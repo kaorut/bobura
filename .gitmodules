@@ -1,0 +1,3 @@
+[submodule "lib/tetengo2"]
+	path = lib/tetengo2
+	url = https://github.com/kaorut/tetengo2.git
