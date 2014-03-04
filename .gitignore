@@ -8,6 +8,7 @@
 *.opensdf
 *.sdf
 *.suo
+*.trs
 *.wixobj
 *.wixpdb
 *.vcxproj.user
@@ -30,7 +31,7 @@ missing
 obj/
 obj.test/
 stamp-h1
-test_driver
+test-driver
 tools/zzz_codesign.bat
 tools/zzz_test_case_check_functions.txt
 tools/zzz_test_case_check_test_cases.txt
