@@ -44,15 +44,13 @@ EXTRA_DIST = $(extra_headers) $(extra_sources)
 
 TESTS = bobura_model.test
 
-bobura_model_test_DEPENDENCIES = \
-    $(top_builddir)/tetengo2/src/libtetengo2.a
 bobura_model_test_CPPFLAGS = \
     -I$(top_srcdir)/bobura_model/include \
-    -I$(top_srcdir)/tetengo2/include \
-    -I$(top_srcdir)/tetengo2_detail/include \
-    -I$(top_srcdir)/tetengo2_gui/include
+    -I$(TETENGO2_INCLUDE) \
+    -I$(TETENGO2_DETAIL_INCLUDE) \
+    -I$(TETENGO2_GUI_INCLUDE)
 bobura_model_test_LDFLAGS = \
-    -L$(top_builddir)/tetengo2/src
+    -L$(TETENGO2_LIB)
 bobura_model_test_LDADD = \
     -ltetengo2 \
     $(UNITTEST_LIBS)
@@ -60,10 +58,5 @@ bobura_model_test_SOURCES = $(headers) $(sources)
 
 $(top_srcdir)/precompiled/precompiled.h.gch: $(top_srcdir)/precompiled/precompiled.h
 	pushd $(top_builddir)/precompiled; \
-	$(MAKE) all; \
-	popd
-
-$(top_builddir)/tetengo2/src/libtetengo2.a:
-	pushd $(top_builddir)/tetengo2/src; \
 	$(MAKE) all; \
 	popd

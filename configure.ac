@@ -104,8 +104,9 @@ AC_ARG_WITH(
     TETENGO2_INCLUDE=$withval,
     if test "x$TETENGO2" = "xSUBMODULE";
     then
-        TETENGO2_INCLUDE="\$(top_srcdir)/lib/tetengo2/include";
-    else
+        TETENGO2_INCLUDE="\$(top_srcdir)/lib/tetengo2/tetengo2/include";
+    elif -n "$TETENGO2";
+    then
         TETENGO2_INCLUDE="$TETENGO2/include";
     fi
 )
@@ -119,8 +120,9 @@ AC_ARG_WITH(
     TETENGO2_LIB=$withval,
     if test "x$TETENGO2" = "xSUBMODULE";
     then
-        TETENGO2_LIB="\$(top_srcdir)/lib/tetengo2/src";
-    else
+        TETENGO2_LIB="\$(top_srcdir)/lib/tetengo2/tetengo2/src";
+    elif -n "$TETENGO2";
+    then
         TETENGO2_LIB="$TETENGO2/include"
     fi
 )
@@ -134,8 +136,9 @@ AC_ARG_WITH(
     TETENGO2_DETAIL_INCLUDE=$withval,
     if test "x$TETENGO2" = "xSUBMODULE";
     then
-        TETENGO2_DETAIL_INCLUDE="\$(top_srcdir)/lib/tetengo2_detail/include";
-    else
+        TETENGO2_DETAIL_INCLUDE="\$(top_srcdir)/lib/tetengo2/tetengo2_detail/include";
+    elif -n "$TETENGO2";
+    then
         TETENGO2_DETAIL_INCLUDE="$TETENGO2/include"
     fi
 )
@@ -149,8 +152,9 @@ AC_ARG_WITH(
     TETENGO2_GUI_INCLUDE=$withval,
     if test "x$TETENGO2" = "xSUBMODULE";
     then
-        TETENGO2_GUI_INCLUDE="\$(top_srcdir)/lib/tetengo2_gui/include";
-    else
+        TETENGO2_GUI_INCLUDE="\$(top_srcdir)/lib/tetengo2/tetengo2_gui/include";
+    elif -n "$TETENGO2";
+    then
         TETENGO2_GUI_INCLUDE="$TETENGO2/include"
     fi
 )
