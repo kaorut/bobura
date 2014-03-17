@@ -9,7 +9,7 @@
 #if !defined(BOBURA_COMMAND_OPENWWWTETENGOORG_H)
 #define BOBURA_COMMAND_OPENWWWTETENGOORG_H
 
-//#include <memory>
+#include <memory>
 
 #include <tetengo2.stdalt.h>
 

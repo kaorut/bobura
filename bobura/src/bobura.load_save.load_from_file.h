@@ -11,10 +11,10 @@
 
 #include <cassert>
 #include <ios>
-//#include <iterator>
-//#include <memory>
+#include <iterator>
+#include <memory>
 #include <stdexcept>
-//#include <utility>
+#include <utility>
 
 #include <boost/filesystem/fstream.hpp>
 #include <boost/optional.hpp>

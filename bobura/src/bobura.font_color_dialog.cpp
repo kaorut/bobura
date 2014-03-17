@@ -6,18 +6,18 @@
     $Id$
 */
 
-//#include <memory>
-//#include <sstream>
-//#include <stdexcept>
-//#include <utility>
-//#include <vector>
+#include <memory>
+#include <sstream>
+#include <stdexcept>
+#include <utility>
+#include <vector>
 
-//#include <boost/format.hpp>
-//#include <boost/mpl/at.hpp>
-//#include <boost/noncopyable.hpp>
-//#include <boost/optional.hpp>
-//#include <boost/rational.hpp>
-//#include <boost/throw_exception.hpp>
+#include <boost/format.hpp>
+#include <boost/mpl/at.hpp>
+#include <boost/noncopyable.hpp>
+#include <boost/optional.hpp>
+#include <boost/rational.hpp>
+#include <boost/throw_exception.hpp>
 
 #include <tetengo2.gui.measure.h>
 #include <tetengo2.stdalt.h>

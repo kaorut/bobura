@@ -6,12 +6,12 @@
     $Id$
 */
 
-//#include <cassert>
-//#include <chrono>
-//#include <memory>
+#include <cassert>
+#include <chrono>
+#include <memory>
 
-//#include <boost/mpl/at.hpp>
-//#include <boost/noncopyable.hpp>
+#include <boost/mpl/at.hpp>
+#include <boost/noncopyable.hpp>
 
 #include <tetengo2.stdalt.h>
 

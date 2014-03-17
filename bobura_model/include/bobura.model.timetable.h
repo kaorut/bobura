@@ -12,9 +12,9 @@
 #include <algorithm>
 #include <cassert>
 #include <cstddef>
-//#include <iterator>
+#include <iterator>
 #include <stdexcept>
-//#include <utility>
+#include <utility>
 #include <vector>
 
 #include <boost/operators.hpp>

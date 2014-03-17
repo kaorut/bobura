@@ -6,8 +6,8 @@
     $Id$
 */
 
-//#include <boost/filesystem.hpp>
-//#include <boost/mpl/at.hpp>
+#include <boost/filesystem.hpp>
+#include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include "bobura.type_list.h"

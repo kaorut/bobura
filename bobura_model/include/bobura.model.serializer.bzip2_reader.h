@@ -9,11 +9,11 @@
 #if !defined(BOBURA_MODEL_SERIALIZER_BZIP2READER_H)
 #define BOBURA_MODEL_SERIALIZER_BZIP2READER_H
 
-//#include <iterator>
-//#include <memory>
+#include <iterator>
+#include <memory>
 #include <sstream>
 #include <string>
-//#include <utility>
+#include <utility>
 
 #include <boost/iostreams/filter/bzip2.hpp>
 #include <boost/iostreams/filtering_stream.hpp>

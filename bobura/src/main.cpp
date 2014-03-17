@@ -6,21 +6,21 @@
     $Id$
 */
 
-//#include <exception>
-//#include <locale>
-//#include <stdexcept>
-//#include <string>
-//#include <vector>
+#include <exception>
+#include <locale>
+#include <stdexcept>
+#include <string>
+#include <vector>
 
-//#include <boost/exception/all.hpp>
-//#include <boost/filesystem.hpp>
-//#include <boost/mpl/at.hpp>
-//#include <boost/program_options.hpp>
-//#include <boost/throw_exception.hpp>
+#include <boost/exception/all.hpp>
+#include <boost/filesystem.hpp>
+#include <boost/mpl/at.hpp>
+#include <boost/program_options.hpp>
+#include <boost/throw_exception.hpp>
 
-//#define NOMINMAX
-//#define OEMRESOURCE
-//#include <Windows.h>
+#define NOMINMAX
+#define OEMRESOURCE
+#include <Windows.h>
 
 #include <tetengo2.stdalt.h>
 #include <tetengo2.utility.h>

@@ -10,12 +10,12 @@
 #define BOBURA_MODEL_SERIALIZER_READERSELECTOR_H
 
 #include <algorithm>
-//#include <memory>
+#include <memory>
 #include <stdexcept>
-//#include <utility>
+#include <utility>
 #include <vector>
 
-//#include <boost/predef.h>
+#include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
 #include <tetengo2.stdalt.h>

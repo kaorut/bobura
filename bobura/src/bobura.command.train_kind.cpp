@@ -6,13 +6,13 @@
     $Id$
 */
 
-//#include <algorithm>
-//#include <cassert>
-//#include <iterator>
-//#include <utility>
-//#include <vector>
+#include <algorithm>
+#include <cassert>
+#include <iterator>
+#include <utility>
+#include <vector>
 
-//#include <boost/optional.hpp>
+#include <boost/optional.hpp>
 
 #include <tetengo2.stdalt.h>
 

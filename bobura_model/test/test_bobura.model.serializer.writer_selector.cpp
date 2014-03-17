@@ -6,14 +6,14 @@
     $Id$
 */
 
-//#include <memory>
-//#include <sstream>
-//#include <stdexcept>
-//#include <string>
-//#include <utility>
-//#include <vector>
+#include <memory>
+#include <sstream>
+#include <stdexcept>
+#include <string>
+#include <utility>
+#include <vector>
 
-//#include <boost/mpl/at.hpp>
+#include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.stdalt.h>

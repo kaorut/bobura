@@ -18,7 +18,7 @@
 
 #include <boost/format.hpp>
 #include <boost/rational.hpp>
-//#include <boost/utility.hpp>
+#include <boost/utility.hpp>
 
 #include <tetengo2.stdalt.h>
 #include <tetengo2.text.h>

@@ -11,9 +11,9 @@
 
 #include <cassert>
 #include <functional>
-//#include <memory>
+#include <memory>
 
-//#include <boost/rational.hpp>
+#include <boost/rational.hpp>
 
 #include <tetengo2.gui.measure.h>
 #include <tetengo2.stdalt.h>

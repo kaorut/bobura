@@ -10,7 +10,7 @@
 #define BOBURA_PROPERTYBAR_H
 
 #include <cassert>
-//#include <memory>
+#include <memory>
 
 #include <boost/mpl/at.hpp>
 

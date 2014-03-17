@@ -11,10 +11,10 @@
 
 #include <cstddef>
 #include <ios>
-//#include <memory>
+#include <memory>
 #include <sstream>
 #include <unordered_map>
-//#include <utility>
+#include <utility>
 #include <vector>
 
 #include <boost/optional.hpp>

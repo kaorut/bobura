@@ -9,11 +9,11 @@
 #if !defined(BOBURA_MODEL_SERIALIZER_READERSET_H)
 #define BOBURA_MODEL_SERIALIZER_READERSET_H
 
-//#include <memory>
-//#include <utility>
-//#include <vector>
+#include <memory>
+#include <utility>
+#include <vector>
 
-//#include <boost/noncopyable.hpp>
+#include <boost/noncopyable.hpp>
 
 #include <tetengo2.stdalt.h>
 

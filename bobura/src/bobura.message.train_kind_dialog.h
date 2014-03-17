@@ -12,7 +12,7 @@
 #include <cassert>
 #include <functional>
 #include <stdexcept>
-//#include <utility>
+#include <utility>
 #include <vector>
 
 #include <boost/optional.hpp>

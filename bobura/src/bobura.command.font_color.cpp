@@ -6,7 +6,7 @@
     $Id$
 */
 
-//#include <utility>
+#include <utility>
 
 #include <tetengo2.stdalt.h>
 

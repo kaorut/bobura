@@ -6,11 +6,11 @@
     $Id$
 */
 
-//#include <memory>
-//#include <utility>
-//#include <vector>
+#include <memory>
+#include <utility>
+#include <vector>
 
-//#include <boost/mpl/at.hpp>
+#include <boost/mpl/at.hpp>
 
 #include <tetengo2.stdalt.h>
 #include <tetengo2.text.h>
