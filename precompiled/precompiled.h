@@ -55,7 +55,6 @@
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/swap.hpp>
 #include <boost/system/system_error.hpp>
-#include <boost/test/unit_test.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/utility.hpp>
 #include <boost/utility/string_ref.hpp>
