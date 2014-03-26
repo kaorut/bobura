@@ -20,7 +20,7 @@
       <AdditionalManifestFiles>$(ProjectDir)res\win32\COMCTL32.DLL.$(PlatformName).manifest</AdditionalManifestFiles>
     </Manifest>
     <PostBuildEvent>
-      <Command>call "$(SolutionDir)tools\codesign.bat" "$(SolutionDir)" "$(TargetPath)"
+      <Command>call "$(SolutionDir)lib\tetengo2\tools\codesign.bat" "$(TargetPath)"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
