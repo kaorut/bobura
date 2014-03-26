@@ -10,8 +10,8 @@
     <Link />
     <PostBuildEvent>
       <Command>cscript "$(SolutionDir)\tools\copy_boost_dlls.js" "$(SolutionDir)" $(ConfigurationName) $(PlatformName)
-call "$(SolutionDir)\tools\get_bobura_config.bat" "$(SolutionDir)" "RUN_TEST_FOR_$(PlatformName)"
-if "%BOBURA_CONFIG%" == "1" (
+call "$(SolutionDir)lib\tetengo2\tools\get_solution_config.bat" "$(SolutionDir)bobura_config.h" "RUN_TEST_FOR_$(PlatformName)"
+if "%SOLUTION_CONFIG%" == "1" (
 "$(TargetDir)\$(TargetFileName)" --report_level=no --log_level=warning
 ) else (
 echo Skipping the unit test...

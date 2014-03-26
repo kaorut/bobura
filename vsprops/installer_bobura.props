@@ -3,13 +3,13 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <NMakeBuildCommandLine>call "$(SolutionDir)\tools\get_bobura_config.bat" "$(SolutionDir)" "BOOST_VERSION"
-nmake CONFIGURATION=$(Configuration) PLATFORM=$(Platform) ARCH=$(PlatformTarget) VC_VERSION=$(PlatformToolsetVersion) BOOST_VERSION="%BOBURA_CONFIG%" /nologo /f Makefile.nmake
+    <NMakeBuildCommandLine>call "$(SolutionDir)lib\tetengo2\tools\get_solution_config.bat" "$(SolutionDir)bobura_config.h" "BOOST_VERSION"
+nmake CONFIGURATION=$(Configuration) PLATFORM=$(Platform) ARCH=$(PlatformTarget) VC_VERSION=$(PlatformToolsetVersion) BOOST_VERSION="%SOLUTION_CONFIG%" /nologo /f Makefile.nmake
 </NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>call "$(SolutionDir)\tools\get_bobura_config.bat" "$(SolutionDir)" "BOOST_VERSION"
-nmake CONFIGURATION=$(Configuration) PLATFORM=$(Platform) ARCH=$(PlatformTarget) VC_VERSION=$(PlatformToolsetVersion) BOOST_VERSION="%BOBURA_CONFIG%" /nologo /f Makefile.nmake clean all</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>call "$(SolutionDir)\tools\get_bobura_config.bat" "$(SolutionDir)" "BOOST_VERSION"
-nmake CONFIGURATION=$(Configuration) PLATFORM=$(Platform) ARCH=$(PlatformTarget) VC_VERSION=$(PlatformToolsetVersion) BOOST_VERSION="%BOBURA_CONFIG%" /nologo /f Makefile.nmake clean</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>call "$(SolutionDir)lib\tetengo2\tools\get_solution_config.bat" "$(SolutionDir)bobura_config.h" "BOOST_VERSION"
+nmake CONFIGURATION=$(Configuration) PLATFORM=$(Platform) ARCH=$(PlatformTarget) VC_VERSION=$(PlatformToolsetVersion) BOOST_VERSION="%SOLUTION_CONFIG%" /nologo /f Makefile.nmake clean all</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>call "$(SolutionDir)lib\tetengo2\tools\get_solution_config.bat" "$(SolutionDir)bobura_config.h" "BOOST_VERSION"
+nmake CONFIGURATION=$(Configuration) PLATFORM=$(Platform) ARCH=$(PlatformTarget) VC_VERSION=$(PlatformToolsetVersion) BOOST_VERSION="%SOLUTION_CONFIG%" /nologo /f Makefile.nmake clean</NMakeCleanCommandLine>
     <NMakeOutput>$(OutDir)bobura.$(Platform).msi</NMakeOutput>
   </PropertyGroup>
   <ItemDefinitionGroup />
