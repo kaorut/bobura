@@ -57,7 +57,7 @@ function include(script)
 		);
 	try { return stream.ReadAll(); } finally { stream.Close(); }
 }
-eval(include("zzz_parse_bobura_config.js"));
+eval(include("..\\lib\\tetengo2\\tools\\zzz_parse_solution_config.js"));
 
 if (WScript.Arguments.length < 2)
 {
