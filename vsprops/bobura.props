@@ -13,7 +13,7 @@
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>cscript "$(SolutionDir)\tools\copy_boost_dlls.js" "$(SolutionDir)" $(ConfigurationName) $(PlatformName)
+      <Command>cscript "$(SolutionDir)lib\tetengo2\tools\copy_boost_dlls.js" "$(ProjectDir)$(ProjectName).boost_libs.txt" "$(SolutionDir)bobura_config.h" "$(SolutionDir)" $(ConfigurationName) $(PlatformName)
 call "$(SolutionDir)tools\copy_bobura_resource.bat" "$(ProjectDir)" "$(OutDir)"
 call "$(SolutionDir)lib\tetengo2\tools\codesign.bat" "$(TargetPath)"</Command>
     </PostBuildEvent>
