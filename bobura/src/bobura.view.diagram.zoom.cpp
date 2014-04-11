@@ -6,11 +6,11 @@
     $Id$
 */
 
-//#include <cassert>
-//#include <utility>
+#include <cassert>
+#include <utility>
 
-//#include <boost/mpl/at.hpp>
-//#include <boost/noncopyable.hpp>
+#include <boost/mpl/at.hpp>
+#include <boost/noncopyable.hpp>
 
 #include "bobura.type_list.h"
 

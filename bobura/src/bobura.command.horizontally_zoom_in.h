@@ -9,9 +9,9 @@
 #if !defined(BOBURA_COMMAND_HORIZONTALLYZOOMIN_H)
 #define BOBURA_COMMAND_HORIZONTALLYZOOMIN_H
 
-//#include <memory>
+#include <memory>
 
-//#include <boost/mpl/at.hpp>
+#include <boost/mpl/at.hpp>
 
 #include <tetengo2.stdalt.h>
 

@@ -11,12 +11,12 @@
 
 #include <algorithm>
 #include <ios>
-//#include <iterator>
-//#include <memory>
+#include <iterator>
+#include <memory>
 #include <sstream>
 #include <stdexcept>
 #include <string>
-//#include <utility>
+#include <utility>
 #include <vector>
 
 #include <boost/algorithm/string.hpp>

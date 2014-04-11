@@ -10,7 +10,7 @@
 #include <exception>
 #include <locale>
 #include <stdexcept>
-//#include <string>
+#include <string>
 #include <vector>
 
 #include <boost/filesystem.hpp>

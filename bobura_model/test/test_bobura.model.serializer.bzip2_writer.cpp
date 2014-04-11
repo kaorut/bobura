@@ -6,10 +6,10 @@
     $Id$
 */
 
-//#include <sstream>
-//#include <utility>
+#include <sstream>
+#include <utility>
 
-//#include <boost/mpl/at.hpp>
+#include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.stdalt.h>

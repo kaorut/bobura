@@ -11,9 +11,9 @@
 
 #include <algorithm>
 #include <cassert>
-//#include <iterator>
-//#include <memory>
-//#include <utility>
+#include <iterator>
+#include <memory>
+#include <utility>
 #include <vector>
 
 #include <boost/noncopyable.hpp>

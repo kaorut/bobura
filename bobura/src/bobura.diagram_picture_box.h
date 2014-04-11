@@ -10,11 +10,11 @@
 #define BOBURA_DIAGRAMPICTUREBOX_H
 
 #include <cassert>
-//#include <memory>
-//#include <utility>
+#include <memory>
+#include <utility>
 
 #include <boost/mpl/at.hpp>
-//#include <boost/rational.hpp>
+#include <boost/rational.hpp>
 
 #include <tetengo2.gui.measure.h>
 #include <tetengo2.stdalt.h>

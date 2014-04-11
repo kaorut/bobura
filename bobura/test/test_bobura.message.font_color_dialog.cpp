@@ -6,12 +6,12 @@
     $Id$
 */
 
-//#include <utility>
-//#include <vector>
+#include <utility>
+#include <vector>
 
-//#include <boost/mpl/at.hpp>
-//#include <boost/optional.hpp>
-//#include <boost/predef.h>
+#include <boost/mpl/at.hpp>
+#include <boost/optional.hpp>
+#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.gui.measure.h>

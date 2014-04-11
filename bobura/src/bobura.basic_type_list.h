@@ -9,17 +9,17 @@
 #if !defined(BOBURA_BASICTYPELIST_H)
 #define BOBURA_BASICTYPELIST_H
 
-//#include <cstddef>
-//#include <iterator>
+#include <cstddef>
+#include <iterator>
 #include <ostream>
-//#include <string>
-//#include <utility>
+#include <string>
+#include <utility>
 
-//#include <boost/filesystem.hpp>
-//#include <boost/mpl/at.hpp>
-//#include <boost/mpl/pair.hpp>
-//#include <boost/rational.hpp>
-//#include <boost/spirit/include/support_multi_pass.hpp>
+#include <boost/filesystem.hpp>
+#include <boost/mpl/at.hpp>
+#include <boost/mpl/pair.hpp>
+#include <boost/rational.hpp>
+#include <boost/spirit/include/support_multi_pass.hpp>
 
 #include <tetengo2.gui.alert.h>
 #include <tetengo2.gui.common_dialog.color.h>

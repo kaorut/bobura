@@ -10,9 +10,9 @@
 #define BOBURA_SETTINGS_H
 
 #include <cassert>
-//#include <memory>
+#include <memory>
 #include <string>
-//#include <utility>
+#include <utility>
 #include <vector>
 
 #include <boost/algorithm/string.hpp>

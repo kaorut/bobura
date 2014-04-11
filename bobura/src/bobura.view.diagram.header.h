@@ -11,8 +11,8 @@
 
 #include <algorithm>
 #include <cassert>
-//#include <memory>
-//#include <utility>
+#include <memory>
+#include <utility>
 
 #include <tetengo2.gui.measure.h>
 #include <tetengo2.stdalt.h>

@@ -12,10 +12,10 @@
 #include <algorithm>
 #include <cassert>
 #include <cstddef>
-//#include <memory>
+#include <memory>
 #include <stdexcept>
 #include <string>
-//#include <utility>
+#include <utility>
 #include <vector>
 
 #include <boost/lexical_cast.hpp>

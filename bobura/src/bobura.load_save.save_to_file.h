@@ -10,7 +10,7 @@
 #define BOBURA_LOADSAVE_SAVETOFILE_H
 
 #include <ios>
-//#include <memory>
+#include <memory>
 
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>

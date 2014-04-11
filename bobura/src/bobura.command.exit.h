@@ -9,7 +9,7 @@
 #if !defined(BOBURA_COMMAND_EXIT_H)
 #define BOBURA_COMMAND_EXIT_H
 
-//#include <memory>
+#include <memory>
 
 #include <tetengo2.stdalt.h>
 

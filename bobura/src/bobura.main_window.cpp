@@ -6,13 +6,13 @@
     $Id$
 */
 
-//#include <cassert>
-//#include <memory>
-//#include <utility>
+#include <cassert>
+#include <memory>
+#include <utility>
 
-//#include <boost/mpl/at.hpp>
-//#include <boost/noncopyable.hpp>
-//#include <boost/optional.hpp>
+#include <boost/mpl/at.hpp>
+#include <boost/noncopyable.hpp>
+#include <boost/optional.hpp>
 
 #include <tetengo2.gui.measure.h>
 #include <tetengo2.stdalt.h>

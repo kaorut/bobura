@@ -5,19 +5,23 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)src;$(SolutionDir)bobura_model\include;$(SolutionDir)tetengo2\include;$(SolutionDir)tetengo2_detail\include;$(SolutionDir)tetengo2_gui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(SolutionDir)bobura_model\include;$(SolutionDir)lib\tetengo2\tetengo2\include;$(SolutionDir)lib\tetengo2\tetengo2_detail\include;$(SolutionDir)lib\tetengo2\tetengo2_gui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link />
     <PostBuildEvent>
-      <Command>cscript "$(SolutionDir)\tools\copy_boost_dlls.js" "$(SolutionDir)" $(ConfigurationName) $(PlatformName)
-call "$(SolutionDir)\tools\get_bobura_config.bat" "$(SolutionDir)" "RUN_TEST_FOR_$(PlatformName)"
-if "%BOBURA_CONFIG%" == "1" (
+      <Command>cscript "$(SolutionDir)lib\tetengo2\tools\copy_boost_dlls.js" "$(ProjectDir)$(ProjectName).boost_libs.txt" "$(SolutionDir)bobura_config.h" "$(SolutionDir)" $(ConfigurationName) $(PlatformName)
+call "$(SolutionDir)lib\tetengo2\tools\get_solution_config.bat" "$(SolutionDir)bobura_config.h" "RUN_TEST_FOR_$(PlatformName)"
+if "%SOLUTION_CONFIG%" == "1" (
 "$(TargetDir)\$(TargetFileName)" --report_level=no --log_level=warning
 ) else (
 echo Skipping the unit test...
 )
 </Command>
     </PostBuildEvent>
+    <Link>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>tetengo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>

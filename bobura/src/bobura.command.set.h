@@ -9,10 +9,10 @@
 #if !defined(BOBURA_COMMAND_SET_H)
 #define BOBURA_COMMAND_SET_H
 
-//#include <memory>
+#include <memory>
 
-//#include <boost/mpl/at.hpp>
-//#include <boost/noncopyable.hpp>
+#include <boost/mpl/at.hpp>
+#include <boost/noncopyable.hpp>
 
 #include <tetengo2.stdalt.h>
 

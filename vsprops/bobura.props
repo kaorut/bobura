@@ -5,16 +5,17 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)bobura_model\include;$(SolutionDir)tetengo2\include;$(SolutionDir)tetengo2_detail\include;$(SolutionDir)tetengo2_gui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)bobura_model\include;$(SolutionDir)lib\tetengo2\tetengo2\include;$(SolutionDir)lib\tetengo2\tetengo2_detail\include;$(SolutionDir)lib\tetengo2\tetengo2_gui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_TETENGO2_DETAIL_TYPES_FOR_APPLICATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>comctl32.lib;gdiplus.lib;d2d1.lib;dwrite.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;gdiplus.lib;d2d1.lib;dwrite.lib;tetengo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>cscript "$(SolutionDir)\tools\copy_boost_dlls.js" "$(SolutionDir)" $(ConfigurationName) $(PlatformName)
+      <Command>cscript "$(SolutionDir)lib\tetengo2\tools\copy_boost_dlls.js" "$(ProjectDir)$(ProjectName).boost_libs.txt" "$(SolutionDir)bobura_config.h" "$(SolutionDir)" $(ConfigurationName) $(PlatformName)
 call "$(SolutionDir)tools\copy_bobura_resource.bat" "$(ProjectDir)" "$(OutDir)"
-call "$(SolutionDir)tools\codesign.bat" "$(SolutionDir)" "$(TargetPath)"</Command>
+call "$(SolutionDir)lib\tetengo2\tools\codesign.bat" "$(TargetPath)"</Command>
     </PostBuildEvent>
     <Manifest>
       <AdditionalManifestFiles>$(ProjectDir)res\win32\COMCTL32.DLL.$(PlatformName).manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>

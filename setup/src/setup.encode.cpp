@@ -6,7 +6,7 @@
     $Id$
 */
 
-//#include <string>
+#include <string>
 
 #include <tetengo2.detail.windows.encoding.h>
 #include <tetengo2.text.encoder.h>

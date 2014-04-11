@@ -8,6 +8,7 @@
 *.opensdf
 *.sdf
 *.suo
+*.trs
 *.wixobj
 *.wixpdb
 *.vcxproj.user
@@ -16,6 +17,7 @@ aclocal.m4
 autom4te.cache
 bin/
 bobura_config.h
+compile
 config.*
 configure
 depcomp
@@ -29,6 +31,7 @@ missing
 obj/
 obj.test/
 stamp-h1
+test-driver
 tools/zzz_codesign.bat
 tools/zzz_test_case_check_functions.txt
 tools/zzz_test_case_check_test_cases.txt

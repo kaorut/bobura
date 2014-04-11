@@ -25,16 +25,6 @@ AC_CONFIG_FILES([
     setup/Makefile
     setup/res/Makefile
     setup/src/Makefile
-    tetengo2/Makefile
-    tetengo2/include/Makefile
-    tetengo2/res.test/Makefile
-    tetengo2/src/Makefile
-    tetengo2/test/Makefile
-    tetengo2_detail/Makefile
-    tetengo2_detail/include/Makefile
-    tetengo2_gui/Makefile
-    tetengo2_gui/include/Makefile
-    tetengo2_gui/test/Makefile
 ])
 
 AC_LANG([C++])
@@ -93,6 +83,82 @@ AC_SUBST([LIBS], "$BOOST_PROGRAM_OPTIONS_LIB $LIBS")
 AC_SUBST([LIBS], "$BOOST_SYSTEM_LIB $LIBS")
 AC_SUBST([LIBS], "$BOOST_THREAD_LIB $LIBS")
 AC_SUBST([UNITTEST_LIBS], "$BOOST_UNIT_TEST_FRAMEWORK_LIB")
+AC_ARG_WITH(
+    tetengo2,
+    AS_HELP_STRING(
+        [--with-tetengo2=DIR],
+        [
+            Specify the base directory of the Tetengo2.
+            When DIR is equal to "SUBMODULE", Tetengo2 as a Git submodule
+            ($(top_srcdir)/lib/tetengo2) is used.
+        ]
+    ),
+    TETENGO2=$withval
+)
+AC_ARG_WITH(
+    tetengo2-includedir,
+    AS_HELP_STRING(
+        [--with-tetengo2-includedir=DIR],
+        [Specify the directory for the Tetengo2 header files.]
+    ),
+    TETENGO2_INCLUDE=$withval,
+    if test "x$TETENGO2" = "xSUBMODULE";
+    then
+        TETENGO2_INCLUDE="\$(top_srcdir)/lib/tetengo2/tetengo2/include";
+    elif -n "$TETENGO2";
+    then
+        TETENGO2_INCLUDE="$TETENGO2/include";
+    fi
+)
+AC_SUBST([TETENGO2_INCLUDE])
+AC_ARG_WITH(
+    tetengo2-libdir,
+    AS_HELP_STRING(
+        [--with-tetengo2-libdir=DIR],
+        [Specify the directory for the Tetengo2 library files.]
+    ),
+    TETENGO2_LIB=$withval,
+    if test "x$TETENGO2" = "xSUBMODULE";
+    then
+        TETENGO2_LIB="\$(top_srcdir)/lib/tetengo2/tetengo2/src";
+    elif -n "$TETENGO2";
+    then
+        TETENGO2_LIB="$TETENGO2/include"
+    fi
+)
+AC_SUBST([TETENGO2_LIB])
+AC_ARG_WITH(
+    tetengo2-detail-includedir,
+    AS_HELP_STRING(
+        [--with-tetengo2-detail-includedir=DIR],
+        [Specify the directory for the Tetengo2-detail header files.]
+    ),
+    TETENGO2_DETAIL_INCLUDE=$withval,
+    if test "x$TETENGO2" = "xSUBMODULE";
+    then
+        TETENGO2_DETAIL_INCLUDE="\$(top_srcdir)/lib/tetengo2/tetengo2_detail/include";
+    elif -n "$TETENGO2";
+    then
+        TETENGO2_DETAIL_INCLUDE="$TETENGO2/include"
+    fi
+)
+AC_SUBST([TETENGO2_DETAIL_INCLUDE])
+AC_ARG_WITH(
+    tetengo2-gui-includedir,
+    AS_HELP_STRING(
+        [--with-tetengo2-gui-includedir=DIR],
+        [Specify the directory for the Tetengo2-gui header files.]
+    ),
+    TETENGO2_GUI_INCLUDE=$withval,
+    if test "x$TETENGO2" = "xSUBMODULE";
+    then
+        TETENGO2_GUI_INCLUDE="\$(top_srcdir)/lib/tetengo2/tetengo2_gui/include";
+    elif -n "$TETENGO2";
+    then
+        TETENGO2_GUI_INCLUDE="$TETENGO2/include"
+    fi
+)
+AC_SUBST([TETENGO2_GUI_INCLUDE])
 
 #### Checks for header files ####
 AC_CXX_HAVE_STD
