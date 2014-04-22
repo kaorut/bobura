@@ -28,7 +28,7 @@ all: $(TARGET)
 $(TARGET): $(ENGLISH_MSI) $(JAPANESE_MST)
 	$(COPY) $(ENGLISH_MSI) $(TARGET)
 	$(EMBEDTRANSFORM) $(TARGET) $(JAPANESE_MST)
-	call "$(SOLUTIONDIR)lib\tetengo2\tools\codesign.bat" "$(SOLUTIONDIR)" "$(TARGET)"
+	call "$(SOLUTIONDIR)lib\tetengo2\tools\codesign.bat" "$(TARGET)"
 
 $(OUTDIR):
 	$(MD) $(OUTDIR)
