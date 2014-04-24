@@ -14,12 +14,6 @@ What is Bobura? {#what_is_bobura}
 Bobura is some software about railways.
 
 
-What is Tetengo2? {#what_is_tetengo2}
-=================
-
-Tetengo2 is a kind of GUI toolkit.
-
-
 Requirements {#requirements}
 ============
 
@@ -28,8 +22,8 @@ Bobura application
 
 - [Windows 7](http://www.microsoft.com/) or later
 
-Bobura and Tetengo2 libraries
------------------------------
+Bobura libraries
+----------------
 
 The libraries are available on Windows and UNIX-like systems.
 
@@ -43,26 +37,10 @@ It's tested on the following systems:
 How to Build {#how_to_build}
 ============
 
-You can obtain the source code either by downloading an archive or by cloning the Git repository.
-
-Downloading the Source Code Archive
------------------------------------
-
-The latest archives can be downloaded from [the web site](http://www.tetengo.org/).
-
-Cloning the Repository
-----------------------
-
-You can clone the Git repository like this:
-
-~~~~{.sh}
-$ git clone http://github.com/kaorut/bobura.git
-~~~~
-
 Building on Windows
 -------------------
 
-You need the following tools in order to build Bubura and Tetengo2:
+You need the following tools in order to build Bubura:
 
 - [Visual Studio 2012 Update 3](http://www.microsoft.com/) (including Express for Desktop)
 - [Boost C++ Libraries 1.55.0](http://www.boost.org/)
@@ -70,6 +48,38 @@ You need the following tools in order to build Bubura and Tetengo2:
 - [WiX 3.8](http://wixtoolset.org/)
 - [Doxygen 1.8.7](http://www.doxygen.org) (to generate API documents)
 - [Graphviz](http://www.graphviz.org) (to generate API documents)
+
+You can obtain the source code either by downloading an archive or by cloning the Git repository.
+
+### Downloading the Source Code Archive
+
+The latest archives can be downloaded from [the web site](http://www.tetengo.org/).
+
+Deploy the Tetengo2 libraries as a submodule. Get the Tetengo2 archive in [the web site](http://www.tetengo.org/),
+unpack the archives, execute
+
+~~~~{.bat}
+X:\path\to\bobura> mkdir lib\tetengo2
+~~~~
+
+in the top directory of Bubura, and copy the contents of the Tetengo2 archive to the directory `lib/tetengo2`.
+
+### Cloning the Repository
+
+You can clone the Git repository like this:
+
+~~~~{.sh}
+$ git clone https://github.com/kaorut/bobura.git
+~~~~
+
+Then, run the following commands when you clone the Git repository in order to get the Tetengo2 libaries:
+
+~~~~{.bat}
+X:\path\to\bobura> git submodule update --init
+X:\path\to\bobura> git submodule foreach 'git checkout master & git pull'
+~~~~
+
+### Build Sequence
 
 First make a copy of `bobura_config.h-original` in the top source directory and name it `bobura_config.h`.
 Edit `bobura_config.h` according to your environment.
@@ -85,8 +95,7 @@ X:\path\to\bobura> doxygen
 Building on UNIX
 ----------------
 
-On UNIX, we cannot build a Bobura executable yet. However, we can build the Bubura and Tentengo2 libraries and use
-them.
+On UNIX, we cannot build a Bobura executable yet. However, we can build the Bubura libraries and use them.
 
 You need the following tools in order to build Bubura and Tetengo2 libraries:
 
@@ -97,22 +106,58 @@ You need the following tools in order to build Bubura and Tetengo2 libraries:
 - [Doxygen 1.8.7](http://www.doxygen.org) (to generate API documents)
 - [Graphviz](http://www.graphviz.org) (to generate API documents)
 
-When you clone the Git repository, you will not find the `configure` script in the working copy.
-Run `bootstrap.sh` to produce the `configure` script. `bootstrap.sh` requires the following tools:
+You can obtain the source code either by downloading an archive or by cloning the Git repository.
 
-- [Autotools (Autoconf, Automake, etc.)](http://www.gnu.org/)
-- [Autoconf Archive](http://www.gnu.org/)
+### Downloading the Source Code Archive
+
+The latest archives can be downloaded from [the web site](http://www.tetengo.org/).
+
+Get the Tetengo2 archive from the web site.
+[Build the Tetengo libraries and install it](http://www.tetengo.org/jenkins/view/Tetengo2/job/tetengo2-master-linux-doc/lastSuccessfulBuild/artifact/doc/index.html#how_to_build).
+
+### Cloning the Repository
+
+You can clone the Git repository like this:
+
+~~~~{.sh}
+$ git clone https://github.com/kaorut/bobura.git
+~~~~
+
+Then, run the following commands when you clone the Git repository in order to get the Tetengo2 libaries:
+
+~~~~{.sh}
+$ git submodule update --init
+$ git submodule foreach 'git checkout master && git pull'
+~~~~
+
+Run `bootstrap.sh` to produce the `configure` script:
 
 ~~~~{.sh}
 $ ./bootstrap.sh
 ~~~~
 
+`bootstrap.sh` requires the following tools:
+
+- [Autotools (Autoconf, Automake, etc.)](http://www.gnu.org/)
+- [Autoconf Archive](http://www.gnu.org/)
+
+### Build Sequence
+
 Run `configure` to generate Makefiles. `--enable-precompilation` enables precompilation by generating `.gch` files.
 On some platform such as Linux, you have to link to librt.
 
+In case you downloaded the source code archive and Tetengo2 is installed in the directory `/usr/local`:
+
 ~~~~{.sh}
-$ ./configure [--enable-precompilation] [LIBS=-lrt]
+$ ./configure --with-tetengo2=/usr/local [--enable-precompilation] [LIBS=-lrt]
 ~~~~
+
+In case you cloned the Git repository and checked Tetengo2 out as a submodule:
+
+~~~~{.sh}
+$ ./configure --with-tetengo2=SUBMODULE [--enable-precompilation] [LIBS=-lrt]
+~~~~
+
 To install the libraries to your system, run make like this:
 
 ~~~~{.sh}
