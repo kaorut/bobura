@@ -477,8 +477,8 @@ namespace bobura
                     m_time_header_height,
                     m_horizontal_scale
                 );
-            m_p_station_line_list.reset(
-                new station_line_list_type(
+            m_p_station_line_list =
+                tetengo2::stdalt::make_unique<station_line_list_type>(
                     m_model,
                     m_time_offset,
                     m_selection,
@@ -489,10 +489,9 @@ namespace bobura
                     m_time_header_height,
                     m_horizontal_scale,
                     m_station_positions
-                )
-            );
-            m_p_train_line_list.reset(
-                new train_line_list_type(
+                );
+            m_p_train_line_list =
+                tetengo2::stdalt::make_unique<train_line_list_type>(
                     m_model,
                     m_time_offset,
                     m_selection,
@@ -505,8 +504,7 @@ namespace bobura
                     m_station_intervals,
                     m_station_positions,
                     m_message_catalog
-                )
-            );
+                );
         }
 
 
