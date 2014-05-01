@@ -158,7 +158,8 @@ namespace bobura { namespace model { namespace serializer
 
         // forbidden operations
 
-        reader_set();
+        reader_set()
+        = delete;
 
 
     };

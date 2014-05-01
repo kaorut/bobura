@@ -293,7 +293,8 @@ namespace bobura { namespace model { namespace station_info
     private:
         // forbidden operations
 
-        grade_type_set();
+        grade_type_set()
+        = delete;
 
 
     };
