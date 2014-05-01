@@ -48,14 +48,8 @@ namespace
     class concrete_reader : public reader_type
     {
     public:
-        concrete_reader()
-        :
-        reader_type()
-        {}
-
         virtual ~concrete_reader()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
     private:

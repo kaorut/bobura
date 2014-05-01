@@ -61,8 +61,7 @@ namespace
         }
 
         virtual ~oudia_diagram_dialog_type()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
         const string_type& file_name()
         const

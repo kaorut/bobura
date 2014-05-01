@@ -58,8 +58,7 @@ namespace
         {}
 
         virtual ~concrete_reader()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
     private:

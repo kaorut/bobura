@@ -50,17 +50,10 @@ namespace bobura { namespace model { namespace station_info
         // constructors and destructor
 
         /*!
-            \brief Creates a grade.
-        */
-        grade()
-        {}
-
-        /*!
             \brief Destroys the grade.
         */
         virtual ~grade()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
     private:
@@ -106,12 +99,8 @@ namespace bobura { namespace model { namespace station_info
     private:
         // constructors and destructor
 
-        local()
-        {}
-
         virtual ~local()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
         // virtual functions
@@ -159,12 +148,8 @@ namespace bobura { namespace model { namespace station_info
     private:
         // constructors and destructor
 
-        principal()
-        {}
-
         virtual ~principal()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
         // virtual functions
@@ -212,12 +197,8 @@ namespace bobura { namespace model { namespace station_info
     private:
         // constructors and destructor
 
-        local_terminal()
-        {}
-
         virtual ~local_terminal()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
         // virtual functions
@@ -265,12 +246,8 @@ namespace bobura { namespace model { namespace station_info
     private:
         // constructors and destructor
 
-        principal_terminal()
-        {}
-
         virtual ~principal_terminal()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
         // virtual functions

@@ -44,14 +44,8 @@ namespace
     class concrete_writer : public writer_type
     {
     public:
-        concrete_writer()
-        :
-        writer_type()
-        {}
-
         virtual ~concrete_writer()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
     private:

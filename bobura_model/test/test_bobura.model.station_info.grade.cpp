@@ -44,8 +44,7 @@ namespace
         {}
 
         virtual ~concrete_grade()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
     private:
         string_type m_name;

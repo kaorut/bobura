@@ -129,8 +129,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the train line fragment.
         */
         virtual ~train_line_fragment()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
         // functions
@@ -550,8 +549,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the train line.
         */
         virtual ~train_line()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
         // functions
@@ -1137,8 +1135,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the train line list.
         */
         virtual ~train_line_list()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
         // functions

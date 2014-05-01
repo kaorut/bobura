@@ -62,19 +62,10 @@ namespace bobura { namespace model { namespace serializer
         // constructors and destructor
 
         /*!
-            \brief Creates a JSON writer.
-        */
-        json_writer()
-        :
-        base_type()
-        {}
-
-        /*!
             \brief Destroys the json_writer.
         */
         virtual ~json_writer()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
     private:
