@@ -85,7 +85,8 @@ namespace bobura { namespace model { namespace serializer
     private:
         // forbidden operations
 
-        writer_set();
+        writer_set()
+        = delete;
 
 
     };

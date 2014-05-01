@@ -70,8 +70,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the bzip2_reader.
         */
         virtual ~bzip2_reader()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
     private:

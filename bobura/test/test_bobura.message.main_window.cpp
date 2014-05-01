@@ -42,9 +42,6 @@ namespace
             selected,
         };
 
-        command_type()
-        {}
-
         virtual bool enabled(const model_type& model)
         const
         {

@@ -57,8 +57,7 @@ namespace
         {}
 
         virtual ~concrete_writer()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
     private:

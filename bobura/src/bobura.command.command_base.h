@@ -30,7 +30,7 @@ namespace bobura { namespace command
             \brief Destroys the command parameter base.
         */
         virtual ~parameter_base()
-        TETENGO2_STDALT_NOEXCEPT = 0;
+        = 0;
 
 
         // functions

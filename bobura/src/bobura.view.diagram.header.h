@@ -108,8 +108,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the company and line name header.
         */
         virtual ~company_line_name_header()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
         // functions
@@ -250,8 +249,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the note header.
         */
         virtual ~note_header()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
         // functions
@@ -412,7 +410,7 @@ namespace bobura { namespace view { namespace diagram
 
             \param another Another header
         */
-        header(header&& another)
+        explicit header(header&& another)
         :
         base_type(another.selection()),
         m_p_company_line_name_header(std::move(another.m_p_company_line_name_header)),
@@ -425,8 +423,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the header.
         */
         virtual ~header()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
         // functions

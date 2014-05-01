@@ -69,19 +69,10 @@ namespace bobura { namespace model { namespace serializer
         // constructors and destructor
 
         /*!
-            \brief Creates a WinDIA reader.
-        */
-        windia_reader()
-        :
-        base_type()
-        {}
-
-        /*!
             \brief Destroys the windia_reader.
         */
         virtual ~windia_reader()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
     private:
@@ -113,7 +104,7 @@ namespace bobura { namespace model { namespace serializer
         {
         public:
             virtual ~state()
-            {}
+            = default;
 
             virtual bool parse(const string_type& line)
             = 0;
@@ -124,7 +115,7 @@ namespace bobura { namespace model { namespace serializer
         {
         public:
             virtual ~initial_state()
-            {}
+            = default;
 
             virtual bool parse(const string_type& line)
             override
@@ -145,7 +136,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~windia_state()
-            {}
+            = default;
 
             virtual bool parse(const string_type& line)
             override
@@ -169,7 +160,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~station_state()
-            {}
+            = default;
 
             virtual bool parse(const string_type& line)
             override
@@ -239,7 +230,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~line_kind_state()
-            {}
+            = default;
 
             virtual bool parse(const string_type& line)
             override
@@ -385,7 +376,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~train_state()
-            {}
+            = default;
 
             virtual bool parse(const string_type& line)
             override
@@ -605,7 +596,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~down_train_state()
-            {}
+            = default;
 
         private:
             virtual direction_type direction_impl()
@@ -633,7 +624,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~up_train_state()
-            {}
+            = default;
 
         private:
             virtual direction_type direction_impl()

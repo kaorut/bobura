@@ -99,8 +99,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the oudia_reader.
         */
         virtual ~oudia_reader()
-        TETENGO2_STDALT_NOEXCEPT
-        {}
+        = default;
 
 
     private:
@@ -153,7 +152,7 @@ namespace bobura { namespace model { namespace serializer
         {
         public:
             virtual ~state()
-            {}
+            = default;
 
             bool parse(const string_type& line)
             {
@@ -198,7 +197,7 @@ namespace bobura { namespace model { namespace serializer
         {
         public:
             virtual ~unknown_state()
-            {}
+            = default;
 
         };
 
@@ -211,7 +210,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~initial_state()
-            {}
+            = default;
 
         private:
             timetable_type& m_timetable;
@@ -236,7 +235,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~rosen_state()
-            {}
+            = default;
 
         private:
             timetable_type& m_timetable;
@@ -264,7 +263,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~eki_state()
-            {}
+            = default;
 
         private:
             static const station_grade_type& to_station_grade(
@@ -360,7 +359,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~ressyasyubetsu_state()
-            {}
+            = default;
 
         private:
             typedef typename train_kind_type::weight_type weight_type;
@@ -448,7 +447,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~dia_state()
-            {}
+            = default;
 
         private:
             string_type& m_current_diagram_name;
@@ -473,7 +472,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~kudari_state()
-            {}
+            = default;
 
         private:
             direction_type& m_direction;
@@ -496,7 +495,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~nobori_state()
-            {}
+            = default;
 
         private:
             direction_type& m_direction;
@@ -525,7 +524,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~ressya_state()
-            {}
+            = default;
 
         private:
             typedef typename train_type::stop_type stop_type;
