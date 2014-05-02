@@ -67,13 +67,6 @@ BOOST_AUTO_TEST_SUITE(station_info)
 BOOST_AUTO_TEST_SUITE(grade)
     // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const concrete_grade grade;
-    }
-
     BOOST_AUTO_TEST_CASE(name)
     {
         BOOST_TEST_PASSPOINT();

@@ -110,13 +110,6 @@ BOOST_AUTO_TEST_SUITE(serializer)
 BOOST_AUTO_TEST_SUITE(windia_reader)
     // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const reader_type reader;
-    }
-
     BOOST_AUTO_TEST_CASE(selects)
     {
         BOOST_TEST_PASSPOINT();
