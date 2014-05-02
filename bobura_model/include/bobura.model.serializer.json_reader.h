@@ -73,7 +73,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the json_reader.
         */
         virtual ~json_reader()
-        = default;
+        TETENGO2_STDALT_NOEXCEPT = default;
 
 
     private:

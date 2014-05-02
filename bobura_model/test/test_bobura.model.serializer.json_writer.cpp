@@ -329,13 +329,6 @@ BOOST_AUTO_TEST_SUITE(serializer)
 BOOST_AUTO_TEST_SUITE(json_writer)
     // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const writer_type json_writer;
-    }
-
     BOOST_AUTO_TEST_CASE(extension)
     {
         BOOST_TEST_PASSPOINT();

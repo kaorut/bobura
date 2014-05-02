@@ -44,7 +44,7 @@ namespace
         {}
 
         virtual ~concrete_grade()
-        = default;
+        TETENGO2_STDALT_NOEXCEPT = default;
 
     private:
         string_type m_name;
@@ -66,13 +66,6 @@ BOOST_AUTO_TEST_SUITE(model)
 BOOST_AUTO_TEST_SUITE(station_info)
 BOOST_AUTO_TEST_SUITE(grade)
     // test cases
-
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const concrete_grade grade;
-    }
 
     BOOST_AUTO_TEST_CASE(name)
     {
