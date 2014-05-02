@@ -79,7 +79,7 @@ namespace bobura
             \brief Destroys the diagram picture box.
         */
         virtual ~diagram_picture_box()
-        = default;
+        TETENGO2_STDALT_NOEXCEPT = default;
 
 
         // functions

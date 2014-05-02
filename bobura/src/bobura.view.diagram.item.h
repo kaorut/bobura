@@ -55,7 +55,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the item.
         */
         virtual ~item()
-        = default;
+        TETENGO2_STDALT_NOEXCEPT = default;
 
 
         // functions
