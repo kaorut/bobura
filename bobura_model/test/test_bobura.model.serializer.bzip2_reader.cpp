@@ -49,7 +49,7 @@ namespace
     {
     public:
         virtual ~concrete_reader()
-        TETENGO2_STDALT_NOEXCEPT = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
     private:

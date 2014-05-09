@@ -301,7 +301,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the time line list.
         */
         virtual ~time_line_list()
-        TETENGO2_STDALT_NOEXCEPT = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
         // functions
