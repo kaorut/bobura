@@ -14,6 +14,7 @@
 #include <utility>
 
 #include <boost/mpl/at.hpp>
+#include <boost/predef.h>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -407,6 +408,11 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
     }
 
+// This test case causes a segmentation fault on Linux.
+#if !( \
+    BOOST_OS_LINUX && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
+    )
     BOOST_AUTO_TEST_CASE(read)
     {
         BOOST_TEST_PASSPOINT();
@@ -690,6 +696,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             BOOST_CHECK(error == error_type::corrupted);
         }
     }
+#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()
