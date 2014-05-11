@@ -20,6 +20,7 @@ BOOST_CHECK_LT                                   boost/test/unit_test.hpp
 BOOST_CHECK_THROW                                boost/test/unit_test.hpp
 BOOST_COMP_GNUC                                  boost/predef.h
 BOOST_OS_CYGWIN                                  boost/predef.h
+BOOST_OS_LINUX                                   boost/predef.h
 BOOST_REQUIRE                                    boost/test/unit_test.hpp
 BOOST_REQUIRE_EQUAL                              boost/test/unit_test.hpp
 BOOST_TEST_MODULE                                boost/test/unit_test.hpp
