@@ -42,28 +42,28 @@ namespace bobura
         // types
 
         //! The base type.
-        typedef Dialog base_type;
+        using base_type = Dialog;
 
         //! The abstract window type.
-        typedef typename base_type::base_type abstract_window_type;
+        using abstract_window_type = typename base_type::base_type;
 
         //! The message catalog type.
-        typedef MessageCatalog message_catalog_type;
+        using message_catalog_type = MessageCatalog;
 
         //! The integer size type.
-        typedef IntSize int_size_type;
+        using int_size_type = IntSize;
 
         //! The font type.
-        typedef Font font_type;
+        using font_type = Font;
 
         //! The point size type.
-        typedef PointSize point_size_type;
+        using point_size_type = PointSize;
 
         //! The color type.
-        typedef Color color_type;
+        using color_type = Color;
 
         //! The font and color type.
-        typedef std::pair<const font_type&, const color_type&> font_color_type;
+        using font_color_type = std::pair<const font_type&, const color_type&>;
 
 
         // constructors and destructor

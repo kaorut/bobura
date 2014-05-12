@@ -29,16 +29,16 @@ namespace bobura { namespace command
         // types
 
         //! The base type.
-        typedef command_base base_type;
+        using base_type = command_base;
 
         //! The train kind dialog type.
-        typedef boost::mpl::at<dialog_type_list, type::dialog::train_kind_dialog>::type train_kind_dialog_type;
+        using train_kind_dialog_type = boost::mpl::at<dialog_type_list, type::dialog::train_kind_dialog>::type;
 
         //! The dialog base type.
-        typedef train_kind_dialog_type::base_type dialog_base_type;
+        using dialog_base_type = train_kind_dialog_type::base_type;
 
         //! The message catalog type.
-        typedef train_kind_dialog_type::message_catalog_type message_catalog_type;
+        using message_catalog_type = train_kind_dialog_type::message_catalog_type;
 
 
         // constructors and destructor

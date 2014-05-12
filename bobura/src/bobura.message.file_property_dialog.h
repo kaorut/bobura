@@ -24,7 +24,7 @@ namespace bobura { namespace message { namespace file_property_dialog
         // types
 
         //! The dialog type.
-        typedef Dialog dialog_type;
+        using dialog_type = Dialog;
 
 
         // constructors and destructor
@@ -73,7 +73,7 @@ namespace bobura { namespace message { namespace file_property_dialog
         // types
 
         //! The dialog type.
-        typedef Dialog dialog_type;
+        using dialog_type = Dialog;
 
 
         // constructors and destructor

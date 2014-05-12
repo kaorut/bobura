@@ -43,32 +43,32 @@ namespace bobura
         // types
 
         //! The base type.
-        typedef Dialog base_type;
+        using base_type = Dialog;
 
         //! The abstract window type.
-        typedef typename base_type::base_type abstract_window_type;
+        using abstract_window_type = typename base_type::base_type;
 
         //! The message catalog type.
-        typedef MessageCatalog message_catalog_type;
+        using message_catalog_type = MessageCatalog;
 
         //! The integer size type.
-        typedef IntSize int_size_type;
+        using int_size_type = IntSize;
 
         //! The train kind type.
-        typedef TrainKind train_kind_type;
+        using train_kind_type = TrainKind;
 
         //! The font type.
-        typedef Font font_type;
+        using font_type = Font;
 
         //! The color type.
-        typedef Color color_type;
+        using color_type = Color;
 
         //! The information set type.
         class info_set_type
         {
         public:
             //! The train kind type.
-            typedef TrainKind train_kind_type;
+            using train_kind_type = TrainKind;
 
             /*!
                 \brief Creates an information set.

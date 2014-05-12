@@ -41,28 +41,28 @@ namespace bobura { namespace view { namespace diagram
         // types
 
         //! The selection type.
-        typedef Selection selection_type;
+        using selection_type = Selection;
 
         //! The canvas type.
-        typedef Canvas canvas_type;
+        using canvas_type = Canvas;
 
         //! The size type.
-        typedef typename canvas_type::size_type size_type;
+        using size_type = typename canvas_type::size_type;
 
         //! The position type.
-        typedef typename canvas_type::position_type position_type;
+        using position_type = typename canvas_type::position_type;
 
         //! The left type.
-        typedef typename tetengo2::gui::position<position_type>::left_type left_type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
         //! The top type.
-        typedef typename tetengo2::gui::position<position_type>::top_type top_type;
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
         //! The base type.
-        typedef item<selection_type, canvas_type> base_type;
+        using base_type = item<selection_type, canvas_type>;
 
         //! The time tick type.
-        typedef TimeTick time_tick_type;
+        using time_tick_type = TimeTick;
 
 
         // constructors and destructor
@@ -144,7 +144,7 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
-        typedef typename canvas_type::string_type string_type;
+        using string_type = typename canvas_type::string_type;
 
 
         // variables
@@ -191,49 +191,49 @@ namespace bobura { namespace view { namespace diagram
         // types
 
         //! The model type.
-        typedef Model model_type;
+        using model_type = Model;
         
         //! The time type.
-        typedef typename model_type::timetable_type::train_type::stop_type::time_type time_type;
+        using time_type = typename model_type::timetable_type::train_type::stop_type::time_type;
 
         //! The time span type.
-        typedef typename time_type::time_span_type time_span_type;
+        using time_span_type = typename time_type::time_span_type;
 
         //! The selection type.
-        typedef Selection selection_type;
+        using selection_type = Selection;
 
         //! The canvas type.
-        typedef Canvas canvas_type;
+        using canvas_type = Canvas;
 
         //! The font type.
-        typedef typename canvas_type::font_type font_type;
+        using font_type = typename canvas_type::font_type;
 
         //! The color type.
-        typedef typename canvas_type::color_type color_type;
+        using color_type = typename canvas_type::color_type;
 
         //! The position type.
-        typedef typename canvas_type::position_type position_type;
+        using position_type = typename canvas_type::position_type;
 
         //! The left type.
-        typedef typename tetengo2::gui::position<position_type>::left_type left_type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
         //! The top type.
-        typedef typename tetengo2::gui::position<position_type>::top_type top_type;
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
         //! The dimension type.
-        typedef typename canvas_type::dimension_type dimension_type;
+        using dimension_type = typename canvas_type::dimension_type;
 
         //! The width type.
-        typedef typename tetengo2::gui::dimension<dimension_type>::width_type width_type;
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
         //! The height type.
-        typedef typename tetengo2::gui::dimension<dimension_type>::height_type height_type;
+        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
         //! The horizontal scale type.
-        typedef typename width_type::value_type horizontal_scale_type;
+        using horizontal_scale_type = typename width_type::value_type;
 
         //! The base type.
-        typedef item<selection_type, canvas_type> base_type;
+        using base_type = item<selection_type, canvas_type>;
 
 
         // constructors and destructor
@@ -329,11 +329,11 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
-        typedef typename time_type::tick_type time_tick_type;
+        using time_tick_type = typename time_type::tick_type;
 
-        typedef time_line<selection_type, canvas_type, time_tick_type> time_line_type;
+        using time_line_type = time_line<selection_type, canvas_type, time_tick_type>;
 
-        typedef typename canvas_type::size_type size_type;
+        using size_type = typename canvas_type::size_type;
 
 
         // static functions

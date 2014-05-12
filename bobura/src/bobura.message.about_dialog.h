@@ -24,7 +24,7 @@ namespace bobura { namespace message { namespace about_dialog
         // types
 
         //! The dialog type.
-        typedef Dialog dialog_type;
+        using dialog_type = Dialog;
 
 
         // constructors and destructor

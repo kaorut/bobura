@@ -42,37 +42,37 @@ namespace bobura { namespace view { namespace diagram
         // types
 
         //! The model type.
-        typedef Model model_type;
+        using model_type = Model;
 
         //! The station location type.
-        typedef typename model_type::timetable_type::station_location_type station_location_type;
+        using station_location_type = typename model_type::timetable_type::station_location_type;
 
         //! The font and color type.
-        typedef typename model_type::timetable_type::font_color_set_type::font_color_type font_color_type;
+        using font_color_type = typename model_type::timetable_type::font_color_set_type::font_color_type;
 
         //! The selection type.
-        typedef Selection selection_type;
+        using selection_type = Selection;
 
         //! The canvas type.
-        typedef Canvas canvas_type;
+        using canvas_type = Canvas;
 
         //! The string type.
-        typedef typename canvas_type::string_type string_type;
+        using string_type = typename canvas_type::string_type;
 
         //! The position type.
-        typedef typename canvas_type::position_type position_type;
+        using position_type = typename canvas_type::position_type;
 
         //! The left type.
-        typedef typename tetengo2::gui::position<position_type>::left_type left_type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
         //! The top type.
-        typedef typename tetengo2::gui::position<position_type>::top_type top_type;
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
         //! The dimension type.
-        typedef typename canvas_type::dimension_type dimension_type;
+        using dimension_type = typename canvas_type::dimension_type;
 
         //! The base type.
-        typedef item<selection_type, canvas_type> base_type;
+        using base_type = item<selection_type, canvas_type>;
 
 
         // constructors and destructor
@@ -239,46 +239,46 @@ namespace bobura { namespace view { namespace diagram
         // types
 
         //! The model type.
-        typedef Model model_type;
+        using model_type = Model;
         
         //! The time type.
-        typedef typename model_type::timetable_type::train_type::stop_type::time_type time_type;
+        using time_type = typename model_type::timetable_type::train_type::stop_type::time_type;
 
         //! The time span type.
-        typedef typename time_type::time_span_type time_span_type;
+        using time_span_type = typename time_type::time_span_type;
 
         //! The selection type.
-        typedef Selection selection_type;
+        using selection_type = Selection;
 
         //! The canvas type.
-        typedef Canvas canvas_type;
+        using canvas_type = Canvas;
 
         //! The position type.
-        typedef typename canvas_type::position_type position_type;
+        using position_type = typename canvas_type::position_type;
 
         //! The left type.
-        typedef typename tetengo2::gui::position<position_type>::left_type left_type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
         //! The top type.
-        typedef typename tetengo2::gui::position<position_type>::top_type top_type;
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
         //! The dimension type.
-        typedef typename canvas_type::dimension_type dimension_type;
+        using dimension_type = typename canvas_type::dimension_type;
 
         //! The width type.
-        typedef typename tetengo2::gui::dimension<dimension_type>::width_type width_type;
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
         //! The height type.
-        typedef typename tetengo2::gui::dimension<dimension_type>::height_type height_type;
+        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
         //! The horizontal scale type.
-        typedef typename width_type::value_type horizontal_scale_type;
+        using horizontal_scale_type = typename width_type::value_type;
 
         //! The base type.
-        typedef item<selection_type, canvas_type> base_type;
+        using base_type = item<selection_type, canvas_type>;
 
         //! The station grade type set type.
-        typedef StationGradeTypeSet station_grade_type_set_type;
+        using station_grade_type_set_type = StationGradeTypeSet;
 
 
         // constructors and destructor
@@ -369,23 +369,23 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
-        typedef station_line<model_type, selection_type, canvas_type> station_line_type;
+        using station_line_type = station_line<model_type, selection_type, canvas_type>;
 
-        typedef typename model_type::timetable_type timetable_type;
+        using timetable_type = typename model_type::timetable_type;
 
-        typedef typename timetable_type::font_color_set_type font_color_set_type;
+        using font_color_set_type = typename timetable_type::font_color_set_type;
 
-        typedef typename font_color_set_type::font_color_type font_color_type;
+        using font_color_type = typename font_color_set_type::font_color_type;
 
-        typedef typename timetable_type::station_location_type station_location_type;
+        using station_location_type = typename timetable_type::station_location_type;
 
-        typedef typename station_location_type::station_type station_type;
+        using station_type = typename station_location_type::station_type;
 
-        typedef typename station_type::grade_type station_grade_type;
+        using station_grade_type = typename station_type::grade_type;
 
-        typedef typename canvas_type::size_type size_type;
+        using size_type = typename canvas_type::size_type;
 
-        typedef typename canvas_type::string_type string_type;
+        using string_type = typename canvas_type::string_type;
 
 
         // static functions

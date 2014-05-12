@@ -27,11 +27,11 @@ namespace bobura { namespace command
     public:
         // types
 
-        typedef vertically_zoom_out::model_type model_type;
+        using model_type = vertically_zoom_out::model_type;
 
-        typedef vertically_zoom_out::abstract_window_type abstract_window_type;
+        using abstract_window_type = vertically_zoom_out::abstract_window_type;
 
-        typedef vertically_zoom_out::diagram_view_type diagram_view_type;
+        using diagram_view_type = vertically_zoom_out::diagram_view_type;
 
 
         // constructors and destructor
@@ -60,9 +60,9 @@ namespace bobura { namespace command
     private:
         // types
 
-        typedef boost::mpl::at<main_window_type_list, type::main_window::main_window>::type main_window_type;
+        using main_window_type = boost::mpl::at<main_window_type_list, type::main_window::main_window>::type;
 
-        typedef view::diagram::zoom zoom_type;
+        using zoom_type = view::diagram::zoom;
 
 
         // variables

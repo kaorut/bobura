@@ -38,13 +38,13 @@ namespace bobura { namespace view
         // types
 
         //! The scale type.
-        typedef Scale scale_type;
+        using scale_type = Scale;
 
         //! The size type.
-        typedef Size size_type;
+        using size_type = Size;
 
         //! The string type.
-        typedef String string_type;
+        using string_type = String;
 
 
         // functions

@@ -47,22 +47,22 @@ namespace bobura
         // types
 
         //! The base type.
-        typedef SideBar base_type;
+        using base_type = SideBar;
 
         //! The abstract window type.
-        typedef AbstractWindow abstract_window_type;
+        using abstract_window_type = AbstractWindow;
 
         //! The map box type.
-        typedef MapBox map_box_type;
+        using map_box_type = MapBox;
 
         //! The settings type.
-        typedef Settings settings_type;
+        using settings_type = Settings;
 
         //! The message catalog type.
-        typedef MessageCatalog message_catalog_type;
+        using message_catalog_type = MessageCatalog;
 
         //! The message type list type.
-        typedef MessageTypeList message_type_list_type;
+        using message_type_list_type = MessageTypeList;
 
 
         // constructors and destructor
@@ -134,13 +134,13 @@ namespace bobura
     private:
         // types
 
-        typedef typename base_type::position_type position_type;
+        using position_type = typename base_type::position_type;
 
-        typedef typename tetengo2::gui::position<position_type>::left_type left_type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
-        typedef typename base_type::dimension_type dimension_type;
+        using dimension_type = typename base_type::dimension_type;
 
-        typedef typename tetengo2::gui::dimension<dimension_type>::width_type width_type;
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
 
         // variables

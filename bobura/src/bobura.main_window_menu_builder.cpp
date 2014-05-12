@@ -25,23 +25,22 @@ namespace bobura
 {
     namespace
     {
-        typedef boost::mpl::at<ui_type_list, type::ui::menu_command>::type menu_command_type;
+        using menu_command_type = boost::mpl::at<ui_type_list, type::ui::menu_command>::type;
 
-        typedef boost::mpl::at<ui_type_list, type::ui::popup_menu>::type popup_menu_type;
+        using popup_menu_type = boost::mpl::at<ui_type_list, type::ui::popup_menu>::type;
 
-        typedef menu_command_type::base_type menu_base_type;
+        using menu_base_type = menu_command_type::base_type;
 
-        typedef menu_base_type::string_type string_type;
+        using string_type = menu_base_type::string_type;
 
-        typedef menu_base_type::shortcut_key_type shortcut_key_type;
+        using shortcut_key_type = menu_base_type::shortcut_key_type;
 
-        typedef shortcut_key_type::virtual_key_type virtual_key_type;
+        using virtual_key_type = shortcut_key_type::virtual_key_type;
 
-        typedef boost::mpl::at<ui_type_list, type::ui::menu_separator>::type menu_separator_type;
+        using menu_separator_type = boost::mpl::at<ui_type_list, type::ui::menu_separator>::type;
 
-        typedef
-            boost::mpl::at<main_window_type_list, type::main_window::message_type_list>::type
-            main_window_message_type_list_type;
+        using main_window_message_type_list_type =
+            boost::mpl::at<main_window_type_list, type::main_window::message_type_list>::type;
 
 
     }
@@ -52,15 +51,15 @@ namespace bobura
     public:
         // types
 
-        typedef main_window_menu_builder::menu_bar_type menu_bar_type;
+        using menu_bar_type = main_window_menu_builder::menu_bar_type;
 
-        typedef main_window_menu_builder::command_set_type command_set_type;
+        using command_set_type = main_window_menu_builder::command_set_type;
 
-        typedef main_window_menu_builder::model_type model_type;
+        using model_type = main_window_menu_builder::model_type;
 
-        typedef main_window main_window_type;
+        using main_window_type = main_window;
 
-        typedef main_window_menu_builder::message_catalog_type message_catalog_type;
+        using message_catalog_type = main_window_menu_builder::message_catalog_type;
 
 
         // constructors and destructor
@@ -98,11 +97,11 @@ namespace bobura
     private:
         // types
 
-        typedef command_set_type::command_type command_type;
+        using command_type = command_set_type::command_type;
 
-        typedef std::vector<const command_type*> commands_type;
+        using commands_type = std::vector<const command_type*>;
 
-        typedef boost::mpl::at<view_type_list, type::view::scale_list>::type view_scale_list_type;
+        using view_scale_list_type = boost::mpl::at<view_type_list, type::view::scale_list>::type;
 
 
         // variables

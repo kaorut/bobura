@@ -26,55 +26,50 @@ namespace bobura
 {
     namespace
     {
-        typedef boost::mpl::at<setting_type_list, type::setting::settings>::type settings_type;
+        using settings_type = boost::mpl::at<setting_type_list, type::setting::settings>::type;
 
-        typedef boost::mpl::at<model_type_list, type::model::model>::type model_type;
+        using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
 
-        typedef
-            boost::mpl::at<application_type_list, type::application::model_message_type_list>::type
-            model_message_type_list_type;
+        using model_message_type_list_type =
+            boost::mpl::at<application_type_list, type::application::model_message_type_list>::type;
 
-        typedef boost::mpl::at<view_type_list, type::view::view>::type view_type;
+        using view_type = boost::mpl::at<view_type_list, type::view::view>::type;
 
-        typedef
-            boost::mpl::at<application_type_list, type::application::diagram_view_message_type_list>::type
-            diagram_view_message_type_list_type;
+        using diagram_view_message_type_list_type =
+            boost::mpl::at<application_type_list, type::application::diagram_view_message_type_list>::type;
 
-        typedef boost::mpl::at<locale_type_list, type::locale::message_catalog>::type message_catalog_type;
+        using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
 
-        typedef boost::mpl::at<load_save_type_list, type::load_save::confirm_file_save>::type confirm_file_save_type;
+        using confirm_file_save_type = boost::mpl::at<load_save_type_list, type::load_save::confirm_file_save>::type;
 
-        typedef boost::mpl::at<load_save_type_list, type::load_save::new_file>::type new_file_type;
+        using new_file_type = boost::mpl::at<load_save_type_list, type::load_save::new_file>::type;
 
-        typedef boost::mpl::at<load_save_type_list, type::load_save::load_from_file>::type load_from_file_type;
+        using load_from_file_type = boost::mpl::at<load_save_type_list, type::load_save::load_from_file>::type;
 
-        typedef boost::mpl::at<load_save_type_list, type::load_save::save_to_file>::type save_to_file_type;
+        using save_to_file_type = boost::mpl::at<load_save_type_list, type::load_save::save_to_file>::type;
 
-        typedef boost::mpl::at<main_window_type_list, type::main_window::command_set>::type command_set_type;
+        using command_set_type = boost::mpl::at<main_window_type_list, type::main_window::command_set>::type;
 
-        typedef boost::mpl::at<main_window_type_list, type::main_window::main_window>::type main_window_type;
+        using main_window_type = boost::mpl::at<main_window_type_list, type::main_window::main_window>::type;
 
-        typedef
-            boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box>::type
-            diagram_picture_box_type;
+        using diagram_picture_box_type =
+            boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box>::type;
 
-        typedef
-            boost::mpl::at<main_window_type_list, type::main_window::message_type_list>::type
-            main_window_message_type_list_type;
+        using main_window_message_type_list_type =
+            boost::mpl::at<main_window_type_list, type::main_window::message_type_list>::type;
 
-        typedef
-            boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box_message_type_list>::type
-            diagram_picture_box_message_type_list;
+        using diagram_picture_box_message_type_list =
+            boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box_message_type_list>::type;
 
-        typedef boost::mpl::at<ui_type_list, type::ui::message_loop>::type message_loop_type;
+        using message_loop_type = boost::mpl::at<ui_type_list, type::ui::message_loop>::type;
 
-        typedef boost::mpl::at<ui_type_list, type::ui::gui_fixture>::type gui_fixture_type;
+        using gui_fixture_type = boost::mpl::at<ui_type_list, type::ui::gui_fixture>::type;
 
-        typedef boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type mouse_capture_type;
+        using mouse_capture_type = boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type;
 
-        typedef mouse_capture_type::mouse_button_type mouse_button_type;
+        using mouse_button_type = mouse_capture_type::mouse_button_type;
 
-        typedef boost::mpl::at<ui_type_list, type::ui::timer>::type timer_type;
+        using timer_type = boost::mpl::at<ui_type_list, type::ui::timer>::type;
 
 
     }

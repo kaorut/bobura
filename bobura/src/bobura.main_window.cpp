@@ -31,23 +31,23 @@ namespace bobura
     public:
         // types
 
-        typedef main_window::base_type base_type;
+        using base_type = main_window::base_type;
 
-        typedef base_type::string_type string_type;
+        using string_type = base_type::string_type;
 
-        typedef base_type::icon_type icon_type;
+        using icon_type = base_type::icon_type;
 
-        typedef base_type::window_state_type window_state_type;
+        using window_state_type = base_type::window_state_type;
 
-        typedef main_window::message_catalog_type message_catalog_type;
+        using message_catalog_type = main_window::message_catalog_type;
 
-        typedef main_window::diagram_picture_box_type diagram_picture_box_type;
+        using diagram_picture_box_type = main_window::diagram_picture_box_type;
 
-        typedef main_window::property_bar_type property_bar_type;
+        using property_bar_type = main_window::property_bar_type;
 
-        typedef main_window::settings_type settings_type;
+        using settings_type = main_window::settings_type;
 
-        typedef main_window::confirm_file_save_type confirm_file_save_type;
+        using confirm_file_save_type = main_window::confirm_file_save_type;
 
 
         // constructors and destructor
@@ -113,19 +113,18 @@ namespace bobura
     private:
         // types
 
-        typedef boost::mpl::at<ui_type_list, type::ui::message_loop_break>::type message_loop_break_type;
+        using message_loop_break_type = boost::mpl::at<ui_type_list, type::ui::message_loop_break>::type;
 
-        typedef
-            boost::mpl::at<main_window_type_list, type::main_window::message_type_list>::type
-            message_type_list_type;
+        using message_type_list_type =
+            boost::mpl::at<main_window_type_list, type::main_window::message_type_list>::type;
 
-        typedef base_type::position_type position_type;
+        using position_type = base_type::position_type;
 
-        typedef tetengo2::gui::position<position_type>::left_type left_type;
+        using left_type = tetengo2::gui::position<position_type>::left_type;
 
-        typedef tetengo2::gui::position<position_type>::top_type top_type;
+        using top_type = tetengo2::gui::position<position_type>::top_type;
 
-        typedef base_type::dimension_type dimension_type;
+        using dimension_type = base_type::dimension_type;
 
 
         // variables
