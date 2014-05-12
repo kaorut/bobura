@@ -18,16 +18,16 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::common_type_list, bobura::type::string>::type string_type;
+    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type window_type;
+    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    typedef boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type settings_type;
+    using settings_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type;
 
-    typedef boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type message_catalog_type;
+    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
-    typedef
-        boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::property_bar>::type property_bar_type;
+    using property_bar_type =
+        boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::property_bar>::type;
 
 
 }

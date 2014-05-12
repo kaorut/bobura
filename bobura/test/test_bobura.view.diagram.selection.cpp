@@ -25,29 +25,26 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::common_type_list, bobura::type::string>::type string_type;
+    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
-    typedef boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type model_type;
+    using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
-    typedef model_type::timetable_type::station_location_type station_location_type;
+    using station_location_type = model_type::timetable_type::station_location_type;
 
-    typedef station_location_type::station_type station_type;
+    using station_type = station_location_type::station_type;
 
-    typedef
-        boost::mpl::at<bobura::model_type_list, bobura::type::model::station_grade_type_set>::type
-        station_grade_type_set_type;
+    using station_grade_type_set_type =
+        boost::mpl::at<bobura::model_type_list, bobura::type::model::station_grade_type_set>::type;
     
-    typedef model_type::timetable_type::train_type train_type;
+    using train_type = model_type::timetable_type::train_type;
 
-    typedef train_type::stops_type::size_type stop_index_type;
+    using stop_index_type = train_type::stops_type::size_type;
 
-    typedef
-        bobura::message::diagram_selection_observer_set<station_location_type, train_type>
-        diagram_selection_observer_set_type;
+    using diagram_selection_observer_set_type =
+        bobura::message::diagram_selection_observer_set<station_location_type, train_type>;
 
-    typedef
-        bobura::view::diagram::selection<station_location_type, train_type, diagram_selection_observer_set_type>
-        selection_type;
+    using selection_type =
+        bobura::view::diagram::selection<station_location_type, train_type, diagram_selection_observer_set_type>;
 
 
 }

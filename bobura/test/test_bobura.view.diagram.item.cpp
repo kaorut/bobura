@@ -25,33 +25,31 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type model_type;
+    using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
-    typedef model_type::timetable_type::station_location_type station_location_type;
+    using station_location_type = model_type::timetable_type::station_location_type;
 
-    typedef model_type::timetable_type::train_type train_type;
+    using train_type = model_type::timetable_type::train_type;
 
-    typedef
-        bobura::message::diagram_selection_observer_set<station_location_type, train_type>
-        diagram_selection_observer_set_type;
+    using diagram_selection_observer_set_type =
+        bobura::message::diagram_selection_observer_set<station_location_type, train_type>;
 
-    typedef
-        bobura::view::diagram::selection<station_location_type, train_type, diagram_selection_observer_set_type>
-        selection_type;
+    using selection_type =
+        bobura::view::diagram::selection<station_location_type, train_type, diagram_selection_observer_set_type>;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type window_type;
+    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type picture_box_type;
+    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type canvas_type;
+    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
 
-    typedef canvas_type::position_type position_type;
+    using position_type = canvas_type::position_type;
 
-    typedef tetengo2::gui::position<position_type>::left_type left_type;
+    using left_type = tetengo2::gui::position<position_type>::left_type;
 
-    typedef tetengo2::gui::position<position_type>::top_type top_type;
+    using top_type = tetengo2::gui::position<position_type>::top_type;
 
-    typedef bobura::view::diagram::item<selection_type, canvas_type> item_type;
+    using item_type = bobura::view::diagram::item<selection_type, canvas_type>;
 
     class concrete_item : public item_type
     {

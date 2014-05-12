@@ -18,19 +18,18 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type window_type;
+    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    typedef
-        boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::diagram_picture_box>::type
-        diagram_picture_box_type;
+    using diagram_picture_box_type =
+        boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::diagram_picture_box>::type;
 
-    typedef diagram_picture_box_type::dimension_type dimension_type;
+    using dimension_type = diagram_picture_box_type::dimension_type;
 
-    typedef tetengo2::gui::dimension<dimension_type>::width_type width_type;
+    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
 
-    typedef tetengo2::gui::dimension<dimension_type>::height_type height_type;
+    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
-    typedef diagram_picture_box_type::mouse_button_type mouse_button_type;
+    using mouse_button_type = diagram_picture_box_type::mouse_button_type;
 
 
 }

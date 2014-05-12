@@ -24,23 +24,23 @@
 
 namespace
 {
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type window_type;
+    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type picture_box_type;
+    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
 
-    typedef picture_box_type::position_type position_type;
+    using position_type = picture_box_type::position_type;
 
-    typedef tetengo2::gui::position<position_type>::left_type left_type;
+    using left_type = tetengo2::gui::position<position_type>::left_type;
 
-    typedef tetengo2::gui::position<position_type>::top_type top_type;
+    using top_type = tetengo2::gui::position<position_type>::top_type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type canvas_type;
+    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
 
-    typedef bobura::model::train_info::time_span<int> time_span_type;
+    using time_span_type = bobura::model::train_info::time_span<int>;
 
-    typedef bobura::model::train_info::time<int, time_span_type> time_type;
+    using time_type = bobura::model::train_info::time<int, time_span_type>;
 
-    typedef tetengo2::gui::position<position_type>::left_type size_type;
+    using size_type = tetengo2::gui::position<position_type>::left_type;
 
 
 }

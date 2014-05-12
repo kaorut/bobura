@@ -27,63 +27,59 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::common_type_list, bobura::type::string>::type string_type;
+    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
-    typedef boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type model_type;
+    using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
-    typedef model_type::timetable_type::station_location_type station_location_type;
+    using station_location_type = model_type::timetable_type::station_location_type;
 
-    typedef station_location_type::station_type station_type;
+    using station_type = station_location_type::station_type;
 
-    typedef model_type::timetable_type::font_color_set_type::font_color_type font_color_type;
+    using font_color_type = model_type::timetable_type::font_color_set_type::font_color_type;
 
-    typedef model_type::timetable_type::train_type train_type;
+    using train_type = model_type::timetable_type::train_type;
 
-    typedef
-        bobura::message::diagram_selection_observer_set<station_location_type, train_type>
-        diagram_selection_observer_set_type;
+    using diagram_selection_observer_set_type =
+        bobura::message::diagram_selection_observer_set<station_location_type, train_type>;
 
-    typedef
-        bobura::view::diagram::selection<station_location_type, train_type, diagram_selection_observer_set_type>
-        selection_type;
+    using selection_type =
+        bobura::view::diagram::selection<station_location_type, train_type, diagram_selection_observer_set_type>;
 
-    typedef model_type::timetable_type::train_type::stop_type::time_type time_type;
+    using time_type = model_type::timetable_type::train_type::stop_type::time_type;
 
-    typedef time_type::time_span_type time_span_type;
+    using time_span_type = time_type::time_span_type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type window_type;
+    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type picture_box_type;
+    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
 
-    typedef picture_box_type::position_type position_type;
+    using position_type = picture_box_type::position_type;
 
-    typedef tetengo2::gui::position<position_type>::left_type left_type;
+    using left_type = tetengo2::gui::position<position_type>::left_type;
 
-    typedef tetengo2::gui::position<position_type>::top_type top_type;
+    using top_type = tetengo2::gui::position<position_type>::top_type;
 
-    typedef picture_box_type::dimension_type dimension_type;
+    using dimension_type = picture_box_type::dimension_type;
 
-    typedef tetengo2::gui::dimension<dimension_type>::width_type width_type;
+    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
 
-    typedef tetengo2::gui::dimension<dimension_type>::height_type height_type;
+    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
-    typedef width_type::value_type horizontal_scale_type;
+    using horizontal_scale_type = width_type::value_type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type canvas_type;
+    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
 
-    typedef canvas_type::font_type font_type;
+    using font_type = canvas_type::font_type;
 
-    typedef canvas_type::color_type color_type;
+    using color_type = canvas_type::color_type;
 
-    typedef
-        boost::mpl::at<bobura::model_type_list, bobura::type::model::station_grade_type_set>::type
-        station_grade_type_set_type;
+    using station_grade_type_set_type =
+        boost::mpl::at<bobura::model_type_list, bobura::type::model::station_grade_type_set>::type;
     
-    typedef bobura::view::diagram::station_line<model_type, selection_type, canvas_type> station_line_type;
+    using station_line_type = bobura::view::diagram::station_line<model_type, selection_type, canvas_type>;
 
-    typedef
-        bobura::view::diagram::station_line_list<model_type, selection_type, canvas_type, station_grade_type_set_type>
-        station_line_list_type;
+    using station_line_list_type =
+        bobura::view::diagram::station_line_list<model_type, selection_type, canvas_type, station_grade_type_set_type>;
 
 
 }

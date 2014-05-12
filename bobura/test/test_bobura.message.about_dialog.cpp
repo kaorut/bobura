@@ -18,9 +18,9 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type dialog_type;
+    using dialog_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type window_type;
+    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
     class concrete_dialog : public dialog_type
     {

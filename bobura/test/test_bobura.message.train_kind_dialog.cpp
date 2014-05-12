@@ -25,35 +25,35 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::common_type_list, bobura::type::size>::type size_type;
+    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
 
-    typedef boost::mpl::at<bobura::common_type_list, bobura::type::string>::type string_type;
+    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
-    typedef boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type message_catalog_type;
+    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::list_box>::type list_box_type;
+    using list_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::list_box>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type dialog_type;
+    using dialog_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type window_type;
+    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    typedef window_type::dimension_type dimension_type;
+    using dimension_type = window_type::dimension_type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type canvas_type;
+    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
 
-    typedef canvas_type::font_type font_type;
+    using font_type = canvas_type::font_type;
 
-    typedef canvas_type::color_type color_type;
+    using color_type = canvas_type::color_type;
 
-    typedef tetengo2::gui::dimension<dimension_type>::width_type width_type;
+    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
 
-    typedef tetengo2::gui::dimension<dimension_type>::height_type height_type;
+    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
     struct info_set_type
     {
-        typedef boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type model_type;
+        using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
-        typedef model_type::timetable_type::train_kind_type train_kind_type;
+        using train_kind_type = model_type::timetable_type::train_kind_type;
 
         info_set_type()
         {}
@@ -108,8 +108,8 @@ namespace
     };
 
 
-    typedef
-        boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::color>::type color_dialog_type;
+    using color_dialog_type =
+        boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::color>::type;
 
     class concrete_dialog : public dialog_type
     {
