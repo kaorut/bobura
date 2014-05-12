@@ -113,7 +113,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the time line.
         */
         virtual ~time_line()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
         // functions
@@ -300,7 +300,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the time line list.
         */
         virtual ~time_line_list()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
         // functions

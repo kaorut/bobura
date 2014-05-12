@@ -65,7 +65,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the json_writer.
         */
         virtual ~json_writer()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
     private:

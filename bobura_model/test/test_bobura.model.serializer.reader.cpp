@@ -43,7 +43,7 @@ namespace
     {
     public:
         virtual ~concrete_reader()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
     private:

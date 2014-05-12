@@ -45,7 +45,7 @@ namespace
     {
     public:
         virtual ~concrete_writer()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
     private:
