@@ -38,16 +38,16 @@ namespace bobura { namespace model { namespace serializer
         // types
 
         //! The output stream type.
-        typedef OutputStream output_stream_type;
+        using output_stream_type = OutputStream;
 
         //! The timetable type.
-        typedef Timetable timetable_type;
+        using timetable_type = Timetable;
 
         //! The path type.
-        typedef Path path_type;
+        using path_type = Path;
 
         //! The base type.
-        typedef writer<output_stream_type, timetable_type, path_type> base_type;
+        using base_type = writer<output_stream_type, timetable_type, path_type>;
 
 
         // constructors and destructor
@@ -77,7 +77,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the writer_selector.
         */
         virtual ~writer_selector()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
     private:

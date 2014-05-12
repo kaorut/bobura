@@ -36,16 +36,16 @@ namespace bobura { namespace view { namespace diagram
         // types
 
         //! The station location type.
-        typedef StationLocation station_location_type;
+        using station_location_type = StationLocation;
 
         //! The train type.
-        typedef Train train_type;
+        using train_type = Train;
 
         //! The stop index type.
-        typedef typename train_type::stops_type::size_type stop_index_type;
+        using stop_index_type = typename train_type::stops_type::size_type;
 
         //! The selection observer set type.
-        typedef SelectionObserverSet selection_observer_set_type;
+        using selection_observer_set_type = SelectionObserverSet;
 
 
         // constructors and destructor

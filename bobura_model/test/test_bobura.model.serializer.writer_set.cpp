@@ -16,17 +16,15 @@ namespace
 {
     // types
 
-    typedef
+    using writer_type =
         boost::mpl::at<
             test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::writer
-        >::type
-        writer_type;
+        >::type;
 
-    typedef
+    using writer_set_type =
         boost::mpl::at<
             test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::writer_set
-        >::type
-        writer_set_type;
+        >::type;
 
 
 }

@@ -43,28 +43,28 @@ namespace bobura { namespace model { namespace serializer
         // types
 
         //! The timetable type.
-        typedef Timetable timetable_type;
+        using timetable_type = Timetable;
 
         //! The station grade type set type.
-        typedef StationGradeTypeSet station_grade_type_set_type;
+        using station_grade_type_set_type = StationGradeTypeSet;
 
         //! The pull parser type.
-        typedef PullParser pull_parser_type;
+        using pull_parser_type = PullParser;
 
         //! The push parser type.
-        typedef typename pull_parser_type::push_parser_type push_parser_type;
+        using push_parser_type = typename pull_parser_type::push_parser_type;
 
         //! The iterator type.
-        typedef typename push_parser_type::iterator iterator;
+        using iterator = typename push_parser_type::iterator;
 
         //! The base type.
-        typedef reader<iterator, timetable_type> base_type;
+        using base_type = reader<iterator, timetable_type>;
 
         //! The error type.
-        typedef typename base_type::error_type error_type;
+        using error_type = typename base_type::error_type;
 
         //! The encoder type.
-        typedef Encoder encoder_type;
+        using encoder_type = Encoder;
 
 
         // constructors and destructor
@@ -73,65 +73,65 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the json_reader.
         */
         virtual ~json_reader()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
     private:
         // types
 
-        typedef typename timetable_type::string_type string_type;
+        using string_type = typename timetable_type::string_type;
 
-        typedef typename timetable_type::font_color_set_type font_color_set_type;
+        using font_color_set_type = typename timetable_type::font_color_set_type;
 
-        typedef typename font_color_set_type::font_color_type font_color_type;
+        using font_color_type = typename font_color_set_type::font_color_type;
 
-        typedef typename font_color_type::font_type font_type;
+        using font_type = typename font_color_type::font_type;
 
-        typedef typename font_color_type::color_type color_type;
+        using color_type = typename font_color_type::color_type;
 
-        typedef boost::variant<font_color_type, font_type, color_type> font_color_set_element_type;
+        using font_color_set_element_type = boost::variant<font_color_type, font_type, color_type>;
 
-        typedef typename timetable_type::train_kind_index_type train_kind_index_type;
+        using train_kind_index_type = typename timetable_type::train_kind_index_type;
 
-        typedef typename push_parser_type::grammar_type grammar_type;
+        using grammar_type = typename push_parser_type::grammar_type;
 
-        typedef typename push_parser_type::string_type input_string_type;
+        using input_string_type = typename push_parser_type::string_type;
 
-        typedef std::unordered_map<string_type, string_type> header_type;
+        using header_type = std::unordered_map<string_type, string_type>;
 
-        typedef typename timetable_type::station_location_type station_location_type;
+        using station_location_type = typename timetable_type::station_location_type;
 
-        typedef typename station_location_type::station_type station_type;
+        using station_type = typename station_location_type::station_type;
 
-        typedef typename station_type::grade_type station_grade_type;
+        using station_grade_type = typename station_type::grade_type;
 
-        typedef typename station_location_type::operating_distance_type operating_distance_type;
+        using operating_distance_type = typename station_location_type::operating_distance_type;
 
-        typedef typename timetable_type::train_kind_type train_kind_type;
+        using train_kind_type = typename timetable_type::train_kind_type;
 
-        typedef typename train_kind_type::weight_type weight_type;
+        using weight_type = typename train_kind_type::weight_type;
 
-        typedef typename train_kind_type::line_style_type line_style_type;
+        using line_style_type = typename train_kind_type::line_style_type;
 
-        typedef typename timetable_type::train_type train_type;
+        using train_type = typename timetable_type::train_type;
 
-        typedef typename train_type::direction_type direction_type;
+        using direction_type = typename train_type::direction_type;
 
-        typedef typename train_type::stop_type stop_type;
+        using stop_type = typename train_type::stop_type;
 
-        typedef typename stop_type::time_type time_type;
+        using time_type = typename stop_type::time_type;
 
-        typedef typename pull_parser_type::element_type element_type;
+        using element_type = typename pull_parser_type::element_type;
 
-        typedef typename pull_parser_type::structure_begin_type structure_begin_type;
+        using structure_begin_type = typename pull_parser_type::structure_begin_type;
 
-        typedef typename pull_parser_type::structure_end_type structure_end_type;
+        using structure_end_type = typename pull_parser_type::structure_end_type;
 
-        typedef typename pull_parser_type::attribute_map_type attribute_map_type;
+        using attribute_map_type = typename pull_parser_type::attribute_map_type;
 
-        typedef typename pull_parser_type::value_type value_type;
+        using value_type = typename pull_parser_type::value_type;
 
-        typedef typename push_parser_type::integer_type integer_type;
+        using integer_type = typename push_parser_type::integer_type;
 
 
         // static functions

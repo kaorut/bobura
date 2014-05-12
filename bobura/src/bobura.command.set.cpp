@@ -42,25 +42,25 @@ namespace bobura { namespace command
     public:
         // types
 
-        typedef set::size_type size_type;
+        using size_type = set::size_type;
 
-        typedef set::new_file_type new_file_type;
+        using new_file_type = set::new_file_type;
 
-        typedef set::load_from_file_type load_from_file_type;
+        using load_from_file_type = set::load_from_file_type;
 
-        typedef set::path_type path_type;
+        using path_type = set::path_type;
 
-        typedef set::save_to_file_type save_to_file_type;
+        using save_to_file_type = set::save_to_file_type;
 
-        typedef set::diagram_view_type diagram_view_type;
+        using diagram_view_type = set::diagram_view_type;
 
-        typedef set::settings_type settings_type;
+        using settings_type = set::settings_type;
 
-        typedef set::message_catalog_type message_catalog_type;
+        using message_catalog_type = set::message_catalog_type;
 
-        typedef set::command_type command_type;
+        using command_type = set::command_type;
 
-        typedef set::parameter_type parameter_type;
+        using parameter_type = set::parameter_type;
 
 
         // constructors and destructor
@@ -217,9 +217,9 @@ namespace bobura { namespace command
     private:
         // types
 
-        typedef std::unique_ptr<command_type> command_ptr_type;
+        using command_ptr_type = std::unique_ptr<command_type>;
 
-        typedef boost::mpl::at<view_type_list, type::view::scale_list>::type scale_list_type;
+        using scale_list_type = boost::mpl::at<view_type_list, type::view::scale_list>::type;
 
 
         // static functions

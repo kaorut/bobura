@@ -41,25 +41,25 @@ namespace bobura { namespace model { namespace serializer
         // types
 
         //! The output stream type.
-        typedef OutputStream output_stream_type;
+        using output_stream_type = OutputStream;
 
         //! The timetable type.
-        typedef Timetable timetable_type;
+        using timetable_type = Timetable;
 
         //! The path type.
-        typedef Path path_type;
+        using path_type = Path;
 
         //! The encoder type.
-        typedef Encoder encoder_type;
+        using encoder_type = Encoder;
 
         //! The writer type.
-        typedef writer<output_stream_type, timetable_type, path_type> writer_type;
+        using writer_type = writer<output_stream_type, timetable_type, path_type>;
 
         //! The bzip2 writer type.
-        typedef bzip2_writer<output_stream_type, timetable_type, path_type> bzip2_writer_type;
+        using bzip2_writer_type = bzip2_writer<output_stream_type, timetable_type, path_type>;
 
         //! The JSON writer type.
-        typedef json_writer<output_stream_type, timetable_type, path_type, encoder_type> json_writer_type;
+        using json_writer_type = json_writer<output_stream_type, timetable_type, path_type, encoder_type>;
 
 
         // static functions

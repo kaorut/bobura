@@ -19,9 +19,9 @@ namespace bobura { namespace command
     public:
         // types
 
-        typedef exit::model_type model_type;
+        using model_type = exit::model_type;
 
-        typedef exit::abstract_window_type abstract_window_type;
+        using abstract_window_type = exit::abstract_window_type;
 
 
         // functions

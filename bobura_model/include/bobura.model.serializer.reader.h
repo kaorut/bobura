@@ -31,10 +31,10 @@ namespace bobura { namespace model { namespace serializer
         // types
 
         //! The iterator type.
-        typedef ForwardIterator iterator;
+        using iterator = ForwardIterator;
 
         //! The timetable type.
-        typedef Timetable timetable_type;
+        using timetable_type = Timetable;
 
         //! The error type.
         enum class error_type
@@ -52,7 +52,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the reader.
         */
         virtual ~reader()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
         // functions

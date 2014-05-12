@@ -18,11 +18,11 @@ namespace bobura { namespace command
     public:
         // types
 
-        typedef new_file::model_type model_type;
+        using model_type = new_file::model_type;
 
-        typedef new_file::abstract_window_type abstract_window_type;
+        using abstract_window_type = new_file::abstract_window_type;
 
-        typedef new_file::new_file_type new_file_type;
+        using new_file_type = new_file::new_file_type;
 
 
         // constructors and destructor

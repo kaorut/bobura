@@ -28,25 +28,22 @@ namespace
 {
     // types
 
-    typedef
+    using reader_type =
         boost::mpl::at<
             test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::reader
-        >::type
-        reader_type;
+        >::type;
 
-    typedef reader_type::error_type error_type;
+    using error_type = reader_type::error_type;
 
-    typedef boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type string_type;
+    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type
-        timetable_type;
+    using timetable_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type;
 
-    typedef
+    using reader_selector_type =
         boost::mpl::at<
             test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::reader_selector
-        >::type
-        reader_selector_type;
+        >::type;
 
     class concrete_reader : public reader_type
     {
@@ -58,7 +55,7 @@ namespace
         {}
 
         virtual ~concrete_reader()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
     private:

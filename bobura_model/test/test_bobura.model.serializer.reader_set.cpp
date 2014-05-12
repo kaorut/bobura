@@ -20,27 +20,23 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type string_type;
+    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::abstract_window>::type
-        abstract_window_type;
+    using abstract_window_type =
+        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::abstract_window>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::message_catalog>::type
-        message_catalog_type;
+    using message_catalog_type =
+        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::message_catalog>::type;
 
-    typedef
+    using reader_type =
         boost::mpl::at<
             test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::reader
-        >::type
-        reader_type;
+        >::type;
 
-    typedef
+    using reader_set_type =
         boost::mpl::at<
             test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::reader_set
-        >::type
-        reader_set_type;
+        >::type;
 
 
 }

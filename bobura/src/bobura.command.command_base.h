@@ -83,10 +83,10 @@ namespace bobura { namespace command
         // types
 
         //! The model type.
-        typedef boost::mpl::at<model_type_list, type::model::model>::type model_type;
+        using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
 
         //! The abstract window type.
-        typedef boost::mpl::at<ui_type_list, type::ui::abstract_window>::type abstract_window_type;
+        using abstract_window_type = boost::mpl::at<ui_type_list, type::ui::abstract_window>::type;
 
         //! The state type.
         enum class state_type

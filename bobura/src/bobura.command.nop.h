@@ -27,7 +27,7 @@ namespace bobura { namespace command
         // types
 
         //! The base type.
-        typedef command_base base_type;
+        using base_type = command_base;
 
 
         // constructors and destructor

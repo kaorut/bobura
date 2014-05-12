@@ -23,11 +23,11 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type model_type;
+    using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
-    typedef boost::mpl::at<bobura::common_type_list, bobura::type::string>::type string_type;
+    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
-    typedef model_type::timetable_type timetable_type;
+    using timetable_type = model_type::timetable_type;
 
 
 }

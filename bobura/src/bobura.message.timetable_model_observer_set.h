@@ -26,18 +26,18 @@ namespace bobura { namespace message
         /*!
             \brief The observer type of reset.
         */
-        typedef void reset_type();
+        using reset_type = void ();
 
         //! The signal type of reset.
-        typedef boost::signals2::signal<reset_type> reset_signal_type;
+        using reset_signal_type = boost::signals2::signal<reset_type>;
 
         /*!
             \brief The observer type of changed.
         */
-        typedef void changed_type();
+        using changed_type = void ();
 
         //! The signal type of changed.
-        typedef boost::signals2::signal<changed_type> changed_signal_type;
+        using changed_signal_type = boost::signals2::signal<changed_type>;
 
 
         // functions

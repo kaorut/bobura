@@ -26,7 +26,7 @@ namespace bobura { namespace message { namespace timetable_model
         template <typename TimetableModel, typename MainWindow>
         void set_main_window_title(const TimetableModel& timetable_model, MainWindow& main_window)
         {
-            typedef typename MainWindow::string_type string_type;
+            using string_type = typename MainWindow::string_type;
 
             const auto title =
                 timetable_model.has_path() ?
@@ -53,13 +53,13 @@ namespace bobura { namespace message { namespace timetable_model
         // types
 
         //! The timetable model type.
-        typedef TimetableModel timetable_model_type;
+        using timetable_model_type = TimetableModel;
 
         //! The diagram view type.
-        typedef DiagramView diagram_view_type;
+        using diagram_view_type = DiagramView;
 
         //! The main window type.
-        typedef MainWindow main_window_type;
+        using main_window_type = MainWindow;
 
 
         // constructors and destructor
@@ -103,13 +103,13 @@ namespace bobura { namespace message { namespace timetable_model
     private:
         // types
 
-        typedef typename diagram_view_type::dimension_type dimension_type;
+        using dimension_type = typename diagram_view_type::dimension_type;
 
-        typedef typename main_window_type::diagram_picture_box_type diagram_picture_box_type;
+        using diagram_picture_box_type = typename main_window_type::diagram_picture_box_type;
 
-        typedef typename diagram_picture_box_type::scroll_bar_type scroll_bar_type;
+        using scroll_bar_type = typename diagram_picture_box_type::scroll_bar_type;
 
-        typedef typename scroll_bar_type::size_type scroll_bar_size_type;
+        using scroll_bar_size_type = typename scroll_bar_type::size_type;
 
 
         // static functions
@@ -169,13 +169,13 @@ namespace bobura { namespace message { namespace timetable_model
         // types
 
         //! The timetable model type.
-        typedef TimetableModel timetable_model_type;
+        using timetable_model_type = TimetableModel;
 
         //! The diagram view type.
-        typedef DiagramView diagram_view_type;
+        using diagram_view_type = DiagramView;
 
         //! The main window type.
-        typedef MainWindow main_window_type;
+        using main_window_type = MainWindow;
 
 
         // constructors and destructor

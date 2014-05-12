@@ -29,10 +29,10 @@ namespace bobura { namespace model
         // types
 
         //! The string type.
-        typedef String string_type;
+        using string_type = String;
 
         //! The color type.
-        typedef Color color_type;
+        using color_type = Color;
 
         //! The weight type.
         enum class weight_type

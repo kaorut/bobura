@@ -29,10 +29,10 @@ namespace bobura { namespace model
         // types
 
         //! The string type.
-        typedef String string_type;
+        using string_type = String;
 
         //! The grade type.
-        typedef Grade grade_type;
+        using grade_type = Grade;
 
 
         // constructors and destructor

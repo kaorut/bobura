@@ -28,10 +28,10 @@ namespace bobura { namespace command
         // types
 
         //! The base type.
-        typedef command_base base_type;
+        using base_type = command_base;
 
         //! The diagram view type.
-        typedef boost::mpl::at<view_type_list, type::view::view>::type diagram_view_type;
+        using diagram_view_type = boost::mpl::at<view_type_list, type::view::view>::type;
 
 
         // constructors and destructor

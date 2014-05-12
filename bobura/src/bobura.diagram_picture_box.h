@@ -39,25 +39,25 @@ namespace bobura
         // types
 
         //! The base type.
-        typedef PictureBox base_type;
+        using base_type = PictureBox;
 
         //! The dimension type.
-        typedef typename base_type::dimension_type dimension_type;
+        using dimension_type = typename base_type::dimension_type;
 
         //! The scroll bar type.
-        typedef typename base_type::scroll_bar_type scroll_bar_type;
+        using scroll_bar_type = typename base_type::scroll_bar_type;
 
         //! The abstract window type.
-        typedef AbstractWindow abstract_window_type;
+        using abstract_window_type = AbstractWindow;
 
         //! The mouse capture type.
-        typedef MouseCapture mouse_capture_type;
+        using mouse_capture_type = MouseCapture;
         
         //! The mouse button type.
-        typedef typename mouse_capture_type::mouse_button_type mouse_button_type;
+        using mouse_button_type = typename mouse_capture_type::mouse_button_type;
 
         //! The message type list type.
-        typedef MessageTypeList message_type_list_type;
+        using message_type_list_type = MessageTypeList;
 
 
         // constructors and destructor
@@ -79,7 +79,7 @@ namespace bobura
             \brief Destroys the diagram picture box.
         */
         virtual ~diagram_picture_box()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
         // functions
@@ -147,7 +147,7 @@ namespace bobura
     private:
         // types
 
-        typedef typename scroll_bar_type::size_type scroll_bar_size_type;
+        using scroll_bar_size_type = typename scroll_bar_type::size_type;
 
 
         // variables

@@ -72,7 +72,7 @@ namespace test_bobura { namespace model
 #if !defined(DOCUMENTATION)
     namespace detail
     {
-        typedef tetengo2::detail::stub::drawing drawing_details_type;
+        using drawing_details_type = tetengo2::detail::stub::drawing;
         struct abstract_window_type
         {
             abstract_window_type()
@@ -87,7 +87,7 @@ namespace test_bobura { namespace model
 #endif
 
     //! The common type list.
-    typedef
+    using type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::size, std::size_t>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::difference, std::ptrdiff_t>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::string, std::string>,
@@ -101,8 +101,7 @@ namespace test_bobura { namespace model
         tetengo2::meta::assoc_list<boost::mpl::pair<type::abstract_window, detail::abstract_window_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::message_catalog, detail::message_catalog_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>
-        type_list;
+        >>>>>>>>>;
 
 
     /**** Model *************************************************************/
@@ -126,43 +125,36 @@ namespace test_bobura { namespace model
 #if !defined(DOCUMENTATION)
     namespace detail { namespace model
     {
-        typedef
+        using font_color_type =
             bobura::model::timetable_info::font_color<
                 boost::mpl::at<type_list, type::font>::type, boost::mpl::at<type_list, type::color>::type
-            >
-            font_color_type;
-        typedef bobura::model::timetable_info::font_color_set<font_color_type> font_color_set_type;
-        typedef
-            bobura::model::station_info::grade_type_set<boost::mpl::at<type_list, type::string>::type>
-            grade_type_set_type;
-        typedef grade_type_set_type::grade_type grade_type;
-        typedef bobura::model::station<boost::mpl::at<type_list, type::string>::type, grade_type> station_type;
-        typedef
-            bobura::model::timetable_info::station_location<station_type, boost::mpl::at<type_list, type::size>::type>
-            station_location_type;
-        typedef
+            >;
+        using font_color_set_type = bobura::model::timetable_info::font_color_set<font_color_type>;
+        using grade_type_set_type =
+            bobura::model::station_info::grade_type_set<boost::mpl::at<type_list, type::string>::type>;
+        using grade_type = grade_type_set_type::grade_type;
+        using station_type = bobura::model::station<boost::mpl::at<type_list, type::string>::type, grade_type>;
+        using station_location_type =
+            bobura::model::timetable_info::station_location<station_type, boost::mpl::at<type_list, type::size>::type>;
+        using train_kind_type =
             bobura::model::train_kind<
                 boost::mpl::at<type_list, type::string>::type, boost::mpl::at<type_list, type::color>::type
-            >
-            train_kind_type;
-        typedef bobura::model::train_info::time_span<boost::mpl::at<type_list, type::difference>::type> time_span_type;
-        typedef bobura::model::train_info::time<boost::mpl::at<type_list, type::size>::type, time_span_type> time_type;
-        typedef
-            bobura::model::train_info::stop<detail::model::time_type, boost::mpl::at<type_list, type::string>::type>
-            stop_type;
-        typedef
+            >;
+        using time_span_type = bobura::model::train_info::time_span<boost::mpl::at<type_list, type::difference>::type>;
+        using time_type = bobura::model::train_info::time<boost::mpl::at<type_list, type::size>::type, time_span_type>;
+        using stop_type =
+            bobura::model::train_info::stop<detail::model::time_type, boost::mpl::at<type_list, type::string>::type>;
+        using train_type =
             bobura::model::train<
                 boost::mpl::at<type_list, type::string>::type, boost::mpl::at<type_list, type::size>::type, stop_type
-            >
-            train_type;
-        typedef
-            bobura::model::timetable_info::station_interval_calculator<station_location_type, train_type>
-            station_interval_calculator_type;
+            >;
+        using station_interval_calculator_type =
+            bobura::model::timetable_info::station_interval_calculator<station_location_type, train_type>;
     }}
 #endif
 
     //! The model type list.
-    typedef
+    using model_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::font_color_set, detail::model::font_color_set_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::grade_type_set, detail::model::grade_type_set_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::station, detail::model::station_type>,
@@ -192,8 +184,7 @@ namespace test_bobura { namespace model
                 >
             >,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>
-        model_type_list;
+        >>>>>>>>>>>;
 
 
     /**** Serialization *****************************************************/
@@ -217,21 +208,20 @@ namespace test_bobura { namespace model
 #if !defined(DOCUMENTATION)
     namespace detail { namespace serialization
     {
-        typedef std::string io_string_type;
-        typedef
-            boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>> input_stream_iterator_type;
-        typedef tetengo2::text::grammar::json<input_stream_iterator_type> grammar_type;
-        typedef tetengo2::text::push_parser<input_stream_iterator_type, grammar_type, int, double> push_parser_type;
-        typedef
-            tetengo2::text::pull_parser<push_parser_type, boost::mpl::at<type_list, type::size>::type>
-            pull_parser_type;
+        using io_string_type = std::string;
+        using input_stream_iterator_type =
+            boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
+        using grammar_type = tetengo2::text::grammar::json<input_stream_iterator_type>;
+        using push_parser_type = tetengo2::text::push_parser<input_stream_iterator_type, grammar_type, int, double>;
+        using pull_parser_type =
+            tetengo2::text::pull_parser<push_parser_type, boost::mpl::at<type_list, type::size>::type>;
         struct select_oudia_diagram_type
         {
-            typedef boost::mpl::at<type_list, type::string>::type string_type;
+            using string_type = boost::mpl::at<type_list, type::string>::type;
 
-            typedef boost::mpl::at<type_list, type::abstract_window>::type abstract_window_type;
+            using abstract_window_type = boost::mpl::at<type_list, type::abstract_window>::type;
 
-            typedef boost::mpl::at<type_list, type::message_catalog>::type message_catalog_type;
+            using message_catalog_type = boost::mpl::at<type_list, type::message_catalog>::type;
 
             string_type m_wanted;
 
@@ -253,14 +243,13 @@ namespace test_bobura { namespace model
             }
 
         };
-        typedef tetengo2::detail::stub::encoding encoding_details_type;
-        typedef
-            tetengo2::text::encoding::locale<boost::mpl::at<type_list, type::string>::type, encoding_details_type>
-            internal_encoding_type;
-        typedef tetengo2::text::encoding::locale<io_string_type, encoding_details_type> timetable_file_encoding_type;
-        typedef
-            tetengo2::text::encoder<internal_encoding_type, timetable_file_encoding_type> timetable_file_encoder_type;
-        typedef
+        using encoding_details_type = tetengo2::detail::stub::encoding;
+        using internal_encoding_type =
+            tetengo2::text::encoding::locale<boost::mpl::at<type_list, type::string>::type, encoding_details_type>;
+        using timetable_file_encoding_type = tetengo2::text::encoding::locale<io_string_type, encoding_details_type>;
+        using timetable_file_encoder_type =
+            tetengo2::text::encoder<internal_encoding_type, timetable_file_encoding_type>;
+        using reader_set_type =
             bobura::model::serializer::reader_set<
                 detail::serialization::input_stream_iterator_type,
                 boost::mpl::at<model_type_list, type::model::timetable>::type,
@@ -269,21 +258,19 @@ namespace test_bobura { namespace model
                 select_oudia_diagram_type,
                 timetable_file_encoder_type,
                 timetable_file_encoder_type
-            >
-            reader_set_type;
-        typedef
+            >;
+        using writer_set_type =
             bobura::model::serializer::writer_set<
                 boost::mpl::at<type_list, type::output_stream>::type,
                 boost::mpl::at<model_type_list, type::model::timetable>::type,
                 boost::mpl::at<type_list, type::path>::type,
                 timetable_file_encoder_type
-            >
-            writer_set_type;
+            >;
     }}
 #endif
 
     //! The serialization type list.
-    typedef
+    using serialization_type_list =
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
                 type::serialization::reader,
@@ -347,8 +334,7 @@ namespace test_bobura { namespace model
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::serialization::writer_set, detail::serialization::writer_set_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>
-        serialization_type_list;
+        >>>>>>>>>>>>;
 
 
 }}

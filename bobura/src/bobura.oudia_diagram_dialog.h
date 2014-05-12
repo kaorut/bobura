@@ -34,19 +34,19 @@ namespace bobura
         // types
 
         //! The base type.
-        typedef Dialog base_type;
+        using base_type = Dialog;
 
         //! The abstract window type.
-        typedef typename base_type::base_type abstract_window_type;
+        using abstract_window_type = typename base_type::base_type;
 
         //! The string type.
-        typedef typename base_type::string_type string_type;
+        using string_type = typename base_type::string_type;
 
         //! The message catalog type.
-        typedef MessageCatalog message_catalog_type;
+        using message_catalog_type = MessageCatalog;
 
         //! The integer size type.
-        typedef IntSize int_size_type;
+        using int_size_type = IntSize;
 
 
         // constructors and destructor

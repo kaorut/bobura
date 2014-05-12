@@ -28,16 +28,16 @@ namespace bobura { namespace view { namespace diagram
         // types
 
         //! The picture box type.
-        typedef boost::mpl::at<ui_type_list, type::ui::picture_box>::type picture_box_type;
+        using picture_box_type = boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
 
         //! The diagram view type.
-        typedef boost::mpl::at<view_type_list, type::view::view>::type diagram_view_type;
+        using diagram_view_type = boost::mpl::at<view_type_list, type::view::view>::type;
 
         //! The scale list type.
-        typedef boost::mpl::at<view_type_list, type::view::scale_list>::type scale_list_type;
+        using scale_list_type = boost::mpl::at<view_type_list, type::view::scale_list>::type;
 
         //! The scale type.
-        typedef scale_list_type::scale_type scale_type;
+        using scale_type = scale_list_type::scale_type;
 
 
         // constructors and destructor

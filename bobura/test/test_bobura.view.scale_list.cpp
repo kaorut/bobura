@@ -19,9 +19,9 @@ namespace
 {
     // types
 
-    typedef boost::rational<int> scale_type;
+    using scale_type = boost::rational<int>;
 
-    typedef bobura::view::scale_list<scale_type, std::size_t, std::string> scale_list_type;
+    using scale_list_type = bobura::view::scale_list<scale_type, std::size_t, std::string>;
 
 
 }

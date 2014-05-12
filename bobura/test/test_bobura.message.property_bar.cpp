@@ -20,23 +20,23 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type window_type;
+    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type side_bar_type;
+    using side_bar_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type map_box_type;
+    using map_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type;
 
-    typedef bobura::message::property_bar::resized<side_bar_type, map_box_type> resized_type;
+    using resized_type = bobura::message::property_bar::resized<side_bar_type, map_box_type>;
 
-    typedef bobura::message::property_bar::mouse_pressed<map_box_type> mouse_pressed_type;
+    using mouse_pressed_type = bobura::message::property_bar::mouse_pressed<map_box_type>;
 
-    typedef mouse_pressed_type::position_type position_type;
+    using position_type = mouse_pressed_type::position_type;
 
-    typedef tetengo2::gui::position<position_type>::left_type left_type;
+    using left_type = tetengo2::gui::position<position_type>::left_type;
 
-    typedef tetengo2::gui::position<position_type>::top_type top_type;
+    using top_type = tetengo2::gui::position<position_type>::top_type;
 
-    typedef mouse_pressed_type::mouse_button_type mouse_button_type;
+    using mouse_button_type = mouse_pressed_type::mouse_button_type;
 
 
 }

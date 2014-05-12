@@ -27,15 +27,15 @@ namespace bobura { namespace command
     public:
         // types
 
-        typedef set_vertical_scale::model_type model_type;
+        using model_type = set_vertical_scale::model_type;
 
-        typedef set_vertical_scale::abstract_window_type abstract_window_type;
+        using abstract_window_type = set_vertical_scale::abstract_window_type;
 
-        typedef set_vertical_scale::diagram_view_type diagram_view_type;
+        using diagram_view_type = set_vertical_scale::diagram_view_type;
 
-        typedef set_vertical_scale::scale_list_type scale_list_type;
+        using scale_list_type = set_vertical_scale::scale_list_type;
 
-        typedef set_vertical_scale::scale_type scale_type;
+        using scale_type = set_vertical_scale::scale_type;
 
 
         // constructors and destructor
@@ -71,9 +71,9 @@ namespace bobura { namespace command
     private:
         // types
 
-        typedef boost::mpl::at<main_window_type_list, type::main_window::main_window>::type main_window_type;
+        using main_window_type = boost::mpl::at<main_window_type_list, type::main_window::main_window>::type;
 
-        typedef view::diagram::zoom zoom_type;
+        using zoom_type = view::diagram::zoom;
 
 
         // variables

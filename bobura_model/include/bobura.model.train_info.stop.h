@@ -29,10 +29,10 @@ namespace bobura { namespace model { namespace train_info
         // types
 
         //! The time type.
-        typedef Time time_type;
+        using time_type = Time;
 
         //! The string type.
-        typedef String string_type;
+        using string_type = String;
 
 
         // constructors and destructor

@@ -29,7 +29,7 @@ namespace bobura { namespace model { namespace station_info
         // types
 
         //! The string type.
-        typedef String string_type;
+        using string_type = String;
 
 
         // functions
@@ -53,7 +53,7 @@ namespace bobura { namespace model { namespace station_info
             \brief Destroys the grade.
         */
         virtual ~grade()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
     private:
@@ -78,7 +78,7 @@ namespace bobura { namespace model { namespace station_info
         // types
 
         //! The base type.
-        typedef grade<String> base_type;
+        using base_type = grade<String>;
 
 
         // static functions
@@ -100,7 +100,7 @@ namespace bobura { namespace model { namespace station_info
         // constructors and destructor
 
         virtual ~local()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
         // virtual functions
@@ -127,7 +127,7 @@ namespace bobura { namespace model { namespace station_info
         // types
 
         //! The base type.
-        typedef grade<String> base_type;
+        using base_type = grade<String>;
 
 
         // static functions
@@ -149,7 +149,7 @@ namespace bobura { namespace model { namespace station_info
         // constructors and destructor
 
         virtual ~principal()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
         // virtual functions
@@ -176,7 +176,7 @@ namespace bobura { namespace model { namespace station_info
         // types
 
         //! The base type.
-        typedef grade<String> base_type;
+        using base_type = grade<String>;
 
 
         // static functions
@@ -198,7 +198,7 @@ namespace bobura { namespace model { namespace station_info
         // constructors and destructor
 
         virtual ~local_terminal()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
         // virtual functions
@@ -225,7 +225,7 @@ namespace bobura { namespace model { namespace station_info
         // types
 
         //! The base type.
-        typedef grade<String> base_type;
+        using base_type = grade<String>;
 
 
         // static functions
@@ -247,7 +247,7 @@ namespace bobura { namespace model { namespace station_info
         // constructors and destructor
 
         virtual ~principal_terminal()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
         // virtual functions
@@ -275,19 +275,19 @@ namespace bobura { namespace model { namespace station_info
         // types
 
         //! The grade type.
-        typedef grade<String> grade_type;
+        using grade_type = grade<String>;
 
         //! The local type.
-        typedef local<String> local_type;
+        using local_type = local<String>;
 
         //! The principal type.
-        typedef principal<String> principal_type;
+        using principal_type = principal<String>;
 
         //! The local terminal type.
-        typedef local_terminal<String> local_terminal_type;
+        using local_terminal_type = local_terminal<String>;
 
         //! The principal terminal type.
-        typedef principal_terminal<String> principal_terminal_type;
+        using principal_terminal_type = principal_terminal<String>;
 
 
     private:

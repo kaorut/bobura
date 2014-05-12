@@ -20,17 +20,16 @@ namespace
 {
     // types
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font_color_set>::type
-        font_color_set_type;
+    using font_color_set_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font_color_set>::type;
 
-    typedef font_color_set_type::font_color_type font_color_type;
+    using font_color_type = font_color_set_type::font_color_type;
 
-    typedef font_color_type::font_type font_type;
+    using font_type = font_color_type::font_type;
 
-    typedef font_type::string_type string_type;
+    using string_type = font_type::string_type;
 
-    typedef font_color_type::color_type color_type;
+    using color_type = font_color_type::color_type;
 
 
 }

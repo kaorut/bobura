@@ -28,13 +28,13 @@ namespace bobura { namespace load_save
         // types
 
         //! The model type.
-        typedef Model model_type;
+        using model_type = Model;
 
         //! The abstract window type.
-        typedef AbstractWindow abstract_window_type;
+        using abstract_window_type = AbstractWindow;
 
         //! The file save confirmation type.
-        typedef ConfirmFileSave confirm_file_save_type;
+        using confirm_file_save_type = ConfirmFileSave;
 
 
         // constructors and destructor
@@ -71,7 +71,7 @@ namespace bobura { namespace load_save
     private:
         // types
 
-        typedef typename model_type::timetable_type timetable_type;
+        using timetable_type = typename model_type::timetable_type;
 
 
         // variables

@@ -18,17 +18,17 @@ namespace bobura { namespace command
     public:
         // types
 
-        typedef file_property::model_type model_type;
+        using model_type = file_property::model_type;
 
-        typedef file_property::abstract_window_type abstract_window_type;
+        using abstract_window_type = file_property::abstract_window_type;
 
-        typedef file_property::file_property_dialog_type file_property_dialog_type;
+        using file_property_dialog_type = file_property::file_property_dialog_type;
 
-        typedef file_property::dialog_base_type dialog_base_type;
+        using dialog_base_type = file_property::dialog_base_type;
 
-        typedef file_property::string_type string_type;
+        using string_type = file_property::string_type;
 
-        typedef file_property::message_catalog_type message_catalog_type;
+        using message_catalog_type = file_property::message_catalog_type;
 
 
         // constructors and destructor

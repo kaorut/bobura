@@ -39,13 +39,13 @@ namespace bobura { namespace message { namespace main_window
         // types
 
         //! The popup menu type.
-        typedef PopupMenu popup_menu_type;
+        using popup_menu_type = PopupMenu;
 
         //! The command type.
-        typedef Command command_type;
+        using command_type = Command;
 
         //! The model type.
-        typedef Model model_type;
+        using model_type = Model;
 
 
         // constructors and destructor
@@ -103,7 +103,7 @@ namespace bobura { namespace message { namespace main_window
     private:
         // types
 
-        typedef typename popup_menu_type::base_type::base_type menu_base_type;
+        using menu_base_type = typename popup_menu_type::base_type::base_type;
 
 
         // static functions
@@ -151,13 +151,13 @@ namespace bobura { namespace message { namespace main_window
         // types
 
         //! The command type.
-        typedef Command command_type;
+        using command_type = Command;
 
         //! The model type.
-        typedef Model model_type;
+        using model_type = Model;
 
         //! The abstract window type.
-        typedef AbstractWindow abstract_window_type;
+        using abstract_window_type = AbstractWindow;
 
 
         // constructors and destructor
@@ -216,16 +216,16 @@ namespace bobura { namespace message { namespace main_window
         // types
 
         //! The command set type.
-        typedef CommandSet command_set_type;
+        using command_set_type = CommandSet;
 
         //! The model type.
-        typedef Model model_type;
+        using model_type = Model;
 
         //! The abstract window type.
-        typedef AbstractWindow abstract_window_type;
+        using abstract_window_type = AbstractWindow;
 
         //! The path type.
-        typedef typename abstract_window_type::file_drop_observer_set_type::path_type path_type;
+        using path_type = typename abstract_window_type::file_drop_observer_set_type::path_type;
 
 
         // constructors and destructor
@@ -291,16 +291,16 @@ namespace bobura { namespace message { namespace main_window
         // types
 
         //! The view type.
-        typedef View view_type;
+        using view_type = View;
 
         //! The abstract window type.
-        typedef AbstractWindow abstract_window_type;
+        using abstract_window_type = AbstractWindow;
 
         //! The diagram picture box type.
-        typedef DiagramPictureBox diagram_picture_box_type;
+        using diagram_picture_box_type = DiagramPictureBox;
 
         //! The property bar type.
-        typedef PropertyBar property_bar_type;
+        using property_bar_type = PropertyBar;
 
 
         // constructors and destructor
@@ -370,19 +370,19 @@ namespace bobura { namespace message { namespace main_window
     private:
         // types
 
-        typedef typename abstract_window_type::window_state_type window_state_type;
+        using window_state_type = typename abstract_window_type::window_state_type;
 
-        typedef typename diagram_picture_box_type::base_type::base_type control_type;
+        using control_type = typename diagram_picture_box_type::base_type::base_type;
 
-        typedef typename control_type::position_type position_type;
+        using position_type = typename control_type::position_type;
 
-        typedef typename tetengo2::gui::position<position_type>::left_type left_type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
-        typedef typename tetengo2::gui::position<position_type>::top_type top_type;
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
-        typedef typename control_type::dimension_type dimension_type;
+        using dimension_type = typename control_type::dimension_type;
 
-        typedef typename tetengo2::gui::dimension<dimension_type>::width_type width_type;
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
 
         // variables
@@ -412,13 +412,13 @@ namespace bobura { namespace message { namespace main_window
         // types
 
         //! The abstract window type.
-        typedef AbstractWindow abstract_window_type;
+        using abstract_window_type = AbstractWindow;
 
         //! The file save confirmation type.
-        typedef ConfirmFileSave confirm_file_save_type;
+        using confirm_file_save_type = ConfirmFileSave;
 
         //! The setting saver type.
-        typedef std::function<void ()> save_settings_type;
+        using save_settings_type = std::function<void ()>;
 
 
         // constructors and destructor

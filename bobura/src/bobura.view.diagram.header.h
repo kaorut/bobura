@@ -36,28 +36,28 @@ namespace bobura { namespace view { namespace diagram
         // types
 
         //! The selection type.
-        typedef Selection selection_type;
+        using selection_type = Selection;
 
         //! The canvas type.
-        typedef Canvas canvas_type;
+        using canvas_type = Canvas;
 
         //! The string type.
-        typedef typename canvas_type::string_type string_type;
+        using string_type = typename canvas_type::string_type;
 
         //! The font type.
-        typedef typename canvas_type::font_type font_type;
+        using font_type = typename canvas_type::font_type;
 
         //! The color type.
-        typedef typename canvas_type::color_type color_type;
+        using color_type = typename canvas_type::color_type;
 
         //! The position type.
-        typedef typename canvas_type::position_type position_type;
+        using position_type = typename canvas_type::position_type;
 
         //! The dimension type.
-        typedef typename canvas_type::dimension_type dimension_type;
+        using dimension_type = typename canvas_type::dimension_type;
 
         //! The base type.
-        typedef item<selection_type, canvas_type> base_type;
+        using base_type = item<selection_type, canvas_type>;
 
 
         // constructors and destructor
@@ -108,7 +108,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the company and line name header.
         */
         virtual ~company_line_name_header()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
         // functions
@@ -177,28 +177,28 @@ namespace bobura { namespace view { namespace diagram
         // types
 
         //! The selection type.
-        typedef Selection selection_type;
+        using selection_type = Selection;
 
         //! The canvas type.
-        typedef Canvas canvas_type;
+        using canvas_type = Canvas;
 
         //! The string type.
-        typedef typename canvas_type::string_type string_type;
+        using string_type = typename canvas_type::string_type;
 
         //! The font type.
-        typedef typename canvas_type::font_type font_type;
+        using font_type = typename canvas_type::font_type;
 
         //! The color type.
-        typedef typename canvas_type::color_type color_type;
+        using color_type = typename canvas_type::color_type;
 
         //! The position type.
-        typedef typename canvas_type::position_type position_type;
+        using position_type = typename canvas_type::position_type;
 
         //! The dimension type.
-        typedef typename canvas_type::dimension_type dimension_type;
+        using dimension_type = typename canvas_type::dimension_type;
 
         //! The base type.
-        typedef item<selection_type, canvas_type> base_type;
+        using base_type = item<selection_type, canvas_type>;
 
 
         // constructors and destructor
@@ -249,7 +249,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the note header.
         */
         virtual ~note_header()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
         // functions
@@ -319,22 +319,22 @@ namespace bobura { namespace view { namespace diagram
         // types
 
         //! The model type.
-        typedef Model model_type;
+        using model_type = Model;
 
         //! The selection type.
-        typedef Selection selection_type;
+        using selection_type = Selection;
 
         //! The canvas type.
-        typedef Canvas canvas_type;
+        using canvas_type = Canvas;
 
         //! The position type.
-        typedef typename canvas_type::position_type position_type;
+        using position_type = typename canvas_type::position_type;
 
         //! The dimension type.
-        typedef typename canvas_type::dimension_type dimension_type;
+        using dimension_type = typename canvas_type::dimension_type;
 
         //! The base type.
-        typedef item<selection_type, canvas_type> base_type;
+        using base_type = item<selection_type, canvas_type>;
 
 
         // constructors and destructor
@@ -423,7 +423,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the header.
         */
         virtual ~header()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
         // functions
@@ -464,23 +464,23 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
-        typedef company_line_name_header<selection_type, canvas_type> company_line_name_header_type;
+        using company_line_name_header_type = company_line_name_header<selection_type, canvas_type>;
 
-        typedef note_header<selection_type, canvas_type> note_header_type;
+        using note_header_type = note_header<selection_type, canvas_type>;
 
-        typedef typename canvas_type::string_type string_type;
+        using string_type = typename canvas_type::string_type;
 
-        typedef typename canvas_type::font_type font_type;
+        using font_type = typename canvas_type::font_type;
 
-        typedef typename canvas_type::color_type color_type;
+        using color_type = typename canvas_type::color_type;
 
-        typedef typename tetengo2::gui::position<position_type>::left_type left_type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
-        typedef typename tetengo2::gui::position<position_type>::top_type top_type;
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
-        typedef typename tetengo2::gui::dimension<dimension_type>::width_type width_type;
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
-        typedef typename tetengo2::gui::dimension<dimension_type>::height_type height_type;
+        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
 
         // static functions

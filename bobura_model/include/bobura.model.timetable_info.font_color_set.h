@@ -29,10 +29,10 @@ namespace bobura { namespace model { namespace timetable_info
         // types
 
         //! The font type.
-        typedef Font font_type;
+        using font_type = Font;
 
         //! The color type.
-        typedef Color color_type;
+        using color_type = Color;
 
 
         // constructors and destructor
@@ -112,13 +112,13 @@ namespace bobura { namespace model { namespace timetable_info
         // types
 
         //! The font and color type.
-        typedef FontColor font_color_type;
+        using font_color_type = FontColor;
 
         //! The font type.
-        typedef typename font_color_type::font_type font_type;
+        using font_type = typename font_color_type::font_type;
 
         //! The color type.
-        typedef typename font_color_type::color_type color_type;
+        using color_type = typename font_color_type::color_type;
 
 
         // static functions

@@ -41,16 +41,16 @@ namespace bobura { namespace model { namespace serializer
         // types
 
         //! The iterator type.
-        typedef ForwardIterator iterator;
+        using iterator = ForwardIterator;
 
         //! The timetable type.
-        typedef Timetable timetable_type;
+        using timetable_type = Timetable;
 
         //! The base type.
-        typedef reader<iterator, timetable_type> base_type;
+        using base_type = reader<iterator, timetable_type>;
 
         //! The error type.
-        typedef typename base_type::error_type error_type;
+        using error_type = typename base_type::error_type;
 
 
         // constructors and destructor
@@ -70,17 +70,16 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the bzip2_reader.
         */
         virtual ~bzip2_reader()
-        = default;
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
 
 
     private:
         // types
 
-        typedef std::basic_string<typename iterator::value_type> input_string_type;
+        using input_string_type = std::basic_string<typename iterator::value_type>;
 
-        typedef
-            boost::basic_string_ref<typename iterator::value_type, std::char_traits<typename iterator::value_type>>
-            input_string_ref_type;
+        using input_string_ref_type =
+            boost::basic_string_ref<typename iterator::value_type, std::char_traits<typename iterator::value_type>>;
 
 
         // variables

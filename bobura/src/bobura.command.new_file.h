@@ -29,10 +29,10 @@ namespace bobura { namespace command
         // types
 
         //! The base type.
-        typedef command_base base_type;
+        using base_type = command_base;
 
         //! The file initialization type.
-        typedef boost::mpl::at<load_save_type_list, type::load_save::new_file>::type new_file_type;
+        using new_file_type = boost::mpl::at<load_save_type_list, type::load_save::new_file>::type;
 
 
         // constructors and destructor

@@ -29,13 +29,13 @@ namespace bobura { namespace command
         // types
 
         //! The base type.
-        typedef command_base base_type;
+        using base_type = command_base;
 
         //! The file loading type.
-        typedef boost::mpl::at<load_save_type_list, type::load_save::load_from_file>::type load_from_file_type;
+        using load_from_file_type = boost::mpl::at<load_save_type_list, type::load_save::load_from_file>::type;
 
         //! The path type.
-        typedef load_from_file_type::path_type path_type;
+        using path_type = load_from_file_type::path_type;
 
         //! The parameter type.
         class parameter_type : public parameter_base

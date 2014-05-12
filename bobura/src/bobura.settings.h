@@ -46,25 +46,25 @@ namespace bobura
         // types
 
         //! The string type.
-        typedef String string_type;
+        using string_type = String;
 
         //! The path type.
-        typedef Path path_type;
+        using path_type = Path;
 
         //! The position type.
-        typedef Position position_type;
+        using position_type = Position;
 
         //! The left type.
-        typedef typename tetengo2::gui::position<position_type>::left_type left_type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
         //! The dimension type.
-        typedef Dimension dimension_type;
+        using dimension_type = Dimension;
 
         //! The width type.
-        typedef typename tetengo2::gui::dimension<dimension_type>::width_type width_type;
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
         //! The configuration traits type.
-        typedef ConfigTraits config_traits_type;
+        using config_traits_type = ConfigTraits;
 
 
         // constructors and destructor
@@ -287,23 +287,23 @@ namespace bobura
     private:
         // types
 
-        typedef typename path_type::string_type path_string_type;
+        using path_string_type = typename path_type::string_type;
 
-        typedef typename tetengo2::gui::dimension<dimension_type>::height_type height_type;
+        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
-        typedef typename config_traits_type::uint_type uint_type;
+        using uint_type = typename config_traits_type::uint_type;
 
-        typedef typename config_traits_type::config_base_type config_base_type;
+        using config_base_type = typename config_traits_type::config_base_type;
 
-        typedef typename config_base_type::value_type config_value_type;
+        using config_value_type = typename config_base_type::value_type;
 
-        typedef typename config_traits_type::config_list_type config_list_type;
+        using config_list_type = typename config_traits_type::config_list_type;
 
-        typedef typename config_traits_type::cached_config_type cached_config_type;
+        using cached_config_type = typename config_traits_type::cached_config_type;
 
-        typedef typename config_traits_type::temporary_config_type temporary_config_type;
+        using temporary_config_type = typename config_traits_type::temporary_config_type;
 
-        typedef typename config_traits_type::persistent_config_type persistent_config_type;
+        using persistent_config_type = typename config_traits_type::persistent_config_type;
 
         template <typename T, typename Str>
         struct value_impl;
@@ -356,9 +356,8 @@ namespace bobura
             boost::program_options::variables_map option_values;
             try
             {
-                typedef
-                    boost::program_options::basic_command_line_parser<typename string_type::value_type>
-                    command_line_parser_type;
+                using command_line_parser_type =
+                    boost::program_options::basic_command_line_parser<typename string_type::value_type>;
                 const auto parsed_options =
                     command_line_parser_type(
                         command_line_arguments
@@ -428,7 +427,7 @@ namespace bobura
         static boost::optional<std::pair<uint_type, uint_type>> parse_dimension(const string_type& dimension_string)
         {
             std::vector<string_type> result;
-            typedef typename string_type::value_type char_type;
+            using char_type = typename string_type::value_type;
             boost::split(
                 result,
                 dimension_string,

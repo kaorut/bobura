@@ -32,28 +32,28 @@ namespace bobura { namespace model { namespace timetable_info
         // types
 
         //! The station location type.
-        typedef StationLocation station_location_type;
+        using station_location_type = StationLocation;
 
         //! The station locations type.
-        typedef std::vector<station_location_type> station_locations_type;
+        using station_locations_type = std::vector<station_location_type>;
 
         //! The train type.
-        typedef Train train_type;
+        using train_type = Train;
 
         //! The trains type.
-        typedef std::vector<train_type> trains_type;
+        using trains_type = std::vector<train_type>;
 
         //! The stop type.
-        typedef typename train_type::stop_type stop_type;
+        using stop_type = typename train_type::stop_type;
 
         //! The time type.
-        typedef typename stop_type::time_type time_type;
+        using time_type = typename stop_type::time_type;
 
         //! The time span type.
-        typedef typename time_type::time_span_type time_span_type;
+        using time_span_type = typename time_type::time_span_type;
 
         //! The station intervals type.
-        typedef std::vector<time_span_type> station_intervals_type;
+        using station_intervals_type = std::vector<time_span_type>;
 
 
         // static functions
@@ -130,7 +130,7 @@ namespace bobura { namespace model { namespace timetable_info
     private:
         // types
 
-        typedef typename train_type::stops_type::size_type stop_index_type;
+        using stop_index_type = typename train_type::stops_type::size_type;
 
 
         // static functions

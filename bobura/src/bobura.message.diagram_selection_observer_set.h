@@ -29,23 +29,23 @@ namespace bobura { namespace message
         // types
 
         //! The station location type.
-        typedef StationLocation station_location_type;
+        using station_location_type = StationLocation;
 
         //! The train type.
-        typedef Train train_type;
+        using train_type = Train;
 
         //! The stop index type.
-        typedef typename train_type::stops_type::size_type stop_index_type;
+        using stop_index_type = typename train_type::stops_type::size_type;
 
         /*!
             \brief The observer type of station selection.
 
             \param station_location A station location.
         */
-        typedef void station_selected_type(const station_location_type& station_location);
+        using station_selected_type = void (const station_location_type& station_location);
 
         //! The signal type of station selection.
-        typedef boost::signals2::signal<station_selected_type> station_selected_signal_type;
+        using station_selected_signal_type = boost::signals2::signal<station_selected_type>;
 
         /*!
             \brief The observer type of train selection.
@@ -53,21 +53,22 @@ namespace bobura { namespace message
             \param train                A train.
             \param departure_stop_index A departure stop index. Or boost::none when a whole train is selected.
         */
-        typedef void train_selected_type(
-            const train_type&                       train,
-            const boost::optional<stop_index_type>& departure_stop_index
-        );
+        using train_selected_type =
+            void (
+                const train_type&                       train,
+                const boost::optional<stop_index_type>& departure_stop_index
+            );
 
         //! The signal type of train selection.
-        typedef boost::signals2::signal<train_selected_type> train_selected_signal_type;
+        using train_selected_signal_type = boost::signals2::signal<train_selected_type>;
 
         /*!
             \brief The observer type of unselection.
         */
-        typedef void all_unselected_type();
+        using all_unselected_type = void ();
 
         //! The signal type of unselection.
-        typedef boost::signals2::signal<all_unselected_type> all_unselected_signal_type;
+        using all_unselected_signal_type = boost::signals2::signal<all_unselected_type>;
 
 
         // functions

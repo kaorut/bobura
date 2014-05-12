@@ -88,60 +88,60 @@ namespace bobura
     namespace detail { namespace detail
     {
 #if defined(USE_TETENGO2_DETAIL_TYPES_FOR_APPLICATION)
-        typedef tetengo2::detail::windows::alert alert_type;
-        typedef tetengo2::detail::windows::common_dialog common_dialog_type;
-        typedef tetengo2::detail::windows::config config_type;
-        typedef tetengo2::detail::windows::cursor cursor_type;
-        typedef tetengo2::detail::windows::gdiplus::drawing drawing_type;
-        typedef tetengo2::detail::windows::direct2d::drawing fast_drawing_type;
-        typedef tetengo2::detail::windows::encoding encoding_type;
+        using alert_type = tetengo2::detail::windows::alert;
+        using common_dialog_type = tetengo2::detail::windows::common_dialog;
+        using config_type = tetengo2::detail::windows::config;
+        using cursor_type = tetengo2::detail::windows::cursor;
+        using drawing_type = tetengo2::detail::windows::gdiplus::drawing;
+        using fast_drawing_type = tetengo2::detail::windows::direct2d::drawing;
+        using encoding_type = tetengo2::detail::windows::encoding;
         struct gui_fixture_type
         {
             tetengo2::detail::windows::gui_fixture m_windows_gui_fixture;
             tetengo2::detail::windows::gdiplus::gui_fixture m_gdiplus_gui_fixutre;
         };
-        typedef tetengo2::detail::windows::icon icon_type;
-        typedef tetengo2::detail::windows::menu menu_type;
-        typedef tetengo2::detail::windows::message_handler message_handler_type;
-        typedef tetengo2::detail::windows::message_loop message_loop_type;
-        typedef tetengo2::detail::windows::mouse_capture mouse_capture_type;
-        typedef tetengo2::detail::windows::scroll scroll_type;
-        typedef tetengo2::detail::windows::shell shell_type;
-        typedef tetengo2::detail::windows::system_color system_color_type;
-        typedef tetengo2::detail::windows::timer timer_type;
-        typedef tetengo2::detail::windows::unit unit_type;
-        typedef tetengo2::detail::windows::virtual_key virtual_key_type;
-        typedef tetengo2::detail::windows::widget widget_type;
+        using icon_type = tetengo2::detail::windows::icon;
+        using menu_type = tetengo2::detail::windows::menu;
+        using message_handler_type = tetengo2::detail::windows::message_handler;
+        using message_loop_type = tetengo2::detail::windows::message_loop;
+        using mouse_capture_type = tetengo2::detail::windows::mouse_capture;
+        using scroll_type = tetengo2::detail::windows::scroll;
+        using shell_type = tetengo2::detail::windows::shell;
+        using system_color_type = tetengo2::detail::windows::system_color;
+        using timer_type = tetengo2::detail::windows::timer;
+        using unit_type = tetengo2::detail::windows::unit;
+        using virtual_key_type = tetengo2::detail::windows::virtual_key;
+        using widget_type = tetengo2::detail::windows::widget;
 #else
-        typedef tetengo2::detail::stub::alert alert_type;
-        typedef tetengo2::detail::stub::common_dialog common_dialog_type;
-        typedef tetengo2::detail::stub::config config_type;
-        typedef tetengo2::detail::stub::cursor cursor_type;
-        typedef tetengo2::detail::stub::drawing drawing_type;
-        typedef tetengo2::detail::stub::drawing fast_drawing_type;
-        typedef tetengo2::detail::stub::encoding encoding_type;
+        using alert_type = tetengo2::detail::stub::alert;
+        using common_dialog_type = tetengo2::detail::stub::common_dialog;
+        using config_type = tetengo2::detail::stub::config;
+        using cursor_type = tetengo2::detail::stub::cursor;
+        using drawing_type = tetengo2::detail::stub::drawing;
+        using fast_drawing_type = tetengo2::detail::stub::drawing;
+        using encoding_type = tetengo2::detail::stub::encoding;
         struct gui_fixture_type
         {
             tetengo2::detail::stub::gui_fixture m_stub_gui_fixture;
         };
-        typedef tetengo2::detail::stub::icon icon_type;
-        typedef tetengo2::detail::stub::menu menu_type;
-        typedef tetengo2::detail::stub::message_handler message_handler_type;
-        typedef tetengo2::detail::stub::message_loop message_loop_type;
-        typedef tetengo2::detail::stub::mouse_capture mouse_capture_type;
-        typedef tetengo2::detail::stub::scroll scroll_type;
-        typedef tetengo2::detail::stub::shell shell_type;
-        typedef tetengo2::detail::stub::system_color system_color_type;
-        typedef tetengo2::detail::stub::timer timer_type;
-        typedef tetengo2::detail::stub::unit unit_type;
-        typedef tetengo2::detail::stub::virtual_key virtual_key_type;
-        typedef tetengo2::detail::stub::widget widget_type;
+        using icon_type = tetengo2::detail::stub::icon;
+        using menu_type = tetengo2::detail::stub::menu;
+        using message_handler_type = tetengo2::detail::stub::message_handler;
+        using message_loop_type = tetengo2::detail::stub::message_loop;
+        using mouse_capture_type = tetengo2::detail::stub::mouse_capture;
+        using scroll_type = tetengo2::detail::stub::scroll;
+        using shell_type = tetengo2::detail::stub::shell;
+        using system_color_type = tetengo2::detail::stub::system_color;
+        using timer_type = tetengo2::detail::stub::timer;
+        using unit_type = tetengo2::detail::stub::unit;
+        using virtual_key_type = tetengo2::detail::stub::virtual_key;
+        using widget_type = tetengo2::detail::stub::widget;
 #endif
     }}
 #endif
 
     //! The detail type list.
-    typedef
+    using detail_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::alert, detail::detail::alert_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::common_dialog, detail::detail::common_dialog_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::cursor, detail::detail::cursor_type>,
@@ -164,8 +164,7 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::virtual_key, detail::detail::virtual_key_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::widget, detail::detail::widget_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>>>>>>>>>
-        detail_type_list;
+        >>>>>>>>>>>>>>>>>>>>;
 
 
 }

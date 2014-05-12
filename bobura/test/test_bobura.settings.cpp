@@ -22,21 +22,21 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::common_type_list, bobura::type::path>::type path_type;
+    using path_type = boost::mpl::at<bobura::common_type_list, bobura::type::path>::type;
 
-    typedef boost::mpl::at<bobura::common_type_list, bobura::type::string>::type string_type;
+    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type position_type;
+    using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
 
-    typedef tetengo2::gui::position<position_type>::left_type left_type;
+    using left_type = tetengo2::gui::position<position_type>::left_type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type dimension_type;
+    using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
 
-    typedef tetengo2::gui::dimension<dimension_type>::width_type width_type;
+    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
 
-    typedef tetengo2::gui::dimension<dimension_type>::height_type height_type;
+    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
-    typedef boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type settings_type;
+    using settings_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type;
 
 
 }

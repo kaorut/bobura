@@ -47,25 +47,24 @@ namespace bobura
         public:
             // types
 
-            typedef Dialog base_type;
+            using base_type = Dialog;
 
-            typedef typename base_type::string_type string_type;
+            using string_type = typename base_type::string_type;
 
-            typedef typename base_type::background_type background_type;
+            using background_type = typename base_type::background_type;
 
-            typedef MessageCatalog message_catalog_type;
+            using message_catalog_type = MessageCatalog;
 
-            typedef IntSize int_size_type;
+            using int_size_type = IntSize;
 
-            typedef Font font_type;
+            using font_type = Font;
 
-            typedef PointSize point_size_type;
+            using point_size_type = PointSize;
 
-            typedef Color color_type;
+            using color_type = Color;
 
-            typedef
-                typename font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::font_color_type
-                font_color_type;
+            using font_color_type =
+                typename font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::font_color_type;
 
 
             // constructors and destructor
@@ -210,21 +209,20 @@ namespace bobura
         private:
             // types
 
-            typedef typename boost::mpl::at<ui_type_list, type::ui::label>::type label_type;
+            using label_type = typename boost::mpl::at<ui_type_list, type::ui::label>::type;
 
-            typedef typename boost::mpl::at<ui_type_list, type::ui::list_box>::type list_box_type;
+            using list_box_type = typename boost::mpl::at<ui_type_list, type::ui::list_box>::type;
 
-            typedef typename boost::mpl::at<ui_type_list, type::ui::text_box>::type text_box_type;
+            using text_box_type = typename boost::mpl::at<ui_type_list, type::ui::text_box>::type;
 
-            typedef typename boost::mpl::at<ui_type_list, type::ui::button>::type button_type;
+            using button_type = typename boost::mpl::at<ui_type_list, type::ui::button>::type;
 
-            typedef typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type picture_box_type;
+            using picture_box_type = typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
 
-            typedef
-                typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type
-                transparent_background_type;
+            using transparent_background_type =
+                typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type;
 
-            typedef
+            using font_color_dialog_message_type_list_type =
                 typename message::font_color_dialog::type_list<
                     int_size_type,
                     base_type,
@@ -233,22 +231,21 @@ namespace bobura
                     typename boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
                     typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
                     message_catalog_type
-                >::type
-                font_color_dialog_message_type_list_type;
+                >::type;
 
-            typedef typename base_type::dimension_type dimension_type;
+            using dimension_type = typename base_type::dimension_type;
 
-            typedef typename tetengo2::gui::dimension<dimension_type>::width_type width_type;
+            using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
-            typedef typename tetengo2::gui::dimension<dimension_type>::height_type height_type;
+            using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
-            typedef typename base_type::position_type position_type;
+            using position_type = typename base_type::position_type;
 
-            typedef typename tetengo2::gui::position<position_type>::left_type left_type;
+            using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
-            typedef typename tetengo2::gui::position<position_type>::top_type top_type;
+            using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
-            typedef std::pair<boost::optional<font_type>, boost::optional<color_type>> internal_font_color_type;
+            using internal_font_color_type = std::pair<boost::optional<font_type>, boost::optional<color_type>>;
 
 
             // static functions

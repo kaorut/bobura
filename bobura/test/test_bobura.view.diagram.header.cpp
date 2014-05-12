@@ -25,49 +25,47 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::common_type_list, bobura::type::string>::type string_type;
+    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
-    typedef boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type model_type;
+    using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
-    typedef model_type::timetable_type::station_location_type station_location_type;
+    using station_location_type = model_type::timetable_type::station_location_type;
 
-    typedef model_type::timetable_type::train_type train_type;
+    using train_type = model_type::timetable_type::train_type;
 
-    typedef
-        bobura::message::diagram_selection_observer_set<station_location_type, train_type>
-        diagram_selection_observer_set_type;
+    using diagram_selection_observer_set_type =
+        bobura::message::diagram_selection_observer_set<station_location_type, train_type>;
 
-    typedef
-        bobura::view::diagram::selection<station_location_type, train_type, diagram_selection_observer_set_type>
-        selection_type;
+    using selection_type =
+        bobura::view::diagram::selection<station_location_type, train_type, diagram_selection_observer_set_type>;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type window_type;
+    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type picture_box_type;
+    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
 
-    typedef picture_box_type::position_type position_type;
+    using position_type = picture_box_type::position_type;
 
-    typedef tetengo2::gui::position<position_type>::left_type left_type;
+    using left_type = tetengo2::gui::position<position_type>::left_type;
 
-    typedef tetengo2::gui::position<position_type>::top_type top_type;
+    using top_type = tetengo2::gui::position<position_type>::top_type;
 
-    typedef picture_box_type::dimension_type dimension_type;
+    using dimension_type = picture_box_type::dimension_type;
 
-    typedef tetengo2::gui::dimension<dimension_type>::width_type width_type;
+    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
 
-    typedef tetengo2::gui::dimension<dimension_type>::height_type height_type;
+    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type canvas_type;
+    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
 
-    typedef canvas_type::font_type font_type;
+    using font_type = canvas_type::font_type;
 
-    typedef canvas_type::color_type color_type;
+    using color_type = canvas_type::color_type;
 
-    typedef bobura::view::diagram::company_line_name_header<selection_type, canvas_type> company_line_name_header_type;
+    using company_line_name_header_type = bobura::view::diagram::company_line_name_header<selection_type, canvas_type>;
 
-    typedef bobura::view::diagram::note_header<selection_type, canvas_type> note_header_type;
+    using note_header_type = bobura::view::diagram::note_header<selection_type, canvas_type>;
 
-    typedef bobura::view::diagram::header<model_type, selection_type, canvas_type> header_type;
+    using header_type = bobura::view::diagram::header<model_type, selection_type, canvas_type>;
 
 
 }

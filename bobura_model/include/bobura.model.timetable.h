@@ -59,43 +59,43 @@ namespace bobura { namespace model
         // types
 
         //! The string type.
-        typedef String string_type;
+        using string_type = String;
 
         //! The station location type.
-        typedef StationLocation station_location_type;
+        using station_location_type = StationLocation;
 
         //! The station locations type.
-        typedef std::vector<station_location_type> station_locations_type;
+        using station_locations_type = std::vector<station_location_type>;
 
         //! The station interval calculator type.
-        typedef StationIntervalCalculator station_interval_calculator_type;
+        using station_interval_calculator_type = StationIntervalCalculator;
 
         //! The station intervals type.
-        typedef typename station_interval_calculator_type::station_intervals_type station_intervals_type;
+        using station_intervals_type = typename station_interval_calculator_type::station_intervals_type;
 
         //! The train kind type.
-        typedef TrainKind train_kind_type;
+        using train_kind_type = TrainKind;
 
         //! The train kinds type.
-        typedef std::vector<train_kind_type> train_kinds_type;
+        using train_kinds_type = std::vector<train_kind_type>;
 
         //! The train kind index type.
-        typedef typename train_kinds_type::size_type train_kind_index_type;
+        using train_kind_index_type = typename train_kinds_type::size_type;
 
         //! The train type.
-        typedef Train train_type;
+        using train_type = Train;
 
         //! The trains type.
-        typedef std::vector<train_type> trains_type;
+        using trains_type = std::vector<train_type>;
 
         //! The speed type.
-        typedef Speed speed_type;
+        using speed_type = Speed;
 
         //! The font color set type.
-        typedef FontColorSet font_color_set_type;
+        using font_color_set_type = FontColorSet;
 
         //! The observer set type.
-        typedef ObserverSet observer_set_type;
+        using observer_set_type = ObserverSet;
 
 
         // constructors and destructor
@@ -694,17 +694,17 @@ namespace bobura { namespace model
     private:
         // types
 
-        typedef typename station_location_type::operating_distance_type operating_distance_type;
+        using operating_distance_type = typename station_location_type::operating_distance_type;
 
-        typedef typename train_type::direction_type direction_type;
+        using direction_type = typename train_type::direction_type;
 
-        typedef typename train_type::stop_type stop_type;
+        using stop_type = typename train_type::stop_type;
 
-        typedef typename stop_type::time_type time_type;
+        using time_type = typename stop_type::time_type;
 
-        typedef typename time_type::time_span_type time_span_type;
+        using time_span_type = typename time_type::time_span_type;
 
-        typedef typename train_type::stops_type::difference_type difference_type;
+        using difference_type = typename train_type::stops_type::difference_type;
 
         struct replace_train_kind_index
         {
