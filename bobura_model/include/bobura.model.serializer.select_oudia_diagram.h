@@ -31,16 +31,16 @@ namespace bobura { namespace model { namespace serializer
         // types
 
         //! The OuDia diagram dialog type.
-        typedef OuDiaDiagramDialog oudia_diagram_dialog_type;
+        using oudia_diagram_dialog_type = OuDiaDiagramDialog;
 
         //! The abstract window type.
-        typedef typename oudia_diagram_dialog_type::abstract_window_type abstract_window_type;
+        using abstract_window_type = typename oudia_diagram_dialog_type::abstract_window_type;
 
         //! The string type.
-        typedef typename oudia_diagram_dialog_type::string_type string_type;
+        using string_type = typename oudia_diagram_dialog_type::string_type;
 
         //! The message catalog type.
-        typedef typename oudia_diagram_dialog_type::message_catalog_type message_catalog_type;
+        using message_catalog_type = typename oudia_diagram_dialog_type::message_catalog_type;
 
 
         // constructors and destructor
@@ -109,7 +109,7 @@ namespace bobura { namespace model { namespace serializer
     private:
         // types
 
-        typedef typename oudia_diagram_dialog_type::int_size_type selected_index_type;
+        using selected_index_type = typename oudia_diagram_dialog_type::int_size_type;
 
 
         // variables

@@ -31,13 +31,13 @@ namespace bobura { namespace model { namespace serializer
         // types
 
         //! The output stream type.
-        typedef OutputStream output_stream_type;
+        using output_stream_type = OutputStream;
 
         //! The timetable type.
-        typedef Timetable timetable_type;
+        using timetable_type = Timetable;
 
         //! The path type.
-        typedef Path path_type;
+        using path_type = Path;
 
 
         // constructors and destructor
@@ -106,7 +106,7 @@ namespace bobura { namespace model { namespace serializer
         virtual bool selects_impl(const path_type& path)
         const
         {
-            typedef typename path_type::string_type path_string_type;
+            using path_string_type = typename path_type::string_type;
 
             const auto path_string = path.native();
             const auto extension_string = extension_impl().native();

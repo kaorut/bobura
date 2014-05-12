@@ -48,22 +48,22 @@ namespace bobura { namespace model { namespace serializer
         // types
 
         //! The iterator type.
-        typedef ForwardIterator iterator;
+        using iterator = ForwardIterator;
 
         //! The timetable type.
-        typedef Timetable timetable_type;
+        using timetable_type = Timetable;
 
         //! The base type.
-        typedef reader<iterator, timetable_type> base_type;
+        using base_type = reader<iterator, timetable_type>;
 
         //! The station grade type set type.
-        typedef StationGradeTypeSet station_grade_type_set_type;
+        using station_grade_type_set_type = StationGradeTypeSet;
 
         //! The error type.
-        typedef typename base_type::error_type error_type;
+        using error_type = typename base_type::error_type;
 
         //! The encoder type.
-        typedef Encoder encoder_type;
+        using encoder_type = Encoder;
 
 
         // constructors and destructor
@@ -78,27 +78,27 @@ namespace bobura { namespace model { namespace serializer
     private:
         // types
 
-        typedef typename iterator::value_type input_char_type;
+        using input_char_type = typename iterator::value_type;
 
-        typedef std::basic_string<input_char_type> input_string_type;
+        using input_string_type = std::basic_string<input_char_type>;
 
-        typedef typename timetable_type::string_type string_type;
+        using string_type = typename timetable_type::string_type;
 
-        typedef typename string_type::value_type char_type;
+        using char_type = typename string_type::value_type;
 
-        typedef boost::basic_string_ref<char_type, std::char_traits<char_type>> string_ref_type;
+        using string_ref_type = boost::basic_string_ref<char_type, std::char_traits<char_type>>;
 
-        typedef typename timetable_type::train_kind_type train_kind_type;
+        using train_kind_type = typename timetable_type::train_kind_type;
 
-        typedef typename train_kind_type::color_type color_type;
+        using color_type = typename train_kind_type::color_type;
 
-        typedef typename train_kind_type::weight_type weight_type;
+        using weight_type = typename train_kind_type::weight_type;
 
-        typedef typename train_kind_type::line_style_type line_style_type;
+        using line_style_type = typename train_kind_type::line_style_type;
 
-        typedef typename timetable_type::train_type train_type;
+        using train_type = typename timetable_type::train_type;
 
-        typedef typename train_type::direction_type direction_type;
+        using direction_type = typename train_type::direction_type;
 
         class state
         {
@@ -195,13 +195,13 @@ namespace bobura { namespace model { namespace serializer
             }
 
         private:
-            typedef typename timetable_type::station_location_type station_location_type;
+            using station_location_type = typename timetable_type::station_location_type;
 
-            typedef typename station_location_type::station_type station_type;
+            using station_type = typename station_location_type::station_type;
 
-            typedef typename station_type::grade_type grade_type;
+            using grade_type = typename station_type::grade_type;
 
-            typedef typename station_location_type::operating_distance_type operating_distance_type;
+            using operating_distance_type = typename station_location_type::operating_distance_type;
 
             static const grade_type& to_grade(const bool principal, const bool show_arrival_and_departure_time)
             {
@@ -417,13 +417,13 @@ namespace bobura { namespace model { namespace serializer
             timetable_type& m_timetable;
 
         private:
-            typedef typename train_type::kind_index_type train_kind_index_type;
+            using train_kind_index_type = typename train_type::kind_index_type;
 
-            typedef typename train_type::stop_type stop_type;
+            using stop_type = typename train_type::stop_type;
 
-            typedef typename stop_type::time_type time_type;
+            using time_type = typename stop_type::time_type;
 
-            typedef typename time_type::tick_type time_tick_type;
+            using time_tick_type = typename time_type::tick_type;
 
             static std::pair<string_ref_type, string_ref_type> split_line(const string_ref_type& line)
             {

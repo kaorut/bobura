@@ -29,10 +29,10 @@ namespace bobura { namespace model { namespace timetable_info
         // types
 
         //! The station type.
-        typedef Station station_type;
+        using station_type = Station;
 
         //! The operating distance type.
-        typedef OperatingDistance operating_distance_type;
+        using operating_distance_type = OperatingDistance;
 
 
         // constructors and destructor

@@ -44,19 +44,19 @@ namespace bobura { namespace model { namespace serializer
         // types
 
         //! The output stream type.
-        typedef OutputStream output_stream_type;
+        using output_stream_type = OutputStream;
 
         //! The timetable type.
-        typedef Timetable timetable_type;
+        using timetable_type = Timetable;
 
         //! The path type.
-        typedef Path path_type;
+        using path_type = Path;
 
         //! The base type.
-        typedef writer<output_stream_type, timetable_type, path_type> base_type;
+        using base_type = writer<output_stream_type, timetable_type, path_type>;
 
         //! The encoder type.
-        typedef Encoder encoder_type;
+        using encoder_type = Encoder;
 
 
         // constructors and destructor
@@ -71,35 +71,35 @@ namespace bobura { namespace model { namespace serializer
     private:
         // types
 
-        typedef typename timetable_type::station_location_type station_location_type;
+        using station_location_type = typename timetable_type::station_location_type;
 
-        typedef typename timetable_type::train_kind_type train_kind_type;
+        using train_kind_type = typename timetable_type::train_kind_type;
 
-        typedef typename timetable_type::train_type train_type;
+        using train_type = typename timetable_type::train_type;
 
-        typedef typename train_type::stops_type stops_type;
+        using stops_type = typename train_type::stops_type;
 
-        typedef typename train_type::stop_type stop_type;
+        using stop_type = typename train_type::stop_type;
 
-        typedef typename stop_type::time_type time_type;
+        using time_type = typename stop_type::time_type;
 
-        typedef typename timetable_type::string_type string_type;
+        using string_type = typename timetable_type::string_type;
 
-        typedef typename timetable_type::font_color_set_type font_color_set_type;
+        using font_color_set_type = typename timetable_type::font_color_set_type;
 
-        typedef typename font_color_set_type::font_color_type font_color_type;
+        using font_color_type = typename font_color_set_type::font_color_type;
 
-        typedef typename font_color_type::font_type font_type;
+        using font_type = typename font_color_type::font_type;
 
-        typedef typename font_color_type::color_type color_type;
+        using color_type = typename font_color_type::color_type;
 
-        typedef typename string_type::value_type char_type;
+        using char_type = typename string_type::value_type;
 
-        typedef typename string_type::size_type size_type;
+        using size_type = typename string_type::size_type;
 
-        typedef typename output_stream_type::char_type output_char_type;
+        using output_char_type = typename output_stream_type::char_type;
 
-        typedef std::basic_string<output_char_type> output_string_type;
+        using output_string_type = std::basic_string<output_char_type>;
 
 
         // static functions
@@ -724,7 +724,7 @@ namespace bobura { namespace model { namespace serializer
             if (!time.initialized())
                 return output_string_type(TETENGO2_TEXT("    -1"));
 
-            typedef typename time_type::tick_type tick_type;
+            using tick_type = typename time_type::tick_type;
             const auto hours_minutes_seconds = time.hours_minutes_seconds();
             const tick_type representation =
                 hours_minutes_seconds.hours() * 10000 +
