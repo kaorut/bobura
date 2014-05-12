@@ -20,14 +20,13 @@ namespace setup
 {
     namespace
     {
-        typedef tetengo2::detail::windows::encoding encoding_details_type;
+        using encoding_details_type = tetengo2::detail::windows::encoding;
 
-        typedef
+        using encoder_type =
             tetengo2::text::encoder<
                 tetengo2::text::encoding::ascii<encoding_details_type>,
                 tetengo2::text::encoding::locale<std::wstring, encoding_details_type>
-            >
-            encoder_type;
+            >;
 
         const encoder_type& encoder()
         {
