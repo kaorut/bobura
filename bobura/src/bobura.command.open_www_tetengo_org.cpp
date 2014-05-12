@@ -22,11 +22,11 @@ namespace bobura { namespace command
     public:
         // types
 
-        typedef open_www_tetengo_org::model_type model_type;
+        using model_type = open_www_tetengo_org::model_type;
 
-        typedef open_www_tetengo_org::abstract_window_type abstract_window_type;
+        using abstract_window_type = open_www_tetengo_org::abstract_window_type;
 
-        typedef boost::mpl::at<ui_type_list, type::ui::shell>::type shell_type;
+        using shell_type = boost::mpl::at<ui_type_list, type::ui::shell>::type;
 
 
         // functions
@@ -43,7 +43,7 @@ namespace bobura { namespace command
     private:
         // types
 
-        typedef shell_type::string_type string_type;
+        using string_type = shell_type::string_type;
 
 
     };

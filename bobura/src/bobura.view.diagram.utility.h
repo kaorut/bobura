@@ -133,9 +133,9 @@ namespace bobura { namespace view { namespace diagram
     {
         if (selected)
         {
-            typedef typename Canvas::color_type color_type;
-            typedef typename Canvas::line_style_type line_style_type;
-            typedef typename Canvas::size_type size_type;
+            using color_type = typename Canvas::color_type;
+            using line_style_type = typename Canvas::line_style_type;
+            using size_type = typename Canvas::size_type;
 
             auto original_color = canvas.color();
             const auto original_line_style = canvas.line_style();

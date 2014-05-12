@@ -19,9 +19,9 @@ namespace bobura { namespace command
     public:
         // types
 
-        typedef nop::model_type model_type;
+        using model_type = nop::model_type;
 
-        typedef nop::abstract_window_type abstract_window_type;
+        using abstract_window_type = nop::abstract_window_type;
 
 
         // functions

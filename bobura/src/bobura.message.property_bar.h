@@ -27,10 +27,10 @@ namespace bobura { namespace message { namespace property_bar
         // types
 
         //! The side bar type.
-        typedef SideBar side_bar_type;
+        using side_bar_type = SideBar;
 
         //! The map box type.
-        typedef MapBox map_box_type;
+        using map_box_type = MapBox;
 
 
         // constructors and destructor
@@ -94,13 +94,13 @@ namespace bobura { namespace message { namespace property_bar
         // types
 
         //! The map box type.
-        typedef MapBox map_box_type;
+        using map_box_type = MapBox;
 
         //! The position type.
-        typedef typename map_box_type::position_type position_type;
+        using position_type = typename map_box_type::position_type;
 
         //! The mouse button type.
-        typedef typename map_box_type::mouse_observer_set_type::mouse_button_type mouse_button_type;
+        using mouse_button_type = typename map_box_type::mouse_observer_set_type::mouse_button_type;
 
 
         // constructors and destructor

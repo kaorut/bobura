@@ -39,22 +39,22 @@ namespace bobura { namespace load_save
         // types
 
         //! The model type.
-        typedef Model model_type;
+        using model_type = Model;
 
         //! The abstract window type.
-        typedef AbstractWindow abstract_window_type;
+        using abstract_window_type = AbstractWindow;
         
         //! The string type.
-        typedef typename abstract_window_type::string_type string_type;
+        using string_type = typename abstract_window_type::string_type;
 
         //! The message box type.
-        typedef MessageBox message_box_type;
+        using message_box_type = MessageBox;
 
         //! The file saving type.
-        typedef SaveToFile save_to_file_type;
+        using save_to_file_type = SaveToFile;
 
         //! The message catalog type.
-        typedef MessageCatalog message_catalog_type;
+        using message_catalog_type = MessageCatalog;
 
 
         // constructors and destructor

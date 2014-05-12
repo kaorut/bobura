@@ -26,15 +26,15 @@ namespace bobura { namespace command
     public:
         // types
 
-        typedef train_kind::model_type model_type;
+        using model_type = train_kind::model_type;
 
-        typedef train_kind::abstract_window_type abstract_window_type;
+        using abstract_window_type = train_kind::abstract_window_type;
 
-        typedef train_kind::train_kind_dialog_type train_kind_dialog_type;
+        using train_kind_dialog_type = train_kind::train_kind_dialog_type;
 
-        typedef train_kind::dialog_base_type dialog_base_type;
+        using dialog_base_type = train_kind::dialog_base_type;
 
-        typedef train_kind::message_catalog_type message_catalog_type;
+        using message_catalog_type = train_kind::message_catalog_type;
 
 
         // constructors and destructor
@@ -72,19 +72,19 @@ namespace bobura { namespace command
     private:
         // types
 
-        typedef train_kind_dialog_type::int_size_type int_size_type;
+        using int_size_type = train_kind_dialog_type::int_size_type;
 
-        typedef train_kind_dialog_type::info_set_type info_set_type;
+        using info_set_type = train_kind_dialog_type::info_set_type;
 
-        typedef model_type::timetable_type timetable_type;
+        using timetable_type = model_type::timetable_type;
 
-        typedef timetable_type::train_kinds_type train_kinds_type;
+        using train_kinds_type = timetable_type::train_kinds_type;
 
-        typedef timetable_type::train_kind_index_type train_kind_index_type;
+        using train_kind_index_type = timetable_type::train_kind_index_type;
 
-        typedef timetable_type::train_kind_type train_kind_type;
+        using train_kind_type = timetable_type::train_kind_type;
 
-        typedef timetable_type::font_color_set_type font_color_set_type;
+        using font_color_set_type = timetable_type::font_color_set_type;
 
 
         // static functions

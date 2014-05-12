@@ -39,13 +39,13 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The size type.
-        typedef Size size_type;
+        using size_type = Size;
 
         //! The list box type.
-        typedef ListBox list_box_type;
+        using list_box_type = ListBox;
 
         //! The update type.
-        typedef std::function<void ()> update_type;
+        using update_type = std::function<void ()>;
 
 
         // constructors and destructor
@@ -109,16 +109,16 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The information set type.
-        typedef InfoSet info_set_type;
+        using info_set_type = InfoSet;
 
         //! The size type.
-        typedef Size size_type;
+        using size_type = Size;
 
         //! The message catalog type.
-        typedef MessageCatalog message_catalog_type;
+        using message_catalog_type = MessageCatalog;
 
         //! The sync type.
-        typedef std::function<void ()> sync_type;
+        using sync_type = std::function<void ()>;
 
 
         // constructors and destructor
@@ -179,11 +179,11 @@ namespace bobura { namespace message { namespace train_kind_dialog
     private:
         // types
 
-        typedef typename info_set_type::train_kind_type train_kind_type;
+        using train_kind_type = typename info_set_type::train_kind_type;
 
-        typedef typename train_kind_type::string_type string_type;
+        using string_type = typename train_kind_type::string_type;
 
-        typedef typename train_kind_type::color_type color_type;
+        using color_type = typename train_kind_type::color_type;
 
 
         // variables
@@ -213,13 +213,13 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The information set type.
-        typedef InfoSet info_set_type;
+        using info_set_type = InfoSet;
 
         //! The size type.
-        typedef Size size_type;
+        using size_type = Size;
 
         //! The sync type.
-        typedef std::function<void ()> sync_type;
+        using sync_type = std::function<void ()>;
 
 
         // constructors and destructor
@@ -294,13 +294,13 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The information set type.
-        typedef InfoSet info_set_type;
+        using info_set_type = InfoSet;
 
         //! The size type.
-        typedef Size size_type;
+        using size_type = Size;
 
         //! The sync type.
-        typedef std::function<void ()> sync_type;
+        using sync_type = std::function<void ()>;
 
 
         // constructors and destructor
@@ -368,13 +368,13 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The information set type.
-        typedef InfoSet info_set_type;
+        using info_set_type = InfoSet;
 
         //! The size type.
-        typedef Size size_type;
+        using size_type = Size;
 
         //! The sync type.
-        typedef std::function<void ()> sync_type;
+        using sync_type = std::function<void ()>;
 
 
         // constructors and destructor
@@ -438,7 +438,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The apply type.
-        typedef std::function<void ()> apply_type;
+        using apply_type = std::function<void ()>;
 
 
         // constructors and destructor
@@ -484,7 +484,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The apply type.
-        typedef std::function<void ()> apply_type;
+        using apply_type = std::function<void ()>;
 
 
         // constructors and destructor
@@ -534,16 +534,16 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The dialog type.
-        typedef Dialog dialog_type;
+        using dialog_type = Dialog;
 
         //! The color dialog type.
-        typedef ColorDialog color_dialog_type;
+        using color_dialog_type = ColorDialog;
 
         //! The color type.
-        typedef typename color_dialog_type::color_type color_type;
+        using color_type = typename color_dialog_type::color_type;
 
         //! The apply type.
-        typedef std::function<void ()> apply_type;
+        using apply_type = std::function<void ()>;
 
 
         // constructors and destructor
@@ -605,7 +605,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The apply type.
-        typedef std::function<void ()> apply_type;
+        using apply_type = std::function<void ()>;
 
 
         // constructors and destructor
@@ -651,7 +651,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The apply type.
-        typedef std::function<void ()> apply_type;
+        using apply_type = std::function<void ()>;
 
 
         // constructors and destructor
@@ -702,22 +702,22 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The information set type.
-        typedef InfoSet info_set_type;
+        using info_set_type = InfoSet;
 
         //! The integer size type.
-        typedef IntSize int_size_type;
+        using int_size_type = IntSize;
 
         //! The canvas type.
-        typedef Canvas canvas_type;
+        using canvas_type = Canvas;
 
         //! The font type.
-        typedef typename Canvas::font_type font_type;
+        using font_type = typename Canvas::font_type;
 
         //! The color type.
-        typedef typename Canvas::color_type color_type;
+        using color_type = typename Canvas::color_type;
 
         //! The dimension type.
-        typedef typename Canvas::dimension_type dimension_type;
+        using dimension_type = typename Canvas::dimension_type;
 
 
         // constructors and destructor
@@ -792,23 +792,23 @@ namespace bobura { namespace message { namespace train_kind_dialog
     private:
         // types
 
-        typedef typename canvas_type::string_type string_type;
+        using string_type = typename canvas_type::string_type;
 
-        typedef typename canvas_type::position_type position_type;
+        using position_type = typename canvas_type::position_type;
 
-        typedef typename tetengo2::gui::position<position_type>::left_type left_type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
-        typedef typename tetengo2::gui::position<position_type>::top_type top_type;
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
-        typedef typename tetengo2::gui::dimension<dimension_type>::width_type width_type;
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
-        typedef typename width_type::value_type size_type;
+        using size_type = typename width_type::value_type;
 
-        typedef typename canvas_type::background_type background_type;
+        using background_type = typename canvas_type::background_type;
 
-        typedef typename canvas_type::solid_background_type solid_background_type;
+        using solid_background_type = typename canvas_type::solid_background_type;
 
-        typedef typename info_set_type::train_kind_type train_kind_type;
+        using train_kind_type = typename info_set_type::train_kind_type;
 
 
         // static functions
@@ -899,7 +899,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The dialog type.
-        typedef Dialog dialog_type;
+        using dialog_type = Dialog;
 
 
         // constructors and destructor
@@ -949,7 +949,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The dialog type.
-        typedef Dialog dialog_type;
+        using dialog_type = Dialog;
 
 
         // constructors and destructor

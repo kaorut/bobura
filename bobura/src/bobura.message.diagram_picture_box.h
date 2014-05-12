@@ -35,19 +35,19 @@ namespace bobura { namespace message { namespace diagram_picture_box
         // types
 
         //! The picture box type.
-        typedef PictureBox picture_box_type;
+        using picture_box_type = PictureBox;
 
         //! The position type.
-        typedef typename picture_box_type::position_type position_type;
+        using position_type = typename picture_box_type::position_type;
 
         //! The button kind type.
-        typedef typename picture_box_type::mouse_observer_set_type::mouse_button_type mouse_button_type;
+        using mouse_button_type = typename picture_box_type::mouse_observer_set_type::mouse_button_type;
 
         //! The view type.
-        typedef View view_type;
+        using view_type = View;
 
         //! The set-mouse-capture function type.
-        typedef std::function<void (const mouse_button_type)> set_mouse_capture_type;
+        using set_mouse_capture_type = std::function<void (const mouse_button_type)>;
 
 
         // constructors and destructor
@@ -110,7 +110,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
     private:
         // types
 
-        typedef typename view_type::item_type item_type;
+        using item_type = typename view_type::item_type;
 
 
         // variables
@@ -138,19 +138,19 @@ namespace bobura { namespace message { namespace diagram_picture_box
         // types
 
         //! The picture box type.
-        typedef PictureBox picture_box_type;
+        using picture_box_type = PictureBox;
 
         //! The position type.
-        typedef typename picture_box_type::position_type position_type;
+        using position_type = typename picture_box_type::position_type;
 
         //! The button kind type.
-        typedef typename picture_box_type::mouse_observer_set_type::mouse_button_type mouse_button_type;
+        using mouse_button_type = typename picture_box_type::mouse_observer_set_type::mouse_button_type;
 
         //! The view type.
-        typedef View view_type;
+        using view_type = View;
 
         //! The release-mouse-capture function type.
-        typedef std::function<bool (const mouse_button_type)> release_mouse_capture_type;
+        using release_mouse_capture_type = std::function<bool (const mouse_button_type)>;
 
 
         // constructors and destructor
@@ -218,16 +218,16 @@ namespace bobura { namespace message { namespace diagram_picture_box
         // types
 
         //! The picture box type.
-        typedef PictureBox picture_box_type;
+        using picture_box_type = PictureBox;
 
         //! The position type.
-        typedef typename picture_box_type::position_type position_type;
+        using position_type = typename picture_box_type::position_type;
 
         //! The button kind type.
-        typedef typename picture_box_type::mouse_observer_set_type::mouse_button_type mouse_button_type;
+        using mouse_button_type = typename picture_box_type::mouse_observer_set_type::mouse_button_type;
 
         //! The view type.
-        typedef View view_type;
+        using view_type = View;
 
 
         // constructors and destructor
@@ -286,11 +286,11 @@ namespace bobura { namespace message { namespace diagram_picture_box
     private:
         // types
 
-        typedef typename picture_box_type::cursor_type cursor_type;
+        using cursor_type = typename picture_box_type::cursor_type;
 
-        typedef typename picture_box_type::system_cursor_type system_cursor_type;
+        using system_cursor_type = typename picture_box_type::system_cursor_type;
 
-        typedef typename view_type::item_type item_type;
+        using item_type = typename view_type::item_type;
 
 
         // variables
@@ -317,19 +317,19 @@ namespace bobura { namespace message { namespace diagram_picture_box
         // types
 
         //! The picture box type.
-        typedef PictureBox picture_box_type;
+        using picture_box_type = PictureBox;
 
         //! The delta type.
-        typedef typename picture_box_type::mouse_observer_set_type::delta_type delta_type;
+        using delta_type = typename picture_box_type::mouse_observer_set_type::delta_type;
 
         //! The direction type.
-        typedef typename picture_box_type::mouse_observer_set_type::direction_type direction_type;
+        using direction_type = typename picture_box_type::mouse_observer_set_type::direction_type;
 
         //! The view type.
-        typedef View view_type;
+        using view_type = View;
 
         //! The view zoom type.
-        typedef ViewZoom view_zoom_type;
+        using view_zoom_type = ViewZoom;
 
 
         // constructors and destructor
@@ -380,7 +380,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
     private:
         // types
 
-        typedef typename picture_box_type::scroll_bar_type::size_type scroll_bar_size_type;
+        using scroll_bar_size_type = typename picture_box_type::scroll_bar_type::size_type;
 
 
         // variables
@@ -431,7 +431,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         )
         const
         {
-            typedef typename delta_type::int_type delta_int_type;
+            using delta_int_type = typename delta_type::int_type;
             auto int_delta = boost::rational_cast<delta_int_type>(delta * 3);
             if (int_delta == 0)
             {
@@ -487,10 +487,10 @@ namespace bobura { namespace message { namespace diagram_picture_box
         // types
 
         //! The picture box type.
-        typedef PictureBox picture_box_type;
+        using picture_box_type = PictureBox;
 
         //! The virtual key type.
-        typedef typename picture_box_type::keyboard_observer_set_type::virtual_key_type virtual_key_type;
+        using virtual_key_type = typename picture_box_type::keyboard_observer_set_type::virtual_key_type;
 
 
         // constructors and destructor
@@ -539,7 +539,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
     private:
         // types
 
-        typedef typename picture_box_type::scroll_bar_type::size_type scroll_bar_size_type;
+        using scroll_bar_size_type = typename picture_box_type::scroll_bar_type::size_type;
 
 
         // variables
@@ -658,13 +658,13 @@ namespace bobura { namespace message { namespace diagram_picture_box
         // types
 
         //! The canvas type.
-        typedef Canvas canvas_type;
+        using canvas_type = Canvas;
 
         //! The picture box type.
-        typedef PictureBox picture_box_type;
+        using picture_box_type = PictureBox;
 
         //! The view type.
-        typedef View view_type;
+        using view_type = View;
 
 
         // constructors and destructor
@@ -708,13 +708,13 @@ namespace bobura { namespace message { namespace diagram_picture_box
     private:
         // types
 
-        typedef typename picture_box_type::position_type position_type;
+        using position_type = typename picture_box_type::position_type;
 
-        typedef typename tetengo2::gui::position<position_type>::left_type left_type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
-        typedef typename tetengo2::gui::position<position_type>::top_type top_type;
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
-        typedef typename picture_box_type::scroll_bar_type::size_type scroll_bar_size_type;
+        using scroll_bar_size_type = typename picture_box_type::scroll_bar_type::size_type;
 
 
         // static functions
@@ -748,13 +748,13 @@ namespace bobura { namespace message { namespace diagram_picture_box
         // types
 
         //! The picture box type.
-        typedef PictureBox picture_box_type;
+        using picture_box_type = PictureBox;
 
         //! The size type.
-        typedef typename picture_box_type::scroll_bar_type::size_type size_type;
+        using size_type = typename picture_box_type::scroll_bar_type::size_type;
 
         //! The view type.
-        typedef View view_type;
+        using view_type = View;
 
         // constructors and destructor
 

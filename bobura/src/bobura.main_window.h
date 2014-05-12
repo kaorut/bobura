@@ -30,27 +30,26 @@ namespace bobura
         // types
 
         //! The base type.
-        typedef boost::mpl::at<ui_type_list, type::ui::window>::type base_type;
+        using base_type = boost::mpl::at<ui_type_list, type::ui::window>::type;
 
         //! The string type.
-        typedef base_type::string_type string_type;
+        using string_type = base_type::string_type;
 
         //! The message catalog type.
-        typedef boost::mpl::at<locale_type_list, type::locale::message_catalog>::type message_catalog_type;
+        using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
 
         //! The diagram picture box type.
-        typedef
-            boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box>::type
-            diagram_picture_box_type;
+        using diagram_picture_box_type =
+            boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box>::type;
 
         //! The property bar type.
-        typedef boost::mpl::at<main_window_type_list, type::main_window::property_bar>::type property_bar_type;
+        using property_bar_type = boost::mpl::at<main_window_type_list, type::main_window::property_bar>::type;
         
         //! The settings type.
-        typedef boost::mpl::at<setting_type_list, type::setting::settings>::type settings_type;
+        using settings_type = boost::mpl::at<setting_type_list, type::setting::settings>::type;
 
         //! The file save confirmation type.
-        typedef boost::mpl::at<load_save_type_list, type::load_save::confirm_file_save>::type confirm_file_save_type;
+        using confirm_file_save_type = boost::mpl::at<load_save_type_list, type::load_save::confirm_file_save>::type;
 
 
         // constructors and destructor

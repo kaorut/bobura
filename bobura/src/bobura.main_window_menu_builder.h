@@ -30,19 +30,19 @@ namespace bobura
         // types
 
         //! The menu bar type.
-        typedef boost::mpl::at<ui_type_list, type::ui::menu_bar>::type menu_bar_type;
+        using menu_bar_type = boost::mpl::at<ui_type_list, type::ui::menu_bar>::type;
 
         //! The command set type.
-        typedef boost::mpl::at<main_window_type_list, type::main_window::command_set>::type command_set_type;
+        using command_set_type = boost::mpl::at<main_window_type_list, type::main_window::command_set>::type;
 
         //! The model type.
-        typedef boost::mpl::at<model_type_list, type::model::model>::type model_type;
+        using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
 
         //! The main window type.
-        typedef boost::mpl::at<main_window_type_list, type::main_window::main_window>::type main_window_type;
+        using main_window_type = boost::mpl::at<main_window_type_list, type::main_window::main_window>::type;
 
         //! The message catalog type.
-        typedef boost::mpl::at<locale_type_list, type::locale::message_catalog>::type message_catalog_type;
+        using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
 
 
         // constructors and destructor

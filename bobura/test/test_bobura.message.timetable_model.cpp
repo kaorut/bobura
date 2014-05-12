@@ -25,30 +25,28 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type model_type;
+    using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
-    typedef boost::mpl::at<bobura::view_type_list, bobura::type::view::view>::type view_type;
+    using view_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::view>::type;
 
-    typedef boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type message_catalog_type;
+    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
-    typedef boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type settings_type;
+    using settings_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type;
 
-    typedef boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::save_to_file>::type save_to_file_type;
+    using save_to_file_type = boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::save_to_file>::type;
 
-    typedef
-        boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::confirm_file_save>::type
-        confirm_file_save_type;
+    using confirm_file_save_type =
+        boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::confirm_file_save>::type;
 
-    typedef boost::mpl::at<bobura::common_type_list, bobura::type::string>::type string_type;
+    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
     class main_window_type : public boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type
     {
     public:
-        typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type base_type;
+        using base_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-        typedef
-            boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::diagram_picture_box>::type
-            diagram_picture_box_type;
+        using diagram_picture_box_type =
+            boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::diagram_picture_box>::type;
 
         main_window_type(
             const message_catalog_type&   message_catalog,

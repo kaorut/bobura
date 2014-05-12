@@ -18,13 +18,12 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type string_type;
+    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
-    typedef boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::color>::type color_type;
+    using color_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::color>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train_kind>::type
-        train_kind_type;
+    using train_kind_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train_kind>::type;
 
 
 }

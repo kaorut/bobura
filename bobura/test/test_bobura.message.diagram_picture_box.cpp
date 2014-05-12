@@ -21,34 +21,34 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type canvas_type;
+    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
 
-    typedef boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type model_type;
+    using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
-    typedef
-        boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type message_catalog_type;
+    using message_catalog_type =
+        boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
-    typedef boost::mpl::at<bobura::view_type_list, bobura::type::view::view>::type view_type;
+    using view_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::view>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type position_type;
+    using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
 
-    typedef tetengo2::gui::position<position_type>::left_type left_type;
+    using left_type = tetengo2::gui::position<position_type>::left_type;
 
-    typedef tetengo2::gui::position<position_type>::top_type top_type;
+    using top_type = tetengo2::gui::position<position_type>::top_type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type window_type;
+    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type picture_box_type;
+    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
 
-    typedef picture_box_type::mouse_observer_set_type mouse_observer_set_type;
+    using mouse_observer_set_type = picture_box_type::mouse_observer_set_type;
 
-    typedef mouse_observer_set_type::mouse_button_type mouse_button_type;
+    using mouse_button_type = mouse_observer_set_type::mouse_button_type;
 
-    typedef bobura::message::diagram_picture_box::mouse_pressed<picture_box_type, view_type> mouse_pressed_type;
+    using mouse_pressed_type = bobura::message::diagram_picture_box::mouse_pressed<picture_box_type, view_type>;
 
-    typedef bobura::message::diagram_picture_box::mouse_released<picture_box_type, view_type> mouse_released_type;
+    using mouse_released_type = bobura::message::diagram_picture_box::mouse_released<picture_box_type, view_type>;
 
-    typedef bobura::message::diagram_picture_box::mouse_moved<picture_box_type, view_type> mouse_moved_type;
+    using mouse_moved_type = bobura::message::diagram_picture_box::mouse_moved<picture_box_type, view_type>;
 
     struct dummy_view_zoom_type
     {
@@ -80,20 +80,18 @@ namespace
 
     };
 
-    typedef
-        bobura::message::diagram_picture_box::mouse_wheeled<picture_box_type, view_type, dummy_view_zoom_type>
-        mouse_wheeled_type;
+    using mouse_wheeled_type =
+        bobura::message::diagram_picture_box::mouse_wheeled<picture_box_type, view_type, dummy_view_zoom_type>;
 
-    typedef picture_box_type::keyboard_observer_set_type::virtual_key_type virtual_key_type;
+    using virtual_key_type = picture_box_type::keyboard_observer_set_type::virtual_key_type;
 
-    typedef bobura::message::diagram_picture_box::keyboard_key_down<picture_box_type> keyboard_key_down_type;
+    using keyboard_key_down_type = bobura::message::diagram_picture_box::keyboard_key_down<picture_box_type>;
 
-    typedef
-        bobura::message::diagram_picture_box::paint_paint<canvas_type, picture_box_type, view_type> paint_paint_type;
+    using paint_paint_type =
+        bobura::message::diagram_picture_box::paint_paint<canvas_type, picture_box_type, view_type>;
 
-    typedef
-        bobura::message::diagram_picture_box::scroll_bar_scrolled<picture_box_type, view_type>
-        scroll_bar_scrolled_type;
+    using scroll_bar_scrolled_type =
+        bobura::message::diagram_picture_box::scroll_bar_scrolled<picture_box_type, view_type>;
 
 
     // functions

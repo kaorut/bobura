@@ -19,15 +19,15 @@ namespace bobura { namespace command
     public:
         // types
 
-        typedef about::model_type model_type;
+        using model_type = about::model_type;
 
-        typedef about::abstract_window_type abstract_window_type;
+        using abstract_window_type = about::abstract_window_type;
 
-        typedef about::about_dialog_type about_dialog_type;
+        using about_dialog_type = about::about_dialog_type;
 
-        typedef about::message_catalog_type message_catalog_type;
+        using message_catalog_type = about::message_catalog_type;
 
-        typedef about::settings_type settings_type;
+        using settings_type = about::settings_type;
 
 
         // constructors and destructor

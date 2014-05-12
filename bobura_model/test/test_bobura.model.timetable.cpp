@@ -24,48 +24,43 @@ namespace
 {
     // types
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type
-        station_type;
+    using station_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::grade_type_set>::type
-        grade_type_set_type;
+    using grade_type_set_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::grade_type_set>::type;
 
-    typedef grade_type_set_type::local_type local_type;
+    using local_type = grade_type_set_type::local_type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station_location>::type
-        station_location_type;
+    using station_location_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station_location>::type;
 
-    typedef boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::time>::type time_type;
+    using time_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::time>::type;
 
-    typedef boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::stop>::type stop_type;
+    using stop_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::stop>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train_kind>::type
-        train_kind_type;
+    using train_kind_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train_kind>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train>::type train_type;
+    using train_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train>::type;
 
-    typedef boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type string_type;
+    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type
-        timetable_type;
+    using timetable_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type;
 
-    typedef timetable_type::train_kinds_type train_kinds_type;
+    using train_kinds_type = timetable_type::train_kinds_type;
 
-    typedef timetable_type::train_kind_index_type train_kind_index_type;
+    using train_kind_index_type = timetable_type::train_kind_index_type;
 
-    typedef timetable_type::font_color_set_type font_color_set_type;
+    using font_color_set_type = timetable_type::font_color_set_type;
 
-    typedef font_color_set_type::font_color_type font_color_type;
+    using font_color_type = font_color_set_type::font_color_type;
 
-    typedef font_color_type::font_type font_type;
+    using font_type = font_color_type::font_type;
 
-    typedef font_color_type::color_type color_type;
+    using color_type = font_color_type::color_type;
 
 
 }

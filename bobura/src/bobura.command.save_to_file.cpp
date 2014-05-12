@@ -18,11 +18,11 @@ namespace bobura { namespace command
     public:
         // types
 
-        typedef save_to_file::model_type model_type;
+        using model_type = save_to_file::model_type;
 
-        typedef save_to_file::abstract_window_type abstract_window_type;
+        using abstract_window_type = save_to_file::abstract_window_type;
 
-        typedef save_to_file::save_to_file_type save_to_file_type;
+        using save_to_file_type = save_to_file::save_to_file_type;
 
 
         // constructors and destructor

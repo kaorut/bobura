@@ -43,30 +43,27 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace main_window
     {
-        typedef command::set command_set_type;
-        typedef
+        using command_set_type = command::set;
+        using diagram_picture_box_message_type_list =
             message::diagram_picture_box::type_list<
                 boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
                 boost::mpl::at<view_type_list, type::view::view>::type,
                 bobura::view::diagram::zoom,
                 boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type
-            >::type
-            diagram_picture_box_message_type_list;
-        typedef
+            >::type;
+        using diagram_picture_box_type =
             diagram_picture_box<
                 boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
                 boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
                 boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
                 diagram_picture_box_message_type_list
-            >
-            diagram_picture_box_type;
-        typedef
+            >;
+        using property_bar_message_type_list =
             message::property_bar::type_list<
                 boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
                 boost::mpl::at<ui_type_list, type::ui::map_box>::type
-            >::type
-            property_bar_message_type_list;
-        typedef
+            >::type;
+        using property_bar_type =
             property_bar<
                 boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
                 boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
@@ -74,9 +71,8 @@ namespace bobura
                 boost::mpl::at<setting_type_list, type::setting::settings>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
                 property_bar_message_type_list
-            >
-            property_bar_type;
-        typedef
+            >;
+        using main_window_message_type_list =
             message::main_window::type_list<
                 boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
                 command_set_type,
@@ -87,13 +83,12 @@ namespace bobura
                 diagram_picture_box_type,
                 property_bar_type,
                 boost::mpl::at<load_save_type_list, type::load_save::confirm_file_save>::type
-            >::type
-            main_window_message_type_list;
+            >::type;
     }}
 #endif
 
     //! The type list for the main window.
-    typedef
+    using main_window_type_list =
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::main_window::command_set, detail::main_window::command_set_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::main_window::main_window, main_window>,
@@ -113,8 +108,7 @@ namespace bobura
                 type::main_window::property_bar_message_type_list, detail::main_window::property_bar_message_type_list
             >,
         tetengo2::meta::assoc_list_end
-        >>>>>>>
-        main_window_type_list;
+        >>>>>>>;
 
 
     /**** The Application ***************************************************/
@@ -126,7 +120,7 @@ namespace bobura
     }}
 
     //! The type list for the application.
-    typedef
+    using application_type_list =
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
                 type::application::model_message_type_list,
@@ -147,8 +141,7 @@ namespace bobura
                 >::type
             >,
         tetengo2::meta::assoc_list_end
-        >>
-        application_type_list;
+        >>;
 
 
 }

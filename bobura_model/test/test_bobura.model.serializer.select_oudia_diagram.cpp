@@ -24,27 +24,23 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type string_type;
+    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::abstract_window>::type
-        abstract_window_type;
+    using abstract_window_type =
+        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::abstract_window>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::message_catalog>::type
-        message_catalog_type;
+    using message_catalog_type =
+        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::message_catalog>::type;
 
     struct oudia_diagram_dialog
     {
-        typedef
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::abstract_window>::type
-            abstract_window_type;
+        using abstract_window_type =
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::abstract_window>::type;
 
-        typedef boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type string_type;
+        using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
-        typedef
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::message_catalog>::type
-            message_catalog_type;
+        using message_catalog_type =
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::message_catalog>::type;
 
         enum class result_type
         {
@@ -53,7 +49,7 @@ namespace
             canceled,
         };
 
-        typedef std::size_t int_size_type;
+        using int_size_type = std::size_t;
 
         oudia_diagram_dialog(abstract_window_type&, const message_catalog_type&)
         {}
@@ -99,7 +95,7 @@ namespace
         
     };
 
-    typedef bobura::model::serializer::select_oudia_diagram<oudia_diagram_dialog> select_oudia_diagram_type;
+    using select_oudia_diagram_type = bobura::model::serializer::select_oudia_diagram<oudia_diagram_dialog>;
 
 
 }

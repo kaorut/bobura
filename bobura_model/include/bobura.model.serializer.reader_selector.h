@@ -39,16 +39,16 @@ namespace bobura { namespace model { namespace serializer
         // types
 
         //! The iterator type.
-        typedef ForwardIterator iterator;
+        using iterator = ForwardIterator;
 
         //! The timetable type.
-        typedef Timetable timetable_type;
+        using timetable_type = Timetable;
 
         //! The base type.
-        typedef reader<iterator, timetable_type> base_type;
+        using base_type = reader<iterator, timetable_type>;
 
         //! The error type.
-        typedef typename base_type::error_type error_type;
+        using error_type = typename base_type::error_type;
 
 
         // constructors and destructor

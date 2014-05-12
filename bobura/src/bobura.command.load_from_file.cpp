@@ -22,15 +22,15 @@ namespace bobura { namespace command
     public:
         // types
 
-        typedef load_from_file::model_type model_type;
+        using model_type = load_from_file::model_type;
 
-        typedef load_from_file::abstract_window_type abstract_window_type;
+        using abstract_window_type = load_from_file::abstract_window_type;
 
-        typedef load_from_file::load_from_file_type load_from_file_type;
+        using load_from_file_type = load_from_file::load_from_file_type;
 
-        typedef load_from_file::path_type path_type;
+        using path_type = load_from_file::path_type;
 
-        typedef load_from_file::parameter_type parameter_type;
+        using parameter_type = load_from_file::parameter_type;
 
 
         // constructors and destructor

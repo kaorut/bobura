@@ -27,28 +27,25 @@ namespace
 {
     // types
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type
-        timetable_type;
+    using timetable_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type;
 
-    typedef
+    using writer_type =
         boost::mpl::at<
             test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::writer
-        >::type
-        writer_type;
+        >::type;
 
-    typedef writer_type::path_type path_type;
+    using path_type = writer_type::path_type;
 
-    typedef
+    using writer_set_type =
         boost::mpl::at<
             test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::writer_selector
-        >::type
-        writer_set_type;
+        >::type;
 
     class concrete_writer : public writer_type
     {
     public:
-        typedef std::basic_string<output_stream_type::char_type> output_string_type;
+        using output_string_type = std::basic_string<output_stream_type::char_type>;
 
         explicit concrete_writer(path_type extension)
         :

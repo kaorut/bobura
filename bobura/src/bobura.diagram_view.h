@@ -54,61 +54,61 @@ namespace bobura
         // types
 
         //! The header type.
-        typedef Header header_type;
+        using header_type = Header;
 
         //! The item type.
-        typedef typename header_type::base_type item_type;
+        using item_type = typename header_type::base_type;
 
         //! The time line list type.
-        typedef TimeLineList time_line_list_type;
+        using time_line_list_type = TimeLineList;
 
         //! The station line list type.
-        typedef StationLineList station_line_list_type;
+        using station_line_list_type = StationLineList;
 
         //! The train line list type.
-        typedef TrainLineList train_line_list_type;
+        using train_line_list_type = TrainLineList;
 
         //! The model type.
-        typedef Model model_type;
+        using model_type = Model;
 
         //! The selection type.
-        typedef Selection selection_type;
+        using selection_type = Selection;
 
         //! The selection observer set type.
-        typedef typename selection_type::selection_observer_set_type selection_observer_set_type;
+        using selection_observer_set_type = typename selection_type::selection_observer_set_type;
 
         //! The canvas type.
-        typedef Canvas canvas_type;
+        using canvas_type = Canvas;
 
         //! The position type.
-        typedef typename canvas_type::position_type position_type;
+        using position_type = typename canvas_type::position_type;
 
         //! The left type.
-        typedef typename tetengo2::gui::position<position_type>::left_type left_type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
         //! The top type.
-        typedef typename tetengo2::gui::position<position_type>::top_type top_type;
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
         //! The dimension type.
-        typedef typename canvas_type::dimension_type dimension_type;
+        using dimension_type = typename canvas_type::dimension_type;
 
         //! The width type.
-        typedef typename tetengo2::gui::dimension<dimension_type>::width_type width_type;
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
         //! The height type.
-        typedef typename tetengo2::gui::dimension<dimension_type>::height_type height_type;
+        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
         //! The horizontal scale type.
-        typedef typename width_type::value_type horizontal_scale_type;
+        using horizontal_scale_type = typename width_type::value_type;
 
         //! The vertical scale type.
-        typedef typename height_type::value_type vertical_scale_type;
+        using vertical_scale_type = typename height_type::value_type;
 
         //! The solid background type.
-        typedef SolidBackground solid_background_type;
+        using solid_background_type = SolidBackground;
 
         //! The message catalog type.
-        typedef MessageCatalog message_catalog_type;
+        using message_catalog_type = MessageCatalog;
 
 
         // constructors and destructor
@@ -364,17 +364,17 @@ namespace bobura
     private:
         // types
 
-        typedef typename model_type::timetable_type timetable_type;
+        using timetable_type = typename model_type::timetable_type;
 
-        typedef typename timetable_type::station_intervals_type station_intervals_type;
+        using station_intervals_type = typename timetable_type::station_intervals_type;
 
-        typedef typename timetable_type::train_type train_type;
+        using train_type = typename timetable_type::train_type;
 
-        typedef typename train_type::stop_type stop_type;
+        using stop_type = typename train_type::stop_type;
 
-        typedef typename stop_type::time_type time_type;
+        using time_type = typename stop_type::time_type;
 
-        typedef typename time_type::time_span_type time_span_type;
+        using time_span_type = typename time_type::time_span_type;
 
         class to_station_position
         {

@@ -26,10 +26,10 @@ namespace bobura { namespace model { namespace message
         /*!
             \brief The observer type of changed.
         */
-        typedef void changed_type();
+        using changed_type = void ();
 
         //! The signal type of changed.
-        typedef boost::signals2::signal<changed_type> changed_signal_type;
+        using changed_signal_type = boost::signals2::signal<changed_type>;
 
 
         // functions

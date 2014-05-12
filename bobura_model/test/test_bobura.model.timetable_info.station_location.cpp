@@ -17,21 +17,18 @@ namespace
 {
     // types
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type
-        station_type;
+    using station_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::grade_type_set>::type
-        grade_type_set_type;
+    using grade_type_set_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::grade_type_set>::type;
 
-    typedef grade_type_set_type::local_type local_type;
+    using local_type = grade_type_set_type::local_type;
 
-    typedef boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type string_type;
+    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station_location>::type
-        station_location_type;
+    using station_location_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station_location>::type;
 
 
 }

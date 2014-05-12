@@ -32,7 +32,7 @@ namespace bobura { namespace model { namespace train_info
         // types
 
         //! The tick type.
-        typedef TimeSpanTick tick_type;
+        using tick_type = TimeSpanTick;
 
         //! The hours-minutes-seconds type.
         class hours_minutes_seconds_type : private boost::equality_comparable<hours_minutes_seconds_type>

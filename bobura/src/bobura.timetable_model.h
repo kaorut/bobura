@@ -38,13 +38,13 @@ namespace bobura
         // types
 
         //! The timetable type.
-        typedef Timetable timetable_type;
+        using timetable_type = Timetable;
 
         //! The path type.
-        typedef Path path_type;
+        using path_type = Path;
 
         //! The observer set type.
-        typedef ObserverSet observer_set_type;
+        using observer_set_type = ObserverSet;
 
 
         // constructors and destructor

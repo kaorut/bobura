@@ -22,40 +22,36 @@ namespace
 {
     // types
 
-    typedef
+    using station_interval_calculator_type =
         boost::mpl::at<
             test_bobura::model::model_type_list, test_bobura::model::type::model::station_interval_calculator
-        >::type
-        station_interval_calculator_type;
+        >::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station_location>::type
-        station_location_type;
+    using station_location_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station_location>::type;
 
-    typedef station_location_type::operating_distance_type operating_distance_type;
+    using operating_distance_type = station_location_type::operating_distance_type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train>::type train_type;
+    using train_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train>::type;
 
-    typedef train_type::stop_type stop_type;
+    using stop_type = train_type::stop_type;
 
-    typedef stop_type::time_type time_type;
+    using time_type = stop_type::time_type;
 
-    typedef time_type::tick_type time_tick_type;
+    using time_tick_type = time_type::tick_type;
 
-    typedef time_type::time_span_type time_span_type;
+    using time_span_type = time_type::time_span_type;
 
-    typedef station_interval_calculator_type::station_intervals_type station_intervals_type;
+    using station_intervals_type = station_interval_calculator_type::station_intervals_type;
 
-    typedef boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type string_type;
+    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type
-        station_type;
+    using station_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::grade_type_set>::type
-        grade_type_set_type;
+    using grade_type_set_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::grade_type_set>::type;
 
 
     // functions

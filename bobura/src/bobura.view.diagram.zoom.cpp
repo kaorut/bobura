@@ -27,17 +27,16 @@ namespace bobura { namespace view { namespace diagram
     public:
         // types
 
-        typedef zoom::picture_box_type picture_box_type;
+        using picture_box_type = zoom::picture_box_type;
 
-        typedef zoom::diagram_view_type diagram_view_type;
+        using diagram_view_type = zoom::diagram_view_type;
 
-        typedef zoom::scale_list_type scale_list_type;
+        using scale_list_type = zoom::scale_list_type;
 
-        typedef zoom::scale_type scale_type;
+        using scale_type = zoom::scale_type;
 
-        typedef
-            boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box>::type
-            diagram_picture_box_type;
+        using diagram_picture_box_type =
+            boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box>::type;
 
 
         // constructors and destructor
@@ -99,15 +98,15 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
-        typedef picture_box_type::fast_canvas_type canvas_type;
+        using canvas_type = picture_box_type::fast_canvas_type;
 
-        typedef picture_box_type::position_type position_type;
+        using position_type = picture_box_type::position_type;
 
-        typedef tetengo2::gui::position<position_type>::left_type left_type;
+        using left_type = tetengo2::gui::position<position_type>::left_type;
 
-        typedef tetengo2::gui::position<position_type>::top_type top_type;
+        using top_type = tetengo2::gui::position<position_type>::top_type;
 
-        typedef picture_box_type::scroll_bar_type::size_type scroll_bar_size_type;
+        using scroll_bar_size_type = picture_box_type::scroll_bar_type::size_type;
 
 
         // static functions

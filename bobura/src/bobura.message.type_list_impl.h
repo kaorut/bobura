@@ -44,14 +44,13 @@ namespace bobura { namespace message
             // types
 
             //! The type list for the timetable model.
-            typedef
+            using type =
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<type::reset, reset<TimetableModel, DiagramView, MainWindow>>,
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<type::changed, changed<TimetableModel, DiagramView, MainWindow>>,
                 tetengo2::meta::assoc_list_end
-                >>
-                type;
+                >>;
 
 
         };
@@ -74,7 +73,7 @@ namespace bobura { namespace message
             // types
 
             //! The type list for the timetable model.
-            typedef
+            using type =
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<
                         type::station_selected,
@@ -86,8 +85,7 @@ namespace bobura { namespace message
                     >,
                 tetengo2::meta::assoc_list<boost::mpl::pair<type::all_unselected, all_unselected<PropertyBar>>,
                 tetengo2::meta::assoc_list_end
-                >>>
-                type;
+                >>>;
 
 
         };
@@ -125,7 +123,7 @@ namespace bobura { namespace message
             // types
 
             //! The type list for the main window.
-            typedef
+            using type =
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<type::popup_menu_selected, popup_menu_selected<PopupMenu, Command, Model>>,
                 tetengo2::meta::assoc_list<
@@ -141,8 +139,7 @@ namespace bobura { namespace message
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<type::window_closing, window_closing<AbstractWindow, ConfirmFileSave>>,
                 tetengo2::meta::assoc_list_end
-                >>>>>
-                type;
+                >>>>>;
 
 
         };
@@ -165,7 +162,7 @@ namespace bobura { namespace message
             // types
 
             //! The type list for the diagram picture box.
-            typedef
+            using type =
                 tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_pressed, mouse_pressed<PictureBox, View>>,
                 tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_released, mouse_released<PictureBox, View>>,
                 tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_moved, mouse_moved<PictureBox, View>>,
@@ -176,8 +173,7 @@ namespace bobura { namespace message
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<type::scroll_bar_scrolled, scroll_bar_scrolled<PictureBox, View>>,
                 tetengo2::meta::assoc_list_end
-                >>>>>>>
-                type;
+                >>>>>>>;
         };
     }
 
@@ -196,12 +192,11 @@ namespace bobura { namespace message
             // types
 
             //! The type list for the property bar.
-            typedef
+            using type =
                 tetengo2::meta::assoc_list<boost::mpl::pair<type::resized, resized<SideBar, MapBox>>,
                 tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_pressed, mouse_pressed<MapBox>>,
                 tetengo2::meta::assoc_list_end
-                >>
-                type;
+                >>;
         };
     }
 
@@ -219,14 +214,13 @@ namespace bobura { namespace message
             // types
 
             //! The type list for the file property dialog.
-            typedef
+            using type =
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<type::ok_button_mouse_clicked, ok_button_mouse_clicked<Dialog>>,
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<type::cancel_button_mouse_clicked, cancel_button_mouse_clicked<Dialog>>,
                 tetengo2::meta::assoc_list_end
-                >>
-                type;
+                >>;
 
 
         };
@@ -246,14 +240,13 @@ namespace bobura { namespace message
             // types
 
             //! The type list for the file property dialog.
-            typedef
+            using type =
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<type::ok_button_mouse_clicked, ok_button_mouse_clicked<Dialog>>,
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<type::cancel_button_mouse_clicked, cancel_button_mouse_clicked<Dialog>>,
                 tetengo2::meta::assoc_list_end
-                >>
-                type;
+                >>;
 
 
         };
@@ -287,7 +280,7 @@ namespace bobura { namespace message
             // types
 
             //! The type list for the font and color dialog.
-            typedef
+            using type =
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<
                         type::category_list_box_selection_changed, category_list_box_selection_changed<Size, ListBox>
@@ -311,8 +304,7 @@ namespace bobura { namespace message
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<type::cancel_button_mouse_clicked, cancel_button_mouse_clicked<Dialog>>,
                 tetengo2::meta::assoc_list_end
-                >>>>>>
-                type;
+                >>>>>>;
 
 
         };
@@ -346,7 +338,7 @@ namespace bobura { namespace message
             // types
 
             //! The type list for the font and color dialog.
-            typedef
+            using type =
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<
                         type::train_kind_list_box_selection_changed,
@@ -386,8 +378,7 @@ namespace bobura { namespace message
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<type::cancel_button_mouse_clicked, cancel_button_mouse_clicked<Dialog>>,
                 tetengo2::meta::assoc_list_end
-                >>>>>>>>>>>>>
-                type;
+                >>>>>>>>>>>>>;
 
 
         };
@@ -407,12 +398,11 @@ namespace bobura { namespace message
             // types
 
             //! The type list for the about dialog.
-            typedef
+            using type =
                 tetengo2::meta::assoc_list<
                     boost::mpl::pair<type::ok_button_mouse_clicked, ok_button_mouse_clicked<Dialog>>,
                 tetengo2::meta::assoc_list_end
-                >
-                type;
+                >;
 
 
         };

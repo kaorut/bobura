@@ -20,15 +20,15 @@ namespace bobura { namespace command
     public:
         // types
 
-        typedef font_color::model_type model_type;
+        using model_type = font_color::model_type;
 
-        typedef font_color::abstract_window_type abstract_window_type;
+        using abstract_window_type = font_color::abstract_window_type;
 
-        typedef font_color::font_color_dialog_type font_color_dialog_type;
+        using font_color_dialog_type = font_color::font_color_dialog_type;
 
-        typedef font_color::dialog_base_type dialog_base_type;
+        using dialog_base_type = font_color::dialog_base_type;
 
-        typedef font_color::message_catalog_type message_catalog_type;
+        using message_catalog_type = font_color::message_catalog_type;
 
 
         // constructors and destructor
@@ -90,9 +90,9 @@ namespace bobura { namespace command
     private:
         // types
 
-        typedef model_type::timetable_type::font_color_set_type font_color_set_type;
+        using font_color_set_type = model_type::timetable_type::font_color_set_type;
 
-        typedef font_color_set_type::font_color_type font_color_type;
+        using font_color_type = font_color_set_type::font_color_type;
 
 
         // variables

@@ -35,34 +35,34 @@ namespace bobura { namespace command
         // types
 
         //! The file initialization type.
-        typedef boost::mpl::at<common_type_list, type::size>::type size_type;
+        using size_type = boost::mpl::at<common_type_list, type::size>::type;
 
         //! The file initialization type.
-        typedef boost::mpl::at<load_save_type_list, type::load_save::new_file>::type new_file_type;
+        using new_file_type = boost::mpl::at<load_save_type_list, type::load_save::new_file>::type;
 
         //! The file loading type.
-        typedef boost::mpl::at<load_save_type_list, type::load_save::load_from_file>::type load_from_file_type;
+        using load_from_file_type = boost::mpl::at<load_save_type_list, type::load_save::load_from_file>::type;
 
         //! The path type.
-        typedef boost::mpl::at<common_type_list, type::path>::type path_type;
+        using path_type = boost::mpl::at<common_type_list, type::path>::type;
 
         //! The file saving type.
-        typedef boost::mpl::at<load_save_type_list, type::load_save::save_to_file>::type save_to_file_type;
+        using save_to_file_type = boost::mpl::at<load_save_type_list, type::load_save::save_to_file>::type;
 
         //! The diagram view type.
-        typedef boost::mpl::at<view_type_list, type::view::view>::type diagram_view_type;
+        using diagram_view_type = boost::mpl::at<view_type_list, type::view::view>::type;
 
         //! The settings type.
-        typedef boost::mpl::at<setting_type_list, type::setting::settings>::type settings_type;
+        using settings_type = boost::mpl::at<setting_type_list, type::setting::settings>::type;
 
         //! The message catalog type.
-        typedef boost::mpl::at<locale_type_list, type::locale::message_catalog>::type message_catalog_type;
+        using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
 
         //! The command type.
-        typedef command_base command_type;
+        using command_type = command_base;
 
         //! The parameter type.
-        typedef parameter_base parameter_type;
+        using parameter_type = parameter_base;
 
 
         // constructors

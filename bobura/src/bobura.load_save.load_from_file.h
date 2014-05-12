@@ -55,31 +55,31 @@ namespace bobura { namespace load_save
         // types
 
         //! The model type.
-        typedef Model model_type;
+        using model_type = Model;
 
         //! The abstract window type.
-        typedef AbstractWindow abstract_window_type;
+        using abstract_window_type = AbstractWindow;
 
         //! The message box type.
-        typedef MessageBox message_box_type;
+        using message_box_type = MessageBox;
 
         //! The file open dialog type.
-        typedef FileOpenDialog file_open_dialog_type;
+        using file_open_dialog_type = FileOpenDialog;
 
         //! The path type.
-        typedef typename file_open_dialog_type::path_type path_type;
+        using path_type = typename file_open_dialog_type::path_type;
 
         //! The file save confirmation type.
-        typedef ConfirmFileSave confirm_file_save_type;
+        using confirm_file_save_type = ConfirmFileSave;
 
         //! The reader selector type.
-        typedef ReaderSelector reader_selector_type;
+        using reader_selector_type = ReaderSelector;
 
         //! The reader set type.
-        typedef ReaderSet reader_set_type;
+        using reader_set_type = ReaderSet;
 
         //! The message catalog type.
-        typedef MessageCatalog message_catalog_type;
+        using message_catalog_type = MessageCatalog;
 
 
         // constructors and destructor
@@ -201,9 +201,9 @@ namespace bobura { namespace load_save
     private:
         // types
 
-        typedef typename abstract_window_type::string_type string_type;
+        using string_type = typename abstract_window_type::string_type;
 
-        typedef typename reader_selector_type::error_type reader_error_type;
+        using reader_error_type = typename reader_selector_type::error_type;
 
 
         // variables

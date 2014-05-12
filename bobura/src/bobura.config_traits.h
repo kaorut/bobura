@@ -33,33 +33,32 @@ namespace bobura
         // types
 
         //! The string type.
-        typedef String string_type;
+        using string_type = String;
 
         //! The unsigned integer type.
-        typedef UInt uint_type;
+        using uint_type = UInt;
 
         //! The encoder type.
-        typedef Encoder encoder_type;
+        using encoder_type = Encoder;
 
         //! The detail implementation type of the configuration.
-        typedef ConfigDetails config_details_type;
+        using config_details_type = ConfigDetails;
 
         //! The configuration base type.
-        typedef tetengo2::config::config_base<string_type, uint_type> config_base_type;
+        using config_base_type = tetengo2::config::config_base<string_type, uint_type>;
 
         //! The configuration list type.
-        typedef tetengo2::config::config_list<string_type, uint_type> config_list_type;
+        using config_list_type = tetengo2::config::config_list<string_type, uint_type>;
 
         //! The cached configuration type.
-        typedef tetengo2::config::cached_config<string_type, uint_type> cached_config_type;
+        using cached_config_type = tetengo2::config::cached_config<string_type, uint_type>;
 
         //! The temporary configuration type.
-        typedef tetengo2::config::temporary_config<string_type, uint_type> temporary_config_type;
+        using temporary_config_type = tetengo2::config::temporary_config<string_type, uint_type>;
 
         //! The persistent configuration type.
-        typedef
-            tetengo2::config::persistent_config<string_type, uint_type, encoder_type, config_details_type>
-            persistent_config_type;
+        using persistent_config_type =
+            tetengo2::config::persistent_config<string_type, uint_type, encoder_type, config_details_type>;
 
 
     };

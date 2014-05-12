@@ -30,7 +30,7 @@ namespace bobura
         // types
 
         //! The settings type.
-        typedef boost::mpl::at<setting_type_list, type::setting::settings>::type settings_type;
+        using settings_type = boost::mpl::at<setting_type_list, type::setting::settings>::type;
 
 
         // constructors and destructor

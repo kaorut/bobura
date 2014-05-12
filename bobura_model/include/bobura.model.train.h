@@ -34,16 +34,16 @@ namespace bobura { namespace model
         // types
 
         //! The string type.
-        typedef String string_type;
+        using string_type = String;
 
         //! The kind index type.
-        typedef KindIndex kind_index_type;
+        using kind_index_type = KindIndex;
 
         //! The stop type.
-        typedef Stop stop_type;
+        using stop_type = Stop;
 
         //! The stops type.
-        typedef std::vector<stop_type> stops_type;
+        using stops_type = std::vector<stop_type>;
 
         //! The direction type.
         enum class direction_type

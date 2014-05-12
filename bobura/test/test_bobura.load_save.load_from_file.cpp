@@ -26,32 +26,31 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type model_type;
+    using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
-    typedef model_type::timetable_type timetable_type;
+    using timetable_type = model_type::timetable_type;
 
-    typedef boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type message_catalog_type;
+    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
-    typedef boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::save_to_file>::type save_to_file_type;
+    using save_to_file_type = boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::save_to_file>::type;
 
-    typedef
-        boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::confirm_file_save>::type
-        confirm_file_save_type;
+    using confirm_file_save_type =
+        boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::confirm_file_save>::type;
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type window_type;
+    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
     struct oudia_diagram_dialog_type : public boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type
     {
-        typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type base_type;
+        using base_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type;
 
-        typedef window_type::base_type abstract_window_type;
+        using abstract_window_type = window_type::base_type;
 
-        typedef abstract_window_type::string_type string_type;
+        using string_type = abstract_window_type::string_type;
 
-        typedef
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type message_catalog_type;
+        using message_catalog_type =
+            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
-        typedef boost::mpl::at<bobura::common_type_list, bobura::type::size>::type int_size_type;
+        using int_size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
 
         oudia_diagram_dialog_type(abstract_window_type& parent, const message_catalog_type& message_catalog)
         :
@@ -101,7 +100,7 @@ namespace
 
     };
 
-    typedef
+    using reader_set_type =
         bobura::model::serializer::reader_set<
             boost::mpl::at<bobura::common_type_list, bobura::type::input_stream_iterator>::type,
             timetable_type,
@@ -110,12 +109,11 @@ namespace
             bobura::model::serializer::select_oudia_diagram<oudia_diagram_dialog_type>,
             boost::mpl::at<bobura::locale_type_list, bobura::type::locale::timetable_file_encoder>::type,
             boost::mpl::at<bobura::locale_type_list, bobura::type::locale::windia_file_encoder>::type
-        >
-        reader_set_type;
+        >;
 
-    typedef boost::mpl::at<bobura::common_type_list, bobura::type::path>::type path_type;
+    using path_type = boost::mpl::at<bobura::common_type_list, bobura::type::path>::type;
 
-    typedef
+    using load_from_file_type =
         bobura::load_save::load_from_file<
             model_type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type,
@@ -125,8 +123,7 @@ namespace
             boost::mpl::at<bobura::model_type_list, bobura::type::model::reader_selector>::type,
             reader_set_type,
             boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type
-        >
-        load_from_file_type;
+        >;
 
 
 }

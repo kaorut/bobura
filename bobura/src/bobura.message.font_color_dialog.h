@@ -36,13 +36,13 @@ namespace bobura { namespace message { namespace font_color_dialog
         // types
 
         //! The size type.
-        typedef Size size_type;
+        using size_type = Size;
 
         //! The list box type.
-        typedef ListBox list_box_type;
+        using list_box_type = ListBox;
 
         //! The update type.
-        typedef std::function<void ()> update_type;
+        using update_type = std::function<void ()>;
 
 
         // constructors and destructor
@@ -106,25 +106,25 @@ namespace bobura { namespace message { namespace font_color_dialog
         // types
 
         //! The integer size type.
-        typedef IntSize int_size_type;
+        using int_size_type = IntSize;
 
         //! The canvas type.
-        typedef Canvas canvas_type;
+        using canvas_type = Canvas;
 
         //! The font type.
-        typedef typename Canvas::font_type font_type;
+        using font_type = typename Canvas::font_type;
 
         //! The color type.
-        typedef typename Canvas::color_type color_type;
+        using color_type = typename Canvas::color_type;
 
         //! The internal font and color type.
-        typedef std::pair<boost::optional<font_type>, boost::optional<color_type>> internal_font_color_type;
+        using internal_font_color_type = std::pair<boost::optional<font_type>, boost::optional<color_type>>;
 
         //! The dimension type.
-        typedef typename Canvas::dimension_type dimension_type;
+        using dimension_type = typename Canvas::dimension_type;
 
         //! The message catalog type.
-        typedef MessageCatalog message_catalog_type;
+        using message_catalog_type = MessageCatalog;
 
 
         // constructors and destructor
@@ -203,21 +203,21 @@ namespace bobura { namespace message { namespace font_color_dialog
     private:
         // types
 
-        typedef typename canvas_type::string_type string_type;
+        using string_type = typename canvas_type::string_type;
 
-        typedef typename canvas_type::position_type position_type;
+        using position_type = typename canvas_type::position_type;
 
-        typedef typename tetengo2::gui::position<position_type>::left_type left_type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
-        typedef typename tetengo2::gui::position<position_type>::top_type top_type;
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
-        typedef typename tetengo2::gui::dimension<dimension_type>::width_type width_type;
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
-        typedef typename width_type::value_type size_type;
+        using size_type = typename width_type::value_type;
 
-        typedef typename canvas_type::background_type background_type;
+        using background_type = typename canvas_type::background_type;
 
-        typedef typename canvas_type::solid_background_type solid_background_type;
+        using solid_background_type = typename canvas_type::solid_background_type;
 
 
         // variables
@@ -274,31 +274,31 @@ namespace bobura { namespace message { namespace font_color_dialog
         // types
 
         //! The size type.
-        typedef Size size_type;
+        using size_type = Size;
 
         //! The dialog type.
-        typedef Dialog dialog_type;
+        using dialog_type = Dialog;
 
         //! The font dialog type.
-        typedef FontDialog font_dialog_type;
+        using font_dialog_type = FontDialog;
 
         //! The canvas type.
-        typedef Canvas canvas_type;
+        using canvas_type = Canvas;
 
         //! The font type.
-        typedef typename Canvas::font_type font_type;
+        using font_type = typename Canvas::font_type;
 
         //! The color type.
-        typedef typename Canvas::color_type color_type;
+        using color_type = typename Canvas::color_type;
 
         //! The internal font and color type.
-        typedef std::pair<boost::optional<font_type>, boost::optional<color_type>> internal_font_color_type;
+        using internal_font_color_type = std::pair<boost::optional<font_type>, boost::optional<color_type>>;
 
         //! The message catalog type.
-        typedef MessageCatalog message_catalog_type;
+        using message_catalog_type = MessageCatalog;
 
         //! The update type.
-        typedef std::function<void ()> update_type;
+        using update_type = std::function<void ()>;
 
 
         // constructors and destructor
@@ -384,31 +384,31 @@ namespace bobura { namespace message { namespace font_color_dialog
         // types
 
         //! The size type.
-        typedef Size size_type;
+        using size_type = Size;
 
         //! The dialog type.
-        typedef Dialog dialog_type;
+        using dialog_type = Dialog;
 
         //! The color dialog type.
-        typedef ColorDialog color_dialog_type;
+        using color_dialog_type = ColorDialog;
 
         //! The canvas type.
-        typedef Canvas canvas_type;
+        using canvas_type = Canvas;
 
         //! The font type.
-        typedef typename Canvas::font_type font_type;
+        using font_type = typename Canvas::font_type;
 
         //! The color type.
-        typedef typename Canvas::color_type color_type;
+        using color_type = typename Canvas::color_type;
 
         //! The internal font and color type.
-        typedef std::pair<boost::optional<font_type>, boost::optional<color_type>> internal_font_color_type;
+        using internal_font_color_type = std::pair<boost::optional<font_type>, boost::optional<color_type>>;
 
         //! The message catalog type.
-        typedef MessageCatalog message_catalog_type;
+        using message_catalog_type = MessageCatalog;
 
         //! The update type.
-        typedef std::function<void ()> update_type;
+        using update_type = std::function<void ()>;
 
 
         // constructors and destructor
@@ -490,7 +490,7 @@ namespace bobura { namespace message { namespace font_color_dialog
         // types
 
         //! The dialog type.
-        typedef Dialog dialog_type;
+        using dialog_type = Dialog;
 
 
         // constructors and destructor
@@ -540,7 +540,7 @@ namespace bobura { namespace message { namespace font_color_dialog
         // types
 
         //! The dialog type.
-        typedef Dialog dialog_type;
+        using dialog_type = Dialog;
 
 
         // constructors and destructor

@@ -33,7 +33,7 @@ namespace
 {
     // types
 
-    typedef boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type settings_type;
+    using settings_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type;
 
 
     // functions
@@ -60,8 +60,8 @@ namespace
 
     void set_locale(const boost::filesystem::path& message_directory_path)
     {
-        typedef
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::messages_facet>::type messages_facet_type;
+        using messages_facet_type =
+            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::messages_facet>::type;
         auto p_messages_facet =
             tetengo2::stdalt::make_unique<messages_facet_type>(
                 message_directory_path, std::locale(ui_locale_name().c_str())
@@ -100,7 +100,7 @@ TETENGO2_STDALT_NOEXCEPT
 {
     tetengo2::suppress_unused_variable_warning(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 
-    typedef boost::mpl::at<bobura::ui_type_list, bobura::type::ui::alert>::type alert_type;
+    using alert_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::alert>::type;
 
     try
     {

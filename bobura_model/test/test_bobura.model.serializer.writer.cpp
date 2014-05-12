@@ -22,17 +22,15 @@ namespace
 {
     // types
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type
-        timetable_type;
+    using timetable_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type;
 
-    typedef
+    using writer_type =
         boost::mpl::at<
             test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::writer
-        >::type
-        writer_type;
+        >::type;
 
-    typedef writer_type::path_type path_type;
+    using path_type = writer_type::path_type;
 
     class concrete_writer : public writer_type
     {

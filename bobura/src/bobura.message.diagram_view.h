@@ -71,22 +71,22 @@ namespace bobura { namespace message { namespace diagram_view
         // types
 
         //! The property bar type.
-        typedef PropertyBar property_bar_type;
+        using property_bar_type = PropertyBar;
 
         //! The model type.
-        typedef Model model_type;
+        using model_type = Model;
 
         //! The timetable type.
-        typedef typename model_type::timetable_type timetable_type;
+        using timetable_type = typename model_type::timetable_type;
 
         //! The station location type.
-        typedef typename timetable_type::station_location_type station_location_type;
+        using station_location_type = typename timetable_type::station_location_type;
 
         //! The station grade type set type.
-        typedef StationGradeTypeSet station_grade_type_set_type;
+        using station_grade_type_set_type = StationGradeTypeSet;
 
         //! The message catalog type.
-        typedef MessageCatalog message_catalog_type;
+        using message_catalog_type = MessageCatalog;
 
 
         // constructors and destructor
@@ -133,15 +133,15 @@ namespace bobura { namespace message { namespace diagram_view
     private:
         // types
 
-        typedef typename property_bar_type::map_box_type::string_type string_type;
+        using string_type = typename property_bar_type::map_box_type::string_type;
 
-        typedef typename property_bar_type::map_box_type::value_type value_type;
+        using value_type = typename property_bar_type::map_box_type::value_type;
 
-        typedef typename station_location_type::station_type station_type;
+        using station_type = typename station_location_type::station_type;
 
-        typedef typename station_type::grade_type grade_type;
+        using grade_type = typename station_type::grade_type;
 
-        typedef typename station_location_type::operating_distance_type operating_distance_type;
+        using operating_distance_type = typename station_location_type::operating_distance_type;
 
 
         // variables
@@ -208,25 +208,25 @@ namespace bobura { namespace message { namespace diagram_view
         // types
 
         //! The property bar type.
-        typedef PropertyBar property_bar_type;
+        using property_bar_type = PropertyBar;
 
         //! The model type.
-        typedef Model model_type;
+        using model_type = Model;
 
         //! The timetable type.
-        typedef typename model_type::timetable_type timetable_type;
+        using timetable_type = typename model_type::timetable_type;
 
         //! The train type.
-        typedef typename timetable_type::train_type train_type;
+        using train_type = typename timetable_type::train_type;
 
         //! The stop index type.
-        typedef typename train_type::stops_type::size_type stop_index_type;
+        using stop_index_type = typename train_type::stops_type::size_type;
 
         //! The station grade type set type.
-        typedef StationGradeTypeSet station_grade_type_set_type;
+        using station_grade_type_set_type = StationGradeTypeSet;
 
         //! The message catalog type.
-        typedef MessageCatalog message_catalog_type;
+        using message_catalog_type = MessageCatalog;
 
 
         // constructors and destructor
@@ -291,17 +291,17 @@ namespace bobura { namespace message { namespace diagram_view
     private:
         // types
 
-        typedef typename property_bar_type::map_box_type::string_type string_type;
+        using string_type = typename property_bar_type::map_box_type::string_type;
 
-        typedef typename property_bar_type::map_box_type::value_type value_type;
+        using value_type = typename property_bar_type::map_box_type::value_type;
 
-        typedef typename train_type::kind_index_type kind_index_type;
+        using kind_index_type = typename train_type::kind_index_type;
 
-        typedef typename train_type::stop_type stop_type;
+        using stop_type = typename train_type::stop_type;
 
-        typedef typename train_type::stops_type::const_iterator stop_iterator;
+        using stop_iterator = typename train_type::stops_type::const_iterator;
 
-        typedef typename stop_type::time_type time_type;
+        using time_type = typename stop_type::time_type;
 
 
         // variables
@@ -560,7 +560,7 @@ namespace bobura { namespace message { namespace diagram_view
         // types
 
         //! The property bar type.
-        typedef PropertyBar property_bar_type;
+        using property_bar_type = PropertyBar;
 
 
         // constructors and destructor
@@ -590,9 +590,9 @@ namespace bobura { namespace message { namespace diagram_view
     private:
         // types
 
-        typedef typename property_bar_type::map_box_type::string_type string_type;
+        using string_type = typename property_bar_type::map_box_type::string_type;
 
-        typedef typename property_bar_type::map_box_type::value_type value_type;
+        using value_type = typename property_bar_type::map_box_type::value_type;
 
 
         // variables

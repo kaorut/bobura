@@ -53,60 +53,57 @@ namespace bobura { namespace model { namespace serializer
         // types
 
         //! The iterator type.
-        typedef ForwardIterator iterator;
+        using iterator = ForwardIterator;
 
         //! The timetable type.
-        typedef Timetable timetable_type;
+        using timetable_type = Timetable;
 
         //! The base type.
-        typedef reader<iterator, timetable_type> base_type;
+        using base_type = reader<iterator, timetable_type>;
 
         //! The pull parser type.
-        typedef PullParser pull_parser_type;
+        using pull_parser_type = PullParser;
 
         //! The station grade type set type.
-        typedef StationGradeTypeSet station_grade_type_set_type;
+        using station_grade_type_set_type = StationGradeTypeSet;
 
         //! The OuDia diagram selecting type.
-        typedef SelectOuDiaDiagram select_oudia_diagram_type;
+        using select_oudia_diagram_type = SelectOuDiaDiagram;
 
         //! The abstract window type.
-        typedef typename select_oudia_diagram_type::abstract_window_type abstract_window_type;
+        using abstract_window_type = typename select_oudia_diagram_type::abstract_window_type;
 
         //! The string type.
-        typedef typename select_oudia_diagram_type::string_type string_type;
+        using string_type = typename select_oudia_diagram_type::string_type;
 
         //! The message catalog type.
-        typedef typename select_oudia_diagram_type::message_catalog_type message_catalog_type;
+        using message_catalog_type = typename select_oudia_diagram_type::message_catalog_type;
 
         //! The UTF-8 encoder type.
-        typedef Utf8Encoder utf8_encoder_type;
+        using utf8_encoder_type = Utf8Encoder;
 
         //! The CP932 encoder type.
-        typedef Cp932Encoder cp932_encoder_type;
+        using cp932_encoder_type = Cp932Encoder;
 
         //! The reader type.
-        typedef reader<iterator, timetable_type> reader_type;
+        using reader_type = reader<iterator, timetable_type>;
 
         //! The JSON reader type.
-        typedef
-            json_reader<pull_parser_type, timetable_type, station_grade_type_set_type, utf8_encoder_type>
-            json_reader_type;
+        using json_reader_type =
+            json_reader<pull_parser_type, timetable_type, station_grade_type_set_type, utf8_encoder_type>;
 
         //! The bzip2 reader type.
-        typedef bzip2_reader<iterator, timetable_type> bzip2_reader_type;
+        using bzip2_reader_type = bzip2_reader<iterator, timetable_type>;
 
         //! The OuDia reader type.
-        typedef
+        using oudia_reader_type =
             oudia_reader<
                 iterator, timetable_type, station_grade_type_set_type, select_oudia_diagram_type, cp932_encoder_type
-            >
-            oudia_reader_type;
+            >;
 
         //! The WinDIA reader type.
-        typedef
-            windia_reader<iterator, timetable_type, station_grade_type_set_type, cp932_encoder_type>
-            windia_reader_type;
+        using windia_reader_type =
+            windia_reader<iterator, timetable_type, station_grade_type_set_type, cp932_encoder_type>;
 
 
         // static functions

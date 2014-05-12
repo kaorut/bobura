@@ -22,42 +22,38 @@ namespace
 {
     // types
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type
-        station_type;
+    using station_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station_location>::type
-        station_location_type;
+    using station_location_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station_location>::type;
 
-    typedef boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::time>::type time_type;
+    using time_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::time>::type;
 
-    typedef boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::stop>::type stop_type;
+    using stop_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::stop>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train>::type train_type;
+    using train_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train>::type;
 
-    typedef
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type
-        timetable_type;
+    using timetable_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type;
 
-    typedef timetable_type::font_color_set_type font_color_set_type;
+    using font_color_set_type = timetable_type::font_color_set_type;
     
-    typedef font_color_set_type::font_color_type font_color_type;
+    using font_color_type = font_color_set_type::font_color_type;
 
-    typedef font_color_type::font_type font_type;
+    using font_type = font_color_type::font_type;
 
-    typedef font_color_type::color_type color_type;
+    using color_type = font_color_type::color_type;
 
-    typedef boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type string_type;
+    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
-    typedef
+    using reader_type =
         boost::mpl::at<
             test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::json_reader
-        >::type
-        reader_type;
+        >::type;
 
-    typedef reader_type::error_type error_type;
+    using error_type = reader_type::error_type;
 
 
     // variables
