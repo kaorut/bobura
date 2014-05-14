@@ -11,7 +11,7 @@
 
 #include <boost/mpl/at.hpp>
 
-#include <tetengo2/stdalt.h>
+#include <tetengo2.h>
 
 #include "bobura.basic_type_list.h"
 

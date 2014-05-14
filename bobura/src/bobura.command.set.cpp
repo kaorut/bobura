@@ -11,7 +11,7 @@
 
 #include <boost/mpl/at.hpp>
 
-#include <tetengo2/stdalt.h>
+#include <tetengo2.h>
 
 #include "bobura.command.about.h"
 #include "bobura.command.command_base.h"

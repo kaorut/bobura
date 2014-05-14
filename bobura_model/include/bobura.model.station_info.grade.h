@@ -11,8 +11,7 @@
 
 #include <boost/noncopyable.hpp>
 
-#include <tetengo2/stdalt.h>
-#include <tetengo2/text.h>
+#include <tetengo2.h>
 
 
 namespace bobura { namespace model { namespace station_info

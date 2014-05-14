@@ -12,7 +12,7 @@
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/pair.hpp>
 
-#include <tetengo2/meta/assoc_list.h>
+#include <tetengo2.h>
 
 #include "bobura.basic_type_list.h"
 #include "bobura.command.command_base.h"

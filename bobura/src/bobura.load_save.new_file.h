@@ -9,7 +9,7 @@
 #if !defined(BOBURA_LOADSAVE_NEWFILE_H)
 #define BOBURA_LOADSAVE_NEWFILE_H
 
-#include <tetengo2/stdalt.h>
+#include <tetengo2.h>
 
 
 namespace bobura { namespace load_save

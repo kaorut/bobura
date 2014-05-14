@@ -12,7 +12,7 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/utility.hpp>
 
-#include <tetengo2/text.h>
+#include <tetengo2.h>
 
 #include "test_bobura.model.type_list.h"
 

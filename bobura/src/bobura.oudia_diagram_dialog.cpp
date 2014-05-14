@@ -16,9 +16,8 @@
 #include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2/gui/measure.h>
-#include <tetengo2/stdalt.h>
-#include <tetengo2/text.h>
+#include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include "bobura.message.type_list.h"
 #include "bobura.type_list.h"

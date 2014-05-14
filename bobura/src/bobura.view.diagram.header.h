@@ -14,9 +14,8 @@
 #include <memory>
 #include <utility>
 
-#include <tetengo2/gui/measure.h>
-#include <tetengo2/stdalt.h>
-#include <tetengo2/text.h>
+#include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include "bobura.view.diagram.item.h"
 

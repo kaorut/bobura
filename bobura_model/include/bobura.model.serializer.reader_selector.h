@@ -18,8 +18,7 @@
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2/stdalt.h>
-#include <tetengo2/utility.h>
+#include <tetengo2.h>
 
 #include "bobura.model.serializer.reader.h"
 

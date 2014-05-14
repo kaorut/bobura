@@ -20,8 +20,7 @@
 #include <boost/optional.hpp>
 #include <boost/variant.hpp>
 
-#include <tetengo2/stdalt.h>
-#include <tetengo2/text.h>
+#include <tetengo2.h>
 
 #include "bobura.model.serializer.reader.h"
 

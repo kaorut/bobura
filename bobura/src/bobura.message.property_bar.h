@@ -9,7 +9,7 @@
 #if !defined(BOBURA_MESSAGE_PROPERTYBAR_H)
 #define BOBURA_MESSAGE_PROPERTYBAR_H
 
-#include <tetengo2/utility.h>
+#include <tetengo2.h>
 
 
 namespace bobura { namespace message { namespace property_bar

@@ -8,10 +8,8 @@
 
 #include <string>
 
+#include <tetengo2.h>
 #include <tetengo2/detail/windows/encoding.h>
-#include <tetengo2/text/encoder.h>
-#include <tetengo2/text/encoding/ascii.h>
-#include <tetengo2/text/encoding/locale.h>
 
 #include "setup.encode.h"
 
