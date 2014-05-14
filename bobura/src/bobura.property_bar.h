@@ -92,7 +92,7 @@ namespace bobura
             \brief Destroys the property bar.
         */
         virtual ~property_bar()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
         // functions

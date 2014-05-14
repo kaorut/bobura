@@ -60,7 +60,7 @@ namespace
         }
 
         virtual ~oudia_diagram_dialog_type()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
         const string_type& file_name()
         const

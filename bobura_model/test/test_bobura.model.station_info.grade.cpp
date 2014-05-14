@@ -44,7 +44,7 @@ namespace
         {}
 
         virtual ~concrete_grade()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
     private:
         string_type m_name;

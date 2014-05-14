@@ -61,7 +61,7 @@ namespace
         }
 
         virtual ~main_window_type()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
         void set_title(const boost::optional<string_type>& document_name, const bool changed)
         {

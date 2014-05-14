@@ -123,7 +123,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the station line.
         */
         virtual ~station_line()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
         // functions
@@ -342,7 +342,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the station line list.
         */
         virtual ~station_line_list()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
         // functions
