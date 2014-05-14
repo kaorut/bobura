@@ -15,9 +15,9 @@
 
 #include <boost/rational.hpp>
 
-#include <tetengo2.gui.measure.h>
-#include <tetengo2.stdalt.h>
-#include <tetengo2.utility.h>
+#include <tetengo2/gui/measure.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/utility.h>
 
 
 namespace bobura { namespace message { namespace diagram_picture_box

@@ -11,8 +11,8 @@
 
 #include <boost/noncopyable.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.utility.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/utility.h>
 
 
 namespace bobura { namespace view { namespace diagram

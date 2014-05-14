@@ -20,8 +20,8 @@
 #include <boost/rational.hpp>
 #include <boost/utility.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
 
 #include "bobura.model.serializer.writer.h"
 #include "bobura.model.station_info.grade.h"

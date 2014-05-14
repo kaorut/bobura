@@ -17,7 +17,7 @@
 
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2.stdalt.h>
+#include <tetengo2/stdalt.h>
 
 #include "bobura.model.serializer.writer.h"
 

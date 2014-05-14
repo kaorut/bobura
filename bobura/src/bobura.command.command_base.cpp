@@ -6,8 +6,8 @@
     $Id$
 */
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.utility.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/utility.h>
 
 #include "bobura.command.command_base.h"
 

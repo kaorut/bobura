@@ -8,9 +8,9 @@
 
 #include <boost/mpl/at.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
-#include <tetengo2.utility.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+#include <tetengo2/utility.h>
 
 #include "bobura.command.open_www_tetengo_org.h"
 

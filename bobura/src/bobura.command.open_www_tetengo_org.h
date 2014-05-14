@@ -11,7 +11,7 @@
 
 #include <memory>
 
-#include <tetengo2.stdalt.h>
+#include <tetengo2/stdalt.h>
 
 #include "bobura.command.command_base.h"
 

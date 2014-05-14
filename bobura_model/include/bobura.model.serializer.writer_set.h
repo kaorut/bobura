@@ -15,7 +15,7 @@
 
 #include <boost/noncopyable.hpp>
 
-#include <tetengo2.stdalt.h>
+#include <tetengo2/stdalt.h>
 
 #include "bobura.model.serializer.bzip2_writer.h"
 #include "bobura.model.serializer.json_writer.h"

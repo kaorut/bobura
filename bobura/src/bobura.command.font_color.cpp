@@ -8,7 +8,7 @@
 
 #include <utility>
 
-#include <tetengo2.stdalt.h>
+#include <tetengo2/stdalt.h>
 
 #include "bobura.command.font_color.h"
 

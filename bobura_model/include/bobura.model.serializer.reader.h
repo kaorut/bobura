@@ -13,7 +13,7 @@
 
 #include <boost/noncopyable.hpp>
 
-#include <tetengo2.stdalt.h>
+#include <tetengo2/stdalt.h>
 
 
 namespace bobura { namespace model { namespace serializer

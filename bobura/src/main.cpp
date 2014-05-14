@@ -22,8 +22,8 @@
 #define OEMRESOURCE
 #include <Windows.h>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.utility.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/utility.h>
 
 #include "bobura.application.h"
 #include "bobura.type_list.h"

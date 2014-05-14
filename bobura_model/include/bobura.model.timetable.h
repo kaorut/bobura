@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/utility.hpp>
 
-#include <tetengo2.stdalt.h>
+#include <tetengo2/stdalt.h>
 
 
 namespace bobura { namespace model

@@ -25,9 +25,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/utility/string_ref.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
-#include <tetengo2.utility.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+#include <tetengo2/utility.h>
 
 #include "bobura.model.serializer.reader.h"
 

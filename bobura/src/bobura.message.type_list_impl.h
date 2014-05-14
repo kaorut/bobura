@@ -11,7 +11,7 @@
 
 #include <boost/mpl/pair.hpp>
 
-#include <tetengo2.meta.assoc_list.h>
+#include <tetengo2/meta/assoc_list.h>
 
 #include "bobura.message.about_dialog.h"
 #include "bobura.message.diagram_picture_box.h"

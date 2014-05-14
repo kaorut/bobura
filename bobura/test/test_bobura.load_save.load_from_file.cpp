@@ -12,9 +12,9 @@
 #include <boost/optional.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
-#include <tetengo2.utility.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+#include <tetengo2/utility.h>
 
 #include "bobura.model.serializer.select_oudia_diagram.h"
 #include "bobura.type_list.h"
