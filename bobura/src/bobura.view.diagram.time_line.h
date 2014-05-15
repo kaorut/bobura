@@ -17,9 +17,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/optional.hpp>
 
-#include <tetengo2.gui.measure.h>
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
+#include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include "bobura.view.diagram.item.h"
 #include "bobura.view.diagram.utility.h"
@@ -113,7 +112,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the time line.
         */
         virtual ~time_line()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
         // functions
@@ -300,7 +299,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the time line list.
         */
         virtual ~time_line_list()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
         // functions

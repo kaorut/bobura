@@ -12,9 +12,7 @@
 #include <boost/optional.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
-#include <tetengo2.utility.h>
+#include <tetengo2.h>
 
 #include "bobura.model.serializer.select_oudia_diagram.h"
 #include "bobura.type_list.h"
@@ -60,7 +58,7 @@ namespace
         }
 
         virtual ~oudia_diagram_dialog_type()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
         const string_type& file_name()
         const

@@ -12,8 +12,7 @@
 
 #include <boost/mpl/at.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
+#include <tetengo2.h>
 
 #include "bobura.main_window.h"
 #include "bobura.type_list.h"

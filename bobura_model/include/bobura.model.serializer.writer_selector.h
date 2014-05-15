@@ -17,7 +17,7 @@
 
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2.stdalt.h>
+#include <tetengo2.h>
 
 #include "bobura.model.serializer.writer.h"
 
@@ -77,7 +77,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the writer_selector.
         */
         virtual ~writer_selector()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
     private:

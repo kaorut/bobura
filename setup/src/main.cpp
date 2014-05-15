@@ -20,8 +20,7 @@
 #include <Windows.h>
 #include <CommCtrl.h>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.utility.h>
+#include <tetengo2.h>
 
 #include "setup.encode.h"
 

@@ -25,9 +25,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/utility/string_ref.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
-#include <tetengo2.utility.h>
+#include <tetengo2.h>
 
 #include "bobura.model.serializer.reader.h"
 
@@ -99,7 +97,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the oudia_reader.
         */
         virtual ~oudia_reader()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
     private:
@@ -151,7 +149,7 @@ namespace bobura { namespace model { namespace serializer
         {
         public:
             virtual ~state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
             bool parse(const string_type& line)
             {
@@ -196,7 +194,7 @@ namespace bobura { namespace model { namespace serializer
         {
         public:
             virtual ~unknown_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
         };
 
@@ -209,7 +207,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~initial_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
         private:
             timetable_type& m_timetable;
@@ -234,7 +232,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~rosen_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
         private:
             timetable_type& m_timetable;
@@ -262,7 +260,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~eki_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
         private:
             static const station_grade_type& to_station_grade(
@@ -358,7 +356,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~ressyasyubetsu_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
         private:
             using weight_type = typename train_kind_type::weight_type;
@@ -446,7 +444,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~dia_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
         private:
             string_type& m_current_diagram_name;
@@ -471,7 +469,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~kudari_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
         private:
             direction_type& m_direction;
@@ -494,7 +492,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~nobori_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
         private:
             direction_type& m_direction;
@@ -523,7 +521,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~ressya_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
         private:
             using stop_type = typename train_type::stop_type;

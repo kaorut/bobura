@@ -14,16 +14,13 @@ SUBDIRS = \
 EXTRA_DIST = bobura.sln bobura_config.h-original TODO Doxyfile
 
 .PHONY: lint
-lint: lint-includes lint-test-cases lint-typedefs
+lint: lint-includes lint-test-cases
 
 lint-includes: $(top_srcdir)/lib/tetengo2/tools
 	$(top_srcdir)/lib/tetengo2/tools/check_includes.sh $(top_srcdir)
 
 lint-test-cases: $(top_srcdir)/lib/tetengo2/tools
 	$(top_srcdir)/lib/tetengo2/tools/check_test_cases.sh $(top_srcdir) silent
-
-lint-typedefs: $(top_srcdir)/lib/tetengo2/tools
-	$(top_srcdir)/lib/tetengo2/tools/check_typedefs.sh $(top_srcdir)
 
 $(top_srcdir)/lib/tetengo2/tools:
 	git submodule update --init

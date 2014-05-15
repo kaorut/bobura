@@ -6,7 +6,7 @@
     $Id$
 */
 
-#include <tetengo2.stdalt.h>
+#include <tetengo2.h>
 
 #include "bobura.command.new_file.h"
 

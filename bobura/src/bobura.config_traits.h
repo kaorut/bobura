@@ -9,11 +9,7 @@
 #if !defined(BOBURA_CONFIGTRAITS_H)
 #define BOBURA_CONFIGTRAITS_H
 
-#include <tetengo2.config.cached_config.h>
-#include <tetengo2.config.config_base.h>
-#include <tetengo2.config.config_list.h>
-#include <tetengo2.config.persistent_config.h>
-#include <tetengo2.config.temporary_config.h>
+#include <tetengo2.h>
 
 
 namespace bobura

@@ -15,7 +15,7 @@
 
 #include <boost/optional.hpp>
 
-#include <tetengo2.stdalt.h>
+#include <tetengo2.h>
 
 
 namespace bobura

@@ -18,8 +18,7 @@
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.utility.h>
+#include <tetengo2.h>
 
 #include "bobura.model.serializer.reader.h"
 
@@ -72,7 +71,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the reader_selector.
         */
         virtual ~reader_selector()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
     private:

@@ -17,8 +17,7 @@
 #include <boost/optional.hpp>
 #include <boost/system/system_error.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
+#include <tetengo2.h>
 
 
 namespace bobura { namespace load_save

@@ -14,7 +14,7 @@
 #include <boost/optional.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.text.h>
+#include <tetengo2.h>
 
 #include "bobura.model.serializer.select_oudia_diagram.h"
 #include "test_bobura.model.type_list.h"

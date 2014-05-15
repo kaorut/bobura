@@ -23,7 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/utility.hpp>
 
-#include <tetengo2.text.h>
+#include <tetengo2.h>
 
 
 namespace bobura { namespace message { namespace diagram_view

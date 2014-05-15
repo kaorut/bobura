@@ -23,9 +23,8 @@
 #include <boost/program_options.hpp>
 #include <boost/variant.hpp>
 
-#include <tetengo2.gui.measure.h>
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
+#include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 
 namespace bobura

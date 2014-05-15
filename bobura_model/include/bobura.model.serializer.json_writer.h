@@ -20,8 +20,7 @@
 #include <boost/rational.hpp>
 #include <boost/utility.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
+#include <tetengo2.h>
 
 #include "bobura.model.serializer.writer.h"
 #include "bobura.model.station_info.grade.h"
@@ -65,7 +64,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the json_writer.
         */
         virtual ~json_writer()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
     private:

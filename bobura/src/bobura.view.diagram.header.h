@@ -14,9 +14,8 @@
 #include <memory>
 #include <utility>
 
-#include <tetengo2.gui.measure.h>
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
+#include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include "bobura.view.diagram.item.h"
 
@@ -108,7 +107,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the company and line name header.
         */
         virtual ~company_line_name_header()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
         // functions
@@ -249,7 +248,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the note header.
         */
         virtual ~note_header()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
         // functions
@@ -423,7 +422,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the header.
         */
         virtual ~header()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
         // functions

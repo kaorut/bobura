@@ -20,8 +20,7 @@
 #include <boost/optional.hpp>
 #include <boost/variant.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
+#include <tetengo2.h>
 
 #include "bobura.model.serializer.reader.h"
 
@@ -73,7 +72,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the json_reader.
         */
         virtual ~json_reader()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
     private:

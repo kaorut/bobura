@@ -20,8 +20,7 @@
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/utility/string_ref.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
+#include <tetengo2.h>
 
 #include "bobura.model.serializer.reader.h"
 
@@ -70,7 +69,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the bzip2_reader.
         */
         virtual ~bzip2_reader()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
     private:

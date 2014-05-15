@@ -12,47 +12,47 @@
 #include <boost/mpl/pair.hpp>
 
 #if defined(USE_TETENGO2_DETAIL_TYPES_FOR_APPLICATION)
-#   include <tetengo2.detail.windows.alert.h>
-#   include <tetengo2.detail.windows.common_dialog.h>
-#   include <tetengo2.detail.windows.config.h>
-#   include <tetengo2.detail.windows.cursor.h>
-#   include <tetengo2.detail.windows.direct2d.drawing.h>
-#   include <tetengo2.detail.windows.encoding.h>
-#   include <tetengo2.detail.windows.gdiplus.drawing.h>
-#   include <tetengo2.detail.windows.gdiplus.gui_fixture.h>
-#   include <tetengo2.detail.windows.gui_fixture.h>
-#   include <tetengo2.detail.windows.icon.h>
-#   include <tetengo2.detail.windows.menu.h>
-#   include <tetengo2.detail.windows.message_handler.h>
-#   include <tetengo2.detail.windows.message_loop.h>
-#   include <tetengo2.detail.windows.mouse_capture.h>
-#   include <tetengo2.detail.windows.scroll.h>
-#   include <tetengo2.detail.windows.shell.h>
-#   include <tetengo2.detail.windows.system_color.h>
-#   include <tetengo2.detail.windows.timer.h>
-#   include <tetengo2.detail.windows.unit.h>
-#   include <tetengo2.detail.windows.virtual_key.h>
-#   include <tetengo2.detail.windows.widget.h>
+#   include <tetengo2/detail/windows/alert.h>
+#   include <tetengo2/detail/windows/common_dialog.h>
+#   include <tetengo2/detail/windows/config.h>
+#   include <tetengo2/detail/windows/cursor.h>
+#   include <tetengo2/detail/windows/direct2d/drawing.h>
+#   include <tetengo2/detail/windows/encoding.h>
+#   include <tetengo2/detail/windows/gdiplus/drawing.h>
+#   include <tetengo2/detail/windows/gdiplus/gui_fixture.h>
+#   include <tetengo2/detail/windows/gui_fixture.h>
+#   include <tetengo2/detail/windows/icon.h>
+#   include <tetengo2/detail/windows/menu.h>
+#   include <tetengo2/detail/windows/message_handler.h>
+#   include <tetengo2/detail/windows/message_loop.h>
+#   include <tetengo2/detail/windows/mouse_capture.h>
+#   include <tetengo2/detail/windows/scroll.h>
+#   include <tetengo2/detail/windows/shell.h>
+#   include <tetengo2/detail/windows/system_color.h>
+#   include <tetengo2/detail/windows/timer.h>
+#   include <tetengo2/detail/windows/unit.h>
+#   include <tetengo2/detail/windows/virtual_key.h>
+#   include <tetengo2/detail/windows/widget.h>
 #else
-#   include <tetengo2.detail.stub.alert.h>
-#   include <tetengo2.detail.stub.common_dialog.h>
-#   include <tetengo2.detail.stub.config.h>
-#   include <tetengo2.detail.stub.cursor.h>
-#   include <tetengo2.detail.stub.drawing.h>
-#   include <tetengo2.detail.stub.encoding.h>
-#   include <tetengo2.detail.stub.gui_fixture.h>
-#   include <tetengo2.detail.stub.icon.h>
-#   include <tetengo2.detail.stub.menu.h>
-#   include <tetengo2.detail.stub.message_handler.h>
-#   include <tetengo2.detail.stub.message_loop.h>
-#   include <tetengo2.detail.stub.mouse_capture.h>
-#   include <tetengo2.detail.stub.scroll.h>
-#   include <tetengo2.detail.stub.shell.h>
-#   include <tetengo2.detail.stub.system_color.h>
-#   include <tetengo2.detail.stub.timer.h>
-#   include <tetengo2.detail.stub.unit.h>
-#   include <tetengo2.detail.stub.virtual_key.h>
-#   include <tetengo2.detail.stub.widget.h>
+#   include <tetengo2/detail/stub/alert.h>
+#   include <tetengo2/detail/stub/common_dialog.h>
+#   include <tetengo2/detail/stub/config.h>
+#   include <tetengo2/detail/stub/cursor.h>
+#   include <tetengo2/detail/stub/drawing.h>
+#   include <tetengo2/detail/stub/encoding.h>
+#   include <tetengo2/detail/stub/gui_fixture.h>
+#   include <tetengo2/detail/stub/icon.h>
+#   include <tetengo2/detail/stub/menu.h>
+#   include <tetengo2/detail/stub/message_handler.h>
+#   include <tetengo2/detail/stub/message_loop.h>
+#   include <tetengo2/detail/stub/mouse_capture.h>
+#   include <tetengo2/detail/stub/scroll.h>
+#   include <tetengo2/detail/stub/shell.h>
+#   include <tetengo2/detail/stub/system_color.h>
+#   include <tetengo2/detail/stub/timer.h>
+#   include <tetengo2/detail/stub/unit.h>
+#   include <tetengo2/detail/stub/virtual_key.h>
+#   include <tetengo2/detail/stub/widget.h>
 #endif
 
 

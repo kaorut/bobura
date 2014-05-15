@@ -10,7 +10,7 @@
 
 #include <boost/optional.hpp>
 
-#include <tetengo2.stdalt.h>
+#include <tetengo2.h>
 
 #include "bobura.command.load_from_file.h"
 

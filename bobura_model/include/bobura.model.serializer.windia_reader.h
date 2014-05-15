@@ -24,9 +24,7 @@
 #include <boost/utility.hpp>
 #include <boost/utility/string_ref.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
-#include <tetengo2.utility.h>
+#include <tetengo2.h>
 
 #include "bobura.model.serializer.reader.h"
 
@@ -72,7 +70,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the windia_reader.
         */
         virtual ~windia_reader()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
     private:
@@ -104,7 +102,7 @@ namespace bobura { namespace model { namespace serializer
         {
         public:
             virtual ~state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
             virtual bool parse(const string_type& line)
             = 0;
@@ -115,7 +113,7 @@ namespace bobura { namespace model { namespace serializer
         {
         public:
             virtual ~initial_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
             virtual bool parse(const string_type& line)
             override
@@ -136,7 +134,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~windia_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
             virtual bool parse(const string_type& line)
             override
@@ -160,7 +158,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~station_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
             virtual bool parse(const string_type& line)
             override
@@ -230,7 +228,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~line_kind_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
             virtual bool parse(const string_type& line)
             override
@@ -376,7 +374,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~train_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
             virtual bool parse(const string_type& line)
             override
@@ -596,7 +594,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~down_train_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
         private:
             virtual direction_type direction_impl()
@@ -624,7 +622,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~up_train_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
         private:
             virtual direction_type direction_impl()

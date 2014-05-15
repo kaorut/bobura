@@ -14,7 +14,7 @@
 
 #include <boost/optional.hpp>
 
-#include <tetengo2.stdalt.h>
+#include <tetengo2.h>
 
 #include "bobura.command.train_kind.h"
 

@@ -15,8 +15,7 @@
 #include <boost/iostreams/filter/bzip2.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
 
-#include <tetengo2.stdalt.h>
-#include <tetengo2.text.h>
+#include <tetengo2.h>
 
 #include "bobura.model.serializer.writer.h"
 
@@ -66,7 +65,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the bzip2 writer.
         */
         virtual ~bzip2_writer()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION
+        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
 
 
     private:

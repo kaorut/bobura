@@ -13,7 +13,7 @@
 #include <stdexcept>
 #include <utility>
 
-#include <tetengo2.stdalt.h>
+#include <tetengo2.h>
 
 
 namespace bobura
