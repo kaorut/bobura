@@ -16,7 +16,7 @@
 
 #include <tetengo2.h>
 
-#include "bobura.model.serializer.select_oudia_diagram.h"
+#include <bobura/model/serializer/select_oudia_diagram.h>
 #include "test_bobura.model.type_list.h"
 
 

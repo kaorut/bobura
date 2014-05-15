@@ -22,7 +22,7 @@
 
 #include <tetengo2.h>
 
-#include "bobura.model.serializer.reader.h"
+#include <bobura/model/serializer/reader.h>
 
 
 namespace bobura { namespace model { namespace serializer

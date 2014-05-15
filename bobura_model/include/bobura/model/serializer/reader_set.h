@@ -17,12 +17,12 @@
 
 #include <tetengo2.h>
 
-#include "bobura.model.serializer.bzip2_reader.h"
-#include "bobura.model.serializer.json_reader.h"
-#include "bobura.model.serializer.oudia_reader.h"
-#include "bobura.model.serializer.reader.h"
-#include "bobura.model.serializer.reader_selector.h"
-#include "bobura.model.serializer.windia_reader.h"
+#include <bobura/model/serializer/bzip2_reader.h>
+#include <bobura/model/serializer/json_reader.h>
+#include <bobura/model/serializer/oudia_reader.h>
+#include <bobura/model/serializer/reader.h>
+#include <bobura/model/serializer/reader_selector.h>
+#include <bobura/model/serializer/windia_reader.h>
 
 
 namespace bobura { namespace model { namespace serializer

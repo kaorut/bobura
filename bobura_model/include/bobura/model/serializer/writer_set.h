@@ -17,10 +17,10 @@
 
 #include <tetengo2.h>
 
-#include "bobura.model.serializer.bzip2_writer.h"
-#include "bobura.model.serializer.json_writer.h"
-#include "bobura.model.serializer.writer.h"
-#include "bobura.model.serializer.writer_selector.h"
+#include <bobura/model/serializer/bzip2_writer.h>
+#include <bobura/model/serializer/json_writer.h>
+#include <bobura/model/serializer/writer.h>
+#include <bobura/model/serializer/writer_selector.h>
 
 
 namespace bobura { namespace model { namespace serializer

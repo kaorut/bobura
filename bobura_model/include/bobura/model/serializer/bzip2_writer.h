@@ -17,7 +17,7 @@
 
 #include <tetengo2.h>
 
-#include "bobura.model.serializer.writer.h"
+#include <bobura/model/serializer/writer.h>
 
 
 namespace bobura { namespace model { namespace serializer
