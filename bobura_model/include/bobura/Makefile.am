@@ -2,39 +2,40 @@
 # Copyright (C) 2007-2014 kaoru
 # $Id$
 
-headers = \
-    bobura.model.message.timetable_observer_set.h \
-    bobura.model.serializer.bzip2_reader.h \
-    bobura.model.serializer.bzip2_writer.h \
-    bobura.model.serializer.json_reader.h \
-    bobura.model.serializer.json_writer.h \
-    bobura.model.serializer.oudia_reader.h \
-    bobura.model.serializer.select_oudia_diagram.h \
-    bobura.model.serializer.reader.h \
-    bobura.model.serializer.reader_selector.h \
-    bobura.model.serializer.reader_set.h \
-    bobura.model.serializer.windia_reader.h \
-    bobura.model.serializer.writer.h \
-    bobura.model.serializer.writer_selector.h \
-    bobura.model.serializer.writer_set.h \
-    bobura.model.station.h \
-    bobura.model.station_info.grade.h \
-    bobura.model.timetable.h \
-    bobura.model.timetable_info.font_color_set.h \
-    bobura.model.timetable_info.station_interval_calculator.h \
-    bobura.model.timetable_info.station_location.h \
-    bobura.model.train.h \
-    bobura.model.train_info.stop.h \
-    bobura.model.train_info.time.h \
-    bobura.model.train_info.time_span.h \
-    bobura.model.train_kind.h
+pkg_headers = \
+    model/message/timetable_observer_set.h \
+    model/serializer/bzip2_reader.h \
+    model/serializer/bzip2_writer.h \
+    model/serializer/json_reader.h \
+    model/serializer/json_writer.h \
+    model/serializer/oudia_reader.h \
+    model/serializer/select_oudia_diagram.h \
+    model/serializer/reader.h \
+    model/serializer/reader_selector.h \
+    model/serializer/reader_set.h \
+    model/serializer/windia_reader.h \
+    model/serializer/writer.h \
+    model/serializer/writer_selector.h \
+    model/serializer/writer_set.h \
+    model/station.h \
+    model/station_info/grade.h \
+    model/timetable.h \
+    model/timetable_info/font_color_set.h \
+    model/timetable_info/station_interval_calculator.h \
+    model/timetable_info/station_location.h \
+    model/train.h \
+    model/train_info/stop.h \
+    model/train_info/time.h \
+    model/train_info/time_span.h \
+    model/train_kind.h
 
 extra_headers = \
-    bobura.model.0namespace.h \
-    bobura.model.serializer.0namespace.h \
-    bobura.model.station_info.0namespace.h \
-    bobura.model.timetable_info.0namespace.h \
-    bobura.model.train_info.0namespace.h
+    model/0namespace.h \
+    model/message/0namespace.h \
+    model/serializer/0namespace.h \
+    model/station_info/0namespace.h \
+    model/timetable_info/0namespace.h \
+    model/train_info/0namespace.h
 
-pkginclude_HEADERS = $(headers)
+nobase_pkginclude_HEADERS = $(pkg_headers)
 EXTRA_DIST = $(extra_headers)
