@@ -2,7 +2,7 @@
 # Copyright (C) 2007-2014 kaoru
 # $Id$
 
-SUBDIRS = res src
+SUBDIRS = include res src
 
 EXTRA_DIST = \
     setup.vcxproj setup.vcxproj.filters
