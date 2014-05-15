@@ -14,7 +14,7 @@
 
 #include <tetengo2.h>
 
-#include "bobura.type_list.h"
+#include <bobura.type_list.h>
 
 #include <bobura/message/main_window.h>
 

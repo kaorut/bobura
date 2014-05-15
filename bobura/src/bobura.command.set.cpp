@@ -25,14 +25,14 @@
 #include <bobura/command/nop.h>
 #include <bobura/command/open_www_tetengo_org.h>
 #include <bobura/command/save_to_file.h>
+#include <bobura/command/set.h>
 #include <bobura/command/set_horizontal_scale.h>
 #include <bobura/command/set_vertical_scale.h>
 #include <bobura/command/train_kind.h>
 #include <bobura/command/vertically_zoom_in.h>
 #include <bobura/command/vertically_zoom_out.h>
-#include "bobura.type_list.h"
 
-#include <bobura/command/set.h>
+#include <bobura.type_list.h>
 
 
 namespace bobura { namespace command

@@ -9,7 +9,7 @@
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include "bobura.type_list.h"
+#include <bobura.type_list.h>
 
 #include <bobura/message/file_property_dialog.h>
 

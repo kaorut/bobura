@@ -16,9 +16,9 @@
 
 #include <bobura/model/train_info/time.h>
 #include <bobura/model/train_info/time_span.h>
-#include "bobura.type_list.h"
-
 #include <bobura/view/diagram/utility.h>
+
+#include <bobura.type_list.h>
 
 
 namespace

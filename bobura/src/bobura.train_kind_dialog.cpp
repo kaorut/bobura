@@ -21,9 +21,9 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/message/type_list.h>
-#include "bobura.type_list.h"
-
 #include <bobura/train_kind_dialog.h>
+
+#include <bobura.type_list.h>
 
 
 namespace bobura

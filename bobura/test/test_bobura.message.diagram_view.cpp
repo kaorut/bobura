@@ -16,7 +16,7 @@
 
 #include <tetengo2.h>
 
-#include "bobura.type_list.h"
+#include <bobura.type_list.h>
 
 #include <bobura/message/diagram_view.h>
 
