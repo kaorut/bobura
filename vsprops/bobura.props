@@ -5,7 +5,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)bobura_model\include;$(SolutionDir)lib\tetengo2\tetengo2\include;$(SolutionDir)lib\tetengo2\tetengo2_detail\include;$(SolutionDir)lib\tetengo2\tetengo2_gui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)src;$(SolutionDir)bobura_model\include;$(SolutionDir)lib\tetengo2\tetengo2\include;$(SolutionDir)lib\tetengo2\tetengo2_detail\include;$(SolutionDir)lib\tetengo2\tetengo2_gui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_TETENGO2_DETAIL_TYPES_FOR_APPLICATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
