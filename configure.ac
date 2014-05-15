@@ -12,6 +12,7 @@ AC_CONFIG_FILES([
     Makefile
     bobura/Makefile
     bobura/include/Makefile
+    bobura/include/bobura/Makefile
     bobura/res/Makefile
     bobura/src/Makefile
     bobura/test/Makefile
