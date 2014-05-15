@@ -6,7 +6,6 @@ extra_headers = \
     bobura.0namespace.h \
     bobura.about_dialog.h \
     bobura.application.h \
-    bobura.basic_type_list.h \
     bobura.command.0namespace.h \
     bobura.command.about.h \
     bobura.command.command_base.h \
@@ -29,7 +28,6 @@ extra_headers = \
     bobura.config_traits.h \
     bobura.diagram_picture_box.h \
     bobura.diagram_view.h \
-    bobura.detail_type_list.h \
     bobura.file_property_dialog.h \
     bobura.font_color_dialog.h \
     bobura.load_save.0namespace.h \
@@ -59,7 +57,6 @@ extra_headers = \
     bobura.settings.h \
     bobura.timetable_model.h \
     bobura.train_kind_dialog.h \
-    bobura.type_list.h \
     bobura.view.0namespace.h \
     bobura.view.diagram.0namespace.h \
     bobura.view.diagram.header.h \
@@ -72,34 +69,4 @@ extra_headers = \
     bobura.view.diagram.zoom.h \
     bobura.view.scale_list.h
 
-extra_sources = \
-    bobura.about_dialog.cpp \
-    bobura.application.cpp \
-    bobura.command.about.cpp \
-    bobura.command.command_base.cpp \
-    bobura.command.exit.cpp \
-    bobura.command.file_property.cpp \
-    bobura.command.font_color.cpp \
-    bobura.command.horizontally_zoom_in.cpp \
-    bobura.command.horizontally_zoom_out.cpp \
-    bobura.command.load_from_file.cpp \
-    bobura.command.new_file.cpp \
-    bobura.command.nop.cpp \
-    bobura.command.open_www_tetengo_org.cpp \
-    bobura.command.save_to_file.cpp \
-    bobura.command.set.cpp \
-    bobura.command.set_horizontal_scale.cpp \
-    bobura.command.set_vertical_scale.cpp \
-    bobura.command.train_kind.cpp \
-    bobura.command.vertically_zoom_in.cpp \
-    bobura.command.vertically_zoom_out.cpp \
-    bobura.file_property_dialog.cpp \
-    bobura.font_color_dialog.cpp \
-    bobura.main_window.cpp \
-    bobura.main_window_menu_builder.cpp \
-    bobura.oudia_diagram_dialog.cpp \
-    bobura.train_kind_dialog.cpp \
-    bobura.view.diagram.zoom.cpp \
-    main.cpp
-
-EXTRA_DIST = $(extra_headers) $(extra_sources)
+EXTRA_DIST = $(extra_headers)
