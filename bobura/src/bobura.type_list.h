@@ -15,12 +15,12 @@
 #include <tetengo2.h>
 
 #include "bobura.basic_type_list.h"
-#include "bobura.command.command_base.h"
-#include "bobura.command.set.h"
-#include "bobura.diagram_picture_box.h"
-#include "bobura.message.type_list_impl.h"
-#include "bobura.property_bar.h"
-#include "bobura.view.diagram.zoom.h"
+#include <bobura/command/command_base.h>
+#include <bobura/command/set.h>
+#include <bobura/diagram_picture_box.h>
+#include <bobura/message/type_list_impl.h>
+#include <bobura/property_bar.h>
+#include <bobura/view/diagram/zoom.h>
 
 
 namespace bobura

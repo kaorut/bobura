@@ -12,7 +12,7 @@
 
 #include <tetengo2.h>
 
-#include "bobura.command.load_from_file.h"
+#include <bobura/command/load_from_file.h>
 
 
 namespace bobura { namespace command

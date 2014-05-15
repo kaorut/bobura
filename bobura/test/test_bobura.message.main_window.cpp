@@ -16,7 +16,7 @@
 
 #include "bobura.type_list.h"
 
-#include "bobura.message.main_window.h"
+#include <bobura/message/main_window.h>
 
 
 namespace

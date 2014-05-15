@@ -20,10 +20,10 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include "bobura.message.type_list.h"
+#include <bobura/message/type_list.h>
 #include "bobura.type_list.h"
 
-#include "bobura.train_kind_dialog.h"
+#include <bobura/train_kind_dialog.h>
 
 
 namespace bobura

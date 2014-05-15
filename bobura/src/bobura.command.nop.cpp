@@ -8,7 +8,7 @@
 
 #include <tetengo2.h>
 
-#include "bobura.command.nop.h"
+#include <bobura/command/nop.h>
 
 
 namespace bobura { namespace command

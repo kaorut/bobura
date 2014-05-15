@@ -17,7 +17,7 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include "bobura.view.diagram.item.h"
+#include <bobura/view/diagram/item.h>
 
 
 namespace bobura { namespace view { namespace diagram

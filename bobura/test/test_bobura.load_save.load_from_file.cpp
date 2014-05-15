@@ -17,7 +17,7 @@
 #include <bobura/model/serializer/select_oudia_diagram.h>
 #include "bobura.type_list.h"
 
-#include "bobura.load_save.load_from_file.h"
+#include <bobura/load_save/load_from_file.h>
 
 
 namespace

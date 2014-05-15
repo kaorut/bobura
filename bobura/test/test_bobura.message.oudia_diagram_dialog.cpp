@@ -11,7 +11,7 @@
 
 #include "bobura.type_list.h"
 
-#include "bobura.message.oudia_diagram_dialog.h"
+#include <bobura/message/oudia_diagram_dialog.h>
 
 
 namespace

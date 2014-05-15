@@ -13,17 +13,17 @@
 
 #include <tetengo2.h>
 
-#include "bobura.message.about_dialog.h"
-#include "bobura.message.diagram_picture_box.h"
-#include "bobura.message.diagram_view.h"
-#include "bobura.message.file_property_dialog.h"
-#include "bobura.message.font_color_dialog.h"
-#include "bobura.message.main_window.h"
-#include "bobura.message.oudia_diagram_dialog.h"
-#include "bobura.message.property_bar.h"
-#include "bobura.message.timetable_model.h"
-#include "bobura.message.train_kind_dialog.h"
-#include "bobura.message.type_list.h"
+#include <bobura/message/about_dialog.h>
+#include <bobura/message/diagram_picture_box.h>
+#include <bobura/message/diagram_view.h>
+#include <bobura/message/file_property_dialog.h>
+#include <bobura/message/font_color_dialog.h>
+#include <bobura/message/main_window.h>
+#include <bobura/message/oudia_diagram_dialog.h>
+#include <bobura/message/property_bar.h>
+#include <bobura/message/timetable_model.h>
+#include <bobura/message/train_kind_dialog.h>
+#include <bobura/message/type_list.h>
 
 
 namespace bobura { namespace message

@@ -10,7 +10,7 @@
 
 #include <tetengo2.h>
 
-#include "bobura.command.font_color.h"
+#include <bobura/command/font_color.h>
 
 
 namespace bobura { namespace command

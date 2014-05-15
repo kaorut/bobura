@@ -8,7 +8,7 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include "bobura.message.timetable_model_observer_set.h"
+#include <bobura/message/timetable_model_observer_set.h>
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)

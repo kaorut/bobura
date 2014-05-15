@@ -8,7 +8,7 @@
 
 #include <tetengo2.h>
 
-#include "bobura.command.file_property.h"
+#include <bobura/command/file_property.h>
 
 
 namespace bobura { namespace command

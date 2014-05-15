@@ -17,7 +17,7 @@
 
 #include "bobura.type_list.h"
 
-#include "bobura.message.train_kind_dialog.h"
+#include <bobura/message/train_kind_dialog.h>
 
 
 namespace

@@ -14,7 +14,7 @@
 
 #include "bobura.type_list.h"
 
-#include "bobura.message.diagram_picture_box.h"
+#include <bobura/message/diagram_picture_box.h>
 
 
 namespace

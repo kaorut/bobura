@@ -11,7 +11,7 @@
 
 #include "bobura.type_list.h"
 
-#include "bobura.message.about_dialog.h"
+#include <bobura/message/about_dialog.h>
 
 
 namespace

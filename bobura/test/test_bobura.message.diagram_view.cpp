@@ -18,7 +18,7 @@
 
 #include "bobura.type_list.h"
 
-#include "bobura.message.diagram_view.h"
+#include <bobura/message/diagram_view.h>
 
 
 namespace

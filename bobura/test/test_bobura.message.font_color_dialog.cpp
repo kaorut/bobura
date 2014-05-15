@@ -18,7 +18,7 @@
 
 #include "bobura.type_list.h"
 
-#include "bobura.message.font_color_dialog.h"
+#include <bobura/message/font_color_dialog.h>
 
 
 namespace

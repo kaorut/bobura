@@ -13,7 +13,7 @@
 
 #include "bobura.type_list.h"
  
-#include "bobura.message.diagram_selection_observer_set.h"
+#include <bobura/message/diagram_selection_observer_set.h>
 
 
 namespace

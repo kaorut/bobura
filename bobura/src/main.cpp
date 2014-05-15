@@ -24,7 +24,7 @@
 
 #include <tetengo2.h>
 
-#include "bobura.application.h"
+#include <bobura/application.h>
 #include "bobura.type_list.h"
 
 
