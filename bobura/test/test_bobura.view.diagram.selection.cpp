@@ -17,8 +17,7 @@
 
 #include <bobura/view/diagram/selection.h>
 #include <bobura/message/diagram_selection_observer_set.h>
- 
-#include <bobura.type_list.h>
+#include <bobura/type_list.h>
 
 
 namespace

@@ -15,11 +15,10 @@
 
 #include <tetengo2.h>
 
+#include <bobura/application.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/type_list.h>
-
-#include <bobura/application.h>
 
 
 namespace bobura

@@ -12,7 +12,7 @@
 #include <boost/mpl/at.hpp>
 #include <boost/noncopyable.hpp>
 
-#include <bobura.type_list.h>
+#include <bobura/type_list.h>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
