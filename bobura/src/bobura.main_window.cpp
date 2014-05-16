@@ -17,9 +17,8 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/message/type_list.h>
-
 #include <bobura/main_window.h>
+#include <bobura/message/type_list.h>
 
 
 namespace bobura

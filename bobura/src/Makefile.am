@@ -2,11 +2,6 @@
 # Copyright (C) 2007-2014 kaoru
 # $Id$
 
-extra_headers = \
-    bobura.basic_type_list.h \
-    bobura.detail_type_list.h \
-    bobura.type_list.h
-
 extra_sources = \
     bobura.about_dialog.cpp \
     bobura.application.cpp \
@@ -37,4 +32,4 @@ extra_sources = \
     bobura.view.diagram.zoom.cpp \
     main.cpp
 
-EXTRA_DIST = $(extra_headers) $(extra_sources)
+EXTRA_DIST = $(extra_sources)

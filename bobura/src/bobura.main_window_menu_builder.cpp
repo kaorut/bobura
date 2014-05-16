@@ -16,8 +16,7 @@
 
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
-
-#include <bobura.type_list.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura

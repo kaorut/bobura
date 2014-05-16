@@ -6,6 +6,7 @@ extra_headers = \
     0namespace.h \
     about_dialog.h \
     application.h \
+    basic_type_list.h \
     command/0namespace.h \
     command/about.h \
     command/command_base.h \
@@ -26,6 +27,7 @@ extra_headers = \
     command/vertically_zoom_in.h \
     command/vertically_zoom_out.h \
     config_traits.h \
+    detail_type_list.h \
     diagram_picture_box.h \
     diagram_view.h \
     file_property_dialog.h \
@@ -57,6 +59,7 @@ extra_headers = \
     settings.h \
     timetable_model.h \
     train_kind_dialog.h \
+    type_list.h \
     view/0namespace.h \
     view/diagram/0namespace.h \
     view/diagram/header.h \

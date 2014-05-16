@@ -26,6 +26,7 @@
 
 #include <bobura/about_dialog.h>
 #include <bobura/config_traits.h>
+#include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
 #include <bobura/file_property_dialog.h>
 #include <bobura/font_color_dialog.h>
@@ -63,8 +64,6 @@
 #include <bobura/view/diagram/time_line.h>
 #include <bobura/view/diagram/train_line.h>
 #include <bobura/view/scale_list.h>
-
-#include <bobura.detail_type_list.h>
 
 
 namespace bobura

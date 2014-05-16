@@ -49,7 +49,6 @@ TESTS = bobura.test
 
 bobura_test_CPPFLAGS = \
     -I$(top_srcdir)/bobura/include \
-    -I$(top_srcdir)/bobura/src \
     -I$(top_srcdir)/bobura_model/include \
     -I$(TETENGO2_INCLUDE) \
     -I$(TETENGO2_DETAIL_INCLUDE) \

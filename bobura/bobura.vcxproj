@@ -98,6 +98,7 @@
     <ClInclude Include="include\bobura\0namespace.h" />
     <ClInclude Include="include\bobura\about_dialog.h" />
     <ClInclude Include="include\bobura\application.h" />
+    <ClInclude Include="include\bobura\basic_type_list.h" />
     <ClInclude Include="include\bobura\command\0namespace.h" />
     <ClInclude Include="include\bobura\command\about.h" />
     <ClInclude Include="include\bobura\command\command_base.h" />
@@ -118,6 +119,7 @@
     <ClInclude Include="include\bobura\command\vertically_zoom_in.h" />
     <ClInclude Include="include\bobura\command\vertically_zoom_out.h" />
     <ClInclude Include="include\bobura\config_traits.h" />
+    <ClInclude Include="include\bobura\detail_type_list.h" />
     <ClInclude Include="include\bobura\diagram_picture_box.h" />
     <ClInclude Include="include\bobura\diagram_view.h" />
     <ClInclude Include="include\bobura\file_property_dialog.h" />
@@ -149,6 +151,7 @@
     <ClInclude Include="include\bobura\settings.h" />
     <ClInclude Include="include\bobura\timetable_model.h" />
     <ClInclude Include="include\bobura\train_kind_dialog.h" />
+    <ClInclude Include="include\bobura\type_list.h" />
     <ClInclude Include="include\bobura\view\0namespace.h" />
     <ClInclude Include="include\bobura\view\diagram\0namespace.h" />
     <ClInclude Include="include\bobura\view\diagram\header.h" />
@@ -161,9 +164,6 @@
     <ClInclude Include="include\bobura\view\diagram\zoom.h" />
     <ClInclude Include="include\bobura\view\scale_list.h" />
     <ClInclude Include="res\win32\resource.h" />
-    <ClInclude Include="src\bobura.basic_type_list.h" />
-    <ClInclude Include="src\bobura.detail_type_list.h" />
-    <ClInclude Include="src\bobura.type_list.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="res\win32\bobura.rc" />

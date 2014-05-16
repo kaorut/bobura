@@ -15,9 +15,8 @@
 
 #include <tetengo2.h>
 
+#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
-
-#include <bobura.basic_type_list.h>
 
 
 namespace bobura { namespace command
