@@ -27,6 +27,7 @@ AC_CONFIG_FILES([
     samples/Makefile
     setup/Makefile
     setup/include/Makefile
+    setup/include/setup/Makefile
     setup/res/Makefile
     setup/src/Makefile
 ])

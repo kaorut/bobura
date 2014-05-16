@@ -3,7 +3,7 @@
 # $Id$
 
 extra_headers = \
-    setup.0namespace.h \
-    setup.encode.h
+    0namespace.h \
+    encode.h
 
 EXTRA_DIST = $(extra_headers)
