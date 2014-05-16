@@ -76,8 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\precompiled\precompiled.h" />
-    <ClInclude Include="include\setup.0namespace.h" />
-    <ClInclude Include="include\setup.encode.h" />
+    <ClInclude Include="include\setup\0namespace.h" />
+    <ClInclude Include="include\setup\encode.h" />
     <ClInclude Include="res\win32\resource.h" />
   </ItemGroup>
   <ItemGroup>
