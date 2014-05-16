@@ -12,12 +12,12 @@
 #include <boost/mpl/at.hpp>
 #include <boost/noncopyable.hpp>
 
-#include "bobura.type_list.h"
+#include <bobura.type_list.h>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include "bobura.view.diagram.zoom.h"
+#include <bobura/view/diagram/zoom.h>
 
 
 namespace bobura { namespace view { namespace diagram

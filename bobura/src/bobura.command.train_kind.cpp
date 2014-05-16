@@ -16,7 +16,7 @@
 
 #include <tetengo2.h>
 
-#include "bobura.command.train_kind.h"
+#include <bobura/command/train_kind.h>
 
 
 namespace bobura { namespace command

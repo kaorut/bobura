@@ -17,10 +17,10 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include "bobura.message.type_list.h"
-#include "bobura.type_list.h"
+#include <bobura/about_dialog.h>
+#include <bobura/message/type_list.h>
 
-#include "bobura.about_dialog.h"
+#include <bobura.type_list.h>
 
 
 namespace bobura

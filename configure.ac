@@ -11,11 +11,14 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
     Makefile
     bobura/Makefile
+    bobura/include/Makefile
+    bobura/include/bobura/Makefile
     bobura/res/Makefile
     bobura/src/Makefile
     bobura/test/Makefile
     bobura_model/Makefile
     bobura_model/include/Makefile
+    bobura_model/include/bobura/Makefile
     bobura_model/test/Makefile
     docsrc/Makefile
     iconsrc/Makefile
@@ -23,6 +26,8 @@ AC_CONFIG_FILES([
     precompiled/Makefile
     samples/Makefile
     setup/Makefile
+    setup/include/Makefile
+    setup/include/setup/Makefile
     setup/res/Makefile
     setup/src/Makefile
 ])

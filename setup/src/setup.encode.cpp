@@ -11,7 +11,7 @@
 #include <tetengo2.h>
 #include <tetengo2/detail/windows/encoding.h>
 
-#include "setup.encode.h"
+#include <setup/encode.h>
 
 
 namespace setup

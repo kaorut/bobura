@@ -10,7 +10,7 @@
 
 #include <tetengo2.h>
 
-#include "bobura.command.open_www_tetengo_org.h"
+#include <bobura/command/open_www_tetengo_org.h>
 
 
 namespace bobura { namespace command

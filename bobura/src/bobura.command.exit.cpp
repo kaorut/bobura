@@ -8,7 +8,7 @@
 
 #include <tetengo2.h>
 
-#include "bobura.command.exit.h"
+#include <bobura/command/exit.h>
 
 
 namespace bobura { namespace command

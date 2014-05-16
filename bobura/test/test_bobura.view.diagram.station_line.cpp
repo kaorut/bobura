@@ -16,11 +16,11 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include "bobura.message.diagram_selection_observer_set.h"
-#include "bobura.type_list.h"
-#include "bobura.view.diagram.selection.h"
+#include <bobura/message/diagram_selection_observer_set.h>
+#include <bobura/view/diagram/selection.h>
+#include <bobura/view/diagram/station_line.h>
 
-#include "bobura.view.diagram.station_line.h"
+#include <bobura.type_list.h>
 
 
 namespace

@@ -22,7 +22,7 @@
 
 #include <tetengo2.h>
 
-#include "setup.encode.h"
+#include <setup/encode.h>
 
 
 namespace

@@ -12,7 +12,7 @@
 #include <boost/rational.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include "bobura.view.scale_list.h"
+#include <bobura/view/scale_list.h>
 
 
 namespace

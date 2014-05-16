@@ -26,24 +26,24 @@
 #include <tetengo2/detail/stub/drawing.h>
 #include <tetengo2/detail/stub/encoding.h>
 
-#include "bobura.model.message.timetable_observer_set.h"
-#include "bobura.model.serializer.reader.h"
-#include "bobura.model.serializer.reader_selector.h"
-#include "bobura.model.serializer.reader_set.h"
-#include "bobura.model.serializer.writer.h"
-#include "bobura.model.serializer.writer_selector.h"
-#include "bobura.model.serializer.writer_set.h"
-#include "bobura.model.station_info.grade.h"
-#include "bobura.model.station.h"
-#include "bobura.model.timetable.h"
-#include "bobura.model.timetable_info.font_color_set.h"
-#include "bobura.model.timetable_info.station_interval_calculator.h"
-#include "bobura.model.timetable_info.station_location.h"
-#include "bobura.model.train.h"
-#include "bobura.model.train_info.stop.h"
-#include "bobura.model.train_info.time.h"
-#include "bobura.model.train_info.time_span.h"
-#include "bobura.model.train_kind.h"
+#include <bobura/model/message/timetable_observer_set.h>
+#include <bobura/model/serializer/reader.h>
+#include <bobura/model/serializer/reader_selector.h>
+#include <bobura/model/serializer/reader_set.h>
+#include <bobura/model/serializer/writer.h>
+#include <bobura/model/serializer/writer_selector.h>
+#include <bobura/model/serializer/writer_set.h>
+#include <bobura/model/station_info/grade.h>
+#include <bobura/model/station.h>
+#include <bobura/model/timetable.h>
+#include <bobura/model/timetable_info/font_color_set.h>
+#include <bobura/model/timetable_info/station_interval_calculator.h>
+#include <bobura/model/timetable_info/station_location.h>
+#include <bobura/model/train.h>
+#include <bobura/model/train_info/stop.h>
+#include <bobura/model/train_info/time.h>
+#include <bobura/model/train_info/time_span.h>
+#include <bobura/model/train_kind.h>
 
 
 namespace test_bobura { namespace model
