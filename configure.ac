@@ -30,6 +30,8 @@ AC_CONFIG_FILES([
     setup/include/setup/Makefile
     setup/res/Makefile
     setup/src/Makefile
+    tools/Makefile
+    vsprops/Makefile
 ])
 
 AC_LANG([C++])

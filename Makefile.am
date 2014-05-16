@@ -9,7 +9,9 @@ SUBDIRS = \
      installer_bobura \
      precompiled \
      samples \
-     setup
+     setup \
+     tools \
+     vsprops
 
 EXTRA_DIST = bobura.sln bobura_config.h-original TODO Doxyfile
 
