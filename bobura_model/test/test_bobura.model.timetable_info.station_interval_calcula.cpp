@@ -45,6 +45,8 @@ namespace
 
     using station_intervals_type = station_interval_calculator_type::station_intervals_type;
 
+    using station_interval_type = station_intervals_type::value_type;
+
     using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
     using station_type =
@@ -272,13 +274,12 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
 
             const auto intervals = calculator.calculate();
 
-            station_intervals_type expected;
-            {
-                expected.emplace_back(1 * 60);
-                expected.emplace_back(2 * 60);
-                expected.emplace_back(3 * 60);
-                expected.push_back(station_interval_calculator_type::default_interval());
-            }
+            const station_intervals_type expected{
+                station_interval_type{ 1 * 60 },
+                station_interval_type{ 2 * 60 },
+                station_interval_type{ 3 * 60 },
+                station_interval_calculator_type::default_interval(),
+            };
             BOOST_CHECK(intervals == expected);
         }
         {
@@ -312,13 +313,12 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
 
             const auto intervals = calculator.calculate();
 
-            station_intervals_type expected;
-            {
-                expected.emplace_back(1 * 60);
-                expected.emplace_back(1 * 60);
-                expected.emplace_back(1 * 60);
-                expected.push_back(station_interval_calculator_type::default_interval());
-            }
+            const station_intervals_type expected{
+                station_interval_type{ 1 * 60 },
+                station_interval_type{ 1 * 60 },
+                station_interval_type{ 1 * 60 },
+                station_interval_calculator_type::default_interval(),
+            };
             BOOST_CHECK(intervals == expected);
         }
         {
@@ -352,13 +352,12 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
 
             const auto intervals = calculator.calculate();
 
-            station_intervals_type expected;
-            {
-                expected.emplace_back(1 * 60);
-                expected.emplace_back(2 * 60);
-                expected.emplace_back(2 * 60);
-                expected.push_back(station_interval_calculator_type::default_interval());
-            }
+            station_intervals_type expected{
+                station_interval_type{ 1 * 60 },
+                station_interval_type{ 2 * 60 },
+                station_interval_type{ 2 * 60 },
+                station_interval_calculator_type::default_interval(),
+            };
             BOOST_CHECK(intervals == expected);
         }
         {
@@ -384,13 +383,12 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
 
             const auto intervals = calculator.calculate();
 
-            station_intervals_type expected;
-            {
-                expected.emplace_back(4 * 60);
-                expected.emplace_back(4 * 60);
-                expected.emplace_back(4 * 60);
-                expected.push_back(station_interval_calculator_type::default_interval());
-            }
+            const station_intervals_type expected{
+                station_interval_type{ 4 * 60 },
+                station_interval_type{ 4 * 60 },
+                station_interval_type{ 4 * 60 },
+                station_interval_calculator_type::default_interval(),
+            };
             BOOST_CHECK(intervals == expected);
         }
         {
@@ -424,13 +422,12 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
 
             const auto intervals = calculator.calculate();
 
-            station_intervals_type expected;
-            {
-                expected.emplace_back(3 * 60);
-                expected.emplace_back(2 * 60);
-                expected.emplace_back(2 * 60);
-                expected.push_back(station_interval_calculator_type::default_interval());
-            }
+            const station_intervals_type expected{
+                station_interval_type{ 3 * 60 },
+                station_interval_type{ 2 * 60 },
+                station_interval_type{ 2 * 60 },
+                station_interval_calculator_type::default_interval(),
+            };
             BOOST_CHECK(intervals == expected);
         }
         {
@@ -464,13 +461,12 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
 
             const auto intervals = calculator.calculate();
 
-            station_intervals_type expected;
-            {
-                expected.emplace_back(5 * 60);
-                expected.emplace_back(4 * 60);
-                expected.emplace_back(4 * 60);
-                expected.push_back(station_interval_calculator_type::default_interval());
-            }
+            const station_intervals_type expected{
+                station_interval_type{ 5 * 60 },
+                station_interval_type{ 4 * 60 },
+                station_interval_type{ 4 * 60 },
+                station_interval_calculator_type::default_interval(),
+            };
             BOOST_CHECK(intervals == expected);
         }
     }

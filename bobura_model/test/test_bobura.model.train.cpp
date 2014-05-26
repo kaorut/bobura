@@ -68,8 +68,9 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.stops().empty());
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(0), time_type(0), false, string_type());
+            const train_type::stops_type stops{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+            };
             train_type::stops_type stops2(stops);
 
             const train_type train(
@@ -85,9 +86,10 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.stops() == stops);
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(0), time_type(0), false, string_type());
-            stops.emplace_back(time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")));
+            const train_type::stops_type stops{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+                stop_type{ time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")) },
+            };
 
             const train_type train(
                 train_type::direction_type::down,
@@ -102,8 +104,9 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.stops() == stops);
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(0), time_type(0), false, string_type());
+            const train_type::stops_type stops{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+            };
 
             const train_type train(
                 train_type::direction_type::down,
@@ -119,9 +122,10 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.stops() == stops);
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(0), time_type(0), false, string_type());
-            stops.emplace_back(time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")));
+            const train_type::stops_type stops{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+                stop_type{ time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")) },
+            };
 
             const train_type train(
                 train_type::direction_type::down,
@@ -164,8 +168,9 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train1 == train2);
         }
         {
-            train_type::stops_type stops1;
-            stops1.emplace_back(time_type(0), time_type(0), false, string_type());
+            const train_type::stops_type stops1{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+            };
             const train_type train1(
                 train_type::direction_type::down,
                 string_type(TETENGO2_TEXT("1")),
@@ -177,8 +182,9 @@ BOOST_AUTO_TEST_SUITE(train)
                 stops1.end()
             );
 
-            train_type::stops_type stops2;
-            stops2.emplace_back(time_type(0), time_type(0), false, string_type());
+            const train_type::stops_type stops2{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+            };
             const train_type train2(
                 train_type::direction_type::down,
                 string_type(TETENGO2_TEXT("1")),
@@ -193,9 +199,10 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train1 == train2);
         }
         {
-            train_type::stops_type stops1;
-            stops1.emplace_back(time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("a")));
-            stops1.emplace_back(time_type(3), time_type(4), true, string_type(TETENGO2_TEXT("b")));
+            const train_type::stops_type stops1{
+                stop_type{ time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("a")) },
+                stop_type{ time_type(3), time_type(4), true, string_type(TETENGO2_TEXT("b")) },
+            };
             const train_type train1(
                 train_type::direction_type::down,
                 string_type(TETENGO2_TEXT("1")),
@@ -207,9 +214,10 @@ BOOST_AUTO_TEST_SUITE(train)
                 stops1.end()
             );
 
-            train_type::stops_type stops2;
-            stops2.emplace_back(time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("a")));
-            stops2.emplace_back(time_type(3), time_type(4), true, string_type(TETENGO2_TEXT("b")));
+            const train_type::stops_type stops2{
+                stop_type{ time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("a")) },
+                stop_type{ time_type(3), time_type(4), true, string_type(TETENGO2_TEXT("b")) },
+            };
             const train_type train2(
                 train_type::direction_type::down,
                 string_type(TETENGO2_TEXT("1")),
@@ -254,9 +262,10 @@ BOOST_AUTO_TEST_SUITE(train)
                 string_type(TETENGO2_TEXT("x"))
             );
 
-            train_type::stops_type stops2;
-            stops2.emplace_back(time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("a")));
-            stops2.emplace_back(time_type(3), time_type(4), true, string_type(TETENGO2_TEXT("b")));
+            const train_type::stops_type stops2{
+                stop_type{ time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("a")) },
+                stop_type{ time_type(3), time_type(4), true, string_type(TETENGO2_TEXT("b")) },
+            };
             const train_type train2(
                 train_type::direction_type::down,
                 string_type(TETENGO2_TEXT("2")),
@@ -271,8 +280,9 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train1 != train2);
         }
         {
-            train_type::stops_type stops1;
-            stops1.emplace_back(time_type(0), time_type(0), false, string_type());
+            const train_type::stops_type stops1{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+            };
             const train_type train1(
                 train_type::direction_type::down,
                 string_type(TETENGO2_TEXT("1")),
@@ -296,8 +306,9 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train1 != train2);
         }
         {
-            train_type::stops_type stops1;
-            stops1.emplace_back(time_type(0), time_type(0), false, string_type());
+            const train_type::stops_type stops1{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+            };
             const train_type train1(
                 train_type::direction_type::down,
                 string_type(TETENGO2_TEXT("1")),
@@ -309,9 +320,10 @@ BOOST_AUTO_TEST_SUITE(train)
                 stops1.end()
             );
 
-            train_type::stops_type stops2;
-            stops2.emplace_back(time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("a")));
-            stops2.emplace_back(time_type(3), time_type(4), true, string_type(TETENGO2_TEXT("b")));
+            const train_type::stops_type stops2{
+                stop_type{ time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("a")) },
+                stop_type{ time_type(3), time_type(4), true, string_type(TETENGO2_TEXT("b")) },
+            };
             const train_type train2(
                 train_type::direction_type::down,
                 string_type(TETENGO2_TEXT("2")),
@@ -459,9 +471,10 @@ BOOST_AUTO_TEST_SUITE(train)
     {
         BOOST_TEST_PASSPOINT();
 
-        train_type::stops_type stops;
-        stops.emplace_back(time_type(0), time_type(0), false, string_type());
-        stops.emplace_back(time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")));
+        const train_type::stops_type stops{
+            stop_type{ time_type(0), time_type(0), false, string_type() },
+            stop_type{ time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")) },
+        };
 
         const train_type train(
             train_type::direction_type::down,
@@ -482,8 +495,9 @@ BOOST_AUTO_TEST_SUITE(train)
         BOOST_TEST_PASSPOINT();
 
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(0), time_type(0), false, string_type());
+            const train_type::stops_type stops{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+            };
 
             train_type train(
                 train_type::direction_type::down,
@@ -498,9 +512,10 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.stops() == stops);
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(0), time_type(0), false, string_type());
-            stops.emplace_back(time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")));
+            const train_type::stops_type stops{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+                stop_type{ time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")) },
+            };
 
             train_type train(
                 train_type::direction_type::down,
@@ -516,9 +531,10 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.stops() == stops);
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(0), time_type(0), false, string_type());
-            stops.emplace_back(time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")));
+            const train_type::stops_type stops{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+                stop_type{ time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")) },
+            };
 
             train_type train(
                 train_type::direction_type::down,
@@ -535,9 +551,10 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.stops() == stops);
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(0), time_type(0), false, string_type());
-            stops.emplace_back(time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")));
+            const train_type::stops_type stops{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+                stop_type{ time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")) },
+            };
 
             train_type train(
                 train_type::direction_type::down,
@@ -560,9 +577,10 @@ BOOST_AUTO_TEST_SUITE(train)
         BOOST_TEST_PASSPOINT();
 
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(0), time_type(0), false, string_type());
-            stops.emplace_back(time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")));
+            const train_type::stops_type stops{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+                stop_type{ time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")) },
+            };
 
             train_type train(
                 train_type::direction_type::down,
@@ -580,9 +598,10 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.stops().empty());
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(0), time_type(0), false, string_type());
-            stops.emplace_back(time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")));
+            const train_type::stops_type stops{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+                stop_type{ time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")) },
+            };
 
             train_type train(
                 train_type::direction_type::down,
@@ -600,9 +619,10 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.stops().empty());
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(0), time_type(0), false, string_type());
-            stops.emplace_back(time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")));
+            const train_type::stops_type stops{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+                stop_type{ time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")) },
+            };
 
             train_type train(
                 train_type::direction_type::down,
@@ -621,9 +641,10 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.stops().empty());
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(0), time_type(0), false, string_type());
-            stops.emplace_back(time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")));
+            const train_type::stops_type stops{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+                stop_type{ time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")) },
+            };
 
             train_type train(
                 train_type::direction_type::down,
@@ -649,10 +670,11 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.stops()[1].platform() == string_type(TETENGO2_TEXT("a")));
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(0), time_type(0), false, string_type());
-            stops.emplace_back(time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")));
-            stops.emplace_back(time_type(3), time_type(4), false, string_type(TETENGO2_TEXT("b")));
+            const train_type::stops_type stops{
+                stop_type{ time_type(0), time_type(0), false, string_type() },
+                stop_type{ time_type(1), time_type(2), true, string_type(TETENGO2_TEXT("a")) },
+                stop_type{ time_type(3), time_type(4), false, string_type(TETENGO2_TEXT("b")) },
+            };
 
             train_type train(
                 train_type::direction_type::down,
@@ -685,15 +707,16 @@ BOOST_AUTO_TEST_SUITE(train)
         BOOST_TEST_PASSPOINT();
 
         {
-            train_type::stops_type stops;
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
-            );
-            stops.emplace_back(time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")));
-            stops.emplace_back(time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")));
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
-            );
+            const train_type::stops_type stops{
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
+                },
+                stop_type{ time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")) },
+                stop_type{ time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")) },
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
+                },
+            };
 
             const train_type train(
                 train_type::direction_type::down,
@@ -716,15 +739,16 @@ BOOST_AUTO_TEST_SUITE(train)
             );
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
-            );
-            stops.emplace_back(time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")));
-            stops.emplace_back(time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")));
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
-            );
+            const train_type::stops_type stops{
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
+                },
+                stop_type{ time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")) },
+                stop_type{ time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")) },
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
+                },
+            };
 
             const train_type train(
                 train_type::direction_type::up,
@@ -754,15 +778,16 @@ BOOST_AUTO_TEST_SUITE(train)
         BOOST_TEST_PASSPOINT();
 
         {
-            train_type::stops_type stops;
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
-            );
-            stops.emplace_back(time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")));
-            stops.emplace_back(time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")));
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
-            );
+            const train_type::stops_type stops{
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
+                },
+                stop_type{ time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")) },
+                stop_type{ time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")) },
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
+                },
+            };
 
             const train_type train(
                 train_type::direction_type::down,
@@ -785,15 +810,16 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.next_stop(boost::next(train.stops().begin(), 3)) == train.stops().end());
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
-            );
-            stops.emplace_back(time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")));
-            stops.emplace_back(time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")));
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
-            );
+            const train_type::stops_type stops{
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
+                },
+                stop_type{ time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")) },
+                stop_type{ time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")) },
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
+                },
+            };
 
             const train_type train(
                 train_type::direction_type::up,
@@ -823,11 +849,12 @@ BOOST_AUTO_TEST_SUITE(train)
         BOOST_TEST_PASSPOINT();
 
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type::uninitialized(), time_type(0), false, string_type(TETENGO2_TEXT("a")));
-            stops.emplace_back(time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("b")));
-            stops.emplace_back(time_type(3), time_type(4), false, string_type(TETENGO2_TEXT("c")));
-            stops.emplace_back(time_type(5), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d")));
+            const train_type::stops_type stops{
+                stop_type{ time_type::uninitialized(), time_type(0), false, string_type(TETENGO2_TEXT("a")) },
+                stop_type{ time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("b")) },
+                stop_type{ time_type(3), time_type(4), false, string_type(TETENGO2_TEXT("c")) },
+                stop_type{ time_type(5), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d")) },
+            };
 
             const train_type train(
                 train_type::direction_type::down,
@@ -843,15 +870,16 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.origin_stop() == boost::next(train.stops().begin(), 0));
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
-            );
-            stops.emplace_back(time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")));
-            stops.emplace_back(time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")));
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
-            );
+            const train_type::stops_type stops{
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
+                },
+                stop_type{ time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")) },
+                stop_type{ time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")) },
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
+                },
+            };
 
             const train_type train(
                 train_type::direction_type::down,
@@ -867,11 +895,12 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.origin_stop() == boost::next(train.stops().begin(), 1));
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(5), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d")));
-            stops.emplace_back(time_type(3), time_type(4), false, string_type(TETENGO2_TEXT("c")));
-            stops.emplace_back(time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("b")));
-            stops.emplace_back(time_type::uninitialized(), time_type(0), false, string_type(TETENGO2_TEXT("a")));
+            const train_type::stops_type stops{
+                stop_type{ time_type(5), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d")) },
+                stop_type{ time_type(3), time_type(4), false, string_type(TETENGO2_TEXT("c")) },
+                stop_type{ time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("b")) },
+                stop_type{ time_type::uninitialized(), time_type(0), false, string_type(TETENGO2_TEXT("a")) },
+            };
 
             const train_type train(
                 train_type::direction_type::up,
@@ -887,15 +916,16 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.origin_stop() == boost::next(train.stops().begin(), 3));
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
-            );
-            stops.emplace_back(time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")));
-            stops.emplace_back(time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")));
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
-            );
+            const train_type::stops_type stops{
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
+                },
+                stop_type{ time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")) },
+                stop_type{ time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")) },
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
+                },
+            };
 
             const train_type train(
                 train_type::direction_type::up,
@@ -911,13 +941,14 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.origin_stop() == boost::next(train.stops().begin(), 2));
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
-            );
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("b"))
-            );
+            const train_type::stops_type stops{
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
+                },
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("b"))
+                },
+            };
 
             const train_type train(
                 train_type::direction_type::down,
@@ -940,11 +971,12 @@ BOOST_AUTO_TEST_SUITE(train)
         BOOST_TEST_PASSPOINT();
 
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type::uninitialized(), time_type(0), false, string_type(TETENGO2_TEXT("a")));
-            stops.emplace_back(time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("b")));
-            stops.emplace_back(time_type(3), time_type(4), false, string_type(TETENGO2_TEXT("c")));
-            stops.emplace_back(time_type(5), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d")));
+            const train_type::stops_type stops{
+                stop_type{ time_type::uninitialized(), time_type(0), false, string_type(TETENGO2_TEXT("a")) },
+                stop_type{ time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("b")) },
+                stop_type{ time_type(3), time_type(4), false, string_type(TETENGO2_TEXT("c")) },
+                stop_type{ time_type(5), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d")) },
+            };
 
             const train_type train(
                 train_type::direction_type::down,
@@ -960,15 +992,16 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.destination_stop() == boost::next(train.stops().begin(), 3));
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
-            );
-            stops.emplace_back(time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")));
-            stops.emplace_back(time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")));
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
-            );
+            const train_type::stops_type stops{
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
+                },
+                stop_type{ time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")) },
+                stop_type{ time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")) },
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
+                },
+            };
 
             const train_type train(
                 train_type::direction_type::down,
@@ -984,11 +1017,12 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.destination_stop() == boost::next(train.stops().begin(), 2));
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(time_type(5), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d")));
-            stops.emplace_back(time_type(3), time_type(4), false, string_type(TETENGO2_TEXT("c")));
-            stops.emplace_back(time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("b")));
-            stops.emplace_back(time_type::uninitialized(), time_type(0), false, string_type(TETENGO2_TEXT("a")));
+            const train_type::stops_type stops{
+                stop_type{ time_type(5), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d")) },
+                stop_type{ time_type(3), time_type(4), false, string_type(TETENGO2_TEXT("c")) },
+                stop_type{ time_type(1), time_type(2), false, string_type(TETENGO2_TEXT("b")) },
+                stop_type{ time_type::uninitialized(), time_type(0), false, string_type(TETENGO2_TEXT("a")) },
+            };
 
             const train_type train(
                 train_type::direction_type::up,
@@ -1004,15 +1038,16 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.destination_stop() == boost::next(train.stops().begin(), 0));
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
-            );
-            stops.emplace_back(time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")));
-            stops.emplace_back(time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")));
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
-            );
+            const train_type::stops_type stops{
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("d"))
+                },
+                stop_type{ time_type(3), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("c")) },
+                stop_type{ time_type::uninitialized(), time_type(2), false, string_type(TETENGO2_TEXT("b")) },
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
+                },
+            };
 
             const train_type train(
                 train_type::direction_type::up,
@@ -1028,13 +1063,14 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.destination_stop() == boost::next(train.stops().begin(), 1));
         }
         {
-            train_type::stops_type stops;
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
-            );
-            stops.emplace_back(
-                time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("b"))
-            );
+            const train_type::stops_type stops{
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("a"))
+                },
+                stop_type{
+                    time_type::uninitialized(), time_type::uninitialized(), false, string_type(TETENGO2_TEXT("b"))
+                },
+            };
 
             const train_type train(
                 train_type::direction_type::down,
