@@ -213,21 +213,21 @@ namespace bobura { namespace load_save
         typename file_save_dialog_type::file_filters_type make_file_filters()
         const
         {
-            typename file_save_dialog_type::file_filters_type filters;
-
-            filters.emplace_back(
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Timetable Files")),
-                string_type(TETENGO2_TEXT("btt"))
-            );
-            filters.emplace_back(
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Timetable Files (Compressed)")),
-                string_type(TETENGO2_TEXT("btt_bz2"))
-            );
-            filters.emplace_back(
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:All Files")), string_type(TETENGO2_TEXT("*"))
-            );
-
-            return filters;
+            return
+                {
+                    {
+                        m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Timetable Files")),
+                        string_type(TETENGO2_TEXT("btt"))
+                    },
+                    {
+                        m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Timetable Files (Compressed)")),
+                        string_type(TETENGO2_TEXT("btt_bz2"))
+                    },
+                    {
+                        m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:All Files")),
+                        string_type(TETENGO2_TEXT("*"))
+                    }
+                };
         }
 
 

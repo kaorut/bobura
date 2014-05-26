@@ -171,33 +171,33 @@ namespace bobura { namespace view
 
         static std::vector<scale_type> make_scales()
         {
-            std::vector<scale_type> scales;
+            std::vector<scale_type> scales{
+                { 1, 10 },
+                { 1, 4 },
+                { 1, 2 },
+                { 3, 4 },
+                { 1 },
+                { 3, 2 },
+                { 2 },
+                { 4 },
+            };
 
-            scales.emplace_back(1, 10);
-            scales.emplace_back(1, 4);
-            scales.emplace_back(1, 2);
-            scales.emplace_back(3, 4);
-            scales.emplace_back(1);
-            scales.emplace_back(3, 2);
-            scales.emplace_back(2);
-            scales.emplace_back(4);
-
-            assert(std::is_sorted(scales.begin(), scales.end(), std::less<scale_type>()));
+            assert(std::is_sorted(scales.begin(), scales.end(), std::less<scale_type>{}));
             return scales;
         }
 
         static std::vector<string_type> make_labels()
         {
-            std::vector<string_type> labels;
-
-            labels.emplace_back(TETENGO2_TEXT("10%"));
-            labels.emplace_back(TETENGO2_TEXT("25%"));
-            labels.emplace_back(TETENGO2_TEXT("50%"));
-            labels.emplace_back(TETENGO2_TEXT("75%"));
-            labels.emplace_back(TETENGO2_TEXT("100%"));
-            labels.emplace_back(TETENGO2_TEXT("150%"));
-            labels.emplace_back(TETENGO2_TEXT("200%"));
-            labels.emplace_back(TETENGO2_TEXT("400%"));
+            std::vector<string_type> labels{
+                { string_type{ TETENGO2_TEXT("10%") } },
+                { string_type{ TETENGO2_TEXT("25%") } },
+                { string_type{ TETENGO2_TEXT("50%") } },
+                { string_type{ TETENGO2_TEXT("75%") } },
+                { string_type{ TETENGO2_TEXT("100%") } },
+                { string_type{ TETENGO2_TEXT("150%") } },
+                { string_type{ TETENGO2_TEXT("200%") } },
+                { string_type{ TETENGO2_TEXT("400%") } },
+            };
 
             assert(labels.size() == scales().size());
             return labels;
