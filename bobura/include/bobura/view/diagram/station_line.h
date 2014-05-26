@@ -433,17 +433,13 @@ namespace bobura { namespace view { namespace diagram
                     break;
 
                 const auto& station_location = model.timetable().station_locations()[i];
-                station_lines.push_back(
-                    station_line_type(
-                        station_location,
-                        selection,
-                        line_right,
-                        station_header_right,
-                        std::move(line_position),
-                        select_station_font_color(
-                            model.timetable().font_color_set(), station_location.station().grade()
-                        )
-                    )
+                station_lines.emplace_back(
+                    station_location,
+                    selection,
+                    line_right,
+                    station_header_right,
+                    std::move(line_position),
+                    select_station_font_color(model.timetable().font_color_set(), station_location.station().grade())
                 );
             }
             station_lines.shrink_to_fit();

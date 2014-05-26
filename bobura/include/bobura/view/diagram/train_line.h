@@ -930,16 +930,14 @@ namespace bobura { namespace view { namespace diagram
             if (lower_bound < header_bottom + time_header_bottom)
                 return;
 
-            fragments.push_back(
-                train_line_fragment_type(
-                    train,
-                    departure_stop_index,
-                    selection,
-                    std::move(departure),
-                    std::move(arrival),
-                    draw_train_name,
-                    message_catalog
-                )
+            fragments.emplace_back(
+                train,
+                departure_stop_index,
+                selection,
+                std::move(departure),
+                std::move(arrival),
+                draw_train_name,
+                message_catalog
             );
         }
 
@@ -1250,22 +1248,20 @@ namespace bobura { namespace view { namespace diagram
         {
             for (const auto& train: trains)
             {
-                train_lines.push_back(
-                    train_line_type(
-                        train,
-                        train_kinds[train.kind_index()],
-                        time_offset,
-                        selection,
-                        canvas_dimension,
-                        scroll_bar_position,
-                        station_header_right,
-                        header_bottom,
-                        time_header_height,
-                        horizontal_scale,
-                        station_intervals,
-                        station_positions,
-                        message_catalog
-                    )
+                train_lines.emplace_back(
+                    train,
+                    train_kinds[train.kind_index()],
+                    time_offset,
+                    selection,
+                    canvas_dimension,
+                    scroll_bar_position,
+                    station_header_right,
+                    header_bottom,
+                    time_header_height,
+                    horizontal_scale,
+                    station_intervals,
+                    station_positions,
+                    message_catalog
                 );
             }
         }
