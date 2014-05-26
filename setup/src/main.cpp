@@ -67,7 +67,7 @@ namespace
 
     std::wstring detect_platform()
     {
-        ::SYSTEM_INFO info = {};
+        ::SYSTEM_INFO info{};
         ::GetNativeSystemInfo(&info);
         if (info.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64)
             return L"x64";
