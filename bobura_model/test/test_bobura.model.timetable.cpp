@@ -1808,8 +1808,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                 },
             };
 
-            std::vector<train_kind_index_type> train_kind_index_map;
-            train_kind_index_map.push_back(1);
+            const std::vector<train_kind_index_type> train_kind_index_map{ 1 };
 
             timetable.assign_train_kinds(std::move(train_kinds), train_kind_index_map);
 
@@ -1908,8 +1907,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                 },
             };
 
-            std::vector<train_kind_index_type> train_kind_index_map;
-            train_kind_index_map.push_back(2);
+            const std::vector<train_kind_index_type> train_kind_index_map{ 2 };
 
             BOOST_CHECK_THROW(
                 timetable.assign_train_kinds(std::move(train_kinds), train_kind_index_map), std::out_of_range
