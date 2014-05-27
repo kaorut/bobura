@@ -98,8 +98,7 @@ BOOST_AUTO_TEST_SUITE(reset)
         model_type model;
         const message_catalog_type message_catalog;
         view_type view(model, message_catalog);
-        std::vector<string_type> arguments;
-        arguments.push_back(string_type(TETENGO2_TEXT("path/to/exe")));
+        const std::vector<string_type> arguments{ string_type(TETENGO2_TEXT("path/to/exe")) };
         const settings_type settings(arguments);
         const save_to_file_type save_to_file(false, message_catalog);
         const confirm_file_save_type confirm_file_save(model, save_to_file, message_catalog);
@@ -116,8 +115,7 @@ BOOST_AUTO_TEST_SUITE(reset)
         model_type model;
         const message_catalog_type message_catalog;
         view_type view(model, message_catalog);
-        std::vector<string_type> arguments;
-        arguments.push_back(string_type(TETENGO2_TEXT("path/to/exe")));
+        const std::vector<string_type> arguments{ string_type(TETENGO2_TEXT("path/to/exe")) };
         const settings_type settings(arguments);
         const save_to_file_type save_to_file(false, message_catalog);
         const confirm_file_save_type confirm_file_save(model, save_to_file, message_catalog);
@@ -141,8 +139,7 @@ BOOST_AUTO_TEST_SUITE(changed)
         model_type model;
         const message_catalog_type message_catalog;
         view_type view(model, message_catalog);
-        std::vector<string_type> arguments;
-        arguments.push_back(string_type(TETENGO2_TEXT("path/to/exe")));
+        const std::vector<string_type> arguments{ string_type(TETENGO2_TEXT("path/to/exe")) };
         const settings_type settings(arguments);
         const save_to_file_type save_to_file(false, message_catalog);
         const confirm_file_save_type confirm_file_save(model, save_to_file, message_catalog);
@@ -159,8 +156,7 @@ BOOST_AUTO_TEST_SUITE(changed)
         model_type model;
         const message_catalog_type message_catalog;
         view_type view(model, message_catalog);
-        std::vector<string_type> arguments;
-        arguments.push_back(string_type(TETENGO2_TEXT("path/to/exe")));
+        const std::vector<string_type> arguments{ string_type(TETENGO2_TEXT("path/to/exe")) };
         const settings_type settings(arguments);
         const save_to_file_type save_to_file(false, message_catalog);
         const confirm_file_save_type confirm_file_save(model, save_to_file, message_catalog);
