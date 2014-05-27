@@ -62,7 +62,7 @@ namespace
         if (std::locale() == std::locale("Japanese"))
             return L"ja";
         else
-            return std::wstring();
+            return {};
     }
 
     std::wstring detect_platform()
@@ -74,7 +74,7 @@ namespace
         else if (info.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_INTEL)
             return L"Win32";
         else
-            return std::wstring();
+            return {};
     }
 
     boost::filesystem::path msi_path(const boost::filesystem::path& base_path_, const std::wstring& platform)
@@ -91,7 +91,7 @@ namespace
         std::wstring parameters;
 
         parameters += L"/i ";
-        parameters += std::wstring(L"\"") + msi_path(base_path_, platform).c_str() + L"\" ";
+        parameters += std::wstring{ L"\"" } +msi_path(base_path_, platform).c_str() + L"\" ";
         if (!language.empty())
             parameters += L"TRANSFORMS=\":" + language + L".mst\"";
 
@@ -115,7 +115,7 @@ namespace
         if (platform.empty())
         {
             throw
-                std::runtime_error(std::string("Cannot install ") + application_name_narrow() + " to this platform.");
+                std::runtime_error(std::string{ "Cannot install " } +application_name_narrow() + " to this platform.");
         }
 
         const boost::filesystem::path base_path_ = base_path();
@@ -128,7 +128,7 @@ namespace
             throw std::runtime_error("Cannot launch the msi file.");
     }
 
-    void show_error_message(const ::HINSTANCE instance_handle, const std::string& message = std::string())
+    void show_error_message(const ::HINSTANCE instance_handle, const std::string& message = {})
     TETENGO2_STDALT_NOEXCEPT
     {
         try

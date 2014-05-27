@@ -45,7 +45,7 @@ namespace bobura { namespace message { namespace diagram_view
         {
             return
                 (
-                    boost::basic_format<typename String::value_type>(String(TETENGO2_TEXT("%1.1f"))) %
+                    boost::basic_format<typename String::value_type>(String{ TETENGO2_TEXT("%1.1f") }) %
                     boost::rational_cast<double>(number)
                 ).str();
         }
@@ -428,7 +428,7 @@ namespace bobura { namespace message { namespace diagram_view
         const
         {
             if (i_stop->passing())
-                return string_type();
+                return {};
 
             const stop_index_type stop_index = std::distance(i_front_stop, i_stop);
             assert(stop_index < m_model.timetable().station_locations().size());
@@ -513,7 +513,7 @@ namespace bobura { namespace message { namespace diagram_view
             if (train.stops().empty())
             {
                 assert(!departure_stop_index);
-                return string_type();
+                return {};
             }
 
             const auto departure_and_arrival = schedule_speed_departure_and_arrival(train, departure_stop_index);

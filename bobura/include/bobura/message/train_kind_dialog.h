@@ -163,7 +163,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
                     false,
                     train_kind_type(
                         m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:New Kind")),
-                        string_type(),
+                        string_type{},
                         color_type(0, 0, 0),
                         train_kind_type::weight_type::normal,
                         train_kind_type::line_style_type::solid

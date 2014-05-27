@@ -574,11 +574,11 @@ namespace bobura
             const
             {
                 if (!m_current_category_index)
-                    return string_type();
+                    return {};
 
                 const auto& font = m_font_color_list[*m_current_category_index].first;
                 if (!font)
-                    return string_type();
+                    return {};
 
                 std::basic_ostringstream<typename string_type::value_type> stream;
                 stream <<

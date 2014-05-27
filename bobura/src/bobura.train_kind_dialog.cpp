@@ -756,8 +756,8 @@ namespace bobura
             else
             {
                 m_current_train_kind_color = color_type(0, 0, 0);
-                m_p_name_text_box->set_text(string_type());
-                m_p_abbreviation_text_box->set_text(string_type());
+                m_p_name_text_box->set_text(string_type{});
+                m_p_abbreviation_text_box->set_text(string_type{});
                 m_p_weight_dropdown_box->select_value(0);
                 m_p_line_style_dropdown_box->select_value(0);
             }

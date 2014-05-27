@@ -146,7 +146,7 @@ BOOST_AUTO_TEST_SUITE(writer_selector)
             std::ostringstream stream;
             writer_selector.write(timetable, stream);
 
-            BOOST_CHECK(stream.str() == std::string(".hoge"));
+            BOOST_CHECK(stream.str() == std::string{ ".hoge" });
         }
         {
             auto concrete_writers = create_concrete_writers();
@@ -155,7 +155,7 @@ BOOST_AUTO_TEST_SUITE(writer_selector)
             std::ostringstream stream;
             writer_selector.write(timetable, stream);
 
-            BOOST_CHECK(stream.str() == std::string(".fuga"));
+            BOOST_CHECK(stream.str() == std::string{ ".fuga" });
         }
         {
             auto concrete_writers = create_concrete_writers();

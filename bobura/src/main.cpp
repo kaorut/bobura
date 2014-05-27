@@ -46,7 +46,7 @@ namespace
         std::vector<char> info(length, '\0');
         ::GetLocaleInfoA(id, type, info.data(), length);
 
-        return std::string(info.data());
+        return info.data();
     }
 
     std::string ui_locale_name()
