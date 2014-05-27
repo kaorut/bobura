@@ -217,15 +217,15 @@ namespace bobura { namespace load_save
                 {
                     {
                         m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Timetable Files")),
-                        string_type(TETENGO2_TEXT("btt"))
+                        string_type{ TETENGO2_TEXT("btt") }
                     },
                     {
                         m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Timetable Files (Compressed)")),
-                        string_type(TETENGO2_TEXT("btt_bz2"))
+                        string_type{ TETENGO2_TEXT("btt_bz2") }
                     },
                     {
                         m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:All Files")),
-                        string_type(TETENGO2_TEXT("*"))
+                        string_type{ TETENGO2_TEXT("*") }
                     }
                 };
         }

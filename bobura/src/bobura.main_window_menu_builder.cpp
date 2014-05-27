@@ -315,7 +315,7 @@ namespace bobura
         string_type make_zoom_scale_label(const string_type& label)
         const
         {
-            return string_type(TETENGO2_TEXT("&")) + label;
+            return string_type{ TETENGO2_TEXT("&") } + label;
         }
 
         std::unique_ptr<popup_menu_type> build_help_menu()

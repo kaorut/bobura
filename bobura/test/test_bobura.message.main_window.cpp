@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_SUITE(popup_menu_selected)
     {
         BOOST_TEST_PASSPOINT();
 
-        popup_menu_type popup_menu(string_type(TETENGO2_TEXT("popup")));
+        popup_menu_type popup_menu(string_type{ TETENGO2_TEXT("popup") });
         std::vector<const command_type*> commands;
         const model_type model;
         const popup_menu_selected_type observer(popup_menu, std::move(commands), model);
@@ -116,7 +116,7 @@ BOOST_AUTO_TEST_SUITE(popup_menu_selected)
     {
         BOOST_TEST_PASSPOINT();
 
-        popup_menu_type popup_menu(string_type(TETENGO2_TEXT("popup")));
+        popup_menu_type popup_menu(string_type{ TETENGO2_TEXT("popup") });
         std::vector<const command_type*> commands;
         const model_type model;
         const popup_menu_selected_type observer(popup_menu, std::move(commands), model);
@@ -192,7 +192,7 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         view_type view(model, message_catalog);
         window_type window;
         diagram_picture_box_type diagram_picture_box(window);
-        const std::vector<string_type> settings_arguments{ string_type(TETENGO2_TEXT("path/to/exe")) };
+        const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings(settings_arguments);
         property_bar_type property_bar(window, settings, message_catalog);
         const window_resized_type observer(view, window, diagram_picture_box, property_bar);
@@ -207,7 +207,7 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         view_type view(model, message_catalog);
         window_type window;
         diagram_picture_box_type diagram_picture_box(window);
-        const std::vector<string_type> settings_arguments{ string_type(TETENGO2_TEXT("path/to/exe")) };
+        const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings(settings_arguments);
         property_bar_type property_bar(window, settings, message_catalog);
         const window_resized_type observer(view, window, diagram_picture_box, property_bar);
@@ -229,7 +229,7 @@ BOOST_AUTO_TEST_SUITE(window_closing)
         const message_catalog_type message_catalog;
         const save_to_file_type save_to_file(false, message_catalog);
         const confirm_file_save_type confirm_file_save(model, save_to_file, message_catalog);
-        const std::vector<string_type> command_line_arguments(1, string_type(TETENGO2_TEXT("path/to/exe")));
+        const std::vector<string_type> command_line_arguments(1, string_type{ TETENGO2_TEXT("path/to/exe") });
         const bobura::message::main_window::window_closing<abstract_window_type, confirm_file_save_type> observer(
             parent, confirm_file_save, []() {}
         );

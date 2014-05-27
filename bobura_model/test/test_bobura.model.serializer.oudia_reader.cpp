@@ -339,7 +339,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
 
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type(TETENGO2_TEXT("Dia1")));
+                tetengo2::stdalt::make_unique<select_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
             const reader_type reader(std::move(p_select_diagram));
         }
         {
@@ -354,7 +354,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
 
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type(TETENGO2_TEXT("Dia1")));
+                tetengo2::stdalt::make_unique<select_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream(data_empty);
@@ -367,7 +367,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type(TETENGO2_TEXT("Dia1")));
+                tetengo2::stdalt::make_unique<select_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream(data_no_train);
@@ -380,7 +380,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type(TETENGO2_TEXT("Dia1")));
+                tetengo2::stdalt::make_unique<select_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream(data_too_old_version);
@@ -393,7 +393,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type(TETENGO2_TEXT("Dia1")));
+                tetengo2::stdalt::make_unique<select_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream(data_too_new_version);
@@ -417,7 +417,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
 
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type(TETENGO2_TEXT("Dia1")));
+                tetengo2::stdalt::make_unique<select_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream(data_empty);
@@ -434,7 +434,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type(TETENGO2_TEXT("Dia1")));
+                tetengo2::stdalt::make_unique<select_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream(data_no_train);
@@ -456,7 +456,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             {
                 const auto& train_kind = p_timetable->train_kinds()[0];
 
-                BOOST_CHECK(train_kind.name() == string_type(TETENGO2_TEXT("futsuu")));
+                BOOST_CHECK(train_kind.name() == string_type{ TETENGO2_TEXT("futsuu") });
                 BOOST_CHECK(train_kind.color() == color_type(0, 0, 0));
                 BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::normal);
             }
@@ -466,7 +466,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type(TETENGO2_TEXT("Dia1")));
+                tetengo2::stdalt::make_unique<select_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream(data_full);
@@ -480,28 +480,28 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
 
             BOOST_REQUIRE(p_timetable);
             BOOST_CHECK(error == error_type::none);
-            BOOST_CHECK(p_timetable->line_name() == string_type(TETENGO2_TEXT("abc")));
-            BOOST_CHECK(p_timetable->note() == string_type(TETENGO2_TEXT("def")));
+            BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("abc") });
+            BOOST_CHECK(p_timetable->note() == string_type{ TETENGO2_TEXT("def") });
 
             BOOST_REQUIRE_EQUAL(p_timetable->station_locations().size(), 6U);
             {
                 const auto& station_location = p_timetable->station_locations()[0];
-                BOOST_CHECK(station_location.station().name() == string_type(TETENGO2_TEXT("hoge")));
-                BOOST_CHECK(station_location.station().grade().name() == string_type(TETENGO2_TEXT("local")));
+                BOOST_CHECK(station_location.station().name() == string_type{ TETENGO2_TEXT("hoge") });
+                BOOST_CHECK(station_location.station().grade().name() == string_type{ TETENGO2_TEXT("local") });
                 BOOST_CHECK_EQUAL(station_location.operating_distance(), 0U);
             }
             {
                 const auto& station_location = p_timetable->station_locations()[2];
-                BOOST_CHECK(station_location.station().name() == string_type(TETENGO2_TEXT("piyo")));
+                BOOST_CHECK(station_location.station().name() == string_type{ TETENGO2_TEXT("piyo") });
                 BOOST_CHECK(
-                    station_location.station().grade().name() == string_type(TETENGO2_TEXT("local terminal"))
+                    station_location.station().grade().name() == string_type{ TETENGO2_TEXT("local terminal") }
                 );
                 BOOST_CHECK_EQUAL(station_location.operating_distance(), 2U);
             }
             {
                 const auto& station_location = p_timetable->station_locations()[4];
-                BOOST_CHECK(station_location.station().name() == string_type(TETENGO2_TEXT("iroha")));
-                BOOST_CHECK(station_location.station().grade().name() == string_type(TETENGO2_TEXT("local")));
+                BOOST_CHECK(station_location.station().name() == string_type{ TETENGO2_TEXT("iroha") });
+                BOOST_CHECK(station_location.station().grade().name() == string_type{ TETENGO2_TEXT("local") });
                 BOOST_CHECK(station_location.station().shows_up_arrival_times());
                 BOOST_CHECK_EQUAL(station_location.operating_distance(), 4U);
             }
@@ -510,14 +510,14 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             {
                 const auto& train_kind = p_timetable->train_kinds()[0];
 
-                BOOST_CHECK(train_kind.name() == string_type(TETENGO2_TEXT("futsuu")));
+                BOOST_CHECK(train_kind.name() == string_type{ TETENGO2_TEXT("futsuu") });
                 BOOST_CHECK(train_kind.color() == color_type(0, 0, 0));
                 BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::normal);
             }
             {
                 const auto& train_kind = p_timetable->train_kinds()[1];
 
-                BOOST_CHECK(train_kind.name() == string_type(TETENGO2_TEXT("Super Kaisoku")));
+                BOOST_CHECK(train_kind.name() == string_type{ TETENGO2_TEXT("Super Kaisoku") });
                 BOOST_CHECK(train_kind.color() == color_type(0xAB, 0xCD, 0xEF));
                 BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::bold);
             }
@@ -526,7 +526,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             {
                 const auto& train = p_timetable->down_trains()[0];
 
-                BOOST_CHECK(train.number() == string_type(TETENGO2_TEXT("121D")));
+                BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("121D") });
                 BOOST_CHECK(train.name().empty());
                 BOOST_CHECK_EQUAL(train.kind_index(), 0U);
                 BOOST_REQUIRE_EQUAL(train.stops().size(), 6U);
@@ -546,13 +546,13 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                     BOOST_CHECK(!stop.operational());
                     BOOST_CHECK(stop.platform().empty());
                 }
-                BOOST_CHECK(train.note() == string_type(TETENGO2_TEXT("xyz")));
+                BOOST_CHECK(train.note() == string_type{ TETENGO2_TEXT("xyz") });
             }
             {
                 const auto& train = p_timetable->down_trains()[1];
 
-                BOOST_CHECK(train.number() == string_type(TETENGO2_TEXT("101D")));
-                BOOST_CHECK(train.name() == string_type(TETENGO2_TEXT("foo")));
+                BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("101D") });
+                BOOST_CHECK(train.name() == string_type{ TETENGO2_TEXT("foo") });
                 BOOST_CHECK_EQUAL(train.kind_index(), 1U);
                 BOOST_REQUIRE_EQUAL(train.stops().size(), 6U);
                 {
@@ -585,7 +585,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             {
                 const auto& train = p_timetable->up_trains()[1];
 
-                BOOST_CHECK(train.number() == string_type(TETENGO2_TEXT("124D")));
+                BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("124D") });
                 BOOST_CHECK(train.name().empty());
                 BOOST_CHECK_EQUAL(train.kind_index(), 0U);
                 BOOST_REQUIRE_EQUAL(train.stops().size(), 6U);
@@ -609,8 +609,8 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             {
                 const auto& train = p_timetable->up_trains()[2];
 
-                BOOST_CHECK(train.number() == string_type(TETENGO2_TEXT("102D")));
-                BOOST_CHECK(train.name() == string_type(TETENGO2_TEXT("bar")));
+                BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("102D") });
+                BOOST_CHECK(train.name() == string_type{ TETENGO2_TEXT("bar") });
                 BOOST_CHECK_EQUAL(train.kind_index(), 1U);
                 BOOST_REQUIRE_EQUAL(train.stops().size(), 6U);
                 {
@@ -625,7 +625,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type(TETENGO2_TEXT("Dia2")));
+                tetengo2::stdalt::make_unique<select_diagram_type>(string_type{ TETENGO2_TEXT("Dia2") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream(data_full);
@@ -644,7 +644,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type(TETENGO2_TEXT("Dia3")));
+                tetengo2::stdalt::make_unique<select_diagram_type>(string_type{ TETENGO2_TEXT("Dia3") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream(data_full);
@@ -661,7 +661,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type(TETENGO2_TEXT("Dia1")));
+                tetengo2::stdalt::make_unique<select_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream(data_too_old_version);
@@ -678,7 +678,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type(TETENGO2_TEXT("Dia1")));
+                tetengo2::stdalt::make_unique<select_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream(data_too_new_version);

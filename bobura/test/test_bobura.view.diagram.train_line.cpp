@@ -98,11 +98,11 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
 
         const train_type train(
             train_type::direction_type::down,
-            string_type(TETENGO2_TEXT("number")),
+            string_type{ TETENGO2_TEXT("number") },
             0,
-            string_type(TETENGO2_TEXT("name")),
-            string_type(TETENGO2_TEXT("name_number")),
-            string_type(TETENGO2_TEXT("note"))
+            string_type{ TETENGO2_TEXT("name") },
+            string_type{ TETENGO2_TEXT("name_number") },
+            string_type{ TETENGO2_TEXT("note") }
         );
         selection_type selection;
         const message_catalog_type message_catalog;
@@ -124,11 +124,11 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
 
         const train_type train(
             train_type::direction_type::down,
-            string_type(TETENGO2_TEXT("number")),
+            string_type{ TETENGO2_TEXT("number") },
             0,
-            string_type(TETENGO2_TEXT("name")),
-            string_type(TETENGO2_TEXT("name_number")),
-            string_type(TETENGO2_TEXT("note"))
+            string_type{ TETENGO2_TEXT("name") },
+            string_type{ TETENGO2_TEXT("name_number") },
+            string_type{ TETENGO2_TEXT("note") }
         );
         selection_type selection;
         const message_catalog_type message_catalog;
@@ -164,8 +164,8 @@ BOOST_AUTO_TEST_SUITE(train_line)
 
         selection_type selection;
         const train_kind_type train_kind(
-            string_type(TETENGO2_TEXT("name")),
-            string_type(TETENGO2_TEXT("abbrev")),
+            string_type{ TETENGO2_TEXT("name") },
+            string_type{ TETENGO2_TEXT("abbrev") },
             color_type(0x12, 0x34, 0x56),
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
@@ -175,11 +175,11 @@ BOOST_AUTO_TEST_SUITE(train_line)
         train_line_type train_line1(
             train_type(
                 train_type::direction_type::down,
-                string_type(TETENGO2_TEXT("number")),
+                string_type{ TETENGO2_TEXT("number") },
                 0,
-                string_type(TETENGO2_TEXT("name")),
-                string_type(TETENGO2_TEXT("name_number")),
-                string_type(TETENGO2_TEXT("note"))
+                string_type{ TETENGO2_TEXT("name") },
+                string_type{ TETENGO2_TEXT("name_number") },
+                string_type{ TETENGO2_TEXT("note") }
             ),
             train_kind,
             time_span_type(42 * 60),
@@ -203,8 +203,8 @@ BOOST_AUTO_TEST_SUITE(train_line)
 
         selection_type selection;
         const train_kind_type train_kind(
-            string_type(TETENGO2_TEXT("name")),
-            string_type(TETENGO2_TEXT("abbrev")),
+            string_type{ TETENGO2_TEXT("name") },
+            string_type{ TETENGO2_TEXT("abbrev") },
             color_type(0x12, 0x34, 0x56),
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
@@ -214,11 +214,11 @@ BOOST_AUTO_TEST_SUITE(train_line)
         train_line_type train_line1(
             train_type(
                 train_type::direction_type::down,
-                string_type(TETENGO2_TEXT("number")),
+                string_type{ TETENGO2_TEXT("number") },
                 0,
-                string_type(TETENGO2_TEXT("name")),
-                string_type(TETENGO2_TEXT("name_number")),
-                string_type(TETENGO2_TEXT("note"))
+                string_type{ TETENGO2_TEXT("name") },
+                string_type{ TETENGO2_TEXT("name_number") },
+                string_type{ TETENGO2_TEXT("note") }
             ),
             train_kind,
             time_span_type(42 * 60),
@@ -236,11 +236,11 @@ BOOST_AUTO_TEST_SUITE(train_line)
         train_line_type train_line2(
             train_type(
                 train_type::direction_type::down,
-                string_type(TETENGO2_TEXT("number")),
+                string_type{ TETENGO2_TEXT("number") },
                 0,
-                string_type(TETENGO2_TEXT("name")),
-                string_type(TETENGO2_TEXT("name_number")),
-                string_type(TETENGO2_TEXT("note"))
+                string_type{ TETENGO2_TEXT("name") },
+                string_type{ TETENGO2_TEXT("name_number") },
+                string_type{ TETENGO2_TEXT("note") }
             ),
             train_kind,
             time_span_type(42 * 60),

@@ -87,8 +87,8 @@ namespace
     {
         std::vector<std::unique_ptr<reader_type>> readers;
 
-        readers.push_back(tetengo2::stdalt::make_unique<concrete_reader>(string_type(TETENGO2_TEXT("hoge"))));
-        readers.push_back(tetengo2::stdalt::make_unique<concrete_reader>(string_type(TETENGO2_TEXT("fuga"))));
+        readers.push_back(tetengo2::stdalt::make_unique<concrete_reader>(string_type{ TETENGO2_TEXT("hoge") }));
+        readers.push_back(tetengo2::stdalt::make_unique<concrete_reader>(string_type{ TETENGO2_TEXT("fuga") }));
 
         return std::move(readers);
     }
@@ -152,7 +152,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
                 );
 
             BOOST_REQUIRE(p_timetable);
-            BOOST_CHECK(p_timetable->line_name() == string_type(TETENGO2_TEXT("hoge")));
+            BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("hoge") });
         }
         {
             auto concrete_readers = create_concrete_readers();
@@ -168,7 +168,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
                 );
 
             BOOST_REQUIRE(p_timetable);
-            BOOST_CHECK(p_timetable->line_name() == string_type(TETENGO2_TEXT("fuga")));
+            BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("fuga") });
         }
         {
             auto concrete_readers = create_concrete_readers();

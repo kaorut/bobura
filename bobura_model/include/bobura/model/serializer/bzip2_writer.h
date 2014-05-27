@@ -80,7 +80,7 @@ namespace bobura { namespace model { namespace serializer
         const override
         {
             return
-                path_type(m_p_writer->extension().native() + typename path_type::string_type(TETENGO2_TEXT("_bz2")));
+                path_type(m_p_writer->extension().native() + typename path_type::string_type{ TETENGO2_TEXT("_bz2") });
         }
 
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream)

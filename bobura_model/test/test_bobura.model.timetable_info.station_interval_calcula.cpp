@@ -73,10 +73,10 @@ namespace
     {
         return
             {
-                make_station_location(string_type(TETENGO2_TEXT("AAA")), 0),
-                make_station_location(string_type(TETENGO2_TEXT("BBB")), 10),
-                make_station_location(string_type(TETENGO2_TEXT("CCC")), 20),
-                make_station_location(string_type(TETENGO2_TEXT("DDD")), 30),
+                make_station_location(string_type{ TETENGO2_TEXT("AAA") }, 0),
+                make_station_location(string_type{ TETENGO2_TEXT("BBB") }, 10),
+                make_station_location(string_type{ TETENGO2_TEXT("CCC") }, 20),
+                make_station_location(string_type{ TETENGO2_TEXT("DDD") }, 30),
             };
     }
 

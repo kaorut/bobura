@@ -215,7 +215,7 @@ namespace bobura { namespace model { namespace serializer
             virtual bool parse_impl(const string_type& key, string_type value)
             override
             {
-                if (key == string_type(TETENGO2_TEXT("Comment")))
+                if (key == string_type{ TETENGO2_TEXT("Comment") })
                     m_timetable.set_note(std::move(value));
 
                 return true;
@@ -240,7 +240,7 @@ namespace bobura { namespace model { namespace serializer
             virtual bool parse_impl(const string_type& key, string_type value)
             override
             {
-                if (key == string_type(TETENGO2_TEXT("Rosenmei")))
+                if (key == string_type{ TETENGO2_TEXT("Rosenmei") })
                     m_timetable.set_line_name(std::move(value));
 
                 return true;
@@ -269,8 +269,8 @@ namespace bobura { namespace model { namespace serializer
             )
             {
                 const auto both_arrival_and_departure =
-                    ekijikokukeisiki == string_type(TETENGO2_TEXT("Jikokukeisiki_Hatsuchaku"));
-                const auto principal = ekikibo == string_type(TETENGO2_TEXT("Ekikibo_Syuyou"));
+                    ekijikokukeisiki == string_type{ TETENGO2_TEXT("Jikokukeisiki_Hatsuchaku") };
+                const auto principal = ekikibo == string_type{ TETENGO2_TEXT("Ekikibo_Syuyou") };
 
                 if (both_arrival_and_departure)
                 {
@@ -290,12 +290,12 @@ namespace bobura { namespace model { namespace serializer
 
             static bool shows_down_arrival_times(const string_type& ekijikokukeisiki)
             {
-                return ekijikokukeisiki == string_type(TETENGO2_TEXT("Jikokukeisiki_KudariChaku"));
+                return ekijikokukeisiki == string_type{ TETENGO2_TEXT("Jikokukeisiki_KudariChaku") };
             }
 
             static bool shows_up_arrival_times(const string_type& ekijikokukeisiki)
             {
-                return ekijikokukeisiki == string_type(TETENGO2_TEXT("Jikokukeisiki_NoboriChaku"));
+                return ekijikokukeisiki == string_type{ TETENGO2_TEXT("Jikokukeisiki_NoboriChaku") };
             }
 
             timetable_type& m_timetable;
@@ -309,11 +309,11 @@ namespace bobura { namespace model { namespace serializer
             virtual bool parse_impl(const string_type& key, string_type value)
             override
             {
-                if (key == string_type(TETENGO2_TEXT("Ekimei")))
+                if (key == string_type{ TETENGO2_TEXT("Ekimei") })
                     m_ekimei = std::move(value);
-                else if (key == string_type(TETENGO2_TEXT("Ekijikokukeisiki")))
+                else if (key == string_type{ TETENGO2_TEXT("Ekijikokukeisiki") })
                     m_ekijikokukeisiki = std::move(value);
-                else if (key == string_type(TETENGO2_TEXT("Ekikibo")))
+                else if (key == string_type{ TETENGO2_TEXT("Ekikibo") })
                     m_ekikibo = std::move(value);
 
                 return true;
@@ -365,7 +365,7 @@ namespace bobura { namespace model { namespace serializer
 
             static weight_type to_weight(const string_type& weight_string)
             {
-                if (weight_string == string_type(TETENGO2_TEXT("1")))
+                if (weight_string == string_type{ TETENGO2_TEXT("1") })
                     return weight_type::bold;
                 else
                     return weight_type::normal;
@@ -373,11 +373,11 @@ namespace bobura { namespace model { namespace serializer
 
             static line_style_type to_line_style(const string_type& line_style_string)
             {
-                if      (line_style_string == string_type(TETENGO2_TEXT("SenStyle_Hasen")))
+                if      (line_style_string == string_type{ TETENGO2_TEXT("SenStyle_Hasen") })
                     return line_style_type::dashed;
-                else if (line_style_string == string_type(TETENGO2_TEXT("SenStyle_Tensen")))
+                else if (line_style_string == string_type{ TETENGO2_TEXT("SenStyle_Tensen") })
                     return line_style_type::dotted;
-                else if (line_style_string == string_type(TETENGO2_TEXT("SenStyle_Ittensasen")))
+                else if (line_style_string == string_type{ TETENGO2_TEXT("SenStyle_Ittensasen") })
                     return line_style_type::dot_dashed;
                 else
                     return line_style_type::solid;
@@ -398,15 +398,15 @@ namespace bobura { namespace model { namespace serializer
             virtual bool parse_impl(const string_type& key, string_type value)
             override
             {
-                if (key == string_type(TETENGO2_TEXT("Syubetsumei")))
+                if (key == string_type{ TETENGO2_TEXT("Syubetsumei") })
                     m_syubetsumei = std::move(value);
-                else if (key == string_type(TETENGO2_TEXT("Ryakusyou")))
+                else if (key == string_type{ TETENGO2_TEXT("Ryakusyou") })
                     m_ryakusyou = std::move(value);
-                else if (key == string_type(TETENGO2_TEXT("DiagramSenColor")))
+                else if (key == string_type{ TETENGO2_TEXT("DiagramSenColor") })
                     m_diagram_sen_color = std::move(value);
-                else if (key == string_type(TETENGO2_TEXT("DiagramSenStyle")))
+                else if (key == string_type{ TETENGO2_TEXT("DiagramSenStyle") })
                     m_diagram_sen_style = std::move(value);
-                else if (key == string_type(TETENGO2_TEXT("DiagramSenIsBold")))
+                else if (key == string_type{ TETENGO2_TEXT("DiagramSenIsBold") })
                     m_diagram_sen_is_bold = std::move(value);
 
                 return true;
@@ -452,7 +452,7 @@ namespace bobura { namespace model { namespace serializer
             virtual bool parse_impl(const string_type& key, string_type value)
             override
             {
-                if (key == string_type(TETENGO2_TEXT("DiaName")))
+                if (key == string_type{ TETENGO2_TEXT("DiaName") })
                     m_current_diagram_name = std::move(value);
 
                 return true;
@@ -582,7 +582,7 @@ namespace bobura { namespace model { namespace serializer
                 if (kind_time.empty())
                     return boost::none;
 
-                const auto stopping = kind_time[0] == string_type(TETENGO2_TEXT("1")) && kind_time.size() >= 2;
+                const auto stopping = kind_time[0] == string_type{ TETENGO2_TEXT("1") } && kind_time.size() >= 2;
                 const auto operational = !stopping && kind_time.size() >= 2;
                 if (!stopping && !operational)
                     return stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type());
@@ -659,19 +659,19 @@ namespace bobura { namespace model { namespace serializer
             virtual bool parse_impl(const string_type& key, string_type value)
             override
             {
-                if      (key == string_type(TETENGO2_TEXT("Houkou")))
+                if      (key == string_type{ TETENGO2_TEXT("Houkou") })
                     m_houkou = std::move(value);
-                else if (key == string_type(TETENGO2_TEXT("Syubetsu")))
+                else if (key == string_type{ TETENGO2_TEXT("Syubetsu") })
                     m_syubetsu = std::move(value);
-                else if (key == string_type(TETENGO2_TEXT("Ressyabangou")))
+                else if (key == string_type{ TETENGO2_TEXT("Ressyabangou") })
                     m_ressyabangou = std::move(value);
-                else if (key == string_type(TETENGO2_TEXT("Ressyamei")))
+                else if (key == string_type{ TETENGO2_TEXT("Ressyamei") })
                     m_ressyamei = std::move(value);
-                else if (key == string_type(TETENGO2_TEXT("Gousuu")))
+                else if (key == string_type{ TETENGO2_TEXT("Gousuu") })
                     m_gousuu = std::move(value);
-                else if (key == string_type(TETENGO2_TEXT("EkiJikoku")))
+                else if (key == string_type{ TETENGO2_TEXT("EkiJikoku") })
                     m_eki_jikoku = std::move(value);
-                else if (key == string_type(TETENGO2_TEXT("Bikou")))
+                else if (key == string_type{ TETENGO2_TEXT("Bikou") })
                     m_bikou = std::move(value);
 
                 return true;
@@ -693,7 +693,7 @@ namespace bobura { namespace model { namespace serializer
                     parse_stops(
                         m_eki_jikoku,
                         m_timetable.station_locations().size(),
-                        m_houkou == string_type(TETENGO2_TEXT("Kudari"))
+                        m_houkou == string_type{ TETENGO2_TEXT("Kudari") }
                     );
                 if (!stops || stops->size() != m_timetable.station_locations().size())
                     return false;
@@ -732,7 +732,7 @@ namespace bobura { namespace model { namespace serializer
                 auto key_value = parse_line(input_line);
                 if (key_value.first.empty() || key_value.second.empty())
                     continue;
-                if (key_value.first != string_type(TETENGO2_TEXT("DiaName")))
+                if (key_value.first != string_type{ TETENGO2_TEXT("DiaName") })
                     continue;
 
                 names.push_back(std::move(key_value.second));
@@ -876,11 +876,11 @@ namespace bobura { namespace model { namespace serializer
 
         static string_type remove_escape_sequences(string_type string)
         {
-            boost::replace_all(string, string_type(TETENGO2_TEXT("\\r\\n")), string_type(TETENGO2_TEXT(" ")));
-            boost::replace_all(string, string_type(TETENGO2_TEXT("\\r")), string_type(TETENGO2_TEXT(" ")));
-            boost::replace_all(string, string_type(TETENGO2_TEXT("\\n")), string_type(TETENGO2_TEXT(" ")));
+            boost::replace_all(string, string_type{ TETENGO2_TEXT("\\r\\n") }, string_type{ TETENGO2_TEXT(" ") });
+            boost::replace_all(string, string_type{ TETENGO2_TEXT("\\r") }, string_type{ TETENGO2_TEXT(" ") });
+            boost::replace_all(string, string_type{ TETENGO2_TEXT("\\n") }, string_type{ TETENGO2_TEXT(" ") });
 
-            boost::replace_all(string, string_type(TETENGO2_TEXT("\\")), string_type());
+            boost::replace_all(string, string_type{ TETENGO2_TEXT("\\") }, string_type());
 
             return string;
         }
@@ -910,8 +910,8 @@ namespace bobura { namespace model { namespace serializer
             const auto file_type_ = parse_file_type(key_value.second);
 
             return
-                key_value.first == string_type(TETENGO2_TEXT("FileType")) &&
-                file_type_.m_name == string_type(TETENGO2_TEXT("OuDia")) &&
+                key_value.first == string_type{ TETENGO2_TEXT("FileType") } &&
+                file_type_.m_name == string_type{ TETENGO2_TEXT("OuDia") } &&
                 file_type_.m_major_version == 1 &&
                 (1 <= file_type_.m_minor_version && file_type_.m_minor_version <= 2);
         }

@@ -366,7 +366,7 @@ namespace bobura { namespace message { namespace diagram_view
                 else
                     text += std::move(stop_text_);
             }
-            text += string_type(TETENGO2_TEXT("\n"));
+            text += string_type{ TETENGO2_TEXT("\n") };
             {
                 const stop_iterator i_arrival = train.next_stop(i_departure);
                 string_type stop_text_ = stop_text(train.stops().begin(), i_arrival, true, false);
@@ -396,7 +396,7 @@ namespace bobura { namespace message { namespace diagram_view
                     if (!stop_text_.empty())
                     {
                         if (!text.empty())
-                            text += string_type(TETENGO2_TEXT("\n"));
+                            text += string_type{ TETENGO2_TEXT("\n") };
                         text += std::move(stop_text_);
                     }
                 }
@@ -445,11 +445,11 @@ namespace bobura { namespace message { namespace diagram_view
 
             stream <<
                 m_model.timetable().station_locations()[stop_index].station().name() <<
-                string_type(TETENGO2_TEXT(" "));
+                string_type{ TETENGO2_TEXT(" ") };
 
             if (!arrival_time.empty() && !departure_time.empty())
             {
-                stream << std::move(arrival_time) << string_type(TETENGO2_TEXT("/")) << std::move(departure_time);
+                stream << std::move(arrival_time) << string_type{ TETENGO2_TEXT("/") } << std::move(departure_time);
             }
             else if (!arrival_time.empty())
             {
@@ -468,13 +468,13 @@ namespace bobura { namespace message { namespace diagram_view
             if (i_stop->operational())
             {
                 stream <<
-                    string_type(TETENGO2_TEXT(" (")) <<
+                    string_type{ TETENGO2_TEXT(" (") } <<
                     m_message_catalog.get(TETENGO2_TEXT("PropertyBar:Operational")) <<
-                    string_type(TETENGO2_TEXT(")"));
+                    string_type{ TETENGO2_TEXT(")") };
             }
 
             if (!i_stop->platform().empty())
-                stream << string_type(TETENGO2_TEXT(" [")) << i_stop->platform() << string_type(TETENGO2_TEXT("]"));
+                stream << string_type{ TETENGO2_TEXT(" [") } << i_stop->platform() << string_type{ TETENGO2_TEXT("]") };
 
             return stream.str();
         }

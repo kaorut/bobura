@@ -184,7 +184,7 @@ namespace bobura { namespace view { namespace diagram
             std::basic_ostringstream<typename string_type::value_type> name;
 
             name << train.number();
-            name << string_type(TETENGO2_TEXT(" "));
+            name << string_type{ TETENGO2_TEXT(" ") };
             if (train.name_number().empty())
             {
                 name << train.name();

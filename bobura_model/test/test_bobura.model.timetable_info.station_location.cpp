@@ -67,21 +67,21 @@ BOOST_AUTO_TEST_SUITE(station_location)
         {
             const station_location_type station_location1(
                 station_type(
-                    string_type(TETENGO2_TEXT("A")),
+                    string_type{ TETENGO2_TEXT("A") },
                     local_type::instance(),
                     false,
                     false,
-                    string_type(TETENGO2_TEXT("N"))
+                    string_type{ TETENGO2_TEXT("N") }
                 ),
                 1
             );
             const station_location_type station_location2(
                 station_type(
-                    string_type(TETENGO2_TEXT("A")),
+                    string_type{ TETENGO2_TEXT("A") },
                     local_type::instance(),
                     false,
                     false,
-                    string_type(TETENGO2_TEXT("N"))
+                    string_type{ TETENGO2_TEXT("N") }
                 ),
                 1
             );
@@ -91,21 +91,21 @@ BOOST_AUTO_TEST_SUITE(station_location)
         {
             const station_location_type station_location1(
                 station_type(
-                    string_type(TETENGO2_TEXT("A")),
+                    string_type{ TETENGO2_TEXT("A") },
                     local_type::instance(),
                     false,
                     false,
-                    string_type(TETENGO2_TEXT("N"))
+                    string_type{ TETENGO2_TEXT("N") }
                 ),
                 1
             );
             const station_location_type station_location2(
                 station_type(
-                    string_type(TETENGO2_TEXT("B")),
+                    string_type{ TETENGO2_TEXT("B") },
                     local_type::instance(),
                     false,
                     false,
-                    string_type(TETENGO2_TEXT("N"))
+                    string_type{ TETENGO2_TEXT("N") }
                 ),
                 2
             );

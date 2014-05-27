@@ -582,7 +582,7 @@ namespace bobura
 
                 std::basic_ostringstream<typename string_type::value_type> stream;
                 stream <<
-                    boost::basic_format<typename string_type::value_type>(string_type(TETENGO2_TEXT("%s, %dpt"))) %
+                    boost::basic_format<typename string_type::value_type>(string_type{ TETENGO2_TEXT("%s, %dpt") }) %
                     font->family() %
                     boost::rational_cast<int>(point_size_type::from_pixels(font->size()).value());
 

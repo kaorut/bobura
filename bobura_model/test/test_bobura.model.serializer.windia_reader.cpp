@@ -206,27 +206,27 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
 
             BOOST_REQUIRE(p_timetable);
             BOOST_CHECK(error == error_type::none);
-            BOOST_CHECK(p_timetable->line_name() == string_type(TETENGO2_TEXT("abc")));
+            BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("abc") });
 
             BOOST_REQUIRE_EQUAL(p_timetable->station_locations().size(), 6U);
             {
                 const auto& station_location = p_timetable->station_locations()[0];
-                BOOST_CHECK(station_location.station().name() == string_type(TETENGO2_TEXT("hoge")));
-                BOOST_CHECK(station_location.station().grade().name() == string_type(TETENGO2_TEXT("local")));
+                BOOST_CHECK(station_location.station().name() == string_type{ TETENGO2_TEXT("hoge") });
+                BOOST_CHECK(station_location.station().grade().name() == string_type{ TETENGO2_TEXT("local") });
                 BOOST_CHECK_EQUAL(station_location.operating_distance(), 0U);
             }
             {
                 const auto& station_location = p_timetable->station_locations()[2];
-                BOOST_CHECK(station_location.station().name() == string_type(TETENGO2_TEXT("piyo")));
+                BOOST_CHECK(station_location.station().name() == string_type{ TETENGO2_TEXT("piyo") });
                 BOOST_CHECK(
-                    station_location.station().grade().name() == string_type(TETENGO2_TEXT("local terminal"))
+                    station_location.station().grade().name() == string_type{ TETENGO2_TEXT("local terminal") }
                 );
                 BOOST_CHECK_EQUAL(station_location.operating_distance(), 2U);
             }
             {
                 const auto& station_location = p_timetable->station_locations()[4];
-                BOOST_CHECK(station_location.station().name() == string_type(TETENGO2_TEXT("iroha")));
-                BOOST_CHECK(station_location.station().grade().name() == string_type(TETENGO2_TEXT("local")));
+                BOOST_CHECK(station_location.station().name() == string_type{ TETENGO2_TEXT("iroha") });
+                BOOST_CHECK(station_location.station().grade().name() == string_type{ TETENGO2_TEXT("local") });
                 BOOST_CHECK(station_location.station().shows_up_arrival_times());
                 BOOST_REQUIRE_EQUAL(station_location.operating_distance(), 4U);
             }
@@ -235,14 +235,14 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
             {
                 const auto& train_kind = p_timetable->train_kinds()[0];
 
-                BOOST_CHECK(train_kind.name() == string_type(TETENGO2_TEXT("\x95\x81\x92\xCA"))); // futsuu
+                BOOST_CHECK(train_kind.name() == string_type{ TETENGO2_TEXT("\x95\x81\x92\xCA") }); // futsuu
                 BOOST_CHECK(train_kind.color() == color_type(0, 0, 0));
                 BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::normal);
             }
             {
                 const auto& train_kind = p_timetable->train_kinds()[3];
 
-                BOOST_CHECK(train_kind.name() == string_type(TETENGO2_TEXT("express")));
+                BOOST_CHECK(train_kind.name() == string_type{ TETENGO2_TEXT("express") });
                 BOOST_CHECK(train_kind.color() == color_type(255, 0, 0));
                 BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::bold);
             }
@@ -251,7 +251,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
             {
                 const auto& train = p_timetable->down_trains()[0];
 
-                BOOST_CHECK(train.number() == string_type(TETENGO2_TEXT("121D")));
+                BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("121D") });
                 BOOST_CHECK(train.name().empty());
                 BOOST_CHECK_EQUAL(train.kind_index(), 0U);
                 BOOST_REQUIRE_EQUAL(train.stops().size(), 6U);
@@ -275,8 +275,8 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
             {
                 const auto& train = p_timetable->down_trains()[1];
 
-                BOOST_CHECK(train.number() == string_type(TETENGO2_TEXT("101D")));
-                BOOST_CHECK(train.name() == string_type(TETENGO2_TEXT("foo")));
+                BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("101D") });
+                BOOST_CHECK(train.name() == string_type{ TETENGO2_TEXT("foo") });
                 BOOST_CHECK_EQUAL(train.kind_index(), 1U);
                 BOOST_REQUIRE_EQUAL(train.stops().size(), 6U);
                 {
@@ -309,7 +309,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
             {
                 const auto& train = p_timetable->up_trains()[1];
 
-                BOOST_CHECK(train.number() == string_type(TETENGO2_TEXT("124D")));
+                BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("124D") });
                 BOOST_CHECK(train.name().empty());
                 BOOST_CHECK_EQUAL(train.kind_index(), 0U);
                 BOOST_REQUIRE_EQUAL(train.stops().size(), 6U);
@@ -333,8 +333,8 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
             {
                 const auto& train = p_timetable->up_trains()[2];
 
-                BOOST_CHECK(train.number() == string_type(TETENGO2_TEXT("102D")));
-                BOOST_CHECK(train.name() == string_type(TETENGO2_TEXT("bar")));
+                BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("102D") });
+                BOOST_CHECK(train.name() == string_type{ TETENGO2_TEXT("bar") });
                 BOOST_CHECK_EQUAL(train.kind_index(), 3U);
                 BOOST_REQUIRE_EQUAL(train.stops().size(), 6U);
                 {

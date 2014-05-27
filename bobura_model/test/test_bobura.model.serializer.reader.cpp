@@ -48,7 +48,7 @@ namespace
         {
             tetengo2::suppress_unused_variable_warning(first, last);
 
-            return string_type(first, last) == string_type(TETENGO2_TEXT("hoge"));
+            return string_type(first, last) == string_type{ TETENGO2_TEXT("hoge") };
         }
 
         virtual std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)

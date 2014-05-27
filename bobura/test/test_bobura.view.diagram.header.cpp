@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_SUITE(company_line_name_header)
         selection_type selection;
         company_line_name_header_type header1(
             selection,
-            string_type(TETENGO2_TEXT("hoge")),
+            string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type(12, 34, 56),
             position_type(left_type(42), top_type(24)),
@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_SUITE(company_line_name_header)
         selection_type selection;
         company_line_name_header_type header1(
             selection,
-            string_type(TETENGO2_TEXT("hoge")),
+            string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type(12, 34, 56),
             position_type(left_type(42), top_type(24)),
@@ -107,7 +107,7 @@ BOOST_AUTO_TEST_SUITE(company_line_name_header)
         );
         company_line_name_header_type header2(
             selection,
-            string_type(TETENGO2_TEXT("hoge")),
+            string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type(12, 34, 56),
             position_type(left_type(42), top_type(24)),
@@ -129,7 +129,7 @@ BOOST_AUTO_TEST_SUITE(note_header)
         selection_type selection;
         note_header_type header1(
             selection,
-            string_type(TETENGO2_TEXT("hoge")),
+            string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type(12, 34, 56),
             position_type(left_type(42), top_type(24)),
@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_SUITE(note_header)
         selection_type selection;
         note_header_type header1(
             selection,
-            string_type(TETENGO2_TEXT("hoge")),
+            string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type(12, 34, 56),
             position_type(left_type(42), top_type(24)),
@@ -153,7 +153,7 @@ BOOST_AUTO_TEST_SUITE(note_header)
         );
         note_header_type header2(
             selection,
-            string_type(TETENGO2_TEXT("hoge")),
+            string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type(12, 34, 56),
             position_type(left_type(42), top_type(24)),

@@ -488,7 +488,7 @@ namespace bobura { namespace view { namespace diagram
         {
             return
                 model.timetable().company_name() +
-                (model.timetable().company_name().empty() ? string_type() : string_type(TETENGO2_TEXT(" "))) +
+                (model.timetable().company_name().empty() ? string_type() : string_type{ TETENGO2_TEXT(" ") }) +
                 model.timetable().line_name();
         }
 

@@ -80,11 +80,11 @@ BOOST_AUTO_TEST_SUITE(selection)
         const selection_type selection;
 
         station_type station(
-            string_type(TETENGO2_TEXT("name")),
+            string_type{ TETENGO2_TEXT("name") },
             station_grade_type_set_type::local_type::instance(),
             false,
             false,
-            string_type(TETENGO2_TEXT("note"))
+            string_type{ TETENGO2_TEXT("note") }
         );
         const station_location_type station_location(std::move(station), 42);
 
@@ -100,11 +100,11 @@ BOOST_AUTO_TEST_SUITE(selection)
 
         const train_type train(
             train_type::direction_type::down,
-            string_type(TETENGO2_TEXT("number")),
+            string_type{ TETENGO2_TEXT("number") },
             0,
-            string_type(TETENGO2_TEXT("name")),
-            string_type(TETENGO2_TEXT("name_number")),
-            string_type(TETENGO2_TEXT("note"))
+            string_type{ TETENGO2_TEXT("name") },
+            string_type{ TETENGO2_TEXT("name_number") },
+            string_type{ TETENGO2_TEXT("note") }
         );
 
         BOOST_CHECK(!selection.selected(train, boost::none));
@@ -131,21 +131,21 @@ BOOST_AUTO_TEST_SUITE(selection)
 
         const train_type train(
             train_type::direction_type::down,
-            string_type(TETENGO2_TEXT("number")),
+            string_type{ TETENGO2_TEXT("number") },
             0,
-            string_type(TETENGO2_TEXT("name")),
-            string_type(TETENGO2_TEXT("name_number")),
-            string_type(TETENGO2_TEXT("note"))
+            string_type{ TETENGO2_TEXT("name") },
+            string_type{ TETENGO2_TEXT("name_number") },
+            string_type{ TETENGO2_TEXT("note") }
         );
         
         selection.select(train, boost::none);
         
         station_type station(
-            string_type(TETENGO2_TEXT("name")),
+            string_type{ TETENGO2_TEXT("name") },
             station_grade_type_set_type::local_type::instance(),
             false,
             false,
-            string_type(TETENGO2_TEXT("note"))
+            string_type{ TETENGO2_TEXT("note") }
         );
         const station_location_type station_location(std::move(station), 42);
 
@@ -184,22 +184,22 @@ BOOST_AUTO_TEST_SUITE(selection)
             );
 
             station_type station(
-                string_type(TETENGO2_TEXT("name")),
+                string_type{ TETENGO2_TEXT("name") },
                 station_grade_type_set_type::local_type::instance(),
                 false,
                 false,
-                string_type(TETENGO2_TEXT("note"))
+                string_type{ TETENGO2_TEXT("note") }
             );
             const station_location_type station_location(std::move(station), 42);
             selection.select(station_location);
 
             const train_type train(
                 train_type::direction_type::down,
-                string_type(TETENGO2_TEXT("number")),
+                string_type{ TETENGO2_TEXT("number") },
                 0,
-                string_type(TETENGO2_TEXT("name")),
-                string_type(TETENGO2_TEXT("name_number")),
-                string_type(TETENGO2_TEXT("note"))
+                string_type{ TETENGO2_TEXT("name") },
+                string_type{ TETENGO2_TEXT("name_number") },
+                string_type{ TETENGO2_TEXT("note") }
             );
         
             selection.select(train, boost::none);
@@ -227,22 +227,22 @@ BOOST_AUTO_TEST_SUITE(selection)
             );
 
             station_type station(
-                string_type(TETENGO2_TEXT("name")),
+                string_type{ TETENGO2_TEXT("name") },
                 station_grade_type_set_type::local_type::instance(),
                 false,
                 false,
-                string_type(TETENGO2_TEXT("note"))
+                string_type{ TETENGO2_TEXT("note") }
             );
             const station_location_type station_location(std::move(station), 42);
             selection.select(station_location);
 
             const train_type train(
                 train_type::direction_type::down,
-                string_type(TETENGO2_TEXT("number")),
+                string_type{ TETENGO2_TEXT("number") },
                 0,
-                string_type(TETENGO2_TEXT("name")),
-                string_type(TETENGO2_TEXT("name_number")),
-                string_type(TETENGO2_TEXT("note"))
+                string_type{ TETENGO2_TEXT("name") },
+                string_type{ TETENGO2_TEXT("name_number") },
+                string_type{ TETENGO2_TEXT("note") }
             );
         
             selection.select(train, boost::make_optional<stop_index_type>(42));
@@ -270,22 +270,22 @@ BOOST_AUTO_TEST_SUITE(selection)
             );
 
             station_type station(
-                string_type(TETENGO2_TEXT("name")),
+                string_type{ TETENGO2_TEXT("name") },
                 station_grade_type_set_type::local_type::instance(),
                 false,
                 false,
-                string_type(TETENGO2_TEXT("note"))
+                string_type{ TETENGO2_TEXT("note") }
             );
             const station_location_type station_location(std::move(station), 42);
             selection.select(station_location);
 
             const train_type train(
                 train_type::direction_type::down,
-                string_type(TETENGO2_TEXT("number")),
+                string_type{ TETENGO2_TEXT("number") },
                 0,
-                string_type(TETENGO2_TEXT("name")),
-                string_type(TETENGO2_TEXT("name_number")),
-                string_type(TETENGO2_TEXT("note"))
+                string_type{ TETENGO2_TEXT("name") },
+                string_type{ TETENGO2_TEXT("name_number") },
+                string_type{ TETENGO2_TEXT("note") }
             );
         
             selection.select(train, boost::make_optional<stop_index_type>(42));
@@ -320,11 +320,11 @@ BOOST_AUTO_TEST_SUITE(selection)
             );
 
             station_type station(
-                string_type(TETENGO2_TEXT("name")),
+                string_type{ TETENGO2_TEXT("name") },
                 station_grade_type_set_type::local_type::instance(),
                 false,
                 false,
-                string_type(TETENGO2_TEXT("note"))
+                string_type{ TETENGO2_TEXT("note") }
             );
             const station_location_type station_location(std::move(station), 42);
             selection.select(station_location);
@@ -347,11 +347,11 @@ BOOST_AUTO_TEST_SUITE(selection)
 
             const train_type train(
                 train_type::direction_type::down,
-                string_type(TETENGO2_TEXT("number")),
+                string_type{ TETENGO2_TEXT("number") },
                 0,
-                string_type(TETENGO2_TEXT("name")),
-                string_type(TETENGO2_TEXT("name_number")),
-                string_type(TETENGO2_TEXT("note"))
+                string_type{ TETENGO2_TEXT("name") },
+                string_type{ TETENGO2_TEXT("name_number") },
+                string_type{ TETENGO2_TEXT("note") }
             );
             selection.select(train, boost::none);
 

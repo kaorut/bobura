@@ -178,11 +178,11 @@ namespace
     {
         auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
 
-        p_timetable->set_company_name(string_type(TETENGO2_TEXT("hoge")));
-        p_timetable->set_line_name(string_type(TETENGO2_TEXT("fuga")));
-        p_timetable->set_note(string_type(TETENGO2_TEXT("piyo")));
+        p_timetable->set_company_name(string_type{ TETENGO2_TEXT("hoge") });
+        p_timetable->set_line_name(string_type{ TETENGO2_TEXT("fuga") });
+        p_timetable->set_note(string_type{ TETENGO2_TEXT("piyo") });
         {
-            font_type font(string_type(TETENGO2_TEXT("hogefont")), 42, false, true, false, true);
+            font_type font(string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true);
             color_type color(0xAB, 0xCD, 0xEF);
             const font_color_type font_color(font, color);
 
@@ -205,11 +205,11 @@ namespace
                 p_timetable->station_locations().end(),
                 station_location_type(
                     station_type(
-                        string_type(TETENGO2_TEXT("stationA")),
+                        string_type{ TETENGO2_TEXT("stationA") },
                         local_type::instance(),
                         false,
                         true,
-                        string_type(TETENGO2_TEXT("noteA"))
+                        string_type{ TETENGO2_TEXT("noteA") }
                     ),
                     42
                 )
@@ -218,11 +218,11 @@ namespace
                 p_timetable->station_locations().end(),
                 station_location_type(
                     station_type(
-                        string_type(TETENGO2_TEXT("stationB")),
+                        string_type{ TETENGO2_TEXT("stationB") },
                         principal_type::instance(),
                         true,
                         false,
-                        string_type(TETENGO2_TEXT("noteB"))
+                        string_type{ TETENGO2_TEXT("noteB") }
                     ),
                     4242
                 )
@@ -232,8 +232,8 @@ namespace
             p_timetable->insert_train_kind(
                 p_timetable->train_kinds().end(),
                 train_kind_type(
-                    string_type(TETENGO2_TEXT("nameA")),
-                    string_type(TETENGO2_TEXT("abbrA")),
+                    string_type{ TETENGO2_TEXT("nameA") },
+                    string_type{ TETENGO2_TEXT("abbrA") },
                     color_type(0, 128, 255),
                     train_kind_type::weight_type::normal,
                     train_kind_type::line_style_type::solid
@@ -242,8 +242,8 @@ namespace
             p_timetable->insert_train_kind(
                 p_timetable->train_kinds().end(),
                 train_kind_type(
-                    string_type(TETENGO2_TEXT("nameB")),
-                    string_type(TETENGO2_TEXT("abbrB")),
+                    string_type{ TETENGO2_TEXT("nameB") },
+                    string_type{ TETENGO2_TEXT("abbrB") },
                     color_type(255, 128, 0),
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::dotted
@@ -254,11 +254,11 @@ namespace
             {
                 train_type train(
                     train_type::direction_type::down,
-                    string_type(TETENGO2_TEXT("101D")),
+                    string_type{ TETENGO2_TEXT("101D") },
                     0,
-                    string_type(TETENGO2_TEXT("foo")),
-                    string_type(TETENGO2_TEXT("bar")),
-                    string_type(TETENGO2_TEXT("fuga"))
+                    string_type{ TETENGO2_TEXT("foo") },
+                    string_type{ TETENGO2_TEXT("bar") },
+                    string_type{ TETENGO2_TEXT("fuga") }
                 );
                 train.insert_stop(
                     train.stops().end(),
@@ -273,15 +273,17 @@ namespace
             {
                 train_type train(
                     train_type::direction_type::down,
-                    string_type(TETENGO2_TEXT("123D")),
+                    string_type{ TETENGO2_TEXT("123D") },
                     1,
-                    string_type(TETENGO2_TEXT("baz")),
-                    string_type(TETENGO2_TEXT("bazz")),
+                    string_type{ TETENGO2_TEXT("baz") },
+                    string_type{ TETENGO2_TEXT("bazz") },
                     string_type()
                 );
                 train.insert_stop(
                     train.stops().end(),
-                    stop_type(time_type::uninitialized(), time_type( 6, 0, 30), true, string_type(TETENGO2_TEXT("1")))
+                    stop_type(
+                        time_type::uninitialized(), time_type( 6, 0, 30), true, string_type{ TETENGO2_TEXT("1") }
+                    )
                 );
                 train.insert_stop(
                     train.stops().end(),
@@ -294,15 +296,17 @@ namespace
             {
                 train_type train(
                     train_type::direction_type::up,
-                    string_type(TETENGO2_TEXT("9324M")),
+                    string_type{ TETENGO2_TEXT("9324M") },
                     0,
-                    string_type(TETENGO2_TEXT("abc")),
-                    string_type(TETENGO2_TEXT("def")),
-                    string_type(TETENGO2_TEXT("piyo"))
+                    string_type{ TETENGO2_TEXT("abc") },
+                    string_type{ TETENGO2_TEXT("def") },
+                    string_type{ TETENGO2_TEXT("piyo") }
                 );
                 train.insert_stop(
                     train.stops().end(),
-                    stop_type(time_type::uninitialized(), time_type(6, 20, 0), false, string_type(TETENGO2_TEXT("0A")))
+                    stop_type(
+                        time_type::uninitialized(), time_type(6, 20, 0), false, string_type{ TETENGO2_TEXT("0A") }
+                    )
                 );
                 train.insert_stop(
                     train.stops().end(),
