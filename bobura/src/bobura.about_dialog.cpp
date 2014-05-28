@@ -234,7 +234,7 @@ namespace bobura
         const settings_type&        settings
     )
     :
-    base_type{ parent },
+    base_type(parent),
     m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings))
     {}
 
