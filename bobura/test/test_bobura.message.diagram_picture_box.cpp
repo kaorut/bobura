@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_SUITE(mouse_pressed)
         view_type view(model, message_catalog);
         const mouse_pressed_type mouse_pressed(picture_box, set_mouse_capture, view);
 
-        mouse_pressed(mouse_button_type::left, position_type(left_type(24), top_type(42)), false, false, false);
+        mouse_pressed(mouse_button_type::left, position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
     }
 
 
@@ -163,7 +163,7 @@ BOOST_AUTO_TEST_SUITE(mouse_released)
         view_type view(model, message_catalog);
         const mouse_released_type mouse_released(release_mouse_capture, view);
 
-        mouse_released(mouse_button_type::left, position_type(left_type(24), top_type(42)), false, false, false);
+        mouse_released(mouse_button_type::left, position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
     }
 
 
@@ -194,7 +194,7 @@ BOOST_AUTO_TEST_SUITE(mouse_moved)
         const view_type view(model, message_catalog);
         const mouse_moved_type mouse_moved(picture_box, view);
 
-        mouse_moved(position_type(left_type(24), top_type(42)), false, false, false);
+        mouse_moved(position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
     }
 
 

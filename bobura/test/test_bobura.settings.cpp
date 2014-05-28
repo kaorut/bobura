@@ -160,13 +160,13 @@ BOOST_AUTO_TEST_SUITE(settings)
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings(arguments);
 
-        settings.set_main_window_dimension(dimension_type(width_type(42), height_type(24)));
+        settings.set_main_window_dimension(dimension_type{ width_type{ 42 }, height_type{ 24 } });
 
         const auto dimension = settings.main_window_dimension();
 
         BOOST_REQUIRE(dimension);
-        BOOST_CHECK(tetengo2::gui::dimension<dimension_type>::width(*dimension) == width_type(42));
-        BOOST_CHECK(tetengo2::gui::dimension<dimension_type>::height(*dimension) == height_type(24));
+        BOOST_CHECK(tetengo2::gui::dimension<dimension_type>::width(*dimension) == width_type{ 42 });
+        BOOST_CHECK(tetengo2::gui::dimension<dimension_type>::height(*dimension) == height_type{ 24 });
     }
 
     BOOST_AUTO_TEST_CASE(main_window_maximized)
@@ -228,12 +228,12 @@ BOOST_AUTO_TEST_SUITE(settings)
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings(arguments);
 
-        settings.set_property_bar_width(width_type(42));
+        settings.set_property_bar_width(width_type{ 42 });
 
         const auto width = settings.property_bar_width();
 
         BOOST_REQUIRE(width);
-        BOOST_CHECK(*width == width_type(42));
+        BOOST_CHECK(*width == width_type{ 42 });
     }
 
     BOOST_AUTO_TEST_CASE(property_bar_minimized)
@@ -295,12 +295,12 @@ BOOST_AUTO_TEST_SUITE(settings)
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings(arguments);
 
-        settings.set_property_bar_splitter_position(left_type(42));
+        settings.set_property_bar_splitter_position(left_type{ 42 });
 
         const auto position = settings.property_bar_splitter_position();
 
         BOOST_REQUIRE(position);
-        BOOST_CHECK(*position == left_type(42));
+        BOOST_CHECK(*position == left_type{ 42 });
     }
 
 

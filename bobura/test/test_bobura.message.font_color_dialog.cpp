@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
             2,
             std::pair<boost::optional<font_type>, boost::optional<color_type>>(
                 boost::make_optional<font_type>(font_type::dialog_font()),
-                boost::make_optional<color_type>(color_type(0x12, 0x34, 0x56))
+                boost::make_optional<color_type>(color_type{ 0x12, 0x34, 0x56 })
             )
         );
         const message_catalog_type message_catalog{};
@@ -123,7 +123,7 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
         > observer(
             font_color_list,
             boost::make_optional<size_type>(1), 
-            dimension_type(width_type(42), height_type(24)),
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
             message_catalog
         );
     }
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
             2,
             std::pair<boost::optional<font_type>, boost::optional<color_type>>(
                 boost::make_optional<font_type>(font_type::dialog_font()),
-                boost::make_optional<color_type>(color_type(0x12, 0x34, 0x56))
+                boost::make_optional<color_type>(color_type{ 0x12, 0x34, 0x56 })
             )
         );
         const message_catalog_type message_catalog{};
@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
         > observer(
             font_color_list,
             boost::make_optional<size_type>(1), 
-            dimension_type(width_type(42), height_type(24)),
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
             message_catalog
         );
 
@@ -169,7 +169,7 @@ BOOST_AUTO_TEST_SUITE(font_button_mouse_clicked)
             2,
             std::pair<boost::optional<font_type>, boost::optional<color_type>>(
                 boost::make_optional<font_type>(font_type::dialog_font()),
-                boost::make_optional<color_type>(color_type(0x12, 0x34, 0x56))
+                boost::make_optional<color_type>(color_type{ 0x12, 0x34, 0x56 })
             )
         );
         const message_catalog_type message_catalog{};
@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_SUITE(font_button_mouse_clicked)
             2,
             std::pair<boost::optional<font_type>, boost::optional<color_type>>(
                 boost::make_optional<font_type>(font_type::dialog_font()),
-                boost::make_optional<color_type>(color_type(0x12, 0x34, 0x56))
+                boost::make_optional<color_type>(color_type{ 0x12, 0x34, 0x56 })
             )
         );
         const message_catalog_type message_catalog{};
@@ -232,7 +232,7 @@ BOOST_AUTO_TEST_SUITE(color_button_mouse_clicked)
             2,
             std::pair<boost::optional<font_type>, boost::optional<color_type>>(
                 boost::make_optional<font_type>(font_type::dialog_font()),
-                boost::make_optional<color_type>(color_type(0x12, 0x34, 0x56))
+                boost::make_optional<color_type>(color_type{ 0x12, 0x34, 0x56 })
             )
         );
         const message_catalog_type message_catalog{};
@@ -257,7 +257,7 @@ BOOST_AUTO_TEST_SUITE(color_button_mouse_clicked)
             2,
             std::pair<boost::optional<font_type>, boost::optional<color_type>>(
                 boost::make_optional<font_type>(font_type::dialog_font()),
-                boost::make_optional<color_type>(color_type(0x12, 0x34, 0x56))
+                boost::make_optional<color_type>(color_type{ 0x12, 0x34, 0x56 })
             )
         );
         const message_catalog_type message_catalog{};

@@ -111,10 +111,10 @@ BOOST_AUTO_TEST_SUITE(station_line)
         station_line_type station_line1(
             station_location,
             selection,
-            left_type(42),
-            left_type(12),
-            top_type(24),
-            font_color_type(font_type::dialog_font(), color_type(12, 34, 56))
+            left_type{ 42 },
+            left_type{ 12 },
+            top_type{ 24 },
+            font_color_type(font_type::dialog_font(), color_type{ 12, 34, 56 })
         );
         const station_line_type station_line2(std::move(station_line1));
     }
@@ -141,10 +141,10 @@ BOOST_AUTO_TEST_SUITE(station_line)
         station_line_type station_line1(
             station_location1,
             selection,
-            left_type(42),
-            left_type(12),
-            top_type(24),
-            font_color_type(font_type::dialog_font(), color_type(12, 34, 56))
+            left_type{ 42 },
+            left_type{ 12 },
+            top_type{ 24 },
+            font_color_type(font_type::dialog_font(), color_type{ 12, 34, 56 })
         );
         station_type station2(
             string_type{ TETENGO2_TEXT("name2") },
@@ -157,10 +157,10 @@ BOOST_AUTO_TEST_SUITE(station_line)
         station_line_type station_line2(
             station_location2,
             selection,
-            left_type(42),
-            left_type(12),
-            top_type(24),
-            font_color_type(font_type::dialog_font(), color_type(12, 34, 56))
+            left_type{ 42 },
+            left_type{ 12 },
+            top_type{ 24 },
+            font_color_type(font_type::dialog_font(), color_type{ 12, 34, 56 })
         );
         station_line1 = std::move(station_line2);
     }
@@ -179,15 +179,15 @@ BOOST_AUTO_TEST_SUITE(station_line_list)
         selection_type selection{};
         station_line_list_type station_line_list1(
             model,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42),
-            std::vector<top_type>(2, top_type(42))
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 },
+            std::vector<top_type>(2, top_type{ 42 })
         );
         const station_line_list_type station_line_list2(std::move(station_line_list1));
     }
@@ -200,27 +200,27 @@ BOOST_AUTO_TEST_SUITE(station_line_list)
         selection_type selection{};
         station_line_list_type station_line_list1(
             model,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42),
-            std::vector<top_type>(2, top_type(42))
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 },
+            std::vector<top_type>(2, top_type{ 42 })
         );
         station_line_list_type station_line_list2(
             model,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42),
-            std::vector<top_type>(2, top_type(42))
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 },
+            std::vector<top_type>(2, top_type{ 42 })
         );
 
         station_line_list1 = std::move(station_line_list2);

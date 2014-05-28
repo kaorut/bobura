@@ -85,9 +85,9 @@ BOOST_AUTO_TEST_SUITE(company_line_name_header)
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type(12, 34, 56),
-            position_type(left_type(42), top_type(24)),
-            dimension_type(width_type(24), height_type(42))
+            color_type{ 12, 34, 56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
         );
         const company_line_name_header_type header2(std::move(header1));
     }
@@ -101,17 +101,17 @@ BOOST_AUTO_TEST_SUITE(company_line_name_header)
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type(12, 34, 56),
-            position_type(left_type(42), top_type(24)),
-            dimension_type(width_type(24), height_type(42))
+            color_type{ 12, 34, 56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
         );
         company_line_name_header_type header2(
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type(12, 34, 56),
-            position_type(left_type(42), top_type(24)),
-            dimension_type(width_type(24), height_type(42))
+            color_type{ 12, 34, 56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
         );
 
         header1 = std::move(header2);
@@ -131,9 +131,9 @@ BOOST_AUTO_TEST_SUITE(note_header)
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type(12, 34, 56),
-            position_type(left_type(42), top_type(24)),
-            dimension_type(width_type(24), height_type(42))
+            color_type{ 12, 34, 56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
         );
         const note_header_type header2(std::move(header1));
     }
@@ -147,17 +147,17 @@ BOOST_AUTO_TEST_SUITE(note_header)
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type(12, 34, 56),
-            position_type(left_type(42), top_type(24)),
-            dimension_type(width_type(24), height_type(42))
+            color_type{ 12, 34, 56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
         );
         note_header_type header2(
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type(12, 34, 56),
-            position_type(left_type(42), top_type(24)),
-            dimension_type(width_type(24), height_type(42))
+            color_type{ 12, 34, 56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
         );
 
         header1 = std::move(header2);
@@ -177,7 +177,7 @@ BOOST_AUTO_TEST_SUITE(header)
         window_type window{};
         const picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::both);
         const auto p_canvas = picture_box.create_canvas();
-        header_type header1(model, selection, *p_canvas, dimension_type(width_type(42), height_type(24)));
+        header_type header1(model, selection, *p_canvas, dimension_type{ width_type{ 42 }, height_type{ 24 } });
         const header_type header2(std::move(header1));
     }
 
@@ -190,8 +190,8 @@ BOOST_AUTO_TEST_SUITE(header)
         window_type window{};
         const picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::both);
         const auto p_canvas = picture_box.create_canvas();
-        header_type header1(model, selection, *p_canvas, dimension_type(width_type(42), height_type(24)));
-        header_type header2(model, selection, *p_canvas, dimension_type(width_type(42), height_type(24)));
+        header_type header1(model, selection, *p_canvas, dimension_type{ width_type{ 42 }, height_type{ 24 } });
+        header_type header2(model, selection, *p_canvas, dimension_type{ width_type{ 42 }, height_type{ 24 } });
 
         header1 = std::move(header2);
     }
@@ -205,7 +205,7 @@ BOOST_AUTO_TEST_SUITE(header)
         window_type window{};
         const picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::both);
         const auto p_canvas = picture_box.create_canvas();
-        const header_type header(model, selection, *p_canvas, dimension_type(width_type(42), height_type(24)));
+        const header_type header(model, selection, *p_canvas, dimension_type{ width_type{ 42 }, height_type{ 24 } });
 
         header.dimension();
     }

@@ -90,10 +90,10 @@ BOOST_AUTO_TEST_SUITE(time_line)
         selection_type selection{};
         time_line_type time_line1(
             selection,
-            left_type(42),
-            top_type(24),
-            top_type(42),
-            size_type(size_type::value_type(1, 2)),
+            left_type{ 42 },
+            top_type{ 24 },
+            top_type{ 42 },
+            size_type{ size_type::value_type{ 1, 2 } },
             boost::make_optional<time_type::tick_type>(12)
         );
         const time_line_type time_line2(std::move(time_line1));
@@ -106,18 +106,18 @@ BOOST_AUTO_TEST_SUITE(time_line)
         selection_type selection{};
         time_line_type time_line1(
             selection,
-            left_type(42),
-            top_type(24),
-            top_type(42),
-            size_type(size_type::value_type(1, 2)),
+            left_type{ 42 },
+            top_type{ 24 },
+            top_type{ 42 },
+            size_type{ size_type::value_type{ 1, 2 } },
             boost::make_optional<time_type::tick_type>(12)
         );
         time_line_type time_line2(
             selection,
-            left_type(42),
-            top_type(24),
-            top_type(42),
-            size_type(size_type::value_type(1, 2)),
+            left_type{ 42 },
+            top_type{ 24 },
+            top_type{ 42 },
+            size_type{ size_type::value_type{ 1, 2 } },
             boost::make_optional<time_type::tick_type>(12)
         );
 
@@ -137,15 +137,15 @@ BOOST_AUTO_TEST_SUITE(time_line_list)
         selection_type selection{};
         time_line_list_type time_line_list1(
             model,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42)
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 }
         );
         const time_line_list_type time_line_list2(std::move(time_line_list1));
     }
@@ -158,27 +158,27 @@ BOOST_AUTO_TEST_SUITE(time_line_list)
         selection_type selection{};
         time_line_list_type time_line_list1(
             model,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42)
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 }
         );
         time_line_list_type time_line_list2(
             model,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42)
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 }
         );
 
         time_line_list1 = std::move(time_line_list2);

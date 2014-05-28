@@ -114,7 +114,9 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
         const picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::both);
         const auto p_canvas = picture_box.create_canvas();
         view.draw_on(
-            *p_canvas, dimension_type(width_type(42), height_type(24)), position_type(left_type(2), top_type(3))
+            *p_canvas,
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 2 }, top_type{ 3 } }
         );
     }
 
@@ -139,11 +141,11 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         view.set_horizontal_scale(42);
 
-        BOOST_CHECK(view.horizontal_scale() == horizontal_scale_type(42));
+        BOOST_CHECK(view.horizontal_scale() == horizontal_scale_type{ 42 });
 
         view.set_horizontal_scale(24);
 
-        BOOST_CHECK(view.horizontal_scale() == horizontal_scale_type(24));
+        BOOST_CHECK(view.horizontal_scale() == horizontal_scale_type{ 24 });
     }
 
     BOOST_AUTO_TEST_CASE(vertical_scale)
@@ -167,11 +169,11 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         view.set_vertical_scale(42);
 
-        BOOST_CHECK(view.vertical_scale() == vertical_scale_type(42));
+        BOOST_CHECK(view.vertical_scale() == vertical_scale_type{ 42 });
 
         view.set_vertical_scale(24);
 
-        BOOST_CHECK(view.vertical_scale() == vertical_scale_type(24));
+        BOOST_CHECK(view.vertical_scale() == vertical_scale_type{ 24 });
     }
 
     BOOST_AUTO_TEST_CASE(dimension)
@@ -204,7 +206,7 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
         const message_catalog_type message_catalog{};
         const view_type view(model, message_catalog);
 
-        view.page_size(dimension_type(width_type(42), height_type(24)));
+        view.page_size(dimension_type{ width_type{ 42 }, height_type{ 24 } });
     }
 
     BOOST_AUTO_TEST_CASE(p_item_by_position)
@@ -216,14 +218,14 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
             const message_catalog_type message_catalog{};
             const view_type view(model, message_catalog);
 
-            view.p_item_by_position(position_type(left_type(42), top_type(24)));
+            view.p_item_by_position(position_type{ left_type{ 42 }, top_type{ 24 } });
         }
         {
             const model_type model{};
             const message_catalog_type message_catalog{};
             view_type view(model, message_catalog);
 
-            view.p_item_by_position(position_type(left_type(42), top_type(24)));
+            view.p_item_by_position(position_type{ left_type{ 42 }, top_type{ 24 } });
         }
     }
 

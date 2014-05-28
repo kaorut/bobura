@@ -110,8 +110,8 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             train,
             42,
             selection,
-            position_type(left_type(24), top_type(42)),
-            position_type(left_type(42), top_type(24)),
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
             true,
             message_catalog
         );
@@ -136,8 +136,8 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             train,
             42,
             selection,
-            position_type(left_type(24), top_type(42)),
-            position_type(left_type(42), top_type(24)),
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
             false,
             message_catalog
         );
@@ -145,8 +145,8 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             train,
             42,
             selection,
-            position_type(left_type(24), top_type(42)),
-            position_type(left_type(42), top_type(24)),
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
             true,
             message_catalog
         );
@@ -166,7 +166,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
         const train_kind_type train_kind(
             string_type{ TETENGO2_TEXT("name") },
             string_type{ TETENGO2_TEXT("abbrev") },
-            color_type(0x12, 0x34, 0x56),
+            color_type{ 0x12, 0x34, 0x56 },
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
         );
@@ -182,16 +182,16 @@ BOOST_AUTO_TEST_SUITE(train_line)
                 string_type{ TETENGO2_TEXT("note") }
             ),
             train_kind,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42),
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type(0)),
+            std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
         );
         const train_line_type train_line2(std::move(train_line1));
@@ -205,7 +205,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
         const train_kind_type train_kind(
             string_type{ TETENGO2_TEXT("name") },
             string_type{ TETENGO2_TEXT("abbrev") },
-            color_type(0x12, 0x34, 0x56),
+            color_type{ 0x12, 0x34, 0x56 },
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
         );
@@ -221,16 +221,16 @@ BOOST_AUTO_TEST_SUITE(train_line)
                 string_type{ TETENGO2_TEXT("note") }
             ),
             train_kind,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42),
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type(0)),
+            std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
         );
         train_line_type train_line2(
@@ -243,16 +243,16 @@ BOOST_AUTO_TEST_SUITE(train_line)
                 string_type{ TETENGO2_TEXT("note") }
             ),
             train_kind,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42),
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type(0)),
+            std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
         );
         train_line1 = std::move(train_line2);
@@ -273,16 +273,16 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
         const message_catalog_type message_catalog{};
         train_line_list_type train_line_list1(
             model,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42),
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type(0)),
+            std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
         );
         const train_line_list_type train_line_list2(std::move(train_line_list1));
@@ -298,30 +298,30 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
         const message_catalog_type message_catalog{};
         train_line_list_type train_line_list1(
             model,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42),
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type(0)),
+            std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
         );
         train_line_list_type train_line_list2(
             model,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42),
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type(0)),
+            std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
         );
 

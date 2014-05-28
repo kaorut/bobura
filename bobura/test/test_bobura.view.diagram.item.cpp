@@ -136,13 +136,13 @@ BOOST_AUTO_TEST_SUITE(item)
             selection_type selection{};
             const concrete_item item(selection);
 
-            item.p_item_by_position(position_type(left_type(42), top_type(24)));
+            item.p_item_by_position(position_type{ left_type{ 42 }, top_type{ 24 } });
         }
         {
             selection_type selection{};
             concrete_item item(selection);
 
-            item.p_item_by_position(position_type(left_type(42), top_type(24)));
+            item.p_item_by_position(position_type{ left_type{ 42 }, top_type{ 24 } });
         }
     }
 

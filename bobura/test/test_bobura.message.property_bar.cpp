@@ -93,7 +93,7 @@ BOOST_AUTO_TEST_SUITE(mouse_pressed)
         map_box_type map_box(side_bar);
         const mouse_pressed_type observer(map_box);
 
-        observer(mouse_button_type::left, position_type(left_type(42), top_type(24)), false, false, false);
+        observer(mouse_button_type::left, position_type{ left_type{ 42 }, top_type{ 24 } }, false, false, false);
     }
 
 
