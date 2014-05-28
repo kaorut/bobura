@@ -234,7 +234,7 @@ namespace
                 train_kind_type(
                     string_type{ TETENGO2_TEXT("nameA") },
                     string_type{ TETENGO2_TEXT("abbrA") },
-                    color_type(0, 128, 255),
+                    color_type{ 0, 128, 255 },
                     train_kind_type::weight_type::normal,
                     train_kind_type::line_style_type::solid
                 )
@@ -244,7 +244,7 @@ namespace
                 train_kind_type(
                     string_type{ TETENGO2_TEXT("nameB") },
                     string_type{ TETENGO2_TEXT("abbrB") },
-                    color_type(255, 128, 0),
+                    color_type{ 255, 128, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::dotted
                 )
@@ -282,12 +282,12 @@ namespace
                 train.insert_stop(
                     train.stops().end(),
                     stop_type(
-                        time_type::uninitialized(), time_type( 6, 0, 30), true, string_type{ TETENGO2_TEXT("1") }
+                        time_type::uninitialized(), time_type{  6, 0, 30 }, true, string_type{ TETENGO2_TEXT("1") }
                     )
                 );
                 train.insert_stop(
                     train.stops().end(),
-                    stop_type(time_type(10, 5, 45), time_type::uninitialized(), false, string_type())
+                    stop_type(time_type{ 10, 5, 45 }, time_type::uninitialized(), false, string_type())
                 );
                 p_timetable->insert_down_train(p_timetable->down_trains().end(), train);
             }
@@ -305,7 +305,7 @@ namespace
                 train.insert_stop(
                     train.stops().end(),
                     stop_type(
-                        time_type::uninitialized(), time_type(6, 20, 0), false, string_type{ TETENGO2_TEXT("0A") }
+                        time_type::uninitialized(), time_type{ 6, 20, 0 }, false, string_type{ TETENGO2_TEXT("0A") }
                     )
                 );
                 train.insert_stop(

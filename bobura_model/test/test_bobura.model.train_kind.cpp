@@ -41,7 +41,7 @@ BOOST_AUTO_TEST_SUITE(train_kind)
         const train_kind_type kind(
             string_type{ TETENGO2_TEXT("hoge") },
             string_type{ TETENGO2_TEXT("fuga") },
-            color_type(0, 128, 255),
+            color_type{ 0, 128, 255 },
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
         );
@@ -55,14 +55,14 @@ BOOST_AUTO_TEST_SUITE(train_kind)
             const train_kind_type kind1(
                 string_type{ TETENGO2_TEXT("hoge") },
                 string_type{ TETENGO2_TEXT("fuga") },
-                color_type(0, 128, 255),
+                color_type{ 0, 128, 255 },
                 train_kind_type::weight_type::normal,
                 train_kind_type::line_style_type::solid
             );
             const train_kind_type kind2(
                 string_type{ TETENGO2_TEXT("hoge") },
                 string_type{ TETENGO2_TEXT("fuga") },
-                color_type(0, 128, 255),
+                color_type{ 0, 128, 255 },
                 train_kind_type::weight_type::normal,
                 train_kind_type::line_style_type::solid
             );
@@ -73,14 +73,14 @@ BOOST_AUTO_TEST_SUITE(train_kind)
             const train_kind_type kind1(
                 string_type{ TETENGO2_TEXT("hoge") },
                 string_type{ TETENGO2_TEXT("fuga") },
-                color_type(0, 128, 255),
+                color_type{ 0, 128, 255 },
                 train_kind_type::weight_type::normal,
                 train_kind_type::line_style_type::solid
             );
             const train_kind_type kind2(
                 string_type{ TETENGO2_TEXT("foo") },
                 string_type{ TETENGO2_TEXT("bar") },
-                color_type(255, 128, 0),
+                color_type{ 255, 128, 0 },
                 train_kind_type::weight_type::bold,
                 train_kind_type::line_style_type::dashed
             );
@@ -96,7 +96,7 @@ BOOST_AUTO_TEST_SUITE(train_kind)
         const train_kind_type kind(
             string_type{ TETENGO2_TEXT("hoge") },
             string_type{ TETENGO2_TEXT("fuga") },
-            color_type(0, 128, 255),
+            color_type{ 0, 128, 255 },
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
         );
@@ -111,7 +111,7 @@ BOOST_AUTO_TEST_SUITE(train_kind)
         const train_kind_type kind(
             string_type{ TETENGO2_TEXT("hoge") },
             string_type{ TETENGO2_TEXT("fuga") },
-            color_type(0, 128, 255),
+            color_type{ 0, 128, 255 },
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
         );
@@ -126,12 +126,12 @@ BOOST_AUTO_TEST_SUITE(train_kind)
         const train_kind_type kind(
             string_type{ TETENGO2_TEXT("hoge") },
             string_type{ TETENGO2_TEXT("fuga") },
-            color_type(0, 128, 255),
+            color_type{ 0, 128, 255 },
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
         );
 
-        BOOST_CHECK(kind.color() == color_type(0, 128, 255));
+        BOOST_CHECK((kind.color() == color_type{ 0, 128, 255 }));
     }
 
     BOOST_AUTO_TEST_CASE(weight)
@@ -141,7 +141,7 @@ BOOST_AUTO_TEST_SUITE(train_kind)
         const train_kind_type kind(
             string_type{ TETENGO2_TEXT("hoge") },
             string_type{ TETENGO2_TEXT("fuga") },
-            color_type(0, 128, 255),
+            color_type{ 0, 128, 255 },
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
         );
@@ -156,7 +156,7 @@ BOOST_AUTO_TEST_SUITE(train_kind)
         const train_kind_type kind(
             string_type{ TETENGO2_TEXT("hoge") },
             string_type{ TETENGO2_TEXT("fuga") },
-            color_type(0, 128, 255),
+            color_type{ 0, 128, 255 },
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
         );

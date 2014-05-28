@@ -62,7 +62,7 @@ namespace
         virtual bool selects_impl(const iterator first, const iterator last)
         override
         {
-            return string_type(first, last) == m_line_name;
+            return string_type{ first, last } == m_line_name;
         }
 
         virtual std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)

@@ -457,7 +457,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 const auto& train_kind = p_timetable->train_kinds()[0];
 
                 BOOST_CHECK(train_kind.name() == string_type{ TETENGO2_TEXT("futsuu") });
-                BOOST_CHECK(train_kind.color() == color_type(0, 0, 0));
+                BOOST_CHECK((train_kind.color() == color_type{ 0, 0, 0 }));
                 BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::normal);
             }
 
@@ -511,14 +511,14 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 const auto& train_kind = p_timetable->train_kinds()[0];
 
                 BOOST_CHECK(train_kind.name() == string_type{ TETENGO2_TEXT("futsuu") });
-                BOOST_CHECK(train_kind.color() == color_type(0, 0, 0));
+                BOOST_CHECK((train_kind.color() == color_type{ 0, 0, 0 }));
                 BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::normal);
             }
             {
                 const auto& train_kind = p_timetable->train_kinds()[1];
 
                 BOOST_CHECK(train_kind.name() == string_type{ TETENGO2_TEXT("Super Kaisoku") });
-                BOOST_CHECK(train_kind.color() == color_type(0xAB, 0xCD, 0xEF));
+                BOOST_CHECK((train_kind.color() == color_type{ 0xAB, 0xCD, 0xEF }));
                 BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::bold);
             }
 
@@ -534,15 +534,15 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                     const auto& stop = train.stops()[0];
 
                     BOOST_CHECK(!stop.arrival().initialized());
-                    BOOST_CHECK(stop.departure() == time_type(10, 0, 0));
+                    BOOST_CHECK((stop.departure() == time_type{ 10, 0, 0 }));
                     BOOST_CHECK(!stop.operational());
                     BOOST_CHECK(stop.platform().empty());
                 }
                 {
                     const auto& stop = train.stops()[2];
 
-                    BOOST_CHECK(stop.arrival() == time_type(10, 20, 0));
-                    BOOST_CHECK(stop.departure() == time_type(10, 30, 0));
+                    BOOST_CHECK((stop.arrival() == time_type{ 10, 20, 0 }));
+                    BOOST_CHECK((stop.departure() == time_type{ 10, 30, 0 }));
                     BOOST_CHECK(!stop.operational());
                     BOOST_CHECK(stop.platform().empty());
                 }
@@ -559,7 +559,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                     const auto& stop = train.stops()[0];
 
                     BOOST_CHECK(!stop.arrival().initialized());
-                    BOOST_CHECK(stop.departure() == time_type(11, 0, 0));
+                    BOOST_CHECK((stop.departure() == time_type{ 11, 0, 0 }));
                     BOOST_CHECK(!stop.operational());
                     BOOST_CHECK(stop.platform().empty());
                 }
@@ -574,8 +574,8 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 {
                     const auto& stop = train.stops()[3];
 
-                    BOOST_CHECK(stop.arrival() == time_type(11, 30, 0));
-                    BOOST_CHECK(stop.departure() == time_type(11, 40, 0));
+                    BOOST_CHECK((stop.arrival() == time_type{ 11, 30, 0 }));
+                    BOOST_CHECK((stop.departure() == time_type{ 11, 40, 0 }));
                     BOOST_CHECK(stop.operational());
                     BOOST_CHECK(stop.platform().empty());
                 }
@@ -592,15 +592,15 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 {
                     const auto& stop = train.stops()[2];
 
-                    BOOST_CHECK(stop.arrival() == time_type(11, 40, 00));
-                    BOOST_CHECK(stop.departure() == time_type(11, 50, 00));
+                    BOOST_CHECK((stop.arrival() == time_type{ 11, 40, 00 }));
+                    BOOST_CHECK((stop.departure() == time_type{ 11, 50, 00 }));
                     BOOST_CHECK(stop.operational());
                     BOOST_CHECK(stop.platform().empty());
                 }
                 {
                     const auto& stop = train.stops()[4];
 
-                    BOOST_CHECK(stop.arrival() == time_type(11, 10, 0));
+                    BOOST_CHECK((stop.arrival() == time_type{ 11, 10, 0 }));
                     BOOST_CHECK(!stop.departure().initialized());
                     BOOST_CHECK(!stop.operational());
                     BOOST_CHECK(stop.platform().empty());

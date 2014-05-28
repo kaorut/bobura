@@ -104,8 +104,8 @@ namespace
     {
         return
             stop_type(
-                time_type(arrival_hours, arrival_minutes, 0),
-                time_type(departure_hours, departure_minutes, 0),
+                time_type{ arrival_hours, arrival_minutes, 0 },
+                time_type{ departure_hours, departure_minutes, 0 },
                 false,
                 string_type()
             );

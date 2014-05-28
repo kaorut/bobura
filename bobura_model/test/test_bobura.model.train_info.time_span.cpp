@@ -202,31 +202,31 @@ BOOST_AUTO_TEST_SUITE_END()
             BOOST_CHECK_EQUAL(time_span.seconds(), -7199);
         }
         {
-            BOOST_CHECK_THROW(time_span_type(0, 60, 0), std::out_of_range);
+            BOOST_CHECK_THROW((time_span_type{ 0, 60, 0 }), std::out_of_range);
         }
         {
-            BOOST_CHECK_THROW(time_span_type(0, 0, 60), std::out_of_range);
+            BOOST_CHECK_THROW((time_span_type{ 0, 0, 60 }), std::out_of_range);
         }
         {
-            BOOST_CHECK_THROW(time_span_type(0, 60, 60), std::out_of_range);
+            BOOST_CHECK_THROW((time_span_type{ 0, 60, 60 }), std::out_of_range);
         }
         {
-            BOOST_CHECK_THROW(time_span_type(-1, 1, 1), std::invalid_argument);
+            BOOST_CHECK_THROW((time_span_type{ -1, 1, 1 }), std::invalid_argument);
         }
         {
-            BOOST_CHECK_THROW(time_span_type(-1, -1, 1), std::invalid_argument);
+            BOOST_CHECK_THROW((time_span_type{ -1, -1, 1 }), std::invalid_argument);
         }
         {
-            BOOST_CHECK_THROW(time_span_type(1, -1, 1), std::invalid_argument);
+            BOOST_CHECK_THROW((time_span_type{ 1, -1, 1 }), std::invalid_argument);
         }
         {
-            BOOST_CHECK_THROW(time_span_type(1, -1, -1), std::invalid_argument);
+            BOOST_CHECK_THROW((time_span_type{ 1, -1, -1 }), std::invalid_argument);
         }
         {
-            BOOST_CHECK_THROW(time_span_type(1, 1, -1), std::invalid_argument);
+            BOOST_CHECK_THROW((time_span_type{ 1, 1, -1 }), std::invalid_argument);
         }
         {
-            BOOST_CHECK_THROW(time_span_type(-1, 1, -1), std::invalid_argument);
+            BOOST_CHECK_THROW((time_span_type{ -1, 1, -1 }), std::invalid_argument);
         }
     }
 
