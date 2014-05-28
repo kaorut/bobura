@@ -720,7 +720,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         static position_type to_position(const scroll_bar_size_type left, const scroll_bar_size_type top)
         {
-            return position_type(left_type(left), top_type(top));
+            return { left_type{ left }, top_type{ top } };
         }
 
 

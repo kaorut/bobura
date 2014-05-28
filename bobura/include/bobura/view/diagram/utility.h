@@ -88,7 +88,7 @@ namespace bobura { namespace view { namespace diagram
     template <typename Size>
     Size normal_line_width()
     {
-        return Size(typename Size::value_type(1, 12));
+        return Size(typename Size::value_type{ 1, 12 });
     }
 
     /*!
@@ -101,7 +101,7 @@ namespace bobura { namespace view { namespace diagram
     template <typename Size>
     Size bold_line_width()
     {
-        return Size(typename Size::value_type(1, 6));
+        return Size(typename Size::value_type{ 1, 6 });
     }
 
     /*!
@@ -114,7 +114,7 @@ namespace bobura { namespace view { namespace diagram
     template <typename Size>
     Size selected_line_margin()
     {
-        return Size(typename Size::value_type(1, 3));
+        return Size(typename Size::value_type{ 1, 3 });
     }
 
     /*!

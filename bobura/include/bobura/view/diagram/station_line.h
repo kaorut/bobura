@@ -173,7 +173,7 @@ namespace bobura { namespace view { namespace diagram
             canvas.set_color(m_p_font_color->color());
 
             draw_selectable_line(
-                canvas, position_type(left_type(0), m_top), position_type(m_right, m_top), this->selected()
+                canvas, position_type{ left_type{ 0 }, m_top }, position_type{ m_right, m_top }, this->selected()
             );
 
             const auto& name = m_p_station_location->station().name();
@@ -181,7 +181,7 @@ namespace bobura { namespace view { namespace diagram
             canvas.draw_text(
                 name,
                 position_type(
-                    left_type(0),
+                    left_type{ 0 },
                     m_top - top_type::from(tetengo2::gui::dimension<dimension_type>::height(name_dimension))
                 )
             );
@@ -193,7 +193,7 @@ namespace bobura { namespace view { namespace diagram
             const auto& x = tetengo2::gui::position<position_type>::left(position);
             const auto& y = tetengo2::gui::position<position_type>::top(position);
             if (
-                (left_type(0) <= x && x <= m_station_header_right) &&
+                (left_type{ 0 } <= x && x <= m_station_header_right) &&
                 (m_top - selected_line_margin<top_type>() <= y && y <= m_top + selected_line_margin<top_type>())
             )
             {
@@ -404,7 +404,7 @@ namespace bobura { namespace view { namespace diagram
         {
             const auto canvas_right =
                 left_type::from(tetengo2::gui::dimension<dimension_type>::width(canvas_dimension));
-            const auto horizontal_scale_left = left_type::from(width_type(horizontal_scale));
+            const auto horizontal_scale_left = left_type::from(width_type{ horizontal_scale });
             const auto last_time_position =
                 time_to_left(
                     time_type(24 * 60 * 60 + time_offset.seconds()),

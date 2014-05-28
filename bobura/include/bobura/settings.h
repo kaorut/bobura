@@ -195,7 +195,7 @@ namespace bobura
         */
         void set_main_window_maximized(const bool status)
         {
-            m_p_config->set(string_type{ TETENGO2_TEXT("MainWindow/Maximized") }, config_value_type(status ? 1 : 0));
+            m_p_config->set(string_type{ TETENGO2_TEXT("MainWindow/Maximized") }, config_value_type{ status ? 1 : 0 });
         }
 
         /*!
@@ -249,7 +249,7 @@ namespace bobura
         void set_property_bar_minimized(const bool status)
         {
             m_p_config->set(
-                string_type{ TETENGO2_TEXT("MainWindow/PropertyBarMinimized") }, config_value_type(status ? 1 : 0)
+                string_type{ TETENGO2_TEXT("MainWindow/PropertyBarMinimized") }, config_value_type{ status ? 1 : 0 }
             );
         }
 
@@ -334,16 +334,16 @@ namespace bobura
 
         static boost::program_options::variables_map parse_command_line_arguments(
             const std::vector<string_type>& command_line_arguments
-        )
+            )
         {
             boost::program_options::options_description visible_options{};
             visible_options.add_options()
-            ("dimension,d", value<string_type, string_type>());
+                ("dimension,d", value<string_type, string_type>());
 
             boost::program_options::options_description hidden_options{};
             hidden_options.add_options()
-            ("exe", value<string_type, string_type>())
-            ("input", value<std::vector<string_type>, string_type>());
+                ("exe", value<string_type, string_type>())
+                ("input", value<std::vector<string_type>, string_type>());
 
             boost::program_options::options_description options{};
             options.add(visible_options).add(hidden_options);
@@ -356,11 +356,11 @@ namespace bobura
             try
             {
                 using command_line_parser_type =
-                    boost::program_options::basic_command_line_parser<typename string_type::value_type>;
+                    boost::program_options::basic_command_line_parser < typename string_type::value_type > ;
                 const auto parsed_options =
-                    command_line_parser_type(
-                        command_line_arguments
-                    ).options(std::move(options)).positional(std::move(positional_options)).run();
+                    command_line_parser_type{ command_line_arguments }.options(std::move(options)).positional(std::move(
+                        positional_options)
+                    ).run();
                 boost::program_options::store(parsed_options, option_values);
             }
             catch (const boost::program_options::error&)
@@ -396,11 +396,11 @@ namespace bobura
                 {
                     values.emplace_back(
                         string_type{ TETENGO2_TEXT("MainWindow/Width") },
-                        config_value_type(main_window_dimension_->first)
+                        config_value_type{ main_window_dimension_->first }
                     );
                     values.emplace_back(
                         string_type{ TETENGO2_TEXT("MainWindow/Height") },
-                        config_value_type(main_window_dimension_->second)
+                        config_value_type{ main_window_dimension_->second }
                     );
                 }
             }

@@ -232,10 +232,10 @@ namespace bobura { namespace view { namespace diagram
                 )
                 {
                     return
-                        position_type(
+                        {
                             tetengo2::gui::position<position_type>::left(departure),
                             tetengo2::gui::position<position_type>::top(departure) - text_height
-                        );
+                        };
                 }
                 else
                 {
@@ -246,7 +246,7 @@ namespace bobura { namespace view { namespace diagram
                             static_cast<typename left_type::value_type::int_type>(left_diff * 0x10000), 0x10000
                         );
 
-                    return position_type(left, tetengo2::gui::position<position_type>::top(departure));
+                    return { left, tetengo2::gui::position<position_type>::top(departure) };
                 }
             }
             else
@@ -265,7 +265,7 @@ namespace bobura { namespace view { namespace diagram
                         static_cast<typename top_type::value_type::int_type>(top_diff * 0x10000), 0x10000
                     );
 
-                return position_type(left, top);
+                return { left, top };
             }
         }
 
@@ -302,14 +302,16 @@ namespace bobura { namespace view { namespace diagram
         static size_type to_size(const double value)
         {
             return
-                size_type(
-                    typename size_type::value_type(typename size_type::value_type::int_type(value * 256.0), 256)
-                );
+                size_type{
+                    typename size_type::value_type{
+                        static_cast<typename size_type::value_type::int_type>(value * 256.0), 256
+                    }
+                };
         }
 
         static geo_vector_type geo_minus(const geo_vector_type& v1, const geo_vector_type& v2)
         {
-            return geo_vector_type(v1.first - v2.first, v1.second - v2.second);
+            return { v1.first - v2.first, v1.second - v2.second };
         }
 
         static double geo_abs(const geo_vector_type& v)
@@ -750,7 +752,7 @@ namespace bobura { namespace view { namespace diagram
                 std::accumulate(
                     station_intervals.begin() + upper_stop_index,
                     station_intervals.begin() + lower_stop_index,
-                    time_span_type(0)
+                    time_span_type{ 0 }
                 );
 
             return departure_interval < travel_time ? to_stop.departure() : from_departure + travel_time;
@@ -874,7 +876,7 @@ namespace bobura { namespace view { namespace diagram
             const auto vertical_scroll_bar_position =
                 tetengo2::gui::position<position_type>::top(scroll_bar_position);
 
-            const auto horizontal_scale_left = left_type::from(width_type(horizontal_scale));
+            const auto horizontal_scale_left = left_type::from(width_type{ horizontal_scale });
             const auto time_header_bottom = top_type::from(time_header_height);
             position_type departure(
                 time_to_left(

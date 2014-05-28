@@ -120,7 +120,7 @@ namespace bobura { namespace view { namespace diagram
             if (snap_to_scale_list)
                 return scale_list.larger(scale);
 
-            const auto larger_scale = scale + scale_type(1, 10);
+            const auto larger_scale = scale + scale_type{ 1, 10 };
             if (larger_scale > scale_list.at(scale_list.size() - 1))
                 return scale;
 
@@ -136,7 +136,7 @@ namespace bobura { namespace view { namespace diagram
             if (snap_to_scale_list)
                 return scale_list.smaller(scale);
 
-            const auto smaller_scale = scale - scale_type(1, 10);
+            const auto smaller_scale = scale - scale_type{ 1, 10 };
             if (smaller_scale < scale_list.at(0))
                 return scale;
 
@@ -145,7 +145,7 @@ namespace bobura { namespace view { namespace diagram
 
         static position_type to_position(const scroll_bar_size_type left, const scroll_bar_size_type top)
         {
-            return position_type(left_type(left), top_type(top));
+            return position_type{ left_type{ left }, top_type{ top } };
         }
 
 

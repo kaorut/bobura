@@ -108,7 +108,7 @@ namespace bobura
 
             load_input_file(main_window, command_set_holder.command_set());
 
-            return message_loop_type(main_window)();
+            return message_loop_type{ main_window }();
         }
 
 

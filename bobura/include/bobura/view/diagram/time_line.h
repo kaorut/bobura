@@ -165,11 +165,11 @@ namespace bobura { namespace view { namespace diagram
         const override
         {
             if (m_hours)
-                canvas.draw_text(boost::lexical_cast<string_type>(*m_hours), position_type(m_left, m_top));
+                canvas.draw_text(boost::lexical_cast<string_type>(*m_hours), position_type{ m_left, m_top });
 
             canvas.set_line_style(canvas_type::line_style_type::solid);
             canvas.set_line_width(m_width);
-            canvas.draw_line(position_type(m_left, m_top), position_type(m_left, m_bottom));
+            canvas.draw_line(position_type{ m_left, m_top }, position_type{ m_left, m_bottom });
         }
 
 
@@ -362,12 +362,14 @@ namespace bobura { namespace view { namespace diagram
                 tetengo2::gui::position<position_type>::top(scroll_bar_position);
             const auto line_bottom = std::min(canvas_bottom, station_position_bottom);
 
-            const auto horizontal_scale_left = left_type::from(width_type(horizontal_scale));
+            const auto horizontal_scale_left = left_type::from(width_type{ horizontal_scale });
             const auto minute_interval =
                 time_to_left(
-                    time_type(60), time_offset, 0, left_type(0), station_header_right, horizontal_scale_left
+                    time_type{ 60 }, time_offset, 0, left_type{ 0 }, station_header_right, horizontal_scale_left
                 ) -
-                time_to_left(time_type(0), time_offset, 0, left_type(0), station_header_right, horizontal_scale_left);
+                time_to_left(
+                    time_type{ 0 }, time_offset, 0, left_type{ 0 }, station_header_right, horizontal_scale_left
+                );
 
             std::vector<time_line_type> time_lines{};
             time_lines.reserve(24 * 60);
@@ -406,7 +408,7 @@ namespace bobura { namespace view { namespace diagram
                 }
                 else if (minutes % 10 == 0)
                 {
-                    if (minute_interval >= typename left_type::value_type(4, 12 * 10))
+                    if (minute_interval >= typename left_type::value_type{ 4, 12 * 10 })
                     {
                         time_lines.emplace_back(
                             selection,
@@ -420,7 +422,7 @@ namespace bobura { namespace view { namespace diagram
                 }
                 else if (minutes % 2 == 0)
                 {
-                    if (minute_interval >= typename left_type::value_type(4, 12 * 2))
+                    if (minute_interval >= typename left_type::value_type{ 4, 12 * 2 })
                     {
                         time_lines.emplace_back(
                             selection,
@@ -434,7 +436,7 @@ namespace bobura { namespace view { namespace diagram
                 }
                 else
                 {
-                    if (minute_interval >= typename left_type::value_type(4, 12))
+                    if (minute_interval >= typename left_type::value_type{ 4, 12 })
                     {
                         time_lines.emplace_back(
                             selection,

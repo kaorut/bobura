@@ -180,7 +180,7 @@ namespace bobura
             if (width)
                 this->set_width(*width);
             else
-                this->set_width(width_type(32));
+                this->set_width(width_type{ 32 });
 
             this->size_observer_set().resized()();
 
@@ -194,7 +194,7 @@ namespace bobura
             if (splitter_position)
                 m_p_map_box->set_splitter_position(*splitter_position);
             else
-                m_p_map_box->set_splitter_position(left_type(16));
+                m_p_map_box->set_splitter_position(left_type{ 16 });
         }
 
 

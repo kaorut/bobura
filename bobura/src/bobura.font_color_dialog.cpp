@@ -71,7 +71,7 @@ namespace bobura
             :
             m_base(base),
             m_message_catalog(message_catalog),
-            m_font_color_list(9, internal_font_color_type(boost::none, boost::none)),
+            m_font_color_list(9, internal_font_color_type{ boost::none, boost::none }),
             m_current_category_index(),
             m_p_category_label(),
             m_p_category_list_box(),
@@ -269,7 +269,7 @@ namespace bobura
                 if (!internal_font_color.first || !internal_font_color.second)
                     BOOST_THROW_EXCEPTION(std::logic_error("The font and/or the color have not been set."));
 
-                return font_color_type(*internal_font_color.first, *internal_font_color.second);
+                return font_color_type{ *internal_font_color.first, *internal_font_color.second };
             }
 
 
@@ -421,7 +421,7 @@ namespace bobura
                         m_base, list_box_type::scroll_bar_style_type::none
                     );
 
-                p_picture_box->set_dimension(dimension_type(width_type(24), height_type(8)));
+                p_picture_box->set_dimension(dimension_type{ width_type{ 24 }, height_type{ 8 } });
                 p_picture_box->fast_paint_observer_set().paint().connect(
                     typename boost::mpl::at<
                         font_color_dialog_message_type_list_type,
@@ -469,14 +469,14 @@ namespace bobura
 
             void locate_controls()
             {
-                m_base.set_client_dimension(dimension_type(width_type(46), height_type(22)));
+                m_base.set_client_dimension(dimension_type{ width_type{ 46 }, height_type{ 22 } });
 
                 const left_type category_label_left(2);
 
                 m_p_category_label->fit_to_content();
-                m_p_category_label->set_position(position_type(category_label_left, top_type(1)));
+                m_p_category_label->set_position(position_type{ category_label_left, top_type{ 1 } });
 
-                m_p_category_list_box->set_dimension(dimension_type(width_type(16), height_type(16)));
+                m_p_category_list_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 16 } });
                 m_p_category_list_box->set_position(
                     position_type(
                         category_label_left,
@@ -489,17 +489,17 @@ namespace bobura
 
                 const left_type font_button_left(20);
             
-                m_p_font_button->set_dimension(dimension_type(width_type(8), height_type(2)));
-                m_p_font_button->set_position(position_type(font_button_left, top_type(2)));
+                m_p_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_font_button->set_position(position_type{ font_button_left, top_type{ 2 } });
 
-                m_p_font_text_box->set_dimension(dimension_type(width_type(16), height_type(2)));
-                m_p_font_text_box->set_position(position_type(font_button_left + left_type(8), top_type(2)));
+                m_p_font_text_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 2 } });
+                m_p_font_text_box->set_position(position_type{ font_button_left + left_type{ 8 }, top_type{ 2 } });
 
-                m_p_color_button->set_dimension(dimension_type(width_type(8), height_type(2)));
-                m_p_color_button->set_position(position_type(font_button_left, top_type(5)));
+                m_p_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_color_button->set_position(position_type{ font_button_left, top_type{ 5 } });
 
                 m_p_sample_label->fit_to_content();
-                m_p_sample_label->set_position(position_type(font_button_left, top_type(8)));
+                m_p_sample_label->set_position(position_type{ font_button_left, top_type{ 8 } });
 
                 m_p_sample_picture_box->set_position(
                     position_type(
@@ -511,11 +511,11 @@ namespace bobura
                     )
                 );
 
-                m_p_ok_button->set_dimension(dimension_type(width_type(8), height_type(2)));
-                m_p_ok_button->set_position(position_type(left_type(27), top_type(19)));
+                m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_ok_button->set_position(position_type{ left_type{ 27 }, top_type{ 19 } });
 
-                m_p_cancel_button->set_dimension(dimension_type(width_type(8), height_type(2)));
-                m_p_cancel_button->set_position(position_type(left_type(36), top_type(19)));
+                m_p_cancel_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_cancel_button->set_position(position_type{ left_type{ 36 }, top_type{ 19 } });
             }
 
             void insert_category_list_box_values()
