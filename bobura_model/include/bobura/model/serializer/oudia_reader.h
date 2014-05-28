@@ -635,7 +635,7 @@ namespace bobura { namespace model { namespace serializer
                 if (!minutes || *minutes >= 60)
                     return boost::none;
 
-                return boost::make_optional(time_type(*hours, *minutes, 0));
+                return boost::make_optional(time_type{ *hours, *minutes, 0 });
             }
 
             timetable_type& m_timetable;
@@ -745,7 +745,7 @@ namespace bobura { namespace model { namespace serializer
         {
             skip_line_breaks(first, last);
             const auto next_line_break = std::find_if(first, last, line_break);
-            auto line = encoder().decode(input_string_type(first, next_line_break));
+            auto line = encoder().decode(input_string_type{ first, next_line_break });
             first = next_line_break;
             return line;
         }
@@ -820,7 +820,7 @@ namespace bobura { namespace model { namespace serializer
             if (line.empty() || line[line.length() - 1] != char_type(TETENGO2_TEXT('.')))
                 return std::unique_ptr<state>();
 
-            const auto name = string_ref_type(line).substr(0, line.length() - 1);
+            const auto name = string_ref_type{ line }.substr(0, line.length() - 1);
             if (name.empty())
             {
                 return tetengo2::stdalt::make_unique<initial_state>(timetable);

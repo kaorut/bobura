@@ -154,7 +154,7 @@ namespace bobura { namespace model { namespace timetable_info
             else if (interval >= whole_day())
                 interval -= whole_day();
             
-            if (interval <= time_span_type(0))
+            if (interval <= time_span_type{ 0 })
                 interval = default_interval();
         }
 

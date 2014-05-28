@@ -639,7 +639,7 @@ namespace bobura { namespace model
             }
 
             const auto distance = distance_between(m_station_locations, train, i_departure, i_arrival);
-            assert(distance > operating_distance_type(0));
+            assert(distance > operating_distance_type{ 0 });
 
             const auto time_span = time_span_between(i_departure, i_arrival);
 

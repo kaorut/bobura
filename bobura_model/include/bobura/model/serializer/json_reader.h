@@ -552,7 +552,7 @@ namespace bobura { namespace model { namespace serializer
                 if (member->first != string_type{ TETENGO2_TEXT("operating_distance") })
                     return boost::none;
 
-                operating_distance = operating_distance_type(member->second) / 10;
+                operating_distance = operating_distance_type{ member->second } / 10;
             }
             
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
@@ -966,7 +966,7 @@ namespace bobura { namespace model { namespace serializer
             if (seconds > 59)
                 return boost::none;
 
-            return time_type(hours, minutes, seconds);
+            return boost::make_optional(time_type{ hours, minutes, seconds });
         }
 
         static boost::optional<std::pair<string_type, string_type>> read_string_member(pull_parser_type& pull_parser)

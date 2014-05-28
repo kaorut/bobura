@@ -250,7 +250,7 @@ namespace bobura { namespace model { namespace train_info
             while (seconds < 0)
                 seconds += time_span_type::seconds_of_whole_day();
 
-            return time_span_type(seconds);
+            return time_span_type{ seconds };
         }
 
         /*!
@@ -314,7 +314,7 @@ namespace bobura { namespace model { namespace train_info
             const tick_type minutes = m_seconds_from_midnight / 60 - hours * 60;
             const tick_type seconds = m_seconds_from_midnight - hours * 60 * 60 - minutes * 60;
 
-            return hours_minutes_seconds_type(hours, minutes, seconds);
+            return hours_minutes_seconds_type{ hours, minutes, seconds };
         }
 
         /*!

@@ -167,7 +167,7 @@ namespace bobura { namespace model { namespace serializer
                 if (comma_position == string_type::npos)
                     return false;
 
-                const auto props = string_ref_type(line).substr(0, comma_position);
+                const auto props = string_ref_type{ line }.substr(0, comma_position);
                 auto name = line.substr(comma_position + 1);
 
                 station_location_type station_location(
@@ -187,7 +187,7 @@ namespace bobura { namespace model { namespace serializer
                     m_timetable.station_locations().end(), std::move(station_location)
                 );
 
-                m_operating_distance += operating_distance_type(1);
+                m_operating_distance += operating_distance_type{ 1 };
 
                 return true;
             }
@@ -267,9 +267,9 @@ namespace bobura { namespace model { namespace serializer
                 if (equal_position == string_type::npos)
                     return boost::none;
 
-                const auto key_and_index = string_ref_type(line).substr(0, equal_position);
+                const auto key_and_index = string_ref_type{ line }.substr(0, equal_position);
                 const auto index_position = key_and_index.find_first_of(string_ref_type(TETENGO2_TEXT("0123456789")));
-                auto key = string_ref_type(key_and_index).substr(0, index_position);
+                auto key = string_ref_type{ key_and_index }.substr(0, index_position);
                 std::size_t index = 0;
                 if (index_position != string_type::npos)
                 {
@@ -283,7 +283,7 @@ namespace bobura { namespace model { namespace serializer
                     }
                 }
 
-                auto values = split_by_comma(string_ref_type(line).substr(equal_position + 1));
+                auto values = split_by_comma(string_ref_type{ line }.substr(equal_position + 1));
 
                 return boost::make_optional(split_type(std::move(key), index, std::move(values)));
             }
@@ -575,7 +575,7 @@ namespace bobura { namespace model { namespace serializer
                 if (minutes > 59)
                     return boost::none;
 
-                return time_type(hours, minutes, 0);
+                return boost::make_optional(time_type{ hours, minutes, 0 });
             }
 
             bool is_operational(const string_ref_type& time_string)
@@ -826,7 +826,7 @@ namespace bobura { namespace model { namespace serializer
                     train_kind_type(
                         encoder().decode(kind.name),
                         encoder().decode(kind.abbreviation),
-                        color_type(0, 0, 0),
+                        color_type{ 0, 0, 0 },
                         kind.weight,
                         kind.line_style
                     )
@@ -870,7 +870,7 @@ namespace bobura { namespace model { namespace serializer
             {
                 skip_line_breaks(first, last);
                 const auto next_line_break = std::find_if(first, last, line_break);
-                line += encoder().decode(input_string_type(first, next_line_break));
+                line += encoder().decode(input_string_type{ first, next_line_break });
 
                 first = next_line_break;
                 if (!line.empty() && line_contination(line[line.length() - 1]))
@@ -933,7 +933,7 @@ namespace bobura { namespace model { namespace serializer
             const auto color = 
                 custom_color ?
                 to_color((prop & 0x3C) / 0x04) :
-                (base ? boost::make_optional(base->color()) : boost::make_optional(color_type(0, 0, 0)));
+                (base ? boost::make_optional(base->color()) : boost::make_optional(color_type{ 0, 0, 0 }));
             if (!color)
                 return boost::none;
             const auto weight = to_weight((prop & 0x80) != 0);
