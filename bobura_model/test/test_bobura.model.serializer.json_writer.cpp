@@ -70,7 +70,7 @@ namespace
 
     // variables
 
-    const std::string json0(
+    const std::string json0{
         "[\n"
         "    {\n"
         "        \"company_name\": \"\",\n"
@@ -83,9 +83,9 @@ namespace
         "    [],\n"
         "    []\n"
         "]\n"
-    );
+    };
 
-    const std::string json1(
+    const std::string json1{
         "[\n"
         "    {\n"
         "        \"company_name\": \"hoge\",\n"
@@ -169,7 +169,7 @@ namespace
         "        }\n"
         "    ]\n"
         "]\n"
-    );
+    };
 
 
     // functions

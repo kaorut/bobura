@@ -112,7 +112,7 @@ BOOST_AUTO_TEST_SUITE(select_oudia_diagram)
         BOOST_TEST_PASSPOINT();
 
         abstract_window_type parent;
-        string_type file_name(TETENGO2_TEXT("hoge"));
+        string_type file_name{ TETENGO2_TEXT("hoge") };
         const message_catalog_type message_catalog;
         const select_oudia_diagram_type select_oudia_diagram(parent, std::move(file_name), message_catalog);
     }
@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_SUITE(select_oudia_diagram)
         BOOST_TEST_PASSPOINT();
 
         abstract_window_type parent;
-        string_type file_name(TETENGO2_TEXT("hoge"));
+        string_type file_name{ TETENGO2_TEXT("hoge") };
         const message_catalog_type message_catalog;
         const select_oudia_diagram_type select_oudia_diagram(parent, std::move(file_name), message_catalog);
 

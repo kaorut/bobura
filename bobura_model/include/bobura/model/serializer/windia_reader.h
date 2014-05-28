@@ -674,41 +674,41 @@ namespace bobura { namespace model { namespace serializer
 
         static const string_type& windia_section_label()
         {
-            static const string_type singleton(
+            static const string_type singleton{
                 encoder().decode(input_string_type{ TETENGO2_TEXT("[WinDIA]") })
-            );
+            };
             return singleton;
         }
 
         static const string_type& station_section_label()
         {
-            static const string_type singleton(
+            static const string_type singleton{
                 encoder().decode(input_string_type{ TETENGO2_TEXT("[\x89\x77]") })
-            ); // "eki"
+            }; // "eki"
             return singleton;
         }
 
         static const string_type& line_kind_section_label()
         {
-            static const string_type singleton(
+            static const string_type singleton{
                 encoder().decode(input_string_type{ TETENGO2_TEXT("[\x90\xFC\x8E\xED]") })
-            ); // "senshu"
+            }; // "senshu"
             return singleton;
         }
 
         static const string_type& down_train_section_label()
         {
-            static const string_type singleton(
+            static const string_type singleton{
                 encoder().decode(input_string_type{ TETENGO2_TEXT("[\x89\xBA\x82\xE8]") })
-            ); // "kudari"
+            }; // "kudari"
             return singleton;
         }
 
         static const string_type& up_train_section_label()
         {
-            static const string_type singleton(
+            static const string_type singleton{
                 encoder().decode(input_string_type{ TETENGO2_TEXT("[\x8F\xE3\x82\xE8]") })
-            ); // "nobori"
+            }; // "nobori"
             return singleton;
         }
 

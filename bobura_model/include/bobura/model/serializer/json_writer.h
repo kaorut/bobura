@@ -111,43 +111,43 @@ namespace bobura { namespace model { namespace serializer
 
         static const output_string_type& comma()
         {
-            static const output_string_type singleton(TETENGO2_TEXT(","));
+            static const output_string_type singleton{ TETENGO2_TEXT(",") };
             return singleton;
         }
 
         static const output_string_type& space()
         {
-            static const output_string_type singleton(TETENGO2_TEXT(" "));
+            static const output_string_type singleton{ TETENGO2_TEXT(" ") };
             return singleton;
         }
 
         static const output_string_type& array_begin()
         {
-            static const output_string_type singleton(TETENGO2_TEXT("["));
+            static const output_string_type singleton{ TETENGO2_TEXT("[") };
             return singleton;
         }
 
         static const output_string_type& array_end()
         {
-            static const output_string_type singleton(TETENGO2_TEXT("]"));
+            static const output_string_type singleton{ TETENGO2_TEXT("]") };
             return singleton;
         }
 
         static const output_string_type& object_begin()
         {
-            static const output_string_type singleton(TETENGO2_TEXT("{"));
+            static const output_string_type singleton{ TETENGO2_TEXT("{") };
             return singleton;
         }
 
         static const output_string_type& object_end()
         {
-            static const output_string_type singleton(TETENGO2_TEXT("}"));
+            static const output_string_type singleton{ TETENGO2_TEXT("}") };
             return singleton;
         }
 
         static const string_type quote(const string_type& string)
         {
-            static const string_type quotation_symbol(TETENGO2_TEXT("\""));
+            static const string_type quotation_symbol{ TETENGO2_TEXT("\"") };
             return quotation_symbol + string + quotation_symbol;
         }
 

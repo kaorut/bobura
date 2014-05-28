@@ -181,7 +181,7 @@ namespace bobura { namespace message { namespace font_color_dialog
                 *m_font_color_list[*m_current_category_index].second : color_type(0x40, 0x40, 0x40)
             );
 
-            const string_type text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:SAMPLE")));
+            const string_type text{ m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:SAMPLE")) };
 
             const auto text_and_line_tops = sample_text_and_line_tops(canvas, text);
 

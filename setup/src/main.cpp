@@ -29,31 +29,31 @@ namespace
 {
     const std::wstring& application_name()
     {
-        static const std::wstring singleton(L"Bobura");
+        static const std::wstring singleton{ L"Bobura" };
         return singleton;
     }
 
     const std::string& application_name_narrow()
     {
-        static const std::string singleton("Bobura");
+        static const std::string singleton{ "Bobura" };
         return singleton;
     }
 
     const std::wstring& message_box_title()
     {
-        static const std::wstring singleton(application_name() + L" Setup");
+        static const std::wstring singleton{ application_name() + L" Setup" };
         return singleton;
     }
 
     const std::wstring& msi_prefix()
     {
-        static const std::wstring singleton(L"bobura.");
+        static const std::wstring singleton{ L"bobura." };
         return singleton;
     }
 
     const std::wstring& msi_suffix()
     {
-        static const std::wstring singleton(L".msi");
+        static const std::wstring singleton{ L".msi" };
         return singleton;
     }
 

@@ -113,9 +113,9 @@ namespace bobura { namespace model { namespace serializer
             if (path_string.length() < extension_string.length())
                 return false;
             
-            const path_string_type path_extension_string(
+            const path_string_type path_extension_string{
                 boost::prior(path_string.end(), extension_string.length()), path_string.end()
-            );
+            };
 
             return path_extension_string == extension_string;
         }
