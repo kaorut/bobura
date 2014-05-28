@@ -92,7 +92,7 @@ namespace bobura
 
         int run()
         {
-            const message_catalog_type message_catalog;
+            const message_catalog_type message_catalog{};
             view_type view(m_model, message_catalog);
             const command_set_holder_type command_set_holder(m_settings, m_model, view, message_catalog);
 

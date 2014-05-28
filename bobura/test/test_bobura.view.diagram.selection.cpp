@@ -60,10 +60,10 @@ BOOST_AUTO_TEST_SUITE(selection)
         BOOST_TEST_PASSPOINT();
 
         {
-            const selection_type selection;
+            const selection_type selection{};
         }
         {
-            selection_type selection1;
+            selection_type selection1{};
             const selection_type selection2(std::move(selection1));
         }
     }
@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_SUITE(selection)
     {
         BOOST_TEST_PASSPOINT();
 
-        const selection_type selection;
+        const selection_type selection{};
 
         station_type station(
             string_type{ TETENGO2_TEXT("name") },
@@ -96,7 +96,7 @@ BOOST_AUTO_TEST_SUITE(selection)
     {
         BOOST_TEST_PASSPOINT();
 
-        const selection_type selection;
+        const selection_type selection{};
 
         const train_type train(
             train_type::direction_type::down,
@@ -119,7 +119,7 @@ BOOST_AUTO_TEST_SUITE(selection)
     {
         BOOST_TEST_PASSPOINT();
 
-        selection_type selection;
+        selection_type selection{};
 
         const station_location_type* p_selected_station_location = nullptr;
         selection.selection_observer_set().station_selected().connect(
@@ -168,10 +168,10 @@ BOOST_AUTO_TEST_SUITE(selection)
         BOOST_TEST_PASSPOINT();
 
         {
-            selection_type selection;
+            selection_type selection{};
 
             const train_type* p_selected_train = nullptr;
-            boost::optional<stop_index_type> selected_departure_stop_index;
+            boost::optional<stop_index_type> selected_departure_stop_index{};
             selection.selection_observer_set().train_selected().connect(
                 [&p_selected_train, &selected_departure_stop_index](
                     const train_type&                       train,
@@ -211,10 +211,10 @@ BOOST_AUTO_TEST_SUITE(selection)
             BOOST_CHECK(selected_departure_stop_index == boost::none);
         }
         {
-            selection_type selection;
+            selection_type selection{};
 
             const train_type* p_selected_train = nullptr;
-            boost::optional<stop_index_type> selected_departure_stop_index;
+            boost::optional<stop_index_type> selected_departure_stop_index{};
             selection.selection_observer_set().train_selected().connect(
                 [&p_selected_train, &selected_departure_stop_index](
                     const train_type&                       train,
@@ -254,10 +254,10 @@ BOOST_AUTO_TEST_SUITE(selection)
             BOOST_CHECK(selected_departure_stop_index == boost::make_optional<stop_index_type>(42));
         }
         {
-            selection_type selection;
+            selection_type selection{};
 
             const train_type* p_selected_train = nullptr;
-            boost::optional<stop_index_type> selected_departure_stop_index;
+            boost::optional<stop_index_type> selected_departure_stop_index{};
             selection.selection_observer_set().train_selected().connect(
                 [&p_selected_train, &selected_departure_stop_index](
                     const train_type&                       train,
@@ -309,7 +309,7 @@ BOOST_AUTO_TEST_SUITE(selection)
         BOOST_TEST_PASSPOINT();
 
         {
-            selection_type selection;
+            selection_type selection{};
 
             bool all_unselected_called = false;
             selection.selection_observer_set().all_unselected().connect(
@@ -335,7 +335,7 @@ BOOST_AUTO_TEST_SUITE(selection)
             BOOST_CHECK(all_unselected_called);
         }
         {
-            selection_type selection;
+            selection_type selection{};
 
             bool all_unselected_called = false;
             selection.selection_observer_set().all_unselected().connect(
@@ -368,12 +368,12 @@ BOOST_AUTO_TEST_SUITE(selection)
         BOOST_TEST_PASSPOINT();
 
         {
-            const selection_type selection;
+            const selection_type selection{};
 
             selection.selection_observer_set();
         }
         {
-            selection_type selection;
+            selection_type selection{};
 
             selection.selection_observer_set();
         }

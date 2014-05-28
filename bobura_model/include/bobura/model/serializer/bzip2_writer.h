@@ -86,7 +86,7 @@ namespace bobura { namespace model { namespace serializer
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream)
         override
         {
-            boost::iostreams::filtering_ostream filtering_output_stream;
+            boost::iostreams::filtering_ostream filtering_output_stream{};
             filtering_output_stream.push(boost::iostreams::bzip2_compressor());
             filtering_output_stream.push(output_stream);
 

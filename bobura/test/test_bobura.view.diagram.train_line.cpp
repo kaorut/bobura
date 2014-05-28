@@ -104,8 +104,8 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             string_type{ TETENGO2_TEXT("name_number") },
             string_type{ TETENGO2_TEXT("note") }
         );
-        selection_type selection;
-        const message_catalog_type message_catalog;
+        selection_type selection{};
+        const message_catalog_type message_catalog{};
         train_line_fragment_type train_line_fragment1(
             train,
             42,
@@ -130,8 +130,8 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             string_type{ TETENGO2_TEXT("name_number") },
             string_type{ TETENGO2_TEXT("note") }
         );
-        selection_type selection;
-        const message_catalog_type message_catalog;
+        selection_type selection{};
+        const message_catalog_type message_catalog{};
         train_line_fragment_type train_line_fragment1(
             train,
             42,
@@ -162,7 +162,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
     {
         BOOST_TEST_PASSPOINT();
 
-        selection_type selection;
+        selection_type selection{};
         const train_kind_type train_kind(
             string_type{ TETENGO2_TEXT("name") },
             string_type{ TETENGO2_TEXT("abbrev") },
@@ -171,7 +171,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             train_kind_type::line_style_type::solid
         );
         const station_intervals_type station_intervals(2, station_interval_calculator_type::default_interval());
-        const message_catalog_type message_catalog;
+        const message_catalog_type message_catalog{};
         train_line_type train_line1(
             train_type(
                 train_type::direction_type::down,
@@ -201,7 +201,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
     {
         BOOST_TEST_PASSPOINT();
 
-        selection_type selection;
+        selection_type selection{};
         const train_kind_type train_kind(
             string_type{ TETENGO2_TEXT("name") },
             string_type{ TETENGO2_TEXT("abbrev") },
@@ -210,7 +210,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             train_kind_type::line_style_type::solid
         );
         const station_intervals_type station_intervals(2, station_interval_calculator_type::default_interval());
-        const message_catalog_type message_catalog;
+        const message_catalog_type message_catalog{};
         train_line_type train_line1(
             train_type(
                 train_type::direction_type::down,
@@ -267,10 +267,10 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        selection_type selection;
+        const model_type model{};
+        selection_type selection{};
         const station_intervals_type station_intervals(2, station_interval_calculator_type::default_interval());
-        const message_catalog_type message_catalog;
+        const message_catalog_type message_catalog{};
         train_line_list_type train_line_list1(
             model,
             time_span_type(42 * 60),
@@ -292,10 +292,10 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        selection_type selection;
+        const model_type model{};
+        selection_type selection{};
         const station_intervals_type station_intervals(2, station_interval_calculator_type::default_interval());
-        const message_catalog_type message_catalog;
+        const message_catalog_type message_catalog{};
         train_line_list_type train_line_list1(
             model,
             time_span_type(42 * 60),

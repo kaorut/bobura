@@ -99,7 +99,7 @@ namespace bobura { namespace load_save
         bool operator()(model_type& model, abstract_window_type& parent)
         const
         {
-            path_type path;
+            path_type path{};
             if (!model.has_path() || m_ask_file_path)
             {
                 file_save_dialog_type dialog(
@@ -144,7 +144,7 @@ namespace bobura { namespace load_save
             }
 
             {
-                boost::system::error_code error_code;
+                boost::system::error_code error_code{};
                 boost::filesystem::rename(temporary_path, path, error_code);
                 if (error_code)
                 {

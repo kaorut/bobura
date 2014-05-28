@@ -85,7 +85,7 @@ namespace
 
     std::vector<std::unique_ptr<reader_type>> create_concrete_readers()
     {
-        std::vector<std::unique_ptr<reader_type>> readers;
+        std::vector<std::unique_ptr<reader_type>> readers{};
 
         readers.push_back(tetengo2::stdalt::make_unique<concrete_reader>(string_type{ TETENGO2_TEXT("hoge") }));
         readers.push_back(tetengo2::stdalt::make_unique<concrete_reader>(string_type{ TETENGO2_TEXT("fuga") }));
@@ -112,7 +112,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             const reader_selector_type reader_selector(std::move(concrete_readers));
         }
         {
-            std::vector<std::unique_ptr<reader_type>> concrete_readers;
+            std::vector<std::unique_ptr<reader_type>> concrete_readers{};
             BOOST_CHECK_THROW(reader_selector_type(std::move(concrete_readers)), std::invalid_argument);
         }
     }

@@ -123,7 +123,7 @@ namespace bobura { namespace model { namespace serializer
             const message_catalog_type& message_catalog
         )
         {
-            std::vector<std::unique_ptr<reader_type>> readers;
+            std::vector<std::unique_ptr<reader_type>> readers{};
 
             readers.push_back(tetengo2::stdalt::make_unique<json_reader_type>());
             readers.push_back(

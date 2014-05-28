@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        const timetable_type timetable;
+        const timetable_type timetable{};
     }
 
 // This test case causes a segmentation fault on Linux.
@@ -88,32 +88,32 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         {
-            const timetable_type timetable1;
+            const timetable_type timetable1{};
 
-            const timetable_type timetable2;
+            const timetable_type timetable2{};
 
             BOOST_CHECK(timetable1 == timetable2);
         }
         {
-            timetable_type timetable1;
+            timetable_type timetable1{};
             timetable1.set_line_name(string_type{ TETENGO2_TEXT("hoge") });
 
-            timetable_type timetable2;
+            timetable_type timetable2{};
             timetable2.set_line_name(string_type{ TETENGO2_TEXT("hoge") });
 
             BOOST_CHECK(timetable1 == timetable2);
         }
         {
-            timetable_type timetable1;
+            timetable_type timetable1{};
             timetable1.set_line_name(string_type{ TETENGO2_TEXT("hoge") });
 
-            timetable_type timetable2;
+            timetable_type timetable2{};
             timetable2.set_line_name(string_type{ TETENGO2_TEXT("fuga") });
 
             BOOST_CHECK(timetable1 != timetable2);
         }
         {
-            timetable_type timetable1;
+            timetable_type timetable1{};
             timetable1.insert_station_location(
                 timetable1.station_locations().end(),
                 station_location_type(
@@ -128,7 +128,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                 )
             );
 
-            timetable_type timetable2;
+            timetable_type timetable2{};
             timetable2.insert_station_location(
                 timetable2.station_locations().end(),
                 station_location_type(
@@ -146,7 +146,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(timetable1 == timetable2);
         }
         {
-            timetable_type timetable1;
+            timetable_type timetable1{};
             timetable1.insert_station_location(
                 timetable1.station_locations().end(),
                 station_location_type(
@@ -161,7 +161,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                 )
             );
 
-            timetable_type timetable2;
+            timetable_type timetable2{};
             timetable2.insert_station_location(
                 timetable2.station_locations().end(),
                 station_location_type(
@@ -179,7 +179,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(timetable1 != timetable2);
         }
         {
-            timetable_type timetable1;
+            timetable_type timetable1{};
             timetable1.insert_station_location(
                 timetable1.station_locations().end(),
                 station_location_type(
@@ -194,7 +194,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                 )
             );
 
-            timetable_type timetable2;
+            timetable_type timetable2{};
             timetable2.insert_station_location(
                 timetable2.station_locations().end(),
                 station_location_type(
@@ -225,7 +225,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(timetable1 != timetable2);
         }
         {
-            timetable_type timetable1;
+            timetable_type timetable1{};
             timetable1.insert_station_location(
                 timetable1.station_locations().end(),
                 station_location_type(
@@ -253,7 +253,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                 )
             );
 
-            timetable_type timetable2;
+            timetable_type timetable2{};
             timetable2.insert_station_location(
                 timetable2.station_locations().end(),
                 station_location_type(
@@ -290,7 +290,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        const timetable_type timetable;
+        const timetable_type timetable{};
 
         BOOST_CHECK(timetable.company_name().empty());
     }
@@ -299,7 +299,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        timetable_type timetable;
+        timetable_type timetable{};
 
         timetable.set_company_name(string_type{ TETENGO2_TEXT("hoge") });
 
@@ -310,7 +310,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        const timetable_type timetable;
+        const timetable_type timetable{};
 
         BOOST_CHECK(timetable.line_name().empty());
     }
@@ -319,7 +319,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        timetable_type timetable;
+        timetable_type timetable{};
 
         timetable.set_line_name(string_type{ TETENGO2_TEXT("hoge") });
 
@@ -330,7 +330,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        const timetable_type timetable;
+        const timetable_type timetable{};
 
         BOOST_CHECK(timetable.note().empty());
     }
@@ -339,7 +339,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        timetable_type timetable;
+        timetable_type timetable{};
 
         timetable.set_note(string_type{ TETENGO2_TEXT("hoge") });
 
@@ -356,14 +356,14 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         {
-            const timetable_type timetable;
+            const timetable_type timetable{};
 
             const auto& station_locations = timetable.station_locations();
 
             BOOST_CHECK(station_locations.empty());
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
 
             const timetable_type::station_locations_type station_locations{
                 station_location_type{
@@ -382,7 +382,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(timetable.station_locations() == station_locations);
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
 
             const timetable_type::station_locations_type station_locations{
                     station_location_type{
@@ -424,7 +424,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         {
-            timetable_type timetable;
+            timetable_type timetable{};
 
             const timetable_type::station_locations_type station_locations{
                 station_location_type{
@@ -454,7 +454,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(timetable.station_locations() == station_locations);
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -476,7 +476,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_EQUAL(station_locations[0].operating_distance(), 1U);
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -513,7 +513,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_EQUAL(station_locations[1].operating_distance(), 2U);
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -551,7 +551,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_EQUAL(station_locations[0].operating_distance(), 2U);
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -618,7 +618,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_EQUAL(station_locations[3].operating_distance(), 4U);
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -732,7 +732,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(timetable.down_trains()[2].stops()[1].platform().empty());
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -858,7 +858,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -893,7 +893,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(timetable.station_locations().empty());
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -930,7 +930,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_EQUAL(timetable.station_locations()[0].operating_distance(), 2U);
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -1001,7 +1001,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     3
                 },
             };
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -1053,7 +1053,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_EQUAL(timetable.station_locations()[1].operating_distance(), 3U);
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -1117,7 +1117,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_EQUAL(timetable.down_trains()[0].stops().size(), timetable.station_locations().size());
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -1181,7 +1181,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_EQUAL(timetable.up_trains()[0].stops().size(), timetable.station_locations().size());
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -1245,7 +1245,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_EQUAL(timetable.down_trains()[0].stops().size(), timetable.station_locations().size());
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -1315,7 +1315,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        const timetable_type timetable;
+        const timetable_type timetable{};
         timetable.station_intervals();
     }
 
@@ -1323,7 +1323,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        const timetable_type timetable;
+        const timetable_type timetable{};
 
         BOOST_CHECK(timetable.train_kinds().empty());
     }
@@ -1333,7 +1333,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -1405,7 +1405,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(!timetable.train_kind_referred(boost::next(timetable.train_kinds().begin(), 2)));
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -1482,7 +1482,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        timetable_type timetable;
+        timetable_type timetable{};
 
         const train_kind_type kind0(
             string_type{ TETENGO2_TEXT("Rapid") },
@@ -1561,7 +1561,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        timetable_type timetable;
+        timetable_type timetable{};
         timetable.insert_train_kind(
             timetable.train_kinds().end(),
             train_kind_type(
@@ -1603,7 +1603,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -1635,7 +1635,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(timetable.train_kinds().empty());
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -1706,7 +1706,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -1742,7 +1742,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         {
-            timetable_type timetable;
+            timetable_type timetable{};
 
             const train_kinds_type train_kinds{
                 train_kind_type{
@@ -1767,7 +1767,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(timetable.train_kinds()[0].name() == string_type{ TETENGO2_TEXT("Local") });
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -1818,7 +1818,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_EQUAL(timetable.down_trains()[0].kind_index(), 1U);
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -1859,14 +1859,14 @@ BOOST_AUTO_TEST_SUITE(timetable)
                 },
             };
 
-            std::vector<train_kind_index_type> train_kind_index_map;
+            std::vector<train_kind_index_type> train_kind_index_map{};
 
             BOOST_CHECK_THROW(
                 timetable.assign_train_kinds(std::move(train_kinds), train_kind_index_map), std::out_of_range
             );
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -1920,14 +1920,14 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         {
-            const timetable_type timetable;
+            const timetable_type timetable{};
 
             const auto& trains = timetable.down_trains();
 
             BOOST_CHECK(trains.empty());
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -1958,7 +1958,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(trains[0].note() == string_type{ TETENGO2_TEXT("x") });
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2008,14 +2008,14 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         {
-            const timetable_type timetable;
+            const timetable_type timetable{};
 
             const auto& trains = timetable.up_trains();
 
             BOOST_CHECK(trains.empty());
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2046,7 +2046,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(trains[0].note() == string_type{ TETENGO2_TEXT("x") });
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2101,7 +2101,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2132,7 +2132,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(trains[0].note() == string_type{ TETENGO2_TEXT("x") });
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2176,7 +2176,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(trains[1].note() == string_type{ TETENGO2_TEXT("y") });
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2246,7 +2246,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(trains[3].note() == string_type{ TETENGO2_TEXT("w") });
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2274,7 +2274,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -2311,7 +2311,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -2352,7 +2352,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2398,7 +2398,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2429,7 +2429,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(trains[0].note() == string_type{ TETENGO2_TEXT("x") });
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2473,7 +2473,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(trains[1].note() == string_type{ TETENGO2_TEXT("y") });
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2543,7 +2543,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(trains[3].note() == string_type{ TETENGO2_TEXT("w") });
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2571,7 +2571,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -2608,7 +2608,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
                 station_location_type(
@@ -2649,7 +2649,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2690,7 +2690,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2732,7 +2732,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(trains.empty());
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2776,7 +2776,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(trains[0].note() == string_type{ TETENGO2_TEXT("y") });
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2822,7 +2822,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(trains[1].note() == string_type{ TETENGO2_TEXT("y") });
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2885,7 +2885,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2927,7 +2927,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(trains.empty());
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -2971,7 +2971,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(trains[0].note() == string_type{ TETENGO2_TEXT("y") });
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -3017,7 +3017,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(trains[1].note() == string_type{ TETENGO2_TEXT("y") });
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
                 train_kind_type(
@@ -3084,7 +3084,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        timetable_type timetable;
+        timetable_type timetable{};
 
         const timetable_type::station_locations_type station_locations{
             station_location_type{
@@ -3319,7 +3319,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        const timetable_type timetable;
+        const timetable_type timetable{};
 
         timetable.font_color_set();
     }
@@ -3328,7 +3328,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        timetable_type timetable;
+        timetable_type timetable{};
 
         font_type font(string_type{ TETENGO2_TEXT("hoge") }, 42, false, true, false, true);
         color_type color(12, 34, 56);
@@ -3346,12 +3346,12 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         {
-            const timetable_type timetable;
+            const timetable_type timetable{};
 
             timetable.observer_set();
         }
         {
-            timetable_type timetable;
+            timetable_type timetable{};
 
             timetable.observer_set();
         }

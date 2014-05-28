@@ -63,13 +63,13 @@ namespace bobura { namespace view { namespace diagram
 
         void horizontally_zoom_in(const bool snap_to_scale_list)
         {
-            const scale_list_type scale_list;
+            const scale_list_type scale_list{};
             set_horizontal_scale(larger(m_diagram_view.horizontal_scale(), scale_list, snap_to_scale_list));
         }
 
         void horizontally_zoom_out(const bool snap_to_scale_list)
         {
-            const scale_list_type scale_list;
+            const scale_list_type scale_list{};
             set_horizontal_scale(smaller(m_diagram_view.horizontal_scale(), scale_list, snap_to_scale_list));
         }
 
@@ -84,13 +84,13 @@ namespace bobura { namespace view { namespace diagram
 
         void vertically_zoom_in(const bool snap_to_scale_list)
         {
-            const scale_list_type scale_list;
+            const scale_list_type scale_list{};
             set_vertical_scale(larger(m_diagram_view.vertical_scale(), scale_list, snap_to_scale_list));
         }
 
         void vertically_zoom_out(const bool snap_to_scale_list)
         {
-            const scale_list_type scale_list;
+            const scale_list_type scale_list{};
             set_vertical_scale(smaller(m_diagram_view.vertical_scale(), scale_list, snap_to_scale_list));
         }
 

@@ -66,14 +66,14 @@ BOOST_AUTO_TEST_SUITE(writer)
     {
         BOOST_TEST_PASSPOINT();
 
-        const concrete_writer writer;
+        const concrete_writer writer{};
     }
 
     BOOST_AUTO_TEST_CASE(extension)
     {
         BOOST_TEST_PASSPOINT();
 
-        const concrete_writer writer;
+        const concrete_writer writer{};
 
         BOOST_CHECK(writer.extension() == path_type(TETENGO2_TEXT("hoge")));
     }
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_SUITE(writer)
     {
         BOOST_TEST_PASSPOINT();
 
-        const concrete_writer writer;
+        const concrete_writer writer{};
 
         BOOST_CHECK(writer.selects(path_type(TETENGO2_TEXT("hoge"))));
         BOOST_CHECK(!writer.selects(path_type(TETENGO2_TEXT("fuga"))));
@@ -93,9 +93,9 @@ BOOST_AUTO_TEST_SUITE(writer)
     {
         BOOST_TEST_PASSPOINT();
 
-        concrete_writer writer;
-        const timetable_type timetable;
-        std::ostringstream stream;
+        concrete_writer writer{};
+        const timetable_type timetable{};
+        std::ostringstream stream{};
         writer.write(timetable, stream);
     }
 

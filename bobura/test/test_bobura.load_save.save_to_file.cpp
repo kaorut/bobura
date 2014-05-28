@@ -38,7 +38,7 @@ BOOST_AUTO_TEST_SUITE(save_to_file)
     {
         BOOST_TEST_PASSPOINT();
 
-        const message_catalog_type message_catalog;
+        const message_catalog_type message_catalog{};
         const save_to_file_type save_to_file(false, message_catalog);
     }
 
@@ -47,43 +47,43 @@ BOOST_AUTO_TEST_SUITE(save_to_file)
         BOOST_TEST_PASSPOINT();
 
         {
-            const message_catalog_type message_catalog;
+            const message_catalog_type message_catalog{};
             const save_to_file_type save_to_file(false, message_catalog);
 
-            model_type model;
-            window_type parent;
+            model_type model{};
+            window_type parent{};
             const auto result = save_to_file(model, parent);
 
             BOOST_CHECK(!result);
         }
         {
-            const message_catalog_type message_catalog;
+            const message_catalog_type message_catalog{};
             const save_to_file_type save_to_file(false, message_catalog);
 
-            model_type model;
+            model_type model{};
             model.set_path(boost::filesystem::path("test"));
-            window_type parent;
+            window_type parent{};
             const auto result = save_to_file(model, parent);
 
             BOOST_CHECK(!result);
         }
         {
-            const message_catalog_type message_catalog;
+            const message_catalog_type message_catalog{};
             const save_to_file_type save_to_file(false, message_catalog);
 
-            model_type model;
+            model_type model{};
             model.set_changed(true);
-            window_type parent;
+            window_type parent{};
             const auto result = save_to_file(model, parent);
 
             BOOST_CHECK(!result);
         }
         {
-            const message_catalog_type message_catalog;
+            const message_catalog_type message_catalog{};
             const save_to_file_type save_to_file(true, message_catalog);
 
-            model_type model;
-            window_type parent;
+            model_type model{};
+            window_type parent{};
             const auto result = save_to_file(model, parent);
 
             BOOST_CHECK(!result);

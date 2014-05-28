@@ -80,7 +80,7 @@ namespace
 
     std::vector<std::unique_ptr<writer_type>> create_concrete_writers()
     {
-        std::vector<std::unique_ptr<writer_type>> writers;
+        std::vector<std::unique_ptr<writer_type>> writers{};
 
         writers.push_back(tetengo2::stdalt::make_unique<concrete_writer>(path_type(TETENGO2_TEXT(".hoge"))));
         writers.push_back(tetengo2::stdalt::make_unique<concrete_writer>(path_type(TETENGO2_TEXT(".fuga"))));
@@ -142,8 +142,8 @@ BOOST_AUTO_TEST_SUITE(writer_selector)
         {
             auto concrete_writers = create_concrete_writers();
             writer_set_type writer_selector(std::move(concrete_writers), path_type(TETENGO2_TEXT("piyo.hoge")));
-            const timetable_type timetable;
-            std::ostringstream stream;
+            const timetable_type timetable{};
+            std::ostringstream stream{};
             writer_selector.write(timetable, stream);
 
             BOOST_CHECK(stream.str() == std::string{ ".hoge" });
@@ -151,8 +151,8 @@ BOOST_AUTO_TEST_SUITE(writer_selector)
         {
             auto concrete_writers = create_concrete_writers();
             writer_set_type writer_selector(std::move(concrete_writers), path_type(TETENGO2_TEXT("piyo.fuga")));
-            const timetable_type timetable;
-            std::ostringstream stream;
+            const timetable_type timetable{};
+            std::ostringstream stream{};
             writer_selector.write(timetable, stream);
 
             BOOST_CHECK(stream.str() == std::string{ ".fuga" });
@@ -160,8 +160,8 @@ BOOST_AUTO_TEST_SUITE(writer_selector)
         {
             auto concrete_writers = create_concrete_writers();
             writer_set_type writer_selector(std::move(concrete_writers), path_type(TETENGO2_TEXT("piyo.foo")));
-            const timetable_type timetable;
-            std::ostringstream stream;
+            const timetable_type timetable{};
+            std::ostringstream stream{};
 
             BOOST_CHECK_THROW(writer_selector.write(timetable, stream), std::logic_error);
         }

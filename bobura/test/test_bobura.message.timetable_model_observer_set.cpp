@@ -21,12 +21,12 @@ BOOST_AUTO_TEST_SUITE(timetable_model_observer_set)
         BOOST_TEST_PASSPOINT();
 
         {
-            const bobura::message::timetable_model_observer_set observer_set;
+            const bobura::message::timetable_model_observer_set observer_set{};
 
             observer_set.reset();
         }
         {
-            bobura::message::timetable_model_observer_set observer_set;
+            bobura::message::timetable_model_observer_set observer_set{};
 
             observer_set.reset();
         }
@@ -37,12 +37,12 @@ BOOST_AUTO_TEST_SUITE(timetable_model_observer_set)
         BOOST_TEST_PASSPOINT();
 
         {
-            const bobura::message::timetable_model_observer_set observer_set;
+            const bobura::message::timetable_model_observer_set observer_set{};
 
             observer_set.changed();
         }
         {
-            bobura::message::timetable_model_observer_set observer_set;
+            bobura::message::timetable_model_observer_set observer_set{};
 
             observer_set.changed();
         }

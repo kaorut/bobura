@@ -98,7 +98,7 @@ namespace bobura { namespace model { namespace serializer
                 return false;
 
             std::istringstream input_stream(input_string);
-            boost::iostreams::filtering_istream filtering_input_stream;
+            boost::iostreams::filtering_istream filtering_input_stream{};
             filtering_input_stream.push(boost::iostreams::bzip2_decompressor());
             filtering_input_stream.push(input_stream);
 
@@ -128,7 +128,7 @@ namespace bobura { namespace model { namespace serializer
         override
         {
             std::istringstream input_stream(input_string_type(first, last));
-            boost::iostreams::filtering_istream filtering_input_stream;
+            boost::iostreams::filtering_istream filtering_input_stream{};
             filtering_input_stream.push(boost::iostreams::bzip2_decompressor());
             filtering_input_stream.push(input_stream);
 

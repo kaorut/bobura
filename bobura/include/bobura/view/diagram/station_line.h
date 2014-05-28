@@ -420,7 +420,7 @@ namespace bobura { namespace view { namespace diagram
             const auto canvas_bottom =
                 top_type::from(tetengo2::gui::dimension<dimension_type>::height(canvas_dimension));
 
-            std::vector<station_line_type> station_lines;
+            std::vector<station_line_type> station_lines{};
             station_lines.reserve(station_positions.size());
             for (decltype(station_positions.size()) i = 0; i < station_positions.size(); ++i)
             {

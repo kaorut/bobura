@@ -107,7 +107,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
             string_type{ TETENGO2_TEXT("note") }
         );
         const station_location_type station_location(std::move(station), 42);
-        selection_type selection;
+        selection_type selection{};
         station_line_type station_line1(
             station_location,
             selection,
@@ -137,7 +137,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
             string_type{ TETENGO2_TEXT("note1") }
         );
         const station_location_type station_location1(std::move(station1), 42);
-        selection_type selection;
+        selection_type selection{};
         station_line_type station_line1(
             station_location1,
             selection,
@@ -175,8 +175,8 @@ BOOST_AUTO_TEST_SUITE(station_line_list)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        selection_type selection;
+        const model_type model{};
+        selection_type selection{};
         station_line_list_type station_line_list1(
             model,
             time_span_type(42 * 60),
@@ -196,8 +196,8 @@ BOOST_AUTO_TEST_SUITE(station_line_list)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        selection_type selection;
+        const model_type model{};
+        selection_type selection{};
         station_line_list_type station_line_list1(
             model,
             time_span_type(42 * 60),

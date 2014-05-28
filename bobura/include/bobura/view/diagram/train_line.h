@@ -607,7 +607,7 @@ namespace bobura { namespace view { namespace diagram
             const message_catalog_type&   message_catalog
         )
         {
-            std::vector<train_line_fragment_type> fragments;
+            std::vector<train_line_fragment_type> fragments{};
 
             auto train_name_drawn = false;
             if (train.direction() == direction_type::down)
@@ -1191,7 +1191,7 @@ namespace bobura { namespace view { namespace diagram
             const message_catalog_type&   message_catalog
         )
         {
-            std::vector<train_line_type> train_lines;
+            std::vector<train_line_type> train_lines{};
 
             make_train_lines_impl(
                 model.timetable().down_trains(),

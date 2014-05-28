@@ -87,7 +87,7 @@ BOOST_AUTO_TEST_SUITE(time_line)
     {
         BOOST_TEST_PASSPOINT();
 
-        selection_type selection;
+        selection_type selection{};
         time_line_type time_line1(
             selection,
             left_type(42),
@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_SUITE(time_line)
     {
         BOOST_TEST_PASSPOINT();
 
-        selection_type selection;
+        selection_type selection{};
         time_line_type time_line1(
             selection,
             left_type(42),
@@ -133,8 +133,8 @@ BOOST_AUTO_TEST_SUITE(time_line_list)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        selection_type selection;
+        const model_type model{};
+        selection_type selection{};
         time_line_list_type time_line_list1(
             model,
             time_span_type(42 * 60),
@@ -154,8 +154,8 @@ BOOST_AUTO_TEST_SUITE(time_line_list)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        selection_type selection;
+        const model_type model{};
+        selection_type selection{};
         time_line_list_type time_line_list1(
             model,
             time_span_type(42 * 60),

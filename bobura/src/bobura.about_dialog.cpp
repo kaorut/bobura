@@ -144,7 +144,7 @@ namespace bobura
             std::unique_ptr<label_type> create_title_label()
             {
                 using char_type = typename string_type::value_type;
-                std::basic_ostringstream<char_type> title;
+                std::basic_ostringstream<char_type> title{};
                 title <<
                     boost::basic_format<char_type>(TETENGO2_TEXT("%s  %s %s")) %
                     m_message_catalog.get(TETENGO2_TEXT("App:Bobura")) %

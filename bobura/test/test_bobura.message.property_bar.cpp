@@ -51,7 +51,7 @@ BOOST_AUTO_TEST_SUITE(resized)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
+        window_type window{};
         side_bar_type side_bar(window);
         map_box_type map_box(side_bar);
         const resized_type observer(side_bar, map_box);
@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_SUITE(resized)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
+        window_type window{};
         side_bar_type side_bar(window);
         map_box_type map_box(side_bar);
         const resized_type observer(side_bar, map_box);
@@ -78,7 +78,7 @@ BOOST_AUTO_TEST_SUITE(mouse_pressed)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
+        window_type window{};
         side_bar_type side_bar(window);
         map_box_type map_box(side_bar);
         const mouse_pressed_type observer(map_box);
@@ -88,7 +88,7 @@ BOOST_AUTO_TEST_SUITE(mouse_pressed)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
+        window_type window{};
         side_bar_type side_bar(window);
         map_box_type map_box(side_bar);
         const mouse_pressed_type observer(map_box);

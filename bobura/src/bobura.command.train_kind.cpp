@@ -91,7 +91,7 @@ namespace bobura { namespace command
 
         static std::vector<info_set_type> to_info_sets(const timetable_type& timetable)
         {
-            std::vector<info_set_type> info_sets;
+            std::vector<info_set_type> info_sets{};
             info_sets.reserve(timetable.train_kinds().size());
 
             for (auto i = timetable.train_kinds().begin(); i != timetable.train_kinds().end(); ++i)
@@ -105,7 +105,7 @@ namespace bobura { namespace command
 
         static train_kinds_type to_train_kinds(const std::vector<info_set_type>& info_sets)
         {
-            train_kinds_type train_kinds;
+            train_kinds_type train_kinds{};
             train_kinds.reserve(info_sets.size());
 
             std::transform(

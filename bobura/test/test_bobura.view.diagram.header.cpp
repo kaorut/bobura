@@ -80,7 +80,7 @@ BOOST_AUTO_TEST_SUITE(company_line_name_header)
     {
         BOOST_TEST_PASSPOINT();
 
-        selection_type selection;
+        selection_type selection{};
         company_line_name_header_type header1(
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
@@ -96,7 +96,7 @@ BOOST_AUTO_TEST_SUITE(company_line_name_header)
     {
         BOOST_TEST_PASSPOINT();
 
-        selection_type selection;
+        selection_type selection{};
         company_line_name_header_type header1(
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
@@ -126,7 +126,7 @@ BOOST_AUTO_TEST_SUITE(note_header)
     {
         BOOST_TEST_PASSPOINT();
 
-        selection_type selection;
+        selection_type selection{};
         note_header_type header1(
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
@@ -142,7 +142,7 @@ BOOST_AUTO_TEST_SUITE(note_header)
     {
         BOOST_TEST_PASSPOINT();
 
-        selection_type selection;
+        selection_type selection{};
         note_header_type header1(
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
@@ -172,9 +172,9 @@ BOOST_AUTO_TEST_SUITE(header)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        selection_type selection;
-        window_type window;
+        const model_type model{};
+        selection_type selection{};
+        window_type window{};
         const picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::both);
         const auto p_canvas = picture_box.create_canvas();
         header_type header1(model, selection, *p_canvas, dimension_type(width_type(42), height_type(24)));
@@ -185,9 +185,9 @@ BOOST_AUTO_TEST_SUITE(header)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        selection_type selection;
-        window_type window;
+        const model_type model{};
+        selection_type selection{};
+        window_type window{};
         const picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::both);
         const auto p_canvas = picture_box.create_canvas();
         header_type header1(model, selection, *p_canvas, dimension_type(width_type(42), height_type(24)));
@@ -200,9 +200,9 @@ BOOST_AUTO_TEST_SUITE(header)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        selection_type selection;
-        window_type window;
+        const model_type model{};
+        selection_type selection{};
+        window_type window{};
         const picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::both);
         const auto p_canvas = picture_box.create_canvas();
         const header_type header(model, selection, *p_canvas, dimension_type(width_type(42), height_type(24)));

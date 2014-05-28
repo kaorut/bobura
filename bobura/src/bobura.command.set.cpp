@@ -283,9 +283,9 @@ namespace bobura { namespace command
 
         static std::vector<command_ptr_type> create_set_horizontal_scale(diagram_view_type& diagram_view)
         {
-            const scale_list_type scale_list;
+            const scale_list_type scale_list{};
 
-            std::vector<command_ptr_type> commands;
+            std::vector<command_ptr_type> commands{};
             commands.reserve(scale_list.size());
 
             for (size_type i = 0; i < scale_list.size(); ++i)
@@ -300,9 +300,9 @@ namespace bobura { namespace command
 
         static std::vector<command_ptr_type> create_set_vertical_scale(diagram_view_type& diagram_view)
         {
-            const scale_list_type scale_list;
+            const scale_list_type scale_list{};
 
-            std::vector<command_ptr_type> commands;
+            std::vector<command_ptr_type> commands{};
             commands.reserve(scale_list.size());
 
             for (size_type i = 0; i < scale_list.size(); ++i)

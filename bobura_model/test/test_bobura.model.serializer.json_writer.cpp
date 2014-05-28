@@ -331,7 +331,7 @@ BOOST_AUTO_TEST_SUITE(json_writer)
     {
         BOOST_TEST_PASSPOINT();
 
-        const writer_type json_writer;
+        const writer_type json_writer{};
 
         BOOST_CHECK(json_writer.extension() == path_type(TETENGO2_TEXT(".btt")));
     }
@@ -340,7 +340,7 @@ BOOST_AUTO_TEST_SUITE(json_writer)
     {
         BOOST_TEST_PASSPOINT();
 
-        const writer_type json_writer;
+        const writer_type json_writer{};
 
         BOOST_CHECK(json_writer.selects(path_type(TETENGO2_TEXT(".btt"))));
         BOOST_CHECK(!json_writer.selects(path_type(TETENGO2_TEXT(".hoge"))));
@@ -357,10 +357,10 @@ BOOST_AUTO_TEST_SUITE(json_writer)
         BOOST_TEST_PASSPOINT();
 
         {
-            writer_type json_writer;
+            writer_type json_writer{};
 
-            const timetable_type timetable;
-            std::ostringstream stream;
+            const timetable_type timetable{};
+            std::ostringstream stream{};
 
             json_writer.write(timetable, stream);
 
@@ -368,10 +368,10 @@ BOOST_AUTO_TEST_SUITE(json_writer)
             BOOST_CHECK(result == json0);
         }
         {
-            writer_type json_writer;
+            writer_type json_writer{};
 
             const auto p_timetable = create_timetable1();
-            std::ostringstream stream;
+            std::ostringstream stream{};
 
             json_writer.write(*p_timetable, stream);
 

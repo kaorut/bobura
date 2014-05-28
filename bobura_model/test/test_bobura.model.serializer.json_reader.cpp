@@ -58,7 +58,7 @@ namespace
 
     // variables
 
-    const std::string json_empty0;
+    const std::string json_empty0{};
 
     const std::string json_empty1{
         "[]"
@@ -495,7 +495,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
     {
         BOOST_TEST_PASSPOINT();
 
-        reader_type json_reader;
+        reader_type json_reader{};
         {
             std::istringstream input_stream(json_empty0);
             BOOST_CHECK(
@@ -552,7 +552,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
     {
         BOOST_TEST_PASSPOINT();
 
-        reader_type json_reader;
+        reader_type json_reader{};
         {
             std::istringstream input_stream(json_not_json);
             auto error = error_type::none;

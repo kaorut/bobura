@@ -149,9 +149,9 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
     {
         BOOST_TEST_PASSPOINT();
 
-        const std::vector<station_location_type> station_locations;
-        const std::vector<train_type> down_trains;
-        const std::vector<train_type> up_trains;
+        const std::vector<station_location_type> station_locations{};
+        const std::vector<train_type> down_trains{};
+        const std::vector<train_type> up_trains{};
         const station_interval_calculator_type calculator(station_locations, down_trains, up_trains);
     }
 
@@ -165,9 +165,9 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
         BOOST_TEST_PASSPOINT();
 
         {
-            const std::vector<station_location_type> station_locations;
-            const std::vector<train_type> down_trains;
-            const std::vector<train_type> up_trains;
+            const std::vector<station_location_type> station_locations{};
+            const std::vector<train_type> down_trains{};
+            const std::vector<train_type> up_trains{};
             const station_interval_calculator_type calculator(station_locations, down_trains, up_trains);
 
             const auto intervals = calculator.calculate();
@@ -183,8 +183,8 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
             // |    |DDD|    |
             // +----+---+----+
             const auto station_locations = make_station_locations();
-            const std::vector<train_type> down_trains;
-            const std::vector<train_type> up_trains;
+            const std::vector<train_type> down_trains{};
+            const std::vector<train_type> up_trains{};
             const station_interval_calculator_type calculator(station_locations, down_trains, up_trains);
 
             const auto intervals = calculator.calculate();
@@ -203,7 +203,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
             // |  v |DDD|    |
             // +----+---+----+
             const auto station_locations = make_station_locations();
-            std::vector<train_type> down_trains;
+            std::vector<train_type> down_trains{};
             {
                 const std::vector<stop_type> stops{
                     make_stop(),
@@ -213,7 +213,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
                 };
                 down_trains.push_back(make_train(stops.begin(), stops.end()));
             }
-            const std::vector<train_type> up_trains;
+            const std::vector<train_type> up_trains{};
             const station_interval_calculator_type calculator(station_locations, down_trains, up_trains);
 
             const auto intervals = calculator.calculate();
@@ -232,8 +232,8 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
             // |    |DDD|  ^ |
             // +----+---+----+
             const auto station_locations = make_station_locations();
-            const std::vector<train_type> down_trains;
-            std::vector<train_type> up_trains;
+            const std::vector<train_type> down_trains{};
+            std::vector<train_type> up_trains{};
             {
                 const std::vector<stop_type> stops{
                     make_stop(),
@@ -261,7 +261,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
             // |1006|DDD|    |
             // +----+---+----+
             const auto station_locations = make_station_locations();
-            std::vector<train_type> down_trains;
+            std::vector<train_type> down_trains{};
             {
                 const std::vector<stop_type> stops{
                     make_stop(false, 10, 0),
@@ -271,7 +271,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
                 };
                 down_trains.push_back(make_train(stops.begin(), stops.end()));
             }
-            const std::vector<train_type> up_trains;
+            const std::vector<train_type> up_trains{};
             const station_interval_calculator_type calculator(station_locations, down_trains, up_trains);
 
             const auto intervals = calculator.calculate();
@@ -293,7 +293,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
             // |1006|1203|DDD|    |
             // +----+----+---+----+
             const auto station_locations = make_station_locations();
-            std::vector<train_type> down_trains;
+            std::vector<train_type> down_trains{};
             {
                 const std::vector<stop_type> stops{
                     make_stop(false, 10, 0),
@@ -312,7 +312,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
                 };
                 down_trains.push_back(make_train(stops.begin(), stops.end()));
             }
-            const std::vector<train_type> up_trains;
+            const std::vector<train_type> up_trains{};
             const station_interval_calculator_type calculator(station_locations, down_trains, up_trains);
 
             const auto intervals = calculator.calculate();
@@ -334,7 +334,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
             // |1006|DDD|1100|
             // +----+---+----+
             const auto station_locations = make_station_locations();
-            std::vector<train_type> down_trains;
+            std::vector<train_type> down_trains{};
             {
                 const std::vector<stop_type> stops{
                     make_stop(false, 10, 0),
@@ -344,7 +344,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
                 };
                 down_trains.push_back(make_train(stops.begin(), stops.end()));
             }
-            std::vector<train_type> up_trains;
+            std::vector<train_type> up_trains{};
             {
                 const std::vector<stop_type> stops{
                     make_stop(true, 11, 6),
@@ -375,7 +375,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
             // |1012|DDD|    |
             // +----+---+----+
             const auto station_locations = make_station_locations();
-            std::vector<train_type> down_trains;
+            std::vector<train_type> down_trains{};
             {
                 const std::vector<stop_type> stops{
                     make_stop(false, 10, 0),
@@ -385,7 +385,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
                 };
                 down_trains.push_back(make_train(stops.begin(), stops.end()));
             }
-            const std::vector<train_type> up_trains;
+            const std::vector<train_type> up_trains{};
             const station_interval_calculator_type calculator(station_locations, down_trains, up_trains);
 
             const auto intervals = calculator.calculate();
@@ -407,7 +407,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
             // |1006|1209|DDD|    |
             // +----+----+---+----+
             const auto station_locations = make_station_locations();
-            std::vector<train_type> down_trains;
+            std::vector<train_type> down_trains{};
             {
                 const std::vector<stop_type> stops{
                     make_stop(false, 10, 0),
@@ -426,7 +426,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
                 };
                 down_trains.push_back(make_train(stops.begin(), stops.end()));
             }
-            const std::vector<train_type> up_trains;
+            const std::vector<train_type> up_trains{};
             const station_interval_calculator_type calculator(station_locations, down_trains, up_trains);
 
             const auto intervals = calculator.calculate();
@@ -448,7 +448,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
             // |====|DDD|1100|
             // +----+---+----+
             const auto station_locations = make_station_locations();
-            std::vector<train_type> down_trains;
+            std::vector<train_type> down_trains{};
             {
                 const std::vector<stop_type> stops{
                     make_stop(false, 10, 0),
@@ -458,7 +458,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
                 };
                 down_trains.push_back(make_train(stops.begin(), stops.end()));
             }
-            std::vector<train_type> up_trains;
+            std::vector<train_type> up_trains{};
             {
                 const std::vector<stop_type> stops{
                     make_stop(),

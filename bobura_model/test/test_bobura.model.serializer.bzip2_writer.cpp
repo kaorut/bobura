@@ -104,8 +104,8 @@ BOOST_AUTO_TEST_SUITE(bzip2_writer)
 
         auto p_writer = tetengo2::stdalt::make_unique<concrete_writer>();
         bzip2_writer_type bzip2_writer(std::move(p_writer));
-        const timetable_type timetable;
-        std::ostringstream stream;
+        const timetable_type timetable{};
+        std::ostringstream stream{};
         bzip2_writer.write(timetable, stream);
 
         const auto result = stream.str();

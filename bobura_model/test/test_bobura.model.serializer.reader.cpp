@@ -75,14 +75,14 @@ BOOST_AUTO_TEST_SUITE(reader)
     {
         BOOST_TEST_PASSPOINT();
 
-        const concrete_reader reader;
+        const concrete_reader reader{};
     }
 
     BOOST_AUTO_TEST_CASE(selects)
     {
         BOOST_TEST_PASSPOINT();
 
-        concrete_reader reader;
+        concrete_reader reader{};
 
         {
             std::istringstream input_stream("hoge");
@@ -108,7 +108,7 @@ BOOST_AUTO_TEST_SUITE(reader)
     {
         BOOST_TEST_PASSPOINT();
 
-        concrete_reader reader;
+        concrete_reader reader{};
         std::istringstream input_stream("hoge");
         auto error = error_type::none;
         const auto p_timetable =

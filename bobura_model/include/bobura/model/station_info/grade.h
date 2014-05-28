@@ -89,7 +89,7 @@ namespace bobura { namespace model { namespace station_info
         */
         static const local& instance()
         {
-            static const local singleton;
+            static const local singleton{};
 
             return singleton;
         }
@@ -138,7 +138,7 @@ namespace bobura { namespace model { namespace station_info
         */
         static const principal& instance()
         {
-            static const principal singleton;
+            static const principal singleton{};
 
             return singleton;
         }
@@ -187,7 +187,7 @@ namespace bobura { namespace model { namespace station_info
         */
         static const local_terminal& instance()
         {
-            static const local_terminal singleton;
+            static const local_terminal singleton{};
 
             return singleton;
         }
@@ -236,7 +236,7 @@ namespace bobura { namespace model { namespace station_info
         */
         static const principal_terminal& instance()
         {
-            static const principal_terminal singleton;
+            static const principal_terminal singleton{};
 
             return singleton;
         }

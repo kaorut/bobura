@@ -240,7 +240,7 @@ namespace bobura
                 return;
             }
             
-            std::vector<top_type> positions;
+            std::vector<top_type> positions{};
             positions.reserve(m_station_intervals.size());
             std::transform(
                 m_station_intervals.begin(),

@@ -56,7 +56,7 @@ namespace
 
     // variables
 
-    const std::string data_empty;
+    const std::string data_empty{};
 
     const std::string data_no_train{
         "FileType=OuDia.1.02\n"
@@ -343,7 +343,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             const reader_type reader(std::move(p_select_diagram));
         }
         {
-            std::unique_ptr<select_diagram_type> p_select_diagram;
+            std::unique_ptr<select_diagram_type> p_select_diagram{};
             BOOST_CHECK_THROW(reader_type(std::move(p_select_diagram)), std::invalid_argument);
         }
     }

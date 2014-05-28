@@ -132,7 +132,7 @@ namespace bobura { namespace model { namespace train_info
         */
         static const time& uninitialized()
         {
-            static const time singleton;
+            static const time singleton{};
 
             return singleton;
         }

@@ -49,7 +49,7 @@ namespace
 
     // variables
 
-    const std::string data0;
+    const std::string data0{};
 
     const std::string data1{
         "[WinDIA]\n"
@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         BOOST_TEST_PASSPOINT();
 
         {
-            reader_type reader;
+            reader_type reader{};
 
             std::istringstream input_stream(data0);
             BOOST_CHECK(
@@ -125,7 +125,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
             );
         }
         {
-            reader_type reader;
+            reader_type reader{};
 
             std::istringstream input_stream(data1);
             BOOST_CHECK(
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
             );
         }
         {
-            reader_type reader;
+            reader_type reader{};
 
             std::istringstream input_stream(data3);
             BOOST_CHECK(
@@ -158,7 +158,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         BOOST_TEST_PASSPOINT();
 
         {
-            reader_type reader;
+            reader_type reader{};
 
             std::istringstream input_stream(data0);
             auto error = error_type::none;
@@ -173,7 +173,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
-            reader_type reader;
+            reader_type reader{};
 
             std::istringstream input_stream(data1);
             auto error = error_type::none;
@@ -193,7 +193,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
             BOOST_CHECK(p_timetable->up_trains().empty());
         }
         {
-            reader_type reader;
+            reader_type reader{};
 
             std::istringstream input_stream(data2);
             auto error = error_type::none;
@@ -348,7 +348,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
             }
         }
         {
-            reader_type reader;
+            reader_type reader{};
 
             std::istringstream input_stream(data3);
             auto error = error_type::none;

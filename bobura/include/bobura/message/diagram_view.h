@@ -356,7 +356,7 @@ namespace bobura { namespace message { namespace diagram_view
             if (stop_index >= train.stops().size() || stop_index >= m_model.timetable().station_locations().size())
                 BOOST_THROW_EXCEPTION(std::out_of_range("Too large train stop index."));
 
-            string_type text;
+            string_type text{};
 
             const stop_iterator i_departure = boost::next(train.stops().begin(), stop_index);
             {
@@ -382,7 +382,7 @@ namespace bobura { namespace message { namespace diagram_view
         string_type departures_and_arrivals(const train_type& train)
         const
         {
-            string_type text;
+            string_type text{};
 
             for (auto i = train.origin_stop(); i != train.stops().end(); i = train.next_stop(i))
             {
@@ -433,11 +433,11 @@ namespace bobura { namespace message { namespace diagram_view
             const stop_index_type stop_index = std::distance(i_front_stop, i_stop);
             assert(stop_index < m_model.timetable().station_locations().size());
 
-            string_type arrival_time;
+            string_type arrival_time{};
             if (i_stop->arrival().initialized() && (arrival || (departure && !i_stop->departure().initialized())))
                 arrival_time = time_text(i_stop->arrival(), false);
 
-            string_type departure_time;
+            string_type departure_time{};
             if (i_stop->departure().initialized() && (departure || (arrival && !i_stop->arrival().initialized())))
                 departure_time = time_text(i_stop->departure(), true);
 

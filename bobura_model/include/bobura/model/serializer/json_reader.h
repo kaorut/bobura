@@ -137,7 +137,7 @@ namespace bobura { namespace model { namespace serializer
 
         static const encoder_type& encoder()
         {
-            static const encoder_type singleton;
+            static const encoder_type singleton{};
             return singleton;
         }
 
@@ -230,7 +230,7 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<header_type> read_header(pull_parser_type& pull_parser)
         {
-            header_type header;
+            header_type header{};
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
                 return boost::none;
@@ -459,7 +459,7 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<std::vector<station_location_type>> read_stations(pull_parser_type& pull_parser)
         {
-            std::vector<station_location_type> stations;
+            std::vector<station_location_type> stations{};
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
@@ -487,7 +487,7 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             pull_parser.next();
 
-            string_type name;
+            string_type name{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
@@ -533,7 +533,7 @@ namespace bobura { namespace model { namespace serializer
                 show_up_arrival_times = std::move(member->second);
             }
 
-            string_type note;
+            string_type note{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
@@ -590,7 +590,7 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<std::vector<train_kind_type>> read_train_kinds(pull_parser_type& pull_parser)
         {
-            std::vector<train_kind_type> train_kinds;
+            std::vector<train_kind_type> train_kinds{};
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
@@ -618,7 +618,7 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             pull_parser.next();
 
-            string_type name;
+            string_type name{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
@@ -629,7 +629,7 @@ namespace bobura { namespace model { namespace serializer
                 name = std::move(member->second);
             }
 
-            string_type abbreviation;
+            string_type abbreviation{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
@@ -640,7 +640,7 @@ namespace bobura { namespace model { namespace serializer
                 abbreviation = std::move(member->second);
             }
 
-            boost::optional<color_type> color;
+            boost::optional<color_type> color{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
@@ -653,7 +653,7 @@ namespace bobura { namespace model { namespace serializer
                     return boost::none;
             }
 
-            boost::optional<weight_type> weight;
+            boost::optional<weight_type> weight{};
             {
                 const auto member = read_integer_member<int>(pull_parser);
                 if (!member)
@@ -666,7 +666,7 @@ namespace bobura { namespace model { namespace serializer
                     return boost::none;
             }
 
-            boost::optional<line_style_type> line_style;
+            boost::optional<line_style_type> line_style{};
             {
                 const auto member = read_integer_member<int>(pull_parser);
                 if (!member)
@@ -753,7 +753,7 @@ namespace bobura { namespace model { namespace serializer
             const std::size_t    kind_count
         )
         {
-            std::vector<train_type> trains;
+            std::vector<train_type> trains{};
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
@@ -786,7 +786,7 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             pull_parser.next();
 
-            string_type number;
+            string_type number{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
@@ -797,7 +797,7 @@ namespace bobura { namespace model { namespace serializer
                 number = std::move(member->second);
             }
 
-            train_kind_index_type kind_index;
+            train_kind_index_type kind_index{};
             {
                 auto member = read_integer_member<train_kind_index_type>(pull_parser);
                 if (!member)
@@ -810,7 +810,7 @@ namespace bobura { namespace model { namespace serializer
                     return boost::none;
             }
 
-            string_type name;
+            string_type name{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
@@ -821,7 +821,7 @@ namespace bobura { namespace model { namespace serializer
                 name = std::move(member->second);
             }
 
-            string_type name_number;
+            string_type name_number{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
@@ -832,7 +832,7 @@ namespace bobura { namespace model { namespace serializer
                 name_number = std::move(member->second);
             }
 
-            string_type note;
+            string_type note{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
@@ -871,7 +871,7 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<std::vector<stop_type>> read_stops(pull_parser_type& pull_parser)
         {
-            std::vector<stop_type> stops;
+            std::vector<stop_type> stops{};
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return boost::none;

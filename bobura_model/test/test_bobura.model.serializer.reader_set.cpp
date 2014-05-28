@@ -52,9 +52,9 @@ BOOST_AUTO_TEST_SUITE(reader_set)
     {
         BOOST_TEST_PASSPOINT();
 
-        abstract_window_type parent;
+        abstract_window_type parent{};
         string_type file_name{ TETENGO2_TEXT("hoge") };
-        const message_catalog_type message_catalog;
+        const message_catalog_type message_catalog{};
         const auto p_readers = reader_set_type::create_readers(parent, std::move(file_name), message_catalog);
 
         BOOST_REQUIRE(!p_readers.empty());

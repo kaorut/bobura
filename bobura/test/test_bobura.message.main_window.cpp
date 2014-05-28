@@ -108,7 +108,7 @@ BOOST_AUTO_TEST_SUITE(popup_menu_selected)
 
         popup_menu_type popup_menu(string_type{ TETENGO2_TEXT("popup") });
         std::vector<const command_type*> commands;
-        const model_type model;
+        const model_type model{};
         const popup_menu_selected_type observer(popup_menu, std::move(commands), model);
     }
 
@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_SUITE(popup_menu_selected)
 
         popup_menu_type popup_menu(string_type{ TETENGO2_TEXT("popup") });
         std::vector<const command_type*> commands;
-        const model_type model;
+        const model_type model{};
         const popup_menu_selected_type observer(popup_menu, std::move(commands), model);
 
         observer();
@@ -133,9 +133,9 @@ BOOST_AUTO_TEST_SUITE(menu_command_selected)
     {
         BOOST_TEST_PASSPOINT();
 
-        const command_type command;
-        model_type model;
-        window_type window;
+        const command_type command{};
+        model_type model{};
+        window_type window{};
         const menu_command_selected_type menu(command, model, window);
     }
 
@@ -143,9 +143,9 @@ BOOST_AUTO_TEST_SUITE(menu_command_selected)
     {
         BOOST_TEST_PASSPOINT();
 
-        const command_type command;
-        model_type model;
-        window_type window;
+        const command_type command{};
+        model_type model{};
+        window_type window{};
         const menu_command_selected_type observer(command, model, window);
 
         observer();
@@ -160,9 +160,9 @@ BOOST_AUTO_TEST_SUITE(file_dropped)
     {
         BOOST_TEST_PASSPOINT();
 
-        const command_type command;
-        model_type model;
-        window_type window;
+        const command_type command{};
+        model_type model{};
+        window_type window{};
         const menu_command_selected_type menu(command, model, window);
     }
 
@@ -170,9 +170,9 @@ BOOST_AUTO_TEST_SUITE(file_dropped)
     {
         BOOST_TEST_PASSPOINT();
 
-        const command_type command;
-        model_type model;
-        window_type window;
+        const command_type command{};
+        model_type model{};
+        window_type window{};
         const menu_command_selected_type observer(command, model, window);
 
         observer();
@@ -187,10 +187,10 @@ BOOST_AUTO_TEST_SUITE(window_resized)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        const message_catalog_type message_catalog;
+        const model_type model{};
+        const message_catalog_type message_catalog{};
         view_type view(model, message_catalog);
-        window_type window;
+        window_type window{};
         diagram_picture_box_type diagram_picture_box(window);
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings(settings_arguments);
@@ -202,10 +202,10 @@ BOOST_AUTO_TEST_SUITE(window_resized)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        const message_catalog_type message_catalog;
+        const model_type model{};
+        const message_catalog_type message_catalog{};
         view_type view(model, message_catalog);
-        window_type window;
+        window_type window{};
         diagram_picture_box_type diagram_picture_box(window);
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings(settings_arguments);
@@ -224,9 +224,9 @@ BOOST_AUTO_TEST_SUITE(window_closing)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type parent;
-        model_type model;
-        const message_catalog_type message_catalog;
+        window_type parent{};
+        model_type model{};
+        const message_catalog_type message_catalog{};
         const save_to_file_type save_to_file(false, message_catalog);
         const confirm_file_save_type confirm_file_save(model, save_to_file, message_catalog);
         const std::vector<string_type> command_line_arguments(1, string_type{ TETENGO2_TEXT("path/to/exe") });
@@ -239,9 +239,9 @@ BOOST_AUTO_TEST_SUITE(window_closing)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type parent;
-        model_type model;
-        const message_catalog_type message_catalog;
+        window_type parent{};
+        model_type model{};
+        const message_catalog_type message_catalog{};
         const save_to_file_type save_to_file(false, message_catalog);
         const confirm_file_save_type confirm_file_save(model, save_to_file, message_catalog);
         const bobura::message::main_window::window_closing<abstract_window_type, confirm_file_save_type> observer(

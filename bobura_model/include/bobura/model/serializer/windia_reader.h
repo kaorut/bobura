@@ -248,9 +248,9 @@ namespace bobura { namespace model { namespace serializer
         private:
             struct split_type
             {
-                string_ref_type key;
+                string_ref_type key{};
                 std::size_t index;
-                std::vector<string_ref_type> values;
+                std::vector<string_ref_type> values{};
 
                 split_type(string_ref_type key, const std::size_t index, std::vector<string_ref_type> values)
                 :
@@ -643,10 +643,10 @@ namespace bobura { namespace model { namespace serializer
 
         struct preset_train_kind_type
         {
-            input_string_type name;
-            input_string_type abbreviation;
-            weight_type weight;
-            line_style_type line_style;
+            input_string_type name{};
+            input_string_type abbreviation{};
+            weight_type weight{};
+            line_style_type line_style{};
 
             preset_train_kind_type(
                 input_string_type     name,
@@ -668,7 +668,7 @@ namespace bobura { namespace model { namespace serializer
 
         static const encoder_type& encoder()
         {
-            static const encoder_type singleton;
+            static const encoder_type singleton{};
             return singleton;
         }
 
@@ -865,7 +865,7 @@ namespace bobura { namespace model { namespace serializer
 
         static string_type next_line(iterator& first, const iterator last)
         {
-            string_type line;
+            string_type line{};
             for (;;)
             {
                 skip_line_breaks(first, last);
@@ -908,7 +908,7 @@ namespace bobura { namespace model { namespace serializer
 
         static std::vector<string_ref_type> split_by_comma(const string_ref_type& string_ref)
         {
-            std::vector<string_ref_type> values;
+            std::vector<string_ref_type> values{};
 
             std::size_t offset = 0;
             for (;;)

@@ -105,7 +105,7 @@ namespace bobura { namespace model { namespace serializer
 
         static const encoder_type& encoder()
         {
-            static const encoder_type singleton;
+            static const encoder_type singleton{};
             return singleton;
         }
 
@@ -565,7 +565,7 @@ namespace bobura { namespace model { namespace serializer
 
         static string_type to_string(const color_type& color)
         {
-            std::basic_ostringstream<char_type> stream;
+            std::basic_ostringstream<char_type> stream{};
 
             stream <<
                 boost::basic_format<char_type>(string_type{ TETENGO2_TEXT("%02X%02X%02X") }, std::locale::classic()) %
@@ -729,7 +729,7 @@ namespace bobura { namespace model { namespace serializer
                 hours_minutes_seconds.hours() * 10000 +
                 hours_minutes_seconds.minutes() * 100 +
                 hours_minutes_seconds.seconds();
-            std::basic_ostringstream<output_char_type> stream;
+            std::basic_ostringstream<output_char_type> stream{};
             stream <<
                 boost::basic_format<output_char_type>(TETENGO2_TEXT("%6d"), std::locale::classic()) % representation;
             return stream.str();

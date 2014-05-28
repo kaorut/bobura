@@ -336,23 +336,23 @@ namespace bobura
             const std::vector<string_type>& command_line_arguments
         )
         {
-            boost::program_options::options_description visible_options;
+            boost::program_options::options_description visible_options{};
             visible_options.add_options()
             ("dimension,d", value<string_type, string_type>());
 
-            boost::program_options::options_description hidden_options;
+            boost::program_options::options_description hidden_options{};
             hidden_options.add_options()
             ("exe", value<string_type, string_type>())
             ("input", value<std::vector<string_type>, string_type>());
 
-            boost::program_options::options_description options;
+            boost::program_options::options_description options{};
             options.add(visible_options).add(hidden_options);
 
-            boost::program_options::positional_options_description positional_options;
+            boost::program_options::positional_options_description positional_options{};
             positional_options.add("exe", 1);
             positional_options.add("input", -1);
 
-            boost::program_options::variables_map option_values;
+            boost::program_options::variables_map option_values{};
             try
             {
                 using command_line_parser_type =
@@ -378,7 +378,7 @@ namespace bobura
 
         static std::unique_ptr<config_base_type> create_config(const boost::program_options::variables_map& options)
         {
-            std::vector<std::unique_ptr<config_base_type>> p_configs;
+            std::vector<std::unique_ptr<config_base_type>> p_configs{};
             p_configs.push_back(create_temporary_config(options));
             p_configs.push_back(create_persistent_config());
 
@@ -425,7 +425,7 @@ namespace bobura
 
         static boost::optional<std::pair<uint_type, uint_type>> parse_dimension(const string_type& dimension_string)
         {
-            std::vector<string_type> result;
+            std::vector<string_type> result{};
             using char_type = typename string_type::value_type;
             boost::split(
                 result,

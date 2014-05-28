@@ -95,8 +95,8 @@ BOOST_AUTO_TEST_SUITE(reset)
     {
         BOOST_TEST_PASSPOINT();
 
-        model_type model;
-        const message_catalog_type message_catalog;
+        model_type model{};
+        const message_catalog_type message_catalog{};
         view_type view(model, message_catalog);
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         const settings_type settings(arguments);
@@ -112,8 +112,8 @@ BOOST_AUTO_TEST_SUITE(reset)
     {
         BOOST_TEST_PASSPOINT();
 
-        model_type model;
-        const message_catalog_type message_catalog;
+        model_type model{};
+        const message_catalog_type message_catalog{};
         view_type view(model, message_catalog);
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         const settings_type settings(arguments);
@@ -136,8 +136,8 @@ BOOST_AUTO_TEST_SUITE(changed)
     {
         BOOST_TEST_PASSPOINT();
 
-        model_type model;
-        const message_catalog_type message_catalog;
+        model_type model{};
+        const message_catalog_type message_catalog{};
         view_type view(model, message_catalog);
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         const settings_type settings(arguments);
@@ -153,8 +153,8 @@ BOOST_AUTO_TEST_SUITE(changed)
     {
         BOOST_TEST_PASSPOINT();
 
-        model_type model;
-        const message_catalog_type message_catalog;
+        model_type model{};
+        const message_catalog_type message_catalog{};
         view_type view(model, message_catalog);
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         const settings_type settings(arguments);

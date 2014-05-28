@@ -135,7 +135,7 @@ namespace bobura { namespace load_save
             if (!m_confirm_file_save(parent))
                 return;
 
-            path_type path;
+            path_type path{};
             if (given_path)
             {
                 path = *given_path;

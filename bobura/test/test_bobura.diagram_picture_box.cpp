@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_SUITE(diagram_picture_box)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
+        window_type window{};
         const diagram_picture_box_type picture_box(window);
     }
 
@@ -51,7 +51,7 @@ BOOST_AUTO_TEST_SUITE(diagram_picture_box)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
+        window_type window{};
         diagram_picture_box_type picture_box(window);
 
         picture_box.set_mouse_capture(mouse_button_type::left);
@@ -63,7 +63,7 @@ BOOST_AUTO_TEST_SUITE(diagram_picture_box)
         BOOST_TEST_PASSPOINT();
 
         {
-            window_type window;
+            window_type window{};
             diagram_picture_box_type picture_box(window);
 
             const auto captured = picture_box.release_mouse_capture(mouse_button_type::left);
@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_SUITE(diagram_picture_box)
             BOOST_CHECK(!captured);
         }
         {
-            window_type window;
+            window_type window{};
             diagram_picture_box_type picture_box(window);
 
             picture_box.set_mouse_capture(mouse_button_type::left);
@@ -85,7 +85,7 @@ BOOST_AUTO_TEST_SUITE(diagram_picture_box)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
+        window_type window{};
         diagram_picture_box_type picture_box(window);
 
         picture_box.update_scroll_bars(

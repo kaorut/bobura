@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_SUITE(grade)
     {
         BOOST_TEST_PASSPOINT();
 
-        const concrete_grade grade;
+        const concrete_grade grade{};
 
         BOOST_CHECK(grade.name() == string_type{ TETENGO2_TEXT("hoge") });
     }

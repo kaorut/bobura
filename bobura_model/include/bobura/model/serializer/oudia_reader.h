@@ -552,7 +552,7 @@ namespace bobura { namespace model { namespace serializer
             {
                 const auto stop_strings = split(stops_string, char_type(TETENGO2_TEXT(',')));
 
-                std::vector<stop_type> stops;
+                std::vector<stop_type> stops{};
                 stops.reserve(stop_strings.size());
                 for (const auto& stop_string: stop_strings)
                 {
@@ -714,13 +714,13 @@ namespace bobura { namespace model { namespace serializer
 
         static const encoder_type& encoder()
         {
-            static const encoder_type singleton;
+            static const encoder_type singleton{};
             return singleton;
         }
 
         static std::vector<string_type> collect_diagram_names(const iterator first, const iterator last)
         {
-            std::vector<string_type> names;
+            std::vector<string_type> names{};
 
             auto next_line_first = first;
             for (;;)
@@ -869,7 +869,7 @@ namespace bobura { namespace model { namespace serializer
 
         static std::vector<string_type> split(const string_type& string, const char_type splitter)
         {
-            std::vector<string_type> result;
+            std::vector<string_type> result{};
             boost::split(result, string, [splitter](const char_type character) { return character == splitter; });
             return result;
         }
@@ -959,7 +959,7 @@ namespace bobura { namespace model { namespace serializer
         )
         {
             auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
-            string_type current_diagram_name;
+            string_type current_diagram_name{};
             auto direction = direction_type::down;
 
             std::unique_ptr<state> p_state = tetengo2::stdalt::make_unique<initial_state>(*p_timetable);

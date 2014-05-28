@@ -88,7 +88,7 @@ namespace
         const boost::filesystem::path& base_path_
     )
     {
-        std::wstring parameters;
+        std::wstring parameters{};
 
         parameters += L"/i ";
         parameters += std::wstring{ L"\"" } +msi_path(base_path_, platform).c_str() + L"\" ";
