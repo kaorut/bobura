@@ -701,9 +701,9 @@ namespace bobura { namespace model { namespace serializer
             return
                 boost::make_optional(
                     color_type{
-                        (color_value / 0x010000) & 0x0000FF,
-                        (color_value / 0x000100) & 0x0000FF,
-                        color_value & 0x0000FF
+                        static_cast<unsigned char>((color_value / 0x010000) & 0x0000FF),
+                        static_cast<unsigned char>((color_value / 0x000100) & 0x0000FF),
+                        static_cast<unsigned char>(color_value & 0x0000FF)
                     }
                 );
         }
