@@ -541,21 +541,21 @@ namespace bobura { namespace view { namespace diagram
                 {
                     const top_type note_top(height_diff / top_type{ 2 });
                     company_line_name_position_ = position_type{ left_type{ 0 }, top_type{ 0 } };
-                    note_position_ = position_type(left_type::from(canvas_width - note_width), note_top);
+                    note_position_ = position_type{ left_type::from(canvas_width - note_width), note_top };
                     header_height = company_line_name_height;
                 }
                 else
                 {
                     const top_type company_line_name_top((top_type{ 0 } - height_diff) / top_type{ 2 });
                     company_line_name_position_ = position_type{ left_type{ 0 }, company_line_name_top };
-                    note_position_ = position_type(left_type::from(canvas_width - note_width), top_type{ 0 });
+                    note_position_ = position_type{ left_type::from(canvas_width - note_width), top_type{ 0 } };
                     header_height = note_height;
                 }
             }
             else
             {
                 company_line_name_position_ = position_type{ left_type{ 0 }, top_type{ 0 } };
-                note_position_ = position_type(left_type{ 0 }, top_type::from(company_line_name_height));
+                note_position_ = position_type{ left_type{ 0 }, top_type::from(company_line_name_height) };
                 header_width = std::max(company_line_name_width, note_width);
                 header_height = company_line_name_height + note_height;
             }
@@ -565,7 +565,7 @@ namespace bobura { namespace view { namespace diagram
             note_position = std::move(note_position_);
             note_dimension = std::move(note_dimension_);
             position = position_type{ left_type{ 0 }, top_type{ 0 } };
-            dimension = dimension_type(std::move(header_width), std::move(header_height));
+            dimension = dimension_type{ std::move(header_width), std::move(header_height) };
         }
 
 

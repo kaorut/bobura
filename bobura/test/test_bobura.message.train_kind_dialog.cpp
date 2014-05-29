@@ -174,7 +174,7 @@ BOOST_AUTO_TEST_SUITE(add_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type());
+        std::vector<info_set_type> info_sets(3, info_set_type{});
         const boost::optional<size_type> current_train_kind_index(1);
         const message_catalog_type message_catalog{};
         const bobura::message::train_kind_dialog::add_button_mouse_clicked<
@@ -186,7 +186,7 @@ BOOST_AUTO_TEST_SUITE(add_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type());
+        std::vector<info_set_type> info_sets(3, info_set_type{});
         const boost::optional<size_type> current_train_kind_index(1);
         const message_catalog_type message_catalog{};
         const bobura::message::train_kind_dialog::add_button_mouse_clicked<
@@ -205,7 +205,7 @@ BOOST_AUTO_TEST_SUITE(delete_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type());
+        std::vector<info_set_type> info_sets(3, info_set_type{});
         boost::optional<size_type> current_train_kind_index(1);
         const bobura::message::train_kind_dialog::delete_button_mouse_clicked<info_set_type, size_type> observer(
             info_sets, current_train_kind_index, sync_function
@@ -216,7 +216,7 @@ BOOST_AUTO_TEST_SUITE(delete_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type());
+        std::vector<info_set_type> info_sets(3, info_set_type{});
         boost::optional<size_type> current_train_kind_index(1);
         const bobura::message::train_kind_dialog::delete_button_mouse_clicked<info_set_type, size_type> observer(
             info_sets, current_train_kind_index, sync_function
@@ -234,7 +234,7 @@ BOOST_AUTO_TEST_SUITE(up_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type());
+        std::vector<info_set_type> info_sets(3, info_set_type{});
         boost::optional<size_type> current_train_kind_index(1);
         const bobura::message::train_kind_dialog::up_button_mouse_clicked<info_set_type, size_type> observer(
             info_sets, current_train_kind_index, sync_function
@@ -245,7 +245,7 @@ BOOST_AUTO_TEST_SUITE(up_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type());
+        std::vector<info_set_type> info_sets(3, info_set_type{});
         boost::optional<size_type> current_train_kind_index(1);
         const bobura::message::train_kind_dialog::up_button_mouse_clicked<info_set_type, size_type> observer(
             info_sets, current_train_kind_index, sync_function
@@ -263,7 +263,7 @@ BOOST_AUTO_TEST_SUITE(down_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type());
+        std::vector<info_set_type> info_sets(3, info_set_type{});
         boost::optional<size_type> current_train_kind_index(1);
         const bobura::message::train_kind_dialog::down_button_mouse_clicked<info_set_type, size_type> observer(
             info_sets, current_train_kind_index, sync_function
@@ -274,7 +274,7 @@ BOOST_AUTO_TEST_SUITE(down_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type());
+        std::vector<info_set_type> info_sets(3, info_set_type{});
         boost::optional<size_type> current_train_kind_index(1);
         const bobura::message::train_kind_dialog::down_button_mouse_clicked<info_set_type, size_type> observer(
             info_sets, current_train_kind_index, sync_function

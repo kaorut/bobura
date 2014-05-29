@@ -174,7 +174,7 @@ namespace bobura
                     m_base, m_confirm_file_save, [this]() { this->save_settings(); }
                 )
             );
-            m_base.window_observer_set().destroyed().connect([](){ return message_loop_break_type()(0); });
+            m_base.window_observer_set().destroyed().connect([](){ return message_loop_break_type{}(0); });
         }
 
         void set_window_icon()

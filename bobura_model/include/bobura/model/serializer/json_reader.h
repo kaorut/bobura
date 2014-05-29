@@ -148,7 +148,7 @@ namespace bobura { namespace model { namespace serializer
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             pull_parser.next();
 
@@ -156,7 +156,7 @@ namespace bobura { namespace model { namespace serializer
             if (!header)
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             {
                 const auto found = header->find(string_type{ TETENGO2_TEXT("company_name") });
@@ -178,7 +178,7 @@ namespace bobura { namespace model { namespace serializer
             if (!font_color_set)
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             p_timetable->set_font_color_set(std::move(*font_color_set));
 
@@ -186,7 +186,7 @@ namespace bobura { namespace model { namespace serializer
             if (!stations)
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             for (auto& station: *stations)
                 p_timetable->insert_station_location(p_timetable->station_locations().end(), std::move(station));
@@ -195,7 +195,7 @@ namespace bobura { namespace model { namespace serializer
             if (!train_kinds)
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             for (auto& train_kind: *train_kinds)
                 p_timetable->insert_train_kind(p_timetable->train_kinds().end(), std::move(train_kind));
@@ -204,7 +204,7 @@ namespace bobura { namespace model { namespace serializer
             if (!down_trains)
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             for (auto& train: *down_trains)
                 p_timetable->insert_down_train(p_timetable->down_trains().end(), std::move(train));
@@ -213,7 +213,7 @@ namespace bobura { namespace model { namespace serializer
             if (!up_trains)
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             for (auto& train: *up_trains)
                 p_timetable->insert_up_train(p_timetable->up_trains().end(), std::move(train));
@@ -221,7 +221,7 @@ namespace bobura { namespace model { namespace serializer
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             pull_parser.next();
 
@@ -546,7 +546,7 @@ namespace bobura { namespace model { namespace serializer
                 note = std::move(member->second);
             }
 
-            operating_distance_type operating_distance = operating_distance_type();
+            operating_distance_type operating_distance{};
             {
                 auto member = read_integer_member<operating_distance_type>(pull_parser);
                 if (!member)
@@ -868,7 +868,7 @@ namespace bobura { namespace model { namespace serializer
 
         static stop_type empty_stop()
         {
-            return stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type());
+            return stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{});
         }
 
         static boost::optional<std::vector<stop_type>> read_stops(pull_parser_type& pull_parser)
@@ -1131,9 +1131,9 @@ namespace bobura { namespace model { namespace serializer
             const typename attribute_map_type::const_iterator found =
                 structure.attribute_map().find(input_string_type{ TETENGO2_TEXT("name") });
             if (found == structure.attribute_map().end())
-                return input_string_type();
+                return input_string_type{};
             if (found->second.which() != 4)
-                return input_string_type();
+                return input_string_type{};
             
             return boost::get<input_string_type>(found->second);
         }

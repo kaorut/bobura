@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_SUITE(settings)
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         const settings_type settings(arguments);
 
-        BOOST_CHECK(settings.base_path() == path_type(string_type{ TETENGO2_TEXT("path/to") }));
+        BOOST_CHECK(settings.base_path() == path_type{ string_type{ TETENGO2_TEXT("path/to") } });
     }
 
     BOOST_AUTO_TEST_CASE(input)
@@ -81,7 +81,7 @@ BOOST_AUTO_TEST_SUITE(settings)
             const settings_type settings(arguments);
 
             BOOST_REQUIRE(settings.input());
-            BOOST_CHECK(*settings.input() == path_type(string_type{ TETENGO2_TEXT("input_file") }));
+            BOOST_CHECK(*settings.input() == path_type{ string_type{ TETENGO2_TEXT("input_file") } });
         }
     }
 
@@ -92,7 +92,9 @@ BOOST_AUTO_TEST_SUITE(settings)
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         const settings_type settings(arguments);
 
-        BOOST_CHECK(settings.message_directory_path() == path_type(string_type{ TETENGO2_TEXT("path/to/messages") }));
+        BOOST_CHECK(
+            settings.message_directory_path() == path_type{ string_type{ TETENGO2_TEXT("path/to/messages") } }
+        );
     }
 
     BOOST_AUTO_TEST_CASE(image_directory_path)
@@ -102,7 +104,7 @@ BOOST_AUTO_TEST_SUITE(settings)
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         const settings_type settings(arguments);
 
-        BOOST_CHECK(settings.image_directory_path() == path_type(string_type{ TETENGO2_TEXT("path/to/images") }));
+        BOOST_CHECK(settings.image_directory_path() == path_type{ string_type{ TETENGO2_TEXT("path/to/images") } });
     }
 
     BOOST_AUTO_TEST_CASE(main_window_dimension)

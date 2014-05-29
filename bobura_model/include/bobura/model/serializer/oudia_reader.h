@@ -567,7 +567,7 @@ namespace bobura { namespace model { namespace serializer
                 std::fill_n(
                     std::back_inserter(stops),
                     station_location_count - stops.size(),
-                    stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type())
+                    stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{})
                 );
                 
                 if (!direction_down)
@@ -585,7 +585,7 @@ namespace bobura { namespace model { namespace serializer
                 const auto stopping = kind_time[0] == string_type{ TETENGO2_TEXT("1") } && kind_time.size() >= 2;
                 const auto operational = !stopping && kind_time.size() >= 2;
                 if (!stopping && !operational)
-                    return stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type());
+                    return stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{});
 
                 const auto arrival_departure = split(kind_time[1], char_type(TETENGO2_TEXT('/')));
                 if (arrival_departure.empty())
@@ -611,7 +611,7 @@ namespace bobura { namespace model { namespace serializer
 
                 return
                     boost::make_optional(
-                        stop_type(std::move(*arrival), std::move(*departure), operational, string_type())
+                        stop_type(std::move(*arrival), std::move(*departure), operational, string_type{})
                     );
             }
 
@@ -818,7 +818,7 @@ namespace bobura { namespace model { namespace serializer
         )
         {
             if (line.empty() || line[line.length() - 1] != char_type(TETENGO2_TEXT('.')))
-                return std::unique_ptr<state>();
+                return std::unique_ptr<state>{};
 
             const auto name = string_ref_type{ line }.substr(0, line.length() - 1);
             if (name.empty())
@@ -862,7 +862,7 @@ namespace bobura { namespace model { namespace serializer
         {
             auto splitted = split(line, char_type(TETENGO2_TEXT('=')));
             if (splitted.size() < 2)
-                return std::make_pair(line, string_type());
+                return std::make_pair(line, string_type{});
 
             return std::make_pair(std::move(splitted[0]), remove_escape_sequences(std::move(splitted[1])));
         }
@@ -880,7 +880,7 @@ namespace bobura { namespace model { namespace serializer
             boost::replace_all(string, string_type{ TETENGO2_TEXT("\\r") }, string_type{ TETENGO2_TEXT(" ") });
             boost::replace_all(string, string_type{ TETENGO2_TEXT("\\n") }, string_type{ TETENGO2_TEXT(" ") });
 
-            boost::replace_all(string, string_type{ TETENGO2_TEXT("\\") }, string_type());
+            boost::replace_all(string, string_type{ TETENGO2_TEXT("\\") }, string_type{});
 
             return string;
         }
@@ -888,7 +888,7 @@ namespace bobura { namespace model { namespace serializer
         static file_type parse_file_type(const string_type& file_type_string)
         {
             auto splitted = split(file_type_string, char_type(TETENGO2_TEXT('.')));
-            auto name = splitted.size() >= 1 ? std::move(splitted[0]) : string_type();
+            auto name = splitted.size() >= 1 ? std::move(splitted[0]) : string_type{};
             const auto major_version = splitted.size() >= 2 ? to_number<int>(splitted[1]) : boost::none;
             const auto minor_version = splitted.size() >= 3 ? to_number<int>(splitted[2]) : boost::none;
             return file_type(std::move(name), major_version ? *major_version : 0, minor_version ? *minor_version : 0);
@@ -922,14 +922,14 @@ namespace bobura { namespace model { namespace serializer
             if (!this->selects(first, last))
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             
             const auto selected_diagram_name = select_diagram(first, last);
             if (!selected_diagram_name)
             {
                 error = error_type::canceled;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
 
             return read_timetable(first, last, error, *selected_diagram_name);
@@ -942,7 +942,7 @@ namespace bobura { namespace model { namespace serializer
         {
             auto diagram_names = collect_diagram_names(first, last);
             if (diagram_names.empty())
-                return string_type();
+                return string_type{};
 
             const auto found = (*m_p_select_diagram)(diagram_names.begin(), diagram_names.end());
             if (found == diagram_names.end())
@@ -977,13 +977,13 @@ namespace bobura { namespace model { namespace serializer
                     if (!p_state->leaving())
                     {
                         error = error_type::corrupted;
-                        return std::unique_ptr<timetable_type>();
+                        return std::unique_ptr<timetable_type>{};
                     }
                     p_state = std::move(p_new_state);
                     if (!p_state->entered())
                     {
                         error = error_type::corrupted;
-                        return std::unique_ptr<timetable_type>();
+                        return std::unique_ptr<timetable_type>{};
                     }
                 }
                 else
@@ -991,7 +991,7 @@ namespace bobura { namespace model { namespace serializer
                     if (!p_state->parse(input_line))
                     {
                         error = error_type::corrupted;
-                        return std::unique_ptr<timetable_type>();
+                        return std::unique_ptr<timetable_type>{};
                     }
                 }
             }
@@ -999,7 +999,7 @@ namespace bobura { namespace model { namespace serializer
             if (!dynamic_cast<initial_state*>(p_state.get()))
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
 
             return std::move(p_timetable);

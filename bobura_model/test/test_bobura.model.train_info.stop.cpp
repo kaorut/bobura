@@ -39,12 +39,12 @@ BOOST_AUTO_TEST_SUITE(stop)
         BOOST_TEST_PASSPOINT();
 
         {
-            const stop_type stop(time_type{ 0 }, time_type{ 0 }, false, string_type());
+            const stop_type stop(time_type{ 0 }, time_type{ 0 }, false, string_type{});
 
             BOOST_CHECK(stop.arrival() == time_type{ 0 });
             BOOST_CHECK(stop.departure() == time_type{ 0 });
             BOOST_CHECK(!stop.operational());
-            BOOST_CHECK(stop.platform() == string_type());
+            BOOST_CHECK(stop.platform() == string_type{});
         }
         {
             const stop_type stop(time_type{ 0 }, time_type{ 1 }, true, string_type{ TETENGO2_TEXT("1") });

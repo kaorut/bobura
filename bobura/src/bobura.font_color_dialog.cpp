@@ -97,7 +97,7 @@ namespace bobura
 
             void set_background(const color_type& color)
             {
-                m_font_color_list[0] = internal_font_color_type(boost::none, boost::make_optional(color));
+                m_font_color_list[0] = internal_font_color_type{ boost::none, boost::make_optional(color) };
             }
 
             font_color_type company_line_name()
@@ -109,7 +109,7 @@ namespace bobura
             void set_company_line_name(const font_type& font, const color_type& color)
             {
                 m_font_color_list[1] =
-                    internal_font_color_type(boost::make_optional(font), boost::make_optional(color));
+                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
             }
 
             font_color_type note()
@@ -121,7 +121,7 @@ namespace bobura
             void set_note(const font_type& font, const color_type& color)
             {
                 m_font_color_list[2] =
-                    internal_font_color_type(boost::make_optional(font), boost::make_optional(color));
+                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
             }
 
             font_color_type time_line()
@@ -133,7 +133,7 @@ namespace bobura
             void set_time_line(const font_type& font, const color_type& color)
             {
                 m_font_color_list[3] =
-                    internal_font_color_type(boost::make_optional(font), boost::make_optional(color));
+                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
             }
 
             font_color_type local_station()
@@ -145,7 +145,7 @@ namespace bobura
             void set_local_station(const font_type& font, const color_type& color)
             {
                 m_font_color_list[4] =
-                    internal_font_color_type(boost::make_optional(font), boost::make_optional(color));
+                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
             }
 
             font_color_type principal_station()
@@ -157,7 +157,7 @@ namespace bobura
             void set_principal_station(const font_type& font, const color_type& color)
             {
                 m_font_color_list[5] =
-                    internal_font_color_type(boost::make_optional(font), boost::make_optional(color));
+                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
             }
 
             font_color_type local_terminal_station()
@@ -169,7 +169,7 @@ namespace bobura
             void set_local_terminal_station(const font_type& font, const color_type& color)
             {
                 m_font_color_list[6] =
-                    internal_font_color_type(boost::make_optional(font), boost::make_optional(color));
+                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
             }
 
             font_color_type principal_terminal_station()
@@ -181,7 +181,7 @@ namespace bobura
             void set_principal_terminal_station(const font_type& font, const color_type& color)
             {
                 m_font_color_list[7] =
-                    internal_font_color_type(boost::make_optional(font), boost::make_optional(color));
+                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
             }
 
             const font_type& train_name()
@@ -192,7 +192,7 @@ namespace bobura
 
             void set_train_name(const font_type& font)
             {
-                m_font_color_list[8] = internal_font_color_type(boost::make_optional(font), boost::none);
+                m_font_color_list[8] = internal_font_color_type{ boost::make_optional(font), boost::none };
             }
 
             void do_modal_impl()

@@ -430,7 +430,7 @@ namespace bobura
             boost::split(
                 result,
                 dimension_string,
-                [](const char_type character) { return character == char_type(TETENGO2_TEXT('x')); }
+                [](const char_type character) { return character == char_type{ TETENGO2_TEXT('x') }; }
             );
             if (result.size() < 2)
                 return boost::none;

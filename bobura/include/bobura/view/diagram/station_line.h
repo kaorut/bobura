@@ -407,7 +407,7 @@ namespace bobura { namespace view { namespace diagram
             const auto horizontal_scale_left = left_type::from(width_type{ horizontal_scale });
             const auto last_time_position =
                 time_to_left(
-                    time_type(24 * 60 * 60 + time_offset.seconds()),
+                    time_type{ 24 * 60 * 60 + time_offset.seconds() },
                     time_offset,
                     1,
                     tetengo2::gui::position<position_type>::left(scroll_bar_position),

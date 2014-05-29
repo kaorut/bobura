@@ -111,17 +111,17 @@ TETENGO2_STDALT_NOEXCEPT
     }
     catch (const boost::exception& e)
     {
-        alert_type()(e);
+        alert_type{}(e);
         return 1;
     }
     catch (const std::exception& e)
     {
-        alert_type()(e);
+        alert_type{}(e);
         return 1;
     }
     catch (...)
     {
-        alert_type()();
+        alert_type{}();
         return 2;
     }
 }

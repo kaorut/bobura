@@ -179,7 +179,7 @@ namespace bobura { namespace model { namespace serializer
                         ),
                         props.find(TETENGO2_TEXT('d')) != string_ref_type::npos,
                         props.find(TETENGO2_TEXT('u')) != string_ref_type::npos,
-                        string_type()
+                        string_type{}
                     },
                     m_operating_distance
                 };
@@ -427,7 +427,7 @@ namespace bobura { namespace model { namespace serializer
             {
                 const auto percent_position = line.find(TETENGO2_TEXT('%'));
                 if (percent_position == string_ref_type::npos)
-                    return std::make_pair(line, string_ref_type());
+                    return std::make_pair(line, string_ref_type{});
 
                 return std::make_pair(line.substr(0, percent_position), line.substr(percent_position + 1));
             }
@@ -528,14 +528,14 @@ namespace bobura { namespace model { namespace serializer
                     is_operational(arrival_and_departure_string.first) ||
                     is_operational(arrival_and_departure_string.second);
 
-                return stop_type(std::move(*arrival), std::move(*departure), operational, string_type());
+                return stop_type(std::move(*arrival), std::move(*departure), operational, string_type{});
             }
 
             std::pair<string_ref_type, string_ref_type> split_time_string(string_ref_type time_string)
             {
                 const auto slash_position = time_string.find(TETENGO2_TEXT('/'));
                 if (slash_position == string_ref_type::npos)
-                    return std::make_pair(string_ref_type(), std::move(time_string));
+                    return std::make_pair(string_ref_type{}, std::move(time_string));
 
                 return std::make_pair(time_string.substr(0, slash_position), time_string.substr(slash_position + 1));
             }
@@ -944,7 +944,7 @@ namespace bobura { namespace model { namespace serializer
                     train_kind_type(base->name(), base->abbreviation(), std::move(*color), weight, line_style)
                 ) :
                 boost::make_optional(
-                    train_kind_type(string_type(), string_type(), std::move(*color), weight, line_style)
+                    train_kind_type(string_type{}, string_type{}, std::move(*color), weight, line_style)
                 );
         }
 
@@ -1039,7 +1039,7 @@ namespace bobura { namespace model { namespace serializer
                     if (!p_state->parse(input_line))
                     {
                         error = error_type::corrupted;
-                        return std::unique_ptr<timetable_type>();
+                        return std::unique_ptr<timetable_type>{};
                     }
                 }
             }
@@ -1049,7 +1049,7 @@ namespace bobura { namespace model { namespace serializer
             if (dynamic_cast<up_train_state*>(p_state.get()) == 0)
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
 
             return std::move(p_timetable);

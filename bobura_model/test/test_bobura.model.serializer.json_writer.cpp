@@ -262,11 +262,11 @@ namespace
                 );
                 train.insert_stop(
                     train.stops().end(),
-                    stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type())
+                    stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{})
                 );
                 train.insert_stop(
                     train.stops().end(),
-                    stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type())
+                    stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{})
                 );
                 p_timetable->insert_down_train(p_timetable->down_trains().end(), train);
             }
@@ -277,7 +277,7 @@ namespace
                     1,
                     string_type{ TETENGO2_TEXT("baz") },
                     string_type{ TETENGO2_TEXT("bazz") },
-                    string_type()
+                    string_type{}
                 );
                 train.insert_stop(
                     train.stops().end(),
@@ -287,7 +287,7 @@ namespace
                 );
                 train.insert_stop(
                     train.stops().end(),
-                    stop_type(time_type{ 10, 5, 45 }, time_type::uninitialized(), false, string_type())
+                    stop_type(time_type{ 10, 5, 45 }, time_type::uninitialized(), false, string_type{})
                 );
                 p_timetable->insert_down_train(p_timetable->down_trains().end(), train);
             }
@@ -310,7 +310,7 @@ namespace
                 );
                 train.insert_stop(
                     train.stops().end(),
-                    stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type())
+                    stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{})
                 );
                 p_timetable->insert_up_train(p_timetable->up_trains().end(), train);
             }
@@ -333,7 +333,7 @@ BOOST_AUTO_TEST_SUITE(json_writer)
 
         const writer_type json_writer{};
 
-        BOOST_CHECK(json_writer.extension() == path_type(TETENGO2_TEXT(".btt")));
+        BOOST_CHECK(json_writer.extension() == path_type{ TETENGO2_TEXT(".btt") });
     }
 
     BOOST_AUTO_TEST_CASE(selects)
@@ -342,9 +342,9 @@ BOOST_AUTO_TEST_SUITE(json_writer)
 
         const writer_type json_writer{};
 
-        BOOST_CHECK(json_writer.selects(path_type(TETENGO2_TEXT(".btt"))));
-        BOOST_CHECK(!json_writer.selects(path_type(TETENGO2_TEXT(".hoge"))));
-        BOOST_CHECK(!json_writer.selects(path_type()));
+        BOOST_CHECK(json_writer.selects(path_type{ TETENGO2_TEXT(".btt") }));
+        BOOST_CHECK(!json_writer.selects(path_type{ TETENGO2_TEXT(".hoge") }));
+        BOOST_CHECK(!json_writer.selects(path_type{}));
     }
 
 // This test case causes a segmentation fault on Linux.

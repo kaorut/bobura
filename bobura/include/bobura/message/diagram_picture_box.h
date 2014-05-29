@@ -276,7 +276,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
             {
                 if (p_system_cursor)
                 {
-                    m_picture_box.set_cursor(std::unique_ptr<cursor_type>());
+                    m_picture_box.set_cursor(std::unique_ptr<cursor_type>{});
                 }
             }
         }

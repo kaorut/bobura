@@ -742,7 +742,7 @@ namespace bobura { namespace model
         {
             train.insert_stop(
                 train.stops().begin() + offset,
-                stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type())
+                stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{})
             );
         }
 

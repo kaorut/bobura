@@ -69,7 +69,7 @@ BOOST_AUTO_TEST_SUITE(train)
         }
         {
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
             };
             train_type::stops_type stops2(stops);
 
@@ -87,7 +87,7 @@ BOOST_AUTO_TEST_SUITE(train)
         }
         {
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
                 stop_type{ time_type{ 1 }, time_type{ 2 }, true, string_type{ TETENGO2_TEXT("a") } },
             };
 
@@ -105,7 +105,7 @@ BOOST_AUTO_TEST_SUITE(train)
         }
         {
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
             };
 
             const train_type train(
@@ -123,7 +123,7 @@ BOOST_AUTO_TEST_SUITE(train)
         }
         {
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
                 stop_type{ time_type{ 1 }, time_type{ 2 }, true, string_type{ TETENGO2_TEXT("a") } },
             };
 
@@ -169,7 +169,7 @@ BOOST_AUTO_TEST_SUITE(train)
         }
         {
             const train_type::stops_type stops1{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
             };
             const train_type train1(
                 train_type::direction_type::down,
@@ -183,7 +183,7 @@ BOOST_AUTO_TEST_SUITE(train)
             );
 
             const train_type::stops_type stops2{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
             };
             const train_type train2(
                 train_type::direction_type::down,
@@ -281,7 +281,7 @@ BOOST_AUTO_TEST_SUITE(train)
         }
         {
             const train_type::stops_type stops1{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
             };
             const train_type train1(
                 train_type::direction_type::down,
@@ -307,7 +307,7 @@ BOOST_AUTO_TEST_SUITE(train)
         }
         {
             const train_type::stops_type stops1{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
             };
             const train_type train1(
                 train_type::direction_type::down,
@@ -472,7 +472,7 @@ BOOST_AUTO_TEST_SUITE(train)
         BOOST_TEST_PASSPOINT();
 
         const train_type::stops_type stops{
-            stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+            stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
             stop_type{ time_type{ 1 }, time_type{ 2 }, true, string_type{ TETENGO2_TEXT("a") } },
         };
 
@@ -496,7 +496,7 @@ BOOST_AUTO_TEST_SUITE(train)
 
         {
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
             };
 
             train_type train(
@@ -513,7 +513,7 @@ BOOST_AUTO_TEST_SUITE(train)
         }
         {
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
                 stop_type{ time_type{ 1 }, time_type{ 2 }, true, string_type{ TETENGO2_TEXT("a") } },
             };
 
@@ -532,7 +532,7 @@ BOOST_AUTO_TEST_SUITE(train)
         }
         {
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
                 stop_type{ time_type{ 1 }, time_type{ 2 }, true, string_type{ TETENGO2_TEXT("a") } },
             };
 
@@ -552,7 +552,7 @@ BOOST_AUTO_TEST_SUITE(train)
         }
         {
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
                 stop_type{ time_type{ 1 }, time_type{ 2 }, true, string_type{ TETENGO2_TEXT("a") } },
             };
 
@@ -578,7 +578,7 @@ BOOST_AUTO_TEST_SUITE(train)
 
         {
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
                 stop_type{ time_type{ 1 }, time_type{ 2 }, true, string_type{ TETENGO2_TEXT("a") } },
             };
 
@@ -599,7 +599,7 @@ BOOST_AUTO_TEST_SUITE(train)
         }
         {
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
                 stop_type{ time_type{ 1 }, time_type{ 2 }, true, string_type{ TETENGO2_TEXT("a") } },
             };
 
@@ -620,7 +620,7 @@ BOOST_AUTO_TEST_SUITE(train)
         }
         {
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
                 stop_type{ time_type{ 1 }, time_type{ 2 }, true, string_type{ TETENGO2_TEXT("a") } },
             };
 
@@ -642,7 +642,7 @@ BOOST_AUTO_TEST_SUITE(train)
         }
         {
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
                 stop_type{ time_type{ 1 }, time_type{ 2 }, true, string_type{ TETENGO2_TEXT("a") } },
             };
 
@@ -663,7 +663,7 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.stops()[0].arrival() == time_type{ 0 });
             BOOST_CHECK(train.stops()[0].departure() == time_type{ 0 });
             BOOST_CHECK(!train.stops()[0].operational());
-            BOOST_CHECK(train.stops()[0].platform() == string_type());
+            BOOST_CHECK(train.stops()[0].platform() == string_type{});
             BOOST_CHECK(train.stops()[1].arrival() == time_type{ 1 });
             BOOST_CHECK(train.stops()[1].departure() == time_type{ 2 });
             BOOST_CHECK(train.stops()[1].operational());
@@ -671,7 +671,7 @@ BOOST_AUTO_TEST_SUITE(train)
         }
         {
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
                 stop_type{ time_type{ 1 }, time_type{ 2 }, true, string_type{ TETENGO2_TEXT("a") } },
                 stop_type{ time_type{ 3 }, time_type{ 4 }, false, string_type{ TETENGO2_TEXT("b") } },
             };
@@ -693,7 +693,7 @@ BOOST_AUTO_TEST_SUITE(train)
             BOOST_CHECK(train.stops()[0].arrival() == time_type{ 0 });
             BOOST_CHECK(train.stops()[0].departure() == time_type{ 0 });
             BOOST_CHECK(!train.stops()[0].operational());
-            BOOST_CHECK(train.stops()[0].platform() == string_type());
+            BOOST_CHECK(train.stops()[0].platform() == string_type{});
             BOOST_CHECK(train.stops()[1].arrival() == time_type{ 3 });
             BOOST_CHECK(train.stops()[1].departure() == time_type{ 4 });
             BOOST_CHECK(!train.stops()[1].operational());

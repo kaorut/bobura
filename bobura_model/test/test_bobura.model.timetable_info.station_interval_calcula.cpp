@@ -126,7 +126,7 @@ namespace
 
     stop_type make_stop()
     {
-        return stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type());
+        return stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{});
     }
 
 

@@ -2292,7 +2292,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
             
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
             };
 
             BOOST_CHECK_THROW(
@@ -2367,7 +2367,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
             
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
             };
 
             BOOST_CHECK_THROW(
@@ -2589,7 +2589,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
             
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
             };
 
             BOOST_CHECK_THROW(
@@ -2664,7 +2664,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
             
             const train_type::stops_type stops{
-                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type() },
+                stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
             };
 
             BOOST_CHECK_THROW(

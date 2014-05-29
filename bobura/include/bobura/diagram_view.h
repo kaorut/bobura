@@ -250,7 +250,7 @@ namespace bobura
             );
 
             m_station_positions = std::move(positions);
-            m_dimension = dimension_type(width, height_type::from(m_station_positions.back()));
+            m_dimension = dimension_type{ width, height_type::from(m_station_positions.back()) };
 
             m_p_header.reset();
             m_p_time_line_list.reset();
@@ -276,7 +276,7 @@ namespace bobura
             const auto header_height = m_header_height + m_time_header_height;
             auto page_height = canvas_height > header_height ? canvas_height - header_height : height_type{ 0 };
 
-            return dimension_type(std::move(page_width), std::move(page_height));
+            return { std::move(page_width), std::move(page_height) };
         }
 
         /*!
@@ -390,7 +390,7 @@ namespace bobura
                 const auto position = m_sum;
                 m_sum += interval;
                 return
-                    top_type(typename top_type::value_type(position.seconds(), 60)) *
+                    top_type{ typename top_type::value_type{ position.seconds(), 60 } } *
                     top_type::from(height_type{ m_vertical_scale }).value();
             }
 

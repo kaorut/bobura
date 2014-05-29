@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
             left_type{ 42 },
             left_type{ 12 },
             top_type{ 24 },
-            font_color_type(font_type::dialog_font(), color_type{ 12, 34, 56 })
+            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
         );
         const station_line_type station_line2(std::move(station_line1));
     }
@@ -144,7 +144,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
             left_type{ 42 },
             left_type{ 12 },
             top_type{ 24 },
-            font_color_type(font_type::dialog_font(), color_type{ 12, 34, 56 })
+            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
         );
         station_type station2(
             string_type{ TETENGO2_TEXT("name2") },
@@ -160,7 +160,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
             left_type{ 42 },
             left_type{ 12 },
             top_type{ 24 },
-            font_color_type(font_type::dialog_font(), color_type{ 12, 34, 56 })
+            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
         );
         station_line1 = std::move(station_line2);
     }
