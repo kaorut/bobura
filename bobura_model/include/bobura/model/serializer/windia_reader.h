@@ -170,19 +170,19 @@ namespace bobura { namespace model { namespace serializer
                 const auto props = string_ref_type{ line }.substr(0, comma_position);
                 auto name = line.substr(comma_position + 1);
 
-                station_location_type station_location(
-                    station_type(
+                station_location_type station_location{
+                    station_type{
                         std::move(name),
                         to_grade(
-                            props.find(TETENGO2_TEXT('p')) != string_ref_type::npos,
-                            props.find(TETENGO2_TEXT('b')) != string_ref_type::npos
+                        props.find(TETENGO2_TEXT('p')) != string_ref_type::npos,
+                        props.find(TETENGO2_TEXT('b')) != string_ref_type::npos
                         ),
                         props.find(TETENGO2_TEXT('d')) != string_ref_type::npos,
                         props.find(TETENGO2_TEXT('u')) != string_ref_type::npos,
                         string_type()
-                    ),
+                    },
                     m_operating_distance
-                );
+                };
                 m_timetable.insert_station_location(
                     m_timetable.station_locations().end(), std::move(station_location)
                 );
@@ -823,13 +823,13 @@ namespace bobura { namespace model { namespace serializer
             {
                 timetable.insert_train_kind(
                     timetable.train_kinds().end(),
-                    train_kind_type(
+                    train_kind_type{
                         encoder().decode(kind.name),
                         encoder().decode(kind.abbreviation),
                         color_type{ 0, 0, 0 },
                         kind.weight,
                         kind.line_style
-                    )
+                    }
                 );
             }
         }

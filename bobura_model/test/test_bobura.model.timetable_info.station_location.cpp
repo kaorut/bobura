@@ -65,50 +65,50 @@ BOOST_AUTO_TEST_SUITE(station_location)
         BOOST_TEST_PASSPOINT();
 
         {
-            const station_location_type station_location1(
-                station_type(
+            const station_location_type station_location1{
+                station_type{
                     string_type{ TETENGO2_TEXT("A") },
                     local_type::instance(),
                     false,
                     false,
                     string_type{ TETENGO2_TEXT("N") }
-                ),
+                },
                 1
-            );
-            const station_location_type station_location2(
-                station_type(
+            };
+            const station_location_type station_location2{
+                station_type{
                     string_type{ TETENGO2_TEXT("A") },
                     local_type::instance(),
                     false,
                     false,
                     string_type{ TETENGO2_TEXT("N") }
-                ),
+                },
                 1
-            );
+            };
 
             BOOST_CHECK(station_location1 == station_location2);
         }
         {
-            const station_location_type station_location1(
-                station_type(
+            const station_location_type station_location1{
+                station_type{
                     string_type{ TETENGO2_TEXT("A") },
                     local_type::instance(),
                     false,
                     false,
                     string_type{ TETENGO2_TEXT("N") }
-                ),
+                },
                 1
-            );
-            const station_location_type station_location2(
-                station_type(
+            };
+            const station_location_type station_location2{
+                station_type{
                     string_type{ TETENGO2_TEXT("B") },
                     local_type::instance(),
                     false,
                     false,
                     string_type{ TETENGO2_TEXT("N") }
-                ),
+                },
                 2
-            );
+            };
 
             BOOST_CHECK(station_location1 != station_location2);
         }

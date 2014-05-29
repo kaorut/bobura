@@ -61,12 +61,12 @@ namespace
     station_location_type make_station_location(string_type name, operating_distance_type operating_distance)
     {
         return
-            station_location_type(
-                station_type(
-                    std::move(name), grade_type_set_type::local_type::instance(), false, false, string_type()
-                ),
+            station_location_type{
+                station_type{
+                    std::move(name), grade_type_set_type::local_type::instance(), false, false, string_type{}
+                },
                 std::move(operating_distance)
-            );
+            };
     }
 
     std::vector<station_location_type> make_station_locations()
@@ -83,16 +83,17 @@ namespace
     template <typename InputIterator>
     train_type make_train(const InputIterator stop_first, const InputIterator stop_last)
     {
-        return train_type(
-            train_type::direction_type::down,
-            train_type::string_type(),
-            0,
-            train_type::string_type(),
-            train_type::string_type(),
-            train_type::string_type(),
-            stop_first,
-            stop_last
-        );
+        return
+            train_type{
+                train_type::direction_type::down,
+                train_type::string_type{},
+                0,
+                train_type::string_type{},
+                train_type::string_type{},
+                train_type::string_type{},
+                stop_first,
+                stop_last
+            };
     }
 
     stop_type make_stop(
@@ -103,24 +104,24 @@ namespace
     )
     {
         return
-            stop_type(
+            stop_type{
                 time_type{ arrival_hours, arrival_minutes, 0 },
                 time_type{ departure_hours, departure_minutes, 0 },
                 false,
-                string_type()
-            );
+                string_type{}
+            };
     }
 
     stop_type make_stop(const bool arrival, const time_tick_type hours, const time_tick_type minutes)
     {
         time_type time(hours, minutes, 0);
         return
-            stop_type(
+            stop_type{
                 arrival ? std::move(time) : time_type::uninitialized(),
                 arrival ? time_type::uninitialized() : std::move(time),
                 false,
-                string_type()
-            );
+                string_type{}
+            };
     }
 
     stop_type make_stop()

@@ -676,13 +676,13 @@ BOOST_AUTO_TEST_SUITE(json_reader)
                 const auto& font_color_set = p_timetable->font_color_set();
 
                 BOOST_CHECK((font_color_set.background() == color_type{ 0xAB, 0xCD, 0xEF }));
-                BOOST_CHECK(
+                BOOST_CHECK((
                     font_color_set.company_line_name() ==
-                    font_color_type(
-                        font_type(string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true),
+                    font_color_type{
+                        font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
                         color_type{ 0xAB, 0xCD, 0xEF }
-                    )
-                );
+                    }
+                ));
                 BOOST_CHECK(
                     font_color_set.train_name() ==
                     font_type(string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true)

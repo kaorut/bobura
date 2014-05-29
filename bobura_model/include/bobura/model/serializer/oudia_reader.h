@@ -324,17 +324,17 @@ namespace bobura { namespace model { namespace serializer
             {
                 m_timetable.insert_station_location(
                     m_timetable.station_locations().end(),
-                    station_location_type(
-                        station_type(
+                    station_location_type{
+                        station_type{
                             std::move(m_ekimei),
                             to_station_grade(m_ekijikokukeisiki, m_ekikibo),
                             shows_down_arrival_times(m_ekijikokukeisiki),
                             shows_up_arrival_times(m_ekijikokukeisiki),
-                            string_type()
-                        ),
+                            string_type{}
+                        },
                         m_timetable.station_locations().empty() ?
-                            0 : m_timetable.station_locations().back().operating_distance() + 1
-                    )
+                        0 : m_timetable.station_locations().back().operating_distance() + 1
+                    }
                 );
 
                 return true;
@@ -421,13 +421,13 @@ namespace bobura { namespace model { namespace serializer
                     return false;
                 m_timetable.insert_train_kind(
                     m_timetable.train_kinds().end(),
-                    train_kind_type(
+                    train_kind_type{
                         std::move(m_syubetsumei),
                         std::move(abbreviation),
                         std::move(*color),
                         to_weight(m_diagram_sen_is_bold),
                         to_line_style(m_diagram_sen_style)
-                    )
+                    }
                 );
 
                 return true;
@@ -792,11 +792,11 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             return
                 boost::make_optional(
-                    color_type(
+                    color_type{
                         static_cast<unsigned char>(*red),
                         static_cast<unsigned char>(*green),
                         static_cast<unsigned char>(*blue)
-                    )
+                    }
                 );
         }
 

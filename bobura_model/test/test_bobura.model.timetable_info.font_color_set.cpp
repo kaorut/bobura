@@ -390,12 +390,13 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(train_name_font)
         );
 
-        BOOST_CHECK(
+        BOOST_CHECK((
             font_color_set.company_line_name() ==
-            font_color_type(
-                font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            )
-        );
+            font_color_type{
+                font_type{ string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true },
+                color_type{ 12, 34, 56 }
+            }
+        ));
     }
 
     BOOST_AUTO_TEST_CASE(note)
@@ -438,12 +439,13 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(train_name_font)
         );
 
-        BOOST_CHECK(
+        BOOST_CHECK((
             font_color_set.note() ==
-            font_color_type(
-                font_type(string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            )
-        );
+            font_color_type{
+                font_type{ string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true },
+                color_type{ 12, 34, 56 }
+            }
+        ));
     }
 
     BOOST_AUTO_TEST_CASE(time_line)
@@ -486,12 +488,13 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(train_name_font)
         );
 
-        BOOST_CHECK(
+        BOOST_CHECK((
             font_color_set.time_line() ==
-            font_color_type(
-                font_type(string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            )
-        );
+            font_color_type{
+                font_type{ string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true },
+                color_type{ 12, 34, 56 }
+            }
+        ));
     }
 
     BOOST_AUTO_TEST_CASE(local_station)
@@ -534,12 +537,13 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(train_name_font)
         );
 
-        BOOST_CHECK(
+        BOOST_CHECK((
             font_color_set.local_station() ==
-            font_color_type(
-                font_type(string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            )
-        );
+            font_color_type{
+                font_type{ string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true },
+                color_type{ 12, 34, 56 }
+            }
+        ));
     }
 
     BOOST_AUTO_TEST_CASE(principal_station)
@@ -582,12 +586,13 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(train_name_font)
         );
 
-        BOOST_CHECK(
+        BOOST_CHECK((
             font_color_set.principal_station() ==
-            font_color_type(
-                font_type(string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            )
-        );
+            font_color_type{
+                font_type{ string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true },
+                color_type{ 12, 34, 56 }
+            }
+        ));
     }
 
     BOOST_AUTO_TEST_CASE(local_terminal_station)
@@ -630,12 +635,13 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(train_name_font)
         );
 
-        BOOST_CHECK(
+        BOOST_CHECK((
             font_color_set.local_terminal_station() ==
-            font_color_type(
-                font_type(string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            )
-        );
+            font_color_type{
+                font_type{ string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true },
+                color_type{ 12, 34, 56 }
+            }
+        ));
     }
 
     BOOST_AUTO_TEST_CASE(principal_terminal_station)
@@ -678,12 +684,13 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(train_name_font)
         );
 
-        BOOST_CHECK(
+        BOOST_CHECK((
             font_color_set.principal_terminal_station() ==
-            font_color_type(
-                font_type(string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            )
-        );
+            font_color_type{
+                font_type{ string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true },
+                color_type{ 12, 34, 56 }
+            }
+        ));
     }
 
     BOOST_AUTO_TEST_CASE(train_name)

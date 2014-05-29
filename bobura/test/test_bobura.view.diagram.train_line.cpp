@@ -173,14 +173,14 @@ BOOST_AUTO_TEST_SUITE(train_line)
         const station_intervals_type station_intervals(2, station_interval_calculator_type::default_interval());
         const message_catalog_type message_catalog{};
         train_line_type train_line1(
-            train_type(
+            train_type{
                 train_type::direction_type::down,
                 string_type{ TETENGO2_TEXT("number") },
                 0,
                 string_type{ TETENGO2_TEXT("name") },
                 string_type{ TETENGO2_TEXT("name_number") },
                 string_type{ TETENGO2_TEXT("note") }
-            ),
+            },
             train_kind,
             time_span_type{ 42 * 60 },
             selection,
@@ -212,14 +212,14 @@ BOOST_AUTO_TEST_SUITE(train_line)
         const station_intervals_type station_intervals(2, station_interval_calculator_type::default_interval());
         const message_catalog_type message_catalog{};
         train_line_type train_line1(
-            train_type(
+            train_type{
                 train_type::direction_type::down,
                 string_type{ TETENGO2_TEXT("number") },
                 0,
                 string_type{ TETENGO2_TEXT("name") },
                 string_type{ TETENGO2_TEXT("name_number") },
                 string_type{ TETENGO2_TEXT("note") }
-            ),
+            },
             train_kind,
             time_span_type{ 42 * 60 },
             selection,
@@ -234,14 +234,14 @@ BOOST_AUTO_TEST_SUITE(train_line)
             message_catalog
         );
         train_line_type train_line2(
-            train_type(
+            train_type{
                 train_type::direction_type::down,
                 string_type{ TETENGO2_TEXT("number") },
                 0,
                 string_type{ TETENGO2_TEXT("name") },
                 string_type{ TETENGO2_TEXT("name_number") },
                 string_type{ TETENGO2_TEXT("note") }
-            ),
+            },
             train_kind,
             time_span_type{ 42 * 60 },
             selection,

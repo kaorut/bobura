@@ -338,16 +338,18 @@ namespace bobura { namespace model { namespace serializer
             pull_parser.next();
 
             return
-                font_color_set_type(
-                    std::move(background_color),
-                    std::move(company_line_name_font_color),
-                    std::move(note_font_color),
-                    std::move(time_line_font_color),
-                    std::move(local_station_font_color),
-                    std::move(principal_station_font_color),
-                    std::move(local_terminal_station_font_color),
-                    std::move(principal_terminal_station_font_color),
-                    std::move(train_name_font)
+                boost::make_optional(
+                    font_color_set_type{
+                        std::move(background_color),
+                        std::move(company_line_name_font_color),
+                        std::move(note_font_color),
+                        std::move(time_line_font_color),
+                        std::move(local_station_font_color),
+                        std::move(principal_station_font_color),
+                        std::move(local_terminal_station_font_color),
+                        std::move(principal_terminal_station_font_color),
+                        std::move(train_name_font)
+                    }
                 );
         }
 
@@ -419,14 +421,14 @@ namespace bobura { namespace model { namespace serializer
 
                 return
                     boost::make_optional<font_color_set_element_type>(
-                        font_type(
+                        font_type{
                             encoder().decode(std::move(*font_name)),
                             std::move(*font_size),
                             std::move(*font_bold),
                             std::move(*font_italic),
                             std::move(*font_underline),
                             std::move(*font_strikeout)
-                        )
+                        }
                     );
             }
 
@@ -561,16 +563,16 @@ namespace bobura { namespace model { namespace serializer
 
             return
                 boost::make_optional(
-                    station_location_type(
-                        station_type(
+                    station_location_type{
+                        station_type{
                             std::move(name),
                             *p_grade,
                             show_down_arrival_times,
                             show_up_arrival_times,
                             std::move(note)
-                        ),
+                        },
                         std::move(operating_distance)
-                    )
+                    }
                 );
         }
 
@@ -698,11 +700,11 @@ namespace bobura { namespace model { namespace serializer
 
             return
                 boost::make_optional(
-                    color_type(
+                    color_type{
                         (color_value / 0x010000) & 0x0000FF,
                         (color_value / 0x000100) & 0x0000FF,
                         color_value & 0x0000FF
-                    )
+                    }
                 );
         }
 
@@ -940,12 +942,12 @@ namespace bobura { namespace model { namespace serializer
 
             return
                 boost::make_optional(
-                    stop_type(
+                    stop_type{
                         std::move(*arrival_time),
                         std::move(*departure_time),
                         *operational,
                         encoder().decode(std::move(*platform))
-                    )
+                    }
                 );
         }
 

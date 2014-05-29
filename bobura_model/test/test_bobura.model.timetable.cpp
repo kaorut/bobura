@@ -116,31 +116,31 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable1{};
             timetable1.insert_station_location(
                 timetable1.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
 
             timetable_type timetable2{};
             timetable2.insert_station_location(
                 timetable2.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
 
             BOOST_CHECK(timetable1 == timetable2);
@@ -149,31 +149,31 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable1{};
             timetable1.insert_station_location(
                 timetable1.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
 
             timetable_type timetable2{};
             timetable2.insert_station_location(
                 timetable2.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
 
             BOOST_CHECK(timetable1 != timetable2);
@@ -182,44 +182,44 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable1{};
             timetable1.insert_station_location(
                 timetable1.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
 
             timetable_type timetable2{};
             timetable2.insert_station_location(
                 timetable2.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable2.insert_station_location(
                 timetable2.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
 
             BOOST_CHECK(timetable1 != timetable2);
@@ -228,57 +228,57 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable1{};
             timetable1.insert_station_location(
                 timetable1.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable1.insert_station_location(
                 timetable1.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
 
             timetable_type timetable2{};
             timetable2.insert_station_location(
                 timetable2.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable2.insert_station_location(
                 timetable2.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
 
             BOOST_CHECK(timetable1 == timetable2);
@@ -367,13 +367,13 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
             const timetable_type::station_locations_type station_locations{
                 station_location_type{
-                    station_type(
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
                 },
             };
@@ -386,23 +386,23 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
             const timetable_type::station_locations_type station_locations{
                     station_location_type{
-                        station_type(
+                        station_type{
                             string_type{ TETENGO2_TEXT("A") },
                             local_type::instance(),
                             false,
                             false,
                             string_type{ TETENGO2_TEXT("N") }
-                        ),
+                        },
                         1
                     },
                     station_location_type{
-                        station_type(
+                        station_type{
                             string_type{ TETENGO2_TEXT("B") },
                             local_type::instance(),
                             false,
                             false,
                             string_type{ TETENGO2_TEXT("N") }
-                        ),
+                        },
                         2
                     },
             };
@@ -428,23 +428,23 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
             const timetable_type::station_locations_type station_locations{
                 station_location_type{
-                    station_type(
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
                 },
                 station_location_type{
-                    station_type(
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
                 },
             };
@@ -457,16 +457,16 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
 
             const auto& station_locations = timetable.station_locations();
@@ -479,29 +479,29 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
 
             const auto& station_locations = timetable.station_locations();
@@ -516,30 +516,30 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
             BOOST_CHECK_THROW(
                 timetable.insert_station_location(
                     timetable.station_locations().end(),
-                    station_location_type(
-                        station_type(
+                    station_location_type{
+                        station_type{
                             string_type{ TETENGO2_TEXT("A") },
                             local_type::instance(),
                             false,
                             false,
                             string_type{ TETENGO2_TEXT("N") }
-                        ),
+                        },
                         1
-                    )
+                    }
                 ),
                 std::invalid_argument
             );
@@ -554,55 +554,55 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("D") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     4
-                )
+                }
             );
             timetable.insert_station_location(
                 timetable.station_locations().begin(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable.insert_station_location(
                 timetable.station_locations().begin() + 2,
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("C") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     3
-                )
+                }
             );
 
             const auto& station_locations = timetable.station_locations();
@@ -621,38 +621,39 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
-                    string_type{ TETENGO2_TEXT("x") })
+                    string_type{ TETENGO2_TEXT("x") }
+                }
             );
 
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
 
             BOOST_REQUIRE_EQUAL(timetable.down_trains()[0].stops().size(), timetable.station_locations().size());
@@ -667,7 +668,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
@@ -676,21 +677,21 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     string_type{ TETENGO2_TEXT("y") },
                     stops.begin(),
                     stops.begin() + 1
-                )
+                }
             );
 
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("C") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     3
-                )
+                }
             );
 
             BOOST_REQUIRE_EQUAL(timetable.down_trains()[1].stops().size(), timetable.station_locations().size());
@@ -700,7 +701,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("3") },
                     0,
@@ -709,21 +710,21 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     string_type{ TETENGO2_TEXT("z") },
                     stops.begin(),
                     stops.end()
-                )
+                }
             );
 
             timetable.insert_station_location(
                 timetable.station_locations().begin() + 1,
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
 
             BOOST_REQUIRE_EQUAL(timetable.down_trains()[2].stops().size(), timetable.station_locations().size());
@@ -735,38 +736,39 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
-                    string_type{ TETENGO2_TEXT("x") })
+                    string_type{ TETENGO2_TEXT("x") }
+                }
             );
 
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
 
             BOOST_REQUIRE_EQUAL(timetable.up_trains()[0].stops().size(), timetable.station_locations().size());
@@ -781,7 +783,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
@@ -790,21 +792,21 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     string_type{ TETENGO2_TEXT("y") },
                     stops.begin(),
                     stops.begin() + 1
-                )
+                }
             );
 
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("C") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     3
-                )
+                }
             );
 
             BOOST_REQUIRE_EQUAL(timetable.up_trains()[1].stops().size(), timetable.station_locations().size());
@@ -814,7 +816,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("3") },
                     0,
@@ -823,21 +825,21 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     string_type{ TETENGO2_TEXT("z") },
                     stops.begin(),
                     stops.end()
-                )
+                }
             );
 
             timetable.insert_station_location(
                 timetable.station_locations().begin() + 1,
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("C") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
 
             BOOST_REQUIRE_EQUAL(timetable.up_trains()[2].stops().size(), timetable.station_locations().size());
@@ -861,29 +863,29 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
 
             timetable.erase_station_locations(
@@ -896,29 +898,29 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
 
             timetable.erase_station_locations(
@@ -933,29 +935,29 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
 
             timetable.erase_station_locations(
@@ -971,75 +973,75 @@ BOOST_AUTO_TEST_SUITE(timetable)
         {
             const timetable_type::station_locations_type station_locations{
                 station_location_type{
-                    station_type(
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
                 },
                 station_location_type{
-                    station_type(
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
                 },
                 station_location_type{
-                    station_type(
+                    station_type{
                         string_type{ TETENGO2_TEXT("C") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     3
                 },
             };
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("C") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     3
-                )
+                }
             );
 
             timetable.erase_station_locations(
@@ -1056,39 +1058,39 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             const train_type::stops_type stops{
@@ -1098,7 +1100,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
@@ -1107,7 +1109,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     string_type{ TETENGO2_TEXT("x") },
                     stops.begin(),
                     stops.end()
-                )
+                }
             );
 
             timetable.erase_station_locations(
@@ -1120,39 +1122,39 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             const train_type::stops_type stops{
@@ -1162,7 +1164,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
@@ -1171,7 +1173,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     string_type{ TETENGO2_TEXT("x") },
                     stops.begin(),
                     stops.end()
-                )
+                }
             );
 
             timetable.erase_station_locations(
@@ -1184,39 +1186,39 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             const train_type::stops_type stops{
@@ -1226,7 +1228,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
@@ -1235,7 +1237,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     string_type{ TETENGO2_TEXT("x") },
                     stops.begin(),
                     stops.end()
-                )
+                }
             );
 
             timetable.erase_station_locations(
@@ -1248,39 +1250,39 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("B") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     2
-                )
+                }
             );
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             const train_type::stops_type stops{
@@ -1290,7 +1292,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
@@ -1299,7 +1301,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     string_type{ TETENGO2_TEXT("x") },
                     stops.begin(),
                     stops.end()
-                )
+                }
             );
 
             timetable.erase_station_locations(
@@ -1336,68 +1338,68 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Local") },
                     string_type{ TETENGO2_TEXT("Local") },
                     color_type{ 0, 0, 255 },
                     train_kind_type::weight_type::normal,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Rapid") },
                     string_type{ TETENGO2_TEXT("Rapid") },
                     color_type{ 0, 128, 0 },
                     train_kind_type::weight_type::normal,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
 
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("3") },
                     1,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("z") }
-                )
+                }
             );
 
             BOOST_CHECK(timetable.train_kind_referred(timetable.train_kinds().begin()));
@@ -1408,68 +1410,68 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Local") },
                     string_type{ TETENGO2_TEXT("Local") },
                     color_type{ 0, 0, 255 },
                     train_kind_type::weight_type::normal,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Rapid") },
                     string_type{ TETENGO2_TEXT("Rapid") },
                     color_type{ 0, 128, 0 },
                     train_kind_type::weight_type::normal,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
 
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("3") },
                     1,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("z") }
-                )
+                }
             );
 
             BOOST_CHECK(timetable.train_kind_referred(0));
@@ -1508,25 +1510,25 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
         timetable.insert_down_train(
             timetable.down_trains().end(),
-            train_type(
+            train_type{
                 train_type::direction_type::down,
                 string_type{ TETENGO2_TEXT("1") },
                 0,
                 string_type{ TETENGO2_TEXT("a") },
                 string_type{ TETENGO2_TEXT("42") },
                 string_type{ TETENGO2_TEXT("x") }
-            )
+            }
         );
         timetable.insert_down_train(
             timetable.down_trains().end(),
-            train_type(
+            train_type{
                 train_type::direction_type::down,
                 string_type{ TETENGO2_TEXT("2") },
                 1,
                 string_type{ TETENGO2_TEXT("a") },
                 string_type{ TETENGO2_TEXT("42") },
                 string_type{ TETENGO2_TEXT("y") }
-            )
+            }
         );
 
         const train_kind_type kind1(
@@ -1564,34 +1566,34 @@ BOOST_AUTO_TEST_SUITE(timetable)
         timetable_type timetable{};
         timetable.insert_train_kind(
             timetable.train_kinds().end(),
-            train_kind_type(
+            train_kind_type{
                 string_type{ TETENGO2_TEXT("Local") },
                 string_type{ TETENGO2_TEXT("Local") },
                 color_type{ 0, 0, 255 },
                 train_kind_type::weight_type::normal,
                 train_kind_type::line_style_type::solid
-            )
+            }
         );
         timetable.insert_train_kind(
             timetable.train_kinds().end(),
-            train_kind_type(
+            train_kind_type{
                 string_type{ TETENGO2_TEXT("Rapid") },
                 string_type{ TETENGO2_TEXT("Rapid") },
                 color_type{ 0, 128, 0 },
                 train_kind_type::weight_type::normal,
                 train_kind_type::line_style_type::solid
-            )
+            }
         );
 
         timetable.set_train_kind(
             timetable.train_kinds().begin(),
-            train_kind_type(
+            train_kind_type{
                 string_type{ TETENGO2_TEXT("Limited Express") },
                 string_type{ TETENGO2_TEXT("Ltd.Exp.") },
                 color_type{ 255, 0, 0 },
                 train_kind_type::weight_type::bold,
                 train_kind_type::line_style_type::solid
-            )
+            }
         );
 
         BOOST_REQUIRE_EQUAL(timetable.train_kinds().size(), 2U);
@@ -1606,23 +1608,23 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Local") },
                     string_type{ TETENGO2_TEXT("Local") },
                     color_type{ 0, 0, 255 },
                     train_kind_type::weight_type::normal,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Rapid") },
                     string_type{ TETENGO2_TEXT("Rapid") },
                     color_type{ 0, 128, 0 },
                     train_kind_type::weight_type::normal,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
 
             timetable.erase_train_kind(timetable.train_kinds().begin());
@@ -1638,56 +1640,56 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Local") },
                     string_type{ TETENGO2_TEXT("Local") },
                     color_type{ 0, 0, 255 },
                     train_kind_type::weight_type::normal,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Rapid") },
                     string_type{ TETENGO2_TEXT("Rapid") },
                     color_type{ 0, 128, 0 },
                     train_kind_type::weight_type::normal,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Limited Express") },
                     string_type{ TETENGO2_TEXT("Ltd.Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("2") },
                     2,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
 
             timetable.erase_train_kind(boost::next(timetable.train_kinds().begin(), 1));
@@ -1709,25 +1711,25 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Local") },
                     string_type{ TETENGO2_TEXT("Local") },
                     color_type{ 0, 0, 255 },
                     train_kind_type::weight_type::normal,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
 
             BOOST_CHECK_THROW(
@@ -1770,25 +1772,25 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
 
             const train_kinds_type train_kinds{
@@ -1821,25 +1823,25 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
 
             const train_kinds_type train_kinds{
@@ -1869,25 +1871,25 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
 
             const train_kinds_type train_kinds{
@@ -1930,25 +1932,25 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
 
             const auto& trains = timetable.down_trains();
@@ -1961,36 +1963,36 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
 
             const auto& trains = timetable.down_trains();
@@ -2018,25 +2020,25 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
 
             const auto& trains = timetable.up_trains();
@@ -2049,36 +2051,36 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
 
             const auto& trains = timetable.up_trains();
@@ -2104,25 +2106,25 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
 
             const auto& trains = timetable.down_trains();
@@ -2135,36 +2137,36 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
 
             const auto& trains = timetable.down_trains();
@@ -2179,58 +2181,58 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("4") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("w") }
-                )
+                }
             );
             timetable.insert_down_train(
                 timetable.down_trains().begin(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_down_train(
                 timetable.down_trains().begin() + 2,
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("3") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("z") }
-                )
+                }
             );
 
             const auto& trains = timetable.down_trains();
@@ -2249,26 +2251,26 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             BOOST_CHECK_THROW(
                 timetable.insert_down_train(
                     timetable.down_trains().end(),
-                    train_type(
+                    train_type{
                         train_type::direction_type::up,
                         string_type{ TETENGO2_TEXT("1") },
                         0,
                         string_type{ TETENGO2_TEXT("a") },
                         string_type{ TETENGO2_TEXT("42") },
                         string_type{ TETENGO2_TEXT("x") }
-                    )
+                    }
                 ),
                 std::invalid_argument
             );
@@ -2277,16 +2279,16 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             
             const train_type::stops_type stops{
@@ -2296,7 +2298,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_THROW(
                 timetable.insert_down_train(
                     timetable.down_trains().end(),
-                    train_type(
+                    train_type{
                         train_type::direction_type::down,
                         string_type{ TETENGO2_TEXT("1") },
                         0,
@@ -2305,7 +2307,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                         string_type{ TETENGO2_TEXT("x") },
                         stops.begin(),
                         stops.end()
-                    )
+                    }
                 ),
                 std::invalid_argument
             );
@@ -2314,39 +2316,39 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             BOOST_CHECK_THROW(
                 timetable.insert_down_train(
                     timetable.down_trains().end(),
-                    train_type(
+                    train_type{
                         train_type::direction_type::down,
                         string_type{ TETENGO2_TEXT("1") },
                         0,
                         string_type{ TETENGO2_TEXT("a") },
                         string_type{ TETENGO2_TEXT("42") },
                         string_type{ TETENGO2_TEXT("x") }
-                    )
+                    }
                 ),
                 std::invalid_argument
             );
@@ -2355,13 +2357,13 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             const train_type::stops_type stops{
@@ -2371,7 +2373,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_THROW(
                 timetable.insert_down_train(
                     timetable.down_trains().end(),
-                    train_type(
+                    train_type{
                         train_type::direction_type::down,
                         string_type{ TETENGO2_TEXT("1") },
                         0,
@@ -2380,7 +2382,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                         string_type{ TETENGO2_TEXT("x") },
                         stops.begin(),
                         stops.end()
-                    )
+                    }
                 ),
                 std::invalid_argument
             );
@@ -2401,25 +2403,25 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
 
             const auto& trains = timetable.up_trains();
@@ -2432,36 +2434,36 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
 
             const auto& trains = timetable.up_trains();
@@ -2476,58 +2478,58 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("4") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("w") }
-                )
+                }
             );
             timetable.insert_up_train(
                 timetable.up_trains().begin(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_up_train(
                 timetable.up_trains().begin() + 2,
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("3") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("z") }
-                )
+                }
             );
 
             const auto& trains = timetable.up_trains();
@@ -2546,26 +2548,26 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             BOOST_CHECK_THROW(
                 timetable.insert_up_train(
                     timetable.down_trains().end(),
-                    train_type(
+                    train_type{
                         train_type::direction_type::down,
                         string_type{ TETENGO2_TEXT("1") },
                         0,
                         string_type{ TETENGO2_TEXT("a") },
                         string_type{ TETENGO2_TEXT("42") },
                         string_type{ TETENGO2_TEXT("x") }
-                    )
+                    }
                 ),
                 std::invalid_argument
             );
@@ -2574,16 +2576,16 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             
             const train_type::stops_type stops{
@@ -2593,7 +2595,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_THROW(
                 timetable.insert_up_train(
                     timetable.up_trains().end(),
-                    train_type(
+                    train_type{
                         train_type::direction_type::up,
                         string_type{ TETENGO2_TEXT("1") },
                         0,
@@ -2602,7 +2604,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                         string_type{ TETENGO2_TEXT("x") },
                         stops.begin(),
                         stops.end()
-                    )
+                    }
                 ),
                 std::invalid_argument
             );
@@ -2611,39 +2613,39 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_station_location(
                 timetable.station_locations().end(),
-                station_location_type(
-                    station_type(
+                station_location_type{
+                    station_type{
                         string_type{ TETENGO2_TEXT("A") },
                         local_type::instance(),
                         false,
                         false,
                         string_type{ TETENGO2_TEXT("N") }
-                    ),
+                    },
                     1
-                )
+                }
             );
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
 
             BOOST_CHECK_THROW(
                 timetable.insert_up_train(
                     timetable.up_trains().end(),
-                    train_type(
+                    train_type{
                         train_type::direction_type::up,
                         string_type{ TETENGO2_TEXT("1") },
                         0,
                         string_type{ TETENGO2_TEXT("a") },
                         string_type{ TETENGO2_TEXT("42") },
                         string_type{ TETENGO2_TEXT("x") }
-                    )
+                    }
                 ),
                 std::invalid_argument
             );
@@ -2652,13 +2654,13 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             const train_type::stops_type stops{
@@ -2668,7 +2670,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_THROW(
                 timetable.insert_up_train(
                     timetable.up_trains().end(),
-                    train_type(
+                    train_type{
                         train_type::direction_type::up,
                         string_type{ TETENGO2_TEXT("1") },
                         0,
@@ -2677,7 +2679,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                         string_type{ TETENGO2_TEXT("x") },
                         stops.begin(),
                         stops.end()
-                    )
+                    }
                 ),
                 std::invalid_argument
             );
@@ -2693,36 +2695,36 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
 
             timetable.erase_down_trains(timetable.down_trains().begin(), timetable.down_trains().end());
@@ -2735,36 +2737,36 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
 
             timetable.erase_down_trains(timetable.down_trains().begin(), timetable.down_trains().begin() + 1);
@@ -2779,36 +2781,36 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
 
             timetable.erase_down_trains(timetable.down_trains().begin(), timetable.down_trains().begin());
@@ -2825,47 +2827,47 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
             timetable.insert_down_train(
                 timetable.down_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("3") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("z") }
-                )
+                }
             );
 
             timetable.erase_down_trains(timetable.down_trains().begin() + 1, timetable.down_trains().begin() + 2);
@@ -2888,36 +2890,36 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
 
             timetable.erase_up_trains(timetable.up_trains().begin(), timetable.up_trains().end());
@@ -2930,36 +2932,36 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
 
             timetable.erase_up_trains(timetable.up_trains().begin(), timetable.up_trains().begin() + 1);
@@ -2974,36 +2976,36 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                    string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
 
             timetable.erase_up_trains(timetable.up_trains().begin(), timetable.up_trains().begin());
@@ -3020,47 +3022,47 @@ BOOST_AUTO_TEST_SUITE(timetable)
             timetable_type timetable{};
             timetable.insert_train_kind(
                 timetable.train_kinds().end(),
-                train_kind_type(
+                train_kind_type{
                     string_type{ TETENGO2_TEXT("Express") },
                     string_type{ TETENGO2_TEXT("Exp.") },
                     color_type{ 255, 0, 0 },
                     train_kind_type::weight_type::bold,
                     train_kind_type::line_style_type::solid
-                )
+                }
             );
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
             timetable.insert_up_train(
                 timetable.up_trains().end(),
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("3") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("z") }
-                )
+                }
             );
 
             timetable.erase_up_trains(timetable.up_trains().begin() + 1, timetable.up_trains().begin() + 2);
@@ -3088,43 +3090,43 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
         const timetable_type::station_locations_type station_locations{
             station_location_type{
-                station_type(
+                station_type{
                 string_type{ TETENGO2_TEXT("A") },
                 local_type::instance(),
                 false,
                 false,
                 string_type{ TETENGO2_TEXT("N") }
-                ),
+                },
                 0
             },
             station_location_type{
-                station_type(
+                station_type{
                     string_type{ TETENGO2_TEXT("B") },
                     local_type::instance(),
                     false,
                     false,
                     string_type{ TETENGO2_TEXT("N") }
-                ),
+                },
                 1
             },
             station_location_type{
-                station_type(
+                station_type{
                     string_type{ TETENGO2_TEXT("C") },
                     local_type::instance(),
                     false,
                     false,
                     string_type{ TETENGO2_TEXT("N") }
-                ),
+                },
                 13
             },
             station_location_type{
-                station_type(
+                station_type{
                     string_type{ TETENGO2_TEXT("D") },
                     local_type::instance(),
                     false,
                     false,
                     string_type{ TETENGO2_TEXT("N") }
-                ),
+                },
                 14
             },
         };
@@ -3135,31 +3137,31 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
         timetable.insert_train_kind(
             timetable.train_kinds().end(),
-            train_kind_type(
+            train_kind_type{
                 string_type{ TETENGO2_TEXT("Express") },
                 string_type{ TETENGO2_TEXT("Exp.") },
                 color_type{ 255, 0, 0 },
                 train_kind_type::weight_type::bold,
                 train_kind_type::line_style_type::solid
-            )
+            }
         );
             
         {
             train_type train(
-                train_type(
+                train_type{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("1") },
                     0,
                     string_type{ TETENGO2_TEXT("a") },
                     string_type{ TETENGO2_TEXT("42") },
                     string_type{ TETENGO2_TEXT("x") }
-                )
+                }
             );
             train.insert_stop(
                 train.stops().end(),
-                stop_type(
+                stop_type{
                     time_type::uninitialized(), time_type::uninitialized(), true, string_type{ TETENGO2_TEXT("0") }
-                )
+                }
             );
             train.insert_stop(
                 train.stops().end(),
@@ -3171,29 +3173,29 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
             train.insert_stop(
                 train.stops().end(),
-                stop_type(
+                stop_type{
                     time_type::uninitialized(), time_type::uninitialized(), true, string_type{ TETENGO2_TEXT("3") }
-                )
+                }
             );
 
             timetable.insert_down_train(timetable.down_trains().end(), std::move(train));
         }
         {
             train_type train(
-                train_type(
+                train_type{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("2") },
                     0,
                     string_type{ TETENGO2_TEXT("b") },
                     string_type{ TETENGO2_TEXT("24") },
                     string_type{ TETENGO2_TEXT("y") }
-                )
+                }
             );
             train.insert_stop(
                 train.stops().end(),
-                stop_type(
+                stop_type{
                     time_type::uninitialized(), time_type::uninitialized(), true, string_type{ TETENGO2_TEXT("0") }
-                )
+                }
             );
             train.insert_stop(
                 train.stops().end(),
@@ -3205,9 +3207,9 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
             train.insert_stop(
                 train.stops().end(),
-                stop_type(
+                stop_type{
                     time_type::uninitialized(), time_type::uninitialized(), true, string_type{ TETENGO2_TEXT("3") }
-                )
+                }
             );
 
             timetable.insert_up_train(timetable.up_trains().end(), std::move(train));
