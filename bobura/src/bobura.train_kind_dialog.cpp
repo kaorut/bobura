@@ -614,13 +614,13 @@ namespace bobura
             const height_type list_box_height(17);
             m_p_train_kind_list_box->set_dimension(dimension_type{ list_box_width, list_box_height });
             m_p_train_kind_list_box->set_position(
-                position_type(
+                position_type{
                     train_kind_label_left,
                     tetengo2::gui::position<position_type>::top(m_p_train_kind_label->position()) +
                         top_type::from(
                             tetengo2::gui::dimension<dimension_type>::height(m_p_train_kind_label->dimension())
                         )
-                )
+                }
             );
 
             const width_type list_box_button_width(typename width_type::value_type{ 9, 2 });
@@ -682,13 +682,13 @@ namespace bobura
             m_p_sample_label->set_position(position_type{ name_label_left, top_type{ 16 } });
 
             m_p_sample_picture_box->set_position(
-                position_type(
+                position_type{
                     name_label_left,
                     tetengo2::gui::position<position_type>::top(m_p_sample_label->position()) +
                         top_type::from(
                             tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
                         )
-                )
+                }
             );
 
             m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
@@ -775,13 +775,13 @@ namespace bobura
             assert(m_p_weight_dropdown_box->selected_value_index());
             assert(m_p_weight_dropdown_box->selected_value_index());
             train_kind =
-                train_kind_type(
+                train_kind_type{
                     m_p_name_text_box->text(),
                     m_p_abbreviation_text_box->text(),
                     m_current_train_kind_color,
                     to_weight(*m_p_weight_dropdown_box->selected_value_index()),
                     to_line_style(*m_p_line_style_dropdown_box->selected_value_index())
-                );
+                };
 
             m_p_train_kind_list_box->set_value(*m_current_train_kind_index, train_kind.name());
             m_p_train_kind_list_box->select_value(*m_current_train_kind_index);

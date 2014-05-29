@@ -180,10 +180,10 @@ namespace bobura { namespace view { namespace diagram
             const auto name_dimension = canvas.calc_text_dimension(name);
             canvas.draw_text(
                 name,
-                position_type(
+                position_type{
                     left_type{ 0 },
                     m_top - top_type::from(tetengo2::gui::dimension<dimension_type>::height(name_dimension))
-                )
+                }
             );
         }
 

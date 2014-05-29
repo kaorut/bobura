@@ -146,10 +146,10 @@ namespace bobura
 
             return
                 boost::make_optional(
-                    dimension_type(
+                    dimension_type{
                         width_type::from_pixels(boost::get<uint_type>(*width)),
                         height_type::from_pixels(boost::get<uint_type>(*height))
-                    )
+                    }
                 );
         }
 

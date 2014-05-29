@@ -156,19 +156,17 @@ namespace bobura { namespace message { namespace train_kind_dialog
                 m_current_train_kind_index ?
                 boost::next(m_info_sets.begin(), *m_current_train_kind_index) : m_info_sets.end();
 
-            m_info_sets.insert(
+            m_info_sets.emplace(
                 tetengo2::stdalt::as_insertion_iterator(m_info_sets, insertion_position),
-                info_set_type(
-                    boost::none,
-                    false,
-                    train_kind_type(
-                        m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:New Kind")),
-                        string_type{},
-                        color_type{ 0, 0, 0 },
-                        train_kind_type::weight_type::normal,
-                        train_kind_type::line_style_type::solid
-                    )
-                )
+                boost::none,
+                false,
+                train_kind_type{
+                    m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:New Kind")),
+                    string_type{},
+                    color_type{ 0, 0, 0 },
+                    train_kind_type::weight_type::normal,
+                    train_kind_type::line_style_type::solid
+                }
             );
 
             m_sync();
@@ -780,10 +778,10 @@ namespace bobura { namespace message { namespace train_kind_dialog
             canvas.set_line_style(to_canvas_line_style(train_kind.line_style()));
             canvas.draw_line(
                 position_type{ left_type{ 0 }, text_and_line_tops.second },
-                position_type(
+                position_type{
                     left_type::from(tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension)),
                     text_and_line_tops.second
-                )
+                }
             );
         }
 
@@ -815,14 +813,14 @@ namespace bobura { namespace message { namespace train_kind_dialog
         static font_type fixed_size_font(const font_type& base)
         {
             return
-                font_type(
+                font_type{
                     base.family(),
                     font_type::dialog_font().size(),
                     base.bold(),
                     base.italic(),
                     base.underline(),
                     base.strikeout()
-                );
+                };
         }
 
         static typename canvas_type::line_style_type to_canvas_line_style(

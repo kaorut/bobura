@@ -270,11 +270,11 @@ namespace bobura
 
             m_p_diagram_list_box->set_dimension(dimension_type{ control_width, height_type{ 10 } });
             m_p_diagram_list_box->set_position(
-                position_type(
+                position_type{
                     label_left,
                     tetengo2::gui::position<position_type>::top(m_p_prompt_label->position()) +
                         top_type::from(tetengo2::gui::dimension<dimension_type>::height(m_p_prompt_label->dimension()))
-                )
+                }
             );
 
             m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });

@@ -478,13 +478,13 @@ namespace bobura
 
                 m_p_category_list_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 16 } });
                 m_p_category_list_box->set_position(
-                    position_type(
+                    position_type{
                         category_label_left,
                         tetengo2::gui::position<position_type>::top(m_p_category_label->position()) +
-                            top_type::from(
-                                tetengo2::gui::dimension<dimension_type>::height(m_p_category_label->dimension())
-                            )
-                    )
+                        top_type::from(
+                            tetengo2::gui::dimension<dimension_type>::height(m_p_category_label->dimension())
+                        )
+                    }
                 );
 
                 const left_type font_button_left(20);
@@ -502,13 +502,13 @@ namespace bobura
                 m_p_sample_label->set_position(position_type{ font_button_left, top_type{ 8 } });
 
                 m_p_sample_picture_box->set_position(
-                    position_type(
+                    position_type{
                         font_button_left,
                         tetengo2::gui::position<position_type>::top(m_p_sample_label->position()) +
-                            top_type::from(
-                                tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
-                            )
-                    )
+                        top_type::from(
+                            tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
+                        )
+                    }
                 );
 
                 m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });

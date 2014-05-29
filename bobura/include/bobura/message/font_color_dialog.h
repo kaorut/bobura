@@ -191,10 +191,10 @@ namespace bobura { namespace message { namespace font_color_dialog
             canvas.set_line_style(canvas_type::line_style_type::solid);
             canvas.draw_line(
                 position_type{ left_type{ 0 }, text_and_line_tops.second },
-                position_type(
+                position_type{
                     left_type::from(tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension)),
                     text_and_line_tops.second
-                )
+                }
             );
         }
 

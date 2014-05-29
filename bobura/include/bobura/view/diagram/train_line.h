@@ -242,9 +242,9 @@ namespace bobura { namespace view { namespace diagram
                     const auto left_diff = boost::rational_cast<double>(text_height.value()) / std::sin(angle);
                     const auto left =
                         tetengo2::gui::position<position_type>::left(departure) +
-                        typename left_type::value_type(
+                        typename left_type::value_type{
                             static_cast<typename left_type::value_type::int_type>(left_diff * 0x10000), 0x10000
-                        );
+                        };
 
                     return { left, tetengo2::gui::position<position_type>::top(departure) };
                 }
@@ -254,16 +254,16 @@ namespace bobura { namespace view { namespace diagram
                 const auto left_diff = boost::rational_cast<double>(text_height.value()) * std::sin(angle);
                 const auto left =
                     tetengo2::gui::position<position_type>::left(departure) +
-                    typename left_type::value_type(
+                    typename left_type::value_type{
                         static_cast<typename left_type::value_type::int_type>(left_diff * 0x10000), 0x10000
-                    );
+                    };
 
                 const auto top_diff = boost::rational_cast<double>(text_height.value()) * std::cos(angle);
                 const auto top =
                     tetengo2::gui::position<position_type>::top(departure) -
-                    typename top_type::value_type(
+                    typename top_type::value_type{
                         static_cast<typename top_type::value_type::int_type>(top_diff * 0x10000), 0x10000
-                    );
+                    };
 
                 return { left, top };
             }
@@ -293,10 +293,10 @@ namespace bobura { namespace view { namespace diagram
         static geo_vector_type to_geo_vector(const position_type& position)
         {
             return
-                geo_vector_type(
+                {
                     boost::rational_cast<double>(tetengo2::gui::position<position_type>::left(position).value()),
                     boost::rational_cast<double>(tetengo2::gui::position<position_type>::top(position).value())
-                );
+                };
         }
 
         static size_type to_size(const double value)

@@ -328,13 +328,13 @@ namespace bobura
 
                 m_p_company_name_text_box->set_dimension(dimension_type{ width_type{ 32 }, height_type{ 2 } });
                 m_p_company_name_text_box->set_position(
-                    position_type(
+                    position_type{
                         label_left,
                         tetengo2::gui::position<position_type>::top(m_p_company_name_label->position()) +
-                            top_type::from(
-                                tetengo2::gui::dimension<dimension_type>::height(m_p_company_name_label->dimension())
-                            )
-                    )
+                        top_type::from(
+                            tetengo2::gui::dimension<dimension_type>::height(m_p_company_name_label->dimension())
+                        )
+                    }
                 );
 
                 m_p_line_name_label->fit_to_content();
@@ -342,13 +342,13 @@ namespace bobura
 
                 m_p_line_name_text_box->set_dimension(dimension_type{ width_type{ 32 }, height_type{ 2 } });
                 m_p_line_name_text_box->set_position(
-                    position_type(
+                    position_type{
                         label_left,
                         tetengo2::gui::position<position_type>::top(m_p_line_name_label->position()) +
-                            top_type::from(
-                                tetengo2::gui::dimension<dimension_type>::height(m_p_line_name_label->dimension())
-                            )
-                    )
+                        top_type::from(
+                            tetengo2::gui::dimension<dimension_type>::height(m_p_line_name_label->dimension())
+                        )
+                    }
                 );
 
                 m_p_note_label->fit_to_content();
@@ -356,13 +356,13 @@ namespace bobura
 
                 m_p_note_text_box->set_dimension(dimension_type{ width_type{ 32 }, height_type{ 2 } });
                 m_p_note_text_box->set_position(
-                    position_type(
+                    position_type{
                         label_left,
                         tetengo2::gui::position<position_type>::top(m_p_note_label->position()) +
-                            top_type::from(
-                                tetengo2::gui::dimension<dimension_type>::height(m_p_note_label->dimension())
-                            )
-                    )
+                        top_type::from(
+                            tetengo2::gui::dimension<dimension_type>::height(m_p_note_label->dimension())
+                        )
+                }
                 );
 
                 m_p_file_name_label->fit_to_content();
@@ -370,13 +370,13 @@ namespace bobura
 
                 m_p_file_name_text_box->set_dimension(dimension_type{ width_type{ 32 }, height_type{ 2 } });
                 m_p_file_name_text_box->set_position(
-                    position_type(
+                    position_type{
                         label_left,
                         tetengo2::gui::position<position_type>::top(m_p_file_name_label->position()) +
-                            top_type::from(
-                                tetengo2::gui::dimension<dimension_type>::height(m_p_file_name_label->dimension())
-                            )
-                    )
+                        top_type::from(
+                            tetengo2::gui::dimension<dimension_type>::height(m_p_file_name_label->dimension())
+                        )
+                    }
                 );
 
                 m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
