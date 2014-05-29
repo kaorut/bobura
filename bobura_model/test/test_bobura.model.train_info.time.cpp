@@ -147,7 +147,7 @@ BOOST_AUTO_TEST_SUITE_END()
             BOOST_CHECK_EQUAL(time.seconds_from_midnight(), 59U);
         }
         {
-            BOOST_CHECK_THROW(time_type(0, 0, 60), std::out_of_range);
+            BOOST_CHECK_THROW((time_type{ 0, 0, 60 }), std::out_of_range);
         }
         {
             const time_type time(0, 1, 0);
@@ -160,7 +160,7 @@ BOOST_AUTO_TEST_SUITE_END()
             BOOST_CHECK_EQUAL(time.seconds_from_midnight(), 3540U);
         }
         {
-            BOOST_CHECK_THROW(time_type(0, 60, 0), std::out_of_range);
+            BOOST_CHECK_THROW((time_type{ 0, 60, 0 }), std::out_of_range);
         }
         {
             const time_type time(1, 0, 0);
@@ -173,7 +173,7 @@ BOOST_AUTO_TEST_SUITE_END()
             BOOST_CHECK_EQUAL(time.seconds_from_midnight(), 82800U);
         }
         {
-            BOOST_CHECK_THROW(time_type(24, 0, 0), std::out_of_range);
+            BOOST_CHECK_THROW((time_type{ 24, 0, 0 }), std::out_of_range);
         }
     }
 
