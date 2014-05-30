@@ -96,17 +96,17 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
     {
         BOOST_TEST_PASSPOINT();
 
-        const train_type train(
+        const train_type train{
             train_type::direction_type::down,
             string_type{ TETENGO2_TEXT("number") },
             0,
             string_type{ TETENGO2_TEXT("name") },
             string_type{ TETENGO2_TEXT("name_number") },
             string_type{ TETENGO2_TEXT("note") }
-        );
+        };
         selection_type selection{};
         const message_catalog_type message_catalog{};
-        train_line_fragment_type train_line_fragment1(
+        train_line_fragment_type train_line_fragment1{
             train,
             42,
             selection,
@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             position_type{ left_type{ 42 }, top_type{ 24 } },
             true,
             message_catalog
-        );
+        };
         const train_line_fragment_type train_line_fragment2{ std::move(train_line_fragment1) };
     }
 
@@ -122,17 +122,17 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
     {
         BOOST_TEST_PASSPOINT();
 
-        const train_type train(
+        const train_type train{
             train_type::direction_type::down,
             string_type{ TETENGO2_TEXT("number") },
             0,
             string_type{ TETENGO2_TEXT("name") },
             string_type{ TETENGO2_TEXT("name_number") },
             string_type{ TETENGO2_TEXT("note") }
-        );
+        };
         selection_type selection{};
         const message_catalog_type message_catalog{};
-        train_line_fragment_type train_line_fragment1(
+        train_line_fragment_type train_line_fragment1{
             train,
             42,
             selection,
@@ -140,8 +140,8 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             position_type{ left_type{ 42 }, top_type{ 24 } },
             false,
             message_catalog
-        );
-        train_line_fragment_type train_line_fragment2(
+        };
+        train_line_fragment_type train_line_fragment2{
             train,
             42,
             selection,
@@ -149,7 +149,7 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             position_type{ left_type{ 42 }, top_type{ 24 } },
             true,
             message_catalog
-        );
+        };
         train_line_fragment1 = std::move(train_line_fragment2);
     }
 
@@ -163,16 +163,16 @@ BOOST_AUTO_TEST_SUITE(train_line)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
-        const train_kind_type train_kind(
+        const train_kind_type train_kind{
             string_type{ TETENGO2_TEXT("name") },
             string_type{ TETENGO2_TEXT("abbrev") },
             color_type{ 0x12, 0x34, 0x56 },
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
-        );
+        };
         const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
         const message_catalog_type message_catalog{};
-        train_line_type train_line1(
+        train_line_type train_line1{
             train_type{
                 train_type::direction_type::down,
                 string_type{ TETENGO2_TEXT("number") },
@@ -193,7 +193,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             station_intervals,
             std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
-        );
+        };
         const train_line_type train_line2{ std::move(train_line1) };
     }
 
@@ -202,16 +202,16 @@ BOOST_AUTO_TEST_SUITE(train_line)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
-        const train_kind_type train_kind(
+        const train_kind_type train_kind{
             string_type{ TETENGO2_TEXT("name") },
             string_type{ TETENGO2_TEXT("abbrev") },
             color_type{ 0x12, 0x34, 0x56 },
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
-        );
+        };
         const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
         const message_catalog_type message_catalog{};
-        train_line_type train_line1(
+        train_line_type train_line1{
             train_type{
                 train_type::direction_type::down,
                 string_type{ TETENGO2_TEXT("number") },
@@ -232,8 +232,8 @@ BOOST_AUTO_TEST_SUITE(train_line)
             station_intervals,
             std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
-        );
-        train_line_type train_line2(
+        };
+        train_line_type train_line2{
             train_type{
                 train_type::direction_type::down,
                 string_type{ TETENGO2_TEXT("number") },
@@ -254,7 +254,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             station_intervals,
             std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
-        );
+        };
         train_line1 = std::move(train_line2);
     }
 
@@ -271,7 +271,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
         selection_type selection{};
         const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
         const message_catalog_type message_catalog{};
-        train_line_list_type train_line_list1(
+        train_line_list_type train_line_list1{
             model,
             time_span_type{ 42 * 60 },
             selection,
@@ -284,7 +284,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             station_intervals,
             std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
-        );
+        };
         const train_line_list_type train_line_list2{ std::move(train_line_list1) };
     }
 
@@ -296,7 +296,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
         selection_type selection{};
         const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
         const message_catalog_type message_catalog{};
-        train_line_list_type train_line_list1(
+        train_line_list_type train_line_list1{
             model,
             time_span_type{ 42 * 60 },
             selection,
@@ -309,8 +309,8 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             station_intervals,
             std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
-        );
-        train_line_list_type train_line_list2(
+        };
+        train_line_list_type train_line_list2{
             model,
             time_span_type{ 42 * 60 },
             selection,
@@ -323,7 +323,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             station_intervals,
             std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
-        );
+        };
 
         train_line_list1 = std::move(train_line_list2);
     }

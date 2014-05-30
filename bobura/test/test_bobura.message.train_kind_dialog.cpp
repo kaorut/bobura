@@ -81,13 +81,13 @@ namespace
         const train_kind_type& train_kind()
         const
         {
-            static const train_kind_type singleton(
+            static const train_kind_type singleton{
                 string_type{ TETENGO2_TEXT("name") },
                 string_type{ TETENGO2_TEXT("abbreviation") },
                 color_type{ 0x12, 0x34, 0x56 },
                 train_kind_type::weight_type::normal,
                 train_kind_type::line_style_type::solid
-            );
+            };
             return singleton;
         }
 

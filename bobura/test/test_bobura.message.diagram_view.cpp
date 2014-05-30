@@ -104,13 +104,13 @@ BOOST_AUTO_TEST_SUITE(station_selected)
         const model_type model{};
         station_selected_type station_selected{ property_bar, model, message_catalog };
 
-        station_type station(
+        station_type station{
             string_type{ TETENGO2_TEXT("name") },
             station_grade_type_set_type::local_type::instance(),
             false,
             false,
             string_type{ TETENGO2_TEXT("note") }
-        );
+        };
         station_location_type station_location{ std::move(station), 42 };
         station_selected(station_location);
     }
@@ -156,14 +156,14 @@ BOOST_AUTO_TEST_SUITE(train_selected)
         );
         train_selected_type train_selected{ property_bar, model, message_catalog };
 
-        const train_type train(
+        const train_type train{
             train_type::direction_type::down,
             string_type{ TETENGO2_TEXT("number") },
             0,
             string_type{ TETENGO2_TEXT("name") },
             string_type{ TETENGO2_TEXT("name_number") },
             string_type{ TETENGO2_TEXT("note") }
-        );
+        };
         train_selected(train, boost::none);
     }
 

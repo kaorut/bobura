@@ -120,12 +120,12 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
         const message_catalog_type message_catalog{};
         const bobura::message::font_color_dialog::sample_picture_box_paint<
             size_type, canvas_type, message_catalog_type
-        > observer(
+        > observer{
             font_color_list,
-            boost::make_optional<size_type>(1), 
+            boost::make_optional<size_type>(1),
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
             message_catalog
-        );
+        };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -142,12 +142,12 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
         const message_catalog_type message_catalog{};
         const bobura::message::font_color_dialog::sample_picture_box_paint<
             size_type, canvas_type, message_catalog_type
-        > observer(
+        > observer{
             font_color_list,
             boost::make_optional<size_type>(1), 
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
             message_catalog
-        );
+        };
 
         window_type window{};
         const auto p_canvas = window.create_canvas();
@@ -175,13 +175,13 @@ BOOST_AUTO_TEST_SUITE(font_button_mouse_clicked)
         const message_catalog_type message_catalog{};
         const bobura::message::font_color_dialog::font_button_mouse_clicked<
             size_type, dialog_type, font_dialog_type, canvas_type, message_catalog_type
-        > observer(
+        > observer{
             dialog,
             font_color_list,
-            boost::make_optional<size_type>(1), 
+            boost::make_optional<size_type>(1),
             update,
             message_catalog
-        );
+        };
     }
 
 // This test case causes a segmentation fault on Cygwin.
@@ -205,13 +205,13 @@ BOOST_AUTO_TEST_SUITE(font_button_mouse_clicked)
         const message_catalog_type message_catalog{};
         const bobura::message::font_color_dialog::font_button_mouse_clicked<
             size_type, dialog_type, font_dialog_type, canvas_type, message_catalog_type
-        > observer(
+        > observer{
             dialog,
             font_color_list,
-            boost::make_optional<size_type>(1), 
+            boost::make_optional<size_type>(1),
             update,
             message_catalog
-        );
+        };
 
         observer();
     }
@@ -238,13 +238,13 @@ BOOST_AUTO_TEST_SUITE(color_button_mouse_clicked)
         const message_catalog_type message_catalog{};
         const bobura::message::font_color_dialog::color_button_mouse_clicked<
             size_type, dialog_type, color_dialog_type, canvas_type, message_catalog_type
-        > observer(
+        > observer{
             dialog,
             font_color_list,
-            boost::make_optional<size_type>(1), 
+            boost::make_optional<size_type>(1),
             update,
             message_catalog
-        );
+        };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -263,13 +263,13 @@ BOOST_AUTO_TEST_SUITE(color_button_mouse_clicked)
         const message_catalog_type message_catalog{};
         const bobura::message::font_color_dialog::color_button_mouse_clicked<
             size_type, dialog_type, color_dialog_type, canvas_type, message_catalog_type
-        > observer(
+        > observer{
             dialog,
             font_color_list,
-            boost::make_optional<size_type>(1), 
+            boost::make_optional<size_type>(1),
             update,
             message_catalog
-        );
+        };
 
         observer();
     }
