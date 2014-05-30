@@ -345,7 +345,7 @@ namespace bobura
                     typename boost::mpl::at<
                         font_color_dialog_message_type_list_type,
                         message::font_color_dialog::type::category_list_box_selection_changed
-                    >::type(m_current_category_index, *p_list_box, [this]() { this->update(); })
+                    >::type{ m_current_category_index, *p_list_box, [this]() { this->update(); } }
                 );
 
                 return std::move(p_list_box);
@@ -426,12 +426,12 @@ namespace bobura
                     typename boost::mpl::at<
                         font_color_dialog_message_type_list_type,
                         message::font_color_dialog::type::sample_picture_box_paint
-                    >::type(
+                    >::type{
                         m_font_color_list,
                         m_current_category_index,
                         p_picture_box->client_dimension(),
                         m_message_catalog
-                    )
+                    }
                 );
 
                 return std::move(p_picture_box);
@@ -446,7 +446,7 @@ namespace bobura
                     typename boost::mpl::at<
                         font_color_dialog_message_type_list_type,
                         message::font_color_dialog::type::ok_button_mouse_clicked
-                    >::type(m_base)
+                    >::type{ m_base }
                 );
 
                 return std::move(p_button);
@@ -461,7 +461,7 @@ namespace bobura
                     typename boost::mpl::at<
                         font_color_dialog_message_type_list_type,
                         message::font_color_dialog::type::cancel_button_mouse_clicked
-                    >::type(m_base)
+                    >::type{ m_base }
                 );
 
                 return std::move(p_button);

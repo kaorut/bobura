@@ -331,7 +331,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::train_kind_list_box_selection_changed
-                >::type(m_current_train_kind_index, *p_list_box, [this]() { this->update(); })
+                >::type{ m_current_train_kind_index, *p_list_box, [this]() { this->update(); } }
             );
 
             return std::move(p_list_box);
@@ -346,7 +346,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::add_button_mouse_clicked
-                >::type(m_info_sets, m_current_train_kind_index, [this]() { this->sync(); }, m_message_catalog)
+                >::type{ m_info_sets, m_current_train_kind_index, [this]() { this->sync(); }, m_message_catalog }
             );
 
             return std::move(p_button);
@@ -361,7 +361,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::delete_button_mouse_clicked
-                >::type(m_info_sets, m_current_train_kind_index, [this]() { this->sync(); })
+                >::type{ m_info_sets, m_current_train_kind_index, [this]() { this->sync(); } }
             );
 
             return std::move(p_button);
@@ -376,7 +376,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::up_button_mouse_clicked
-                >::type(m_info_sets, m_current_train_kind_index, [this]() { this->sync(); })
+                >::type{ m_info_sets, m_current_train_kind_index, [this]() { this->sync(); } }
             );
 
             return std::move(p_button);
@@ -391,7 +391,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::down_button_mouse_clicked
-                >::type(m_info_sets, m_current_train_kind_index, [this]() { this->sync(); })
+                >::type{ m_info_sets, m_current_train_kind_index, [this]() { this->sync(); } }
             );
 
             return std::move(p_button);
@@ -416,7 +416,7 @@ namespace bobura
             p_text_box->text_box_observer_set().changed().connect(
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type, message::train_kind_dialog::type::name_text_box_changed
-                >::type([this]() { this->apply(); })
+                >::type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_text_box);
@@ -442,7 +442,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::abbreviation_text_box_changed
-                >::type([this]() { this->apply(); })
+                >::type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_text_box);
@@ -457,7 +457,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::color_button_mouse_clicked
-                >::type(m_base, m_current_train_kind_color, [this]() { this->apply(); })
+                >::type{ m_base, m_current_train_kind_color, [this]() { this->apply(); } }
             );
 
             return std::move(p_button);
@@ -490,7 +490,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::weight_dropdown_box_selection_changed
-                >::type([this]() { this->apply(); })
+                >::type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_dropdown_box);
@@ -529,7 +529,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::line_style_dropdown_box_selection_changed
-                >::type([this]() { this->apply(); })
+                >::type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_dropdown_box);
@@ -559,13 +559,9 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::sample_picture_box_paint
-                >::type(
-                    m_info_sets,
-                    m_current_train_kind_index,
-                    font,
-                    background_color,
-                    p_picture_box->client_dimension()
-                )
+                >::type{
+                    m_info_sets, m_current_train_kind_index, font, background_color, p_picture_box->client_dimension()
+                }
             );
 
             return std::move(p_picture_box);
@@ -580,7 +576,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::ok_button_mouse_clicked
-                >::type(m_base)
+                >::type{ m_base }
             );
 
             return std::move(p_button);
@@ -595,7 +591,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::cancel_button_mouse_clicked
-                >::type(m_base)
+                >::type{ m_base }
             );
 
             return std::move(p_button);

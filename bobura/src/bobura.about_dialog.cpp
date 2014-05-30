@@ -189,7 +189,7 @@ namespace bobura
                 p_button->mouse_observer_set().clicked().connect(
                     typename boost::mpl::at<
                         about_dialog_message_type_list_type, message::about_dialog::type::ok_button_mouse_clicked
-                    >::type(m_base)
+                    >::type{ m_base }
                 );
 
                 return std::move(p_button);

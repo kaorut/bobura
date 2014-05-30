@@ -217,7 +217,7 @@ namespace bobura
                 typename boost::mpl::at<
                     oudia_diagram_dialog_message_type_list_type,
                     message::oudia_diagram_dialog::type::ok_button_mouse_clicked
-                >::type(m_base)
+                >::type{ m_base }
             );
 
             return std::move(p_list_box);
@@ -233,7 +233,7 @@ namespace bobura
                 typename boost::mpl::at<
                     oudia_diagram_dialog_message_type_list_type,
                     message::oudia_diagram_dialog::type::ok_button_mouse_clicked
-                >::type(m_base)
+                >::type{ m_base }
             );
 
             return std::move(p_button);
@@ -249,7 +249,7 @@ namespace bobura
                 typename boost::mpl::at<
                     oudia_diagram_dialog_message_type_list_type,
                     message::oudia_diagram_dialog::type::cancel_button_mouse_clicked
-                >::type(m_base)
+                >::type{ m_base }
             );
 
             return std::move(p_button);

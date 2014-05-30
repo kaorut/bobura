@@ -160,15 +160,15 @@ namespace bobura
             m_p_map_box = tetengo2::stdalt::make_unique<map_box_type>(*this);
 
             this->size_observer_set().resized().connect(
-                typename boost::mpl::at<message_type_list_type, message::property_bar::type::resized>::type(
+                typename boost::mpl::at<message_type_list_type, message::property_bar::type::resized>::type{
                     *this, *m_p_map_box
-                )
+                }
             );
 
             m_p_map_box->mouse_observer_set().pressed().connect(
-                typename boost::mpl::at<message_type_list_type, message::property_bar::type::mouse_pressed>::type(
+                typename boost::mpl::at<message_type_list_type, message::property_bar::type::mouse_pressed>::type{
                     *m_p_map_box
-                )
+                }
             );
 
             load_settings();

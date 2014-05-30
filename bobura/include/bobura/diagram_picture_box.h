@@ -162,7 +162,7 @@ namespace bobura
             this->keyboard_observer_set().key_down().connect(
                 typename boost::mpl::at<
                     message_type_list_type, message::diagram_picture_box::type::keyboard_key_down
-                >::type(*this)
+                >::type{ *this }
             );
         }
 

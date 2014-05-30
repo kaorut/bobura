@@ -395,7 +395,7 @@ namespace bobura
             p_menu_command->menu_observer_set().selected().connect(
                 boost::mpl::at<
                     main_window_message_type_list_type, message::main_window::type::menu_command_selected
-                >::type(command, m_model, m_main_window)
+                >::type{ command, m_model, m_main_window }
             );
 
             popup_menu.insert(popup_menu.end(), std::move(p_menu_command));
@@ -416,7 +416,7 @@ namespace bobura
             popup_menu.menu_observer_set().selected().connect(
                 boost::mpl::at<
                     main_window_message_type_list_type, message::main_window::type::popup_menu_selected
-                >::type(popup_menu, std::move(commands), m_model)
+                >::type{ popup_menu, std::move(commands), m_model }
             );
         }
 
