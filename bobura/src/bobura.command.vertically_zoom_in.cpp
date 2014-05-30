@@ -49,7 +49,7 @@ namespace bobura { namespace command
 
             auto* const p_main_window = dynamic_cast<main_window_type*>(&parent);
             assert(p_main_window);
-            zoom_type zoom(p_main_window->diagram_picture_box(), m_diagram_view);
+            zoom_type zoom{ p_main_window->diagram_picture_box(), m_diagram_view };
 
             zoom.vertically_zoom_in(true);
         }

@@ -321,7 +321,7 @@ namespace bobura
             {
                 m_base.set_client_dimension(dimension_type{ width_type{ 36 }, height_type{ 21 } });
 
-                const left_type label_left(2);
+                const left_type label_left{ 2 };
 
                 m_p_company_name_label->fit_to_content();
                 m_p_company_name_label->set_position(position_type{ label_left, top_type{ 1 } });

@@ -124,7 +124,7 @@ namespace bobura { namespace load_save
 
             const auto temporary_path = path.parent_path() / boost::filesystem::unique_path();
             {
-                writer_selector_type writer(writer_set_type::create_writers(), path);
+                writer_selector_type writer{ writer_set_type::create_writers(), path };
                 if (!writer.selects(path))
                 {
                     if (m_ask_file_path)
@@ -133,7 +133,7 @@ namespace bobura { namespace load_save
                         return save_to_file(true, m_message_catalog)(model, parent);
                 }
 
-                boost::filesystem::ofstream output_stream(temporary_path, std::ios_base::binary);
+                boost::filesystem::ofstream output_stream{ temporary_path, std::ios_base::binary };
                 if (!output_stream)
                 {
                     create_cant_create_temporary_file_message_box(temporary_path, parent)->do_modal();

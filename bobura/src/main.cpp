@@ -65,7 +65,7 @@ namespace
             tetengo2::stdalt::make_unique<messages_facet_type>(
                 message_directory_path, std::locale(ui_locale_name().c_str())
             );
-        const std::locale global_locale(std::locale(""), p_messages_facet.release());
+        const std::locale global_locale{ std::locale(""), p_messages_facet.release() };
 
         std::locale::global(global_locale);
     }
@@ -103,7 +103,7 @@ TETENGO2_STDALT_NOEXCEPT
 
     try
     {
-        settings_type settings(boost::program_options::split_winmain(::GetCommandLineW()));
+        settings_type settings{ boost::program_options::split_winmain(::GetCommandLineW()) };
 
         set_locale(settings.message_directory_path());
 

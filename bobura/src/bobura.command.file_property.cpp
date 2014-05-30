@@ -44,7 +44,7 @@ namespace bobura { namespace command
         void execute(model_type& model, abstract_window_type& parent)
         const
         {
-            file_property_dialog_type dialog(parent, m_message_catalog);
+            file_property_dialog_type dialog{ parent, m_message_catalog };
 
             dialog.set_company_name(model.timetable().company_name());
             dialog.set_line_name(model.timetable().line_name());

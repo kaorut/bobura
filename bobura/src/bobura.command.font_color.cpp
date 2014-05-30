@@ -44,7 +44,7 @@ namespace bobura { namespace command
         void execute(model_type& model, abstract_window_type& parent)
         const
         {
-            font_color_dialog_type dialog(parent, m_message_catalog);
+            font_color_dialog_type dialog{ parent, m_message_catalog };
 
             const auto& font_color_set = model.timetable().font_color_set();
             dialog.set_background(font_color_set.background());

@@ -605,13 +605,13 @@ namespace bobura
         {
             m_base.set_client_dimension(dimension_type{ width_type{ 46 }, height_type{ 26 } });
 
-            const left_type train_kind_label_left(2);
+            const left_type train_kind_label_left{ 2 };
 
             m_p_train_kind_label->fit_to_content();
             m_p_train_kind_label->set_position(position_type{ train_kind_label_left, top_type{ 1 } });
 
-            const width_type list_box_width(20);
-            const height_type list_box_height(17);
+            const width_type list_box_width{ 20 };
+            const height_type list_box_height{ 17 };
             m_p_train_kind_list_box->set_dimension(dimension_type{ list_box_width, list_box_height });
             m_p_train_kind_list_box->set_position(
                 position_type{
@@ -623,7 +623,7 @@ namespace bobura
                 }
             );
 
-            const width_type list_box_button_width(typename width_type::value_type{ 9, 2 });
+            const width_type list_box_button_width{ typename width_type::value_type{ 9, 2 } };
             left_type list_box_button_left(
                 train_kind_label_left + left_type::from(list_box_width) - left_type::from(list_box_button_width)
             );
@@ -649,11 +649,11 @@ namespace bobura
             m_p_add_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
             m_p_add_button->set_position(position_type{ list_box_button_left, list_box_button_top });
 
-            const left_type name_label_left(24);
+            const left_type name_label_left{ 24 };
             m_p_name_label->fit_to_content();
             m_p_name_label->set_position(position_type{ name_label_left, top_type{ 1 } });
 
-            const left_type name_text_box_left(32);
+            const left_type name_text_box_left{ 32 };
             m_p_name_text_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
             m_p_name_text_box->set_position(position_type{ name_text_box_left, top_type{ 1 } });
 

@@ -224,7 +224,7 @@ namespace bobura
         */
         void update_dimension()
         {
-            const width_type width(20 * 24 * m_horizontal_scale);
+            const width_type width{ 20 * 24 * m_horizontal_scale };
 
             m_station_intervals = m_model.timetable().station_intervals();
             if (m_station_intervals.empty())

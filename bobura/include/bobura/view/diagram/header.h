@@ -363,10 +363,10 @@ namespace bobura { namespace view { namespace diagram
             const auto& company_line_name_font = model.timetable().font_color_set().company_line_name().font();
             auto note = make_note(model);
             const auto& note_font = model.timetable().font_color_set().note().font();
-            position_type company_line_name_position(left_type{ 0 }, top_type{ 0 });
-            dimension_type company_line_name_dimension(width_type{ 0 }, height_type{ 0 });
-            position_type note_position(left_type{ 0 }, top_type{ 0 });
-            dimension_type note_dimension(width_type{ 0 }, height_type{ 0 });
+            position_type company_line_name_position{ left_type{ 0 }, top_type{ 0 } };
+            dimension_type company_line_name_dimension{ width_type{ 0 }, height_type{ 0 } };
+            position_type note_position{ left_type{ 0 }, top_type{ 0 } };
+            dimension_type note_dimension{ width_type{ 0 }, height_type{ 0 } };
             calculate_positions_and_dimensions(
                 canvas,
                 canvas_dimension,
@@ -528,10 +528,10 @@ namespace bobura { namespace view { namespace diagram
             const auto& note_height =
                 note.empty() ? height_type{ 0 } : tetengo2::gui::dimension<dimension_type>::height(note_dimension_);
 
-            position_type company_line_name_position_(left_type{ 0 }, top_type{ 0 });
-            position_type note_position_(left_type{ 0 }, top_type{ 0 });
-            width_type header_width(0);
-            height_type header_height(0);
+            position_type company_line_name_position_{ left_type{ 0 }, top_type{ 0 } };
+            position_type note_position_{ left_type{ 0 }, top_type{ 0 } };
+            width_type header_width{ 0 };
+            height_type header_height{ 0 };
             if (company_line_name_width + note_width <= canvas_width)
             {
                 header_width = canvas_width;
@@ -539,14 +539,14 @@ namespace bobura { namespace view { namespace diagram
                 const auto height_diff = top_type::from(company_line_name_height) - top_type::from(note_height);
                 if (height_diff > 0)
                 {
-                    const top_type note_top(height_diff / top_type{ 2 });
+                    const top_type note_top{ height_diff / top_type{ 2 } };
                     company_line_name_position_ = position_type{ left_type{ 0 }, top_type{ 0 } };
                     note_position_ = position_type{ left_type::from(canvas_width - note_width), note_top };
                     header_height = company_line_name_height;
                 }
                 else
                 {
-                    const top_type company_line_name_top((top_type{ 0 } - height_diff) / top_type{ 2 });
+                    const top_type company_line_name_top{ (top_type{ 0 } - height_diff) / top_type{ 2 } };
                     company_line_name_position_ = position_type{ left_type{ 0 }, company_line_name_top };
                     note_position_ = position_type{ left_type::from(canvas_width - note_width), top_type{ 0 } };
                     header_height = note_height;

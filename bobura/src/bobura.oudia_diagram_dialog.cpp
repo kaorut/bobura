@@ -259,8 +259,8 @@ namespace bobura
         {
             m_base.set_client_dimension(dimension_type{ width_type{ 32 }, height_type{ 19 } });
 
-            const left_type label_left(2);
-            const width_type control_width(28);
+            const left_type label_left{ 2 };
+            const width_type control_width{ 28 };
 
             m_p_file_name_label->set_dimension(dimension_type{ control_width, height_type{ 2 } });
             m_p_file_name_label->set_position(position_type{ label_left, top_type{ 1 } });

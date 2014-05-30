@@ -568,7 +568,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         void operator()()
         const
         {
-            color_dialog_type color_dialog(m_color, m_dialog);
+            color_dialog_type color_dialog{ m_color, m_dialog };
 
             const auto ok = color_dialog.do_modal();
             if (!ok)

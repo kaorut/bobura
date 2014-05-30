@@ -375,7 +375,7 @@ namespace bobura { namespace view { namespace diagram
             time_lines.reserve(24 * 60);
             for (time_tick_type i = 0; i <= 24 * 60; ++i)
             {
-                const time_type time(i * 60 + time_offset.seconds());
+                const time_type time{ i * 60 + time_offset.seconds() };
                 const auto hours_minutes_seconds = time.hours_minutes_seconds();
                 const auto hours = hours_minutes_seconds.hours();
                 const auto minutes = hours_minutes_seconds.minutes();

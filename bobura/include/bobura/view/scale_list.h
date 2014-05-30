@@ -159,13 +159,13 @@ namespace bobura { namespace view
 
         static const std::vector<scale_type>& scales()
         {
-            static const std::vector<scale_type> singleton(make_scales());
+            static const std::vector<scale_type> singleton{ make_scales() };
             return singleton;
         }
 
         static const std::vector<string_type>& labels()
         {
-            static const std::vector<string_type> singleton(make_labels());
+            static const std::vector<string_type> singleton{ make_labels() };
             return singleton;
         }
 

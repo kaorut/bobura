@@ -471,7 +471,7 @@ namespace bobura
             {
                 m_base.set_client_dimension(dimension_type{ width_type{ 46 }, height_type{ 22 } });
 
-                const left_type category_label_left(2);
+                const left_type category_label_left{ 2 };
 
                 m_p_category_label->fit_to_content();
                 m_p_category_label->set_position(position_type{ category_label_left, top_type{ 1 } });
@@ -487,7 +487,7 @@ namespace bobura
                     }
                 );
 
-                const left_type font_button_left(20);
+                const left_type font_button_left{ 20 };
             
                 m_p_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
                 m_p_font_button->set_position(position_type{ font_button_left, top_type{ 2 } });

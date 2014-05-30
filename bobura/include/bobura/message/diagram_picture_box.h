@@ -452,7 +452,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         void zoom(const delta_type delta, const bool vertical)
         const
         {
-            view_zoom_type zoom(m_picture_box, m_view);
+            view_zoom_type zoom{ m_picture_box, m_view };
 
             if (vertical)
             {

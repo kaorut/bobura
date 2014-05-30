@@ -157,7 +157,7 @@ namespace bobura { namespace load_save
                 path = model.path();
             }
 
-            boost::filesystem::ifstream input_stream(path, std::ios_base::binary);
+            boost::filesystem::ifstream input_stream{ path, std::ios_base::binary };
             if (!input_stream)
             {
                 create_cant_open_file_message_box(path, parent)->do_modal();

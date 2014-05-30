@@ -229,8 +229,8 @@ namespace bobura
         )
         const
         {
-            const boost::rational<scroll_bar_size_type> change_rate(view_size.value() / previous_size);
-            const boost::rational<scroll_bar_size_type> half_page_size(page_size, 2);
+            const boost::rational<scroll_bar_size_type> change_rate{ view_size.value() / previous_size };
+            const boost::rational<scroll_bar_size_type> half_page_size{ page_size, 2 };
             if ((scroll_bar.position() + half_page_size) * change_rate < half_page_size)
                 return 0;
             const boost::rational<scroll_bar_size_type> new_position(
