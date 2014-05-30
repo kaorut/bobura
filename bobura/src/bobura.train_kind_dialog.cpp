@@ -624,13 +624,13 @@ namespace bobura
             );
 
             const width_type list_box_button_width{ typename width_type::value_type{ 9, 2 } };
-            left_type list_box_button_left(
+            left_type list_box_button_left{
                 train_kind_label_left + left_type::from(list_box_width) - left_type::from(list_box_button_width)
-            );
-            const top_type list_box_button_top(
+            };
+            const top_type list_box_button_top{
                 tetengo2::gui::position<position_type>::top(m_p_train_kind_list_box->position()) +
                     top_type::from(list_box_height)
-            );
+            };
             m_p_down_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
             m_p_down_button->set_position(position_type{ list_box_button_left, list_box_button_top });
 

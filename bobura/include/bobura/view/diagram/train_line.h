@@ -878,7 +878,7 @@ namespace bobura { namespace view { namespace diagram
 
             const auto horizontal_scale_left = left_type::from(width_type{ horizontal_scale });
             const auto time_header_bottom = top_type::from(time_header_height);
-            position_type departure(
+            position_type departure{
                 time_to_left(
                     departure_time,
                     time_offset,
@@ -894,8 +894,8 @@ namespace bobura { namespace view { namespace diagram
                     header_bottom,
                     time_header_bottom
                 )
-            );
-            position_type arrival(
+            };
+            position_type arrival{
                 time_to_left(
                     arrival_time,
                     time_offset,
@@ -904,14 +904,14 @@ namespace bobura { namespace view { namespace diagram
                     station_header_right,
                     horizontal_scale_left
                 ),
-                station_index_to_top(
+                    station_index_to_top(
                     station_positions,
                     arrival_stop_index,
                     vertical_scroll_bar_position,
                     header_bottom,
                     time_header_bottom
                 )
-            );
+            };
             
             const auto left_bound = tetengo2::gui::position<position_type>::left(departure);
             if (left_bound > left_type::from(tetengo2::gui::dimension<dimension_type>::width(canvas_dimension)))

@@ -102,12 +102,12 @@ namespace bobura { namespace load_save
             path_type path{};
             if (!model.has_path() || m_ask_file_path)
             {
-                file_save_dialog_type dialog(
+                file_save_dialog_type dialog{
                     m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:SaveAs")),
                     model.has_path() ? boost::make_optional(model.path()) : boost::none,
                     make_file_filters(),
                     parent
-                );
+                };
                 const auto ok = dialog.do_modal();
                 if (!ok)
                     return false;

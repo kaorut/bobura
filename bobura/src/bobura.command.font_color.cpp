@@ -70,7 +70,7 @@ namespace bobura { namespace command
             if (dialog.result() != dialog_base_type::result_type::accepted)
                 return;
         
-            font_color_set_type new_font_color_set(
+            font_color_set_type new_font_color_set{
                 dialog.background(),
                 font_color_type{ dialog.company_line_name().first, dialog.company_line_name().second },
                 font_color_type{ dialog.note().first, dialog.note().second },
@@ -82,7 +82,7 @@ namespace bobura { namespace command
                     dialog.principal_terminal_station().first, dialog.principal_terminal_station().second
                 },
                 dialog.train_name()
-            );
+            };
             model.timetable().set_font_color_set(std::move(new_font_color_set));
         }
 
