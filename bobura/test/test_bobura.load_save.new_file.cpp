@@ -44,9 +44,9 @@ BOOST_AUTO_TEST_SUITE(new_file)
 
         model_type model{};
         const message_catalog_type message_catalog{};
-        const save_to_file_type save_to_file(false, message_catalog);
-        const confirm_file_save_type confirm_file_save(model, save_to_file, message_catalog);
-        const new_file_type new_file(confirm_file_save);
+        const save_to_file_type save_to_file{ false, message_catalog };
+        const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
+        const new_file_type new_file{ confirm_file_save };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -55,9 +55,9 @@ BOOST_AUTO_TEST_SUITE(new_file)
 
         model_type model{};
         const message_catalog_type message_catalog{};
-        const save_to_file_type save_to_file(false, message_catalog);
-        const confirm_file_save_type confirm_file_save(model, save_to_file, message_catalog);
-        const new_file_type new_file(confirm_file_save);
+        const save_to_file_type save_to_file{ false, message_catalog };
+        const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
+        const new_file_type new_file{ confirm_file_save };
 
         window_type parent{};
         new_file(model, parent);

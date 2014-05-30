@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
             false,
             string_type{ TETENGO2_TEXT("note") }
         );
-        const station_location_type station_location(std::move(station), 42);
+        const station_location_type station_location{ std::move(station), 42 };
         selection_type selection{};
         station_line_type station_line1(
             station_location,
@@ -116,7 +116,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
             top_type{ 24 },
             font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
         );
-        const station_line_type station_line2(std::move(station_line1));
+        const station_line_type station_line2{ std::move(station_line1) };
     }
 #endif
 
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
             false,
             string_type{ TETENGO2_TEXT("note1") }
         );
-        const station_location_type station_location1(std::move(station1), 42);
+        const station_location_type station_location1{ std::move(station1), 42 };
         selection_type selection{};
         station_line_type station_line1(
             station_location1,
@@ -153,7 +153,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
             false,
             string_type{ TETENGO2_TEXT("note2") }
         );
-        const station_location_type station_location2(std::move(station2), 4242);
+        const station_location_type station_location2{ std::move(station2), 4242 };
         station_line_type station_line2(
             station_location2,
             selection,
@@ -189,7 +189,7 @@ BOOST_AUTO_TEST_SUITE(station_line_list)
             horizontal_scale_type{ 42 },
             std::vector<top_type>(2, top_type{ 42 })
         );
-        const station_line_list_type station_line_list2(std::move(station_line_list1));
+        const station_line_list_type station_line_list2{ std::move(station_line_list1) };
     }
 
     BOOST_AUTO_TEST_CASE(operator_assign)

@@ -115,7 +115,7 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             true,
             message_catalog
         );
-        const train_line_fragment_type train_line_fragment2(std::move(train_line_fragment1));
+        const train_line_fragment_type train_line_fragment2{ std::move(train_line_fragment1) };
     }
 
     BOOST_AUTO_TEST_CASE(operator_assign)
@@ -170,7 +170,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
         );
-        const station_intervals_type station_intervals(2, station_interval_calculator_type::default_interval());
+        const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
         const message_catalog_type message_catalog{};
         train_line_type train_line1(
             train_type{
@@ -194,7 +194,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
         );
-        const train_line_type train_line2(std::move(train_line1));
+        const train_line_type train_line2{ std::move(train_line1) };
     }
 
     BOOST_AUTO_TEST_CASE(operator_assign)
@@ -209,7 +209,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
         );
-        const station_intervals_type station_intervals(2, station_interval_calculator_type::default_interval());
+        const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
         const message_catalog_type message_catalog{};
         train_line_type train_line1(
             train_type{
@@ -269,7 +269,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
 
         const model_type model{};
         selection_type selection{};
-        const station_intervals_type station_intervals(2, station_interval_calculator_type::default_interval());
+        const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
         const message_catalog_type message_catalog{};
         train_line_list_type train_line_list1(
             model,
@@ -285,7 +285,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
         );
-        const train_line_list_type train_line_list2(std::move(train_line_list1));
+        const train_line_list_type train_line_list2{ std::move(train_line_list1) };
     }
 
     BOOST_AUTO_TEST_CASE(operator_assign)
@@ -294,7 +294,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
 
         const model_type model{};
         selection_type selection{};
-        const station_intervals_type station_intervals(2, station_interval_calculator_type::default_interval());
+        const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
         const message_catalog_type message_catalog{};
         train_line_list_type train_line_list1(
             model,

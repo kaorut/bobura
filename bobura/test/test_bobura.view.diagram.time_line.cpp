@@ -96,7 +96,7 @@ BOOST_AUTO_TEST_SUITE(time_line)
             size_type{ size_type::value_type{ 1, 2 } },
             boost::make_optional<time_type::tick_type>(12)
         );
-        const time_line_type time_line2(std::move(time_line1));
+        const time_line_type time_line2{ std::move(time_line1) };
     }
 
     BOOST_AUTO_TEST_CASE(operator_assign)
@@ -147,7 +147,7 @@ BOOST_AUTO_TEST_SUITE(time_line_list)
             height_type{ 24 },
             horizontal_scale_type{ 42 }
         );
-        const time_line_list_type time_line_list2(std::move(time_line_list1));
+        const time_line_list_type time_line_list2{ std::move(time_line_list1) };
     }
 
     BOOST_AUTO_TEST_CASE(operator_assign)

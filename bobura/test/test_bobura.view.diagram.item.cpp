@@ -100,7 +100,7 @@ BOOST_AUTO_TEST_SUITE(item)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
-        const concrete_item item(selection);
+        const concrete_item item{ selection };
     }
 
     BOOST_AUTO_TEST_CASE(operator_assign)
@@ -108,9 +108,9 @@ BOOST_AUTO_TEST_SUITE(item)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection1{};
-        concrete_item item1(selection1);
+        concrete_item item1{ selection1 };
         selection_type selection2{};
-        concrete_item item2(selection2);
+        concrete_item item2{ selection2 };
 
         item1 = std::move(item2);
     }
@@ -120,10 +120,10 @@ BOOST_AUTO_TEST_SUITE(item)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
-        const concrete_item item(selection);
+        const concrete_item item{ selection };
 
         window_type window{};
-        const picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::both);
+        const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
         const auto p_canvas = picture_box.create_canvas();
         item.draw_on(*p_canvas);
     }
@@ -134,13 +134,13 @@ BOOST_AUTO_TEST_SUITE(item)
 
         {
             selection_type selection{};
-            const concrete_item item(selection);
+            const concrete_item item{ selection };
 
             item.p_item_by_position(position_type{ left_type{ 42 }, top_type{ 24 } });
         }
         {
             selection_type selection{};
-            concrete_item item(selection);
+            concrete_item item{ selection };
 
             item.p_item_by_position(position_type{ left_type{ 42 }, top_type{ 24 } });
         }
@@ -152,13 +152,13 @@ BOOST_AUTO_TEST_SUITE(item)
 
         {
             selection_type selection{};
-            const concrete_item item(selection);
+            const concrete_item item{ selection };
 
             BOOST_CHECK_EQUAL(&item.selection(), &selection);
         }
         {
             selection_type selection{};
-            concrete_item item(selection);
+            concrete_item item{ selection };
 
             BOOST_CHECK_EQUAL(&item.selection(), &selection);
         }
@@ -169,7 +169,7 @@ BOOST_AUTO_TEST_SUITE(item)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
-        const concrete_item item(selection);
+        const concrete_item item{ selection };
 
         BOOST_CHECK(!item.selected());
     }
@@ -179,7 +179,7 @@ BOOST_AUTO_TEST_SUITE(item)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
-        concrete_item item(selection);
+        concrete_item item{ selection };
 
         item.select(false);
 

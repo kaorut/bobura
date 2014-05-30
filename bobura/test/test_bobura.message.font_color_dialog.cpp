@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_SUITE(category_list_box_selection_changed)
 
         boost::optional<size_type> current_category_index{};
         window_type parent{};
-        list_box_type list_box(parent, list_box_type::scroll_bar_style_type::none);
+        list_box_type list_box{ parent, list_box_type::scroll_bar_style_type::none };
         const bobura::message::font_color_dialog::category_list_box_selection_changed<size_type, list_box_type>
         observer(current_category_index, list_box, update);
     }
@@ -94,7 +94,7 @@ BOOST_AUTO_TEST_SUITE(category_list_box_selection_changed)
 
         boost::optional<size_type> current_category_index{};
         window_type parent{};
-        list_box_type list_box(parent, list_box_type::scroll_bar_style_type::none);
+        list_box_type list_box{ parent, list_box_type::scroll_bar_style_type::none };
         const bobura::message::font_color_dialog::category_list_box_selection_changed<size_type, list_box_type>
         observer(current_category_index, list_box, update);
 
@@ -164,7 +164,7 @@ BOOST_AUTO_TEST_SUITE(font_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
+        concrete_dialog dialog{ parent };
         std::vector<std::pair<boost::optional<font_type>, boost::optional<color_type>>> font_color_list(
             2,
             std::pair<boost::optional<font_type>, boost::optional<color_type>>(
@@ -194,7 +194,7 @@ BOOST_AUTO_TEST_SUITE(font_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
+        concrete_dialog dialog{ parent };
         std::vector<std::pair<boost::optional<font_type>, boost::optional<color_type>>> font_color_list(
             2,
             std::pair<boost::optional<font_type>, boost::optional<color_type>>(
@@ -227,7 +227,7 @@ BOOST_AUTO_TEST_SUITE(color_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
+        concrete_dialog dialog{ parent };
         std::vector<std::pair<boost::optional<font_type>, boost::optional<color_type>>> font_color_list(
             2,
             std::pair<boost::optional<font_type>, boost::optional<color_type>>(
@@ -252,7 +252,7 @@ BOOST_AUTO_TEST_SUITE(color_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
+        concrete_dialog dialog{ parent };
         std::vector<std::pair<boost::optional<font_type>, boost::optional<color_type>>> font_color_list(
             2,
             std::pair<boost::optional<font_type>, boost::optional<color_type>>(
@@ -284,8 +284,8 @@ BOOST_AUTO_TEST_SUITE(ok_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
-        const bobura::message::font_color_dialog::ok_button_mouse_clicked<dialog_type> observer(dialog);
+        concrete_dialog dialog{ parent };
+        const bobura::message::font_color_dialog::ok_button_mouse_clicked<dialog_type> observer{ dialog };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -293,8 +293,8 @@ BOOST_AUTO_TEST_SUITE(ok_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
-        const bobura::message::font_color_dialog::ok_button_mouse_clicked<dialog_type> observer(dialog);
+        concrete_dialog dialog{ parent };
+        const bobura::message::font_color_dialog::ok_button_mouse_clicked<dialog_type> observer{ dialog };
 
         observer();
     }
@@ -309,8 +309,8 @@ BOOST_AUTO_TEST_SUITE(cancel_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
-        const bobura::message::font_color_dialog::cancel_button_mouse_clicked<dialog_type> observer(dialog);
+        concrete_dialog dialog{ parent };
+        const bobura::message::font_color_dialog::cancel_button_mouse_clicked<dialog_type> observer{ dialog };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -318,8 +318,8 @@ BOOST_AUTO_TEST_SUITE(cancel_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
-        const bobura::message::font_color_dialog::cancel_button_mouse_clicked<dialog_type> observer(dialog);
+        concrete_dialog dialog{ parent };
+        const bobura::message::font_color_dialog::cancel_button_mouse_clicked<dialog_type> observer{ dialog };
 
         observer();
     }

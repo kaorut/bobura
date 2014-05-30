@@ -147,7 +147,7 @@ BOOST_AUTO_TEST_SUITE(train_kind_list_box_selection_changed)
 
         boost::optional<size_type> current_train_kind_index{};
         window_type window{};
-        list_box_type list_box(window, list_box_type::scroll_bar_style_type::none);
+        list_box_type list_box{ window, list_box_type::scroll_bar_style_type::none };
         const bobura::message::train_kind_dialog::train_kind_list_box_selection_changed<size_type, list_box_type>
         observer(current_train_kind_index, list_box, update_function);
     }
@@ -158,7 +158,7 @@ BOOST_AUTO_TEST_SUITE(train_kind_list_box_selection_changed)
 
         boost::optional<size_type> current_train_kind_index{};
         window_type window{};
-        list_box_type list_box(window, list_box_type::scroll_bar_style_type::none);
+        list_box_type list_box{ window, list_box_type::scroll_bar_style_type::none };
         const bobura::message::train_kind_dialog::train_kind_list_box_selection_changed<size_type, list_box_type>
         observer(current_train_kind_index, list_box, update_function);
 
@@ -174,8 +174,8 @@ BOOST_AUTO_TEST_SUITE(add_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type{});
-        const boost::optional<size_type> current_train_kind_index(1);
+        std::vector<info_set_type> info_sets{ 3, info_set_type{} };
+        const boost::optional<size_type> current_train_kind_index{ 1 };
         const message_catalog_type message_catalog{};
         const bobura::message::train_kind_dialog::add_button_mouse_clicked<
             info_set_type, size_type, message_catalog_type
@@ -186,8 +186,8 @@ BOOST_AUTO_TEST_SUITE(add_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type{});
-        const boost::optional<size_type> current_train_kind_index(1);
+        std::vector<info_set_type> info_sets{ 3, info_set_type{} };
+        const boost::optional<size_type> current_train_kind_index{ 1 };
         const message_catalog_type message_catalog{};
         const bobura::message::train_kind_dialog::add_button_mouse_clicked<
             info_set_type, size_type, message_catalog_type
@@ -205,8 +205,8 @@ BOOST_AUTO_TEST_SUITE(delete_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type{});
-        boost::optional<size_type> current_train_kind_index(1);
+        std::vector<info_set_type> info_sets{ 3, info_set_type{} };
+        boost::optional<size_type> current_train_kind_index{ 1 };
         const bobura::message::train_kind_dialog::delete_button_mouse_clicked<info_set_type, size_type> observer(
             info_sets, current_train_kind_index, sync_function
         );
@@ -216,8 +216,8 @@ BOOST_AUTO_TEST_SUITE(delete_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type{});
-        boost::optional<size_type> current_train_kind_index(1);
+        std::vector<info_set_type> info_sets{ 3, info_set_type{} };
+        boost::optional<size_type> current_train_kind_index{ 1 };
         const bobura::message::train_kind_dialog::delete_button_mouse_clicked<info_set_type, size_type> observer(
             info_sets, current_train_kind_index, sync_function
         );
@@ -234,8 +234,8 @@ BOOST_AUTO_TEST_SUITE(up_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type{});
-        boost::optional<size_type> current_train_kind_index(1);
+        std::vector<info_set_type> info_sets{ 3, info_set_type{} };
+        boost::optional<size_type> current_train_kind_index{ 1 };
         const bobura::message::train_kind_dialog::up_button_mouse_clicked<info_set_type, size_type> observer(
             info_sets, current_train_kind_index, sync_function
         );
@@ -245,8 +245,8 @@ BOOST_AUTO_TEST_SUITE(up_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type{});
-        boost::optional<size_type> current_train_kind_index(1);
+        std::vector<info_set_type> info_sets{ 3, info_set_type{} };
+        boost::optional<size_type> current_train_kind_index{ 1 };
         const bobura::message::train_kind_dialog::up_button_mouse_clicked<info_set_type, size_type> observer(
             info_sets, current_train_kind_index, sync_function
         );
@@ -263,8 +263,8 @@ BOOST_AUTO_TEST_SUITE(down_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type{});
-        boost::optional<size_type> current_train_kind_index(1);
+        std::vector<info_set_type> info_sets{ 3, info_set_type{} };
+        boost::optional<size_type> current_train_kind_index{ 1 };
         const bobura::message::train_kind_dialog::down_button_mouse_clicked<info_set_type, size_type> observer(
             info_sets, current_train_kind_index, sync_function
         );
@@ -274,8 +274,8 @@ BOOST_AUTO_TEST_SUITE(down_button_mouse_clicked)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<info_set_type> info_sets(3, info_set_type{});
-        boost::optional<size_type> current_train_kind_index(1);
+        std::vector<info_set_type> info_sets{ 3, info_set_type{} };
+        boost::optional<size_type> current_train_kind_index{ 1 };
         const bobura::message::train_kind_dialog::down_button_mouse_clicked<info_set_type, size_type> observer(
             info_sets, current_train_kind_index, sync_function
         );
@@ -292,14 +292,14 @@ BOOST_AUTO_TEST_SUITE(name_text_box_changed)
     {
         BOOST_TEST_PASSPOINT();
 
-        const bobura::message::train_kind_dialog::name_text_box_changed observer(apply_function);
+        const bobura::message::train_kind_dialog::name_text_box_changed observer{ apply_function };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        const bobura::message::train_kind_dialog::name_text_box_changed observer(apply_function);
+        const bobura::message::train_kind_dialog::name_text_box_changed observer{ apply_function };
 
         observer();
     }
@@ -313,14 +313,14 @@ BOOST_AUTO_TEST_SUITE(abbreviation_text_box_changed)
     {
         BOOST_TEST_PASSPOINT();
 
-        const bobura::message::train_kind_dialog::abbreviation_text_box_changed observer(apply_function);
+        const bobura::message::train_kind_dialog::abbreviation_text_box_changed observer{ apply_function };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        const bobura::message::train_kind_dialog::abbreviation_text_box_changed observer(apply_function);
+        const bobura::message::train_kind_dialog::abbreviation_text_box_changed observer{ apply_function };
 
         observer();
     }
@@ -335,8 +335,8 @@ BOOST_AUTO_TEST_SUITE(color_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type window{};
-        concrete_dialog dialog(window);
-        color_type color(0x12, 0x34, 0x56);
+        concrete_dialog dialog{ window };
+        color_type color{ 0x12, 0x34, 0x56 };
         const bobura::message::train_kind_dialog::color_button_mouse_clicked<dialog_type, color_dialog_type> observer(
             dialog, color, apply_function
         );
@@ -347,8 +347,8 @@ BOOST_AUTO_TEST_SUITE(color_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type window{};
-        concrete_dialog dialog(window);
-        color_type color(0x12, 0x34, 0x56);
+        concrete_dialog dialog{ window };
+        color_type color{ 0x12, 0x34, 0x56 };
         const bobura::message::train_kind_dialog::color_button_mouse_clicked<dialog_type, color_dialog_type> observer(
             dialog, color, apply_function
         );
@@ -365,14 +365,14 @@ BOOST_AUTO_TEST_SUITE(weight_dropdown_box_selection_changed)
     {
         BOOST_TEST_PASSPOINT();
 
-        const bobura::message::train_kind_dialog::weight_dropdown_box_selection_changed observer(apply_function);
+        const bobura::message::train_kind_dialog::weight_dropdown_box_selection_changed observer{ apply_function };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        const bobura::message::train_kind_dialog::abbreviation_text_box_changed observer(apply_function);
+        const bobura::message::train_kind_dialog::abbreviation_text_box_changed observer{ apply_function };
 
         observer();
     }
@@ -386,14 +386,14 @@ BOOST_AUTO_TEST_SUITE(line_style_dropdown_box_selection_changed)
     {
         BOOST_TEST_PASSPOINT();
 
-        const bobura::message::train_kind_dialog::line_style_dropdown_box_selection_changed observer(apply_function);
+        const bobura::message::train_kind_dialog::line_style_dropdown_box_selection_changed observer{ apply_function };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        const bobura::message::train_kind_dialog::line_style_dropdown_box_selection_changed observer(apply_function);
+        const bobura::message::train_kind_dialog::line_style_dropdown_box_selection_changed observer{ apply_function };
 
         observer();
     }
@@ -445,8 +445,8 @@ BOOST_AUTO_TEST_SUITE(ok_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
-        const bobura::message::train_kind_dialog::ok_button_mouse_clicked<dialog_type> observer(dialog);
+        concrete_dialog dialog{ parent };
+        const bobura::message::train_kind_dialog::ok_button_mouse_clicked<dialog_type> observer{ dialog };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -454,8 +454,8 @@ BOOST_AUTO_TEST_SUITE(ok_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
-        const bobura::message::train_kind_dialog::ok_button_mouse_clicked<dialog_type> observer(dialog);
+        concrete_dialog dialog{ parent };
+        const bobura::message::train_kind_dialog::ok_button_mouse_clicked<dialog_type> observer{ dialog };
 
         observer();
     }
@@ -470,8 +470,8 @@ BOOST_AUTO_TEST_SUITE(cancel_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
-        const bobura::message::train_kind_dialog::cancel_button_mouse_clicked<dialog_type> observer(dialog);
+        concrete_dialog dialog{ parent };
+        const bobura::message::train_kind_dialog::cancel_button_mouse_clicked<dialog_type> observer{ dialog };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -479,8 +479,8 @@ BOOST_AUTO_TEST_SUITE(cancel_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
-        const bobura::message::train_kind_dialog::cancel_button_mouse_clicked<dialog_type> observer(dialog);
+        concrete_dialog dialog{ parent };
+        const bobura::message::train_kind_dialog::cancel_button_mouse_clicked<dialog_type> observer{ dialog };
 
         observer();
     }

@@ -100,7 +100,7 @@ BOOST_AUTO_TEST_SUITE(diagram)
         BOOST_TEST_PASSPOINT();
 
         window_type window{};
-        const picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::both);
+        const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
         const auto p_canvas = picture_box.create_canvas();
 
         bobura::view::diagram::draw_selectable_line(

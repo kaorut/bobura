@@ -46,8 +46,8 @@ BOOST_AUTO_TEST_SUITE(ok_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
-        const bobura::message::oudia_diagram_dialog::ok_button_mouse_clicked<dialog_type> observer(dialog);
+        concrete_dialog dialog{ parent };
+        const bobura::message::oudia_diagram_dialog::ok_button_mouse_clicked<dialog_type> observer{ dialog };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -55,8 +55,8 @@ BOOST_AUTO_TEST_SUITE(ok_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
-        const bobura::message::oudia_diagram_dialog::ok_button_mouse_clicked<dialog_type> observer(dialog);
+        concrete_dialog dialog{ parent };
+        const bobura::message::oudia_diagram_dialog::ok_button_mouse_clicked<dialog_type> observer{ dialog };
 
         observer();
     }
@@ -71,8 +71,8 @@ BOOST_AUTO_TEST_SUITE(cancel_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
-        const bobura::message::oudia_diagram_dialog::cancel_button_mouse_clicked<dialog_type> observer(dialog);
+        concrete_dialog dialog{ parent };
+        const bobura::message::oudia_diagram_dialog::cancel_button_mouse_clicked<dialog_type> observer{ dialog };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -80,8 +80,8 @@ BOOST_AUTO_TEST_SUITE(cancel_button_mouse_clicked)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        concrete_dialog dialog(parent);
-        const bobura::message::oudia_diagram_dialog::cancel_button_mouse_clicked<dialog_type> observer(dialog);
+        concrete_dialog dialog{ parent };
+        const bobura::message::oudia_diagram_dialog::cancel_button_mouse_clicked<dialog_type> observer{ dialog };
 
         observer();
     }

@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_SUITE(diagram_picture_box)
         BOOST_TEST_PASSPOINT();
 
         window_type window{};
-        const diagram_picture_box_type picture_box(window);
+        const diagram_picture_box_type picture_box{ window };
     }
 
     BOOST_AUTO_TEST_CASE(set_mouse_capture)
@@ -52,7 +52,7 @@ BOOST_AUTO_TEST_SUITE(diagram_picture_box)
         BOOST_TEST_PASSPOINT();
 
         window_type window{};
-        diagram_picture_box_type picture_box(window);
+        diagram_picture_box_type picture_box{ window };
 
         picture_box.set_mouse_capture(mouse_button_type::left);
         picture_box.release_mouse_capture(mouse_button_type::left);
@@ -64,7 +64,7 @@ BOOST_AUTO_TEST_SUITE(diagram_picture_box)
 
         {
             window_type window{};
-            diagram_picture_box_type picture_box(window);
+            diagram_picture_box_type picture_box{ window };
 
             const auto captured = picture_box.release_mouse_capture(mouse_button_type::left);
 
@@ -72,7 +72,7 @@ BOOST_AUTO_TEST_SUITE(diagram_picture_box)
         }
         {
             window_type window{};
-            diagram_picture_box_type picture_box(window);
+            diagram_picture_box_type picture_box{ window };
 
             picture_box.set_mouse_capture(mouse_button_type::left);
             const auto captured = picture_box.release_mouse_capture(mouse_button_type::left);
@@ -86,7 +86,7 @@ BOOST_AUTO_TEST_SUITE(diagram_picture_box)
         BOOST_TEST_PASSPOINT();
 
         window_type window{};
-        diagram_picture_box_type picture_box(window);
+        diagram_picture_box_type picture_box{ window };
 
         picture_box.update_scroll_bars(
             dimension_type{ width_type{ 24 }, height_type{ 24 } }, dimension_type{ width_type{ 42 }, width_type{ 42 } }
