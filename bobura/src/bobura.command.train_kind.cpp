@@ -51,9 +51,9 @@ namespace bobura { namespace command
         const
         {
             const auto& font_color_set = model.timetable().font_color_set();
-            train_kind_dialog_type dialog(
+            train_kind_dialog_type dialog{
                 parent, m_message_catalog, font_color_set.train_name(), font_color_set.background()
-            );
+            };
 
             auto info_sets = to_info_sets(model.timetable());
             dialog.set_info_sets(std::move(info_sets));

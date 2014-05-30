@@ -142,9 +142,9 @@ namespace bobura { namespace load_save
             }
             else if (m_ask_file_path)
             {
-                file_open_dialog_type dialog(
+                file_open_dialog_type dialog{
                     m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Open")), make_file_filters(), parent
-                );
+                };
                 const auto ok = dialog.do_modal();
                 if (!ok)
                     return;
@@ -164,9 +164,9 @@ namespace bobura { namespace load_save
                 return;
             }
 
-            reader_selector_type reader_selector(
+            reader_selector_type reader_selector{
                 reader_set_type::create_readers(parent, path.template string<string_type>(), m_message_catalog)
-            );
+            };
             auto error = reader_error_type::none;
             auto p_timetable =
                 reader_selector.read(
