@@ -158,9 +158,9 @@ BOOST_AUTO_TEST_SUITE(stop)
             BOOST_CHECK(!stop.passing());
         }
         {
-            const stop_type stop(
+            const stop_type stop{
                 time_type::uninitialized(), time_type::uninitialized(), false, string_type{ TETENGO2_TEXT("1") }
-            );
+            };
 
             BOOST_CHECK(stop.passing());
         }

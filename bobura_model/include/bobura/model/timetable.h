@@ -764,14 +764,14 @@ namespace bobura { namespace model
             if (train.kind_index() < index)
                 return;
 
-            train_type new_train(
+            train_type new_train{
                 train.direction(),
                 train.number(),
                 train.kind_index() + index_delta,
                 train.name(),
                 train.name_number(),
                 train.note()
-            );
+            };
             for (const auto& stop: train.stops())
                 new_train.insert_stop(new_train.stops().end(), stop);
 

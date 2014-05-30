@@ -190,9 +190,9 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
 
             const auto intervals = calculator.calculate();
 
-            const station_intervals_type expected(
+            const station_intervals_type expected{
                 station_locations.size(), station_interval_calculator_type::default_interval()
-            );
+            };
             BOOST_CHECK(intervals == expected);
         }
         {
@@ -219,9 +219,9 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
 
             const auto intervals = calculator.calculate();
 
-            const station_intervals_type expected(
+            const station_intervals_type expected{
                 station_locations.size(), station_interval_calculator_type::default_interval()
-            );
+            };
             BOOST_CHECK(intervals == expected);
         }
         {
@@ -248,9 +248,9 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
 
             const auto intervals = calculator.calculate();
 
-            const station_intervals_type expected(
+            const station_intervals_type expected{
                 station_locations.size(), station_interval_calculator_type::default_interval()
-            );
+            };
             BOOST_CHECK(intervals == expected);
         }
         {

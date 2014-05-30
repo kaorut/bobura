@@ -186,7 +186,7 @@ namespace
             color_type color{ 0xAB, 0xCD, 0xEF };
             const font_color_type font_color{ font, color };
 
-            const font_color_set_type font_color_set(
+            const font_color_set_type font_color_set{
                 std::move(color),
                 std::move(font_color),
                 font_color_set_type::default_().note(),
@@ -196,7 +196,7 @@ namespace
                 font_color_set_type::default_().local_terminal_station(),
                 font_color_set_type::default_().principal_terminal_station(),
                 std::move(font)
-            );
+            };
 
             p_timetable->set_font_color_set(font_color_set);
         }
@@ -252,14 +252,14 @@ namespace
         }
         {
             {
-                train_type train(
+                train_type train{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("101D") },
                     0,
                     string_type{ TETENGO2_TEXT("foo") },
                     string_type{ TETENGO2_TEXT("bar") },
                     string_type{ TETENGO2_TEXT("fuga") }
-                );
+                };
                 train.insert_stop(
                     train.stops().end(),
                     stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{})
@@ -271,14 +271,14 @@ namespace
                 p_timetable->insert_down_train(p_timetable->down_trains().end(), train);
             }
             {
-                train_type train(
+                train_type train{
                     train_type::direction_type::down,
                     string_type{ TETENGO2_TEXT("123D") },
                     1,
                     string_type{ TETENGO2_TEXT("baz") },
                     string_type{ TETENGO2_TEXT("bazz") },
                     string_type{}
-                );
+                };
                 train.insert_stop(
                     train.stops().end(),
                     stop_type{
@@ -294,14 +294,14 @@ namespace
         }
         {
             {
-                train_type train(
+                train_type train{
                     train_type::direction_type::up,
                     string_type{ TETENGO2_TEXT("9324M") },
                     0,
                     string_type{ TETENGO2_TEXT("abc") },
                     string_type{ TETENGO2_TEXT("def") },
                     string_type{ TETENGO2_TEXT("piyo") }
-                );
+                };
                 train.insert_stop(
                     train.stops().end(),
                     stop_type{

@@ -45,9 +45,9 @@ BOOST_AUTO_TEST_SUITE(font_color)
     {
         BOOST_TEST_PASSPOINT();
 
-        const font_color_type font_color(
+        const font_color_type font_color{
             font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
+        };
     }
 
     BOOST_AUTO_TEST_CASE(operator_equal)
@@ -55,22 +55,22 @@ BOOST_AUTO_TEST_SUITE(font_color)
         BOOST_TEST_PASSPOINT();
 
         {
-            const font_color_type font_color1(
+            const font_color_type font_color1{
                 font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            const font_color_type font_color2(
+            };
+            const font_color_type font_color2{
                 font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
+            };
 
             BOOST_CHECK(font_color1 == font_color2);
         }
         {
-            const font_color_type font_color1(
+            const font_color_type font_color1{
                 font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            const font_color_type font_color2(
+            };
+            const font_color_type font_color2{
                 font_type(string_type{ TETENGO2_TEXT("ABC") }, 24, true, true, false, false), color_type{ 21, 43, 65 }
-            );
+            };
 
             BOOST_CHECK(font_color1 != font_color2);
         }
@@ -80,9 +80,9 @@ BOOST_AUTO_TEST_SUITE(font_color)
     {
         BOOST_TEST_PASSPOINT();
 
-        const font_color_type font_color(
+        const font_color_type font_color{
             font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
+        };
 
         BOOST_CHECK(font_color.font() == font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true));
     }
@@ -91,9 +91,9 @@ BOOST_AUTO_TEST_SUITE(font_color)
     {
         BOOST_TEST_PASSPOINT();
 
-        const font_color_type font_color(
+        const font_color_type font_color{
             font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
+        };
 
         BOOST_CHECK((font_color.color() == color_type{ 12, 34, 56 }));
     }
@@ -115,30 +115,30 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
         BOOST_TEST_PASSPOINT();
 
         color_type background_color{ 12, 34, 56 };
-        font_color_type company_line_name_font_color(
+        font_color_type company_line_name_font_color{
             font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type note_font_color(
+        };
+        font_color_type note_font_color{
             font_type(string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type time_line_font_color(
+        };
+        font_color_type time_line_font_color{
             font_type(string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_station_font_color(
+        };
+        font_color_type local_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_station_font_color(
+        };
+        font_color_type principal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_terminal_station_font_color(
+        };
+        font_color_type local_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_terminal_station_font_color(
+        };
+        font_color_type principal_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
+        };
         font_type train_name_font{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true };
 
-        const font_color_set_type font_color_set(
+        const font_color_set_type font_color_set{
             std::move(background_color),
             std::move(company_line_name_font_color),
             std::move(note_font_color),
@@ -148,7 +148,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(local_terminal_station_font_color),
             std::move(principal_terminal_station_font_color),
             std::move(train_name_font)
-        );
+        };
     }
 
     BOOST_AUTO_TEST_CASE(operator_equal)
@@ -157,30 +157,30 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
 
         {
             color_type background_color1{ 12, 34, 56 };
-            font_color_type company_line_name_font_color1(
+            font_color_type company_line_name_font_color1{
                 font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type note_font_color1(
+            };
+            font_color_type note_font_color1{
                 font_type(string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type time_line_font_color1(
+            };
+            font_color_type time_line_font_color1{
                 font_type(string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type local_station_font_color1(
+            };
+            font_color_type local_station_font_color1{
                 font_type(string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type principal_station_font_color1(
+            };
+            font_color_type principal_station_font_color1{
                 font_type(string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type local_terminal_station_font_color1(
+            };
+            font_color_type local_terminal_station_font_color1{
                 font_type(string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type principal_terminal_station_font_color1(
+            };
+            font_color_type principal_terminal_station_font_color1{
                 font_type(string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
+            };
             font_type train_name_font1{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true };
 
-            const font_color_set_type font_color_set1(
+            const font_color_set_type font_color_set1{
                 std::move(background_color1),
                 std::move(company_line_name_font_color1),
                 std::move(note_font_color1),
@@ -190,33 +190,33 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
                 std::move(local_terminal_station_font_color1),
                 std::move(principal_terminal_station_font_color1),
                 std::move(train_name_font1)
-            );
+            };
 
             color_type background_color2{ 12, 34, 56 };
-            font_color_type company_line_name_font_color2(
+            font_color_type company_line_name_font_color2{
                 font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type note_font_color2(
+            };
+            font_color_type note_font_color2{
                 font_type(string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type time_line_font_color2(
+            };
+            font_color_type time_line_font_color2{
                 font_type(string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type local_station_font_color2(
+            };
+            font_color_type local_station_font_color2{
                 font_type(string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type principal_station_font_color2(
+            };
+            font_color_type principal_station_font_color2{
                 font_type(string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type local_terminal_station_font_color2(
+            };
+            font_color_type local_terminal_station_font_color2{
                 font_type(string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type principal_terminal_station_font_color2(
+            };
+            font_color_type principal_terminal_station_font_color2{
                 font_type(string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
+            };
             font_type train_name_font2{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true };
 
-            const font_color_set_type font_color_set2(
+            const font_color_set_type font_color_set2{
                 std::move(background_color2),
                 std::move(company_line_name_font_color2),
                 std::move(note_font_color2),
@@ -226,36 +226,36 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
                 std::move(local_terminal_station_font_color2),
                 std::move(principal_terminal_station_font_color2),
                 std::move(train_name_font2)
-            );
+            };
 
             BOOST_CHECK(font_color_set1 == font_color_set2);
         }
         {
             color_type background_color1{ 12, 34, 56 };
-            font_color_type company_line_name_font_color1(
+            font_color_type company_line_name_font_color1{
                 font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type note_font_color1(
+            };
+            font_color_type note_font_color1{
                 font_type(string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type time_line_font_color1(
+            };
+            font_color_type time_line_font_color1{
                 font_type(string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type local_station_font_color1(
+            };
+            font_color_type local_station_font_color1{
                 font_type(string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type principal_station_font_color1(
+            };
+            font_color_type principal_station_font_color1{
                 font_type(string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type local_terminal_station_font_color1(
+            };
+            font_color_type local_terminal_station_font_color1{
                 font_type(string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type principal_terminal_station_font_color1(
+            };
+            font_color_type principal_terminal_station_font_color1{
                 font_type(string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
+            };
             font_type train_name_font1{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true };
 
-            const font_color_set_type font_color_set1(
+            const font_color_set_type font_color_set1{
                 std::move(background_color1),
                 std::move(company_line_name_font_color1),
                 std::move(note_font_color1),
@@ -265,33 +265,33 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
                 std::move(local_terminal_station_font_color1),
                 std::move(principal_terminal_station_font_color1),
                 std::move(train_name_font1)
-            );
+            };
 
             color_type background_color2{ 12, 34, 56 };
-            font_color_type company_line_name_font_color2(
+            font_color_type company_line_name_font_color2{
                 font_type(string_type{ TETENGO2_TEXT("ABC") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type note_font_color2(
+            };
+            font_color_type note_font_color2{
                 font_type(string_type{ TETENGO2_TEXT("DEF") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type time_line_font_color2(
+            };
+            font_color_type time_line_font_color2{
                 font_type(string_type{ TETENGO2_TEXT("GHI") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type local_station_font_color2(
+            };
+            font_color_type local_station_font_color2{
                 font_type(string_type{ TETENGO2_TEXT("JKL") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type principal_station_font_color2(
+            };
+            font_color_type principal_station_font_color2{
                 font_type(string_type{ TETENGO2_TEXT("MNO") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type local_terminal_station_font_color2(
+            };
+            font_color_type local_terminal_station_font_color2{
                 font_type(string_type{ TETENGO2_TEXT("PQR") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
-            font_color_type principal_terminal_station_font_color2(
+            };
+            font_color_type principal_terminal_station_font_color2{
                 font_type(string_type{ TETENGO2_TEXT("STU") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-            );
+            };
             font_type train_name_font2{ string_type{ TETENGO2_TEXT("VWX") }, 42, false, true, false, true };
 
-            const font_color_set_type font_color_set2(
+            const font_color_set_type font_color_set2{
                 std::move(background_color2),
                 std::move(company_line_name_font_color2),
                 std::move(note_font_color2),
@@ -301,7 +301,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
                 std::move(local_terminal_station_font_color2),
                 std::move(principal_terminal_station_font_color2),
                 std::move(train_name_font2)
-            );
+            };
 
             BOOST_CHECK(font_color_set1 != font_color_set2);
         }
@@ -312,30 +312,30 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
         BOOST_TEST_PASSPOINT();
 
         color_type background_color{ 12, 34, 56 };
-        font_color_type company_line_name_font_color(
+        font_color_type company_line_name_font_color{
             font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type note_font_color(
+        };
+        font_color_type note_font_color{
             font_type(string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type time_line_font_color(
+        };
+        font_color_type time_line_font_color{
             font_type(string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_station_font_color(
+        };
+        font_color_type local_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_station_font_color(
+        };
+        font_color_type principal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_terminal_station_font_color(
+        };
+        font_color_type local_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_terminal_station_font_color(
+        };
+        font_color_type principal_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
+        };
         font_type train_name_font{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true };
 
-        const font_color_set_type font_color_set(
+        const font_color_set_type font_color_set{
             std::move(background_color),
             std::move(company_line_name_font_color),
             std::move(note_font_color),
@@ -345,7 +345,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(local_terminal_station_font_color),
             std::move(principal_terminal_station_font_color),
             std::move(train_name_font)
-        );
+        };
 
         BOOST_CHECK((font_color_set.background() == color_type{ 12, 34, 56 }));
     }
@@ -355,30 +355,30 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
         BOOST_TEST_PASSPOINT();
 
         color_type background_color{ 12, 34, 56 };
-        font_color_type company_line_name_font_color(
+        font_color_type company_line_name_font_color{
             font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type note_font_color(
+        };
+        font_color_type note_font_color{
             font_type(string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type time_line_font_color(
+        };
+        font_color_type time_line_font_color{
             font_type(string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_station_font_color(
+        };
+        font_color_type local_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_station_font_color(
+        };
+        font_color_type principal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_terminal_station_font_color(
+        };
+        font_color_type local_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_terminal_station_font_color(
+        };
+        font_color_type principal_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
+        };
         font_type train_name_font{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true };
 
-        const font_color_set_type font_color_set(
+        const font_color_set_type font_color_set{
             std::move(background_color),
             std::move(company_line_name_font_color),
             std::move(note_font_color),
@@ -388,7 +388,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(local_terminal_station_font_color),
             std::move(principal_terminal_station_font_color),
             std::move(train_name_font)
-        );
+        };
 
         BOOST_CHECK((
             font_color_set.company_line_name() ==
@@ -404,30 +404,30 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
         BOOST_TEST_PASSPOINT();
 
         color_type background_color{ 12, 34, 56 };
-        font_color_type company_line_name_font_color(
+        font_color_type company_line_name_font_color{
             font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type note_font_color(
+        };
+        font_color_type note_font_color{
             font_type(string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type time_line_font_color(
+        };
+        font_color_type time_line_font_color{
             font_type(string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_station_font_color(
+        };
+        font_color_type local_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_station_font_color(
+        };
+        font_color_type principal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_terminal_station_font_color(
+        };
+        font_color_type local_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_terminal_station_font_color(
+        };
+        font_color_type principal_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
+        };
         font_type train_name_font{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true };
 
-        const font_color_set_type font_color_set(
+        const font_color_set_type font_color_set{
             std::move(background_color),
             std::move(company_line_name_font_color),
             std::move(note_font_color),
@@ -437,7 +437,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(local_terminal_station_font_color),
             std::move(principal_terminal_station_font_color),
             std::move(train_name_font)
-        );
+        };
 
         BOOST_CHECK((
             font_color_set.note() ==
@@ -453,30 +453,30 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
         BOOST_TEST_PASSPOINT();
 
         color_type background_color{ 12, 34, 56 };
-        font_color_type company_line_name_font_color(
+        font_color_type company_line_name_font_color{
             font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type note_font_color(
+        };
+        font_color_type note_font_color{
             font_type(string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type time_line_font_color(
+        };
+        font_color_type time_line_font_color{
             font_type(string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_station_font_color(
+        };
+        font_color_type local_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_station_font_color(
+        };
+        font_color_type principal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_terminal_station_font_color(
+        };
+        font_color_type local_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_terminal_station_font_color(
+        };
+        font_color_type principal_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
+        };
         font_type train_name_font{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true };
 
-        const font_color_set_type font_color_set(
+        const font_color_set_type font_color_set{
             std::move(background_color),
             std::move(company_line_name_font_color),
             std::move(note_font_color),
@@ -486,7 +486,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(local_terminal_station_font_color),
             std::move(principal_terminal_station_font_color),
             std::move(train_name_font)
-        );
+        };
 
         BOOST_CHECK((
             font_color_set.time_line() ==
@@ -502,30 +502,30 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
         BOOST_TEST_PASSPOINT();
 
         color_type background_color{ 12, 34, 56 };
-        font_color_type company_line_name_font_color(
+        font_color_type company_line_name_font_color{
             font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type note_font_color(
+        };
+        font_color_type note_font_color{
             font_type(string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type time_line_font_color(
+        };
+        font_color_type time_line_font_color{
             font_type(string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_station_font_color(
+        };
+        font_color_type local_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_station_font_color(
+        };
+        font_color_type principal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_terminal_station_font_color(
+        };
+        font_color_type local_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_terminal_station_font_color(
+        };
+        font_color_type principal_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
+        };
         font_type train_name_font{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true };
 
-        const font_color_set_type font_color_set(
+        const font_color_set_type font_color_set{
             std::move(background_color),
             std::move(company_line_name_font_color),
             std::move(note_font_color),
@@ -535,7 +535,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(local_terminal_station_font_color),
             std::move(principal_terminal_station_font_color),
             std::move(train_name_font)
-        );
+        };
 
         BOOST_CHECK((
             font_color_set.local_station() ==
@@ -551,30 +551,30 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
         BOOST_TEST_PASSPOINT();
 
         color_type background_color{ 12, 34, 56 };
-        font_color_type company_line_name_font_color(
+        font_color_type company_line_name_font_color{
             font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type note_font_color(
+        };
+        font_color_type note_font_color{
             font_type(string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type time_line_font_color(
+        };
+        font_color_type time_line_font_color{
             font_type(string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_station_font_color(
+        };
+        font_color_type local_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_station_font_color(
+        };
+        font_color_type principal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_terminal_station_font_color(
+        };
+        font_color_type local_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_terminal_station_font_color(
+        };
+        font_color_type principal_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
+        };
         font_type train_name_font{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true };
 
-        const font_color_set_type font_color_set(
+        const font_color_set_type font_color_set{
             std::move(background_color),
             std::move(company_line_name_font_color),
             std::move(note_font_color),
@@ -584,7 +584,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(local_terminal_station_font_color),
             std::move(principal_terminal_station_font_color),
             std::move(train_name_font)
-        );
+        };
 
         BOOST_CHECK((
             font_color_set.principal_station() ==
@@ -600,30 +600,30 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
         BOOST_TEST_PASSPOINT();
 
         color_type background_color{ 12, 34, 56 };
-        font_color_type company_line_name_font_color(
+        font_color_type company_line_name_font_color{
             font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type note_font_color(
+        };
+        font_color_type note_font_color{
             font_type(string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type time_line_font_color(
+        };
+        font_color_type time_line_font_color{
             font_type(string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_station_font_color(
+        };
+        font_color_type local_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_station_font_color(
+        };
+        font_color_type principal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_terminal_station_font_color(
+        };
+        font_color_type local_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_terminal_station_font_color(
+        };
+        font_color_type principal_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
+        };
         font_type train_name_font{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true };
 
-        const font_color_set_type font_color_set(
+        const font_color_set_type font_color_set{
             std::move(background_color),
             std::move(company_line_name_font_color),
             std::move(note_font_color),
@@ -633,7 +633,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(local_terminal_station_font_color),
             std::move(principal_terminal_station_font_color),
             std::move(train_name_font)
-        );
+        };
 
         BOOST_CHECK((
             font_color_set.local_terminal_station() ==
@@ -649,30 +649,30 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
         BOOST_TEST_PASSPOINT();
 
         color_type background_color{ 12, 34, 56 };
-        font_color_type company_line_name_font_color(
+        font_color_type company_line_name_font_color{
             font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type note_font_color(
+        };
+        font_color_type note_font_color{
             font_type(string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type time_line_font_color(
+        };
+        font_color_type time_line_font_color{
             font_type(string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_station_font_color(
+        };
+        font_color_type local_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_station_font_color(
+        };
+        font_color_type principal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_terminal_station_font_color(
+        };
+        font_color_type local_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_terminal_station_font_color(
+        };
+        font_color_type principal_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
+        };
         font_type train_name_font{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true };
 
-        const font_color_set_type font_color_set(
+        const font_color_set_type font_color_set{
             std::move(background_color),
             std::move(company_line_name_font_color),
             std::move(note_font_color),
@@ -682,7 +682,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(local_terminal_station_font_color),
             std::move(principal_terminal_station_font_color),
             std::move(train_name_font)
-        );
+        };
 
         BOOST_CHECK((
             font_color_set.principal_terminal_station() ==
@@ -698,30 +698,30 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
         BOOST_TEST_PASSPOINT();
 
         color_type background_color{ 12, 34, 56 };
-        font_color_type company_line_name_font_color(
+        font_color_type company_line_name_font_color{
             font_type(string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type note_font_color(
+        };
+        font_color_type note_font_color{
             font_type(string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type time_line_font_color(
+        };
+        font_color_type time_line_font_color{
             font_type(string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_station_font_color(
+        };
+        font_color_type local_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_station_font_color(
+        };
+        font_color_type principal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type local_terminal_station_font_color(
+        };
+        font_color_type local_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
-        font_color_type principal_terminal_station_font_color(
+        };
+        font_color_type principal_terminal_station_font_color{
             font_type(string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true), color_type{ 12, 34, 56 }
-        );
+        };
         font_type train_name_font{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true };
 
-        const font_color_set_type font_color_set(
+        const font_color_set_type font_color_set{
             std::move(background_color),
             std::move(company_line_name_font_color),
             std::move(note_font_color),
@@ -731,7 +731,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
             std::move(local_terminal_station_font_color),
             std::move(principal_terminal_station_font_color),
             std::move(train_name_font)
-        );
+        };
 
         BOOST_CHECK(
             font_color_set.train_name() == font_type(string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true)
