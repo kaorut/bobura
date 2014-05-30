@@ -54,7 +54,7 @@ BOOST_AUTO_TEST_SUITE(station)
         BOOST_TEST_PASSPOINT();
 
         {
-            const station_type station(string_type{}, local_type::instance(), false, false, string_type{});
+            const station_type station{ string_type{}, local_type::instance(), false, false, string_type{} };
         }
         {
             const station_type station(
@@ -286,17 +286,17 @@ BOOST_AUTO_TEST_SUITE(station)
         BOOST_TEST_PASSPOINT();
 
         {
-            const station_type station(string_type{}, local_type::instance(), false, false, string_type{});
+            const station_type station{ string_type{}, local_type::instance(), false, false, string_type{} };
 
             BOOST_CHECK_EQUAL(&station.grade(), &local_type::instance());
         }
         {
-            const station_type station(string_type{}, principal_type::instance(), false, false, string_type{});
+            const station_type station{ string_type{}, principal_type::instance(), false, false, string_type{} };
 
             BOOST_CHECK_EQUAL(&station.grade(), &principal_type::instance());
         }
         {
-            const station_type station(string_type{}, local_terminal_type::instance(), false, false, string_type{});
+            const station_type station{ string_type{}, local_terminal_type::instance(), false, false, string_type{} };
 
             BOOST_CHECK_EQUAL(&station.grade(), &local_terminal_type::instance());
         }
@@ -320,12 +320,12 @@ BOOST_AUTO_TEST_SUITE(station)
         BOOST_TEST_PASSPOINT();
 
         {
-            const station_type station(string_type{}, local_type::instance(), false, false, string_type{});
+            const station_type station{ string_type{}, local_type::instance(), false, false, string_type{} };
 
             BOOST_CHECK(!station.shows_down_arrival_times());
         }
         {
-            const station_type station(string_type{}, local_type::instance(), true, false, string_type{});
+            const station_type station{ string_type{}, local_type::instance(), true, false, string_type{} };
 
             BOOST_CHECK(station.shows_down_arrival_times());
         }
@@ -342,12 +342,12 @@ BOOST_AUTO_TEST_SUITE(station)
         BOOST_TEST_PASSPOINT();
 
         {
-            const station_type station(string_type{}, local_type::instance(), false, false, string_type{});
+            const station_type station{ string_type{}, local_type::instance(), false, false, string_type{} };
 
             BOOST_CHECK(!station.shows_up_arrival_times());
         }
         {
-            const station_type station(string_type{}, local_type::instance(), false, true, string_type{});
+            const station_type station{ string_type{}, local_type::instance(), false, true, string_type{} };
 
             BOOST_CHECK(station.shows_up_arrival_times());
         }
@@ -364,7 +364,7 @@ BOOST_AUTO_TEST_SUITE(station)
         BOOST_TEST_PASSPOINT();
 
         {
-            const station_type station(string_type{}, local_type::instance(), false, false, string_type{});
+            const station_type station{ string_type{}, local_type::instance(), false, false, string_type{} };
 
             BOOST_CHECK(station.note() == string_type{});
         }

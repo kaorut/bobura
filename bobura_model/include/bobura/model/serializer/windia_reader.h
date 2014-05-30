@@ -348,13 +348,13 @@ namespace bobura { namespace model { namespace serializer
                 if (name_and_abbreviation.size() < 2)
                     return false;
 
-                train_kind_type new_kind(
+                train_kind_type new_kind{
                     string_type(name_and_abbreviation[0].begin(), name_and_abbreviation[0].end()),
                     string_type(name_and_abbreviation[1].begin(), name_and_abbreviation[1].end()),
                     m_timetable.train_kinds()[index].color(),
                     m_timetable.train_kinds()[index].weight(),
                     m_timetable.train_kinds()[index].line_style()
-                );
+                };
 
                 m_timetable.set_train_kind(
                     boost::next(m_timetable.train_kinds().begin(), index), std::move(new_kind)
@@ -390,14 +390,14 @@ namespace bobura { namespace model { namespace serializer
                 if (*train_kind_index >= m_timetable.train_kinds().size())
                     return false;
 
-                train_type train(
+                train_type train{
                     direction(),
                     string_type(split[1].begin(), split[1].end()),
                     *train_kind_index,
                     string_type(split[2].begin(), split[2].end()),
                     string_type(split[3].begin(), split[3].end()),
                     string_type(others_and_note.second.begin(), others_and_note.second.end())
-                );
+                };
                 for (std::size_t i = 0; i < m_timetable.station_locations().size(); ++i)
                 {
                     auto stop = to_stop(std::move(split[4 + i]));

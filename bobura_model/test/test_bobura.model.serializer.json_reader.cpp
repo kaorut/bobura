@@ -497,7 +497,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
 
         reader_type json_reader{};
         {
-            std::istringstream input_stream(json_empty0);
+            std::istringstream input_stream{ json_empty0 };
             BOOST_CHECK(
                 !json_reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -506,7 +506,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             );
         }
         {
-            std::istringstream input_stream(json_empty1);
+            std::istringstream input_stream{ json_empty1 };
             BOOST_CHECK(
                 json_reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -515,7 +515,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             );
         }
         {
-            std::istringstream input_stream(json_empty2);
+            std::istringstream input_stream{ json_empty2 };
             BOOST_CHECK(
                 json_reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -524,7 +524,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             );
         }
         {
-            std::istringstream input_stream(json_white_space_before_start_element);
+            std::istringstream input_stream{ json_white_space_before_start_element };
             BOOST_CHECK(
                 json_reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -533,7 +533,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             );
         }
         {
-            std::istringstream input_stream(json_not_json);
+            std::istringstream input_stream{ json_not_json };
             BOOST_CHECK(
                 !json_reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -554,7 +554,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
 
         reader_type json_reader{};
         {
-            std::istringstream input_stream(json_not_json);
+            std::istringstream input_stream{ json_not_json };
             auto error = error_type::none;
             const auto p_timetable =
                 json_reader.read(
@@ -567,7 +567,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
-            std::istringstream input_stream(json_empty1);
+            std::istringstream input_stream{ json_empty1 };
             auto error = error_type::none;
             const auto p_timetable =
                 json_reader.read(
@@ -580,7 +580,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
-            std::istringstream input_stream(json_empty2);
+            std::istringstream input_stream{ json_empty2 };
             auto error = error_type::none;
             const auto p_timetable =
                 json_reader.read(
@@ -594,7 +594,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             BOOST_CHECK(p_timetable->line_name().empty());
         }
         {
-            std::istringstream input_stream(json_line_name_only);
+            std::istringstream input_stream{ json_line_name_only };
             auto error = error_type::none;
             const auto p_timetable =
                 json_reader.read(
@@ -608,7 +608,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("hoge") });
         }
         {
-            std::istringstream input_stream(json_station_only);
+            std::istringstream input_stream{ json_station_only };
             auto error = error_type::none;
             const auto p_timetable =
                 json_reader.read(
@@ -643,7 +643,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             }
         }
         {
-            std::istringstream input_stream(json_invalid_station_grade);
+            std::istringstream input_stream{ json_invalid_station_grade };
             auto error = error_type::none;
             const auto p_timetable =
                 json_reader.read(
@@ -656,7 +656,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
-            std::istringstream input_stream(json_full_content);
+            std::istringstream input_stream{ json_full_content };
             auto error = error_type::none;
             const auto p_timetable =
                 json_reader.read(
@@ -756,7 +756,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             }
         }
         {
-            std::istringstream input_stream(json_invalid_stop_time);
+            std::istringstream input_stream{ json_invalid_stop_time };
             auto error = error_type::none;
             const auto p_timetable =
                 json_reader.read(
@@ -769,7 +769,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
-            std::istringstream input_stream(json_too_many_stops);
+            std::istringstream input_stream{ json_too_many_stops };
             auto error = error_type::none;
             const auto p_timetable =
                 json_reader.read(
@@ -782,7 +782,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
-            std::istringstream input_stream(json_invalid_time_format);
+            std::istringstream input_stream{ json_invalid_time_format };
             auto error = error_type::none;
             const auto p_timetable =
                 json_reader.read(
@@ -795,7 +795,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
-            std::istringstream input_stream(json_train_with_no_stop);
+            std::istringstream input_stream{ json_train_with_no_stop };
             auto error = error_type::none;
             const auto p_timetable =
                 json_reader.read(
@@ -808,7 +808,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
-            std::istringstream input_stream(json_invalid_kind_index);
+            std::istringstream input_stream{ json_invalid_kind_index };
             auto error = error_type::none;
             const auto p_timetable =
                 json_reader.read(

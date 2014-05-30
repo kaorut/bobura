@@ -315,7 +315,7 @@ namespace bobura { namespace model
         station_intervals_type station_intervals()
         const
         {
-            const station_interval_calculator_type calculator(m_station_locations, m_down_trains, m_up_trains);
+            const station_interval_calculator_type calculator{ m_station_locations, m_down_trains, m_up_trains };
             return calculator.calculate();
         }
 

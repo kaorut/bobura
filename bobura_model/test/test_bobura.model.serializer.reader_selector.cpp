@@ -124,7 +124,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
         auto concrete_readers = create_concrete_readers();
         reader_selector_type reader_selector(std::move(concrete_readers));
 
-        std::istringstream input_stream("hoge");
+        std::istringstream input_stream{ "hoge" };
         BOOST_CHECK_THROW(
             reader_selector.selects(
                 boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -142,7 +142,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             auto concrete_readers = create_concrete_readers();
             reader_selector_type reader_selector(std::move(concrete_readers));
 
-            std::istringstream input_stream("hoge");
+            std::istringstream input_stream{ "hoge" };
             auto error = error_type::none;
             const auto p_timetable =
                 reader_selector.read(
@@ -158,7 +158,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             auto concrete_readers = create_concrete_readers();
             reader_selector_type reader_selector(std::move(concrete_readers));
 
-            std::istringstream input_stream("fuga");
+            std::istringstream input_stream{ "fuga" };
             auto error = error_type::none;
             const auto p_timetable =
                 reader_selector.read(
@@ -174,7 +174,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             auto concrete_readers = create_concrete_readers();
             reader_selector_type reader_selector(std::move(concrete_readers));
 
-            std::istringstream input_stream("piyo");
+            std::istringstream input_stream{ "piyo" };
             auto error = error_type::none;
             const auto p_timetable =
                 reader_selector.read(

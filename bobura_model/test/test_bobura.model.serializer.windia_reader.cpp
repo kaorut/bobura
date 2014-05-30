@@ -116,7 +116,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         {
             reader_type reader{};
 
-            std::istringstream input_stream(data0);
+            std::istringstream input_stream{ data0 };
             BOOST_CHECK(
                 !reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -127,7 +127,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         {
             reader_type reader{};
 
-            std::istringstream input_stream(data1);
+            std::istringstream input_stream{ data1 };
             BOOST_CHECK(
                 reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -138,7 +138,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         {
             reader_type reader{};
 
-            std::istringstream input_stream(data3);
+            std::istringstream input_stream{ data3 };
             BOOST_CHECK(
                 !reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -160,7 +160,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         {
             reader_type reader{};
 
-            std::istringstream input_stream(data0);
+            std::istringstream input_stream{ data0 };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(
@@ -175,7 +175,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         {
             reader_type reader{};
 
-            std::istringstream input_stream(data1);
+            std::istringstream input_stream{ data1 };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(
@@ -195,7 +195,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         {
             reader_type reader{};
 
-            std::istringstream input_stream(data2);
+            std::istringstream input_stream{ data2 };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(
@@ -350,7 +350,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         {
             reader_type reader{};
 
-            std::istringstream input_stream(data3);
+            std::istringstream input_stream{ data3 };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(

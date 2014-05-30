@@ -687,7 +687,7 @@ namespace bobura { namespace model { namespace serializer
                 if (!train_kind_index || *train_kind_index >= m_timetable.train_kinds().size())
                     return false;
 
-                train_type train(m_direction, m_ressyabangou, *train_kind_index, m_ressyamei, m_gousuu, m_bikou);
+                train_type train{ m_direction, m_ressyabangou, *train_kind_index, m_ressyamei, m_gousuu, m_bikou };
 
                 auto stops =
                     parse_stops(
@@ -803,7 +803,7 @@ namespace bobura { namespace model { namespace serializer
         template <typename T>
         static boost::optional<T> from_hex_string(const string_type& hex_string)
         {
-            std::basic_istringstream<char_type> stream(hex_string);
+            std::basic_istringstream<char_type> stream{ hex_string };
             T result = 0;
             stream >> std::hex >> result;
             return boost::make_optional(stream.eof() || stream.good(), std::move(result));

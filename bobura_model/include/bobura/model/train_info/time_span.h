@@ -170,7 +170,7 @@ namespace bobura { namespace model { namespace train_info
         */
         time_span& operator+=(const time_span& another)
         {
-            time_span temp(*this);
+            time_span temp{ *this };
 
             temp.m_seconds += another.m_seconds;
 
@@ -187,7 +187,7 @@ namespace bobura { namespace model { namespace train_info
         */
         time_span& operator-=(const time_span& another)
         {
-            time_span temp(*this);
+            time_span temp{ *this };
 
             temp.m_seconds -= another.m_seconds;
 

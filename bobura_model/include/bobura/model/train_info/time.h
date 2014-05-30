@@ -194,7 +194,7 @@ namespace bobura { namespace model { namespace train_info
             seconds %= time_span_type::seconds_of_whole_day();
             assert(0 <= seconds && seconds < time_span_type::seconds_of_whole_day());
 
-            time temp(seconds);
+            time temp{ seconds };
             boost::swap(temp, *this);
             return *this;
         }
@@ -223,7 +223,7 @@ namespace bobura { namespace model { namespace train_info
             seconds %= time_span_type::seconds_of_whole_day();
             assert(0 <= seconds && seconds < time_span_type::seconds_of_whole_day());
 
-            time temp(seconds);
+            time temp{ seconds };
             boost::swap(temp, *this);
             return *this;
         }

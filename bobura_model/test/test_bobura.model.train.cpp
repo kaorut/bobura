@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_SUITE(train)
             const train_type::stops_type stops{
                 stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
             };
-            train_type::stops_type stops2(stops);
+            train_type::stops_type stops2{ stops };
 
             const train_type train(
                 train_type::direction_type::down,

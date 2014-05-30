@@ -385,7 +385,7 @@ namespace bobura { namespace model { namespace serializer
                 return boost::make_optional<font_color_set_element_type>(std::move(*color));
             }
 
-            return read_font_or_font_color(pull_parser);
+            return read_font_or_font_color{ pull_parser };
         }
 
         static boost::optional<font_color_set_element_type> read_font_or_font_color(pull_parser_type& pull_parser)
@@ -456,7 +456,7 @@ namespace bobura { namespace model { namespace serializer
             auto color_string = read_string(pull_parser);
             if (!color_string)
                 return boost::none;
-            return to_color(encoder().decode(std::move(*color_string)));
+            return to_color{ encoder().decode(std::move(*color_string)) };
         }
 
         static boost::optional<std::vector<station_location_type>> read_stations(pull_parser_type& pull_parser)
@@ -845,9 +845,9 @@ namespace bobura { namespace model { namespace serializer
                 note = std::move(member->second);
             }
 
-            train_type train(
+            train_type train{
                 direction, std::move(number), kind_index, std::move(name), std::move(name_number), std::move(note)
-            );
+            };
 
             auto stops = read_stops(pull_parser);
             if (!stops)
@@ -868,7 +868,7 @@ namespace bobura { namespace model { namespace serializer
 
         static stop_type empty_stop()
         {
-            return stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{});
+            return stop_type{ time_type::uninitialized(), time_type::uninitialized(), false, string_type{} };
         }
 
         static boost::optional<std::vector<stop_type>> read_stops(pull_parser_type& pull_parser)
@@ -1109,7 +1109,7 @@ namespace bobura { namespace model { namespace serializer
 
         static bool next_is_string(const pull_parser_type& pull_parser)
         {
-            return next_is_value(pull_parser, 4);
+            return next_is_value{ pull_parser, 4 };
         }
 
         static bool next_is_value(const pull_parser_type& pull_parser, const int which)
@@ -1148,7 +1148,7 @@ namespace bobura { namespace model { namespace serializer
                 tetengo2::stdalt::make_unique<push_parser_type>(
                     first, last, tetengo2::stdalt::make_unique<grammar_type>()
                 );
-            pull_parser_type pull_parser(std::move(p_push_parser), 5);
+            pull_parser_type pull_parser{ std::move(p_push_parser), 5 };
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return false;
@@ -1165,9 +1165,9 @@ namespace bobura { namespace model { namespace serializer
                 tetengo2::stdalt::make_unique<push_parser_type>(
                     first, last, tetengo2::stdalt::make_unique<grammar_type>()
                 );
-            pull_parser_type pull_parser(std::move(p_push_parser), 5);
+            pull_parser_type pull_parser{ std::move(p_push_parser), 5 };
 
-            return read_timetable(pull_parser, error);
+            return read_timetable{ pull_parser, error };
         }
 
 

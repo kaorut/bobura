@@ -85,7 +85,7 @@ BOOST_AUTO_TEST_SUITE(reader)
         concrete_reader reader{};
 
         {
-            std::istringstream input_stream("hoge");
+            std::istringstream input_stream{ "hoge" };
             BOOST_CHECK(
                 reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -94,7 +94,7 @@ BOOST_AUTO_TEST_SUITE(reader)
             );
         }
         {
-            std::istringstream input_stream("fuga");
+            std::istringstream input_stream{ "fuga" };
             BOOST_CHECK(
                 !reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -109,7 +109,7 @@ BOOST_AUTO_TEST_SUITE(reader)
         BOOST_TEST_PASSPOINT();
 
         concrete_reader reader{};
-        std::istringstream input_stream("hoge");
+        std::istringstream input_stream{ "hoge" };
         auto error = error_type::none;
         const auto p_timetable =
             reader.read(

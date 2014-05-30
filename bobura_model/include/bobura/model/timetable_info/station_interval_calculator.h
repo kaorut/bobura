@@ -65,7 +65,7 @@ namespace bobura { namespace model { namespace timetable_info
         */
         static const time_span_type& default_interval()
         {
-            static const time_span_type singleton(3 * 60);
+            static const time_span_type singleton{ 3 * 60 };
             return singleton;
         }
 
@@ -103,7 +103,7 @@ namespace bobura { namespace model { namespace timetable_info
             if (m_station_locations.empty())
                 return station_intervals_type(m_station_locations.size(), default_interval());
 
-            station_intervals_type intervals(m_station_locations.size(), default_interval() + whole_day2());
+            station_intervals_type intervals{ m_station_locations.size(), default_interval() + whole_day2() };
 
             for (const auto& train: m_down_trains)
             {
@@ -137,13 +137,13 @@ namespace bobura { namespace model { namespace timetable_info
 
         static const time_span_type& whole_day()
         {
-            static const time_span_type singleton(time_span_type::seconds_of_whole_day());
+            static const time_span_type singleton{ time_span_type::seconds_of_whole_day() };
             return singleton;
         }
 
         static const time_span_type& whole_day2()
         {
-            static const time_span_type singleton(whole_day().seconds() * 2);
+            static const time_span_type singleton{ whole_day().seconds() * 2 };
             return singleton;
         }
 
@@ -178,7 +178,7 @@ namespace bobura { namespace model { namespace timetable_info
         station_intervals_type calculate_by_train(const train_type& train, const bool down)
         const
         {
-            station_intervals_type intervals(train.stops().size(), default_interval() + whole_day2());
+            station_intervals_type intervals{ train.stops().size(), default_interval() + whole_day2() };
 
             for (stop_index_type from = 0; from < train.stops().size() - 1; )
             {
@@ -196,7 +196,7 @@ namespace bobura { namespace model { namespace timetable_info
                     const auto travel_time = calculate_travel_time(train, departure, arrival);
                     if (travel_time)
                     {
-                        time_span_type interval(travel_time->seconds() / (to - from));
+                        time_span_type interval{ travel_time->seconds() / (to - from) };
                         if (to - from > 1)
                             interval += whole_day();
                         for (stop_index_type i = from; i < to; ++i)
