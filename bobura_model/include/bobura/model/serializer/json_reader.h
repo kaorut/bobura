@@ -385,7 +385,7 @@ namespace bobura { namespace model { namespace serializer
                 return boost::make_optional<font_color_set_element_type>(std::move(*color));
             }
 
-            return read_font_or_font_color{ pull_parser };
+            return read_font_or_font_color(pull_parser);
         }
 
         static boost::optional<font_color_set_element_type> read_font_or_font_color(pull_parser_type& pull_parser)
@@ -456,7 +456,7 @@ namespace bobura { namespace model { namespace serializer
             auto color_string = read_string(pull_parser);
             if (!color_string)
                 return boost::none;
-            return to_color{ encoder().decode(std::move(*color_string)) };
+            return to_color(encoder().decode(std::move(*color_string)));
         }
 
         static boost::optional<std::vector<station_location_type>> read_stations(pull_parser_type& pull_parser)
@@ -1109,7 +1109,7 @@ namespace bobura { namespace model { namespace serializer
 
         static bool next_is_string(const pull_parser_type& pull_parser)
         {
-            return next_is_value{ pull_parser, 4 };
+            return next_is_value(pull_parser, 4);
         }
 
         static bool next_is_value(const pull_parser_type& pull_parser, const int which)
@@ -1167,7 +1167,7 @@ namespace bobura { namespace model { namespace serializer
                 );
             pull_parser_type pull_parser{ std::move(p_push_parser), 5 };
 
-            return read_timetable{ pull_parser, error };
+            return read_timetable(pull_parser, error);
         }
 
 

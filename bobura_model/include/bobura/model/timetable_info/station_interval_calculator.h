@@ -196,7 +196,9 @@ namespace bobura { namespace model { namespace timetable_info
                     const auto travel_time = calculate_travel_time(train, departure, arrival);
                     if (travel_time)
                     {
-                        time_span_type interval{ travel_time->seconds() / (to - from) };
+                        time_span_type interval{
+                            static_cast<typename time_span_type::tick_type>(travel_time->seconds() / (to - from))
+                        };
                         if (to - from > 1)
                             interval += whole_day();
                         for (stop_index_type i = from; i < to; ++i)
