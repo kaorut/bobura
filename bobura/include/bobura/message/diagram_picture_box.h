@@ -276,7 +276,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
             {
                 if (p_system_cursor)
                 {
-                    m_picture_box.set_cursor(std::unique_ptr<cursor_type>());
+                    m_picture_box.set_cursor(std::unique_ptr<cursor_type>{});
                 }
             }
         }
@@ -452,7 +452,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         void zoom(const delta_type delta, const bool vertical)
         const
         {
-            view_zoom_type zoom(m_picture_box, m_view);
+            view_zoom_type zoom{ m_picture_box, m_view };
 
             if (vertical)
             {
@@ -720,7 +720,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         static position_type to_position(const scroll_bar_size_type left, const scroll_bar_size_type top)
         {
-            return position_type(left_type(left), top_type(top));
+            return { static_cast<left_type>(left), static_cast<top_type>(top) };
         }
 
 

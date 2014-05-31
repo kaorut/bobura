@@ -126,11 +126,11 @@ namespace bobura
         m_selection(),
         m_horizontal_scale(1),
         m_vertical_scale(1),
-        m_dimension(width_type(0), height_type(0)),
+        m_dimension(width_type{ 0 }, height_type{ 0 }),
         m_header_height(0),
         m_time_header_height(3),
         m_station_header_width(8),
-        m_time_offset(time_span_type(3, 0, 0)),
+        m_time_offset(time_span_type{ 3, 0, 0 }),
         m_station_intervals(),
         m_station_positions(),
         m_p_header(),
@@ -224,13 +224,13 @@ namespace bobura
         */
         void update_dimension()
         {
-            const width_type width(20 * 24 * m_horizontal_scale);
+            const width_type width{ 20 * 24 * m_horizontal_scale };
 
             m_station_intervals = m_model.timetable().station_intervals();
             if (m_station_intervals.empty())
             {
                 m_station_positions.clear();
-                m_dimension = dimension_type(width, height_type(0));
+                m_dimension = dimension_type{ width, height_type{ 0 } };
 
                 m_p_header.reset();
                 m_p_time_line_list.reset();
@@ -240,7 +240,7 @@ namespace bobura
                 return;
             }
             
-            std::vector<top_type> positions;
+            std::vector<top_type> positions{};
             positions.reserve(m_station_intervals.size());
             std::transform(
                 m_station_intervals.begin(),
@@ -250,7 +250,7 @@ namespace bobura
             );
 
             m_station_positions = std::move(positions);
-            m_dimension = dimension_type(width, height_type::from(m_station_positions.back()));
+            m_dimension = dimension_type{ width, height_type::from(m_station_positions.back()) };
 
             m_p_header.reset();
             m_p_time_line_list.reset();
@@ -270,13 +270,13 @@ namespace bobura
         {
             const auto& canvas_width = tetengo2::gui::dimension<dimension_type>::width(canvas_dimension);
             const auto& header_width = m_station_header_width;
-            auto page_width = canvas_width > header_width ? canvas_width - header_width : width_type(0);
+            auto page_width = canvas_width > header_width ? canvas_width - header_width : width_type{ 0 };
 
             const auto& canvas_height = tetengo2::gui::dimension<dimension_type>::height(canvas_dimension);
             const auto header_height = m_header_height + m_time_header_height;
-            auto page_height = canvas_height > header_height ? canvas_height - header_height : height_type(0);
+            auto page_height = canvas_height > header_height ? canvas_height - header_height : height_type{ 0 };
 
-            return dimension_type(std::move(page_width), std::move(page_height));
+            return { std::move(page_width), std::move(page_height) };
         }
 
         /*!
@@ -390,8 +390,8 @@ namespace bobura
                 const auto position = m_sum;
                 m_sum += interval;
                 return
-                    top_type(typename top_type::value_type(position.seconds(), 60)) *
-                    top_type::from(height_type(m_vertical_scale)).value();
+                    top_type{ typename top_type::value_type{ position.seconds(), 60 } } *
+                    top_type::from(height_type{ m_vertical_scale }).value();
             }
 
         private:
@@ -447,7 +447,7 @@ namespace bobura
                     m_model.timetable().font_color_set().background()
                 )
             );
-            canvas.fill_rectangle(position_type(left_type(0), top_type(0)), canvas_dimension);
+            canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, canvas_dimension);
         }
 
         void ensure_items_created(

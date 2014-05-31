@@ -91,14 +91,14 @@ namespace bobura { namespace model { namespace serializer
         virtual bool selects_impl(const iterator first, const iterator last)
         override
         {
-            const input_string_type input_string(first, last);
+            const input_string_type input_string{ first, last };
             if (input_string.length() < 2)
                 return false;
-            if (input_string_ref_type(input_string).substr(0, 2) != input_string_ref_type(TETENGO2_TEXT("BZ")))
+            if (input_string_ref_type{ input_string }.substr(0, 2) != input_string_ref_type(TETENGO2_TEXT("BZ")))
                 return false;
 
-            std::istringstream input_stream(input_string);
-            boost::iostreams::filtering_istream filtering_input_stream;
+            std::istringstream input_stream{ input_string };
+            boost::iostreams::filtering_istream filtering_input_stream{};
             filtering_input_stream.push(boost::iostreams::bzip2_decompressor());
             filtering_input_stream.push(input_stream);
 
@@ -127,8 +127,8 @@ namespace bobura { namespace model { namespace serializer
         virtual std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
         override
         {
-            std::istringstream input_stream(input_string_type(first, last));
-            boost::iostreams::filtering_istream filtering_input_stream;
+            std::istringstream input_stream{ input_string_type{ first, last } };
+            boost::iostreams::filtering_istream filtering_input_stream{};
             filtering_input_stream.push(boost::iostreams::bzip2_decompressor());
             filtering_input_stream.push(input_stream);
 
@@ -148,7 +148,7 @@ namespace bobura { namespace model { namespace serializer
             catch (const boost::iostreams::bzip2_error&)
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             catch (...)
             {

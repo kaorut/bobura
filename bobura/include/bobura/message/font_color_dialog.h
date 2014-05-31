@@ -163,7 +163,7 @@ namespace bobura { namespace message { namespace font_color_dialog
             assert(m_font_color_list[0].second);
             auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(*m_font_color_list[0].second);
             canvas.set_background(std::move(p_background));
-            canvas.fill_rectangle(position_type(left_type(0), top_type(0)), m_canvas_dimension);
+            canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, m_canvas_dimension);
 
             if (
                 !m_current_category_index ||
@@ -178,23 +178,23 @@ namespace bobura { namespace message { namespace font_color_dialog
             canvas.set_font(*m_font_color_list[*m_current_category_index].first);
             canvas.set_color(
                 m_font_color_list[*m_current_category_index].second ?
-                *m_font_color_list[*m_current_category_index].second : color_type(0x40, 0x40, 0x40)
+                *m_font_color_list[*m_current_category_index].second : color_type{ 0x40, 0x40, 0x40 }
             );
 
-            const string_type text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:SAMPLE")));
+            const string_type text{ m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:SAMPLE")) };
 
             const auto text_and_line_tops = sample_text_and_line_tops(canvas, text);
 
-            canvas.draw_text(text, position_type(left_type(1), text_and_line_tops.first));
+            canvas.draw_text(text, position_type{ left_type{ 1 }, text_and_line_tops.first });
 
-            canvas.set_line_width(width_type(size_type(1, 12)));
+            canvas.set_line_width(width_type{ size_type{ 1, 12 } });
             canvas.set_line_style(canvas_type::line_style_type::solid);
             canvas.draw_line(
-                position_type(left_type(0), text_and_line_tops.second),
-                position_type(
+                position_type{ left_type{ 0 }, text_and_line_tops.second },
+                position_type{
                     left_type::from(tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension)),
                     text_and_line_tops.second
-                )
+                }
             );
         }
 
@@ -338,7 +338,7 @@ namespace bobura { namespace message { namespace font_color_dialog
             if (!m_current_category_index)
                 return;
 
-            font_dialog_type font_dialog(m_font_color_list[*m_current_category_index].first, m_dialog);
+            font_dialog_type font_dialog{ m_font_color_list[*m_current_category_index].first, m_dialog };
 
             const auto ok = font_dialog.do_modal();
             if (!ok)
@@ -448,7 +448,7 @@ namespace bobura { namespace message { namespace font_color_dialog
             if (!m_current_category_index)
                 return;
 
-            color_dialog_type color_dialog(m_font_color_list[*m_current_category_index].second, m_dialog);
+            color_dialog_type color_dialog{ m_font_color_list[*m_current_category_index].second, m_dialog };
 
             const auto ok = color_dialog.do_modal();
             if (!ok)

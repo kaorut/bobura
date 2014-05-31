@@ -99,24 +99,24 @@ BOOST_AUTO_TEST_SUITE(station_line)
     {
         BOOST_TEST_PASSPOINT();
 
-        station_type station(
-            string_type(TETENGO2_TEXT("name")),
+        station_type station{
+            string_type{ TETENGO2_TEXT("name") },
             station_grade_type_set_type::local_type::instance(),
             false,
             false,
-            string_type(TETENGO2_TEXT("note"))
-        );
-        const station_location_type station_location(std::move(station), 42);
-        selection_type selection;
-        station_line_type station_line1(
+            string_type{ TETENGO2_TEXT("note") }
+        };
+        const station_location_type station_location{ std::move(station), 42 };
+        selection_type selection{};
+        station_line_type station_line1{
             station_location,
             selection,
-            left_type(42),
-            left_type(12),
-            top_type(24),
-            font_color_type(font_type::dialog_font(), color_type(12, 34, 56))
-        );
-        const station_line_type station_line2(std::move(station_line1));
+            left_type{ 42 },
+            left_type{ 12 },
+            top_type{ 24 },
+            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+        };
+        const station_line_type station_line2{ std::move(station_line1) };
     }
 #endif
 
@@ -129,39 +129,39 @@ BOOST_AUTO_TEST_SUITE(station_line)
     {
         BOOST_TEST_PASSPOINT();
 
-        station_type station1(
-            string_type(TETENGO2_TEXT("name1")),
+        station_type station1{
+            string_type{ TETENGO2_TEXT("name1") },
             station_grade_type_set_type::local_type::instance(),
             false,
             false,
-            string_type(TETENGO2_TEXT("note1"))
-        );
-        const station_location_type station_location1(std::move(station1), 42);
-        selection_type selection;
-        station_line_type station_line1(
+            string_type{ TETENGO2_TEXT("note1") }
+        };
+        const station_location_type station_location1{ std::move(station1), 42 };
+        selection_type selection{};
+        station_line_type station_line1{
             station_location1,
             selection,
-            left_type(42),
-            left_type(12),
-            top_type(24),
-            font_color_type(font_type::dialog_font(), color_type(12, 34, 56))
-        );
-        station_type station2(
-            string_type(TETENGO2_TEXT("name2")),
+            left_type{ 42 },
+            left_type{ 12 },
+            top_type{ 24 },
+            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+        };
+        station_type station2{
+            string_type{ TETENGO2_TEXT("name2") },
             station_grade_type_set_type::local_type::instance(),
             false,
             false,
-            string_type(TETENGO2_TEXT("note2"))
-        );
-        const station_location_type station_location2(std::move(station2), 4242);
-        station_line_type station_line2(
+            string_type{ TETENGO2_TEXT("note2") }
+        };
+        const station_location_type station_location2{ std::move(station2), 4242 };
+        station_line_type station_line2{
             station_location2,
             selection,
-            left_type(42),
-            left_type(12),
-            top_type(24),
-            font_color_type(font_type::dialog_font(), color_type(12, 34, 56))
-        );
+            left_type{ 42 },
+            left_type{ 12 },
+            top_type{ 24 },
+            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+        };
         station_line1 = std::move(station_line2);
     }
 #endif
@@ -175,53 +175,53 @@ BOOST_AUTO_TEST_SUITE(station_line_list)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        selection_type selection;
-        station_line_list_type station_line_list1(
+        const model_type model{};
+        selection_type selection{};
+        station_line_list_type station_line_list1{
             model,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42),
-            std::vector<top_type>(2, top_type(42))
-        );
-        const station_line_list_type station_line_list2(std::move(station_line_list1));
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 },
+            std::vector<top_type>(2, top_type{ 42 })
+        };
+        const station_line_list_type station_line_list2{ std::move(station_line_list1) };
     }
 
     BOOST_AUTO_TEST_CASE(operator_assign)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        selection_type selection;
-        station_line_list_type station_line_list1(
+        const model_type model{};
+        selection_type selection{};
+        station_line_list_type station_line_list1{
             model,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42),
-            std::vector<top_type>(2, top_type(42))
-        );
-        station_line_list_type station_line_list2(
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 },
+            std::vector<top_type>(2, top_type{ 42 })
+        };
+        station_line_list_type station_line_list2{
             model,
-            time_span_type(42 * 60),
+            time_span_type{ 42 * 60 },
             selection,
-            dimension_type(width_type(42), height_type(24)),
-            position_type(left_type(24), top_type(42)),
-            left_type(24),
-            top_type(42),
-            height_type(24),
-            horizontal_scale_type(42),
-            std::vector<top_type>(2, top_type(42))
-        );
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            horizontal_scale_type{ 42 },
+            std::vector<top_type>(2, top_type{ 42 })
+        };
 
         station_line_list1 = std::move(station_line_list2);
     }

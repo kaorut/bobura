@@ -83,7 +83,7 @@ namespace bobura { namespace model { namespace serializer
             if (std::distance(first, last) < 2)
                 return first;
 
-            oudia_diagram_dialog_type dialog(m_parent, m_message_catalog);
+            oudia_diagram_dialog_type dialog{ m_parent, m_message_catalog };
 
             dialog.set_file_name(m_file_name);
             dialog.set_names(std::vector<string_type>(first, last));

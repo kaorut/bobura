@@ -315,7 +315,7 @@ namespace bobura { namespace model
         station_intervals_type station_intervals()
         const
         {
-            const station_interval_calculator_type calculator(m_station_locations, m_down_trains, m_up_trains);
+            const station_interval_calculator_type calculator{ m_station_locations, m_down_trains, m_up_trains };
             return calculator.calculate();
         }
 
@@ -639,7 +639,7 @@ namespace bobura { namespace model
             }
 
             const auto distance = distance_between(m_station_locations, train, i_departure, i_arrival);
-            assert(distance > operating_distance_type(0));
+            assert(distance > operating_distance_type{ 0 });
 
             const auto time_span = time_span_between(i_departure, i_arrival);
 
@@ -742,7 +742,7 @@ namespace bobura { namespace model
         {
             train.insert_stop(
                 train.stops().begin() + offset,
-                stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type())
+                stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{})
             );
         }
 
@@ -764,14 +764,14 @@ namespace bobura { namespace model
             if (train.kind_index() < index)
                 return;
 
-            train_type new_train(
+            train_type new_train{
                 train.direction(),
                 train.number(),
                 train.kind_index() + index_delta,
                 train.name(),
                 train.name_number(),
                 train.note()
-            );
+            };
             for (const auto& stop: train.stops())
                 new_train.insert_stop(new_train.stops().end(), stop);
 

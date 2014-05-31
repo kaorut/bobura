@@ -62,7 +62,7 @@ namespace
         virtual bool selects_impl(const iterator first, const iterator last)
         override
         {
-            return string_type(first, last) == m_line_name;
+            return string_type{ first, last } == m_line_name;
         }
 
         virtual std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
@@ -85,10 +85,10 @@ namespace
 
     std::vector<std::unique_ptr<reader_type>> create_concrete_readers()
     {
-        std::vector<std::unique_ptr<reader_type>> readers;
+        std::vector<std::unique_ptr<reader_type>> readers{};
 
-        readers.push_back(tetengo2::stdalt::make_unique<concrete_reader>(string_type(TETENGO2_TEXT("hoge"))));
-        readers.push_back(tetengo2::stdalt::make_unique<concrete_reader>(string_type(TETENGO2_TEXT("fuga"))));
+        readers.push_back(tetengo2::stdalt::make_unique<concrete_reader>(string_type{ TETENGO2_TEXT("hoge") }));
+        readers.push_back(tetengo2::stdalt::make_unique<concrete_reader>(string_type{ TETENGO2_TEXT("fuga") }));
 
         return std::move(readers);
     }
@@ -112,7 +112,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             const reader_selector_type reader_selector(std::move(concrete_readers));
         }
         {
-            std::vector<std::unique_ptr<reader_type>> concrete_readers;
+            std::vector<std::unique_ptr<reader_type>> concrete_readers{};
             BOOST_CHECK_THROW(reader_selector_type(std::move(concrete_readers)), std::invalid_argument);
         }
     }
@@ -124,7 +124,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
         auto concrete_readers = create_concrete_readers();
         reader_selector_type reader_selector(std::move(concrete_readers));
 
-        std::istringstream input_stream("hoge");
+        std::istringstream input_stream{ "hoge" };
         BOOST_CHECK_THROW(
             reader_selector.selects(
                 boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -142,7 +142,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             auto concrete_readers = create_concrete_readers();
             reader_selector_type reader_selector(std::move(concrete_readers));
 
-            std::istringstream input_stream("hoge");
+            std::istringstream input_stream{ "hoge" };
             auto error = error_type::none;
             const auto p_timetable =
                 reader_selector.read(
@@ -152,13 +152,13 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
                 );
 
             BOOST_REQUIRE(p_timetable);
-            BOOST_CHECK(p_timetable->line_name() == string_type(TETENGO2_TEXT("hoge")));
+            BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("hoge") });
         }
         {
             auto concrete_readers = create_concrete_readers();
             reader_selector_type reader_selector(std::move(concrete_readers));
 
-            std::istringstream input_stream("fuga");
+            std::istringstream input_stream{ "fuga" };
             auto error = error_type::none;
             const auto p_timetable =
                 reader_selector.read(
@@ -168,13 +168,13 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
                 );
 
             BOOST_REQUIRE(p_timetable);
-            BOOST_CHECK(p_timetable->line_name() == string_type(TETENGO2_TEXT("fuga")));
+            BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("fuga") });
         }
         {
             auto concrete_readers = create_concrete_readers();
             reader_selector_type reader_selector(std::move(concrete_readers));
 
-            std::istringstream input_stream("piyo");
+            std::istringstream input_stream{ "piyo" };
             auto error = error_type::none;
             const auto p_timetable =
                 reader_selector.read(

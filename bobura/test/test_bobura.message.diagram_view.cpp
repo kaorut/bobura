@@ -78,14 +78,13 @@ BOOST_AUTO_TEST_SUITE(station_selected)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        const message_catalog_type message_catalog;
-        std::vector<string_type> settings_arguments;
-        settings_arguments.push_back(string_type(TETENGO2_TEXT("path/to/exe")));
-        settings_type settings(settings_arguments);
-        property_bar_type property_bar(window, settings, message_catalog);
-        const model_type model;
-        const station_selected_type station_selected(property_bar, model, message_catalog);
+        window_type window{};
+        const message_catalog_type message_catalog{};
+        const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+        settings_type settings{ settings_arguments };
+        property_bar_type property_bar{ window, settings, message_catalog };
+        const model_type model{};
+        const station_selected_type station_selected{ property_bar, model, message_catalog };
     }
 
 // This test case causes a segmentation fault on Linux.
@@ -97,23 +96,22 @@ BOOST_AUTO_TEST_SUITE(station_selected)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        std::vector<string_type> settings_arguments;
-        settings_arguments.push_back(string_type(TETENGO2_TEXT("path/to/exe")));
-        settings_type settings(settings_arguments);
-        const message_catalog_type message_catalog;
-        property_bar_type property_bar(window, settings, message_catalog);
-        const model_type model;
-        station_selected_type station_selected(property_bar, model, message_catalog);
+        window_type window{};
+        const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+        settings_type settings{ settings_arguments };
+        const message_catalog_type message_catalog{};
+        property_bar_type property_bar{ window, settings, message_catalog };
+        const model_type model{};
+        station_selected_type station_selected{ property_bar, model, message_catalog };
 
-        station_type station(
-            string_type(TETENGO2_TEXT("name")),
+        station_type station{
+            string_type{ TETENGO2_TEXT("name") },
             station_grade_type_set_type::local_type::instance(),
             false,
             false,
-            string_type(TETENGO2_TEXT("note"))
-        );
-        station_location_type station_location(std::move(station), 42);
+            string_type{ TETENGO2_TEXT("note") }
+        };
+        station_location_type station_location{ std::move(station), 42 };
         station_selected(station_location);
     }
 #endif
@@ -127,47 +125,45 @@ BOOST_AUTO_TEST_SUITE(train_selected)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        std::vector<string_type> settings_arguments;
-        settings_arguments.push_back(string_type(TETENGO2_TEXT("path/to/exe")));
-        settings_type settings(settings_arguments);
-        const message_catalog_type message_catalog;
-        property_bar_type property_bar(window, settings, message_catalog);
-        const model_type model;
-        const train_selected_type train_selected(property_bar, model, message_catalog);
+        window_type window{};
+        const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+        settings_type settings{ settings_arguments };
+        const message_catalog_type message_catalog{};
+        property_bar_type property_bar{ window, settings, message_catalog };
+        const model_type model{};
+        const train_selected_type train_selected{ property_bar, model, message_catalog };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        std::vector<string_type> settings_arguments;
-        settings_arguments.push_back(string_type(TETENGO2_TEXT("path/to/exe")));
-        settings_type settings(settings_arguments);
-        const message_catalog_type message_catalog;
-        property_bar_type property_bar(window, settings, message_catalog);
-        model_type model;
+        window_type window{};
+        const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+        settings_type settings{ settings_arguments };
+        const message_catalog_type message_catalog{};
+        property_bar_type property_bar{ window, settings, message_catalog };
+        model_type model{};
         model.timetable().insert_train_kind(
             model.timetable().train_kinds().end(),
-            train_kind_type(
-                string_type(TETENGO2_TEXT("Express")),
-                string_type(TETENGO2_TEXT("Exp.")),
-                color_type(255, 0, 0),
+            train_kind_type{
+                string_type{ TETENGO2_TEXT("Express") },
+                string_type{ TETENGO2_TEXT("Exp.") },
+                color_type{ 255, 0, 0 },
                 train_kind_type::weight_type::bold,
                 train_kind_type::line_style_type::solid
-            )
+            }
         );
-        train_selected_type train_selected(property_bar, model, message_catalog);
+        train_selected_type train_selected{ property_bar, model, message_catalog };
 
-        const train_type train(
+        const train_type train{
             train_type::direction_type::down,
-            string_type(TETENGO2_TEXT("number")),
+            string_type{ TETENGO2_TEXT("number") },
             0,
-            string_type(TETENGO2_TEXT("name")),
-            string_type(TETENGO2_TEXT("name_number")),
-            string_type(TETENGO2_TEXT("note"))
-        );
+            string_type{ TETENGO2_TEXT("name") },
+            string_type{ TETENGO2_TEXT("name_number") },
+            string_type{ TETENGO2_TEXT("note") }
+        };
         train_selected(train, boost::none);
     }
 
@@ -180,26 +176,24 @@ BOOST_AUTO_TEST_SUITE(all_unselected)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        std::vector<string_type> settings_arguments;
-        settings_arguments.push_back(string_type(TETENGO2_TEXT("path/to/exe")));
-        settings_type settings(settings_arguments);
-        const message_catalog_type message_catalog;
-        property_bar_type property_bar(window, settings, message_catalog);
-        const all_unselected_type all_unselected(property_bar);
+        window_type window{};
+        const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+        settings_type settings{ settings_arguments };
+        const message_catalog_type message_catalog{};
+        property_bar_type property_bar{ window, settings, message_catalog };
+        const all_unselected_type all_unselected{ property_bar };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        std::vector<string_type> settings_arguments;
-        settings_arguments.push_back(string_type(TETENGO2_TEXT("path/to/exe")));
-        settings_type settings(settings_arguments);
-        const message_catalog_type message_catalog;
-        property_bar_type property_bar(window, settings, message_catalog);
-        all_unselected_type all_unselected(property_bar);
+        window_type window{};
+        const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+        settings_type settings{ settings_arguments };
+        const message_catalog_type message_catalog{};
+        property_bar_type property_bar{ window, settings, message_catalog };
+        all_unselected_type all_unselected{ property_bar };
 
         all_unselected();
     }

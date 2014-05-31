@@ -162,7 +162,7 @@ namespace bobura
             this->keyboard_observer_set().key_down().connect(
                 typename boost::mpl::at<
                     message_type_list_type, message::diagram_picture_box::type::keyboard_key_down
-                >::type(*this)
+                >::type{ *this }
             );
         }
 
@@ -229,13 +229,13 @@ namespace bobura
         )
         const
         {
-            const boost::rational<scroll_bar_size_type> change_rate(view_size.value() / previous_size);
-            const boost::rational<scroll_bar_size_type> half_page_size(page_size, 2);
+            const boost::rational<scroll_bar_size_type> change_rate{ view_size.value() / previous_size };
+            const boost::rational<scroll_bar_size_type> half_page_size{ page_size, 2 };
             if ((scroll_bar.position() + half_page_size) * change_rate < half_page_size)
                 return 0;
-            const boost::rational<scroll_bar_size_type> new_position(
+            const boost::rational<scroll_bar_size_type> new_position{
                 (scroll_bar.position() + half_page_size) * change_rate - half_page_size
-            );
+            };
             if (new_position > boost::rational<scroll_bar_size_type>(max))
                 return max;
             return boost::rational_cast<scroll_bar_size_type>(new_position);

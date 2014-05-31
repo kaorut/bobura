@@ -73,8 +73,8 @@ namespace bobura
         {
             auto title = document_name ? *document_name : m_message_catalog.get(TETENGO2_TEXT("Common:Untitled"));
             if (changed)
-                title += string_type(TETENGO2_TEXT(" *"));
-            title += string_type(TETENGO2_TEXT(" - "));
+                title += string_type{ TETENGO2_TEXT(" *") };
+            title += string_type{ TETENGO2_TEXT(" - ") };
             title += m_message_catalog.get(TETENGO2_TEXT("App:Bobura"));
 
             m_base.set_text(title);
@@ -174,14 +174,14 @@ namespace bobura
                     m_base, m_confirm_file_save, [this]() { this->save_settings(); }
                 )
             );
-            m_base.window_observer_set().destroyed().connect([](){ return message_loop_break_type()(0); });
+            m_base.window_observer_set().destroyed().connect([](){ return message_loop_break_type{}(0); });
         }
 
         void set_window_icon()
         {
             auto p_icon =
                 tetengo2::stdalt::make_unique<icon_type>(
-                    m_settings.image_directory_path() / string_type(TETENGO2_TEXT("bobura_app.ico"))
+                    m_settings.image_directory_path() / string_type{ TETENGO2_TEXT("bobura_app.ico") }
                 );
             m_base.set_icon(std::move(p_icon));
         }

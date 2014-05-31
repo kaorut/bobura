@@ -133,8 +133,8 @@ namespace bobura
 
                 auto p_icon =
                     tetengo2::stdalt::make_unique<icon_type>(
-                        m_settings.image_directory_path() / string_type(TETENGO2_TEXT("bobura_app.ico")),
-                        dimension_type(width_type(4), height_type(4))
+                        m_settings.image_directory_path() / string_type{ TETENGO2_TEXT("bobura_app.ico") },
+                        dimension_type{ width_type{ 4 }, height_type{ 4 } }
                     );
                 p_image->set_icon(std::move(p_icon));
 
@@ -144,12 +144,12 @@ namespace bobura
             std::unique_ptr<label_type> create_title_label()
             {
                 using char_type = typename string_type::value_type;
-                std::basic_ostringstream<char_type> title;
+                std::basic_ostringstream<char_type> title{};
                 title <<
                     boost::basic_format<char_type>(TETENGO2_TEXT("%s  %s %s")) %
                     m_message_catalog.get(TETENGO2_TEXT("App:Bobura")) %
                     m_message_catalog.get(TETENGO2_TEXT("Dialog:About:version")) %
-                    string_type(TETENGO2_TEXT("0.0.0"));
+                    string_type{ TETENGO2_TEXT("0.0.0") };
 
                 auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
 
@@ -164,7 +164,7 @@ namespace bobura
             {
                 auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
 
-                p_label->set_text(string_type(TETENGO2_TEXT("Copyright (C) 2007-2014 kaoru")));
+                p_label->set_text(string_type{ TETENGO2_TEXT("Copyright (C) 2007-2014 kaoru") });
                 auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
                 p_label->set_background(std::move(p_background));
 
@@ -175,7 +175,7 @@ namespace bobura
             {
                 auto p_label =tetengo2::stdalt::make_unique<link_label_type>(m_base);
 
-                p_label->set_text(string_type(TETENGO2_TEXT("http://www.tetengo.org/")));
+                p_label->set_text(string_type{ TETENGO2_TEXT("http://www.tetengo.org/") });
                 p_label->set_target(p_label->text());
 
                 return std::move(p_label);
@@ -189,7 +189,7 @@ namespace bobura
                 p_button->mouse_observer_set().clicked().connect(
                     typename boost::mpl::at<
                         about_dialog_message_type_list_type, message::about_dialog::type::ok_button_mouse_clicked
-                    >::type(m_base)
+                    >::type{ m_base }
                 );
 
                 return std::move(p_button);
@@ -197,27 +197,27 @@ namespace bobura
 
             void locate_controls()
             {
-                m_base.set_client_dimension(dimension_type(width_type(36), height_type(10)));
+                m_base.set_client_dimension(dimension_type{ width_type{ 36 }, height_type{ 10 } });
 
                 m_p_application_image->fit_to_content();
-                m_p_application_image->set_position(position_type(left_type(2), top_type(1)));
+                m_p_application_image->set_position(position_type{ left_type{ 2 }, top_type{ 1 } });
             
                 const auto label_left =
-                    left_type(2) +
+                    left_type{ 2 } +
                     tetengo2::gui::dimension<dimension_type>::width(m_p_application_image->dimension()) +
-                    left_type(1);
+                    left_type{ 1 };
 
                 m_p_title_label->fit_to_content();
-                m_p_title_label->set_position(position_type(label_left, top_type(1)));
+                m_p_title_label->set_position(position_type{ label_left, top_type{ 1 } });
 
                 m_p_copyright_label->fit_to_content();
-                m_p_copyright_label->set_position(position_type(label_left, top_type(3)));
+                m_p_copyright_label->set_position(position_type{ label_left, top_type{ 3 } });
 
                 m_p_link_label->fit_to_content();
-                m_p_link_label->set_position(position_type(label_left, top_type(5)));
+                m_p_link_label->set_position(position_type{ label_left, top_type{ 5 } });
 
-                m_p_ok_button->set_dimension(dimension_type(width_type(8), height_type(2)));
-                m_p_ok_button->set_position(position_type(left_type(26), top_type(7)));
+                m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_ok_button->set_position(position_type{ left_type{ 26 }, top_type{ 7 } });
             }
 
 

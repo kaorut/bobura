@@ -54,22 +54,22 @@ BOOST_AUTO_TEST_SUITE(diagram)
 
         const auto result =
             bobura::view::diagram::time_to_left(
-                time_type(1), time_span_type(2), 0, left_type(3), left_type(4), left_type(5)
+                time_type{ 1 }, time_span_type{ 2 }, 0, left_type{ 3 }, left_type{ 4 }, left_type{ 5 }
             );
 
-        BOOST_CHECK_EQUAL(result.value(), left_type::value_type(86435, 36));
+        BOOST_CHECK_EQUAL(result.value(), (left_type::value_type{ 86435, 36 }));
     }
 
     BOOST_AUTO_TEST_CASE(station_index_to_top)
     {
         BOOST_TEST_PASSPOINT();
 
-        std::vector<int> station_positions;
-        station_positions.push_back(0);
-        station_positions.push_back(42);
+        const std::vector<int> station_positions{ 0, 42 };
 
         const auto result =
-            bobura::view::diagram::station_index_to_top(station_positions, 1, top_type(2), top_type(3), top_type(4));
+            bobura::view::diagram::station_index_to_top(
+                station_positions, 1, top_type{ 2 }, top_type{ 3 }, top_type{ 4 }
+            );
 
         BOOST_CHECK_EQUAL(result.value(), 47);
     }
@@ -99,14 +99,14 @@ BOOST_AUTO_TEST_SUITE(diagram)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        const picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::both);
+        window_type window{};
+        const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
         const auto p_canvas = picture_box.create_canvas();
 
         bobura::view::diagram::draw_selectable_line(
             *p_canvas,
-            position_type(left_type(24), top_type(24)),
-            position_type(left_type(42), top_type(42)),
+            position_type{ left_type{ 24 }, top_type{ 24 } },
+            position_type{ left_type{ 42 }, top_type{ 42 } },
             false
         );
     }

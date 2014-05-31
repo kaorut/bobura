@@ -45,7 +45,7 @@ namespace bobura { namespace command
         {
             tetengo2::suppress_unused_variable_warning(model);
 
-            about_dialog_type(parent, m_message_catalog, m_settings).do_modal();
+            about_dialog_type{ parent, m_message_catalog, m_settings }.do_modal();
         }
 
 

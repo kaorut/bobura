@@ -51,9 +51,9 @@ BOOST_AUTO_TEST_SUITE(resized)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        side_bar_type side_bar(window);
-        map_box_type map_box(side_bar);
+        window_type window{};
+        side_bar_type side_bar{ window };
+        map_box_type map_box{ side_bar };
         const resized_type observer(side_bar, map_box);
     }
 
@@ -61,9 +61,9 @@ BOOST_AUTO_TEST_SUITE(resized)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        side_bar_type side_bar(window);
-        map_box_type map_box(side_bar);
+        window_type window{};
+        side_bar_type side_bar{ window };
+        map_box_type map_box{ side_bar };
         const resized_type observer(side_bar, map_box);
 
         observer();
@@ -78,22 +78,22 @@ BOOST_AUTO_TEST_SUITE(mouse_pressed)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        side_bar_type side_bar(window);
-        map_box_type map_box(side_bar);
-        const mouse_pressed_type observer(map_box);
+        window_type window{};
+        side_bar_type side_bar{ window };
+        map_box_type map_box{ side_bar };
+        const mouse_pressed_type observer{ map_box };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        side_bar_type side_bar(window);
-        map_box_type map_box(side_bar);
-        const mouse_pressed_type observer(map_box);
+        window_type window{};
+        side_bar_type side_bar{ window };
+        map_box_type map_box{ side_bar };
+        const mouse_pressed_type observer{ map_box };
 
-        observer(mouse_button_type::left, position_type(left_type(42), top_type(24)), false, false, false);
+        observer(mouse_button_type::left, position_type{ left_type{ 42 }, top_type{ 24 } }, false, false, false);
     }
 
 

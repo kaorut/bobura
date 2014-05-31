@@ -34,7 +34,7 @@ namespace bobura { namespace command
         {
             tetengo2::suppress_unused_variable_warning(model, parent);
 
-            shell_type::instance().execute(string_type(TETENGO2_TEXT("http://www.tetengo.org/")));
+            shell_type::instance().execute(string_type{ TETENGO2_TEXT("http://www.tetengo.org/") });
         }
 
 

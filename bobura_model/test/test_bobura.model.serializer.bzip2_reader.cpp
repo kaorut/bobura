@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_SUITE(bzip2_reader)
         BOOST_TEST_PASSPOINT();
 
         auto p_reader = tetengo2::stdalt::make_unique<concrete_reader>();
-        const bzip2_reader_type bzip2_reader(std::move(p_reader));
+        const bzip2_reader_type bzip2_reader{ std::move(p_reader) };
     }
 
     BOOST_AUTO_TEST_CASE(selects)
@@ -92,9 +92,9 @@ BOOST_AUTO_TEST_SUITE(bzip2_reader)
 
         {
             auto p_reader = tetengo2::stdalt::make_unique<concrete_reader>();
-            bzip2_reader_type bzip2_reader(std::move(p_reader));
+            bzip2_reader_type bzip2_reader{ std::move(p_reader) };
 
-            std::istringstream input_stream("BZ");
+            std::istringstream input_stream{ "BZ" };
             BOOST_CHECK(
                 bzip2_reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -104,9 +104,9 @@ BOOST_AUTO_TEST_SUITE(bzip2_reader)
         }
         {
             auto p_reader = tetengo2::stdalt::make_unique<concrete_reader>();
-            bzip2_reader_type bzip2_reader(std::move(p_reader));
+            bzip2_reader_type bzip2_reader{ std::move(p_reader) };
 
-            std::istringstream input_stream("AZ");
+            std::istringstream input_stream{ "AZ" };
             BOOST_CHECK(
                 !bzip2_reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -121,9 +121,9 @@ BOOST_AUTO_TEST_SUITE(bzip2_reader)
         BOOST_TEST_PASSPOINT();
 
         auto p_reader = tetengo2::stdalt::make_unique<concrete_reader>();
-        bzip2_reader_type bzip2_reader(std::move(p_reader));
+        bzip2_reader_type bzip2_reader{ std::move(p_reader) };
 
-        std::istringstream input_stream("BZ");
+        std::istringstream input_stream{ "BZ" };
         auto error = error_type::none;
         const auto p_timetable =
             bzip2_reader.read(

@@ -40,22 +40,22 @@ BOOST_AUTO_TEST_SUITE(confirm_file_save)
     {
         BOOST_TEST_PASSPOINT();
 
-        model_type model;
-        const message_catalog_type message_catalog;
-        const save_to_file_type save_to_file(false, message_catalog);
-        const confirm_file_save_type confirm_file_save(model, save_to_file, message_catalog);
+        model_type model{};
+        const message_catalog_type message_catalog{};
+        const save_to_file_type save_to_file{ false, message_catalog };
+        const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        model_type model;
-        const message_catalog_type message_catalog;
-        const save_to_file_type save_to_file(false, message_catalog);
-        const confirm_file_save_type confirm_file_save(model, save_to_file, message_catalog);
+        model_type model{};
+        const message_catalog_type message_catalog{};
+        const save_to_file_type save_to_file{ false, message_catalog };
+        const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
 
-        window_type window;
+        window_type window{};
         confirm_file_save(window);
     }
 

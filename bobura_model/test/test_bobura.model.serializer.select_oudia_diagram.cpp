@@ -66,7 +66,7 @@ namespace
         const string_type& file_name()
         const
         {
-            static const string_type singleton;
+            static const string_type singleton{};
             return singleton;
         }
 
@@ -76,7 +76,7 @@ namespace
         const std::vector<string_type>& names()
         const
         {
-            static const std::vector<string_type> singleton;
+            static const std::vector<string_type> singleton{};
             return singleton;
         }
 
@@ -111,22 +111,22 @@ BOOST_AUTO_TEST_SUITE(select_oudia_diagram)
     {
         BOOST_TEST_PASSPOINT();
 
-        abstract_window_type parent;
-        string_type file_name(TETENGO2_TEXT("hoge"));
-        const message_catalog_type message_catalog;
-        const select_oudia_diagram_type select_oudia_diagram(parent, std::move(file_name), message_catalog);
+        abstract_window_type parent{};
+        string_type file_name{ TETENGO2_TEXT("hoge") };
+        const message_catalog_type message_catalog{};
+        const select_oudia_diagram_type select_oudia_diagram{ parent, std::move(file_name), message_catalog };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        abstract_window_type parent;
-        string_type file_name(TETENGO2_TEXT("hoge"));
-        const message_catalog_type message_catalog;
-        const select_oudia_diagram_type select_oudia_diagram(parent, std::move(file_name), message_catalog);
+        abstract_window_type parent{};
+        string_type file_name{ TETENGO2_TEXT("hoge") };
+        const message_catalog_type message_catalog{};
+        const select_oudia_diagram_type select_oudia_diagram{ parent, std::move(file_name), message_catalog };
 
-        std::vector<string_type> diagram_names;
+        std::vector<string_type> diagram_names{};
         const auto selected = select_oudia_diagram(diagram_names.begin(), diagram_names.end());
 
         BOOST_CHECK(selected == diagram_names.end());

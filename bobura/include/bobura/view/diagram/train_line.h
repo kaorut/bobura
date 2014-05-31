@@ -184,7 +184,7 @@ namespace bobura { namespace view { namespace diagram
             std::basic_ostringstream<typename string_type::value_type> name;
 
             name << train.number();
-            name << string_type(TETENGO2_TEXT(" "));
+            name << string_type{ TETENGO2_TEXT(" ") };
             if (train.name_number().empty())
             {
                 name << train.name();
@@ -232,21 +232,21 @@ namespace bobura { namespace view { namespace diagram
                 )
                 {
                     return
-                        position_type(
+                        {
                             tetengo2::gui::position<position_type>::left(departure),
                             tetengo2::gui::position<position_type>::top(departure) - text_height
-                        );
+                        };
                 }
                 else
                 {
                     const auto left_diff = boost::rational_cast<double>(text_height.value()) / std::sin(angle);
                     const auto left =
                         tetengo2::gui::position<position_type>::left(departure) +
-                        typename left_type::value_type(
+                        typename left_type::value_type{
                             static_cast<typename left_type::value_type::int_type>(left_diff * 0x10000), 0x10000
-                        );
+                        };
 
-                    return position_type(left, tetengo2::gui::position<position_type>::top(departure));
+                    return { left, tetengo2::gui::position<position_type>::top(departure) };
                 }
             }
             else
@@ -254,18 +254,18 @@ namespace bobura { namespace view { namespace diagram
                 const auto left_diff = boost::rational_cast<double>(text_height.value()) * std::sin(angle);
                 const auto left =
                     tetengo2::gui::position<position_type>::left(departure) +
-                    typename left_type::value_type(
+                    typename left_type::value_type{
                         static_cast<typename left_type::value_type::int_type>(left_diff * 0x10000), 0x10000
-                    );
+                    };
 
                 const auto top_diff = boost::rational_cast<double>(text_height.value()) * std::cos(angle);
                 const auto top =
                     tetengo2::gui::position<position_type>::top(departure) -
-                    typename top_type::value_type(
+                    typename top_type::value_type{
                         static_cast<typename top_type::value_type::int_type>(top_diff * 0x10000), 0x10000
-                    );
+                    };
 
-                return position_type(left, top);
+                return { left, top };
             }
         }
 
@@ -293,23 +293,25 @@ namespace bobura { namespace view { namespace diagram
         static geo_vector_type to_geo_vector(const position_type& position)
         {
             return
-                geo_vector_type(
+                {
                     boost::rational_cast<double>(tetengo2::gui::position<position_type>::left(position).value()),
                     boost::rational_cast<double>(tetengo2::gui::position<position_type>::top(position).value())
-                );
+                };
         }
 
         static size_type to_size(const double value)
         {
             return
-                size_type(
-                    typename size_type::value_type(typename size_type::value_type::int_type(value * 256.0), 256)
-                );
+                size_type{
+                    typename size_type::value_type{
+                        static_cast<typename size_type::value_type::int_type>(value * 256.0), 256
+                    }
+                };
         }
 
         static geo_vector_type geo_minus(const geo_vector_type& v1, const geo_vector_type& v2)
         {
-            return geo_vector_type(v1.first - v2.first, v1.second - v2.second);
+            return { v1.first - v2.first, v1.second - v2.second };
         }
 
         static double geo_abs(const geo_vector_type& v)
@@ -607,7 +609,7 @@ namespace bobura { namespace view { namespace diagram
             const message_catalog_type&   message_catalog
         )
         {
-            std::vector<train_line_fragment_type> fragments;
+            std::vector<train_line_fragment_type> fragments{};
 
             auto train_name_drawn = false;
             if (train.direction() == direction_type::down)
@@ -750,7 +752,7 @@ namespace bobura { namespace view { namespace diagram
                 std::accumulate(
                     station_intervals.begin() + upper_stop_index,
                     station_intervals.begin() + lower_stop_index,
-                    time_span_type(0)
+                    time_span_type{ 0 }
                 );
 
             return departure_interval < travel_time ? to_stop.departure() : from_departure + travel_time;
@@ -874,9 +876,9 @@ namespace bobura { namespace view { namespace diagram
             const auto vertical_scroll_bar_position =
                 tetengo2::gui::position<position_type>::top(scroll_bar_position);
 
-            const auto horizontal_scale_left = left_type::from(width_type(horizontal_scale));
+            const auto horizontal_scale_left = left_type::from(width_type{ horizontal_scale });
             const auto time_header_bottom = top_type::from(time_header_height);
-            position_type departure(
+            position_type departure{
                 time_to_left(
                     departure_time,
                     time_offset,
@@ -892,8 +894,8 @@ namespace bobura { namespace view { namespace diagram
                     header_bottom,
                     time_header_bottom
                 )
-            );
-            position_type arrival(
+            };
+            position_type arrival{
                 time_to_left(
                     arrival_time,
                     time_offset,
@@ -902,14 +904,14 @@ namespace bobura { namespace view { namespace diagram
                     station_header_right,
                     horizontal_scale_left
                 ),
-                station_index_to_top(
+                    station_index_to_top(
                     station_positions,
                     arrival_stop_index,
                     vertical_scroll_bar_position,
                     header_bottom,
                     time_header_bottom
                 )
-            );
+            };
             
             const auto left_bound = tetengo2::gui::position<position_type>::left(departure);
             if (left_bound > left_type::from(tetengo2::gui::dimension<dimension_type>::width(canvas_dimension)))
@@ -930,16 +932,14 @@ namespace bobura { namespace view { namespace diagram
             if (lower_bound < header_bottom + time_header_bottom)
                 return;
 
-            fragments.push_back(
-                train_line_fragment_type(
-                    train,
-                    departure_stop_index,
-                    selection,
-                    std::move(departure),
-                    std::move(arrival),
-                    draw_train_name,
-                    message_catalog
-                )
+            fragments.emplace_back(
+                train,
+                departure_stop_index,
+                selection,
+                std::move(departure),
+                std::move(arrival),
+                draw_train_name,
+                message_catalog
             );
         }
 
@@ -1193,7 +1193,7 @@ namespace bobura { namespace view { namespace diagram
             const message_catalog_type&   message_catalog
         )
         {
-            std::vector<train_line_type> train_lines;
+            std::vector<train_line_type> train_lines{};
 
             make_train_lines_impl(
                 model.timetable().down_trains(),
@@ -1250,22 +1250,20 @@ namespace bobura { namespace view { namespace diagram
         {
             for (const auto& train: trains)
             {
-                train_lines.push_back(
-                    train_line_type(
-                        train,
-                        train_kinds[train.kind_index()],
-                        time_offset,
-                        selection,
-                        canvas_dimension,
-                        scroll_bar_position,
-                        station_header_right,
-                        header_bottom,
-                        time_header_height,
-                        horizontal_scale,
-                        station_intervals,
-                        station_positions,
-                        message_catalog
-                    )
+                train_lines.emplace_back(
+                    train,
+                    train_kinds[train.kind_index()],
+                    time_offset,
+                    selection,
+                    canvas_dimension,
+                    scroll_bar_position,
+                    station_header_right,
+                    header_bottom,
+                    time_header_height,
+                    horizontal_scale,
+                    station_intervals,
+                    station_positions,
+                    message_catalog
                 );
             }
         }

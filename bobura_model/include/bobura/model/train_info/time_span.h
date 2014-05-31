@@ -170,7 +170,7 @@ namespace bobura { namespace model { namespace train_info
         */
         time_span& operator+=(const time_span& another)
         {
-            time_span temp(*this);
+            time_span temp{ *this };
 
             temp.m_seconds += another.m_seconds;
 
@@ -187,7 +187,7 @@ namespace bobura { namespace model { namespace train_info
         */
         time_span& operator-=(const time_span& another)
         {
-            time_span temp(*this);
+            time_span temp{ *this };
 
             temp.m_seconds -= another.m_seconds;
 
@@ -246,7 +246,7 @@ namespace bobura { namespace model { namespace train_info
             const tick_type minutes = m_seconds / 60 - hours * 60;
             const tick_type seconds = m_seconds - hours * 60 * 60 - minutes * 60;
 
-            return hours_minutes_seconds_type(hours, minutes, seconds);
+            return hours_minutes_seconds_type{ hours, minutes, seconds };
         }
 
 

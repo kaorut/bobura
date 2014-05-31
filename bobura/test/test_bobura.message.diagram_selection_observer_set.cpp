@@ -41,12 +41,12 @@ BOOST_AUTO_TEST_SUITE(diagram_selection_observer_set)
         BOOST_TEST_PASSPOINT();
 
         {
-            const observer_set_type observer_set;
+            const observer_set_type observer_set{};
 
             observer_set.station_selected();
         }
         {
-            observer_set_type observer_set;
+            observer_set_type observer_set{};
 
             observer_set.station_selected();
         }
@@ -57,12 +57,12 @@ BOOST_AUTO_TEST_SUITE(diagram_selection_observer_set)
         BOOST_TEST_PASSPOINT();
 
         {
-            const observer_set_type observer_set;
+            const observer_set_type observer_set{};
 
             observer_set.train_selected();
         }
         {
-            observer_set_type observer_set;
+            observer_set_type observer_set{};
 
             observer_set.train_selected();
         }
@@ -73,12 +73,12 @@ BOOST_AUTO_TEST_SUITE(diagram_selection_observer_set)
         BOOST_TEST_PASSPOINT();
 
         {
-            const observer_set_type observer_set;
+            const observer_set_type observer_set{};
 
             observer_set.all_unselected();
         }
         {
-            observer_set_type observer_set;
+            observer_set_type observer_set{};
 
             observer_set.all_unselected();
         }

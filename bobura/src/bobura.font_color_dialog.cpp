@@ -71,7 +71,7 @@ namespace bobura
             :
             m_base(base),
             m_message_catalog(message_catalog),
-            m_font_color_list(9, internal_font_color_type(boost::none, boost::none)),
+            m_font_color_list(9, internal_font_color_type{ boost::none, boost::none }),
             m_current_category_index(),
             m_p_category_label(),
             m_p_category_list_box(),
@@ -97,7 +97,7 @@ namespace bobura
 
             void set_background(const color_type& color)
             {
-                m_font_color_list[0] = internal_font_color_type(boost::none, boost::make_optional(color));
+                m_font_color_list[0] = internal_font_color_type{ boost::none, boost::make_optional(color) };
             }
 
             font_color_type company_line_name()
@@ -109,7 +109,7 @@ namespace bobura
             void set_company_line_name(const font_type& font, const color_type& color)
             {
                 m_font_color_list[1] =
-                    internal_font_color_type(boost::make_optional(font), boost::make_optional(color));
+                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
             }
 
             font_color_type note()
@@ -121,7 +121,7 @@ namespace bobura
             void set_note(const font_type& font, const color_type& color)
             {
                 m_font_color_list[2] =
-                    internal_font_color_type(boost::make_optional(font), boost::make_optional(color));
+                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
             }
 
             font_color_type time_line()
@@ -133,7 +133,7 @@ namespace bobura
             void set_time_line(const font_type& font, const color_type& color)
             {
                 m_font_color_list[3] =
-                    internal_font_color_type(boost::make_optional(font), boost::make_optional(color));
+                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
             }
 
             font_color_type local_station()
@@ -145,7 +145,7 @@ namespace bobura
             void set_local_station(const font_type& font, const color_type& color)
             {
                 m_font_color_list[4] =
-                    internal_font_color_type(boost::make_optional(font), boost::make_optional(color));
+                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
             }
 
             font_color_type principal_station()
@@ -157,7 +157,7 @@ namespace bobura
             void set_principal_station(const font_type& font, const color_type& color)
             {
                 m_font_color_list[5] =
-                    internal_font_color_type(boost::make_optional(font), boost::make_optional(color));
+                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
             }
 
             font_color_type local_terminal_station()
@@ -169,7 +169,7 @@ namespace bobura
             void set_local_terminal_station(const font_type& font, const color_type& color)
             {
                 m_font_color_list[6] =
-                    internal_font_color_type(boost::make_optional(font), boost::make_optional(color));
+                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
             }
 
             font_color_type principal_terminal_station()
@@ -181,7 +181,7 @@ namespace bobura
             void set_principal_terminal_station(const font_type& font, const color_type& color)
             {
                 m_font_color_list[7] =
-                    internal_font_color_type(boost::make_optional(font), boost::make_optional(color));
+                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
             }
 
             const font_type& train_name()
@@ -192,7 +192,7 @@ namespace bobura
 
             void set_train_name(const font_type& font)
             {
-                m_font_color_list[8] = internal_font_color_type(boost::make_optional(font), boost::none);
+                m_font_color_list[8] = internal_font_color_type{ boost::make_optional(font), boost::none };
             }
 
             void do_modal_impl()
@@ -269,7 +269,7 @@ namespace bobura
                 if (!internal_font_color.first || !internal_font_color.second)
                     BOOST_THROW_EXCEPTION(std::logic_error("The font and/or the color have not been set."));
 
-                return font_color_type(*internal_font_color.first, *internal_font_color.second);
+                return font_color_type{ *internal_font_color.first, *internal_font_color.second };
             }
 
 
@@ -345,7 +345,7 @@ namespace bobura
                     typename boost::mpl::at<
                         font_color_dialog_message_type_list_type,
                         message::font_color_dialog::type::category_list_box_selection_changed
-                    >::type(m_current_category_index, *p_list_box, [this]() { this->update(); })
+                    >::type{ m_current_category_index, *p_list_box, [this]() { this->update(); } }
                 );
 
                 return std::move(p_list_box);
@@ -421,17 +421,17 @@ namespace bobura
                         m_base, list_box_type::scroll_bar_style_type::none
                     );
 
-                p_picture_box->set_dimension(dimension_type(width_type(24), height_type(8)));
+                p_picture_box->set_dimension(dimension_type{ width_type{ 24 }, height_type{ 8 } });
                 p_picture_box->fast_paint_observer_set().paint().connect(
                     typename boost::mpl::at<
                         font_color_dialog_message_type_list_type,
                         message::font_color_dialog::type::sample_picture_box_paint
-                    >::type(
+                    >::type{
                         m_font_color_list,
                         m_current_category_index,
                         p_picture_box->client_dimension(),
                         m_message_catalog
-                    )
+                    }
                 );
 
                 return std::move(p_picture_box);
@@ -446,7 +446,7 @@ namespace bobura
                     typename boost::mpl::at<
                         font_color_dialog_message_type_list_type,
                         message::font_color_dialog::type::ok_button_mouse_clicked
-                    >::type(m_base)
+                    >::type{ m_base }
                 );
 
                 return std::move(p_button);
@@ -461,7 +461,7 @@ namespace bobura
                     typename boost::mpl::at<
                         font_color_dialog_message_type_list_type,
                         message::font_color_dialog::type::cancel_button_mouse_clicked
-                    >::type(m_base)
+                    >::type{ m_base }
                 );
 
                 return std::move(p_button);
@@ -469,53 +469,53 @@ namespace bobura
 
             void locate_controls()
             {
-                m_base.set_client_dimension(dimension_type(width_type(46), height_type(22)));
+                m_base.set_client_dimension(dimension_type{ width_type{ 46 }, height_type{ 22 } });
 
-                const left_type category_label_left(2);
+                const left_type category_label_left{ 2 };
 
                 m_p_category_label->fit_to_content();
-                m_p_category_label->set_position(position_type(category_label_left, top_type(1)));
+                m_p_category_label->set_position(position_type{ category_label_left, top_type{ 1 } });
 
-                m_p_category_list_box->set_dimension(dimension_type(width_type(16), height_type(16)));
+                m_p_category_list_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 16 } });
                 m_p_category_list_box->set_position(
-                    position_type(
+                    position_type{
                         category_label_left,
                         tetengo2::gui::position<position_type>::top(m_p_category_label->position()) +
-                            top_type::from(
-                                tetengo2::gui::dimension<dimension_type>::height(m_p_category_label->dimension())
-                            )
-                    )
+                        top_type::from(
+                            tetengo2::gui::dimension<dimension_type>::height(m_p_category_label->dimension())
+                        )
+                    }
                 );
 
-                const left_type font_button_left(20);
+                const left_type font_button_left{ 20 };
             
-                m_p_font_button->set_dimension(dimension_type(width_type(8), height_type(2)));
-                m_p_font_button->set_position(position_type(font_button_left, top_type(2)));
+                m_p_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_font_button->set_position(position_type{ font_button_left, top_type{ 2 } });
 
-                m_p_font_text_box->set_dimension(dimension_type(width_type(16), height_type(2)));
-                m_p_font_text_box->set_position(position_type(font_button_left + left_type(8), top_type(2)));
+                m_p_font_text_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 2 } });
+                m_p_font_text_box->set_position(position_type{ font_button_left + left_type{ 8 }, top_type{ 2 } });
 
-                m_p_color_button->set_dimension(dimension_type(width_type(8), height_type(2)));
-                m_p_color_button->set_position(position_type(font_button_left, top_type(5)));
+                m_p_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_color_button->set_position(position_type{ font_button_left, top_type{ 5 } });
 
                 m_p_sample_label->fit_to_content();
-                m_p_sample_label->set_position(position_type(font_button_left, top_type(8)));
+                m_p_sample_label->set_position(position_type{ font_button_left, top_type{ 8 } });
 
                 m_p_sample_picture_box->set_position(
-                    position_type(
+                    position_type{
                         font_button_left,
                         tetengo2::gui::position<position_type>::top(m_p_sample_label->position()) +
-                            top_type::from(
-                                tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
-                            )
-                    )
+                        top_type::from(
+                            tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
+                        )
+                    }
                 );
 
-                m_p_ok_button->set_dimension(dimension_type(width_type(8), height_type(2)));
-                m_p_ok_button->set_position(position_type(left_type(27), top_type(19)));
+                m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_ok_button->set_position(position_type{ left_type{ 27 }, top_type{ 19 } });
 
-                m_p_cancel_button->set_dimension(dimension_type(width_type(8), height_type(2)));
-                m_p_cancel_button->set_position(position_type(left_type(36), top_type(19)));
+                m_p_cancel_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_cancel_button->set_position(position_type{ left_type{ 36 }, top_type{ 19 } });
             }
 
             void insert_category_list_box_values()
@@ -574,15 +574,15 @@ namespace bobura
             const
             {
                 if (!m_current_category_index)
-                    return string_type();
+                    return {};
 
                 const auto& font = m_font_color_list[*m_current_category_index].first;
                 if (!font)
-                    return string_type();
+                    return {};
 
                 std::basic_ostringstream<typename string_type::value_type> stream;
                 stream <<
-                    boost::basic_format<typename string_type::value_type>(string_type(TETENGO2_TEXT("%s, %dpt"))) %
+                    boost::basic_format<typename string_type::value_type>(string_type{ TETENGO2_TEXT("%s, %dpt") }) %
                     font->family() %
                     boost::rational_cast<int>(point_size_type::from_pixels(font->size()).value());
 

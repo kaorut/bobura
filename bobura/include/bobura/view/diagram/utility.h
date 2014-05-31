@@ -47,7 +47,7 @@ namespace bobura { namespace view { namespace diagram
         left_value += previous_or_next_day * TimeSpan::seconds_of_whole_day();
         left_value /= 180;
         left_value *= horizontal_scale.value();
-        return Left(left_value) - horizontal_scroll_bar_position + station_header_right;
+        return Left{ left_value } -horizontal_scroll_bar_position + station_header_right;
     }
 
     /*!
@@ -88,7 +88,7 @@ namespace bobura { namespace view { namespace diagram
     template <typename Size>
     Size normal_line_width()
     {
-        return Size(typename Size::value_type(1, 12));
+        return Size{ typename Size::value_type{ 1, 12 } };
     }
 
     /*!
@@ -101,7 +101,7 @@ namespace bobura { namespace view { namespace diagram
     template <typename Size>
     Size bold_line_width()
     {
-        return Size(typename Size::value_type(1, 6));
+        return Size{ typename Size::value_type{ 1, 6 } };
     }
 
     /*!
@@ -114,7 +114,7 @@ namespace bobura { namespace view { namespace diagram
     template <typename Size>
     Size selected_line_margin()
     {
-        return Size(typename Size::value_type(1, 3));
+        return Size{ typename Size::value_type{ 1, 3 } };
     }
 
     /*!
@@ -142,7 +142,7 @@ namespace bobura { namespace view { namespace diagram
             auto original_line_width = canvas.line_width();
 
             canvas.set_color(
-                color_type(original_color.red(), original_color.green(), original_color.blue(), 0x30)
+                color_type{ original_color.red(), original_color.green(), original_color.blue(), 0x30 }
             );
             canvas.set_line_style(line_style_type::solid);
 

@@ -46,7 +46,7 @@ namespace
         std::vector<char> info(length, '\0');
         ::GetLocaleInfoA(id, type, info.data(), length);
 
-        return std::string(info.data());
+        return info.data();
     }
 
     std::string ui_locale_name()
@@ -65,7 +65,7 @@ namespace
             tetengo2::stdalt::make_unique<messages_facet_type>(
                 message_directory_path, std::locale(ui_locale_name().c_str())
             );
-        const std::locale global_locale(std::locale(""), p_messages_facet.release());
+        const std::locale global_locale{ std::locale(""), p_messages_facet.release() };
 
         std::locale::global(global_locale);
     }
@@ -103,7 +103,7 @@ TETENGO2_STDALT_NOEXCEPT
 
     try
     {
-        settings_type settings(boost::program_options::split_winmain(::GetCommandLineW()));
+        settings_type settings{ boost::program_options::split_winmain(::GetCommandLineW()) };
 
         set_locale(settings.message_directory_path());
 
@@ -111,17 +111,17 @@ TETENGO2_STDALT_NOEXCEPT
     }
     catch (const boost::exception& e)
     {
-        alert_type()(e);
+        alert_type{}(e);
         return 1;
     }
     catch (const std::exception& e)
     {
-        alert_type()(e);
+        alert_type{}(e);
         return 1;
     }
     catch (...)
     {
-        alert_type()();
+        alert_type{}();
         return 2;
     }
 }

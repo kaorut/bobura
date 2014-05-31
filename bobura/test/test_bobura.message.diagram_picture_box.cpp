@@ -117,26 +117,26 @@ BOOST_AUTO_TEST_SUITE(mouse_pressed)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::vertical);
-        const model_type model;
-        const message_catalog_type message_catalog;
-        view_type view(model, message_catalog);
-        const mouse_pressed_type mouse_pressed(picture_box, set_mouse_capture, view);
+        window_type window{};
+        picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::vertical };
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        view_type view{ model, message_catalog };
+        const mouse_pressed_type mouse_pressed{ picture_box, set_mouse_capture, view };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::vertical);
-        const model_type model;
-        const message_catalog_type message_catalog;
-        view_type view(model, message_catalog);
-        const mouse_pressed_type mouse_pressed(picture_box, set_mouse_capture, view);
+        window_type window{};
+        picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::vertical };
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        view_type view{ model, message_catalog };
+        const mouse_pressed_type mouse_pressed{ picture_box, set_mouse_capture, view };
 
-        mouse_pressed(mouse_button_type::left, position_type(left_type(24), top_type(42)), false, false, false);
+        mouse_pressed(mouse_button_type::left, position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
     }
 
 
@@ -148,22 +148,22 @@ BOOST_AUTO_TEST_SUITE(mouse_released)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        const message_catalog_type message_catalog;
-        view_type view(model, message_catalog);
-        const mouse_released_type mouse_released(release_mouse_capture, view);
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        view_type view{ model, message_catalog };
+        const mouse_released_type mouse_released{ release_mouse_capture, view };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        const model_type model;
-        const message_catalog_type message_catalog;
-        view_type view(model, message_catalog);
-        const mouse_released_type mouse_released(release_mouse_capture, view);
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        view_type view{ model, message_catalog };
+        const mouse_released_type mouse_released{ release_mouse_capture, view };
 
-        mouse_released(mouse_button_type::left, position_type(left_type(24), top_type(42)), false, false, false);
+        mouse_released(mouse_button_type::left, position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
     }
 
 
@@ -175,26 +175,26 @@ BOOST_AUTO_TEST_SUITE(mouse_moved)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::vertical);
-        const model_type model;
-        const message_catalog_type message_catalog;
-        const view_type view(model, message_catalog);
-        const mouse_moved_type mouse_moved(picture_box, view);
+        window_type window{};
+        picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::vertical };
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        const view_type view{ model, message_catalog };
+        const mouse_moved_type mouse_moved{ picture_box, view };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::vertical);
-        const model_type model;
-        const message_catalog_type message_catalog;
-        const view_type view(model, message_catalog);
-        const mouse_moved_type mouse_moved(picture_box, view);
+        window_type window{};
+        picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::vertical };
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        const view_type view{ model, message_catalog };
+        const mouse_moved_type mouse_moved{ picture_box, view };
 
-        mouse_moved(position_type(left_type(24), top_type(42)), false, false, false);
+        mouse_moved(position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
     }
 
 
@@ -206,24 +206,24 @@ BOOST_AUTO_TEST_SUITE(mouse_wheeled)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::vertical);
-        const model_type model;
-        const message_catalog_type message_catalog;
-        view_type view(model, message_catalog);
-        const mouse_wheeled_type mouse_wheeled(picture_box, view);
+        window_type window{};
+        picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::vertical };
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        view_type view{ model, message_catalog };
+        const mouse_wheeled_type mouse_wheeled{ picture_box, view };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::vertical);
-        const model_type model;
-        const message_catalog_type message_catalog;
-        view_type view(model, message_catalog);
-        const mouse_wheeled_type mouse_wheeled(picture_box, view);
+        window_type window{};
+        picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::vertical };
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        view_type view{ model, message_catalog };
+        const mouse_wheeled_type mouse_wheeled{ picture_box, view };
 
         mouse_wheeled(42, mouse_observer_set_type::direction_type::vertical, false, false, false);
     }
@@ -237,18 +237,18 @@ BOOST_AUTO_TEST_SUITE(keyboard_key_down)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::none);
-        const keyboard_key_down_type keyboard_key_down(picture_box);
+        window_type window{};
+        picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::none };
+        const keyboard_key_down_type keyboard_key_down{ picture_box };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::none);
-        const keyboard_key_down_type keyboard_key_down(picture_box);
+        window_type window{};
+        picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::none };
+        const keyboard_key_down_type keyboard_key_down{ picture_box };
 
         keyboard_key_down(virtual_key_type::char_a(), false, false, false);
     }
@@ -262,24 +262,24 @@ BOOST_AUTO_TEST_SUITE(paint_paint)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        const picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::none);
-        const model_type model;
-        const message_catalog_type message_catalog;
-        view_type view(model, message_catalog);
-        const paint_paint_type paint(picture_box, view);
+        window_type window{};
+        const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::none };
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        view_type view{ model, message_catalog };
+        const paint_paint_type paint{ picture_box, view };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        const picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::both);
-        const model_type model;
-        const message_catalog_type message_catalog;
-        view_type view(model, message_catalog);
-        const paint_paint_type paint(picture_box, view);
+        window_type window{};
+        const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        view_type view{ model, message_catalog };
+        const paint_paint_type paint{ picture_box, view };
 
         auto p_canvas = picture_box.create_canvas();
         paint(*p_canvas);
@@ -294,24 +294,24 @@ BOOST_AUTO_TEST_SUITE(scroll_bar_scrolled)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        const picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::both);
-        const model_type model;
-        const message_catalog_type message_catalog;
-        view_type view(model, message_catalog);
-        const scroll_bar_scrolled_type scrolled(picture_box, view);
+        window_type window{};
+        const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        view_type view{ model, message_catalog };
+        const scroll_bar_scrolled_type scrolled{ picture_box, view };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
 
-        window_type window;
-        const picture_box_type picture_box(window, picture_box_type::scroll_bar_style_type::both);
-        const model_type model;
-        const message_catalog_type message_catalog;
-        view_type view(model, message_catalog);
-        const scroll_bar_scrolled_type scrolled(picture_box, view);
+        window_type window{};
+        const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        view_type view{ model, message_catalog };
+        const scroll_bar_scrolled_type scrolled{ picture_box, view };
 
         scrolled(42);
     }

@@ -44,7 +44,7 @@ namespace bobura { namespace command
         void execute(model_type& model, abstract_window_type& parent)
         const
         {
-            font_color_dialog_type dialog(parent, m_message_catalog);
+            font_color_dialog_type dialog{ parent, m_message_catalog };
 
             const auto& font_color_set = model.timetable().font_color_set();
             dialog.set_background(font_color_set.background());
@@ -70,19 +70,19 @@ namespace bobura { namespace command
             if (dialog.result() != dialog_base_type::result_type::accepted)
                 return;
         
-            font_color_set_type new_font_color_set(
+            font_color_set_type new_font_color_set{
                 dialog.background(),
-                font_color_type(dialog.company_line_name().first, dialog.company_line_name().second),
-                font_color_type(dialog.note().first, dialog.note().second),
-                font_color_type(dialog.time_line().first, dialog.time_line().second),
-                font_color_type(dialog.local_station().first, dialog.local_station().second),
-                font_color_type(dialog.principal_station().first, dialog.principal_station().second),
-                font_color_type(dialog.local_terminal_station().first, dialog.local_terminal_station().second),
-                font_color_type(
+                font_color_type{ dialog.company_line_name().first, dialog.company_line_name().second },
+                font_color_type{ dialog.note().first, dialog.note().second },
+                font_color_type{ dialog.time_line().first, dialog.time_line().second },
+                font_color_type{ dialog.local_station().first, dialog.local_station().second },
+                font_color_type{ dialog.principal_station().first, dialog.principal_station().second },
+                font_color_type{ dialog.local_terminal_station().first, dialog.local_terminal_station().second },
+                font_color_type{
                     dialog.principal_terminal_station().first, dialog.principal_terminal_station().second
-                ),
+                },
                 dialog.train_name()
-            );
+            };
             model.timetable().set_font_color_set(std::move(new_font_color_set));
         }
 

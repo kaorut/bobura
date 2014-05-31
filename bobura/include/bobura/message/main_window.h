@@ -343,20 +343,20 @@ namespace bobura { namespace message { namespace main_window
             const auto& window_height = tetengo2::gui::dimension<dimension_type>::height(window_dimension);
             const auto& property_bar_width = m_property_bar.preferred_width();
             {
-                const position_type position(
-                    left_type::from(window_width) - left_type::from(property_bar_width), top_type(0)
-                );
-                const dimension_type dimension(property_bar_width, window_height);
+                const position_type position{
+                    left_type::from(window_width) - left_type::from(property_bar_width), top_type{ 0 }
+                };
+                const dimension_type dimension{ property_bar_width, window_height };
                 m_property_bar.set_position_and_dimension(position, dimension);
                 m_property_bar.repaint();
                 m_property_bar.size_observer_set().resized()();
             }
             {
-                const position_type position(left_type(0), top_type(0));
-                const dimension_type dimension(
-                    window_width > property_bar_width ? window_width - property_bar_width : width_type(0),
+                const position_type position{ left_type{ 0 }, top_type{ 0 } };
+                const dimension_type dimension{
+                    window_width > property_bar_width ? window_width - property_bar_width : width_type{ 0 },
                     window_height
-                );
+                };
                 m_diagram_picture_box.set_position_and_dimension(position, dimension);
                 m_view.update_dimension();
                 m_diagram_picture_box.update_scroll_bars(

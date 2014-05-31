@@ -71,7 +71,7 @@ namespace bobura { namespace model { namespace serializer
         */
         static std::vector<std::unique_ptr<writer_type>> create_writers()
         {
-            std::vector<std::unique_ptr<writer_type>> writers;
+            std::vector<std::unique_ptr<writer_type>> writers{};
 
             writers.push_back(tetengo2::stdalt::make_unique<json_writer_type>());
             writers.push_back(

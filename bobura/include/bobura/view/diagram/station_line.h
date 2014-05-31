@@ -173,17 +173,17 @@ namespace bobura { namespace view { namespace diagram
             canvas.set_color(m_p_font_color->color());
 
             draw_selectable_line(
-                canvas, position_type(left_type(0), m_top), position_type(m_right, m_top), this->selected()
+                canvas, position_type{ left_type{ 0 }, m_top }, position_type{ m_right, m_top }, this->selected()
             );
 
             const auto& name = m_p_station_location->station().name();
             const auto name_dimension = canvas.calc_text_dimension(name);
             canvas.draw_text(
                 name,
-                position_type(
-                    left_type(0),
+                position_type{
+                    left_type{ 0 },
                     m_top - top_type::from(tetengo2::gui::dimension<dimension_type>::height(name_dimension))
-                )
+                }
             );
         }
 
@@ -193,7 +193,7 @@ namespace bobura { namespace view { namespace diagram
             const auto& x = tetengo2::gui::position<position_type>::left(position);
             const auto& y = tetengo2::gui::position<position_type>::top(position);
             if (
-                (left_type(0) <= x && x <= m_station_header_right) &&
+                (left_type{ 0 } <= x && x <= m_station_header_right) &&
                 (m_top - selected_line_margin<top_type>() <= y && y <= m_top + selected_line_margin<top_type>())
             )
             {
@@ -404,10 +404,10 @@ namespace bobura { namespace view { namespace diagram
         {
             const auto canvas_right =
                 left_type::from(tetengo2::gui::dimension<dimension_type>::width(canvas_dimension));
-            const auto horizontal_scale_left = left_type::from(width_type(horizontal_scale));
+            const auto horizontal_scale_left = left_type::from(width_type{ horizontal_scale });
             const auto last_time_position =
                 time_to_left(
-                    time_type(24 * 60 * 60 + time_offset.seconds()),
+                    time_type{ static_cast<typename time_type::tick_type>(24 * 60 * 60 + time_offset.seconds()) },
                     time_offset,
                     1,
                     tetengo2::gui::position<position_type>::left(scroll_bar_position),
@@ -420,7 +420,7 @@ namespace bobura { namespace view { namespace diagram
             const auto canvas_bottom =
                 top_type::from(tetengo2::gui::dimension<dimension_type>::height(canvas_dimension));
 
-            std::vector<station_line_type> station_lines;
+            std::vector<station_line_type> station_lines{};
             station_lines.reserve(station_positions.size());
             for (decltype(station_positions.size()) i = 0; i < station_positions.size(); ++i)
             {
@@ -433,17 +433,13 @@ namespace bobura { namespace view { namespace diagram
                     break;
 
                 const auto& station_location = model.timetable().station_locations()[i];
-                station_lines.push_back(
-                    station_line_type(
-                        station_location,
-                        selection,
-                        line_right,
-                        station_header_right,
-                        std::move(line_position),
-                        select_station_font_color(
-                            model.timetable().font_color_set(), station_location.station().grade()
-                        )
-                    )
+                station_lines.emplace_back(
+                    station_location,
+                    selection,
+                    line_right,
+                    station_header_right,
+                    std::move(line_position),
+                    select_station_font_color(model.timetable().font_color_set(), station_location.station().grade())
                 );
             }
             station_lines.shrink_to_fit();

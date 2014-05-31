@@ -99,15 +99,15 @@ namespace bobura { namespace load_save
         bool operator()(model_type& model, abstract_window_type& parent)
         const
         {
-            path_type path;
+            path_type path{};
             if (!model.has_path() || m_ask_file_path)
             {
-                file_save_dialog_type dialog(
+                file_save_dialog_type dialog{
                     m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:SaveAs")),
                     model.has_path() ? boost::make_optional(model.path()) : boost::none,
                     make_file_filters(),
                     parent
-                );
+                };
                 const auto ok = dialog.do_modal();
                 if (!ok)
                     return false;
@@ -124,7 +124,7 @@ namespace bobura { namespace load_save
 
             const auto temporary_path = path.parent_path() / boost::filesystem::unique_path();
             {
-                writer_selector_type writer(writer_set_type::create_writers(), path);
+                writer_selector_type writer{ writer_set_type::create_writers(), path };
                 if (!writer.selects(path))
                 {
                     if (m_ask_file_path)
@@ -133,7 +133,7 @@ namespace bobura { namespace load_save
                         return save_to_file(true, m_message_catalog)(model, parent);
                 }
 
-                boost::filesystem::ofstream output_stream(temporary_path, std::ios_base::binary);
+                boost::filesystem::ofstream output_stream{ temporary_path, std::ios_base::binary };
                 if (!output_stream)
                 {
                     create_cant_create_temporary_file_message_box(temporary_path, parent)->do_modal();
@@ -144,7 +144,7 @@ namespace bobura { namespace load_save
             }
 
             {
-                boost::system::error_code error_code;
+                boost::system::error_code error_code{};
                 boost::filesystem::rename(temporary_path, path, error_code);
                 if (error_code)
                 {
@@ -213,21 +213,21 @@ namespace bobura { namespace load_save
         typename file_save_dialog_type::file_filters_type make_file_filters()
         const
         {
-            typename file_save_dialog_type::file_filters_type filters;
-
-            filters.emplace_back(
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Timetable Files")),
-                string_type(TETENGO2_TEXT("btt"))
-            );
-            filters.emplace_back(
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Timetable Files (Compressed)")),
-                string_type(TETENGO2_TEXT("btt_bz2"))
-            );
-            filters.emplace_back(
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:All Files")), string_type(TETENGO2_TEXT("*"))
-            );
-
-            return filters;
+            return
+                {
+                    {
+                        m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Timetable Files")),
+                        string_type{ TETENGO2_TEXT("btt") }
+                    },
+                    {
+                        m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Timetable Files (Compressed)")),
+                        string_type{ TETENGO2_TEXT("btt_bz2") }
+                    },
+                    {
+                        m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:All Files")),
+                        string_type{ TETENGO2_TEXT("*") }
+                    }
+                };
         }
 
 

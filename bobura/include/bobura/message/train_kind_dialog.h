@@ -156,19 +156,17 @@ namespace bobura { namespace message { namespace train_kind_dialog
                 m_current_train_kind_index ?
                 boost::next(m_info_sets.begin(), *m_current_train_kind_index) : m_info_sets.end();
 
-            m_info_sets.insert(
+            m_info_sets.emplace(
                 tetengo2::stdalt::as_insertion_iterator(m_info_sets, insertion_position),
-                info_set_type(
-                    boost::none,
-                    false,
-                    train_kind_type(
-                        m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:New Kind")),
-                        string_type(),
-                        color_type(0, 0, 0),
-                        train_kind_type::weight_type::normal,
-                        train_kind_type::line_style_type::solid
-                    )
-                )
+                boost::none,
+                false,
+                train_kind_type{
+                    m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:New Kind")),
+                    string_type{},
+                    color_type{ 0, 0, 0 },
+                    train_kind_type::weight_type::normal,
+                    train_kind_type::line_style_type::solid
+                }
             );
 
             m_sync();
@@ -570,7 +568,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         void operator()()
         const
         {
-            color_dialog_type color_dialog(m_color, m_dialog);
+            color_dialog_type color_dialog{ m_color, m_dialog };
 
             const auto ok = color_dialog.do_modal();
             if (!ok)
@@ -758,7 +756,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         {
             auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(m_background_color);
             canvas.set_background(std::move(p_background));
-            canvas.fill_rectangle(position_type(left_type(0), top_type(0)), m_canvas_dimension);
+            canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, m_canvas_dimension);
 
             if (!m_current_train_kind_index)
                 return;
@@ -770,20 +768,20 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             const auto& text = train_kind.abbreviation().empty() ? train_kind.name() : train_kind.abbreviation();
             const auto text_and_line_tops = sample_text_and_line_tops(canvas, text);
-            canvas.draw_text(text, position_type(left_type(1), text_and_line_tops.first));
+            canvas.draw_text(text, position_type{ left_type{ 1 }, text_and_line_tops.first });
 
             auto line_width =
                 train_kind.weight() == train_kind_type::weight_type::bold ?
-                width_type(size_type(1, 6)) : width_type(size_type(1, 12));
+                width_type{ size_type{ 1, 6 } } : width_type{ size_type{ 1, 12 } };
             canvas.set_line_width(std::move(line_width));
             
             canvas.set_line_style(to_canvas_line_style(train_kind.line_style()));
             canvas.draw_line(
-                position_type(left_type(0), text_and_line_tops.second),
-                position_type(
+                position_type{ left_type{ 0 }, text_and_line_tops.second },
+                position_type{
                     left_type::from(tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension)),
                     text_and_line_tops.second
-                )
+                }
             );
         }
 
@@ -815,14 +813,14 @@ namespace bobura { namespace message { namespace train_kind_dialog
         static font_type fixed_size_font(const font_type& base)
         {
             return
-                font_type(
+                font_type{
                     base.family(),
                     font_type::dialog_font().size(),
                     base.bold(),
                     base.italic(),
                     base.underline(),
                     base.strikeout()
-                );
+                };
         }
 
         static typename canvas_type::line_style_type to_canvas_line_style(

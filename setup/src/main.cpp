@@ -29,31 +29,31 @@ namespace
 {
     const std::wstring& application_name()
     {
-        static const std::wstring singleton(L"Bobura");
+        static const std::wstring singleton{ L"Bobura" };
         return singleton;
     }
 
     const std::string& application_name_narrow()
     {
-        static const std::string singleton("Bobura");
+        static const std::string singleton{ "Bobura" };
         return singleton;
     }
 
     const std::wstring& message_box_title()
     {
-        static const std::wstring singleton(application_name() + L" Setup");
+        static const std::wstring singleton{ application_name() + L" Setup" };
         return singleton;
     }
 
     const std::wstring& msi_prefix()
     {
-        static const std::wstring singleton(L"bobura.");
+        static const std::wstring singleton{ L"bobura." };
         return singleton;
     }
 
     const std::wstring& msi_suffix()
     {
-        static const std::wstring singleton(L".msi");
+        static const std::wstring singleton{ L".msi" };
         return singleton;
     }
 
@@ -62,19 +62,19 @@ namespace
         if (std::locale() == std::locale("Japanese"))
             return L"ja";
         else
-            return std::wstring();
+            return {};
     }
 
     std::wstring detect_platform()
     {
-        ::SYSTEM_INFO info = {};
+        ::SYSTEM_INFO info{};
         ::GetNativeSystemInfo(&info);
         if (info.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64)
             return L"x64";
         else if (info.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_INTEL)
             return L"Win32";
         else
-            return std::wstring();
+            return {};
     }
 
     boost::filesystem::path msi_path(const boost::filesystem::path& base_path_, const std::wstring& platform)
@@ -88,10 +88,10 @@ namespace
         const boost::filesystem::path& base_path_
     )
     {
-        std::wstring parameters;
+        std::wstring parameters{};
 
         parameters += L"/i ";
-        parameters += std::wstring(L"\"") + msi_path(base_path_, platform).c_str() + L"\" ";
+        parameters += std::wstring{ L"\"" } +msi_path(base_path_, platform).c_str() + L"\" ";
         if (!language.empty())
             parameters += L"TRANSFORMS=\":" + language + L".mst\"";
 
@@ -115,7 +115,7 @@ namespace
         if (platform.empty())
         {
             throw
-                std::runtime_error(std::string("Cannot install ") + application_name_narrow() + " to this platform.");
+                std::runtime_error(std::string{ "Cannot install " } +application_name_narrow() + " to this platform.");
         }
 
         const boost::filesystem::path base_path_ = base_path();
@@ -128,7 +128,7 @@ namespace
             throw std::runtime_error("Cannot launch the msi file.");
     }
 
-    void show_error_message(const ::HINSTANCE instance_handle, const std::string& message = std::string())
+    void show_error_message(const ::HINSTANCE instance_handle, const std::string& message = {})
     TETENGO2_STDALT_NOEXCEPT
     {
         try

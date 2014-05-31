@@ -331,7 +331,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::train_kind_list_box_selection_changed
-                >::type(m_current_train_kind_index, *p_list_box, [this]() { this->update(); })
+                >::type{ m_current_train_kind_index, *p_list_box, [this]() { this->update(); } }
             );
 
             return std::move(p_list_box);
@@ -346,7 +346,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::add_button_mouse_clicked
-                >::type(m_info_sets, m_current_train_kind_index, [this]() { this->sync(); }, m_message_catalog)
+                >::type{ m_info_sets, m_current_train_kind_index, [this]() { this->sync(); }, m_message_catalog }
             );
 
             return std::move(p_button);
@@ -361,7 +361,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::delete_button_mouse_clicked
-                >::type(m_info_sets, m_current_train_kind_index, [this]() { this->sync(); })
+                >::type{ m_info_sets, m_current_train_kind_index, [this]() { this->sync(); } }
             );
 
             return std::move(p_button);
@@ -376,7 +376,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::up_button_mouse_clicked
-                >::type(m_info_sets, m_current_train_kind_index, [this]() { this->sync(); })
+                >::type{ m_info_sets, m_current_train_kind_index, [this]() { this->sync(); } }
             );
 
             return std::move(p_button);
@@ -391,7 +391,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::down_button_mouse_clicked
-                >::type(m_info_sets, m_current_train_kind_index, [this]() { this->sync(); })
+                >::type{ m_info_sets, m_current_train_kind_index, [this]() { this->sync(); } }
             );
 
             return std::move(p_button);
@@ -416,7 +416,7 @@ namespace bobura
             p_text_box->text_box_observer_set().changed().connect(
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type, message::train_kind_dialog::type::name_text_box_changed
-                >::type([this]() { this->apply(); })
+                >::type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_text_box);
@@ -442,7 +442,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::abbreviation_text_box_changed
-                >::type([this]() { this->apply(); })
+                >::type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_text_box);
@@ -457,7 +457,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::color_button_mouse_clicked
-                >::type(m_base, m_current_train_kind_color, [this]() { this->apply(); })
+                >::type{ m_base, m_current_train_kind_color, [this]() { this->apply(); } }
             );
 
             return std::move(p_button);
@@ -490,7 +490,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::weight_dropdown_box_selection_changed
-                >::type([this]() { this->apply(); })
+                >::type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_dropdown_box);
@@ -529,7 +529,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::line_style_dropdown_box_selection_changed
-                >::type([this]() { this->apply(); })
+                >::type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_dropdown_box);
@@ -554,18 +554,14 @@ namespace bobura
             auto p_picture_box =
                 tetengo2::stdalt::make_unique<picture_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
 
-            p_picture_box->set_dimension(dimension_type(width_type(20), height_type(4)));
+            p_picture_box->set_dimension(dimension_type{ width_type{ 20 }, height_type{ 4 } });
             p_picture_box->fast_paint_observer_set().paint().connect(
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::sample_picture_box_paint
-                >::type(
-                    m_info_sets,
-                    m_current_train_kind_index,
-                    font,
-                    background_color,
-                    p_picture_box->client_dimension()
-                )
+                >::type{
+                    m_info_sets, m_current_train_kind_index, font, background_color, p_picture_box->client_dimension()
+                }
             );
 
             return std::move(p_picture_box);
@@ -580,7 +576,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::ok_button_mouse_clicked
-                >::type(m_base)
+                >::type{ m_base }
             );
 
             return std::move(p_button);
@@ -595,7 +591,7 @@ namespace bobura
                 typename boost::mpl::at<
                     train_kind_dialog_message_type_list_type,
                     message::train_kind_dialog::type::cancel_button_mouse_clicked
-                >::type(m_base)
+                >::type{ m_base }
             );
 
             return std::move(p_button);
@@ -603,99 +599,99 @@ namespace bobura
 
         void locate_controls()
         {
-            m_base.set_client_dimension(dimension_type(width_type(46), height_type(26)));
+            m_base.set_client_dimension(dimension_type{ width_type{ 46 }, height_type{ 26 } });
 
-            const left_type train_kind_label_left(2);
+            const left_type train_kind_label_left{ 2 };
 
             m_p_train_kind_label->fit_to_content();
-            m_p_train_kind_label->set_position(position_type(train_kind_label_left, top_type(1)));
+            m_p_train_kind_label->set_position(position_type{ train_kind_label_left, top_type{ 1 } });
 
-            const width_type list_box_width(20);
-            const height_type list_box_height(17);
-            m_p_train_kind_list_box->set_dimension(dimension_type(list_box_width, list_box_height));
+            const width_type list_box_width{ 20 };
+            const height_type list_box_height{ 17 };
+            m_p_train_kind_list_box->set_dimension(dimension_type{ list_box_width, list_box_height });
             m_p_train_kind_list_box->set_position(
-                position_type(
+                position_type{
                     train_kind_label_left,
                     tetengo2::gui::position<position_type>::top(m_p_train_kind_label->position()) +
                         top_type::from(
                             tetengo2::gui::dimension<dimension_type>::height(m_p_train_kind_label->dimension())
                         )
-                )
+                }
             );
 
-            const width_type list_box_button_width(typename width_type::value_type(9, 2));
-            left_type list_box_button_left(
+            const width_type list_box_button_width{ typename width_type::value_type{ 9, 2 } };
+            left_type list_box_button_left{
                 train_kind_label_left + left_type::from(list_box_width) - left_type::from(list_box_button_width)
-            );
-            const top_type list_box_button_top(
+            };
+            const top_type list_box_button_top{
                 tetengo2::gui::position<position_type>::top(m_p_train_kind_list_box->position()) +
                     top_type::from(list_box_height)
-            );
-            m_p_down_button->set_dimension(dimension_type(list_box_button_width, height_type(2)));
-            m_p_down_button->set_position(position_type(list_box_button_left, list_box_button_top));
+            };
+            m_p_down_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
+            m_p_down_button->set_position(position_type{ list_box_button_left, list_box_button_top });
 
             list_box_button_left -=
-                left_type::from(list_box_button_width) + left_type(typename left_type::value_type(1, 4));
-            m_p_up_button->set_dimension(dimension_type(list_box_button_width, height_type(2)));
-            m_p_up_button->set_position(position_type(list_box_button_left, list_box_button_top));
+                left_type::from(list_box_button_width) + left_type{ typename left_type::value_type{ 1, 4 } };
+            m_p_up_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
+            m_p_up_button->set_position(position_type{ list_box_button_left, list_box_button_top });
 
             list_box_button_left -=
-                left_type::from(list_box_button_width) + left_type(typename left_type::value_type(1, 2));
-            m_p_delete_button->set_dimension(dimension_type(list_box_button_width, height_type(2)));
-            m_p_delete_button->set_position(position_type(list_box_button_left, list_box_button_top));
+                left_type::from(list_box_button_width) + left_type{ typename left_type::value_type{ 1, 2 } };
+            m_p_delete_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
+            m_p_delete_button->set_position(position_type{ list_box_button_left, list_box_button_top });
 
             list_box_button_left -=
-                left_type::from(list_box_button_width) + left_type(typename left_type::value_type(1, 4));
-            m_p_add_button->set_dimension(dimension_type(list_box_button_width, height_type(2)));
-            m_p_add_button->set_position(position_type(list_box_button_left, list_box_button_top));
+                left_type::from(list_box_button_width) + left_type{ typename left_type::value_type{ 1, 4 } };
+            m_p_add_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
+            m_p_add_button->set_position(position_type{ list_box_button_left, list_box_button_top });
 
-            const left_type name_label_left(24);
+            const left_type name_label_left{ 24 };
             m_p_name_label->fit_to_content();
-            m_p_name_label->set_position(position_type(name_label_left, top_type(1)));
+            m_p_name_label->set_position(position_type{ name_label_left, top_type{ 1 } });
 
-            const left_type name_text_box_left(32);
-            m_p_name_text_box->set_dimension(dimension_type(width_type(12), height_type(2)));
-            m_p_name_text_box->set_position(position_type(name_text_box_left, top_type(1)));
+            const left_type name_text_box_left{ 32 };
+            m_p_name_text_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
+            m_p_name_text_box->set_position(position_type{ name_text_box_left, top_type{ 1 } });
 
             m_p_abbreviation_label->fit_to_content();
-            m_p_abbreviation_label->set_position(position_type(name_label_left, top_type(4)));
+            m_p_abbreviation_label->set_position(position_type{ name_label_left, top_type{ 4 } });
 
-            m_p_abbreviation_text_box->set_dimension(dimension_type(width_type(12), height_type(2)));
-            m_p_abbreviation_text_box->set_position(position_type(name_text_box_left, top_type(4)));
+            m_p_abbreviation_text_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
+            m_p_abbreviation_text_box->set_position(position_type{ name_text_box_left, top_type{ 4 } });
 
-            m_p_color_button->set_dimension(dimension_type(width_type(8), height_type(2)));
-            m_p_color_button->set_position(position_type(name_text_box_left, top_type(7)));
+            m_p_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+            m_p_color_button->set_position(position_type{ name_text_box_left, top_type{ 7 } });
 
             m_p_weight_label->fit_to_content();
-            m_p_weight_label->set_position(position_type(name_label_left, top_type(10)));
+            m_p_weight_label->set_position(position_type{ name_label_left, top_type{ 10 } });
 
-            m_p_weight_dropdown_box->set_dimension(dimension_type(width_type(12), height_type(2)));
-            m_p_weight_dropdown_box->set_position(position_type(name_text_box_left, top_type(10)));
+            m_p_weight_dropdown_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
+            m_p_weight_dropdown_box->set_position(position_type{ name_text_box_left, top_type{ 10 } });
 
             m_p_line_style_label->fit_to_content();
-            m_p_line_style_label->set_position(position_type(name_label_left, top_type(13)));
+            m_p_line_style_label->set_position(position_type{ name_label_left, top_type{ 13 } });
 
-            m_p_line_style_dropdown_box->set_dimension(dimension_type(width_type(12), height_type(2)));
-            m_p_line_style_dropdown_box->set_position(position_type(name_text_box_left, top_type(13)));
+            m_p_line_style_dropdown_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
+            m_p_line_style_dropdown_box->set_position(position_type{ name_text_box_left, top_type{ 13 } });
 
             m_p_sample_label->fit_to_content();
-            m_p_sample_label->set_position(position_type(name_label_left, top_type(16)));
+            m_p_sample_label->set_position(position_type{ name_label_left, top_type{ 16 } });
 
             m_p_sample_picture_box->set_position(
-                position_type(
+                position_type{
                     name_label_left,
                     tetengo2::gui::position<position_type>::top(m_p_sample_label->position()) +
                         top_type::from(
                             tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
                         )
-                )
+                }
             );
 
-            m_p_ok_button->set_dimension(dimension_type(width_type(8), height_type(2)));
-            m_p_ok_button->set_position(position_type(left_type(27), top_type(23)));
+            m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+            m_p_ok_button->set_position(position_type{ left_type{ 27 }, top_type{ 23 } });
 
-            m_p_cancel_button->set_dimension(dimension_type(width_type(8), height_type(2)));
-            m_p_cancel_button->set_position(position_type(left_type(36), top_type(23)));
+            m_p_cancel_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+            m_p_cancel_button->set_position(position_type{ left_type{ 36 }, top_type{ 23 } });
         }
 
         void sync()
@@ -755,9 +751,9 @@ namespace bobura
             }
             else
             {
-                m_current_train_kind_color = color_type(0, 0, 0);
-                m_p_name_text_box->set_text(string_type());
-                m_p_abbreviation_text_box->set_text(string_type());
+                m_current_train_kind_color = color_type{ 0, 0, 0 };
+                m_p_name_text_box->set_text(string_type{});
+                m_p_abbreviation_text_box->set_text(string_type{});
                 m_p_weight_dropdown_box->select_value(0);
                 m_p_line_style_dropdown_box->select_value(0);
             }
@@ -775,13 +771,13 @@ namespace bobura
             assert(m_p_weight_dropdown_box->selected_value_index());
             assert(m_p_weight_dropdown_box->selected_value_index());
             train_kind =
-                train_kind_type(
+                train_kind_type{
                     m_p_name_text_box->text(),
                     m_p_abbreviation_text_box->text(),
                     m_current_train_kind_color,
                     to_weight(*m_p_weight_dropdown_box->selected_value_index()),
                     to_line_style(*m_p_line_style_dropdown_box->selected_value_index())
-                );
+                };
 
             m_p_train_kind_list_box->set_value(*m_current_train_kind_index, train_kind.name());
             m_p_train_kind_list_box->select_value(*m_current_train_kind_index);

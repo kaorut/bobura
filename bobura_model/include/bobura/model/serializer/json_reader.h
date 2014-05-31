@@ -137,7 +137,7 @@ namespace bobura { namespace model { namespace serializer
 
         static const encoder_type& encoder()
         {
-            static const encoder_type singleton;
+            static const encoder_type singleton{};
             return singleton;
         }
 
@@ -145,10 +145,10 @@ namespace bobura { namespace model { namespace serializer
         {
             auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
 
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             pull_parser.next();
 
@@ -156,20 +156,20 @@ namespace bobura { namespace model { namespace serializer
             if (!header)
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             {
-                const auto found = header->find(string_type(TETENGO2_TEXT("company_name")));
+                const auto found = header->find(string_type{ TETENGO2_TEXT("company_name") });
                 if (found != header->end())
                     p_timetable->set_company_name(std::move(found->second));
             }
             {
-                const auto found = header->find(string_type(TETENGO2_TEXT("line_name")));
+                const auto found = header->find(string_type{ TETENGO2_TEXT("line_name") });
                 if (found != header->end())
                     p_timetable->set_line_name(std::move(found->second));
             }
             {
-                const auto found = header->find(string_type(TETENGO2_TEXT("note")));
+                const auto found = header->find(string_type{ TETENGO2_TEXT("note") });
                 if (found != header->end())
                     p_timetable->set_note(std::move(found->second));
             }
@@ -178,7 +178,7 @@ namespace bobura { namespace model { namespace serializer
             if (!font_color_set)
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             p_timetable->set_font_color_set(std::move(*font_color_set));
 
@@ -186,7 +186,7 @@ namespace bobura { namespace model { namespace serializer
             if (!stations)
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             for (auto& station: *stations)
                 p_timetable->insert_station_location(p_timetable->station_locations().end(), std::move(station));
@@ -195,7 +195,7 @@ namespace bobura { namespace model { namespace serializer
             if (!train_kinds)
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             for (auto& train_kind: *train_kinds)
                 p_timetable->insert_train_kind(p_timetable->train_kinds().end(), std::move(train_kind));
@@ -204,7 +204,7 @@ namespace bobura { namespace model { namespace serializer
             if (!down_trains)
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             for (auto& train: *down_trains)
                 p_timetable->insert_down_train(p_timetable->down_trains().end(), std::move(train));
@@ -213,15 +213,15 @@ namespace bobura { namespace model { namespace serializer
             if (!up_trains)
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             for (auto& train: *up_trains)
                 p_timetable->insert_up_train(p_timetable->up_trains().end(), std::move(train));
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
                 error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>();
+                return std::unique_ptr<timetable_type>{};
             }
             pull_parser.next();
 
@@ -230,9 +230,9 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<header_type> read_header(pull_parser_type& pull_parser)
         {
-            header_type header;
+            header_type header{};
 
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("object"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
                 return boost::none;
             pull_parser.next();
 
@@ -245,7 +245,7 @@ namespace bobura { namespace model { namespace serializer
                 header.insert(std::move(*member));
             }
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("object"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
                 return boost::none;
             pull_parser.next();
 
@@ -254,7 +254,7 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<font_color_set_type> read_font_color_set(pull_parser_type& pull_parser)
         {
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("object"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
                 return boost::none;
             pull_parser.next();
 
@@ -273,55 +273,55 @@ namespace bobura { namespace model { namespace serializer
                 if (!element)
                     break;
 
-                if      (element->first == string_type(TETENGO2_TEXT("background")))
+                if      (element->first == string_type{ TETENGO2_TEXT("background") })
                 {
                     if (element->second.which() != 2)
                         return boost::none;
                     background_color = std::move(boost::get<color_type>(element->second));
                 }
-                else if (element->first == string_type(TETENGO2_TEXT("company_line_name")))
+                else if (element->first == string_type{ TETENGO2_TEXT("company_line_name") })
                 {
                     if (element->second.which() != 0)
                         return boost::none;
                     company_line_name_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
-                else if (element->first == string_type(TETENGO2_TEXT("note")))
+                else if (element->first == string_type{ TETENGO2_TEXT("note") })
                 {
                     if (element->second.which() != 0)
                         return boost::none;
                     note_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
-                else if (element->first == string_type(TETENGO2_TEXT("time_line")))
+                else if (element->first == string_type{ TETENGO2_TEXT("time_line") })
                 {
                     if (element->second.which() != 0)
                         return boost::none;
                     time_line_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
-                else if (element->first == string_type(TETENGO2_TEXT("local_station")))
+                else if (element->first == string_type{ TETENGO2_TEXT("local_station") })
                 {
                     if (element->second.which() != 0)
                         return boost::none;
                     local_station_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
-                else if (element->first == string_type(TETENGO2_TEXT("principal_station")))
+                else if (element->first == string_type{ TETENGO2_TEXT("principal_station") })
                 {
                     if (element->second.which() != 0)
                         return boost::none;
                     principal_station_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
-                else if (element->first == string_type(TETENGO2_TEXT("local_terminal_station")))
+                else if (element->first == string_type{ TETENGO2_TEXT("local_terminal_station") })
                 {
                     if (element->second.which() != 0)
                         return boost::none;
                     local_terminal_station_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
-                else if (element->first == string_type(TETENGO2_TEXT("principal_terminal_station")))
+                else if (element->first == string_type{ TETENGO2_TEXT("principal_terminal_station") })
                 {
                     if (element->second.which() != 0)
                         return boost::none;
                     principal_terminal_station_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
-                else if (element->first == string_type(TETENGO2_TEXT("train_name")))
+                else if (element->first == string_type{ TETENGO2_TEXT("train_name") })
                 {
                     if (element->second.which() != 1)
                         return boost::none;
@@ -333,21 +333,23 @@ namespace bobura { namespace model { namespace serializer
                 }
             }
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("object"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
                 return boost::none;
             pull_parser.next();
 
             return
-                font_color_set_type(
-                    std::move(background_color),
-                    std::move(company_line_name_font_color),
-                    std::move(note_font_color),
-                    std::move(time_line_font_color),
-                    std::move(local_station_font_color),
-                    std::move(principal_station_font_color),
-                    std::move(local_terminal_station_font_color),
-                    std::move(principal_terminal_station_font_color),
-                    std::move(train_name_font)
+                boost::make_optional(
+                    font_color_set_type{
+                        std::move(background_color),
+                        std::move(company_line_name_font_color),
+                        std::move(note_font_color),
+                        std::move(time_line_font_color),
+                        std::move(local_station_font_color),
+                        std::move(principal_station_font_color),
+                        std::move(local_terminal_station_font_color),
+                        std::move(principal_terminal_station_font_color),
+                        std::move(train_name_font)
+                    }
                 );
         }
 
@@ -355,7 +357,7 @@ namespace bobura { namespace model { namespace serializer
             pull_parser_type& pull_parser
         )
         {
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("member"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return boost::none;
             const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
@@ -366,7 +368,7 @@ namespace bobura { namespace model { namespace serializer
             if (!value)
                 return boost::none;
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("member"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return boost::none;
             pull_parser.next();
 
@@ -388,7 +390,7 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<font_color_set_element_type> read_font_or_font_color(pull_parser_type& pull_parser)
         {
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
             pull_parser.next();
 
@@ -413,20 +415,20 @@ namespace bobura { namespace model { namespace serializer
                 if (!font_strikeout)
                     return boost::none;
 
-                if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+                if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                     return boost::none;
                 pull_parser.next();
 
                 return
                     boost::make_optional<font_color_set_element_type>(
-                        font_type(
+                        font_type{
                             encoder().decode(std::move(*font_name)),
                             std::move(*font_size),
                             std::move(*font_bold),
                             std::move(*font_italic),
                             std::move(*font_underline),
                             std::move(*font_strikeout)
-                        )
+                        }
                     );
             }
 
@@ -438,7 +440,7 @@ namespace bobura { namespace model { namespace serializer
             if (!color)
                 return boost::none;
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
             pull_parser.next();
 
@@ -459,9 +461,9 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<std::vector<station_location_type>> read_stations(pull_parser_type& pull_parser)
         {
-            std::vector<station_location_type> stations;
+            std::vector<station_location_type> stations{};
 
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
             pull_parser.next();
 
@@ -474,7 +476,7 @@ namespace bobura { namespace model { namespace serializer
                 stations.push_back(std::move(*station));
             }
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
             pull_parser.next();
 
@@ -483,16 +485,16 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<station_location_type> read_station(pull_parser_type& pull_parser)
         {
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("object"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
                 return boost::none;
             pull_parser.next();
 
-            string_type name;
+            string_type name{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("name")))
+                if (member->first != string_type{ TETENGO2_TEXT("name") })
                     return boost::none;
 
                 name = std::move(member->second);
@@ -503,7 +505,7 @@ namespace bobura { namespace model { namespace serializer
                 auto member = read_string_member(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("grade")))
+                if (member->first != string_type{ TETENGO2_TEXT("grade") })
                     return boost::none;
 
                 p_grade = to_station_grade(std::move(member->second));
@@ -516,7 +518,7 @@ namespace bobura { namespace model { namespace serializer
                 auto member = read_boolean_member(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("show_down_arrival_times")))
+                if (member->first != string_type{ TETENGO2_TEXT("show_down_arrival_times") })
                     return boost::none;
 
                 show_down_arrival_times = std::move(member->second);
@@ -527,50 +529,50 @@ namespace bobura { namespace model { namespace serializer
                 auto member = read_boolean_member(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("show_up_arrival_times")))
+                if (member->first != string_type{ TETENGO2_TEXT("show_up_arrival_times") })
                     return boost::none;
 
                 show_up_arrival_times = std::move(member->second);
             }
 
-            string_type note;
+            string_type note{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("note")))
+                if (member->first != string_type{ TETENGO2_TEXT("note") })
                     return boost::none;
 
                 note = std::move(member->second);
             }
 
-            operating_distance_type operating_distance = operating_distance_type();
+            operating_distance_type operating_distance{};
             {
                 auto member = read_integer_member<operating_distance_type>(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("operating_distance")))
+                if (member->first != string_type{ TETENGO2_TEXT("operating_distance") })
                     return boost::none;
 
-                operating_distance = operating_distance_type(member->second) / 10;
+                operating_distance = operating_distance_type{ member->second } / 10;
             }
             
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("object"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
                 return boost::none;
             pull_parser.next();
 
             return
                 boost::make_optional(
-                    station_location_type(
-                        station_type(
+                    station_location_type{
+                        station_type{
                             std::move(name),
                             *p_grade,
                             show_down_arrival_times,
                             show_up_arrival_times,
                             std::move(note)
-                        ),
+                        },
                         std::move(operating_distance)
-                    )
+                    }
                 );
         }
 
@@ -590,9 +592,9 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<std::vector<train_kind_type>> read_train_kinds(pull_parser_type& pull_parser)
         {
-            std::vector<train_kind_type> train_kinds;
+            std::vector<train_kind_type> train_kinds{};
 
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
             pull_parser.next();
 
@@ -605,7 +607,7 @@ namespace bobura { namespace model { namespace serializer
                 train_kinds.push_back(std::move(*train_kind));
             }
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
             pull_parser.next();
 
@@ -614,38 +616,38 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<train_kind_type> read_train_kind(pull_parser_type& pull_parser)
         {
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("object"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
                 return boost::none;
             pull_parser.next();
 
-            string_type name;
+            string_type name{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("name")))
+                if (member->first != string_type{ TETENGO2_TEXT("name") })
                     return boost::none;
 
                 name = std::move(member->second);
             }
 
-            string_type abbreviation;
+            string_type abbreviation{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("abbreviation")))
+                if (member->first != string_type{ TETENGO2_TEXT("abbreviation") })
                     return boost::none;
 
                 abbreviation = std::move(member->second);
             }
 
-            boost::optional<color_type> color;
+            boost::optional<color_type> color{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("color")))
+                if (member->first != string_type{ TETENGO2_TEXT("color") })
                     return boost::none;
 
                 color = to_color(std::move(member->second));
@@ -653,12 +655,12 @@ namespace bobura { namespace model { namespace serializer
                     return boost::none;
             }
 
-            boost::optional<weight_type> weight;
+            boost::optional<weight_type> weight{};
             {
                 const auto member = read_integer_member<int>(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("weight")))
+                if (member->first != string_type{ TETENGO2_TEXT("weight") })
                     return boost::none;
 
                 weight = to_weight(member->second);
@@ -666,12 +668,12 @@ namespace bobura { namespace model { namespace serializer
                     return boost::none;
             }
 
-            boost::optional<line_style_type> line_style;
+            boost::optional<line_style_type> line_style{};
             {
                 const auto member = read_integer_member<int>(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("line_style")))
+                if (member->first != string_type{ TETENGO2_TEXT("line_style") })
                     return boost::none;
 
                 line_style = to_line_style(member->second);
@@ -679,7 +681,7 @@ namespace bobura { namespace model { namespace serializer
                     return boost::none;
             }
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("object"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
                 return boost::none;
             pull_parser.next();
 
@@ -698,11 +700,11 @@ namespace bobura { namespace model { namespace serializer
 
             return
                 boost::make_optional(
-                    color_type(
-                        (color_value / 0x010000) & 0x0000FF,
-                        (color_value / 0x000100) & 0x0000FF,
-                        color_value & 0x0000FF
-                    )
+                    color_type{
+                        static_cast<unsigned char>((color_value / 0x010000) & 0x0000FF),
+                        static_cast<unsigned char>((color_value / 0x000100) & 0x0000FF),
+                        static_cast<unsigned char>(color_value & 0x0000FF)
+                    }
                 );
         }
 
@@ -753,9 +755,9 @@ namespace bobura { namespace model { namespace serializer
             const std::size_t    kind_count
         )
         {
-            std::vector<train_type> trains;
+            std::vector<train_type> trains{};
 
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
             pull_parser.next();
 
@@ -768,7 +770,7 @@ namespace bobura { namespace model { namespace serializer
                 trains.push_back(std::move(*train));
             }
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
             pull_parser.next();
 
@@ -782,27 +784,27 @@ namespace bobura { namespace model { namespace serializer
             const std::size_t    kind_count
         )
         {
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("object"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
                 return boost::none;
             pull_parser.next();
 
-            string_type number;
+            string_type number{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("number")))
+                if (member->first != string_type{ TETENGO2_TEXT("number") })
                     return boost::none;
 
                 number = std::move(member->second);
             }
 
-            train_kind_index_type kind_index;
+            train_kind_index_type kind_index{};
             {
                 auto member = read_integer_member<train_kind_index_type>(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("kind_index")))
+                if (member->first != string_type{ TETENGO2_TEXT("kind_index") })
                     return boost::none;
 
                 kind_index = std::move(member->second);
@@ -810,42 +812,42 @@ namespace bobura { namespace model { namespace serializer
                     return boost::none;
             }
 
-            string_type name;
+            string_type name{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("name")))
+                if (member->first != string_type{ TETENGO2_TEXT("name") })
                     return boost::none;
 
                 name = std::move(member->second);
             }
 
-            string_type name_number;
+            string_type name_number{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("name_number")))
+                if (member->first != string_type{ TETENGO2_TEXT("name_number") })
                     return boost::none;
 
                 name_number = std::move(member->second);
             }
 
-            string_type note;
+            string_type note{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type(TETENGO2_TEXT("note")))
+                if (member->first != string_type{ TETENGO2_TEXT("note") })
                     return boost::none;
 
                 note = std::move(member->second);
             }
 
-            train_type train(
+            train_type train{
                 direction, std::move(number), kind_index, std::move(name), std::move(name_number), std::move(note)
-            );
+            };
 
             auto stops = read_stops(pull_parser);
             if (!stops)
@@ -857,7 +859,7 @@ namespace bobura { namespace model { namespace serializer
             for (std::size_t i = stops->size(); i < station_count; ++i)
                 train.insert_stop(train.stops().end(), empty_stop());
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("object"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
                 return boost::none;
             pull_parser.next();
 
@@ -866,14 +868,14 @@ namespace bobura { namespace model { namespace serializer
 
         static stop_type empty_stop()
         {
-            return stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type());
+            return stop_type{ time_type::uninitialized(), time_type::uninitialized(), false, string_type{} };
         }
 
         static boost::optional<std::vector<stop_type>> read_stops(pull_parser_type& pull_parser)
         {
-            std::vector<stop_type> stops;
+            std::vector<stop_type> stops{};
 
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("member"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return boost::none;
             const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
@@ -882,7 +884,7 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             pull_parser.next();
 
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
             pull_parser.next();
 
@@ -895,11 +897,11 @@ namespace bobura { namespace model { namespace serializer
                 stops.push_back(std::move(*stop));
             }
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
             pull_parser.next();
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("member"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return boost::none;
             pull_parser.next();
 
@@ -908,7 +910,7 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<stop_type> read_stop(pull_parser_type& pull_parser)
         {
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
             pull_parser.next();
 
@@ -934,18 +936,18 @@ namespace bobura { namespace model { namespace serializer
             if (!platform)
                 return boost::none;
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
             pull_parser.next();
 
             return
                 boost::make_optional(
-                    stop_type(
+                    stop_type{
                         std::move(*arrival_time),
                         std::move(*departure_time),
                         *operational,
                         encoder().decode(std::move(*platform))
-                    )
+                    }
                 );
         }
 
@@ -966,12 +968,12 @@ namespace bobura { namespace model { namespace serializer
             if (seconds > 59)
                 return boost::none;
 
-            return time_type(hours, minutes, seconds);
+            return boost::make_optional(time_type{ hours, minutes, seconds });
         }
 
         static boost::optional<std::pair<string_type, string_type>> read_string_member(pull_parser_type& pull_parser)
         {
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("member"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return boost::none;
             auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
@@ -982,7 +984,7 @@ namespace bobura { namespace model { namespace serializer
             if (!value)
                 return boost::none;
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("member"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return boost::none;
             pull_parser.next();
 
@@ -1010,7 +1012,7 @@ namespace bobura { namespace model { namespace serializer
         template <typename Integer>
         static boost::optional<std::pair<string_type, Integer>> read_integer_member(pull_parser_type& pull_parser)
         {
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("member"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return boost::none;
             const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
@@ -1021,7 +1023,7 @@ namespace bobura { namespace model { namespace serializer
             if (!value)
                 return boost::none;
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("member"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return boost::none;
             pull_parser.next();
 
@@ -1046,7 +1048,7 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<std::pair<string_type, bool>> read_boolean_member(pull_parser_type& pull_parser)
         {
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("member"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return boost::none;
             const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
@@ -1057,7 +1059,7 @@ namespace bobura { namespace model { namespace serializer
             if (!value)
                 return boost::none;
 
-            if (!next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("member"))))
+            if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return boost::none;
             pull_parser.next();
 
@@ -1127,11 +1129,11 @@ namespace bobura { namespace model { namespace serializer
         static input_string_type get_attribute(const structure_begin_type& structure)
         {
             const typename attribute_map_type::const_iterator found =
-                structure.attribute_map().find(input_string_type(TETENGO2_TEXT("name")));
+                structure.attribute_map().find(input_string_type{ TETENGO2_TEXT("name") });
             if (found == structure.attribute_map().end())
-                return input_string_type();
+                return input_string_type{};
             if (found->second.which() != 4)
-                return input_string_type();
+                return input_string_type{};
             
             return boost::get<input_string_type>(found->second);
         }
@@ -1146,14 +1148,14 @@ namespace bobura { namespace model { namespace serializer
                 tetengo2::stdalt::make_unique<push_parser_type>(
                     first, last, tetengo2::stdalt::make_unique<grammar_type>()
                 );
-            pull_parser_type pull_parser(std::move(p_push_parser), 5);
+            pull_parser_type pull_parser{ std::move(p_push_parser), 5 };
 
-            if (!next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("array"))))
+            if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return false;
             pull_parser.next();
             return
-                next_is_structure_begin(pull_parser, input_string_type(TETENGO2_TEXT("object"))) ||
-                next_is_structure_end(pull_parser, input_string_type(TETENGO2_TEXT("array")));
+                next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }) ||
+                next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") });
         }
 
         virtual std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
@@ -1163,7 +1165,7 @@ namespace bobura { namespace model { namespace serializer
                 tetengo2::stdalt::make_unique<push_parser_type>(
                     first, last, tetengo2::stdalt::make_unique<grammar_type>()
                 );
-            pull_parser_type pull_parser(std::move(p_push_parser), 5);
+            pull_parser_type pull_parser{ std::move(p_push_parser), 5 };
 
             return read_timetable(pull_parser, error);
         }

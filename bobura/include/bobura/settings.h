@@ -115,7 +115,7 @@ namespace bobura
         path_type message_directory_path()
         const
         {
-            return m_base_path / path_string_type(TETENGO2_TEXT("messages"));
+            return m_base_path / path_string_type{ TETENGO2_TEXT("messages") };
         }
 
         /*!
@@ -126,7 +126,7 @@ namespace bobura
         path_type image_directory_path()
         const
         {
-            return m_base_path / path_string_type(TETENGO2_TEXT("images"));
+            return m_base_path / path_string_type{ TETENGO2_TEXT("images") };
         }
 
         /*!
@@ -137,19 +137,19 @@ namespace bobura
         boost::optional<dimension_type> main_window_dimension()
         const
         {
-            const auto width = m_p_config->get(string_type(TETENGO2_TEXT("MainWindow/Width")));
+            const auto width = m_p_config->get(string_type{ TETENGO2_TEXT("MainWindow/Width") });
             if (!width || width->which() != 1)
                 return boost::none;
-            const auto height = m_p_config->get(string_type(TETENGO2_TEXT("MainWindow/Height")));
+            const auto height = m_p_config->get(string_type{ TETENGO2_TEXT("MainWindow/Height") });
             if (!height || height->which() != 1)
                 return boost::none;
 
             return
                 boost::make_optional(
-                    dimension_type(
+                    dimension_type{
                         width_type::from_pixels(boost::get<uint_type>(*width)),
                         height_type::from_pixels(boost::get<uint_type>(*height))
-                    )
+                    }
                 );
         }
 
@@ -162,13 +162,13 @@ namespace bobura
         {
             const auto& width = tetengo2::gui::dimension<dimension_type>::width(dimension);
             m_p_config->set(
-                string_type(TETENGO2_TEXT("MainWindow/Width")),
+                string_type{ TETENGO2_TEXT("MainWindow/Width") },
                 config_value_type(width.template to_pixels<uint_type>())
             );
 
             const auto& height = tetengo2::gui::dimension<dimension_type>::height(dimension);
             m_p_config->set(
-                string_type(TETENGO2_TEXT("MainWindow/Height")),
+                string_type{ TETENGO2_TEXT("MainWindow/Height") },
                 config_value_type(height.template to_pixels<uint_type>())
             );
         }
@@ -181,7 +181,7 @@ namespace bobura
         boost::optional<bool> main_window_maximized()
         const
         {
-            const auto status = m_p_config->get(string_type(TETENGO2_TEXT("MainWindow/Maximized")));
+            const auto status = m_p_config->get(string_type{ TETENGO2_TEXT("MainWindow/Maximized") });
             if (!status || status->which() != 1)
                 return boost::none;
 
@@ -195,7 +195,7 @@ namespace bobura
         */
         void set_main_window_maximized(const bool status)
         {
-            m_p_config->set(string_type(TETENGO2_TEXT("MainWindow/Maximized")), config_value_type(status ? 1 : 0));
+            m_p_config->set(string_type{ TETENGO2_TEXT("MainWindow/Maximized") }, config_value_type{ status ? 1 : 0 });
         }
 
         /*!
@@ -206,7 +206,7 @@ namespace bobura
         boost::optional<width_type> property_bar_width()
         const
         {
-            const auto width = m_p_config->get(string_type(TETENGO2_TEXT("MainWindow/PropertyBarWidth")));
+            const auto width = m_p_config->get(string_type{ TETENGO2_TEXT("MainWindow/PropertyBarWidth") });
             if (!width || width->which() != 1)
                 return boost::none;
 
@@ -221,7 +221,7 @@ namespace bobura
         void set_property_bar_width(const width_type& width)
         {
             m_p_config->set(
-                string_type(TETENGO2_TEXT("MainWindow/PropertyBarWidth")),
+                string_type{ TETENGO2_TEXT("MainWindow/PropertyBarWidth") },
                 config_value_type(width.template to_pixels<uint_type>())
             );
         }
@@ -234,7 +234,7 @@ namespace bobura
         boost::optional<bool> property_bar_minimized()
         const
         {
-            const auto status = m_p_config->get(string_type(TETENGO2_TEXT("MainWindow/PropertyBarMinimized")));
+            const auto status = m_p_config->get(string_type{ TETENGO2_TEXT("MainWindow/PropertyBarMinimized") });
             if (!status || status->which() != 1)
                 return boost::none;
 
@@ -249,7 +249,7 @@ namespace bobura
         void set_property_bar_minimized(const bool status)
         {
             m_p_config->set(
-                string_type(TETENGO2_TEXT("MainWindow/PropertyBarMinimized")), config_value_type(status ? 1 : 0)
+                string_type{ TETENGO2_TEXT("MainWindow/PropertyBarMinimized") }, config_value_type{ status ? 1 : 0 }
             );
         }
 
@@ -262,7 +262,7 @@ namespace bobura
         const
         {
             const auto position =
-                m_p_config->get(string_type(TETENGO2_TEXT("MainWindow/PropertyBarSplitterPosition")));
+                m_p_config->get(string_type{ TETENGO2_TEXT("MainWindow/PropertyBarSplitterPosition") });
             if (!position || position->which() != 1)
                 return boost::none;
 
@@ -277,7 +277,7 @@ namespace bobura
         void set_property_bar_splitter_position(const left_type& position)
         {
             m_p_config->set(
-                string_type(TETENGO2_TEXT("MainWindow/PropertyBarSplitterPosition")),
+                string_type{ TETENGO2_TEXT("MainWindow/PropertyBarSplitterPosition") },
                 config_value_type(position.template to_pixels<uint_type>())
             );
         }
@@ -334,33 +334,33 @@ namespace bobura
 
         static boost::program_options::variables_map parse_command_line_arguments(
             const std::vector<string_type>& command_line_arguments
-        )
+            )
         {
-            boost::program_options::options_description visible_options;
+            boost::program_options::options_description visible_options{};
             visible_options.add_options()
-            ("dimension,d", value<string_type, string_type>());
+                ("dimension,d", value<string_type, string_type>());
 
-            boost::program_options::options_description hidden_options;
+            boost::program_options::options_description hidden_options{};
             hidden_options.add_options()
-            ("exe", value<string_type, string_type>())
-            ("input", value<std::vector<string_type>, string_type>());
+                ("exe", value<string_type, string_type>())
+                ("input", value<std::vector<string_type>, string_type>());
 
-            boost::program_options::options_description options;
+            boost::program_options::options_description options{};
             options.add(visible_options).add(hidden_options);
 
-            boost::program_options::positional_options_description positional_options;
+            boost::program_options::positional_options_description positional_options{};
             positional_options.add("exe", 1);
             positional_options.add("input", -1);
 
-            boost::program_options::variables_map option_values;
+            boost::program_options::variables_map option_values{};
             try
             {
                 using command_line_parser_type =
-                    boost::program_options::basic_command_line_parser<typename string_type::value_type>;
+                    boost::program_options::basic_command_line_parser < typename string_type::value_type > ;
                 const auto parsed_options =
-                    command_line_parser_type(
-                        command_line_arguments
-                    ).options(std::move(options)).positional(std::move(positional_options)).run();
+                    command_line_parser_type{ command_line_arguments }.options(std::move(options)).positional(std::move(
+                        positional_options)
+                    ).run();
                 boost::program_options::store(parsed_options, option_values);
             }
             catch (const boost::program_options::error&)
@@ -378,7 +378,7 @@ namespace bobura
 
         static std::unique_ptr<config_base_type> create_config(const boost::program_options::variables_map& options)
         {
-            std::vector<std::unique_ptr<config_base_type>> p_configs;
+            std::vector<std::unique_ptr<config_base_type>> p_configs{};
             p_configs.push_back(create_temporary_config(options));
             p_configs.push_back(create_persistent_config());
 
@@ -395,12 +395,12 @@ namespace bobura
                 if (main_window_dimension_)
                 {
                     values.emplace_back(
-                        string_type(TETENGO2_TEXT("MainWindow/Width")),
-                        config_value_type(main_window_dimension_->first)
+                        string_type{ TETENGO2_TEXT("MainWindow/Width") },
+                        config_value_type{ main_window_dimension_->first }
                     );
                     values.emplace_back(
-                        string_type(TETENGO2_TEXT("MainWindow/Height")),
-                        config_value_type(main_window_dimension_->second)
+                        string_type{ TETENGO2_TEXT("MainWindow/Height") },
+                        config_value_type{ main_window_dimension_->second }
                     );
                 }
             }
@@ -425,12 +425,12 @@ namespace bobura
 
         static boost::optional<std::pair<uint_type, uint_type>> parse_dimension(const string_type& dimension_string)
         {
-            std::vector<string_type> result;
+            std::vector<string_type> result{};
             using char_type = typename string_type::value_type;
             boost::split(
                 result,
                 dimension_string,
-                [](const char_type character) { return character == char_type(TETENGO2_TEXT('x')); }
+                [](const char_type character) { return character == char_type{ TETENGO2_TEXT('x') }; }
             );
             if (result.size() < 2)
                 return boost::none;
@@ -452,7 +452,7 @@ namespace bobura
         {
             return
                 tetengo2::stdalt::make_unique<cached_config_type>(
-                    tetengo2::stdalt::make_unique<persistent_config_type>(string_type(TETENGO2_TEXT("bobura")))
+                    tetengo2::stdalt::make_unique<persistent_config_type>(string_type{ TETENGO2_TEXT("bobura") })
                 );
         }
 

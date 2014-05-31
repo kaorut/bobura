@@ -54,52 +54,52 @@ BOOST_AUTO_TEST_SUITE(station)
         BOOST_TEST_PASSPOINT();
 
         {
-            const station_type station(string_type(), local_type::instance(), false, false, string_type());
+            const station_type station{ string_type{}, local_type::instance(), false, false, string_type{} };
         }
         {
-            const station_type station(
-                string_type(TETENGO2_TEXT("A")), local_type::instance(), false, false, string_type()
-            );
+            const station_type station{
+                string_type{ TETENGO2_TEXT("A") }, local_type::instance(), false, false, string_type{}
+            };
         }
         {
-            const station_type station(
-                string_type(TETENGO2_TEXT("AB")), local_type::instance(), false, false, string_type()
-            );
+            const station_type station{
+                string_type{ TETENGO2_TEXT("AB") }, local_type::instance(), false, false, string_type{}
+            };
         }
         {
-            const station_type station(
-                string_type(1024 * 1024, TETENGO2_TEXT('X')), local_type::instance(), false, false, string_type()
-            );
+            const station_type station{
+                string_type(1024 * 1024, TETENGO2_TEXT('X')), local_type::instance(), false, false, string_type{}
+            };
         }
         {
-            const station_type station(
-                string_type(TETENGO2_TEXT("A")), principal_type::instance(), false, false, string_type()
-            );
+            const station_type station{
+                string_type{ TETENGO2_TEXT("A") }, principal_type::instance(), false, false, string_type{}
+            };
         }
         {
-            const station_type station(
-                string_type(TETENGO2_TEXT("A")), local_type::instance(), true, false, string_type()
-            );
+            const station_type station{
+                string_type{ TETENGO2_TEXT("A") }, local_type::instance(), true, false, string_type{}
+            };
         }
         {
-            const station_type station(
-                string_type(TETENGO2_TEXT("A")), local_type::instance(), false, true, string_type()
-            );
+            const station_type station{
+                string_type{ TETENGO2_TEXT("A") }, local_type::instance(), false, true, string_type{}
+            };
         }
         {
-            const station_type station(
-                string_type(), local_type::instance(), false, false, string_type(TETENGO2_TEXT("N"))
-            );
+            const station_type station{
+                string_type{}, local_type::instance(), false, false, string_type{ TETENGO2_TEXT("N") }
+            };
         }
         {
-            const station_type station(
-                string_type(), local_type::instance(), false, false, string_type(TETENGO2_TEXT("NM"))
-            );
+            const station_type station{
+                string_type{}, local_type::instance(), false, false, string_type{ TETENGO2_TEXT("NM") }
+            };
         }
         {
-            const station_type station(
-                string_type(), local_type::instance(), false, false, string_type(1024 * 1024, TETENGO2_TEXT('Y'))
-            );
+            const station_type station{
+                string_type{}, local_type::instance(), false, false, string_type(1024 * 1024, TETENGO2_TEXT('Y'))
+            };
         }
     }
 #endif
@@ -114,74 +114,110 @@ BOOST_AUTO_TEST_SUITE(station)
         BOOST_TEST_PASSPOINT();
 
         {
-            const station_type station1(
-                string_type(TETENGO2_TEXT("A")), local_type::instance(), false, false, string_type(TETENGO2_TEXT("N"))
-            );
-            const station_type station2(
-                string_type(TETENGO2_TEXT("A")), local_type::instance(), false, false, string_type(TETENGO2_TEXT("N"))
-            );
+            const station_type station1{
+                string_type{ TETENGO2_TEXT("A") },
+                local_type::instance(),
+                false,
+                false,
+                string_type{ TETENGO2_TEXT("N") }
+            };
+            const station_type station2{
+                string_type{ TETENGO2_TEXT("A") },
+                local_type::instance(),
+                false,
+                false,
+                string_type{ TETENGO2_TEXT("N") }
+            };
 
             BOOST_CHECK(station1 == station2);
         }
         {
-            const station_type station1(
-                string_type(TETENGO2_TEXT("B")),
+            const station_type station1{
+                string_type{ TETENGO2_TEXT("B") },
                 principal_type::instance(),
                 false,
                 false,
-                string_type(TETENGO2_TEXT("N"))
-            );
-            const station_type station2(
-                string_type(TETENGO2_TEXT("B")),
+                string_type{ TETENGO2_TEXT("N") }
+            };
+            const station_type station2{
+                string_type{ TETENGO2_TEXT("B") },
                 principal_type::instance(),
                 false,
                 false,
-                string_type(TETENGO2_TEXT("N"))
-            );
+                string_type{ TETENGO2_TEXT("N") }
+            };
 
             BOOST_CHECK(station1 == station2);
         }
         {
-            const station_type station1(
-                string_type(TETENGO2_TEXT("A")), local_type::instance(), false, false, string_type(TETENGO2_TEXT("N"))
-            );
-            const station_type station2(
-                string_type(TETENGO2_TEXT("B")),
+            const station_type station1{
+                string_type{ TETENGO2_TEXT("A") },
+                local_type::instance(),
+                false,
+                false, 
+                string_type{ TETENGO2_TEXT("N") }
+            };
+            const station_type station2{
+                string_type{ TETENGO2_TEXT("B") },
                 principal_type::instance(),
                 false,
                 false,
-                string_type(TETENGO2_TEXT("N"))
-            );
+                string_type{ TETENGO2_TEXT("N") }
+            };
 
             BOOST_CHECK(station1 != station2);
         }
         {
-            const station_type station1(
-                string_type(TETENGO2_TEXT("A")), local_type::instance(), false, false, string_type(TETENGO2_TEXT("N"))
-            );
-            const station_type station2(
-                string_type(TETENGO2_TEXT("A")), local_type::instance(), true, false, string_type(TETENGO2_TEXT("N"))
-            );
+            const station_type station1{
+                string_type{ TETENGO2_TEXT("A") }, 
+                local_type::instance(), 
+                false, 
+                false, 
+                string_type{ TETENGO2_TEXT("N") }
+            };
+            const station_type station2{
+                string_type{ TETENGO2_TEXT("A") },
+                local_type::instance(), 
+                true, 
+                false, 
+                string_type{ TETENGO2_TEXT("N") }
+            };
 
             BOOST_CHECK(station1 != station2);
         }
         {
-            const station_type station1(
-                string_type(TETENGO2_TEXT("A")), local_type::instance(), false, false, string_type(TETENGO2_TEXT("N"))
-            );
-            const station_type station2(
-                string_type(TETENGO2_TEXT("A")), local_type::instance(), false, true, string_type(TETENGO2_TEXT("N"))
-            );
+            const station_type station1{
+                string_type{ TETENGO2_TEXT("A") },
+                local_type::instance(),
+                false, 
+                false,
+                string_type{ TETENGO2_TEXT("N") }
+            };
+            const station_type station2{
+                string_type{ TETENGO2_TEXT("A") },
+                local_type::instance(), 
+                false, 
+                true,
+                string_type{ TETENGO2_TEXT("N") }
+            };
 
             BOOST_CHECK(station1 != station2);
         }
         {
-            const station_type station1(
-                string_type(TETENGO2_TEXT("A")), local_type::instance(), false, false, string_type(TETENGO2_TEXT("N"))
-            );
-            const station_type station2(
-                string_type(TETENGO2_TEXT("A")), local_type::instance(), false, false, string_type(TETENGO2_TEXT("M"))
-            );
+            const station_type station1{
+                string_type{ TETENGO2_TEXT("A") },
+                local_type::instance(),
+                false,
+                false,
+                string_type{ TETENGO2_TEXT("N") }
+            };
+            const station_type station2{
+                string_type{ TETENGO2_TEXT("A") },
+                local_type::instance(),
+                false,
+                false,
+                string_type{ TETENGO2_TEXT("M") }
+            };
 
             BOOST_CHECK(station1 != station2);
         }
@@ -198,34 +234,42 @@ BOOST_AUTO_TEST_SUITE(station)
         BOOST_TEST_PASSPOINT();
 
         {
-            const station_type station(
-                string_type(), local_type::instance(), false, false, string_type(TETENGO2_TEXT("N"))
-            );
+            const station_type station{
+                string_type{}, local_type::instance(), false, false, string_type{ TETENGO2_TEXT("N") }
+            };
 
-            BOOST_CHECK(station.name() == string_type());
+            BOOST_CHECK(station.name() == string_type{});
         }
         {
-            const station_type station(
-                string_type(TETENGO2_TEXT("A")), local_type::instance(), false, false, string_type(TETENGO2_TEXT("N"))
-            );
+            const station_type station{
+                string_type{ TETENGO2_TEXT("A") },
+                local_type::instance(),
+                false,
+                false, 
+                string_type{ TETENGO2_TEXT("N") }
+            };
 
-            BOOST_CHECK(station.name() == string_type(TETENGO2_TEXT("A")));
+            BOOST_CHECK(station.name() == string_type{ TETENGO2_TEXT("A") });
         }
         {
-            const station_type station(
-                string_type(TETENGO2_TEXT("AB")), local_type::instance(), false, false, string_type(TETENGO2_TEXT("N"))
-            );
+            const station_type station{
+                string_type{ TETENGO2_TEXT("AB") }, 
+                local_type::instance(), 
+                false, 
+                false, 
+                string_type{ TETENGO2_TEXT("N") }
+            };
 
-            BOOST_CHECK(station.name() == string_type(TETENGO2_TEXT("AB")));
+            BOOST_CHECK(station.name() == string_type{ TETENGO2_TEXT("AB") });
         }
         {
-            const station_type station(
+            const station_type station{
                 string_type(1024 * 1024, TETENGO2_TEXT('X')),
                 local_type::instance(),
                 false,
                 false,
-                string_type(TETENGO2_TEXT("N"))
-            );
+                string_type{ TETENGO2_TEXT("N") }
+            };
 
             BOOST_CHECK(station.name() == string_type(1024 * 1024, TETENGO2_TEXT('X')));
         }
@@ -242,24 +286,24 @@ BOOST_AUTO_TEST_SUITE(station)
         BOOST_TEST_PASSPOINT();
 
         {
-            const station_type station(string_type(), local_type::instance(), false, false, string_type());
+            const station_type station{ string_type{}, local_type::instance(), false, false, string_type{} };
 
             BOOST_CHECK_EQUAL(&station.grade(), &local_type::instance());
         }
         {
-            const station_type station(string_type(), principal_type::instance(), false, false, string_type());
+            const station_type station{ string_type{}, principal_type::instance(), false, false, string_type{} };
 
             BOOST_CHECK_EQUAL(&station.grade(), &principal_type::instance());
         }
         {
-            const station_type station(string_type(), local_terminal_type::instance(), false, false, string_type());
+            const station_type station{ string_type{}, local_terminal_type::instance(), false, false, string_type{} };
 
             BOOST_CHECK_EQUAL(&station.grade(), &local_terminal_type::instance());
         }
         {
-            const station_type station(
-                string_type(), principal_terminal_type::instance(), false, false, string_type()
-            );
+            const station_type station{
+                string_type{}, principal_terminal_type::instance(), false, false, string_type{}
+            };
 
             BOOST_CHECK_EQUAL(&station.grade(), &principal_terminal_type::instance());
         }
@@ -276,12 +320,12 @@ BOOST_AUTO_TEST_SUITE(station)
         BOOST_TEST_PASSPOINT();
 
         {
-            const station_type station(string_type(), local_type::instance(), false, false, string_type());
+            const station_type station{ string_type{}, local_type::instance(), false, false, string_type{} };
 
             BOOST_CHECK(!station.shows_down_arrival_times());
         }
         {
-            const station_type station(string_type(), local_type::instance(), true, false, string_type());
+            const station_type station{ string_type{}, local_type::instance(), true, false, string_type{} };
 
             BOOST_CHECK(station.shows_down_arrival_times());
         }
@@ -298,12 +342,12 @@ BOOST_AUTO_TEST_SUITE(station)
         BOOST_TEST_PASSPOINT();
 
         {
-            const station_type station(string_type(), local_type::instance(), false, false, string_type());
+            const station_type station{ string_type{}, local_type::instance(), false, false, string_type{} };
 
             BOOST_CHECK(!station.shows_up_arrival_times());
         }
         {
-            const station_type station(string_type(), local_type::instance(), false, true, string_type());
+            const station_type station{ string_type{}, local_type::instance(), false, true, string_type{} };
 
             BOOST_CHECK(station.shows_up_arrival_times());
         }
@@ -320,28 +364,28 @@ BOOST_AUTO_TEST_SUITE(station)
         BOOST_TEST_PASSPOINT();
 
         {
-            const station_type station(string_type(), local_type::instance(), false, false, string_type());
+            const station_type station{ string_type{}, local_type::instance(), false, false, string_type{} };
 
-            BOOST_CHECK(station.note() == string_type());
+            BOOST_CHECK(station.note() == string_type{});
         }
         {
-            const station_type station(
-                string_type(), local_type::instance(), false, false, string_type(TETENGO2_TEXT("N"))
-            );
+            const station_type station{
+                string_type{}, local_type::instance(), false, false, string_type{ TETENGO2_TEXT("N") }
+            };
 
-            BOOST_CHECK(station.note() == string_type(TETENGO2_TEXT("N")));
+            BOOST_CHECK(station.note() == string_type{ TETENGO2_TEXT("N") });
         }
         {
-            const station_type station(
-                string_type(), local_type::instance(), false, false, string_type(TETENGO2_TEXT("NM"))
-            );
+            const station_type station{
+                string_type{}, local_type::instance(), false, false, string_type{ TETENGO2_TEXT("NM") }
+            };
 
-            BOOST_CHECK(station.note() == string_type(TETENGO2_TEXT("NM")));
+            BOOST_CHECK(station.note() == string_type{ TETENGO2_TEXT("NM") });
         }
         {
-            const station_type station(
-                string_type(), local_type::instance(), false, false, string_type(1024 * 1024, TETENGO2_TEXT('Y'))
-            );
+            const station_type station{
+                string_type{}, local_type::instance(), false, false, string_type(1024 * 1024, TETENGO2_TEXT('Y'))
+            };
 
             BOOST_CHECK(station.note() == string_type(1024 * 1024, TETENGO2_TEXT('Y')));
         }

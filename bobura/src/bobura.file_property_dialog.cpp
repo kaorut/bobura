@@ -296,7 +296,7 @@ namespace bobura
                     typename boost::mpl::at<
                         file_property_dialog_message_type_list_type,
                         message::file_property_dialog::type::ok_button_mouse_clicked
-                    >::type(m_base)
+                    >::type{ m_base }
                 );
 
                 return std::move(p_button);
@@ -311,7 +311,7 @@ namespace bobura
                     typename boost::mpl::at<
                         file_property_dialog_message_type_list_type,
                         message::file_property_dialog::type::cancel_button_mouse_clicked
-                    >::type(m_base)
+                    >::type{ m_base }
                 );
 
                 return std::move(p_button);
@@ -319,71 +319,71 @@ namespace bobura
 
             void locate_controls()
             {
-                m_base.set_client_dimension(dimension_type(width_type(36), height_type(21)));
+                m_base.set_client_dimension(dimension_type{ width_type{ 36 }, height_type{ 21 } });
 
-                const left_type label_left(2);
+                const left_type label_left{ 2 };
 
                 m_p_company_name_label->fit_to_content();
-                m_p_company_name_label->set_position(position_type(label_left, top_type(1)));
+                m_p_company_name_label->set_position(position_type{ label_left, top_type{ 1 } });
 
-                m_p_company_name_text_box->set_dimension(dimension_type(width_type(32), height_type(2)));
+                m_p_company_name_text_box->set_dimension(dimension_type{ width_type{ 32 }, height_type{ 2 } });
                 m_p_company_name_text_box->set_position(
-                    position_type(
+                    position_type{
                         label_left,
                         tetengo2::gui::position<position_type>::top(m_p_company_name_label->position()) +
-                            top_type::from(
-                                tetengo2::gui::dimension<dimension_type>::height(m_p_company_name_label->dimension())
-                            )
-                    )
+                        top_type::from(
+                            tetengo2::gui::dimension<dimension_type>::height(m_p_company_name_label->dimension())
+                        )
+                    }
                 );
 
                 m_p_line_name_label->fit_to_content();
-                m_p_line_name_label->set_position(position_type(label_left, top_type(5)));
+                m_p_line_name_label->set_position(position_type{ label_left, top_type{ 5 } });
 
-                m_p_line_name_text_box->set_dimension(dimension_type(width_type(32), height_type(2)));
+                m_p_line_name_text_box->set_dimension(dimension_type{ width_type{ 32 }, height_type{ 2 } });
                 m_p_line_name_text_box->set_position(
-                    position_type(
+                    position_type{
                         label_left,
                         tetengo2::gui::position<position_type>::top(m_p_line_name_label->position()) +
-                            top_type::from(
-                                tetengo2::gui::dimension<dimension_type>::height(m_p_line_name_label->dimension())
-                            )
-                    )
+                        top_type::from(
+                            tetengo2::gui::dimension<dimension_type>::height(m_p_line_name_label->dimension())
+                        )
+                    }
                 );
 
                 m_p_note_label->fit_to_content();
-                m_p_note_label->set_position(position_type(label_left, top_type(9)));
+                m_p_note_label->set_position(position_type{ label_left, top_type{ 9 } });
 
-                m_p_note_text_box->set_dimension(dimension_type(width_type(32), height_type(2)));
+                m_p_note_text_box->set_dimension(dimension_type{ width_type{ 32 }, height_type{ 2 } });
                 m_p_note_text_box->set_position(
-                    position_type(
+                    position_type{
                         label_left,
                         tetengo2::gui::position<position_type>::top(m_p_note_label->position()) +
-                            top_type::from(
-                                tetengo2::gui::dimension<dimension_type>::height(m_p_note_label->dimension())
-                            )
-                    )
+                        top_type::from(
+                            tetengo2::gui::dimension<dimension_type>::height(m_p_note_label->dimension())
+                        )
+                }
                 );
 
                 m_p_file_name_label->fit_to_content();
-                m_p_file_name_label->set_position(position_type(label_left, top_type(13)));
+                m_p_file_name_label->set_position(position_type{ label_left, top_type{ 13 } });
 
-                m_p_file_name_text_box->set_dimension(dimension_type(width_type(32), height_type(2)));
+                m_p_file_name_text_box->set_dimension(dimension_type{ width_type{ 32 }, height_type{ 2 } });
                 m_p_file_name_text_box->set_position(
-                    position_type(
+                    position_type{
                         label_left,
                         tetengo2::gui::position<position_type>::top(m_p_file_name_label->position()) +
-                            top_type::from(
-                                tetengo2::gui::dimension<dimension_type>::height(m_p_file_name_label->dimension())
-                            )
-                    )
+                        top_type::from(
+                            tetengo2::gui::dimension<dimension_type>::height(m_p_file_name_label->dimension())
+                        )
+                    }
                 );
 
-                m_p_ok_button->set_dimension(dimension_type(width_type(8), height_type(2)));
-                m_p_ok_button->set_position(position_type(left_type(17), top_type(18)));
+                m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_ok_button->set_position(position_type{ left_type{ 17 }, top_type{ 18 } });
 
-                m_p_cancel_button->set_dimension(dimension_type(width_type(8), height_type(2)));
-                m_p_cancel_button->set_position(position_type(left_type(26), top_type(18)));
+                m_p_cancel_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_cancel_button->set_position(position_type{ left_type{ 26 }, top_type{ 18 } });
             }
 
 
