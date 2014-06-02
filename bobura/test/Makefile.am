@@ -60,7 +60,7 @@ bobura_test_LDADD = \
     $(UNITTEST_LIBS)
 bobura_test_SOURCES = $(headers) $(sources)
 
-$(top_srcdir)/precompiled/precompiled.h.gch: $(top_srcdir)/precompiled/precompiled.h
+$(top_builddir)/precompiled/precompiled.h.gch: $(top_srcdir)/precompiled/precompiled.h
 	pushd $(top_builddir)/precompiled; \
 	$(MAKE) all; \
 	popd
