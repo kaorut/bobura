@@ -4,15 +4,22 @@
 
 EXTRA_DIST = precompiled.h precompiled.cpp
 
-all-local: $(top_srcdir)/precompiled/precompiled.h.gch
+PRECOMPILE_OUTPUT = $(top_builddir)/precompiled/precompiled.h.gch
+
+all-local: $(PRECOMPILE_OUTPUT)
 
 TETENGO2_CPPFLAGS = \
     -I$(TETENGO2_INCLUDE) \
     -I$(TETENGO2_DETAIL_INCLUDE) \
     -I$(TETENGO2_GUI_INCLUDE)
-
-$(top_srcdir)/precompiled/precompiled.h.gch: precompiled.h
-	test -z "$(PRECOMPILE_CPPFLAGS)" || $(CXX) $(CPPFLAGS) $(CXXFLAGS) $(TETENGO2_CPPFLAGS) $(BOOST_CPPFLAGS) $<
+PRECOMPILE_CXX = \
+    $(CXX) \
+    $(DEFS) \
+    $(DEFAULT_INCLUDES) $(INCLUDES) \
+    $(AM_CPPFLAGS) $(CPPFLAGS) $(TETENGO2_CPPFLAGS) \
+    $(AM_CXXFLAGS) $(CXXFLAGS)
+$(PRECOMPILE_OUTPUT): precompiled.h
+	test -z "$(PRECOMPILE_CPPFLAGS)" || $(PRECOMPILE_CXX) -o $(PRECOMPILE_OUTPUT) $<
 
 clean-local:
-	-test -z "$(PRECOMPILE_CPPFLAGS)" || rm -f $(top_srcdir)/precompiled/precompiled.h.gch
+	-test -z "$(PRECOMPILE_CPPFLAGS)" || rm -f $(PRECOMPILE_OUTPUT)
