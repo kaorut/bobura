@@ -144,18 +144,18 @@ $ ./bootstrap.sh
 ### Build Sequence
 
 Run `configure` to generate Makefiles. `--enable-precompilation` enables precompilation by generating `.gch` files.
-On some platform such as Linux, you have to link to librt.
+On some platform such as Linux, you have to link to librt, or if you use Cygwin, link to libiconv.
 
 In case you downloaded the source code archive and Tetengo2 is installed in the directory `/usr/local`:
 
 ~~~~{.sh}
-$ ./configure --with-tetengo2=/usr/local [--enable-precompilation] [LIBS=-lrt]
+$ ./configure --with-tetengo2=/usr/local [--enable-precompilation] [LIBS=-lrt|LIBS=-liconv]
 ~~~~
 
 In case you cloned the Git repository and checked Tetengo2 out as a submodule:
 
 ~~~~{.sh}
-$ ./configure --with-tetengo2=SUBMODULE [--enable-precompilation] [LIBS=-lrt]
+$ ./configure --with-tetengo2=SUBMODULE [--enable-precompilation] [LIBS=-lrt|LIBS=-liconv]
 ~~~~
 
 To install the libraries to your system, run make like this:
