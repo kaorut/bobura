@@ -70,6 +70,11 @@ test -z $DOXYGEN && \
     AC_MSG_WARN([You cannot generate documentation for lack of Doxygen.])
 
 #### Checks for libraries ####
+AC_CHECK_FUNC(sem_open, , [AC_CHECK_LIB(rt, sem_open)])
+AC_CHECK_LIB(pthread, pthread_cancel)
+AC_CHECK_LIB(bz2, BZ2_bzCompressInit)
+AC_CHECK_FUNC(iconv, , [AC_CHECK_LIB(iconv, libiconv)])
+
 AX_BOOST_BASE([1.55.0])
 AX_BOOST_CHRONO
 AX_BOOST_DATE_TIME
@@ -79,9 +84,7 @@ AX_BOOST_PROGRAM_OPTIONS
 AX_BOOST_SYSTEM
 AX_BOOST_THREAD
 AX_BOOST_UNIT_TEST_FRAMEWORK
-AC_CHECK_LIB(bz2, BZ2_bzCompressInit)
 AC_SUBST([LDFLAGS], "$LDFLAGS $BOOST_LDFLAGS")
-AC_SUBST([LIBS], "-lpthread $LIBS")
 AC_SUBST([LIBS], "$BOOST_CHRONO_LIB $LIBS")
 AC_SUBST([LIBS], "$BOOST_DATE_TIME_LIB $LIBS")
 AC_SUBST([LIBS], "$BOOST_FILESYSTEM_LIB $LIBS")
@@ -90,6 +93,7 @@ AC_SUBST([LIBS], "$BOOST_PROGRAM_OPTIONS_LIB $LIBS")
 AC_SUBST([LIBS], "$BOOST_SYSTEM_LIB $LIBS")
 AC_SUBST([LIBS], "$BOOST_THREAD_LIB $LIBS")
 AC_SUBST([UNITTEST_LIBS], "$BOOST_UNIT_TEST_FRAMEWORK_LIB")
+
 AC_ARG_WITH(
     tetengo2,
     AS_HELP_STRING(
@@ -112,7 +116,7 @@ AC_ARG_WITH(
     if test "x$TETENGO2" = "xSUBMODULE";
     then
         TETENGO2_INCLUDE="\$(top_srcdir)/lib/tetengo2/tetengo2/include";
-    elif -n "$TETENGO2";
+    elif test -n "$TETENGO2";
     then
         TETENGO2_INCLUDE="$TETENGO2/include";
     fi
@@ -128,7 +132,7 @@ AC_ARG_WITH(
     if test "x$TETENGO2" = "xSUBMODULE";
     then
         TETENGO2_LIB="\$(top_srcdir)/lib/tetengo2/tetengo2/src";
-    elif -n "$TETENGO2";
+    elif test -n "$TETENGO2";
     then
         TETENGO2_LIB="$TETENGO2/include"
     fi
@@ -144,7 +148,7 @@ AC_ARG_WITH(
     if test "x$TETENGO2" = "xSUBMODULE";
     then
         TETENGO2_DETAIL_INCLUDE="\$(top_srcdir)/lib/tetengo2/tetengo2_detail/include";
-    elif -n "$TETENGO2";
+    elif test -n "$TETENGO2";
     then
         TETENGO2_DETAIL_INCLUDE="$TETENGO2/include"
     fi
@@ -160,7 +164,7 @@ AC_ARG_WITH(
     if test "x$TETENGO2" = "xSUBMODULE";
     then
         TETENGO2_GUI_INCLUDE="\$(top_srcdir)/lib/tetengo2/tetengo2_gui/include";
-    elif -n "$TETENGO2";
+    elif test -n "$TETENGO2";
     then
         TETENGO2_GUI_INCLUDE="$TETENGO2/include"
     fi

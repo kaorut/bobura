@@ -103,6 +103,7 @@ You need the following tools in order to build Bubura and Tetengo2 libraries:
 - [GNU Make](http://www.gnu.org/)
 - [Boost C++ Libraries 1.55.0](http://www.boost.org/)
 - [bzip2](http://www.bzip.org)
+- [libiconv](http://www.gnu.org/) (on Cygwin)
 - [Doxygen 1.8.7](http://www.doxygen.org) (to generate API documents)
 - [Graphviz](http://www.graphviz.org) (to generate API documents)
 
@@ -144,18 +145,17 @@ $ ./bootstrap.sh
 ### Build Sequence
 
 Run `configure` to generate Makefiles. `--enable-precompilation` enables precompilation by generating `.gch` files.
-On some platform such as Linux, you have to link to librt, or if you use Cygwin, link to libiconv.
 
 In case you downloaded the source code archive and Tetengo2 is installed in the directory `/usr/local`:
 
 ~~~~{.sh}
-$ ./configure --with-tetengo2=/usr/local [--enable-precompilation] [LIBS=-lrt|LIBS=-liconv]
+$ ./configure --with-tetengo2=/usr/local [--enable-precompilation]
 ~~~~
 
 In case you cloned the Git repository and checked Tetengo2 out as a submodule:
 
 ~~~~{.sh}
-$ ./configure --with-tetengo2=SUBMODULE [--enable-precompilation] [LIBS=-lrt|LIBS=-liconv]
+$ ./configure --with-tetengo2=SUBMODULE [--enable-precompilation]
 ~~~~
 
 To install the libraries to your system, run make like this:
