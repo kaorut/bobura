@@ -50,7 +50,7 @@ namespace bobura
                 boost::mpl::at<view_type_list, type::view::view>::type,
                 bobura::view::diagram::zoom,
                 boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type
-            >::type;
+            >;
         using diagram_picture_box_type =
             diagram_picture_box<
                 boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
@@ -62,7 +62,7 @@ namespace bobura
             message::property_bar::type_list<
                 boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
                 boost::mpl::at<ui_type_list, type::ui::map_box>::type
-            >::type;
+            >;
         using property_bar_type =
             property_bar<
                 boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
@@ -83,7 +83,7 @@ namespace bobura
                 diagram_picture_box_type,
                 property_bar_type,
                 boost::mpl::at<load_save_type_list, type::load_save::confirm_file_save>::type
-            >::type;
+            >;
     }}
 #endif
 
@@ -128,7 +128,7 @@ namespace bobura
                     boost::mpl::at<model_type_list, type::model::model>::type,
                     boost::mpl::at<view_type_list, type::view::view>::type,
                     boost::mpl::at<main_window_type_list, type::main_window::main_window>::type
-                >::type
+                >
             >,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
@@ -138,7 +138,7 @@ namespace bobura
                     boost::mpl::at<model_type_list, type::model::model>::type,
                     boost::mpl::at<model_type_list, type::model::station_grade_type_set>::type,
                     boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
-                >::type
+                >
             >,
         tetengo2::meta::assoc_list_end
         >>;

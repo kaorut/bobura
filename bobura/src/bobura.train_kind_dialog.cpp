@@ -137,7 +137,7 @@ namespace bobura
             typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type;
 
         using train_kind_dialog_message_type_list_type =
-            typename message::train_kind_dialog::type_list<
+            message::train_kind_dialog::type_list<
                 info_set_type,
                 int_size_type,
                 base_type,
@@ -145,7 +145,7 @@ namespace bobura
                 typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
                 typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
                 message_catalog_type
-            >::type;
+            >;
 
         using dimension_type = typename base_type::dimension_type;
 
