@@ -10,6 +10,7 @@
 #define BOBURA_DETAILTYPELIST_H
 
 #include <boost/mpl/pair.hpp>
+#include <boost/predef.h>
 
 #if defined(USE_TETENGO2_DETAIL_TYPES_FOR_APPLICATION)
 #   include <tetengo2/detail/windows/alert.h>
