@@ -196,6 +196,8 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         property_bar_type property_bar{ window, settings, message_catalog };
         const window_resized_type observer{ view, window, diagram_picture_box, property_bar };
+
+        settings.clear_config();
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -213,6 +215,8 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         const window_resized_type observer{ view, window, diagram_picture_box, property_bar };
 
         observer();
+
+        settings.clear_config();
     }
 
 

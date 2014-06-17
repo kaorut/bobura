@@ -85,6 +85,8 @@ BOOST_AUTO_TEST_SUITE(station_selected)
         property_bar_type property_bar{ window, settings, message_catalog };
         const model_type model{};
         const station_selected_type station_selected{ property_bar, model, message_catalog };
+
+        settings.clear_config();
     }
 
 // This test case causes a segmentation fault on Linux.
@@ -113,6 +115,8 @@ BOOST_AUTO_TEST_SUITE(station_selected)
         };
         station_location_type station_location{ std::move(station), 42 };
         station_selected(station_location);
+
+        settings.clear_config();
     }
 #endif
 
@@ -132,6 +136,8 @@ BOOST_AUTO_TEST_SUITE(train_selected)
         property_bar_type property_bar{ window, settings, message_catalog };
         const model_type model{};
         const train_selected_type train_selected{ property_bar, model, message_catalog };
+
+        settings.clear_config();
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -165,6 +171,8 @@ BOOST_AUTO_TEST_SUITE(train_selected)
             string_type{ TETENGO2_TEXT("note") }
         };
         train_selected(train, boost::none);
+
+        settings.clear_config();
     }
 
 
@@ -182,6 +190,8 @@ BOOST_AUTO_TEST_SUITE(all_unselected)
         const message_catalog_type message_catalog{};
         property_bar_type property_bar{ window, settings, message_catalog };
         const all_unselected_type all_unselected{ property_bar };
+
+        settings.clear_config();
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -196,6 +206,8 @@ BOOST_AUTO_TEST_SUITE(all_unselected)
         all_unselected_type all_unselected{ property_bar };
 
         all_unselected();
+
+        settings.clear_config();
     }
 
 

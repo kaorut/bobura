@@ -46,6 +46,8 @@ BOOST_AUTO_TEST_SUITE(property_bar)
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const message_catalog_type message_catalog{};
         const property_bar_type property_bar{ window, settings, message_catalog };
+
+        settings.clear_config();
     }
 
     BOOST_AUTO_TEST_CASE(map_box)
@@ -60,6 +62,8 @@ BOOST_AUTO_TEST_SUITE(property_bar)
             const property_bar_type property_bar{ window, settings, message_catalog };
 
             property_bar.map_box();
+
+            settings.clear_config();
         }
         {
             window_type window{};
@@ -69,6 +73,8 @@ BOOST_AUTO_TEST_SUITE(property_bar)
             property_bar_type property_bar{ window, settings, message_catalog };
 
             property_bar.map_box();
+
+            settings.clear_config();
         }
     }
 
@@ -83,6 +89,8 @@ BOOST_AUTO_TEST_SUITE(property_bar)
         property_bar_type property_bar{ window, settings, message_catalog };
 
         property_bar.save_settings();
+
+        settings.clear_config();
     }
 
 

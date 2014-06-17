@@ -283,6 +283,14 @@ namespace bobura
             );
         }
 
+        /*!
+            \brief Clears the configuration.
+        */
+        void clear_config()
+        {
+            m_p_config->clear();
+        }
+
 
     private:
         // types
