@@ -19,6 +19,7 @@ BOOST_CHECK_EQUAL                                boost/test/unit_test.hpp
 BOOST_CHECK_LT                                   boost/test/unit_test.hpp
 BOOST_CHECK_THROW                                boost/test/unit_test.hpp
 BOOST_COMP_GNUC                                  boost/predef.h
+BOOST_COMP_MSVC                                  boost/predef.h
 BOOST_OS_CYGWIN                                  boost/predef.h
 BOOST_OS_LINUX                                   boost/predef.h
 BOOST_REQUIRE                                    boost/test/unit_test.hpp
