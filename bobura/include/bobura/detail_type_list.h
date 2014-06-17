@@ -36,10 +36,18 @@
 #else
 #   include <tetengo2/detail/stub/alert.h>
 #   include <tetengo2/detail/stub/common_dialog.h>
-#   include <tetengo2/detail/stub/config.h>
+#   if BOOST_COMP_MSVC
+#       include <tetengo2/detail/windows/config.h>
+#   else
+#       include <tetengo2/detail/unixos/config.h>
+#   endif
 #   include <tetengo2/detail/stub/cursor.h>
 #   include <tetengo2/detail/stub/drawing.h>
-#   include <tetengo2/detail/stub/encoding.h>
+#   if BOOST_COMP_MSVC
+#       include <tetengo2/detail/windows/encoding.h>
+#   else
+#       include <tetengo2/detail/unixos/encoding.h>
+#   endif
 #   include <tetengo2/detail/stub/gui_fixture.h>
 #   include <tetengo2/detail/stub/icon.h>
 #   include <tetengo2/detail/stub/menu.h>
@@ -115,11 +123,19 @@ namespace bobura
 #else
         using alert_type = tetengo2::detail::stub::alert;
         using common_dialog_type = tetengo2::detail::stub::common_dialog;
-        using config_type = tetengo2::detail::stub::config;
+#   if BOOST_COMP_MSVC
+        using config_type = tetengo2::detail::windows::config;
+#   else
+        using config_type = tetengo2::detail::unixos::config;
+#   endif
         using cursor_type = tetengo2::detail::stub::cursor;
         using drawing_type = tetengo2::detail::stub::drawing;
         using fast_drawing_type = tetengo2::detail::stub::drawing;
-        using encoding_type = tetengo2::detail::stub::encoding;
+#   if BOOST_COMP_MSVC
+        using encoding_type = tetengo2::detail::windows::encoding;
+#   else
+        using encoding_type = tetengo2::detail::unixos::encoding;
+#   endif
         struct gui_fixture_type
         {
             tetengo2::detail::stub::gui_fixture m_stub_gui_fixture;

@@ -24,7 +24,6 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 #include <tetengo2/detail/stub/drawing.h>
-#include <tetengo2/detail/stub/encoding.h>
 
 #include <bobura/model/message/timetable_observer_set.h>
 #include <bobura/model/serializer/reader.h>
@@ -44,6 +43,8 @@
 #include <bobura/model/train_info/time.h>
 #include <bobura/model/train_info/time_span.h>
 #include <bobura/model/train_kind.h>
+
+#include "test_bobura.model.detail_type_list.h"
 
 
 namespace test_bobura { namespace model
@@ -137,7 +138,9 @@ namespace test_bobura { namespace model
         using time_span_type = bobura::model::train_info::time_span<boost::mpl::at<type_list, type::difference>::type>;
         using time_type = bobura::model::train_info::time<boost::mpl::at<type_list, type::size>::type, time_span_type>;
         using stop_type =
-            bobura::model::train_info::stop<detail::model::time_type, boost::mpl::at<type_list, type::string>::type>;
+            bobura::model::train_info::stop<
+                test_bobura::model::detail::model::time_type, boost::mpl::at<type_list, type::string>::type
+            >;
         using train_type =
             bobura::model::train<
                 boost::mpl::at<type_list, type::string>::type, boost::mpl::at<type_list, type::size>::type, stop_type
@@ -237,7 +240,7 @@ namespace test_bobura { namespace model
             }
 
         };
-        using encoding_details_type = tetengo2::detail::stub::encoding;
+        using encoding_details_type = boost::mpl::at<detail_type_list, type::detail::encoding>::type;
         using internal_encoding_type =
             tetengo2::text::encoding::locale<boost::mpl::at<type_list, type::string>::type, encoding_details_type>;
         using timetable_file_encoding_type = tetengo2::text::encoding::locale<io_string_type, encoding_details_type>;
@@ -245,7 +248,7 @@ namespace test_bobura { namespace model
             tetengo2::text::encoder<internal_encoding_type, timetable_file_encoding_type>;
         using reader_set_type =
             bobura::model::serializer::reader_set<
-                detail::serialization::input_stream_iterator_type,
+                test_bobura::model::detail::serialization::input_stream_iterator_type,
                 boost::mpl::at<model_type_list, type::model::timetable>::type,
                 pull_parser_type,
                 boost::mpl::at<model_type_list, type::model::grade_type_set>::type,
