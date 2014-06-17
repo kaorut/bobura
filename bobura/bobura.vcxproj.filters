@@ -105,12 +105,6 @@
     <ClInclude Include="include\bobura\message\diagram_selection_observer_set.h">
       <Filter>headers\bobura\message</Filter>
     </ClInclude>
-    <ClInclude Include="include\bobura\diagram_view.h">
-      <Filter>headers\bobura\message</Filter>
-    </ClInclude>
-    <ClInclude Include="include\bobura\message\diagram_view.h">
-      <Filter>headers\bobura</Filter>
-    </ClInclude>
     <ClInclude Include="include\bobura\command\exit.h">
       <Filter>headers\bobura\command</Filter>
     </ClInclude>
@@ -260,6 +254,12 @@
     </ClInclude>
     <ClInclude Include="include\bobura\type_list.h">
       <Filter>headers\bobura</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bobura\diagram_view.h">
+      <Filter>headers\bobura</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bobura\message\diagram_view.h">
+      <Filter>headers\bobura\message</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

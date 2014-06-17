@@ -1,5 +1,5 @@
 /*! \file
-    \brief The definition of bobura::type_list.
+    \brief The definition of basic type lists for bobura.
 
     Copyright (C) 2007-2014 kaoru
 

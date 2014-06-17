@@ -1,5 +1,5 @@
 /*! \file
-    \brief The definition of bobura::view::diagram::utility.
+    \brief The definition of utilities for bobura::view::diagram.
 
     Copyright (C) 2007-2014 kaoru
 

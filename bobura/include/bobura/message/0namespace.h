@@ -18,6 +18,10 @@
     \brief The namespace for message observers of the diagram picture box.
 */
 
+/*! \namespace bobura::message::diagram_view
+    \brief The namespace for message observers of the diagram view.
+*/
+
 /*! \namespace bobura::message::file_property_dialog
     \brief The namespace for message observers of the file property dialog.
 */

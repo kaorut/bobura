@@ -1,5 +1,5 @@
 /*! \file
-    \brief The definition of bobura::message::type.
+    \brief The definition of type lists for bobura::message.
 
     Copyright (C) 2007-2014 kaoru
 
