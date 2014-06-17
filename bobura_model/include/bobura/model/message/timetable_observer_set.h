@@ -1,5 +1,5 @@
 /*! \file
-    \brief The definition of bobura::message::timetable_observer_set.
+    \brief The definition of bobura::model::message::timetable_observer_set.
 
     Copyright (C) 2007-2014 kaoru
 
