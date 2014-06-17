@@ -34,6 +34,8 @@ namespace
 
     using settings_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type;
 
+    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
+
 
     // functions
 
@@ -103,7 +105,9 @@ TETENGO2_STDALT_NOEXCEPT
 
     try
     {
-        settings_type settings{ boost::program_options::split_winmain(::GetCommandLineW()) };
+        settings_type settings{
+            boost::program_options::split_winmain(::GetCommandLineW()), string_type{ TETENGO2_TEXT("bobura") }
+        };
 
         set_locale(settings.message_directory_path());
 

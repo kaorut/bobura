@@ -36,6 +36,9 @@
     <ClInclude Include="test\test_bobura.model.type_list.h">
       <Filter>headers\test_bobura::model</Filter>
     </ClInclude>
+    <ClInclude Include="test\test_bobura.model.detail_type_list.h">
+      <Filter>headers\test_bobura::model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\precompiled\precompiled.cpp">
