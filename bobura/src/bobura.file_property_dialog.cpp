@@ -138,8 +138,7 @@ namespace bobura
             using transparent_background_type =
                 typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type;
 
-            using file_property_dialog_message_type_list_type =
-                typename message::file_property_dialog::type_list<base_type>::type;
+            using file_property_dialog_message_type_list_type = message::file_property_dialog::type_list<base_type>;
 
             using dimension_type = typename base_type::dimension_type;
 

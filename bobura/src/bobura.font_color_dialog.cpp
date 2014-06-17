@@ -221,7 +221,7 @@ namespace bobura
                 typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type;
 
             using font_color_dialog_message_type_list_type =
-                typename message::font_color_dialog::type_list<
+                message::font_color_dialog::type_list<
                     int_size_type,
                     base_type,
                     list_box_type,
@@ -229,7 +229,7 @@ namespace bobura
                     typename boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
                     typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
                     message_catalog_type
-                >::type;
+                >;
 
             using dimension_type = typename base_type::dimension_type;
 

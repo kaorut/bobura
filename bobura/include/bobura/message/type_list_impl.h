@@ -38,22 +38,12 @@ namespace bobura { namespace message
             \tparam MainWindow     A main window type.
         */
         template <typename TimetableModel, typename DiagramView, typename MainWindow>
-        class type_list
-        {
-        public:
-            // types
-
-            //! The type list for the timetable model.
-            using type =
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::reset, reset<TimetableModel, DiagramView, MainWindow>>,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::changed, changed<TimetableModel, DiagramView, MainWindow>>,
-                tetengo2::meta::assoc_list_end
-                >>;
-
-
-        };
+        using type_list =
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::reset, reset<TimetableModel, DiagramView, MainWindow>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::changed, changed<TimetableModel, DiagramView, MainWindow>>,
+            tetengo2::meta::assoc_list_end
+            >>;
     }
 
     namespace diagram_view
@@ -67,28 +57,18 @@ namespace bobura { namespace message
             \tparam MessageCatalog      A message catalog type.
         */
         template <typename PropertyBar, typename Model, typename StationGradeTypeSet, typename MessageCatalog>
-        class type_list
-        {
-        public:
-            // types
-
-            //! The type list for the timetable model.
-            using type =
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<
-                        type::station_selected,
-                        station_selected<PropertyBar, Model, StationGradeTypeSet, MessageCatalog>
-                    >,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<
-                        type::train_selected, train_selected<PropertyBar, Model, StationGradeTypeSet, MessageCatalog>
-                    >,
-                tetengo2::meta::assoc_list<boost::mpl::pair<type::all_unselected, all_unselected<PropertyBar>>,
-                tetengo2::meta::assoc_list_end
-                >>>;
-
-
-        };
+        using type_list =
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<
+                    type::station_selected, station_selected<PropertyBar, Model, StationGradeTypeSet, MessageCatalog>
+                >,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<
+                    type::train_selected, train_selected<PropertyBar, Model, StationGradeTypeSet, MessageCatalog>
+                >,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::all_unselected, all_unselected<PropertyBar>>,
+            tetengo2::meta::assoc_list_end
+            >>>;
     }
 
     namespace main_window
@@ -117,32 +97,21 @@ namespace bobura { namespace message
             typename PropertyBar,
             typename ConfirmFileSave
         >
-        class type_list
-        {
-        public:
-            // types
-
-            //! The type list for the main window.
-            using type =
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::popup_menu_selected, popup_menu_selected<PopupMenu, Command, Model>>,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<
-                        type::menu_command_selected, menu_command_selected<Command, Model, AbstractWindow>
-                    >,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::file_dropped, file_dropped<CommandSet, Model, AbstractWindow>>,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<
-                        type::window_resized, window_resized<View, AbstractWindow, DiagramPictureBox, PropertyBar>
-                    >,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::window_closing, window_closing<AbstractWindow, ConfirmFileSave>>,
-                tetengo2::meta::assoc_list_end
-                >>>>>;
-
-
-        };
+        using type_list =
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::popup_menu_selected, popup_menu_selected<PopupMenu, Command, Model>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::menu_command_selected, menu_command_selected<Command, Model, AbstractWindow>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::file_dropped, file_dropped<CommandSet, Model, AbstractWindow>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<
+                    type::window_resized, window_resized<View, AbstractWindow, DiagramPictureBox, PropertyBar>
+                >,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::window_closing, window_closing<AbstractWindow, ConfirmFileSave>>,
+            tetengo2::meta::assoc_list_end
+            >>>>>;
     }
 
     namespace diagram_picture_box
@@ -156,25 +125,18 @@ namespace bobura { namespace message
             \tparam Canvas     A canvas type.
         */
         template <typename PictureBox, typename View, typename ViewZoom, typename Canvas>
-        class type_list
-        {
-        public:
-            // types
-
-            //! The type list for the diagram picture box.
-            using type =
-                tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_pressed, mouse_pressed<PictureBox, View>>,
-                tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_released, mouse_released<PictureBox, View>>,
-                tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_moved, mouse_moved<PictureBox, View>>,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::mouse_wheeled, mouse_wheeled<PictureBox, View, ViewZoom>>,
-                tetengo2::meta::assoc_list<boost::mpl::pair<type::keyboard_key_down, keyboard_key_down<PictureBox>>,
-                tetengo2::meta::assoc_list<boost::mpl::pair<type::paint_paint, paint_paint<Canvas, PictureBox, View>>,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::scroll_bar_scrolled, scroll_bar_scrolled<PictureBox, View>>,
-                tetengo2::meta::assoc_list_end
-                >>>>>>>;
-        };
+        using type_list =
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_pressed, mouse_pressed<PictureBox, View>>,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_released, mouse_released<PictureBox, View>>,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_moved, mouse_moved<PictureBox, View>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::mouse_wheeled, mouse_wheeled<PictureBox, View, ViewZoom>>,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::keyboard_key_down, keyboard_key_down<PictureBox>>,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::paint_paint, paint_paint<Canvas, PictureBox, View>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::scroll_bar_scrolled, scroll_bar_scrolled<PictureBox, View>>,
+            tetengo2::meta::assoc_list_end
+            >>>>>>>;
     }
 
     namespace property_bar
@@ -186,18 +148,11 @@ namespace bobura { namespace message
             \tparam MapBox  A map box type.
         */
         template <typename SideBar, typename MapBox>
-        class type_list
-        {
-        public:
-            // types
-
-            //! The type list for the property bar.
-            using type =
-                tetengo2::meta::assoc_list<boost::mpl::pair<type::resized, resized<SideBar, MapBox>>,
-                tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_pressed, mouse_pressed<MapBox>>,
-                tetengo2::meta::assoc_list_end
-                >>;
-        };
+        using type_list =
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::resized, resized<SideBar, MapBox>>,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_pressed, mouse_pressed<MapBox>>,
+            tetengo2::meta::assoc_list_end
+            >>;
     }
 
     namespace oudia_diagram_dialog
@@ -208,22 +163,13 @@ namespace bobura { namespace message
             \tparam Dialog A dialog type.
         */
         template <typename Dialog>
-        class type_list
-        {
-        public:
-            // types
-
-            //! The type list for the file property dialog.
-            using type =
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::ok_button_mouse_clicked, ok_button_mouse_clicked<Dialog>>,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::cancel_button_mouse_clicked, cancel_button_mouse_clicked<Dialog>>,
-                tetengo2::meta::assoc_list_end
-                >>;
-
-
-        };
+        using type_list =
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::ok_button_mouse_clicked, ok_button_mouse_clicked<Dialog>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::cancel_button_mouse_clicked, cancel_button_mouse_clicked<Dialog>>,
+            tetengo2::meta::assoc_list_end
+            >>;
     }
 
     namespace file_property_dialog
@@ -234,22 +180,13 @@ namespace bobura { namespace message
             \tparam Dialog A dialog type.
         */
         template <typename Dialog>
-        class type_list
-        {
-        public:
-            // types
-
-            //! The type list for the file property dialog.
-            using type =
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::ok_button_mouse_clicked, ok_button_mouse_clicked<Dialog>>,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::cancel_button_mouse_clicked, cancel_button_mouse_clicked<Dialog>>,
-                tetengo2::meta::assoc_list_end
-                >>;
-
-
-        };
+        using type_list =
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::ok_button_mouse_clicked, ok_button_mouse_clicked<Dialog>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::cancel_button_mouse_clicked, cancel_button_mouse_clicked<Dialog>>,
+            tetengo2::meta::assoc_list_end
+            >>;
     }
 
     namespace font_color_dialog
@@ -274,40 +211,31 @@ namespace bobura { namespace message
             typename ColorDialog,
             typename MessageCatalog
         >
-        class type_list
-        {
-        public:
-            // types
-
-            //! The type list for the font and color dialog.
-            using type =
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<
-                        type::category_list_box_selection_changed, category_list_box_selection_changed<Size, ListBox>
-                    >,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<
-                        type::sample_picture_box_paint, sample_picture_box_paint<Size, Canvas, MessageCatalog>
-                    >,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<
-                        type::font_button_mouse_clicked,
-                        font_button_mouse_clicked<Size, Dialog, FontDialog, Canvas, MessageCatalog>
-                    >,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<
-                        type::color_button_mouse_clicked,
-                        color_button_mouse_clicked<Size, Dialog, ColorDialog, Canvas, MessageCatalog>
-                    >,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::ok_button_mouse_clicked, ok_button_mouse_clicked<Dialog>>,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::cancel_button_mouse_clicked, cancel_button_mouse_clicked<Dialog>>,
-                tetengo2::meta::assoc_list_end
-                >>>>>>;
-
-
-        };
+        using type_list =
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<
+                    type::category_list_box_selection_changed, category_list_box_selection_changed<Size, ListBox>
+                >,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<
+                    type::sample_picture_box_paint, sample_picture_box_paint<Size, Canvas, MessageCatalog>
+                >,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<
+                    type::font_button_mouse_clicked,
+                    font_button_mouse_clicked<Size, Dialog, FontDialog, Canvas, MessageCatalog>
+                >,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<
+                    type::color_button_mouse_clicked,
+                    color_button_mouse_clicked<Size, Dialog, ColorDialog, Canvas, MessageCatalog>
+                >,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::ok_button_mouse_clicked, ok_button_mouse_clicked<Dialog>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::cancel_button_mouse_clicked, cancel_button_mouse_clicked<Dialog>>,
+            tetengo2::meta::assoc_list_end
+            >>>>>>;
     }
 
     namespace train_kind_dialog
@@ -332,56 +260,40 @@ namespace bobura { namespace message
             typename ColorDialog,
             typename MessageCatalog
         >
-        class type_list
-        {
-        public:
-            // types
-
-            //! The type list for the font and color dialog.
-            using type =
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<
-                        type::train_kind_list_box_selection_changed,
-                        train_kind_list_box_selection_changed<Size, ListBox>
-                    >,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<
-                        type::add_button_mouse_clicked, add_button_mouse_clicked<InfoSet, Size, MessageCatalog>
-                    >,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::delete_button_mouse_clicked, delete_button_mouse_clicked<InfoSet, Size>>,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::up_button_mouse_clicked, up_button_mouse_clicked<InfoSet, Size>>,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::down_button_mouse_clicked, down_button_mouse_clicked<InfoSet, Size>>,
-                tetengo2::meta::assoc_list<boost::mpl::pair<type::name_text_box_changed, name_text_box_changed>,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::abbreviation_text_box_changed, abbreviation_text_box_changed>,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<
-                        type::color_button_mouse_clicked, color_button_mouse_clicked<Dialog, ColorDialog>
-                    >,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<
-                        type::weight_dropdown_box_selection_changed, weight_dropdown_box_selection_changed
-                    >,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<
-                        type::line_style_dropdown_box_selection_changed, line_style_dropdown_box_selection_changed
-                    >,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<
-                        type::sample_picture_box_paint, sample_picture_box_paint<InfoSet, Size, Canvas>
-                    >,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::ok_button_mouse_clicked, ok_button_mouse_clicked<Dialog>>,
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::cancel_button_mouse_clicked, cancel_button_mouse_clicked<Dialog>>,
-                tetengo2::meta::assoc_list_end
-                >>>>>>>>>>>>>;
-
-
-        };
+        using type_list =
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<
+                    type::train_kind_list_box_selection_changed, train_kind_list_box_selection_changed<Size, ListBox>
+                >,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<
+                    type::add_button_mouse_clicked, add_button_mouse_clicked<InfoSet, Size, MessageCatalog>
+                >,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::delete_button_mouse_clicked, delete_button_mouse_clicked<InfoSet, Size>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::up_button_mouse_clicked, up_button_mouse_clicked<InfoSet, Size>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::down_button_mouse_clicked, down_button_mouse_clicked<InfoSet, Size>>,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::name_text_box_changed, name_text_box_changed>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::abbreviation_text_box_changed, abbreviation_text_box_changed>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::color_button_mouse_clicked, color_button_mouse_clicked<Dialog, ColorDialog>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::weight_dropdown_box_selection_changed, weight_dropdown_box_selection_changed>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<
+                    type::line_style_dropdown_box_selection_changed, line_style_dropdown_box_selection_changed
+                >,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::sample_picture_box_paint, sample_picture_box_paint<InfoSet, Size, Canvas>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::ok_button_mouse_clicked, ok_button_mouse_clicked<Dialog>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::cancel_button_mouse_clicked, cancel_button_mouse_clicked<Dialog>>,
+            tetengo2::meta::assoc_list_end
+            >>>>>>>>>>>>>;
     }
 
     namespace about_dialog
@@ -392,20 +304,11 @@ namespace bobura { namespace message
             \tparam Dialog A dialog type.
         */
         template <typename Dialog>
-        class type_list
-        {
-        public:
-            // types
-
-            //! The type list for the about dialog.
-            using type =
-                tetengo2::meta::assoc_list<
-                    boost::mpl::pair<type::ok_button_mouse_clicked, ok_button_mouse_clicked<Dialog>>,
-                tetengo2::meta::assoc_list_end
-                >;
-
-
-        };
+        using type_list =
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<type::ok_button_mouse_clicked, ok_button_mouse_clicked<Dialog>>,
+            tetengo2::meta::assoc_list_end
+            >;
     }
 
 
