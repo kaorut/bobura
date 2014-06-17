@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_SUITE(property_bar)
 
         window_type window{};
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments };
+        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const message_catalog_type message_catalog{};
         const property_bar_type property_bar{ window, settings, message_catalog };
     }
@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_SUITE(property_bar)
         {
             window_type window{};
             const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-            settings_type settings{ arguments };
+            settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
             const message_catalog_type message_catalog{};
             const property_bar_type property_bar{ window, settings, message_catalog };
 
@@ -64,7 +64,7 @@ BOOST_AUTO_TEST_SUITE(property_bar)
         {
             window_type window{};
             const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-            settings_type settings{ arguments };
+            settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
             const message_catalog_type message_catalog{};
             property_bar_type property_bar{ window, settings, message_catalog };
 
@@ -78,7 +78,7 @@ BOOST_AUTO_TEST_SUITE(property_bar)
 
         window_type window{};
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments };
+        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const message_catalog_type message_catalog{};
         property_bar_type property_bar{ window, settings, message_catalog };
 

@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_SUITE(reset)
         const message_catalog_type message_catalog{};
         view_type view{ model, message_catalog };
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        const settings_type settings{ arguments };
+        const settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const save_to_file_type save_to_file{ false, message_catalog };
         const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
         main_window_type main_window{ message_catalog, settings, confirm_file_save };
@@ -116,7 +116,7 @@ BOOST_AUTO_TEST_SUITE(reset)
         const message_catalog_type message_catalog{};
         view_type view{ model, message_catalog };
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        const settings_type settings{ arguments };
+        const settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const save_to_file_type save_to_file{ false, message_catalog };
         const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
         main_window_type main_window{ message_catalog, settings, confirm_file_save };
@@ -140,7 +140,7 @@ BOOST_AUTO_TEST_SUITE(changed)
         const message_catalog_type message_catalog{};
         view_type view{ model, message_catalog };
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        const settings_type settings{ arguments };
+        const settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const save_to_file_type save_to_file{ false, message_catalog };
         const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
         main_window_type main_window{ message_catalog, settings, confirm_file_save };
@@ -157,7 +157,7 @@ BOOST_AUTO_TEST_SUITE(changed)
         const message_catalog_type message_catalog{};
         view_type view{ model, message_catalog };
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        const settings_type settings{ arguments };
+        const settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const save_to_file_type save_to_file{ false, message_catalog };
         const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
         main_window_type main_window{ message_catalog, settings, confirm_file_save };

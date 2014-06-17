@@ -193,7 +193,7 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         window_type window{};
         diagram_picture_box_type diagram_picture_box{ window };
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ settings_arguments };
+        settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         property_bar_type property_bar{ window, settings, message_catalog };
         const window_resized_type observer{ view, window, diagram_picture_box, property_bar };
     }
@@ -208,7 +208,7 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         window_type window{};
         diagram_picture_box_type diagram_picture_box{ window };
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ settings_arguments };
+        settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         property_bar_type property_bar{ window, settings, message_catalog };
         const window_resized_type observer{ view, window, diagram_picture_box, property_bar };
 

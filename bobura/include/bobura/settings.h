@@ -72,14 +72,15 @@ namespace bobura
             \brief Creates settings.
 
             \param command_line_arguments Command line arguments.
+            \param config_group_name      A group name for the configuration.
         */
-        explicit settings(const std::vector<string_type>& command_line_arguments)
+        explicit settings(const std::vector<string_type>& command_line_arguments, string_type config_group_name)
         :
         m_base_path(),
         m_input(),
         m_p_config()
         {
-            initialize(command_line_arguments);
+            initialize(command_line_arguments, std::move(config_group_name));
         }
 
 
@@ -376,11 +377,14 @@ namespace bobura
             return value_impl<T, Str>()();
         }
 
-        static std::unique_ptr<config_base_type> create_config(const boost::program_options::variables_map& options)
+        static std::unique_ptr<config_base_type> create_config(
+            const boost::program_options::variables_map& options,
+            string_type                                  group_name
+        )
         {
             std::vector<std::unique_ptr<config_base_type>> p_configs{};
             p_configs.push_back(create_temporary_config(options));
-            p_configs.push_back(create_persistent_config());
+            p_configs.push_back(create_persistent_config(std::move(group_name)));
 
             return tetengo2::stdalt::make_unique<config_list_type>(std::move(p_configs));
         }
@@ -448,11 +452,11 @@ namespace bobura
             }
         }
 
-        static std::unique_ptr<config_base_type> create_persistent_config()
+        static std::unique_ptr<config_base_type> create_persistent_config(string_type group_name)
         {
             return
                 tetengo2::stdalt::make_unique<cached_config_type>(
-                    tetengo2::stdalt::make_unique<persistent_config_type>(string_type{ TETENGO2_TEXT("bobura") })
+                    tetengo2::stdalt::make_unique<persistent_config_type>(std::move(group_name))
                 );
         }
 
@@ -468,7 +472,7 @@ namespace bobura
 
         // functions
 
-        void initialize(const std::vector<string_type>& command_line_arguments)
+        void initialize(const std::vector<string_type>& command_line_arguments, string_type config_group_name)
         {
             const auto options = parse_command_line_arguments(command_line_arguments);
 
@@ -482,7 +486,7 @@ namespace bobura
                     m_input = boost::make_optional<string_type>(input_values[0]);
             }
 
-            m_p_config = create_config(options);
+            m_p_config = create_config(options, std::move(config_group_name));
         }
 
 
