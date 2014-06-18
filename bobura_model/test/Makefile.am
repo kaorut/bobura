@@ -3,6 +3,7 @@
 # $Id$
 
 headers = \
+    test_bobura.model.detail_type_list.h \
     test_bobura.model.type_list.h
 
 extra_headers =
