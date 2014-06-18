@@ -209,9 +209,10 @@ namespace test_bobura { namespace model
         using input_stream_iterator_type =
             boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
         using grammar_type = tetengo2::text::grammar::json<input_stream_iterator_type>;
-        using push_parser_type = tetengo2::text::push_parser<input_stream_iterator_type, grammar_type, int, double>;
         using pull_parser_type =
-            tetengo2::text::pull_parser<push_parser_type, boost::mpl::at<type_list, type::size>::type>;
+            tetengo2::text::pull_parser<
+                input_stream_iterator_type, grammar_type, int, double, boost::mpl::at<type_list, type::size>::type
+            >;
         struct select_oudia_diagram_type
         {
             using string_type = boost::mpl::at<type_list, type::string>::type;

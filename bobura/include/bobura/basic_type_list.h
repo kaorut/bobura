@@ -90,9 +90,8 @@ namespace bobura
         using input_stream_iterator_type =
             boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
         using json_grammar_type = tetengo2::text::grammar::json<input_stream_iterator_type>;
-        using push_parser_type =
-            tetengo2::text::push_parser<input_stream_iterator_type, json_grammar_type, int, double>;
-        using pull_parser_type = tetengo2::text::pull_parser<push_parser_type, size_type>;
+        using pull_parser_type =
+            tetengo2::text::pull_parser<input_stream_iterator_type, json_grammar_type, int, double, size_type>;
         using path_type = boost::filesystem::path;
     }
 #endif
