@@ -155,8 +155,9 @@ namespace bobura
             tetengo2::text::encoder<internal_encoding_type, message_catalog_encoding_type>;
         using message_catalog_parser_type =
             tetengo2::message::message_catalog_parser<
-                boost::mpl::at<common_type_list, type::pull_parser>::type,
+                boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
                 boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<common_type_list, type::size>::type,
                 message_catalog_encoder_type
             >;
         using locale_name_encoder_type = tetengo2::text::encoder<internal_encoding_type, locale_name_encoding_type>;
