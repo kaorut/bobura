@@ -389,23 +389,20 @@ namespace bobura
             >;
         using widget_traits_type =
             tetengo2::gui::widget::traits::widget_traits<
-                widget_canvas_type,
-                alert_type,
+                unit_size_type,
+                unit_difference_type,
+                boost::mpl::at<common_type_list, type::string>::type,
                 position_type,
                 dimension_type,
-                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<common_type_list, type::path>::type,
                 boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                background_type,
-                font_type,
-                system_cursor_type,
-                scroll_bar_type,
-                tetengo2::gui::message::size_observer_set,
-                tetengo2::gui::message::focus_observer_set,
-                tetengo2::gui::message::paint_observer_set<canvas_type>,
-                tetengo2::gui::message::keyboard_observer_set<
-                    virtual_key_type, boost::mpl::at<common_type_list, type::string>::type::value_type
-                >,
-                mouse_observer_set_type
+                boost::mpl::at<locale_type_list, type::locale::exception_encoder>::type,
+                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
+                boost::mpl::at<detail_type_list, type::detail::icon>::type,
+                boost::mpl::at<detail_type_list, type::detail::alert>::type,
+                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
+                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
+                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
             >;
         using widget_type =
             tetengo2::gui::widget::widget<
@@ -435,11 +432,7 @@ namespace bobura
             >;
         using abstract_window_traits_type =
             tetengo2::gui::widget::traits::abstract_window_traits<
-                widget_traits_type,
-                icon_type,
-                menu_bar_type,
-                tetengo2::gui::message::window_observer_set,
-                tetengo2::gui::message::file_drop_observer_set<boost::mpl::at<common_type_list, type::path>::type>
+                widget_traits_type, boost::mpl::at<detail_type_list, type::detail::menu>::type
             >;
         using abstract_window_type =
             tetengo2::gui::widget::abstract_window<
