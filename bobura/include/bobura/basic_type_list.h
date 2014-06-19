@@ -90,9 +90,8 @@ namespace bobura
         using input_stream_iterator_type =
             boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
         using json_grammar_type = tetengo2::text::grammar::json<input_stream_iterator_type>;
-        using push_parser_type =
-            tetengo2::text::push_parser<input_stream_iterator_type, json_grammar_type, int, double>;
-        using pull_parser_type = tetengo2::text::pull_parser<push_parser_type, size_type>;
+        using pull_parser_type =
+            tetengo2::text::pull_parser<input_stream_iterator_type, json_grammar_type, int, double, size_type>;
         using path_type = boost::filesystem::path;
     }
 #endif
@@ -154,17 +153,23 @@ namespace bobura
             >;
         using message_catalog_encoder_type =
             tetengo2::text::encoder<internal_encoding_type, message_catalog_encoding_type>;
-        using message_catalog_parser_type =
-            tetengo2::message::message_catalog_parser<
-                boost::mpl::at<common_type_list, type::pull_parser>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                message_catalog_encoder_type
-            >;
         using locale_name_encoder_type = tetengo2::text::encoder<internal_encoding_type, locale_name_encoding_type>;
         using messages_type =
             tetengo2::message::messages<
                 boost::mpl::at<common_type_list, type::path>::type,
-                message_catalog_parser_type,
+                boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<common_type_list, type::size>::type,
+                message_catalog_encoder_type,
+                locale_name_encoder_type
+            >;
+        using message_catalog_type =
+            tetengo2::message::message_catalog<
+                boost::mpl::at<common_type_list, type::path>::type,
+                boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<common_type_list, type::size>::type,
+                message_catalog_encoder_type,
                 locale_name_encoder_type
             >;
         using timetable_file_encoding_type = utf8_encoding_type;
@@ -196,9 +201,7 @@ namespace bobura
             >,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::locale::messages_facet, detail::locale::messages_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::locale::message_catalog, tetengo2::message::message_catalog<detail::locale::messages_type>
-            >,
+            boost::mpl::pair<type::locale::message_catalog, detail::locale::message_catalog_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::locale::timetable_file_encoder, detail::locale::timetable_file_encoder_type>,
         tetengo2::meta::assoc_list<
