@@ -163,6 +163,15 @@ namespace bobura
                 message_catalog_encoder_type,
                 locale_name_encoder_type
             >;
+        using message_catalog_type =
+            tetengo2::message::message_catalog<
+                boost::mpl::at<common_type_list, type::path>::type,
+                boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<common_type_list, type::size>::type,
+                message_catalog_encoder_type,
+                locale_name_encoder_type
+            >;
         using timetable_file_encoding_type = utf8_encoding_type;
         using timetable_file_encoder_type =
             tetengo2::text::encoder<internal_encoding_type, timetable_file_encoding_type>;
@@ -192,9 +201,7 @@ namespace bobura
             >,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::locale::messages_facet, detail::locale::messages_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::locale::message_catalog, tetengo2::message::message_catalog<detail::locale::messages_type>
-            >,
+            boost::mpl::pair<type::locale::message_catalog, detail::locale::message_catalog_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::locale::timetable_file_encoder, detail::locale::timetable_file_encoder_type>,
         tetengo2::meta::assoc_list<
