@@ -271,18 +271,15 @@ namespace bobura
                 boost::mpl::at<detail_type_list, type::detail::unit>::type
             >;
         using dimension_type = std::pair<unit_size_type, unit_size_type>;
-        using color_type = tetengo2::gui::drawing::color<unsigned char>;
         using background_type =
             tetengo2::gui::drawing::background<boost::mpl::at<detail_type_list, type::detail::drawing>::type>;
         using fast_background_type =
             tetengo2::gui::drawing::background<boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type>;
         using solid_background_type =
-            tetengo2::gui::drawing::solid_background<
-                color_type, boost::mpl::at<detail_type_list, type::detail::drawing>::type
-            >;
+            tetengo2::gui::drawing::solid_background<boost::mpl::at<detail_type_list, type::detail::drawing>::type>;
         using fast_solid_background_type =
             tetengo2::gui::drawing::solid_background<
-                color_type, boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
+                boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
             >;
         using transparent_background_type =
             tetengo2::gui::drawing::transparent_background<
@@ -320,6 +317,7 @@ namespace bobura
                 boost::mpl::at<common_type_list, type::path>::type,
                 boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
             >;
+        using color_type = tetengo2::gui::drawing::color<unsigned char>;
         using icon_type =
             tetengo2::gui::icon<
                 boost::mpl::at<common_type_list, type::path>::type,
