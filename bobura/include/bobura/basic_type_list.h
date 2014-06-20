@@ -310,8 +310,8 @@ namespace bobura
             >;
         using picture_reader_type =
             tetengo2::gui::drawing::picture_reader<
-                picture_type,
                 boost::mpl::at<common_type_list, type::path>::type,
+                dimension_type,
                 boost::mpl::at<detail_type_list, type::detail::drawing>::type
             >;
         using fast_picture_reader_type =
