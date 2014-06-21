@@ -517,7 +517,7 @@ namespace bobura
             >;
         using system_color_set_type =
             tetengo2::gui::drawing::system_color_set<
-                color_type, boost::mpl::at<detail_type_list, type::detail::system_color>::type
+                boost::mpl::at<detail_type_list, type::detail::system_color>::type
             >;
         using shell_type =
             tetengo2::gui::shell<
