@@ -92,7 +92,7 @@ namespace test_bobura { namespace model
             boost::mpl::pair<
                 type::font, tetengo2::gui::drawing::font<std::string, std::size_t, detail::drawing_details_type>
             >,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::color, tetengo2::gui::drawing::color<unsigned char>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::color, tetengo2::gui::drawing::color>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::abstract_window, detail::abstract_window_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::message_catalog, detail::message_catalog_type>,
         tetengo2::meta::assoc_list_end

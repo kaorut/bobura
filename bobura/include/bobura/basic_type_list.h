@@ -469,7 +469,7 @@ namespace bobura
                 boost::mpl::at<detail_type_list, type::detail::widget>::type,
                 boost::mpl::at<detail_type_list, type::detail::message_handler>::type
             >;
-        using color_type = tetengo2::gui::drawing::color<unsigned char>;
+        using color_type = tetengo2::gui::drawing::color;
         using control_traits_type = tetengo2::gui::widget::traits::control_traits<widget_traits_type, color_type>;
         using control_type =
             tetengo2::gui::widget::control<
