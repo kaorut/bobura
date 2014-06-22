@@ -313,30 +313,21 @@ namespace bobura
             >;
         using fast_picture_reader_type =
             tetengo2::gui::drawing::picture_reader<
-                fast_picture_type,
-                boost::mpl::at<common_type_list, type::path>::type,
-                boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
-            >;
-        using color_type = tetengo2::gui::drawing::color<unsigned char>;
-        using icon_type =
-            tetengo2::gui::icon<
                 boost::mpl::at<common_type_list, type::path>::type,
                 dimension_type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type
+                boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
             >;
         using canvas_traits_type =
             tetengo2::gui::drawing::canvas_traits<
                 unit_size_type,
+                boost::mpl::at<common_type_list, type::size>::type,
                 boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<common_type_list, type::path>::type,
                 position_type,
                 dimension_type,
                 boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                color_type,
-                background_type,
-                solid_background_type,
-                font_type,
-                picture_type,
-                icon_type
+                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
+                boost::mpl::at<detail_type_list, type::detail::icon>::type
             >;
         using widget_canvas_type =
             tetengo2::gui::drawing::widget_canvas<
@@ -346,16 +337,14 @@ namespace bobura
         using fast_canvas_traits_type =
             tetengo2::gui::drawing::canvas_traits<
                 unit_size_type,
+                boost::mpl::at<common_type_list, type::size>::type,
                 boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<common_type_list, type::path>::type,
                 position_type,
                 dimension_type,
                 boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                color_type,
-                fast_background_type,
-                fast_solid_background_type,
-                fast_font_type,
-                fast_picture_type,
-                icon_type
+                boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type,
+                boost::mpl::at<detail_type_list, type::detail::icon>::type
             >;
         using fast_widget_canvas_type =
             tetengo2::gui::drawing::widget_canvas<
@@ -427,6 +416,12 @@ namespace bobura
             tetengo2::gui::menu::shortcut_key_table<
                 shortcut_key_type, menu_base_type, boost::mpl::at<detail_type_list, type::detail::menu>::type
             >;
+        using icon_type =
+            tetengo2::gui::icon<
+                boost::mpl::at<common_type_list, type::path>::type,
+                dimension_type,
+                boost::mpl::at<detail_type_list, type::detail::icon>::type
+            >;
         using menu_bar_type =
             tetengo2::gui::menu::menu_bar<
                 menu_traits_type, shortcut_key_table_type, boost::mpl::at<detail_type_list, type::detail::menu>::type
@@ -474,6 +469,7 @@ namespace bobura
                 boost::mpl::at<detail_type_list, type::detail::widget>::type,
                 boost::mpl::at<detail_type_list, type::detail::message_handler>::type
             >;
+        using color_type = tetengo2::gui::drawing::color<unsigned char>;
         using control_traits_type = tetengo2::gui::widget::traits::control_traits<widget_traits_type, color_type>;
         using control_type =
             tetengo2::gui::widget::control<
