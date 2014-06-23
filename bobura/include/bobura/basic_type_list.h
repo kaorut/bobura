@@ -325,30 +325,21 @@ namespace bobura
                 boost::mpl::at<common_type_list, type::path>::type,
                 position_type,
                 dimension_type,
-                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type
+                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type
             >;
         using widget_canvas_type =
             tetengo2::gui::drawing::widget_canvas<
-                canvas_traits_type, boost::mpl::at<detail_type_list, type::detail::drawing>::type
+                canvas_traits_type,
+                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
+                boost::mpl::at<detail_type_list, type::detail::icon>::type
+
             >;
         using canvas_type = widget_canvas_type::base_type;
-        using fast_canvas_traits_type =
-            tetengo2::gui::drawing::canvas_traits<
-                unit_size_type,
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<common_type_list, type::path>::type,
-                position_type,
-                dimension_type,
-                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type
-            >;
         using fast_widget_canvas_type =
             tetengo2::gui::drawing::widget_canvas<
-                fast_canvas_traits_type, boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
+                canvas_traits_type,
+                boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type,
+                boost::mpl::at<detail_type_list, type::detail::icon>::type
             >;
         using fast_canvas_type = fast_widget_canvas_type::base_type;
         using alert_type =
