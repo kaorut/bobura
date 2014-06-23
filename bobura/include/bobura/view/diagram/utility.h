@@ -135,9 +135,9 @@ namespace bobura { namespace view { namespace diagram
         {
             using color_type = typename Canvas::color_type;
             using line_style_type = typename Canvas::line_style_type;
-            using size_type = typename Canvas::size_type;
+            using unit_size_type = typename Canvas::unit_size_type;
 
-            auto original_color = canvas.color();
+            auto original_color = canvas.get_color();
             const auto original_line_style = canvas.line_style();
             auto original_line_width = canvas.line_width();
 
@@ -146,10 +146,10 @@ namespace bobura { namespace view { namespace diagram
             );
             canvas.set_line_style(line_style_type::solid);
 
-            canvas.set_line_width(original_line_width + selected_line_margin<size_type>() * 2);
+            canvas.set_line_width(original_line_width + selected_line_margin<unit_size_type>() * 2);
             canvas.draw_line(from, to);
 
-            canvas.set_line_width(original_line_width + selected_line_margin<size_type>());
+            canvas.set_line_width(original_line_width + selected_line_margin<unit_size_type>());
             canvas.draw_line(from, to);
 
             canvas.set_color(std::move(original_color));

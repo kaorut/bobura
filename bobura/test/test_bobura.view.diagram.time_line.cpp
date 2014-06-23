@@ -47,8 +47,6 @@ namespace
 
     using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
 
-    using size_type = picture_box_type::size_type;
-
     using position_type = picture_box_type::position_type;
 
     using left_type = tetengo2::gui::position<position_type>::left_type;
@@ -64,6 +62,8 @@ namespace
     using horizontal_scale_type = width_type::value_type;
 
     using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
+
+    using unit_size_type = canvas_type::unit_size_type;
 
     using font_type = canvas_type::font_type;
 
@@ -93,7 +93,7 @@ BOOST_AUTO_TEST_SUITE(time_line)
             left_type{ 42 },
             top_type{ 24 },
             top_type{ 42 },
-            size_type{ size_type::value_type{ 1, 2 } },
+            unit_size_type{ unit_size_type::value_type{ 1, 2 } },
             boost::make_optional<time_type::tick_type>(12)
         };
         const time_line_type time_line2{ std::move(time_line1) };
@@ -109,7 +109,7 @@ BOOST_AUTO_TEST_SUITE(time_line)
             left_type{ 42 },
             top_type{ 24 },
             top_type{ 42 },
-            size_type{ size_type::value_type{ 1, 2 } },
+            unit_size_type{ unit_size_type::value_type{ 1, 2 } },
             boost::make_optional<time_type::tick_type>(12)
         };
         time_line_type time_line2{
@@ -117,7 +117,7 @@ BOOST_AUTO_TEST_SUITE(time_line)
             left_type{ 42 },
             top_type{ 24 },
             top_type{ 42 },
-            size_type{ size_type::value_type{ 1, 2 } },
+            unit_size_type{ unit_size_type::value_type{ 1, 2 } },
             boost::make_optional<time_type::tick_type>(12)
         };
 
