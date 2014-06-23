@@ -353,7 +353,6 @@ namespace bobura
         using scroll_bar_type =
             tetengo2::gui::scroll_bar<
                 boost::mpl::at<common_type_list, type::size>::type,
-                tetengo2::gui::message::scroll_bar_observer_set<boost::mpl::at<common_type_list, type::size>::type>,
                 boost::mpl::at<detail_type_list, type::detail::scroll>::type
             >;
         using virtual_key_type =
