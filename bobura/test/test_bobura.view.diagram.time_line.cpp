@@ -63,7 +63,7 @@ namespace
 
     using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
 
-    using unit_size_type = canvas_type::size_type;
+    using unit_size_type = canvas_type::unit_size_type;
 
     using font_type = canvas_type::font_type;
 

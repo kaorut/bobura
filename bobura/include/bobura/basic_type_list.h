@@ -319,8 +319,8 @@ namespace bobura
             >;
         using canvas_traits_type =
             tetengo2::gui::drawing::canvas_traits<
-                unit_size_type,
                 boost::mpl::at<common_type_list, type::size>::type,
+                unit_size_type,
                 boost::mpl::at<common_type_list, type::string>::type,
                 boost::mpl::at<common_type_list, type::path>::type,
                 position_type,

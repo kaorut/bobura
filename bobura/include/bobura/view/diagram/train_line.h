@@ -172,7 +172,7 @@ namespace bobura { namespace view { namespace diagram
 
         using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
-        using size_type = typename canvas_type::size_type;
+        using unit_size_type = typename canvas_type::unit_size_type;
 
         using geo_vector_type = std::pair<double, double>;
 
@@ -269,7 +269,7 @@ namespace bobura { namespace view { namespace diagram
             }
         }
 
-        static size_type calculate_distance(
+        static unit_size_type calculate_distance(
             const position_type& point,
             const position_type& line_segment_begin,
             const position_type& line_segment_end
@@ -299,12 +299,12 @@ namespace bobura { namespace view { namespace diagram
                 };
         }
 
-        static size_type to_size(const double value)
+        static unit_size_type to_size(const double value)
         {
             return
-                size_type{
-                    typename size_type::value_type{
-                        static_cast<typename size_type::value_type::int_type>(value * 256.0), 256
+                unit_size_type{
+                    typename unit_size_type::value_type{
+                        static_cast<typename unit_size_type::value_type::int_type>(value * 256.0), 256
                     }
                 };
         }
@@ -359,7 +359,7 @@ namespace bobura { namespace view { namespace diagram
         override
         {
             return
-                calculate_distance(position, m_departure, m_arrival) <= selected_line_margin<size_type>() ?
+                calculate_distance(position, m_departure, m_arrival) <= selected_line_margin<unit_size_type>() ?
                 this : nullptr;
         }
 
@@ -583,7 +583,7 @@ namespace bobura { namespace view { namespace diagram
 
         using direction_type = typename train_type::direction_type;
 
-        using size_type = typename canvas_type::size_type;
+        using unit_size_type = typename canvas_type::unit_size_type;
 
         using string_type = typename canvas_type::string_type;
 
@@ -979,7 +979,7 @@ namespace bobura { namespace view { namespace diagram
             canvas.set_color(m_p_train_kind->color());
             canvas.set_line_width(
                 m_p_train_kind->weight() == train_kind_type::weight_type::bold ?
-                bold_line_width<size_type>() : normal_line_width<size_type>()
+                bold_line_width<unit_size_type>() : normal_line_width<unit_size_type>()
             );
             canvas.set_line_style(translate_line_style(m_p_train_kind->line_style()));
 
