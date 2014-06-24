@@ -390,21 +390,24 @@ namespace bobura
                 boost::mpl::at<detail_type_list, type::detail::widget>::type,
                 boost::mpl::at<detail_type_list, type::detail::message_handler>::type
             >;
-        using shortcut_key_type = tetengo2::gui::menu::shortcut_key<virtual_key_type>;
-        using menu_traits_type =
-            tetengo2::gui::menu::traits<
+        using shortcut_key_type =
+            tetengo2::gui::menu::shortcut_key<
                 boost::mpl::at<common_type_list, type::string>::type,
-                shortcut_key_type,
-                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                tetengo2::gui::message::menu_observer_set
+                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
             >;
         using menu_base_type =
             tetengo2::gui::menu::menu_base<
-                menu_traits_type, boost::mpl::at<detail_type_list, type::detail::menu>::type
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
             >;
         using shortcut_key_table_type =
             tetengo2::gui::menu::shortcut_key_table<
-                shortcut_key_type, menu_base_type, boost::mpl::at<detail_type_list, type::detail::menu>::type
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
             >;
         using icon_type =
             tetengo2::gui::icon<
@@ -414,7 +417,11 @@ namespace bobura
             >;
         using menu_bar_type =
             tetengo2::gui::menu::menu_bar<
-                menu_traits_type, shortcut_key_table_type, boost::mpl::at<detail_type_list, type::detail::menu>::type
+                boost::mpl::at<common_type_list, type::string>::type,
+                shortcut_key_table_type,
+                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
             >;
         using abstract_window_traits_type =
             tetengo2::gui::widget::traits::abstract_window_traits<
@@ -624,14 +631,20 @@ namespace bobura
             boost::mpl::pair<
                 type::ui::menu_command,
                 tetengo2::gui::menu::command<
-                    detail::ui::menu_traits_type, boost::mpl::at<detail_type_list, type::detail::menu>::type
+                    boost::mpl::at<common_type_list, type::string>::type,
+                    boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                    boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                    boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
                 >
             >,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
                 type::ui::menu_separator,
                 tetengo2::gui::menu::separator<
-                    detail::ui::menu_traits_type, boost::mpl::at<detail_type_list, type::detail::menu>::type
+                    boost::mpl::at<common_type_list, type::string>::type,
+                    boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                    boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                    boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
                 >
             >,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::message_loop, detail::ui::message_loop_type>,
@@ -652,7 +665,10 @@ namespace bobura
             boost::mpl::pair<
                 type::ui::popup_menu,
                 tetengo2::gui::menu::popup<
-                    detail::ui::menu_traits_type, boost::mpl::at<detail_type_list, type::detail::menu>::type
+                    boost::mpl::at<common_type_list, type::string>::type,
+                    boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                    boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                    boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
                 >
             >,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::position, detail::ui::position_type>,
