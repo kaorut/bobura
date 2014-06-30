@@ -40,7 +40,7 @@ How to Build {#how_to_build}
 Building on Windows
 -------------------
 
-You need the following tools in order to build Bubura:
+You need the following tools in order to build Bobura:
 
 - [Visual Studio 2013 Update 2](http://www.microsoft.com/) (including Express for Desktop)
 - [Boost C++ Libraries 1.55.0](http://www.boost.org/)
@@ -56,13 +56,13 @@ You can obtain the source code either by downloading an archive or by cloning th
 The latest archives can be downloaded from [the web site](http://www.tetengo.org/).
 
 Deploy the Tetengo2 libraries as a submodule. Get the Tetengo2 archive in [the web site](http://www.tetengo.org/),
-unpack the archives, execute
+unpack the archive, execute
 
 ~~~~{.bat}
 X:\path\to\bobura> mkdir lib\tetengo2
 ~~~~
 
-in the top directory of Bubura, and copy the contents of the Tetengo2 archive to the directory `lib/tetengo2`.
+in the top directory of Bobura, and copy the contents of the Tetengo2 archive to the directory `lib/tetengo2`.
 
 ### Cloning the Repository
 
@@ -84,7 +84,7 @@ X:\path\to\bobura> git submodule foreach 'git checkout master & git pull'
 First make a copy of `bobura_config.h-original` in the top source directory and name it `bobura_config.h`.
 Edit `bobura_config.h` according to your environment.
 
-Open `bobura.sln` with Visual Studio and build the solution in order to build Bubura and run the unit tests.
+Open `bobura.sln` with Visual Studio and build the solution in order to build Bobura and run the unit tests.
 
 To generate API documents, open Command Prompt and run `doxygen` command in the top source directory:
 
@@ -95,9 +95,9 @@ X:\path\to\bobura> doxygen
 Building on UNIX
 ----------------
 
-On UNIX, we cannot build a Bobura executable yet. However, we can build the Bubura libraries and use them.
+On UNIX, we cannot build a Bobura executable yet. However, we can build the Bobura libraries and use them.
 
-You need the following tools in order to build Bubura and Tetengo2 libraries:
+You need the following tools in order to build Bobura and Tetengo2 libraries:
 
 - [GCC 4.7.2 or 4.8.3](http://www.gnu.org/)
 - [GNU Make](http://www.gnu.org/)
