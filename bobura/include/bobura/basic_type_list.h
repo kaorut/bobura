@@ -219,15 +219,12 @@ namespace bobura
         struct button;         //!< The button type.
         struct canvas;         //!< The canvas type.
         struct color;          //!< The color type.
-        struct control;        //!< The control type.
         struct dialog;         //!< The dialog type.
         struct dimension;      //!< The dimension type.
         struct dropdown_box;   //!< The dropdown box type.
         struct fast_canvas;    //!< The fast canvas type.
         struct fast_font;      //!< The fast font type.
-        struct fast_picture_reader; //!< The fast picture reader type.
         struct fast_solid_background; //!< The fast solid background type.
-        struct font;           //!< The font type.
         struct gui_fixture;    //!< The GUI fixture type.
         struct image;          //!< The image type.
         struct label;          //!< The label type.
@@ -241,7 +238,6 @@ namespace bobura
         struct message_loop_break; //!< The message loop break type.
         struct mouse_capture;  //!< The mouse capture type.
         struct picture_box;    //!< The picture box type.
-        struct picture_reader; //!< The picture reader type.
         struct point_unit_size; //!< The point unit size type.
         struct popup_menu;     //!< The popup menu type.
         struct position;       //!< The position type.
@@ -271,10 +267,6 @@ namespace bobura
                 boost::mpl::at<detail_type_list, type::detail::unit>::type
             >;
         using dimension_type = std::pair<unit_size_type, unit_size_type>;
-        using background_type =
-            tetengo2::gui::drawing::background<boost::mpl::at<detail_type_list, type::detail::drawing>::type>;
-        using fast_background_type =
-            tetengo2::gui::drawing::background<boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type>;
         using solid_background_type =
             tetengo2::gui::drawing::solid_background<boost::mpl::at<detail_type_list, type::detail::drawing>::type>;
         using fast_solid_background_type =
@@ -285,36 +277,10 @@ namespace bobura
             tetengo2::gui::drawing::transparent_background<
                 boost::mpl::at<detail_type_list, type::detail::drawing>::type
             >;
-        using font_type =
-            tetengo2::gui::drawing::font<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type
-            >;
         using fast_font_type =
             tetengo2::gui::drawing::font<
                 boost::mpl::at<common_type_list, type::string>::type,
                 boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
-            >;
-        using picture_type =
-            tetengo2::gui::drawing::picture<
-                dimension_type, boost::mpl::at<detail_type_list, type::detail::drawing>::type
-            >;
-        using fast_picture_type =
-            tetengo2::gui::drawing::picture<
-                dimension_type, boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
-            >;
-        using picture_reader_type =
-            tetengo2::gui::drawing::picture_reader<
-                boost::mpl::at<common_type_list, type::path>::type,
-                dimension_type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type
-            >;
-        using fast_picture_reader_type =
-            tetengo2::gui::drawing::picture_reader<
-                boost::mpl::at<common_type_list, type::path>::type,
-                dimension_type,
                 boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
             >;
         using canvas_traits_type =
@@ -327,45 +293,31 @@ namespace bobura
                 dimension_type,
                 boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type
             >;
-        using widget_canvas_type =
-            tetengo2::gui::drawing::widget_canvas<
+        using canvas_type =
+            tetengo2::gui::drawing::canvas<
                 canvas_traits_type,
                 boost::mpl::at<detail_type_list, type::detail::drawing>::type,
                 boost::mpl::at<detail_type_list, type::detail::icon>::type
 
             >;
-        using canvas_type = widget_canvas_type::base_type;
-        using fast_widget_canvas_type =
-            tetengo2::gui::drawing::widget_canvas<
+        using fast_canvas_type =
+            tetengo2::gui::drawing::canvas<
                 canvas_traits_type,
                 boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type,
                 boost::mpl::at<detail_type_list, type::detail::icon>::type
             >;
-        using fast_canvas_type = fast_widget_canvas_type::base_type;
         using alert_type =
             tetengo2::gui::alert<
                 boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
                 boost::mpl::at<locale_type_list, type::locale::exception_encoder>::type,
                 boost::mpl::at<detail_type_list, type::detail::alert>::type
             >;
-        using system_cursor_type =
-            tetengo2::gui::cursor::system<boost::mpl::at<detail_type_list, type::detail::cursor>::type>;
-        using scroll_bar_type =
-            tetengo2::gui::scroll_bar<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type
-            >;
-        using virtual_key_type =
-            tetengo2::gui::virtual_key<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
         using mouse_observer_set_type =
             tetengo2::gui::message::mouse_observer_set<
                 position_type, boost::mpl::at<common_type_list, type::difference>::type
             >;
         using widget_traits_type =
-            tetengo2::gui::widget::traits::widget_traits<
+            tetengo2::gui::widget::widget_traits<
                 boost::mpl::at<common_type_list, type::size>::type,
                 unit_size_type,
                 boost::mpl::at<common_type_list, type::difference>::type,
@@ -376,9 +328,8 @@ namespace bobura
                 boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
                 boost::mpl::at<locale_type_list, type::locale::exception_encoder>::type
             >;
-        using widget_type =
-            tetengo2::gui::widget::widget<
-                widget_traits_type,
+        using widget_details_traits_type =
+            tetengo2::gui::widget::widget_details_traits<
                 boost::mpl::at<detail_type_list, type::detail::widget>::type,
                 boost::mpl::at<detail_type_list, type::detail::drawing>::type,
                 boost::mpl::at<detail_type_list, type::detail::icon>::type,
@@ -388,30 +339,13 @@ namespace bobura
                 boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
                 boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
             >;
-        using shortcut_key_type =
-            tetengo2::gui::menu::shortcut_key<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
-        using menu_base_type =
-            tetengo2::gui::menu::menu_base<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::menu>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
+        using widget_type = tetengo2::gui::widget::widget<widget_traits_type, widget_details_traits_type>;
         using shortcut_key_table_type =
             tetengo2::gui::menu::shortcut_key_table<
                 boost::mpl::at<common_type_list, type::string>::type,
                 boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
                 boost::mpl::at<detail_type_list, type::detail::menu>::type,
                 boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
-        using icon_type =
-            tetengo2::gui::icon<
-                boost::mpl::at<common_type_list, type::path>::type,
-                dimension_type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type
             >;
         using menu_bar_type =
             tetengo2::gui::menu::menu_bar<
@@ -421,33 +355,18 @@ namespace bobura
                 boost::mpl::at<detail_type_list, type::detail::menu>::type,
                 boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
             >;
-        using abstract_window_traits_type = tetengo2::gui::widget::traits::abstract_window_traits<widget_traits_type>;
         using abstract_window_type =
             tetengo2::gui::widget::abstract_window<
-                abstract_window_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type,
+                widget_traits_type,
+                widget_details_traits_type,
                 boost::mpl::at<detail_type_list, type::detail::menu>::type
             >;
-        using window_traits_type = tetengo2::gui::widget::traits::window_traits<abstract_window_traits_type>;
         using window_type =
             tetengo2::gui::widget::window<
-                window_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type,
-                boost::mpl::at<detail_type_list, type::detail::menu>::type
+                widget_traits_type,
+                widget_details_traits_type,
+                boost::mpl::at<detail_type_list,
+                type::detail::menu>::type
             >;
         using message_loop_type =
             tetengo2::gui::message::message_loop<
@@ -457,197 +376,62 @@ namespace bobura
             tetengo2::gui::message::message_loop_break<
                 boost::mpl::at<detail_type_list, type::detail::message_loop>::type
             >;
-        using dialog_message_loop_type =
-            tetengo2::gui::message::dialog_message_loop<
-                abstract_window_type, boost::mpl::at<detail_type_list, type::detail::message_loop>::type
-            >;
-        using dialog_traits_type = tetengo2::gui::widget::traits::dialog_traits<abstract_window_traits_type>;
         using dialog_type =
             tetengo2::gui::widget::dialog<
-                dialog_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type,
+                widget_traits_type,
+                widget_details_traits_type,
                 boost::mpl::at<detail_type_list, type::detail::menu>::type,
                 boost::mpl::at<detail_type_list, type::detail::message_loop>::type
             >;
         using color_type = tetengo2::gui::drawing::color;
-        using control_traits_type = tetengo2::gui::widget::traits::control_traits<widget_traits_type>;
-        using control_type =
-            tetengo2::gui::widget::control<
-                control_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
-        using button_traits_type = tetengo2::gui::widget::traits::button_traits<control_traits_type>;
-        using button_type =
-            tetengo2::gui::widget::button<
-                button_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
-        using image_traits_type = tetengo2::gui::widget::traits::image_traits<control_traits_type>;
-        using image_type =
-            tetengo2::gui::widget::image<
-                image_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
-        using dropdown_box_traits_type = tetengo2::gui::widget::traits::dropdown_box_traits<control_traits_type>;
-        using dropdown_box_type =
-            tetengo2::gui::widget::dropdown_box<
-                dropdown_box_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
-        using label_traits_type = tetengo2::gui::widget::traits::label_traits<control_traits_type>;
-        using label_type =
-            tetengo2::gui::widget::label<
-                label_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
-        using system_color_set_type =
-            tetengo2::gui::drawing::system_color_set<
-                boost::mpl::at<detail_type_list, type::detail::system_color>::type
-            >;
+        using button_type = tetengo2::gui::widget::button<widget_traits_type, widget_details_traits_type>;
+        using image_type = tetengo2::gui::widget::image<widget_traits_type, widget_details_traits_type>;
+        using dropdown_box_type = tetengo2::gui::widget::dropdown_box<widget_traits_type, widget_details_traits_type>;
+        using label_type = tetengo2::gui::widget::label<widget_traits_type, widget_details_traits_type>;
         using shell_type =
             tetengo2::gui::shell<
                 boost::mpl::at<common_type_list, type::string>::type,
                 boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
                 boost::mpl::at<detail_type_list, type::detail::shell>::type
             >;
-        using link_label_traits_type = tetengo2::gui::widget::traits::link_label_traits<label_traits_type>;
         using link_label_type =
             tetengo2::gui::widget::link_label<
-                link_label_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type,
+                widget_traits_type,
+                widget_details_traits_type,
                 boost::mpl::at<detail_type_list, type::detail::system_color>::type,
                 boost::mpl::at<detail_type_list, type::detail::shell>::type
             >;
-        using list_box_traits_type = tetengo2::gui::widget::traits::list_box_traits<control_traits_type>;
-        using list_box_type =
-            tetengo2::gui::widget::list_box<
-                list_box_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
+        using list_box_type = tetengo2::gui::widget::list_box<widget_traits_type, widget_details_traits_type>;
         using mouse_capture_type =
             tetengo2::gui::mouse_capture<
                 widget_type,
                 mouse_observer_set_type::mouse_button_type,
                 boost::mpl::at<detail_type_list, type::detail::mouse_capture>::type
             >;
-        using custom_control_traits_type = tetengo2::gui::widget::traits::custom_control_traits<control_traits_type>;
-        using map_box_traits_type =
-            tetengo2::gui::widget::traits::map_box_traits<custom_control_traits_type>;
         using map_box_type =
             tetengo2::gui::widget::map_box<
-                map_box_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type,
+                widget_traits_type,
+                widget_details_traits_type,
                 boost::mpl::at<detail_type_list, type::detail::mouse_capture>::type,
                 boost::mpl::at<detail_type_list, type::detail::system_color>::type
             >;
-        using picture_box_traits_type = tetengo2::gui::widget::traits::picture_box_traits<control_traits_type>;
         using picture_box_type =
             tetengo2::gui::widget::picture_box<
-                picture_box_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type,
+                widget_traits_type,
+                widget_details_traits_type,
                 boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
             >;
         using timer_type =
             tetengo2::gui::timer<widget_type, boost::mpl::at<detail_type_list, type::detail::timer>::type>;
-        using side_bar_traits_type = tetengo2::gui::widget::traits::side_bar_traits<custom_control_traits_type>;
         using side_bar_type =
             tetengo2::gui::widget::side_bar<
-                side_bar_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type,
+                widget_traits_type,
+                widget_details_traits_type,
                 boost::mpl::at<detail_type_list, type::detail::mouse_capture>::type,
                 boost::mpl::at<detail_type_list, type::detail::system_color>::type,
                 boost::mpl::at<detail_type_list, type::detail::timer>::type
             >;
-        using text_box_traits_type = tetengo2::gui::widget::traits::text_box_traits<control_traits_type>;
-        using text_box_type =
-            tetengo2::gui::widget::text_box<
-                text_box_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
-                boost::mpl::at<detail_type_list, type::detail::icon>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
+        using text_box_type = tetengo2::gui::widget::text_box<widget_traits_type, widget_details_traits_type>;
     }}
 #endif
 
@@ -657,7 +441,6 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::alert, detail::ui::alert_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::button, detail::ui::button_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::canvas, detail::ui::canvas_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::control, detail::ui::control_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::color, detail::ui::color_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::dialog, detail::ui::dialog_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::dimension, detail::ui::dimension_type>,
@@ -665,10 +448,7 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::fast_canvas, detail::ui::fast_canvas_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::fast_font, detail::ui::fast_font_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::ui::fast_picture_reader, detail::ui::fast_picture_reader_type>,
-        tetengo2::meta::assoc_list<
             boost::mpl::pair<type::ui::fast_solid_background, detail::ui::fast_solid_background_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::font, detail::ui::font_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::gui_fixture, detail::ui::gui_fixture_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::image, detail::ui::image_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::label, detail::ui::label_type>,
@@ -701,7 +481,6 @@ namespace bobura
             boost::mpl::pair<type::ui::message_loop_break, detail::ui::message_loop_break_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::mouse_capture, detail::ui::mouse_capture_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::picture_box, detail::ui::picture_box_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::picture_reader, detail::ui::picture_reader_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
                 type::ui::point_unit_size,
@@ -730,7 +509,7 @@ namespace bobura
             boost::mpl::pair<type::ui::transparent_background, detail::ui::transparent_background_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::window, detail::ui::window_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>;
+        >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>;
 
 
     /**** Setting ***********************************************************/
