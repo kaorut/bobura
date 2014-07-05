@@ -10,6 +10,7 @@
 #include <stdexcept>
 #include <utility>
 
+#include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -73,7 +74,7 @@ BOOST_AUTO_TEST_SUITE(timetable_model)
 
             model.reset_timetable(
                 tetengo2::stdalt::make_unique<timetable_type>(),
-                model_type::path_type{ string_type{ TETENGO2_TEXT("hoge") } }
+                boost::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } }
             );
         }
         {
@@ -81,7 +82,7 @@ BOOST_AUTO_TEST_SUITE(timetable_model)
 
             BOOST_CHECK_THROW(
                 model.reset_timetable(
-                std::unique_ptr<timetable_type>{}, model_type::path_type{ string_type{ TETENGO2_TEXT("hoge") } }
+                std::unique_ptr<timetable_type>{}, boost::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } }
                 ),
                 std::invalid_argument
             );
@@ -120,7 +121,7 @@ BOOST_AUTO_TEST_SUITE(timetable_model)
             auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
             model.reset_timetable(std::move(p_timetable), string_type{ TETENGO2_TEXT("hoge") });
 
-            BOOST_CHECK(model.path() == model_type::path_type{ string_type{ TETENGO2_TEXT("hoge") } });
+            BOOST_CHECK(model.path() == boost::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } });
         }
     }
 
@@ -129,9 +130,9 @@ BOOST_AUTO_TEST_SUITE(timetable_model)
         BOOST_TEST_PASSPOINT();
 
         model_type model{};
-        model.set_path(model_type::path_type{ string_type{ TETENGO2_TEXT("hoge") } });
+        model.set_path(boost::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } });
 
-        BOOST_CHECK(model.path() == model_type::path_type{ string_type{ TETENGO2_TEXT("hoge") } });
+        BOOST_CHECK(model.path() == boost::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } });
     }
 
     BOOST_AUTO_TEST_CASE(changed)

@@ -40,6 +40,7 @@ boost::exception                                 boost/exception/all.hpp
 boost::filesystem::ifstream                      boost/filesystem/fstream.hpp
 boost::filesystem::ofstream                      boost/filesystem/fstream.hpp
 boost::filesystem::path                          boost/filesystem.hpp
+boost::filesystem::path::string_type             boost/filesystem.hpp
 boost::filesystem::rename                        boost/filesystem.hpp
 boost::filesystem::unique_path                   boost/filesystem.hpp
 boost::get                                       boost/variant.hpp

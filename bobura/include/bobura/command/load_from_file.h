@@ -11,6 +11,7 @@
 
 #include <memory>
 
+#include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
@@ -34,9 +35,6 @@ namespace bobura { namespace command
         //! The file loading type.
         using load_from_file_type = boost::mpl::at<load_save_type_list, type::load_save::load_from_file>::type;
 
-        //! The path type.
-        using path_type = load_from_file_type::path_type;
-
         //! The parameter type.
         class parameter_type : public parameter_base
         {
@@ -46,7 +44,7 @@ namespace bobura { namespace command
 
                 \param path A path.
             */
-            explicit parameter_type(path_type path);
+            explicit parameter_type(boost::filesystem::path path);
 
             /*!
                 \brief Destroys the parameter.
@@ -59,11 +57,11 @@ namespace bobura { namespace command
 
                 \return The path.
             */
-            const path_type& path()
+            const boost::filesystem::path& path()
             const;
 
         private:
-            path_type m_path;
+            boost::filesystem::path m_path;
 
         };
 

@@ -66,9 +66,6 @@ namespace bobura { namespace load_save
         //! The file open dialog type.
         using file_open_dialog_type = FileOpenDialog;
 
-        //! The path type.
-        using path_type = boost::filesystem::path;
-
         //! The file save confirmation type.
         using confirm_file_save_type = ConfirmFileSave;
 
@@ -114,7 +111,7 @@ namespace bobura { namespace load_save
             \retval true  When the model is reloadable.
             \retval false Otherwise.
         */
-        bool reloadable(const model_type& model, const boost::optional<path_type>& given_path)
+        bool reloadable(const model_type& model, const boost::optional<boost::filesystem::path>& given_path)
         const
         {
             return m_ask_file_path || model.has_path() || given_path;
@@ -127,7 +124,11 @@ namespace bobura { namespace load_save
             \param given_path A given path.
             \param parent     A parent window.
         */
-        void operator()(model_type& model, const boost::optional<path_type>& given_path, abstract_window_type& parent)
+        void operator()(
+            model_type&                                     model,
+            const boost::optional<boost::filesystem::path>& given_path,
+            abstract_window_type&                           parent
+        )
         const
         {
             if (!m_ask_file_path && !model.has_path() && !given_path)
@@ -136,7 +137,7 @@ namespace bobura { namespace load_save
             if (!m_confirm_file_save(parent))
                 return;
 
-            path_type path{};
+            boost::filesystem::path path{};
             if (given_path)
             {
                 path = *given_path;
@@ -218,8 +219,8 @@ namespace bobura { namespace load_save
         // functions
 
         std::unique_ptr<message_box_type> create_cant_open_file_message_box(
-            const path_type&      path,
-            abstract_window_type& parent
+            const boost::filesystem::path& path,
+            abstract_window_type&          parent
         )
         const
         {
@@ -235,8 +236,8 @@ namespace bobura { namespace load_save
         }
 
         std::unique_ptr<message_box_type> create_file_broken_message_box(
-            const path_type&      path,
-            abstract_window_type& parent
+            const boost::filesystem::path& path,
+            abstract_window_type&          parent
         )
         const
         {
@@ -252,8 +253,8 @@ namespace bobura { namespace load_save
         }
 
         std::unique_ptr<message_box_type> create_unsupported_format_file_message_box(
-            const path_type&      path,
-            abstract_window_type& parent
+            const boost::filesystem::path& path,
+            abstract_window_type&          parent
         )
         const
         {

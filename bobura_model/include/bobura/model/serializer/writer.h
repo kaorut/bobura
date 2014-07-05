@@ -9,6 +9,7 @@
 #if !defined(BOBURA_MODEL_SERIALIZER_WRITER_H)
 #define BOBURA_MODEL_SERIALIZER_WRITER_H
 
+#include <boost/filesystem.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/utility.hpp>
 
@@ -22,9 +23,8 @@ namespace bobura { namespace model { namespace serializer
 
         \tparam OutputStream An output stream type.
         \tparam Timetable    A timetable type.
-        \tparam Path         A path type.
     */
-    template <typename OutputStream, typename Timetable, typename Path>
+    template <typename OutputStream, typename Timetable>
     class writer : private boost::noncopyable
     {
     public:
@@ -35,9 +35,6 @@ namespace bobura { namespace model { namespace serializer
 
         //! The timetable type.
         using timetable_type = Timetable;
-
-        //! The path type.
-        using path_type = Path;
 
 
         // constructors and destructor
@@ -58,7 +55,7 @@ namespace bobura { namespace model { namespace serializer
 
             \return The extension.
         */
-        path_type extension()
+        boost::filesystem::path extension()
         const
         {
             return extension_impl();
@@ -72,7 +69,7 @@ namespace bobura { namespace model { namespace serializer
             \retval true  When this writer selects the file type.
             \retval false Otherwise.
         */
-        bool selects(const path_type& path)
+        bool selects(const boost::filesystem::path& path)
         const
         {
             return selects_impl(path);
@@ -103,10 +100,10 @@ namespace bobura { namespace model { namespace serializer
     private:
         // virtual functions
 
-        virtual bool selects_impl(const path_type& path)
+        virtual bool selects_impl(const boost::filesystem::path& path)
         const
         {
-            using path_string_type = typename path_type::string_type;
+            using path_string_type = typename boost::filesystem::path::string_type;
 
             const auto path_string = path.native();
             const auto extension_string = extension_impl().native();
@@ -120,7 +117,7 @@ namespace bobura { namespace model { namespace serializer
             return path_extension_string == extension_string;
         }
 
-        virtual path_type extension_impl()
+        virtual boost::filesystem::path extension_impl()
         const = 0;
 
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream)

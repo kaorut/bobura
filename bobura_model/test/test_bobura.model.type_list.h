@@ -317,8 +317,7 @@ namespace test_bobura { namespace model
                 type::serialization::writer_selector,
                 bobura::model::serializer::writer_selector<
                     boost::mpl::at<type_list, type::output_stream>::type,
-                    boost::mpl::at<model_type_list, type::model::timetable>::type,
-                    boost::mpl::at<type_list, type::path>::type
+                    boost::mpl::at<model_type_list, type::model::timetable>::type
                 >
             >,
         tetengo2::meta::assoc_list<

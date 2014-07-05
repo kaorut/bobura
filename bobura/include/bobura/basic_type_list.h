@@ -15,7 +15,6 @@
 #include <string>
 #include <utility>
 
-#include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/pair.hpp>
 #include <boost/rational.hpp>
@@ -75,7 +74,6 @@ namespace bobura
         struct difference;     //!< The difference type.
         struct size;           //!< The size type.
         struct string;         //!< The string type.
-        struct path;           //!< The path type.
         struct input_stream_iterator; //!< The input stream iterator type.
         struct pull_parser;    //!< The pull parser_type.
         struct output_stream;  //!< The output stream type.
@@ -92,7 +90,6 @@ namespace bobura
         using json_grammar_type = tetengo2::text::grammar::json<input_stream_iterator_type>;
         using pull_parser_type =
             tetengo2::text::pull_parser<input_stream_iterator_type, json_grammar_type, int, double, size_type>;
-        using path_type = boost::filesystem::path;
     }
 #endif
 
@@ -101,13 +98,12 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::difference, std::ptrdiff_t>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::size, detail::size_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::string, detail::string_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::path, detail::path_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::input_stream_iterator, detail::input_stream_iterator_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::pull_parser, detail::pull_parser_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::output_stream, std::basic_ostream<detail::io_string_type::value_type>>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>;
+        >>>>>>;
 
 
     /**** Locale ************************************************************/
@@ -528,7 +524,6 @@ namespace bobura
         using settings_type =
             settings<
                 boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<common_type_list, type::path>::type,
                 boost::mpl::at<ui_type_list, type::ui::position>::type,
                 boost::mpl::at<ui_type_list, type::ui::dimension>::type,
                 config_traits_type
@@ -798,7 +793,6 @@ namespace bobura
                 type::model::model,
                 timetable_model<
                     detail::model::timetable_type,
-                    boost::mpl::at<common_type_list, type::path>::type,
                     message::timetable_model_observer_set
                 >
             >,
@@ -828,9 +822,7 @@ namespace bobura
             boost::mpl::pair<
                 type::model::writer_selector,
                 model::serializer::writer_selector<
-                    boost::mpl::at<common_type_list, type::output_stream>::type,
-                    detail::model::timetable_type,
-                    boost::mpl::at<common_type_list, type::path>::type
+                    boost::mpl::at<common_type_list, type::output_stream>::type, detail::model::timetable_type
                 >
             >,
         tetengo2::meta::assoc_list<
@@ -839,7 +831,6 @@ namespace bobura
                 model::serializer::writer_set<
                     boost::mpl::at<common_type_list, type::output_stream>::type,
                     detail::model::timetable_type,
-                    boost::mpl::at<common_type_list, type::path>::type,
                     boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
                 >
             >,

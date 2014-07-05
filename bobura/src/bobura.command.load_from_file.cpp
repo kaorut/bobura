@@ -8,6 +8,7 @@
 
 #include <utility>
 
+#include <boost/filesystem.hpp>
 #include <boost/optional.hpp>
 
 #include <tetengo2.h>
@@ -27,8 +28,6 @@ namespace bobura { namespace command
         using abstract_window_type = load_from_file::abstract_window_type;
 
         using load_from_file_type = load_from_file::load_from_file_type;
-
-        using path_type = load_from_file::path_type;
 
         using parameter_type = load_from_file::parameter_type;
 
@@ -71,7 +70,7 @@ namespace bobura { namespace command
     };
 
 
-    load_from_file::parameter_type::parameter_type(path_type path)
+    load_from_file::parameter_type::parameter_type(boost::filesystem::path path)
     :
     m_path(std::move(path))
     {}
@@ -80,7 +79,7 @@ namespace bobura { namespace command
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    const load_from_file::path_type& load_from_file::parameter_type::path()
+    const boost::filesystem::path& load_from_file::parameter_type::path()
     const
     {
         return m_path;

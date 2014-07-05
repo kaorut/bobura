@@ -15,6 +15,7 @@
 #include <utility>
 #include <vector>
 
+#include <boost/filesystem.hpp>
 #include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
@@ -29,10 +30,9 @@ namespace bobura { namespace model { namespace serializer
 
         \tparam OutputStream An output stream type.
         \tparam Timetable    A timetable type.
-        \tparam Path         A path type.
     */
-    template <typename OutputStream, typename Timetable, typename Path>
-    class writer_selector : public writer<OutputStream, Timetable, Path>
+    template <typename OutputStream, typename Timetable>
+    class writer_selector : public writer<OutputStream, Timetable>
     {
     public:
         // types
@@ -43,11 +43,8 @@ namespace bobura { namespace model { namespace serializer
         //! The timetable type.
         using timetable_type = Timetable;
 
-        //! The path type.
-        using path_type = Path;
-
         //! The base type.
-        using base_type = writer<output_stream_type, timetable_type, path_type>;
+        using base_type = writer<output_stream_type, timetable_type>;
 
 
         // constructors and destructor
@@ -64,7 +61,7 @@ namespace bobura { namespace model { namespace serializer
             \throw std::invalid_argument When the count of the writers is
                                          empty.
         */
-        writer_selector(std::vector<std::unique_ptr<base_type>> p_writers, path_type path)
+        writer_selector(std::vector<std::unique_ptr<base_type>> p_writers, boost::filesystem::path path)
         :
         m_p_writers(std::move(p_writers)),
         m_path(std::move(path))
@@ -85,12 +82,12 @@ namespace bobura { namespace model { namespace serializer
 
         const std::vector<std::unique_ptr<base_type>> m_p_writers;
 
-        const path_type m_path;
+        const boost::filesystem::path m_path;
 
 
         // virtual functions
 
-        virtual bool selects_impl(const path_type& path)
+        virtual bool selects_impl(const boost::filesystem::path& path)
         const override
         {
             return
@@ -101,7 +98,7 @@ namespace bobura { namespace model { namespace serializer
                 ) != m_p_writers.end();
         }
 
-        virtual path_type extension_impl()
+        virtual boost::filesystem::path extension_impl()
         const override
         {
             BOOST_THROW_EXCEPTION(std::logic_error("No extension."));

@@ -14,6 +14,7 @@
 #include <stdexcept>
 #include <utility>
 
+#include <boost/filesystem.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
@@ -27,11 +28,10 @@ namespace bobura
    /*!
         \brief The class template for a model.
 
-        \tparam Timetable       A timetable type.
-        \tparam Path            A path type.
-        \tparam ObserverSet     A observer set type.
+        \tparam Timetable   A timetable type.
+        \tparam ObserverSet A observer set type.
     */
-    template <typename Timetable, typename Path, typename ObserverSet>
+    template <typename Timetable, typename ObserverSet>
     class timetable_model : private boost::noncopyable
     {
     public:
@@ -39,9 +39,6 @@ namespace bobura
 
         //! The timetable type.
         using timetable_type = Timetable;
-
-        //! The path type.
-        using path_type = Path;
 
         //! The observer set type.
         using observer_set_type = ObserverSet;
@@ -116,7 +113,7 @@ namespace bobura
 
             \throw std::invalid_argument When p_timetable is nullptr.
         */
-        void reset_timetable(std::unique_ptr<timetable_type> p_timetable, path_type path)
+        void reset_timetable(std::unique_ptr<timetable_type> p_timetable, boost::filesystem::path path)
         {
             reset_timetable_impl(std::move(p_timetable), boost::make_optional(std::move(path)));
         }
@@ -140,7 +137,7 @@ namespace bobura
 
             \throw std::logic_error When the model does not have a path.
         */
-        const path_type& path()
+        const boost::filesystem::path& path()
         const
         {
             if (!has_path())
@@ -154,7 +151,7 @@ namespace bobura
 
             \param path A path.
         */
-        void set_path(path_type path)
+        void set_path(boost::filesystem::path path)
         {
             m_path = boost::make_optional(std::move(path));
             m_changed = false;
@@ -213,7 +210,7 @@ namespace bobura
 
         std::unique_ptr<timetable_type> m_p_timetable;
 
-        boost::optional<path_type> m_path;
+        boost::optional<boost::filesystem::path> m_path;
 
         bool m_changed;
 
@@ -222,13 +219,16 @@ namespace bobura
 
         // functions
 
-        void reset_timetable_impl(std::unique_ptr<timetable_type> p_timetable, boost::optional<path_type>&& path)
+        void reset_timetable_impl(
+            std::unique_ptr<timetable_type>            p_timetable,
+            boost::optional<boost::filesystem::path>&& path
+        )
         {
             if (!p_timetable)
                 BOOST_THROW_EXCEPTION(std::invalid_argument("Timetable is nullptr."));
 
             m_p_timetable = std::move(p_timetable);
-            m_path = std::forward<boost::optional<path_type>>(path);
+            m_path = std::forward<boost::optional<boost::filesystem::path>>(path);
             m_changed = false;
 
             set_timetable_observer_set();

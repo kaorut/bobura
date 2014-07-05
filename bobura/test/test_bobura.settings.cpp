@@ -9,6 +9,7 @@
 #include <cstddef>
 #include <vector>
 
+#include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -21,8 +22,6 @@
 namespace
 {
     // types
-
-    using path_type = boost::mpl::at<bobura::common_type_list, bobura::type::path>::type;
 
     using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
@@ -63,7 +62,7 @@ BOOST_AUTO_TEST_SUITE(settings)
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
-        BOOST_CHECK(settings.base_path() == path_type{ string_type{ TETENGO2_TEXT("path/to") } });
+        BOOST_CHECK(settings.base_path() == boost::filesystem::path{ string_type{ TETENGO2_TEXT("path/to") } });
 
         settings.clear_config();
     }
@@ -87,7 +86,7 @@ BOOST_AUTO_TEST_SUITE(settings)
             settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
             BOOST_REQUIRE(settings.input());
-            BOOST_CHECK(*settings.input() == path_type{ string_type{ TETENGO2_TEXT("input_file") } });
+            BOOST_CHECK(*settings.input() == boost::filesystem::path{ string_type{ TETENGO2_TEXT("input_file") } });
 
             settings.clear_config();
         }
@@ -101,7 +100,8 @@ BOOST_AUTO_TEST_SUITE(settings)
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
         BOOST_CHECK(
-            settings.message_directory_path() == path_type{ string_type{ TETENGO2_TEXT("path/to/messages") } }
+            settings.message_directory_path() ==
+            boost::filesystem::path{ string_type{ TETENGO2_TEXT("path/to/messages") } }
         );
 
         settings.clear_config();
@@ -114,7 +114,10 @@ BOOST_AUTO_TEST_SUITE(settings)
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
-        BOOST_CHECK(settings.image_directory_path() == path_type{ string_type{ TETENGO2_TEXT("path/to/images") } });
+        BOOST_CHECK(
+            settings.image_directory_path() ==
+            boost::filesystem::path{ string_type{ TETENGO2_TEXT("path/to/images") } }
+        );
 
         settings.clear_config();
     }

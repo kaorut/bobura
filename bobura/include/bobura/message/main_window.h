@@ -225,9 +225,6 @@ namespace bobura { namespace message { namespace main_window
         //! The abstract window type.
         using abstract_window_type = AbstractWindow;
 
-        //! The path type.
-        using path_type = boost::filesystem::path;
-
 
         // constructors and destructor
 
@@ -253,7 +250,7 @@ namespace bobura { namespace message { namespace main_window
 
             \param paths Paths.
         */
-        void operator()(const std::vector<path_type>& paths)
+        void operator()(const std::vector<boost::filesystem::path>& paths)
         const
         {
             if (paths.empty())

@@ -12,6 +12,7 @@
 #include <memory>
 #include <utility>
 
+#include <boost/filesystem.hpp>
 #include <boost/iostreams/filter/bzip2.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
 
@@ -27,10 +28,9 @@ namespace bobura { namespace model { namespace serializer
 
         \tparam OutputStream A output stream type.
         \tparam Timetable    A timetable type.
-        \tparam Path         A path type.
     */
-    template <typename OutputStream, typename Timetable, typename Path>
-    class bzip2_writer : public writer<OutputStream, Timetable, Path>
+    template <typename OutputStream, typename Timetable>
+    class bzip2_writer : public writer<OutputStream, Timetable>
     {
     public:
         // types
@@ -41,11 +41,8 @@ namespace bobura { namespace model { namespace serializer
         //! The timetable type.
         using timetable_type = Timetable;
 
-        //! The path type.
-        using path_type = Path;
-
         //! The base type.
-        using base_type = writer<output_stream_type, timetable_type, path_type>;
+        using base_type = writer<output_stream_type, timetable_type>;
 
 
         // constructors and destructor
@@ -76,11 +73,12 @@ namespace bobura { namespace model { namespace serializer
 
         // virtual functions
 
-        virtual path_type extension_impl()
+        virtual boost::filesystem::path extension_impl()
         const override
         {
             return
-                path_type(m_p_writer->extension().native() + typename path_type::string_type{ TETENGO2_TEXT("_bz2") });
+                boost::filesystem::path(m_p_writer->extension().native() +
+                typename boost::filesystem::path::string_type{ TETENGO2_TEXT("_bz2") });
         }
 
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream)

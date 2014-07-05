@@ -33,12 +33,11 @@ namespace bobura
         \brief The class template for settings of bobura.
 
         \tparam String       A string type.
-        \tparam Path         A path type.
         \tparam Position     A position type.
         \tparam Dimension    A dimension type.
         \tparam ConfigTraits A configuration traits type.
     */
-    template <typename String, typename Path, typename Position, typename Dimension, typename ConfigTraits>
+    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
     class settings : private boost::noncopyable
     {
     public:
@@ -46,9 +45,6 @@ namespace bobura
 
         //! The string type.
         using string_type = String;
-
-        //! The path type.
-        using path_type = Path;
 
         //! The position type.
         using position_type = Position;
@@ -91,7 +87,7 @@ namespace bobura
 
             \return The base path.
         */
-        const path_type& base_path()
+        const boost::filesystem::path& base_path()
         const
         {
             return m_base_path;
@@ -102,7 +98,7 @@ namespace bobura
 
             \return The input.
         */
-        const boost::optional<path_type>& input()
+        const boost::optional<boost::filesystem::path>& input()
         const
         {
             return m_input;
@@ -113,7 +109,7 @@ namespace bobura
 
             \return The message directory path.
         */
-        path_type message_directory_path()
+        boost::filesystem::path message_directory_path()
         const
         {
             return m_base_path / path_string_type{ TETENGO2_TEXT("messages") };
@@ -124,7 +120,7 @@ namespace bobura
 
             \return The image directory path.
         */
-        path_type image_directory_path()
+        boost::filesystem::path image_directory_path()
         const
         {
             return m_base_path / path_string_type{ TETENGO2_TEXT("images") };
@@ -295,7 +291,7 @@ namespace bobura
     private:
         // types
 
-        using path_string_type = typename path_type::string_type;
+        using path_string_type = typename boost::filesystem::path::string_type;
 
         using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
@@ -471,9 +467,9 @@ namespace bobura
 
         // variables
 
-        path_type m_base_path;
+        boost::filesystem::path m_base_path;
 
-        boost::optional<path_type> m_input;
+        boost::optional<boost::filesystem::path> m_input;
 
         std::unique_ptr<config_base_type> m_p_config;
 

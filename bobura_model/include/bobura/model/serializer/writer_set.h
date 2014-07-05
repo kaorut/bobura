@@ -30,11 +30,10 @@ namespace bobura { namespace model { namespace serializer
 
         \tparam OutputStream        A output stream type.
         \tparam Timetable           A timetable type.
-        \tparam Path                A path type.
         \tparam StationGradeTypeSet A station grade type set type.
         \tparam Encoder             An encoder type.
     */
-    template <typename OutputStream, typename Timetable, typename Path, typename Encoder>
+    template <typename OutputStream, typename Timetable, typename Encoder>
     class writer_set : private boost::noncopyable
     {
     public:
@@ -46,20 +45,17 @@ namespace bobura { namespace model { namespace serializer
         //! The timetable type.
         using timetable_type = Timetable;
 
-        //! The path type.
-        using path_type = Path;
-
         //! The encoder type.
         using encoder_type = Encoder;
 
         //! The writer type.
-        using writer_type = writer<output_stream_type, timetable_type, path_type>;
+        using writer_type = writer<output_stream_type, timetable_type>;
 
         //! The bzip2 writer type.
-        using bzip2_writer_type = bzip2_writer<output_stream_type, timetable_type, path_type>;
+        using bzip2_writer_type = bzip2_writer<output_stream_type, timetable_type>;
 
         //! The JSON writer type.
-        using json_writer_type = json_writer<output_stream_type, timetable_type, path_type, encoder_type>;
+        using json_writer_type = json_writer<output_stream_type, timetable_type, encoder_type>;
 
 
         // static functions
