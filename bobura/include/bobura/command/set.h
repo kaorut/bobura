@@ -11,6 +11,7 @@
 
 #include <memory>
 
+#include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/noncopyable.hpp>
 
@@ -42,9 +43,6 @@ namespace bobura { namespace command
 
         //! The file loading type.
         using load_from_file_type = boost::mpl::at<load_save_type_list, type::load_save::load_from_file>::type;
-
-        //! The path type.
-        using path_type = boost::mpl::at<common_type_list, type::path>::type;
 
         //! The file saving type.
         using save_to_file_type = boost::mpl::at<load_save_type_list, type::load_save::save_to_file>::type;
@@ -171,7 +169,7 @@ namespace bobura { namespace command
 
             \return A unique pointer to a parameter for the command load-from-file.
         */
-        std::unique_ptr<parameter_type> create_load_from_file_parameter(const path_type& path)
+        std::unique_ptr<parameter_type> create_load_from_file_parameter(const boost::filesystem::path& path)
         const;
 
         /*!

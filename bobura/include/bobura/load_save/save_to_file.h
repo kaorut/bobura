@@ -99,7 +99,7 @@ namespace bobura { namespace load_save
         bool operator()(model_type& model, abstract_window_type& parent)
         const
         {
-            path_type path{};
+            boost::filesystem::path path{};
             if (!model.has_path() || m_ask_file_path)
             {
                 file_save_dialog_type dialog{
@@ -164,8 +164,6 @@ namespace bobura { namespace load_save
 
         using string_type = typename abstract_window_type::string_type;
 
-        using path_type = typename file_save_dialog_type::path_type;
-
 
         // variables
 
@@ -177,8 +175,8 @@ namespace bobura { namespace load_save
         // functions
 
         std::unique_ptr<message_box_type> create_cant_create_temporary_file_message_box(
-            const path_type&      path,
-            abstract_window_type& parent
+            const boost::filesystem::path& path,
+            abstract_window_type&          parent
         )
         const
         {
@@ -194,8 +192,8 @@ namespace bobura { namespace load_save
         }
 
         std::unique_ptr<message_box_type> create_cant_write_to_file_message_box(
-            const path_type&      path,
-            abstract_window_type& parent
+            const boost::filesystem::path& path,
+            abstract_window_type&          parent
         )
         const
         {

@@ -9,6 +9,7 @@
 #include <memory>
 #include <vector>
 
+#include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
@@ -46,8 +47,6 @@ namespace bobura { namespace command
         using new_file_type = set::new_file_type;
 
         using load_from_file_type = set::load_from_file_type;
-
-        using path_type = set::path_type;
 
         using save_to_file_type = set::save_to_file_type;
 
@@ -146,7 +145,7 @@ namespace bobura { namespace command
             return *m_p_load_from_file;
         }
 
-        std::unique_ptr<parameter_type> create_load_from_file_parameter(const path_type& path)
+        std::unique_ptr<parameter_type> create_load_from_file_parameter(const boost::filesystem::path& path)
         const
         {
             return tetengo2::stdalt::make_unique<command::load_from_file::parameter_type>(path);
@@ -450,7 +449,7 @@ namespace bobura { namespace command
         return m_p_impl->load_from_file();
     }
 
-    std::unique_ptr<set::parameter_type> set::create_load_from_file_parameter(const path_type& path)
+    std::unique_ptr<set::parameter_type> set::create_load_from_file_parameter(const boost::filesystem::path& path)
     const
     {
         return m_p_impl->create_load_from_file_parameter(path);

@@ -9,6 +9,7 @@
 #include <sstream>
 #include <utility>
 
+#include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -29,8 +30,6 @@ namespace
             test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::writer
         >::type;
 
-    using path_type = writer_type::path_type;
-
     using bzip2_writer_type =
         boost::mpl::at<
             test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::bzip2_writer
@@ -44,10 +43,10 @@ namespace
 
 
     private:
-        virtual path_type extension_impl()
+        virtual boost::filesystem::path extension_impl()
         const override
         {
-            return path_type{ TETENGO2_TEXT("hoge.ext") };
+            return boost::filesystem::path{ TETENGO2_TEXT("hoge.ext") };
         }
 
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream)
@@ -83,7 +82,7 @@ BOOST_AUTO_TEST_SUITE(bzip2_writer)
         auto p_writer = tetengo2::stdalt::make_unique<concrete_writer>();
         const bzip2_writer_type bzip2_writer{ std::move(p_writer) };
 
-        BOOST_CHECK(bzip2_writer.extension() == path_type{ TETENGO2_TEXT("hoge.ext_bz2") });
+        BOOST_CHECK(bzip2_writer.extension() == boost::filesystem::path{ TETENGO2_TEXT("hoge.ext_bz2") });
     }
 
     BOOST_AUTO_TEST_CASE(selects)
@@ -93,9 +92,9 @@ BOOST_AUTO_TEST_SUITE(bzip2_writer)
         auto p_writer = tetengo2::stdalt::make_unique<concrete_writer>();
         const bzip2_writer_type bzip2_writer{ std::move(p_writer) };
 
-        BOOST_CHECK(bzip2_writer.selects(path_type{ TETENGO2_TEXT("hoge.ext_bz2") }));
-        BOOST_CHECK(!bzip2_writer.selects(path_type{ TETENGO2_TEXT("hoge.ext") }));
-        BOOST_CHECK(!bzip2_writer.selects(path_type{}));
+        BOOST_CHECK(bzip2_writer.selects(boost::filesystem::path{ TETENGO2_TEXT("hoge.ext_bz2") }));
+        BOOST_CHECK(!bzip2_writer.selects(boost::filesystem::path{ TETENGO2_TEXT("hoge.ext") }));
+        BOOST_CHECK(!bzip2_writer.selects(boost::filesystem::path{}));
     }
 
     BOOST_AUTO_TEST_CASE(write)

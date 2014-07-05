@@ -11,6 +11,7 @@
 #include <string>
 #include <utility>
 
+#include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
@@ -64,8 +65,6 @@ namespace
         boost::mpl::at<
             test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::json_writer
         >::type;
-
-    using path_type = writer_type::path_type;
 
 
     // variables
@@ -333,7 +332,7 @@ BOOST_AUTO_TEST_SUITE(json_writer)
 
         const writer_type json_writer{};
 
-        BOOST_CHECK(json_writer.extension() == path_type{ TETENGO2_TEXT(".btt") });
+        BOOST_CHECK(json_writer.extension() == boost::filesystem::path{ TETENGO2_TEXT(".btt") });
     }
 
     BOOST_AUTO_TEST_CASE(selects)
@@ -342,9 +341,9 @@ BOOST_AUTO_TEST_SUITE(json_writer)
 
         const writer_type json_writer{};
 
-        BOOST_CHECK(json_writer.selects(path_type{ TETENGO2_TEXT(".btt") }));
-        BOOST_CHECK(!json_writer.selects(path_type{ TETENGO2_TEXT(".hoge") }));
-        BOOST_CHECK(!json_writer.selects(path_type{}));
+        BOOST_CHECK(json_writer.selects(boost::filesystem::path{ TETENGO2_TEXT(".btt") }));
+        BOOST_CHECK(!json_writer.selects(boost::filesystem::path{ TETENGO2_TEXT(".hoge") }));
+        BOOST_CHECK(!json_writer.selects(boost::filesystem::path{}));
     }
 
 // This test case causes a segmentation fault on Linux.

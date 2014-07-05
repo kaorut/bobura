@@ -16,6 +16,7 @@
 #include <string>
 #include <type_traits>
 
+#include <boost/filesystem.hpp>
 #include <boost/format.hpp>
 #include <boost/rational.hpp>
 #include <boost/utility.hpp>
@@ -33,11 +34,10 @@ namespace bobura { namespace model { namespace serializer
 
         \tparam OutputStream A output stream type.
         \tparam Timetable    A timetable type.
-        \tparam Path         A path type.
         \tparam Encoder      An encoder type.
     */
-    template <typename OutputStream, typename Timetable, typename Path, typename Encoder>
-    class json_writer : public writer<OutputStream, Timetable, Path>
+    template <typename OutputStream, typename Timetable, typename Encoder>
+    class json_writer : public writer<OutputStream, Timetable>
     {
     public:
         // types
@@ -48,11 +48,8 @@ namespace bobura { namespace model { namespace serializer
         //! The timetable type.
         using timetable_type = Timetable;
 
-        //! The path type.
-        using path_type = Path;
-
         //! The base type.
-        using base_type = writer<output_stream_type, timetable_type, path_type>;
+        using base_type = writer<output_stream_type, timetable_type>;
 
         //! The encoder type.
         using encoder_type = Encoder;
@@ -743,10 +740,10 @@ namespace bobura { namespace model { namespace serializer
 
         // virtual functions
 
-        virtual path_type extension_impl()
+        virtual boost::filesystem::path extension_impl()
         const override
         {
-            return path_type{ TETENGO2_TEXT(".btt") };
+            return boost::filesystem::path{ TETENGO2_TEXT(".btt") };
         }
 
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream)

@@ -8,6 +8,7 @@
 
 #include <sstream>
 
+#include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -28,8 +29,6 @@ namespace
             test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::writer
         >::type;
 
-    using path_type = writer_type::path_type;
-
     class concrete_writer : public writer_type
     {
     public:
@@ -38,10 +37,10 @@ namespace
 
 
     private:
-        virtual path_type extension_impl()
+        virtual boost::filesystem::path extension_impl()
         const override
         {
-            return path_type{ TETENGO2_TEXT("hoge") };
+            return boost::filesystem::path{ TETENGO2_TEXT("hoge") };
         }
 
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream)
@@ -75,7 +74,7 @@ BOOST_AUTO_TEST_SUITE(writer)
 
         const concrete_writer writer{};
 
-        BOOST_CHECK(writer.extension() == path_type{ TETENGO2_TEXT("hoge") });
+        BOOST_CHECK(writer.extension() == boost::filesystem::path{ TETENGO2_TEXT("hoge") });
     }
 
     BOOST_AUTO_TEST_CASE(selects)
@@ -84,9 +83,9 @@ BOOST_AUTO_TEST_SUITE(writer)
 
         const concrete_writer writer{};
 
-        BOOST_CHECK(writer.selects(path_type{ TETENGO2_TEXT("hoge") }));
-        BOOST_CHECK(!writer.selects(path_type{ TETENGO2_TEXT("fuga") }));
-        BOOST_CHECK(!writer.selects(path_type{}));
+        BOOST_CHECK(writer.selects(boost::filesystem::path{ TETENGO2_TEXT("hoge") }));
+        BOOST_CHECK(!writer.selects(boost::filesystem::path{ TETENGO2_TEXT("fuga") }));
+        BOOST_CHECK(!writer.selects(boost::filesystem::path{}));
     }
 
     BOOST_AUTO_TEST_CASE(write)
