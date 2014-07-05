@@ -102,6 +102,7 @@ namespace bobura { namespace model { namespace serializer
         const override
         {
             BOOST_THROW_EXCEPTION(std::logic_error("No extension."));
+            return boost::filesystem::path(); // for warning suppression
         }
 
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream)
