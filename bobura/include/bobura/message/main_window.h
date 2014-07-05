@@ -17,6 +17,7 @@
 #include <utility>
 #include <vector>
 
+#include <boost/filesystem.hpp>
 #include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
@@ -225,7 +226,7 @@ namespace bobura { namespace message { namespace main_window
         using abstract_window_type = AbstractWindow;
 
         //! The path type.
-        using path_type = typename abstract_window_type::file_drop_observer_set_type::path_type;
+        using path_type = boost::filesystem::path;
 
 
         // constructors and destructor

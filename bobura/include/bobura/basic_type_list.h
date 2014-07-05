@@ -156,7 +156,6 @@ namespace bobura
         using locale_name_encoder_type = tetengo2::text::encoder<internal_encoding_type, locale_name_encoding_type>;
         using messages_type =
             tetengo2::message::messages<
-                boost::mpl::at<common_type_list, type::path>::type,
                 boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
                 boost::mpl::at<common_type_list, type::string>::type,
                 boost::mpl::at<common_type_list, type::size>::type,
@@ -165,7 +164,6 @@ namespace bobura
             >;
         using message_catalog_type =
             tetengo2::message::message_catalog<
-                boost::mpl::at<common_type_list, type::path>::type,
                 boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
                 boost::mpl::at<common_type_list, type::string>::type,
                 boost::mpl::at<common_type_list, type::size>::type,
@@ -288,7 +286,6 @@ namespace bobura
                 boost::mpl::at<common_type_list, type::size>::type,
                 unit_size_type,
                 boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<common_type_list, type::path>::type,
                 position_type,
                 dimension_type,
                 boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type
@@ -322,7 +319,6 @@ namespace bobura
                 unit_size_type,
                 boost::mpl::at<common_type_list, type::difference>::type,
                 boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<common_type_list, type::path>::type,
                 position_type,
                 dimension_type,
                 boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
@@ -558,57 +554,93 @@ namespace bobura
         struct message_box;    //!< The message box type.
     }}
 
+#if !defined(DOCUMENTATION)
+    namespace detail { namespace common_dialog
+    {
+        using widget_traits_type =
+            tetengo2::gui::widget::widget_traits<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<ui_type_list, type::ui::dimension>::type::first_type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<ui_type_list, type::ui::position>::type,
+                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                boost::mpl::at<locale_type_list, type::locale::exception_encoder>::type
+            >;
+        using widget_details_traits_type =
+            tetengo2::gui::widget::widget_details_traits<
+                boost::mpl::at<detail_type_list, type::detail::widget>::type,
+                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
+                boost::mpl::at<detail_type_list, type::detail::icon>::type,
+                boost::mpl::at<detail_type_list, type::detail::alert>::type,
+                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
+                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
+                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
+                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
+            >;
+    }}
+#endif
+
     //! The type list for the commong dialogs.
     using common_dialog_type_list =
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
                 type::common_dialog::color,
                 tetengo2::gui::common_dialog::color<
-                    boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
                     boost::mpl::at<ui_type_list, type::ui::color>::type,
-                    boost::mpl::at<detail_type_list, type::detail::common_dialog>::type
+                    detail::common_dialog::widget_traits_type,
+                    boost::mpl::at<detail_type_list, type::detail::common_dialog>::type,
+                    detail::common_dialog::widget_details_traits_type,
+                    boost::mpl::at<detail_type_list, type::detail::menu>::type
                 >
             >,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
                 type::common_dialog::file_open_dialog,
                 tetengo2::gui::common_dialog::file_open<
-                    boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
                     boost::mpl::at<common_type_list, type::string>::type,
-                    boost::mpl::at<common_type_list, type::path>::type,
+                    detail::common_dialog::widget_traits_type,
                     boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                    boost::mpl::at<detail_type_list, type::detail::common_dialog>::type
+                    boost::mpl::at<detail_type_list, type::detail::common_dialog>::type,
+                    detail::common_dialog::widget_details_traits_type,
+                    boost::mpl::at<detail_type_list, type::detail::menu>::type
                 >
             >,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
                 type::common_dialog::file_save_dialog,
                 tetengo2::gui::common_dialog::file_save<
-                    boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
                     boost::mpl::at<common_type_list, type::string>::type,
-                    boost::mpl::at<common_type_list, type::path>::type,
+                    detail::common_dialog::widget_traits_type,
                     boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                    boost::mpl::at<detail_type_list, type::detail::common_dialog>::type
+                    boost::mpl::at<detail_type_list, type::detail::common_dialog>::type,
+                    detail::common_dialog::widget_details_traits_type,
+                    boost::mpl::at<detail_type_list, type::detail::menu>::type
                 >
             >,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
                 type::common_dialog::font,
                 tetengo2::gui::common_dialog::font<
-                    boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
                     boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                    detail::common_dialog::widget_traits_type,
                     boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                    boost::mpl::at<detail_type_list, type::detail::common_dialog>::type
+                    boost::mpl::at<detail_type_list, type::detail::common_dialog>::type,
+                    detail::common_dialog::widget_details_traits_type,
+                    boost::mpl::at<detail_type_list, type::detail::menu>::type
                 >
             >,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
                 type::common_dialog::message_box,
                 tetengo2::gui::common_dialog::message_box<
-                    boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
                     boost::mpl::at<common_type_list, type::string>::type,
+                    detail::common_dialog::widget_traits_type,
                     boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                    boost::mpl::at<detail_type_list, type::detail::common_dialog>::type
+                    boost::mpl::at<detail_type_list, type::detail::common_dialog>::type,
+                    detail::common_dialog::widget_details_traits_type,
+                    boost::mpl::at<detail_type_list, type::detail::menu>::type
                 >
             >,
         tetengo2::meta::assoc_list_end

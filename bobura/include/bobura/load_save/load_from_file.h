@@ -16,6 +16,7 @@
 #include <stdexcept>
 #include <utility>
 
+#include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/optional.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
@@ -66,7 +67,7 @@ namespace bobura { namespace load_save
         using file_open_dialog_type = FileOpenDialog;
 
         //! The path type.
-        using path_type = typename file_open_dialog_type::path_type;
+        using path_type = boost::filesystem::path;
 
         //! The file save confirmation type.
         using confirm_file_save_type = ConfirmFileSave;

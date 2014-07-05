@@ -11,6 +11,7 @@
 
 #include <memory>
 
+#include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/noncopyable.hpp>
 
@@ -44,7 +45,7 @@ namespace bobura { namespace command
         using load_from_file_type = boost::mpl::at<load_save_type_list, type::load_save::load_from_file>::type;
 
         //! The path type.
-        using path_type = boost::mpl::at<common_type_list, type::path>::type;
+        using path_type = boost::filesystem::path;
 
         //! The file saving type.
         using save_to_file_type = boost::mpl::at<load_save_type_list, type::load_save::save_to_file>::type;

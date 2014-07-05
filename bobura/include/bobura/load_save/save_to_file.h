@@ -164,7 +164,7 @@ namespace bobura { namespace load_save
 
         using string_type = typename abstract_window_type::string_type;
 
-        using path_type = typename file_save_dialog_type::path_type;
+        using path_type = boost::filesystem::path;
 
 
         // variables
