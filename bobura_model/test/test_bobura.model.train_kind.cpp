@@ -10,6 +10,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include "test_bobura.model.type_list.h"
 
@@ -20,7 +21,7 @@ namespace
 
     using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
-    using color_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::color>::type;
+    using color_type = tetengo2::gui::drawing::color;
 
     using train_kind_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train_kind>::type;
