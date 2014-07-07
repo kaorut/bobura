@@ -16,7 +16,6 @@
 #include <string>
 #include <utility>
 
-#include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/pair.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
@@ -56,9 +55,6 @@ namespace test_bobura { namespace model
         struct size;           //!< The size type.
         struct difference;     //!< The difference type.
         struct string;         //!< The string type.
-        struct path;           //!< The path type.
-        struct output_stream;  //!< The output stream type.
-        struct font;           //!< The font type.
         struct color;          //!< The color type.
         struct abstract_window; //!< The abstract window type.
         struct message_catalog; //!< The message catalog type.
@@ -67,7 +63,6 @@ namespace test_bobura { namespace model
 #if !defined(DOCUMENTATION)
     namespace detail
     {
-        using drawing_details_type = tetengo2::detail::stub::drawing;
         struct abstract_window_type
         {
             abstract_window_type()
@@ -86,17 +81,11 @@ namespace test_bobura { namespace model
         tetengo2::meta::assoc_list<boost::mpl::pair<type::size, std::size_t>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::difference, std::ptrdiff_t>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::string, std::string>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::path, boost::filesystem::path>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::output_stream, std::ostream>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::font, tetengo2::gui::drawing::font<std::string, std::size_t, detail::drawing_details_type>
-            >,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::color, tetengo2::gui::drawing::color>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::abstract_window, detail::abstract_window_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::message_catalog, detail::message_catalog_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>;
+        >>>>>>;
 
 
     /**** Model *************************************************************/
@@ -120,10 +109,14 @@ namespace test_bobura { namespace model
 #if !defined(DOCUMENTATION)
     namespace detail { namespace model
     {
-        using font_color_type =
-            bobura::model::timetable_info::font_color<
-                boost::mpl::at<type_list, type::font>::type, boost::mpl::at<type_list, type::color>::type
+        using font_type =
+            tetengo2::gui::drawing::font<
+                boost::mpl::at<type_list, type::string>::type,
+                boost::mpl::at<type_list, type::size>::type,
+                boost::mpl::at<detail_type_list, type::detail::drawing>::type
             >;
+        using font_color_type =
+            bobura::model::timetable_info::font_color<font_type, boost::mpl::at<type_list, type::color>::type>;
         using font_color_set_type = bobura::model::timetable_info::font_color_set<font_color_type>;
         using grade_type_set_type =
             bobura::model::station_info::grade_type_set<boost::mpl::at<type_list, type::string>::type>;
@@ -257,10 +250,11 @@ namespace test_bobura { namespace model
                 timetable_file_encoder_type,
                 timetable_file_encoder_type
             >;
+        using output_stream_type = std::basic_ostream<io_string_type::value_type>;
         using writer_set_type =
             bobura::model::serializer::writer_set<
-                boost::mpl::at<type_list, type::output_stream>::type,
-                boost::mpl::at<model_type_list, type::model::timetable>::type,
+                output_stream_type, boost::mpl::at<model_type_list,
+                type::model::timetable>::type,
                 timetable_file_encoder_type
             >;
     }}
@@ -306,7 +300,7 @@ namespace test_bobura { namespace model
             boost::mpl::pair<
                 type::serialization::writer,
                 bobura::model::serializer::writer<
-                    boost::mpl::at<type_list, type::output_stream>::type,
+                    detail::serialization::output_stream_type,
                     boost::mpl::at<model_type_list, type::model::timetable>::type
                 >
             >,
@@ -314,7 +308,7 @@ namespace test_bobura { namespace model
             boost::mpl::pair<
                 type::serialization::writer_selector,
                 bobura::model::serializer::writer_selector<
-                    boost::mpl::at<type_list, type::output_stream>::type,
+                    detail::serialization::output_stream_type,
                     boost::mpl::at<model_type_list, type::model::timetable>::type
                 >
             >,
