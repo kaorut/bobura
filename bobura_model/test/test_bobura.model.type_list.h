@@ -16,14 +16,12 @@
 #include <string>
 #include <utility>
 
-#include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/pair.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
-#include <tetengo2/detail/stub/drawing.h>
 
 #include <bobura/model/message/timetable_observer_set.h>
 #include <bobura/model/serializer/reader.h>
@@ -56,47 +54,66 @@ namespace test_bobura { namespace model
         struct size;           //!< The size type.
         struct difference;     //!< The difference type.
         struct string;         //!< The string type.
-        struct path;           //!< The path type.
-        struct output_stream;  //!< The output stream type.
-        struct font;           //!< The font type.
-        struct color;          //!< The color type.
-        struct abstract_window; //!< The abstract window type.
-        struct message_catalog; //!< The message catalog type.
+        struct encoder;        //!< The encoder type.
+        struct widget_traits;  //!< The widget traits type.
+        struct widget_details_traits; //!< The widget details traits type.
     }
 
 #if !defined(DOCUMENTATION)
     namespace detail
     {
-        using drawing_details_type = tetengo2::detail::stub::drawing;
-        struct abstract_window_type
-        {
-            abstract_window_type()
-            {}
-        };
-        struct message_catalog_type
-        {
-            message_catalog_type()
-            {}
-        };
+        using size_type = std::size_t;
+        using difference_type = std::ptrdiff_t;
+        using position_type = std::pair<difference_type, difference_type>;
+        using dimension_type = std::pair<size_t, size_t>;
+        using string_type = std::string;
+        using exception_string_type = std::string;
+        using encoding_details_type = boost::mpl::at<detail_type_list, type::detail::encoding>::type;
+        using internal_encoding_type = tetengo2::text::encoding::locale<string_type, encoding_details_type>;
+        using encoding_type = tetengo2::text::encoding::locale<string_type, encoding_details_type>;
+        using encoder_type  = tetengo2::text::encoder<internal_encoding_type, encoding_type>;
+        using ui_encoding_type =
+            tetengo2::text::encoding::locale<
+                boost::mpl::at<detail_type_list, type::detail::widget>::type::string_type, encoding_details_type
+            >;
+        using ui_encoder_type  = tetengo2::text::encoder<internal_encoding_type, ui_encoding_type>;
+        using exception_encoding_type = tetengo2::text::encoding::locale<exception_string_type, encoding_details_type>;
+        using exception_encoder_type = tetengo2::text::encoder<internal_encoding_type, exception_encoding_type>;
+        using widget_traits_type =
+            tetengo2::gui::widget::widget_traits<
+                size_type,
+                size_type,
+                difference_type,
+                string_type,
+                position_type,
+                dimension_type,
+                ui_encoder_type,
+                exception_encoder_type
+            >;
+        using widget_details_traits_type =
+            tetengo2::gui::widget::widget_details_traits<
+                boost::mpl::at<detail_type_list, type::detail::widget>::type,
+                boost::mpl::at<detail_type_list, type::detail::drawing>::type,
+                boost::mpl::at<detail_type_list, type::detail::icon>::type,
+                boost::mpl::at<detail_type_list, type::detail::alert>::type,
+                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
+                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
+                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
+                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
+            >;
     }
 #endif
 
     //! The common type list.
     using type_list =
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::size, std::size_t>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::difference, std::ptrdiff_t>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::string, std::string>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::path, boost::filesystem::path>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::output_stream, std::ostream>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::font, tetengo2::gui::drawing::font<std::string, std::size_t, detail::drawing_details_type>
-            >,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::color, tetengo2::gui::drawing::color>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::abstract_window, detail::abstract_window_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::message_catalog, detail::message_catalog_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::size, detail::size_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::difference, detail::difference_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::string, detail::string_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::encoder, detail::encoder_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::widget_traits, detail::widget_traits_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::widget_details_traits, detail::widget_details_traits_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>;
+        >>>>>>;
 
 
     /**** Model *************************************************************/
@@ -120,10 +137,14 @@ namespace test_bobura { namespace model
 #if !defined(DOCUMENTATION)
     namespace detail { namespace model
     {
-        using font_color_type =
-            bobura::model::timetable_info::font_color<
-                boost::mpl::at<type_list, type::font>::type, boost::mpl::at<type_list, type::color>::type
+        using font_type =
+            tetengo2::gui::drawing::font<
+                boost::mpl::at<type_list, type::string>::type,
+                boost::mpl::at<type_list, type::size>::type,
+                boost::mpl::at<detail_type_list, type::detail::drawing>::type
             >;
+        using color_type = tetengo2::gui::drawing::color;
+        using font_color_type = bobura::model::timetable_info::font_color<font_type, color_type>;
         using font_color_set_type = bobura::model::timetable_info::font_color_set<font_color_type>;
         using grade_type_set_type =
             bobura::model::station_info::grade_type_set<boost::mpl::at<type_list, type::string>::type>;
@@ -131,10 +152,7 @@ namespace test_bobura { namespace model
         using station_type = bobura::model::station<boost::mpl::at<type_list, type::string>::type, grade_type>;
         using station_location_type =
             bobura::model::timetable_info::station_location<station_type, boost::mpl::at<type_list, type::size>::type>;
-        using train_kind_type =
-            bobura::model::train_kind<
-                boost::mpl::at<type_list, type::string>::type, boost::mpl::at<type_list, type::color>::type
-            >;
+        using train_kind_type = bobura::model::train_kind<boost::mpl::at<type_list, type::string>::type, color_type>;
         using time_span_type = bobura::model::train_info::time_span<boost::mpl::at<type_list, type::difference>::type>;
         using time_type = bobura::model::train_info::time<boost::mpl::at<type_list, type::size>::type, time_span_type>;
         using stop_type =
@@ -215,11 +233,23 @@ namespace test_bobura { namespace model
             >;
         struct select_oudia_diagram_type
         {
+            using size_type = boost::mpl::at<type_list, type::size>::type;
+
             using string_type = boost::mpl::at<type_list, type::string>::type;
 
-            using abstract_window_type = boost::mpl::at<type_list, type::abstract_window>::type;
+            using encoder_type = boost::mpl::at<type_list, type::encoder>::type;
 
-            using message_catalog_type = boost::mpl::at<type_list, type::message_catalog>::type;
+            using abstract_window_type =
+                tetengo2::gui::widget::abstract_window<
+                    boost::mpl::at<type_list, type::widget_traits>::type,
+                    boost::mpl::at<type_list, type::widget_details_traits>::type,
+                    boost::mpl::at<detail_type_list, type::detail::menu>::type
+                >;
+
+            using message_catalog_type =
+                tetengo2::message::message_catalog<
+                    input_stream_iterator_type, string_type, size_type, encoder_type, encoder_type
+                >;
 
             string_type m_wanted;
 
@@ -257,10 +287,11 @@ namespace test_bobura { namespace model
                 timetable_file_encoder_type,
                 timetable_file_encoder_type
             >;
+        using output_stream_type = std::basic_ostream<io_string_type::value_type>;
         using writer_set_type =
             bobura::model::serializer::writer_set<
-                boost::mpl::at<type_list, type::output_stream>::type,
-                boost::mpl::at<model_type_list, type::model::timetable>::type,
+                output_stream_type, boost::mpl::at<model_type_list,
+                type::model::timetable>::type,
                 timetable_file_encoder_type
             >;
     }}
@@ -306,7 +337,7 @@ namespace test_bobura { namespace model
             boost::mpl::pair<
                 type::serialization::writer,
                 bobura::model::serializer::writer<
-                    boost::mpl::at<type_list, type::output_stream>::type,
+                    detail::serialization::output_stream_type,
                     boost::mpl::at<model_type_list, type::model::timetable>::type
                 >
             >,
@@ -314,7 +345,7 @@ namespace test_bobura { namespace model
             boost::mpl::pair<
                 type::serialization::writer_selector,
                 bobura::model::serializer::writer_selector<
-                    boost::mpl::at<type_list, type::output_stream>::type,
+                    detail::serialization::output_stream_type,
                     boost::mpl::at<model_type_list, type::model::timetable>::type
                 >
             >,

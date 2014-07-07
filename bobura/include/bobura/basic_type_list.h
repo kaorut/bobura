@@ -596,7 +596,6 @@ namespace bobura
                 tetengo2::gui::common_dialog::file_open<
                     boost::mpl::at<common_type_list, type::string>::type,
                     detail::common_dialog::widget_traits_type,
-                    boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
                     boost::mpl::at<detail_type_list, type::detail::common_dialog>::type,
                     detail::common_dialog::widget_details_traits_type,
                     boost::mpl::at<detail_type_list, type::detail::menu>::type
@@ -608,7 +607,6 @@ namespace bobura
                 tetengo2::gui::common_dialog::file_save<
                     boost::mpl::at<common_type_list, type::string>::type,
                     detail::common_dialog::widget_traits_type,
-                    boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
                     boost::mpl::at<detail_type_list, type::detail::common_dialog>::type,
                     detail::common_dialog::widget_details_traits_type,
                     boost::mpl::at<detail_type_list, type::detail::menu>::type
@@ -620,7 +618,6 @@ namespace bobura
                 tetengo2::gui::common_dialog::font<
                     boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
                     detail::common_dialog::widget_traits_type,
-                    boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
                     boost::mpl::at<detail_type_list, type::detail::common_dialog>::type,
                     detail::common_dialog::widget_details_traits_type,
                     boost::mpl::at<detail_type_list, type::detail::menu>::type
@@ -632,7 +629,6 @@ namespace bobura
                 tetengo2::gui::common_dialog::message_box<
                     boost::mpl::at<common_type_list, type::string>::type,
                     detail::common_dialog::widget_traits_type,
-                    boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
                     boost::mpl::at<detail_type_list, type::detail::common_dialog>::type,
                     detail::common_dialog::widget_details_traits_type,
                     boost::mpl::at<detail_type_list, type::detail::menu>::type
