@@ -649,11 +649,7 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace dialog
     {
-        using train_kind_type =
-            bobura::model::train_kind<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<ui_type_list, type::ui::color>::type
-            >;
+        using train_kind_type = bobura::model::train_kind<boost::mpl::at<common_type_list, type::string>::type>;
     }}
 #endif
 
@@ -744,11 +740,7 @@ namespace bobura
         using station_type = bobura::model::station<boost::mpl::at<common_type_list, type::string>::type, grade_type>;
         using distance_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
         using station_location_type = bobura::model::timetable_info::station_location<station_type, distance_type>;
-        using train_kind_type =
-            bobura::model::train_kind<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<ui_type_list, type::ui::color>::type
-            >;
+        using train_kind_type = bobura::model::train_kind<boost::mpl::at<common_type_list, type::string>::type>;
         using train_type =
             bobura::model::train<
                 boost::mpl::at<common_type_list, type::size>::type,

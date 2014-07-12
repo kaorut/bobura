@@ -13,6 +13,9 @@
 
 #include <boost/operators.hpp>
 
+#include <tetengo2.h>
+#include <tetengo2.gui.h>
+
 
 namespace bobura { namespace model
 {
@@ -20,10 +23,9 @@ namespace bobura { namespace model
         \brief The class template for a train kind.
 
         \tparam String A string type.
-        \tparam Color  A color type.
     */
-    template <typename String, typename Color>
-    class train_kind : private boost::equality_comparable<train_kind<String, Color>>
+    template <typename String>
+    class train_kind : private boost::equality_comparable<train_kind<String>>
     {
     public:
         // types
@@ -32,7 +34,7 @@ namespace bobura { namespace model
         using string_type = String;
 
         //! The color type.
-        using color_type = Color;
+        using color_type = tetengo2::gui::drawing::color;
 
         //! The weight type.
         enum class weight_type
