@@ -69,7 +69,7 @@ namespace
 
     using color_type = canvas_type::color_type;
 
-    using time_line_type = bobura::view::diagram::time_line<selection_type, canvas_type, time_type::tick_type>;
+    using time_line_type = bobura::view::diagram::time_line<selection_type, canvas_type, time_type::size_type>;
 
     using time_line_list_type = bobura::view::diagram::time_line_list<model_type, selection_type, canvas_type>;
 
@@ -94,7 +94,7 @@ BOOST_AUTO_TEST_SUITE(time_line)
             top_type{ 24 },
             top_type{ 42 },
             unit_size_type{ unit_size_type::value_type{ 1, 2 } },
-            boost::make_optional<time_type::tick_type>(12)
+            boost::make_optional<time_type::size_type>(12)
         };
         const time_line_type time_line2{ std::move(time_line1) };
     }
@@ -110,7 +110,7 @@ BOOST_AUTO_TEST_SUITE(time_line)
             top_type{ 24 },
             top_type{ 42 },
             unit_size_type{ unit_size_type::value_type{ 1, 2 } },
-            boost::make_optional<time_type::tick_type>(12)
+            boost::make_optional<time_type::size_type>(12)
         };
         time_line_type time_line2{
             selection,
@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_SUITE(time_line)
             top_type{ 24 },
             top_type{ 42 },
             unit_size_type{ unit_size_type::value_type{ 1, 2 } },
-            boost::make_optional<time_type::tick_type>(12)
+            boost::make_optional<time_type::size_type>(12)
         };
 
         time_line1 = std::move(time_line2);

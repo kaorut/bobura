@@ -415,13 +415,11 @@ namespace bobura { namespace model { namespace serializer
             timetable_type& m_timetable;
 
         private:
-            using train_kind_index_type = typename train_type::kind_index_type;
+            using size_type = typename train_type::size_type;
 
             using stop_type = typename train_type::stop_type;
 
             using time_type = typename stop_type::time_type;
-
-            using time_tick_type = typename time_type::tick_type;
 
             static std::pair<string_ref_type, string_ref_type> split_line(const string_ref_type& line)
             {
@@ -452,7 +450,7 @@ namespace bobura { namespace model { namespace serializer
             virtual void insert_train_impl(train_type train)
             = 0;
 
-            boost::optional<train_kind_index_type> to_train_kind_index(const string_ref_type& train_kind_string)
+            boost::optional<size_type> to_train_kind_index(const string_ref_type& train_kind_string)
             {
                 const auto opening_paren_position = train_kind_string.find(TETENGO2_TEXT('('));
                 if (opening_paren_position == string_type::npos)
@@ -461,8 +459,8 @@ namespace bobura { namespace model { namespace serializer
                     {
                         return
                             train_kind_string.empty() ?
-                            boost::make_optional(static_cast<train_kind_index_type>(0)) :
-                            boost::make_optional(boost::lexical_cast<train_kind_index_type>(train_kind_string));
+                            boost::make_optional(static_cast<size_type>(0)) :
+                            boost::make_optional(boost::lexical_cast<size_type>(train_kind_string));
                     }
                     catch (const boost::bad_lexical_cast&)
                     {
@@ -474,11 +472,11 @@ namespace bobura { namespace model { namespace serializer
                 if (closing_paren_position == string_type::npos || closing_paren_position <= opening_paren_position)
                     return boost::none;
 
-                train_kind_index_type base_index = 0;
+                size_type base_index = 0;
                 try
                 {
                     const auto index_string = train_kind_string.substr(0, opening_paren_position);
-                    base_index = index_string.empty() ? 0 : boost::lexical_cast<train_kind_index_type>(index_string);
+                    base_index = index_string.empty() ? 0 : boost::lexical_cast<size_type>(index_string);
                 }
                 catch (const boost::bad_lexical_cast&)
                 {
@@ -510,7 +508,7 @@ namespace bobura { namespace model { namespace serializer
                     return boost::none;
                 m_timetable.insert_train_kind(m_timetable.train_kinds().end(), std::move(*new_train_kind));
 
-                return boost::make_optional<train_kind_index_type>(m_timetable.train_kinds().size() - 1);
+                return boost::make_optional<size_type>(m_timetable.train_kinds().size() - 1);
             }
 
             boost::optional<stop_type> to_stop(string_ref_type time_string)
@@ -552,10 +550,10 @@ namespace bobura { namespace model { namespace serializer
                     return boost::none;
                 const std::size_t minute_position = time_string_length == 3 ? 1 : 2;
 
-                time_tick_type hours = 0;
+                size_type hours = 0;
                 try
                 {
-                    hours = boost::lexical_cast<time_tick_type>(time_string.substr(0, minute_position));
+                    hours = boost::lexical_cast<size_type>(time_string.substr(0, minute_position));
                 }
                 catch (const boost::bad_lexical_cast&)
                 {
@@ -563,10 +561,10 @@ namespace bobura { namespace model { namespace serializer
                 }
                 hours %= 24;
 
-                time_tick_type minutes = 0;
+                size_type minutes = 0;
                 try
                 {
-                    minutes = boost::lexical_cast<time_tick_type>(time_string.substr(minute_position, 2));
+                    minutes = boost::lexical_cast<size_type>(time_string.substr(minute_position, 2));
                 }
                 catch (const boost::bad_lexical_cast&)
                 {

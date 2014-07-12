@@ -295,7 +295,7 @@ namespace bobura { namespace message { namespace diagram_view
 
         using value_type = typename property_bar_type::map_box_type::value_type;
 
-        using kind_index_type = typename train_type::kind_index_type;
+        using size_type = typename train_type::size_type;
 
         using stop_type = typename train_type::stop_type;
 
@@ -325,7 +325,7 @@ namespace bobura { namespace message { namespace diagram_view
         string_type kind_name_text(const train_type& train)
         const
         {
-            const kind_index_type kind_index = train.kind_index();
+            const size_type kind_index = train.kind_index();
             if (kind_index >= m_model.timetable().train_kinds().size())
                 BOOST_THROW_EXCEPTION(std::out_of_range("Too large train kind index."));
 

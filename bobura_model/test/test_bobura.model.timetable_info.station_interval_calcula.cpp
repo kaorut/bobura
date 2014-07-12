@@ -39,7 +39,7 @@ namespace
 
     using time_type = stop_type::time_type;
 
-    using time_tick_type = time_type::tick_type;
+    using size_type = time_type::size_type;
 
     using time_span_type = time_type::time_span_type;
 
@@ -97,10 +97,10 @@ namespace
     }
 
     stop_type make_stop(
-        const time_tick_type arrival_hours,
-        const time_tick_type arrival_minutes,
-        const time_tick_type departure_hours,
-        const time_tick_type departure_minutes
+        const size_type arrival_hours,
+        const size_type arrival_minutes,
+        const size_type departure_hours,
+        const size_type departure_minutes
     )
     {
         return
@@ -112,7 +112,7 @@ namespace
             };
     }
 
-    stop_type make_stop(const bool arrival, const time_tick_type hours, const time_tick_type minutes)
+    stop_type make_stop(const bool arrival, const size_type hours, const size_type minutes)
     {
         time_type time{ hours, minutes, 0 };
         return

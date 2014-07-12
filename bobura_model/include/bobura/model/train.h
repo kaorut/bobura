@@ -25,31 +25,27 @@ namespace bobura { namespace model
     /*!
         \brief The class template for a train.
 
-        \tparam String       A string type.
-        \tparam KindIndex    A kind index type.
-        \tparam TimeTick     A time tick type.
-        \tparam TimeSpanTick A time span tick type.
+        \tparam Size       A size type.
+        \tparam Difference A difference type.
+        \tparam String     A string type.
     */
-    template <typename String, typename KindIndex, typename TimeTick, typename TimeSpanTick>
-    class train : private boost::equality_comparable<train<String, KindIndex, TimeTick, TimeSpanTick>>
+    template <typename Size, typename Difference, typename String>
+    class train : private boost::equality_comparable<train<Size, Difference, String>>
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
         //! The string type.
         using string_type = String;
 
-        //! The kind index type.
-        using kind_index_type = KindIndex;
-
-        //! The time tick type.
-        using time_tick_type = TimeTick;
-
-        //! The time span tick type.
-        using time_span_tick_type = TimeSpanTick;
-
         //! The stop type.
-        using stop_type = train_info::stop<time_tick_type, time_span_tick_type, string_type>;
+        using stop_type = train_info::stop<size_type, difference_type, string_type>;
 
         //! The stops type.
         using stops_type = std::vector<stop_type>;
@@ -75,12 +71,12 @@ namespace bobura { namespace model
             \param note        A note.
         */
         train(
-            const direction_type  direction,
-            string_type           number,
-            const kind_index_type kind_index,
-            string_type           name,
-            string_type           name_number,
-            string_type           note
+            const direction_type direction,
+            string_type          number,
+            const size_type      kind_index,
+            string_type          name,
+            string_type          name_number,
+            string_type          note
         )
         :
         m_direction(direction),
@@ -106,13 +102,13 @@ namespace bobura { namespace model
             \param stops       Stops.
         */
         train(
-            const direction_type  direction,
-            string_type           number,
-            const kind_index_type kind_index,
-            string_type           name,
-            string_type           name_number,
-            string_type           note,
-            stops_type            stops
+            const direction_type direction,
+            string_type          number,
+            const size_type      kind_index,
+            string_type          name,
+            string_type          name_number,
+            string_type          note,
+            stops_type           stops
         )
         :
         m_direction(direction),
@@ -140,14 +136,14 @@ namespace bobura { namespace model
         */
         template <typename InputIterator>
         train(
-            const direction_type  direction,
-            string_type           number,
-            const kind_index_type kind_index,
-            string_type           name,
-            string_type           name_number,
-            string_type           note,
-            const InputIterator   stop_first,
-            const InputIterator   stop_last
+            const direction_type direction,
+            string_type          number,
+            const size_type      kind_index,
+            string_type          name,
+            string_type          name_number,
+            string_type          note,
+            const InputIterator  stop_first,
+            const InputIterator  stop_last
         )
         :
         m_direction(direction),
@@ -210,7 +206,7 @@ namespace bobura { namespace model
 
             \return The kind index.
         */
-        kind_index_type kind_index()
+        size_type kind_index()
         const
         {
             return m_kind_index;
@@ -221,7 +217,7 @@ namespace bobura { namespace model
 
             \param kind_index A kind index.
         */
-        void set_kind_index(const kind_index_type kind_index)
+        void set_kind_index(const size_type kind_index)
         {
             m_kind_index = kind_index;
         }
@@ -366,7 +362,7 @@ namespace bobura { namespace model
 
         string_type m_number;
 
-        kind_index_type m_kind_index;
+        size_type m_kind_index;
 
         string_type m_name;
 

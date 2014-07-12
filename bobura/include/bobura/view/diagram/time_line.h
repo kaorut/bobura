@@ -31,9 +31,9 @@ namespace bobura { namespace view { namespace diagram
 
         \tparam Selection A selection type.
         \tparam Canvas    A canvas type.
-        \tparam TimeTick  A time tick type.
+        \tparam Size      A size type.
     */
-    template <typename Selection, typename Canvas, typename TimeTick>
+    template <typename Selection, typename Canvas, typename Size>
     class time_line : public item<Selection, Canvas>
     {
     public:
@@ -60,8 +60,8 @@ namespace bobura { namespace view { namespace diagram
         //! The base type.
         using base_type = item<selection_type, canvas_type>;
 
-        //! The time tick type.
-        using time_tick_type = TimeTick;
+        //! The size type.
+        using size_type = Size;
 
 
         // constructors and destructor
@@ -77,12 +77,12 @@ namespace bobura { namespace view { namespace diagram
             \param hours     Hours.
         */
         time_line(
-            selection_type&                 selection,
-            left_type                       left,
-            const top_type&                 top,
-            const top_type&                 bottom,
-            unit_size_type                  width,
-            boost::optional<time_tick_type> hours
+            selection_type&            selection,
+            left_type                  left,
+            const top_type&            top,
+            const top_type&            bottom,
+            unit_size_type             width,
+            boost::optional<size_type> hours
         )
         :
         base_type(selection),
@@ -156,7 +156,7 @@ namespace bobura { namespace view { namespace diagram
 
         unit_size_type m_width;
 
-        boost::optional<time_tick_type> m_hours;
+        boost::optional<size_type> m_hours;
 
 
         // virtual functions
@@ -328,9 +328,9 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
-        using time_tick_type = typename time_type::tick_type;
+        using size_type = typename time_type::size_type;
 
-        using time_line_type = time_line<selection_type, canvas_type, time_tick_type>;
+        using time_line_type = time_line<selection_type, canvas_type, size_type>;
 
         using unit_size_type = typename canvas_type::unit_size_type;
 
@@ -373,7 +373,7 @@ namespace bobura { namespace view { namespace diagram
 
             std::vector<time_line_type> time_lines{};
             time_lines.reserve(24 * 60);
-            for (time_tick_type i = 0; i <= 24 * 60; ++i)
+            for (size_type i = 0; i <= 24 * 60; ++i)
             {
                 const time_type time{ i * 60 + time_offset.seconds() };
                 const auto hours_minutes_seconds = time.hours_minutes_seconds();

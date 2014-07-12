@@ -197,7 +197,7 @@ namespace bobura { namespace model { namespace timetable_info
                     if (travel_time)
                     {
                         time_span_type interval{
-                            static_cast<typename time_span_type::tick_type>(travel_time->seconds() / (to - from))
+                            static_cast<typename time_span_type::difference_type>(travel_time->seconds() / (to - from))
                         };
                         if (to - from > 1)
                             interval += whole_day();

@@ -21,24 +21,24 @@ namespace bobura { namespace model { namespace train_info
     /*!
         \brief The class template for a train stop.
 
-        \tparam TimeTick     A time tick type.
-        \tparam TimeSpanTick A time span tick type.
-        \tparam String       A string type.
+        \tparam Size       A size type.
+        \tparam Difference A difference type.
+        \tparam String     A string type.
     */
-    template <typename TimeTick, typename TimeSpanTick, typename String>
-    class stop : private boost::equality_comparable<stop<TimeTick, TimeSpanTick, String>>
+    template <typename Size, typename Difference, typename String>
+    class stop : private boost::equality_comparable<stop<Size, Difference, String>>
     {
     public:
         // types
 
-        //! The time tick type.
-        using time_tick_type = TimeTick;
+        //! The size type.
+        using size_type = Size;
 
-        //! The time span tick type.
-        using time_span_tick_type = TimeSpanTick;
+        //! The difference type.
+        using difference_type = Difference;
 
         //! The time type.
-        using time_type = time<time_tick_type, time_span_tick_type>;
+        using time_type = time<size_type, difference_type>;
 
         //! The string type.
         using string_type = String;

@@ -720,9 +720,9 @@ namespace bobura { namespace model { namespace serializer
             if (!time.initialized())
                 return output_string_type{ TETENGO2_TEXT("    -1") };
 
-            using tick_type = typename time_type::tick_type;
+            using size_type = typename time_type::size_type;
             const auto hours_minutes_seconds = time.hours_minutes_seconds();
-            const tick_type representation =
+            const size_type representation =
                 hours_minutes_seconds.hours() * 10000 +
                 hours_minutes_seconds.minutes() * 100 +
                 hours_minutes_seconds.seconds();
