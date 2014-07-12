@@ -13,23 +13,32 @@
 
 #include <boost/operators.hpp>
 
+#include <bobura/model/train_info/time.h>
+
 
 namespace bobura { namespace model { namespace train_info
 {
     /*!
         \brief The class template for a train stop.
 
-        \tparam Time   A time type.
-        \tparam String A string type.
+        \tparam TimeTick     A time tick type.
+        \tparam TimeSpanTick A time span tick type.
+        \tparam String       A string type.
     */
-    template <typename Time, typename String>
-    class stop : private boost::equality_comparable<stop<Time, String>>
+    template <typename TimeTick, typename TimeSpanTick, typename String>
+    class stop : private boost::equality_comparable<stop<TimeTick, TimeSpanTick, String>>
     {
     public:
         // types
 
+        //! The time tick type.
+        using time_tick_type = TimeTick;
+
+        //! The time span tick type.
+        using time_span_tick_type = TimeSpanTick;
+
         //! The time type.
-        using time_type = Time;
+        using time_type = time<time_tick_type, time_span_tick_type>;
 
         //! The string type.
         using string_type = String;

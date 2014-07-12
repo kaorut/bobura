@@ -160,7 +160,9 @@ namespace test_bobura { namespace model
             >;
         using stop_type =
             bobura::model::train_info::stop<
-                test_bobura::model::detail::model::time_type, boost::mpl::at<type_list, type::string>::type
+                boost::mpl::at<type_list, type::size>::type,
+                boost::mpl::at<type_list, type::difference>::type,
+                boost::mpl::at<type_list, type::string>::type
             >;
         using train_type =
             bobura::model::train<
