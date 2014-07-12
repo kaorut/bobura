@@ -17,18 +17,21 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/train_info/stop.h>
+
 
 namespace bobura { namespace model
 {
     /*!
         \brief The class template for a train.
 
-        \tparam String    A string type.
-        \tparam KindIndex A kind index type.
-        \tparam Stop      A stop type.
+        \tparam String       A string type.
+        \tparam KindIndex    A kind index type.
+        \tparam TimeTick     A time tick type.
+        \tparam TimeSpanTick A time span tick type.
     */
-    template <typename String, typename KindIndex, typename Stop>
-    class train : private boost::equality_comparable<train<String, KindIndex, Stop>>
+    template <typename String, typename KindIndex, typename TimeTick, typename TimeSpanTick>
+    class train : private boost::equality_comparable<train<String, KindIndex, TimeTick, TimeSpanTick>>
     {
     public:
         // types
@@ -39,8 +42,14 @@ namespace bobura { namespace model
         //! The kind index type.
         using kind_index_type = KindIndex;
 
+        //! The time tick type.
+        using time_tick_type = TimeTick;
+
+        //! The time span tick type.
+        using time_span_tick_type = TimeSpanTick;
+
         //! The stop type.
-        using stop_type = Stop;
+        using stop_type = train_info::stop<time_tick_type, time_span_tick_type, string_type>;
 
         //! The stops type.
         using stops_type = std::vector<stop_type>;

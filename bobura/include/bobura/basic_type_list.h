@@ -49,7 +49,6 @@
 #include <bobura/model/timetable_info/font_color_set.h>
 #include <bobura/model/timetable_info/station_interval_calculator.h>
 #include <bobura/model/timetable_info/station_location.h>
-#include <bobura/model/train_info/stop.h>
 #include <bobura/model/train_kind.h>
 #include <bobura/oudia_diagram_dialog.h>
 #include <bobura/settings.h>
@@ -750,17 +749,12 @@ namespace bobura
                 boost::mpl::at<common_type_list, type::string>::type,
                 boost::mpl::at<ui_type_list, type::ui::color>::type
             >;
-        using stop_type =
-            bobura::model::train_info::stop<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type
-            >;
         using train_type =
             bobura::model::train<
                 boost::mpl::at<common_type_list, type::string>::type,
                 boost::mpl::at<common_type_list, type::size>::type,
-                stop_type
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type
             >;
         using station_interval_calculator_type =
             bobura::model::timetable_info::station_interval_calculator<station_location_type, train_type>;

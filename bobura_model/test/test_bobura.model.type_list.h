@@ -166,7 +166,10 @@ namespace test_bobura { namespace model
             >;
         using train_type =
             bobura::model::train<
-                boost::mpl::at<type_list, type::string>::type, boost::mpl::at<type_list, type::size>::type, stop_type
+                boost::mpl::at<type_list, type::string>::type,
+                boost::mpl::at<type_list, type::size>::type,
+                boost::mpl::at<type_list, type::size>::type,
+                boost::mpl::at<type_list, type::difference>::type
             >;
         using station_interval_calculator_type =
             bobura::model::timetable_info::station_interval_calculator<station_location_type, train_type>;
