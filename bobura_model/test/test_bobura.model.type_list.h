@@ -148,8 +148,7 @@ namespace test_bobura { namespace model
         using font_color_set_type = bobura::model::timetable_info::font_color_set<font_color_type>;
         using grade_type_set_type =
             bobura::model::station_info::grade_type_set<boost::mpl::at<type_list, type::string>::type>;
-        using grade_type = grade_type_set_type::grade_type;
-        using station_type = bobura::model::station<boost::mpl::at<type_list, type::string>::type, grade_type>;
+        using station_type = bobura::model::station<boost::mpl::at<type_list, type::string>::type>;
         using station_location_type =
             bobura::model::timetable_info::station_location<station_type, boost::mpl::at<type_list, type::size>::type>;
         using train_kind_type = bobura::model::train_kind<boost::mpl::at<type_list, type::string>::type>;

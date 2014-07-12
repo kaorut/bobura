@@ -736,8 +736,7 @@ namespace bobura
             bobura::model::serializer::select_oudia_diagram<
                 boost::mpl::at<dialog_type_list, type::dialog::oudia_diagram_dialog>::type
             >;
-        using grade_type = station_grade_type_set_type::grade_type;
-        using station_type = bobura::model::station<boost::mpl::at<common_type_list, type::string>::type, grade_type>;
+        using station_type = bobura::model::station<boost::mpl::at<common_type_list, type::string>::type>;
         using distance_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
         using station_location_type = bobura::model::timetable_info::station_location<station_type, distance_type>;
         using train_kind_type = bobura::model::train_kind<boost::mpl::at<common_type_list, type::string>::type>;
