@@ -36,7 +36,7 @@ namespace
 
     using time_span_type = bobura::model::train_info::time_span<int>;
 
-    using time_type = bobura::model::train_info::time<int, time_span_type>;
+    using time_type = bobura::model::train_info::time<int, int>;
 
     using size_type = tetengo2::gui::position<position_type>::left_type;
 

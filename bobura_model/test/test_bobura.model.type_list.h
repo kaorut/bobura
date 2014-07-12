@@ -154,7 +154,10 @@ namespace test_bobura { namespace model
             bobura::model::timetable_info::station_location<station_type, boost::mpl::at<type_list, type::size>::type>;
         using train_kind_type = bobura::model::train_kind<boost::mpl::at<type_list, type::string>::type, color_type>;
         using time_span_type = bobura::model::train_info::time_span<boost::mpl::at<type_list, type::difference>::type>;
-        using time_type = bobura::model::train_info::time<boost::mpl::at<type_list, type::size>::type, time_span_type>;
+        using time_type =
+            bobura::model::train_info::time<
+                boost::mpl::at<type_list, type::size>::type, boost::mpl::at<type_list, type::difference>::type
+            >;
         using stop_type =
             bobura::model::train_info::stop<
                 test_bobura::model::detail::model::time_type, boost::mpl::at<type_list, type::string>::type

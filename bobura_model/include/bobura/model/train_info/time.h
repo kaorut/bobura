@@ -17,19 +17,21 @@
 #include <boost/swap.hpp>
 #include <boost/throw_exception.hpp>
 
+#include <bobura/model/train_info/time_span.h>
+
 
 namespace bobura { namespace model { namespace train_info
 {
     /*!
         \brief The class template for a time.
 
-        \tparam TimeTick A time tick type.
-        \tparam TimeSpan A time span type.
+        \tparam TimeTick     A time tick type.
+        \tparam TimeSpanTick A time span tick type.
     */
-    template <typename TimeTick, typename TimeSpan>
+    template <typename TimeTick, typename TimeSpanTick>
     class time :
-        private boost::totally_ordered<time<TimeTick, TimeSpan>>,
-        private boost::additive<time<TimeTick, TimeSpan>, TimeSpan>
+        private boost::totally_ordered<time<TimeTick, TimeSpanTick>>,
+        private boost::additive<time<TimeTick, TimeSpanTick>, time_span<TimeSpanTick>>
     {
     public:
         // types
@@ -37,8 +39,11 @@ namespace bobura { namespace model { namespace train_info
         //! The tick type.
         using tick_type = TimeTick;
 
+        //! The time span tick type.
+        using time_span_tick_type = TimeSpanTick;
+
         //! The time span type.
-        using time_span_type = TimeSpan;
+        using time_span_type = time_span<time_span_tick_type>;
 
         //! The hours-minutes-seconds type.
         class hours_minutes_seconds_type : private boost::equality_comparable<hours_minutes_seconds_type>

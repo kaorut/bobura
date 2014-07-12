@@ -755,7 +755,7 @@ namespace bobura
         using time_type =
             bobura::model::train_info::time<
                 boost::mpl::at<common_type_list, type::size>::type,
-                bobura::model::train_info::time_span<boost::mpl::at<common_type_list, type::difference>::type>
+                boost::mpl::at<common_type_list, type::difference>::type
             >;
         using stop_type =
             bobura::model::train_info::stop<time_type, boost::mpl::at<common_type_list, type::string>::type>;
