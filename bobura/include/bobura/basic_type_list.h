@@ -45,8 +45,6 @@
 #include <bobura/model/train.h>
 #include <bobura/model/station_info/grade.h>
 #include <bobura/model/timetable.h>
-#include <bobura/model/timetable_info/font_color_set.h>
-#include <bobura/model/timetable_info/station_interval_calculator.h>
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train_kind.h>
 #include <bobura/oudia_diagram_dialog.h>
@@ -723,12 +721,6 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace model
     {
-        using font_color_set_type =
-            bobura::model::timetable_info::font_color_set<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
-            >;
         using station_grade_type_set_type =
             bobura::model::station_info::grade_type_set<boost::mpl::at<common_type_list, type::string>::type>;
         using select_oudia_diagram_type =
@@ -747,24 +739,15 @@ namespace bobura
                 boost::mpl::at<common_type_list, type::difference>::type,
                 boost::mpl::at<common_type_list, type::string>::type
             >;
-        using station_interval_calculator_type =
-            bobura::model::timetable_info::station_interval_calculator<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                distance_type
-            >;
         using speed_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
         using timetable_type =
             bobura::model::timetable<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
                 boost::mpl::at<common_type_list, type::string>::type,
-                station_location_type,
-                station_interval_calculator_type,
-                train_kind_type,
-                train_type,
+                distance_type,
                 speed_type,
-                font_color_set_type,
-                bobura::model::message::timetable_observer_set
+                boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
             >;
     }}
 #endif

@@ -175,6 +175,7 @@ namespace test_bobura { namespace model
                 boost::mpl::at<type_list, type::string>::type,
                 distance_type
             >;
+        using speed_type = boost::mpl::at<type_list, type::size>::type;
     }}
 #endif
 
@@ -201,14 +202,12 @@ namespace test_bobura { namespace model
             boost::mpl::pair<
                 type::model::timetable,
                 bobura::model::timetable<
-                    boost::mpl::at<type_list, type::string>::type,
-                    detail::model::station_location_type,
-                    detail::model::station_interval_calculator_type,
-                    detail::model::train_kind_type,
-                    detail::model::train_type,
                     boost::mpl::at<type_list, type::size>::type,
-                    detail::model::font_color_set_type,
-                    bobura::model::message::timetable_observer_set
+                    boost::mpl::at<type_list, type::difference>::type,
+                    boost::mpl::at<type_list, type::string>::type,
+                    detail::model::distance_type,
+                    detail::model::speed_type,
+                    boost::mpl::at<detail_type_list, type::detail::drawing>::type
                 >
             >,
         tetengo2::meta::assoc_list_end

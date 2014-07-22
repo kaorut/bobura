@@ -52,7 +52,7 @@ namespace
 
     using train_kinds_type = timetable_type::train_kinds_type;
 
-    using train_kind_index_type = timetable_type::train_kind_index_type;
+    using train_kind_index_type = timetable_type::size_type;
 
     using font_color_set_type = timetable_type::font_color_set_type;
 

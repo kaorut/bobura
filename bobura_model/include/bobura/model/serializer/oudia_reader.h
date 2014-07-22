@@ -683,7 +683,7 @@ namespace bobura { namespace model { namespace serializer
                 if (m_houkou.empty() || m_syubetsu.empty())
                     return true;
 
-                const auto train_kind_index = to_number<typename timetable_type::train_kind_index_type>(m_syubetsu);
+                const auto train_kind_index = to_number<typename timetable_type::size_type>(m_syubetsu);
                 if (!train_kind_index || *train_kind_index >= m_timetable.train_kinds().size())
                     return false;
 

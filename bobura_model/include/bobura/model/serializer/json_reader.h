@@ -90,7 +90,7 @@ namespace bobura { namespace model { namespace serializer
 
         using font_color_set_element_type = boost::variant<font_color_type, font_type, color_type>;
 
-        using train_kind_index_type = typename timetable_type::train_kind_index_type;
+        using train_kind_index_type = typename timetable_type::size_type;
 
         using grammar_type = typename push_parser_type::grammar_type;
 
