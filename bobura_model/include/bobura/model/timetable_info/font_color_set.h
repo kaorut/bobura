@@ -13,8 +13,8 @@
 
 #include <boost/operators.hpp>
 
-#include <tetengo2/gui/drawing/color.h>
-#include <tetengo2/gui/drawing/font.h>
+#include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 
 namespace bobura { namespace model { namespace timetable_info
