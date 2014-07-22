@@ -137,15 +137,12 @@ namespace test_bobura { namespace model
 #if !defined(DOCUMENTATION)
     namespace detail { namespace model
     {
-        using font_type =
-            tetengo2::gui::drawing::font<
-                boost::mpl::at<type_list, type::string>::type,
+        using font_color_set_type =
+            bobura::model::timetable_info::font_color_set<
                 boost::mpl::at<type_list, type::size>::type,
+                boost::mpl::at<type_list, type::string>::type,
                 boost::mpl::at<detail_type_list, type::detail::drawing>::type
             >;
-        using color_type = tetengo2::gui::drawing::color;
-        using font_color_type = bobura::model::timetable_info::font_color<font_type, color_type>;
-        using font_color_set_type = bobura::model::timetable_info::font_color_set<font_color_type>;
         using grade_type_set_type =
             bobura::model::station_info::grade_type_set<boost::mpl::at<type_list, type::string>::type>;
         using station_type = bobura::model::station<boost::mpl::at<type_list, type::string>::type>;

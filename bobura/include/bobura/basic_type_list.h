@@ -724,12 +724,12 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace model
     {
-        using font_color_type =
-            bobura::model::timetable_info::font_color<
-                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                boost::mpl::at<ui_type_list, type::ui::color>::type
+        using font_color_set_type =
+            bobura::model::timetable_info::font_color_set<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
             >;
-        using font_color_set_type = bobura::model::timetable_info::font_color_set<font_color_type>;
         using station_grade_type_set_type =
             bobura::model::station_info::grade_type_set<boost::mpl::at<common_type_list, type::string>::type>;
         using select_oudia_diagram_type =

@@ -13,26 +13,39 @@
 
 #include <boost/operators.hpp>
 
+#include <tetengo2/gui/drawing/color.h>
+#include <tetengo2/gui/drawing/font.h>
+
 
 namespace bobura { namespace model { namespace timetable_info
 {
     /*!
         \brief The class template for a font and color.
 
-        \tparam Font  A font type.
-        \tparam Color A color type.
+        \tparam Size           A size type.
+        \tparam String         A string type.
+        \tparam DrawingDetails A detail implementation type of a drawing.
     */
-    template <typename Font, typename Color>
-    class font_color : private boost::equality_comparable<font_color<Font, Color>>
+    template <typename Size, typename String, typename DrawingDetails>
+    class font_color : private boost::equality_comparable<font_color<Size, String, DrawingDetails>>
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The drawing details type.
+        using drawing_details_type = DrawingDetails;
+
         //! The font type.
-        using font_type = Font;
+        using font_type = tetengo2::gui::drawing::font<string_type, size_type, drawing_details_type>;
 
         //! The color type.
-        using color_type = Color;
+        using color_type = tetengo2::gui::drawing::color;
 
 
         // constructors and destructor
@@ -103,16 +116,27 @@ namespace bobura { namespace model { namespace timetable_info
     /*!
         \brief The class template for a font and color set.
 
-        \tparam FontColor A font and color type.
+        \tparam Size           A size type.
+        \tparam String         A string type.
+        \tparam DrawingDetails A detail implementation type of a drawing.
     */
-    template <typename FontColor>
-    class font_color_set : private boost::equality_comparable<font_color_set<FontColor>>
+    template <typename Size, typename String, typename DrawingDetails>
+    class font_color_set : private boost::equality_comparable<font_color_set<Size, String, DrawingDetails>>
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The drawing details type.
+        using drawing_details_type = DrawingDetails;
+
         //! The font and color type.
-        using font_color_type = FontColor;
+        using font_color_type = font_color<size_type, string_type, drawing_details_type>;
 
         //! The font type.
         using font_type = typename font_color_type::font_type;
