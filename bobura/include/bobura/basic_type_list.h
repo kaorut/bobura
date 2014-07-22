@@ -748,7 +748,12 @@ namespace bobura
                 boost::mpl::at<common_type_list, type::string>::type
             >;
         using station_interval_calculator_type =
-            bobura::model::timetable_info::station_interval_calculator<station_location_type, train_type>;
+            bobura::model::timetable_info::station_interval_calculator<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                distance_type
+            >;
         using speed_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
         using timetable_type =
             bobura::model::timetable<
