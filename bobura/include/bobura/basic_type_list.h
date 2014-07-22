@@ -42,7 +42,6 @@
 #include <bobura/model/serializer/select_oudia_diagram.h>
 #include <bobura/model/serializer/writer_selector.h>
 #include <bobura/model/serializer/writer_set.h>
-#include <bobura/model/station.h>
 #include <bobura/model/train.h>
 #include <bobura/model/station_info/grade.h>
 #include <bobura/model/timetable.h>
@@ -736,9 +735,11 @@ namespace bobura
             bobura::model::serializer::select_oudia_diagram<
                 boost::mpl::at<dialog_type_list, type::dialog::oudia_diagram_dialog>::type
             >;
-        using station_type = bobura::model::station<boost::mpl::at<common_type_list, type::string>::type>;
         using distance_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
-        using station_location_type = bobura::model::timetable_info::station_location<station_type, distance_type>;
+        using station_location_type =
+            bobura::model::timetable_info::station_location<
+                boost::mpl::at<common_type_list, type::string>::type, distance_type
+            >;
         using train_kind_type = bobura::model::train_kind<boost::mpl::at<common_type_list, type::string>::type>;
         using train_type =
             bobura::model::train<

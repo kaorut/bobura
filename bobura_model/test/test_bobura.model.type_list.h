@@ -145,9 +145,10 @@ namespace test_bobura { namespace model
             >;
         using grade_type_set_type =
             bobura::model::station_info::grade_type_set<boost::mpl::at<type_list, type::string>::type>;
-        using station_type = bobura::model::station<boost::mpl::at<type_list, type::string>::type>;
         using station_location_type =
-            bobura::model::timetable_info::station_location<station_type, boost::mpl::at<type_list, type::size>::type>;
+            bobura::model::timetable_info::station_location<
+                boost::mpl::at<type_list, type::string>::type, boost::mpl::at<type_list, type::size>::type
+            >;
         using train_kind_type = bobura::model::train_kind<boost::mpl::at<type_list, type::string>::type>;
         using time_span_type = bobura::model::train_info::time_span<boost::mpl::at<type_list, type::difference>::type>;
         using time_type =
@@ -175,7 +176,10 @@ namespace test_bobura { namespace model
     using model_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::font_color_set, detail::model::font_color_set_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::grade_type_set, detail::model::grade_type_set_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::model::station, detail::model::station_type>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<
+                type::model::station, bobura::model::station<boost::mpl::at<type_list, type::string>::type>
+            >,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::model::station_location, detail::model::station_location_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::train_kind, detail::model::train_kind_type>,

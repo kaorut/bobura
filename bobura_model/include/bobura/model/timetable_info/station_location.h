@@ -13,26 +13,31 @@
 
 #include <boost/operators.hpp>
 
+#include <bobura/model/station.h>
+
 
 namespace bobura { namespace model { namespace timetable_info
 {
     /*!
         \brief The class template for a station location.
 
-        \tparam Station           A station type.
+        \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
     */
-    template <typename Station, typename OperatingDistance>
-    class station_location : private boost::equality_comparable<station_location<Station, OperatingDistance>>
+    template <typename String, typename OperatingDistance>
+    class station_location : private boost::equality_comparable<station_location<String, OperatingDistance>>
     {
     public:
         // types
 
-        //! The station type.
-        using station_type = Station;
+        //! The string type.
+        using string_type = String;
 
         //! The operating distance type.
         using operating_distance_type = OperatingDistance;
+
+        //! The station type.
+        using station_type = station<string_type>;
 
 
         // constructors and destructor
