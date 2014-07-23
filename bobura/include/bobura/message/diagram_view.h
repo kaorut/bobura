@@ -119,7 +119,7 @@ namespace bobura { namespace message { namespace diagram_view
         */
         void operator()(const station_location_type& station_location)
         {
-            const station_type& station = station_location.station();
+            const station_type& station = station_location.get_station();
             insert_value(m_message_catalog.get(TETENGO2_TEXT("PropertyBar:Name")), station.name());
             insert_value(m_message_catalog.get(TETENGO2_TEXT("PropertyBar:Grade")), grade_text(station.grade()));
             insert_value(m_message_catalog.get(TETENGO2_TEXT("PropertyBar:Note")), station.note());
@@ -415,7 +415,7 @@ namespace bobura { namespace message { namespace diagram_view
             assert(stop_index < m_model.timetable().station_locations().size());
 
             return
-                &m_model.timetable().station_locations()[stop_index].station().grade() !=
+                &m_model.timetable().station_locations()[stop_index].get_station().grade() !=
                 &station_grade_type_set_type::local_type::instance();
         }
 
@@ -444,7 +444,7 @@ namespace bobura { namespace message { namespace diagram_view
             std::basic_ostringstream<typename string_type::value_type> stream;
 
             stream <<
-                m_model.timetable().station_locations()[stop_index].station().name() <<
+                m_model.timetable().station_locations()[stop_index].get_station().name() <<
                 string_type{ TETENGO2_TEXT(" ") };
 
             if (!arrival_time.empty() && !departure_time.empty())

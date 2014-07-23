@@ -176,7 +176,7 @@ namespace bobura { namespace view { namespace diagram
                 canvas, position_type{ left_type{ 0 }, m_top }, position_type{ m_right, m_top }, this->selected()
             );
 
-            const auto& name = m_p_station_location->station().name();
+            const auto& name = m_p_station_location->get_station().name();
             const auto name_dimension = canvas.calc_text_dimension(name);
             canvas.draw_text(
                 name,
@@ -439,7 +439,9 @@ namespace bobura { namespace view { namespace diagram
                     line_right,
                     station_header_right,
                     std::move(line_position),
-                    select_station_font_color(model.timetable().font_color_set(), station_location.station().grade())
+                    select_station_font_color(
+                        model.timetable().font_color_set(), station_location.get_station().grade()
+                    )
                 );
             }
             station_lines.shrink_to_fit();

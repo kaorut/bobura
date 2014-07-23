@@ -76,7 +76,7 @@ namespace bobura { namespace model { namespace timetable_info
 
             \return The station.
         */
-        const station_type& station()
+        const station_type& get_station()
         const
         {
             return m_station;

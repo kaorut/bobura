@@ -623,7 +623,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             BOOST_REQUIRE_EQUAL(p_timetable->station_locations().size(), 2U);
             {
                 const auto& station_location = p_timetable->station_locations()[0];
-                const auto& station = station_location.station();
+                const auto& station = station_location.get_station();
                 BOOST_CHECK(station.name() == string_type{ TETENGO2_TEXT("stationA") });
                 BOOST_CHECK(station.grade().name() == string_type{ TETENGO2_TEXT("local") });
                 BOOST_CHECK(!station.shows_down_arrival_times());
@@ -633,7 +633,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             }
             {
                 const auto& station_location = p_timetable->station_locations()[1];
-                const auto& station = station_location.station();
+                const auto& station = station_location.get_station();
                 BOOST_CHECK(station.name() == string_type{ TETENGO2_TEXT("stationB") });
                 BOOST_CHECK(station.grade().name() == string_type{ TETENGO2_TEXT("principal") });
                 BOOST_CHECK(station.shows_down_arrival_times());

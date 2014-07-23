@@ -453,19 +453,21 @@ namespace bobura { namespace model { namespace serializer
             output_stream << object_begin();
 
             new_line(level + 2, output_stream);
-            write_object_entry(string_type{ TETENGO2_TEXT("name") }, station_location.station().name(), output_stream);
+            write_object_entry(
+                string_type{ TETENGO2_TEXT("name") }, station_location.get_station().name(), output_stream
+            );
             output_stream << comma();
 
             new_line(level + 2, output_stream);
             write_object_entry(
-                string_type{ TETENGO2_TEXT("grade") }, station_location.station().grade().name(), output_stream
+                string_type{ TETENGO2_TEXT("grade") }, station_location.get_station().grade().name(), output_stream
             );
             output_stream << comma();
 
             new_line(level + 2, output_stream);
             write_object_entry(
                 string_type{ TETENGO2_TEXT("show_down_arrival_times") },
-                station_location.station().shows_down_arrival_times(),
+                station_location.get_station().shows_down_arrival_times(),
                 output_stream
             );
             output_stream << comma();
@@ -473,13 +475,15 @@ namespace bobura { namespace model { namespace serializer
             new_line(level + 2, output_stream);
             write_object_entry(
                 string_type{ TETENGO2_TEXT("show_up_arrival_times") },
-                station_location.station().shows_up_arrival_times(),
+                station_location.get_station().shows_up_arrival_times(),
                 output_stream
             );
             output_stream << comma();
 
             new_line(level + 2, output_stream);
-            write_object_entry(string_type{ TETENGO2_TEXT("note") }, station_location.station().note(), output_stream);
+            write_object_entry(
+                string_type{ TETENGO2_TEXT("note") }, station_location.get_station().note(), output_stream
+            );
             output_stream << comma();
 
             new_line(level + 2, output_stream);

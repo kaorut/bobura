@@ -128,7 +128,10 @@ BOOST_AUTO_TEST_SUITE(station_location)
             station_type(string_type{}, local_type::instance(), false, false, string_type{}), 0
         };
 
-        BOOST_CHECK(station_location.station() == station_type(string_type{}, local_type::instance(), false, false, string_type{}));
+        BOOST_CHECK(
+            station_location.get_station() ==
+            station_type(string_type{}, local_type::instance(), false, false, string_type{})
+        );
     }
 #endif
 
