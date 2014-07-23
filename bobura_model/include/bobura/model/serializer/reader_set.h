@@ -118,7 +118,15 @@ namespace bobura { namespace model { namespace serializer
         //! The OuDia reader type.
         using oudia_reader_type =
             oudia_reader<
-                iterator, timetable_type, station_grade_type_set_type, select_oudia_diagram_type, cp932_encoder_type
+                typename timetable_type::size_type,
+                typename timetable_type::difference_type,
+                typename timetable_type::string_type,
+                iterator,
+                typename timetable_type::operating_distance_type,
+                typename timetable_type::speed_type,
+                select_oudia_diagram_type,
+                cp932_encoder_type,
+                typename timetable_type::drawing_details_type
             >;
 
         //! The WinDIA reader type.
