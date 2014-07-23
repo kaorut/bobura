@@ -32,7 +32,7 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a JSON writer.
 
-        \tparam OutputStream A output stream type.
+        \tparam OutputStream An output stream type.
         \tparam Timetable    A timetable type.
         \tparam Encoder      An encoder type.
     */

@@ -28,7 +28,7 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a writer set.
 
-        \tparam OutputStream        A output stream type.
+        \tparam OutputStream        An output stream type.
         \tparam Timetable           A timetable type.
         \tparam StationGradeTypeSet A station grade type set type.
         \tparam Encoder             An encoder type.
@@ -52,7 +52,16 @@ namespace bobura { namespace model { namespace serializer
         using writer_type = writer<output_stream_type, timetable_type>;
 
         //! The bzip2 writer type.
-        using bzip2_writer_type = bzip2_writer<output_stream_type, timetable_type>;
+        using bzip2_writer_type =
+            bzip2_writer<
+                typename timetable_type::size_type,
+                typename timetable_type::difference_type,
+                typename timetable_type::string_type,
+                output_stream_type,
+                typename timetable_type::operating_distance_type,
+                typename timetable_type::speed_type,
+                typename timetable_type::drawing_details_type
+            >;
 
         //! The JSON writer type.
         using json_writer_type = json_writer<output_stream_type, timetable_type, encoder_type>;
