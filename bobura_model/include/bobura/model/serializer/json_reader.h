@@ -23,6 +23,8 @@
 #include <tetengo2.h>
 
 #include <bobura/model/serializer/reader.h>
+#include <bobura/model/station_info/grade.h>
+#include <bobura/model/timetable.h>
 
 
 namespace bobura { namespace model { namespace serializer
@@ -30,40 +32,88 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a JSON reader.
 
-        \tparam PullParser          A pull parser type.
-        \tparam Timetable           A timetable type.
-        \tparam StationGradeTypeSet A station grade type set type.
+        \tparam Size                A size type.
+        \tparam Difference          A difference type.
+        \tparam String              A string type.
+        \tparam ForwardIterator     A forward iterator type.
+        \tparam Integer             An integer type.
+        \tparam Float               A floating point number type.
+        \tparam OperatingDistance   An operating distance type.
+        \tparam Speed               A speed type.
         \tparam Encoder             An encoder type.
+        \tparam DrawingDetails      A detail implementation type of a drawing.
     */
-    template <typename PullParser, typename Timetable, typename StationGradeTypeSet, typename Encoder>
-    class json_reader : public reader<typename PullParser::push_parser_type::iterator, Timetable>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename ForwardIterator,
+        typename Integer,
+        typename Float,
+        typename OperatingDistance,
+        typename Speed,
+        typename Encoder,
+        typename DrawingDetails
+    >
+    class json_reader : public reader<ForwardIterator, timetable<Size, Difference, String, OperatingDistance, Speed, DrawingDetails>>
     {
     public:
         // types
 
-        //! The timetable type.
-        using timetable_type = Timetable;
+        //! The size type.
+        using size_type = Size;
 
-        //! The station grade type set type.
-        using station_grade_type_set_type = StationGradeTypeSet;
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The iterator type.
+        using iterator = ForwardIterator;
+
+        //! The integer type.
+        using integer_type = Integer;
+
+        //! The float type.
+        using float_type = Float;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The encoder type.
+        using encoder_type = Encoder;
+
+        //! The drawing details type.
+        using drawing_details_type = DrawingDetails;
+
+        //! The grammar type.
+        using grammar_type = tetengo2::text::grammar::json<iterator>;
 
         //! The pull parser type.
-        using pull_parser_type = PullParser;
+        using pull_parser_type =
+            tetengo2::text::pull_parser<iterator, grammar_type, integer_type, float_type, size_type>;
 
         //! The push parser type.
         using push_parser_type = typename pull_parser_type::push_parser_type;
 
-        //! The iterator type.
-        using iterator = typename push_parser_type::iterator;
+        //! The timetable type.
+        using timetable_type =
+            timetable<
+                size_type, difference_type, string_type, operating_distance_type, speed_type, drawing_details_type
+            >;
+
+        //! The station grade type set type.
+        using station_grade_type_set_type = station_info::grade_type_set<string_type>;
 
         //! The base type.
         using base_type = reader<iterator, timetable_type>;
 
         //! The error type.
         using error_type = typename base_type::error_type;
-
-        //! The encoder type.
-        using encoder_type = Encoder;
 
 
         // constructors and destructor
@@ -78,8 +128,6 @@ namespace bobura { namespace model { namespace serializer
     private:
         // types
 
-        using string_type = typename timetable_type::string_type;
-
         using font_color_set_type = typename timetable_type::font_color_set_type;
 
         using font_color_type = typename font_color_set_type::font_color_type;
@@ -92,8 +140,6 @@ namespace bobura { namespace model { namespace serializer
 
         using train_kind_index_type = typename timetable_type::size_type;
 
-        using grammar_type = typename push_parser_type::grammar_type;
-
         using input_string_type = typename push_parser_type::string_type;
 
         using header_type = std::unordered_map<string_type, string_type>;
@@ -103,8 +149,6 @@ namespace bobura { namespace model { namespace serializer
         using station_type = typename station_location_type::station_type;
 
         using station_grade_type = typename station_type::grade_type;
-
-        using operating_distance_type = typename station_location_type::operating_distance_type;
 
         using train_kind_type = typename timetable_type::train_kind_type;
 
@@ -129,8 +173,6 @@ namespace bobura { namespace model { namespace serializer
         using attribute_map_type = typename pull_parser_type::attribute_map_type;
 
         using value_type = typename pull_parser_type::value_type;
-
-        using integer_type = typename push_parser_type::integer_type;
 
 
         // static functions
