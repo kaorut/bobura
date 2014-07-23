@@ -93,7 +93,16 @@ namespace bobura { namespace model { namespace serializer
             json_reader<pull_parser_type, timetable_type, station_grade_type_set_type, utf8_encoder_type>;
 
         //! The bzip2 reader type.
-        using bzip2_reader_type = bzip2_reader<iterator, timetable_type>;
+        using bzip2_reader_type =
+            bzip2_reader<
+                typename timetable_type::size_type,
+                typename timetable_type::difference_type,
+                typename timetable_type::string_type,
+                iterator,
+                typename timetable_type::operating_distance_type,
+                typename timetable_type::speed_type,
+                typename timetable_type::drawing_details_type
+            >;
 
         //! The OuDia reader type.
         using oudia_reader_type =
