@@ -49,7 +49,6 @@ namespace bobura { namespace model { namespace serializer
     public:
         // types
 
-
         //! The size type.
         using size_type = Size;
 

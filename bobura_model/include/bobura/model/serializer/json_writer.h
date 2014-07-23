@@ -25,6 +25,7 @@
 
 #include <bobura/model/serializer/writer.h>
 #include <bobura/model/station_info/grade.h>
+#include <bobura/model/timetable.h>
 
 
 namespace bobura { namespace model { namespace serializer
@@ -32,21 +33,56 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a JSON writer.
 
-        \tparam OutputStream An output stream type.
-        \tparam Timetable    A timetable type.
-        \tparam Encoder      An encoder type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OutputStream      An output stream type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Encoder           An encoder type.
+        \tparam DrawingDetails    A detail implementation type of a drawing.
     */
-    template <typename OutputStream, typename Timetable, typename Encoder>
-    class json_writer : public writer<OutputStream, Timetable>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OutputStream,
+        typename OperatingDistance,
+        typename Speed,
+        typename Encoder,
+        typename DrawingDetails
+    >
+    class json_writer : public writer<OutputStream, timetable<Size, Difference, String, OperatingDistance, Speed, DrawingDetails>>
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
         //! The output stream type.
         using output_stream_type = OutputStream;
 
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The drawing details type.
+        using drawing_details_type = DrawingDetails;
+
         //! The timetable type.
-        using timetable_type = Timetable;
+        using timetable_type =
+            timetable<
+                size_type, difference_type, string_type, operating_distance_type, speed_type, drawing_details_type
+            >;
 
         //! The base type.
         using base_type = writer<output_stream_type, timetable_type>;
@@ -79,8 +115,6 @@ namespace bobura { namespace model { namespace serializer
 
         using time_type = typename stop_type::time_type;
 
-        using string_type = typename timetable_type::string_type;
-
         using font_color_set_type = typename timetable_type::font_color_set_type;
 
         using font_color_type = typename font_color_set_type::font_color_type;
@@ -90,8 +124,6 @@ namespace bobura { namespace model { namespace serializer
         using color_type = typename font_color_type::color_type;
 
         using char_type = typename string_type::value_type;
-
-        using size_type = typename string_type::size_type;
 
         using output_char_type = typename output_stream_type::char_type;
 

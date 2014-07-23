@@ -64,7 +64,17 @@ namespace bobura { namespace model { namespace serializer
             >;
 
         //! The JSON writer type.
-        using json_writer_type = json_writer<output_stream_type, timetable_type, encoder_type>;
+        using json_writer_type =
+            json_writer<
+                typename timetable_type::size_type,
+                typename timetable_type::difference_type,
+                typename timetable_type::string_type,
+                output_stream_type,
+                typename timetable_type::operating_distance_type,
+                typename timetable_type::speed_type,
+                encoder_type,
+                typename timetable_type::drawing_details_type
+            >;
 
 
         // static functions
