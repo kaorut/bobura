@@ -768,7 +768,13 @@ namespace bobura
             boost::mpl::pair<
                 type::model::reader_selector,
                 model::serializer::reader_selector<
-                    boost::mpl::at<common_type_list, type::input_stream_iterator>::type, detail::model::timetable_type
+                    boost::mpl::at<common_type_list, type::size>::type,
+                    boost::mpl::at<common_type_list, type::difference>::type,
+                    boost::mpl::at<common_type_list, type::string>::type,
+                    boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
+                    detail::model::distance_type,
+                    detail::model::speed_type,
+                    boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
                 >
             >,
         tetengo2::meta::assoc_list<
