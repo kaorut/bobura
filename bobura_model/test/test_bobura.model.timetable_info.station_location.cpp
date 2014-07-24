@@ -120,7 +120,7 @@ BOOST_AUTO_TEST_SUITE(station_location)
     BOOST_OS_LINUX && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
     )
-    BOOST_AUTO_TEST_CASE(station)
+    BOOST_AUTO_TEST_CASE(get_station)
     {
         BOOST_TEST_PASSPOINT();
 
