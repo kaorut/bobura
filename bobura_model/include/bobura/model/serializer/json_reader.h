@@ -1051,8 +1051,8 @@ namespace bobura { namespace model { namespace serializer
             return boost::make_optional(std::move(string));
         }
 
-        template <typename Integer>
-        static boost::optional<std::pair<string_type, Integer>> read_integer_member(pull_parser_type& pull_parser)
+        template <typename Int>
+        static boost::optional<std::pair<string_type, Int>> read_integer_member(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return boost::none;
@@ -1061,7 +1061,7 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             pull_parser.next();
 
-            const auto value = read_integer<Integer>(pull_parser);
+            const auto value = read_integer<Int>(pull_parser);
             if (!value)
                 return boost::none;
 
@@ -1072,8 +1072,8 @@ namespace bobura { namespace model { namespace serializer
             return boost::make_optional(std::make_pair(encoder().decode(std::move(key)), *value));
         }
 
-        template <typename Integer>
-        static boost::optional<Integer> read_integer(pull_parser_type& pull_parser)
+        template <typename Int>
+        static boost::optional<Int> read_integer(pull_parser_type& pull_parser)
         {
             if (!pull_parser.has_next())
                 return boost::none;
@@ -1085,7 +1085,7 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             const auto integer = boost::get<integer_type>(value);
             pull_parser.next();
-            return boost::make_optional<Integer>(integer);
+            return boost::make_optional<Int>(integer);
         }
 
         static boost::optional<std::pair<string_type, bool>> read_boolean_member(pull_parser_type& pull_parser)
