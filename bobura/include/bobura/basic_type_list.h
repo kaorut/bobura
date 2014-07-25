@@ -794,7 +794,13 @@ namespace bobura
             boost::mpl::pair<
                 type::model::writer_selector,
                 model::serializer::writer_selector<
-                    boost::mpl::at<common_type_list, type::output_stream>::type, detail::model::timetable_type
+                    boost::mpl::at<common_type_list, type::size>::type,
+                    boost::mpl::at<common_type_list, type::difference>::type,
+                    boost::mpl::at<common_type_list, type::string>::type,
+                    boost::mpl::at<common_type_list, type::output_stream>::type,
+                    detail::model::distance_type,
+                    detail::model::speed_type,
+                    boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
                 >
             >,
         tetengo2::meta::assoc_list<

@@ -362,8 +362,13 @@ namespace test_bobura { namespace model
             boost::mpl::pair<
                 type::serialization::writer_selector,
                 bobura::model::serializer::writer_selector<
+                    boost::mpl::at<type_list, type::size>::type,
+                    boost::mpl::at<type_list, type::difference>::type,
+                    boost::mpl::at<type_list, type::string>::type,
                     detail::serialization::output_stream_type,
-                    boost::mpl::at<model_type_list, type::model::timetable>::type
+                    boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
+                    boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
+                    boost::mpl::at<detail_type_list, type::detail::drawing>::type
                 >
             >,
         tetengo2::meta::assoc_list<
