@@ -46,7 +46,8 @@ namespace bobura { namespace model { namespace serializer
         typename Speed,
         typename DrawingDetails
     >
-    class writer_selector : public writer<OutputStream, timetable<Size, Difference, String, OperatingDistance, Speed, DrawingDetails>>
+    class writer_selector :
+        public writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, DrawingDetails>
     {
     public:
         // types
@@ -72,14 +73,20 @@ namespace bobura { namespace model { namespace serializer
         //! The drawing details type.
         using drawing_details_type = DrawingDetails;
 
-        //! The timetable type.
-        using timetable_type =
-            timetable<
-                size_type, difference_type, string_type, operating_distance_type, speed_type, drawing_details_type
+        //! The base type.
+        using base_type =
+            writer<
+                size_type,
+                difference_type,
+                string_type,
+                output_stream_type,
+                operating_distance_type,
+                speed_type,
+                drawing_details_type
             >;
 
-        //! The base type.
-        using base_type = writer<output_stream_type, timetable_type>;
+        //! The timetable type.
+        using timetable_type = typename base_type::timetable_type;
 
 
         // constructors and destructor

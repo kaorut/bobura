@@ -49,7 +49,16 @@ namespace bobura { namespace model { namespace serializer
         using encoder_type = Encoder;
 
         //! The writer type.
-        using writer_type = writer<output_stream_type, timetable_type>;
+        using writer_type =
+            writer<
+                typename timetable_type::size_type,
+                typename timetable_type::difference_type,
+                typename timetable_type::string_type,
+                output_stream_type,
+                typename timetable_type::operating_distance_type,
+                typename timetable_type::speed_type,
+                typename timetable_type::drawing_details_type
+            >;
 
         //! The bzip2 writer type.
         using bzip2_writer_type =
