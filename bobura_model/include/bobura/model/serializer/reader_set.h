@@ -58,9 +58,6 @@ namespace bobura { namespace model { namespace serializer
         //! The timetable type.
         using timetable_type = Timetable;
 
-        //! The base type.
-        using base_type = reader<iterator, timetable_type>;
-
         //! The pull parser type.
         using pull_parser_type = PullParser;
 
@@ -86,7 +83,16 @@ namespace bobura { namespace model { namespace serializer
         using cp932_encoder_type = Cp932Encoder;
 
         //! The reader type.
-        using reader_type = reader<iterator, timetable_type>;
+        using reader_type =
+            reader<
+                typename timetable_type::size_type,
+                typename timetable_type::difference_type,
+                typename timetable_type::string_type,
+                iterator,
+                typename timetable_type::operating_distance_type,
+                typename timetable_type::speed_type,
+                typename timetable_type::drawing_details_type
+            >;
 
         //! The JSON reader type.
         using json_reader_type =

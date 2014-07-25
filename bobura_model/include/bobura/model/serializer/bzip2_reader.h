@@ -48,7 +48,8 @@ namespace bobura { namespace model { namespace serializer
         typename Speed,
         typename DrawingDetails
     >
-    class bzip2_reader : public reader<ForwardIterator, timetable<Size, Difference, String, OperatingDistance, Speed, DrawingDetails>>
+    class bzip2_reader :
+        public reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, DrawingDetails>
     {
     public:
         // types
@@ -74,14 +75,20 @@ namespace bobura { namespace model { namespace serializer
         //! The drawing details type.
         using drawing_details_type = DrawingDetails;
 
-        //! The timetable type.
-        using timetable_type =
-            timetable<
-                size_type, difference_type, string_type, operating_distance_type, speed_type, drawing_details_type
+        //! The base type.
+        using base_type =
+            reader<
+                size_type,
+                difference_type,
+                string_type,
+                iterator,
+                operating_distance_type,
+                speed_type,
+                drawing_details_type
             >;
 
-        //! The base type.
-        using base_type = reader<iterator, timetable_type>;
+        //! The timetable type.
+        using timetable_type = typename base_type::timetable_type;
 
         //! The error type.
         using error_type = typename base_type::error_type;
