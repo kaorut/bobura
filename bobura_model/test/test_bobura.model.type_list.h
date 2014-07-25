@@ -291,13 +291,16 @@ namespace test_bobura { namespace model
             tetengo2::text::encoder<internal_encoding_type, timetable_file_encoding_type>;
         using reader_set_type =
             bobura::model::serializer::reader_set<
-                test_bobura::model::detail::serialization::input_stream_iterator_type,
-                boost::mpl::at<model_type_list, type::model::timetable>::type,
-                pull_parser_type,
-                boost::mpl::at<model_type_list, type::model::grade_type_set>::type,
+                boost::mpl::at<type_list, type::size>::type,
+                boost::mpl::at<type_list, type::difference>::type,
+                boost::mpl::at<type_list, type::string>::type,
+                input_stream_iterator_type,
+                boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
+                boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
                 select_oudia_diagram_type,
                 timetable_file_encoder_type,
-                timetable_file_encoder_type
+                timetable_file_encoder_type,
+                boost::mpl::at<detail_type_list, type::detail::drawing>::type
             >;
         using output_stream_type = std::basic_ostream<io_string_type::value_type>;
         using writer_set_type =

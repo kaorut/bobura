@@ -781,13 +781,16 @@ namespace bobura
             boost::mpl::pair<
                 type::model::reader_set,
                 model::serializer::reader_set<
+                    boost::mpl::at<common_type_list, type::size>::type,
+                    boost::mpl::at<common_type_list, type::difference>::type,
+                    boost::mpl::at<common_type_list, type::string>::type,
                     boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
-                    detail::model::timetable_type,
-                    boost::mpl::at<common_type_list, type::pull_parser>::type,
-                    detail::model::station_grade_type_set_type,
+                    detail::model::distance_type,
+                    detail::model::speed_type,
                     detail::model::select_oudia_diagram_type,
                     boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type,
-                    boost::mpl::at<locale_type_list, type::locale::windia_file_encoder>::type
+                    boost::mpl::at<locale_type_list, type::locale::windia_file_encoder>::type,
+                    boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
                 >
             >,
         tetengo2::meta::assoc_list<

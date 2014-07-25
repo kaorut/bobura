@@ -100,13 +100,16 @@ namespace
 
     using reader_set_type =
         bobura::model::serializer::reader_set<
+            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
             boost::mpl::at<bobura::common_type_list, bobura::type::input_stream_iterator>::type,
-            timetable_type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::pull_parser>::type,
-            boost::mpl::at<bobura::model_type_list, bobura::type::model::station_grade_type_set>::type,
+            timetable_type::operating_distance_type,
+            timetable_type::speed_type,
             bobura::model::serializer::select_oudia_diagram<oudia_diagram_dialog_type>,
             boost::mpl::at<bobura::locale_type_list, bobura::type::locale::timetable_file_encoder>::type,
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::windia_file_encoder>::type
+            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::windia_file_encoder>::type,
+            boost::mpl::at<bobura::detail_type_list, bobura::type::detail::fast_drawing>::type
         >;
 
     using load_from_file_type =
