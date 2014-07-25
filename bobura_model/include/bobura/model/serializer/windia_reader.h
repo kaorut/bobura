@@ -27,6 +27,7 @@
 #include <tetengo2.h>
 
 #include <bobura/model/serializer/reader.h>
+#include <bobura/model/timetable.h>
 
 
 namespace bobura { namespace model { namespace serializer
@@ -34,34 +35,68 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a WinDIA reader.
 
-        \tparam ForwardIterator     A forward iterator type.
-        \tparam Timetable           A timetable type.
-        \tparam StationGradeTypeSet A station grade type set type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam ForwardIterator   A forward iterator type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
         \tparam Encoder             An encoder type.
+        \tparam DrawingDetails      A detail implementation type of a drawing.
     */
-    template <typename ForwardIterator, typename Timetable, typename StationGradeTypeSet, typename Encoder>
-    class windia_reader : public reader<ForwardIterator, Timetable>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename ForwardIterator,
+        typename OperatingDistance,
+        typename Speed,
+        typename Encoder,
+        typename DrawingDetails
+    >
+    class windia_reader : public reader<ForwardIterator, timetable<Size, Difference, String, OperatingDistance, Speed, DrawingDetails>>
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
         //! The iterator type.
         using iterator = ForwardIterator;
 
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The encoder type.
+        using encoder_type = Encoder;
+
+        //! The drawing details type.
+        using drawing_details_type = DrawingDetails;
+
         //! The timetable type.
-        using timetable_type = Timetable;
+        using timetable_type =
+            timetable<
+                size_type, difference_type, string_type, operating_distance_type, speed_type, drawing_details_type
+            >;
+
+        //! The station grade type set type.
+        using station_grade_type_set_type = station_info::grade_type_set<string_type>;
 
         //! The base type.
         using base_type = reader<iterator, timetable_type>;
 
-        //! The station grade type set type.
-        using station_grade_type_set_type = StationGradeTypeSet;
-
         //! The error type.
         using error_type = typename base_type::error_type;
-
-        //! The encoder type.
-        using encoder_type = Encoder;
 
 
         // constructors and destructor
@@ -79,8 +114,6 @@ namespace bobura { namespace model { namespace serializer
         using input_char_type = typename iterator::value_type;
 
         using input_string_type = std::basic_string<input_char_type>;
-
-        using string_type = typename timetable_type::string_type;
 
         using char_type = typename string_type::value_type;
 

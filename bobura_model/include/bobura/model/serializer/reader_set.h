@@ -131,7 +131,16 @@ namespace bobura { namespace model { namespace serializer
 
         //! The WinDIA reader type.
         using windia_reader_type =
-            windia_reader<iterator, timetable_type, station_grade_type_set_type, cp932_encoder_type>;
+            windia_reader<
+                typename timetable_type::size_type,
+                typename timetable_type::difference_type,
+                typename timetable_type::string_type,
+                iterator,
+                typename timetable_type::operating_distance_type,
+                typename timetable_type::speed_type,
+                cp932_encoder_type,
+                typename timetable_type::drawing_details_type
+            >;
 
 
         // static functions
