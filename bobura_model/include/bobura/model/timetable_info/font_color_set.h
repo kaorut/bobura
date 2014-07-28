@@ -22,27 +22,16 @@ namespace bobura { namespace model { namespace timetable_info
     /*!
         \brief The class template for a font and color.
 
-        \tparam Size           A size type.
-        \tparam String         A string type.
-        \tparam DrawingDetails A detail implementation type of a drawing.
+        \tparam Font A font type.
     */
-    template <typename Size, typename String, typename DrawingDetails>
-    class font_color : private boost::equality_comparable<font_color<Size, String, DrawingDetails>>
+    template <typename Font>
+    class font_color : private boost::equality_comparable<font_color<Font>>
     {
     public:
         // types
 
-        //! The size type.
-        using size_type = Size;
-
-        //! The string type.
-        using string_type = String;
-
-        //! The drawing details type.
-        using drawing_details_type = DrawingDetails;
-
         //! The font type.
-        using font_type = tetengo2::gui::drawing::font<string_type, size_type, drawing_details_type>;
+        using font_type = Font;
 
         //! The color type.
         using color_type = tetengo2::gui::drawing::color;
@@ -116,30 +105,19 @@ namespace bobura { namespace model { namespace timetable_info
     /*!
         \brief The class template for a font and color set.
 
-        \tparam Size           A size type.
-        \tparam String         A string type.
-        \tparam DrawingDetails A detail implementation type of a drawing.
+        \tparam Font A font type.
     */
-    template <typename Size, typename String, typename DrawingDetails>
-    class font_color_set : private boost::equality_comparable<font_color_set<Size, String, DrawingDetails>>
+    template <typename Font>
+    class font_color_set : private boost::equality_comparable<font_color_set<Font>>
     {
     public:
         // types
 
-        //! The size type.
-        using size_type = Size;
-
-        //! The string type.
-        using string_type = String;
-
-        //! The drawing details type.
-        using drawing_details_type = DrawingDetails;
+        //! The font type.
+        using font_type = Font;
 
         //! The font and color type.
-        using font_color_type = font_color<size_type, string_type, drawing_details_type>;
-
-        //! The font type.
-        using font_type = typename font_color_type::font_type;
+        using font_color_type = font_color<font_type>;
 
         //! The color type.
         using color_type = typename font_color_type::color_type;

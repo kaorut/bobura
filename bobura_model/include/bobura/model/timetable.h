@@ -104,8 +104,11 @@ namespace bobura { namespace model
         //! The trains type.
         using trains_type = std::vector<train_type>;
 
+        //! The font type.
+        using font_type = tetengo2::gui::drawing::font<string_type, size_type, drawing_details_type>;
+
         //! The font color set type.
-        using font_color_set_type = timetable_info::font_color_set<size_type, string_type, drawing_details_type>;
+        using font_color_set_type = timetable_info::font_color_set<font_type>;
 
         //! The observer set type.
         using observer_set_type = message::timetable_observer_set;
