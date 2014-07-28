@@ -728,17 +728,6 @@ namespace bobura
                 boost::mpl::at<dialog_type_list, type::dialog::oudia_diagram_dialog>::type
             >;
         using distance_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
-        using station_location_type =
-            bobura::model::timetable_info::station_location<
-                boost::mpl::at<common_type_list, type::string>::type, distance_type
-            >;
-        using train_kind_type = bobura::model::train_kind<boost::mpl::at<common_type_list, type::string>::type>;
-        using train_type =
-            bobura::model::train<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type
-            >;
         using speed_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
         using timetable_type =
             bobura::model::timetable<
@@ -810,9 +799,14 @@ namespace bobura
             boost::mpl::pair<
                 type::model::writer_set,
                 model::serializer::writer_set<
+                    boost::mpl::at<common_type_list, type::size>::type,
+                    boost::mpl::at<common_type_list, type::difference>::type,
+                    boost::mpl::at<common_type_list, type::string>::type,
                     boost::mpl::at<common_type_list, type::output_stream>::type,
-                    detail::model::timetable_type,
-                    boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
+                    detail::model::distance_type,
+                    detail::model::speed_type,
+                    boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type,
+                    boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
                 >
             >,
         tetengo2::meta::assoc_list_end

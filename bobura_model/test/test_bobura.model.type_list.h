@@ -238,11 +238,6 @@ namespace test_bobura { namespace model
         using io_string_type = std::string;
         using input_stream_iterator_type =
             boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
-        using grammar_type = tetengo2::text::grammar::json<input_stream_iterator_type>;
-        using pull_parser_type =
-            tetengo2::text::pull_parser<
-                input_stream_iterator_type, grammar_type, int, double, boost::mpl::at<type_list, type::size>::type
-            >;
         struct select_oudia_diagram_type
         {
             using size_type = boost::mpl::at<type_list, type::size>::type;
@@ -305,9 +300,14 @@ namespace test_bobura { namespace model
         using output_stream_type = std::basic_ostream<io_string_type::value_type>;
         using writer_set_type =
             bobura::model::serializer::writer_set<
-                output_stream_type, boost::mpl::at<model_type_list,
-                type::model::timetable>::type,
-                timetable_file_encoder_type
+                boost::mpl::at<type_list, type::size>::type,
+                boost::mpl::at<type_list, type::difference>::type,
+                boost::mpl::at<type_list, type::string>::type,
+                output_stream_type,
+                boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
+                boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
+                timetable_file_encoder_type,
+                boost::mpl::at<detail_type_list, type::detail::drawing>::type
             >;
     }}
 #endif
