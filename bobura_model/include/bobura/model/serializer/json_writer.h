@@ -39,8 +39,8 @@ namespace bobura { namespace model { namespace serializer
         \tparam OutputStream      An output stream type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
+        \tparam Font              A font type.
         \tparam Encoder           An encoder type.
-        \tparam DrawingDetails    A detail implementation type of a drawing.
     */
     template <
         typename Size,
@@ -49,11 +49,10 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename Encoder,
-        typename DrawingDetails
+        typename Font,
+        typename Encoder
     >
-    class json_writer :
-        public writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, DrawingDetails>
+    class json_writer : public writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>
     {
     public:
         // types
@@ -76,11 +75,11 @@ namespace bobura { namespace model { namespace serializer
         //! The speed type.
         using speed_type = Speed;
 
+        //! The font type.
+        using font_type = Font;
+
         //! The encoder type.
         using encoder_type = Encoder;
-
-        //! The drawing details type.
-        using drawing_details_type = DrawingDetails;
 
         //! The base type.
         using base_type =
@@ -91,7 +90,7 @@ namespace bobura { namespace model { namespace serializer
                 output_stream_type,
                 operating_distance_type,
                 speed_type,
-                drawing_details_type
+                font_type
             >;
 
         //! The timetable type.
@@ -125,8 +124,6 @@ namespace bobura { namespace model { namespace serializer
         using font_color_set_type = typename timetable_type::font_color_set_type;
 
         using font_color_type = typename font_color_set_type::font_color_type;
-
-        using font_type = typename font_color_type::font_type;
 
         using color_type = typename font_color_type::color_type;
 

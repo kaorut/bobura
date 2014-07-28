@@ -33,7 +33,7 @@ namespace bobura { namespace model { namespace serializer
         \tparam OutputStream      An output stream type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
-        \tparam DrawingDetails    A detail implementation type of a drawing.
+        \tparam Font              A font type.
     */
     template <
         typename Size,
@@ -42,10 +42,9 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename DrawingDetails
+        typename Font
     >
-    class bzip2_writer :
-        public writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, DrawingDetails>
+    class bzip2_writer : public writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>
     {
     public:
         // types
@@ -68,8 +67,8 @@ namespace bobura { namespace model { namespace serializer
         //! The speed type.
         using speed_type = Speed;
 
-        //! The drawing details type.
-        using drawing_details_type = DrawingDetails;
+        //! The font type.
+        using font_type = Font;
 
         //! The base type.
         using base_type =
@@ -80,7 +79,7 @@ namespace bobura { namespace model { namespace serializer
                 output_stream_type,
                 operating_distance_type,
                 speed_type,
-                drawing_details_type
+                font_type
             >;
 
         //! The timetable type.

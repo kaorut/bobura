@@ -307,8 +307,8 @@ namespace test_bobura { namespace model
                 output_stream_type,
                 boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
                 boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
-                timetable_file_encoder_type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type
+                boost::mpl::at<model_type_list, type::model::timetable>::type::font_type,
+                timetable_file_encoder_type
             >;
     }}
 #endif
@@ -369,7 +369,7 @@ namespace test_bobura { namespace model
                     detail::serialization::output_stream_type,
                     boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
                     boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
-                    boost::mpl::at<detail_type_list, type::detail::drawing>::type
+                    boost::mpl::at<model_type_list, type::model::timetable>::type::font_type
                 >
             >,
         tetengo2::meta::assoc_list<
@@ -382,7 +382,7 @@ namespace test_bobura { namespace model
                     detail::serialization::output_stream_type,
                     boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
                     boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
-                    boost::mpl::at<detail_type_list, type::detail::drawing>::type
+                    boost::mpl::at<model_type_list, type::model::timetable>::type::font_type
                 >
             >,
         tetengo2::meta::assoc_list<
