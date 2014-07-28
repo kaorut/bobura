@@ -41,7 +41,7 @@ namespace bobura { namespace model
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
-        \tparam DrawingDetails    A detail implementation type of a drawing.
+        \tparam Font              A font type.
     */
     template <
         typename Size,
@@ -49,12 +49,10 @@ namespace bobura { namespace model
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename DrawingDetails
+        typename Font
     >
     class timetable :
-        private boost::equality_comparable<
-            timetable<Size, Difference, String, OperatingDistance, Speed, DrawingDetails>
-        >
+        private boost::equality_comparable<timetable<Size, Difference, String, OperatingDistance, Speed, Font>>
     {
     public:
         // types
@@ -74,8 +72,8 @@ namespace bobura { namespace model
         //! The speed type.
         using speed_type = Speed;
 
-        //! The drawing details type.
-        using drawing_details_type = DrawingDetails;
+        //! The font type.
+        using font_type = Font;
 
         //! The station location type.
         using station_location_type = timetable_info::station_location<string_type, operating_distance_type>;
@@ -103,9 +101,6 @@ namespace bobura { namespace model
 
         //! The trains type.
         using trains_type = std::vector<train_type>;
-
-        //! The font type.
-        using font_type = tetengo2::gui::drawing::font<string_type, size_type, drawing_details_type>;
 
         //! The font color set type.
         using font_color_set_type = timetable_info::font_color_set<font_type>;

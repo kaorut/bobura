@@ -37,9 +37,9 @@ namespace bobura { namespace model { namespace serializer
         \tparam OperatingDistance  An operating distance type.
         \tparam Speed              A speed type.
         \tparam SelectOuDiaDiagram An OuDia diagram selecting type.
+        \tparam Font               A font type.
         \tparam Utf8Encoder        A UTF-8 encoder type.
         \tparam Cp932Encoder       A CP932 encoder type.
-        \tparam DrawingDetails     A detail implementation type of a drawing.
     */
     template <
         typename Size,
@@ -49,9 +49,9 @@ namespace bobura { namespace model { namespace serializer
         typename OperatingDistance,
         typename Speed,
         typename SelectOuDiaDiagram,
+        typename Font,
         typename Utf8Encoder,
-        typename Cp932Encoder,
-        typename DrawingDetails
+        typename Cp932Encoder
     >
     class reader_set : private boost::noncopyable
     {
@@ -76,9 +76,6 @@ namespace bobura { namespace model { namespace serializer
         //! The speed type.
         using speed_type = Speed;
 
-        //! The drawing details type.
-        using drawing_details_type = DrawingDetails;
-
         //! The OuDia diagram selecting type.
         using select_oudia_diagram_type = SelectOuDiaDiagram;
 
@@ -88,6 +85,9 @@ namespace bobura { namespace model { namespace serializer
         //! The message catalog type.
         using message_catalog_type = typename select_oudia_diagram_type::message_catalog_type;
 
+        //! The font type.
+        using font_type = Font;
+
         //! The UTF-8 encoder type.
         using utf8_encoder_type = Utf8Encoder;
 
@@ -96,15 +96,7 @@ namespace bobura { namespace model { namespace serializer
 
         //! The reader type.
         using reader_type =
-            reader<
-                size_type,
-                difference_type,
-                string_type,
-                iterator,
-                operating_distance_type,
-                speed_type,
-                drawing_details_type
-            >;
+            reader<size_type, difference_type, string_type, iterator, operating_distance_type, speed_type, font_type>;
 
         //! The JSON reader type.
         using json_reader_type =
@@ -117,8 +109,8 @@ namespace bobura { namespace model { namespace serializer
                 double,
                 operating_distance_type,
                 speed_type,
-                utf8_encoder_type,
-                drawing_details_type
+                font_type,
+                utf8_encoder_type
             >;
 
         //! The bzip2 reader type.
@@ -130,7 +122,7 @@ namespace bobura { namespace model { namespace serializer
                 iterator,
                 operating_distance_type,
                 speed_type,
-                drawing_details_type
+                font_type
             >;
 
         //! The OuDia reader type.
@@ -143,8 +135,8 @@ namespace bobura { namespace model { namespace serializer
                 operating_distance_type,
                 speed_type,
                 select_oudia_diagram_type,
-                cp932_encoder_type,
-                drawing_details_type
+                font_type,
+                cp932_encoder_type
             >;
 
         //! The WinDIA reader type.
@@ -156,8 +148,8 @@ namespace bobura { namespace model { namespace serializer
                 iterator,
                 operating_distance_type,
                 speed_type,
-                cp932_encoder_type,
-                drawing_details_type
+                font_type,
+                cp932_encoder_type
             >;
 
 

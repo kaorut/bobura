@@ -107,9 +107,9 @@ namespace
             timetable_type::operating_distance_type,
             timetable_type::speed_type,
             bobura::model::serializer::select_oudia_diagram<oudia_diagram_dialog_type>,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type,
             boost::mpl::at<bobura::locale_type_list, bobura::type::locale::timetable_file_encoder>::type,
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::windia_file_encoder>::type,
-            boost::mpl::at<bobura::detail_type_list, bobura::type::detail::fast_drawing>::type
+            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::windia_file_encoder>::type
         >;
 
     using load_from_file_type =

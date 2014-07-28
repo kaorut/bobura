@@ -43,8 +43,8 @@ namespace bobura { namespace model { namespace serializer
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
         \tparam SelectDiagram     A diagram selecting type.
+        \tparam Font              A font type.
         \tparam Encoder           An encoder type.
-        \tparam DrawingDetails    A detail implementation type of a drawing.
     */
     template <
         typename Size,
@@ -54,11 +54,10 @@ namespace bobura { namespace model { namespace serializer
         typename OperatingDistance,
         typename Speed,
         typename SelectDiagram,
-        typename Encoder,
-        typename DrawingDetails
+        typename Font,
+        typename Encoder
     >
-    class oudia_reader :
-        public reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, DrawingDetails>
+    class oudia_reader : public reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>
     {
     public:
         // types
@@ -84,23 +83,15 @@ namespace bobura { namespace model { namespace serializer
         //! The diagram selecting type.
         using select_diagram_type = SelectDiagram;
 
+        //! The font type.
+        using font_type = Font;
+
         //! The encoder type.
         using encoder_type = Encoder;
 
-        //! The drawing details type.
-        using drawing_details_type = DrawingDetails;
-
         //! The base type.
         using base_type =
-            reader<
-                size_type,
-                difference_type,
-                string_type,
-                iterator,
-                operating_distance_type,
-                speed_type,
-                drawing_details_type
-            >;
+            reader<size_type, difference_type, string_type, iterator, operating_distance_type, speed_type, font_type>;
 
         //! The timetable type.
         using timetable_type = typename base_type::timetable_type;

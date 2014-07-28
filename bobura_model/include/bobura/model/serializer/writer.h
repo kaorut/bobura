@@ -66,11 +66,12 @@ namespace bobura { namespace model { namespace serializer
         //! The drawing details type.
         using drawing_details_type = DrawingDetails;
 
+        //! The font type.
+        using font_type = tetengo2::gui::drawing::font<string_type, size_type, drawing_details_type>;
+
         //! The timetable type.
         using timetable_type =
-            timetable<
-                size_type, difference_type, string_type, operating_distance_type, speed_type, drawing_details_type
-            >;
+            timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
 
         // constructors and destructor

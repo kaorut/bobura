@@ -736,7 +736,7 @@ namespace bobura
                 boost::mpl::at<common_type_list, type::string>::type,
                 distance_type,
                 speed_type,
-                boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
+                boost::mpl::at<ui_type_list, type::ui::fast_font>::type
             >;
     }}
 #endif
@@ -763,7 +763,7 @@ namespace bobura
                     boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
                     detail::model::distance_type,
                     detail::model::speed_type,
-                    boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
+                    boost::mpl::at<ui_type_list, type::ui::fast_font>::type
                 >
             >,
         tetengo2::meta::assoc_list<
@@ -777,9 +777,9 @@ namespace bobura
                     detail::model::distance_type,
                     detail::model::speed_type,
                     detail::model::select_oudia_diagram_type,
+                    boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
                     boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type,
-                    boost::mpl::at<locale_type_list, type::locale::windia_file_encoder>::type,
-                    boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
+                    boost::mpl::at<locale_type_list, type::locale::windia_file_encoder>::type
                 >
             >,
         tetengo2::meta::assoc_list<

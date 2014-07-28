@@ -208,7 +208,7 @@ namespace test_bobura { namespace model
                     boost::mpl::at<type_list, type::string>::type,
                     detail::model::distance_type,
                     detail::model::speed_type,
-                    boost::mpl::at<detail_type_list, type::detail::drawing>::type
+                    detail::model::font_type
                 >
             >,
         tetengo2::meta::assoc_list_end
@@ -294,9 +294,9 @@ namespace test_bobura { namespace model
                 boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
                 boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
                 select_oudia_diagram_type,
+                boost::mpl::at<model_type_list, type::model::timetable>::type::font_type,
                 timetable_file_encoder_type,
-                timetable_file_encoder_type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type
+                timetable_file_encoder_type
             >;
         using output_stream_type = std::basic_ostream<io_string_type::value_type>;
         using writer_set_type =
@@ -325,7 +325,7 @@ namespace test_bobura { namespace model
                     detail::serialization::input_stream_iterator_type,
                     boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
                     boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
-                    boost::mpl::at<detail_type_list, type::detail::drawing>::type
+                    boost::mpl::at<model_type_list, type::model::timetable>::type::font_type
                 >
             >,
         tetengo2::meta::assoc_list<
@@ -338,7 +338,7 @@ namespace test_bobura { namespace model
                     detail::serialization::input_stream_iterator_type,
                     boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
                     boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
-                    boost::mpl::at<detail_type_list, type::detail::drawing>::type
+                    boost::mpl::at<model_type_list, type::model::timetable>::type::font_type
                 >
             >,
         tetengo2::meta::assoc_list<

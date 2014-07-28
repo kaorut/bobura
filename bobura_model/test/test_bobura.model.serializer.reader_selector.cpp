@@ -109,11 +109,11 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
 
         {
             auto concrete_readers = create_concrete_readers();
-            const reader_selector_type reader_selector(std::move(concrete_readers));
+            const reader_selector_type reader_selector{ std::move(concrete_readers) };
         }
         {
             std::vector<std::unique_ptr<reader_type>> concrete_readers{};
-            BOOST_CHECK_THROW(reader_selector_type(std::move(concrete_readers)), std::invalid_argument);
+            BOOST_CHECK_THROW(reader_selector_type{ std::move(concrete_readers) }, std::invalid_argument);
         }
     }
 
@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
         BOOST_TEST_PASSPOINT();
 
         auto concrete_readers = create_concrete_readers();
-        reader_selector_type reader_selector(std::move(concrete_readers));
+        reader_selector_type reader_selector{ std::move(concrete_readers) };
 
         std::istringstream input_stream{ "hoge" };
         BOOST_CHECK_THROW(
@@ -140,7 +140,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
 
         {
             auto concrete_readers = create_concrete_readers();
-            reader_selector_type reader_selector(std::move(concrete_readers));
+            reader_selector_type reader_selector{ std::move(concrete_readers) };
 
             std::istringstream input_stream{ "hoge" };
             auto error = error_type::none;
@@ -156,7 +156,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
         }
         {
             auto concrete_readers = create_concrete_readers();
-            reader_selector_type reader_selector(std::move(concrete_readers));
+            reader_selector_type reader_selector{ std::move(concrete_readers) };
 
             std::istringstream input_stream{ "fuga" };
             auto error = error_type::none;
@@ -172,7 +172,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
         }
         {
             auto concrete_readers = create_concrete_readers();
-            reader_selector_type reader_selector(std::move(concrete_readers));
+            reader_selector_type reader_selector{ std::move(concrete_readers) };
 
             std::istringstream input_stream{ "piyo" };
             auto error = error_type::none;

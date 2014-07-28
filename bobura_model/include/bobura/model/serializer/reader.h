@@ -29,7 +29,7 @@ namespace bobura { namespace model { namespace serializer
         \tparam ForwardIterator   A forward iterator type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
-        \tparam DrawingDetails    A detail implementation type of a drawing.
+        \tparam Font              A font type.
     */
     template <
         typename Size,
@@ -38,7 +38,7 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
-        typename DrawingDetails
+        typename Font
     >
     class reader : private boost::noncopyable
     {
@@ -63,14 +63,12 @@ namespace bobura { namespace model { namespace serializer
         //! The speed type.
         using speed_type = Speed;
 
-        //! The drawing details type.
-        using drawing_details_type = DrawingDetails;
+        //! The font type.
+        using font_type = Font;
 
         //! The timetable type.
         using timetable_type =
-            timetable<
-                size_type, difference_type, string_type, operating_distance_type, speed_type, drawing_details_type
-            >;
+            timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
         //! The error type.
         enum class error_type

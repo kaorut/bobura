@@ -40,8 +40,8 @@ namespace bobura { namespace model { namespace serializer
         \tparam ForwardIterator   A forward iterator type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
-        \tparam Encoder             An encoder type.
-        \tparam DrawingDetails      A detail implementation type of a drawing.
+        \tparam Font              A font type.
+        \tparam Encoder           An encoder type.
     */
     template <
         typename Size,
@@ -50,11 +50,10 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
-        typename Encoder,
-        typename DrawingDetails
+        typename Font,
+        typename Encoder
     >
-    class windia_reader :
-        public reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, DrawingDetails>
+    class windia_reader : public reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>
     {
     public:
         // types
@@ -77,26 +76,18 @@ namespace bobura { namespace model { namespace serializer
         //! The speed type.
         using speed_type = Speed;
 
+        //! The font type.
+        using font_type = Font;
+
         //! The encoder type.
         using encoder_type = Encoder;
-
-        //! The drawing details type.
-        using drawing_details_type = DrawingDetails;
 
         //! The station grade type set type.
         using station_grade_type_set_type = station_info::grade_type_set<string_type>;
 
         //! The base type.
         using base_type =
-            reader<
-                size_type,
-                difference_type,
-                string_type,
-                iterator,
-                operating_distance_type,
-                speed_type,
-                drawing_details_type
-            >;
+            reader<size_type, difference_type, string_type, iterator, operating_distance_type, speed_type, font_type>;
 
         //! The timetable type.
         using timetable_type = typename base_type::timetable_type;
