@@ -646,6 +646,13 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace dialog
     {
+        using config_traits_type =
+            config_traits<
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
+                boost::mpl::at<detail_type_list, type::detail::config>::type
+            >;
         using train_kind_type = bobura::model::train_kind<boost::mpl::at<common_type_list, type::string>::type>;
     }}
 #endif
@@ -656,9 +663,12 @@ namespace bobura
             boost::mpl::pair<
                 type::dialog::about_dialog,
                 about_dialog<
+                    boost::mpl::at<common_type_list, type::string>::type,
+                    boost::mpl::at<ui_type_list, type::ui::position>::type,
+                    boost::mpl::at<ui_type_list, type::ui::dimension>::type,
                     boost::mpl::at<ui_type_list, type::ui::dialog>::type,
                     boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                    boost::mpl::at<setting_type_list, type::setting::settings>::type
+                    detail::dialog::config_traits_type
                 >
             >,
         tetengo2::meta::assoc_list<
