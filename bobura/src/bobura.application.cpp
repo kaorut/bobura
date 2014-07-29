@@ -16,6 +16,7 @@
 #include <tetengo2.h>
 
 #include <bobura/application.h>
+#include <bobura/config_traits.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/type_list.h>
@@ -25,8 +26,6 @@ namespace bobura
 {
     namespace
     {
-        using settings_type = boost::mpl::at<setting_type_list, type::setting::settings>::type;
-
         using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
 
         using model_message_type_list_type =
@@ -74,9 +73,28 @@ namespace bobura
     }
 
 
-    class application::impl : private boost::noncopyable
+    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
+    class application<String, Position, Dimension, ConfigTraits>::impl : private boost::noncopyable
     {
     public:
+        // types
+
+        //! The string type.
+        using string_type = String;
+
+        //! The position type.
+        using position_type = Position;
+
+        //! The dimension type.
+        using dimension_type = Dimension;
+
+        //! The configuration traits type.
+        using config_traits_type = ConfigTraits;
+
+        //! The settings type.
+        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
+
+
         // constructors and destructor
 
         explicit impl(settings_type& settings)
@@ -318,19 +336,35 @@ namespace bobura
     };
 
 
-    application::application(settings_type& settings)
+    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
+    application<String, Position, Dimension, ConfigTraits>::application(settings_type& settings)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(settings))
     {}
 
-    application::~application()
+    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
+    application<String, Position, Dimension, ConfigTraits>::~application()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    int application::run()
+    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
+    int application<String, Position, Dimension, ConfigTraits>::run()
     {
         return m_p_impl->run();
     }
+
+
+    template class application<
+        boost::mpl::at<common_type_list, type::string>::type,
+        boost::mpl::at<ui_type_list, type::ui::position>::type,
+        boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+        config_traits<
+            boost::mpl::at<common_type_list, type::string>::type,
+            boost::mpl::at<common_type_list, type::size>::type,
+            boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
+            boost::mpl::at<detail_type_list, type::detail::config>::type
+        >
+    >;
 
 
 }
