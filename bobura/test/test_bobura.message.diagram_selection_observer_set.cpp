@@ -21,11 +21,15 @@ namespace
 
     using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
-    using station_type = model_type::timetable_type::station_location_type::station_type;
+    using station_location_type = model_type::timetable_type::station_location_type;
 
-    using train_type = model_type::timetable_type::train_type;
-
-    using observer_set_type = bobura::message::diagram_selection_observer_set<station_type, train_type>;
+    using observer_set_type =
+        bobura::message::diagram_selection_observer_set<
+            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            station_location_type::operating_distance_type
+        >;
 
 
 }

@@ -13,29 +13,44 @@
 #include <boost/optional.hpp>
 #include <boost/signals2.hpp>
 
+#include <bobura/model/timetable_info/station_location.h>
+#include <bobura/model/train.h>
+
 
 namespace bobura { namespace message
 {
     /*!
         \brief The class template for a diagram selection observer set.
 
-        \tparam StationLocation A station location type.
-        \tparam Train           A train type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
     */
-    template <typename StationLocation, typename Train>
+    template <typename Size, typename Difference, typename String, typename OperatingDistance>
     class diagram_selection_observer_set : private boost::noncopyable
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
         //! The station location type.
-        using station_location_type = StationLocation;
+        using station_location_type = model::timetable_info::station_location<string_type, operating_distance_type>;
 
         //! The train type.
-        using train_type = Train;
+        using train_type = model::train<size_type, difference_type, string_type>;
 
-        //! The stop index type.
-        using stop_index_type = typename train_type::stops_type::size_type;
 
         /*!
             \brief The observer type of station selection.
@@ -55,8 +70,8 @@ namespace bobura { namespace message
         */
         using train_selected_type =
             void (
-                const train_type&                       train,
-                const boost::optional<stop_index_type>& departure_stop_index
+                const train_type&                 train,
+                const boost::optional<size_type>& departure_stop_index
             );
 
         //! The signal type of train selection.

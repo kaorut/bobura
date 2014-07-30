@@ -842,7 +842,12 @@ namespace bobura
         using station_location_type = model_type::timetable_type::station_location_type;
         using train_type = model_type::timetable_type::train_type;
         using diagram_selection_observer_set_type =
-            bobura::message::diagram_selection_observer_set<station_location_type, train_type>;
+            bobura::message::diagram_selection_observer_set<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                station_location_type::operating_distance_type
+            >;
         using selection_type =
             bobura::view::diagram::selection<station_location_type, train_type, diagram_selection_observer_set_type>;
         using diagram_header_type =
