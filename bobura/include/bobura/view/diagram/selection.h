@@ -19,33 +19,48 @@
 
 #include <tetengo2.h>
 
+#include <bobura/message/diagram_selection_observer_set.h>
+#include <bobura/model/timetable_info/station_location.h>
+#include <bobura/model/train.h>
+
 
 namespace bobura { namespace view { namespace diagram
 {
      /*!
         \brief The class template for the diagram view selection.
 
-        \tparam StationLocation      A station location type.
-        \tparam Train                A train type.
-        \tparam SelectionObserverSet A selection observer set type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
     */
-    template <typename StationLocation, typename Train, typename SelectionObserverSet>
+    template <typename Size, typename Difference, typename String, typename OperatingDistance>
     class selection : private boost::noncopyable
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
         //! The station location type.
-        using station_location_type = StationLocation;
+        using station_location_type = model::timetable_info::station_location<string_type, operating_distance_type>;
 
         //! The train type.
-        using train_type = Train;
-
-        //! The stop index type.
-        using stop_index_type = typename train_type::stops_type::size_type;
+        using train_type = model::train<size_type, difference_type, string_type>;
 
         //! The selection observer set type.
-        using selection_observer_set_type = SelectionObserverSet;
+        using selection_observer_set_type =
+            message::diagram_selection_observer_set<size_type, difference_type, string_type, operating_distance_type>;
 
 
         // constructors and destructor
@@ -97,14 +112,13 @@ namespace bobura { namespace view { namespace diagram
 
             \param train                A train.
             \param departure_stop_index A departure stop index.
-                                        Specity std::numeric_limits<stop_index_type>::max() to test whether any
-                                        fragment is selected.
-                                        Or specify boost::none to test whether a whole train is selected.
+                                        Specity std::numeric_limits<size_type>::max() to test whether any fragment is
+                                        selected. Or specify boost::none to test whether a whole train is selected.
 
             \retval true  When the train is selected.
             \retval false Otherwise.
         */
-        bool selected(const train_type& train, const boost::optional<stop_index_type>& departure_stop_index)
+        bool selected(const train_type& train, const boost::optional<size_type>& departure_stop_index)
         const
         {
             if (!m_p_selected_train)
@@ -119,7 +133,7 @@ namespace bobura { namespace view { namespace diagram
             return
                 &train == m_p_selected_train &&
                 (
-                    *departure_stop_index == std::numeric_limits<stop_index_type>::max() ||
+                    *departure_stop_index == std::numeric_limits<size_type>::max() ||
                     *departure_stop_index == *m_departure_stop_index
                 );
         }
@@ -145,8 +159,8 @@ namespace bobura { namespace view { namespace diagram
             \param departure_stop_index A departure stop index. Or specify boost::none when a whole train is selected.
         */
         void select(
-            const train_type&                       train,
-            const boost::optional<stop_index_type>& departure_stop_index
+            const train_type&                 train,
+            const boost::optional<size_type>& departure_stop_index
         )
         {
             unselect_all();
@@ -198,7 +212,7 @@ namespace bobura { namespace view { namespace diagram
 
         const train_type* m_p_selected_train;
 
-        boost::optional<stop_index_type> m_departure_stop_index;
+        boost::optional<size_type> m_departure_stop_index;
 
         std::unique_ptr<selection_observer_set_type> m_p_selection_observer_set;
 

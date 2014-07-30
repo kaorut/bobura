@@ -33,7 +33,6 @@
 #include <bobura/load_save/load_from_file.h>
 #include <bobura/load_save/new_file.h>
 #include <bobura/load_save/save_to_file.h>
-#include <bobura/message/diagram_selection_observer_set.h>
 #include <bobura/message/timetable_model_observer_set.h>
 #include <bobura/message/type_list_impl.h>
 #include <bobura/model/message/timetable_observer_set.h>
@@ -839,17 +838,14 @@ namespace bobura
     namespace detail { namespace view
     {
         using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
-        using station_location_type = model_type::timetable_type::station_location_type;
-        using train_type = model_type::timetable_type::train_type;
-        using diagram_selection_observer_set_type =
-            bobura::message::diagram_selection_observer_set<
+        using operating_distance_type = model_type::timetable_type::station_location_type::operating_distance_type;
+        using selection_type =
+            bobura::view::diagram::selection<
                 boost::mpl::at<common_type_list, type::size>::type,
                 boost::mpl::at<common_type_list, type::difference>::type,
                 boost::mpl::at<common_type_list, type::string>::type,
-                station_location_type::operating_distance_type
+                operating_distance_type
             >;
-        using selection_type =
-            bobura::view::diagram::selection<station_location_type, train_type, diagram_selection_observer_set_type>;
         using diagram_header_type =
             bobura::view::diagram::header<
                 model_type, selection_type, boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type
