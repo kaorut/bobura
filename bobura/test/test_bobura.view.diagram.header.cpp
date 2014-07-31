@@ -58,11 +58,20 @@ namespace
 
     using color_type = canvas_type::color_type;
 
-    using company_line_name_header_type = bobura::view::diagram::company_line_name_header<selection_type, canvas_type>;
+    using company_line_name_header_type =
+        bobura::view::diagram::company_line_name_header<
+            size_type, difference_type, string_type, operating_distance_type, canvas_type
+        >;
 
-    using note_header_type = bobura::view::diagram::note_header<selection_type, canvas_type>;
+    using note_header_type =
+        bobura::view::diagram::note_header<
+            size_type, difference_type, string_type, operating_distance_type, canvas_type
+        >;
 
-    using header_type = bobura::view::diagram::header<model_type, selection_type, canvas_type>;
+    using header_type =
+        bobura::view::diagram::header<
+            size_type, difference_type, string_type, operating_distance_type, model_type, canvas_type
+        >;
 
 
 }
