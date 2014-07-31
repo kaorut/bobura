@@ -74,14 +74,18 @@ namespace
 
     using color_type = canvas_type::color_type;
 
-    using station_grade_type_set_type =
-        boost::mpl::at<bobura::model_type_list, bobura::type::model::station_grade_type_set>::type;
-    
-    using station_line_type = bobura::view::diagram::station_line<model_type, selection_type, canvas_type>;
+    using station_line_type =
+        bobura::view::diagram::station_line<
+            size_type, difference_type, string_type, operating_distance_type, model_type, canvas_type
+        >;
 
     using station_line_list_type =
-        bobura::view::diagram::station_line_list<model_type, selection_type, canvas_type, station_grade_type_set_type>;
+        bobura::view::diagram::station_line_list<
+            size_type, difference_type, string_type, operating_distance_type, model_type, canvas_type
+        >;
 
+    using station_grade_type_set_type = station_line_list_type::station_grade_type_set_type;
+    
 
 }
 
