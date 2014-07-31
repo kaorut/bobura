@@ -13,29 +13,46 @@
 
 #include <tetengo2.h>
 
+#include <bobura/view/diagram/selection.h>
+
 
 namespace bobura { namespace view { namespace diagram
 {
      /*!
         \brief The class template for the diagram view item.
 
-        \tparam Selection A selection type.
-        \tparam Canvas    A canvas type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Canvas            A canvas type.
     */
-    template <typename Selection, typename Canvas>
+    template <typename Size, typename Difference, typename String, typename OperatingDistance, typename Canvas>
     class item : private boost::noncopyable
     {
     public:
         // types
 
-        //! The selection type.
-        using selection_type = Selection;
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
 
         //! The canvas type.
         using canvas_type = Canvas;
 
         //! The position type.
         using position_type = typename canvas_type::position_type;
+
+        //! The selection type.
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
 
 
         // constructors and destructor

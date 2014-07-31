@@ -35,7 +35,8 @@ namespace bobura { namespace view { namespace diagram
         \tparam Canvas    A canvas type.
     */
     template <typename Model, typename Selection, typename Canvas>
-    class station_line : public item<Selection, Canvas>
+    class station_line :
+        public item<typename Selection::size_type, typename Selection::difference_type, typename Selection::string_type, typename Selection::operating_distance_type, Canvas>
     {
     public:
         // types
@@ -71,7 +72,8 @@ namespace bobura { namespace view { namespace diagram
         using dimension_type = typename canvas_type::dimension_type;
 
         //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        using base_type =
+            item<typename selection_type::size_type, typename selection_type::difference_type, typename selection_type::string_type, typename selection_type::operating_distance_type, canvas_type>;
 
 
         // constructors and destructor
@@ -232,7 +234,8 @@ namespace bobura { namespace view { namespace diagram
         \tparam StationGradeTypeSet A station grade type set type.
     */
     template <typename Model, typename Selection, typename Canvas, typename StationGradeTypeSet>
-    class station_line_list : public item<Selection, Canvas>
+    class station_line_list :
+        public item<typename Selection::size_type, typename Selection::difference_type, typename Selection::string_type, typename Selection::operating_distance_type, Canvas>
     {
     public:
         // types
@@ -274,7 +277,8 @@ namespace bobura { namespace view { namespace diagram
         using horizontal_scale_type = typename width_type::value_type;
 
         //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        using base_type =
+            item<typename selection_type::size_type, typename selection_type::difference_type, typename selection_type::string_type, typename selection_type::operating_distance_type, canvas_type>;
 
         //! The station grade type set type.
         using station_grade_type_set_type = StationGradeTypeSet;

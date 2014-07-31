@@ -34,7 +34,8 @@ namespace bobura { namespace view { namespace diagram
         \tparam Size      A size type.
     */
     template <typename Selection, typename Canvas, typename Size>
-    class time_line : public item<Selection, Canvas>
+    class time_line :
+        public item<typename Selection::size_type, typename Selection::difference_type, typename Selection::string_type, typename Selection::operating_distance_type, Canvas>
     {
     public:
         // types
@@ -58,7 +59,8 @@ namespace bobura { namespace view { namespace diagram
         using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
         //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        using base_type =
+            item<typename selection_type::size_type, typename selection_type::difference_type, typename selection_type::string_type, typename selection_type::operating_distance_type, canvas_type>;
 
         //! The size type.
         using size_type = Size;
@@ -184,7 +186,8 @@ namespace bobura { namespace view { namespace diagram
         \tparam Canvas    A canvas type.
     */
     template <typename Model, typename Selection, typename Canvas>
-    class time_line_list : public item<Selection, Canvas>
+    class time_line_list :
+        public item<typename Selection::size_type, typename Selection::difference_type, typename Selection::string_type, typename Selection::operating_distance_type, Canvas>
     {
     public:
         // types
@@ -232,7 +235,8 @@ namespace bobura { namespace view { namespace diagram
         using horizontal_scale_type = typename width_type::value_type;
 
         //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        using base_type =
+            item<typename selection_type::size_type, typename selection_type::difference_type, typename selection_type::string_type, typename selection_type::operating_distance_type, canvas_type>;
 
 
         // constructors and destructor

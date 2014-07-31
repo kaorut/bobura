@@ -43,7 +43,8 @@ namespace bobura { namespace view { namespace diagram
         \tparam MessageCatalog A message catalog type.
     */
     template <typename Model, typename Selection, typename Canvas, typename MessageCatalog>
-    class train_line_fragment : public item<Selection, Canvas>
+    class train_line_fragment :
+        public item<typename Selection::size_type, typename Selection::difference_type, typename Selection::string_type, typename Selection::operating_distance_type, Canvas>
     {
     public:
         // types
@@ -70,7 +71,8 @@ namespace bobura { namespace view { namespace diagram
         using position_type = typename canvas_type::position_type;
 
         //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        using base_type =
+            item<typename selection_type::size_type, typename selection_type::difference_type, typename selection_type::string_type, typename selection_type::operating_distance_type, canvas_type>;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
@@ -422,7 +424,8 @@ namespace bobura { namespace view { namespace diagram
         \tparam MessageCatalog A message catalog type.
     */
     template <typename Model, typename Selection, typename Canvas, typename MessageCatalog>
-    class train_line : public item<Selection, Canvas>
+    class train_line :
+        public item<typename Selection::size_type, typename Selection::difference_type, typename Selection::string_type, typename Selection::operating_distance_type, Canvas>
     {
     public:
         // types
@@ -473,7 +476,8 @@ namespace bobura { namespace view { namespace diagram
         using horizontal_scale_type = typename width_type::value_type;
 
         //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        using base_type =
+            item<typename selection_type::size_type, typename selection_type::difference_type, typename selection_type::string_type, typename selection_type::operating_distance_type, canvas_type>;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
@@ -1013,7 +1017,8 @@ namespace bobura { namespace view { namespace diagram
         \tparam MessageCatalog A message catalog type.
     */
     template <typename Model, typename Selection, typename Canvas, typename MessageCatalog>
-    class train_line_list : public item<Selection, Canvas>
+    class train_line_list :
+        public item<typename Selection::size_type, typename Selection::difference_type, typename Selection::string_type, typename Selection::operating_distance_type, Canvas>
     {
     public:
         // types
@@ -1058,7 +1063,8 @@ namespace bobura { namespace view { namespace diagram
         using horizontal_scale_type = typename width_type::value_type;
 
         //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        using base_type =
+            item<typename selection_type::size_type, typename selection_type::difference_type, typename selection_type::string_type, typename selection_type::operating_distance_type, canvas_type>;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;

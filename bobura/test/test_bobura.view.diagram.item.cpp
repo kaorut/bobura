@@ -48,7 +48,8 @@ namespace
 
     using top_type = tetengo2::gui::position<position_type>::top_type;
 
-    using item_type = bobura::view::diagram::item<selection_type, canvas_type>;
+    using item_type =
+        bobura::view::diagram::item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
     class concrete_item : public item_type
     {
