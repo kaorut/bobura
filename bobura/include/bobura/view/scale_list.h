@@ -27,24 +27,24 @@ namespace bobura { namespace view
     /*!
         \brief The class template for a view scale list.
 
-        \tparam Scale  A scale type.
         \tparam Size   A size type.
         \tparam String A string type.
+        \tparam Scale  A scale type.
     */
-    template <typename Scale, typename Size, typename String>
+    template <typename Size, typename String, typename Scale>
     class scale_list : boost::noncopyable
     {
     public:
         // types
-
-        //! The scale type.
-        using scale_type = Scale;
 
         //! The size type.
         using size_type = Size;
 
         //! The string type.
         using string_type = String;
+
+        //! The scale type.
+        using scale_type = Scale;
 
 
         // functions

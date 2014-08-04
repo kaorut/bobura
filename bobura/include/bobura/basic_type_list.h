@@ -914,9 +914,9 @@ namespace bobura
             boost::mpl::pair<
                 type::view::scale_list,
                 bobura::view::scale_list<
-                    boost::rational<boost::mpl::at<common_type_list, type::size>::type>,
                     boost::mpl::at<common_type_list, type::size>::type,
-                    boost::mpl::at<common_type_list, type::string>::type
+                    boost::mpl::at<common_type_list, type::string>::type,
+                    boost::rational<boost::mpl::at<common_type_list, type::size>::type>
                 >
             >,
         tetengo2::meta::assoc_list_end
