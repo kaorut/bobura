@@ -875,8 +875,11 @@ namespace bobura
             >;
         using diagram_train_line_list_type =
             bobura::view::diagram::train_line_list<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                operating_distance_type,
                 model_type,
-                selection_type,
                 boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;

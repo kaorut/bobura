@@ -74,13 +74,37 @@ namespace
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
     using train_line_fragment_type =
-        bobura::view::diagram::train_line_fragment<model_type, selection_type, canvas_type, message_catalog_type>;
+        bobura::view::diagram::train_line_fragment<
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            model_type,
+            canvas_type,
+            message_catalog_type
+        >;
 
     using train_line_type =
-        bobura::view::diagram::train_line<model_type, selection_type, canvas_type, message_catalog_type>;
+        bobura::view::diagram::train_line<
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            model_type,
+            canvas_type,
+            message_catalog_type
+        >;
 
     using train_line_list_type =
-        bobura::view::diagram::train_line_list<model_type, selection_type, canvas_type, message_catalog_type>;
+        bobura::view::diagram::train_line_list<
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            model_type,
+            canvas_type,
+            message_catalog_type
+        >;
 
 
 }
