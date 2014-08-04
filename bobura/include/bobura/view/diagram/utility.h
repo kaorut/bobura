@@ -10,6 +10,10 @@
 #define BOBURA_VIEW_DIAGRAM_UTILITY_H
 
 #include <utility>
+#include <vector>
+
+#include <bobura/model/train_info/time.h>
+#include <bobura/model/train_info/time_span.h>
 
 
 namespace bobura { namespace view { namespace diagram
@@ -17,45 +21,46 @@ namespace bobura { namespace view { namespace diagram
     /*!
         \brief Calculates a horizontal position by a time.
 
-        \tparam Left     A left type.
-        \tparam Time     A time type.
-        \tparam TimeSpan A time span type.
+        \tparam Size       A size type.
+        \tparam Difference A difference type.
+        \tparam Left       A left type.
 
         \param time                           A time.
         \param time_offset                    A time offset
-        \param previous_or_next_day           Set -1 for previous day, 0 for today and +1 for next day.
+        \param previous_or_next_day           Set -1 for previous day, 0 for today or +1 for next day.
         \param horizontal_scroll_bar_position A horizontal scroll bar position.
         \param station_header_right           The right position of a station header.
         \param horizontal_scale               A horizontal scale.
 
         \return The horizontal position.
     */
-    template <typename Left, typename Time, typename TimeSpan>
+    template <typename Size, typename Difference, typename Left>
     Left time_to_left(
-        const Time&     time,
-        const TimeSpan& time_offset,
-        const int       previous_or_next_day,
-        const Left&     horizontal_scroll_bar_position,
-        const Left&     station_header_right,
-        const Left&     horizontal_scale
+        const model::train_info::time<Size, Difference>& time,
+        const model::train_info::time_span<Difference>&  time_offset,
+        const int                                        previous_or_next_day,
+        const Left&                                      horizontal_scroll_bar_position,
+        const Left&                                      station_header_right,
+        const Left&                                      horizontal_scale
     )
     {
+        using time_span_type = model::train_info::time_span<Difference>;
+
         typename Left::value_type left_value(time.seconds_from_midnight());
         left_value -= time_offset.seconds();
         if (left_value < 0)
-            left_value += TimeSpan::seconds_of_whole_day();
-        left_value += previous_or_next_day * TimeSpan::seconds_of_whole_day();
+            left_value += time_span_type::seconds_of_whole_day();
+        left_value += previous_or_next_day * time_span_type::seconds_of_whole_day();
         left_value /= 180;
         left_value *= horizontal_scale.value();
-        return Left{ left_value } -horizontal_scroll_bar_position + station_header_right;
+        return Left{ left_value } - horizontal_scroll_bar_position + station_header_right;
     }
 
     /*!
         \brief Calculates a vertical position by a station index.
 
-        \tparam Top              A top type.
-        \tparam StationPositions A station positions type.
-        \tparam StationIndex     A station index type.
+        \tparam Size A size type.
+        \tparam Top  A top type.
 
         \param station_positions            Station positions.
         \param station_index                A station index.
@@ -65,10 +70,10 @@ namespace bobura { namespace view { namespace diagram
 
         \return The vertical position.
     */
-    template <typename Top, typename StationPositions, typename StationIndex>
+    template <typename Size, typename Top>
     Top station_index_to_top(
-        const StationPositions& station_positions,
-        const StationIndex      station_index,
+        const std::vector<Top>& station_positions,
+        const Size              station_index,
         const Top&              vertical_scroll_bar_position,
         const Top&              header_bottom,
         const Top&              time_header_bottom

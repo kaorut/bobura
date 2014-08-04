@@ -38,7 +38,7 @@ namespace
 
     using time_type = bobura::model::train_info::time<int, int>;
 
-    using size_type = tetengo2::gui::position<position_type>::left_type;
+    using unit_size_type = tetengo2::gui::position<position_type>::left_type;
 
 
 }
@@ -64,7 +64,7 @@ BOOST_AUTO_TEST_SUITE(diagram)
     {
         BOOST_TEST_PASSPOINT();
 
-        const std::vector<int> station_positions{ 0, 42 };
+        const std::vector<top_type> station_positions{ top_type{ 0 }, top_type{ 42 } };
 
         const auto result =
             bobura::view::diagram::station_index_to_top(
@@ -78,21 +78,21 @@ BOOST_AUTO_TEST_SUITE(diagram)
     {
         BOOST_TEST_PASSPOINT();
 
-        bobura::view::diagram::normal_line_width<size_type>();
+        bobura::view::diagram::normal_line_width<unit_size_type>();
     }
 
     BOOST_AUTO_TEST_CASE(bold_line_width)
     {
         BOOST_TEST_PASSPOINT();
 
-        bobura::view::diagram::bold_line_width<size_type>();
+        bobura::view::diagram::bold_line_width<unit_size_type>();
     }
 
     BOOST_AUTO_TEST_CASE(selected_line_margin)
     {
         BOOST_TEST_PASSPOINT();
 
-        bobura::view::diagram::selected_line_margin<size_type>();
+        bobura::view::diagram::selected_line_margin<unit_size_type>();
     }
 
     BOOST_AUTO_TEST_CASE(draw_selectable_line)
