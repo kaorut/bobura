@@ -69,9 +69,15 @@ namespace
 
     using color_type = canvas_type::color_type;
 
-    using time_line_type = bobura::view::diagram::time_line<selection_type, canvas_type, time_type::size_type>;
+    using time_line_type =
+        bobura::view::diagram::time_line<
+            size_type, difference_type, string_type, operating_distance_type, canvas_type
+        >;
 
-    using time_line_list_type = bobura::view::diagram::time_line_list<model_type, selection_type, canvas_type>;
+    using time_line_list_type =
+        bobura::view::diagram::time_line_list<
+            size_type, difference_type, string_type, operating_distance_type, model_type, canvas_type
+        >;
 
 
 }

@@ -857,7 +857,12 @@ namespace bobura
             >;
         using diagram_time_line_list_type =
             bobura::view::diagram::time_line_list<
-                model_type, selection_type, boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                operating_distance_type,
+                model_type,
+                boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type
             >;
         using diagram_station_line_list_type =
             bobura::view::diagram::station_line_list<
