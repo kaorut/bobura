@@ -117,7 +117,7 @@ namespace bobura { namespace view { namespace diagram
         */
         train_line_fragment(train_line_fragment&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_p_train(another.m_p_train),
         m_departure_stop_index(another.m_departure_stop_index),
         m_departure(std::move(another.m_departure)),
@@ -369,18 +369,18 @@ namespace bobura { namespace view { namespace diagram
         const override
         {
             return
-                this->selection().selected(*m_p_train, boost::none) ||
-                this->selection().selected(*m_p_train, boost::make_optional(m_departure_stop_index));
+                this->get_selection().selected(*m_p_train, boost::none) ||
+                this->get_selection().selected(*m_p_train, boost::make_optional(m_departure_stop_index));
         }
 
         virtual void select_impl(const bool switch_selection_style)
         override
         {
-            const auto whole_selected = this->selection().selected(*m_p_train, boost::none);
+            const auto whole_selected = this->get_selection().selected(*m_p_train, boost::none);
             const auto this_fragment_selected =
-                this->selection().selected(*m_p_train, boost::make_optional(m_departure_stop_index));
+                this->get_selection().selected(*m_p_train, boost::make_optional(m_departure_stop_index));
             const auto any_fragment_selected =
-                this->selection().selected(
+                this->get_selection().selected(
                     *m_p_train, boost::make_optional(std::numeric_limits<stop_index_type>::max())
                 );
 
@@ -389,7 +389,7 @@ namespace bobura { namespace view { namespace diagram
                 select_fragment = whole_selected || (!this_fragment_selected && any_fragment_selected);
             else
                 select_fragment = this_fragment_selected;
-            this->selection().select(
+            this->get_selection().select(
                 *m_p_train, boost::make_optional(select_fragment, m_departure_stop_index)
             );
         }
@@ -545,7 +545,7 @@ namespace bobura { namespace view { namespace diagram
         */
         train_line(train_line&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_p_train_kind(another.m_p_train_kind),
         m_fragments(std::move(another.m_fragments))
         {}
@@ -1130,7 +1130,7 @@ namespace bobura { namespace view { namespace diagram
         */
         train_line_list(train_line_list&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_p_font(another.m_p_font),
         m_train_lines(std::move(another.m_train_lines))
         {}

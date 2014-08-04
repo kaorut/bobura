@@ -147,7 +147,7 @@ BOOST_AUTO_TEST_SUITE(item)
         }
     }
 
-    BOOST_AUTO_TEST_CASE(selection)
+    BOOST_AUTO_TEST_CASE(get_selection)
     {
         BOOST_TEST_PASSPOINT();
 
@@ -155,13 +155,13 @@ BOOST_AUTO_TEST_SUITE(item)
             selection_type selection{};
             const concrete_item item{ selection };
 
-            BOOST_CHECK_EQUAL(&item.selection(), &selection);
+            BOOST_CHECK_EQUAL(&item.get_selection(), &selection);
         }
         {
             selection_type selection{};
             concrete_item item{ selection };
 
-            BOOST_CHECK_EQUAL(&item.selection(), &selection);
+            BOOST_CHECK_EQUAL(&item.get_selection(), &selection);
         }
     }
 

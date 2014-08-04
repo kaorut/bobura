@@ -69,7 +69,7 @@ namespace bobura { namespace view { namespace diagram
         using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
         //! The selection type.
-        using selection_type = diagram::selection<size_type, difference_type, string_type, operating_distance_type>;
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
 
 
         // constructors and destructor
@@ -108,7 +108,7 @@ namespace bobura { namespace view { namespace diagram
         */
         company_line_name_header(company_line_name_header&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_company_line_name(std::move(another.m_company_line_name)),
         m_p_font(another.m_p_font),
         m_p_color(another.m_p_color),
@@ -222,7 +222,7 @@ namespace bobura { namespace view { namespace diagram
         using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
         //! The selection type.
-        using selection_type = diagram::selection<size_type, difference_type, string_type, operating_distance_type>;
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
 
 
         // constructors and destructor
@@ -261,7 +261,7 @@ namespace bobura { namespace view { namespace diagram
         */
         note_header(note_header&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_note(std::move(another.m_note)),
         m_p_font(another.m_p_font),
         m_p_color(another.m_p_color),
@@ -380,7 +380,7 @@ namespace bobura { namespace view { namespace diagram
         using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
         //! The selection type.
-        using selection_type = diagram::selection<size_type, difference_type, string_type, operating_distance_type>;
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
 
 
         // constructors and destructor
@@ -458,7 +458,7 @@ namespace bobura { namespace view { namespace diagram
         */
         explicit header(header&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_p_company_line_name_header(std::move(another.m_p_company_line_name_header)),
         m_p_note_header(std::move(another.m_p_note_header)),
         m_position(std::move(another.m_position)),

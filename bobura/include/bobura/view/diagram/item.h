@@ -140,7 +140,7 @@ namespace bobura { namespace view { namespace diagram
 
             \return The selection.
         */
-        const selection_type& selection()
+        const selection_type& get_selection()
         const
         {
             return *m_p_selection;
@@ -151,7 +151,7 @@ namespace bobura { namespace view { namespace diagram
 
             \return The selection.
         */
-        selection_type& selection()
+        selection_type& get_selection()
         {
             return *m_p_selection;
         }

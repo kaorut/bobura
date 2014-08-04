@@ -102,7 +102,7 @@ namespace bobura { namespace view { namespace diagram
         */
         time_line(time_line&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_left(std::move(another.m_left)),
         m_top(std::move(another.m_top)),
         m_bottom(std::move(another.m_bottom)),
@@ -293,7 +293,7 @@ namespace bobura { namespace view { namespace diagram
         */
         time_line_list(time_line_list&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_p_font(another.m_p_font),
         m_p_color(another.m_p_color),
         m_time_lines(std::move(another.m_time_lines))

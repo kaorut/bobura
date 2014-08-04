@@ -92,7 +92,7 @@ namespace bobura { namespace view { namespace diagram
         using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
         //! The selection type.
-        using selection_type = diagram::selection<size_type, difference_type, string_type, operating_distance_type>;
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
 
 
         // constructors and destructor
@@ -131,7 +131,7 @@ namespace bobura { namespace view { namespace diagram
         */
         station_line(station_line&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_p_station_location(another.m_p_station_location),
         m_right(std::move(another.m_right)),
         m_station_header_right(another.m_station_header_right),
@@ -229,7 +229,7 @@ namespace bobura { namespace view { namespace diagram
         virtual bool selected_impl()
         const override
         {
-            return this->selection().selected(*m_p_station_location);
+            return this->get_selection().selected(*m_p_station_location);
         }
 
         virtual void select_impl(const bool switch_selection_style)
@@ -237,7 +237,7 @@ namespace bobura { namespace view { namespace diagram
         {
             tetengo2::suppress_unused_variable_warning(switch_selection_style);
 
-            this->selection().select(*m_p_station_location);
+            this->get_selection().select(*m_p_station_location);
         }
 
 
@@ -316,7 +316,7 @@ namespace bobura { namespace view { namespace diagram
         using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
         //! The selection type.
-        using selection_type = diagram::selection<size_type, difference_type, string_type, operating_distance_type>;
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
 
         //! The station grade type set type.
         using station_grade_type_set_type = model::station_info::grade_type_set<string_type>;
@@ -375,7 +375,7 @@ namespace bobura { namespace view { namespace diagram
         */
         station_line_list(station_line_list&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_station_lines(std::move(another.m_station_lines))
         {}
 
