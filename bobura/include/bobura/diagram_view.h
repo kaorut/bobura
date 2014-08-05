@@ -21,29 +21,34 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/view/diagram/header.h>
+#include <bobura/view/diagram/item.h>
+#include <bobura/view/diagram/selection.h>
+#include <bobura/view/diagram/station_line.h>
+#include <bobura/view/diagram/time_line.h>
+#include <bobura/view/diagram/train_line.h>
+
 
 namespace bobura
 {
    /*!
         \brief The class template for a diagram view.
 
-        \tparam Header          A header type.
-        \tparam TimeLineList    A time line list type.
-        \tparam StationLineList A station line list type.
-        \tparam TrainLineList   A train line list type.
-        \tparam Model           A model type.
-        \tparam Selection       A selection type.
-        \tparam Canvas          A canvas type.
-        \tparam SolidBackground A solid background type.
-        \tparam MessageCatalog  A message catalog type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Model             A model type.
+        \tparam Canvas            A canvas type.
+        \tparam SolidBackground   A solid background type.
+        \tparam MessageCatalog    A message catalog type.
     */
     template <
-        typename Header,
-        typename TimeLineList,
-        typename StationLineList,
-        typename TrainLineList,
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
         typename Model,
-        typename Selection,
         typename Canvas,
         typename SolidBackground,
         typename MessageCatalog
@@ -53,29 +58,20 @@ namespace bobura
     public:
         // types
 
-        //! The header type.
-        using header_type = Header;
+        //! The size type.
+        using size_type = Size;
 
-        //! The item type.
-        using item_type = typename header_type::base_type;
+        //! The difference type.
+        using difference_type = Difference;
 
-        //! The time line list type.
-        using time_line_list_type = TimeLineList;
+        //! The string type.
+        using string_type = String;
 
-        //! The station line list type.
-        using station_line_list_type = StationLineList;
-
-        //! The train line list type.
-        using train_line_list_type = TrainLineList;
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
 
         //! The model type.
         using model_type = Model;
-
-        //! The selection type.
-        using selection_type = Selection;
-
-        //! The selection observer set type.
-        using selection_observer_set_type = typename selection_type::selection_observer_set_type;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -109,6 +105,47 @@ namespace bobura
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
+
+        //! The header type.
+        using header_type =
+            view::diagram::header<
+                size_type, difference_type, string_type, operating_distance_type, model_type, canvas_type
+            >;
+
+        //! The item type.
+        using item_type =
+            view::diagram::item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+
+        //! The time line list type.
+        using time_line_list_type = 
+            view::diagram::time_line_list<
+                size_type, difference_type, string_type, operating_distance_type, model_type, canvas_type
+            >;
+
+        //! The station line list type.
+        using station_line_list_type =
+            view::diagram::station_line_list<
+                size_type, difference_type, string_type, operating_distance_type, model_type, canvas_type
+            >;
+
+        //! The train line list type.
+        using train_line_list_type =
+            view::diagram::train_line_list<
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                model_type,
+                canvas_type,
+                message_catalog_type
+            >;
+
+        //! The selection type.
+        using selection_type =
+            view::diagram::selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The selection observer set type.
+        using selection_observer_set_type = typename selection_type::selection_observer_set_type;
 
 
         // constructors and destructor

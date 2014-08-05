@@ -50,11 +50,6 @@
 #include <bobura/settings.h>
 #include <bobura/timetable_model.h>
 #include <bobura/train_kind_dialog.h>
-#include <bobura/view/diagram/header.h>
-#include <bobura/view/diagram/selection.h>
-#include <bobura/view/diagram/station_line.h>
-#include <bobura/view/diagram/time_line.h>
-#include <bobura/view/diagram/train_line.h>
 #include <bobura/view/scale_list.h>
 
 
@@ -839,50 +834,6 @@ namespace bobura
     {
         using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
         using operating_distance_type = model_type::timetable_type::station_location_type::operating_distance_type;
-        using selection_type =
-            bobura::view::diagram::selection<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                operating_distance_type
-            >;
-        using diagram_header_type =
-            bobura::view::diagram::header<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                operating_distance_type,
-                model_type,
-                boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type
-            >;
-        using diagram_time_line_list_type =
-            bobura::view::diagram::time_line_list<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                operating_distance_type,
-                model_type,
-                boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type
-            >;
-        using diagram_station_line_list_type =
-            bobura::view::diagram::station_line_list<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                operating_distance_type,
-                model_type,
-                boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type
-            >;
-        using diagram_train_line_list_type =
-            bobura::view::diagram::train_line_list<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                operating_distance_type,
-                model_type,
-                boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
-            >;
     }}
 #endif
 
@@ -892,24 +843,16 @@ namespace bobura
             boost::mpl::pair<
                 type::view::view,
                 bobura::diagram_view<
-                    detail::view::diagram_header_type,
-                    detail::view::diagram_time_line_list_type,
-                    detail::view::diagram_station_line_list_type,
-                    detail::view::diagram_train_line_list_type,
-                    boost::mpl::at<model_type_list, type::model::model>::type,
-                    detail::view::selection_type,
+                    boost::mpl::at<common_type_list, type::size>::type,
+                    boost::mpl::at<common_type_list, type::difference>::type,
+                    boost::mpl::at<common_type_list, type::string>::type,
+                    detail::view::operating_distance_type,
+                    detail::view::model_type,
                     boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
                     boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
                     boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
                 >
             >,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::view::diagram_header, detail::view::diagram_header_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::view::diagram_time_line_list, detail::view::diagram_time_line_list_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::view::diagram_station_line_list, detail::view::diagram_station_line_list_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::view::diagram_train_line_list, detail::view::diagram_train_line_list_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
                 type::view::scale_list,
@@ -920,7 +863,7 @@ namespace bobura
                 >
             >,
         tetengo2::meta::assoc_list_end
-        >>>>>>;
+        >>;
 
 
     /**** Loading and Saving ************************************************/

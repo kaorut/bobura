@@ -9,11 +9,10 @@
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2.h>
 #include <tetengo2.gui.h>
 
 #include <bobura/diagram_view.h>
-#include <bobura/view/diagram/selection.h>
-
 #include <bobura/type_list.h>
 
 
@@ -27,23 +26,9 @@ namespace
 
     using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
-    using header_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::diagram_header>::type;
-
-    using time_line_list_type =
-        boost::mpl::at<bobura::view_type_list, bobura::type::view::diagram_time_line_list>::type;
-
-    using station_line_list_type =
-        boost::mpl::at<bobura::view_type_list, bobura::type::view::diagram_station_line_list>::type;
-
-    using train_line_list_type =
-        boost::mpl::at<bobura::view_type_list, bobura::type::view::diagram_train_line_list>::type;
-
     using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
     using operating_distance_type = model_type::timetable_type::station_location_type::operating_distance_type;
-
-    using selection_type =
-        bobura::view::diagram::selection<size_type, difference_type, string_type, operating_distance_type>;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
@@ -70,12 +55,11 @@ namespace
 
     using view_type =
         bobura::diagram_view<
-            header_type,
-            time_line_list_type,
-            station_line_list_type,
-            train_line_list_type,
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
             model_type,
-            selection_type,
             canvas_type,
             solid_background_type,
             message_catalog_type
