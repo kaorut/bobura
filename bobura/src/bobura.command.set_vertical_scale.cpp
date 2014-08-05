@@ -71,7 +71,12 @@ namespace bobura { namespace command
 
         using main_window_type = boost::mpl::at<main_window_type_list, type::main_window::main_window>::type;
 
-        using zoom_type = view::diagram::zoom;
+        using zoom_type =
+            view::diagram::zoom<
+                boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
+                boost::mpl::at<view_type_list, type::view::view>::type,
+                boost::mpl::at<view_type_list, type::view::scale_list>::type
+            >;
 
 
         // variables

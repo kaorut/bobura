@@ -20,24 +20,29 @@
 namespace bobura { namespace view { namespace diagram
 {
     /*!
-        \brief The class for a zoom of a view.
+        \brief The class template for a zoom of a view.
+
+        \tparam PictureBox  A picture box type.
+        \tparam DiagramView A diagram view type.
+        \tparam ScaleList   A scale list type.
     */
+    template <typename PictureBox, typename DiagramView, typename ScaleList>
     class zoom : boost::noncopyable
     {
     public:
         // types
 
         //! The picture box type.
-        using picture_box_type = boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
+        using picture_box_type = PictureBox;
 
         //! The diagram view type.
-        using diagram_view_type = boost::mpl::at<view_type_list, type::view::view>::type;
+        using diagram_view_type = DiagramView;
 
         //! The scale list type.
-        using scale_list_type = boost::mpl::at<view_type_list, type::view::scale_list>::type;
+        using scale_list_type = ScaleList;
 
         //! The scale type.
-        using scale_type = scale_list_type::scale_type;
+        using scale_type = typename scale_list_type::scale_type;
 
 
         // constructors and destructor

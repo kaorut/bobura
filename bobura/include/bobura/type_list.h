@@ -48,7 +48,11 @@ namespace bobura
             message::diagram_picture_box::type_list<
                 boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
                 boost::mpl::at<view_type_list, type::view::view>::type,
-                bobura::view::diagram::zoom,
+                bobura::view::diagram::zoom<
+                    boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
+                    boost::mpl::at<view_type_list, type::view::view>::type,
+                    boost::mpl::at<view_type_list, type::view::scale_list>::type
+                >,
                 boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type
             >;
         using diagram_picture_box_type =

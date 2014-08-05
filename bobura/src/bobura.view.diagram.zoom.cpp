@@ -22,21 +22,22 @@
 
 namespace bobura { namespace view { namespace diagram
 {
-    class zoom::impl : private boost::noncopyable
+    template <typename PictureBox, typename DiagramView, typename ScaleList>
+    class zoom<PictureBox, DiagramView, ScaleList>::impl : private boost::noncopyable
     {
     public:
         // types
 
-        using picture_box_type = zoom::picture_box_type;
+        using picture_box_type = typename zoom::picture_box_type;
 
-        using diagram_view_type = zoom::diagram_view_type;
+        using diagram_view_type = typename zoom::diagram_view_type;
 
-        using scale_list_type = zoom::scale_list_type;
+        using scale_list_type = typename zoom::scale_list_type;
 
-        using scale_type = zoom::scale_type;
+        using scale_type = typename zoom::scale_type;
 
         using diagram_picture_box_type =
-            boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box>::type;
+            typename boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box>::type;
 
 
         // constructors and destructor
@@ -98,15 +99,15 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
-        using canvas_type = picture_box_type::fast_canvas_type;
+        using canvas_type = typename picture_box_type::fast_canvas_type;
 
-        using position_type = picture_box_type::position_type;
+        using position_type = typename picture_box_type::position_type;
 
-        using left_type = tetengo2::gui::position<position_type>::left_type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
-        using top_type = tetengo2::gui::position<position_type>::top_type;
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
-        using scroll_bar_size_type = picture_box_type::scroll_bar_type::size_type;
+        using scroll_bar_size_type = typename picture_box_type::scroll_bar_type::size_type;
 
 
         // static functions
@@ -160,44 +161,59 @@ namespace bobura { namespace view { namespace diagram
     };
 
 
-    zoom::zoom(picture_box_type& picture_box, diagram_view_type& diagram_view)
+    template <typename PictureBox, typename DiagramView, typename ScaleList>
+    zoom<PictureBox, DiagramView, ScaleList>::zoom(picture_box_type& picture_box, diagram_view_type& diagram_view)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(picture_box, diagram_view))
     {}
 
-    zoom::~zoom()
+    template <typename PictureBox, typename DiagramView, typename ScaleList>
+    zoom<PictureBox, DiagramView, ScaleList>::~zoom()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    void zoom::set_horizontal_scale(scale_type scale)
+    template <typename PictureBox, typename DiagramView, typename ScaleList>
+    void zoom<PictureBox, DiagramView, ScaleList>::set_horizontal_scale(scale_type scale)
     {
         m_p_impl->set_horizontal_scale(std::move(scale));
     }
 
-    void zoom::horizontally_zoom_in(const bool snap_to_scale_list)
+    template <typename PictureBox, typename DiagramView, typename ScaleList>
+    void zoom<PictureBox, DiagramView, ScaleList>::horizontally_zoom_in(const bool snap_to_scale_list)
     {
         m_p_impl->horizontally_zoom_in(snap_to_scale_list);
     }
 
-    void zoom::horizontally_zoom_out(const bool snap_to_scale_list)
+    template <typename PictureBox, typename DiagramView, typename ScaleList>
+    void zoom<PictureBox, DiagramView, ScaleList>::horizontally_zoom_out(const bool snap_to_scale_list)
     {
         m_p_impl->horizontally_zoom_out(snap_to_scale_list);
     }
 
-    void zoom::set_vertical_scale(scale_type scale)
+    template <typename PictureBox, typename DiagramView, typename ScaleList>
+    void zoom<PictureBox, DiagramView, ScaleList>::set_vertical_scale(scale_type scale)
     {
         m_p_impl->set_vertical_scale(std::move(scale));
     }
 
-    void zoom::vertically_zoom_in(const bool snap_to_scale_list)
+    template <typename PictureBox, typename DiagramView, typename ScaleList>
+    void zoom<PictureBox, DiagramView, ScaleList>::vertically_zoom_in(const bool snap_to_scale_list)
     {
         m_p_impl->vertically_zoom_in(snap_to_scale_list);
     }
 
-    void zoom::vertically_zoom_out(const bool snap_to_scale_list)
+    template <typename PictureBox, typename DiagramView, typename ScaleList>
+    void zoom<PictureBox, DiagramView, ScaleList>::vertically_zoom_out(const bool snap_to_scale_list)
     {
         m_p_impl->vertically_zoom_out(snap_to_scale_list);
     }
+
+
+    template class zoom<
+        boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
+        boost::mpl::at<view_type_list, type::view::view>::type,
+        boost::mpl::at<view_type_list, type::view::scale_list>::type
+    >;
 
 
 }}}
