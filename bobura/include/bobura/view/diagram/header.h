@@ -19,6 +19,7 @@
 
 #include <bobura/view/diagram/item.h>
 #include <bobura/view/diagram/selection.h>
+#include <bobura/timetable_model.h>
 
 
 namespace bobura { namespace view { namespace diagram
@@ -336,7 +337,7 @@ namespace bobura { namespace view { namespace diagram
         \tparam Difference        A difference type.
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
-        \tparam Model             A model type.
+        \tparam Speed             A speed type.
         \tparam Canvas            A canvas type.
     */
     template <
@@ -344,7 +345,7 @@ namespace bobura { namespace view { namespace diagram
         typename Difference,
         typename String,
         typename OperatingDistance,
-        typename Model,
+        typename Speed,
         typename Canvas
     >
     class header : public item<Size, Difference, String, OperatingDistance, Canvas>
@@ -364,8 +365,8 @@ namespace bobura { namespace view { namespace diagram
         //! The operating distance type.
         using operating_distance_type = OperatingDistance;
 
-        //! The model type.
-        using model_type = Model;
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -376,11 +377,18 @@ namespace bobura { namespace view { namespace diagram
         //! The dimension type.
         using dimension_type = typename canvas_type::dimension_type;
 
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
         //! The base type.
         using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
         //! The selection type.
         using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
 
         // constructors and destructor

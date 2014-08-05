@@ -33,6 +33,8 @@ namespace
 
     using operating_distance_type = model_type::timetable_type::station_location_type::operating_distance_type;
 
+    using speed_type = model_type::speed_type;
+
     using selection_type =
         bobura::view::diagram::selection<size_type, difference_type, string_type, operating_distance_type>;
 
@@ -70,7 +72,7 @@ namespace
 
     using header_type =
         bobura::view::diagram::header<
-            size_type, difference_type, string_type, operating_distance_type, model_type, canvas_type
+            size_type, difference_type, string_type, operating_distance_type, speed_type, canvas_type
         >;
 
 

@@ -109,7 +109,7 @@ namespace bobura
         //! The header type.
         using header_type =
             view::diagram::header<
-                size_type, difference_type, string_type, operating_distance_type, model_type, canvas_type
+                size_type, difference_type, string_type, operating_distance_type, typename model_type::speed_type, canvas_type
             >;
 
         //! The item type.
