@@ -190,7 +190,7 @@ namespace bobura { namespace view { namespace diagram
         \tparam Difference        A difference type.
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
-        \tparam Model             A model type.
+        \tparam Speed             A speed type.
         \tparam Canvas            A canvas type.
     */
     template <
@@ -198,7 +198,7 @@ namespace bobura { namespace view { namespace diagram
         typename Difference,
         typename String,
         typename OperatingDistance,
-        typename Model,
+        typename Speed,
         typename Canvas
     >
     class time_line_list : public item<Size, Difference, String, OperatingDistance, Canvas>
@@ -218,23 +218,11 @@ namespace bobura { namespace view { namespace diagram
         //! The operating distance type.
         using operating_distance_type = OperatingDistance;
 
-        //! The model type.
-        using model_type = Model;
-
-        //! The time type.
-        using time_type = typename model_type::timetable_type::train_type::stop_type::time_type;
-
-        //! The time span type.
-        using time_span_type = typename time_type::time_span_type;
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
-
-        //! The font type.
-        using font_type = typename canvas_type::font_type;
-
-        //! The color type.
-        using color_type = typename canvas_type::color_type;
 
         //! The position type.
         using position_type = typename canvas_type::position_type;
@@ -257,11 +245,27 @@ namespace bobura { namespace view { namespace diagram
         //! The horizontal scale type.
         using horizontal_scale_type = typename width_type::value_type;
 
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
+        //! The color type.
+        using color_type = typename canvas_type::color_type;
+
         //! The base type.
         using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
         //! The selection type.
         using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+        //! The time type.
+        using time_type = typename model_type::timetable_type::train_type::stop_type::time_type;
+
+        //! The time span type.
+        using time_span_type = typename time_type::time_span_type;
 
 
         // constructors and destructor

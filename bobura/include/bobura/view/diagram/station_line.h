@@ -25,6 +25,7 @@
 #include <bobura/view/diagram/item.h>
 #include <bobura/view/diagram/selection.h>
 #include <bobura/view/diagram/utility.h>
+#include <bobura/timetable_model.h>
 
 
 namespace bobura { namespace view { namespace diagram
@@ -36,7 +37,7 @@ namespace bobura { namespace view { namespace diagram
         \tparam Difference        A difference type.
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
-        \tparam Model             A model type.
+        \tparam Speed             A speed type.
         \tparam Canvas            A canvas type.
     */
     template <
@@ -44,7 +45,7 @@ namespace bobura { namespace view { namespace diagram
         typename Difference,
         typename String,
         typename OperatingDistance,
-        typename Model,
+        typename Speed,
         typename Canvas
     >
     class station_line : public item<Size, Difference, String, OperatingDistance, Canvas>
@@ -64,14 +65,8 @@ namespace bobura { namespace view { namespace diagram
         //! The operating distance type.
         using operating_distance_type = OperatingDistance;
 
-        //! The model type.
-        using model_type = Model;
-
-        //! The station location type.
-        using station_location_type = typename model_type::timetable_type::station_location_type;
-
-        //! The font and color type.
-        using font_color_type = typename model_type::timetable_type::font_color_set_type::font_color_type;
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -88,11 +83,24 @@ namespace bobura { namespace view { namespace diagram
         //! The dimension type.
         using dimension_type = typename canvas_type::dimension_type;
 
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
         //! The base type.
         using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
         //! The selection type.
         using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+        //! The station location type.
+        using station_location_type = typename model_type::timetable_type::station_location_type;
+
+        //! The font and color type.
+        using font_color_type = typename model_type::timetable_type::font_color_set_type::font_color_type;
 
 
         // constructors and destructor
@@ -251,7 +259,7 @@ namespace bobura { namespace view { namespace diagram
         \tparam Difference        A difference type.
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
-        \tparam Model             A model type.
+        \tparam Speed             A speed type.
         \tparam Canvas            A canvas type.
     */
     template <
@@ -259,7 +267,7 @@ namespace bobura { namespace view { namespace diagram
         typename Difference,
         typename String,
         typename OperatingDistance,
-        typename Model,
+        typename Speed,
         typename Canvas
     >
     class station_line_list : public item<Size, Difference, String, OperatingDistance, Canvas>
@@ -279,14 +287,8 @@ namespace bobura { namespace view { namespace diagram
         //! The operating distance type.
         using operating_distance_type = OperatingDistance;
 
-        //! The model type.
-        using model_type = Model;
-
-        //! The time type.
-        using time_type = typename model_type::timetable_type::train_type::stop_type::time_type;
-
-        //! The time span type.
-        using time_span_type = typename time_type::time_span_type;
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -312,11 +314,24 @@ namespace bobura { namespace view { namespace diagram
         //! The horizontal scale type.
         using horizontal_scale_type = typename width_type::value_type;
 
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
         //! The base type.
         using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
         //! The selection type.
         using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+        //! The time type.
+        using time_type = typename model_type::timetable_type::train_type::stop_type::time_type;
+
+        //! The time span type.
+        using time_span_type = typename time_type::time_span_type;
 
         //! The station grade type set type.
         using station_grade_type_set_type = model::station_info::grade_type_set<string_type>;
@@ -411,7 +426,7 @@ namespace bobura { namespace view { namespace diagram
         // types
 
         using station_line_type =
-            station_line<size_type, difference_type, string_type, operating_distance_type, model_type, canvas_type>;
+            station_line<size_type, difference_type, string_type, operating_distance_type, speed_type, canvas_type>;
 
         using timetable_type = typename model_type::timetable_type;
 

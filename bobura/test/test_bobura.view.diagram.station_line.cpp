@@ -33,6 +33,8 @@ namespace
 
     using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
+    using speed_type = model_type::speed_type;
+
     using station_location_type = model_type::timetable_type::station_location_type;
 
     using station_type = station_location_type::station_type;
@@ -76,12 +78,12 @@ namespace
 
     using station_line_type =
         bobura::view::diagram::station_line<
-            size_type, difference_type, string_type, operating_distance_type, model_type, canvas_type
+            size_type, difference_type, string_type, operating_distance_type, speed_type, canvas_type
         >;
 
     using station_line_list_type =
         bobura::view::diagram::station_line_list<
-            size_type, difference_type, string_type, operating_distance_type, model_type, canvas_type
+            size_type, difference_type, string_type, operating_distance_type, speed_type, canvas_type
         >;
 
     using station_grade_type_set_type = station_line_list_type::station_grade_type_set_type;

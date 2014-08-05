@@ -837,6 +837,7 @@ namespace bobura
     namespace detail { namespace view
     {
         using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
+        using speed_type = model_type::speed_type;
         using operating_distance_type = model_type::timetable_type::station_location_type::operating_distance_type;
     }}
 #endif
@@ -851,7 +852,7 @@ namespace bobura
                     boost::mpl::at<common_type_list, type::difference>::type,
                     boost::mpl::at<common_type_list, type::string>::type,
                     detail::view::operating_distance_type,
-                    detail::view::model_type,
+                    detail::view::speed_type,
                     boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
                     boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
                     boost::mpl::at<locale_type_list, type::locale::message_catalog>::type

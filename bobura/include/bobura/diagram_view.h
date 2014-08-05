@@ -27,6 +27,7 @@
 #include <bobura/view/diagram/station_line.h>
 #include <bobura/view/diagram/time_line.h>
 #include <bobura/view/diagram/train_line.h>
+#include <bobura/timetable_model.h>
 
 
 namespace bobura
@@ -38,7 +39,7 @@ namespace bobura
         \tparam Difference        A difference type.
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
-        \tparam Model             A model type.
+        \tparam Speed             A speed type.
         \tparam Canvas            A canvas type.
         \tparam SolidBackground   A solid background type.
         \tparam MessageCatalog    A message catalog type.
@@ -48,7 +49,7 @@ namespace bobura
         typename Difference,
         typename String,
         typename OperatingDistance,
-        typename Model,
+        typename Speed,
         typename Canvas,
         typename SolidBackground,
         typename MessageCatalog
@@ -70,8 +71,8 @@ namespace bobura
         //! The operating distance type.
         using operating_distance_type = OperatingDistance;
 
-        //! The model type.
-        using model_type = Model;
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -100,16 +101,23 @@ namespace bobura
         //! The vertical scale type.
         using vertical_scale_type = typename height_type::value_type;
 
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
         //! The solid background type.
         using solid_background_type = SolidBackground;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
         //! The header type.
         using header_type =
             view::diagram::header<
-                size_type, difference_type, string_type, operating_distance_type, typename model_type::speed_type, canvas_type
+                size_type, difference_type, string_type, operating_distance_type, speed_type, canvas_type
             >;
 
         //! The item type.
@@ -119,13 +127,13 @@ namespace bobura
         //! The time line list type.
         using time_line_list_type = 
             view::diagram::time_line_list<
-                size_type, difference_type, string_type, operating_distance_type, model_type, canvas_type
+                size_type, difference_type, string_type, operating_distance_type, speed_type, canvas_type
             >;
 
         //! The station line list type.
         using station_line_list_type =
             view::diagram::station_line_list<
-                size_type, difference_type, string_type, operating_distance_type, model_type, canvas_type
+                size_type, difference_type, string_type, operating_distance_type, speed_type, canvas_type
             >;
 
         //! The train line list type.
@@ -135,7 +143,7 @@ namespace bobura
                 difference_type,
                 string_type,
                 operating_distance_type,
-                model_type,
+                speed_type,
                 canvas_type,
                 message_catalog_type
             >;

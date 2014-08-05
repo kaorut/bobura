@@ -42,7 +42,7 @@ namespace bobura { namespace view { namespace diagram
         \tparam Difference        A difference type.
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
-        \tparam Model             A model type.
+        \tparam Speed             A speed type.
         \tparam Canvas            A canvas type.
         \tparam MessageCatalog    A message catalog type.
     */
@@ -51,7 +51,7 @@ namespace bobura { namespace view { namespace diagram
         typename Difference,
         typename String,
         typename OperatingDistance,
-        typename Model,
+        typename Speed,
         typename Canvas,
         typename MessageCatalog
     >
@@ -72,17 +72,17 @@ namespace bobura { namespace view { namespace diagram
         //! The operating distance type.
         using operating_distance_type = OperatingDistance;
 
-        //! The model type.
-        using model_type = Model;
-
-        //! The train type.
-        using train_type = typename model_type::timetable_type::train_type;
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
 
         //! The position type.
         using position_type = typename canvas_type::position_type;
+
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
@@ -92,6 +92,13 @@ namespace bobura { namespace view { namespace diagram
 
         //! The selection type.
         using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+        //! The train type.
+        using train_type = typename model_type::timetable_type::train_type;
 
 
         // constructors and destructor
@@ -438,7 +445,7 @@ namespace bobura { namespace view { namespace diagram
         \tparam Difference        A difference type.
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
-        \tparam Model             A model type.
+        \tparam Speed             A speed type.
         \tparam Canvas            A canvas type.
         \tparam MessageCatalog    A message catalog type.
     */
@@ -447,7 +454,7 @@ namespace bobura { namespace view { namespace diagram
         typename Difference,
         typename String,
         typename OperatingDistance,
-        typename Model,
+        typename Speed,
         typename Canvas,
         typename MessageCatalog
     >
@@ -468,23 +475,8 @@ namespace bobura { namespace view { namespace diagram
         //! The operating distance type.
         using operating_distance_type = OperatingDistance;
 
-        //! The model type.
-        using model_type = Model;
-
-        //! The train type.
-        using train_type = typename model_type::timetable_type::train_type;
-
-        //! The time type.
-        using time_type = typename train_type::stop_type::time_type;
-
-        //! The time span type.
-        using time_span_type = typename time_type::time_span_type;
-
-        //! The train kind type.
-        using train_kind_type = typename model_type::timetable_type::train_kind_type;
-
-        //! The station intervals type.
-        using station_intervals_type = typename model_type::timetable_type::station_intervals_type;
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -510,6 +502,9 @@ namespace bobura { namespace view { namespace diagram
         //! The horizontal scale type.
         using horizontal_scale_type = typename width_type::value_type;
 
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
@@ -518,6 +513,25 @@ namespace bobura { namespace view { namespace diagram
 
         //! The selection type.
         using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+        //! The train type.
+        using train_type = typename model_type::timetable_type::train_type;
+
+        //! The time type.
+        using time_type = typename train_type::stop_type::time_type;
+
+        //! The time span type.
+        using time_span_type = typename time_type::time_span_type;
+
+        //! The train kind type.
+        using train_kind_type = typename model_type::timetable_type::train_kind_type;
+
+        //! The station intervals type.
+        using station_intervals_type = typename model_type::timetable_type::station_intervals_type;
 
 
         // constructors and destructor
@@ -625,7 +639,7 @@ namespace bobura { namespace view { namespace diagram
                 difference_type,
                 string_type,
                 operating_distance_type,
-                model_type,
+                speed_type,
                 canvas_type,
                 message_catalog_type
             >;
@@ -1056,7 +1070,7 @@ namespace bobura { namespace view { namespace diagram
         \tparam Difference        A difference type.
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
-        \tparam Model             A model type.
+        \tparam Speed             A speed type.
         \tparam Canvas            A canvas type.
         \tparam MessageCatalog    A message catalog type.
     */
@@ -1065,7 +1079,7 @@ namespace bobura { namespace view { namespace diagram
         typename Difference,
         typename String,
         typename OperatingDistance,
-        typename Model,
+        typename Speed,
         typename Canvas,
         typename MessageCatalog
     >
@@ -1086,17 +1100,8 @@ namespace bobura { namespace view { namespace diagram
         //! The operating distance type.
         using operating_distance_type = OperatingDistance;
 
-        //! The model type.
-        using model_type = Model;
-
-        //! The time type.
-        using time_type = typename model_type::timetable_type::train_type::stop_type::time_type;
-
-        //! The time span type.
-        using time_span_type = typename time_type::time_span_type;
-
-        //! The station intervals type.
-        using station_intervals_type = typename model_type::timetable_type::station_intervals_type;
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -1125,11 +1130,27 @@ namespace bobura { namespace view { namespace diagram
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
         //! The base type.
         using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
         //! The selection type.
         using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+        //! The time type.
+        using time_type = typename model_type::timetable_type::train_type::stop_type::time_type;
+
+        //! The time span type.
+        using time_span_type = typename time_type::time_span_type;
+
+        //! The station intervals type.
+        using station_intervals_type = typename model_type::timetable_type::station_intervals_type;
 
 
         // constructors and destructor
@@ -1235,7 +1256,7 @@ namespace bobura { namespace view { namespace diagram
                 difference_type,
                 string_type,
                 operating_distance_type,
-                model_type,
+                speed_type,
                 canvas_type,
                 message_catalog_type
             >;
@@ -1249,8 +1270,6 @@ namespace bobura { namespace view { namespace diagram
         using train_kinds_type = typename timetable_type::train_kinds_type;
 
         using train_kind_type = typename timetable_type::train_kind_type;
-
-        using font_type = typename canvas_type::font_type;
 
 
         // static functions

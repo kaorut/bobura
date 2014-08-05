@@ -28,6 +28,8 @@ namespace
 
     using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
+    using speed_type = model_type::speed_type;
+
     using operating_distance_type = model_type::timetable_type::station_location_type::operating_distance_type;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
@@ -59,7 +61,7 @@ namespace
             difference_type,
             string_type,
             operating_distance_type,
-            model_type,
+            speed_type,
             canvas_type,
             solid_background_type,
             message_catalog_type
