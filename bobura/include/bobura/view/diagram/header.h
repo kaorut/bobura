@@ -524,8 +524,6 @@ namespace bobura { namespace view { namespace diagram
         using note_header_type =
             note_header<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
-        using font_type = typename canvas_type::font_type;
-
         using color_type = typename canvas_type::color_type;
 
         using left_type = typename tetengo2::gui::position<position_type>::left_type;
