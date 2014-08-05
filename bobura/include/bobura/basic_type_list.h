@@ -751,8 +751,12 @@ namespace bobura
             boost::mpl::pair<
                 type::model::model,
                 timetable_model<
-                    detail::model::timetable_type,
-                    message::timetable_model_observer_set
+                    boost::mpl::at<common_type_list, type::size>::type,
+                    boost::mpl::at<common_type_list, type::difference>::type,
+                    boost::mpl::at<common_type_list, type::string>::type,
+                    detail::model::distance_type,
+                    detail::model::speed_type,
+                    boost::mpl::at<ui_type_list, type::ui::fast_font>::type
                 >
             >,
         tetengo2::meta::assoc_list<
