@@ -36,15 +36,8 @@
 #include <bobura/message/timetable_model_observer_set.h>
 #include <bobura/message/type_list_impl.h>
 #include <bobura/model/message/timetable_observer_set.h>
-#include <bobura/model/serializer/reader_selector.h>
-#include <bobura/model/serializer/reader_set.h>
-#include <bobura/model/serializer/select_oudia_diagram.h>
-#include <bobura/model/serializer/writer_selector.h>
-#include <bobura/model/serializer/writer_set.h>
 #include <bobura/model/train.h>
 #include <bobura/model/station_info/grade.h>
-#include <bobura/model/timetable.h>
-#include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train_kind.h>
 #include <bobura/oudia_diagram_dialog.h>
 #include <bobura/settings.h>
@@ -63,7 +56,6 @@ namespace bobura
         struct size;           //!< The size type.
         struct string;         //!< The string type.
         struct input_stream_iterator; //!< The input stream iterator type.
-        struct pull_parser;    //!< The pull parser_type.
         struct output_stream;  //!< The output stream type.
     }
 
@@ -75,9 +67,6 @@ namespace bobura
         using io_string_type = std::string;
         using input_stream_iterator_type =
             boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
-        using json_grammar_type = tetengo2::text::grammar::json<input_stream_iterator_type>;
-        using pull_parser_type =
-            tetengo2::text::pull_parser<input_stream_iterator_type, json_grammar_type, int, double, size_type>;
     }
 #endif
 
@@ -87,11 +76,10 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::size, detail::size_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::string, detail::string_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::input_stream_iterator, detail::input_stream_iterator_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::pull_parser, detail::pull_parser_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::output_stream, std::basic_ostream<detail::io_string_type::value_type>>,
         tetengo2::meta::assoc_list_end
-        >>>>>>;
+        >>>>>;
 
 
     /**** Locale ************************************************************/
@@ -716,32 +704,13 @@ namespace bobura
     {
         struct model;          //!< The model type.
         struct station_grade_type_set; //!< The station grade type set type.
-        struct reader_selector; //!< The reader selector type.
-        struct reader_set;     //!< The reader set type.
-        struct writer_selector; //!< The writer selector type.
-        struct writer_set;     //!< The writer set type.
     }}
 
 #if !defined(DOCUMENTATION)
     namespace detail { namespace model
     {
-        using station_grade_type_set_type =
-            bobura::model::station_info::grade_type_set<boost::mpl::at<common_type_list, type::string>::type>;
-        using select_oudia_diagram_type =
-            bobura::model::serializer::select_oudia_diagram<
-                boost::mpl::at<dialog_type_list, type::dialog::oudia_diagram_dialog>::type
-            >;
         using distance_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
         using speed_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
-        using timetable_type =
-            bobura::model::timetable<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                distance_type,
-                speed_type,
-                boost::mpl::at<ui_type_list, type::ui::fast_font>::type
-            >;
     }}
 #endif
 
@@ -760,65 +729,12 @@ namespace bobura
                 >
             >,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::model::station_grade_type_set, detail::model::station_grade_type_set_type>,
-        tetengo2::meta::assoc_list<
             boost::mpl::pair<
-                type::model::reader_selector,
-                model::serializer::reader_selector<
-                    boost::mpl::at<common_type_list, type::size>::type,
-                    boost::mpl::at<common_type_list, type::difference>::type,
-                    boost::mpl::at<common_type_list, type::string>::type,
-                    boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
-                    detail::model::distance_type,
-                    detail::model::speed_type,
-                    boost::mpl::at<ui_type_list, type::ui::fast_font>::type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::model::reader_set,
-                model::serializer::reader_set<
-                    boost::mpl::at<common_type_list, type::size>::type,
-                    boost::mpl::at<common_type_list, type::difference>::type,
-                    boost::mpl::at<common_type_list, type::string>::type,
-                    boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
-                    detail::model::distance_type,
-                    detail::model::speed_type,
-                    detail::model::select_oudia_diagram_type,
-                    boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                    boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type,
-                    boost::mpl::at<locale_type_list, type::locale::windia_file_encoder>::type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::model::writer_selector,
-                model::serializer::writer_selector<
-                    boost::mpl::at<common_type_list, type::size>::type,
-                    boost::mpl::at<common_type_list, type::difference>::type,
-                    boost::mpl::at<common_type_list, type::string>::type,
-                    boost::mpl::at<common_type_list, type::output_stream>::type,
-                    detail::model::distance_type,
-                    detail::model::speed_type,
-                    boost::mpl::at<ui_type_list, type::ui::fast_font>::type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::model::writer_set,
-                model::serializer::writer_set<
-                    boost::mpl::at<common_type_list, type::size>::type,
-                    boost::mpl::at<common_type_list, type::difference>::type,
-                    boost::mpl::at<common_type_list, type::string>::type,
-                    boost::mpl::at<common_type_list, type::output_stream>::type,
-                    detail::model::distance_type,
-                    detail::model::speed_type,
-                    boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                    boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
-                >
+                type::model::station_grade_type_set,
+                bobura::model::station_info::grade_type_set<boost::mpl::at<common_type_list, type::string>::type>
             >,
         tetengo2::meta::assoc_list_end
-        >>>>>>;
+        >>;
 
 
     /**** View **************************************************************/
@@ -826,21 +742,8 @@ namespace bobura
     namespace type { namespace view
     {
         struct view;           //!< The view type.
-        struct diagram_header; //!< The diagram header type.
-        struct diagram_time_line_list; //!< The diagram time line list type.
-        struct diagram_station_line_list; //!< The diagram station line list type.
-        struct diagram_train_line_list; //!< The diagram train line list type.
         struct scale_list;     //!< The scale list type.
     }}
-
-#if !defined(DOCUMENTATION)
-    namespace detail { namespace view
-    {
-        using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
-        using speed_type = model_type::speed_type;
-        using operating_distance_type = model_type::timetable_type::station_location_type::operating_distance_type;
-    }}
-#endif
 
     //! The view type list.
     using view_type_list =
@@ -851,8 +754,8 @@ namespace bobura
                     boost::mpl::at<common_type_list, type::size>::type,
                     boost::mpl::at<common_type_list, type::difference>::type,
                     boost::mpl::at<common_type_list, type::string>::type,
-                    detail::view::operating_distance_type,
-                    detail::view::speed_type,
+                    boost::mpl::at<model_type_list, type::model::model>::type::operating_distance_type,
+                    boost::mpl::at<model_type_list, type::model::model>::type::speed_type,
                     boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
                     boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
                     boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
