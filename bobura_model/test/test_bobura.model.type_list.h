@@ -120,6 +120,7 @@ namespace test_bobura { namespace model
 
     namespace type { namespace model
     {
+        struct font;           //!< The font type.
         struct font_color;     //!< The font and color type.
         struct font_color_set; //!< The font and color set type.
         struct grade_type_set; //!< The station grade type set type.
@@ -131,6 +132,8 @@ namespace test_bobura { namespace model
         struct stop;           //!< The stop type.
         struct train;          //!< The train type.
         struct station_interval_calculator; //!< The station interval calculator type.
+        struct operating_distance; //!< The operating distance type.
+        struct speed;          //!< The speed type.
         struct timetable;      //!< The timetable type.
     }}
 
@@ -146,10 +149,10 @@ namespace test_bobura { namespace model
         using font_color_set_type = bobura::model::timetable_info::font_color_set<font_type>;
         using grade_type_set_type =
             bobura::model::station_info::grade_type_set<boost::mpl::at<type_list, type::string>::type>;
-        using distance_type = boost::mpl::at<type_list, type::size>::type;
+        using operating_distance_type = boost::mpl::at<type_list, type::size>::type;
         using station_location_type =
             bobura::model::timetable_info::station_location<
-                boost::mpl::at<type_list, type::string>::type, distance_type
+                boost::mpl::at<type_list, type::string>::type, operating_distance_type
             >;
         using train_kind_type = bobura::model::train_kind<boost::mpl::at<type_list, type::string>::type>;
         using time_span_type = bobura::model::train_info::time_span<boost::mpl::at<type_list, type::difference>::type>;
@@ -174,7 +177,7 @@ namespace test_bobura { namespace model
                 boost::mpl::at<type_list, type::size>::type,
                 boost::mpl::at<type_list, type::difference>::type,
                 boost::mpl::at<type_list, type::string>::type,
-                distance_type
+                operating_distance_type
             >;
         using speed_type = boost::mpl::at<type_list, type::size>::type;
     }}
@@ -182,6 +185,7 @@ namespace test_bobura { namespace model
 
     //! The model type list.
     using model_type_list =
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::model::font, detail::model::font_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::font_color_set, detail::model::font_color_set_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::grade_type_set, detail::model::grade_type_set_type>,
         tetengo2::meta::assoc_list<
@@ -200,19 +204,22 @@ namespace test_bobura { namespace model
                 type::model::station_interval_calculator, detail::model::station_interval_calculator_type
             >,
         tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::model::operating_distance, detail::model::operating_distance_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::model::speed, detail::model::speed_type>,
+        tetengo2::meta::assoc_list<
             boost::mpl::pair<
                 type::model::timetable,
                 bobura::model::timetable<
                     boost::mpl::at<type_list, type::size>::type,
                     boost::mpl::at<type_list, type::difference>::type,
                     boost::mpl::at<type_list, type::string>::type,
-                    detail::model::distance_type,
+                    detail::model::operating_distance_type,
                     detail::model::speed_type,
                     detail::model::font_type
                 >
             >,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>;
+        >>>>>>>>>>>>>>;
 
 
     /**** Serialization *****************************************************/
@@ -291,10 +298,10 @@ namespace test_bobura { namespace model
                 boost::mpl::at<type_list, type::difference>::type,
                 boost::mpl::at<type_list, type::string>::type,
                 input_stream_iterator_type,
-                boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
-                boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
+                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                boost::mpl::at<model_type_list, type::model::speed>::type,
                 select_oudia_diagram_type,
-                boost::mpl::at<model_type_list, type::model::timetable>::type::font_type,
+                boost::mpl::at<model_type_list, type::model::font>::type,
                 timetable_file_encoder_type,
                 timetable_file_encoder_type
             >;
@@ -305,9 +312,9 @@ namespace test_bobura { namespace model
                 boost::mpl::at<type_list, type::difference>::type,
                 boost::mpl::at<type_list, type::string>::type,
                 output_stream_type,
-                boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
-                boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
-                boost::mpl::at<model_type_list, type::model::timetable>::type::font_type,
+                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<model_type_list, type::model::font>::type,
                 timetable_file_encoder_type
             >;
     }}
@@ -323,9 +330,9 @@ namespace test_bobura { namespace model
                     boost::mpl::at<type_list, type::difference>::type,
                     boost::mpl::at<type_list, type::string>::type,
                     detail::serialization::input_stream_iterator_type,
-                    boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
-                    boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
-                    boost::mpl::at<model_type_list, type::model::timetable>::type::font_type
+                    boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                    boost::mpl::at<model_type_list, type::model::speed>::type,
+                    boost::mpl::at<model_type_list, type::model::font>::type
                 >
             >,
         tetengo2::meta::assoc_list<
@@ -336,9 +343,9 @@ namespace test_bobura { namespace model
                     boost::mpl::at<type_list, type::difference>::type,
                     boost::mpl::at<type_list, type::string>::type,
                     detail::serialization::input_stream_iterator_type,
-                    boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
-                    boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
-                    boost::mpl::at<model_type_list, type::model::timetable>::type::font_type
+                    boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                    boost::mpl::at<model_type_list, type::model::speed>::type,
+                    boost::mpl::at<model_type_list, type::model::font>::type
                 >
             >,
         tetengo2::meta::assoc_list<
@@ -367,9 +374,9 @@ namespace test_bobura { namespace model
                     boost::mpl::at<type_list, type::difference>::type,
                     boost::mpl::at<type_list, type::string>::type,
                     detail::serialization::output_stream_type,
-                    boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
-                    boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
-                    boost::mpl::at<model_type_list, type::model::timetable>::type::font_type
+                    boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                    boost::mpl::at<model_type_list, type::model::speed>::type,
+                    boost::mpl::at<model_type_list, type::model::font>::type
                 >
             >,
         tetengo2::meta::assoc_list<
@@ -380,9 +387,9 @@ namespace test_bobura { namespace model
                     boost::mpl::at<type_list, type::difference>::type,
                     boost::mpl::at<type_list, type::string>::type,
                     detail::serialization::output_stream_type,
-                    boost::mpl::at<model_type_list, type::model::timetable>::type::operating_distance_type,
-                    boost::mpl::at<model_type_list, type::model::timetable>::type::speed_type,
-                    boost::mpl::at<model_type_list, type::model::timetable>::type::font_type
+                    boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                    boost::mpl::at<model_type_list, type::model::speed>::type,
+                    boost::mpl::at<model_type_list, type::model::font>::type
                 >
             >,
         tetengo2::meta::assoc_list<
