@@ -7,6 +7,7 @@
 */
 
 #include <memory>
+#include <ostream>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -19,6 +20,8 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/serializer/writer_selector.h>
+
 #include "test_bobura.model.type_list.h"
 
 
@@ -29,15 +32,25 @@ namespace
     using timetable_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type;
 
-    using writer_type =
-        boost::mpl::at<
-            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::writer
-        >::type;
+    using output_stream_type =
+        std::basic_ostream<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type::value_type
+        >;
 
-    using writer_set_type =
-        boost::mpl::at<
-            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::writer_selector
-        >::type;
+    using writer_selector_type =
+        bobura::model::serializer::writer_selector<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            output_stream_type,
+            boost::mpl::at<
+                test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
+            >::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type
+        >;
+
+    using writer_type = writer_selector_type::base_type;
 
     class concrete_writer : public writer_type
     {
@@ -107,11 +120,11 @@ BOOST_AUTO_TEST_SUITE(writer_selector)
 
         {
             auto concrete_writers = create_concrete_writers();
-            const writer_set_type writer_selector{ std::move(concrete_writers), boost::filesystem::path{} };
+            const writer_selector_type writer_selector{ std::move(concrete_writers), boost::filesystem::path{} };
         }
         {
             BOOST_CHECK_THROW(
-                writer_set_type(std::vector<std::unique_ptr<writer_type>>{}, boost::filesystem::path{}),
+                writer_selector_type(std::vector<std::unique_ptr<writer_type>>{}, boost::filesystem::path{}),
                 std::invalid_argument
             );
         }
@@ -122,7 +135,7 @@ BOOST_AUTO_TEST_SUITE(writer_selector)
         BOOST_TEST_PASSPOINT();
 
         auto concrete_writers = create_concrete_writers();
-        const writer_set_type writer_selector{ std::move(concrete_writers), boost::filesystem::path{} };
+        const writer_selector_type writer_selector{ std::move(concrete_writers), boost::filesystem::path{} };
 
         BOOST_CHECK_THROW(writer_selector.extension(), std::logic_error);
     }
@@ -132,7 +145,7 @@ BOOST_AUTO_TEST_SUITE(writer_selector)
         BOOST_TEST_PASSPOINT();
 
         auto concrete_writers = create_concrete_writers();
-        const writer_set_type writer_selector{ std::move(concrete_writers), boost::filesystem::path{} };
+        const writer_selector_type writer_selector{ std::move(concrete_writers), boost::filesystem::path{} };
 
         BOOST_CHECK(writer_selector.selects(boost::filesystem::path{ TETENGO2_TEXT("piyo.hoge") }));
         BOOST_CHECK(!writer_selector.selects(boost::filesystem::path{ TETENGO2_TEXT("piyo.foo") }));
@@ -145,7 +158,7 @@ BOOST_AUTO_TEST_SUITE(writer_selector)
 
         {
             auto concrete_writers = create_concrete_writers();
-            writer_set_type writer_selector{
+            writer_selector_type writer_selector{
                 std::move(concrete_writers), boost::filesystem::path{ TETENGO2_TEXT("piyo.hoge") }
             };
             const timetable_type timetable{};
@@ -156,7 +169,7 @@ BOOST_AUTO_TEST_SUITE(writer_selector)
         }
         {
             auto concrete_writers = create_concrete_writers();
-            writer_set_type writer_selector{
+            writer_selector_type writer_selector{
                 std::move(concrete_writers), boost::filesystem::path{ TETENGO2_TEXT("piyo.fuga") }
             };
             const timetable_type timetable{};
@@ -167,7 +180,7 @@ BOOST_AUTO_TEST_SUITE(writer_selector)
         }
         {
             auto concrete_writers = create_concrete_writers();
-            writer_set_type writer_selector{
+            writer_selector_type writer_selector{
                 std::move(concrete_writers), boost::filesystem::path{ TETENGO2_TEXT("piyo.foo") }
             };
             const timetable_type timetable{};

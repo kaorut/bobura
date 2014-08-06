@@ -6,8 +6,12 @@
     $Id$
 */
 
+#include <ostream>
+
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
+
+#include <bobura/model/serializer/writer_set.h>
 
 #include "test_bobura.model.type_list.h"
 
@@ -16,16 +20,24 @@ namespace
 {
     // types
 
-    using writer_type =
-        boost::mpl::at<
-            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::writer
-        >::type;
+    using output_stream_type =
+        std::basic_ostream<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type::value_type
+        >;
 
     using writer_set_type =
-        boost::mpl::at<
-            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::writer_set
-        >::type;
-
+        bobura::model::serializer::writer_set<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            output_stream_type,
+            boost::mpl::at<
+                test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
+            >::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type
+        >;
 
 }
 

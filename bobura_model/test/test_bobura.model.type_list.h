@@ -12,7 +12,6 @@
 #include <algorithm>
 #include <cstddef>
 #include <iterator>
-#include <ostream>
 #include <string>
 #include <utility>
 
@@ -27,9 +26,6 @@
 #include <bobura/model/serializer/reader.h>
 #include <bobura/model/serializer/reader_selector.h>
 #include <bobura/model/serializer/reader_set.h>
-#include <bobura/model/serializer/writer.h>
-#include <bobura/model/serializer/writer_selector.h>
-#include <bobura/model/serializer/writer_set.h>
 #include <bobura/model/station_info/grade.h>
 #include <bobura/model/station.h>
 #include <bobura/model/timetable.h>
@@ -54,7 +50,9 @@ namespace test_bobura { namespace model
         struct size;           //!< The size type.
         struct difference;     //!< The difference type.
         struct string;         //!< The string type.
+        struct io_string;      //!< The I/O string type.
         struct encoder;        //!< The encoder type.
+        struct io_encoder;     //!< The I/O encoder type.
         struct widget_traits;  //!< The widget traits type.
         struct widget_details_traits; //!< The widget details traits type.
     }
@@ -67,11 +65,14 @@ namespace test_bobura { namespace model
         using position_type = std::pair<difference_type, difference_type>;
         using dimension_type = std::pair<size_t, size_t>;
         using string_type = std::string;
+        using io_string_type = std::string;
         using exception_string_type = std::string;
         using encoding_details_type = boost::mpl::at<detail_type_list, type::detail::encoding>::type;
         using internal_encoding_type = tetengo2::text::encoding::locale<string_type, encoding_details_type>;
         using encoding_type = tetengo2::text::encoding::locale<string_type, encoding_details_type>;
         using encoder_type  = tetengo2::text::encoder<internal_encoding_type, encoding_type>;
+        using io_encoding_type = tetengo2::text::encoding::locale<io_string_type, encoding_details_type>;
+        using io_encoder_type  = tetengo2::text::encoder<internal_encoding_type, io_encoding_type>;
         using ui_encoding_type =
             tetengo2::text::encoding::locale<
                 boost::mpl::at<detail_type_list, type::detail::widget>::type::string_type, encoding_details_type
@@ -109,11 +110,13 @@ namespace test_bobura { namespace model
         tetengo2::meta::assoc_list<boost::mpl::pair<type::size, detail::size_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::difference, detail::difference_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::string, detail::string_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::io_string, detail::io_string_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::encoder, detail::encoder_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::io_encoder, detail::io_encoder_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::widget_traits, detail::widget_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::widget_details_traits, detail::widget_details_traits_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>;
+        >>>>>>>>;
 
 
     /**** Model *************************************************************/
@@ -233,17 +236,12 @@ namespace test_bobura { namespace model
         struct oudia_reader;   //!< The OuDia reader type.
         struct windia_reader;  //!< The WinDIA reader type.
         struct reader_set;     //!< The reader set type.
-        struct writer;         //!< The writer type.
-        struct writer_selector; //!< The writer selector type.
-        struct json_writer;    //!< The JSON writer type.
-        struct bzip2_writer;   //!< The bzip2 writer type.
-        struct writer_set;     //!< The writer set type.
     }}
 
 #if !defined(DOCUMENTATION)
     namespace detail { namespace serialization
     {
-        using io_string_type = std::string;
+        using io_string_type = boost::mpl::at<type_list, type::io_string>::type;
         using input_stream_iterator_type =
             boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
         struct select_oudia_diagram_type
@@ -286,12 +284,6 @@ namespace test_bobura { namespace model
             }
 
         };
-        using encoding_details_type = boost::mpl::at<detail_type_list, type::detail::encoding>::type;
-        using internal_encoding_type =
-            tetengo2::text::encoding::locale<boost::mpl::at<type_list, type::string>::type, encoding_details_type>;
-        using timetable_file_encoding_type = tetengo2::text::encoding::locale<io_string_type, encoding_details_type>;
-        using timetable_file_encoder_type =
-            tetengo2::text::encoder<internal_encoding_type, timetable_file_encoding_type>;
         using reader_set_type =
             bobura::model::serializer::reader_set<
                 boost::mpl::at<type_list, type::size>::type,
@@ -302,20 +294,8 @@ namespace test_bobura { namespace model
                 boost::mpl::at<model_type_list, type::model::speed>::type,
                 select_oudia_diagram_type,
                 boost::mpl::at<model_type_list, type::model::font>::type,
-                timetable_file_encoder_type,
-                timetable_file_encoder_type
-            >;
-        using output_stream_type = std::basic_ostream<io_string_type::value_type>;
-        using writer_set_type =
-            bobura::model::serializer::writer_set<
-                boost::mpl::at<type_list, type::size>::type,
-                boost::mpl::at<type_list, type::difference>::type,
-                boost::mpl::at<type_list, type::string>::type,
-                output_stream_type,
-                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                boost::mpl::at<model_type_list, type::model::speed>::type,
-                boost::mpl::at<model_type_list, type::model::font>::type,
-                timetable_file_encoder_type
+                boost::mpl::at<type_list, type::io_encoder>::type,
+                boost::mpl::at<type_list, type::io_encoder>::type
             >;
     }}
 #endif
@@ -366,44 +346,8 @@ namespace test_bobura { namespace model
             >,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::serialization::reader_set, detail::serialization::reader_set_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::serialization::writer,
-                bobura::model::serializer::writer<
-                    boost::mpl::at<type_list, type::size>::type,
-                    boost::mpl::at<type_list, type::difference>::type,
-                    boost::mpl::at<type_list, type::string>::type,
-                    detail::serialization::output_stream_type,
-                    boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                    boost::mpl::at<model_type_list, type::model::speed>::type,
-                    boost::mpl::at<model_type_list, type::model::font>::type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::serialization::writer_selector,
-                bobura::model::serializer::writer_selector<
-                    boost::mpl::at<type_list, type::size>::type,
-                    boost::mpl::at<type_list, type::difference>::type,
-                    boost::mpl::at<type_list, type::string>::type,
-                    detail::serialization::output_stream_type,
-                    boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                    boost::mpl::at<model_type_list, type::model::speed>::type,
-                    boost::mpl::at<model_type_list, type::model::font>::type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::serialization::json_writer, detail::serialization::writer_set_type::json_writer_type
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::serialization::bzip2_writer, detail::serialization::writer_set_type::bzip2_writer_type
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::serialization::writer_set, detail::serialization::writer_set_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>;
+        >>>>>>>;
 
 
 }}
