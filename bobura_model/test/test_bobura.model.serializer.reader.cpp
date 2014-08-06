@@ -16,6 +16,8 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/serializer/reader.h>
+
 #include "test_bobura.model.type_list.h"
 
 
@@ -28,10 +30,25 @@ namespace
 
     using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
+    using input_stream_iterator_type =
+        boost::spirit::multi_pass<
+            std::istreambuf_iterator<
+                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type::value_type
+            >
+        >;
+
     using reader_type =
-        boost::mpl::at<
-            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::reader
-        >::type;
+        bobura::model::serializer::reader<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            input_stream_iterator_type,
+            boost::mpl::at<
+                test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
+            >::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type
+        >;
 
     using error_type = reader_type::error_type;
 

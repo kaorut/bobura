@@ -20,6 +20,8 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/serializer/oudia_reader.h>
+
 #include "test_bobura.model.type_list.h"
 
 
@@ -44,12 +46,32 @@ namespace
 
     using time_type = stop_type::time_type;
 
-    using reader_type =
+    using input_stream_iterator_type =
+        boost::spirit::multi_pass<
+            std::istreambuf_iterator<
+                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type::value_type
+            >
+        >;
+
+    using select_diagram_type =
         boost::mpl::at<
-            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::oudia_reader
+            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::select_oudia_diagram
         >::type;
 
-    using select_diagram_type = reader_type::select_diagram_type;
+    using reader_type =
+        bobura::model::serializer::oudia_reader<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            input_stream_iterator_type,
+            boost::mpl::at<
+                test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
+            >::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type,
+            select_diagram_type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type
+        >;
 
     using error_type = reader_type::error_type;
 

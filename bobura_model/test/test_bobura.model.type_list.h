@@ -22,10 +22,6 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/model/message/timetable_observer_set.h>
-#include <bobura/model/serializer/reader.h>
-#include <bobura/model/serializer/reader_selector.h>
-#include <bobura/model/serializer/reader_set.h>
 #include <bobura/model/station_info/grade.h>
 #include <bobura/model/station.h>
 #include <bobura/model/timetable.h>
@@ -229,21 +225,16 @@ namespace test_bobura { namespace model
 
     namespace type { namespace serialization
     {
-        struct reader;         //!< The reader type.
-        struct reader_selector; //!< The reader selector type.
-        struct json_reader;    //!< The JSON reader type.
-        struct bzip2_reader;   //!< The bzip2 reader type.
-        struct oudia_reader;   //!< The OuDia reader type.
-        struct windia_reader;  //!< The WinDIA reader type.
-        struct reader_set;     //!< The reader set type.
+        struct select_oudia_diagram; //!< The OuDia diagram selector type.
     }}
 
 #if !defined(DOCUMENTATION)
     namespace detail { namespace serialization
     {
-        using io_string_type = boost::mpl::at<type_list, type::io_string>::type;
         using input_stream_iterator_type =
-            boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
+            boost::spirit::multi_pass<
+                std::istreambuf_iterator<boost::mpl::at<type_list, type::io_string>::type::value_type>
+            >;
         struct select_oudia_diagram_type
         {
             using size_type = boost::mpl::at<type_list, type::size>::type;
@@ -284,19 +275,6 @@ namespace test_bobura { namespace model
             }
 
         };
-        using reader_set_type =
-            bobura::model::serializer::reader_set<
-                boost::mpl::at<type_list, type::size>::type,
-                boost::mpl::at<type_list, type::difference>::type,
-                boost::mpl::at<type_list, type::string>::type,
-                input_stream_iterator_type,
-                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                boost::mpl::at<model_type_list, type::model::speed>::type,
-                select_oudia_diagram_type,
-                boost::mpl::at<model_type_list, type::model::font>::type,
-                boost::mpl::at<type_list, type::io_encoder>::type,
-                boost::mpl::at<type_list, type::io_encoder>::type
-            >;
     }}
 #endif
 
@@ -304,50 +282,10 @@ namespace test_bobura { namespace model
     using serialization_type_list =
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
-                type::serialization::reader,
-                bobura::model::serializer::reader<
-                    boost::mpl::at<type_list, type::size>::type,
-                    boost::mpl::at<type_list, type::difference>::type,
-                    boost::mpl::at<type_list, type::string>::type,
-                    detail::serialization::input_stream_iterator_type,
-                    boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                    boost::mpl::at<model_type_list, type::model::speed>::type,
-                    boost::mpl::at<model_type_list, type::model::font>::type
-                >
+                type::serialization::select_oudia_diagram, detail::serialization::select_oudia_diagram_type
             >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::serialization::reader_selector,
-                bobura::model::serializer::reader_selector<
-                    boost::mpl::at<type_list, type::size>::type,
-                    boost::mpl::at<type_list, type::difference>::type,
-                    boost::mpl::at<type_list, type::string>::type,
-                    detail::serialization::input_stream_iterator_type,
-                    boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                    boost::mpl::at<model_type_list, type::model::speed>::type,
-                    boost::mpl::at<model_type_list, type::model::font>::type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::serialization::json_reader, detail::serialization::reader_set_type::json_reader_type
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::serialization::bzip2_reader, detail::serialization::reader_set_type::bzip2_reader_type
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::serialization::oudia_reader, detail::serialization::reader_set_type::oudia_reader_type
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::serialization::windia_reader, detail::serialization::reader_set_type::windia_reader_type
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::serialization::reader_set, detail::serialization::reader_set_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>;
+        >;
 
 
 }}
