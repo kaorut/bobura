@@ -884,8 +884,8 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace load_save
     {
-        using save_to_file_type =
-            bobura::load_save::save_to_file<
+        using confirm_file_save_type =
+            bobura::load_save::confirm_file_save<
                 boost::mpl::at<common_type_list, type::size>::type,
                 boost::mpl::at<common_type_list, type::difference>::type,
                 boost::mpl::at<common_type_list, type::string>::type,
@@ -898,14 +898,6 @@ namespace bobura
                 boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
                 boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
-            >;
-        using confirm_file_save_type =
-            bobura::load_save::confirm_file_save<
-                boost::mpl::at<model_type_list, type::model::model>::type,
-                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
-                save_to_file_type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
 
     }}
@@ -937,9 +929,28 @@ namespace bobura
                 >
             >,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::load_save::save_to_file, detail::load_save::save_to_file_type>,
+            boost::mpl::pair<
+                type::load_save::save_to_file,
+                bobura::load_save::save_to_file<
+                    boost::mpl::at<common_type_list, type::size>::type,
+                    boost::mpl::at<common_type_list, type::difference>::type,
+                    boost::mpl::at<common_type_list, type::string>::type,
+                    boost::mpl::at<common_type_list, type::output_stream>::type,
+                    boost::mpl::at<model_type_list, type::model::model>::type::operating_distance_type,
+                    boost::mpl::at<model_type_list, type::model::model>::type::speed_type,
+                    boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                    boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                    boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
+                    boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
+                    boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+                    boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
+                >
+            >,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::load_save::confirm_file_save, detail::load_save::confirm_file_save_type>,
+            boost::mpl::pair<
+                type::load_save::confirm_file_save,
+                detail::load_save::confirm_file_save_type
+            >,
         tetengo2::meta::assoc_list_end
         >>>>;
 
