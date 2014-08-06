@@ -13,6 +13,8 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/timetable_info/font_color_set.h>
+
 #include "test_bobura.model.type_list.h"
 
 
@@ -20,12 +22,11 @@ namespace
 {
     // types
 
-    using font_color_set_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font_color_set>::type;
+    using font_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type;
+
+    using font_color_set_type = bobura::model::timetable_info::font_color_set<font_type>;
 
     using font_color_type = font_color_set_type::font_color_type;
-
-    using font_type = font_color_type::font_type;
 
     using string_type = font_type::string_type;
 

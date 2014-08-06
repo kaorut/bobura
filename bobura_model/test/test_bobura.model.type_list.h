@@ -25,8 +25,6 @@
 #include <bobura/model/station_info/grade.h>
 #include <bobura/model/station.h>
 #include <bobura/model/timetable.h>
-#include <bobura/model/timetable_info/font_color_set.h>
-#include <bobura/model/timetable_info/station_interval_calculator.h>
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
 #include <bobura/model/train_info/stop.h>
@@ -171,13 +169,6 @@ namespace test_bobura { namespace model
                 boost::mpl::at<type_list, type::difference>::type,
                 boost::mpl::at<type_list, type::string>::type
             >;
-        using station_interval_calculator_type =
-            bobura::model::timetable_info::station_interval_calculator<
-                boost::mpl::at<type_list, type::size>::type,
-                boost::mpl::at<type_list, type::difference>::type,
-                boost::mpl::at<type_list, type::string>::type,
-                operating_distance_type
-            >;
         using speed_type = boost::mpl::at<type_list, type::size>::type;
     }}
 #endif
@@ -199,10 +190,6 @@ namespace test_bobura { namespace model
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::stop, detail::model::stop_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::train, detail::model::train_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::model::station_interval_calculator, detail::model::station_interval_calculator_type
-            >,
-        tetengo2::meta::assoc_list<
             boost::mpl::pair<type::model::operating_distance, detail::model::operating_distance_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::speed, detail::model::speed_type>,
         tetengo2::meta::assoc_list<
@@ -218,7 +205,7 @@ namespace test_bobura { namespace model
                 >
             >,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>>>;
+        >>>>>>>>>>>>>;
 
 
     /**** Serialization *****************************************************/
