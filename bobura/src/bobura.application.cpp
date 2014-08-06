@@ -34,7 +34,7 @@ namespace bobura
                 boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type,
                 boost::mpl::at<bobura::view_type_list, bobura::type::view::view>::type,
                 boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::main_window>::type
-            >
+            >;
 
         using view_type = boost::mpl::at<view_type_list, type::view::view>::type;
 
