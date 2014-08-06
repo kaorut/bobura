@@ -117,39 +117,6 @@ namespace bobura
         >>>>>>;
 
 
-    /**** The Application ***************************************************/
-
-    namespace type { namespace application
-    {
-        struct model_message_type_list; //!< The model message type list type.
-        struct diagram_view_message_type_list;  //!< The diagram view messge type list type.
-    }}
-
-    //! The type list for the application.
-    using application_type_list =
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::application::model_message_type_list,
-                message::timetable_model::type_list<
-                    boost::mpl::at<model_type_list, type::model::model>::type,
-                    boost::mpl::at<view_type_list, type::view::view>::type,
-                    boost::mpl::at<main_window_type_list, type::main_window::main_window>::type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::application::diagram_view_message_type_list,
-                message::diagram_view::type_list<
-                    boost::mpl::at<main_window_type_list, type::main_window::property_bar>::type,
-                    boost::mpl::at<model_type_list, type::model::model>::type,
-                    boost::mpl::at<model_type_list, type::model::station_grade_type_set>::type,
-                    boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
-                >
-            >,
-        tetengo2::meta::assoc_list_end
-        >>;
-
-
 }
 
 

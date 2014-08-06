@@ -20,6 +20,7 @@
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/type_list.h>
+#include <bobura/message/type_list_impl.h>
 
 
 namespace bobura
@@ -29,12 +30,21 @@ namespace bobura
         using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
 
         using model_message_type_list_type =
-            boost::mpl::at<application_type_list, type::application::model_message_type_list>::type;
+            bobura::message::timetable_model::type_list<
+                boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type,
+                boost::mpl::at<bobura::view_type_list, bobura::type::view::view>::type,
+                boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::main_window>::type
+            >
 
         using view_type = boost::mpl::at<view_type_list, type::view::view>::type;
 
         using diagram_view_message_type_list_type =
-            boost::mpl::at<application_type_list, type::application::diagram_view_message_type_list>::type;
+            bobura::message::diagram_view::type_list<
+                boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::property_bar>::type,
+                boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type,
+                boost::mpl::at<bobura::model_type_list, bobura::type::model::station_grade_type_set>::type,
+                boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type
+            >;
 
         using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
 
