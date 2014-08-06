@@ -918,14 +918,22 @@ namespace bobura
             boost::mpl::pair<
                 type::load_save::load_from_file,
                 load_save::load_from_file<
-                    boost::mpl::at<model_type_list, type::model::model>::type,
+                    boost::mpl::at<common_type_list, type::size>::type,
+                    boost::mpl::at<common_type_list, type::difference>::type,
+                    boost::mpl::at<common_type_list, type::string>::type,
+                    boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
+                    boost::mpl::at<common_type_list, type::output_stream>::type,
+                    boost::mpl::at<model_type_list, type::model::model>::type::operating_distance_type,
+                    boost::mpl::at<model_type_list, type::model::model>::type::speed_type,
+                    boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
                     boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
                     boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
                     boost::mpl::at<common_dialog_type_list, type::common_dialog::file_open_dialog>::type,
-                    detail::load_save::confirm_file_save_type,
-                    boost::mpl::at<model_type_list, type::model::reader_selector>::type,
-                    boost::mpl::at<model_type_list, type::model::reader_set>::type,
-                    boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+                    boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
+                    boost::mpl::at<dialog_type_list, type::dialog::oudia_diagram_dialog>::type,
+                    boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+                    boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type,
+                    boost::mpl::at<locale_type_list, type::locale::windia_file_encoder>::type
                 >
             >,
         tetengo2::meta::assoc_list<

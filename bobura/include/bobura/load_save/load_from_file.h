@@ -24,38 +24,81 @@
 
 #include <tetengo2.h>
 
+#include <bobura/load_save/confirm_file_save.h>
+#include <bobura/model/serializer/reader_selector.h>
+#include <bobura/model/serializer/reader_set.h>
+#include <bobura/model/serializer/select_oudia_diagram.h>
+#include <bobura/timetable_model.h>
+
 
 namespace bobura { namespace load_save
 {
     /*!
         \brief The class template for a file loading.
 
-        \tparam Model           A model type.
-        \tparam AbstractWindow  An abstract window type.
-        \tparam MessageBox      A message box type.
-        \tparam FileOpenDialog  A file open dialog type.
-        \tparam ConfirmFileSave A file save confirmation type.
-        \tparam ReaderSelector  A reader selector type.
-        \tparam ReaderSet       A reader set type.
-        \tparam MessageCatalog  A message catalog type.
+        \tparam Size               A size type.
+        \tparam Difference         A difference type.
+        \tparam String             A string type.
+        \tparam ForwardIterator    A forward iterator type.
+        \tparam OutputStream       An output stream type.
+        \tparam OperatingDistance  An operating distance type.
+        \tparam Speed              A speed type.
+        \tparam Font               A font type.
+        \tparam AbstractWindow     An abstract window type.
+        \tparam MessageBox         A message box type.
+        \tparam FileOpenDialog     A file open dialog type.
+        \tparam FileSaveDialog     A file save dialog type.
+        \tparam OuDiaDiagramDialog An OuDia diagram dialog type.
+        \tparam MessageCatalog     A message catalog type.
+        \tparam Utf8Encoder        A UTF-8 encoder type.
+        \tparam Cp932Encoder       A CP932 encoder type.
     */
     template <
-        typename Model,
+        typename Size,
+        typename Difference,
+        typename String,
+        typename ForwardIterator,
+        typename OutputStream,
+        typename OperatingDistance,
+        typename Speed,
+        typename Font,
         typename AbstractWindow,
         typename MessageBox,
         typename FileOpenDialog,
-        typename ConfirmFileSave,
-        typename ReaderSelector,
-        typename ReaderSet,
-        typename MessageCatalog
+        typename FileSaveDialog,
+        typename OuDiaDiagramDialog,
+        typename MessageCatalog,
+        typename Utf8Encoder,
+        typename Cp932Encoder
     >
     class load_from_file
     {
     public:
         // types
 
-        //! The model type.
-        using model_type = Model;
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The iterator type.
+        using iterator = ForwardIterator;
+
+        //! The output stream type.
+        using output_stream_type = OutputStream;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The font type.
+        using font_type = Font;
 
         //! The abstract window type.
         using abstract_window_type = AbstractWindow;
@@ -66,17 +109,65 @@ namespace bobura { namespace load_save
         //! The file open dialog type.
         using file_open_dialog_type = FileOpenDialog;
 
-        //! The file save confirmation type.
-        using confirm_file_save_type = ConfirmFileSave;
+        //! The file save dialog type.
+        using file_save_dialog_type = FileSaveDialog;
 
-        //! The reader selector type.
-        using reader_selector_type = ReaderSelector;
-
-        //! The reader set type.
-        using reader_set_type = ReaderSet;
+        //! The OuDia diagram dialog type.
+        using oudia_diagram_dialog_type = OuDiaDiagramDialog;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
+
+        //! The UTF-8 encoder type.
+        using utf8_encoder_type = Utf8Encoder;
+
+        //! The CP932 encoder type.
+        using cp932_encoder_type = Cp932Encoder;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+        //! The file save confirmation type.
+        using confirm_file_save_type =
+            confirm_file_save<
+                size_type,
+                difference_type,
+                string_type,
+                output_stream_type,
+                operating_distance_type,
+                speed_type,
+                font_type,
+                abstract_window_type,
+                message_box_type,
+                file_save_dialog_type,
+                message_catalog_type,
+                utf8_encoder_type
+            >;
+
+        //! The reader selector type.
+        using reader_selector_type =
+            model::serializer::reader_selector<
+                size_type, difference_type, string_type, iterator, operating_distance_type, speed_type, font_type
+            >;
+
+        //! The OuDia diagram selector type.
+        using select_oudia_diagram_type = model::serializer::select_oudia_diagram<oudia_diagram_dialog_type>;
+
+        //! The reader set type.
+        using reader_set_type =
+            model::serializer::reader_set<
+                size_type,
+                difference_type,
+                string_type,
+                iterator,
+                operating_distance_type,
+                speed_type,
+                select_oudia_diagram_type,
+                font_type,
+                utf8_encoder_type,
+                cp932_encoder_type
+            >;
 
 
         // constructors and destructor
@@ -201,8 +292,6 @@ namespace bobura { namespace load_save
 
     private:
         // types
-
-        using string_type = typename abstract_window_type::string_type;
 
         using reader_error_type = typename reader_selector_type::error_type;
 
