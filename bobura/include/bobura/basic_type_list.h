@@ -81,7 +81,8 @@ namespace bobura
         struct exception_encoder; //!< The encoder type for exceptions.
         struct ui_encoder;     //!< The encoder type for the user interface.
         struct config_encoder; //!< The encoder type for the user interface.
-        struct messages_facet; //!< The messages facet type.
+        struct message_catalog_encoder; //!< The message catalog encoder type.
+        struct locale_name_encoder; //!< The locale name encoder type.
         struct message_catalog; //!< The message catalog type.
         struct timetable_file_encoder; //!< The encoder type for the timetable file.
         struct windia_file_encoder; //!< The encoder type for the WinDIA file.
@@ -111,21 +112,13 @@ namespace bobura
                 boost::mpl::at<detail_type_list, type::detail::encoding>::type
             >;
         using message_catalog_encoding_type = utf8_encoding_type;
+        using message_catalog_encoder_type =
+            tetengo2::text::encoder<internal_encoding_type, message_catalog_encoding_type>;
         using locale_name_encoding_type =
             tetengo2::text::encoding::locale<
                 std::string, boost::mpl::at<detail_type_list, type::detail::encoding>::type
             >;
-        using message_catalog_encoder_type =
-            tetengo2::text::encoder<internal_encoding_type, message_catalog_encoding_type>;
         using locale_name_encoder_type = tetengo2::text::encoder<internal_encoding_type, locale_name_encoding_type>;
-        using messages_type =
-            tetengo2::message::messages<
-                boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<common_type_list, type::size>::type,
-                message_catalog_encoder_type,
-                locale_name_encoder_type
-            >;
         using message_catalog_type =
             tetengo2::message::message_catalog<
                 boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
@@ -161,7 +154,10 @@ namespace bobura
                 type::locale::ui_encoder,
                 tetengo2::text::encoder<detail::locale::internal_encoding_type, detail::locale::ui_encoding_type>
             >,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::locale::messages_facet, detail::locale::messages_type>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::locale::message_catalog_encoder, detail::locale::message_catalog_encoder_type>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::locale::locale_name_encoder, detail::locale::locale_name_encoder_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::locale::message_catalog, detail::locale::message_catalog_type>,
         tetengo2::meta::assoc_list<
@@ -169,7 +165,7 @@ namespace bobura
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::locale::windia_file_encoder, detail::locale::windia_file_encoder_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>;
+        >>>>>>>>;
 
 
     /**** User Interface ****************************************************/

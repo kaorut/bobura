@@ -72,7 +72,13 @@ namespace
     void set_locale(const boost::filesystem::path& message_directory_path)
     {
         using messages_facet_type =
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::messages_facet>::type;
+            tetengo2::message::messages<
+                boost::mpl::at<bobura::common_type_list, bobura::type::input_stream_iterator>::type,
+                boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+                boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
+                boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog_encoder>::type,
+                boost::mpl::at<bobura::locale_type_list, bobura::type::locale::locale_name_encoder>::type
+            >;
         auto p_messages_facet =
             tetengo2::stdalt::make_unique<messages_facet_type>(
                 message_directory_path, std::locale(ui_locale_name().c_str())
