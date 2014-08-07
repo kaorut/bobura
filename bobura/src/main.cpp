@@ -23,6 +23,7 @@
 #include <Windows.h>
 
 #include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include <bobura/application.h>
 #include <bobura/settings.h>
@@ -110,7 +111,12 @@ TETENGO2_STDALT_NOEXCEPT
 {
     tetengo2::suppress_unused_variable_warning(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 
-    using alert_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::alert>::type;
+    using alert_type =
+        tetengo2::gui::alert<
+            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::ui_encoder>::type,
+            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::exception_encoder>::type,
+            boost::mpl::at<bobura::detail_type_list, bobura::type::detail::alert>::type
+        >;
 
     try
     {

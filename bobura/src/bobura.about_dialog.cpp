@@ -82,9 +82,19 @@ namespace bobura
 
             using color_type = typename label_type::color_type;
 
-            using link_label_type = typename boost::mpl::at<ui_type_list, type::ui::link_label>::type;
+            using link_label_type =
+                tetengo2::gui::widget::link_label<
+                    boost::mpl::at<ui_type_list, type::ui::widget_traits>::type,
+                    boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type,
+                    boost::mpl::at<detail_type_list, type::detail::system_color>::type,
+                    boost::mpl::at<detail_type_list, type::detail::shell>::type
+                >;
 
-            using image_type = typename boost::mpl::at<ui_type_list, type::ui::image>::type;
+            using image_type =
+                tetengo2::gui::widget::image<
+                    boost::mpl::at<ui_type_list, type::ui::widget_traits>::type,
+                    boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type
+                >;
 
             using icon_type = typename image_type::icon_type;
 

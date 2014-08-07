@@ -50,7 +50,10 @@ namespace
 
     using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
 
-    using solid_background_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::solid_background>::type;
+    using solid_background_type =
+        tetengo2::gui::drawing::solid_background<
+            boost::mpl::at<bobura::detail_type_list, bobura::type::detail::drawing>::type
+        >;
 
     using message_catalog_type =
         boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;

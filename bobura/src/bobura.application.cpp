@@ -14,6 +14,7 @@
 #include <boost/noncopyable.hpp>
 
 #include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include <bobura/application.h>
 #include <bobura/main_window.h>
@@ -68,15 +69,24 @@ namespace bobura
         using diagram_picture_box_message_type_list =
             boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box_message_type_list>::type;
 
-        using message_loop_type = boost::mpl::at<ui_type_list, type::ui::message_loop>::type;
+        using message_loop_type =
+            tetengo2::gui::message::message_loop<
+                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                boost::mpl::at<detail_type_list, type::detail::message_loop>::type
+            >;
 
-        using gui_fixture_type = boost::mpl::at<ui_type_list, type::ui::gui_fixture>::type;
+        using gui_fixture_type =
+            tetengo2::gui::fixture<boost::mpl::at<detail_type_list, type::detail::gui_fixture>::type>;
 
         using mouse_capture_type = boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type;
 
         using mouse_button_type = mouse_capture_type::mouse_button_type;
 
-        using timer_type = boost::mpl::at<ui_type_list, type::ui::timer>::type;
+        using timer_type =
+            tetengo2::gui::timer<
+                boost::mpl::at<ui_type_list, type::ui::widget>::type,
+                boost::mpl::at<detail_type_list, type::detail::timer>::type
+            >;
 
 
     }

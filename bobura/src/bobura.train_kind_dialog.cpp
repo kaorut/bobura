@@ -127,7 +127,11 @@ namespace bobura
 
         using text_box_type = typename boost::mpl::at<ui_type_list, type::ui::text_box>::type;
 
-        using dropdown_box_type = typename boost::mpl::at<ui_type_list, type::ui::dropdown_box>::type;
+        using dropdown_box_type =
+            tetengo2::gui::widget::dropdown_box<
+                typename boost::mpl::at<ui_type_list, type::ui::widget_traits>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type
+            >;
 
         using button_type = typename boost::mpl::at<ui_type_list, type::ui::button>::type;
 

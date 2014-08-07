@@ -23,22 +23,15 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/about_dialog.h>
 #include <bobura/config_traits.h>
 #include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
-#include <bobura/file_property_dialog.h>
-#include <bobura/font_color_dialog.h>
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/load_save/load_from_file.h>
 #include <bobura/load_save/new_file.h>
 #include <bobura/load_save/save_to_file.h>
-#include <bobura/message/timetable_model_observer_set.h>
 #include <bobura/message/type_list_impl.h>
-#include <bobura/model/message/timetable_observer_set.h>
-#include <bobura/model/train.h>
 #include <bobura/model/station_info/grade.h>
-#include <bobura/model/train_kind.h>
 #include <bobura/oudia_diagram_dialog.h>
 #include <bobura/settings.h>
 #include <bobura/timetable_model.h>
@@ -184,46 +177,34 @@ namespace bobura
     namespace type { namespace ui
     {
         struct abstract_window; //!< The abstract window type.
-        struct alert;          //!< The alert type.
         struct button;         //!< The button type.
         struct canvas;         //!< The canvas type.
         struct color;          //!< The color type.
         struct dialog;         //!< The dialog type.
         struct dimension;      //!< The dimension type.
-        struct dropdown_box;   //!< The dropdown box type.
         struct fast_canvas;    //!< The fast canvas type.
         struct fast_font;      //!< The fast font type.
         struct fast_solid_background; //!< The fast solid background type.
-        struct gui_fixture;    //!< The GUI fixture type.
-        struct image;          //!< The image type.
         struct label;          //!< The label type.
-        struct link_label;     //!< The link label type.
         struct list_box;       //!< The list box type.
         struct map_box;        //!< The map box type.
-        struct menu_bar;       //!< The menu bar type.
-        struct menu_command;   //!< The menu command type.
-        struct menu_separator; //!< The menu separator type;
-        struct message_loop;   //!< The message loop type.
-        struct message_loop_break; //!< The message loop break type.
         struct mouse_capture;  //!< The mouse capture type.
         struct picture_box;    //!< The picture box type.
         struct point_unit_size; //!< The point unit size type.
         struct popup_menu;     //!< The popup menu type.
         struct position;       //!< The position type.
-        struct shell;          //!< The shell type.
         struct side_bar;       //!< The side bar type.
-        struct solid_background; //!< The solid background type.
         struct text_box;       //!< The text box type.
-        struct timer;          //!< The timer type.
         struct transparent_background; //!< The transparent background type.
+        struct widget;         //!< The widget type.
+        struct widget_details_traits; //!< The widget details traits type.
+        struct widget_traits;  //!< The widget traits type.
         struct window;         //!< The window type.
     }}
 
 #if !defined(DOCUMENTATION)
     namespace detail { namespace ui
     {
-        using gui_fixture_type =
-            tetengo2::gui::fixture<boost::mpl::at<detail_type_list, type::detail::gui_fixture>::type>;
         using unit_difference_type =
             tetengo2::gui::unit::em<
                 boost::rational<boost::mpl::at<common_type_list, type::difference>::type>,
@@ -274,12 +255,6 @@ namespace bobura
                 boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type,
                 boost::mpl::at<detail_type_list, type::detail::icon>::type
             >;
-        using alert_type =
-            tetengo2::gui::alert<
-                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                boost::mpl::at<locale_type_list, type::locale::exception_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type
-            >;
         using mouse_observer_set_type =
             tetengo2::gui::message::mouse_observer_set<
                 position_type, boost::mpl::at<common_type_list, type::difference>::type
@@ -307,21 +282,6 @@ namespace bobura
                 boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
             >;
         using widget_type = tetengo2::gui::widget::widget<widget_traits_type, widget_details_traits_type>;
-        using shortcut_key_table_type =
-            tetengo2::gui::menu::shortcut_key_table<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::menu>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
-        using menu_bar_type =
-            tetengo2::gui::menu::menu_bar<
-                boost::mpl::at<common_type_list, type::string>::type,
-                shortcut_key_table_type,
-                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::menu>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
         using abstract_window_type =
             tetengo2::gui::widget::abstract_window<
                 widget_traits_type,
@@ -335,14 +295,6 @@ namespace bobura
                 boost::mpl::at<detail_type_list,
                 type::detail::menu>::type
             >;
-        using message_loop_type =
-            tetengo2::gui::message::message_loop<
-                abstract_window_type, boost::mpl::at<detail_type_list, type::detail::message_loop>::type
-            >;
-        using message_loop_break_type =
-            tetengo2::gui::message::message_loop_break<
-                boost::mpl::at<detail_type_list, type::detail::message_loop>::type
-            >;
         using dialog_type =
             tetengo2::gui::widget::dialog<
                 widget_traits_type,
@@ -352,22 +304,7 @@ namespace bobura
             >;
         using color_type = tetengo2::gui::drawing::color;
         using button_type = tetengo2::gui::widget::button<widget_traits_type, widget_details_traits_type>;
-        using image_type = tetengo2::gui::widget::image<widget_traits_type, widget_details_traits_type>;
-        using dropdown_box_type = tetengo2::gui::widget::dropdown_box<widget_traits_type, widget_details_traits_type>;
         using label_type = tetengo2::gui::widget::label<widget_traits_type, widget_details_traits_type>;
-        using shell_type =
-            tetengo2::gui::shell<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::shell>::type
-            >;
-        using link_label_type =
-            tetengo2::gui::widget::link_label<
-                widget_traits_type,
-                widget_details_traits_type,
-                boost::mpl::at<detail_type_list, type::detail::system_color>::type,
-                boost::mpl::at<detail_type_list, type::detail::shell>::type
-            >;
         using list_box_type = tetengo2::gui::widget::list_box<widget_traits_type, widget_details_traits_type>;
         using mouse_capture_type =
             tetengo2::gui::mouse_capture<
@@ -388,8 +325,6 @@ namespace bobura
                 widget_details_traits_type,
                 boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
             >;
-        using timer_type =
-            tetengo2::gui::timer<widget_type, boost::mpl::at<detail_type_list, type::detail::timer>::type>;
         using side_bar_type =
             tetengo2::gui::widget::side_bar<
                 widget_traits_type,
@@ -405,47 +340,18 @@ namespace bobura
     //! The type list for the user interface.
     using ui_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::abstract_window, detail::ui::abstract_window_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::alert, detail::ui::alert_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::button, detail::ui::button_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::canvas, detail::ui::canvas_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::color, detail::ui::color_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::dialog, detail::ui::dialog_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::dimension, detail::ui::dimension_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::dropdown_box, detail::ui::dropdown_box_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::fast_canvas, detail::ui::fast_canvas_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::fast_font, detail::ui::fast_font_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::ui::fast_solid_background, detail::ui::fast_solid_background_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::gui_fixture, detail::ui::gui_fixture_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::image, detail::ui::image_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::label, detail::ui::label_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::link_label, detail::ui::link_label_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::list_box, detail::ui::list_box_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::map_box, detail::ui::map_box_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::menu_bar, detail::ui::menu_bar_type >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::ui::menu_command,
-                tetengo2::gui::menu::command<
-                    boost::mpl::at<common_type_list, type::string>::type,
-                    boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                    boost::mpl::at<detail_type_list, type::detail::menu>::type,
-                    boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::ui::menu_separator,
-                tetengo2::gui::menu::separator<
-                    boost::mpl::at<common_type_list, type::string>::type,
-                    boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                    boost::mpl::at<detail_type_list, type::detail::menu>::type,
-                    boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-                >
-            >,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::message_loop, detail::ui::message_loop_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::ui::message_loop_break, detail::ui::message_loop_break_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::mouse_capture, detail::ui::mouse_capture_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::picture_box, detail::ui::picture_box_type>,
         tetengo2::meta::assoc_list<
@@ -467,16 +373,17 @@ namespace bobura
                 >
             >,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::position, detail::ui::position_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::shell, detail::ui::shell_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::side_bar, detail::ui::side_bar_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::solid_background, detail::ui::solid_background_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::text_box, detail::ui::text_box_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::timer, detail::ui::timer_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::ui::transparent_background, detail::ui::transparent_background_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::widget, detail::ui::widget_type>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::ui::widget_details_traits, detail::ui::widget_details_traits_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::widget_traits, detail::ui::widget_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::window, detail::ui::window_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>;
+        >>>>>>>>>>>>>>>>>>>>>>>>;
 
 
     /**** Setting ***********************************************************/
