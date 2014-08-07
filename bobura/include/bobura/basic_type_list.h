@@ -42,7 +42,6 @@
 #include <bobura/oudia_diagram_dialog.h>
 #include <bobura/settings.h>
 #include <bobura/timetable_model.h>
-#include <bobura/train_kind_dialog.h>
 #include <bobura/view/scale_list.h>
 
 
@@ -484,6 +483,7 @@ namespace bobura
 
     namespace type { namespace setting
     {
+        struct config_traits;  //!< The config traits type.
         struct settings;       //!< The settings type.
     }}
 
@@ -509,9 +509,10 @@ namespace bobura
 
     //! The type list for the settings.
     using setting_type_list =
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::setting::config_traits, detail::setting::config_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::setting::settings, detail::setting::settings_type>,
         tetengo2::meta::assoc_list_end
-        >;
+        >>;
 
 
     /**** Common Dialog *****************************************************/
@@ -609,90 +610,6 @@ namespace bobura
                     boost::mpl::at<detail_type_list, type::detail::common_dialog>::type,
                     detail::common_dialog::widget_details_traits_type,
                     boost::mpl::at<detail_type_list, type::detail::menu>::type
-                >
-            >,
-        tetengo2::meta::assoc_list_end
-        >>>>>;
-
-
-    /**** Dialog ************************************************************/
-
-    namespace type { namespace dialog
-    {
-        struct about_dialog;   //!< The about dialog type.
-        struct file_property_dialog; //!< The file property dialog type.
-        struct font_color_dialog; //!< The font and color dialog type.
-        struct oudia_diagram_dialog; //!< The OuDia diagram dialog type.
-        struct train_kind_dialog; //!< The train kind dialog type.
-    }}
-
-#if !defined(DOCUMENTATION)
-    namespace detail { namespace dialog
-    {
-        using config_traits_type =
-            config_traits<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::config>::type
-            >;
-        using train_kind_type = bobura::model::train_kind<boost::mpl::at<common_type_list, type::string>::type>;
-    }}
-#endif
-
-    //! The type list for the dialogs.
-    using dialog_type_list =
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::dialog::about_dialog,
-                about_dialog<
-                    boost::mpl::at<common_type_list, type::string>::type,
-                    boost::mpl::at<ui_type_list, type::ui::position>::type,
-                    boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-                    boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                    boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                    detail::dialog::config_traits_type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::dialog::file_property_dialog,
-                file_property_dialog<
-                    boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                    boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::dialog::font_color_dialog,
-                font_color_dialog<
-                    boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                    boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                    boost::mpl::at<common_type_list, type::size>::type,
-                    boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                    boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
-                    boost::mpl::at<ui_type_list, type::ui::color>::type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::dialog::oudia_diagram_dialog,
-                oudia_diagram_dialog<
-                    boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                    boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                    boost::mpl::at<common_type_list, type::size>::type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::dialog::train_kind_dialog,
-                train_kind_dialog<
-                    boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                    boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                    boost::mpl::at<common_type_list, type::size>::type,
-                    detail::dialog::train_kind_type,
-                    boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                    boost::mpl::at<ui_type_list, type::ui::color>::type
                 >
             >,
         tetengo2::meta::assoc_list_end
@@ -799,6 +716,18 @@ namespace bobura
         struct confirm_file_save; //!< The file save confirmation.
     }}
 
+#if !defined(DOCUMENTATION)
+    namespace detail { namespace load_save
+    {
+        using oudia_diagram_dialog_type =
+            oudia_diagram_dialog<
+                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+                boost::mpl::at<common_type_list, type::size>::type
+            >;
+    }}
+#endif
+
     //! The type list for the miscellaneous processings.
     using load_save_type_list =
         tetengo2::meta::assoc_list<
@@ -835,7 +764,7 @@ namespace bobura
                     boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
                     boost::mpl::at<common_dialog_type_list, type::common_dialog::file_open_dialog>::type,
                     boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
-                    boost::mpl::at<dialog_type_list, type::dialog::oudia_diagram_dialog>::type,
+                    detail::load_save::oudia_diagram_dialog_type,
                     boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
                     boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type,
                     boost::mpl::at<locale_type_list, type::locale::windia_file_encoder>::type

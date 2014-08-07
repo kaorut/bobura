@@ -16,7 +16,6 @@
 #include <tetengo2.h>
 
 #include <bobura/application.h>
-#include <bobura/config_traits.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/type_list.h>
@@ -368,12 +367,7 @@ namespace bobura
         boost::mpl::at<common_type_list, type::string>::type,
         boost::mpl::at<ui_type_list, type::ui::position>::type,
         boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-        config_traits<
-            boost::mpl::at<common_type_list, type::string>::type,
-            boost::mpl::at<common_type_list, type::size>::type,
-            boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
-            boost::mpl::at<detail_type_list, type::detail::config>::type
-        >
+        boost::mpl::at<setting_type_list, type::setting::config_traits>::type
     >;
 
 

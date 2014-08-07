@@ -16,6 +16,8 @@
 #include <tetengo2.h>
 
 #include <bobura/command/command_base.h>
+#include <bobura/model/train_kind.h>
+#include <bobura/train_kind_dialog.h>
 
 
 namespace bobura { namespace command
@@ -32,7 +34,15 @@ namespace bobura { namespace command
         using base_type = command_base;
 
         //! The train kind dialog type.
-        using train_kind_dialog_type = boost::mpl::at<dialog_type_list, type::dialog::train_kind_dialog>::type;
+        using train_kind_dialog_type =
+            train_kind_dialog<
+                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+                boost::mpl::at<common_type_list, type::size>::type,
+                bobura::model::train_kind<boost::mpl::at<common_type_list, type::string>::type>,
+                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                boost::mpl::at<ui_type_list, type::ui::color>::type
+            >;
 
         //! The dialog base type.
         using dialog_base_type = train_kind_dialog_type::base_type;

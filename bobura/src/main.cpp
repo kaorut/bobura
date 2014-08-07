@@ -25,7 +25,6 @@
 #include <tetengo2.h>
 
 #include <bobura/application.h>
-#include <bobura/config_traits.h>
 #include <bobura/settings.h>
 #include <bobura/type_list.h>
 
@@ -40,13 +39,7 @@ namespace
 
     using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
 
-    using config_traits_type =
-        bobura::config_traits<
-            string_type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::config_encoder>::type,
-            boost::mpl::at<bobura::detail_type_list, bobura::type::detail::config>::type
-        >;
+    using config_traits_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type;
 
     using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
 

@@ -15,6 +15,7 @@
 
 #include <tetengo2.h>
 
+#include <bobura/about_dialog.h>
 #include <bobura/command/command_base.h>
 
 
@@ -32,7 +33,15 @@ namespace bobura { namespace command
         using base_type = command_base;
 
         //! The about dialog type.
-        using about_dialog_type = boost::mpl::at<dialog_type_list, type::dialog::about_dialog>::type;
+        using about_dialog_type =
+            about_dialog<
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<ui_type_list, type::ui::position>::type,
+                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+                boost::mpl::at<setting_type_list, type::setting::config_traits>::type
+            >;
 
         //! The message catalog type.
         using message_catalog_type = about_dialog_type::message_catalog_type;

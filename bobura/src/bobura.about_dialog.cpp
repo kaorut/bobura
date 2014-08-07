@@ -18,7 +18,6 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/about_dialog.h>
-#include <bobura/config_traits.h>
 #include <bobura/message/type_list.h>
 #include <bobura/settings.h>
 #include <bobura/type_list.h>
@@ -276,12 +275,7 @@ namespace bobura
         boost::mpl::at<ui_type_list, type::ui::dimension>::type,
         boost::mpl::at<ui_type_list, type::ui::dialog>::type,
         boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-        config_traits<
-            boost::mpl::at<common_type_list, type::string>::type,
-            boost::mpl::at<common_type_list, type::size>::type,
-            boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
-            boost::mpl::at<detail_type_list, type::detail::config>::type
-        >
+        boost::mpl::at<setting_type_list, type::setting::config_traits>::type
     >;
 
 
