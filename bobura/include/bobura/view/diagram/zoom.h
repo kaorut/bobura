@@ -30,7 +30,7 @@ namespace bobura { namespace view { namespace diagram
         \tparam Scale             A scale type.
         \tparam Canvas            A canvas type.
         \tparam SolidBackground   A solid background type.
-        \tparam PictureBox  A picture box type.
+        \tparam PictureBox        A picture box type.
         \tparam MessageCatalog    A message catalog type.
     */
     template <
