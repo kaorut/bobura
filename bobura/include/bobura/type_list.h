@@ -62,19 +62,16 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
                 diagram_picture_box_message_type_list
             >;
-        using property_bar_message_type_list =
-            message::property_bar::type_list<
-                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
-                boost::mpl::at<ui_type_list, type::ui::map_box>::type
-            >;
         using property_bar_type =
             property_bar<
-                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<ui_type_list, type::ui::position>::type,
+                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
                 boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
                 boost::mpl::at<ui_type_list, type::ui::map_box>::type,
-                boost::mpl::at<setting_type_list, type::setting::settings>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                property_bar_message_type_list
+                boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
         using main_window_message_type_list =
             message::main_window::type_list<

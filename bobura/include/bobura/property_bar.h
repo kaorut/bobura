@@ -18,6 +18,8 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/message/type_list.h>
+#include <bobura/message/type_list_impl.h>
+#include <bobura/settings.h>
 
 
 namespace bobura
@@ -25,43 +27,59 @@ namespace bobura
     /*!
         \brief The class template for the property bar.
 
-        \tparam SideBar         A side bar type.
+        \tparam String          A string type.
+        \tparam Position        A position type.
+        \tparam Dimension       A dimension type.
         \tparam AbstractWindow  An abstract window type.
+        \tparam SideBar         A side bar type.
         \tparam MapBox          A map box type.
-        \tparam Settings        A settings type.
+        \tparam ConfigTraits    A configuration traits type.
         \tparam MessageCatalog  A message catalog type.
-        \tparam MessageTypeList A message type list.
     */
     template <
-        typename SideBar,
+        typename String,
+        typename Position,
+        typename Dimension,
         typename AbstractWindow,
+        typename SideBar,
         typename MapBox,
-        typename Settings,
-        typename MessageCatalog,
-        typename MessageTypeList
+        typename ConfigTraits,
+        typename MessageCatalog
     >
     class property_bar : public SideBar
     {
     public:
         // types
 
-        //! The base type.
-        using base_type = SideBar;
+        //! The string type.
+        using string_type = String;
+
+        //! The position type.
+        using position_type = Position;
+
+        //! The dimension type.
+        using dimension_type = Dimension;
 
         //! The abstract window type.
         using abstract_window_type = AbstractWindow;
 
+        //! The base type.
+        using base_type = SideBar;
+
         //! The map box type.
         using map_box_type = MapBox;
 
-        //! The settings type.
-        using settings_type = Settings;
+        //! The config traits type.
+        using config_traits_type = ConfigTraits;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
+        //! The settings type.
+        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
+
         //! The message type list type.
-        using message_type_list_type = MessageTypeList;
+        using message_type_list_type = message::property_bar::type_list<base_type, map_box_type>;
 
 
         // constructors and destructor
@@ -133,11 +151,7 @@ namespace bobura
     private:
         // types
 
-        using position_type = typename base_type::position_type;
-
         using left_type = typename tetengo2::gui::position<position_type>::left_type;
-
-        using dimension_type = typename base_type::dimension_type;
 
         using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
