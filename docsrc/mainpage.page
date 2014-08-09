@@ -42,7 +42,7 @@ Building on Windows
 
 You need the following tools in order to build Bobura:
 
-- [Visual Studio 2013 Update 2](http://www.microsoft.com/) (including Express for Desktop)
+- [Visual Studio 2013 Update 3](http://www.microsoft.com/) (including Express for Desktop)
 - [Boost C++ Libraries 1.55.0](http://www.boost.org/)
 - [bzip2](http://www.bzip.org)
 - [WiX 3.8](http://wixtoolset.org/)
