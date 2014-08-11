@@ -15,6 +15,7 @@
 #include <utility>
 #include <vector>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/range/adaptors.hpp>
 #include <boost/throw_exception.hpp>
 
@@ -214,7 +215,7 @@ namespace bobura { namespace view { namespace diagram
         virtual void select_impl(const bool switch_selection_style)
         override
         {
-            tetengo2::suppress_unused_variable_warning(switch_selection_style);
+            boost::ignore_unused(switch_selection_style);
 
             this->selection().select(*m_p_station_location);
         }

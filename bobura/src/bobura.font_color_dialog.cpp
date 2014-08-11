@@ -12,9 +12,9 @@
 #include <utility>
 #include <vector>
 
+#include <boost/core/noncopyable.hpp>
 #include <boost/format.hpp>
 #include <boost/mpl/at.hpp>
-#include <boost/noncopyable.hpp>
 #include <boost/optional.hpp>
 #include <boost/rational.hpp>
 #include <boost/throw_exception.hpp>

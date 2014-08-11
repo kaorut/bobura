@@ -6,6 +6,8 @@
     $Id$
 */
 
+#include <boost/core/ignore_unused.hpp>
+
 #include <tetengo2.h>
 
 #include <bobura/command/nop.h>
@@ -28,7 +30,7 @@ namespace bobura { namespace command
         void execute(model_type& model, abstract_window_type& parent)
         const
         {
-            tetengo2::suppress_unused_variable_warning(model, parent);
+            boost::ignore_unused(model, parent);
         }
 
 

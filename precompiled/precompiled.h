@@ -34,6 +34,7 @@
 
 // The Boost library headers
 #include <boost/algorithm/string.hpp>
+#include <boost/core/noncopyable.hpp>
 #include <boost/exception/all.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
@@ -44,7 +45,6 @@
 #include <boost/math/constants/constants.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/pair.hpp>
-#include <boost/noncopyable.hpp>
 #include <boost/operators.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>

@@ -8,6 +8,7 @@
 
 #include <utility>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -78,7 +79,7 @@ namespace
         virtual void select_impl(const bool switch_selection_style)
         override
         {
-            tetengo2::suppress_unused_variable_warning(switch_selection_style);
+            boost::ignore_unused(switch_selection_style);
 
             m_selected = true;
         }

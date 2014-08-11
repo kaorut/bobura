@@ -9,7 +9,7 @@
 #if !defined(BOBURA_MODEL_STATIONINFO_GRADE_H)
 #define BOBURA_MODEL_STATIONINFO_GRADE_H
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 
 #include <tetengo2.h>
 

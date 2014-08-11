@@ -20,6 +20,7 @@
 #include <vector>
 
 #include <boost/algorithm/string.hpp>
+#include <boost/core/ignore_unused.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
@@ -173,7 +174,7 @@ namespace bobura { namespace model { namespace serializer
         private:
             virtual bool parse_impl(const string_type& key, string_type value)
             {
-                tetengo2::suppress_unused_variable_warning(key, value);
+                boost::ignore_unused(key, value);
 
                 return true;
             }

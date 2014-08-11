@@ -8,6 +8,7 @@
 
 #include <vector>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
 #include <boost/test/unit_test.hpp>
@@ -62,7 +63,7 @@ namespace
             train_kind_type            train_kind
         )
         {
-            tetengo2::suppress_unused_variable_warning(original_index, referred, train_kind);
+            boost::ignore_unused(original_index, referred, train_kind);
         }
 
         const boost::optional<size_type>& original_index()

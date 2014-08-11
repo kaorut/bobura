@@ -9,7 +9,7 @@
 #if !defined(BOBURA_MESSAGE_PROPERTYBAR_H)
 #define BOBURA_MESSAGE_PROPERTYBAR_H
 
-#include <tetengo2.h>
+#include <boost/core/ignore_unused.hpp>
 
 
 namespace bobura { namespace message { namespace property_bar
@@ -136,7 +136,7 @@ namespace bobura { namespace message { namespace property_bar
         )
         const
         {
-            tetengo2::suppress_unused_variable_warning(button, position, shift, control, meta);
+            boost::ignore_unused(button, position, shift, control, meta);
 
             m_map_box.set_focus();
         }

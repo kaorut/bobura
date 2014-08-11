@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
@@ -32,7 +33,7 @@ namespace bobura { namespace command
         void execute(model_type& model, abstract_window_type& parent)
         const
         {
-            tetengo2::suppress_unused_variable_warning(model, parent);
+            boost::ignore_unused(model, parent);
 
             shell_type::instance().execute(string_type{ TETENGO2_TEXT("http://www.tetengo.org/") });
         }
