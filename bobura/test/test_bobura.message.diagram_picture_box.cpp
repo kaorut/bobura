@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -54,27 +55,27 @@ namespace
     public:
         dummy_view_zoom_type(picture_box_type& picture_box, view_type& diagram_view)
         {
-            tetengo2::suppress_unused_variable_warning(picture_box, diagram_view);
+            boost::ignore_unused(picture_box, diagram_view);
         }
 
         void horizontally_zoom_in(bool snap_to_scale_list)
         {
-            tetengo2::suppress_unused_variable_warning(snap_to_scale_list);
+            boost::ignore_unused(snap_to_scale_list);
         }
 
         void horizontally_zoom_out(bool snap_to_scale_list)
         {
-            tetengo2::suppress_unused_variable_warning(snap_to_scale_list);
+            boost::ignore_unused(snap_to_scale_list);
         }
 
         void vertically_zoom_in(bool snap_to_scale_list)
         {
-            tetengo2::suppress_unused_variable_warning(snap_to_scale_list);
+            boost::ignore_unused(snap_to_scale_list);
         }
 
         void vertically_zoom_out(bool snap_to_scale_list)
         {
-            tetengo2::suppress_unused_variable_warning(snap_to_scale_list);
+            boost::ignore_unused(snap_to_scale_list);
         }
 
     };

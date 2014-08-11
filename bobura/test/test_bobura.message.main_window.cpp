@@ -9,6 +9,7 @@
 #include <utility>
 #include <vector>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -43,7 +44,7 @@ namespace
         virtual bool enabled(const model_type& model)
         const
         {
-            tetengo2::suppress_unused_variable_warning(model);
+            boost::ignore_unused(model);
 
             return true;
         }
@@ -57,7 +58,7 @@ namespace
         virtual void execute(model_type& model, abstract_window_type& parent)
         const
         {
-            tetengo2::suppress_unused_variable_warning(model, parent);
+            boost::ignore_unused(model, parent);
         }
 
     };

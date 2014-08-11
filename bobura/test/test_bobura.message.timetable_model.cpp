@@ -8,6 +8,7 @@
 
 #include <vector>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
 #include <boost/test/unit_test.hpp>
@@ -54,7 +55,7 @@ namespace
         base_type(),
         m_diagram_picture_box(*this)
         {
-            tetengo2::suppress_unused_variable_warning(message_catalog, settings, confirm_file_save);
+            boost::ignore_unused(message_catalog, settings, confirm_file_save);
         }
 
         virtual ~main_window_type()
@@ -62,7 +63,7 @@ namespace
 
         void set_title(const boost::optional<string_type>& document_name, const bool changed)
         {
-            tetengo2::suppress_unused_variable_warning(document_name, changed);
+            boost::ignore_unused(document_name, changed);
         }
 
         const diagram_picture_box_type& diagram_picture_box()

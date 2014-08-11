@@ -44,6 +44,7 @@ boost::filesystem::path::string_type             boost/filesystem.hpp
 boost::filesystem::rename                        boost/filesystem.hpp
 boost::filesystem::unique_path                   boost/filesystem.hpp
 boost::get                                       boost/variant.hpp
+boost::ignore_unused                             boost/core/ignore_unused.hpp
 boost::iostreams::bzip2_compressor               boost/iostreams/filter/bzip2.hpp
 boost::iostreams::bzip2_decompressor             boost/iostreams/filter/bzip2.hpp
 boost::iostreams::bzip2_error                    boost/iostreams/filter/bzip2.hpp
@@ -121,7 +122,6 @@ std::max                                         algorithm
 std::min                                         algorithm
 std::move                                        utility
 std::numeric_limits                              limits
-std::ostream                                     ostream
 std::ostringstream                               sstream
 std::out_of_range                                stdexcept
 std::pair                                        utility

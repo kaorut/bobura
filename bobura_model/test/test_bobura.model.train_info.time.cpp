@@ -8,10 +8,9 @@
 
 #include <stdexcept>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
-
-#include <tetengo2.h>
 
 #include "test_bobura.model.type_list.h"
 
@@ -99,7 +98,7 @@ BOOST_AUTO_TEST_SUITE_END()
         BOOST_TEST_PASSPOINT();
 
         const auto time = time_type::uninitialized();
-        tetengo2::suppress_unused_variable_warning(time);
+        boost::ignore_unused(time);
     }
 
     BOOST_AUTO_TEST_CASE(construction)

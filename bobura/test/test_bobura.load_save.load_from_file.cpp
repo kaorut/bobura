@@ -8,6 +8,7 @@
 
 #include <vector>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
@@ -54,7 +55,7 @@ namespace
         :
         base_type(parent)
         {
-            tetengo2::suppress_unused_variable_warning(message_catalog);
+            boost::ignore_unused(message_catalog);
         }
 
         virtual ~oudia_diagram_dialog_type()
@@ -69,7 +70,7 @@ namespace
 
         void set_file_name(string_type file_name)
         {
-            tetengo2::suppress_unused_variable_warning(file_name);
+            boost::ignore_unused(file_name);
         }
 
         const std::vector<string_type>& names()
@@ -81,7 +82,7 @@ namespace
 
         void set_names(std::vector<string_type> names)
         {
-            tetengo2::suppress_unused_variable_warning(names);
+            boost::ignore_unused(names);
         }
 
         const boost::optional<int_size_type>& selected_index()
@@ -93,7 +94,7 @@ namespace
 
         void set_selected_index(const int_size_type index)
         {
-            tetengo2::suppress_unused_variable_warning(index);
+            boost::ignore_unused(index);
         }
 
     };

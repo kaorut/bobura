@@ -9,6 +9,7 @@
 #if !defined(BOBURA_VIEW_DIAGRAM_ITEM_H)
 #define BOBURA_VIEW_DIAGRAM_ITEM_H
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 
 #include <tetengo2.h>
@@ -172,12 +173,12 @@ namespace bobura { namespace view { namespace diagram
         virtual void draw_on_impl(canvas_type& canvas)
         const
         {
-            tetengo2::suppress_unused_variable_warning(canvas);
+            boost::ignore_unused(canvas);
         }
 
         virtual item* p_item_by_position_impl(const position_type& position)
         {
-            tetengo2::suppress_unused_variable_warning(position);
+            boost::ignore_unused(position);
 
             return nullptr;
         }
@@ -190,7 +191,7 @@ namespace bobura { namespace view { namespace diagram
 
         virtual void select_impl(const bool switch_selection_style)
         {
-            tetengo2::suppress_unused_variable_warning(switch_selection_style);
+            boost::ignore_unused(switch_selection_style);
         }
 
 
