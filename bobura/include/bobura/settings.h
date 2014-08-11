@@ -16,9 +16,9 @@
 #include <vector>
 
 #include <boost/algorithm/string.hpp>
+#include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/noncopyable.hpp>
 #include <boost/optional.hpp>
 #include <boost/program_options.hpp>
 #include <boost/variant.hpp>

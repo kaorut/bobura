@@ -9,7 +9,7 @@
 #if !defined(BOBURA_VIEW_DIAGRAM_ITEM_H)
 #define BOBURA_VIEW_DIAGRAM_ITEM_H
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 
 #include <tetengo2.h>
 

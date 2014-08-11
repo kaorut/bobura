@@ -15,7 +15,7 @@
 #include <stdexcept>
 #include <vector>
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 #include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
 

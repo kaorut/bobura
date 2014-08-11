@@ -55,7 +55,7 @@ boost::math::constants::pi                       boost/math/constants/constants.
 boost::mpl::at                                   boost/mpl/at.hpp
 boost::mpl::pair                                 boost/mpl/pair.hpp
 boost::next                                      boost/utility.hpp
-boost::noncopyable                               boost/noncopyable.hpp
+boost::noncopyable                               boost/core/noncopyable.hpp
 boost::none                                      boost/optional.hpp
 boost::optional                                  boost/optional.hpp
 boost::prior                                     boost/utility.hpp

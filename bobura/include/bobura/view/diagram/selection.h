@@ -14,7 +14,7 @@
 #include <memory>
 #include <utility>
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 #include <boost/optional.hpp>
 
 #include <tetengo2.h>

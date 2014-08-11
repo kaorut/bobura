@@ -11,8 +11,8 @@
 
 #include <memory>
 
+#include <boost/core/noncopyable.hpp>
 #include <boost/mpl/at.hpp>
-#include <boost/noncopyable.hpp>
 
 #include <bobura/basic_type_list.h>
 
