@@ -24,7 +24,31 @@ namespace
 {
     // types
 
+    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
+
+    using difference_type = boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type;
+
     using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
+
+    using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
+
+    using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
+
+    using operating_distance_type =
+        boost::mpl::at<bobura::model_type_list, bobura::type::model::operating_distance>::type;
+
+    using speed_type =
+        boost::mpl::at<bobura::model_type_list, bobura::type::model::speed>::type;
+
+    using font_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type;
+
+    using abstract_window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type;
+
+    using side_bar_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type;
+
+    using map_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type;
+
+    using config_traits_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
@@ -48,7 +72,19 @@ namespace
     
     using station_selected_type =
         bobura::message::diagram_view::station_selected<
-            property_bar_type, model_type, station_grade_type_set_type, message_catalog_type
+            size_type,
+            difference_type,
+            string_type,
+            position_type,
+            dimension_type,
+            operating_distance_type,
+            speed_type,
+            font_type,
+            abstract_window_type,
+            side_bar_type,
+            map_box_type,
+            config_traits_type,
+            message_catalog_type
         >;
 
     using train_type = model_type::timetable_type::train_type;
@@ -59,10 +95,32 @@ namespace
 
     using train_selected_type =
         bobura::message::diagram_view::train_selected<
-            property_bar_type, model_type, station_grade_type_set_type, message_catalog_type
+            size_type,
+            difference_type,
+            string_type,
+            position_type,
+            dimension_type,
+            operating_distance_type,
+            speed_type,
+            font_type,
+            abstract_window_type,
+            side_bar_type,
+            map_box_type,
+            config_traits_type,
+            message_catalog_type
         >;
 
-    using all_unselected_type = bobura::message::diagram_view::all_unselected<property_bar_type>;
+    using all_unselected_type =
+        bobura::message::diagram_view::all_unselected<
+            string_type,
+            position_type,
+            dimension_type,
+            abstract_window_type,
+            side_bar_type,
+            map_box_type,
+            config_traits_type,
+            message_catalog_type
+        >;
 
 
 }

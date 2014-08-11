@@ -25,6 +25,10 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/station_info/grade.h>
+#include <bobura/property_bar.h>
+#include <bobura/timetable_model.h>
+
 
 namespace bobura { namespace message { namespace diagram_view
 {
@@ -59,22 +63,97 @@ namespace bobura { namespace message { namespace diagram_view
     /*!
         \brief The class template for a station selection observer of the diagram view.
 
-        \tparam PropertyBar         A property bar type.
-        \tparam Model               A model type.
-        \tparam StationGradeTypeSet A station grade type set type.
-        \tparam MessageCatalog      A message catalog type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam Position          A position type.
+        \tparam Dimension         A dimension type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Font              A font type.
+        \tparam AbstractWindow    An abstract window type.
+        \tparam SideBar           A side bar type.
+        \tparam MapBox            A map box type.
+        \tparam ConfigTraits      A configuration traits type.
+        \tparam MessageCatalog    A message catalog type.
     */
-    template <typename PropertyBar, typename Model, typename StationGradeTypeSet, typename MessageCatalog>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename Position,
+        typename Dimension,
+        typename OperatingDistance,
+        typename Speed,
+        typename Font,
+        typename AbstractWindow,
+        typename SideBar,
+        typename MapBox,
+        typename ConfigTraits,
+        typename MessageCatalog
+    >
     class station_selected
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The position type.
+        using position_type = Position;
+
+        //! The dimension type.
+        using dimension_type = Dimension;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The font type.
+        using font_type = Font;
+
+        //! The abstract window type.
+        using abstract_window_type = AbstractWindow;
+
+        //! The side bar type.
+        using side_bar_type = SideBar;
+
+        //! The map box type.
+        using map_box_type = MapBox;
+
+        //! The config traits type.
+        using config_traits_type = ConfigTraits;
+
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
         //! The property bar type.
-        using property_bar_type = PropertyBar;
+        using property_bar_type =
+            bobura::property_bar<
+                string_type,
+                position_type,
+                dimension_type,
+                abstract_window_type,
+                side_bar_type,
+                map_box_type,
+                config_traits_type,
+                message_catalog_type
+            >;
 
         //! The model type.
-        using model_type = Model;
+        using model_type = 
+            bobura::timetable_model<
+                size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
+            >;
 
         //! The timetable type.
         using timetable_type = typename model_type::timetable_type;
@@ -83,10 +162,7 @@ namespace bobura { namespace message { namespace diagram_view
         using station_location_type = typename timetable_type::station_location_type;
 
         //! The station grade type set type.
-        using station_grade_type_set_type = StationGradeTypeSet;
-
-        //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        using station_grade_type_set_type = model::station_info::grade_type_set<string_type>;
 
 
         // constructors and destructor
@@ -133,15 +209,11 @@ namespace bobura { namespace message { namespace diagram_view
     private:
         // types
 
-        using string_type = typename property_bar_type::map_box_type::string_type;
-
         using value_type = typename property_bar_type::map_box_type::value_type;
 
         using station_type = typename station_location_type::station_type;
 
         using grade_type = typename station_type::grade_type;
-
-        using operating_distance_type = typename station_location_type::operating_distance_type;
 
 
         // variables
@@ -196,22 +268,97 @@ namespace bobura { namespace message { namespace diagram_view
     /*!
         \brief The class template for a train selection observer of the diagram view.
 
-        \tparam PropertyBar         A property bar type.
-        \tparam Model               A model type.
-        \tparam StationGradeTypeSet A station grade type set type.
-        \tparam MessageCatalog      A message catalog type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam Position          A position type.
+        \tparam Dimension         A dimension type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Font              A font type.
+        \tparam AbstractWindow    An abstract window type.
+        \tparam SideBar           A side bar type.
+        \tparam MapBox            A map box type.
+        \tparam ConfigTraits      A configuration traits type.
+        \tparam MessageCatalog    A message catalog type.
     */
-    template <typename PropertyBar, typename Model, typename StationGradeTypeSet, typename MessageCatalog>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename Position,
+        typename Dimension,
+        typename OperatingDistance,
+        typename Speed,
+        typename Font,
+        typename AbstractWindow,
+        typename SideBar,
+        typename MapBox,
+        typename ConfigTraits,
+        typename MessageCatalog
+    >
     class train_selected
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The position type.
+        using position_type = Position;
+
+        //! The dimension type.
+        using dimension_type = Dimension;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The font type.
+        using font_type = Font;
+
+        //! The abstract window type.
+        using abstract_window_type = AbstractWindow;
+
+        //! The side bar type.
+        using side_bar_type = SideBar;
+
+        //! The map box type.
+        using map_box_type = MapBox;
+
+        //! The config traits type.
+        using config_traits_type = ConfigTraits;
+
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
         //! The property bar type.
-        using property_bar_type = PropertyBar;
+        using property_bar_type =
+            bobura::property_bar<
+                string_type,
+                position_type,
+                dimension_type,
+                abstract_window_type,
+                side_bar_type,
+                map_box_type,
+                config_traits_type,
+                message_catalog_type
+            >;
 
         //! The model type.
-        using model_type = Model;
+        using model_type = 
+            bobura::timetable_model<
+                size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
+            >;
 
         //! The timetable type.
         using timetable_type = typename model_type::timetable_type;
@@ -219,14 +366,8 @@ namespace bobura { namespace message { namespace diagram_view
         //! The train type.
         using train_type = typename timetable_type::train_type;
 
-        //! The stop index type.
-        using stop_index_type = typename train_type::stops_type::size_type;
-
         //! The station grade type set type.
-        using station_grade_type_set_type = StationGradeTypeSet;
-
-        //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        using station_grade_type_set_type = model::station_info::grade_type_set<string_type>;
 
 
         // constructors and destructor
@@ -258,10 +399,7 @@ namespace bobura { namespace message { namespace diagram_view
             \param train                A train.
             \param departure_stop_index A departure stop index. Or boost::none when a whole train is selected.
         */
-        void operator()(
-            const train_type&                       train,
-            const boost::optional<stop_index_type>& departure_stop_index
-        )
+        void operator()(const train_type& train, const boost::optional<size_type>& departure_stop_index)
         {
             insert_value(m_message_catalog.get(TETENGO2_TEXT("PropertyBar:Train Number")), train.number());
             insert_value(m_message_catalog.get(TETENGO2_TEXT("PropertyBar:Kind")), kind_name_text(train));
@@ -291,11 +429,7 @@ namespace bobura { namespace message { namespace diagram_view
     private:
         // types
 
-        using string_type = typename property_bar_type::map_box_type::string_type;
-
         using value_type = typename property_bar_type::map_box_type::value_type;
-
-        using size_type = typename train_type::size_type;
 
         using stop_type = typename train_type::stop_type;
 
@@ -350,7 +484,7 @@ namespace bobura { namespace message { namespace diagram_view
             }
         }
 
-        string_type departure_and_arrival(const train_type& train, const stop_index_type stop_index)
+        string_type departure_and_arrival(const train_type& train, const size_type stop_index)
         const
         {
             if (stop_index >= train.stops().size() || stop_index >= m_model.timetable().station_locations().size())
@@ -411,7 +545,7 @@ namespace bobura { namespace message { namespace diagram_view
         bool is_principal_station(const stop_iterator i_front_stop, const stop_iterator i_stop)
         const
         {
-            const stop_index_type stop_index = std::distance(i_front_stop, i_stop);
+            const size_type stop_index = std::distance(i_front_stop, i_stop);
             assert(stop_index < m_model.timetable().station_locations().size());
 
             return
@@ -430,7 +564,7 @@ namespace bobura { namespace message { namespace diagram_view
             if (i_stop->passing())
                 return {};
 
-            const stop_index_type stop_index = std::distance(i_front_stop, i_stop);
+            const size_type stop_index = std::distance(i_front_stop, i_stop);
             assert(stop_index < m_model.timetable().station_locations().size());
 
             string_type arrival_time{};
@@ -505,8 +639,8 @@ namespace bobura { namespace message { namespace diagram_view
         }
 
         string_type scheduled_speed_text(
-            const train_type&                       train,
-            const boost::optional<stop_index_type>& departure_stop_index
+            const train_type&                 train,
+            const boost::optional<size_type>& departure_stop_index
         )
         const
         {
@@ -529,8 +663,8 @@ namespace bobura { namespace message { namespace diagram_view
         }
 
         std::pair<stop_iterator, stop_iterator> schedule_speed_departure_and_arrival(
-            const train_type&                       train,
-            const boost::optional<stop_index_type>& departure_stop_index
+            const train_type&                 train,
+            const boost::optional<size_type>& departure_stop_index
         )
         const
         {
@@ -551,16 +685,66 @@ namespace bobura { namespace message { namespace diagram_view
     /*!
         \brief The class template for an unselection observer of the diagram view.
 
-        \tparam PropertyBar A property bar type.
+        \tparam String          A string type.
+        \tparam Position        A position type.
+        \tparam Dimension       A dimension type.
+        \tparam AbstractWindow  An abstract window type.
+        \tparam SideBar         A side bar type.
+        \tparam MapBox          A map box type.
+        \tparam ConfigTraits    A configuration traits type.
+        \tparam MessageCatalog  A message catalog type.
     */
-    template <typename PropertyBar>
+    template <
+        typename String,
+        typename Position,
+        typename Dimension,
+        typename AbstractWindow,
+        typename SideBar,
+        typename MapBox,
+        typename ConfigTraits,
+        typename MessageCatalog
+    >
     class all_unselected
     {
     public:
         // types
 
+        //! The string type.
+        using string_type = String;
+
+        //! The position type.
+        using position_type = Position;
+
+        //! The dimension type.
+        using dimension_type = Dimension;
+
+        //! The abstract window type.
+        using abstract_window_type = AbstractWindow;
+
+        //! The side bar type.
+        using side_bar_type = SideBar;
+
+        //! The map box type.
+        using map_box_type = MapBox;
+
+        //! The config traits type.
+        using config_traits_type = ConfigTraits;
+
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
         //! The property bar type.
-        using property_bar_type = PropertyBar;
+        using property_bar_type =
+            bobura::property_bar<
+                string_type,
+                position_type,
+                dimension_type,
+                abstract_window_type,
+                side_bar_type,
+                map_box_type,
+                config_traits_type,
+                message_catalog_type
+            >;
 
 
         // constructors and destructor
@@ -589,8 +773,6 @@ namespace bobura { namespace message { namespace diagram_view
 
     private:
         // types
-
-        using string_type = typename property_bar_type::map_box_type::string_type;
 
         using value_type = typename property_bar_type::map_box_type::value_type;
 

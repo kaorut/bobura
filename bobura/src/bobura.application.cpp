@@ -40,9 +40,18 @@ namespace bobura
 
         using diagram_view_message_type_list_type =
             bobura::message::diagram_view::type_list<
-                boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::property_bar>::type,
-                boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type,
-                boost::mpl::at<bobura::model_type_list, bobura::type::model::station_grade_type_set>::type,
+                boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
+                boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
+                boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
+                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
+                boost::mpl::at<bobura::model_type_list, bobura::type::model::operating_distance>::type,
+                boost::mpl::at<bobura::model_type_list, bobura::type::model::speed>::type,
+                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type,
+                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type,
+                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type,
+                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type,
+                boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type,
                 boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type
             >;
 

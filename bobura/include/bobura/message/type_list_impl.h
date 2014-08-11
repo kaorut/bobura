@@ -52,22 +52,88 @@ namespace bobura { namespace message
         /*!
             \brief The meta function for the type list of the diagram view messages.
 
-            \tparam PropertyBar         A property bar type.
-            \tparam Model               A model type.
-            \tparam StationGradeTypeSet A station grade type set type.
-            \tparam MessageCatalog      A message catalog type.
+            \tparam Size              A size type.
+            \tparam Difference        A difference type.
+            \tparam String            A string type.
+            \tparam Position          A position type.
+            \tparam Dimension         A dimension type.
+            \tparam OperatingDistance An operating distance type.
+            \tparam Speed             A speed type.
+            \tparam Font              A font type.
+            \tparam AbstractWindow    An abstract window type.
+            \tparam SideBar           A side bar type.
+            \tparam MapBox            A map box type.
+            \tparam ConfigTraits      A configuration traits type.
+            \tparam MessageCatalog    A message catalog type.
         */
-        template <typename PropertyBar, typename Model, typename StationGradeTypeSet, typename MessageCatalog>
+        template <
+            typename Size,
+            typename Difference,
+            typename String,
+            typename Position,
+            typename Dimension,
+            typename OperatingDistance,
+            typename Speed,
+            typename Font,
+            typename AbstractWindow,
+            typename SideBar,
+            typename MapBox,
+            typename ConfigTraits,
+            typename MessageCatalog
+        >
         using type_list =
             tetengo2::meta::assoc_list<
                 boost::mpl::pair<
-                    type::station_selected, station_selected<PropertyBar, Model, StationGradeTypeSet, MessageCatalog>
+                    type::station_selected,
+                    bobura::message::diagram_view::station_selected<
+                        Size,
+                        Difference,
+                        String,
+                        Position,
+                        Dimension,
+                        OperatingDistance,
+                        Speed,
+                        Font,
+                        AbstractWindow,
+                        SideBar,
+                        MapBox,
+                        ConfigTraits,
+                        MessageCatalog
+                    >
                 >,
             tetengo2::meta::assoc_list<
                 boost::mpl::pair<
-                    type::train_selected, train_selected<PropertyBar, Model, StationGradeTypeSet, MessageCatalog>
+                    type::train_selected,
+                    message::diagram_view::train_selected<
+                        Size,
+                        Difference,
+                        String,
+                        Position,
+                        Dimension,
+                        OperatingDistance,
+                        Speed,
+                        Font,
+                        AbstractWindow,
+                        SideBar,
+                        MapBox,
+                        ConfigTraits,
+                        MessageCatalog
+                    >
                 >,
-            tetengo2::meta::assoc_list<boost::mpl::pair<type::all_unselected, all_unselected<PropertyBar>>,
+            tetengo2::meta::assoc_list<
+                boost::mpl::pair<
+                    type::all_unselected,
+                    message::diagram_view::all_unselected<
+                        String,
+                        Position,
+                        Dimension,
+                        AbstractWindow,
+                        SideBar,
+                        MapBox,
+                        ConfigTraits,
+                        MessageCatalog
+                    >
+                >,
             tetengo2::meta::assoc_list_end
             >>>;
     }
