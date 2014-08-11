@@ -9,7 +9,7 @@
 #if !defined(TETENGO2_MESSAGE_DIAGRAMSELECTIONOBSERVERSET_H)
 #define TETENGO2_MESSAGE_DIAGRAMSELECTIONOBSERVERSET_H
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 #include <boost/optional.hpp>
 #include <boost/signals2.hpp>
 

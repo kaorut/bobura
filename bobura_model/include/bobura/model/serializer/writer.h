@@ -9,8 +9,8 @@
 #if !defined(BOBURA_MODEL_SERIALIZER_WRITER_H)
 #define BOBURA_MODEL_SERIALIZER_WRITER_H
 
+#include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/noncopyable.hpp>
 #include <boost/utility.hpp>
 
 #include <tetengo2.h>

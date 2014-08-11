@@ -15,6 +15,7 @@
 #include <utility>
 #include <vector>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
@@ -120,7 +121,7 @@ namespace bobura { namespace model { namespace serializer
         virtual bool selects_impl(const iterator first, const iterator last)
         override
         {
-            tetengo2::suppress_unused_variable_warning(first, last);
+            boost::ignore_unused(first, last);
 
             BOOST_THROW_EXCEPTION(std::logic_error("This function cannot be called."));
         }

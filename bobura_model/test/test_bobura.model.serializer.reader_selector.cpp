@@ -13,6 +13,7 @@
 #include <utility>
 #include <vector>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
@@ -82,7 +83,7 @@ namespace
         virtual std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
         override
         {
-            tetengo2::suppress_unused_variable_warning(first, last, error);
+            boost::ignore_unused(first, last, error);
 
             auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
 

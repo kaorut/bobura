@@ -42,8 +42,8 @@ Building on Windows
 
 You need the following tools in order to build Bobura:
 
-- [Visual Studio 2013 Update 2](http://www.microsoft.com/) (including Express for Desktop)
-- [Boost C++ Libraries 1.55.0](http://www.boost.org/)
+- [Visual Studio 2013 Update 3](http://www.microsoft.com/) (including Express for Desktop)
+- [Boost C++ Libraries 1.56.0](http://www.boost.org/)
 - [bzip2](http://www.bzip.org)
 - [WiX 3.8](http://wixtoolset.org/)
 - [Doxygen 1.8.7](http://www.doxygen.org) (to generate API documents)
@@ -101,7 +101,7 @@ You need the following tools in order to build Bobura and Tetengo2 libraries:
 
 - [GCC 4.7.2 or 4.8.3](http://www.gnu.org/)
 - [GNU Make](http://www.gnu.org/)
-- [Boost C++ Libraries 1.55.0](http://www.boost.org/)
+- [Boost C++ Libraries 1.56.0](http://www.boost.org/)
 - [bzip2](http://www.bzip.org)
 - [libiconv](http://www.gnu.org/) (on Cygwin)
 - [Doxygen 1.8.7](http://www.doxygen.org) (to generate API documents)

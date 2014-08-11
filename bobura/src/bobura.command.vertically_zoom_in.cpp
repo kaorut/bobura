@@ -8,6 +8,7 @@
 
 #include <cassert>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
@@ -45,7 +46,7 @@ namespace bobura { namespace command
         void execute(model_type& model, abstract_window_type& parent)
         const
         {
-            tetengo2::suppress_unused_variable_warning(model);
+            boost::ignore_unused(model);
 
             auto* const p_main_window = dynamic_cast<main_window_type*>(&parent);
             assert(p_main_window);

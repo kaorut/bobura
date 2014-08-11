@@ -6,6 +6,8 @@
     $Id$
 */
 
+#include <boost/core/ignore_unused.hpp>
+
 #include <tetengo2.h>
 
 #include <bobura/command/command_base.h>
@@ -51,7 +53,7 @@ namespace bobura { namespace command
     bool command_base::enabled_impl(const model_type& model)
     const
     {
-        tetengo2::suppress_unused_variable_warning(model);
+        boost::ignore_unused(model);
 
         return true;
     }
@@ -65,7 +67,7 @@ namespace bobura { namespace command
     void command_base::execute_impl(model_type& model, abstract_window_type& parent, const parameter_base& parameter)
     const
     {
-        tetengo2::suppress_unused_variable_warning(parameter);
+        boost::ignore_unused(parameter);
 
         execute_impl(model, parent);
     }

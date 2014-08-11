@@ -9,7 +9,7 @@
 #if !defined(TETENGO2_MESSAGE_TIMETABLEMODELOBSERVERSET_H)
 #define TETENGO2_MESSAGE_TIMETABLEMODELOBSERVERSET_H
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 #include <boost/signals2.hpp>
 
 

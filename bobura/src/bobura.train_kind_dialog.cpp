@@ -12,8 +12,8 @@
 #include <utility>
 #include <vector>
 
+#include <boost/core/noncopyable.hpp>
 #include <boost/mpl/at.hpp>
-#include <boost/noncopyable.hpp>
 #include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
 
@@ -730,17 +730,17 @@ namespace bobura
                 selected_index && *selected_index + 1 < m_p_train_kind_list_box->value_count()
             );
 
-            m_p_name_label->set_enabled(selected_index);
-            m_p_name_text_box->set_enabled(selected_index);
-            m_p_abbreviation_label->set_enabled(selected_index);
-            m_p_abbreviation_text_box->set_enabled(selected_index);
-            m_p_color_button->set_enabled(selected_index);
-            m_p_weight_label->set_enabled(selected_index);
-            m_p_weight_dropdown_box->set_enabled(selected_index);
-            m_p_line_style_label->set_enabled(selected_index);
-            m_p_line_style_dropdown_box->set_enabled(selected_index);
+            m_p_name_label->set_enabled(static_cast<bool>(selected_index));
+            m_p_name_text_box->set_enabled(static_cast<bool>(selected_index));
+            m_p_abbreviation_label->set_enabled(static_cast<bool>(selected_index));
+            m_p_abbreviation_text_box->set_enabled(static_cast<bool>(selected_index));
+            m_p_color_button->set_enabled(static_cast<bool>(selected_index));
+            m_p_weight_label->set_enabled(static_cast<bool>(selected_index));
+            m_p_weight_dropdown_box->set_enabled(static_cast<bool>(selected_index));
+            m_p_line_style_label->set_enabled(static_cast<bool>(selected_index));
+            m_p_line_style_dropdown_box->set_enabled(static_cast<bool>(selected_index));
 
-            if (selected_index)
+            if (static_cast<bool>(selected_index))
             {
                 assert(m_info_sets.size() == m_p_train_kind_list_box->value_count());
                 const auto& train_kind = m_info_sets[*selected_index].train_kind();

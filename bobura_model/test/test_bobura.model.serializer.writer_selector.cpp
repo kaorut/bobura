@@ -14,6 +14,7 @@
 #include <utility>
 #include <vector>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
@@ -79,7 +80,7 @@ namespace
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream)
         override
         {
-            tetengo2::suppress_unused_variable_warning(timetable);
+            boost::ignore_unused(timetable);
 
             output_stream << m_extension.string();
         }

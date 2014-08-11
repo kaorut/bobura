@@ -10,9 +10,9 @@
 #include <sstream>
 #include <utility>
 
+#include <boost/core/noncopyable.hpp>
 #include <boost/format.hpp>
 #include <boost/mpl/at.hpp>
-#include <boost/noncopyable.hpp>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>

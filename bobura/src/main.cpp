@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/exception/all.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
@@ -115,7 +116,7 @@ int WINAPI wWinMain(
 )
 TETENGO2_STDALT_NOEXCEPT
 {
-    tetengo2::suppress_unused_variable_warning(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
+    boost::ignore_unused(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 
     using alert_type =
         tetengo2::gui::alert<

@@ -13,6 +13,7 @@
 #include <functional>
 #include <memory>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/rational.hpp>
 
 #include <tetengo2.h>
@@ -143,7 +144,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         )
         const
         {
-            tetengo2::suppress_unused_variable_warning(shift, control, meta);
+            boost::ignore_unused(shift, control, meta);
 
             m_picture_box.set_focus();
 
@@ -291,7 +292,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         )
         const
         {
-            tetengo2::suppress_unused_variable_warning(button, position, shift, control, meta);
+            boost::ignore_unused(button, position, shift, control, meta);
 
             m_release_mouse_capture(button);
         }
@@ -412,7 +413,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         void operator()(const position_type& position, const bool shift, const bool control, const bool meta)
         const
         {
-            tetengo2::suppress_unused_variable_warning(shift, control, meta);
+            boost::ignore_unused(shift, control, meta);
 
             const auto* const p_item = m_view.p_item_by_position(position);
             const auto cursor = m_picture_box.cursor();
@@ -1089,7 +1090,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         void operator()(const size_type new_position)
         const
         {
-            tetengo2::suppress_unused_variable_warning(new_position);
+            boost::ignore_unused(new_position);
 
             m_view.update_dimension();
             m_picture_box.repaint();

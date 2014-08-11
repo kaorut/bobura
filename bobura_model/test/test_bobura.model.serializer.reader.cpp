@@ -10,6 +10,7 @@
 #include <memory>
 #include <sstream>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
@@ -63,7 +64,7 @@ namespace
         virtual bool selects_impl(const iterator first, const iterator last)
         override
         {
-            tetengo2::suppress_unused_variable_warning(first, last);
+            boost::ignore_unused(first, last);
 
             return string_type{ first, last } == string_type{ TETENGO2_TEXT("hoge") };
         }
@@ -71,7 +72,7 @@ namespace
         virtual std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
         override
         {
-            tetengo2::suppress_unused_variable_warning(first, last, error);
+            boost::ignore_unused(first, last, error);
 
             return tetengo2::stdalt::make_unique<timetable_type>();
         }

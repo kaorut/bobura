@@ -11,7 +11,7 @@
 
 #include <memory>
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 
 #include <bobura/diagram_view.h>
 #include <bobura/view/scale_list.h>
