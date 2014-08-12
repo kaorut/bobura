@@ -12,6 +12,7 @@
 
 #include <boost/core/ignore_unused.hpp>
 #include <boost/mpl/at.hpp>
+#include <boost/predef.h>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -96,6 +97,10 @@ BOOST_AUTO_TEST_SUITE(reader)
         const concrete_reader reader{};
     }
 
+#if !( \
+    BOOST_OS_LINUX && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
+    )
     BOOST_AUTO_TEST_CASE(selects)
     {
         BOOST_TEST_PASSPOINT();
@@ -121,6 +126,7 @@ BOOST_AUTO_TEST_SUITE(reader)
             );
         }
     }
+#endif
 
     BOOST_AUTO_TEST_CASE(read)
     {
