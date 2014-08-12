@@ -12,6 +12,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
+#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -131,6 +132,10 @@ BOOST_AUTO_TEST_SUITE(load_save)
 BOOST_AUTO_TEST_SUITE(load_from_file)
     // test cases
 
+#if !( \
+    BOOST_OS_LINUX && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
+    )
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -229,6 +234,7 @@ BOOST_AUTO_TEST_SUITE(load_from_file)
             load_from_file(model, path, parent);
         }
     }
+#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -11,6 +11,7 @@
 #include <utility>
 
 #include <boost/mpl/at.hpp>
+#include <boost/predef.h>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -70,6 +71,10 @@ BOOST_AUTO_TEST_SUITE(serializer)
 BOOST_AUTO_TEST_SUITE(reader_set)
     // test cases
 
+#if !( \
+    BOOST_OS_LINUX && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
+    )
     BOOST_AUTO_TEST_CASE(create_readers)
     {
         BOOST_TEST_PASSPOINT();
@@ -82,6 +87,7 @@ BOOST_AUTO_TEST_SUITE(reader_set)
         BOOST_REQUIRE(!p_readers.empty());
         BOOST_CHECK(p_readers[0]);
     }
+#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()
