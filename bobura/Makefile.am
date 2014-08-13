@@ -5,4 +5,4 @@
 SUBDIRS = include res src
 
 EXTRA_DIST = \
-    bobura.vcxproj bobura.vcxproj.filter
+    bobura.vcxproj bobura.vcxproj.filters
