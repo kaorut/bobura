@@ -20,7 +20,7 @@ echo Skipping the unit test...
     </PostBuildEvent>
     <Link>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>tetengo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>bobura_core.lib;tetengo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />

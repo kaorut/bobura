@@ -5,11 +5,11 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)bobura_model\include;$(SolutionDir)lib\tetengo2\tetengo2\include;$(SolutionDir)lib\tetengo2\tetengo2_detail\include;$(SolutionDir)lib\tetengo2\tetengo2_gui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)bobura_core\include;$(SolutionDir)bobura_model\include;$(SolutionDir)lib\tetengo2\tetengo2\include;$(SolutionDir)lib\tetengo2\tetengo2_detail\include;$(SolutionDir)lib\tetengo2\tetengo2_gui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_TETENGO2_DETAIL_TYPES_FOR_APPLICATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>comctl32.lib;gdiplus.lib;d2d1.lib;dwrite.lib;tetengo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;gdiplus.lib;d2d1.lib;dwrite.lib;bobura_core.lib;tetengo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
