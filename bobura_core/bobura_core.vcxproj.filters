@@ -10,18 +10,6 @@
     <Filter Include="headers\bobura">
       <UniqueIdentifier>{331196ef-56c9-4373-868d-94eb01451bd9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="resources">
-      <UniqueIdentifier>{1a283181-6f05-4efd-abfe-aa839069ca0d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="resources\messages">
-      <UniqueIdentifier>{810f9661-0a38-41fa-aa43-578bfb98cd1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="resources\win32">
-      <UniqueIdentifier>{98f488c9-a614-4cbe-bdd1-1e3f93e8abc3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="resources\images">
-      <UniqueIdentifier>{bc4e3f8a-8e28-42fd-b9f2-02ca4e2c7f21}</UniqueIdentifier>
-    </Filter>
     <Filter Include="headers\bobura\command">
       <UniqueIdentifier>{70024d0f-a754-44dd-b562-b95d72a46525}</UniqueIdentifier>
     </Filter>
@@ -53,9 +41,6 @@
   <ItemGroup>
     <ClInclude Include="..\precompiled\precompiled.h">
       <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="res\win32\resource.h">
-      <Filter>resources\win32</Filter>
     </ClInclude>
     <ClInclude Include="include\bobura\load_save\0namespace.h">
       <Filter>headers\bobura\load_save</Filter>
@@ -263,35 +248,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\images\kumakuma.jpg">
-      <Filter>resources\images</Filter>
-    </None>
-    <None Include="res\images\kuma.png">
-      <Filter>resources\images</Filter>
-    </None>
-    <None Include="res\win32\COMCTL32.DLL.x64.manifest">
-      <Filter>resources\win32</Filter>
-    </None>
-    <None Include="res\win32\COMCTL32.DLL.Win32.manifest">
-      <Filter>resources\win32</Filter>
-    </None>
-    <None Include="res\messages\_catalogs.json">
-      <Filter>resources\messages</Filter>
-    </None>
-    <None Include="res\messages\Japanese.json">
-      <Filter>resources\messages</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="res\win32\bobura.rc">
-      <Filter>resources\win32</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\precompiled\precompiled.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\main.cpp">
       <Filter>sources</Filter>
     </ClCompile>
     <ClCompile Include="src\bobura.application.cpp">
@@ -375,21 +332,5 @@
     <ClCompile Include="src\bobura.command.open_www_tetengo_org.cpp">
       <Filter>sources\bobura\command</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Manifest Include="res\win32\high_dpi.manifest">
-      <Filter>resources\win32</Filter>
-    </Manifest>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="res\win32\bobura_app.ico">
-      <Filter>resources\win32</Filter>
-    </Image>
-    <Image Include="res\win32\btt_file.ico">
-      <Filter>resources\win32</Filter>
-    </Image>
-    <Image Include="res\win32\bttbz2_file.ico">
-      <Filter>resources\win32</Filter>
-    </Image>
   </ItemGroup>
 </Project>

@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E9959F02-3B7B-40BF-97C2-A20260C55601}</ProjectGuid>
+    <ProjectGuid>{5B674AE3-B842-4383-9EDA-595519C83AD1}</ProjectGuid>
     <RootNamespace>bobura_coretest</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

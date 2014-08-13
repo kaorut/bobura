@@ -12,11 +12,7 @@
       <AdditionalDependencies>comctl32.lib;gdiplus.lib;d2d1.lib;dwrite.lib;tetengo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
-    <PostBuildEvent>
-      <Command>cscript "$(SolutionDir)lib\tetengo2\tools\copy_boost_dlls.js" "$(ProjectDir)$(ProjectName).boost_libs.txt" "$(SolutionDir)bobura_config.h" "$(SolutionDir)" $(ConfigurationName) $(PlatformName)
-call "$(SolutionDir)tools\copy_bobura_resource.bat" "$(ProjectDir)" "$(OutDir)"
-call "$(SolutionDir)lib\tetengo2\tools\codesign.bat" "$(TargetPath)"</Command>
-    </PostBuildEvent>
+    <PostBuildEvent />
     <Manifest>
       <AdditionalManifestFiles>$(ProjectDir)res\win32\COMCTL32.DLL.$(PlatformName).manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
