@@ -757,6 +757,8 @@ WARN_LOGFILE           =
 INPUT                  = docsrc \
                          bobura/include \
                          bobura/src \
+                         bobura_core/include \
+                         bobura_core/src \
                          bobura_model/include \
                          setup/include \
                          setup/src

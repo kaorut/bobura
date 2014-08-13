@@ -29,7 +29,6 @@ extra_sources = \
     bobura.main_window_menu_builder.cpp \
     bobura.oudia_diagram_dialog.cpp \
     bobura.train_kind_dialog.cpp \
-    bobura.view.diagram.zoom.cpp \
-    main.cpp
+    bobura.view.diagram.zoom.cpp
 
 EXTRA_DIST = $(extra_sources)

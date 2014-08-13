@@ -42,23 +42,23 @@ extra_sources =
 
 BUILT_SOURCES = $(PRECOMPILE_BUILT_SOURCES)
 
-check_PROGRAMS = bobura.test
+check_PROGRAMS = bobura_core.test
 EXTRA_DIST = $(extra_headers) $(extra_sources)
 
-TESTS = bobura.test
+TESTS = bobura_core.test
 
-bobura_test_CPPFLAGS = \
-    -I$(top_srcdir)/bobura/include \
+bobura_core_test_CPPFLAGS = \
+    -I$(top_srcdir)/bobura_core/include \
     -I$(top_srcdir)/bobura_model/include \
     -I$(TETENGO2_INCLUDE) \
     -I$(TETENGO2_DETAIL_INCLUDE) \
     -I$(TETENGO2_GUI_INCLUDE)
-bobura_test_LDFLAGS = \
+bobura_core_test_LDFLAGS = \
     -L$(TETENGO2_LIB)
-bobura_test_LDADD = \
+bobura_core_test_LDADD = \
     -ltetengo2 \
     $(UNITTEST_LIBS)
-bobura_test_SOURCES = $(headers) $(sources)
+bobura_core_test_SOURCES = $(headers) $(sources)
 
 $(top_builddir)/precompiled/precompiled.h.gch: $(top_srcdir)/precompiled/precompiled.h
 	pushd $(top_builddir)/precompiled; \
