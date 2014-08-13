@@ -13,17 +13,19 @@
 
 #include <boost/operators.hpp>
 
+#include <tetengo2.h>
+#include <tetengo2.gui.h>
+
 
 namespace bobura { namespace model { namespace timetable_info
 {
     /*!
         \brief The class template for a font and color.
 
-        \tparam Font  A font type.
-        \tparam Color A color type.
+        \tparam Font A font type.
     */
-    template <typename Font, typename Color>
-    class font_color : private boost::equality_comparable<font_color<Font, Color>>
+    template <typename Font>
+    class font_color : private boost::equality_comparable<font_color<Font>>
     {
     public:
         // types
@@ -32,7 +34,7 @@ namespace bobura { namespace model { namespace timetable_info
         using font_type = Font;
 
         //! The color type.
-        using color_type = Color;
+        using color_type = tetengo2::gui::drawing::color;
 
 
         // constructors and destructor
@@ -103,19 +105,19 @@ namespace bobura { namespace model { namespace timetable_info
     /*!
         \brief The class template for a font and color set.
 
-        \tparam FontColor A font and color type.
+        \tparam Font A font type.
     */
-    template <typename FontColor>
-    class font_color_set : private boost::equality_comparable<font_color_set<FontColor>>
+    template <typename Font>
+    class font_color_set : private boost::equality_comparable<font_color_set<Font>>
     {
     public:
         // types
 
-        //! The font and color type.
-        using font_color_type = FontColor;
-
         //! The font type.
-        using font_type = typename font_color_type::font_type;
+        using font_type = Font;
+
+        //! The font and color type.
+        using font_color_type = font_color<font_type>;
 
         //! The color type.
         using color_type = typename font_color_type::color_type;

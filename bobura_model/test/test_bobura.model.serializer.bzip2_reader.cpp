@@ -18,6 +18,8 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/serializer/bzip2_reader.h>
+
 #include "test_bobura.model.type_list.h"
 
 
@@ -25,22 +27,34 @@ namespace
 {
     // types
 
-    using reader_type =
-        boost::mpl::at<
-            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::reader
-        >::type;
-
-    using error_type = reader_type::error_type;
-
     using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
     using timetable_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type;
 
+    using input_stream_iterator_type =
+        boost::spirit::multi_pass<
+            std::istreambuf_iterator<
+                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type::value_type
+            >
+        >;
+
     using bzip2_reader_type =
-        boost::mpl::at<
-            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::bzip2_reader
-        >::type;
+        bobura::model::serializer::bzip2_reader<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            input_stream_iterator_type,
+            boost::mpl::at<
+                test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
+            >::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type
+        >;
+
+    using reader_type = bzip2_reader_type::base_type;
+
+    using error_type = reader_type::error_type;
 
     class concrete_reader : public reader_type
     {

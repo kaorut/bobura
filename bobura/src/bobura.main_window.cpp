@@ -110,7 +110,10 @@ namespace bobura
     private:
         // types
 
-        using message_loop_break_type = boost::mpl::at<ui_type_list, type::ui::message_loop_break>::type;
+        using message_loop_break_type =
+            tetengo2::gui::message::message_loop_break<
+                boost::mpl::at<detail_type_list, type::detail::message_loop>::type
+            >;
 
         using message_type_list_type =
             boost::mpl::at<main_window_type_list, type::main_window::message_type_list>::type;

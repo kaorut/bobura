@@ -16,29 +16,46 @@
 
 #include <boost/optional.hpp>
 
+#include <bobura/model/timetable_info/station_location.h>
+#include <bobura/model/train.h>
+
 
 namespace bobura { namespace model { namespace timetable_info
 {
     /*!
         \brief The class template for a station interval calculator.
 
-        \tparam StationLocation A station location type.
-        \tparam Train           A train type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
     */
-    template <typename StationLocation, typename Train>
+    template <typename Size, typename Difference, typename String, typename OperatingDistance>
     class station_interval_calculator
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
         //! The station location type.
-        using station_location_type = StationLocation;
+        using station_location_type = station_location<string_type, operating_distance_type>;
 
         //! The station locations type.
         using station_locations_type = std::vector<station_location_type>;
 
         //! The train type.
-        using train_type = Train;
+        using train_type = train<size_type, difference_type, string_type>;
 
         //! The trains type.
         using trains_type = std::vector<train_type>;
@@ -197,7 +214,7 @@ namespace bobura { namespace model { namespace timetable_info
                     if (travel_time)
                     {
                         time_span_type interval{
-                            static_cast<typename time_span_type::tick_type>(travel_time->seconds() / (to - from))
+                            static_cast<typename time_span_type::difference_type>(travel_time->seconds() / (to - from))
                         };
                         if (to - from > 1)
                             interval += whole_day();

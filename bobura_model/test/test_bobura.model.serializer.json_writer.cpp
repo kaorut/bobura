@@ -7,6 +7,7 @@
 */
 
 #include <memory>
+#include <ostream>
 #include <sstream>
 #include <string>
 #include <utility>
@@ -17,6 +18,8 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
+
+#include <bobura/model/serializer/json_writer.h>
 
 #include "test_bobura.model.type_list.h"
 
@@ -61,10 +64,24 @@ namespace
 
     using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
+    using output_stream_type =
+        std::basic_ostream<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type::value_type
+        >;
+
     using writer_type =
-        boost::mpl::at<
-            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::json_writer
-        >::type;
+        bobura::model::serializer::json_writer<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            output_stream_type,
+            boost::mpl::at<
+                test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
+            >::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type
+        >;
 
 
     // variables

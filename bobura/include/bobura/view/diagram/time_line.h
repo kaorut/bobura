@@ -21,6 +21,7 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/view/diagram/item.h>
+#include <bobura/view/diagram/selection.h>
 #include <bobura/view/diagram/utility.h>
 
 
@@ -29,18 +30,29 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a time line in the diagram view.
 
-        \tparam Selection A selection type.
-        \tparam Canvas    A canvas type.
-        \tparam TimeTick  A time tick type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Canvas            A canvas type.
     */
-    template <typename Selection, typename Canvas, typename TimeTick>
-    class time_line : public item<Selection, Canvas>
+    template <typename Size, typename Difference, typename String, typename OperatingDistance, typename Canvas>
+    class time_line : public item<Size, Difference, String, OperatingDistance, Canvas>
     {
     public:
         // types
 
-        //! The selection type.
-        using selection_type = Selection;
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -58,10 +70,10 @@ namespace bobura { namespace view { namespace diagram
         using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
         //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
-        //! The time tick type.
-        using time_tick_type = TimeTick;
+        //! The selection type.
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
 
 
         // constructors and destructor
@@ -77,12 +89,12 @@ namespace bobura { namespace view { namespace diagram
             \param hours     Hours.
         */
         time_line(
-            selection_type&                 selection,
-            left_type                       left,
-            const top_type&                 top,
-            const top_type&                 bottom,
-            unit_size_type                  width,
-            boost::optional<time_tick_type> hours
+            selection_type&            selection,
+            left_type                  left,
+            const top_type&            top,
+            const top_type&            bottom,
+            unit_size_type             width,
+            boost::optional<size_type> hours
         )
         :
         base_type(selection),
@@ -100,7 +112,7 @@ namespace bobura { namespace view { namespace diagram
         */
         time_line(time_line&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_left(std::move(another.m_left)),
         m_top(std::move(another.m_top)),
         m_bottom(std::move(another.m_bottom)),
@@ -141,11 +153,6 @@ namespace bobura { namespace view { namespace diagram
 
 
     private:
-        // types
-
-        using string_type = typename canvas_type::string_type;
-
-
         // variables
 
         left_type m_left;
@@ -156,7 +163,7 @@ namespace bobura { namespace view { namespace diagram
 
         unit_size_type m_width;
 
-        boost::optional<time_tick_type> m_hours;
+        boost::optional<size_type> m_hours;
 
 
         // virtual functions
@@ -179,36 +186,43 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a time line list in the diagram view.
 
-        \tparam Model     A model type.
-        \tparam Selection A selection type.
-        \tparam Canvas    A canvas type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Canvas            A canvas type.
     */
-    template <typename Model, typename Selection, typename Canvas>
-    class time_line_list : public item<Selection, Canvas>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Canvas
+    >
+    class time_line_list : public item<Size, Difference, String, OperatingDistance, Canvas>
     {
     public:
         // types
 
-        //! The model type.
-        using model_type = Model;
-        
-        //! The time type.
-        using time_type = typename model_type::timetable_type::train_type::stop_type::time_type;
+        //! The size type.
+        using size_type = Size;
 
-        //! The time span type.
-        using time_span_type = typename time_type::time_span_type;
+        //! The difference type.
+        using difference_type = Difference;
 
-        //! The selection type.
-        using selection_type = Selection;
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
-
-        //! The font type.
-        using font_type = typename canvas_type::font_type;
-
-        //! The color type.
-        using color_type = typename canvas_type::color_type;
 
         //! The position type.
         using position_type = typename canvas_type::position_type;
@@ -231,8 +245,27 @@ namespace bobura { namespace view { namespace diagram
         //! The horizontal scale type.
         using horizontal_scale_type = typename width_type::value_type;
 
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
+        //! The color type.
+        using color_type = typename canvas_type::color_type;
+
         //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+
+        //! The selection type.
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+        //! The time type.
+        using time_type = typename model_type::timetable_type::train_type::stop_type::time_type;
+
+        //! The time span type.
+        using time_span_type = typename time_type::time_span_type;
 
 
         // constructors and destructor
@@ -289,7 +322,7 @@ namespace bobura { namespace view { namespace diagram
         */
         time_line_list(time_line_list&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_p_font(another.m_p_font),
         m_p_color(another.m_p_color),
         m_time_lines(std::move(another.m_time_lines))
@@ -328,9 +361,8 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
-        using time_tick_type = typename time_type::tick_type;
-
-        using time_line_type = time_line<selection_type, canvas_type, time_tick_type>;
+        using time_line_type =
+            time_line<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
         using unit_size_type = typename canvas_type::unit_size_type;
 
@@ -373,7 +405,7 @@ namespace bobura { namespace view { namespace diagram
 
             std::vector<time_line_type> time_lines{};
             time_lines.reserve(24 * 60);
-            for (time_tick_type i = 0; i <= 24 * 60; ++i)
+            for (size_type i = 0; i <= 24 * 60; ++i)
             {
                 const time_type time{ i * 60 + time_offset.seconds() };
                 const auto hours_minutes_seconds = time.hours_minutes_seconds();

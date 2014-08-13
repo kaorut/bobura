@@ -13,21 +13,42 @@
 
 #include <tetengo2.h>
 
+#include <bobura/settings.h>
+
 
 namespace bobura
 {
     /*!
         \brief The class template for the about dialog.
 
+        \tparam String         A string type.
+        \tparam Position       A position type.
+        \tparam Dimension      A dimension type.
         \tparam Dialog         A dialog type.
         \tparam MessageCatalog A message catalog type.
-        \tparam Settings       A settings type.
+        \tparam ConfigTraits   A configuration traits type.
     */
-    template <typename Dialog, typename MessageCatalog, typename Settings>
+    template <
+        typename String,
+        typename Position,
+        typename Dimension,
+        typename Dialog,
+        typename MessageCatalog,
+        typename ConfigTraits
+    >
     class about_dialog : public Dialog
     {
     public:
         // types
+
+        //! The string type.
+        using string_type = String;
+
+        //! The position type.
+        using position_type = Position;
+
+        //! The dimension type.
+        using dimension_type = Dimension;
 
         //! The base type.
         using base_type = Dialog;
@@ -38,8 +59,11 @@ namespace bobura
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
+        //! The configuration traits type.
+        using config_traits_type = ConfigTraits;
+
         //! The settings type.
-        using settings_type = Settings;
+        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
 
 
         // constructors and destructor

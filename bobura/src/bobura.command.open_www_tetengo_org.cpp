@@ -10,6 +10,7 @@
 #include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include <bobura/command/open_www_tetengo_org.h>
 
@@ -25,7 +26,12 @@ namespace bobura { namespace command
 
         using abstract_window_type = open_www_tetengo_org::abstract_window_type;
 
-        using shell_type = boost::mpl::at<ui_type_list, type::ui::shell>::type;
+        using shell_type =
+            tetengo2::gui::shell<
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                boost::mpl::at<detail_type_list, type::detail::shell>::type
+            >;
 
 
         // functions

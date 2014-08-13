@@ -14,28 +14,46 @@
 #include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include <bobura/application.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/type_list.h>
+#include <bobura/message/type_list_impl.h>
 
 
 namespace bobura
 {
     namespace
     {
-        using settings_type = boost::mpl::at<setting_type_list, type::setting::settings>::type;
-
         using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
 
         using model_message_type_list_type =
-            boost::mpl::at<application_type_list, type::application::model_message_type_list>::type;
+            bobura::message::timetable_model::type_list<
+                boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type,
+                boost::mpl::at<bobura::view_type_list, bobura::type::view::view>::type,
+                boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::main_window>::type
+            >;
 
         using view_type = boost::mpl::at<view_type_list, type::view::view>::type;
 
         using diagram_view_message_type_list_type =
-            boost::mpl::at<application_type_list, type::application::diagram_view_message_type_list>::type;
+            bobura::message::diagram_view::type_list<
+                boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
+                boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
+                boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
+                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
+                boost::mpl::at<bobura::model_type_list, bobura::type::model::operating_distance>::type,
+                boost::mpl::at<bobura::model_type_list, bobura::type::model::speed>::type,
+                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type,
+                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type,
+                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type,
+                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type,
+                boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type,
+                boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type
+            >;
 
         using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
 
@@ -60,23 +78,51 @@ namespace bobura
         using diagram_picture_box_message_type_list =
             boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box_message_type_list>::type;
 
-        using message_loop_type = boost::mpl::at<ui_type_list, type::ui::message_loop>::type;
+        using message_loop_type =
+            tetengo2::gui::message::message_loop<
+                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                boost::mpl::at<detail_type_list, type::detail::message_loop>::type
+            >;
 
-        using gui_fixture_type = boost::mpl::at<ui_type_list, type::ui::gui_fixture>::type;
+        using gui_fixture_type =
+            tetengo2::gui::fixture<boost::mpl::at<detail_type_list, type::detail::gui_fixture>::type>;
 
         using mouse_capture_type = boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type;
 
         using mouse_button_type = mouse_capture_type::mouse_button_type;
 
-        using timer_type = boost::mpl::at<ui_type_list, type::ui::timer>::type;
+        using timer_type =
+            tetengo2::gui::timer<
+                boost::mpl::at<ui_type_list, type::ui::widget>::type,
+                boost::mpl::at<detail_type_list, type::detail::timer>::type
+            >;
 
 
     }
 
 
-    class application::impl : private boost::noncopyable
+    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
+    class application<String, Position, Dimension, ConfigTraits>::impl : private boost::noncopyable
     {
     public:
+        // types
+
+        //! The string type.
+        using string_type = String;
+
+        //! The position type.
+        using position_type = Position;
+
+        //! The dimension type.
+        using dimension_type = Dimension;
+
+        //! The configuration traits type.
+        using config_traits_type = ConfigTraits;
+
+        //! The settings type.
+        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
+
+
         // constructors and destructor
 
         explicit impl(settings_type& settings)
@@ -318,19 +364,30 @@ namespace bobura
     };
 
 
-    application::application(settings_type& settings)
+    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
+    application<String, Position, Dimension, ConfigTraits>::application(settings_type& settings)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(settings))
     {}
 
-    application::~application()
+    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
+    application<String, Position, Dimension, ConfigTraits>::~application()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    int application::run()
+    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
+    int application<String, Position, Dimension, ConfigTraits>::run()
     {
         return m_p_impl->run();
     }
+
+
+    template class application<
+        boost::mpl::at<common_type_list, type::string>::type,
+        boost::mpl::at<ui_type_list, type::ui::position>::type,
+        boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+        boost::mpl::at<setting_type_list, type::setting::config_traits>::type
+    >;
 
 
 }

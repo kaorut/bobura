@@ -15,7 +15,6 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/message/diagram_selection_observer_set.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/selection.h>
 #include <bobura/view/diagram/train_line.h>
@@ -25,19 +24,22 @@ namespace
 {
     // types
 
+    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
+
+    using difference_type = boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type;
+
     using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
     using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
+    
+    using speed_type = model_type::speed_type;
 
-    using station_location_type = model_type::timetable_type::station_location_type;
+    using operating_distance_type = model_type::timetable_type::station_location_type::operating_distance_type;
 
     using train_type = model_type::timetable_type::train_type;
 
-    using diagram_selection_observer_set_type =
-        bobura::message::diagram_selection_observer_set<station_location_type, train_type>;
-
     using selection_type =
-        bobura::view::diagram::selection<station_location_type, train_type, diagram_selection_observer_set_type>;
+        bobura::view::diagram::selection<size_type, difference_type, string_type, operating_distance_type>;
 
     using time_type = train_type::stop_type::time_type;
 
@@ -74,13 +76,37 @@ namespace
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
     using train_line_fragment_type =
-        bobura::view::diagram::train_line_fragment<model_type, selection_type, canvas_type, message_catalog_type>;
+        bobura::view::diagram::train_line_fragment<
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            speed_type,
+            canvas_type,
+            message_catalog_type
+        >;
 
     using train_line_type =
-        bobura::view::diagram::train_line<model_type, selection_type, canvas_type, message_catalog_type>;
+        bobura::view::diagram::train_line<
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            speed_type,
+            canvas_type,
+            message_catalog_type
+        >;
 
     using train_line_list_type =
-        bobura::view::diagram::train_line_list<model_type, selection_type, canvas_type, message_catalog_type>;
+        bobura::view::diagram::train_line_list<
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            speed_type,
+            canvas_type,
+            message_catalog_type
+        >;
 
 
 }

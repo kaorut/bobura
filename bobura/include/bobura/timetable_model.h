@@ -22,26 +22,59 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/message/timetable_model_observer_set.h>
+#include <bobura/model/timetable.h>
+
 
 namespace bobura
 {
    /*!
         \brief The class template for a model.
 
-        \tparam Timetable   A timetable type.
-        \tparam ObserverSet A observer set type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Font              A font type.
     */
-    template <typename Timetable, typename ObserverSet>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Font
+    >
     class timetable_model : private boost::noncopyable
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The font type.
+        using font_type = Font;
+
         //! The timetable type.
-        using timetable_type = Timetable;
+        using timetable_type =
+            model::timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
         //! The observer set type.
-        using observer_set_type = ObserverSet;
+        using observer_set_type = message::timetable_model_observer_set;
 
 
         // constructors and destructor

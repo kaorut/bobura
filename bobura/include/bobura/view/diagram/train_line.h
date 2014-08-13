@@ -29,6 +29,7 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/view/diagram/item.h>
+#include <bobura/view/diagram/selection.h>
 #include <bobura/view/diagram/utility.h>
 
 
@@ -37,43 +38,67 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a train line fragment in the diagram view.
 
-        \tparam Model          A model type.
-        \tparam Selection      A selection type.
-        \tparam Canvas         A canvas type.
-        \tparam MessageCatalog A message catalog type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Canvas            A canvas type.
+        \tparam MessageCatalog    A message catalog type.
     */
-    template <typename Model, typename Selection, typename Canvas, typename MessageCatalog>
-    class train_line_fragment : public item<Selection, Canvas>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Canvas,
+        typename MessageCatalog
+    >
+    class train_line_fragment : public item<Size, Difference, String, OperatingDistance, Canvas>
     {
     public:
         // types
 
-        //! The model type.
-        using model_type = Model;
+        //! The size type.
+        using size_type = Size;
 
-        //! The train type.
-        using train_type = typename model_type::timetable_type::train_type;
+        //! The difference type.
+        using difference_type = Difference;
 
-        //! The stop index type.
-        using stop_index_type = typename train_type::stops_type::size_type;
+        //! The string type.
+        using string_type = String;
 
-        //! The selection type.
-        using selection_type = Selection;
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
 
-        //! The string type.
-        using string_type = typename canvas_type::string_type;
-
         //! The position type.
         using position_type = typename canvas_type::position_type;
 
-        //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
+
+        //! The base type.
+        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+
+        //! The selection type.
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+        //! The train type.
+        using train_type = typename model_type::timetable_type::train_type;
 
 
         // constructors and destructor
@@ -91,7 +116,7 @@ namespace bobura { namespace view { namespace diagram
         */
         train_line_fragment(
             const train_type&           train,
-            const stop_index_type       departure_stop_index,
+            const size_type             departure_stop_index,
             selection_type&             selection,
             position_type               departure,
             position_type               arrival,
@@ -115,7 +140,7 @@ namespace bobura { namespace view { namespace diagram
         */
         train_line_fragment(train_line_fragment&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_p_train(another.m_p_train),
         m_departure_stop_index(another.m_departure_stop_index),
         m_departure(std::move(another.m_departure)),
@@ -334,7 +359,7 @@ namespace bobura { namespace view { namespace diagram
 
         const train_type* m_p_train;
 
-        stop_index_type m_departure_stop_index;
+        size_type m_departure_stop_index;
 
         position_type m_departure;
 
@@ -367,19 +392,19 @@ namespace bobura { namespace view { namespace diagram
         const override
         {
             return
-                this->selection().selected(*m_p_train, boost::none) ||
-                this->selection().selected(*m_p_train, boost::make_optional(m_departure_stop_index));
+                this->get_selection().selected(*m_p_train, boost::none) ||
+                this->get_selection().selected(*m_p_train, boost::make_optional(m_departure_stop_index));
         }
 
         virtual void select_impl(const bool switch_selection_style)
         override
         {
-            const auto whole_selected = this->selection().selected(*m_p_train, boost::none);
+            const auto whole_selected = this->get_selection().selected(*m_p_train, boost::none);
             const auto this_fragment_selected =
-                this->selection().selected(*m_p_train, boost::make_optional(m_departure_stop_index));
+                this->get_selection().selected(*m_p_train, boost::make_optional(m_departure_stop_index));
             const auto any_fragment_selected =
-                this->selection().selected(
-                    *m_p_train, boost::make_optional(std::numeric_limits<stop_index_type>::max())
+                this->get_selection().selected(
+                    *m_p_train, boost::make_optional(std::numeric_limits<size_type>::max())
                 );
 
             auto select_fragment = false;
@@ -387,7 +412,7 @@ namespace bobura { namespace view { namespace diagram
                 select_fragment = whole_selected || (!this_fragment_selected && any_fragment_selected);
             else
                 select_fragment = this_fragment_selected;
-            this->selection().select(
+            this->get_selection().select(
                 *m_p_train, boost::make_optional(select_fragment, m_departure_stop_index)
             );
         }
@@ -416,37 +441,42 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a train line in the diagram view.
 
-        \tparam Model          A model type.
-        \tparam Selection      A selection type.
-        \tparam Canvas         A canvas type.
-        \tparam MessageCatalog A message catalog type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Canvas            A canvas type.
+        \tparam MessageCatalog    A message catalog type.
     */
-    template <typename Model, typename Selection, typename Canvas, typename MessageCatalog>
-    class train_line : public item<Selection, Canvas>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Canvas,
+        typename MessageCatalog
+    >
+    class train_line : public item<Size, Difference, String, OperatingDistance, Canvas>
     {
     public:
         // types
 
-        //! The model type.
-        using model_type = Model;
+        //! The size type.
+        using size_type = Size;
 
-        //! The train type.
-        using train_type = typename model_type::timetable_type::train_type;
+        //! The difference type.
+        using difference_type = Difference;
 
-        //! The time type.
-        using time_type = typename train_type::stop_type::time_type;
+        //! The string type.
+        using string_type = String;
 
-        //! The time span type.
-        using time_span_type = typename time_type::time_span_type;
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
 
-        //! The train kind type.
-        using train_kind_type = typename model_type::timetable_type::train_kind_type;
-
-        //! The station intervals type.
-        using station_intervals_type = typename model_type::timetable_type::station_intervals_type;
-
-        //! The selection type.
-        using selection_type = Selection;
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -472,11 +502,36 @@ namespace bobura { namespace view { namespace diagram
         //! The horizontal scale type.
         using horizontal_scale_type = typename width_type::value_type;
 
-        //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
+
+        //! The base type.
+        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+
+        //! The selection type.
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+        //! The train type.
+        using train_type = typename model_type::timetable_type::train_type;
+
+        //! The time type.
+        using time_type = typename train_type::stop_type::time_type;
+
+        //! The time span type.
+        using time_span_type = typename time_type::time_span_type;
+
+        //! The train kind type.
+        using train_kind_type = typename model_type::timetable_type::train_kind_type;
+
+        //! The station intervals type.
+        using station_intervals_type = typename model_type::timetable_type::station_intervals_type;
 
 
         // constructors and destructor
@@ -541,7 +596,7 @@ namespace bobura { namespace view { namespace diagram
         */
         train_line(train_line&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_p_train_kind(another.m_p_train_kind),
         m_fragments(std::move(another.m_fragments))
         {}
@@ -579,15 +634,19 @@ namespace bobura { namespace view { namespace diagram
         // types
 
         using train_line_fragment_type =
-            train_line_fragment<model_type, selection_type, canvas_type, message_catalog_type>;
+            train_line_fragment<
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                speed_type,
+                canvas_type,
+                message_catalog_type
+            >;
 
         using direction_type = typename train_type::direction_type;
 
         using unit_size_type = typename canvas_type::unit_size_type;
-
-        using string_type = typename canvas_type::string_type;
-
-        using stop_index_type = typename train_type::stops_type::size_type;
 
         using stop_type = typename train_type::stop_type;
 
@@ -614,7 +673,7 @@ namespace bobura { namespace view { namespace diagram
             auto train_name_drawn = false;
             if (train.direction() == direction_type::down)
             {
-                for (stop_index_type i = 0; i + 1 < train.stops().size(); )
+                for (size_type i = 0; i + 1 < train.stops().size(); )
                 {
                     const auto from = i;
 
@@ -667,7 +726,7 @@ namespace bobura { namespace view { namespace diagram
             }
             else
             {
-                for (stop_index_type i = train.stops().size(); i > 1; )
+                for (size_type i = train.stops().size(); i > 1; )
                 {
                     const auto from = i - 1;
 
@@ -740,8 +799,8 @@ namespace bobura { namespace view { namespace diagram
             const station_intervals_type& station_intervals,
             const time_type&              from_departure,
             const stop_type&              to_stop,
-            const stop_index_type         upper_stop_index,
-            const stop_index_type         lower_stop_index
+            const size_type               upper_stop_index,
+            const size_type               lower_stop_index
         )
         {
             if (to_stop.arrival().initialized())
@@ -760,9 +819,9 @@ namespace bobura { namespace view { namespace diagram
 
         static void make_fragment(
             const train_type&                      train,
-            const stop_index_type                  departure_stop_index,
+            const size_type                        departure_stop_index,
             const time_type&                       departure_time,
-            const stop_index_type                  arrival_stop_index,
+            const size_type                        arrival_stop_index,
             const time_type&                       arrival_time,
             const bool                             draw_train_name,
             const time_span_type&                  time_offset,
@@ -851,10 +910,10 @@ namespace bobura { namespace view { namespace diagram
 
         static void make_fragment_impl(
             const train_type&                      train,
-            const stop_index_type                  departure_stop_index,
+            const size_type                        departure_stop_index,
             const time_type&                       departure_time,
             const bool                             previous_day_departure,
-            const stop_index_type                  arrival_stop_index,
+            const size_type                        arrival_stop_index,
             const time_type&                       arrival_time,
             const bool                             next_day_arrival,
             const bool                             draw_train_name,
@@ -1007,31 +1066,42 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a train line list in the diagram view.
 
-        \tparam Model          A model type.
-        \tparam Selection      A selection type.
-        \tparam Canvas         A canvas type.
-        \tparam MessageCatalog A message catalog type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Canvas            A canvas type.
+        \tparam MessageCatalog    A message catalog type.
     */
-    template <typename Model, typename Selection, typename Canvas, typename MessageCatalog>
-    class train_line_list : public item<Selection, Canvas>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Canvas,
+        typename MessageCatalog
+    >
+    class train_line_list : public item<Size, Difference, String, OperatingDistance, Canvas>
     {
     public:
         // types
 
-        //! The model type.
-        using model_type = Model;
-        
-        //! The time type.
-        using time_type = typename model_type::timetable_type::train_type::stop_type::time_type;
+        //! The size type.
+        using size_type = Size;
 
-        //! The time span type.
-        using time_span_type = typename time_type::time_span_type;
+        //! The difference type.
+        using difference_type = Difference;
 
-        //! The station intervals type.
-        using station_intervals_type = typename model_type::timetable_type::station_intervals_type;
+        //! The string type.
+        using string_type = String;
 
-        //! The selection type.
-        using selection_type = Selection;
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -1057,11 +1127,30 @@ namespace bobura { namespace view { namespace diagram
         //! The horizontal scale type.
         using horizontal_scale_type = typename width_type::value_type;
 
-        //! The base type.
-        using base_type = item<selection_type, canvas_type>;
-
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
+
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
+        //! The base type.
+        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+
+        //! The selection type.
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+        //! The time type.
+        using time_type = typename model_type::timetable_type::train_type::stop_type::time_type;
+
+        //! The time span type.
+        using time_span_type = typename time_type::time_span_type;
+
+        //! The station intervals type.
+        using station_intervals_type = typename model_type::timetable_type::station_intervals_type;
 
 
         // constructors and destructor
@@ -1124,7 +1213,7 @@ namespace bobura { namespace view { namespace diagram
         */
         train_line_list(train_line_list&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_p_font(another.m_p_font),
         m_train_lines(std::move(another.m_train_lines))
         {}
@@ -1161,7 +1250,16 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
-        using train_line_type = train_line<model_type, selection_type, canvas_type, message_catalog_type>;
+        using train_line_type =
+            train_line<
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                speed_type,
+                canvas_type,
+                message_catalog_type
+            >;
 
         using timetable_type = typename model_type::timetable_type;
 
@@ -1172,8 +1270,6 @@ namespace bobura { namespace view { namespace diagram
         using train_kinds_type = typename timetable_type::train_kinds_type;
 
         using train_kind_type = typename timetable_type::train_kind_type;
-
-        using font_type = typename canvas_type::font_type;
 
 
         // static functions

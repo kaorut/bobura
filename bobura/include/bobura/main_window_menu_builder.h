@@ -30,7 +30,19 @@ namespace bobura
         // types
 
         //! The menu bar type.
-        using menu_bar_type = boost::mpl::at<ui_type_list, type::ui::menu_bar>::type;
+        using menu_bar_type =
+            tetengo2::gui::menu::menu_bar<
+                boost::mpl::at<common_type_list, type::string>::type,
+                tetengo2::gui::menu::shortcut_key_table<
+                    boost::mpl::at<common_type_list, type::string>::type,
+                    boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                    boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                    boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
+                >,
+                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
+            >;
 
         //! The command set type.
         using command_set_type = boost::mpl::at<main_window_type_list, type::main_window::command_set>::type;

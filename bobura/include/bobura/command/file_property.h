@@ -16,6 +16,7 @@
 #include <tetengo2.h>
 
 #include <bobura/command/command_base.h>
+#include <bobura/file_property_dialog.h>
 
 
 namespace bobura { namespace command
@@ -32,7 +33,11 @@ namespace bobura { namespace command
         using base_type = command_base;
 
         //! The file property dialog type.
-        using file_property_dialog_type = boost::mpl::at<dialog_type_list, type::dialog::file_property_dialog>::type;
+        using file_property_dialog_type =
+            file_property_dialog<
+                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+            >;
 
         //! The dialog base type.
         using dialog_base_type = file_property_dialog_type::base_type;

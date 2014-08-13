@@ -7,7 +7,6 @@
 */
 
 #include <iterator>
-#include <string>
 #include <utility>
 
 #include <boost/mpl/at.hpp>
@@ -17,6 +16,8 @@
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
+
+#include <bobura/model/serializer/reader_set.h>
 
 #include "test_bobura.model.type_list.h"
 
@@ -34,10 +35,12 @@ namespace
             boost::mpl::at<test_bobura::model::detail_type_list, test_bobura::model::type::detail::menu>::type
         >;
 
-    using io_string_type = std::string;
-
     using input_stream_iterator_type =
-        boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
+        boost::spirit::multi_pass<
+            std::istreambuf_iterator<
+                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type::value_type
+            >
+        >;
 
     using message_catalog_type =
         tetengo2::message::message_catalog<
@@ -48,18 +51,24 @@ namespace
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type
         >;
 
-    using input_stream_iterator_type =
-        boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
-
-    using reader_type =
-        boost::mpl::at<
-            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::reader
-        >::type;
-
     using reader_set_type =
-        boost::mpl::at<
-            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::reader_set
-        >::type;
+        bobura::model::serializer::reader_set<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            input_stream_iterator_type,
+            boost::mpl::at<
+                test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
+            >::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type,
+            boost::mpl::at<
+                test_bobura::model::serialization_type_list,
+                test_bobura::model::type::serialization::select_oudia_diagram
+            >::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type
+        >;
 
 
 }

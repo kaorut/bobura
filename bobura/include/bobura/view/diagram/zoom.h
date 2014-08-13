@@ -12,32 +12,89 @@
 #include <memory>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/mpl/at.hpp>
 
-#include <bobura/basic_type_list.h>
+#include <bobura/diagram_view.h>
+#include <bobura/view/scale_list.h>
 
 
 namespace bobura { namespace view { namespace diagram
 {
     /*!
-        \brief The class for a zoom of a view.
+        \brief The class template for a zoom of a view.
+
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Scale             A scale type.
+        \tparam Canvas            A canvas type.
+        \tparam SolidBackground   A solid background type.
+        \tparam PictureBox        A picture box type.
+        \tparam MessageCatalog    A message catalog type.
     */
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Scale,
+        typename Canvas,
+        typename SolidBackground,
+        typename PictureBox,
+        typename MessageCatalog
+    >
     class zoom : boost::noncopyable
     {
     public:
         // types
 
-        //! The picture box type.
-        using picture_box_type = boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
+        //! The size type.
+        using size_type = Size;
 
-        //! The diagram view type.
-        using diagram_view_type = boost::mpl::at<view_type_list, type::view::view>::type;
+        //! The difference type.
+        using difference_type = Difference;
 
-        //! The scale list type.
-        using scale_list_type = boost::mpl::at<view_type_list, type::view::scale_list>::type;
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The scale type.
-        using scale_type = scale_list_type::scale_type;
+        using scale_type = Scale;
+
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! The solid background type.
+        using solid_background_type = SolidBackground;
+
+        //! The picture box type.
+        using picture_box_type = PictureBox;
+
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
+        //! The diagram view type.
+        using diagram_view_type =
+            diagram_view<
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                speed_type,
+                canvas_type,
+                solid_background_type,
+                message_catalog_type
+            >;
+
+        //! The scale list type.
+        using scale_list_type = view::scale_list<size_type, string_type, scale_type>;
 
 
         // constructors and destructor

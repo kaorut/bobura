@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <ostream>
 #include <sstream>
 
 #include <boost/core/ignore_unused.hpp>
@@ -14,6 +15,8 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
+
+#include <bobura/model/serializer/writer.h>
 
 #include "test_bobura.model.type_list.h"
 
@@ -25,10 +28,23 @@ namespace
     using timetable_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type;
 
+    using output_stream_type =
+        std::basic_ostream<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type::value_type
+        >;
+
     using writer_type =
-        boost::mpl::at<
-            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::writer
-        >::type;
+        bobura::model::serializer::writer<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            output_stream_type,
+            boost::mpl::at<
+                test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
+            >::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type
+        >;
 
     class concrete_writer : public writer_type
     {

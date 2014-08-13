@@ -35,34 +35,66 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a WinDIA reader.
 
-        \tparam ForwardIterator     A forward iterator type.
-        \tparam Timetable           A timetable type.
-        \tparam StationGradeTypeSet A station grade type set type.
-        \tparam Encoder             An encoder type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam ForwardIterator   A forward iterator type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Font              A font type.
+        \tparam Encoder           An encoder type.
     */
-    template <typename ForwardIterator, typename Timetable, typename StationGradeTypeSet, typename Encoder>
-    class windia_reader : public reader<ForwardIterator, Timetable>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename ForwardIterator,
+        typename OperatingDistance,
+        typename Speed,
+        typename Font,
+        typename Encoder
+    >
+    class windia_reader : public reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
         //! The iterator type.
         using iterator = ForwardIterator;
 
-        //! The timetable type.
-        using timetable_type = Timetable;
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
 
-        //! The base type.
-        using base_type = reader<iterator, timetable_type>;
+        //! The speed type.
+        using speed_type = Speed;
 
-        //! The station grade type set type.
-        using station_grade_type_set_type = StationGradeTypeSet;
-
-        //! The error type.
-        using error_type = typename base_type::error_type;
+        //! The font type.
+        using font_type = Font;
 
         //! The encoder type.
         using encoder_type = Encoder;
+
+        //! The station grade type set type.
+        using station_grade_type_set_type = station_info::grade_type_set<string_type>;
+
+        //! The base type.
+        using base_type =
+            reader<size_type, difference_type, string_type, iterator, operating_distance_type, speed_type, font_type>;
+
+        //! The timetable type.
+        using timetable_type = typename base_type::timetable_type;
+
+        //! The error type.
+        using error_type = typename base_type::error_type;
 
 
         // constructors and destructor
@@ -80,8 +112,6 @@ namespace bobura { namespace model { namespace serializer
         using input_char_type = typename iterator::value_type;
 
         using input_string_type = std::basic_string<input_char_type>;
-
-        using string_type = typename timetable_type::string_type;
 
         using char_type = typename string_type::value_type;
 
@@ -416,13 +446,11 @@ namespace bobura { namespace model { namespace serializer
             timetable_type& m_timetable;
 
         private:
-            using train_kind_index_type = typename train_type::kind_index_type;
+            using size_type = typename train_type::size_type;
 
             using stop_type = typename train_type::stop_type;
 
             using time_type = typename stop_type::time_type;
-
-            using time_tick_type = typename time_type::tick_type;
 
             static std::pair<string_ref_type, string_ref_type> split_line(const string_ref_type& line)
             {
@@ -453,7 +481,7 @@ namespace bobura { namespace model { namespace serializer
             virtual void insert_train_impl(train_type train)
             = 0;
 
-            boost::optional<train_kind_index_type> to_train_kind_index(const string_ref_type& train_kind_string)
+            boost::optional<size_type> to_train_kind_index(const string_ref_type& train_kind_string)
             {
                 const auto opening_paren_position = train_kind_string.find(TETENGO2_TEXT('('));
                 if (opening_paren_position == string_type::npos)
@@ -462,8 +490,8 @@ namespace bobura { namespace model { namespace serializer
                     {
                         return
                             train_kind_string.empty() ?
-                            boost::make_optional(static_cast<train_kind_index_type>(0)) :
-                            boost::make_optional(boost::lexical_cast<train_kind_index_type>(train_kind_string));
+                            boost::make_optional(static_cast<size_type>(0)) :
+                            boost::make_optional(boost::lexical_cast<size_type>(train_kind_string));
                     }
                     catch (const boost::bad_lexical_cast&)
                     {
@@ -475,11 +503,11 @@ namespace bobura { namespace model { namespace serializer
                 if (closing_paren_position == string_type::npos || closing_paren_position <= opening_paren_position)
                     return boost::none;
 
-                train_kind_index_type base_index = 0;
+                size_type base_index = 0;
                 try
                 {
                     const auto index_string = train_kind_string.substr(0, opening_paren_position);
-                    base_index = index_string.empty() ? 0 : boost::lexical_cast<train_kind_index_type>(index_string);
+                    base_index = index_string.empty() ? 0 : boost::lexical_cast<size_type>(index_string);
                 }
                 catch (const boost::bad_lexical_cast&)
                 {
@@ -511,7 +539,7 @@ namespace bobura { namespace model { namespace serializer
                     return boost::none;
                 m_timetable.insert_train_kind(m_timetable.train_kinds().end(), std::move(*new_train_kind));
 
-                return boost::make_optional<train_kind_index_type>(m_timetable.train_kinds().size() - 1);
+                return boost::make_optional<size_type>(m_timetable.train_kinds().size() - 1);
             }
 
             boost::optional<stop_type> to_stop(string_ref_type time_string)
@@ -553,10 +581,10 @@ namespace bobura { namespace model { namespace serializer
                     return boost::none;
                 const std::size_t minute_position = time_string_length == 3 ? 1 : 2;
 
-                time_tick_type hours = 0;
+                size_type hours = 0;
                 try
                 {
-                    hours = boost::lexical_cast<time_tick_type>(time_string.substr(0, minute_position));
+                    hours = boost::lexical_cast<size_type>(time_string.substr(0, minute_position));
                 }
                 catch (const boost::bad_lexical_cast&)
                 {
@@ -564,10 +592,10 @@ namespace bobura { namespace model { namespace serializer
                 }
                 hours %= 24;
 
-                time_tick_type minutes = 0;
+                size_type minutes = 0;
                 try
                 {
-                    minutes = boost::lexical_cast<time_tick_type>(time_string.substr(minute_position, 2));
+                    minutes = boost::lexical_cast<size_type>(time_string.substr(minute_position, 2));
                 }
                 catch (const boost::bad_lexical_cast&)
                 {

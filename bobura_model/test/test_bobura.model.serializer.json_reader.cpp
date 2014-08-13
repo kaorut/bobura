@@ -15,6 +15,8 @@
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <bobura/model/serializer/json_reader.h>
+
 #include "test_bobura.model.type_list.h"
 
 
@@ -22,18 +24,7 @@ namespace
 {
     // types
 
-    using station_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type;
-
-    using station_location_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station_location>::type;
-
     using time_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::time>::type;
-
-    using stop_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::stop>::type;
-
-    using train_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train>::type;
 
     using timetable_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type;
@@ -48,10 +39,28 @@ namespace
 
     using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
+    using input_stream_iterator_type =
+        boost::spirit::multi_pass<
+            std::istreambuf_iterator<
+                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type::value_type
+            >
+        >;
+
     using reader_type =
-        boost::mpl::at<
-            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::json_reader
-        >::type;
+        bobura::model::serializer::json_reader<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            input_stream_iterator_type,
+            int,
+            double,
+            boost::mpl::at<
+                test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
+            >::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type
+        >;
 
     using error_type = reader_type::error_type;
 
@@ -622,7 +631,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             BOOST_REQUIRE_EQUAL(p_timetable->station_locations().size(), 2U);
             {
                 const auto& station_location = p_timetable->station_locations()[0];
-                const auto& station = station_location.station();
+                const auto& station = station_location.get_station();
                 BOOST_CHECK(station.name() == string_type{ TETENGO2_TEXT("stationA") });
                 BOOST_CHECK(station.grade().name() == string_type{ TETENGO2_TEXT("local") });
                 BOOST_CHECK(!station.shows_down_arrival_times());
@@ -632,7 +641,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             }
             {
                 const auto& station_location = p_timetable->station_locations()[1];
-                const auto& station = station_location.station();
+                const auto& station = station_location.get_station();
                 BOOST_CHECK(station.name() == string_type{ TETENGO2_TEXT("stationB") });
                 BOOST_CHECK(station.grade().name() == string_type{ TETENGO2_TEXT("principal") });
                 BOOST_CHECK(station.shows_down_arrival_times());

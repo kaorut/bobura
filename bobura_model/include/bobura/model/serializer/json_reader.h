@@ -23,6 +23,7 @@
 #include <tetengo2.h>
 
 #include <bobura/model/serializer/reader.h>
+#include <bobura/model/station_info/grade.h>
 
 
 namespace bobura { namespace model { namespace serializer
@@ -30,40 +31,86 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a JSON reader.
 
-        \tparam PullParser          A pull parser type.
-        \tparam Timetable           A timetable type.
-        \tparam StationGradeTypeSet A station grade type set type.
-        \tparam Encoder             An encoder type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam ForwardIterator   A forward iterator type.
+        \tparam Integer           An integer type.
+        \tparam Float             A floating point number type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Font              A font type.
+        \tparam Encoder           An encoder type.
     */
-    template <typename PullParser, typename Timetable, typename StationGradeTypeSet, typename Encoder>
-    class json_reader : public reader<typename PullParser::push_parser_type::iterator, Timetable>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename ForwardIterator,
+        typename Integer,
+        typename Float,
+        typename OperatingDistance,
+        typename Speed,
+        typename Font,
+        typename Encoder
+    >
+    class json_reader : public reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>
     {
     public:
         // types
 
-        //! The timetable type.
-        using timetable_type = Timetable;
+        //! The size type.
+        using size_type = Size;
 
-        //! The station grade type set type.
-        using station_grade_type_set_type = StationGradeTypeSet;
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The iterator type.
+        using iterator = ForwardIterator;
+
+        //! The integer type.
+        using integer_type = Integer;
+
+        //! The float type.
+        using float_type = Float;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The font type.
+        using font_type = Font;
+
+        //! The encoder type.
+        using encoder_type = Encoder;
+
+        //! The grammar type.
+        using grammar_type = tetengo2::text::grammar::json<iterator>;
 
         //! The pull parser type.
-        using pull_parser_type = PullParser;
+        using pull_parser_type =
+            tetengo2::text::pull_parser<iterator, grammar_type, integer_type, float_type, size_type>;
 
         //! The push parser type.
         using push_parser_type = typename pull_parser_type::push_parser_type;
 
-        //! The iterator type.
-        using iterator = typename push_parser_type::iterator;
+        //! The station grade type set type.
+        using station_grade_type_set_type = station_info::grade_type_set<string_type>;
 
         //! The base type.
-        using base_type = reader<iterator, timetable_type>;
+        using base_type =
+            reader<size_type, difference_type, string_type, iterator, operating_distance_type, speed_type, font_type>;
+
+        //! The timetable type.
+        using timetable_type = typename base_type::timetable_type;
 
         //! The error type.
         using error_type = typename base_type::error_type;
-
-        //! The encoder type.
-        using encoder_type = Encoder;
 
 
         // constructors and destructor
@@ -78,21 +125,15 @@ namespace bobura { namespace model { namespace serializer
     private:
         // types
 
-        using string_type = typename timetable_type::string_type;
-
         using font_color_set_type = typename timetable_type::font_color_set_type;
 
         using font_color_type = typename font_color_set_type::font_color_type;
-
-        using font_type = typename font_color_type::font_type;
 
         using color_type = typename font_color_type::color_type;
 
         using font_color_set_element_type = boost::variant<font_color_type, font_type, color_type>;
 
-        using train_kind_index_type = typename timetable_type::train_kind_index_type;
-
-        using grammar_type = typename push_parser_type::grammar_type;
+        using train_kind_index_type = typename timetable_type::size_type;
 
         using input_string_type = typename push_parser_type::string_type;
 
@@ -103,8 +144,6 @@ namespace bobura { namespace model { namespace serializer
         using station_type = typename station_location_type::station_type;
 
         using station_grade_type = typename station_type::grade_type;
-
-        using operating_distance_type = typename station_location_type::operating_distance_type;
 
         using train_kind_type = typename timetable_type::train_kind_type;
 
@@ -129,8 +168,6 @@ namespace bobura { namespace model { namespace serializer
         using attribute_map_type = typename pull_parser_type::attribute_map_type;
 
         using value_type = typename pull_parser_type::value_type;
-
-        using integer_type = typename push_parser_type::integer_type;
 
 
         // static functions
@@ -1009,8 +1046,8 @@ namespace bobura { namespace model { namespace serializer
             return boost::make_optional(std::move(string));
         }
 
-        template <typename Integer>
-        static boost::optional<std::pair<string_type, Integer>> read_integer_member(pull_parser_type& pull_parser)
+        template <typename Int>
+        static boost::optional<std::pair<string_type, Int>> read_integer_member(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return boost::none;
@@ -1019,7 +1056,7 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             pull_parser.next();
 
-            const auto value = read_integer<Integer>(pull_parser);
+            const auto value = read_integer<Int>(pull_parser);
             if (!value)
                 return boost::none;
 
@@ -1030,8 +1067,8 @@ namespace bobura { namespace model { namespace serializer
             return boost::make_optional(std::make_pair(encoder().decode(std::move(key)), *value));
         }
 
-        template <typename Integer>
-        static boost::optional<Integer> read_integer(pull_parser_type& pull_parser)
+        template <typename Int>
+        static boost::optional<Int> read_integer(pull_parser_type& pull_parser)
         {
             if (!pull_parser.has_next())
                 return boost::none;
@@ -1043,7 +1080,7 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             const auto integer = boost::get<integer_type>(value);
             pull_parser.next();
-            return boost::make_optional<Integer>(integer);
+            return boost::make_optional<Int>(integer);
         }
 
         static boost::optional<std::pair<string_type, bool>> read_boolean_member(pull_parser_type& pull_parser)

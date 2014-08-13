@@ -18,7 +18,6 @@
 #include <tetengo2.h>
 
 #include <bobura/load_save/load_from_file.h>
-#include <bobura/model/serializer/select_oudia_diagram.h>
 #include <bobura/type_list.h>
 
 
@@ -27,8 +26,6 @@ namespace
     // types
 
     using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
-
-    using timetable_type = model_type::timetable_type;
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
@@ -100,27 +97,24 @@ namespace
 
     };
 
-    using reader_set_type =
-        bobura::model::serializer::reader_set<
-            boost::mpl::at<bobura::common_type_list, bobura::type::input_stream_iterator>::type,
-            timetable_type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::pull_parser>::type,
-            boost::mpl::at<bobura::model_type_list, bobura::type::model::station_grade_type_set>::type,
-            bobura::model::serializer::select_oudia_diagram<oudia_diagram_dialog_type>,
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::timetable_file_encoder>::type,
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::windia_file_encoder>::type
-        >;
-
     using load_from_file_type =
         bobura::load_save::load_from_file<
-            model_type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::input_stream_iterator>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::output_stream>::type,
+            boost::mpl::at<bobura::model_type_list, bobura::type::model::operating_distance>::type,
+            boost::mpl::at<bobura::model_type_list, bobura::type::model::speed>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type,
             boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::message_box>::type,
             boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::file_open_dialog>::type,
-            confirm_file_save_type,
-            boost::mpl::at<bobura::model_type_list, bobura::type::model::reader_selector>::type,
-            reader_set_type,
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type
+            boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::file_save_dialog>::type,
+            oudia_diagram_dialog_type,
+            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type,
+            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::timetable_file_encoder>::type,
+            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::windia_file_encoder>::type
         >;
 
 

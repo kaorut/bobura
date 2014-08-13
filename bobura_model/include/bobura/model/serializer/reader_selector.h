@@ -29,23 +29,55 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a reader selector.
 
-        \tparam ForwardIterator A forward iterator type.
-        \tparam Timetable       A timetable type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam ForwardIterator   A forward iterator type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Font              A font type.
     */
-    template <typename ForwardIterator, typename Timetable>
-    class reader_selector : public reader<ForwardIterator, Timetable>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename ForwardIterator,
+        typename OperatingDistance,
+        typename Speed,
+        typename Font
+    >
+    class reader_selector : public reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
         //! The iterator type.
         using iterator = ForwardIterator;
 
-        //! The timetable type.
-        using timetable_type = Timetable;
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The font type.
+        using font_type = Font;
 
         //! The base type.
-        using base_type = reader<iterator, timetable_type>;
+        using base_type =
+            reader<size_type, difference_type, string_type, iterator, operating_distance_type, speed_type, font_type>;
+
+        //! The timetable type.
+        using timetable_type = typename base_type::timetable_type;
 
         //! The error type.
         using error_type = typename base_type::error_type;

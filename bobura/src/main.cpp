@@ -24,8 +24,10 @@
 #include <Windows.h>
 
 #include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include <bobura/application.h>
+#include <bobura/settings.h>
 #include <bobura/type_list.h>
 
 
@@ -33,9 +35,17 @@ namespace
 {
     // types
 
-    using settings_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type;
-
     using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
+
+    using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
+
+    using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
+
+    using config_traits_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type;
+
+    using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
+
+    using application_type = bobura::application<string_type, position_type, dimension_type, config_traits_type>;
 
 
     // functions
@@ -63,7 +73,13 @@ namespace
     void set_locale(const boost::filesystem::path& message_directory_path)
     {
         using messages_facet_type =
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::messages_facet>::type;
+            tetengo2::message::messages<
+                boost::mpl::at<bobura::common_type_list, bobura::type::input_stream_iterator>::type,
+                boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+                boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
+                boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog_encoder>::type,
+                boost::mpl::at<bobura::locale_type_list, bobura::type::locale::locale_name_encoder>::type
+            >;
         auto p_messages_facet =
             tetengo2::stdalt::make_unique<messages_facet_type>(
                 message_directory_path, std::locale(ui_locale_name().c_str())
@@ -75,7 +91,7 @@ namespace
 
     int run_application(settings_type& settings)
     {
-        return bobura::application(settings).run();
+        return application_type(settings).run();
     }
 
 
@@ -102,7 +118,12 @@ TETENGO2_STDALT_NOEXCEPT
 {
     boost::ignore_unused(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 
-    using alert_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::alert>::type;
+    using alert_type =
+        tetengo2::gui::alert<
+            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::ui_encoder>::type,
+            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::exception_encoder>::type,
+            boost::mpl::at<bobura::detail_type_list, bobura::type::detail::alert>::type
+        >;
 
     try
     {

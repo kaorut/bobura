@@ -12,25 +12,42 @@
 #include <memory>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
 
-#include <bobura/type_list.h>
+#include <bobura/settings.h>
 
 
 namespace bobura
 {
    /*!
-        \brief The class for a bobura application.
+        \brief The class template for a bobura application.
+
+        \tparam String         A string type.
+        \tparam Position       A position type.
+        \tparam Dimension      A dimension type.
+        \tparam ConfigTraits   A configuration traits type.
     */
+    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
     class application : private boost::noncopyable
     {
     public:
         // types
 
+        //! The string type.
+        using string_type = String;
+
+        //! The position type.
+        using position_type = Position;
+
+        //! The dimension type.
+        using dimension_type = Dimension;
+
+        //! The configuration traits type.
+        using config_traits_type = ConfigTraits;
+
         //! The settings type.
-        using settings_type = boost::mpl::at<setting_type_list, type::setting::settings>::type;
+        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
 
 
         // constructors and destructor

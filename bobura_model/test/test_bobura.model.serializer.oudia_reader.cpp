@@ -20,6 +20,8 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/serializer/oudia_reader.h>
+
 #include "test_bobura.model.type_list.h"
 
 
@@ -44,12 +46,32 @@ namespace
 
     using time_type = stop_type::time_type;
 
-    using reader_type =
+    using input_stream_iterator_type =
+        boost::spirit::multi_pass<
+            std::istreambuf_iterator<
+                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type::value_type
+            >
+        >;
+
+    using select_diagram_type =
         boost::mpl::at<
-            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::oudia_reader
+            test_bobura::model::serialization_type_list, test_bobura::model::type::serialization::select_oudia_diagram
         >::type;
 
-    using select_diagram_type = reader_type::select_diagram_type;
+    using reader_type =
+        bobura::model::serializer::oudia_reader<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            input_stream_iterator_type,
+            boost::mpl::at<
+                test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
+            >::type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type,
+            select_diagram_type,
+            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type
+        >;
 
     using error_type = reader_type::error_type;
 
@@ -486,23 +508,23 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             BOOST_REQUIRE_EQUAL(p_timetable->station_locations().size(), 6U);
             {
                 const auto& station_location = p_timetable->station_locations()[0];
-                BOOST_CHECK(station_location.station().name() == string_type{ TETENGO2_TEXT("hoge") });
-                BOOST_CHECK(station_location.station().grade().name() == string_type{ TETENGO2_TEXT("local") });
+                BOOST_CHECK(station_location.get_station().name() == string_type{ TETENGO2_TEXT("hoge") });
+                BOOST_CHECK(station_location.get_station().grade().name() == string_type{ TETENGO2_TEXT("local") });
                 BOOST_CHECK_EQUAL(station_location.operating_distance(), 0U);
             }
             {
                 const auto& station_location = p_timetable->station_locations()[2];
-                BOOST_CHECK(station_location.station().name() == string_type{ TETENGO2_TEXT("piyo") });
+                BOOST_CHECK(station_location.get_station().name() == string_type{ TETENGO2_TEXT("piyo") });
                 BOOST_CHECK(
-                    station_location.station().grade().name() == string_type{ TETENGO2_TEXT("local terminal") }
+                    station_location.get_station().grade().name() == string_type{ TETENGO2_TEXT("local terminal") }
                 );
                 BOOST_CHECK_EQUAL(station_location.operating_distance(), 2U);
             }
             {
                 const auto& station_location = p_timetable->station_locations()[4];
-                BOOST_CHECK(station_location.station().name() == string_type{ TETENGO2_TEXT("iroha") });
-                BOOST_CHECK(station_location.station().grade().name() == string_type{ TETENGO2_TEXT("local") });
-                BOOST_CHECK(station_location.station().shows_up_arrival_times());
+                BOOST_CHECK(station_location.get_station().name() == string_type{ TETENGO2_TEXT("iroha") });
+                BOOST_CHECK(station_location.get_station().grade().name() == string_type{ TETENGO2_TEXT("local") });
+                BOOST_CHECK(station_location.get_station().shows_up_arrival_times());
                 BOOST_CHECK_EQUAL(station_location.operating_distance(), 4U);
             }
 

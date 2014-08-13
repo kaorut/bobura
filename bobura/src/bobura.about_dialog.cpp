@@ -19,6 +19,7 @@
 
 #include <bobura/about_dialog.h>
 #include <bobura/message/type_list.h>
+#include <bobura/settings.h>
 #include <bobura/type_list.h>
 
 
@@ -26,11 +27,25 @@ namespace bobura
 {
     namespace
     {
-        template <typename Dialog, typename MessageCatalog, typename Settings>
-        class about_dialog<Dialog, MessageCatalog, Settings>::impl : private boost::noncopyable
+        template <
+            typename String,
+            typename Position,
+            typename Dimension,
+            typename Dialog,
+            typename MessageCatalog,
+            typename ConfigTraits
+        >
+        class about_dialog<String, Position, Dimension, Dialog, MessageCatalog, ConfigTraits>::impl :
+            private boost::noncopyable
         {
         public:
             // types
+
+            using string_type = String;
+
+            using position_type = Position;
+
+            using dimension_type = Dimension;
 
             using base_type = Dialog;
 
@@ -38,7 +53,9 @@ namespace bobura
 
             using message_catalog_type = MessageCatalog;
 
-            using settings_type = Settings;
+            using config_traits_type = ConfigTraits;
+
+            using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
 
 
             // constructors and destructor
@@ -65,9 +82,19 @@ namespace bobura
 
             using color_type = typename label_type::color_type;
 
-            using link_label_type = typename boost::mpl::at<ui_type_list, type::ui::link_label>::type;
+            using link_label_type =
+                tetengo2::gui::widget::link_label<
+                    boost::mpl::at<ui_type_list, type::ui::widget_traits>::type,
+                    boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type,
+                    boost::mpl::at<detail_type_list, type::detail::system_color>::type,
+                    boost::mpl::at<detail_type_list, type::detail::shell>::type
+                >;
 
-            using image_type = typename boost::mpl::at<ui_type_list, type::ui::image>::type;
+            using image_type =
+                tetengo2::gui::widget::image<
+                    boost::mpl::at<ui_type_list, type::ui::widget_traits>::type,
+                    boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type
+                >;
 
             using icon_type = typename image_type::icon_type;
 
@@ -78,15 +105,9 @@ namespace bobura
 
             using about_dialog_message_type_list_type = message::about_dialog::type_list<base_type>;
 
-            using string_type = typename base_type::string_type;
-
-            using dimension_type = typename base_type::dimension_type;
-
             using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
             using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
-
-            using position_type = typename base_type::position_type;
 
             using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
@@ -227,8 +248,15 @@ namespace bobura
     }
 
 
-    template <typename Dialog, typename MessageCatalog, typename Settings>
-    about_dialog<Dialog, MessageCatalog, Settings>::about_dialog(
+    template <
+        typename String,
+        typename Position,
+        typename Dimension,
+        typename Dialog,
+        typename MessageCatalog,
+        typename ConfigTraits
+    >
+    about_dialog<String, Position, Dimension, Dialog, MessageCatalog, ConfigTraits>::about_dialog(
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog,
         const settings_type&        settings
@@ -238,16 +266,26 @@ namespace bobura
     m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings))
     {}
 
-    template <typename Dialog, typename MessageCatalog, typename Settings>
-    about_dialog<Dialog, MessageCatalog, Settings>::~about_dialog()
+    template <
+        typename String,
+        typename Position,
+        typename Dimension,
+        typename Dialog,
+        typename MessageCatalog,
+        typename ConfigTraits
+    >
+    about_dialog<String, Position, Dimension, Dialog, MessageCatalog, ConfigTraits>::~about_dialog()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
 
     template class about_dialog<
-        typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-        typename boost::mpl::at<setting_type_list, type::setting::settings>::type
+        boost::mpl::at<common_type_list, type::string>::type,
+        boost::mpl::at<ui_type_list, type::ui::position>::type,
+        boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+        boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+        boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+        boost::mpl::at<setting_type_list, type::setting::config_traits>::type
     >;
 
 

@@ -13,7 +13,6 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/message/diagram_picture_box.h>
 #include <bobura/type_list.h>
 
 
@@ -21,12 +20,30 @@ namespace
 {
     // types
 
-    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
+    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
+
+    using difference_type = boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type;
+
+    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
+
+    using operating_distance_type =
+        boost::mpl::at<bobura::model_type_list, bobura::type::model::operating_distance>::type;
+
+    using speed_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::speed>::type;
+
+    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_canvas>::type;
+
+    using solid_background_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_solid_background>::type;
+
+    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
+
+    using mouse_observer_set_type = picture_box_type::mouse_observer_set_type;
+
+    using mouse_button_type = mouse_observer_set_type::mouse_button_type;
+
+    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
     using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
-
-    using message_catalog_type =
-        boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
     using view_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::view>::type;
 
@@ -38,17 +55,44 @@ namespace
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
+    using mouse_pressed_type =
+        bobura::message::diagram_picture_box::mouse_pressed<
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            speed_type,
+            canvas_type,
+            solid_background_type,
+            picture_box_type,
+            message_catalog_type
+        >;
 
-    using mouse_observer_set_type = picture_box_type::mouse_observer_set_type;
+    using mouse_released_type =
+        bobura::message::diagram_picture_box::mouse_released<
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            speed_type,
+            canvas_type,
+            solid_background_type,
+            picture_box_type,
+            message_catalog_type
+        >;
 
-    using mouse_button_type = mouse_observer_set_type::mouse_button_type;
-
-    using mouse_pressed_type = bobura::message::diagram_picture_box::mouse_pressed<picture_box_type, view_type>;
-
-    using mouse_released_type = bobura::message::diagram_picture_box::mouse_released<picture_box_type, view_type>;
-
-    using mouse_moved_type = bobura::message::diagram_picture_box::mouse_moved<picture_box_type, view_type>;
+    using mouse_moved_type =
+        bobura::message::diagram_picture_box::mouse_moved<
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            speed_type,
+            canvas_type,
+            solid_background_type,
+            picture_box_type,
+            message_catalog_type
+        >;
 
     struct dummy_view_zoom_type
     {
@@ -81,17 +125,48 @@ namespace
     };
 
     using mouse_wheeled_type =
-        bobura::message::diagram_picture_box::mouse_wheeled<picture_box_type, view_type, dummy_view_zoom_type>;
+        bobura::message::diagram_picture_box::mouse_wheeled<
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            speed_type,
+            canvas_type,
+            solid_background_type,
+            picture_box_type,
+            dummy_view_zoom_type,
+            message_catalog_type
+        >;
 
     using virtual_key_type = picture_box_type::keyboard_observer_set_type::virtual_key_type;
 
     using keyboard_key_down_type = bobura::message::diagram_picture_box::keyboard_key_down<picture_box_type>;
 
     using paint_paint_type =
-        bobura::message::diagram_picture_box::paint_paint<canvas_type, picture_box_type, view_type>;
+        bobura::message::diagram_picture_box::paint_paint<
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            speed_type,
+            canvas_type,
+            solid_background_type,
+            picture_box_type,
+            message_catalog_type
+        >;
 
     using scroll_bar_scrolled_type =
-        bobura::message::diagram_picture_box::scroll_bar_scrolled<picture_box_type, view_type>;
+        bobura::message::diagram_picture_box::scroll_bar_scrolled<
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            speed_type,
+            canvas_type,
+            solid_background_type,
+            picture_box_type,
+            message_catalog_type
+        >;
 
 
     // functions

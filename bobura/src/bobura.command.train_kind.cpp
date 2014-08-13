@@ -80,7 +80,7 @@ namespace bobura { namespace command
 
         using train_kinds_type = timetable_type::train_kinds_type;
 
-        using train_kind_index_type = timetable_type::train_kind_index_type;
+        using train_kind_index_type = timetable_type::size_type;
 
         using train_kind_type = timetable_type::train_kind_type;
 

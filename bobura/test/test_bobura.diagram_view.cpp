@@ -9,12 +9,10 @@
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2.h>
 #include <tetengo2.gui.h>
 
 #include <bobura/diagram_view.h>
-#include <bobura/message/diagram_selection_observer_set.h>
-#include <bobura/view/diagram/selection.h>
-
 #include <bobura/type_list.h>
 
 
@@ -22,28 +20,17 @@ namespace
 {
     // types
 
-    using header_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::diagram_header>::type;
+    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
 
-    using time_line_list_type =
-        boost::mpl::at<bobura::view_type_list, bobura::type::view::diagram_time_line_list>::type;
+    using difference_type = boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type;
 
-    using station_line_list_type =
-        boost::mpl::at<bobura::view_type_list, bobura::type::view::diagram_station_line_list>::type;
-
-    using train_line_list_type =
-        boost::mpl::at<bobura::view_type_list, bobura::type::view::diagram_train_line_list>::type;
+    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
     using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
-    using station_location_type = model_type::timetable_type::station_location_type;
+    using speed_type = model_type::speed_type;
 
-    using train_type = model_type::timetable_type::train_type;
-
-    using diagram_selection_observer_set_type =
-        bobura::message::diagram_selection_observer_set<station_location_type, train_type>;
-
-    using selection_type =
-        bobura::view::diagram::selection<station_location_type, train_type, diagram_selection_observer_set_type>;
+    using operating_distance_type = model_type::timetable_type::station_location_type::operating_distance_type;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
@@ -63,19 +50,21 @@ namespace
 
     using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
 
-    using solid_background_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::solid_background>::type;
+    using solid_background_type =
+        tetengo2::gui::drawing::solid_background<
+            boost::mpl::at<bobura::detail_type_list, bobura::type::detail::drawing>::type
+        >;
 
     using message_catalog_type =
         boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
     using view_type =
         bobura::diagram_view<
-            header_type,
-            time_line_list_type,
-            station_line_list_type,
-            train_line_list_type,
-            model_type,
-            selection_type,
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            speed_type,
             canvas_type,
             solid_background_type,
             message_catalog_type

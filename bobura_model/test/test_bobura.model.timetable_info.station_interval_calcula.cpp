@@ -15,6 +15,8 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/timetable_info/station_interval_calculator.h>
+
 #include "test_bobura.model.type_list.h"
 
 
@@ -22,15 +24,19 @@ namespace
 {
     // types
 
+    using operating_distance_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance>::type;
+
     using station_interval_calculator_type =
-        boost::mpl::at<
-            test_bobura::model::model_type_list, test_bobura::model::type::model::station_interval_calculator
-        >::type;
+        bobura::model::timetable_info::station_interval_calculator<
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            operating_distance_type
+        >;
 
     using station_location_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station_location>::type;
-
-    using operating_distance_type = station_location_type::operating_distance_type;
 
     using train_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train>::type;
@@ -39,9 +45,7 @@ namespace
 
     using time_type = stop_type::time_type;
 
-    using time_tick_type = time_type::tick_type;
-
-    using time_span_type = time_type::time_span_type;
+    using size_type = time_type::size_type;
 
     using station_intervals_type = station_interval_calculator_type::station_intervals_type;
 
@@ -97,10 +101,10 @@ namespace
     }
 
     stop_type make_stop(
-        const time_tick_type arrival_hours,
-        const time_tick_type arrival_minutes,
-        const time_tick_type departure_hours,
-        const time_tick_type departure_minutes
+        const size_type arrival_hours,
+        const size_type arrival_minutes,
+        const size_type departure_hours,
+        const size_type departure_minutes
     )
     {
         return
@@ -112,7 +116,7 @@ namespace
             };
     }
 
-    stop_type make_stop(const bool arrival, const time_tick_type hours, const time_tick_type minutes)
+    stop_type make_stop(const bool arrival, const size_type hours, const size_type minutes)
     {
         time_type time{ hours, minutes, 0 };
         return

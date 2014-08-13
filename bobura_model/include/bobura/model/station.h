@@ -13,6 +13,8 @@
 
 #include <boost/operators.hpp>
 
+#include <bobura/model/station_info/grade.h>
+
 
 namespace bobura { namespace model
 {
@@ -20,10 +22,9 @@ namespace bobura { namespace model
         \brief The class template for a station.
 
         \tparam String A string type.
-        \tparam Grade  A grade type.
     */
-    template <typename String, typename Grade>
-    class station : private boost::equality_comparable<station<String, Grade>>
+    template <typename String>
+    class station : private boost::equality_comparable<station<String>>
     {
     public:
         // types
@@ -32,7 +33,7 @@ namespace bobura { namespace model
         using string_type = String;
 
         //! The grade type.
-        using grade_type = Grade;
+        using grade_type = station_info::grade<string_type>;
 
 
         // constructors and destructor

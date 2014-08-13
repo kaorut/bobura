@@ -19,20 +19,60 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/diagram_view.h>
+
 
 namespace bobura { namespace message { namespace diagram_picture_box
 {
     /*!
         \brief The class template for a mouse pressed observer of the picture box.
 
-        \tparam PictureBox A picture box type.
-        \tparam View       A view type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Canvas            A canvas type.
+        \tparam SolidBackground   A solid background type.
+        \tparam PictureBox        A picture box type.
+        \tparam MessageCatalog    A message catalog type.
     */
-    template <typename PictureBox, typename View>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Canvas,
+        typename SolidBackground,
+        typename PictureBox,
+        typename MessageCatalog
+    >
     class mouse_pressed
     {
     public:
         // types
+
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! The solid background type.
+        using solid_background_type = SolidBackground;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
@@ -43,8 +83,21 @@ namespace bobura { namespace message { namespace diagram_picture_box
         //! The button kind type.
         using mouse_button_type = typename picture_box_type::mouse_observer_set_type::mouse_button_type;
 
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
         //! The view type.
-        using view_type = View;
+        using view_type =
+            bobura::diagram_view<
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                speed_type,
+                canvas_type,
+                solid_background_type,
+                message_catalog_type
+            >;
 
         //! The set-mouse-capture function type.
         using set_mouse_capture_type = std::function<void (const mouse_button_type)>;
@@ -128,14 +181,52 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a mouse released observer of the picture box.
 
-        \tparam PictureBox A picture box type.
-        \tparam View       A view type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Canvas            A canvas type.
+        \tparam SolidBackground   A solid background type.
+        \tparam PictureBox        A picture box type.
+        \tparam MessageCatalog    A message catalog type.
     */
-    template <typename PictureBox, typename View>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Canvas,
+        typename SolidBackground,
+        typename PictureBox,
+        typename MessageCatalog
+    >
     class mouse_released
     {
     public:
         // types
+
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! The solid background type.
+        using solid_background_type = SolidBackground;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
@@ -146,8 +237,21 @@ namespace bobura { namespace message { namespace diagram_picture_box
         //! The button kind type.
         using mouse_button_type = typename picture_box_type::mouse_observer_set_type::mouse_button_type;
 
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
         //! The view type.
-        using view_type = View;
+        using view_type =
+            bobura::diagram_view<
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                speed_type,
+                canvas_type,
+                solid_background_type,
+                message_catalog_type
+            >;
 
         //! The release-mouse-capture function type.
         using release_mouse_capture_type = std::function<bool (const mouse_button_type)>;
@@ -208,14 +312,52 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a mouse moved observer of the picture box.
 
-        \tparam PictureBox A picture box type.
-        \tparam View       A view type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Canvas            A canvas type.
+        \tparam SolidBackground   A solid background type.
+        \tparam PictureBox        A picture box type.
+        \tparam MessageCatalog    A message catalog type.
     */
-    template <typename PictureBox, typename View>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Canvas,
+        typename SolidBackground,
+        typename PictureBox,
+        typename MessageCatalog
+    >
     class mouse_moved
     {
     public:
         // types
+
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! The solid background type.
+        using solid_background_type = SolidBackground;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
@@ -226,8 +368,21 @@ namespace bobura { namespace message { namespace diagram_picture_box
         //! The button kind type.
         using mouse_button_type = typename picture_box_type::mouse_observer_set_type::mouse_button_type;
 
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
         //! The view type.
-        using view_type = View;
+        using view_type =
+            bobura::diagram_view<
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                speed_type,
+                canvas_type,
+                solid_background_type,
+                message_catalog_type
+            >;
 
 
         // constructors and destructor
@@ -306,18 +461,63 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a mouse wheel observer of the picture box.
 
-        \tparam PictureBox A picture box type.
-        \tparam View       A view type.
-        \tparam ViewZoom   A view zoom type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Canvas            A canvas type.
+        \tparam SolidBackground   A solid background type.
+        \tparam PictureBox        A picture box type.
+        \tparam Zoom              A zoom type.
+        \tparam MessageCatalog    A message catalog type.
     */
-    template <typename PictureBox, typename View, typename ViewZoom>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Canvas,
+        typename SolidBackground,
+        typename PictureBox,
+        typename Zoom,
+        typename MessageCatalog
+    >
     class mouse_wheeled
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! The solid background type.
+        using solid_background_type = SolidBackground;
+
         //! The picture box type.
         using picture_box_type = PictureBox;
+
+        //! The position type.
+        using position_type = typename picture_box_type::position_type;
+
+        //! The button kind type.
+        using mouse_button_type = typename picture_box_type::mouse_observer_set_type::mouse_button_type;
 
         //! The delta type.
         using delta_type = typename picture_box_type::mouse_observer_set_type::delta_type;
@@ -325,11 +525,24 @@ namespace bobura { namespace message { namespace diagram_picture_box
         //! The direction type.
         using direction_type = typename picture_box_type::mouse_observer_set_type::direction_type;
 
-        //! The view type.
-        using view_type = View;
-
         //! The view zoom type.
-        using view_zoom_type = ViewZoom;
+        using view_zoom_type = Zoom;
+
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
+        //! The view type.
+        using view_type =
+            bobura::diagram_view<
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                speed_type,
+                canvas_type,
+                solid_background_type,
+                message_catalog_type
+            >;
 
 
         // constructors and destructor
@@ -647,24 +860,71 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a paint observer of the picture box.
 
-        \tparam Canvas     A canvas type.
-        \tparam PictureBox A picture box type.
-        \tparam View       A view type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Canvas            A canvas type.
+        \tparam SolidBackground   A solid background type.
+        \tparam PictureBox        A picture box type.
+        \tparam MessageCatalog    A message catalog type.
     */
-    template <typename Canvas, typename PictureBox, typename View>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Canvas,
+        typename SolidBackground,
+        typename PictureBox,
+        typename MessageCatalog
+    >
     class paint_paint
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
         //! The canvas type.
         using canvas_type = Canvas;
+
+        //! The solid background type.
+        using solid_background_type = SolidBackground;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
 
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
         //! The view type.
-        using view_type = View;
+        using view_type =
+            bobura::diagram_view<
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                speed_type,
+                canvas_type,
+                solid_background_type,
+                message_catalog_type
+            >;
 
 
         // constructors and destructor
@@ -738,23 +998,72 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a scroll bar observer of the picture box.
 
-        \tparam PictureBox A picture box type.
-        \tparam View       A view type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Canvas            A canvas type.
+        \tparam SolidBackground   A solid background type.
+        \tparam PictureBox        A picture box type.
+        \tparam MessageCatalog    A message catalog type.
     */
-    template <typename PictureBox, typename View>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Canvas,
+        typename SolidBackground,
+        typename PictureBox,
+        typename MessageCatalog
+    >
     class scroll_bar_scrolled
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! The solid background type.
+        using solid_background_type = SolidBackground;
+
         //! The picture box type.
         using picture_box_type = PictureBox;
 
-        //! The size type.
-        using size_type = typename picture_box_type::scroll_bar_type::size_type;
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
 
         //! The view type.
-        using view_type = View;
+        using view_type =
+            bobura::diagram_view<
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                speed_type,
+                canvas_type,
+                solid_background_type,
+                message_catalog_type
+            >;
+
 
         // constructors and destructor
 

@@ -25,6 +25,7 @@
 
 #include <bobura/model/serializer/writer.h>
 #include <bobura/model/station_info/grade.h>
+#include <bobura/model/timetable.h>
 
 
 namespace bobura { namespace model { namespace serializer
@@ -32,27 +33,68 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a JSON writer.
 
-        \tparam OutputStream A output stream type.
-        \tparam Timetable    A timetable type.
-        \tparam Encoder      An encoder type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OutputStream      An output stream type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Font              A font type.
+        \tparam Encoder           An encoder type.
     */
-    template <typename OutputStream, typename Timetable, typename Encoder>
-    class json_writer : public writer<OutputStream, Timetable>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OutputStream,
+        typename OperatingDistance,
+        typename Speed,
+        typename Font,
+        typename Encoder
+    >
+    class json_writer : public writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
         //! The output stream type.
         using output_stream_type = OutputStream;
 
-        //! The timetable type.
-        using timetable_type = Timetable;
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
 
-        //! The base type.
-        using base_type = writer<output_stream_type, timetable_type>;
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The font type.
+        using font_type = Font;
 
         //! The encoder type.
         using encoder_type = Encoder;
+
+        //! The base type.
+        using base_type =
+            writer<
+                size_type,
+                difference_type,
+                string_type,
+                output_stream_type,
+                operating_distance_type,
+                speed_type,
+                font_type
+            >;
+
+        //! The timetable type.
+        using timetable_type = typename base_type::timetable_type;
 
 
         // constructors and destructor
@@ -79,19 +121,13 @@ namespace bobura { namespace model { namespace serializer
 
         using time_type = typename stop_type::time_type;
 
-        using string_type = typename timetable_type::string_type;
-
         using font_color_set_type = typename timetable_type::font_color_set_type;
 
         using font_color_type = typename font_color_set_type::font_color_type;
 
-        using font_type = typename font_color_type::font_type;
-
         using color_type = typename font_color_type::color_type;
 
         using char_type = typename string_type::value_type;
-
-        using size_type = typename string_type::size_type;
 
         using output_char_type = typename output_stream_type::char_type;
 
@@ -453,19 +489,21 @@ namespace bobura { namespace model { namespace serializer
             output_stream << object_begin();
 
             new_line(level + 2, output_stream);
-            write_object_entry(string_type{ TETENGO2_TEXT("name") }, station_location.station().name(), output_stream);
+            write_object_entry(
+                string_type{ TETENGO2_TEXT("name") }, station_location.get_station().name(), output_stream
+            );
             output_stream << comma();
 
             new_line(level + 2, output_stream);
             write_object_entry(
-                string_type{ TETENGO2_TEXT("grade") }, station_location.station().grade().name(), output_stream
+                string_type{ TETENGO2_TEXT("grade") }, station_location.get_station().grade().name(), output_stream
             );
             output_stream << comma();
 
             new_line(level + 2, output_stream);
             write_object_entry(
                 string_type{ TETENGO2_TEXT("show_down_arrival_times") },
-                station_location.station().shows_down_arrival_times(),
+                station_location.get_station().shows_down_arrival_times(),
                 output_stream
             );
             output_stream << comma();
@@ -473,13 +511,15 @@ namespace bobura { namespace model { namespace serializer
             new_line(level + 2, output_stream);
             write_object_entry(
                 string_type{ TETENGO2_TEXT("show_up_arrival_times") },
-                station_location.station().shows_up_arrival_times(),
+                station_location.get_station().shows_up_arrival_times(),
                 output_stream
             );
             output_stream << comma();
 
             new_line(level + 2, output_stream);
-            write_object_entry(string_type{ TETENGO2_TEXT("note") }, station_location.station().note(), output_stream);
+            write_object_entry(
+                string_type{ TETENGO2_TEXT("note") }, station_location.get_station().note(), output_stream
+            );
             output_stream << comma();
 
             new_line(level + 2, output_stream);
@@ -720,9 +760,9 @@ namespace bobura { namespace model { namespace serializer
             if (!time.initialized())
                 return output_string_type{ TETENGO2_TEXT("    -1") };
 
-            using tick_type = typename time_type::tick_type;
+            using size_type = typename time_type::size_type;
             const auto hours_minutes_seconds = time.hours_minutes_seconds();
-            const tick_type representation =
+            const size_type representation =
                 hours_minutes_seconds.hours() * 10000 +
                 hours_minutes_seconds.minutes() * 100 +
                 hours_minutes_seconds.seconds();

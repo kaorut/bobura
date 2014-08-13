@@ -13,6 +13,7 @@
 #include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
@@ -23,7 +24,13 @@ namespace bobura
 {
     namespace
     {
-        using menu_command_type = boost::mpl::at<ui_type_list, type::ui::menu_command>::type;
+        using menu_command_type =
+            tetengo2::gui::menu::command<
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
+            >;
 
         using popup_menu_type = boost::mpl::at<ui_type_list, type::ui::popup_menu>::type;
 
@@ -35,7 +42,13 @@ namespace bobura
 
         using virtual_key_type = shortcut_key_type::virtual_key_type;
 
-        using menu_separator_type = boost::mpl::at<ui_type_list, type::ui::menu_separator>::type;
+        using menu_separator_type =
+            tetengo2::gui::menu::separator<
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
+            >;
 
         using main_window_message_type_list_type =
             boost::mpl::at<main_window_type_list, type::main_window::message_type_list>::type;

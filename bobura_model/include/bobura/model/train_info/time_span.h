@@ -21,18 +21,18 @@ namespace bobura { namespace model { namespace train_info
     /*!
         \brief The class template for a time span.
 
-        \tparam TimeSpanTick A time span tick type.
+        \tparam Difference A difference type.
     */
-    template <typename TimeSpanTick>
+    template <typename Difference>
     class time_span :
-        private boost::totally_ordered<time_span<TimeSpanTick>>,
-        private boost::additive<time_span<TimeSpanTick>>
+        private boost::totally_ordered<time_span<Difference>>,
+        private boost::additive<time_span<Difference>>
     {
     public:
         // types
 
-        //! The tick type.
-        using tick_type = TimeSpanTick;
+        //! The difference type.
+        using difference_type = Difference;
 
         //! The hours-minutes-seconds type.
         class hours_minutes_seconds_type : private boost::equality_comparable<hours_minutes_seconds_type>
@@ -45,7 +45,11 @@ namespace bobura { namespace model { namespace train_info
                 \param minutes Minutes.
                 \param seconds Seconds.
             */
-            hours_minutes_seconds_type(const tick_type hours, const tick_type minutes, const tick_type seconds)
+            hours_minutes_seconds_type(
+                const difference_type hours,
+                const difference_type minutes,
+                const difference_type seconds
+            )
             :
             m_hours(hours),
             m_minutes(minutes),
@@ -74,7 +78,7 @@ namespace bobura { namespace model { namespace train_info
 
                 \return Hours.
             */
-            tick_type hours()
+            difference_type hours()
             const
             {
                 return m_hours;
@@ -85,7 +89,7 @@ namespace bobura { namespace model { namespace train_info
 
                 \return Minutes.
             */
-            tick_type minutes()
+            difference_type minutes()
             const
             {
                 return m_minutes;
@@ -96,7 +100,7 @@ namespace bobura { namespace model { namespace train_info
 
                 \return Seconds.
             */
-            tick_type seconds()
+            difference_type seconds()
             const
             {
                 return m_seconds;
@@ -104,11 +108,11 @@ namespace bobura { namespace model { namespace train_info
 
 
         private:
-            tick_type m_hours;
+            difference_type m_hours;
 
-            tick_type m_minutes;
+            difference_type m_minutes;
 
-            tick_type m_seconds;
+            difference_type m_seconds;
 
         };
 
@@ -122,7 +126,7 @@ namespace bobura { namespace model { namespace train_info
 
             \return The seconds of a whole way.
         */
-        static tick_type seconds_of_whole_day()
+        static difference_type seconds_of_whole_day()
         {
             return 24 * 60 * 60;
         }
@@ -135,7 +139,7 @@ namespace bobura { namespace model { namespace train_info
 
             \param seconds A second span.
         */
-        explicit time_span(const tick_type seconds)
+        explicit time_span(const difference_type seconds)
         :
         m_seconds(seconds)
         {}
@@ -153,7 +157,7 @@ namespace bobura { namespace model { namespace train_info
             \throw std::out_of_range     When the minutes and/or seconds are invalid.
             \throw std::invalid_argument When the signs of the hours and the minutes and the seconds are different.
         */
-        time_span(const tick_type hours, const tick_type minutes, const tick_type seconds)
+        time_span(const difference_type hours, const difference_type minutes, const difference_type seconds)
         :
         m_seconds(calculate_seconds(hours, minutes, seconds))
         {}
@@ -228,7 +232,7 @@ namespace bobura { namespace model { namespace train_info
 
             \return The seconds.
         */
-        tick_type seconds()
+        difference_type seconds()
         const
         {
             return m_seconds;
@@ -242,9 +246,9 @@ namespace bobura { namespace model { namespace train_info
         const hours_minutes_seconds_type hours_minutes_seconds()
         const
         {
-            const tick_type hours = m_seconds / (60 * 60);
-            const tick_type minutes = m_seconds / 60 - hours * 60;
-            const tick_type seconds = m_seconds - hours * 60 * 60 - minutes * 60;
+            const difference_type hours = m_seconds / (60 * 60);
+            const difference_type minutes = m_seconds / 60 - hours * 60;
+            const difference_type seconds = m_seconds - hours * 60 * 60 - minutes * 60;
 
             return hours_minutes_seconds_type{ hours, minutes, seconds };
         }
@@ -253,7 +257,11 @@ namespace bobura { namespace model { namespace train_info
     private:
         // static functions
 
-        static tick_type calculate_seconds(const tick_type hours, const tick_type minutes, const tick_type seconds)
+        static difference_type calculate_seconds(
+            const difference_type hours,
+            const difference_type minutes,
+            const difference_type seconds
+        )
         {
             if (!(hours >= 0 && minutes >= 0 && seconds >= 0) && !(hours <= 0 && minutes <= 0 && seconds <= 0))
             {
@@ -284,7 +292,7 @@ namespace bobura { namespace model { namespace train_info
 
         // variables
 
-        tick_type m_seconds;
+        difference_type m_seconds;
 
 
     };

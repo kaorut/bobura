@@ -17,28 +17,33 @@
 #include <boost/swap.hpp>
 #include <boost/throw_exception.hpp>
 
+#include <bobura/model/train_info/time_span.h>
+
 
 namespace bobura { namespace model { namespace train_info
 {
     /*!
         \brief The class template for a time.
 
-        \tparam TimeTick A time tick type.
-        \tparam TimeSpan A time span type.
+        \tparam Size       A size type.
+        \tparam Difference A difference type.
     */
-    template <typename TimeTick, typename TimeSpan>
+    template <typename Size, typename Difference>
     class time :
-        private boost::totally_ordered<time<TimeTick, TimeSpan>>,
-        private boost::additive<time<TimeTick, TimeSpan>, TimeSpan>
+        private boost::totally_ordered<time<Size, Difference>>,
+        private boost::additive<time<Size, Difference>, time_span<Difference>>
     {
     public:
         // types
 
-        //! The tick type.
-        using tick_type = TimeTick;
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
 
         //! The time span type.
-        using time_span_type = TimeSpan;
+        using time_span_type = time_span<difference_type>;
 
         //! The hours-minutes-seconds type.
         class hours_minutes_seconds_type : private boost::equality_comparable<hours_minutes_seconds_type>
@@ -51,7 +56,7 @@ namespace bobura { namespace model { namespace train_info
                 \param minutes Minutes.
                 \param seconds Seconds.
             */
-            hours_minutes_seconds_type(const tick_type hours, const tick_type minutes, const tick_type seconds)
+            hours_minutes_seconds_type(const size_type hours, const size_type minutes, const size_type seconds)
             :
             m_hours(hours),
             m_minutes(minutes),
@@ -80,7 +85,7 @@ namespace bobura { namespace model { namespace train_info
 
                 \return Hours.
             */
-            tick_type hours()
+            size_type hours()
             const
             {
                 return m_hours;
@@ -91,7 +96,7 @@ namespace bobura { namespace model { namespace train_info
 
                 \return Minutes.
             */
-            tick_type minutes()
+            size_type minutes()
             const
             {
                 return m_minutes;
@@ -102,7 +107,7 @@ namespace bobura { namespace model { namespace train_info
 
                 \return Seconds.
             */
-            tick_type seconds()
+            size_type seconds()
             const
             {
                 return m_seconds;
@@ -110,11 +115,11 @@ namespace bobura { namespace model { namespace train_info
 
 
         private:
-            tick_type m_hours;
+            size_type m_hours;
 
-            tick_type m_minutes;
+            size_type m_minutes;
 
-            tick_type m_seconds;
+            size_type m_seconds;
 
         };
 
@@ -148,7 +153,7 @@ namespace bobura { namespace model { namespace train_info
 
             \param seconds_from_midnight Seconds from the midnight.
         */
-        explicit time(const tick_type seconds_from_midnight)
+        explicit time(const size_type seconds_from_midnight)
         :
         m_seconds_from_midnight(seconds_from_midnight % time_span_type::seconds_of_whole_day())
         {}
@@ -162,7 +167,7 @@ namespace bobura { namespace model { namespace train_info
 
             \throw std::out_of_range When hours, minutes and/or seconds are invalid.
         */
-        time(const tick_type hours, const tick_type minutes, const tick_type seconds)
+        time(const size_type hours, const size_type minutes, const size_type seconds)
         :
         m_seconds_from_midnight(calculate_seconds_from_midnight(hours, minutes, seconds))
         {}
@@ -187,14 +192,14 @@ namespace bobura { namespace model { namespace train_info
         {
             if (*this == uninitialized()) return *this;
 
-            typename time_span_type::tick_type seconds = m_seconds_from_midnight;
+            typename time_span_type::difference_type seconds = m_seconds_from_midnight;
             while (seconds < -time_span.seconds())
                 seconds += time_span_type::seconds_of_whole_day();
             seconds += time_span.seconds();
             seconds %= time_span_type::seconds_of_whole_day();
             assert(0 <= seconds && seconds < time_span_type::seconds_of_whole_day());
 
-            time temp{ static_cast<tick_type>(seconds) };
+            time temp{ static_cast<size_type>(seconds) };
             boost::swap(temp, *this);
             return *this;
         }
@@ -216,14 +221,14 @@ namespace bobura { namespace model { namespace train_info
         {
             if (*this == uninitialized()) return *this;
 
-            typename time_span_type::tick_type seconds = m_seconds_from_midnight;
+            typename time_span_type::difference_type seconds = m_seconds_from_midnight;
             while (seconds < time_span.seconds())
                 seconds += time_span_type::seconds_of_whole_day();
             seconds -= time_span.seconds();
             seconds %= time_span_type::seconds_of_whole_day();
             assert(0 <= seconds && seconds < time_span_type::seconds_of_whole_day());
 
-            time temp{ static_cast<tick_type>(seconds) };
+            time temp{ static_cast<size_type>(seconds) };
             boost::swap(temp, *this);
             return *this;
         }
@@ -245,7 +250,7 @@ namespace bobura { namespace model { namespace train_info
             if (one == uninitialized() || another == uninitialized())
                 BOOST_THROW_EXCEPTION(std::logic_error("The time object is uninitialized."));
 
-            typename time_span_type::tick_type seconds = one.m_seconds_from_midnight;
+            typename time_span_type::difference_type seconds = one.m_seconds_from_midnight;
             seconds -= another.m_seconds_from_midnight;
             while (seconds < 0)
                 seconds += time_span_type::seconds_of_whole_day();
@@ -288,7 +293,7 @@ namespace bobura { namespace model { namespace train_info
 
             \throw std::logic_error When this is uninitialized.
         */
-        tick_type seconds_from_midnight()
+        size_type seconds_from_midnight()
         const
         {
             if (*this == uninitialized())
@@ -310,9 +315,9 @@ namespace bobura { namespace model { namespace train_info
             if (*this == uninitialized())
                 BOOST_THROW_EXCEPTION(std::logic_error("The time object is uninitialized."));
 
-            const tick_type hours = m_seconds_from_midnight / (60 * 60);
-            const tick_type minutes = m_seconds_from_midnight / 60 - hours * 60;
-            const tick_type seconds = m_seconds_from_midnight - hours * 60 * 60 - minutes * 60;
+            const size_type hours = m_seconds_from_midnight / (60 * 60);
+            const size_type minutes = m_seconds_from_midnight / 60 - hours * 60;
+            const size_type seconds = m_seconds_from_midnight - hours * 60 * 60 - minutes * 60;
 
             return hours_minutes_seconds_type{ hours, minutes, seconds };
         }
@@ -333,10 +338,10 @@ namespace bobura { namespace model { namespace train_info
     private:
         // static functions
 
-        static tick_type calculate_seconds_from_midnight(
-            const tick_type hours,
-            const tick_type minutes,
-            const tick_type seconds
+        static size_type calculate_seconds_from_midnight(
+            const size_type hours,
+            const size_type minutes,
+            const size_type seconds
         )
         {
             if (hours > 23)
@@ -346,8 +351,8 @@ namespace bobura { namespace model { namespace train_info
             else if (seconds > 59)
                 BOOST_THROW_EXCEPTION(std::out_of_range("60 or greater is specified for the seconds."));
 
-            const tick_type seconds_from_midnight = hours * 60 * 60 + minutes * 60 + seconds;
-            assert(seconds_from_midnight < static_cast<tick_type>(time_span_type::seconds_of_whole_day()));
+            const size_type seconds_from_midnight = hours * 60 * 60 + minutes * 60 + seconds;
+            assert(seconds_from_midnight < static_cast<size_type>(time_span_type::seconds_of_whole_day()));
 
             return seconds_from_midnight;
         }
@@ -357,13 +362,13 @@ namespace bobura { namespace model { namespace train_info
 
         time()
         :
-        m_seconds_from_midnight(std::numeric_limits<tick_type>::max())
+        m_seconds_from_midnight(std::numeric_limits<size_type>::max())
         {}
 
 
         // variables
 
-        tick_type m_seconds_from_midnight;
+        size_type m_seconds_from_midnight;
 
 
     };

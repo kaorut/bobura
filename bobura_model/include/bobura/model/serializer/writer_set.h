@@ -28,34 +28,90 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a writer set.
 
-        \tparam OutputStream        A output stream type.
-        \tparam Timetable           A timetable type.
-        \tparam StationGradeTypeSet A station grade type set type.
-        \tparam Encoder             An encoder type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OutputStream      An output stream type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Font              A font type.
+        \tparam Encoder           An encoder type.
     */
-    template <typename OutputStream, typename Timetable, typename Encoder>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OutputStream,
+        typename OperatingDistance,
+        typename Speed,
+        typename Font,
+        typename Encoder
+    >
     class writer_set : private boost::noncopyable
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
         //! The output stream type.
         using output_stream_type = OutputStream;
 
-        //! The timetable type.
-        using timetable_type = Timetable;
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The font type.
+        using font_type = Font;
 
         //! The encoder type.
         using encoder_type = Encoder;
 
         //! The writer type.
-        using writer_type = writer<output_stream_type, timetable_type>;
+        using writer_type =
+            writer<
+                size_type,
+                difference_type,
+                string_type,
+                output_stream_type,
+                operating_distance_type,
+                speed_type,
+                font_type
+            >;
 
         //! The bzip2 writer type.
-        using bzip2_writer_type = bzip2_writer<output_stream_type, timetable_type>;
+        using bzip2_writer_type =
+            bzip2_writer<
+                size_type,
+                difference_type,
+                string_type,
+                output_stream_type,
+                operating_distance_type,
+                speed_type,
+                font_type
+            >;
 
         //! The JSON writer type.
-        using json_writer_type = json_writer<output_stream_type, timetable_type, encoder_type>;
+        using json_writer_type =
+            json_writer<
+                size_type,
+                difference_type,
+                string_type,
+                output_stream_type,
+                operating_distance_type,
+                speed_type,
+                font_type,
+                encoder_type
+            >;
 
 
         // static functions

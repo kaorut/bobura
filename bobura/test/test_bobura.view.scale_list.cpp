@@ -21,7 +21,7 @@ namespace
 
     using scale_type = boost::rational<int>;
 
-    using scale_list_type = bobura::view::scale_list<scale_type, std::size_t, std::string>;
+    using scale_list_type = bobura::view::scale_list<std::size_t, std::string, scale_type>;
 
 
 }

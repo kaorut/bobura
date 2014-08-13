@@ -18,6 +18,8 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/view/diagram/item.h>
+#include <bobura/view/diagram/selection.h>
+#include <bobura/timetable_model.h>
 
 
 namespace bobura { namespace view { namespace diagram
@@ -25,23 +27,32 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a header of the company and line name in the diagram view.
 
-        \tparam Selection A selection type.
-        \tparam Canvas    A canvas type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Canvas            A canvas type.
     */
-    template <typename Selection, typename Canvas>
-    class company_line_name_header : public item<Selection, Canvas>
+    template <typename Size, typename Difference, typename String, typename OperatingDistance, typename Canvas>
+    class company_line_name_header : public item<Size, Difference, String, OperatingDistance, Canvas>
     {
     public:
         // types
 
-        //! The selection type.
-        using selection_type = Selection;
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
 
         //! The canvas type.
         using canvas_type = Canvas;
-
-        //! The string type.
-        using string_type = typename canvas_type::string_type;
 
         //! The font type.
         using font_type = typename canvas_type::font_type;
@@ -56,7 +67,10 @@ namespace bobura { namespace view { namespace diagram
         using dimension_type = typename canvas_type::dimension_type;
 
         //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+
+        //! The selection type.
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
 
 
         // constructors and destructor
@@ -95,7 +109,7 @@ namespace bobura { namespace view { namespace diagram
         */
         company_line_name_header(company_line_name_header&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_company_line_name(std::move(another.m_company_line_name)),
         m_p_font(another.m_p_font),
         m_p_color(another.m_p_color),
@@ -166,23 +180,32 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a header of the note in the diagram view.
 
-        \tparam Selection A selection type.
-        \tparam Canvas    A canvas type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Canvas            A canvas type.
     */
-    template <typename Selection, typename Canvas>
-    class note_header : public item<Selection, Canvas>
+    template <typename Size, typename Difference, typename String, typename OperatingDistance, typename Canvas>
+    class note_header : public item<Size, Difference, String, OperatingDistance, Canvas>
     {
     public:
         // types
 
-        //! The selection type.
-        using selection_type = Selection;
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
 
         //! The canvas type.
         using canvas_type = Canvas;
-
-        //! The string type.
-        using string_type = typename canvas_type::string_type;
 
         //! The font type.
         using font_type = typename canvas_type::font_type;
@@ -197,7 +220,10 @@ namespace bobura { namespace view { namespace diagram
         using dimension_type = typename canvas_type::dimension_type;
 
         //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+
+        //! The selection type.
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
 
 
         // constructors and destructor
@@ -236,7 +262,7 @@ namespace bobura { namespace view { namespace diagram
         */
         note_header(note_header&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_note(std::move(another.m_note)),
         m_p_font(another.m_p_font),
         m_p_color(another.m_p_color),
@@ -307,21 +333,40 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a header in the diagram view.
 
-        \tparam Model     A model type.
-        \tparam Selection A selection type.
-        \tparam Canvas    A canvas type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Canvas            A canvas type.
     */
-    template <typename Model, typename Selection, typename Canvas>
-    class header : public item<Selection, Canvas>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Canvas
+    >
+    class header : public item<Size, Difference, String, OperatingDistance, Canvas>
     {
     public:
         // types
 
-        //! The model type.
-        using model_type = Model;
+        //! The size type.
+        using size_type = Size;
 
-        //! The selection type.
-        using selection_type = Selection;
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -332,8 +377,18 @@ namespace bobura { namespace view { namespace diagram
         //! The dimension type.
         using dimension_type = typename canvas_type::dimension_type;
 
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
         //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+
+        //! The selection type.
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
 
         // constructors and destructor
@@ -411,7 +466,7 @@ namespace bobura { namespace view { namespace diagram
         */
         explicit header(header&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_p_company_line_name_header(std::move(another.m_p_company_line_name_header)),
         m_p_note_header(std::move(another.m_p_note_header)),
         m_position(std::move(another.m_position)),
@@ -463,13 +518,11 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
-        using company_line_name_header_type = company_line_name_header<selection_type, canvas_type>;
+        using company_line_name_header_type =
+            company_line_name_header<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
-        using note_header_type = note_header<selection_type, canvas_type>;
-
-        using string_type = typename canvas_type::string_type;
-
-        using font_type = typename canvas_type::font_type;
+        using note_header_type =
+            note_header<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
 
         using color_type = typename canvas_type::color_type;
 

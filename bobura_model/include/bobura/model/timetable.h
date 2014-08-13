@@ -23,79 +23,90 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/message/timetable_observer_set.h>
+#include <bobura/model/timetable_info/font_color_set.h>
+#include <bobura/model/timetable_info/station_interval_calculator.h>
+#include <bobura/model/timetable_info/station_location.h>
+#include <bobura/model/train.h>
+#include <bobura/model/train_kind.h>
+
 
 namespace bobura { namespace model
 {
     /*!
         \brief The class template for a timetable.
 
-        \tparam String                    A string type.
-        \tparam StationLocation           A station location type.
-        \tparam StationIntervalCalculator A station interval calculatortype.
-        \tparam TrainKind                 A train kind type.
-        \tparam Train                     A train type.
-        \tparam Speed                     A speed type.
-        \tparam FontColorSet              A font and color set type.
-        \tparam ObserverSet               An observer set type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Font              A font type.
     */
     template <
+        typename Size,
+        typename Difference,
         typename String,
-        typename StationLocation,
-        typename StationIntervalCalculator,
-        typename TrainKind,
-        typename Train,
+        typename OperatingDistance,
         typename Speed,
-        typename FontColorSet, 
-        typename ObserverSet
+        typename Font
     >
     class timetable :
-        private boost::equality_comparable<
-            timetable<
-                String, StationLocation, StationIntervalCalculator, TrainKind, Train, Speed, FontColorSet, ObserverSet
-            >
-        >
+        private boost::equality_comparable<timetable<Size, Difference, String, OperatingDistance, Speed, Font>>
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
         //! The string type.
         using string_type = String;
 
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The font type.
+        using font_type = Font;
+
         //! The station location type.
-        using station_location_type = StationLocation;
+        using station_location_type = timetable_info::station_location<string_type, operating_distance_type>;
 
         //! The station locations type.
         using station_locations_type = std::vector<station_location_type>;
 
         //! The station interval calculator type.
-        using station_interval_calculator_type = StationIntervalCalculator;
+        using station_interval_calculator_type =
+            timetable_info::station_interval_calculator<
+                size_type, difference_type, string_type, operating_distance_type
+            >;
 
         //! The station intervals type.
         using station_intervals_type = typename station_interval_calculator_type::station_intervals_type;
 
         //! The train kind type.
-        using train_kind_type = TrainKind;
+        using train_kind_type = train_kind<string_type>;
 
         //! The train kinds type.
         using train_kinds_type = std::vector<train_kind_type>;
 
-        //! The train kind index type.
-        using train_kind_index_type = typename train_kinds_type::size_type;
-
         //! The train type.
-        using train_type = Train;
+        using train_type = train<size_type, difference_type, string_type>;
 
         //! The trains type.
         using trains_type = std::vector<train_type>;
 
-        //! The speed type.
-        using speed_type = Speed;
-
         //! The font color set type.
-        using font_color_set_type = FontColorSet;
+        using font_color_set_type = timetable_info::font_color_set<font_type>;
 
         //! The observer set type.
-        using observer_set_type = ObserverSet;
+        using observer_set_type = message::timetable_observer_set;
 
 
         // constructors and destructor
@@ -352,7 +363,7 @@ namespace bobura { namespace model
             \retval true  The train kind is referred.
             \retval false Otherwise.
         */
-        bool train_kind_referred(const train_kind_index_type& train_kind_index)
+        bool train_kind_referred(const size_type& train_kind_index)
         const
         {
             const auto referred_by_down_trains =
@@ -382,7 +393,7 @@ namespace bobura { namespace model
             train_kind_type                                 train_kind
         )
         {
-            const train_kind_index_type inserted_index =
+            const size_type inserted_index =
                 std::distance<typename train_kinds_type::const_iterator>(m_train_kinds.begin(), position);
 
             m_train_kinds.insert(
@@ -445,7 +456,7 @@ namespace bobura { namespace model
             if (train_kind_referred(position))
                 BOOST_THROW_EXCEPTION(std::invalid_argument("The train kind is still referred."));
 
-            const train_kind_index_type erased_index =
+            const size_type erased_index =
                 std::distance<typename train_kinds_type::const_iterator>(m_train_kinds.begin(), position);
 
             m_train_kinds.erase(tetengo2::stdalt::as_insertion_iterator(m_train_kinds, position));
@@ -481,10 +492,7 @@ namespace bobura { namespace model
 
             \throw std::out_of_range When the size and/or the elements of train_kind_index_map is out of range.
         */
-        void assign_train_kinds(
-            train_kinds_type                          train_kinds,
-            const std::vector<train_kind_index_type>& train_kind_index_map
-        )
+        void assign_train_kinds(train_kinds_type train_kinds, const std::vector<size_type>& train_kind_index_map)
         {
             std::for_each(
                 m_down_trains.begin(),
@@ -694,8 +702,6 @@ namespace bobura { namespace model
     private:
         // types
 
-        using operating_distance_type = typename station_location_type::operating_distance_type;
-
         using direction_type = typename train_type::direction_type;
 
         using stop_type = typename train_type::stop_type;
@@ -704,17 +710,15 @@ namespace bobura { namespace model
 
         using time_span_type = typename time_type::time_span_type;
 
-        using difference_type = typename train_type::stops_type::difference_type;
-
         struct replace_train_kind_index
         {
             const train_kinds_type& m_train_kinds;
 
-            const std::vector<train_kind_index_type>& m_train_kind_index_map;
+            const std::vector<size_type>& m_train_kind_index_map;
 
             replace_train_kind_index(
-                const train_kinds_type&                   train_kinds,
-                const std::vector<train_kind_index_type>& train_kind_index_map
+                const train_kinds_type&       train_kinds,
+                const std::vector<size_type>& train_kind_index_map
             )
             :
             m_train_kinds(train_kinds),
@@ -755,11 +759,7 @@ namespace bobura { namespace model
             train.erase_stops(train.stops().begin() + first_offset, train.stops().begin() + last_offset);
         }
 
-        static void update_train_kind_index(
-            train_type&                 train,
-            const train_kind_index_type index,
-            const std::ptrdiff_t        index_delta
-        )
+        static void update_train_kind_index(train_type& train, const size_type index, const std::ptrdiff_t index_delta)
         {
             if (train.kind_index() < index)
                 return;
@@ -786,13 +786,11 @@ namespace bobura { namespace model
         )
         {
             const auto departure_index = std::distance(train.stops().begin(), i_departure);
-            assert(
-                static_cast<typename station_locations_type::size_type>(departure_index) < station_locations.size()
-            );
+            assert(static_cast<size_type>(departure_index) < station_locations.size());
             const auto& departure_distance = station_locations[departure_index].operating_distance();
 
             const auto arrival_index = std::distance(train.stops().begin(), i_arrival);
-            assert(static_cast<typename station_locations_type::size_type>(arrival_index) < station_locations.size());
+            assert(static_cast<size_type>(arrival_index) < station_locations.size());
             const auto& arrival_distance = station_locations[arrival_index].operating_distance();
 
             return

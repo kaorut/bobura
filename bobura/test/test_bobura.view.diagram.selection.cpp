@@ -15,14 +15,17 @@
 
 #include <tetengo2.h>
 
-#include <bobura/view/diagram/selection.h>
-#include <bobura/message/diagram_selection_observer_set.h>
 #include <bobura/type_list.h>
+#include <bobura/view/diagram/selection.h>
 
 
 namespace
 {
     // types
+
+    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
+
+    using difference_type = boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type;
 
     using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
@@ -32,18 +35,15 @@ namespace
 
     using station_type = station_location_type::station_type;
 
+    using operating_distance_type = station_location_type::operating_distance_type;
+
     using station_grade_type_set_type =
         boost::mpl::at<bobura::model_type_list, bobura::type::model::station_grade_type_set>::type;
     
     using train_type = model_type::timetable_type::train_type;
 
-    using stop_index_type = train_type::stops_type::size_type;
-
-    using diagram_selection_observer_set_type =
-        bobura::message::diagram_selection_observer_set<station_location_type, train_type>;
-
     using selection_type =
-        bobura::view::diagram::selection<station_location_type, train_type, diagram_selection_observer_set_type>;
+        bobura::view::diagram::selection<size_type, difference_type, string_type, operating_distance_type>;
 
 
 }
@@ -153,7 +153,7 @@ BOOST_AUTO_TEST_SUITE(selection)
 
         BOOST_CHECK(selection.selected(station_location));
         BOOST_CHECK(!selection.selected(train, boost::none));
-        BOOST_CHECK(!selection.selected(train, boost::make_optional<stop_index_type>(42)));
+        BOOST_CHECK(!selection.selected(train, boost::make_optional<size_type>(42)));
         BOOST_CHECK_EQUAL(p_selected_station_location, &station_location);
     }
 #endif
@@ -171,11 +171,11 @@ BOOST_AUTO_TEST_SUITE(selection)
             selection_type selection{};
 
             const train_type* p_selected_train = nullptr;
-            boost::optional<stop_index_type> selected_departure_stop_index{};
+            boost::optional<size_type> selected_departure_stop_index{};
             selection.selection_observer_set().train_selected().connect(
                 [&p_selected_train, &selected_departure_stop_index](
-                    const train_type&                       train,
-                    const boost::optional<stop_index_type>& departure_stop_index
+                    const train_type&                 train,
+                    const boost::optional<size_type>& departure_stop_index
                 )
                 {
                     p_selected_train = &train;
@@ -206,7 +206,7 @@ BOOST_AUTO_TEST_SUITE(selection)
         
             BOOST_CHECK(!selection.selected(station_location));
             BOOST_CHECK(selection.selected(train, boost::none));
-            BOOST_CHECK(!selection.selected(train, boost::make_optional<stop_index_type>(42)));
+            BOOST_CHECK(!selection.selected(train, boost::make_optional<size_type>(42)));
             BOOST_CHECK_EQUAL(p_selected_train, &train);
             BOOST_CHECK(selected_departure_stop_index == boost::none);
         }
@@ -214,11 +214,11 @@ BOOST_AUTO_TEST_SUITE(selection)
             selection_type selection{};
 
             const train_type* p_selected_train = nullptr;
-            boost::optional<stop_index_type> selected_departure_stop_index{};
+            boost::optional<size_type> selected_departure_stop_index{};
             selection.selection_observer_set().train_selected().connect(
                 [&p_selected_train, &selected_departure_stop_index](
-                    const train_type&                       train,
-                    const boost::optional<stop_index_type>& departure_stop_index
+                    const train_type&                 train,
+                    const boost::optional<size_type>& departure_stop_index
                 )
                 {
                     p_selected_train = &train;
@@ -245,23 +245,23 @@ BOOST_AUTO_TEST_SUITE(selection)
                 string_type{ TETENGO2_TEXT("note") }
             };
         
-            selection.select(train, boost::make_optional<stop_index_type>(42));
+            selection.select(train, boost::make_optional<size_type>(42));
         
             BOOST_CHECK(!selection.selected(station_location));
             BOOST_CHECK(!selection.selected(train, boost::none));
-            BOOST_CHECK(selection.selected(train, boost::make_optional<stop_index_type>(42)));
+            BOOST_CHECK(selection.selected(train, boost::make_optional<size_type>(42)));
             BOOST_CHECK_EQUAL(p_selected_train, &train);
-            BOOST_CHECK(selected_departure_stop_index == boost::make_optional<stop_index_type>(42));
+            BOOST_CHECK(selected_departure_stop_index == boost::make_optional<size_type>(42));
         }
         {
             selection_type selection{};
 
             const train_type* p_selected_train = nullptr;
-            boost::optional<stop_index_type> selected_departure_stop_index{};
+            boost::optional<size_type> selected_departure_stop_index{};
             selection.selection_observer_set().train_selected().connect(
                 [&p_selected_train, &selected_departure_stop_index](
-                    const train_type&                       train,
-                    const boost::optional<stop_index_type>& departure_stop_index
+                    const train_type&                 train,
+                    const boost::optional<size_type>& departure_stop_index
                 )
                 {
                     p_selected_train = &train;
@@ -288,13 +288,13 @@ BOOST_AUTO_TEST_SUITE(selection)
                 string_type{ TETENGO2_TEXT("note") }
             };
         
-            selection.select(train, boost::make_optional<stop_index_type>(42));
+            selection.select(train, boost::make_optional<size_type>(42));
         
             BOOST_CHECK(!selection.selected(station_location));
             BOOST_CHECK(!selection.selected(train, boost::none));
-            BOOST_CHECK(selection.selected(train, boost::make_optional<stop_index_type>(42)));
+            BOOST_CHECK(selection.selected(train, boost::make_optional<size_type>(42)));
             BOOST_CHECK_EQUAL(p_selected_train, &train);
-            BOOST_CHECK(selected_departure_stop_index == boost::make_optional<stop_index_type>(42));
+            BOOST_CHECK(selected_departure_stop_index == boost::make_optional<size_type>(42));
         }
     }
 #endif

@@ -22,8 +22,11 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/model/station_info/grade.h>
 #include <bobura/view/diagram/item.h>
+#include <bobura/view/diagram/selection.h>
 #include <bobura/view/diagram/utility.h>
+#include <bobura/timetable_model.h>
 
 
 namespace bobura { namespace view { namespace diagram
@@ -31,33 +34,43 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a station line in the diagram view.
 
-        \tparam Model     A model type.
-        \tparam Selection A selection type.
-        \tparam Canvas    A canvas type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Canvas            A canvas type.
     */
-    template <typename Model, typename Selection, typename Canvas>
-    class station_line : public item<Selection, Canvas>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Canvas
+    >
+    class station_line : public item<Size, Difference, String, OperatingDistance, Canvas>
     {
     public:
         // types
 
-        //! The model type.
-        using model_type = Model;
+        //! The size type.
+        using size_type = Size;
 
-        //! The station location type.
-        using station_location_type = typename model_type::timetable_type::station_location_type;
+        //! The difference type.
+        using difference_type = Difference;
 
-        //! The font and color type.
-        using font_color_type = typename model_type::timetable_type::font_color_set_type::font_color_type;
+        //! The string type.
+        using string_type = String;
 
-        //! The selection type.
-        using selection_type = Selection;
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
-
-        //! The string type.
-        using string_type = typename canvas_type::string_type;
 
         //! The position type.
         using position_type = typename canvas_type::position_type;
@@ -71,8 +84,24 @@ namespace bobura { namespace view { namespace diagram
         //! The dimension type.
         using dimension_type = typename canvas_type::dimension_type;
 
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
         //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+
+        //! The selection type.
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+        //! The station location type.
+        using station_location_type = typename model_type::timetable_type::station_location_type;
+
+        //! The font and color type.
+        using font_color_type = typename model_type::timetable_type::font_color_set_type::font_color_type;
 
 
         // constructors and destructor
@@ -111,7 +140,7 @@ namespace bobura { namespace view { namespace diagram
         */
         station_line(station_line&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_p_station_location(another.m_p_station_location),
         m_right(std::move(another.m_right)),
         m_station_header_right(another.m_station_header_right),
@@ -177,7 +206,7 @@ namespace bobura { namespace view { namespace diagram
                 canvas, position_type{ left_type{ 0 }, m_top }, position_type{ m_right, m_top }, this->selected()
             );
 
-            const auto& name = m_p_station_location->station().name();
+            const auto& name = m_p_station_location->get_station().name();
             const auto name_dimension = canvas.calc_text_dimension(name);
             canvas.draw_text(
                 name,
@@ -209,7 +238,7 @@ namespace bobura { namespace view { namespace diagram
         virtual bool selected_impl()
         const override
         {
-            return this->selection().selected(*m_p_station_location);
+            return this->get_selection().selected(*m_p_station_location);
         }
 
         virtual void select_impl(const bool switch_selection_style)
@@ -217,7 +246,7 @@ namespace bobura { namespace view { namespace diagram
         {
             boost::ignore_unused(switch_selection_style);
 
-            this->selection().select(*m_p_station_location);
+            this->get_selection().select(*m_p_station_location);
         }
 
 
@@ -227,28 +256,40 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a station line list in the diagram view.
 
-        \tparam Model               A model type.
-        \tparam Selection           A selection type.
-        \tparam Canvas              A canvas type.
-        \tparam StationGradeTypeSet A station grade type set type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Canvas            A canvas type.
     */
-    template <typename Model, typename Selection, typename Canvas, typename StationGradeTypeSet>
-    class station_line_list : public item<Selection, Canvas>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Canvas
+    >
+    class station_line_list : public item<Size, Difference, String, OperatingDistance, Canvas>
     {
     public:
         // types
 
-        //! The model type.
-        using model_type = Model;
-        
-        //! The time type.
-        using time_type = typename model_type::timetable_type::train_type::stop_type::time_type;
+        //! The size type.
+        using size_type = Size;
 
-        //! The time span type.
-        using time_span_type = typename time_type::time_span_type;
+        //! The difference type.
+        using difference_type = Difference;
 
-        //! The selection type.
-        using selection_type = Selection;
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -274,11 +315,27 @@ namespace bobura { namespace view { namespace diagram
         //! The horizontal scale type.
         using horizontal_scale_type = typename width_type::value_type;
 
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
         //! The base type.
-        using base_type = item<selection_type, canvas_type>;
+        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+
+        //! The selection type.
+        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+        //! The time type.
+        using time_type = typename model_type::timetable_type::train_type::stop_type::time_type;
+
+        //! The time span type.
+        using time_span_type = typename time_type::time_span_type;
 
         //! The station grade type set type.
-        using station_grade_type_set_type = StationGradeTypeSet;
+        using station_grade_type_set_type = model::station_info::grade_type_set<string_type>;
 
 
         // constructors and destructor
@@ -334,7 +391,7 @@ namespace bobura { namespace view { namespace diagram
         */
         station_line_list(station_line_list&& another)
         :
-        base_type(another.selection()),
+        base_type(another.get_selection()),
         m_station_lines(std::move(another.m_station_lines))
         {}
 
@@ -369,7 +426,8 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
-        using station_line_type = station_line<model_type, selection_type, canvas_type>;
+        using station_line_type =
+            station_line<size_type, difference_type, string_type, operating_distance_type, speed_type, canvas_type>;
 
         using timetable_type = typename model_type::timetable_type;
 
@@ -384,8 +442,6 @@ namespace bobura { namespace view { namespace diagram
         using station_grade_type = typename station_type::grade_type;
 
         using unit_size_type = typename canvas_type::unit_size_type;
-
-        using string_type = typename canvas_type::string_type;
 
 
         // static functions
@@ -408,7 +464,7 @@ namespace bobura { namespace view { namespace diagram
             const auto horizontal_scale_left = left_type::from(width_type{ horizontal_scale });
             const auto last_time_position =
                 time_to_left(
-                    time_type{ static_cast<typename time_type::tick_type>(24 * 60 * 60 + time_offset.seconds()) },
+                    time_type{ static_cast<typename time_type::size_type>(24 * 60 * 60 + time_offset.seconds()) },
                     time_offset,
                     1,
                     tetengo2::gui::position<position_type>::left(scroll_bar_position),
@@ -440,7 +496,9 @@ namespace bobura { namespace view { namespace diagram
                     line_right,
                     station_header_right,
                     std::move(line_position),
-                    select_station_font_color(model.timetable().font_color_set(), station_location.station().grade())
+                    select_station_font_color(
+                        model.timetable().font_color_set(), station_location.get_station().grade()
+                    )
                 );
             }
             station_lines.shrink_to_fit();

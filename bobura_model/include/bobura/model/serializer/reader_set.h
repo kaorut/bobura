@@ -30,20 +30,26 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a reader set.
 
-        \tparam ForwardIterator      A forward iterator type.
-        \tparam Timetable            A timetable type.
-        \tparam PullParser           A pull parser type.
-        \tparam StationGradeTypeSet  A station grade type set type.
-        \tparam SelectOuDiaDiagram   An OuDia diagram selecting type.
-        \tparam Utf8Encoder          A UTF-8 encoder type.
-        \tparam Cp932Encoder         A CP932 encoder type.
+        \tparam Size               A size type.
+        \tparam Difference         A difference type.
+        \tparam String             A string type.
+        \tparam ForwardIterator    A forward iterator type.
+        \tparam OperatingDistance  An operating distance type.
+        \tparam Speed              A speed type.
+        \tparam SelectOuDiaDiagram An OuDia diagram selecting type.
+        \tparam Font               A font type.
+        \tparam Utf8Encoder        A UTF-8 encoder type.
+        \tparam Cp932Encoder       A CP932 encoder type.
     */
     template <
+        typename Size,
+        typename Difference,
+        typename String,
         typename ForwardIterator,
-        typename Timetable,
-        typename PullParser,
-        typename StationGradeTypeSet,
+        typename OperatingDistance,
+        typename Speed,
         typename SelectOuDiaDiagram,
+        typename Font,
         typename Utf8Encoder,
         typename Cp932Encoder
     >
@@ -52,20 +58,23 @@ namespace bobura { namespace model { namespace serializer
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
         //! The iterator type.
         using iterator = ForwardIterator;
 
-        //! The timetable type.
-        using timetable_type = Timetable;
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
 
-        //! The base type.
-        using base_type = reader<iterator, timetable_type>;
-
-        //! The pull parser type.
-        using pull_parser_type = PullParser;
-
-        //! The station grade type set type.
-        using station_grade_type_set_type = StationGradeTypeSet;
+        //! The speed type.
+        using speed_type = Speed;
 
         //! The OuDia diagram selecting type.
         using select_oudia_diagram_type = SelectOuDiaDiagram;
@@ -73,11 +82,11 @@ namespace bobura { namespace model { namespace serializer
         //! The abstract window type.
         using abstract_window_type = typename select_oudia_diagram_type::abstract_window_type;
 
-        //! The string type.
-        using string_type = typename select_oudia_diagram_type::string_type;
-
         //! The message catalog type.
         using message_catalog_type = typename select_oudia_diagram_type::message_catalog_type;
+
+        //! The font type.
+        using font_type = Font;
 
         //! The UTF-8 encoder type.
         using utf8_encoder_type = Utf8Encoder;
@@ -86,24 +95,62 @@ namespace bobura { namespace model { namespace serializer
         using cp932_encoder_type = Cp932Encoder;
 
         //! The reader type.
-        using reader_type = reader<iterator, timetable_type>;
+        using reader_type =
+            reader<size_type, difference_type, string_type, iterator, operating_distance_type, speed_type, font_type>;
 
         //! The JSON reader type.
         using json_reader_type =
-            json_reader<pull_parser_type, timetable_type, station_grade_type_set_type, utf8_encoder_type>;
+            json_reader<
+                size_type,
+                difference_type,
+                string_type,
+                iterator,
+                int,
+                double,
+                operating_distance_type,
+                speed_type,
+                font_type,
+                utf8_encoder_type
+            >;
 
         //! The bzip2 reader type.
-        using bzip2_reader_type = bzip2_reader<iterator, timetable_type>;
+        using bzip2_reader_type =
+            bzip2_reader<
+                size_type,
+                difference_type,
+                string_type,
+                iterator,
+                operating_distance_type,
+                speed_type,
+                font_type
+            >;
 
         //! The OuDia reader type.
         using oudia_reader_type =
             oudia_reader<
-                iterator, timetable_type, station_grade_type_set_type, select_oudia_diagram_type, cp932_encoder_type
+                size_type,
+                difference_type,
+                string_type,
+                iterator,
+                operating_distance_type,
+                speed_type,
+                select_oudia_diagram_type,
+                font_type,
+                cp932_encoder_type
             >;
 
         //! The WinDIA reader type.
         using windia_reader_type =
-            windia_reader<iterator, timetable_type, station_grade_type_set_type, cp932_encoder_type>;
+            windia_reader<
+                size_type,
+                difference_type,
+                string_type,
+                iterator,
+                operating_distance_type,
+                speed_type,
+                font_type,
+                cp932_encoder_type
+            >;
 
 
         // static functions
