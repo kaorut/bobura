@@ -12,10 +12,13 @@ AC_CONFIG_FILES([
     Makefile
     bobura/Makefile
     bobura/include/Makefile
-    bobura/include/bobura/Makefile
     bobura/res/Makefile
     bobura/src/Makefile
-    bobura/test/Makefile
+    bobura_core/Makefile
+    bobura_core/include/Makefile
+    bobura_core/include/bobura/Makefile
+    bobura_core/src/Makefile
+    bobura_core/test/Makefile
     bobura_model/Makefile
     bobura_model/include/Makefile
     bobura_model/include/bobura/Makefile
