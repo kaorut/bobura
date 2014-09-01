@@ -3,7 +3,7 @@
 # $Id$
 
 SUBDIRS = \
-     bobura bobura_model \
+     bobura bobura_core bobura_model \
      docsrc \
      iconsrc \
      installer_bobura \

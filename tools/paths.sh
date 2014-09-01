@@ -8,6 +8,8 @@ list_sources()
     find \
         $1/bobura/include \
         $1/bobura/src \
+        $1/bobura_core/include \
+        $1/bobura_core/src \
         $1/bobura_model/include \
         $1/setup/include \
         $1/setup/src \
@@ -19,7 +21,7 @@ list_sources()
 list_test_sources()
 {
     find \
-        $1/bobura/test \
+        $1/bobura_core/test \
         $1/bobura_model/test \
         -type f \
         -name '*.h' -or \
