@@ -3,11 +3,11 @@
 # $Id$
 
 extra_headers = \
-    0namespace.h \
+    0namespace.dox \
     about_dialog.h \
     application.h \
     basic_type_list.h \
-    command/0namespace.h \
+    command/0namespace.dox \
     command/about.h \
     command/command_base.h \
     command/exit.h \
@@ -32,14 +32,14 @@ extra_headers = \
     diagram_view.h \
     file_property_dialog.h \
     font_color_dialog.h \
-    load_save/0namespace.h \
+    load_save/0namespace.dox \
     load_save/confirm_file_save.h \
     load_save/load_from_file.h \
     load_save/new_file.h \
     load_save/save_to_file.h \
     main_window.h \
     main_window_menu_builder.h \
-    message/0namespace.h \
+    message/0namespace.dox \
     message/about_dialog.h \
     message/diagram_picture_box.h \
     message/diagram_selection_observer_set.h \
@@ -60,8 +60,8 @@ extra_headers = \
     timetable_model.h \
     train_kind_dialog.h \
     type_list.h \
-    view/0namespace.h \
-    view/diagram/0namespace.h \
+    view/0namespace.dox \
+    view/diagram/0namespace.dox \
     view/diagram/header.h \
     view/diagram/item.h \
     view/diagram/selection.h \

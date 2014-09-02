@@ -99,11 +99,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
   <ItemGroup>
     <ClInclude Include="..\precompiled\precompiled.h" />
-    <ClInclude Include="include\bobura\0namespace.h" />
+    <ClInclude Include="include\bobura\0namespace.dox" />
     <ClInclude Include="include\bobura\about_dialog.h" />
     <ClInclude Include="include\bobura\application.h" />
     <ClInclude Include="include\bobura\basic_type_list.h" />
-    <ClInclude Include="include\bobura\command\0namespace.h" />
+    <ClInclude Include="include\bobura\command\0namespace.dox" />
     <ClInclude Include="include\bobura\command\about.h" />
     <ClInclude Include="include\bobura\command\command_base.h" />
     <ClInclude Include="include\bobura\command\exit.h" />
@@ -128,14 +128,14 @@
     <ClInclude Include="include\bobura\diagram_view.h" />
     <ClInclude Include="include\bobura\file_property_dialog.h" />
     <ClInclude Include="include\bobura\font_color_dialog.h" />
-    <ClInclude Include="include\bobura\load_save\0namespace.h" />
+    <ClInclude Include="include\bobura\load_save\0namespace.dox" />
     <ClInclude Include="include\bobura\load_save\confirm_file_save.h" />
     <ClInclude Include="include\bobura\load_save\load_from_file.h" />
     <ClInclude Include="include\bobura\load_save\new_file.h" />
     <ClInclude Include="include\bobura\load_save\save_to_file.h" />
     <ClInclude Include="include\bobura\main_window.h" />
     <ClInclude Include="include\bobura\main_window_menu_builder.h" />
-    <ClInclude Include="include\bobura\message\0namespace.h" />
+    <ClInclude Include="include\bobura\message\0namespace.dox" />
     <ClInclude Include="include\bobura\message\about_dialog.h" />
     <ClInclude Include="include\bobura\message\diagram_picture_box.h" />
     <ClInclude Include="include\bobura\message\diagram_selection_observer_set.h" />
@@ -156,8 +156,8 @@
     <ClInclude Include="include\bobura\timetable_model.h" />
     <ClInclude Include="include\bobura\train_kind_dialog.h" />
     <ClInclude Include="include\bobura\type_list.h" />
-    <ClInclude Include="include\bobura\view\0namespace.h" />
-    <ClInclude Include="include\bobura\view\diagram\0namespace.h" />
+    <ClInclude Include="include\bobura\view\0namespace.dox" />
+    <ClInclude Include="include\bobura\view\diagram\0namespace.dox" />
     <ClInclude Include="include\bobura\view\diagram\header.h" />
     <ClInclude Include="include\bobura\view\diagram\item.h" />
     <ClInclude Include="include\bobura\view\diagram\selection.h" />

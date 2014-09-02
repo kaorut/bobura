@@ -43,7 +43,7 @@
     <ClInclude Include="..\precompiled\precompiled.h">
       <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="include\setup\0namespace.h">
+    <ClInclude Include="include\setup\0namespace.dox">
       <Filter>headers\setup</Filter>
     </ClInclude>
     <ClInclude Include="include\setup\encode.h">
