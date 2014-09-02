@@ -30,12 +30,12 @@ pkg_headers = \
     model/train_kind.h
 
 extra_headers = \
-    model/0namespace.h \
-    model/message/0namespace.h \
-    model/serializer/0namespace.h \
-    model/station_info/0namespace.h \
-    model/timetable_info/0namespace.h \
-    model/train_info/0namespace.h
+    model/0namespace.dox \
+    model/message/0namespace.dox \
+    model/serializer/0namespace.dox \
+    model/station_info/0namespace.dox \
+    model/timetable_info/0namespace.dox \
+    model/train_info/0namespace.dox
 
 nobase_pkginclude_HEADERS = $(pkg_headers)
 EXTRA_DIST = $(extra_headers)

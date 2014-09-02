@@ -3,7 +3,7 @@
 # $Id$
 
 extra_headers = \
-    0namespace.h \
+    0namespace.dox \
     encode.h
 
 EXTRA_DIST = $(extra_headers)

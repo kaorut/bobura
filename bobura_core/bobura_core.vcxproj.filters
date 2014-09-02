@@ -42,22 +42,22 @@
     <ClInclude Include="..\precompiled\precompiled.h">
       <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="include\bobura\load_save\0namespace.h">
+    <ClInclude Include="include\bobura\load_save\0namespace.dox">
       <Filter>headers\bobura\load_save</Filter>
     </ClInclude>
-    <ClInclude Include="include\bobura\message\0namespace.h">
+    <ClInclude Include="include\bobura\message\0namespace.dox">
       <Filter>headers\bobura\message</Filter>
     </ClInclude>
-    <ClInclude Include="include\bobura\view\0namespace.h">
+    <ClInclude Include="include\bobura\view\0namespace.dox">
       <Filter>headers\bobura\view</Filter>
     </ClInclude>
-    <ClInclude Include="include\bobura\0namespace.h">
+    <ClInclude Include="include\bobura\0namespace.dox">
       <Filter>headers\bobura</Filter>
     </ClInclude>
-    <ClInclude Include="include\bobura\command\0namespace.h">
+    <ClInclude Include="include\bobura\command\0namespace.dox">
       <Filter>headers\bobura\command</Filter>
     </ClInclude>
-    <ClInclude Include="include\bobura\view\diagram\0namespace.h">
+    <ClInclude Include="include\bobura\view\diagram\0namespace.dox">
       <Filter>headers\bobura\view\diagram</Filter>
     </ClInclude>
     <ClInclude Include="include\bobura\command\about.h">
