@@ -164,6 +164,7 @@
     <ClInclude Include="include\bobura\view\diagram\station_line.h" />
     <ClInclude Include="include\bobura\view\diagram\time_line.h" />
     <ClInclude Include="include\bobura\view\diagram\train_line.h" />
+    <ClInclude Include="include\bobura\view\diagram\traits.h" />
     <ClInclude Include="include\bobura\view\diagram\utility.h" />
     <ClInclude Include="include\bobura\view\diagram\zoom.h" />
     <ClInclude Include="include\bobura\view\scale_list.h" />

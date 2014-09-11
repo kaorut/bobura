@@ -68,6 +68,7 @@ extra_headers = \
     view/diagram/station_line.h \
     view/diagram/time_line.h \
     view/diagram/train_line.h \
+    view/diagram/traits.h \
     view/diagram/utility.h \
     view/diagram/zoom.h \
     view/scale_list.h
