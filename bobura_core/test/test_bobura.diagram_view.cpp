@@ -14,6 +14,7 @@
 
 #include <bobura/diagram_view.h>
 #include <bobura/type_list.h>
+#include <bobura/view/diagram/traits.h>
 
 
 namespace
@@ -58,8 +59,8 @@ namespace
     using message_catalog_type =
         boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
-    using view_type =
-        bobura::diagram_view<
+    using view_traits_type =
+        bobura::view::diagram::traits<
             size_type,
             difference_type,
             string_type,
@@ -69,6 +70,8 @@ namespace
             solid_background_type,
             message_catalog_type
         >;
+
+    using view_type = bobura::diagram_view<view_traits_type>;
 
     using horizontal_scale_type = view_type::horizontal_scale_type;
 

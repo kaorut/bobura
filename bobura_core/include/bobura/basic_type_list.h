@@ -35,6 +35,7 @@
 #include <bobura/oudia_diagram_dialog.h>
 #include <bobura/settings.h>
 #include <bobura/timetable_model.h>
+#include <bobura/view/diagram/traits.h>
 #include <bobura/view/scale_list.h>
 
 
@@ -575,6 +576,17 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace view
     {
+        using view_traits_type =
+            bobura::view::diagram::traits<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
+                boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+            >;
         using scale_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
     }}
 #endif
@@ -582,19 +594,7 @@ namespace bobura
     //! The view type list.
     using view_type_list =
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::view::view,
-                bobura::diagram_view<
-                    boost::mpl::at<common_type_list, type::size>::type,
-                    boost::mpl::at<common_type_list, type::difference>::type,
-                    boost::mpl::at<common_type_list, type::string>::type,
-                    boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                    boost::mpl::at<model_type_list, type::model::speed>::type,
-                    boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
-                    boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
-                    boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
-                >
-            >,
+            boost::mpl::pair<type::view::view, bobura::diagram_view<detail::view::view_traits_type>>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::view::scale, detail::view::scale_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<

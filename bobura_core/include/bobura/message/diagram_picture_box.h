@@ -20,6 +20,7 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/diagram_view.h>
+#include <bobura/view/diagram/traits.h>
 
 
 namespace bobura { namespace message { namespace diagram_picture_box
@@ -86,9 +87,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
-        //! The view type.
-        using view_type =
-            bobura::diagram_view<
+        //! The view traits type.
+        using view_traits_type =
+            bobura::view::diagram::traits<
                 size_type,
                 difference_type,
                 string_type,
@@ -98,6 +99,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
                 solid_background_type,
                 message_catalog_type
             >;
+
+        //! The view type.
+        using view_type = bobura::diagram_view<view_traits_type>;
 
         //! The set-mouse-capture function type.
         using set_mouse_capture_type = std::function<void (const mouse_button_type)>;
@@ -240,9 +244,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
-        //! The view type.
-        using view_type =
-            bobura::diagram_view<
+        //! The view traits type.
+        using view_traits_type =
+            bobura::view::diagram::traits<
                 size_type,
                 difference_type,
                 string_type,
@@ -252,6 +256,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
                 solid_background_type,
                 message_catalog_type
             >;
+
+        //! The view type.
+        using view_type = bobura::diagram_view<view_traits_type>;
 
         //! The release-mouse-capture function type.
         using release_mouse_capture_type = std::function<bool (const mouse_button_type)>;
@@ -371,9 +378,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
-        //! The view type.
-        using view_type =
-            bobura::diagram_view<
+        //! The view traits type.
+        using view_traits_type =
+            bobura::view::diagram::traits<
                 size_type,
                 difference_type,
                 string_type,
@@ -383,6 +390,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
                 solid_background_type,
                 message_catalog_type
             >;
+
+        //! The view type.
+        using view_type = bobura::diagram_view<view_traits_type>;
 
 
         // constructors and destructor
@@ -531,9 +541,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
-        //! The view type.
-        using view_type =
-            bobura::diagram_view<
+        //! The view traits type.
+        using view_traits_type =
+            bobura::view::diagram::traits<
                 size_type,
                 difference_type,
                 string_type,
@@ -543,6 +553,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
                 solid_background_type,
                 message_catalog_type
             >;
+
+        //! The view type.
+        using view_type = bobura::diagram_view<view_traits_type>;
 
 
         // constructors and destructor
@@ -913,9 +926,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
-        //! The view type.
-        using view_type =
-            bobura::diagram_view<
+        //! The view traits type.
+        using view_traits_type =
+            bobura::view::diagram::traits<
                 size_type,
                 difference_type,
                 string_type,
@@ -925,6 +938,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
                 solid_background_type,
                 message_catalog_type
             >;
+
+        //! The view type.
+        using view_type = bobura::diagram_view<view_traits_type>;
 
 
         // constructors and destructor
@@ -1051,9 +1067,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
-        //! The view type.
-        using view_type =
-            bobura::diagram_view<
+        //! The view traits type.
+        using view_traits_type =
+            bobura::view::diagram::traits<
                 size_type,
                 difference_type,
                 string_type,
@@ -1063,6 +1079,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
                 solid_background_type,
                 message_catalog_type
             >;
+
+        //! The view type.
+        using view_type = bobura::diagram_view<view_traits_type>;
 
 
         // constructors and destructor

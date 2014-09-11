@@ -14,6 +14,7 @@
 #include <boost/core/noncopyable.hpp>
 
 #include <bobura/diagram_view.h>
+#include <bobura/view/diagram/traits.h>
 #include <bobura/view/scale_list.h>
 
 
@@ -80,9 +81,9 @@ namespace bobura { namespace view { namespace diagram
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
-        //! The diagram view type.
-        using diagram_view_type =
-            diagram_view<
+        //! The view traits type.
+        using view_traits_type =
+            bobura::view::diagram::traits<
                 size_type,
                 difference_type,
                 string_type,
@@ -92,6 +93,9 @@ namespace bobura { namespace view { namespace diagram
                 solid_background_type,
                 message_catalog_type
             >;
+
+        //! The view type.
+        using diagram_view_type = bobura::diagram_view<view_traits_type>;
 
         //! The scale list type.
         using scale_list_type = view::scale_list<size_type, string_type, scale_type>;
