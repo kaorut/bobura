@@ -17,26 +17,14 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/view/diagram/traits.h>
 #include <bobura/view/diagram/zoom.h>
 
 
 namespace bobura { namespace view { namespace diagram
 {
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
-    class zoom<
-        Size, Difference, String, OperatingDistance, Speed, Scale, Canvas, SolidBackground, PictureBox, MessageCatalog
-    >::impl : private boost::noncopyable
+    template <typename Traits, typename PictureBox>
+    class zoom<Traits, PictureBox>::impl : private boost::noncopyable
     {
     public:
         // types
@@ -174,169 +162,67 @@ namespace bobura { namespace view { namespace diagram
     };
 
 
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
-    zoom<
-        Size, Difference, String, OperatingDistance, Speed, Scale, Canvas, SolidBackground, PictureBox, MessageCatalog
-    >::zoom(picture_box_type& picture_box, diagram_view_type& diagram_view)
+    template <typename Traits, typename PictureBox>
+    zoom<Traits, PictureBox>::zoom(picture_box_type& picture_box, diagram_view_type& diagram_view)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(picture_box, diagram_view))
     {}
 
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
-    zoom<
-        Size, Difference, String, OperatingDistance, Speed, Scale, Canvas, SolidBackground, PictureBox, MessageCatalog
-    >::~zoom()
+    template <typename Traits, typename PictureBox>
+    zoom<Traits, PictureBox>::~zoom()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
-    void zoom<
-        Size, Difference, String, OperatingDistance, Speed, Scale, Canvas, SolidBackground, PictureBox, MessageCatalog
-    >::set_horizontal_scale(scale_type scale)
+    template <typename Traits, typename PictureBox>
+    void zoom<Traits, PictureBox>::set_horizontal_scale(scale_type scale)
     {
         m_p_impl->set_horizontal_scale(std::move(scale));
     }
 
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
-    void zoom<
-        Size, Difference, String, OperatingDistance, Speed, Scale, Canvas, SolidBackground, PictureBox, MessageCatalog
-    >::horizontally_zoom_in(const bool snap_to_scale_list)
+    template <typename Traits, typename PictureBox>
+    void zoom<Traits, PictureBox>::horizontally_zoom_in(const bool snap_to_scale_list)
     {
         m_p_impl->horizontally_zoom_in(snap_to_scale_list);
     }
 
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
-    void zoom<
-        Size, Difference, String, OperatingDistance, Speed, Scale, Canvas, SolidBackground, PictureBox, MessageCatalog
-    >::horizontally_zoom_out(const bool snap_to_scale_list)
+    template <typename Traits, typename PictureBox>
+    void zoom<Traits, PictureBox>::horizontally_zoom_out(const bool snap_to_scale_list)
     {
         m_p_impl->horizontally_zoom_out(snap_to_scale_list);
     }
 
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
-    void zoom<
-        Size, Difference, String, OperatingDistance, Speed, Scale, Canvas, SolidBackground, PictureBox, MessageCatalog
-    >::set_vertical_scale(scale_type scale)
+    template <typename Traits, typename PictureBox>
+    void zoom<Traits, PictureBox>::set_vertical_scale(scale_type scale)
     {
         m_p_impl->set_vertical_scale(std::move(scale));
     }
 
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
-    void zoom<
-        Size, Difference, String, OperatingDistance, Speed, Scale, Canvas, SolidBackground, PictureBox, MessageCatalog
-    >::vertically_zoom_in(const bool snap_to_scale_list)
+    template <typename Traits, typename PictureBox>
+    void zoom<Traits, PictureBox>::vertically_zoom_in(const bool snap_to_scale_list)
     {
         m_p_impl->vertically_zoom_in(snap_to_scale_list);
     }
 
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
-    void zoom<
-        Size, Difference, String, OperatingDistance, Speed, Scale, Canvas, SolidBackground, PictureBox, MessageCatalog
-    >::vertically_zoom_out(const bool snap_to_scale_list)
+    template <typename Traits, typename PictureBox>
+    void zoom<Traits, PictureBox>::vertically_zoom_out(const bool snap_to_scale_list)
     {
         m_p_impl->vertically_zoom_out(snap_to_scale_list);
     }
 
 
     template class zoom<
-        boost::mpl::at<common_type_list, type::size>::type,
-        boost::mpl::at<common_type_list, type::difference>::type,
-        boost::mpl::at<common_type_list, type::string>::type,
-        boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-        boost::mpl::at<model_type_list, type::model::speed>::type,
-        boost::mpl::at<view_type_list, type::view::scale>::type,
-        boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
-        boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
-        boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
-        boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+        traits<
+            boost::mpl::at<common_type_list, type::size>::type,
+            boost::mpl::at<common_type_list, type::difference>::type,
+            boost::mpl::at<common_type_list, type::string>::type,
+            boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+            boost::mpl::at<model_type_list, type::model::speed>::type,
+            boost::mpl::at<view_type_list, type::view::scale>::type,
+            boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
+            boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
+            boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+        >,
+        boost::mpl::at<ui_type_list, type::ui::picture_box>::type
     >;
 
 

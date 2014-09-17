@@ -18,6 +18,7 @@
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/selection.h>
 #include <bobura/view/diagram/train_line.h>
+#include <bobura/view/diagram/traits.h>
 
 
 namespace
@@ -37,9 +38,6 @@ namespace
     using operating_distance_type = model_type::timetable_type::station_location_type::operating_distance_type;
 
     using train_type = model_type::timetable_type::train_type;
-
-    using selection_type =
-        bobura::view::diagram::selection<size_type, difference_type, string_type, operating_distance_type>;
 
     using time_type = train_type::stop_type::time_type;
 
@@ -67,7 +65,7 @@ namespace
 
     using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
-    using horizontal_scale_type = width_type::value_type;
+    using scale_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::scale>::type;
 
     using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
 
@@ -75,38 +73,30 @@ namespace
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
-    using train_line_fragment_type =
-        bobura::view::diagram::train_line_fragment<
+    using solid_background_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::solid_background>::type;
+
+    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
+
+    using traits_type =
+        bobura::view::diagram::traits<
             size_type,
             difference_type,
             string_type,
             operating_distance_type,
             speed_type,
+            scale_type,
             canvas_type,
+            solid_background_type,
             message_catalog_type
         >;
 
-    using train_line_type =
-        bobura::view::diagram::train_line<
-            size_type,
-            difference_type,
-            string_type,
-            operating_distance_type,
-            speed_type,
-            canvas_type,
-            message_catalog_type
-        >;
+    using selection_type = bobura::view::diagram::selection<traits_type>;
 
-    using train_line_list_type =
-        bobura::view::diagram::train_line_list<
-            size_type,
-            difference_type,
-            string_type,
-            operating_distance_type,
-            speed_type,
-            canvas_type,
-            message_catalog_type
-        >;
+    using train_line_fragment_type = bobura::view::diagram::train_line_fragment<traits_type>;
+
+    using train_line_type = bobura::view::diagram::train_line<traits_type>;
+
+    using train_line_list_type = bobura::view::diagram::train_line_list<traits_type>;
 
 
 }
@@ -215,7 +205,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             left_type{ 24 },
             top_type{ 42 },
             height_type{ 24 },
-            horizontal_scale_type{ 42 },
+            scale_type{ 42 },
             station_intervals,
             std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
@@ -254,7 +244,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             left_type{ 24 },
             top_type{ 42 },
             height_type{ 24 },
-            horizontal_scale_type{ 42 },
+            scale_type{ 42 },
             station_intervals,
             std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
@@ -276,7 +266,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             left_type{ 24 },
             top_type{ 42 },
             height_type{ 24 },
-            horizontal_scale_type{ 42 },
+            scale_type{ 42 },
             station_intervals,
             std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
@@ -306,7 +296,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             left_type{ 24 },
             top_type{ 42 },
             height_type{ 24 },
-            horizontal_scale_type{ 42 },
+            scale_type{ 42 },
             station_intervals,
             std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
@@ -331,7 +321,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             left_type{ 24 },
             top_type{ 42 },
             height_type{ 24 },
-            horizontal_scale_type{ 42 },
+            scale_type{ 42 },
             station_intervals,
             std::vector<top_type>(2, top_type{ 0 }),
             message_catalog
@@ -345,7 +335,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             left_type{ 24 },
             top_type{ 42 },
             height_type{ 24 },
-            horizontal_scale_type{ 42 },
+            scale_type{ 42 },
             station_intervals,
             std::vector<top_type>(2, top_type{ 0 }),
             message_catalog

@@ -16,6 +16,7 @@
 #include <bobura/command/horizontally_zoom_out.h>
 #include <bobura/main_window.h>
 #include <bobura/type_list.h>
+#include <bobura/view/diagram/traits.h>
 #include <bobura/view/diagram/zoom.h>
 
 
@@ -61,8 +62,8 @@ namespace bobura { namespace command
 
         using main_window_type = boost::mpl::at<main_window_type_list, type::main_window::main_window>::type;
 
-        using zoom_type =
-            view::diagram::zoom<
+        using traits_type =
+            view::diagram::traits<
                 boost::mpl::at<common_type_list, type::size>::type,
                 boost::mpl::at<common_type_list, type::difference>::type,
                 boost::mpl::at<common_type_list, type::string>::type,
@@ -71,9 +72,10 @@ namespace bobura { namespace command
                 boost::mpl::at<view_type_list, type::view::scale>::type,
                 boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
                 boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
-                boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
+
+        using zoom_type = view::diagram::zoom<traits_type, boost::mpl::at<ui_type_list, type::ui::picture_box>::type>;
 
 
         // variables

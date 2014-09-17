@@ -23,79 +23,50 @@ namespace bobura { namespace view { namespace diagram
     /*!
         \brief The class template for a zoom of a view.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Scale             A scale type.
-        \tparam Canvas            A canvas type.
-        \tparam SolidBackground   A solid background type.
-        \tparam PictureBox        A picture box type.
-        \tparam MessageCatalog    A message catalog type.
+        \tparam Traits     A traits type.
+        \tparam PictureBox A picture box type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
+    template <typename Traits, typename PictureBox>
     class zoom : boost::noncopyable
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The size type.
-        using size_type = Size;
+        using size_type = typename traits_type::size_type;
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = typename traits_type::difference_type;
 
         //! The string type.
-        using string_type = String;
+        using string_type = typename traits_type::string_type;
 
         //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
+        using operating_distance_type = typename traits_type::operating_distance_type;
 
         //! The speed type.
-        using speed_type = Speed;
+        using speed_type = typename traits_type::speed_type;
 
         //! The scale type.
-        using scale_type = Scale;
+        using scale_type = typename traits_type::scale_type;
 
         //! The canvas type.
-        using canvas_type = Canvas;
+        using canvas_type = typename traits_type::canvas_type;
 
         //! The solid background type.
-        using solid_background_type = SolidBackground;
+        using solid_background_type = typename traits_type::solid_background_type;
+
+        //! The message catalog type.
+        using message_catalog_type = typename traits_type::message_catalog_type;
+
+        //! The view type.
+        using diagram_view_type = bobura::diagram_view<traits_type>;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
-
-        //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
-
-        //! The view traits type.
-        using view_traits_type =
-            bobura::view::diagram::traits<
-                size_type,
-                difference_type,
-                string_type,
-                operating_distance_type,
-                speed_type,
-                canvas_type,
-                solid_background_type,
-                message_catalog_type
-            >;
-
-        //! The view type.
-        using diagram_view_type = bobura::diagram_view<view_traits_type>;
 
         //! The scale list type.
         using scale_list_type = view::scale_list<size_type, string_type, scale_type>;

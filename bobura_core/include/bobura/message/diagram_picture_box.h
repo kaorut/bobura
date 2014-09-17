@@ -33,6 +33,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
+        \tparam Scale             A scale type.
         \tparam Canvas            A canvas type.
         \tparam SolidBackground   A solid background type.
         \tparam PictureBox        A picture box type.
@@ -44,6 +45,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         typename String,
         typename OperatingDistance,
         typename Speed,
+        typename Scale,
         typename Canvas,
         typename SolidBackground,
         typename PictureBox,
@@ -68,6 +70,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         //! The speed type.
         using speed_type = Speed;
+
+        //! The scale type.
+        using scale_type = Scale;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -95,6 +100,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
                 string_type,
                 operating_distance_type,
                 speed_type,
+                scale_type,
                 canvas_type,
                 solid_background_type,
                 message_catalog_type
@@ -190,6 +196,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
+        \tparam Scale             A scale type.
         \tparam Canvas            A canvas type.
         \tparam SolidBackground   A solid background type.
         \tparam PictureBox        A picture box type.
@@ -201,6 +208,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         typename String,
         typename OperatingDistance,
         typename Speed,
+        typename Scale,
         typename Canvas,
         typename SolidBackground,
         typename PictureBox,
@@ -225,6 +233,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         //! The speed type.
         using speed_type = Speed;
+
+        //! The scale type.
+        using scale_type = Scale;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -252,6 +263,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
                 string_type,
                 operating_distance_type,
                 speed_type,
+                scale_type,
                 canvas_type,
                 solid_background_type,
                 message_catalog_type
@@ -324,6 +336,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
+        \tparam Scale             A scale type.
         \tparam Canvas            A canvas type.
         \tparam SolidBackground   A solid background type.
         \tparam PictureBox        A picture box type.
@@ -335,6 +348,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         typename String,
         typename OperatingDistance,
         typename Speed,
+        typename Scale,
         typename Canvas,
         typename SolidBackground,
         typename PictureBox,
@@ -359,6 +373,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         //! The speed type.
         using speed_type = Speed;
+
+        //! The scale type.
+        using scale_type = Scale;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -386,6 +403,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
                 string_type,
                 operating_distance_type,
                 speed_type,
+                scale_type,
                 canvas_type,
                 solid_background_type,
                 message_catalog_type
@@ -476,6 +494,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
+        \tparam Scale             A scale type.
         \tparam Canvas            A canvas type.
         \tparam SolidBackground   A solid background type.
         \tparam PictureBox        A picture box type.
@@ -488,6 +507,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         typename String,
         typename OperatingDistance,
         typename Speed,
+        typename Scale,
         typename Canvas,
         typename SolidBackground,
         typename PictureBox,
@@ -513,6 +533,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         //! The speed type.
         using speed_type = Speed;
+
+        //! The scale type.
+        using scale_type = Scale;
 
         //! The canvas type.
         using canvas_type = Canvas;
@@ -549,6 +572,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
                 string_type,
                 operating_distance_type,
                 speed_type,
+                scale_type,
                 canvas_type,
                 solid_background_type,
                 message_catalog_type
@@ -878,6 +902,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
+        \tparam Scale             A scale type.
         \tparam Canvas            A canvas type.
         \tparam SolidBackground   A solid background type.
         \tparam PictureBox        A picture box type.
@@ -889,6 +914,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         typename String,
         typename OperatingDistance,
         typename Speed,
+        typename Scale,
         typename Canvas,
         typename SolidBackground,
         typename PictureBox,
@@ -914,6 +940,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
         //! The speed type.
         using speed_type = Speed;
 
+        //! The scale type.
+        using scale_type = Scale;
+
         //! The canvas type.
         using canvas_type = Canvas;
 
@@ -934,6 +963,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
                 string_type,
                 operating_distance_type,
                 speed_type,
+                scale_type,
                 canvas_type,
                 solid_background_type,
                 message_catalog_type
@@ -1019,6 +1049,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
+        \tparam Scale             A scale type.
         \tparam Canvas            A canvas type.
         \tparam SolidBackground   A solid background type.
         \tparam PictureBox        A picture box type.
@@ -1030,6 +1061,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         typename String,
         typename OperatingDistance,
         typename Speed,
+        typename Scale,
         typename Canvas,
         typename SolidBackground,
         typename PictureBox,
@@ -1055,6 +1087,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
         //! The speed type.
         using speed_type = Speed;
 
+        //! The scale type.
+        using scale_type = Scale;
+
         //! The canvas type.
         using canvas_type = Canvas;
 
@@ -1075,6 +1110,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
                 string_type,
                 operating_distance_type,
                 speed_type,
+                scale_type,
                 canvas_type,
                 solid_background_type,
                 message_catalog_type

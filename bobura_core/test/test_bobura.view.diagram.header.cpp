@@ -17,6 +17,7 @@
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/header.h>
 #include <bobura/view/diagram/selection.h>
+#include <bobura/view/diagram/traits.h>
 
 
 namespace
@@ -35,9 +36,6 @@ namespace
 
     using speed_type = model_type::speed_type;
 
-    using selection_type =
-        bobura::view::diagram::selection<size_type, difference_type, string_type, operating_distance_type>;
-
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
     using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
@@ -54,26 +52,38 @@ namespace
 
     using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
+    using scale_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::scale>::type;
+
     using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
 
     using font_type = canvas_type::font_type;
 
     using color_type = canvas_type::color_type;
 
-    using company_line_name_header_type =
-        bobura::view::diagram::company_line_name_header<
-            size_type, difference_type, string_type, operating_distance_type, canvas_type
+    using solid_background_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::solid_background>::type;
+
+    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
+
+    using traits_type =
+        bobura::view::diagram::traits<
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            speed_type,
+            scale_type,
+            canvas_type,
+            solid_background_type,
+            message_catalog_type
         >;
 
-    using note_header_type =
-        bobura::view::diagram::note_header<
-            size_type, difference_type, string_type, operating_distance_type, canvas_type
-        >;
+    using selection_type = bobura::view::diagram::selection<traits_type>;
 
-    using header_type =
-        bobura::view::diagram::header<
-            size_type, difference_type, string_type, operating_distance_type, speed_type, canvas_type
-        >;
+    using company_line_name_header_type = bobura::view::diagram::company_line_name_header<traits_type>;
+
+    using note_header_type = bobura::view::diagram::note_header<traits_type>;
+
+    using header_type = bobura::view::diagram::header<traits_type>;
 
 
 }

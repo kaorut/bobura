@@ -20,6 +20,7 @@ namespace bobura { namespace view { namespace diagram
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
+        \tparam Scale             A scale type.
         \tparam Canvas            A canvas type.
         \tparam SolidBackground   A solid background type.
         \tparam MessageCatalog    A message catalog type.
@@ -30,6 +31,7 @@ namespace bobura { namespace view { namespace diagram
         typename String,
         typename OperatingDistance,
         typename Speed,
+        typename Scale,
         typename Canvas,
         typename SolidBackground,
         typename MessageCatalog
@@ -53,6 +55,9 @@ namespace bobura { namespace view { namespace diagram
 
         //! The speed type.
         using speed_type = Speed;
+
+        //! The scale type.
+        using scale_type = Scale;
 
         //! The canvas type.
         using canvas_type = Canvas;

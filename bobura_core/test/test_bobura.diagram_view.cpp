@@ -31,6 +31,8 @@ namespace
 
     using speed_type = model_type::speed_type;
 
+    using scale_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::scale>::type;
+
     using operating_distance_type = model_type::timetable_type::station_location_type::operating_distance_type;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
@@ -66,16 +68,13 @@ namespace
             string_type,
             operating_distance_type,
             speed_type,
+            scale_type,
             canvas_type,
             solid_background_type,
             message_catalog_type
         >;
 
     using view_type = bobura::diagram_view<view_traits_type>;
-
-    using horizontal_scale_type = view_type::horizontal_scale_type;
-
-    using vertical_scale_type = view_type::vertical_scale_type;
 
 
 }
@@ -133,11 +132,11 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         view.set_horizontal_scale(42);
 
-        BOOST_CHECK(view.horizontal_scale() == horizontal_scale_type{ 42 });
+        BOOST_CHECK(view.horizontal_scale() == scale_type{ 42 });
 
         view.set_horizontal_scale(24);
 
-        BOOST_CHECK(view.horizontal_scale() == horizontal_scale_type{ 24 });
+        BOOST_CHECK(view.horizontal_scale() == scale_type{ 24 });
     }
 
     BOOST_AUTO_TEST_CASE(vertical_scale)
@@ -161,11 +160,11 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         view.set_vertical_scale(42);
 
-        BOOST_CHECK(view.vertical_scale() == vertical_scale_type{ 42 });
+        BOOST_CHECK(view.vertical_scale() == scale_type{ 42 });
 
         view.set_vertical_scale(24);
 
-        BOOST_CHECK(view.vertical_scale() == vertical_scale_type{ 24 });
+        BOOST_CHECK(view.vertical_scale() == scale_type{ 24 });
     }
 
     BOOST_AUTO_TEST_CASE(dimension)

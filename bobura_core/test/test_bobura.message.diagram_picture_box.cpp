@@ -14,6 +14,7 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/type_list.h>
+#include <bobura/view/diagram/traits.h>
 
 
 namespace
@@ -30,6 +31,8 @@ namespace
         boost::mpl::at<bobura::model_type_list, bobura::type::model::operating_distance>::type;
 
     using speed_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::speed>::type;
+
+    using scale_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::scale>::type;
 
     using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_canvas>::type;
 
@@ -62,6 +65,7 @@ namespace
             string_type,
             operating_distance_type,
             speed_type,
+            scale_type,
             canvas_type,
             solid_background_type,
             picture_box_type,
@@ -75,6 +79,7 @@ namespace
             string_type,
             operating_distance_type,
             speed_type,
+            scale_type,
             canvas_type,
             solid_background_type,
             picture_box_type,
@@ -88,6 +93,7 @@ namespace
             string_type,
             operating_distance_type,
             speed_type,
+            scale_type,
             canvas_type,
             solid_background_type,
             picture_box_type,
@@ -131,6 +137,7 @@ namespace
             string_type,
             operating_distance_type,
             speed_type,
+            scale_type,
             canvas_type,
             solid_background_type,
             picture_box_type,
@@ -149,6 +156,7 @@ namespace
             string_type,
             operating_distance_type,
             speed_type,
+            scale_type,
             canvas_type,
             solid_background_type,
             picture_box_type,
@@ -162,6 +170,7 @@ namespace
             string_type,
             operating_distance_type,
             speed_type,
+            scale_type,
             canvas_type,
             solid_background_type,
             picture_box_type,

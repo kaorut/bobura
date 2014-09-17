@@ -24,6 +24,7 @@
 #include <bobura/message/timetable_model.h>
 #include <bobura/message/train_kind_dialog.h>
 #include <bobura/message/type_list.h>
+#include <bobura/view/diagram/traits.h>
 #include <bobura/view/diagram/zoom.h>
 
 
@@ -219,6 +220,7 @@ namespace bobura { namespace message
                         String,
                         OperatingDistance,
                         Speed,
+                        Scale,
                         Canvas,
                         SolidBackground,
                         PictureBox,
@@ -234,6 +236,7 @@ namespace bobura { namespace message
                         String,
                         OperatingDistance,
                         Speed,
+                        Scale,
                         Canvas,
                         SolidBackground,
                         PictureBox,
@@ -249,6 +252,7 @@ namespace bobura { namespace message
                         String,
                         OperatingDistance,
                         Speed,
+                        Scale,
                         Canvas,
                         SolidBackground,
                         PictureBox,
@@ -264,20 +268,23 @@ namespace bobura { namespace message
                         String,
                         OperatingDistance,
                         Speed,
+                        Scale,
                         Canvas,
                         SolidBackground,
                         PictureBox,
                         view::diagram::zoom<
-                            Size,
-                            Difference,
-                            String,
-                            OperatingDistance,
-                            Speed,
-                            Scale,
-                            Canvas,
-                            SolidBackground,
-                            PictureBox,
-                            MessageCatalog
+                            view::diagram::traits<
+                                Size,
+                                Difference,
+                                String,
+                                OperatingDistance,
+                                Speed,
+                                Scale,
+                                Canvas,
+                                SolidBackground,
+                                MessageCatalog
+                            >,
+                            PictureBox
                         >,
                         MessageCatalog
                     >
@@ -292,6 +299,7 @@ namespace bobura { namespace message
                         String,
                         OperatingDistance,
                         Speed,
+                        Scale,
                         Canvas,
                         SolidBackground,
                         PictureBox,
@@ -307,6 +315,7 @@ namespace bobura { namespace message
                         String,
                         OperatingDistance,
                         Speed,
+                        Scale,
                         Canvas,
                         SolidBackground,
                         PictureBox,

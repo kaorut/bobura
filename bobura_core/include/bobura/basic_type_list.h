@@ -191,6 +191,7 @@ namespace bobura
         struct popup_menu;     //!< The popup menu type.
         struct position;       //!< The position type.
         struct side_bar;       //!< The side bar type.
+        struct solid_background; //!< The solid background type.
         struct text_box;       //!< The text box type.
         struct transparent_background; //!< The transparent background type.
         struct widget;         //!< The widget type.
@@ -371,6 +372,7 @@ namespace bobura
             >,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::position, detail::ui::position_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::side_bar, detail::ui::side_bar_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::solid_background, detail::ui::solid_background_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::text_box, detail::ui::text_box_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::ui::transparent_background, detail::ui::transparent_background_type>,
@@ -380,7 +382,7 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::widget_traits, detail::ui::widget_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::window, detail::ui::window_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>>>>>>>>>>>>>;
+        >>>>>>>>>>>>>>>>>>>>>>>>>;
 
 
     /**** Setting ***********************************************************/
@@ -576,6 +578,7 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace view
     {
+        using scale_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
         using view_traits_type =
             bobura::view::diagram::traits<
                 boost::mpl::at<common_type_list, type::size>::type,
@@ -583,11 +586,11 @@ namespace bobura
                 boost::mpl::at<common_type_list, type::string>::type,
                 boost::mpl::at<model_type_list, type::model::operating_distance>::type,
                 boost::mpl::at<model_type_list, type::model::speed>::type,
+                scale_type,
                 boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
                 boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
-        using scale_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
     }}
 #endif
 
