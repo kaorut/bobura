@@ -14,29 +14,13 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/type_list.h>
-#include <bobura/view/diagram/traits.h>
 
 
 namespace
 {
     // types
 
-    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
-
-    using difference_type = boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type;
-
-    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
-
-    using operating_distance_type =
-        boost::mpl::at<bobura::model_type_list, bobura::type::model::operating_distance>::type;
-
-    using speed_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::speed>::type;
-
-    using scale_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::scale>::type;
-
-    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_canvas>::type;
-
-    using solid_background_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_solid_background>::type;
+    using view_traits_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::traits>::type;
 
     using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
 
@@ -58,47 +42,12 @@ namespace
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    using mouse_pressed_type =
-        bobura::message::diagram_picture_box::mouse_pressed<
-            size_type,
-            difference_type,
-            string_type,
-            operating_distance_type,
-            speed_type,
-            scale_type,
-            canvas_type,
-            solid_background_type,
-            picture_box_type,
-            message_catalog_type
-        >;
+    using mouse_pressed_type = bobura::message::diagram_picture_box::mouse_pressed<view_traits_type, picture_box_type>;
 
     using mouse_released_type =
-        bobura::message::diagram_picture_box::mouse_released<
-            size_type,
-            difference_type,
-            string_type,
-            operating_distance_type,
-            speed_type,
-            scale_type,
-            canvas_type,
-            solid_background_type,
-            picture_box_type,
-            message_catalog_type
-        >;
+        bobura::message::diagram_picture_box::mouse_released<view_traits_type, picture_box_type>;
 
-    using mouse_moved_type =
-        bobura::message::diagram_picture_box::mouse_moved<
-            size_type,
-            difference_type,
-            string_type,
-            operating_distance_type,
-            speed_type,
-            scale_type,
-            canvas_type,
-            solid_background_type,
-            picture_box_type,
-            message_catalog_type
-        >;
+    using mouse_moved_type = bobura::message::diagram_picture_box::mouse_moved<view_traits_type, picture_box_type>;
 
     struct dummy_view_zoom_type
     {
@@ -131,51 +80,16 @@ namespace
     };
 
     using mouse_wheeled_type =
-        bobura::message::diagram_picture_box::mouse_wheeled<
-            size_type,
-            difference_type,
-            string_type,
-            operating_distance_type,
-            speed_type,
-            scale_type,
-            canvas_type,
-            solid_background_type,
-            picture_box_type,
-            dummy_view_zoom_type,
-            message_catalog_type
-        >;
+        bobura::message::diagram_picture_box::mouse_wheeled<view_traits_type, picture_box_type, dummy_view_zoom_type>;
 
     using virtual_key_type = picture_box_type::keyboard_observer_set_type::virtual_key_type;
 
     using keyboard_key_down_type = bobura::message::diagram_picture_box::keyboard_key_down<picture_box_type>;
 
-    using paint_paint_type =
-        bobura::message::diagram_picture_box::paint_paint<
-            size_type,
-            difference_type,
-            string_type,
-            operating_distance_type,
-            speed_type,
-            scale_type,
-            canvas_type,
-            solid_background_type,
-            picture_box_type,
-            message_catalog_type
-        >;
+    using paint_paint_type = bobura::message::diagram_picture_box::paint_paint<view_traits_type, picture_box_type>;
 
     using scroll_bar_scrolled_type =
-        bobura::message::diagram_picture_box::scroll_bar_scrolled<
-            size_type,
-            difference_type,
-            string_type,
-            operating_distance_type,
-            speed_type,
-            scale_type,
-            canvas_type,
-            solid_background_type,
-            picture_box_type,
-            message_catalog_type
-        >;
+        bobura::message::diagram_picture_box::scroll_bar_scrolled<view_traits_type, picture_box_type>;
 
 
     // functions

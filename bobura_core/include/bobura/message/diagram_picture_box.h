@@ -20,7 +20,6 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/diagram_view.h>
-#include <bobura/view/diagram/traits.h>
 
 
 namespace bobura { namespace message { namespace diagram_picture_box
@@ -28,57 +27,17 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a mouse pressed observer of the picture box.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Scale             A scale type.
-        \tparam Canvas            A canvas type.
-        \tparam SolidBackground   A solid background type.
-        \tparam PictureBox        A picture box type.
-        \tparam MessageCatalog    A message catalog type.
+        \tparam ViewTraits A view traits type.
+        \tparam PictureBox A picture box type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
+    template <typename ViewTraits, typename PictureBox>
     class mouse_pressed
     {
     public:
         // types
 
-        //! The size type.
-        using size_type = Size;
-
-        //! The difference type.
-        using difference_type = Difference;
-
-        //! The string type.
-        using string_type = String;
-
-        //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
-
-        //! The speed type.
-        using speed_type = Speed;
-
-        //! The scale type.
-        using scale_type = Scale;
-
-        //! The canvas type.
-        using canvas_type = Canvas;
-
-        //! The solid background type.
-        using solid_background_type = SolidBackground;
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
@@ -88,23 +47,6 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         //! The button kind type.
         using mouse_button_type = typename picture_box_type::mouse_observer_set_type::mouse_button_type;
-
-        //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
-
-        //! The view traits type.
-        using view_traits_type =
-            bobura::view::diagram::traits<
-                size_type,
-                difference_type,
-                string_type,
-                operating_distance_type,
-                speed_type,
-                scale_type,
-                canvas_type,
-                solid_background_type,
-                message_catalog_type
-            >;
 
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;
@@ -171,11 +113,6 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
 
     private:
-        // types
-
-        using item_type = typename view_type::item_type;
-
-
         // variables
 
         picture_box_type& m_picture_box;
@@ -191,57 +128,17 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a mouse released observer of the picture box.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Scale             A scale type.
-        \tparam Canvas            A canvas type.
-        \tparam SolidBackground   A solid background type.
-        \tparam PictureBox        A picture box type.
-        \tparam MessageCatalog    A message catalog type.
+        \tparam ViewTraits A view traits type.
+        \tparam PictureBox A picture box type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
+    template <typename ViewTraits, typename PictureBox>
     class mouse_released
     {
     public:
         // types
 
-        //! The size type.
-        using size_type = Size;
-
-        //! The difference type.
-        using difference_type = Difference;
-
-        //! The string type.
-        using string_type = String;
-
-        //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
-
-        //! The speed type.
-        using speed_type = Speed;
-
-        //! The scale type.
-        using scale_type = Scale;
-
-        //! The canvas type.
-        using canvas_type = Canvas;
-
-        //! The solid background type.
-        using solid_background_type = SolidBackground;
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
@@ -251,23 +148,6 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         //! The button kind type.
         using mouse_button_type = typename picture_box_type::mouse_observer_set_type::mouse_button_type;
-
-        //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
-
-        //! The view traits type.
-        using view_traits_type =
-            bobura::view::diagram::traits<
-                size_type,
-                difference_type,
-                string_type,
-                operating_distance_type,
-                speed_type,
-                scale_type,
-                canvas_type,
-                solid_background_type,
-                message_catalog_type
-            >;
 
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;
@@ -331,57 +211,17 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a mouse moved observer of the picture box.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Scale             A scale type.
-        \tparam Canvas            A canvas type.
-        \tparam SolidBackground   A solid background type.
-        \tparam PictureBox        A picture box type.
-        \tparam MessageCatalog    A message catalog type.
+        \tparam ViewTraits A view traits type.
+        \tparam PictureBox A picture box type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
+    template <typename ViewTraits, typename PictureBox>
     class mouse_moved
     {
     public:
         // types
 
-        //! The size type.
-        using size_type = Size;
-
-        //! The difference type.
-        using difference_type = Difference;
-
-        //! The string type.
-        using string_type = String;
-
-        //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
-
-        //! The speed type.
-        using speed_type = Speed;
-
-        //! The scale type.
-        using scale_type = Scale;
-
-        //! The canvas type.
-        using canvas_type = Canvas;
-
-        //! The solid background type.
-        using solid_background_type = SolidBackground;
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
@@ -391,23 +231,6 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         //! The button kind type.
         using mouse_button_type = typename picture_box_type::mouse_observer_set_type::mouse_button_type;
-
-        //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
-
-        //! The view traits type.
-        using view_traits_type =
-            bobura::view::diagram::traits<
-                size_type,
-                difference_type,
-                string_type,
-                operating_distance_type,
-                speed_type,
-                scale_type,
-                canvas_type,
-                solid_background_type,
-                message_catalog_type
-            >;
 
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;
@@ -473,8 +296,6 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         using system_cursor_type = typename picture_box_type::system_cursor_type;
 
-        using item_type = typename view_type::item_type;
-
 
         // variables
 
@@ -489,59 +310,18 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a mouse wheel observer of the picture box.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Scale             A scale type.
-        \tparam Canvas            A canvas type.
-        \tparam SolidBackground   A solid background type.
-        \tparam PictureBox        A picture box type.
-        \tparam Zoom              A zoom type.
-        \tparam MessageCatalog    A message catalog type.
+        \tparam ViewTraits A view traits type.
+        \tparam PictureBox A picture box type.
+        \tparam Zoom       A zoom type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename Zoom,
-        typename MessageCatalog
-    >
+    template <typename ViewTraits, typename PictureBox, typename Zoom>
     class mouse_wheeled
     {
     public:
         // types
 
-        //! The size type.
-        using size_type = Size;
-
-        //! The difference type.
-        using difference_type = Difference;
-
-        //! The string type.
-        using string_type = String;
-
-        //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
-
-        //! The speed type.
-        using speed_type = Speed;
-
-        //! The scale type.
-        using scale_type = Scale;
-
-        //! The canvas type.
-        using canvas_type = Canvas;
-
-        //! The solid background type.
-        using solid_background_type = SolidBackground;
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
@@ -560,23 +340,6 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         //! The view zoom type.
         using view_zoom_type = Zoom;
-
-        //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
-
-        //! The view traits type.
-        using view_traits_type =
-            bobura::view::diagram::traits<
-                size_type,
-                difference_type,
-                string_type,
-                operating_distance_type,
-                speed_type,
-                scale_type,
-                canvas_type,
-                solid_background_type,
-                message_catalog_type
-            >;
 
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;
@@ -897,77 +660,23 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a paint observer of the picture box.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Scale             A scale type.
-        \tparam Canvas            A canvas type.
-        \tparam SolidBackground   A solid background type.
-        \tparam PictureBox        A picture box type.
-        \tparam MessageCatalog    A message catalog type.
+        \tparam ViewTraits A view traits type.
+        \tparam PictureBox A picture box type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
+    template <typename ViewTraits, typename PictureBox>
     class paint_paint
     {
     public:
         // types
 
-        //! The size type.
-        using size_type = Size;
-
-        //! The difference type.
-        using difference_type = Difference;
-
-        //! The string type.
-        using string_type = String;
-
-        //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
-
-        //! The speed type.
-        using speed_type = Speed;
-
-        //! The scale type.
-        using scale_type = Scale;
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
 
         //! The canvas type.
-        using canvas_type = Canvas;
-
-        //! The solid background type.
-        using solid_background_type = SolidBackground;
+        using canvas_type = typename view_traits_type::canvas_type;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
-
-        //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
-
-        //! The view traits type.
-        using view_traits_type =
-            bobura::view::diagram::traits<
-                size_type,
-                difference_type,
-                string_type,
-                operating_distance_type,
-                speed_type,
-                scale_type,
-                canvas_type,
-                solid_background_type,
-                message_catalog_type
-            >;
 
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;
@@ -1044,77 +753,23 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a scroll bar observer of the picture box.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Scale             A scale type.
-        \tparam Canvas            A canvas type.
-        \tparam SolidBackground   A solid background type.
-        \tparam PictureBox        A picture box type.
-        \tparam MessageCatalog    A message catalog type.
+        \tparam ViewTraits A view traits type.
+        \tparam PictureBox A picture box type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Canvas,
-        typename SolidBackground,
-        typename PictureBox,
-        typename MessageCatalog
-    >
+    template <typename ViewTraits, typename PictureBox>
     class scroll_bar_scrolled
     {
     public:
         // types
 
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
+
         //! The size type.
-        using size_type = Size;
-
-        //! The difference type.
-        using difference_type = Difference;
-
-        //! The string type.
-        using string_type = String;
-
-        //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
-
-        //! The speed type.
-        using speed_type = Speed;
-
-        //! The scale type.
-        using scale_type = Scale;
-
-        //! The canvas type.
-        using canvas_type = Canvas;
-
-        //! The solid background type.
-        using solid_background_type = SolidBackground;
+        using size_type = typename view_traits_type::size_type;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
-
-        //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
-
-        //! The view traits type.
-        using view_traits_type =
-            bobura::view::diagram::traits<
-                size_type,
-                difference_type,
-                string_type,
-                operating_distance_type,
-                speed_type,
-                scale_type,
-                canvas_type,
-                solid_background_type,
-                message_catalog_type
-            >;
 
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;

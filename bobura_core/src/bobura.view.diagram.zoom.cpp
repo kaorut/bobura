@@ -17,7 +17,6 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/view/diagram/traits.h>
 #include <bobura/view/diagram/zoom.h>
 
 
@@ -211,17 +210,7 @@ namespace bobura { namespace view { namespace diagram
 
 
     template class zoom<
-        traits<
-            boost::mpl::at<common_type_list, type::size>::type,
-            boost::mpl::at<common_type_list, type::difference>::type,
-            boost::mpl::at<common_type_list, type::string>::type,
-            boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-            boost::mpl::at<model_type_list, type::model::speed>::type,
-            boost::mpl::at<view_type_list, type::view::scale>::type,
-            boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
-            boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
-            boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
-        >,
+        boost::mpl::at<view_type_list, type::view::traits>::type,
         boost::mpl::at<ui_type_list, type::ui::picture_box>::type
     >;
 

@@ -14,7 +14,6 @@
 #include <boost/core/noncopyable.hpp>
 
 #include <bobura/diagram_view.h>
-#include <bobura/view/diagram/traits.h>
 #include <bobura/view/scale_list.h>
 
 

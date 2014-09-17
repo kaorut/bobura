@@ -19,28 +19,19 @@
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/selection.h>
 #include <bobura/view/diagram/station_line.h>
-#include <bobura/view/diagram/traits.h>
 
 
 namespace
 {
     // types
 
-    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
-
-    using difference_type = boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type;
-
     using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
     using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
-    using speed_type = model_type::speed_type;
-
     using station_location_type = model_type::timetable_type::station_location_type;
 
     using station_type = station_location_type::station_type;
-
-    using operating_distance_type = station_location_type::operating_distance_type;
 
     using font_color_type = model_type::timetable_type::font_color_set_type::font_color_type;
 
@@ -49,8 +40,6 @@ namespace
     using time_type = model_type::timetable_type::train_type::stop_type::time_type;
 
     using time_span_type = time_type::time_span_type;
-
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
     using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
 
@@ -74,22 +63,7 @@ namespace
 
     using color_type = canvas_type::color_type;
 
-    using solid_background_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::solid_background>::type;
-
-    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
-
-    using traits_type =
-        bobura::view::diagram::traits<
-            size_type,
-            difference_type,
-            string_type,
-            operating_distance_type,
-            speed_type,
-            scale_type,
-            canvas_type,
-            solid_background_type,
-            message_catalog_type
-        >;
+    using traits_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::traits>::type;
 
     using selection_type = bobura::view::diagram::selection<traits_type>;
 

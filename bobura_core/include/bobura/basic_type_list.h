@@ -570,6 +570,7 @@ namespace bobura
 
     namespace type { namespace view
     {
+        struct traits;         //!< The traits type.
         struct view;           //!< The view type.
         struct scale;          //!< The scale type.
         struct scale_list;     //!< The scale list type.
@@ -579,7 +580,7 @@ namespace bobura
     namespace detail { namespace view
     {
         using scale_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
-        using view_traits_type =
+        using traits_type =
             bobura::view::diagram::traits<
                 boost::mpl::at<common_type_list, type::size>::type,
                 boost::mpl::at<common_type_list, type::difference>::type,
@@ -596,8 +597,9 @@ namespace bobura
 
     //! The view type list.
     using view_type_list =
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::view::traits, detail::view::traits_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::view::view, bobura::diagram_view<detail::view::view_traits_type>>,
+            boost::mpl::pair<type::view::view, bobura::diagram_view<detail::view::traits_type>>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::view::scale, detail::view::scale_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
@@ -609,7 +611,7 @@ namespace bobura
                 >
             >,
         tetengo2::meta::assoc_list_end
-        >>>;
+        >>>>;
 
 
     /**** Loading and Saving ************************************************/

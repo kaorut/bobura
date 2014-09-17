@@ -17,24 +17,15 @@
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/header.h>
 #include <bobura/view/diagram/selection.h>
-#include <bobura/view/diagram/traits.h>
 
 
 namespace
 {
     // types
 
-    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
-
-    using difference_type = boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type;
-
     using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
     using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
-
-    using operating_distance_type = model_type::timetable_type::station_location_type::operating_distance_type;
-
-    using speed_type = model_type::speed_type;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
@@ -52,30 +43,13 @@ namespace
 
     using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
-    using scale_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::scale>::type;
-
     using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
 
     using font_type = canvas_type::font_type;
 
     using color_type = canvas_type::color_type;
 
-    using solid_background_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::solid_background>::type;
-
-    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
-
-    using traits_type =
-        bobura::view::diagram::traits<
-            size_type,
-            difference_type,
-            string_type,
-            operating_distance_type,
-            speed_type,
-            scale_type,
-            canvas_type,
-            solid_background_type,
-            message_catalog_type
-        >;
+    using traits_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::traits>::type;
 
     using selection_type = bobura::view::diagram::selection<traits_type>;
 
