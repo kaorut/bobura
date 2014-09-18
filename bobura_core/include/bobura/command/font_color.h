@@ -35,12 +35,12 @@ namespace bobura { namespace command
         //! The font and color dialog type.
         using font_color_dialog_type =
             font_color_dialog<
-                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
                 boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
                 boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
                 boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
-                boost::mpl::at<ui_type_list, type::ui::color>::type
+                boost::mpl::at<ui_type_list, type::ui::color>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
 
         //! The dialog base type.
