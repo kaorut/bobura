@@ -36,12 +36,12 @@ namespace bobura { namespace command
         //! The train kind dialog type.
         using train_kind_dialog_type =
             train_kind_dialog<
-                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
                 boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
                 bobura::model::train_kind<boost::mpl::at<common_type_list, type::string>::type>,
                 boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                boost::mpl::at<ui_type_list, type::ui::color>::type
+                boost::mpl::at<ui_type_list, type::ui::color>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
 
         //! The dialog base type.

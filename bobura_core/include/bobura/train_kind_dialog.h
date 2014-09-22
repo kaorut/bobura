@@ -22,37 +22,34 @@ namespace bobura
     /*!
         \brief The class template for the train kind dialog.
 
+        \tparam Size           A size type.
         \tparam Dialog         A dialog type.
-        \tparam MessageCatalog A message catalog type.
-        \tparam IntSize        An integer size type.
         \tparam TrainKind      A train kind type.
         \tparam Font           A font type.
         \tparam Color          A color type.
+        \tparam MessageCatalog A message catalog type.
     */
     template <
+        typename Size,
         typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
         typename TrainKind,
         typename Font,
-        typename Color
+        typename Color,
+        typename MessageCatalog
     >
     class train_kind_dialog : public Dialog
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
         //! The base type.
         using base_type = Dialog;
 
         //! The abstract window type.
         using abstract_window_type = typename base_type::base_type;
-
-        //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
-
-        //! The integer size type.
-        using int_size_type = IntSize;
 
         //! The train kind type.
         using train_kind_type = TrainKind;
@@ -62,6 +59,9 @@ namespace bobura
 
         //! The color type.
         using color_type = Color;
+
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
 
         //! The information set type.
         class info_set_type
@@ -77,11 +77,7 @@ namespace bobura
                 \param referred       A referred status.
                 \param train_kind     A train kind.
             */
-            info_set_type(
-                boost::optional<int_size_type> original_index,
-                const bool                     referred,
-                train_kind_type                train_kind
-            );
+            info_set_type(boost::optional<size_type> original_index, const bool referred, train_kind_type train_kind);
 
 
             /*!
@@ -89,7 +85,7 @@ namespace bobura
 
                 \return The original index.
             */
-            const boost::optional<int_size_type>& original_index()
+            const boost::optional<size_type>& original_index()
             const;
 
             /*!
@@ -116,7 +112,7 @@ namespace bobura
             train_kind_type& train_kind();
 
         private:
-            boost::optional<int_size_type> m_original_index;
+            boost::optional<size_type> m_original_index;
 
             bool m_referred;
 
@@ -131,15 +127,15 @@ namespace bobura
             \brief Creates a train kind dialog.
 
             \param parent           A parent window.
-            \param message_catalog  A message catalog.
             \param font             A font for the sample.
             \param background_color A background color for the sample.
+            \param message_catalog  A message catalog.
         */
         train_kind_dialog(
             abstract_window_type&       parent,
-            const message_catalog_type& message_catalog,
             const font_type&            font,
-            const color_type&           background_color
+            const color_type&           background_color,
+            const message_catalog_type& message_catalog
         );
 
         /*!

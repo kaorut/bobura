@@ -52,7 +52,7 @@ namespace bobura { namespace command
         {
             const auto& font_color_set = model.timetable().font_color_set();
             train_kind_dialog_type dialog{
-                parent, m_message_catalog, font_color_set.train_name(), font_color_set.background()
+                parent, font_color_set.train_name(), font_color_set.background(), m_message_catalog
             };
 
             auto info_sets = to_info_sets(model.timetable());
@@ -72,7 +72,7 @@ namespace bobura { namespace command
     private:
         // types
 
-        using int_size_type = train_kind_dialog_type::int_size_type;
+        using size_type = train_kind_dialog_type::size_type;
 
         using info_set_type = train_kind_dialog_type::info_set_type;
 
@@ -96,7 +96,7 @@ namespace bobura { namespace command
 
             for (auto i = timetable.train_kinds().begin(); i != timetable.train_kinds().end(); ++i)
             {
-                const int_size_type index = std::distance(timetable.train_kinds().begin(), i);
+                const size_type index = std::distance(timetable.train_kinds().begin(), i);
                 info_sets.emplace_back(boost::make_optional(index), timetable.train_kind_referred(i), *i);
             }
 
