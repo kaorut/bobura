@@ -23,15 +23,22 @@ namespace bobura
     /*!
         \brief The class template for the OuDia diagram dialog.
 
+        \tparam Size           A size type.
+        \tparam String         A string type.
         \tparam Dialog         A dialog type.
         \tparam MessageCatalog A message catalog type.
-        \tparam IntSize        An integer size type.
     */
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
+    template <typename Size, typename String, typename Dialog, typename MessageCatalog>
     class oudia_diagram_dialog : public Dialog
     {
     public:
         // types
+
+        //! The size type.
+        using size_type = Size;
+
+        //! The string type.
+        using string_type = String;
 
         //! The base type.
         using base_type = Dialog;
@@ -39,14 +46,8 @@ namespace bobura
         //! The abstract window type.
         using abstract_window_type = typename base_type::base_type;
 
-        //! The string type.
-        using string_type = typename base_type::string_type;
-
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
-
-        //! The integer size type.
-        using int_size_type = IntSize;
 
 
         // constructors and destructor
@@ -103,7 +104,7 @@ namespace bobura
 
             \return The selected index.
         */
-        const boost::optional<int_size_type>& selected_index()
+        const boost::optional<size_type>& selected_index()
         const;
 
         /*!
@@ -113,7 +114,7 @@ namespace bobura
 
             \throw std::out_of_range When index is greater than the diagram count.
         */
-        void set_selected_index(const int_size_type index);
+        void set_selected_index(const size_type index);
 
 
     private:

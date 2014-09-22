@@ -109,7 +109,7 @@ namespace bobura { namespace model { namespace serializer
     private:
         // types
 
-        using selected_index_type = typename oudia_diagram_dialog_type::int_size_type;
+        using selected_index_type = typename oudia_diagram_dialog_type::size_type;
 
 
         // variables

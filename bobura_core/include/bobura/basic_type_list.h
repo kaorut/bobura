@@ -629,9 +629,10 @@ namespace bobura
     {
         using oudia_diagram_dialog_type =
             oudia_diagram_dialog<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
                 boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                boost::mpl::at<common_type_list, type::size>::type
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
     }}
 #endif

@@ -26,21 +26,19 @@
 
 namespace bobura
 {
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    class oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::impl : private boost::noncopyable
+    template <typename Size, typename String, typename Dialog, typename MessageCatalog>
+    class oudia_diagram_dialog<Size, String, Dialog, MessageCatalog>::impl : private boost::noncopyable
     {
     public:
         // types
 
+        using size_type = Size;
+
+        using string_type = String;
+
         using base_type = Dialog;
 
-        using string_type = typename base_type::string_type;
-
-        using background_type = typename base_type::background_type;
-
         using message_catalog_type = MessageCatalog;
-
-        using int_size_type = IntSize;
 
 
         // constructors and destructor
@@ -98,13 +96,13 @@ namespace bobura
             m_selected_index = m_p_diagram_list_box->selected_value_index();
         }
 
-        const boost::optional<int_size_type>& selected_index()
+        const boost::optional<size_type>& selected_index()
         const
         {
             return m_selected_index;
         }
 
-        void set_selected_index(const int_size_type index)
+        void set_selected_index(const size_type index)
         {
             if (index >= m_p_diagram_list_box->value_count())
                 BOOST_THROW_EXCEPTION(std::out_of_range("index is greater than the diagram count."));
@@ -157,7 +155,7 @@ namespace bobura
 
         std::vector<string_type> m_names;
 
-        boost::optional<int_size_type> m_selected_index;
+        boost::optional<size_type> m_selected_index;
 
         std::unique_ptr<label_type> m_p_file_name_label;
 
@@ -287,8 +285,8 @@ namespace bobura
     };
 
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::oudia_diagram_dialog(
+    template <typename Size, typename String, typename Dialog, typename MessageCatalog>
+    oudia_diagram_dialog<Size, String, Dialog, MessageCatalog>::oudia_diagram_dialog(
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog
     )
@@ -297,64 +295,65 @@ namespace bobura
     m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog))
     {}
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::~oudia_diagram_dialog()
+    template <typename Size, typename String, typename Dialog, typename MessageCatalog>
+    oudia_diagram_dialog<Size, String, Dialog, MessageCatalog>::~oudia_diagram_dialog()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    const typename oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::string_type&
-    oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::file_name()
+    template <typename Size, typename String, typename Dialog, typename MessageCatalog>
+    const typename oudia_diagram_dialog<Size, String, Dialog, MessageCatalog>::string_type&
+    oudia_diagram_dialog<Size, String, Dialog, MessageCatalog>::file_name()
     const
     {
         return m_p_impl->file_name();
     }
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    void oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::set_file_name(string_type file_name)
+    template <typename Size, typename String, typename Dialog, typename MessageCatalog>
+    void oudia_diagram_dialog<Size, String, Dialog, MessageCatalog>::set_file_name(string_type file_name)
     {
         m_p_impl->set_file_name(std::move(file_name));
     }
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    const std::vector<typename oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::string_type>&
-    oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::names()
+    template <typename Size, typename String, typename Dialog, typename MessageCatalog>
+    const std::vector<typename oudia_diagram_dialog<Size, String, Dialog, MessageCatalog>::string_type>&
+    oudia_diagram_dialog<Size, String, Dialog, MessageCatalog>::names()
     const
     {
         return m_p_impl->names();
     }
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    void oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::set_names(std::vector<string_type> names)
+    template <typename Size, typename String, typename Dialog, typename MessageCatalog>
+    void oudia_diagram_dialog<Size, String, Dialog, MessageCatalog>::set_names(std::vector<string_type> names)
     {
         m_p_impl->set_names(std::move(names));
     }
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    const boost::optional<typename oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::int_size_type>&
-    oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::selected_index()
+    template <typename Size, typename String, typename Dialog, typename MessageCatalog>
+    const boost::optional<typename oudia_diagram_dialog<Size, String, Dialog, MessageCatalog>::size_type>&
+    oudia_diagram_dialog<Size, String, Dialog, MessageCatalog>::selected_index()
     const
     {
         return m_p_impl->selected_index();
     }
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    void oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::set_selected_index(const int_size_type index)
+    template <typename Size, typename String, typename Dialog, typename MessageCatalog>
+    void oudia_diagram_dialog<Size, String, Dialog, MessageCatalog>::set_selected_index(const size_type index)
     {
         m_p_impl->set_selected_index(index);
     }
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    void oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::set_result_impl()
+    template <typename Size, typename String, typename Dialog, typename MessageCatalog>
+    void oudia_diagram_dialog<Size, String, Dialog, MessageCatalog>::set_result_impl()
     {
         m_p_impl->set_result_impl();
     }
 
 
     template class oudia_diagram_dialog<
+        typename boost::mpl::at<common_type_list, type::size>::type,
+        typename boost::mpl::at<common_type_list, type::string>::type,
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-        typename boost::mpl::at<common_type_list, type::size>::type
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
     >;
 
 
