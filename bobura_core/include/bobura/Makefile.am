@@ -39,6 +39,7 @@ extra_headers = \
     load_save/save_to_file.h \
     main_window.h \
     main_window_menu_builder.h \
+    main_window_traits.h \
     message/0namespace.dox \
     message/about_dialog.h \
     message/diagram_picture_box.h \

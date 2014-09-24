@@ -180,7 +180,7 @@ namespace bobura
 
             \return The diagram picture box.
         */
-        const diagram_picture_box_type& diagram_picture_box()
+        const diagram_picture_box_type& get_diagram_picture_box()
         const;
 
         /*!
@@ -188,14 +188,14 @@ namespace bobura
 
             \return The diagram picture box.
         */
-        diagram_picture_box_type& diagram_picture_box();
+        diagram_picture_box_type& get_diagram_picture_box();
 
         /*!
             \brief Returns the property bar.
 
             \return The property bar.
         */
-        const property_bar_type& property_bar()
+        const property_bar_type& get_property_bar()
         const;
 
         /*!
@@ -203,7 +203,7 @@ namespace bobura
 
             \return The property bar.
         */
-        property_bar_type& property_bar();
+        property_bar_type& get_property_bar();
 
 
     private:

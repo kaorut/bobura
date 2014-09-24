@@ -66,13 +66,13 @@ namespace
             boost::ignore_unused(document_name, changed);
         }
 
-        const diagram_picture_box_type& diagram_picture_box()
+        const diagram_picture_box_type& get_diagram_picture_box()
         const
         {
             return m_diagram_picture_box;
         }
 
-        diagram_picture_box_type& diagram_picture_box()
+        diagram_picture_box_type& get_diagram_picture_box()
         {
             return m_diagram_picture_box;
         }

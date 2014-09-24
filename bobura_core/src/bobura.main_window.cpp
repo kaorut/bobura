@@ -93,27 +93,27 @@ namespace bobura
             m_base.set_text(title);
         }
 
-        const diagram_picture_box_type& diagram_picture_box()
+        const diagram_picture_box_type& get_diagram_picture_box()
         const
         {
             assert(m_p_diagram_picture_box);
             return *m_p_diagram_picture_box;
         }
 
-        diagram_picture_box_type& diagram_picture_box()
+        diagram_picture_box_type& get_diagram_picture_box()
         {
             assert(m_p_diagram_picture_box);
             return *m_p_diagram_picture_box;
         }
 
-        const property_bar_type& property_bar()
+        const property_bar_type& get_property_bar()
         const
         {
             assert(m_p_property_bar);
             return *m_p_property_bar;
         }
 
-        property_bar_type& property_bar()
+        property_bar_type& get_property_bar()
         {
             assert(m_p_property_bar);
             return *m_p_property_bar;
@@ -241,29 +241,29 @@ namespace bobura
     }
 
     template <typename Traits>
-    const typename main_window<Traits>::diagram_picture_box_type& main_window<Traits>::diagram_picture_box()
+    const typename main_window<Traits>::diagram_picture_box_type& main_window<Traits>::get_diagram_picture_box()
     const
     {
-        return m_p_impl->diagram_picture_box();
+        return m_p_impl->get_diagram_picture_box();
     }
 
     template <typename Traits>
-    typename main_window<Traits>::diagram_picture_box_type& main_window<Traits>::diagram_picture_box()
+    typename main_window<Traits>::diagram_picture_box_type& main_window<Traits>::get_diagram_picture_box()
     {
-        return m_p_impl->diagram_picture_box();
+        return m_p_impl->get_diagram_picture_box();
     }
 
     template <typename Traits>
-    const typename main_window<Traits>::property_bar_type& main_window<Traits>::property_bar()
+    const typename main_window<Traits>::property_bar_type& main_window<Traits>::get_property_bar()
     const
     {
-        return m_p_impl->property_bar();
+        return m_p_impl->get_property_bar();
     }
 
     template <typename Traits>
-    typename main_window<Traits>::property_bar_type& main_window<Traits>::property_bar()
+    typename main_window<Traits>::property_bar_type& main_window<Traits>::get_property_bar()
     {
-        return m_p_impl->property_bar();
+        return m_p_impl->get_property_bar();
     }
 
 

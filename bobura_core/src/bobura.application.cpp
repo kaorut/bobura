@@ -253,16 +253,16 @@ namespace bobura
             view.selection_observer_set().station_selected().connect(
                 boost::mpl::at<
                     diagram_view_message_type_list_type, message::diagram_view::type::station_selected
-                >::type{ main_window.property_bar(), m_model, message_catalog }
+                >::type{ main_window.get_property_bar(), m_model, message_catalog }
             );
             view.selection_observer_set().train_selected().connect(
                 boost::mpl::at<diagram_view_message_type_list_type, message::diagram_view::type::train_selected>::type{
-                    main_window.property_bar(), m_model, message_catalog
+                    main_window.get_property_bar(), m_model, message_catalog
                 }
             );
             view.selection_observer_set().all_unselected().connect(
                 boost::mpl::at<diagram_view_message_type_list_type, message::diagram_view::type::all_unselected>::type{
-                    main_window.property_bar()
+                    main_window.get_property_bar()
                 }
             );
             
@@ -273,69 +273,69 @@ namespace bobura
             );
             main_window.size_observer_set().resized().connect(
                 boost::mpl::at<main_window_message_type_list_type, message::main_window::type::window_resized>::type{
-                    view, main_window, main_window.diagram_picture_box(), main_window.property_bar()
+                    view, main_window, main_window.get_diagram_picture_box(), main_window.get_property_bar()
                 }
             );
 
-            main_window.diagram_picture_box().mouse_observer_set().pressed().connect(
+            main_window.get_diagram_picture_box().mouse_observer_set().pressed().connect(
                 boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::mouse_pressed
                 >::type(
-                    main_window.diagram_picture_box(),
+                    main_window.get_diagram_picture_box(),
                     [&main_window](const mouse_button_type mouse_button)
                     {
-                        main_window.diagram_picture_box().set_mouse_capture(mouse_button);
+                        main_window.get_diagram_picture_box().set_mouse_capture(mouse_button);
                     },
                     view
                 )
             );
-            main_window.diagram_picture_box().mouse_observer_set().released().connect(
+            main_window.get_diagram_picture_box().mouse_observer_set().released().connect(
                 boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::mouse_released
                 >::type(
                     [&main_window](const mouse_button_type mouse_button)
                     {
-                        return main_window.diagram_picture_box().release_mouse_capture(mouse_button);
+                        return main_window.get_diagram_picture_box().release_mouse_capture(mouse_button);
                     },
                     view
                 )
             );
-            main_window.diagram_picture_box().mouse_observer_set().moved().connect(
+            main_window.get_diagram_picture_box().mouse_observer_set().moved().connect(
                 boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::mouse_moved
-                >::type{ main_window.diagram_picture_box(), view }
+                >::type{ main_window.get_diagram_picture_box(), view }
             );
-            main_window.diagram_picture_box().mouse_observer_set().wheeled().connect(
+            main_window.get_diagram_picture_box().mouse_observer_set().wheeled().connect(
                 boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::mouse_wheeled
-                >::type{ main_window.diagram_picture_box(), view }
+                >::type{ main_window.get_diagram_picture_box(), view }
             );
-            main_window.diagram_picture_box().fast_paint_observer_set().paint().connect(
+            main_window.get_diagram_picture_box().fast_paint_observer_set().paint().connect(
                 boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::paint_paint
-                >::type{ main_window.diagram_picture_box(), view }
+                >::type{ main_window.get_diagram_picture_box(), view }
             );
-            assert(main_window.diagram_picture_box().has_vertical_scroll_bar());
-            main_window.diagram_picture_box().vertical_scroll_bar().scroll_bar_observer_set().scrolling().connect(
+            assert(main_window.get_diagram_picture_box().has_vertical_scroll_bar());
+            main_window.get_diagram_picture_box().vertical_scroll_bar().scroll_bar_observer_set().scrolling().connect(
                 boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::scroll_bar_scrolled
-                >::type{ main_window.diagram_picture_box(), view }
+                >::type{ main_window.get_diagram_picture_box(), view }
             );
-            main_window.diagram_picture_box().vertical_scroll_bar().scroll_bar_observer_set().scrolled().connect(
+            main_window.get_diagram_picture_box().vertical_scroll_bar().scroll_bar_observer_set().scrolled().connect(
                 boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::scroll_bar_scrolled
-                >::type{ main_window.diagram_picture_box(), view }
+                >::type{ main_window.get_diagram_picture_box(), view }
             );
-            assert(main_window.diagram_picture_box().has_horizontal_scroll_bar());
-            main_window.diagram_picture_box().horizontal_scroll_bar().scroll_bar_observer_set().scrolling().connect(
+            assert(main_window.get_diagram_picture_box().has_horizontal_scroll_bar());
+            main_window.get_diagram_picture_box().horizontal_scroll_bar().scroll_bar_observer_set().scrolling().connect(
                 boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::scroll_bar_scrolled
-                >::type{ main_window.diagram_picture_box(), view }
+                >::type{ main_window.get_diagram_picture_box(), view }
             );
-            main_window.diagram_picture_box().horizontal_scroll_bar().scroll_bar_observer_set().scrolled().connect(
+            main_window.get_diagram_picture_box().horizontal_scroll_bar().scroll_bar_observer_set().scrolled().connect(
                 boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::scroll_bar_scrolled
-                >::type{ main_window.diagram_picture_box(), view }
+                >::type{ main_window.get_diagram_picture_box(), view }
             );
         }
 
