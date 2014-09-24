@@ -68,7 +68,34 @@ namespace bobura
 
         using model_type = main_window_menu_builder::model_type;
 
-        using main_window_type = main_window;
+        using main_window_traits_type =
+            main_window_traits<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<ui_type_list, type::ui::position>::type,
+                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+                boost::mpl::at<common_type_list, type::output_stream>::type,
+                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<ui_type_list, type::ui::window>::type,
+                boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
+                boost::mpl::at<ui_type_list, type::ui::map_box>::type,
+                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
+                boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
+                boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
+                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
+                boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
+                message::diagram_picture_box::type_list<
+                    boost::mpl::at<view_type_list, type::view::traits>::type,
+                    boost::mpl::at<ui_type_list, type::ui::picture_box>::type
+                >,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+                boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
+            >;
+
+        using main_window_type = main_window<main_window_traits_type>;
 
         using message_catalog_type = main_window_menu_builder::message_catalog_type;
 

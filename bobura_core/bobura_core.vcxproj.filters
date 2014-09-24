@@ -249,6 +249,9 @@
     <ClInclude Include="include\bobura\view\diagram\traits.h">
       <Filter>headers\bobura\view\diagram</Filter>
     </ClInclude>
+    <ClInclude Include="include\bobura\main_window_traits.h">
+      <Filter>headers\bobura</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\precompiled\precompiled.cpp">

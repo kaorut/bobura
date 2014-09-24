@@ -17,34 +17,47 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/command/command_base.h>
+#include <bobura/command/set.h>
 #include <bobura/main_window.h>
+#include <bobura/main_window_traits.h>
 #include <bobura/message/type_list.h>
+#include <bobura/basic_type_list.h>
 
 
 namespace bobura
 {
-    class main_window::impl : private boost::noncopyable
+    template <typename Traits>
+    class main_window<Traits>::impl : private boost::noncopyable
     {
     public:
         // types
 
-        using base_type = main_window::base_type;
+        using size_type = typename main_window::size_type;
 
-        using string_type = base_type::string_type;
+        using difference_type = typename main_window::difference_type;
 
-        using icon_type = base_type::icon_type;
+        using string_type = typename main_window::string_type;
 
-        using window_state_type = base_type::window_state_type;
+        using operating_distance_type = typename main_window::operating_distance_type;
 
-        using message_catalog_type = main_window::message_catalog_type;
+        using speed_type = typename main_window::speed_type;
 
-        using diagram_picture_box_type = main_window::diagram_picture_box_type;
+        using base_type = typename main_window::base_type;
 
-        using property_bar_type = main_window::property_bar_type;
+        using abstract_window_type = typename main_window::abstract_window_type;
 
-        using settings_type = main_window::settings_type;
+        using font_type = typename main_window::font_type;
 
-        using confirm_file_save_type = main_window::confirm_file_save_type;
+        using message_catalog_type = typename main_window::message_catalog_type;
+
+        using diagram_picture_box_type = typename main_window::diagram_picture_box_type;
+
+        using property_bar_type = typename main_window::property_bar_type;
+        
+        using settings_type = typename main_window::settings_type;
+
+        using confirm_file_save_type = typename main_window::confirm_file_save_type;
 
 
         // constructors and destructor
@@ -116,15 +129,19 @@ namespace bobura
             >;
 
         using message_type_list_type =
-            boost::mpl::at<main_window_type_list, type::main_window::message_type_list>::type;
-
-        using position_type = base_type::position_type;
-
-        using left_type = tetengo2::gui::position<position_type>::left_type;
-
-        using top_type = tetengo2::gui::position<position_type>::top_type;
-
-        using dimension_type = base_type::dimension_type;
+            message::main_window::type_list<
+                boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
+                command::set,
+                command::command_base,
+                timetable_model<
+                    size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
+                >,
+                diagram_view<boost::mpl::at<view_type_list, type::view::traits>::type>,
+                abstract_window_type,
+                diagram_picture_box_type,
+                property_bar_type,
+                confirm_file_save_type
+            >;
 
 
         // variables
@@ -201,7 +218,8 @@ namespace bobura
     };
 
 
-    main_window::main_window(
+    template <typename Traits>
+    main_window<Traits>::main_window(
         const message_catalog_type&   message_catalog,
         settings_type&                settings,
         const confirm_file_save_type& confirm_file_save
@@ -211,36 +229,71 @@ namespace bobura
     m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, confirm_file_save))
     {}
 
-    main_window::~main_window()
+    template <typename Traits>
+    main_window<Traits>::~main_window()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    void main_window::set_title(const boost::optional<string_type>& document_name, const bool changed)
+    template <typename Traits>
+    void main_window<Traits>::set_title(const boost::optional<string_type>& document_name, const bool changed)
     {
         m_p_impl->set_title(document_name, changed);
     }
 
-    const main_window::diagram_picture_box_type& main_window::diagram_picture_box()
+    template <typename Traits>
+    const typename main_window<Traits>::diagram_picture_box_type& main_window<Traits>::diagram_picture_box()
     const
     {
         return m_p_impl->diagram_picture_box();
     }
 
-    main_window::diagram_picture_box_type& main_window::diagram_picture_box()
+    template <typename Traits>
+    typename main_window<Traits>::diagram_picture_box_type& main_window<Traits>::diagram_picture_box()
     {
         return m_p_impl->diagram_picture_box();
     }
 
-    const main_window::property_bar_type& main_window::property_bar()
+    template <typename Traits>
+    const typename main_window<Traits>::property_bar_type& main_window<Traits>::property_bar()
     const
     {
         return m_p_impl->property_bar();
     }
 
-    main_window::property_bar_type& main_window::property_bar()
+    template <typename Traits>
+    typename main_window<Traits>::property_bar_type& main_window<Traits>::property_bar()
     {
         return m_p_impl->property_bar();
     }
+
+
+    template class main_window<
+        main_window_traits<
+            boost::mpl::at<common_type_list, type::size>::type,
+            boost::mpl::at<common_type_list, type::difference>::type,
+            boost::mpl::at<common_type_list, type::string>::type,
+            boost::mpl::at<ui_type_list, type::ui::position>::type,
+            boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+            boost::mpl::at<common_type_list, type::output_stream>::type,
+            boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+            boost::mpl::at<model_type_list, type::model::speed>::type,
+            boost::mpl::at<ui_type_list, type::ui::window>::type,
+            boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
+            boost::mpl::at<ui_type_list, type::ui::map_box>::type,
+            boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
+            boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
+            boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
+            boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+            boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
+            boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
+            message::diagram_picture_box::type_list<
+                boost::mpl::at<view_type_list, type::view::traits>::type,
+                boost::mpl::at<ui_type_list, type::ui::picture_box>::type
+            >,
+            boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+            boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
+        >
+    >;
 
 
 }
