@@ -21,6 +21,7 @@
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/type_list.h>
 #include <bobura/message/type_list_impl.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura
@@ -29,14 +30,12 @@ namespace bobura
     {
         using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
 
-        using model_message_type_list_type =
-            bobura::message::timetable_model::type_list<
-                boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type,
-                boost::mpl::at<bobura::view_type_list, bobura::type::view::view>::type,
-                boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::main_window>::type
-            >;
+        using main_window_type = boost::mpl::at<main_window_type_list, type::main_window::main_window>::type;
 
         using view_type = boost::mpl::at<view_type_list, type::view::view>::type;
+
+        using model_message_type_list_type =
+            bobura::message::timetable_model::type_list<model_type, view_type, main_window_type>;
 
         using diagram_view_message_type_list_type =
             bobura::message::diagram_view::type_list<
@@ -67,7 +66,8 @@ namespace bobura
 
         using command_set_type = boost::mpl::at<main_window_type_list, type::main_window::command_set>::type;
 
-        using main_window_type = boost::mpl::at<main_window_type_list, type::main_window::main_window>::type;
+        using main_window_menu_builder_type =
+            boost::mpl::at<main_window_type_list, type::main_window::menu_builder>::type;
 
         using diagram_picture_box_type =
             boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box>::type;
@@ -146,7 +146,7 @@ namespace bobura
             set_message_observers(command_set_holder.command_set(), view, main_window, message_catalog);
             m_model.reset_timetable();
             main_window.set_menu_bar(
-                main_window_menu_builder(
+                main_window_menu_builder_type(
                     command_set_holder.command_set(), m_model, main_window, message_catalog
                 ).build()
             );

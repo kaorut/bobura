@@ -19,6 +19,7 @@
 #include <bobura/command/set.h>
 #include <bobura/diagram_picture_box.h>
 #include <bobura/main_window.h>
+#include <bobura/main_window_menu_builder.h>
 #include <bobura/main_window_traits.h>
 #include <bobura/message/type_list_impl.h>
 #include <bobura/property_bar.h>
@@ -35,6 +36,7 @@ namespace bobura
     {
         struct command_set;    //!< The command set type.
         struct main_window;    //!< The main window type.
+        struct menu_builder;   //!< The menu builder type.
         struct message_type_list; //!< The main window message type list type.
         struct diagram_picture_box; //!< The diagram picture box type.
         struct diagram_picture_box_message_type_list; //!< The diagram picture box message type list type.
@@ -91,7 +93,19 @@ namespace bobura
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
                 boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
             >;
-        using main_window_message_type_list =
+        using menu_builder_type =
+            main_window_menu_builder<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
+                main_window_traits_type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+            >;
+        using main_window_message_type_list_type =
             message::main_window::type_list<
                 boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
                 command_set_type,
@@ -115,7 +129,11 @@ namespace bobura
                 type::main_window::main_window, main_window<detail::main_window::main_window_traits_type>
             >,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::main_window::message_type_list, detail::main_window::main_window_message_type_list>,
+            boost::mpl::pair<type::main_window::menu_builder, detail::main_window::menu_builder_type>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<
+                type::main_window::message_type_list, detail::main_window::main_window_message_type_list_type
+            >,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::main_window::diagram_picture_box, detail::main_window::diagram_picture_box_type>,
         tetengo2::meta::assoc_list<
@@ -126,7 +144,7 @@ namespace bobura
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::main_window::property_bar, detail::main_window::property_bar_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>;
+        >>>>>>>;
 
 
 }

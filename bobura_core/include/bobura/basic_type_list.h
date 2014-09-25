@@ -185,6 +185,7 @@ namespace bobura
         struct label;          //!< The label type.
         struct list_box;       //!< The list box type.
         struct map_box;        //!< The map box type.
+        struct menu_bar;       //!< The menu bar type.
         struct mouse_capture;  //!< The mouse capture type.
         struct picture_box;    //!< The picture box type.
         struct point_unit_size; //!< The point unit size type.
@@ -317,6 +318,19 @@ namespace bobura
                 boost::mpl::at<detail_type_list, type::detail::mouse_capture>::type,
                 boost::mpl::at<detail_type_list, type::detail::system_color>::type
             >;
+        using menu_bar_type =
+            tetengo2::gui::menu::menu_bar<
+                boost::mpl::at<common_type_list, type::string>::type,
+                tetengo2::gui::menu::shortcut_key_table<
+                    boost::mpl::at<common_type_list, type::string>::type,
+                    boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                    boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                    boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
+                >,
+                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
+            >;
         using picture_box_type =
             tetengo2::gui::widget::picture_box<
                 widget_traits_type,
@@ -350,6 +364,7 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::label, detail::ui::label_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::list_box, detail::ui::list_box_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::map_box, detail::ui::map_box_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::menu_bar, detail::ui::menu_bar_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::mouse_capture, detail::ui::mouse_capture_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::picture_box, detail::ui::picture_box_type>,
         tetengo2::meta::assoc_list<
@@ -382,7 +397,7 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::widget_traits, detail::ui::widget_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::window, detail::ui::window_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>>>>>>>>>>>>>>;
+        >>>>>>>>>>>>>>>>>>>>>>>>>>;
 
 
     /**** Setting ***********************************************************/

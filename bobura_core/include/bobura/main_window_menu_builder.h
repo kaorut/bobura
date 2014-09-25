@@ -12,49 +12,81 @@
 #include <memory>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
 
-#include <bobura/type_list.h>
+#include <bobura/command/set.h>
+#include <bobura/main_window.h>
+#include <bobura/timetable_model.h>
 
 
 namespace bobura
 {
     /*!
-        \brief The class for the main window menu builder.
+        \brief The class template for the main window menu builder.
+
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Font              A font type.
+        \tparam MenuBar           A menu bar type.
+        \tparam MainWindowTraits  A main window traits type.
+        \tparam MessageCatalog    A message catalog type.
     */
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Font,
+        typename MenuBar,
+        typename MainWindowTraits,
+        typename MessageCatalog
+    >
     class main_window_menu_builder : private boost::noncopyable
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
+        //! The string type.
+        using string_type = String;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The font type.
+        using font_type = Font;
+
         //! The menu bar type.
-        using menu_bar_type =
-            tetengo2::gui::menu::menu_bar<
-                boost::mpl::at<common_type_list, type::string>::type,
-                tetengo2::gui::menu::shortcut_key_table<
-                    boost::mpl::at<common_type_list, type::string>::type,
-                    boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                    boost::mpl::at<detail_type_list, type::detail::menu>::type,
-                    boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-                >,
-                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::menu>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
+        using menu_bar_type = MenuBar;
 
-        //! The command set type.
-        using command_set_type = boost::mpl::at<main_window_type_list, type::main_window::command_set>::type;
-
-        //! The model type.
-        using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
-
-        //! The main window type.
-        using main_window_type = boost::mpl::at<main_window_type_list, type::main_window::main_window>::type;
+        //! The main window traits type.
+        using main_window_traits_type = MainWindowTraits;
 
         //! The message catalog type.
-        using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
+        using message_catalog_type = MessageCatalog;
+
+        //! The command set type.
+        using command_set_type = command::set;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+        //! The main window type.
+        using main_window_type = main_window<main_window_traits_type>;
 
 
         // constructors and destructor
