@@ -12,11 +12,12 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/mpl/at.hpp>
 
-#include <bobura/type_list.h>
-
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/basic_type_list.h>
+#include <bobura/diagram_picture_box.h>
+#include <bobura/message/type_list_impl.h>
 #include <bobura/view/diagram/zoom.h>
 
 
@@ -37,7 +38,14 @@ namespace bobura { namespace view { namespace diagram
         using scale_type = typename zoom::scale_type;
 
         using diagram_picture_box_type =
-            typename boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box>::type;
+            diagram_picture_box<
+                picture_box_type,
+                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
+                message::diagram_picture_box::type_list<
+                    boost::mpl::at<view_type_list, type::view::traits>::type, picture_box_type
+                >
+            >;
 
 
         // constructors and destructor
