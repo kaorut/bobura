@@ -40,10 +40,10 @@ namespace bobura { namespace view { namespace diagram
         using diagram_picture_box_type =
             diagram_picture_box<
                 picture_box_type,
-                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
                 message::diagram_picture_box::type_list<
-                    boost::mpl::at<view_type_list, type::view::traits>::type, picture_box_type
+                    typename boost::mpl::at<view_type_list, type::view::traits>::type, picture_box_type
                 >
             >;
 
@@ -218,8 +218,8 @@ namespace bobura { namespace view { namespace diagram
 
 
     template class zoom<
-        boost::mpl::at<view_type_list, type::view::traits>::type,
-        boost::mpl::at<ui_type_list, type::ui::picture_box>::type
+        typename boost::mpl::at<view_type_list, type::view::traits>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type
     >;
 
 

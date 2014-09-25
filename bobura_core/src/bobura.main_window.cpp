@@ -125,12 +125,12 @@ namespace bobura
 
         using message_loop_break_type =
             tetengo2::gui::message::message_loop_break<
-                boost::mpl::at<detail_type_list, type::detail::message_loop>::type
+                typename boost::mpl::at<detail_type_list, type::detail::message_loop>::type
             >;
 
         using message_type_list_type =
             message::main_window::type_list<
-                boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
                 command::set,
                 command::command_base,
                 timetable_model<
@@ -190,7 +190,7 @@ namespace bobura
                 [](base_type::canvas_type&) { return true; }
             );
             m_base.window_observer_set().closing().connect(
-                boost::mpl::at<message_type_list_type, message::main_window::type::window_closing>::type(
+                typename boost::mpl::at<message_type_list_type, message::main_window::type::window_closing>::type(
                     m_base, m_confirm_file_save, [this]() { this->save_settings(); }
                 )
             );
@@ -269,29 +269,29 @@ namespace bobura
 
     template class main_window<
         main_window_traits<
-            boost::mpl::at<common_type_list, type::size>::type,
-            boost::mpl::at<common_type_list, type::difference>::type,
-            boost::mpl::at<common_type_list, type::string>::type,
-            boost::mpl::at<ui_type_list, type::ui::position>::type,
-            boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-            boost::mpl::at<common_type_list, type::output_stream>::type,
-            boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-            boost::mpl::at<model_type_list, type::model::speed>::type,
-            boost::mpl::at<ui_type_list, type::ui::window>::type,
-            boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
-            boost::mpl::at<ui_type_list, type::ui::map_box>::type,
-            boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
-            boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
-            boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
-            boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-            boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
-            boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
+            typename boost::mpl::at<common_type_list, type::size>::type,
+            typename boost::mpl::at<common_type_list, type::difference>::type,
+            typename boost::mpl::at<common_type_list, type::string>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::position>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+            typename boost::mpl::at<common_type_list, type::output_stream>::type,
+            typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+            typename boost::mpl::at<model_type_list, type::model::speed>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::window>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::map_box>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
+            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
+            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
+            typename boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
             message::diagram_picture_box::type_list<
-                boost::mpl::at<view_type_list, type::view::traits>::type,
-                boost::mpl::at<ui_type_list, type::ui::picture_box>::type
+                typename boost::mpl::at<view_type_list, type::view::traits>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type
             >,
-            boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-            boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
+            typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+            typename boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
         >
     >;
 

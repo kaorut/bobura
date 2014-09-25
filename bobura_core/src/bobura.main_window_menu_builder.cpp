@@ -90,10 +90,10 @@ namespace bobura
 
         using menu_command_type =
             tetengo2::gui::menu::command<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::menu>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
+                typename boost::mpl::at<common_type_list, type::string>::type,
+                typename boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                typename boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                typename boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
             >;
 
         using popup_menu_type = typename boost::mpl::at<ui_type_list, type::ui::popup_menu>::type;
@@ -106,10 +106,10 @@ namespace bobura
 
         using menu_separator_type =
             tetengo2::gui::menu::separator<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::menu>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
+                typename boost::mpl::at<common_type_list, type::string>::type,
+                typename boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                typename boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                typename boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
             >;
 
         using main_window_message_type_list_type =
@@ -424,7 +424,7 @@ namespace bobura
         const
         {
             p_menu_command->menu_observer_set().selected().connect(
-                boost::mpl::at<
+                typename boost::mpl::at<
                     main_window_message_type_list_type, message::main_window::type::menu_command_selected
                 >::type(command, m_model, m_main_window)
             );
@@ -445,7 +445,7 @@ namespace bobura
         const
         {
             popup_menu.menu_observer_set().selected().connect(
-                boost::mpl::at<
+                typename boost::mpl::at<
                     main_window_message_type_list_type, message::main_window::type::popup_menu_selected
                 >::type{ popup_menu, std::move(commands), m_model }
             );
@@ -520,39 +520,39 @@ namespace bobura
 
 
     template class main_window_menu_builder<
-        boost::mpl::at<common_type_list, type::size>::type,
-        boost::mpl::at<common_type_list, type::difference>::type,
-        boost::mpl::at<common_type_list, type::string>::type,
-        boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-        boost::mpl::at<model_type_list, type::model::speed>::type,
-        boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-        boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
+        typename boost::mpl::at<common_type_list, type::size>::type,
+        typename boost::mpl::at<common_type_list, type::difference>::type,
+        typename boost::mpl::at<common_type_list, type::string>::type,
+        typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+        typename boost::mpl::at<model_type_list, type::model::speed>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
         main_window_traits<
-            boost::mpl::at<common_type_list, type::size>::type,
-            boost::mpl::at<common_type_list, type::difference>::type,
-            boost::mpl::at<common_type_list, type::string>::type,
-            boost::mpl::at<ui_type_list, type::ui::position>::type,
-            boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-            boost::mpl::at<common_type_list, type::output_stream>::type,
-            boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-            boost::mpl::at<model_type_list, type::model::speed>::type,
-            boost::mpl::at<ui_type_list, type::ui::window>::type,
-            boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
-            boost::mpl::at<ui_type_list, type::ui::map_box>::type,
-            boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
-            boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
-            boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
-            boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-            boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
-            boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
+            typename boost::mpl::at<common_type_list, type::size>::type,
+            typename boost::mpl::at<common_type_list, type::difference>::type,
+            typename boost::mpl::at<common_type_list, type::string>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::position>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+            typename boost::mpl::at<common_type_list, type::output_stream>::type,
+            typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+            typename boost::mpl::at<model_type_list, type::model::speed>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::window>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::map_box>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
+            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
+            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
+            typename boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
             message::diagram_picture_box::type_list<
-                boost::mpl::at<view_type_list, type::view::traits>::type,
-                boost::mpl::at<ui_type_list, type::ui::picture_box>::type
+                typename boost::mpl::at<view_type_list, type::view::traits>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type
             >,
-            boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-            boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
+            typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+            typename boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
         >,
-        boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
     >;
 
 

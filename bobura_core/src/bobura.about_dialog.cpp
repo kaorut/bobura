@@ -84,16 +84,16 @@ namespace bobura
 
             using link_label_type =
                 tetengo2::gui::widget::link_label<
-                    boost::mpl::at<ui_type_list, type::ui::widget_traits>::type,
-                    boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type,
-                    boost::mpl::at<detail_type_list, type::detail::system_color>::type,
-                    boost::mpl::at<detail_type_list, type::detail::shell>::type
+                    typename boost::mpl::at<ui_type_list, type::ui::widget_traits>::type,
+                    typename boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type,
+                    typename boost::mpl::at<detail_type_list, type::detail::system_color>::type,
+                    typename boost::mpl::at<detail_type_list, type::detail::shell>::type
                 >;
 
             using image_type =
                 tetengo2::gui::widget::image<
-                    boost::mpl::at<ui_type_list, type::ui::widget_traits>::type,
-                    boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type
+                    typename boost::mpl::at<ui_type_list, type::ui::widget_traits>::type,
+                    typename boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type
                 >;
 
             using icon_type = typename image_type::icon_type;
@@ -280,12 +280,12 @@ namespace bobura
 
 
     template class about_dialog<
-        boost::mpl::at<common_type_list, type::string>::type,
-        boost::mpl::at<ui_type_list, type::ui::position>::type,
-        boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-        boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-        boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-        boost::mpl::at<setting_type_list, type::setting::config_traits>::type
+        typename boost::mpl::at<common_type_list, type::string>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::position>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+        typename boost::mpl::at<setting_type_list, type::setting::config_traits>::type
     >;
 
 
