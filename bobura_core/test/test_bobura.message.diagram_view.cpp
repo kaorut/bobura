@@ -16,8 +16,9 @@
 
 #include <tetengo2.h>
 
+#include <bobura/basic_type_list.h>
 #include <bobura/message/diagram_view.h>
-#include <bobura/type_list.h>
+#include <bobura/property_bar.h>
 
 
 namespace
@@ -57,7 +58,16 @@ namespace
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
     using property_bar_type =
-        boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::property_bar>::type;
+        bobura::property_bar<
+            string_type,
+            position_type,
+            dimension_type,
+            abstract_window_type,
+            side_bar_type,
+            map_box_type,
+            config_traits_type,
+            message_catalog_type
+        >;
 
     using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 

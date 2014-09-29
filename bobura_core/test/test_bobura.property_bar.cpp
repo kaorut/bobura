@@ -11,7 +11,8 @@
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <bobura/type_list.h>
+#include <bobura/basic_type_list.h>
+#include <bobura/property_bar.h>
 
 
 namespace
@@ -27,7 +28,16 @@ namespace
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
     using property_bar_type =
-        boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::property_bar>::type;
+        bobura::property_bar<
+            string_type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type,
+            boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type,
+            message_catalog_type
+        >;
 
 
 }

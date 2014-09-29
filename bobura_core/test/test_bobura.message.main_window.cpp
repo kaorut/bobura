@@ -15,8 +15,12 @@
 
 #include <tetengo2.h>
 
+#include <bobura/basic_type_list.h>
+#include <bobura/diagram_picture_box.h>
 #include <bobura/message/main_window.h>
-#include <bobura/type_list.h>
+#include <bobura/message/type_list.h>
+#include <bobura/message/type_list_impl.h>
+#include <bobura/property_bar.h>
 
 
 namespace
@@ -76,11 +80,33 @@ namespace
 
     using view_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::view>::type;
 
+    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
+
+    using diagram_picture_box_message_type_list =
+        bobura::message::diagram_picture_box::type_list<
+            boost::mpl::at<bobura::view_type_list, bobura::type::view::traits>::type,
+            picture_box_type
+        >;
+
     using diagram_picture_box_type =
-        boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::diagram_picture_box>::type;
+        bobura::diagram_picture_box<
+            picture_box_type,
+            abstract_window_type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::mouse_capture>::type,
+            diagram_picture_box_message_type_list
+        >;
 
     using property_bar_type =
-        boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::property_bar>::type;
+        bobura::property_bar<
+            string_type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
+            abstract_window_type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type,
+            boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type,
+            message_catalog_type
+        >;
 
     using popup_menu_selected_type =
         bobura::message::main_window::popup_menu_selected<popup_menu_type, command_type, model_type>;

@@ -11,7 +11,10 @@
 
 #include <tetengo2.gui.h>
 
-#include <bobura/type_list.h>
+#include <bobura/basic_type_list.h>
+#include <bobura/diagram_picture_box.h>
+#include <bobura/message/type_list.h>
+#include <bobura/message/type_list_impl.h>
 
 
 namespace
@@ -20,8 +23,23 @@ namespace
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
+    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
+
+    using abstract_window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type;
+
+    using diagram_picture_box_message_type_list =
+        bobura::message::diagram_picture_box::type_list<
+            boost::mpl::at<bobura::view_type_list, bobura::type::view::traits>::type,
+            picture_box_type
+        >;
+
     using diagram_picture_box_type =
-        boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::diagram_picture_box>::type;
+        bobura::diagram_picture_box<
+            picture_box_type,
+            abstract_window_type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::mouse_capture>::type,
+            diagram_picture_box_message_type_list
+        >;
 
     using dimension_type = diagram_picture_box_type::dimension_type;
 
