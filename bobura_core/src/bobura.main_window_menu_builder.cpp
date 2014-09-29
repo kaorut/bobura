@@ -125,7 +125,6 @@ namespace bobura
                 typename main_window_type::confirm_file_save_type
             >;
 
-
         using command_type = typename command_set_type::command_type;
 
         using commands_type = std::vector<const command_type*>;
