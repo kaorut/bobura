@@ -16,21 +16,28 @@
 #include <tetengo2.h>
 
 #include <bobura/about_dialog.h>
+#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
 
 
 namespace bobura { namespace command
 {
     /*!
-        \brief The class for an about command.
+        \brief The class template for an about command.
+
+        \tparam Traits A traits type.
     */
-    class about : public command_base
+    template <typename Traits>
+    class about : public command_base<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The base type.
-        using base_type = command_base;
+        using base_type = command_base<traits_type>;
 
         //! The about dialog type.
         using about_dialog_type =

@@ -19,6 +19,7 @@
 
 #include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
+#include <bobura/command/traits.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_traits.h>
 #include <bobura/message/type_list.h>
@@ -128,11 +129,22 @@ namespace bobura
                 typename boost::mpl::at<detail_type_list, type::detail::message_loop>::type
             >;
 
+        using command_traits_type =
+            command::traits<
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                speed_type,
+                font_type,
+                abstract_window_type
+            >;
+
         using message_type_list_type =
             message::main_window::type_list<
                 typename boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
-                command::set,
-                command::command_base,
+                command::set<command_traits_type>,
+                command::command_base<command_traits_type>,
                 timetable_model<
                     size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
                 >,

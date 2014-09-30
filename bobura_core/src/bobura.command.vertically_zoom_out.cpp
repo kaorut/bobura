@@ -15,6 +15,7 @@
 
 #include <bobura/basic_type_list.h>
 #include <bobura/command/vertically_zoom_out.h>
+#include <bobura/command/traits.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_traits.h>
 #include <bobura/view/diagram/zoom.h>
@@ -22,16 +23,17 @@
 
 namespace bobura { namespace command
 {
-    class vertically_zoom_out::impl
+    template <typename Traits>
+    class vertically_zoom_out<Traits>::impl
     {
     public:
         // types
 
-        using model_type = vertically_zoom_out::model_type;
+        using model_type = typename vertically_zoom_out::model_type;
 
-        using abstract_window_type = vertically_zoom_out::abstract_window_type;
+        using abstract_window_type = typename vertically_zoom_out::abstract_window_type;
 
-        using diagram_view_type = vertically_zoom_out::diagram_view_type;
+        using diagram_view_type = typename vertically_zoom_out::diagram_view_type;
 
 
         // constructors and destructor
@@ -60,39 +62,39 @@ namespace bobura { namespace command
     private:
         // types
 
-        using picture_box_type = boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
+        using picture_box_type = typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
 
         using main_window_traits_type =
             main_window_traits<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<ui_type_list, type::ui::position>::type,
-                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-                boost::mpl::at<common_type_list, type::output_stream>::type,
-                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                boost::mpl::at<model_type_list, type::model::speed>::type,
-                boost::mpl::at<ui_type_list, type::ui::window>::type,
+                typename boost::mpl::at<common_type_list, type::size>::type,
+                typename boost::mpl::at<common_type_list, type::difference>::type,
+                typename boost::mpl::at<common_type_list, type::string>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::position>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+                typename boost::mpl::at<common_type_list, type::output_stream>::type,
+                typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                typename boost::mpl::at<model_type_list, type::model::speed>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::window>::type,
                 picture_box_type,
-                boost::mpl::at<ui_type_list, type::ui::map_box>::type,
-                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
-                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
-                boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::map_box>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
+                typename boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
+                typename boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
+                typename boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
                 message::diagram_picture_box::type_list<
-                    boost::mpl::at<view_type_list, type::view::traits>::type, picture_box_type
+                    typename boost::mpl::at<view_type_list, type::view::traits>::type, picture_box_type
                 >,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
+                typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+                typename boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
             >;
 
-        using main_window_type = main_window<main_window_traits_type>;
+        using main_window_type = typename main_window<main_window_traits_type>;
 
-        using traits_type = boost::mpl::at<view_type_list, type::view::traits>::type;
+        using traits_type = typename boost::mpl::at<view_type_list, type::view::traits>::type;
 
-        using zoom_type = view::diagram::zoom<traits_type, picture_box_type>;
+        using zoom_type = typename view::diagram::zoom<traits_type, picture_box_type>;
 
 
         // variables
@@ -103,20 +105,36 @@ namespace bobura { namespace command
     };
 
 
-    vertically_zoom_out::vertically_zoom_out(diagram_view_type& diagram_view)
+    template <typename Traits>
+    vertically_zoom_out<Traits>::vertically_zoom_out(diagram_view_type& diagram_view)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(diagram_view))
     {}
 
-    vertically_zoom_out::~vertically_zoom_out()
+    template <typename Traits>
+    vertically_zoom_out<Traits>::~vertically_zoom_out()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    void vertically_zoom_out::execute_impl(model_type& model, abstract_window_type& parent)
+    template <typename Traits>
+    void vertically_zoom_out<Traits>::execute_impl(model_type& model, abstract_window_type& parent)
     const
     {
         m_p_impl->execute(model, parent);
     }
+
+
+    template class vertically_zoom_out<
+        traits<
+            typename boost::mpl::at<common_type_list, type::size>::type,
+            typename boost::mpl::at<common_type_list, type::difference>::type,
+            typename boost::mpl::at<common_type_list, type::string>::type,
+            typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+            typename boost::mpl::at<model_type_list, type::model::speed>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
+        >
+    >;
 
 
 }}

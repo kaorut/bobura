@@ -12,29 +12,33 @@
 #include <utility>
 #include <vector>
 
+#include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
 
 #include <tetengo2.h>
 
+#include <bobura/basic_type_list.h>
 #include <bobura/command/train_kind.h>
+#include <bobura/command/traits.h>
 
 
 namespace bobura { namespace command
 {
-    class train_kind::impl
+    template <typename Traits>
+    class train_kind<Traits>::impl
     {
     public:
         // types
 
-        using model_type = train_kind::model_type;
+        using model_type = typename train_kind::model_type;
 
-        using abstract_window_type = train_kind::abstract_window_type;
+        using abstract_window_type = typename train_kind::abstract_window_type;
 
-        using train_kind_dialog_type = train_kind::train_kind_dialog_type;
+        using train_kind_dialog_type = typename train_kind::train_kind_dialog_type;
 
-        using dialog_base_type = train_kind::dialog_base_type;
+        using dialog_base_type = typename train_kind::dialog_base_type;
 
-        using message_catalog_type = train_kind::message_catalog_type;
+        using message_catalog_type = typename train_kind::message_catalog_type;
 
 
         // constructors and destructor
@@ -72,19 +76,19 @@ namespace bobura { namespace command
     private:
         // types
 
-        using size_type = train_kind_dialog_type::size_type;
+        using size_type = typename train_kind_dialog_type::size_type;
 
-        using info_set_type = train_kind_dialog_type::info_set_type;
+        using info_set_type = typename train_kind_dialog_type::info_set_type;
 
-        using timetable_type = model_type::timetable_type;
+        using timetable_type = typename model_type::timetable_type;
 
-        using train_kinds_type = timetable_type::train_kinds_type;
+        using train_kinds_type = typename timetable_type::train_kinds_type;
 
-        using train_kind_index_type = timetable_type::size_type;
+        using train_kind_index_type = typename timetable_type::size_type;
 
-        using train_kind_type = timetable_type::train_kind_type;
+        using train_kind_type = typename timetable_type::train_kind_type;
 
-        using font_color_set_type = timetable_type::font_color_set_type;
+        using font_color_set_type = typename timetable_type::font_color_set_type;
 
 
         // static functions
@@ -146,20 +150,36 @@ namespace bobura { namespace command
     };
 
 
-    train_kind::train_kind(const message_catalog_type& message_catalog)
+    template <typename Traits>
+    train_kind<Traits>::train_kind(const message_catalog_type& message_catalog)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
     {}
 
-    train_kind::~train_kind()
+    template <typename Traits>
+    train_kind<Traits>::~train_kind()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    void train_kind::execute_impl(model_type& model, abstract_window_type& parent)
+    template <typename Traits>
+    void train_kind<Traits>::execute_impl(model_type& model, abstract_window_type& parent)
     const
     {
         m_p_impl->execute(model, parent);
     }
+
+
+    template class train_kind<
+        traits<
+            typename boost::mpl::at<common_type_list, type::size>::type,
+            typename boost::mpl::at<common_type_list, type::difference>::type,
+            typename boost::mpl::at<common_type_list, type::string>::type,
+            typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+            typename boost::mpl::at<model_type_list, type::model::speed>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
+        >
+    >;
 
 
 }}

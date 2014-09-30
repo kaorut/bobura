@@ -7,28 +7,32 @@
 */
 
 #include <boost/core/ignore_unused.hpp>
+#include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
 
+#include <bobura/basic_type_list.h>
 #include <bobura/command/about.h>
+#include <bobura/command/traits.h>
 
 
 namespace bobura { namespace command
 {
-    class about::impl
+    template <typename Traits>
+    class about<Traits>::impl
     {
     public:
         // types
 
-        using model_type = about::model_type;
+        using model_type = typename about::model_type;
 
-        using abstract_window_type = about::abstract_window_type;
+        using abstract_window_type = typename about::abstract_window_type;
 
-        using about_dialog_type = about::about_dialog_type;
+        using about_dialog_type = typename about::about_dialog_type;
 
-        using message_catalog_type = about::message_catalog_type;
+        using message_catalog_type = typename about::message_catalog_type;
 
-        using settings_type = about::settings_type;
+        using settings_type = typename about::settings_type;
 
 
         // constructors and destructor
@@ -62,20 +66,36 @@ namespace bobura { namespace command
     };
 
 
-    about::about(const message_catalog_type& message_catalog, const settings_type& settings)
+    template <typename Traits>
+    about<Traits>::about(const message_catalog_type& message_catalog, const settings_type& settings)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog, settings))
     {}
 
-    about::~about()
+    template <typename Traits>
+    about<Traits>::~about()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    void about::execute_impl(model_type& model, abstract_window_type& parent)
+    template <typename Traits>
+    void about<Traits>::execute_impl(model_type& model, abstract_window_type& parent)
     const
     {
         m_p_impl->execute(model, parent);
     }
+
+
+    template class about<
+        traits<
+            typename boost::mpl::at<common_type_list, type::size>::type,
+            typename boost::mpl::at<common_type_list, type::difference>::type,
+            typename boost::mpl::at<common_type_list, type::string>::type,
+            typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+            typename boost::mpl::at<model_type_list, type::model::speed>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
+        >
+    >;
 
 
 }}

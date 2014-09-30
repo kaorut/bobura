@@ -15,21 +15,28 @@
 
 #include <tetengo2.h>
 
+#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
 
 
 namespace bobura { namespace command
 {
     /*!
-        \brief The class for a vertical zoom-out command.
+        \brief The class template for a vertical zoom-out command.
+
+        \tparam Traits A traits type.
     */
-    class vertically_zoom_out : public command_base
+    template <typename Traits>
+    class vertically_zoom_out : public command_base<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The base type.
-        using base_type = command_base;
+        using base_type = command_base<traits_type>;
 
         //! The diagram view type.
         using diagram_view_type = boost::mpl::at<view_type_list, type::view::view>::type;

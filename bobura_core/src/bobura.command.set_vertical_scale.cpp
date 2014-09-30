@@ -15,6 +15,7 @@
 
 #include <bobura/basic_type_list.h>
 #include <bobura/command/set_vertical_scale.h>
+#include <bobura/command/traits.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_traits.h>
 #include <bobura/view/diagram/zoom.h>
@@ -22,20 +23,21 @@
 
 namespace bobura { namespace command
 {
-    class set_vertical_scale::impl
+    template <typename Traits>
+    class set_vertical_scale<Traits>::impl
     {
     public:
         // types
 
-        using model_type = set_vertical_scale::model_type;
+        using model_type = typename set_vertical_scale::model_type;
 
-        using abstract_window_type = set_vertical_scale::abstract_window_type;
+        using abstract_window_type = typename set_vertical_scale::abstract_window_type;
 
-        using diagram_view_type = set_vertical_scale::diagram_view_type;
+        using diagram_view_type = typename set_vertical_scale::diagram_view_type;
 
-        using scale_list_type = set_vertical_scale::scale_list_type;
+        using scale_list_type = typename set_vertical_scale::scale_list_type;
 
-        using scale_type = set_vertical_scale::scale_type;
+        using scale_type = typename set_vertical_scale::scale_type;
 
 
         // constructors and destructor
@@ -71,39 +73,39 @@ namespace bobura { namespace command
     private:
         // types
 
-        using picture_box_type = boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
+        using picture_box_type = typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
 
         using main_window_traits_type =
             main_window_traits<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<ui_type_list, type::ui::position>::type,
-                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-                boost::mpl::at<common_type_list, type::output_stream>::type,
-                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                boost::mpl::at<model_type_list, type::model::speed>::type,
-                boost::mpl::at<ui_type_list, type::ui::window>::type,
+                typename boost::mpl::at<common_type_list, type::size>::type,
+                typename boost::mpl::at<common_type_list, type::difference>::type,
+                typename boost::mpl::at<common_type_list, type::string>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::position>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+                typename boost::mpl::at<common_type_list, type::output_stream>::type,
+                typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                typename boost::mpl::at<model_type_list, type::model::speed>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::window>::type,
                 picture_box_type,
-                boost::mpl::at<ui_type_list, type::ui::map_box>::type,
-                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
-                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
-                boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::map_box>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
+                typename boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
+                typename boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
+                typename boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
                 message::diagram_picture_box::type_list<
-                    boost::mpl::at<view_type_list, type::view::traits>::type, picture_box_type
+                    typename boost::mpl::at<view_type_list, type::view::traits>::type, picture_box_type
                 >,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
+                typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+                typename boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
             >;
 
-        using main_window_type = main_window<main_window_traits_type>;
+        using main_window_type = typename main_window<main_window_traits_type>;
 
-        using traits_type = boost::mpl::at<view_type_list, type::view::traits>::type;
+        using traits_type = typename boost::mpl::at<view_type_list, type::view::traits>::type;
 
-        using zoom_type = view::diagram::zoom<traits_type, picture_box_type>;
+        using zoom_type = typename view::diagram::zoom<traits_type, picture_box_type>;
 
 
         // variables
@@ -116,26 +118,43 @@ namespace bobura { namespace command
     };
 
 
-    set_vertical_scale::set_vertical_scale(diagram_view_type& diagram_view, const scale_type& scale)
+    template <typename Traits>
+    set_vertical_scale<Traits>::set_vertical_scale(diagram_view_type& diagram_view, const scale_type& scale)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(diagram_view, scale))
     {}
 
-    set_vertical_scale::~set_vertical_scale()
+    template <typename Traits>
+    set_vertical_scale<Traits>::~set_vertical_scale()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    set_vertical_scale::state_type set_vertical_scale::state_impl()
+    template <typename Traits>
+    typename set_vertical_scale<Traits>::state_type set_vertical_scale<Traits>::state_impl()
     const
     {
         return m_p_impl->state();
     }
 
-    void set_vertical_scale::execute_impl(model_type& model, abstract_window_type& parent)
+    template <typename Traits>
+    void set_vertical_scale<Traits>::execute_impl(model_type& model, abstract_window_type& parent)
     const
     {
         m_p_impl->execute(model, parent);
     }
+
+
+    template class set_vertical_scale<
+        traits<
+            typename boost::mpl::at<common_type_list, type::size>::type,
+            typename boost::mpl::at<common_type_list, type::difference>::type,
+            typename boost::mpl::at<common_type_list, type::string>::type,
+            typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+            typename boost::mpl::at<model_type_list, type::model::speed>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
+        >
+    >;
 
 
 }}

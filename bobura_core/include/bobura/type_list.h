@@ -17,6 +17,7 @@
 #include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
+#include <bobura/command/traits.h>
 #include <bobura/diagram_picture_box.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
@@ -46,7 +47,17 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace main_window
     {
-        using command_set_type = command::set;
+        using command_traits_type =
+            command::traits<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
+            >;
+        using command_set_type = command::set<command_traits_type>;
         using diagram_picture_box_message_type_list =
             message::diagram_picture_box::type_list<
                 boost::mpl::at<view_type_list, type::view::traits>::type,
@@ -109,7 +120,7 @@ namespace bobura
             message::main_window::type_list<
                 boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
                 command_set_type,
-                command::command_base,
+                command::command_base<command_traits_type>,
                 boost::mpl::at<model_type_list, type::model::model>::type,
                 boost::mpl::at<view_type_list, type::view::view>::type,
                 boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,

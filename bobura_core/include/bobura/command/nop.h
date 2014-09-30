@@ -20,14 +20,20 @@ namespace bobura { namespace command
 {
     /*!
         \brief The class template for a no-operation command.
+
+        \tparam Traits A traits type.
     */
-    class nop : public command_base
+    template <typename Traits>
+    class nop : public command_base<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The base type.
-        using base_type = command_base;
+        using base_type = command_base<traits_type>;
 
 
         // constructors and destructor

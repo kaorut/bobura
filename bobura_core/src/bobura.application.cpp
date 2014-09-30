@@ -19,6 +19,7 @@
 #include <bobura/application.h>
 #include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
+#include <bobura/command/traits.h>
 #include <bobura/basic_type_list.h>
 #include <bobura/diagram_picture_box.h>
 #include <bobura/main_window.h>
@@ -95,7 +96,18 @@ namespace bobura
 
         using save_to_file_type = boost::mpl::at<load_save_type_list, type::load_save::save_to_file>::type;
 
-        using command_set_type = command::set;
+        using command_traits_type =
+            command::traits<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
+            >;
+
+        using command_set_type = command::set<command_traits_type>;
 
         using main_window_menu_builder_type =
             main_window_menu_builder<

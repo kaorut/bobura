@@ -15,21 +15,28 @@
 
 #include <tetengo2.h>
 
+#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
 
 
 namespace bobura { namespace command
 {
     /*!
-        \brief The class for a new-file command.
+        \brief The class template for a new-file command.
+
+        \tparam Traits A traits type.
     */
-    class new_file : public command_base
+    template <typename Traits>
+    class new_file : public command_base<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The base type.
-        using base_type = command_base;
+        using base_type = command_base<traits_type>;
 
         //! The file initialization type.
         using new_file_type = boost::mpl::at<load_save_type_list, type::load_save::new_file>::type;

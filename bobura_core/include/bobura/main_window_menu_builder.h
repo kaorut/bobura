@@ -16,6 +16,7 @@
 #include <tetengo2.h>
 
 #include <bobura/command/set.h>
+#include <bobura/command/traits.h>
 #include <bobura/main_window.h>
 #include <bobura/timetable_model.h>
 
@@ -79,7 +80,18 @@ namespace bobura
         using message_catalog_type = MessageCatalog;
 
         //! The command set type.
-        using command_set_type = command::set;
+        using command_set_type =
+            command::set<
+                command::traits<
+                    size_type,
+                    difference_type,
+                    string_type,
+                    operating_distance_type,
+                    speed_type,
+                    font_type,
+                    typename main_window_traits_type::window_type::base_type
+                >
+            >;
 
         //! The model type.
         using model_type =

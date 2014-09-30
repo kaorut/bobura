@@ -15,6 +15,7 @@
 
 #include <tetengo2.h>
 
+#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
 #include <bobura/file_property_dialog.h>
 
@@ -22,15 +23,20 @@
 namespace bobura { namespace command
 {
     /*!
-        \brief The class for a file property command.
+        \brief The class template for a file property command.
+        \tparam Traits A traits type.
     */
-    class file_property : public command_base
+    template <typename Traits>
+    class file_property : public command_base<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The base type.
-        using base_type = command_base;
+        using base_type = command_base<traits_type>;
 
         //! The file property dialog type.
         using file_property_dialog_type =

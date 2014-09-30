@@ -22,15 +22,21 @@
 namespace bobura { namespace command
 {
     /*!
-        \brief The class for a set-horizontal-scale command.
+        \brief The class template for a set-horizontal-scale command.
+
+        \tparam Traits A traits type.
     */
-    class set_horizontal_scale : public command_base
+    template <typename Traits>
+    class set_horizontal_scale : public command_base<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The base type.
-        using base_type = command_base;
+        using base_type = command_base<traits_type>;
 
         //! The diagram view type.
         using diagram_view_type = boost::mpl::at<view_type_list, type::view::view>::type;

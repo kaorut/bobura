@@ -8,27 +8,31 @@
 
 #include <utility>
 
+#include <boost/mpl/at.hpp>
+
 #include <tetengo2.h>
 
+#include <bobura/basic_type_list.h>
 #include <bobura/command/font_color.h>
+#include <bobura/command/traits.h>
 
 
 namespace bobura { namespace command
 {
-    class font_color::impl
+    template <typename Traits>
+    class font_color<Traits>::impl
     {
     public:
         // types
 
-        using model_type = font_color::model_type;
+        using model_type = typename font_color::model_type;
 
-        using abstract_window_type = font_color::abstract_window_type;
+        using abstract_window_type = typename font_color::abstract_window_type;
 
-        using font_color_dialog_type = font_color::font_color_dialog_type;
+        using font_color_dialog_type = typename font_color::font_color_dialog_type;
 
-        using dialog_base_type = font_color::dialog_base_type;
-
-        using message_catalog_type = font_color::message_catalog_type;
+        using dialog_base_type = typename font_color::dialog_base_type;
+using message_catalog_type = typename font_color::message_catalog_type;
 
 
         // constructors and destructor
@@ -90,9 +94,9 @@ namespace bobura { namespace command
     private:
         // types
 
-        using font_color_set_type = model_type::timetable_type::font_color_set_type;
+        using font_color_set_type = typename model_type::timetable_type::font_color_set_type;
 
-        using font_color_type = font_color_set_type::font_color_type;
+        using font_color_type = typename font_color_set_type::font_color_type;
 
 
         // variables
@@ -103,20 +107,36 @@ namespace bobura { namespace command
     };
 
 
-    font_color::font_color(const message_catalog_type& message_catalog)
+    template <typename Traits>
+    font_color<Traits>::font_color(const message_catalog_type& message_catalog)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
     {}
 
-    font_color::~font_color()
+    template <typename Traits>
+    font_color<Traits>::~font_color()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    void font_color::execute_impl(model_type& model, abstract_window_type& parent)
+    template <typename Traits>
+    void font_color<Traits>::execute_impl(model_type& model, abstract_window_type& parent)
     const
     {
         m_p_impl->execute(model, parent);
     }
+
+
+    template class font_color<
+        traits<
+            typename boost::mpl::at<common_type_list, type::size>::type,
+            typename boost::mpl::at<common_type_list, type::difference>::type,
+            typename boost::mpl::at<common_type_list, type::string>::type,
+            typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+            typename boost::mpl::at<model_type_list, type::model::speed>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
+        >
+    >;
 
 
 }}

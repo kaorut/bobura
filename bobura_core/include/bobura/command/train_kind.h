@@ -15,6 +15,7 @@
 
 #include <tetengo2.h>
 
+#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
 #include <bobura/model/train_kind.h>
 #include <bobura/train_kind_dialog.h>
@@ -24,14 +25,20 @@ namespace bobura { namespace command
 {
     /*!
         \brief The class template for a train kind command.
+
+        \tparam Traits A traits type.
     */
-    class train_kind : public command_base
+    template <typename Traits>
+    class train_kind : public command_base<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The base type.
-        using base_type = command_base;
+        using base_type = command_base<traits_type>;
 
         //! The train kind dialog type.
         using train_kind_dialog_type =

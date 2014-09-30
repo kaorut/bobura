@@ -22,21 +22,28 @@
 
 namespace bobura { namespace command
 {
+    template <typename Traits>
     class command_base;
 
     class parameter_base;
 
 
     /*!
-        \brief The class for a command set.
+        \brief The class template for a command set.
+
+        \tparam Traits A traits type.
     */
+    template <typename Traits>
     class set : private boost::noncopyable
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The file initialization type.
-        using size_type = boost::mpl::at<common_type_list, type::size>::type;
+        using size_type = typename Traits::size_type;
 
         //! The file initialization type.
         using new_file_type = boost::mpl::at<load_save_type_list, type::load_save::new_file>::type;
@@ -57,7 +64,7 @@ namespace bobura { namespace command
         using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
 
         //! The command type.
-        using command_type = command_base;
+        using command_type = command_base<traits_type>;
 
         //! The parameter type.
         using parameter_type = parameter_base;

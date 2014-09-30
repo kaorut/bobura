@@ -15,6 +15,7 @@
 
 #include <tetengo2.h>
 
+#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
 #include <bobura/font_color_dialog.h>
 
@@ -23,14 +24,20 @@ namespace bobura { namespace command
 {
     /*!
         \brief The class template for a font and color command.
+
+        \tparam Traits A traits type.
     */
-    class font_color : public command_base
+    template <typename Traits>
+    class font_color : public command_base<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The base type.
-        using base_type = command_base;
+        using base_type = command_base<traits_type>;
 
         //! The font and color dialog type.
         using font_color_dialog_type =
