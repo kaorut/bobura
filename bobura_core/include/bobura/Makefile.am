@@ -24,6 +24,7 @@ extra_headers = \
     command/set_horizontal_scale.h \
     command/set_vertical_scale.h \
     command/train_kind.h \
+    command/traits.h \
     command/vertically_zoom_in.h \
     command/vertically_zoom_out.h \
     config_traits.h \

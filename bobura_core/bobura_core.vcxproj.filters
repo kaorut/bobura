@@ -252,6 +252,9 @@
     <ClInclude Include="include\bobura\main_window_traits.h">
       <Filter>headers\bobura</Filter>
     </ClInclude>
+    <ClInclude Include="include\bobura\command\traits.h">
+      <Filter>headers\bobura\command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\precompiled\precompiled.cpp">

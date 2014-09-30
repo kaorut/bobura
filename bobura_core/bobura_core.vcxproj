@@ -120,6 +120,7 @@
     <ClInclude Include="include\bobura\command\set_horizontal_scale.h" />
     <ClInclude Include="include\bobura\command\set_vertical_scale.h" />
     <ClInclude Include="include\bobura\command\train_kind.h" />
+    <ClInclude Include="include\bobura\command\traits.h" />
     <ClInclude Include="include\bobura\command\vertically_zoom_in.h" />
     <ClInclude Include="include\bobura\command\vertically_zoom_out.h" />
     <ClInclude Include="include\bobura\config_traits.h" />
