@@ -11,13 +11,12 @@
 
 #include <memory>
 
-#include <boost/mpl/at.hpp>
-
 #include <tetengo2.h>
 
 #include <bobura/about_dialog.h>
-#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
+#include <bobura/config_traits.h>
+#include <bobura/settings.h>
 
 
 namespace bobura { namespace command
@@ -25,9 +24,21 @@ namespace bobura { namespace command
     /*!
         \brief The class template for an about command.
 
-        \tparam Traits A traits type.
+        \tparam Traits         A traits type.
+        \tparam Position       A position type.
+        \tparam Dimension      A dimension type.
+        \tparam Dialog         A dialog type.
+        \tparam ConfigTraits   A config traits type.
+        \tparam MessageCatalog A message catalog type.
     */
-    template <typename Traits>
+    template <
+        typename Traits,
+        typename Position,
+        typename Dimension,
+        typename Dialog,
+        typename ConfigTraits,
+        typename MessageCatalog
+    >
     class about : public command_base<Traits>
     {
     public:
@@ -36,25 +47,35 @@ namespace bobura { namespace command
         //! The traits type.
         using traits_type = Traits;
 
+        //! The string type.
+        using string_type = typename traits_type::string_type;
+
+        //! The position type.
+        using position_type = Position;
+
+        //! The dimension type.
+        using dimension_type = Dimension;
+
+        //! The dialog type.
+        using dialog_type = Dialog;
+
+        //! The config traits type.
+        using config_traits_type = ConfigTraits;
+
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
         //! The base type.
         using base_type = command_base<traits_type>;
 
         //! The about dialog type.
         using about_dialog_type =
             about_dialog<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<ui_type_list, type::ui::position>::type,
-                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                boost::mpl::at<setting_type_list, type::setting::config_traits>::type
+                string_type, position_type, dimension_type, dialog_type, message_catalog_type, config_traits_type
             >;
 
-        //! The message catalog type.
-        using message_catalog_type = about_dialog_type::message_catalog_type;
-
         //! The settings type.
-        using settings_type = about_dialog_type::settings_type;
+        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
 
 
         // constructors and destructor

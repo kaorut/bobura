@@ -31,9 +31,21 @@ namespace bobura { namespace command
     /*!
         \brief The class template for a command set.
 
-        \tparam Traits A traits type.
+        \tparam Traits         A traits type.
+        \tparam Position       A position type.
+        \tparam Dimension      A dimension type.
+        \tparam Dialog         A dialog type.
+        \tparam ConfigTraits   A config traits type.
+        \tparam MessageCatalog A message catalog type.
     */
-    template <typename Traits>
+    template <
+        typename Traits,
+        typename Position,
+        typename Dimension,
+        typename Dialog,
+        typename ConfigTraits,
+        typename MessageCatalog
+    >
     class set : private boost::noncopyable
     {
     public:
@@ -43,7 +55,22 @@ namespace bobura { namespace command
         using traits_type = Traits;
 
         //! The file initialization type.
-        using size_type = typename Traits::size_type;
+        using size_type = typename traits_type::size_type;
+
+        //! The position type.
+        using position_type = Position;
+
+        //! The dimension type.
+        using dimension_type = Dimension;
+
+        //! The dialog type.
+        using dialog_type = Dialog;
+
+        //! The config traits type.
+        using config_traits_type = ConfigTraits;
+
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
 
         //! The file initialization type.
         using new_file_type = boost::mpl::at<load_save_type_list, type::load_save::new_file>::type;
@@ -59,9 +86,6 @@ namespace bobura { namespace command
 
         //! The settings type.
         using settings_type = boost::mpl::at<setting_type_list, type::setting::settings>::type;
-
-        //! The message catalog type.
-        using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
 
         //! The command type.
         using command_type = command_base<traits_type>;

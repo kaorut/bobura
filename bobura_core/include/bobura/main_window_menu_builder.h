@@ -29,22 +29,30 @@ namespace bobura
         \tparam Size              A size type.
         \tparam Difference        A difference type.
         \tparam String            A string type.
+        \tparam Position          A position type.
+        \tparam Dimension         A dimension type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
+        \tparam Dialog            A dialog type.
         \tparam Font              A font type.
         \tparam MenuBar           A menu bar type.
         \tparam MainWindowTraits  A main window traits type.
+        \tparam ConfigTraits      A config traits type.
         \tparam MessageCatalog    A message catalog type.
     */
     template <
         typename Size,
         typename Difference,
         typename String,
+        typename Position,
+        typename Dimension,
         typename OperatingDistance,
         typename Speed,
+        typename Dialog,
         typename Font,
         typename MenuBar,
         typename MainWindowTraits,
+        typename ConfigTraits,
         typename MessageCatalog
     >
     class main_window_menu_builder : private boost::noncopyable
@@ -61,11 +69,20 @@ namespace bobura
         //! The string type.
         using string_type = String;
 
+        //! The position type.
+        using position_type = Position;
+
+        //! The dimension type.
+        using dimension_type = Dimension;
+
         //! The operating distance type.
         using operating_distance_type = OperatingDistance;
 
         //! The speed type.
         using speed_type = Speed;
+
+        //! The dialog type.
+        using dialog_type = Dialog;
 
         //! The font type.
         using font_type = Font;
@@ -75,6 +92,9 @@ namespace bobura
 
         //! The main window traits type.
         using main_window_traits_type = MainWindowTraits;
+
+        //! The config traits type.
+        using config_traits_type = ConfigTraits;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
@@ -90,7 +110,12 @@ namespace bobura
                     speed_type,
                     font_type,
                     typename main_window_traits_type::window_type::base_type
-                >
+                >,
+                position_type,
+                dimension_type,
+                dialog_type,
+                config_traits_type,
+                message_catalog_type
             >;
 
         //! The model type.

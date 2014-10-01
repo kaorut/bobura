@@ -40,6 +40,10 @@ namespace bobura
 
         using string_type = typename main_window::string_type;
 
+        using position_type = typename main_window::position_type;
+
+        using dimension_type = typename main_window::dimension_type;
+
         using operating_distance_type = typename main_window::operating_distance_type;
 
         using speed_type = typename main_window::speed_type;
@@ -49,6 +53,8 @@ namespace bobura
         using abstract_window_type = typename main_window::abstract_window_type;
 
         using font_type = typename main_window::font_type;
+
+        using config_traits_type = typename main_window::config_traits_type;
 
         using message_catalog_type = typename main_window::message_catalog_type;
 
@@ -143,7 +149,14 @@ namespace bobura
         using message_type_list_type =
             message::main_window::type_list<
                 typename boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
-                command::set<command_traits_type>,
+                command::set<
+                    command_traits_type,
+                    position_type,
+                    dimension_type,
+                    typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+                    config_traits_type,
+                    message_catalog_type
+                >,
                 command::command_base<command_traits_type>,
                 timetable_model<
                     size_type, difference_type, string_type, operating_distance_type, speed_type, font_type

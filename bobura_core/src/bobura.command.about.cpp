@@ -18,8 +18,15 @@
 
 namespace bobura { namespace command
 {
-    template <typename Traits>
-    class about<Traits>::impl
+    template <
+        typename Traits,
+        typename Position,
+        typename Dimension,
+        typename Dialog,
+        typename ConfigTraits,
+        typename MessageCatalog
+    >
+    class about<Traits, Position, Dimension, Dialog, ConfigTraits, MessageCatalog>::impl
     {
     public:
         // types
@@ -66,19 +73,46 @@ namespace bobura { namespace command
     };
 
 
-    template <typename Traits>
-    about<Traits>::about(const message_catalog_type& message_catalog, const settings_type& settings)
+    template <
+        typename Traits,
+        typename Position,
+        typename Dimension,
+        typename Dialog,
+        typename ConfigTraits,
+        typename MessageCatalog
+    >
+    about<Traits, Position, Dimension, Dialog, ConfigTraits, MessageCatalog>::about(
+        const message_catalog_type& message_catalog,
+        const settings_type&        settings
+    )
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog, settings))
     {}
 
-    template <typename Traits>
-    about<Traits>::~about()
+    template <
+        typename Traits,
+        typename Position,
+        typename Dimension,
+        typename Dialog,
+        typename ConfigTraits,
+        typename MessageCatalog
+    >
+    about<Traits, Position, Dimension, Dialog, ConfigTraits, MessageCatalog>::~about()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    template <typename Traits>
-    void about<Traits>::execute_impl(model_type& model, abstract_window_type& parent)
+    template <
+        typename Traits,
+        typename Position,
+        typename Dimension,
+        typename Dialog,
+        typename ConfigTraits,
+        typename MessageCatalog
+    >
+    void about<Traits, Position, Dimension, Dialog, ConfigTraits, MessageCatalog>::execute_impl(
+        model_type&           model,
+        abstract_window_type& parent
+    )
     const
     {
         m_p_impl->execute(model, parent);
@@ -94,7 +128,12 @@ namespace bobura { namespace command
             typename boost::mpl::at<model_type_list, type::model::speed>::type,
             typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
             typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
-        >
+        >,
+        typename boost::mpl::at<ui_type_list, type::ui::position>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+        typename boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type,
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
     >;
 
 

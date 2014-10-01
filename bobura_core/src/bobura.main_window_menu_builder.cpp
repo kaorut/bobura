@@ -15,6 +15,7 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/config_traits.h>
 #include <bobura/diagram_view.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/main_window_traits.h>
@@ -28,15 +29,31 @@ namespace bobura
         typename Size,
         typename Difference,
         typename String,
+        typename Position,
+        typename Dimension,
         typename OperatingDistance,
         typename Speed,
+        typename Dialog,
         typename Font,
         typename MenuBar,
         typename MainWindowTraits,
+        typename ConfigTraits,
         typename MessageCatalog
     >
     class main_window_menu_builder<
-        Size, Difference, String, OperatingDistance, Speed, Font, MenuBar, MainWindowTraits, MessageCatalog
+        Size,
+        Difference,
+        String,
+        Position,
+        Dimension,
+        OperatingDistance,
+        Speed,
+        Dialog,
+        Font,
+        MenuBar,
+        MainWindowTraits,
+        ConfigTraits,
+        MessageCatalog
     >::impl
     {
     public:
@@ -458,15 +475,31 @@ namespace bobura
         typename Size,
         typename Difference,
         typename String,
+        typename Position,
+        typename Dimension,
         typename OperatingDistance,
         typename Speed,
+        typename Dialog,
         typename Font,
         typename MenuBar,
         typename MainWindowTraits,
+        typename ConfigTraits,
         typename MessageCatalog
     >
     main_window_menu_builder<
-        Size, Difference, String, OperatingDistance, Speed, Font, MenuBar, MainWindowTraits, MessageCatalog
+        Size,
+        Difference,
+        String,
+        Position,
+        Dimension,
+        OperatingDistance,
+        Speed,
+        Dialog,
+        Font,
+        MenuBar,
+        MainWindowTraits,
+        ConfigTraits,
+        MessageCatalog
     >::main_window_menu_builder(
         const command_set_type&     command_set,
         model_type&                 model,
@@ -481,15 +514,31 @@ namespace bobura
         typename Size,
         typename Difference,
         typename String,
+        typename Position,
+        typename Dimension,
         typename OperatingDistance,
         typename Speed,
+        typename Dialog,
         typename Font,
         typename MenuBar,
         typename MainWindowTraits,
+        typename ConfigTraits,
         typename MessageCatalog
     >
     main_window_menu_builder<
-        Size, Difference, String, OperatingDistance, Speed, Font, MenuBar, MainWindowTraits, MessageCatalog
+        Size,
+        Difference,
+        String,
+        Position,
+        Dimension,
+        OperatingDistance,
+        Speed,
+        Dialog,
+        Font,
+        MenuBar,
+        MainWindowTraits,
+        ConfigTraits,
+        MessageCatalog
     >::~main_window_menu_builder()
     TETENGO2_STDALT_NOEXCEPT
     {}
@@ -498,19 +547,47 @@ namespace bobura
         typename Size,
         typename Difference,
         typename String,
+        typename Position,
+        typename Dimension,
         typename OperatingDistance,
         typename Speed,
+        typename Dialog,
         typename Font,
         typename MenuBar,
         typename MainWindowTraits,
+        typename ConfigTraits,
         typename MessageCatalog
     >
     std::unique_ptr<
         typename main_window_menu_builder<
-            Size, Difference, String, OperatingDistance, Speed, Font, MenuBar, MainWindowTraits, MessageCatalog
+            Size,
+            Difference,
+            String,
+            Position,
+            Dimension,
+            OperatingDistance,
+            Speed,
+            Dialog,
+            Font,
+            MenuBar,
+            MainWindowTraits,
+            ConfigTraits,
+            MessageCatalog
         >::menu_bar_type
     > main_window_menu_builder<
-        Size, Difference, String, OperatingDistance, Speed, Font, MenuBar, MainWindowTraits, MessageCatalog
+        Size,
+        Difference,
+        String,
+        Position,
+        Dimension,
+        OperatingDistance,
+        Speed,
+        Dialog,
+        Font,
+        MenuBar,
+        MainWindowTraits,
+        ConfigTraits,
+        MessageCatalog
     >::build()
     const
     {
@@ -522,8 +599,11 @@ namespace bobura
         typename boost::mpl::at<common_type_list, type::size>::type,
         typename boost::mpl::at<common_type_list, type::difference>::type,
         typename boost::mpl::at<common_type_list, type::string>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::position>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
         typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
         typename boost::mpl::at<model_type_list, type::model::speed>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
         typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
         typename boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
         main_window_traits<
@@ -550,6 +630,12 @@ namespace bobura
             >,
             typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
             typename boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
+        >,
+        config_traits<
+            typename boost::mpl::at<common_type_list, type::string>::type,
+            typename boost::mpl::at<common_type_list, type::size>::type,
+            typename boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
+            typename boost::mpl::at<detail_type_list, type::detail::config>::type
         >,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
     >;
