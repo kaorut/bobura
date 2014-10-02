@@ -67,12 +67,6 @@ namespace bobura { namespace command
         //! The base type.
         using base_type = command_base<traits_type>;
 
-        //! The about dialog type.
-        using about_dialog_type =
-            about_dialog<
-                string_type, position_type, dimension_type, dialog_type, message_catalog_type, config_traits_type
-            >;
-
         //! The settings type.
         using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
 

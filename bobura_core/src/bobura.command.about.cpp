@@ -35,7 +35,7 @@ namespace bobura { namespace command
 
         using abstract_window_type = typename about::abstract_window_type;
 
-        using about_dialog_type = typename about::about_dialog_type;
+        using config_traits_type = typename about::config_traits_type;
 
         using message_catalog_type = typename about::message_catalog_type;
 
@@ -63,6 +63,14 @@ namespace bobura { namespace command
 
 
     private:
+        // types
+
+        using about_dialog_type =
+            about_dialog<
+                string_type, position_type, dimension_type, dialog_type, message_catalog_type, config_traits_type
+            >;
+
+
         // variables
 
         const message_catalog_type& m_message_catalog;
