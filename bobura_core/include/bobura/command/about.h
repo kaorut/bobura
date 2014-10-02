@@ -15,7 +15,6 @@
 
 #include <bobura/about_dialog.h>
 #include <bobura/command/command_base.h>
-#include <bobura/config_traits.h>
 #include <bobura/settings.h>
 
 
