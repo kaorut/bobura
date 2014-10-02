@@ -265,7 +265,10 @@ namespace bobura { namespace command
 
         static command_ptr_type create_file_property(const message_catalog_type& message_catalog)
         {
-            return tetengo2::stdalt::make_unique<command::file_property<traits_type>>(message_catalog);
+            return
+                tetengo2::stdalt::make_unique<command::file_property<traits_type, dialog_type, message_catalog_type>>(
+                    message_catalog
+                );
         }
 
         static command_ptr_type create_font_color(const message_catalog_type& message_catalog)
