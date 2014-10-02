@@ -110,6 +110,7 @@ namespace bobura
         using command_set_type =
             command::set<
                 command_traits_type,
+                boost::mpl::at<view_type_list, type::view::traits>::type,
                 boost::mpl::at<ui_type_list, type::ui::position>::type,
                 boost::mpl::at<ui_type_list, type::ui::dimension>::type,
                 boost::mpl::at<ui_type_list, type::ui::dialog>::type,
@@ -134,6 +135,7 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
                 boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
                 main_window_traits_type,
+                boost::mpl::at<view_type_list, type::view::traits>::type,
                 boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;

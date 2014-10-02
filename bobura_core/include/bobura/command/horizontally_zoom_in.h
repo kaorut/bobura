@@ -11,12 +11,10 @@
 
 #include <memory>
 
-#include <boost/mpl/at.hpp>
-
 #include <tetengo2.h>
 
-#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
+#include <bobura/diagram_view.h>
 
 
 namespace bobura { namespace command
@@ -24,9 +22,10 @@ namespace bobura { namespace command
     /*!
         \brief The class template for a horizontal zoom-in command.
 
-        \tparam Traits A traits type.
+        \tparam Traits     A traits type.
+        \tparam ViewTraits A view traits type.
     */
-    template <typename Traits>
+    template <typename Traits, typename ViewTraits>
     class horizontally_zoom_in : public command_base<Traits>
     {
     public:
@@ -35,11 +34,14 @@ namespace bobura { namespace command
         //! The traits type.
         using traits_type = Traits;
 
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
+
         //! The base type.
         using base_type = command_base<traits_type>;
 
         //! The diagram view type.
-        using diagram_view_type = boost::mpl::at<view_type_list, type::view::view>::type;
+        using diagram_view_type = diagram_view<view_traits_type>;
 
 
         // constructors and destructor

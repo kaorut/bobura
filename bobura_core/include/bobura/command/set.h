@@ -32,6 +32,7 @@ namespace bobura { namespace command
         \brief The class template for a command set.
 
         \tparam Traits         A traits type.
+        \tparam ViewTraits     A view traits type.
         \tparam Position       A position type.
         \tparam Dimension      A dimension type.
         \tparam Dialog         A dialog type.
@@ -42,6 +43,7 @@ namespace bobura { namespace command
     */
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -57,6 +59,9 @@ namespace bobura { namespace command
 
         //! The traits type.
         using traits_type = Traits;
+
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
 
         //! The file initialization type.
         using size_type = typename traits_type::size_type;

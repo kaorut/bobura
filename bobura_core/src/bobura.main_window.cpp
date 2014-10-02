@@ -151,6 +151,7 @@ namespace bobura
                 typename boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
                 command::set<
                     command_traits_type,
+                    typename boost::mpl::at<view_type_list, type::view::traits>::type,
                     position_type,
                     dimension_type,
                     typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,

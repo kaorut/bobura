@@ -39,6 +39,7 @@ namespace bobura { namespace command
 {
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -47,12 +48,16 @@ namespace bobura { namespace command
         typename ConfigTraits,
         typename MessageCatalog
     >
-    class set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::impl
+    class set<
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+    >::impl
     {
     public:
         // types
 
         using traits_type = typename set::traits_type;
+
+        using view_traits_type = typename set::view_traits_type;
 
         using size_type = typename set::size_type;
 
@@ -289,12 +294,18 @@ namespace bobura { namespace command
 
         static command_ptr_type create_horizontally_zoom_in(diagram_view_type& diagram_view)
         {
-            return tetengo2::stdalt::make_unique<command::horizontally_zoom_in<traits_type>>(diagram_view);
+            return
+                tetengo2::stdalt::make_unique<command::horizontally_zoom_in<traits_type, view_traits_type>>(
+                    diagram_view
+                );
         }
 
         static command_ptr_type create_horizontally_zoom_out(diagram_view_type& diagram_view)
         {
-            return tetengo2::stdalt::make_unique<command::horizontally_zoom_out<traits_type>>(diagram_view);
+            return
+                tetengo2::stdalt::make_unique<command::horizontally_zoom_out<traits_type, view_traits_type>>(
+                    diagram_view
+                );
         }
 
         static command_ptr_type create_load_from_file(const load_from_file_type& load_from_file)
@@ -367,12 +378,18 @@ namespace bobura { namespace command
 
         static command_ptr_type create_vertically_zoom_in(diagram_view_type& diagram_view)
         {
-            return tetengo2::stdalt::make_unique<command::vertically_zoom_in<traits_type>>(diagram_view);
+            return
+                tetengo2::stdalt::make_unique<command::vertically_zoom_in<traits_type, view_traits_type>>(
+                    diagram_view
+                );
         }
 
         static command_ptr_type create_vertically_zoom_out(diagram_view_type& diagram_view)
         {
-            return tetengo2::stdalt::make_unique<command::vertically_zoom_out<traits_type>>(diagram_view);
+            return
+                tetengo2::stdalt::make_unique<command::vertically_zoom_out<traits_type, view_traits_type>>(
+                    diagram_view
+                );
         }
 
 
@@ -420,6 +437,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -428,7 +446,7 @@ namespace bobura { namespace command
         typename ConfigTraits,
         typename MessageCatalog
     >
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::set(
+    set<Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::set(
         const new_file_type&          new_file,
         const load_from_file_type&    load_from_file,
         const load_from_file_type&    reload,
@@ -455,6 +473,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -463,12 +482,13 @@ namespace bobura { namespace command
         typename ConfigTraits,
         typename MessageCatalog
     >
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::~set()
+    set<Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::~set()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -478,9 +498,9 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::about()
+    set<Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::about()
     const
     {
         return m_p_impl->about();
@@ -488,6 +508,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -497,10 +518,10 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
     set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::ask_file_path_and_save_to_file()
     const
     {
@@ -509,6 +530,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -518,9 +540,9 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::exit()
+    set<Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::exit()
     const
     {
         return m_p_impl->exit();
@@ -528,6 +550,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -537,9 +560,11 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::file_property()
+    set<
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+    >::file_property()
     const
     {
         return m_p_impl->file_property();
@@ -547,6 +572,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -556,9 +582,11 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::font_color()
+    set<
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+    >::font_color()
     const
     {
         return m_p_impl->font_color();
@@ -566,6 +594,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -575,10 +604,10 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
     set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::horizontally_zoom_in()
     const
     {
@@ -587,6 +616,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -596,10 +626,10 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
     set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::horizontally_zoom_out()
     const
     {
@@ -608,6 +638,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -617,9 +648,11 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::load_from_file()
+    set<
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+    >::load_from_file()
     const
     {
         return m_p_impl->load_from_file();
@@ -627,6 +660,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -637,11 +671,11 @@ namespace bobura { namespace command
     >
     std::unique_ptr<
         typename set<
-            Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+            Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
         >::parameter_type
     >
     set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::create_load_from_file_parameter(const boost::filesystem::path& path)
     const
     {
@@ -650,6 +684,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -659,9 +694,11 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::new_file()
+    set<
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+    >::new_file()
     const
     {
         return m_p_impl->new_file();
@@ -669,6 +706,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -678,9 +716,11 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::nop()
+    set<
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+    >::nop()
     const
     {
         return m_p_impl->nop();
@@ -688,6 +728,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -697,10 +738,10 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
     set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::open_www_tetengo_org()
     const
     {
@@ -709,6 +750,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -718,9 +760,9 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::reload()
+    set<Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::reload()
     const
     {
         return m_p_impl->reload();
@@ -728,6 +770,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -737,9 +780,11 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::save_to_file()
+    set<
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+    >::save_to_file()
     const
     {
         return m_p_impl->save_to_file();
@@ -747,6 +792,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -756,11 +802,11 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::set_horizontal_scale(
-        const size_type index
-    )
+    set<
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+    >::set_horizontal_scale(const size_type index)
     const
     {
         return m_p_impl->set_horizontal_scale(index);
@@ -768,6 +814,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -777,11 +824,11 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::set_vertical_scale(
-        const size_type index
-    )
+    set<
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+    >::set_vertical_scale(const size_type index)
     const
     {
         return m_p_impl->set_vertical_scale(index);
@@ -789,6 +836,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -798,9 +846,11 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::train_kind()
+    set<
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+    >::train_kind()
     const
     {
         return m_p_impl->train_kind();
@@ -808,6 +858,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -817,9 +868,11 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::vertically_zoom_in()
+    set<
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+    >::vertically_zoom_in()
     const
     {
         return m_p_impl->vertically_zoom_in();
@@ -827,6 +880,7 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
+        typename ViewTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -836,9 +890,11 @@ namespace bobura { namespace command
         typename MessageCatalog
     >
     typename const set<
-        Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
     >::command_type&
-    set<Traits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog>::vertically_zoom_out()
+    set<
+        Traits, ViewTraits, Position, Dimension, Dialog, Color, PointUnitSize, ConfigTraits, MessageCatalog
+    >::vertically_zoom_out()
     const
     {
         return m_p_impl->vertically_zoom_out();
@@ -855,6 +911,7 @@ namespace bobura { namespace command
             boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
             boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
         >,
+        typename boost::mpl::at<view_type_list, type::view::traits>::type,
         typename boost::mpl::at<ui_type_list, type::ui::position>::type,
         typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,

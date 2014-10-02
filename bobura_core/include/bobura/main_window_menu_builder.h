@@ -39,6 +39,7 @@ namespace bobura
         \tparam PointUnitSize     A point unit size type.
         \tparam MenuBar           A menu bar type.
         \tparam MainWindowTraits  A main window traits type.
+        \tparam ViewTraits        A view traits type.
         \tparam ConfigTraits      A config traits type.
         \tparam MessageCatalog    A message catalog type.
     */
@@ -56,6 +57,7 @@ namespace bobura
         typename PointUnitSize,
         typename MenuBar,
         typename MainWindowTraits,
+        typename ViewTraits,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -103,6 +105,9 @@ namespace bobura
         //! The main window traits type.
         using main_window_traits_type = MainWindowTraits;
 
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
+
         //! The config traits type.
         using config_traits_type = ConfigTraits;
 
@@ -121,6 +126,7 @@ namespace bobura
                     font_type,
                     typename main_window_traits_type::window_type::base_type
                 >,
+                view_traits_type,
                 position_type,
                 dimension_type,
                 dialog_type,

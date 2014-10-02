@@ -39,6 +39,7 @@ namespace bobura
         typename PointUnitSize,
         typename MenuBar,
         typename MainWindowTraits,
+        typename ViewTraits,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -56,6 +57,7 @@ namespace bobura
         PointUnitSize,
         MenuBar,
         MainWindowTraits,
+        ViewTraits,
         ConfigTraits,
         MessageCatalog
     >::impl
@@ -489,6 +491,7 @@ namespace bobura
         typename PointUnitSize,
         typename MenuBar,
         typename MainWindowTraits,
+        typename ViewTraits,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -506,6 +509,7 @@ namespace bobura
         PointUnitSize,
         MenuBar,
         MainWindowTraits,
+        ViewTraits,
         ConfigTraits,
         MessageCatalog
     >::main_window_menu_builder(
@@ -532,6 +536,7 @@ namespace bobura
         typename PointUnitSize,
         typename MenuBar,
         typename MainWindowTraits,
+        typename ViewTraits,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -549,6 +554,7 @@ namespace bobura
         PointUnitSize,
         MenuBar,
         MainWindowTraits,
+        ViewTraits,
         ConfigTraits,
         MessageCatalog
     >::~main_window_menu_builder()
@@ -569,6 +575,7 @@ namespace bobura
         typename PointUnitSize,
         typename MenuBar,
         typename MainWindowTraits,
+        typename ViewTraits,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -587,6 +594,7 @@ namespace bobura
             PointUnitSize,
             MenuBar,
             MainWindowTraits,
+            ViewTraits,
             ConfigTraits,
             MessageCatalog
         >::menu_bar_type
@@ -604,6 +612,7 @@ namespace bobura
         PointUnitSize,
         MenuBar,
         MainWindowTraits,
+        ViewTraits,
         ConfigTraits,
         MessageCatalog
     >::build()
@@ -651,6 +660,7 @@ namespace bobura
             typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
             typename boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
         >,
+        typename boost::mpl::at<view_type_list, type::view::traits>::type,
         config_traits<
             typename boost::mpl::at<common_type_list, type::string>::type,
             typename boost::mpl::at<common_type_list, type::size>::type,

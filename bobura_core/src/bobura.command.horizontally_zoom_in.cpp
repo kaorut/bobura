@@ -19,12 +19,13 @@
 #include <bobura/main_window.h>
 #include <bobura/main_window_traits.h>
 #include <bobura/view/diagram/zoom.h>
+#include <bobura/view/diagram/traits.h>
 
 
 namespace bobura { namespace command
 {
-    template <typename Traits>
-    class horizontally_zoom_in<Traits>::impl
+    template <typename Traits, typename ViewTraits>
+    class horizontally_zoom_in<Traits, ViewTraits>::impl
     {
     public:
         // types
@@ -105,19 +106,19 @@ namespace bobura { namespace command
     };
 
 
-    template <typename Traits>
-    horizontally_zoom_in<Traits>::horizontally_zoom_in(diagram_view_type& diagram_view)
+    template <typename Traits, typename ViewTraits>
+    horizontally_zoom_in<Traits, ViewTraits>::horizontally_zoom_in(diagram_view_type& diagram_view)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(diagram_view))
     {}
 
-    template <typename Traits>
-    horizontally_zoom_in<Traits>::~horizontally_zoom_in()
+    template <typename Traits, typename ViewTraits>
+    horizontally_zoom_in<Traits, ViewTraits>::~horizontally_zoom_in()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    template <typename Traits>
-    void horizontally_zoom_in<Traits>::execute_impl(model_type& model, abstract_window_type& parent)
+    template <typename Traits, typename ViewTraits>
+    void horizontally_zoom_in<Traits, ViewTraits>::execute_impl(model_type& model, abstract_window_type& parent)
     const
     {
         m_p_impl->execute(model, parent);
@@ -133,7 +134,8 @@ namespace bobura { namespace command
             typename boost::mpl::at<model_type_list, type::model::speed>::type,
             typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
             typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
-        >
+        >,
+        typename boost::mpl::at<view_type_list, type::view::traits>::type
     >;
 
 
