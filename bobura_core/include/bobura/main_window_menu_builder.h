@@ -35,6 +35,8 @@ namespace bobura
         \tparam Speed             A speed type.
         \tparam Dialog            A dialog type.
         \tparam Font              A font type.
+        \tparam Color             A color type.
+        \tparam PointUnitSize     A point unit size type.
         \tparam MenuBar           A menu bar type.
         \tparam MainWindowTraits  A main window traits type.
         \tparam ConfigTraits      A config traits type.
@@ -50,6 +52,8 @@ namespace bobura
         typename Speed,
         typename Dialog,
         typename Font,
+        typename Color,
+        typename PointUnitSize,
         typename MenuBar,
         typename MainWindowTraits,
         typename ConfigTraits,
@@ -84,6 +88,12 @@ namespace bobura
         //! The dialog type.
         using dialog_type = Dialog;
 
+        //! The color type.
+        using color_type = Color;
+
+        //! The point unit size type.
+        using point_unit_size_type = PointUnitSize;
+
         //! The font type.
         using font_type = Font;
 
@@ -114,6 +124,8 @@ namespace bobura
                 position_type,
                 dimension_type,
                 dialog_type,
+                color_type,
+                point_unit_size_type,
                 config_traits_type,
                 message_catalog_type
             >;

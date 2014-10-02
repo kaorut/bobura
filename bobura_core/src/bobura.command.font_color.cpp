@@ -15,24 +15,30 @@
 #include <bobura/basic_type_list.h>
 #include <bobura/command/font_color.h>
 #include <bobura/command/traits.h>
+#include <bobura/font_color_dialog.h>
 
 
 namespace bobura { namespace command
 {
-    template <typename Traits>
-    class font_color<Traits>::impl
+    template <typename Traits, typename Dialog, typename PointUnitSize, typename Color, typename MessageCatalog>
+    class font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog>::impl
     {
     public:
         // types
+
+        using traits_type = typename font_color::traits_type;
 
         using model_type = typename font_color::model_type;
 
         using abstract_window_type = typename font_color::abstract_window_type;
 
-        using font_color_dialog_type = typename font_color::font_color_dialog_type;
+        using dialog_type = typename font_color::dialog_type;
 
-        using dialog_base_type = typename font_color::dialog_base_type;
-using message_catalog_type = typename font_color::message_catalog_type;
+        using point_unit_size_type = typename font_color::point_unit_size_type;
+
+        using color_type = typename font_color::color_type;
+
+        using message_catalog_type = typename font_color::message_catalog_type;
 
 
         // constructors and destructor
@@ -71,7 +77,7 @@ using message_catalog_type = typename font_color::message_catalog_type;
             dialog.set_train_name(font_color_set.train_name());
 
             dialog.do_modal();
-            if (dialog.result() != dialog_base_type::result_type::accepted)
+            if (dialog.result() != dialog_type::result_type::accepted)
                 return;
         
             font_color_set_type new_font_color_set{
@@ -94,9 +100,18 @@ using message_catalog_type = typename font_color::message_catalog_type;
     private:
         // types
 
+        using size_type = typename traits_type::size_type;
+
+        using font_type = typename traits_type::font_type;
+
         using font_color_set_type = typename model_type::timetable_type::font_color_set_type;
 
         using font_color_type = typename font_color_set_type::font_color_type;
+
+        using font_color_dialog_type =
+            font_color_dialog<
+                size_type, dialog_type, font_type, point_unit_size_type, color_type, message_catalog_type
+            >;
 
 
         // variables
@@ -107,19 +122,24 @@ using message_catalog_type = typename font_color::message_catalog_type;
     };
 
 
-    template <typename Traits>
-    font_color<Traits>::font_color(const message_catalog_type& message_catalog)
+    template <typename Traits, typename Dialog, typename PointUnitSize, typename Color, typename MessageCatalog>
+    font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog>::font_color(
+        const message_catalog_type& message_catalog
+    )
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
     {}
 
-    template <typename Traits>
-    font_color<Traits>::~font_color()
+    template <typename Traits, typename Dialog, typename PointUnitSize, typename Color, typename MessageCatalog>
+    font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog>::~font_color()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    template <typename Traits>
-    void font_color<Traits>::execute_impl(model_type& model, abstract_window_type& parent)
+    template <typename Traits, typename Dialog, typename PointUnitSize, typename Color, typename MessageCatalog>
+    void font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog>::execute_impl(
+        model_type&           model,
+        abstract_window_type& parent
+    )
     const
     {
         m_p_impl->execute(model, parent);
@@ -135,7 +155,11 @@ using message_catalog_type = typename font_color::message_catalog_type;
             typename boost::mpl::at<model_type_list, type::model::speed>::type,
             typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
             typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
-        >
+        >,
+        typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::color>::type,
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
     >;
 
 

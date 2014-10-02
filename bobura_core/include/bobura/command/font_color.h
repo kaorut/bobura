@@ -11,13 +11,9 @@
 
 #include <memory>
 
-#include <boost/mpl/at.hpp>
-
 #include <tetengo2.h>
 
-#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
-#include <bobura/font_color_dialog.h>
 
 
 namespace bobura { namespace command
@@ -25,9 +21,13 @@ namespace bobura { namespace command
     /*!
         \brief The class template for a font and color command.
 
-        \tparam Traits A traits type.
+        \tparam Traits         A traits type.
+        \tparam Dialog         A dialog type.
+        \tparam PointUnitSize  A point unit size type.
+        \tparam Color          A color type.
+        \tparam MessageCatalog A message catalog type.
     */
-    template <typename Traits>
+    template <typename Traits, typename Dialog, typename PointUnitSize, typename Color, typename MessageCatalog>
     class font_color : public command_base<Traits>
     {
     public:
@@ -36,25 +36,20 @@ namespace bobura { namespace command
         //! The traits type.
         using traits_type = Traits;
 
-        //! The base type.
-        using base_type = command_base<traits_type>;
+        //! The dialog type.
+        using dialog_type = Dialog;
 
-        //! The font and color dialog type.
-        using font_color_dialog_type =
-            font_color_dialog<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
-                boost::mpl::at<ui_type_list, type::ui::color>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
-            >;
+        //! The point unit size type.
+        using point_unit_size_type = PointUnitSize;
 
-        //! The dialog base type.
-        using dialog_base_type = font_color_dialog_type::base_type;
+        //! The color type.
+        using color_type = Color;
 
         //! The message catalog type.
-        using message_catalog_type = font_color_dialog_type::message_catalog_type;
+        using message_catalog_type = MessageCatalog;
+
+        //! The base type.
+        using base_type = command_base<traits_type>;
 
 
         // constructors and destructor

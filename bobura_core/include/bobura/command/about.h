@@ -13,7 +13,6 @@
 
 #include <tetengo2.h>
 
-#include <bobura/about_dialog.h>
 #include <bobura/command/command_base.h>
 #include <bobura/settings.h>
 
