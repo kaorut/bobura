@@ -348,7 +348,8 @@ namespace bobura { namespace command
 
         static command_ptr_type create_save_to_file(const save_to_file_type& save_to_file)
         {
-            return tetengo2::stdalt::make_unique<command::save_to_file<traits_type>>(save_to_file);
+            return
+                tetengo2::stdalt::make_unique<command::save_to_file<traits_type, load_save_traits_type>>(save_to_file);
         }
 
         static std::vector<command_ptr_type> create_set_horizontal_scale(diagram_view_type& diagram_view)
