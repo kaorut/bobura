@@ -36,93 +36,64 @@ namespace bobura { namespace load_save
     /*!
         \brief The class template for a file loading.
 
-        \tparam Size               A size type.
-        \tparam Difference         A difference type.
-        \tparam String             A string type.
-        \tparam ForwardIterator    A forward iterator type.
-        \tparam OutputStream       An output stream type.
-        \tparam OperatingDistance  An operating distance type.
-        \tparam Speed              A speed type.
-        \tparam Font               A font type.
-        \tparam AbstractWindow     An abstract window type.
-        \tparam MessageBox         A message box type.
-        \tparam FileOpenDialog     A file open dialog type.
-        \tparam FileSaveDialog     A file save dialog type.
-        \tparam OuDiaDiagramDialog An OuDia diagram dialog type.
-        \tparam MessageCatalog     A message catalog type.
-        \tparam Utf8Encoder        A UTF-8 encoder type.
-        \tparam Cp932Encoder       A CP932 encoder type.
+        \tparam Traits A traits type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename ForwardIterator,
-        typename OutputStream,
-        typename OperatingDistance,
-        typename Speed,
-        typename Font,
-        typename AbstractWindow,
-        typename MessageBox,
-        typename FileOpenDialog,
-        typename FileSaveDialog,
-        typename OuDiaDiagramDialog,
-        typename MessageCatalog,
-        typename Utf8Encoder,
-        typename Cp932Encoder
-    >
+    template <typename Traits>
     class load_from_file
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The size type.
-        using size_type = Size;
+        using size_type = typename traits_type::size_type;
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = typename traits_type::difference_type;
 
         //! The string type.
-        using string_type = String;
+        using string_type = typename traits_type::string_type;
 
         //! The iterator type.
-        using iterator = ForwardIterator;
+        using iterator = typename traits_type::iterator;
 
         //! The output stream type.
-        using output_stream_type = OutputStream;
+        using output_stream_type = typename traits_type::output_stream_type;
 
         //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
+        using operating_distance_type = typename traits_type::operating_distance_type;
 
         //! The speed type.
-        using speed_type = Speed;
+        using speed_type = typename traits_type::speed_type;
 
         //! The font type.
-        using font_type = Font;
+        using font_type = typename traits_type::font_type;
 
         //! The abstract window type.
-        using abstract_window_type = AbstractWindow;
+        using abstract_window_type = typename traits_type::abstract_window_type;
 
         //! The message box type.
-        using message_box_type = MessageBox;
+        using message_box_type = typename traits_type::message_box_type;
 
         //! The file open dialog type.
-        using file_open_dialog_type = FileOpenDialog;
+        using file_open_dialog_type = typename traits_type::file_open_dialog_type;
 
         //! The file save dialog type.
-        using file_save_dialog_type = FileSaveDialog;
+        using file_save_dialog_type = typename traits_type::file_save_dialog_type;
 
         //! The OuDia diagram dialog type.
-        using oudia_diagram_dialog_type = OuDiaDiagramDialog;
+        using oudia_diagram_dialog_type = typename traits_type::oudia_diagram_dialog_type;
 
         //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        using message_catalog_type = typename traits_type::message_catalog_type;
 
-        //! The UTF-8 encoder type.
-        using utf8_encoder_type = Utf8Encoder;
+        //! The timetable file encoder type.
+        using timetable_file_encoder_type = typename traits_type::timetable_file_encoder_type;
 
-        //! The CP932 encoder type.
-        using cp932_encoder_type = Cp932Encoder;
+        //! The WinDIA file encoder type.
+        using windia_file_encoder_type = typename traits_type::windia_file_encoder_type;
 
         //! The model type.
         using model_type =
@@ -142,7 +113,7 @@ namespace bobura { namespace load_save
                 message_box_type,
                 file_save_dialog_type,
                 message_catalog_type,
-                utf8_encoder_type
+                timetable_file_encoder_type
             >;
 
         //! The reader selector type.
@@ -165,8 +136,8 @@ namespace bobura { namespace load_save
                 speed_type,
                 select_oudia_diagram_type,
                 font_type,
-                utf8_encoder_type,
-                cp932_encoder_type
+                timetable_file_encoder_type,
+                windia_file_encoder_type
             >;
 
 
@@ -358,8 +329,7 @@ namespace bobura { namespace load_save
                 );
         }
 
-        typename file_open_dialog_type::file_filters_type
-        make_file_filters()
+        typename file_open_dialog_type::file_filters_type make_file_filters()
         const
         {
             return

@@ -18,6 +18,7 @@
 #include <tetengo2.h>
 
 #include <bobura/load_save/load_from_file.h>
+#include <bobura/load_save/traits.h>
 #include <bobura/type_list.h>
 
 
@@ -97,8 +98,8 @@ namespace
 
     };
 
-    using load_from_file_type =
-        bobura::load_save::load_from_file<
+    using load_save_traits_type =
+        bobura::load_save::traits<
             boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
             boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
             boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
@@ -116,6 +117,8 @@ namespace
             boost::mpl::at<bobura::locale_type_list, bobura::type::locale::timetable_file_encoder>::type,
             boost::mpl::at<bobura::locale_type_list, bobura::type::locale::windia_file_encoder>::type
         >;
+
+    using load_from_file_type = bobura::load_save::load_from_file<load_save_traits_type>;
 
 
 }
