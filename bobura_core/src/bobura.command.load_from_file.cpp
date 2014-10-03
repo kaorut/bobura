@@ -17,12 +17,14 @@
 #include <bobura/basic_type_list.h>
 #include <bobura/command/load_from_file.h>
 #include <bobura/command/traits.h>
+#include <bobura/load_save/traits.h>
+#include <bobura/oudia_diagram_dialog.h>
 
 
 namespace bobura { namespace command
 {
-    template <typename Traits>
-    class load_from_file<Traits>::impl
+    template <typename Traits, typename LoadSaveTraits>
+    class load_from_file<Traits, LoadSaveTraits>::impl
     {
     public:
         // types
@@ -74,51 +76,55 @@ namespace bobura { namespace command
     };
 
 
-    template <typename Traits>
-    load_from_file<Traits>::parameter_type::parameter_type(boost::filesystem::path path)
+    template <typename Traits, typename LoadSaveTraits>
+    load_from_file<Traits, LoadSaveTraits>::parameter_type::parameter_type(boost::filesystem::path path)
     :
     m_path(std::move(path))
     {}
 
-    template <typename Traits>
-    load_from_file<Traits>::parameter_type::~parameter_type()
+    template <typename Traits, typename LoadSaveTraits>
+    load_from_file<Traits, LoadSaveTraits>::parameter_type::~parameter_type()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    template <typename Traits>
-    const boost::filesystem::path& load_from_file<Traits>::parameter_type::path()
+    template <typename Traits, typename LoadSaveTraits>
+    const boost::filesystem::path& load_from_file<Traits, LoadSaveTraits>::parameter_type::path()
     const
     {
         return m_path;
     }
 
-    template <typename Traits>
-    load_from_file<Traits>::load_from_file(const load_from_file_type& load_from_file)
+    template <typename Traits, typename LoadSaveTraits>
+    load_from_file<Traits, LoadSaveTraits>::load_from_file(const load_from_file_type& load_from_file)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(load_from_file))
     {}
 
-    template <typename Traits>
-    load_from_file<Traits>::~load_from_file()
+    template <typename Traits, typename LoadSaveTraits>
+    load_from_file<Traits, LoadSaveTraits>::~load_from_file()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    template <typename Traits>
-    bool load_from_file<Traits>::enabled_impl(const model_type& model)
+    template <typename Traits, typename LoadSaveTraits>
+    bool load_from_file<Traits, LoadSaveTraits>::enabled_impl(const model_type& model)
     const
     {
         return m_p_impl->enabled(model);
     }
 
-    template <typename Traits>
-    void load_from_file<Traits>::execute_impl(model_type& model, abstract_window_type& parent)
+    template <typename Traits, typename LoadSaveTraits>
+    void load_from_file<Traits, LoadSaveTraits>::execute_impl(model_type& model, abstract_window_type& parent)
     const
     {
         m_p_impl->execute(model, parent);
     }
 
-    template <typename Traits>
-    void load_from_file<Traits>::execute_impl(model_type& model, abstract_window_type& parent, const parameter_base& parameter)
+    template <typename Traits, typename LoadSaveTraits>
+    void load_from_file<Traits, LoadSaveTraits>::execute_impl(
+        model_type&           model,
+        abstract_window_type& parent,
+        const parameter_base& parameter
+    )
     const
     {
         m_p_impl->execute(model, parent, parameter);
@@ -134,6 +140,29 @@ namespace bobura { namespace command
             typename boost::mpl::at<model_type_list, type::model::speed>::type,
             typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
             typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
+        >,
+        load_save::traits<
+            typename boost::mpl::at<common_type_list, type::size>::type,
+            typename boost::mpl::at<common_type_list, type::difference>::type,
+            typename boost::mpl::at<common_type_list, type::string>::type,
+            typename boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
+            typename boost::mpl::at<common_type_list, type::output_stream>::type,
+            typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+            typename boost::mpl::at<model_type_list, type::model::speed>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
+            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::file_open_dialog>::type,
+            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
+            oudia_diagram_dialog<
+                typename boost::mpl::at<common_type_list, type::size>::type,
+                typename boost::mpl::at<common_type_list, type::string>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+                typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+            >,
+            typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+            typename boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type,
+            typename boost::mpl::at<locale_type_list, type::locale::windia_file_encoder>::type
         >
     >;
 

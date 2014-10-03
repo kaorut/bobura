@@ -132,6 +132,7 @@ namespace bobura
                     typename main_window_traits_type::window_type::base_type
                 >,
                 view_traits_type,
+                load_save_traits_type,
                 position_type,
                 dimension_type,
                 dialog_type,

@@ -33,6 +33,7 @@ namespace bobura { namespace command
 
         \tparam Traits         A traits type.
         \tparam ViewTraits     A view traits type.
+        \tparam LoadSaveTraits A loading and saving processing traits type.
         \tparam Position       A position type.
         \tparam Dimension      A dimension type.
         \tparam Dialog         A dialog type.
@@ -44,6 +45,7 @@ namespace bobura { namespace command
     template <
         typename Traits,
         typename ViewTraits,
+        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -62,6 +64,9 @@ namespace bobura { namespace command
 
         //! The view traits type.
         using view_traits_type = ViewTraits;
+
+        //! The loading and saving processing traits type.
+        using load_save_traits_type = LoadSaveTraits;
 
         //! The file initialization type.
         using size_type = typename traits_type::size_type;

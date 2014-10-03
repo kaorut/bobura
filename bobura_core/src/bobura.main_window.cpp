@@ -152,6 +152,7 @@ namespace bobura
                 command::set<
                     command_traits_type,
                     typename boost::mpl::at<view_type_list, type::view::traits>::type,
+                    typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
                     position_type,
                     dimension_type,
                     typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
