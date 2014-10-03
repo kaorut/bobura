@@ -17,6 +17,8 @@
 
 #include <tetengo2.h>
 
+#include <bobura/load_save/confirm_file_save.h>
+#include <bobura/load_save/save_to_file.h>
 #include <bobura/load_save/load_from_file.h>
 #include <bobura/load_save/traits.h>
 #include <bobura/type_list.h>
@@ -29,11 +31,6 @@ namespace
     using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
-
-    using save_to_file_type = boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::save_to_file>::type;
-
-    using confirm_file_save_type =
-        boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::confirm_file_save>::type;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
@@ -113,10 +110,14 @@ namespace
             boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::file_open_dialog>::type,
             boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::file_save_dialog>::type,
             oudia_diagram_dialog_type,
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type,
+            message_catalog_type,
             boost::mpl::at<bobura::locale_type_list, bobura::type::locale::timetable_file_encoder>::type,
             boost::mpl::at<bobura::locale_type_list, bobura::type::locale::windia_file_encoder>::type
         >;
+
+    using save_to_file_type = bobura::load_save::save_to_file<load_save_traits_type>;
+
+    using confirm_file_save_type = bobura::load_save::confirm_file_save<load_save_traits_type>;
 
     using load_from_file_type = bobura::load_save::load_from_file<load_save_traits_type>;
 

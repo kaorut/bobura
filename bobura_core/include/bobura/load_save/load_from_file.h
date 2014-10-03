@@ -100,21 +100,7 @@ namespace bobura { namespace load_save
             timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
         //! The file save confirmation type.
-        using confirm_file_save_type =
-            confirm_file_save<
-                size_type,
-                difference_type,
-                string_type,
-                output_stream_type,
-                operating_distance_type,
-                speed_type,
-                font_type,
-                abstract_window_type,
-                message_box_type,
-                file_save_dialog_type,
-                message_catalog_type,
-                timetable_file_encoder_type
-            >;
+        using confirm_file_save_type = confirm_file_save<traits_type>;
 
         //! The reader selector type.
         using reader_selector_type =

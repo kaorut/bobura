@@ -91,6 +91,9 @@ namespace bobura
         //! The config traits type.
         using config_traits_type = typename traits_type::config_traits_type;
 
+        //! The loading and saving processing traits type.
+        using load_save_traits_type = typename traits_type::load_save_traits_type;
+
         //! The message catalog type.
         using message_catalog_type = typename traits_type::message_catalog_type;
 
@@ -127,20 +130,7 @@ namespace bobura
         using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
 
         //! The file save confirmation type.
-        using confirm_file_save_type =
-            load_save::confirm_file_save<
-                size_type,
-                difference_type,
-                string_type,
-                output_stream_type,
-                operating_distance_type,
-                speed_type, font_type,
-                abstract_window_type,
-                message_box_type,
-                file_save_dialog_type,
-                message_catalog_type,
-                timetable_file_encoder_type
-            >;
+        using confirm_file_save_type = load_save::confirm_file_save<load_save_traits_type>;
 
 
         // constructors and destructor

@@ -84,6 +84,7 @@ namespace bobura { namespace command
                 typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
                 typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
                 typename boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
+                typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
                 message::diagram_picture_box::type_list<
                     typename boost::mpl::at<view_type_list, type::view::traits>::type, picture_box_type
                 >,
@@ -91,7 +92,7 @@ namespace bobura { namespace command
                 typename boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
             >;
 
-        using main_window_type = typename main_window<main_window_traits_type>;
+        using main_window_type = main_window<main_window_traits_type>;
 
         using traits_type = typename boost::mpl::at<view_type_list, type::view::traits>::type;
 

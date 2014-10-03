@@ -32,6 +32,7 @@ namespace bobura
         \tparam Font                             A font type.
         \tparam MouseCapture                     A mouse capture type.
         \tparam ConfigTraits                     A configuration traits type.
+        \tparam LoadSaveTraits                   A loading and saving processing traits type.
         \tparam DiagramPictureBoxMessageTypeList A diagram picture box message type list type.
         \tparam MessageCatalog                   A message catalog type.
         \tparam TimetableFileEncoder             A timetable file encoder type.
@@ -54,6 +55,7 @@ namespace bobura
         typename Font,
         typename MouseCapture,
         typename ConfigTraits,
+        typename LoadSaveTraits,
         typename DiagramPictureBoxMessageTypeList,
         typename MessageCatalog,
         typename TimetableFileEncoder
@@ -113,6 +115,9 @@ namespace bobura
 
         //! The config traits type.
         using config_traits_type = ConfigTraits;
+
+        //! The loading and saving processing traits type.
+        using load_save_traits_type = LoadSaveTraits;
 
         //! The diagram picture box message type list type.
         using diagram_picture_box_message_type_list_type = DiagramPictureBoxMessageTypeList;

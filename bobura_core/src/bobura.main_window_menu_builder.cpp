@@ -41,6 +41,7 @@ namespace bobura
         typename MainWindowTraits,
         typename ViewTraits,
         typename ConfigTraits,
+        typename LoadSaveTraits,
         typename MessageCatalog
     >
     class main_window_menu_builder<
@@ -59,6 +60,7 @@ namespace bobura
         MainWindowTraits,
         ViewTraits,
         ConfigTraits,
+        LoadSaveTraits,
         MessageCatalog
     >::impl
     {
@@ -493,6 +495,7 @@ namespace bobura
         typename MainWindowTraits,
         typename ViewTraits,
         typename ConfigTraits,
+        typename LoadSaveTraits,
         typename MessageCatalog
     >
     main_window_menu_builder<
@@ -511,6 +514,7 @@ namespace bobura
         MainWindowTraits,
         ViewTraits,
         ConfigTraits,
+        LoadSaveTraits,
         MessageCatalog
     >::main_window_menu_builder(
         const command_set_type&     command_set,
@@ -538,6 +542,7 @@ namespace bobura
         typename MainWindowTraits,
         typename ViewTraits,
         typename ConfigTraits,
+        typename LoadSaveTraits,
         typename MessageCatalog
     >
     main_window_menu_builder<
@@ -556,6 +561,7 @@ namespace bobura
         MainWindowTraits,
         ViewTraits,
         ConfigTraits,
+        LoadSaveTraits,
         MessageCatalog
     >::~main_window_menu_builder()
     TETENGO2_STDALT_NOEXCEPT
@@ -577,6 +583,7 @@ namespace bobura
         typename MainWindowTraits,
         typename ViewTraits,
         typename ConfigTraits,
+        typename LoadSaveTraits,
         typename MessageCatalog
     >
     std::unique_ptr<
@@ -596,6 +603,7 @@ namespace bobura
             MainWindowTraits,
             ViewTraits,
             ConfigTraits,
+            LoadSaveTraits,
             MessageCatalog
         >::menu_bar_type
     > main_window_menu_builder<
@@ -614,6 +622,7 @@ namespace bobura
         MainWindowTraits,
         ViewTraits,
         ConfigTraits,
+        LoadSaveTraits,
         MessageCatalog
     >::build()
     const
@@ -653,6 +662,7 @@ namespace bobura
             typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
             typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
             typename boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
+            typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
             message::diagram_picture_box::type_list<
                 typename boost::mpl::at<view_type_list, type::view::traits>::type,
                 typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type
@@ -667,6 +677,7 @@ namespace bobura
             typename boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
             typename boost::mpl::at<detail_type_list, type::detail::config>::type
         >,
+        typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
     >;
 

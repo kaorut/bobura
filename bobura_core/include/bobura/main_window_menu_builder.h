@@ -41,6 +41,7 @@ namespace bobura
         \tparam MainWindowTraits  A main window traits type.
         \tparam ViewTraits        A view traits type.
         \tparam ConfigTraits      A config traits type.
+        \tparam LoadSaveTraits    A loading and saving processing traits.
         \tparam MessageCatalog    A message catalog type.
     */
     template <
@@ -59,6 +60,7 @@ namespace bobura
         typename MainWindowTraits,
         typename ViewTraits,
         typename ConfigTraits,
+        typename LoadSaveTraits,
         typename MessageCatalog
     >
     class main_window_menu_builder : private boost::noncopyable
@@ -110,6 +112,9 @@ namespace bobura
 
         //! The config traits type.
         using config_traits_type = ConfigTraits;
+
+        //! The load save traits type.
+        using load_save_traits_type = LoadSaveTraits;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;

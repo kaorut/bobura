@@ -111,6 +111,7 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
                 boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
                 boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
+                boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
                 diagram_picture_box_message_type_list,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
                 boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
@@ -132,6 +133,7 @@ namespace bobura
                 main_window_traits_type,
                 boost::mpl::at<view_type_list, type::view::traits>::type,
                 boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
+                boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
         using main_window_message_type_list_type =
