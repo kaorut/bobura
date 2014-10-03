@@ -333,7 +333,7 @@ namespace bobura { namespace command
 
         static command_ptr_type create_new_file(const new_file_type& new_file)
         {
-            return tetengo2::stdalt::make_unique<command::new_file<traits_type>>(new_file);
+            return tetengo2::stdalt::make_unique<command::new_file<traits_type, load_save_traits_type>>(new_file);
         }
 
         static command_ptr_type create_nop()

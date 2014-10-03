@@ -11,12 +11,10 @@
 
 #include <memory>
 
-#include <boost/mpl/at.hpp>
-
 #include <tetengo2.h>
 
-#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
+#include <bobura/load_save/new_file.h>
 
 
 namespace bobura { namespace command
@@ -24,9 +22,10 @@ namespace bobura { namespace command
     /*!
         \brief The class template for a new-file command.
 
-        \tparam Traits A traits type.
+        \tparam Traits         A traits type.
+        \tparam LoadSaveTraits A loading and saving processing traits type.
     */
-    template <typename Traits>
+    template <typename Traits, typename LoadSaveTraits>
     class new_file : public command_base<Traits>
     {
     public:
@@ -35,11 +34,14 @@ namespace bobura { namespace command
         //! The traits type.
         using traits_type = Traits;
 
+        //! The loading and saving processing traits type.
+        using load_save_traits_type = LoadSaveTraits;
+
         //! The base type.
         using base_type = command_base<traits_type>;
 
         //! The file initialization type.
-        using new_file_type = boost::mpl::at<load_save_type_list, type::load_save::new_file>::type;
+        using new_file_type = load_save::new_file<load_save_traits_type>;
 
 
         // constructors and destructor
