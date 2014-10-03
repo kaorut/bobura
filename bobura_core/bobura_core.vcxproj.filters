@@ -255,6 +255,9 @@
     <ClInclude Include="include\bobura\command\traits.h">
       <Filter>headers\bobura\command</Filter>
     </ClInclude>
+    <ClInclude Include="include\bobura\load_save\traits.h">
+      <Filter>headers\bobura\load_save</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\precompiled\precompiled.cpp">

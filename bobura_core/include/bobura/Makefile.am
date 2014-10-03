@@ -38,6 +38,7 @@ extra_headers = \
     load_save/load_from_file.h \
     load_save/new_file.h \
     load_save/save_to_file.h \
+    load_save/traits.h \
     main_window.h \
     main_window_menu_builder.h \
     main_window_traits.h \
