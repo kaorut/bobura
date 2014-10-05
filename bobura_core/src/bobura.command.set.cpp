@@ -30,6 +30,7 @@
 #include <bobura/command/set_horizontal_scale.h>
 #include <bobura/command/set_vertical_scale.h>
 #include <bobura/command/train_kind.h>
+#include <bobura/command/traits.h>
 #include <bobura/type_list.h>
 #include <bobura/command/vertically_zoom_in.h>
 #include <bobura/command/vertically_zoom_out.h>
