@@ -46,6 +46,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -58,6 +59,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::impl
@@ -343,7 +345,7 @@ namespace bobura { namespace command
 
         static command_ptr_type create_open_www_tetengo_org()
         {
-            return tetengo2::stdalt::make_unique<command::open_www_tetengo_org<traits_type>>();
+            return tetengo2::stdalt::make_unique<command::open_www_tetengo_org<traits_type, shell_type>>();
         }
 
         static command_ptr_type create_save_to_file(const save_to_file_type& save_to_file)
@@ -463,6 +465,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -475,6 +478,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::set(
@@ -511,6 +515,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -523,6 +528,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::~set()
@@ -538,6 +544,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -550,6 +557,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -562,6 +570,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::about()
@@ -579,6 +588,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -591,6 +601,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -603,6 +614,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::ask_file_path_and_save_to_file()
@@ -620,6 +632,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -632,6 +645,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -644,6 +658,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::exit()
@@ -661,6 +676,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -673,6 +689,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -685,6 +702,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::file_property()
@@ -702,6 +720,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -714,6 +733,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -726,6 +746,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::font_color()
@@ -743,6 +764,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -755,6 +777,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -767,6 +790,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::horizontally_zoom_in()
@@ -784,6 +808,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -796,6 +821,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -808,6 +834,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::horizontally_zoom_out()
@@ -825,6 +852,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -837,6 +865,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -849,6 +878,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::load_from_file()
@@ -866,6 +896,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -879,6 +910,7 @@ namespace bobura { namespace command
             Dialog,
             Color,
             PointUnitSize,
+        Shell,
             ConfigTraits,
             MessageCatalog
         >::parameter_type
@@ -892,6 +924,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::create_load_from_file_parameter(const boost::filesystem::path& path)
@@ -909,6 +942,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -921,6 +955,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -933,6 +968,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::new_file()
@@ -950,6 +986,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -962,6 +999,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -974,6 +1012,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::nop()
@@ -991,6 +1030,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -1003,6 +1043,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -1015,6 +1056,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::open_www_tetengo_org()
@@ -1032,6 +1074,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -1044,6 +1087,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -1056,6 +1100,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::reload()
@@ -1073,6 +1118,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -1085,6 +1131,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -1097,6 +1144,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::save_to_file()
@@ -1114,6 +1162,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -1126,6 +1175,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -1138,6 +1188,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::set_horizontal_scale(const size_type index)
@@ -1155,6 +1206,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -1167,6 +1219,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -1179,6 +1232,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::set_vertical_scale(const size_type index)
@@ -1196,6 +1250,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -1208,6 +1263,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -1220,6 +1276,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::train_kind()
@@ -1237,6 +1294,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -1249,6 +1307,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -1261,6 +1320,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::vertically_zoom_in()
@@ -1278,6 +1338,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -1290,6 +1351,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::command_type&
@@ -1302,6 +1364,7 @@ namespace bobura { namespace command
         Dialog,
         Color,
         PointUnitSize,
+        Shell,
         ConfigTraits,
         MessageCatalog
     >::vertically_zoom_out()
@@ -1328,6 +1391,7 @@ namespace bobura { namespace command
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
         typename boost::mpl::at<ui_type_list, type::ui::color>::type,
         typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
         typename boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
     >;

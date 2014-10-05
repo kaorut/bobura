@@ -158,6 +158,7 @@ namespace bobura
                     typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
                     typename boost::mpl::at<ui_type_list, type::ui::color>::type,
                     typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
+                    typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
                     config_traits_type,
                     message_catalog_type
                 >,

@@ -38,6 +38,7 @@ namespace bobura
         \tparam Color             A color type.
         \tparam PointUnitSize     A point unit size type.
         \tparam MenuBar           A menu bar type.
+        \tparam Shell             A shell type.
         \tparam MainWindowTraits  A main window traits type.
         \tparam ViewTraits        A view traits type.
         \tparam ConfigTraits      A config traits type.
@@ -57,6 +58,7 @@ namespace bobura
         typename Color,
         typename PointUnitSize,
         typename MenuBar,
+        typename Shell,
         typename MainWindowTraits,
         typename ViewTraits,
         typename ConfigTraits,
@@ -104,6 +106,9 @@ namespace bobura
         //! The menu bar type.
         using menu_bar_type = MenuBar;
 
+        //! The shell type.
+        using shell_type = Shell;
+
         //! The main window traits type.
         using main_window_traits_type = MainWindowTraits;
 
@@ -138,6 +143,7 @@ namespace bobura
                 dialog_type,
                 color_type,
                 point_unit_size_type,
+                shell_type,
                 config_traits_type,
                 message_catalog_type
             >;

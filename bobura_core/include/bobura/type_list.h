@@ -67,6 +67,7 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::dialog>::type,
                 boost::mpl::at<ui_type_list, type::ui::color>::type,
                 boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
+                boost::mpl::at<ui_type_list, type::ui::shell>::type,
                 boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
@@ -131,6 +132,7 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::color>::type,
                 boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
                 boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
+                boost::mpl::at<ui_type_list, type::ui::shell>::type,
                 main_window_traits_type,
                 boost::mpl::at<view_type_list, type::view::traits>::type,
                 boost::mpl::at<setting_type_list, type::setting::config_traits>::type,

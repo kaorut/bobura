@@ -39,6 +39,7 @@ namespace bobura { namespace command
         \tparam Dialog         A dialog type.
         \tparam Color          A color type.
         \tparam PointUnitSize  A point unit size type.
+        \tparam Shell          A shell type.
         \tparam ConfigTraits   A config traits type.
         \tparam MessageCatalog A message catalog type.
     */
@@ -51,6 +52,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
     >
@@ -85,6 +87,9 @@ namespace bobura { namespace command
 
         //! The point unit size type.
         using point_unit_size_type = PointUnitSize;
+
+        //! The shell type.
+        using shell_type = Shell;
 
         //! The config traits type.
         using config_traits_type = ConfigTraits;

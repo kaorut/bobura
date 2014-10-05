@@ -192,6 +192,7 @@ namespace bobura
         struct point_unit_size; //!< The point unit size type.
         struct popup_menu;     //!< The popup menu type.
         struct position;       //!< The position type.
+        struct shell;          //!< The shell type.
         struct side_bar;       //!< The side bar type.
         struct solid_background; //!< The solid background type.
         struct text_box;       //!< The text box type.
@@ -338,6 +339,12 @@ namespace bobura
                 widget_details_traits_type,
                 boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type
             >;
+        using shell_type =
+            tetengo2::gui::shell<
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                boost::mpl::at<detail_type_list, type::detail::shell>::type
+            >;
         using side_bar_type =
             tetengo2::gui::widget::side_bar<
                 widget_traits_type,
@@ -387,6 +394,7 @@ namespace bobura
                 >
             >,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::position, detail::ui::position_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::shell, detail::ui::shell_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::side_bar, detail::ui::side_bar_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::solid_background, detail::ui::solid_background_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::text_box, detail::ui::text_box_type>,
@@ -398,7 +406,7 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::widget_traits, detail::ui::widget_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::window, detail::ui::window_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>>>>>>>>>>>>>>>;
+        >>>>>>>>>>>>>>>>>>>>>>>>>>>;
 
 
     /**** Setting ***********************************************************/
