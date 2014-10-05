@@ -10,7 +10,6 @@
 #include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/basic_type_list.h>
 #include <bobura/command/open_www_tetengo_org.h>
