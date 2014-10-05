@@ -57,42 +57,10 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
                 boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
             >;
-        using command_set_type =
-            command::set<
-                command_traits_type,
-                boost::mpl::at<view_type_list, type::view::traits>::type,
-                boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
-                boost::mpl::at<ui_type_list, type::ui::position>::type,
-                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                boost::mpl::at<ui_type_list, type::ui::color>::type,
-                boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
-                boost::mpl::at<ui_type_list, type::ui::shell>::type,
-                boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
-            >;
         using diagram_picture_box_message_type_list =
             message::diagram_picture_box::type_list<
                 boost::mpl::at<view_type_list, type::view::traits>::type,
                 boost::mpl::at<ui_type_list, type::ui::picture_box>::type
-            >;
-        using diagram_picture_box_type =
-            diagram_picture_box<
-                boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
-                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
-                diagram_picture_box_message_type_list
-            >;
-        using property_bar_type =
-            property_bar<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<ui_type_list, type::ui::position>::type,
-                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
-                boost::mpl::at<ui_type_list, type::ui::map_box>::type,
-                boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
         using main_window_traits_type =
             main_window_traits<
@@ -118,6 +86,40 @@ namespace bobura
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
                 boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
             >;
+        using command_set_type =
+            command::set<
+                command_traits_type,
+                main_window_traits_type,
+                boost::mpl::at<view_type_list, type::view::traits>::type,
+                boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
+                boost::mpl::at<ui_type_list, type::ui::position>::type,
+                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+                boost::mpl::at<ui_type_list, type::ui::color>::type,
+                boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
+                boost::mpl::at<ui_type_list, type::ui::shell>::type,
+                boost::mpl::at<view_type_list, type::view::scale>::type,
+                boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+            >;
+        using diagram_picture_box_type =
+            diagram_picture_box<
+                boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
+                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
+                diagram_picture_box_message_type_list
+            >;
+        using property_bar_type =
+            property_bar<
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<ui_type_list, type::ui::position>::type,
+                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
+                boost::mpl::at<ui_type_list, type::ui::map_box>::type,
+                boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+            >;
         using menu_builder_type =
             main_window_menu_builder<
                 boost::mpl::at<common_type_list, type::size>::type,
@@ -132,6 +134,7 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::color>::type,
                 boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
                 boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
+                boost::mpl::at<view_type_list, type::view::scale>::type,
                 boost::mpl::at<ui_type_list, type::ui::shell>::type,
                 main_window_traits_type,
                 boost::mpl::at<view_type_list, type::view::traits>::type,

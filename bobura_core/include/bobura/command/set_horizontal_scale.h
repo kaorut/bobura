@@ -11,12 +11,10 @@
 
 #include <memory>
 
-#include <boost/mpl/at.hpp>
-
 #include <tetengo2.h>
 
-#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
+#include <bobura/diagram_view.h>
 
 
 namespace bobura { namespace command
@@ -24,9 +22,12 @@ namespace bobura { namespace command
     /*!
         \brief The class template for a set-horizontal-scale command.
 
-        \tparam Traits A traits type.
+        \tparam Traits           A traits type.
+        \tparam MainWindowTraits A main window traits type.
+        \tparam ViewTraits       A view traits type.
+        \tparam Scale            A scale type.
     */
-    template <typename Traits>
+    template <typename Traits, typename MainWindowTraits, typename ViewTraits, typename Scale>
     class set_horizontal_scale : public command_base<Traits>
     {
     public:
@@ -35,17 +36,20 @@ namespace bobura { namespace command
         //! The traits type.
         using traits_type = Traits;
 
+        //! The main window traits type.
+        using main_window_traits_type = MainWindowTraits;
+
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
+
+        //! The scale type.
+        using scale_type = Scale;
+
         //! The base type.
         using base_type = command_base<traits_type>;
 
         //! The diagram view type.
-        using diagram_view_type = boost::mpl::at<view_type_list, type::view::view>::type;
-
-        //! The scale list type.
-        using scale_list_type = boost::mpl::at<view_type_list, type::view::scale_list>::type;
-
-        //! The scale type.
-        using scale_type = scale_list_type::scale_type;
+        using diagram_view_type = diagram_view<view_traits_type>;
 
 
         // constructors and destructor

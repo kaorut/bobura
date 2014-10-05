@@ -34,6 +34,8 @@ namespace bobura
     public:
         // types
 
+        using traits_type = typename main_window::traits_type;
+
         using size_type = typename main_window::size_type;
 
         using difference_type = typename main_window::difference_type;
@@ -151,6 +153,7 @@ namespace bobura
                 typename boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
                 command::set<
                     command_traits_type,
+                    traits_type,
                     typename boost::mpl::at<view_type_list, type::view::traits>::type,
                     typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
                     position_type,
@@ -158,6 +161,7 @@ namespace bobura
                     typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
                     typename boost::mpl::at<ui_type_list, type::ui::color>::type,
                     typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
+                    typename boost::mpl::at<view_type_list, type::view::scale>::type,
                     typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
                     config_traits_type,
                     message_catalog_type

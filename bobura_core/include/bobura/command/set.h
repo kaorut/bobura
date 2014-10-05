@@ -31,20 +31,23 @@ namespace bobura { namespace command
     /*!
         \brief The class template for a command set.
 
-        \tparam Traits         A traits type.
-        \tparam ViewTraits     A view traits type.
-        \tparam LoadSaveTraits A loading and saving processing traits type.
-        \tparam Position       A position type.
-        \tparam Dimension      A dimension type.
-        \tparam Dialog         A dialog type.
-        \tparam Color          A color type.
-        \tparam PointUnitSize  A point unit size type.
-        \tparam Shell          A shell type.
-        \tparam ConfigTraits   A config traits type.
-        \tparam MessageCatalog A message catalog type.
+        \tparam Traits           A traits type.
+        \tparam MainWindowTraits A main window traits type.
+        \tparam ViewTraits       A view traits type.
+        \tparam LoadSaveTraits   A loading and saving processing traits type.
+        \tparam Position         A position type.
+        \tparam Dimension        A dimension type.
+        \tparam Dialog           A dialog type.
+        \tparam Color            A color type.
+        \tparam PointUnitSize    A point unit size type.
+        \tparam Scale            A scale type.
+        \tparam Shell            A shell type.
+        \tparam ConfigTraits     A config traits type.
+        \tparam MessageCatalog   A message catalog type.
     */
     template <
         typename Traits,
+        typename MainWindowTraits,
         typename ViewTraits,
         typename LoadSaveTraits,
         typename Position,
@@ -52,6 +55,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename PointUnitSize,
+        typename Scale,
         typename Shell,
         typename ConfigTraits,
         typename MessageCatalog
@@ -63,6 +67,9 @@ namespace bobura { namespace command
 
         //! The traits type.
         using traits_type = Traits;
+
+        //! The main window traits type.
+        using main_window_traits_type = MainWindowTraits;
 
         //! The view traits type.
         using view_traits_type = ViewTraits;
@@ -87,6 +94,9 @@ namespace bobura { namespace command
 
         //! The point unit size type.
         using point_unit_size_type = PointUnitSize;
+
+        //! The scale type.
+        using scale_type = Scale;
 
         //! The shell type.
         using shell_type = Shell;
