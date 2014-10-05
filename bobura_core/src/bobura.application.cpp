@@ -24,7 +24,6 @@
 #include <bobura/diagram_picture_box.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
-#include <bobura/main_window_traits.h>
 #include <bobura/message/type_list.h>
 #include <bobura/message/type_list_impl.h>
 
@@ -35,33 +34,7 @@ namespace bobura
     {
         using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
 
-        using main_window_traits_type =
-            main_window_traits<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<ui_type_list, type::ui::position>::type,
-                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-                boost::mpl::at<common_type_list, type::output_stream>::type,
-                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                boost::mpl::at<model_type_list, type::model::speed>::type,
-                boost::mpl::at<ui_type_list, type::ui::window>::type,
-                boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
-                boost::mpl::at<ui_type_list, type::ui::map_box>::type,
-                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
-                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
-                boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
-                boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
-                message::diagram_picture_box::type_list<
-                    boost::mpl::at<view_type_list, type::view::traits>::type,
-                    boost::mpl::at<ui_type_list, type::ui::picture_box>::type
-                >,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
-            >;
+        using main_window_traits_type = boost::mpl::at<main_window_type_list, type::main_window::traits>::type;
 
         using main_window_type = main_window<main_window_traits_type>;
 
@@ -71,20 +44,20 @@ namespace bobura
             message::timetable_model::type_list<model_type, view_type, main_window_type>;
 
         using diagram_view_message_type_list_type =
-            bobura::message::diagram_view::type_list<
-                boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
-                boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
-                boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
-                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
-                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
-                boost::mpl::at<bobura::model_type_list, bobura::type::model::operating_distance>::type,
-                boost::mpl::at<bobura::model_type_list, bobura::type::model::speed>::type,
-                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type,
-                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type,
-                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type,
-                boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type,
-                boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type,
-                boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type
+            message::diagram_view::type_list<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<ui_type_list, type::ui::position>::type,
+                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
+                boost::mpl::at<ui_type_list, type::ui::map_box>::type,
+                boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
 
         using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;

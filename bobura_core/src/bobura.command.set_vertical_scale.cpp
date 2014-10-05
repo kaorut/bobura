@@ -17,8 +17,6 @@
 #include <bobura/command/set_vertical_scale.h>
 #include <bobura/command/traits.h>
 #include <bobura/main_window.h>
-#include <bobura/main_window_traits.h>
-#include <bobura/message/type_list_impl.h>
 #include <bobura/view/diagram/zoom.h>
 
 
@@ -134,32 +132,7 @@ namespace bobura { namespace command
             typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
             typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
         >,
-        main_window_traits<
-            typename boost::mpl::at<common_type_list, type::size>::type,
-            typename boost::mpl::at<common_type_list, type::difference>::type,
-            typename boost::mpl::at<common_type_list, type::string>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::position>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-            typename boost::mpl::at<common_type_list, type::output_stream>::type,
-            typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-            typename boost::mpl::at<model_type_list, type::model::speed>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::window>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::map_box>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
-            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
-            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
-            typename boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
-            typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
-            message::diagram_picture_box::type_list<
-                typename boost::mpl::at<view_type_list, type::view::traits>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type
-            >,
-            typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-            typename boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
-        >,
+        typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
         typename boost::mpl::at<view_type_list, type::view::traits>::type,
         typename boost::mpl::at<view_type_list, type::view::scale>::type
     >;

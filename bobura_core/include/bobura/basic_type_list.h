@@ -31,6 +31,7 @@
 #include <bobura/load_save/new_file.h>
 #include <bobura/load_save/save_to_file.h>
 #include <bobura/load_save/traits.h>
+#include <bobura/main_window_traits.h>
 #include <bobura/message/type_list_impl.h>
 #include <bobura/model/station_info/grade.h>
 #include <bobura/oudia_diagram_dialog.h>
@@ -681,7 +682,7 @@ namespace bobura
     }}
 #endif
 
-    //! The type list for the miscellaneous processings.
+    //! The loading and saving processing type list.
     using load_save_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::load_save::traits, detail::load_save::traits_type>,
         tetengo2::meta::assoc_list<
@@ -698,6 +699,53 @@ namespace bobura
             >,
         tetengo2::meta::assoc_list_end
         >>>>>;
+
+
+    /**** Main Window *******************************************************/
+
+    namespace type { namespace main_window
+    {
+        struct traits;         //!< The traits.
+    }}
+
+#if !defined(DOCUMENTATION)
+    namespace detail { namespace main_window
+    {
+        using traits_type =
+            main_window_traits<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<ui_type_list, type::ui::position>::type,
+                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+                boost::mpl::at<common_type_list, type::output_stream>::type,
+                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<ui_type_list, type::ui::window>::type,
+                boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
+                boost::mpl::at<ui_type_list, type::ui::map_box>::type,
+                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
+                boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
+                boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
+                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
+                boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
+                boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
+                message::diagram_picture_box::type_list<
+                    boost::mpl::at<view_type_list, type::view::traits>::type,
+                    boost::mpl::at<ui_type_list, type::ui::picture_box>::type
+                >,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+                boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type
+            >;
+    }}
+#endif
+
+    //! The main window type list.
+    using main_window_type_list =
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::main_window::traits, detail::main_window::traits_type>,
+        tetengo2::meta::assoc_list_end
+        >;
 
 
 }
