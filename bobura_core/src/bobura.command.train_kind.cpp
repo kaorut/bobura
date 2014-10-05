@@ -20,12 +20,14 @@
 #include <bobura/basic_type_list.h>
 #include <bobura/command/train_kind.h>
 #include <bobura/command/traits.h>
+#include <bobura/model/train_kind.h>
+#include <bobura/train_kind_dialog.h>
 
 
 namespace bobura { namespace command
 {
-    template <typename Traits>
-    class train_kind<Traits>::impl
+    template <typename Traits, typename Dialog, typename Color, typename MessageCatalog>
+    class train_kind<Traits, Dialog, Color, MessageCatalog>::impl
     {
     public:
         // types
@@ -34,11 +36,26 @@ namespace bobura { namespace command
 
         using abstract_window_type = typename train_kind::abstract_window_type;
 
-        using train_kind_dialog_type = typename train_kind::train_kind_dialog_type;
+        using size_type = typename train_kind::size_type;
 
-        using dialog_base_type = typename train_kind::dialog_base_type;
+        using string_type = typename train_kind::string_type;
+
+        using font_type = typename train_kind::font_type;
+
+        using dialog_type = typename train_kind::dialog_type;
+
+        using color_type = typename train_kind::color_type;
 
         using message_catalog_type = typename train_kind::message_catalog_type;
+
+        using train_kind_dialog_type =
+            train_kind_dialog<
+                size_type,
+                dialog_type,
+                model::train_kind<string_type>,
+                font_type, color_type,
+                message_catalog_type
+            >;
 
 
         // constructors and destructor
@@ -63,7 +80,7 @@ namespace bobura { namespace command
             dialog.set_info_sets(std::move(info_sets));
 
             dialog.do_modal();
-            if (dialog.result() != dialog_base_type::result_type::accepted)
+            if (dialog.result() != dialog_type::result_type::accepted)
                 return;
         
             model.timetable().assign_train_kinds(
@@ -75,8 +92,6 @@ namespace bobura { namespace command
 
     private:
         // types
-
-        using size_type = typename train_kind_dialog_type::size_type;
 
         using info_set_type = typename train_kind_dialog_type::info_set_type;
 
@@ -150,19 +165,22 @@ namespace bobura { namespace command
     };
 
 
-    template <typename Traits>
-    train_kind<Traits>::train_kind(const message_catalog_type& message_catalog)
+    template <typename Traits, typename Dialog, typename Color, typename MessageCatalog>
+    train_kind<Traits, Dialog, Color, MessageCatalog>::train_kind(const message_catalog_type& message_catalog)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
     {}
 
-    template <typename Traits>
-    train_kind<Traits>::~train_kind()
+    template <typename Traits, typename Dialog, typename Color, typename MessageCatalog>
+    train_kind<Traits, Dialog, Color, MessageCatalog>::~train_kind()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    template <typename Traits>
-    void train_kind<Traits>::execute_impl(model_type& model, abstract_window_type& parent)
+    template <typename Traits, typename Dialog, typename Color, typename MessageCatalog>
+    void train_kind<Traits, Dialog, Color, MessageCatalog>::execute_impl(
+        model_type&           model,
+        abstract_window_type& parent
+    )
     const
     {
         m_p_impl->execute(model, parent);
@@ -178,7 +196,10 @@ namespace bobura { namespace command
             typename boost::mpl::at<model_type_list, type::model::speed>::type,
             typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
             typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
-        >
+        >,
+        typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::color>::type,
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
     >;
 
 

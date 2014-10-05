@@ -408,7 +408,10 @@ namespace bobura { namespace command
 
         static command_ptr_type create_train_kind(const message_catalog_type& message_catalog)
         {
-            return tetengo2::stdalt::make_unique<command::train_kind<traits_type>>(message_catalog);
+            return
+                tetengo2::stdalt::make_unique<
+                    command::train_kind<traits_type, dialog_type, color_type, message_catalog_type>
+                >(message_catalog);
         }
 
         static command_ptr_type create_vertically_zoom_in(diagram_view_type& diagram_view)

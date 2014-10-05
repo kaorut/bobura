@@ -11,14 +11,9 @@
 
 #include <memory>
 
-#include <boost/mpl/at.hpp>
-
 #include <tetengo2.h>
 
-#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
-#include <bobura/model/train_kind.h>
-#include <bobura/train_kind_dialog.h>
 
 
 namespace bobura { namespace command
@@ -26,9 +21,12 @@ namespace bobura { namespace command
     /*!
         \brief The class template for a train kind command.
 
-        \tparam Traits A traits type.
+        \tparam Traits         A traits type.
+        \tparam Dialog         A dialog type.
+        \tparam Color          A color type.
+        \tparam MessageCatalog A message catalog type.
     */
-    template <typename Traits>
+    template <typename Traits, typename Dialog, typename Color, typename MessageCatalog>
     class train_kind : public command_base<Traits>
     {
     public:
@@ -37,25 +35,17 @@ namespace bobura { namespace command
         //! The traits type.
         using traits_type = Traits;
 
-        //! The base type.
-        using base_type = command_base<traits_type>;
+        //! The dialog type.
+        using dialog_type = Dialog;
 
-        //! The train kind dialog type.
-        using train_kind_dialog_type =
-            train_kind_dialog<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                bobura::model::train_kind<boost::mpl::at<common_type_list, type::string>::type>,
-                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                boost::mpl::at<ui_type_list, type::ui::color>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
-            >;
-
-        //! The dialog base type.
-        using dialog_base_type = train_kind_dialog_type::base_type;
+        //! The color type.
+        using color_type = Color;
 
         //! The message catalog type.
-        using message_catalog_type = train_kind_dialog_type::message_catalog_type;
+        using message_catalog_type = MessageCatalog;
+
+        //! The base type.
+        using base_type = command_base<traits_type>;
 
 
         // constructors and destructor
