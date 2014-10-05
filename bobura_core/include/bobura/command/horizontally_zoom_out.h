@@ -22,10 +22,11 @@ namespace bobura { namespace command
     /*!
         \brief The class template for a horizontal zoom-out command.
 
-        \tparam Traits     A traits type.
-        \tparam ViewTraits A view traits type.
+        \tparam Traits           A traits type.
+        \tparam MainWindowTraits A main window traits type.
+        \tparam ViewTraits       A view traits type.
     */
-    template <typename Traits, typename ViewTraits>
+    template <typename Traits, typename MainWindowTraits, typename ViewTraits>
     class horizontally_zoom_out : public command_base<Traits>
     {
     public:
@@ -33,6 +34,9 @@ namespace bobura { namespace command
 
         //! The traits type.
         using traits_type = Traits;
+
+        //! The main window traits type.
+        using main_window_traits_type = MainWindowTraits;
 
         //! The view traits type.
         using view_traits_type = ViewTraits;

@@ -324,17 +324,17 @@ namespace bobura { namespace command
         static command_ptr_type create_horizontally_zoom_in(diagram_view_type& diagram_view)
         {
             return
-                tetengo2::stdalt::make_unique<command::horizontally_zoom_in<traits_type, view_traits_type>>(
-                    diagram_view
-                );
+                tetengo2::stdalt::make_unique<
+                    command::horizontally_zoom_in<traits_type, main_window_traits_type, view_traits_type>
+                >(diagram_view);
         }
 
         static command_ptr_type create_horizontally_zoom_out(diagram_view_type& diagram_view)
         {
             return
-                tetengo2::stdalt::make_unique<command::horizontally_zoom_out<traits_type, view_traits_type>>(
-                    diagram_view
-                );
+                tetengo2::stdalt::make_unique<
+                    command::horizontally_zoom_out<traits_type, main_window_traits_type, view_traits_type>
+                >(diagram_view);
         }
 
         static command_ptr_type create_load_from_file(const load_from_file_type& load_from_file)
@@ -414,17 +414,17 @@ namespace bobura { namespace command
         static command_ptr_type create_vertically_zoom_in(diagram_view_type& diagram_view)
         {
             return
-                tetengo2::stdalt::make_unique<command::vertically_zoom_in<traits_type, view_traits_type>>(
-                    diagram_view
-                );
+                tetengo2::stdalt::make_unique<
+                    command::vertically_zoom_in<traits_type, main_window_traits_type, view_traits_type>
+                >(diagram_view);
         }
 
         static command_ptr_type create_vertically_zoom_out(diagram_view_type& diagram_view)
         {
             return
-                tetengo2::stdalt::make_unique<command::vertically_zoom_out<traits_type, view_traits_type>>(
-                    diagram_view
-                );
+                tetengo2::stdalt::make_unique<
+                    command::vertically_zoom_out<traits_type, main_window_traits_type, view_traits_type>
+                >(diagram_view);
         }
 
 
