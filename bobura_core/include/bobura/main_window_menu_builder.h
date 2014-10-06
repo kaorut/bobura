@@ -16,6 +16,7 @@
 #include <tetengo2.h>
 
 #include <bobura/command/set.h>
+#include <bobura/command/set_traits.h>
 #include <bobura/command/traits.h>
 #include <bobura/main_window.h>
 #include <bobura/timetable_model.h>
@@ -132,27 +133,30 @@ namespace bobura
         //! The command set type.
         using command_set_type =
             command::set<
-                command::traits<
+                command::set_traits<
                     size_type,
-                    difference_type,
-                    string_type,
-                    operating_distance_type,
-                    speed_type,
-                    font_type,
-                    typename main_window_traits_type::window_type::base_type
-                >,
-                position_type,
-                dimension_type,
-                dialog_type,
-                color_type,
-                point_unit_size_type,
-                scale_type,
-                shell_type,
-                message_catalog_type,
-                main_window_traits_type,
-                view_traits_type,
-                load_save_traits_type,
-                config_traits_type
+                    position_type,
+                    dimension_type,
+                    dialog_type,
+                    color_type,
+                    point_unit_size_type,
+                    scale_type,
+                    shell_type,
+                    message_catalog_type,
+                    command::traits<
+                        size_type,
+                        difference_type,
+                        string_type,
+                        operating_distance_type,
+                        speed_type,
+                        font_type,
+                        typename main_window_traits_type::window_type::base_type
+                    >,
+                    main_window_traits_type,
+                    view_traits_type,
+                    load_save_traits_type,
+                    config_traits_type
+                >
             >;
 
         //! The model type.

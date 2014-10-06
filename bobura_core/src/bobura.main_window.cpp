@@ -20,6 +20,7 @@
 #include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
+#include <bobura/command/set_traits.h>
 #include <bobura/command/traits.h>
 #include <bobura/main_window.h>
 
@@ -146,24 +147,28 @@ namespace bobura
                 abstract_window_type
             >;
 
+        using command_set_traits_type =
+            command::set_traits<
+                size_type,
+                position_type,
+                dimension_type,
+                typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::color>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
+                typename boost::mpl::at<view_type_list, type::view::scale>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
+                message_catalog_type,
+                command_traits_type,
+                traits_type,
+                typename boost::mpl::at<view_type_list, type::view::traits>::type,
+                typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
+                config_traits_type
+            >;
+
         using message_type_list_type =
             message::main_window::type_list<
                 typename boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
-                command::set<
-                    command_traits_type,
-                    position_type,
-                    dimension_type,
-                    typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                    typename boost::mpl::at<ui_type_list, type::ui::color>::type,
-                    typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
-                    typename boost::mpl::at<view_type_list, type::view::scale>::type,
-                    typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
-                    message_catalog_type,
-                    traits_type,
-                    typename boost::mpl::at<view_type_list, type::view::traits>::type,
-                    typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
-                    config_traits_type
-                >,
+                command::set<command_set_traits_type>,
                 command::command_base<command_traits_type>,
                 timetable_model<
                     size_type, difference_type, string_type, operating_distance_type, speed_type, font_type

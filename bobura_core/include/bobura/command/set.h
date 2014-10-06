@@ -31,35 +31,9 @@ namespace bobura { namespace command
     /*!
         \brief The class template for a command set.
 
-        \tparam Traits           A traits type.
-        \tparam Position         A position type.
-        \tparam Dimension        A dimension type.
-        \tparam Dialog           A dialog type.
-        \tparam Color            A color type.
-        \tparam PointUnitSize    A point unit size type.
-        \tparam Scale            A scale type.
-        \tparam Shell            A shell type.
-        \tparam MessageCatalog   A message catalog type.
-        \tparam MainWindowTraits A main window traits type.
-        \tparam ViewTraits       A view traits type.
-        \tparam LoadSaveTraits   A loading and saving processing traits type.
-        \tparam ConfigTraits     A config traits type.
+        \tparam Traits A traits type.
     */
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
+    template <typename Traits>
     class set : private boost::noncopyable
     {
     public:
@@ -72,40 +46,43 @@ namespace bobura { namespace command
         using size_type = typename traits_type::size_type;
 
         //! The position type.
-        using position_type = Position;
+        using position_type = typename traits_type::position_type;
 
         //! The dimension type.
-        using dimension_type = Dimension;
+        using dimension_type = typename traits_type::dimension_type;
 
         //! The dialog type.
-        using dialog_type = Dialog;
+        using dialog_type = typename traits_type::dialog_type;
 
         //! The color type.
-        using color_type = Color;
+        using color_type = typename traits_type::color_type;
 
         //! The point unit size type.
-        using point_unit_size_type = PointUnitSize;
+        using point_unit_size_type = typename traits_type::point_unit_size_type;
 
         //! The scale type.
-        using scale_type = Scale;
+        using scale_type = typename traits_type::scale_type;
 
         //! The shell type.
-        using shell_type = Shell;
+        using shell_type = typename traits_type::shell_type;
 
         //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        using message_catalog_type = typename traits_type::message_catalog_type;
+
+        //! The command traits type.
+        using command_traits_type = typename traits_type::command_traits_type;
 
         //! The main window traits type.
-        using main_window_traits_type = MainWindowTraits;
+        using main_window_traits_type = typename traits_type::main_window_traits_type;
 
         //! The view traits type.
-        using view_traits_type = ViewTraits;
+        using view_traits_type = typename traits_type::view_traits_type;
 
         //! The loading and saving processing traits type.
-        using load_save_traits_type = LoadSaveTraits;
+        using load_save_traits_type = typename traits_type::load_save_traits_type;
 
         //! The config traits type.
-        using config_traits_type = ConfigTraits;
+        using config_traits_type = typename traits_type::config_traits_type;
 
         //! The file initialization type.
         using new_file_type = boost::mpl::at<load_save_type_list, type::load_save::new_file>::type;
@@ -123,7 +100,7 @@ namespace bobura { namespace command
         using settings_type = boost::mpl::at<setting_type_list, type::setting::settings>::type;
 
         //! The command type.
-        using command_type = command_base<traits_type>;
+        using command_type = command_base<command_traits_type>;
 
         //! The parameter type.
         using parameter_type = parameter_base;

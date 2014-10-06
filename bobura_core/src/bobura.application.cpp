@@ -19,6 +19,7 @@
 #include <bobura/application.h>
 #include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
+#include <bobura/command/set_traits.h>
 #include <bobura/command/traits.h>
 #include <bobura/basic_type_list.h>
 #include <bobura/diagram_picture_box.h>
@@ -81,9 +82,9 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
             >;
 
-        using command_set_type =
-            command::set<
-                command_traits_type,
+        using command_set_traits_type =
+            command::set_traits<
+                boost::mpl::at<common_type_list, type::size>::type,
                 boost::mpl::at<ui_type_list, type::ui::position>::type,
                 boost::mpl::at<ui_type_list, type::ui::dimension>::type,
                 boost::mpl::at<ui_type_list, type::ui::dialog>::type,
@@ -92,11 +93,14 @@ namespace bobura
                 boost::mpl::at<view_type_list, type::view::scale>::type,
                 boost::mpl::at<ui_type_list, type::ui::shell>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+                command_traits_type,
                 main_window_traits_type,
                 boost::mpl::at<view_type_list, type::view::traits>::type,
                 boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
                 boost::mpl::at<setting_type_list, type::setting::config_traits>::type
-           >;
+            >;
+
+        using command_set_type = command::set<command_set_traits_type>;
 
         using main_window_menu_builder_type =
             main_window_menu_builder<

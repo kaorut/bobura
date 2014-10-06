@@ -28,6 +28,7 @@
 #include <bobura/command/save_to_file.h>
 #include <bobura/command/set.h>
 #include <bobura/command/set_horizontal_scale.h>
+#include <bobura/command/set_traits.h>
 #include <bobura/command/set_vertical_scale.h>
 #include <bobura/command/train_kind.h>
 #include <bobura/command/traits.h>
@@ -38,41 +39,11 @@
 
 namespace bobura { namespace command
 {
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    class set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::impl
+    template <typename Traits>
+    class set<Traits>::impl
     {
     public:
         // types
-
-        using traits_type = typename set::traits_type;
 
         using size_type = typename set::size_type;
 
@@ -91,6 +62,8 @@ namespace bobura { namespace command
         using shell_type = typename set::shell_type;
 
         using message_catalog_type = typename set::message_catalog_type;
+
+        using command_traits_type = typename set::command_traits_type;
 
         using main_window_traits_type = typename set::main_window_traits_type;
 
@@ -204,7 +177,7 @@ namespace bobura { namespace command
         {
             return
                 tetengo2::stdalt::make_unique<command::load_from_file<
-                    traits_type, load_save_traits_type
+                    command_traits_type, load_save_traits_type
                 >::parameter_type>(path);
         }
 
@@ -287,7 +260,7 @@ namespace bobura { namespace command
             return
                 tetengo2::stdalt::make_unique<
                     command::about<
-                        traits_type,
+                        command_traits_type,
                         position_type,
                         dimension_type,
                         dialog_type,
@@ -299,13 +272,13 @@ namespace bobura { namespace command
 
         static command_ptr_type create_exit()
         {
-            return tetengo2::stdalt::make_unique<command::exit<traits_type>>();
+            return tetengo2::stdalt::make_unique<command::exit<command_traits_type>>();
         }
 
         static command_ptr_type create_file_property(const message_catalog_type& message_catalog)
         {
             return
-                tetengo2::stdalt::make_unique<command::file_property<traits_type, dialog_type, message_catalog_type>>(
+                tetengo2::stdalt::make_unique<command::file_property<command_traits_type, dialog_type, message_catalog_type>>(
                     message_catalog
                 );
         }
@@ -315,7 +288,7 @@ namespace bobura { namespace command
             return
                 tetengo2::stdalt::make_unique<
                     command::font_color<
-                        traits_type, dialog_type, point_unit_size_type, color_type, message_catalog_type
+                        command_traits_type, dialog_type, point_unit_size_type, color_type, message_catalog_type
                     >
                 >(message_catalog);
         }
@@ -324,7 +297,7 @@ namespace bobura { namespace command
         {
             return
                 tetengo2::stdalt::make_unique<
-                    command::horizontally_zoom_in<traits_type, main_window_traits_type, view_traits_type>
+                    command::horizontally_zoom_in<command_traits_type, main_window_traits_type, view_traits_type>
                 >(diagram_view);
         }
 
@@ -332,37 +305,37 @@ namespace bobura { namespace command
         {
             return
                 tetengo2::stdalt::make_unique<
-                    command::horizontally_zoom_out<traits_type, main_window_traits_type, view_traits_type>
+                    command::horizontally_zoom_out<command_traits_type, main_window_traits_type, view_traits_type>
                 >(diagram_view);
         }
 
         static command_ptr_type create_load_from_file(const load_from_file_type& load_from_file)
         {
             return
-                tetengo2::stdalt::make_unique<command::load_from_file<traits_type, load_save_traits_type>>(
+                tetengo2::stdalt::make_unique<command::load_from_file<command_traits_type, load_save_traits_type>>(
                     load_from_file
                 );
         }
 
         static command_ptr_type create_new_file(const new_file_type& new_file)
         {
-            return tetengo2::stdalt::make_unique<command::new_file<traits_type, load_save_traits_type>>(new_file);
+            return tetengo2::stdalt::make_unique<command::new_file<command_traits_type, load_save_traits_type>>(new_file);
         }
 
         static command_ptr_type create_nop()
         {
-            return tetengo2::stdalt::make_unique<command::nop<traits_type>>();
+            return tetengo2::stdalt::make_unique<command::nop<command_traits_type>>();
         }
 
         static command_ptr_type create_open_www_tetengo_org()
         {
-            return tetengo2::stdalt::make_unique<command::open_www_tetengo_org<traits_type, shell_type>>();
+            return tetengo2::stdalt::make_unique<command::open_www_tetengo_org<command_traits_type, shell_type>>();
         }
 
         static command_ptr_type create_save_to_file(const save_to_file_type& save_to_file)
         {
             return
-                tetengo2::stdalt::make_unique<command::save_to_file<traits_type, load_save_traits_type>>(save_to_file);
+                tetengo2::stdalt::make_unique<command::save_to_file<command_traits_type, load_save_traits_type>>(save_to_file);
         }
 
         static std::vector<command_ptr_type> create_set_horizontal_scale(diagram_view_type& diagram_view)
@@ -377,7 +350,7 @@ namespace bobura { namespace command
                 commands.push_back(
                     tetengo2::stdalt::make_unique<
                         command::set_horizontal_scale<
-                            traits_type, scale_type, main_window_traits_type, view_traits_type
+                            command_traits_type, scale_type, main_window_traits_type, view_traits_type
                         >
                     >(diagram_view, scale_list.at(i))
                 );
@@ -397,7 +370,7 @@ namespace bobura { namespace command
             {
                 commands.push_back(
                     tetengo2::stdalt::make_unique<
-                        command::set_vertical_scale<traits_type, scale_type, main_window_traits_type, view_traits_type>
+                        command::set_vertical_scale<command_traits_type, scale_type, main_window_traits_type, view_traits_type>
                     >(diagram_view, scale_list.at(i))
                 );
             }
@@ -409,7 +382,7 @@ namespace bobura { namespace command
         {
             return
                 tetengo2::stdalt::make_unique<
-                    command::train_kind<traits_type, dialog_type, color_type, message_catalog_type>
+                    command::train_kind<command_traits_type, dialog_type, color_type, message_catalog_type>
                 >(message_catalog);
         }
 
@@ -417,7 +390,7 @@ namespace bobura { namespace command
         {
             return
                 tetengo2::stdalt::make_unique<
-                    command::vertically_zoom_in<traits_type, main_window_traits_type, view_traits_type>
+                    command::vertically_zoom_in<command_traits_type, main_window_traits_type, view_traits_type>
                 >(diagram_view);
         }
 
@@ -425,7 +398,7 @@ namespace bobura { namespace command
         {
             return
                 tetengo2::stdalt::make_unique<
-                    command::vertically_zoom_out<traits_type, main_window_traits_type, view_traits_type>
+                    command::vertically_zoom_out<command_traits_type, main_window_traits_type, view_traits_type>
                 >(diagram_view);
         }
 
@@ -472,36 +445,8 @@ namespace bobura { namespace command
     };
 
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::set(
+    template <typename Traits>
+    set<Traits>::set(
         const new_file_type&          new_file,
         const load_from_file_type&    load_from_file,
         const load_from_file_type&    reload,
@@ -526,986 +471,141 @@ namespace bobura { namespace command
     )
     {}
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::~set()
+    template <typename Traits>
+    set<Traits>::~set()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::about()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::about()
     const
     {
         return m_p_impl->about();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::ask_file_path_and_save_to_file()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::ask_file_path_and_save_to_file()
     const
     {
         return m_p_impl->ask_file_path_and_save_to_file();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::exit()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::exit()
     const
     {
         return m_p_impl->exit();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::file_property()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::file_property()
     const
     {
         return m_p_impl->file_property();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::font_color()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::font_color()
     const
     {
         return m_p_impl->font_color();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::horizontally_zoom_in()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::horizontally_zoom_in()
     const
     {
         return m_p_impl->horizontally_zoom_in();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::horizontally_zoom_out()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::horizontally_zoom_out()
     const
     {
         return m_p_impl->horizontally_zoom_out();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::load_from_file()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::load_from_file()
     const
     {
         return m_p_impl->load_from_file();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    std::unique_ptr<
-        typename set<
-            Traits,
-            Position,
-            Dimension,
-            Dialog,
-            Color,
-            PointUnitSize,
-            Scale,
-            Shell,
-            MessageCatalog,
-            MainWindowTraits,
-            ViewTraits,
-            LoadSaveTraits,
-            ConfigTraits
-        >::parameter_type
-    >
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::create_load_from_file_parameter(const boost::filesystem::path& path)
+    template <typename Traits>
+    std::unique_ptr<typename set<Traits>::parameter_type> set<Traits>::create_load_from_file_parameter(
+        const boost::filesystem::path& path
+    )
     const
     {
         return m_p_impl->create_load_from_file_parameter(path);
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::new_file()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::new_file()
     const
     {
         return m_p_impl->new_file();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::nop()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::nop()
     const
     {
         return m_p_impl->nop();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::open_www_tetengo_org()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::open_www_tetengo_org()
     const
     {
         return m_p_impl->open_www_tetengo_org();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::reload()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::reload()
     const
     {
         return m_p_impl->reload();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::save_to_file()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::save_to_file()
     const
     {
         return m_p_impl->save_to_file();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::set_horizontal_scale(const size_type index)
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::set_horizontal_scale(const size_type index)
     const
     {
         return m_p_impl->set_horizontal_scale(index);
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::set_vertical_scale(const size_type index)
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::set_vertical_scale(const size_type index)
     const
     {
         return m_p_impl->set_vertical_scale(index);
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::train_kind()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::train_kind()
     const
     {
         return m_p_impl->train_kind();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::vertically_zoom_in()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::vertically_zoom_in()
     const
     {
         return m_p_impl->vertically_zoom_in();
     }
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Color,
-        typename PointUnitSize,
-        typename Scale,
-        typename Shell,
-        typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
-    >
-    typename const set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::command_type&
-    set<
-        Traits,
-        Position,
-        Dimension,
-        Dialog,
-        Color,
-        PointUnitSize,
-        Scale,
-        Shell,
-        MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
-        ConfigTraits
-    >::vertically_zoom_out()
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::vertically_zoom_out()
     const
     {
         return m_p_impl->vertically_zoom_out();
@@ -1513,27 +613,30 @@ namespace bobura { namespace command
 
 
     template class set<
-        traits<
+        set_traits<
             typename boost::mpl::at<common_type_list, type::size>::type,
-            typename boost::mpl::at<common_type_list, type::difference>::type,
-            typename boost::mpl::at<common_type_list, type::string>::type,
-            typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-            typename boost::mpl::at<model_type_list, type::model::speed>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
-        >,
-        typename boost::mpl::at<ui_type_list, type::ui::position>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::color>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
-        typename boost::mpl::at<view_type_list, type::view::scale>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
-        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-        typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
-        typename boost::mpl::at<view_type_list, type::view::traits>::type,
-        typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
-        typename boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type
+            typename boost::mpl::at<ui_type_list, type::ui::position>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::color>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
+            typename boost::mpl::at<view_type_list, type::view::scale>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
+            typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+            traits<
+                typename boost::mpl::at<common_type_list, type::size>::type,
+                typename boost::mpl::at<common_type_list, type::difference>::type,
+                typename boost::mpl::at<common_type_list, type::string>::type,
+                typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                typename boost::mpl::at<model_type_list, type::model::speed>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
+            >,
+            typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
+            typename boost::mpl::at<view_type_list, type::view::traits>::type,
+            typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
+            typename boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type
+        >
     >;
 
 
