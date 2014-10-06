@@ -40,11 +40,11 @@ namespace bobura
         \tparam MenuBar           A menu bar type.
         \tparam Scale             A scale type.
         \tparam Shell             A shell type.
+        \tparam MessageCatalog    A message catalog type.
         \tparam MainWindowTraits  A main window traits type.
         \tparam ViewTraits        A view traits type.
         \tparam ConfigTraits      A config traits type.
         \tparam LoadSaveTraits    A loading and saving processing traits.
-        \tparam MessageCatalog    A message catalog type.
     */
     template <
         typename Size,
@@ -61,11 +61,11 @@ namespace bobura
         typename MenuBar,
         typename Scale,
         typename Shell,
+        typename MessageCatalog,
         typename MainWindowTraits,
         typename ViewTraits,
         typename ConfigTraits,
-        typename LoadSaveTraits,
-        typename MessageCatalog
+        typename LoadSaveTraits
     >
     class main_window_menu_builder : private boost::noncopyable
     {
@@ -114,6 +114,9 @@ namespace bobura
         //! The shell type.
         using shell_type = Shell;
 
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
         //! The main window traits type.
         using main_window_traits_type = MainWindowTraits;
 
@@ -125,9 +128,6 @@ namespace bobura
 
         //! The load save traits type.
         using load_save_traits_type = LoadSaveTraits;
-
-        //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
 
         //! The command set type.
         using command_set_type =

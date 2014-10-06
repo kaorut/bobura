@@ -40,11 +40,11 @@ namespace bobura
         typename MenuBar,
         typename Scale,
         typename Shell,
+        typename MessageCatalog,
         typename MainWindowTraits,
         typename ViewTraits,
         typename ConfigTraits,
-        typename LoadSaveTraits,
-        typename MessageCatalog
+        typename LoadSaveTraits
     >
     class main_window_menu_builder<
         Size,
@@ -61,11 +61,11 @@ namespace bobura
         MenuBar,
         Scale,
         Shell,
+        MessageCatalog,
         MainWindowTraits,
         ViewTraits,
         ConfigTraits,
-        LoadSaveTraits,
-        MessageCatalog
+        LoadSaveTraits
     >::impl
     {
     public:
@@ -498,11 +498,11 @@ namespace bobura
         typename MenuBar,
         typename Scale,
         typename Shell,
+        typename MessageCatalog,
         typename MainWindowTraits,
         typename ViewTraits,
         typename ConfigTraits,
-        typename LoadSaveTraits,
-        typename MessageCatalog
+        typename LoadSaveTraits
     >
     main_window_menu_builder<
         Size,
@@ -519,11 +519,11 @@ namespace bobura
         MenuBar,
         Scale,
         Shell,
+        MessageCatalog,
         MainWindowTraits,
         ViewTraits,
         ConfigTraits,
-        LoadSaveTraits,
-        MessageCatalog
+        LoadSaveTraits
     >::main_window_menu_builder(
         const command_set_type&     command_set,
         model_type&                 model,
@@ -549,11 +549,11 @@ namespace bobura
         typename MenuBar,
         typename Scale,
         typename Shell,
+        typename MessageCatalog,
         typename MainWindowTraits,
         typename ViewTraits,
         typename ConfigTraits,
-        typename LoadSaveTraits,
-        typename MessageCatalog
+        typename LoadSaveTraits
     >
     main_window_menu_builder<
         Size,
@@ -570,11 +570,11 @@ namespace bobura
         MenuBar,
         Scale,
         Shell,
+        MessageCatalog,
         MainWindowTraits,
         ViewTraits,
         ConfigTraits,
-        LoadSaveTraits,
-        MessageCatalog
+        LoadSaveTraits
     >::~main_window_menu_builder()
     TETENGO2_STDALT_NOEXCEPT
     {}
@@ -594,11 +594,11 @@ namespace bobura
         typename MenuBar,
         typename Scale,
         typename Shell,
+        typename MessageCatalog,
         typename MainWindowTraits,
         typename ViewTraits,
         typename ConfigTraits,
-        typename LoadSaveTraits,
-        typename MessageCatalog
+        typename LoadSaveTraits
     >
     std::unique_ptr<
         typename main_window_menu_builder<
@@ -614,13 +614,13 @@ namespace bobura
             Color,
             PointUnitSize,
             MenuBar,
-        Scale,
-        Shell,
+            Scale,
+            Shell,
+            MessageCatalog,
             MainWindowTraits,
             ViewTraits,
             ConfigTraits,
-            LoadSaveTraits,
-            MessageCatalog
+            LoadSaveTraits
         >::menu_bar_type
     > main_window_menu_builder<
         Size,
@@ -637,11 +637,11 @@ namespace bobura
         MenuBar,
         Scale,
         Shell,
+        MessageCatalog,
         MainWindowTraits,
         ViewTraits,
         ConfigTraits,
-        LoadSaveTraits,
-        MessageCatalog
+        LoadSaveTraits
     >::build()
     const
     {
@@ -664,6 +664,7 @@ namespace bobura
         typename boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
         typename boost::mpl::at<view_type_list, type::view::scale>::type,
         typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
         typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
         typename boost::mpl::at<view_type_list, type::view::traits>::type,
         config_traits<
@@ -672,8 +673,7 @@ namespace bobura
             typename boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
             typename boost::mpl::at<detail_type_list, type::detail::config>::type
         >,
-        typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
-        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+        typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type
     >;
 
 

@@ -114,11 +114,11 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
                 boost::mpl::at<view_type_list, type::view::scale>::type,
                 boost::mpl::at<ui_type_list, type::ui::shell>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
                 main_window_traits_type,
                 boost::mpl::at<view_type_list, type::view::traits>::type,
                 boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
-                boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+                boost::mpl::at<load_save_type_list, type::load_save::traits>::type
             >;
 
         using picture_box_type = boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
