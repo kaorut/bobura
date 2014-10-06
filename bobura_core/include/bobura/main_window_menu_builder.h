@@ -16,8 +16,6 @@
 #include <tetengo2.h>
 
 #include <bobura/command/set.h>
-#include <bobura/command/set_traits.h>
-#include <bobura/command/traits.h>
 #include <bobura/main_window.h>
 #include <bobura/timetable_model.h>
 
@@ -30,43 +28,25 @@ namespace bobura
         \tparam Size              A size type.
         \tparam Difference        A difference type.
         \tparam String            A string type.
-        \tparam Position          A position type.
-        \tparam Dimension         A dimension type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
-        \tparam Dialog            A dialog type.
         \tparam Font              A font type.
-        \tparam Color             A color type.
-        \tparam PointUnitSize     A point unit size type.
         \tparam MenuBar           A menu bar type.
-        \tparam Scale             A scale type.
-        \tparam Shell             A shell type.
         \tparam MessageCatalog    A message catalog type.
+        \tparam CommandSetTraits  A command set traits.
         \tparam MainWindowTraits  A main window traits type.
-        \tparam ViewTraits        A view traits type.
-        \tparam ConfigTraits      A config traits type.
-        \tparam LoadSaveTraits    A loading and saving processing traits.
     */
     template <
         typename Size,
         typename Difference,
         typename String,
-        typename Position,
-        typename Dimension,
         typename OperatingDistance,
         typename Speed,
-        typename Dialog,
         typename Font,
-        typename Color,
-        typename PointUnitSize,
         typename MenuBar,
-        typename Scale,
-        typename Shell,
         typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename ConfigTraits,
-        typename LoadSaveTraits
+        typename CommandSetTraits,
+        typename MainWindowTraits
     >
     class main_window_menu_builder : private boost::noncopyable
     {
@@ -82,26 +62,11 @@ namespace bobura
         //! The string type.
         using string_type = String;
 
-        //! The position type.
-        using position_type = Position;
-
-        //! The dimension type.
-        using dimension_type = Dimension;
-
         //! The operating distance type.
         using operating_distance_type = OperatingDistance;
 
         //! The speed type.
         using speed_type = Speed;
-
-        //! The dialog type.
-        using dialog_type = Dialog;
-
-        //! The color type.
-        using color_type = Color;
-
-        //! The point unit size type.
-        using point_unit_size_type = PointUnitSize;
 
         //! The font type.
         using font_type = Font;
@@ -109,55 +74,17 @@ namespace bobura
         //! The menu bar type.
         using menu_bar_type = MenuBar;
 
-        //! The scale type.
-        using scale_type = Scale;
-
-        //! The shell type.
-        using shell_type = Shell;
-
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
+
+        //! The command set traits type.
+        using command_set_traits = CommandSetTraits;
 
         //! The main window traits type.
         using main_window_traits_type = MainWindowTraits;
 
-        //! The view traits type.
-        using view_traits_type = ViewTraits;
-
-        //! The config traits type.
-        using config_traits_type = ConfigTraits;
-
-        //! The load save traits type.
-        using load_save_traits_type = LoadSaveTraits;
-
         //! The command set type.
-        using command_set_type =
-            command::set<
-                command::set_traits<
-                    size_type,
-                    position_type,
-                    dimension_type,
-                    dialog_type,
-                    color_type,
-                    point_unit_size_type,
-                    scale_type,
-                    shell_type,
-                    message_catalog_type,
-                    command::traits<
-                        size_type,
-                        difference_type,
-                        string_type,
-                        operating_distance_type,
-                        speed_type,
-                        font_type,
-                        typename main_window_traits_type::window_type::base_type
-                    >,
-                    main_window_traits_type,
-                    view_traits_type,
-                    load_save_traits_type,
-                    config_traits_type
-                >
-            >;
+        using command_set_type = command::set<command_set_traits>;
 
         //! The model type.
         using model_type =

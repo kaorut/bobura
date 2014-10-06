@@ -92,7 +92,7 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
                 boost::mpl::at<view_type_list, type::view::scale>::type,
                 boost::mpl::at<ui_type_list, type::ui::shell>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+                message_catalog_type,
                 command_traits_type,
                 main_window_traits_type,
                 boost::mpl::at<view_type_list, type::view::traits>::type,
@@ -107,22 +107,13 @@ namespace bobura
                 boost::mpl::at<common_type_list, type::size>::type,
                 boost::mpl::at<common_type_list, type::difference>::type,
                 boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<ui_type_list, type::ui::position>::type,
-                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
                 boost::mpl::at<model_type_list, type::model::operating_distance>::type,
                 boost::mpl::at<model_type_list, type::model::speed>::type,
-                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
                 boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                boost::mpl::at<ui_type_list, type::ui::color>::type,
-                boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
                 boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
-                boost::mpl::at<view_type_list, type::view::scale>::type,
-                boost::mpl::at<ui_type_list, type::ui::shell>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                main_window_traits_type,
-                boost::mpl::at<view_type_list, type::view::traits>::type,
-                boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
-                boost::mpl::at<load_save_type_list, type::load_save::traits>::type
+                message_catalog_type,
+                command_set_traits_type,
+                main_window_traits_type
             >;
 
         using picture_box_type = boost::mpl::at<ui_type_list, type::ui::picture_box>::type;

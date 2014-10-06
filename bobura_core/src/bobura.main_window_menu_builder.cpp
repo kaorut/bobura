@@ -15,7 +15,8 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/config_traits.h>
+#include <bobura/command/set_traits.h>
+#include <bobura/command/traits.h>
 #include <bobura/diagram_view.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/type_list.h>
@@ -29,43 +30,25 @@ namespace bobura
         typename Size,
         typename Difference,
         typename String,
-        typename Position,
-        typename Dimension,
         typename OperatingDistance,
         typename Speed,
-        typename Dialog,
         typename Font,
-        typename Color,
-        typename PointUnitSize,
         typename MenuBar,
-        typename Scale,
-        typename Shell,
         typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename ConfigTraits,
-        typename LoadSaveTraits
+        typename CommandSetTraits,
+        typename MainWindowTraits
     >
     class main_window_menu_builder<
         Size,
         Difference,
         String,
-        Position,
-        Dimension,
         OperatingDistance,
         Speed,
-        Dialog,
         Font,
-        Color,
-        PointUnitSize,
         MenuBar,
-        Scale,
-        Shell,
         MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        ConfigTraits,
-        LoadSaveTraits
+        CommandSetTraits,
+        MainWindowTraits
     >::impl
     {
     public:
@@ -487,43 +470,25 @@ namespace bobura
         typename Size,
         typename Difference,
         typename String,
-        typename Position,
-        typename Dimension,
         typename OperatingDistance,
         typename Speed,
-        typename Dialog,
         typename Font,
-        typename Color,
-        typename PointUnitSize,
         typename MenuBar,
-        typename Scale,
-        typename Shell,
         typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename ConfigTraits,
-        typename LoadSaveTraits
+        typename CommandSetTraits,
+        typename MainWindowTraits
     >
     main_window_menu_builder<
         Size,
         Difference,
         String,
-        Position,
-        Dimension,
         OperatingDistance,
         Speed,
-        Dialog,
         Font,
-        Color,
-        PointUnitSize,
         MenuBar,
-        Scale,
-        Shell,
         MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        ConfigTraits,
-        LoadSaveTraits
+        CommandSetTraits,
+        MainWindowTraits
     >::main_window_menu_builder(
         const command_set_type&     command_set,
         model_type&                 model,
@@ -538,43 +503,25 @@ namespace bobura
         typename Size,
         typename Difference,
         typename String,
-        typename Position,
-        typename Dimension,
         typename OperatingDistance,
         typename Speed,
-        typename Dialog,
         typename Font,
-        typename Color,
-        typename PointUnitSize,
         typename MenuBar,
-        typename Scale,
-        typename Shell,
         typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename ConfigTraits,
-        typename LoadSaveTraits
+        typename CommandSetTraits,
+        typename MainWindowTraits
     >
     main_window_menu_builder<
         Size,
         Difference,
         String,
-        Position,
-        Dimension,
         OperatingDistance,
         Speed,
-        Dialog,
         Font,
-        Color,
-        PointUnitSize,
         MenuBar,
-        Scale,
-        Shell,
         MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        ConfigTraits,
-        LoadSaveTraits
+        CommandSetTraits,
+        MainWindowTraits
     >::~main_window_menu_builder()
     TETENGO2_STDALT_NOEXCEPT
     {}
@@ -583,65 +530,38 @@ namespace bobura
         typename Size,
         typename Difference,
         typename String,
-        typename Position,
-        typename Dimension,
         typename OperatingDistance,
         typename Speed,
-        typename Dialog,
         typename Font,
-        typename Color,
-        typename PointUnitSize,
         typename MenuBar,
-        typename Scale,
-        typename Shell,
         typename MessageCatalog,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename ConfigTraits,
-        typename LoadSaveTraits
+        typename CommandSetTraits,
+        typename MainWindowTraits
     >
     std::unique_ptr<
         typename main_window_menu_builder<
             Size,
             Difference,
             String,
-            Position,
-            Dimension,
             OperatingDistance,
             Speed,
-            Dialog,
             Font,
-            Color,
-            PointUnitSize,
             MenuBar,
-            Scale,
-            Shell,
             MessageCatalog,
-            MainWindowTraits,
-            ViewTraits,
-            ConfigTraits,
-            LoadSaveTraits
+            CommandSetTraits,
+            MainWindowTraits
         >::menu_bar_type
     > main_window_menu_builder<
         Size,
         Difference,
         String,
-        Position,
-        Dimension,
         OperatingDistance,
         Speed,
-        Dialog,
         Font,
-        Color,
-        PointUnitSize,
         MenuBar,
-        Scale,
-        Shell,
         MessageCatalog,
-        MainWindowTraits,
-        ViewTraits,
-        ConfigTraits,
-        LoadSaveTraits
+        CommandSetTraits,
+        MainWindowTraits
     >::build()
     const
     {
@@ -653,27 +573,36 @@ namespace bobura
         typename boost::mpl::at<common_type_list, type::size>::type,
         typename boost::mpl::at<common_type_list, type::difference>::type,
         typename boost::mpl::at<common_type_list, type::string>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::position>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
         typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
         typename boost::mpl::at<model_type_list, type::model::speed>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
         typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::color>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
         typename boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
-        typename boost::mpl::at<view_type_list, type::view::scale>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-        typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
-        typename boost::mpl::at<view_type_list, type::view::traits>::type,
-        config_traits<
-            typename boost::mpl::at<common_type_list, type::string>::type,
+        command::set_traits<
             typename boost::mpl::at<common_type_list, type::size>::type,
-            typename boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
-            typename boost::mpl::at<detail_type_list, type::detail::config>::type
+            typename boost::mpl::at<ui_type_list, type::ui::position>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::color>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
+            typename boost::mpl::at<view_type_list, type::view::scale>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
+            typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+            command::traits<
+                typename boost::mpl::at<common_type_list, type::size>::type,
+                typename boost::mpl::at<common_type_list, type::difference>::type,
+                typename boost::mpl::at<common_type_list, type::string>::type,
+                typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                typename boost::mpl::at<model_type_list, type::model::speed>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
+            >,
+            typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
+            typename boost::mpl::at<view_type_list, type::view::traits>::type,
+            typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
+            typename boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type
         >,
-        typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type
+        typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type
     >;
 
 
