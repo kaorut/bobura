@@ -40,9 +40,6 @@ namespace bobura { namespace command
 {
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -50,14 +47,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     class set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -65,20 +62,17 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::impl
     {
     public:
         // types
 
         using traits_type = typename set::traits_type;
-
-        using main_window_traits_type = typename set::main_window_traits_type;
-
-        using view_traits_type = typename set::view_traits_type;
-
-        using load_save_traits_type = typename set::load_save_traits_type;
 
         using size_type = typename set::size_type;
 
@@ -96,9 +90,15 @@ namespace bobura { namespace command
 
         using shell_type = typename set::shell_type;
 
-        using config_traits_type = typename set::config_traits_type;
-
         using message_catalog_type = typename set::message_catalog_type;
+
+        using main_window_traits_type = typename set::main_window_traits_type;
+
+        using view_traits_type = typename set::view_traits_type;
+
+        using load_save_traits_type = typename set::load_save_traits_type;
+
+        using config_traits_type = typename set::config_traits_type;
 
         using new_file_type = typename set::new_file_type;
 
@@ -291,8 +291,8 @@ namespace bobura { namespace command
                         position_type,
                         dimension_type,
                         dialog_type,
-                        config_traits_type,
-                        message_catalog_type
+                        message_catalog_type,
+                        config_traits_type
                     >
                 >(message_catalog, settings);
         }
@@ -474,9 +474,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -484,14 +481,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -499,8 +496,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::set(
         const new_file_type&          new_file,
         const load_from_file_type&    load_from_file,
@@ -528,9 +528,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -538,14 +535,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -553,17 +550,17 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::~set()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -571,14 +568,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -586,14 +583,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -601,8 +598,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::about()
     const
     {
@@ -611,9 +611,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -621,14 +618,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -636,14 +633,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -651,8 +648,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::ask_file_path_and_save_to_file()
     const
     {
@@ -661,9 +661,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -671,14 +668,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -686,14 +683,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -701,8 +698,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::exit()
     const
     {
@@ -711,9 +711,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -721,14 +718,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -736,14 +733,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -751,8 +748,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::file_property()
     const
     {
@@ -761,9 +761,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -771,14 +768,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -786,14 +783,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -801,8 +798,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::font_color()
     const
     {
@@ -811,9 +811,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -821,14 +818,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -836,14 +833,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -851,8 +848,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::horizontally_zoom_in()
     const
     {
@@ -861,9 +861,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -871,14 +868,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -886,14 +883,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -901,8 +898,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::horizontally_zoom_out()
     const
     {
@@ -911,9 +911,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -921,14 +918,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -936,14 +933,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -951,8 +948,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::load_from_file()
     const
     {
@@ -961,9 +961,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -971,31 +968,31 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     std::unique_ptr<
         typename set<
             Traits,
-        MainWindowTraits,
-            ViewTraits,
-            LoadSaveTraits,
             Position,
             Dimension,
             Dialog,
             Color,
             PointUnitSize,
-        Scale,
-        Shell,
-            ConfigTraits,
-            MessageCatalog
+            Scale,
+            Shell,
+            MessageCatalog,
+            MainWindowTraits,
+            ViewTraits,
+            LoadSaveTraits,
+            ConfigTraits
         >::parameter_type
     >
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1003,8 +1000,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::create_load_from_file_parameter(const boost::filesystem::path& path)
     const
     {
@@ -1013,9 +1013,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -1023,14 +1020,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1038,14 +1035,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1053,8 +1050,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::new_file()
     const
     {
@@ -1063,9 +1063,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -1073,14 +1070,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1088,14 +1085,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1103,8 +1100,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::nop()
     const
     {
@@ -1113,9 +1113,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -1123,14 +1120,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1138,14 +1135,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1153,8 +1150,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::open_www_tetengo_org()
     const
     {
@@ -1163,9 +1163,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -1173,14 +1170,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1188,14 +1185,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1203,8 +1200,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::reload()
     const
     {
@@ -1213,9 +1213,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -1223,14 +1220,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1238,14 +1235,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1253,8 +1250,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::save_to_file()
     const
     {
@@ -1263,9 +1263,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -1273,14 +1270,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1288,14 +1285,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1303,8 +1300,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::set_horizontal_scale(const size_type index)
     const
     {
@@ -1313,9 +1313,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -1323,14 +1320,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1338,14 +1335,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1353,8 +1350,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::set_vertical_scale(const size_type index)
     const
     {
@@ -1363,9 +1363,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -1373,14 +1370,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1388,14 +1385,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1403,8 +1400,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::train_kind()
     const
     {
@@ -1413,9 +1413,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -1423,14 +1420,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1438,14 +1435,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1453,8 +1450,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::vertically_zoom_in()
     const
     {
@@ -1463,9 +1463,6 @@ namespace bobura { namespace command
 
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -1473,14 +1470,14 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     typename const set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1488,14 +1485,14 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::command_type&
     set<
         Traits,
-        MainWindowTraits,
-        ViewTraits,
-        LoadSaveTraits,
         Position,
         Dimension,
         Dialog,
@@ -1503,8 +1500,11 @@ namespace bobura { namespace command
         PointUnitSize,
         Scale,
         Shell,
-        ConfigTraits,
-        MessageCatalog
+        MessageCatalog,
+        MainWindowTraits,
+        ViewTraits,
+        LoadSaveTraits,
+        ConfigTraits
     >::vertically_zoom_out()
     const
     {
@@ -1522,9 +1522,6 @@ namespace bobura { namespace command
             typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
             typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
         >,
-        typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
-        typename boost::mpl::at<view_type_list, type::view::traits>::type,
-        typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
         typename boost::mpl::at<ui_type_list, type::ui::position>::type,
         typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
@@ -1532,8 +1529,11 @@ namespace bobura { namespace command
         typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
         typename boost::mpl::at<view_type_list, type::view::scale>::type,
         typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
-        typename boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type,
-        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+        typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
+        typename boost::mpl::at<view_type_list, type::view::traits>::type,
+        typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
+        typename boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type
     >;
 
 

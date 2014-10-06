@@ -24,10 +24,10 @@ namespace bobura { namespace command
         typename Position,
         typename Dimension,
         typename Dialog,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename ConfigTraits
     >
-    class about<Traits, Position, Dimension, Dialog, ConfigTraits, MessageCatalog>::impl
+    class about<Traits, Position, Dimension, Dialog, MessageCatalog, ConfigTraits>::impl
     {
     public:
         // types
@@ -87,10 +87,10 @@ namespace bobura { namespace command
         typename Position,
         typename Dimension,
         typename Dialog,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename ConfigTraits
     >
-    about<Traits, Position, Dimension, Dialog, ConfigTraits, MessageCatalog>::about(
+    about<Traits, Position, Dimension, Dialog, MessageCatalog, ConfigTraits>::about(
         const message_catalog_type& message_catalog,
         const settings_type&        settings
     )
@@ -103,10 +103,10 @@ namespace bobura { namespace command
         typename Position,
         typename Dimension,
         typename Dialog,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename ConfigTraits
     >
-    about<Traits, Position, Dimension, Dialog, ConfigTraits, MessageCatalog>::~about()
+    about<Traits, Position, Dimension, Dialog, MessageCatalog, ConfigTraits>::~about()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
@@ -115,10 +115,10 @@ namespace bobura { namespace command
         typename Position,
         typename Dimension,
         typename Dialog,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename ConfigTraits
     >
-    void about<Traits, Position, Dimension, Dialog, ConfigTraits, MessageCatalog>::execute_impl(
+    void about<Traits, Position, Dimension, Dialog, MessageCatalog, ConfigTraits>::execute_impl(
         model_type&           model,
         abstract_window_type& parent
     )
@@ -141,8 +141,8 @@ namespace bobura { namespace command
         typename boost::mpl::at<ui_type_list, type::ui::position>::type,
         typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-        typename boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type,
-        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+        typename boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type
     >;
 
 

@@ -32,9 +32,6 @@ namespace bobura { namespace command
         \brief The class template for a command set.
 
         \tparam Traits           A traits type.
-        \tparam MainWindowTraits A main window traits type.
-        \tparam ViewTraits       A view traits type.
-        \tparam LoadSaveTraits   A loading and saving processing traits type.
         \tparam Position         A position type.
         \tparam Dimension        A dimension type.
         \tparam Dialog           A dialog type.
@@ -42,14 +39,14 @@ namespace bobura { namespace command
         \tparam PointUnitSize    A point unit size type.
         \tparam Scale            A scale type.
         \tparam Shell            A shell type.
-        \tparam ConfigTraits     A config traits type.
         \tparam MessageCatalog   A message catalog type.
+        \tparam MainWindowTraits A main window traits type.
+        \tparam ViewTraits       A view traits type.
+        \tparam LoadSaveTraits   A loading and saving processing traits type.
+        \tparam ConfigTraits     A config traits type.
     */
     template <
         typename Traits,
-        typename MainWindowTraits,
-        typename ViewTraits,
-        typename LoadSaveTraits,
         typename Position,
         typename Dimension,
         typename Dialog,
@@ -57,8 +54,11 @@ namespace bobura { namespace command
         typename PointUnitSize,
         typename Scale,
         typename Shell,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename MainWindowTraits,
+        typename ViewTraits,
+        typename LoadSaveTraits,
+        typename ConfigTraits
     >
     class set : private boost::noncopyable
     {
@@ -67,15 +67,6 @@ namespace bobura { namespace command
 
         //! The traits type.
         using traits_type = Traits;
-
-        //! The main window traits type.
-        using main_window_traits_type = MainWindowTraits;
-
-        //! The view traits type.
-        using view_traits_type = ViewTraits;
-
-        //! The loading and saving processing traits type.
-        using load_save_traits_type = LoadSaveTraits;
 
         //! The file initialization type.
         using size_type = typename traits_type::size_type;
@@ -101,11 +92,20 @@ namespace bobura { namespace command
         //! The shell type.
         using shell_type = Shell;
 
-        //! The config traits type.
-        using config_traits_type = ConfigTraits;
-
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
+
+        //! The main window traits type.
+        using main_window_traits_type = MainWindowTraits;
+
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
+
+        //! The loading and saving processing traits type.
+        using load_save_traits_type = LoadSaveTraits;
+
+        //! The config traits type.
+        using config_traits_type = ConfigTraits;
 
         //! The file initialization type.
         using new_file_type = boost::mpl::at<load_save_type_list, type::load_save::new_file>::type;

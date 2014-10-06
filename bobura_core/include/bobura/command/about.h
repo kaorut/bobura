@@ -26,16 +26,16 @@ namespace bobura { namespace command
         \tparam Position       A position type.
         \tparam Dimension      A dimension type.
         \tparam Dialog         A dialog type.
-        \tparam ConfigTraits   A config traits type.
         \tparam MessageCatalog A message catalog type.
+        \tparam ConfigTraits   A config traits type.
     */
     template <
         typename Traits,
         typename Position,
         typename Dimension,
         typename Dialog,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename ConfigTraits
     >
     class about : public command_base<Traits>
     {
@@ -57,11 +57,11 @@ namespace bobura { namespace command
         //! The dialog type.
         using dialog_type = Dialog;
 
-        //! The config traits type.
-        using config_traits_type = ConfigTraits;
-
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
+
+        //! The config traits type.
+        using config_traits_type = ConfigTraits;
 
         //! The base type.
         using base_type = command_base<traits_type>;

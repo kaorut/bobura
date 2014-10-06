@@ -141,9 +141,6 @@ namespace bobura
                     font_type,
                     typename main_window_traits_type::window_type::base_type
                 >,
-                main_window_traits_type,
-                view_traits_type,
-                load_save_traits_type,
                 position_type,
                 dimension_type,
                 dialog_type,
@@ -151,8 +148,11 @@ namespace bobura
                 point_unit_size_type,
                 scale_type,
                 shell_type,
-                config_traits_type,
-                message_catalog_type
+                message_catalog_type,
+                main_window_traits_type,
+                view_traits_type,
+                load_save_traits_type,
+                config_traits_type
             >;
 
         //! The model type.

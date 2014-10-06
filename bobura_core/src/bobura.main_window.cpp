@@ -151,9 +151,6 @@ namespace bobura
                 typename boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
                 command::set<
                     command_traits_type,
-                    traits_type,
-                    typename boost::mpl::at<view_type_list, type::view::traits>::type,
-                    typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
                     position_type,
                     dimension_type,
                     typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
@@ -161,8 +158,11 @@ namespace bobura
                     typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
                     typename boost::mpl::at<view_type_list, type::view::scale>::type,
                     typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
-                    config_traits_type,
-                    message_catalog_type
+                    message_catalog_type,
+                    traits_type,
+                    typename boost::mpl::at<view_type_list, type::view::traits>::type,
+                    typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
+                    config_traits_type
                 >,
                 command::command_base<command_traits_type>,
                 timetable_model<
