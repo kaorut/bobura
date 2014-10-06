@@ -34,13 +34,13 @@ namespace bobura { namespace command
 
         using abstract_window_type = typename set_horizontal_scale::abstract_window_type;
 
+        using scale_type = typename set_horizontal_scale::scale_type;
+
         using main_window_traits_type = typename set_horizontal_scale::main_window_traits_type;
 
         using view_traits_type = typename set_horizontal_scale::view_traits_type;
 
         using diagram_view_type = typename set_horizontal_scale::diagram_view_type;
-
-        using scale_type = typename set_horizontal_scale::scale_type;
 
 
         // constructors and destructor
@@ -134,9 +134,9 @@ namespace bobura { namespace command
             typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
             typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
         >,
+        typename boost::mpl::at<view_type_list, type::view::scale>::type,
         typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
-        typename boost::mpl::at<view_type_list, type::view::traits>::type,
-        typename boost::mpl::at<view_type_list, type::view::scale>::type
+        typename boost::mpl::at<view_type_list, type::view::traits>::type
     >;
 
 
