@@ -103,8 +103,8 @@ namespace
             abstract_window_type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type,
-            boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type,
-            message_catalog_type
+            message_catalog_type,
+            boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type
         >;
 
     using popup_menu_selected_type =

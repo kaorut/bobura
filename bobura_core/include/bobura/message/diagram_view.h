@@ -145,8 +145,8 @@ namespace bobura { namespace message { namespace diagram_view
                 abstract_window_type,
                 side_bar_type,
                 map_box_type,
-                config_traits_type,
-                message_catalog_type
+                message_catalog_type,
+                config_traits_type
             >;
 
         //! The model type.
@@ -350,8 +350,8 @@ namespace bobura { namespace message { namespace diagram_view
                 abstract_window_type,
                 side_bar_type,
                 map_box_type,
-                config_traits_type,
-                message_catalog_type
+                message_catalog_type,
+                config_traits_type
             >;
 
         //! The model type.
@@ -742,8 +742,8 @@ namespace bobura { namespace message { namespace diagram_view
                 abstract_window_type,
                 side_bar_type,
                 map_box_type,
-                config_traits_type,
-                message_catalog_type
+                message_catalog_type,
+                config_traits_type
             >;
 
 
