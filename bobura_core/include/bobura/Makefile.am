@@ -22,6 +22,7 @@ extra_headers = \
     command/save_to_file.h \
     command/set.h \
     command/set_horizontal_scale.h \
+    command/set_traits.h \
     command/set_vertical_scale.h \
     command/train_kind.h \
     command/traits.h \

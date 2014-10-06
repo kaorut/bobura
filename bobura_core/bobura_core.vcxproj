@@ -118,6 +118,7 @@
     <ClInclude Include="include\bobura\command\save_to_file.h" />
     <ClInclude Include="include\bobura\command\set.h" />
     <ClInclude Include="include\bobura\command\set_horizontal_scale.h" />
+    <ClInclude Include="include\bobura\command\set_traits.h" />
     <ClInclude Include="include\bobura\command\set_vertical_scale.h" />
     <ClInclude Include="include\bobura\command\train_kind.h" />
     <ClInclude Include="include\bobura\command\traits.h" />
