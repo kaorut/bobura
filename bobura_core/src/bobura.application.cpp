@@ -123,14 +123,17 @@ namespace bobura
 
         using picture_box_type = boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
 
+        using diagram_picture_box_message_type_list =
+            message::diagram_picture_box::type_list<
+                picture_box_type, boost::mpl::at<view_type_list, type::view::traits>::type
+            >;
+
         using diagram_picture_box_type =
             diagram_picture_box<
                 picture_box_type,
                 boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
                 boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
-                message::diagram_picture_box::type_list<
-                    boost::mpl::at<view_type_list, type::view::traits>::type, picture_box_type
-                >
+                diagram_picture_box_message_type_list
             >;
 
         using main_window_message_type_list_type =
@@ -144,12 +147,6 @@ namespace bobura
                 main_window_type::diagram_picture_box_type,
                 main_window_type::property_bar_type,
                 main_window_type::confirm_file_save_type
-            >;
-
-        using diagram_picture_box_message_type_list =
-            message::diagram_picture_box::type_list<
-                boost::mpl::at<view_type_list, type::view::traits>::type,
-                boost::mpl::at<ui_type_list, type::ui::picture_box>::type
             >;
 
         using message_loop_type =

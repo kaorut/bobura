@@ -93,8 +93,8 @@ namespace
             abstract_window_type,
             side_bar_type,
             map_box_type,
-            config_traits_type,
-            message_catalog_type
+            message_catalog_type,
+            config_traits_type
         >;
 
     using train_type = model_type::timetable_type::train_type;
@@ -116,8 +116,8 @@ namespace
             abstract_window_type,
             side_bar_type,
             map_box_type,
-            config_traits_type,
-            message_catalog_type
+            message_catalog_type,
+            config_traits_type
         >;
 
     using all_unselected_type =
@@ -128,8 +128,8 @@ namespace
             abstract_window_type,
             side_bar_type,
             map_box_type,
-            config_traits_type,
-            message_catalog_type
+            message_catalog_type,
+            config_traits_type
         >;
 
 

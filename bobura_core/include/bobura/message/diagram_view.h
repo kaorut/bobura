@@ -74,8 +74,8 @@ namespace bobura { namespace message { namespace diagram_view
         \tparam AbstractWindow    An abstract window type.
         \tparam SideBar           A side bar type.
         \tparam MapBox            A map box type.
-        \tparam ConfigTraits      A configuration traits type.
         \tparam MessageCatalog    A message catalog type.
+        \tparam ConfigTraits      A configuration traits type.
     */
     template <
         typename Size,
@@ -89,8 +89,8 @@ namespace bobura { namespace message { namespace diagram_view
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename ConfigTraits
     >
     class station_selected
     {
@@ -130,11 +130,11 @@ namespace bobura { namespace message { namespace diagram_view
         //! The map box type.
         using map_box_type = MapBox;
 
-        //! The config traits type.
-        using config_traits_type = ConfigTraits;
-
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
+
+        //! The config traits type.
+        using config_traits_type = ConfigTraits;
 
         //! The property bar type.
         using property_bar_type =
@@ -279,8 +279,8 @@ namespace bobura { namespace message { namespace diagram_view
         \tparam AbstractWindow    An abstract window type.
         \tparam SideBar           A side bar type.
         \tparam MapBox            A map box type.
-        \tparam ConfigTraits      A configuration traits type.
         \tparam MessageCatalog    A message catalog type.
+        \tparam ConfigTraits      A configuration traits type.
     */
     template <
         typename Size,
@@ -294,8 +294,8 @@ namespace bobura { namespace message { namespace diagram_view
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename ConfigTraits
     >
     class train_selected
     {
@@ -335,11 +335,11 @@ namespace bobura { namespace message { namespace diagram_view
         //! The map box type.
         using map_box_type = MapBox;
 
-        //! The config traits type.
-        using config_traits_type = ConfigTraits;
-
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
+
+        //! The config traits type.
+        using config_traits_type = ConfigTraits;
 
         //! The property bar type.
         using property_bar_type =
@@ -691,8 +691,8 @@ namespace bobura { namespace message { namespace diagram_view
         \tparam AbstractWindow  An abstract window type.
         \tparam SideBar         A side bar type.
         \tparam MapBox          A map box type.
-        \tparam ConfigTraits    A configuration traits type.
         \tparam MessageCatalog  A message catalog type.
+        \tparam ConfigTraits    A configuration traits type.
     */
     template <
         typename String,
@@ -701,8 +701,8 @@ namespace bobura { namespace message { namespace diagram_view
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename ConfigTraits,
-        typename MessageCatalog
+        typename MessageCatalog,
+        typename ConfigTraits
     >
     class all_unselected
     {
@@ -727,11 +727,11 @@ namespace bobura { namespace message { namespace diagram_view
         //! The map box type.
         using map_box_type = MapBox;
 
-        //! The config traits type.
-        using config_traits_type = ConfigTraits;
-
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
+
+        //! The config traits type.
+        using config_traits_type = ConfigTraits;
 
         //! The property bar type.
         using property_bar_type =

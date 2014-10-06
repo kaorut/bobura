@@ -27,17 +27,14 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a mouse pressed observer of the picture box.
 
-        \tparam ViewTraits A view traits type.
         \tparam PictureBox A picture box type.
+        \tparam ViewTraits A view traits type.
     */
-    template <typename ViewTraits, typename PictureBox>
+    template <typename PictureBox, typename ViewTraits>
     class mouse_pressed
     {
     public:
         // types
-
-        //! The view traits type.
-        using view_traits_type = ViewTraits;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
@@ -47,6 +44,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         //! The button kind type.
         using mouse_button_type = typename picture_box_type::mouse_observer_set_type::mouse_button_type;
+
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
 
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;
@@ -128,17 +128,14 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a mouse released observer of the picture box.
 
-        \tparam ViewTraits A view traits type.
         \tparam PictureBox A picture box type.
+        \tparam ViewTraits A view traits type.
     */
-    template <typename ViewTraits, typename PictureBox>
+    template <typename PictureBox, typename ViewTraits>
     class mouse_released
     {
     public:
         // types
-
-        //! The view traits type.
-        using view_traits_type = ViewTraits;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
@@ -148,6 +145,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         //! The button kind type.
         using mouse_button_type = typename picture_box_type::mouse_observer_set_type::mouse_button_type;
+
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
 
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;
@@ -211,17 +211,14 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a mouse moved observer of the picture box.
 
-        \tparam ViewTraits A view traits type.
         \tparam PictureBox A picture box type.
+        \tparam ViewTraits A view traits type.
     */
-    template <typename ViewTraits, typename PictureBox>
+    template <typename PictureBox, typename ViewTraits>
     class mouse_moved
     {
     public:
         // types
-
-        //! The view traits type.
-        using view_traits_type = ViewTraits;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
@@ -231,6 +228,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         //! The button kind type.
         using mouse_button_type = typename picture_box_type::mouse_observer_set_type::mouse_button_type;
+
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
 
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;
@@ -310,18 +310,15 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a mouse wheel observer of the picture box.
 
-        \tparam ViewTraits A view traits type.
         \tparam PictureBox A picture box type.
         \tparam Zoom       A zoom type.
+        \tparam ViewTraits A view traits type.
     */
-    template <typename ViewTraits, typename PictureBox, typename Zoom>
+    template <typename PictureBox, typename Zoom, typename ViewTraits>
     class mouse_wheeled
     {
     public:
         // types
-
-        //! The view traits type.
-        using view_traits_type = ViewTraits;
 
         //! The picture box type.
         using picture_box_type = PictureBox;
@@ -340,6 +337,9 @@ namespace bobura { namespace message { namespace diagram_picture_box
 
         //! The view zoom type.
         using view_zoom_type = Zoom;
+
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
 
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;
@@ -660,23 +660,23 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a paint observer of the picture box.
 
-        \tparam ViewTraits A view traits type.
         \tparam PictureBox A picture box type.
+        \tparam ViewTraits A view traits type.
     */
-    template <typename ViewTraits, typename PictureBox>
+    template <typename PictureBox, typename ViewTraits>
     class paint_paint
     {
     public:
         // types
+
+        //! The picture box type.
+        using picture_box_type = PictureBox;
 
         //! The view traits type.
         using view_traits_type = ViewTraits;
 
         //! The canvas type.
         using canvas_type = typename view_traits_type::canvas_type;
-
-        //! The picture box type.
-        using picture_box_type = PictureBox;
 
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;
@@ -753,23 +753,23 @@ namespace bobura { namespace message { namespace diagram_picture_box
     /*!
         \brief The class template for a scroll bar observer of the picture box.
 
-        \tparam ViewTraits A view traits type.
         \tparam PictureBox A picture box type.
+        \tparam ViewTraits A view traits type.
     */
-    template <typename ViewTraits, typename PictureBox>
+    template <typename PictureBox, typename ViewTraits>
     class scroll_bar_scrolled
     {
     public:
         // types
+
+        //! The picture box type.
+        using picture_box_type = PictureBox;
 
         //! The view traits type.
         using view_traits_type = ViewTraits;
 
         //! The size type.
         using size_type = typename view_traits_type::size_type;
-
-        //! The picture box type.
-        using picture_box_type = PictureBox;
 
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;

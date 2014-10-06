@@ -42,12 +42,12 @@ namespace
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    using mouse_pressed_type = bobura::message::diagram_picture_box::mouse_pressed<view_traits_type, picture_box_type>;
+    using mouse_pressed_type = bobura::message::diagram_picture_box::mouse_pressed<picture_box_type, view_traits_type>;
 
     using mouse_released_type =
-        bobura::message::diagram_picture_box::mouse_released<view_traits_type, picture_box_type>;
+        bobura::message::diagram_picture_box::mouse_released<picture_box_type, view_traits_type>;
 
-    using mouse_moved_type = bobura::message::diagram_picture_box::mouse_moved<view_traits_type, picture_box_type>;
+    using mouse_moved_type = bobura::message::diagram_picture_box::mouse_moved<picture_box_type, view_traits_type>;
 
     struct dummy_view_zoom_type
     {
@@ -80,16 +80,16 @@ namespace
     };
 
     using mouse_wheeled_type =
-        bobura::message::diagram_picture_box::mouse_wheeled<view_traits_type, picture_box_type, dummy_view_zoom_type>;
+        bobura::message::diagram_picture_box::mouse_wheeled<picture_box_type, dummy_view_zoom_type, view_traits_type>;
 
     using virtual_key_type = picture_box_type::keyboard_observer_set_type::virtual_key_type;
 
     using keyboard_key_down_type = bobura::message::diagram_picture_box::keyboard_key_down<picture_box_type>;
 
-    using paint_paint_type = bobura::message::diagram_picture_box::paint_paint<view_traits_type, picture_box_type>;
+    using paint_paint_type = bobura::message::diagram_picture_box::paint_paint<picture_box_type, view_traits_type>;
 
     using scroll_bar_scrolled_type =
-        bobura::message::diagram_picture_box::scroll_bar_scrolled<view_traits_type, picture_box_type>;
+        bobura::message::diagram_picture_box::scroll_bar_scrolled<picture_box_type, view_traits_type>;
 
 
     // functions

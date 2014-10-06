@@ -43,7 +43,7 @@ namespace bobura { namespace view { namespace diagram
                 typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
                 typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
                 message::diagram_picture_box::type_list<
-                    typename boost::mpl::at<view_type_list, type::view::traits>::type, picture_box_type
+                    picture_box_type, typename boost::mpl::at<view_type_list, type::view::traits>::type
                 >
             >;
 

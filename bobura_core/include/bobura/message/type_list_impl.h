@@ -63,8 +63,8 @@ namespace bobura { namespace message
             \tparam AbstractWindow    An abstract window type.
             \tparam SideBar           A side bar type.
             \tparam MapBox            A map box type.
-            \tparam ConfigTraits      A configuration traits type.
             \tparam MessageCatalog    A message catalog type.
+            \tparam ConfigTraits      A configuration traits type.
         */
         template <
             typename Size,
@@ -78,8 +78,8 @@ namespace bobura { namespace message
             typename AbstractWindow,
             typename SideBar,
             typename MapBox,
-            typename ConfigTraits,
-            typename MessageCatalog
+            typename MessageCatalog,
+            typename ConfigTraits
         >
         using type_list =
             tetengo2::meta::assoc_list<
@@ -186,23 +186,23 @@ namespace bobura { namespace message
         /*!
             \brief The meta function for the type list of the diagram picture box messages.
 
-            \tparam ViewTraits A view traits type.
             \tparam PictureBox A picture box type.
+            \tparam ViewTraits A view traits type.
         */
-        template <typename ViewTraits, typename PictureBox>
+        template <typename PictureBox, typename ViewTraits>
         using type_list =
-            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_pressed, mouse_pressed<ViewTraits, PictureBox>>,
-            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_released, mouse_released<ViewTraits, PictureBox>>,
-            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_moved, mouse_moved<ViewTraits, PictureBox>>,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_pressed, mouse_pressed<PictureBox, ViewTraits>>,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_released, mouse_released<PictureBox, ViewTraits>>,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_moved, mouse_moved<PictureBox, ViewTraits>>,
             tetengo2::meta::assoc_list<
                 boost::mpl::pair<
                     type::mouse_wheeled,
-                    mouse_wheeled<ViewTraits, PictureBox, view::diagram::zoom<ViewTraits, PictureBox>>
+                    mouse_wheeled<PictureBox, view::diagram::zoom<ViewTraits, PictureBox>, ViewTraits>
                 >,
             tetengo2::meta::assoc_list<boost::mpl::pair<type::keyboard_key_down, keyboard_key_down<PictureBox>>,
-            tetengo2::meta::assoc_list<boost::mpl::pair<type::paint_paint, paint_paint<ViewTraits, PictureBox>>,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::paint_paint, paint_paint<PictureBox, ViewTraits>>,
             tetengo2::meta::assoc_list<
-                boost::mpl::pair<type::scroll_bar_scrolled,scroll_bar_scrolled<ViewTraits, PictureBox>>,
+                boost::mpl::pair<type::scroll_bar_scrolled,scroll_bar_scrolled<PictureBox, ViewTraits>>,
             tetengo2::meta::assoc_list_end
             >>>>>>>;
     }
