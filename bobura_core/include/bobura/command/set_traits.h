@@ -13,7 +13,7 @@
 namespace bobura { namespace command
 {
     /*!
-        \brief The class template for the command set_traits.
+        \brief The class template for the command set traits.
 
         \tparam Size             A size type.
         \tparam Position         A position type.
