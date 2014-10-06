@@ -13,11 +13,14 @@
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
 
-#include <bobura/basic_type_list.h>
+#include <bobura/diagram_view.h>
+#include <bobura/load_save/load_from_file.h>
+#include <bobura/load_save/new_file.h>
+#include <bobura/load_save/save_to_file.h>
+#include <bobura/settings.h>
 
 
 namespace bobura { namespace command
@@ -42,8 +45,11 @@ namespace bobura { namespace command
         //! The traits type.
         using traits_type = Traits;
 
-        //! The file initialization type.
+        //! The size type.
         using size_type = typename traits_type::size_type;
+
+        //! The string type.
+        using string_type = typename traits_type::string_type;
 
         //! The position type.
         using position_type = typename traits_type::position_type;
@@ -85,19 +91,19 @@ namespace bobura { namespace command
         using config_traits_type = typename traits_type::config_traits_type;
 
         //! The file initialization type.
-        using new_file_type = boost::mpl::at<load_save_type_list, type::load_save::new_file>::type;
+        using new_file_type = load_save::new_file<load_save_traits_type>;
 
         //! The file loading type.
-        using load_from_file_type = boost::mpl::at<load_save_type_list, type::load_save::load_from_file>::type;
+        using load_from_file_type = load_save::load_from_file<load_save_traits_type>;
 
         //! The file saving type.
-        using save_to_file_type = boost::mpl::at<load_save_type_list, type::load_save::save_to_file>::type;
+        using save_to_file_type = load_save::save_to_file<load_save_traits_type>;
 
         //! The diagram view type.
-        using diagram_view_type = boost::mpl::at<view_type_list, type::view::view>::type;
+        using diagram_view_type = diagram_view<view_traits_type>;
 
         //! The settings type.
-        using settings_type = boost::mpl::at<setting_type_list, type::setting::settings>::type;
+        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
 
         //! The command type.
         using command_type = command_base<command_traits_type>;

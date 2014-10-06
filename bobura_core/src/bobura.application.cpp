@@ -85,6 +85,7 @@ namespace bobura
         using command_set_traits_type =
             command::set_traits<
                 boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
                 boost::mpl::at<ui_type_list, type::ui::position>::type,
                 boost::mpl::at<ui_type_list, type::ui::dimension>::type,
                 boost::mpl::at<ui_type_list, type::ui::dialog>::type,

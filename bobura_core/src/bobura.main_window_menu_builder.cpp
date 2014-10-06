@@ -580,6 +580,7 @@ namespace bobura
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
         command::set_traits<
             typename boost::mpl::at<common_type_list, type::size>::type,
+            typename boost::mpl::at<common_type_list, type::string>::type,
             typename boost::mpl::at<ui_type_list, type::ui::position>::type,
             typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
             typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
