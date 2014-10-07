@@ -107,6 +107,9 @@ namespace bobura { namespace command
         //! The abstract window type.
         using abstract_window_type = typename traits_type::abstract_window_type;
 
+        //! The mouse capture type.
+        using mouse_capture_type = typename traits_type::mouse_capture_type;
+
         //! The model type.
         using model_type =
             timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;

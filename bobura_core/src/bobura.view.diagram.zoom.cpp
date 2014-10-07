@@ -23,13 +23,19 @@
 
 namespace bobura { namespace view { namespace diagram
 {
-    template <typename Traits, typename PictureBox>
-    class zoom<Traits, PictureBox>::impl : private boost::noncopyable
+    template <typename Traits, typename AbstractWindow, typename PictureBox, typename MouseCapture>
+    class zoom<Traits, AbstractWindow, PictureBox, MouseCapture>::impl : private boost::noncopyable
     {
     public:
         // types
 
+        using traits_type = typename zoom::traits_type;
+
+        using abstract_window_type = typename zoom::abstract_window_type;
+
         using picture_box_type = typename zoom::picture_box_type;
+
+        using mouse_capture_type = typename zoom::mouse_capture_type;
 
         using diagram_view_type = typename zoom::diagram_view_type;
 
@@ -40,10 +46,10 @@ namespace bobura { namespace view { namespace diagram
         using diagram_picture_box_type =
             diagram_picture_box<
                 picture_box_type,
-                typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
+                abstract_window_type,
+                mouse_capture_type,
                 message::diagram_picture_box::type_list<
-                    picture_box_type, typename boost::mpl::at<view_type_list, type::view::traits>::type
+                    picture_box_type, abstract_window_type, mouse_capture_type, traits_type
                 >
             >;
 
@@ -169,49 +175,52 @@ namespace bobura { namespace view { namespace diagram
     };
 
 
-    template <typename Traits, typename PictureBox>
-    zoom<Traits, PictureBox>::zoom(picture_box_type& picture_box, diagram_view_type& diagram_view)
+    template <typename Traits, typename AbstractWindow, typename PictureBox, typename MouseCapture>
+    zoom<Traits, AbstractWindow, PictureBox, MouseCapture>::zoom(
+        picture_box_type&  picture_box,
+        diagram_view_type& diagram_view
+    )
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(picture_box, diagram_view))
     {}
 
-    template <typename Traits, typename PictureBox>
-    zoom<Traits, PictureBox>::~zoom()
+    template <typename Traits, typename AbstractWindow, typename PictureBox, typename MouseCapture>
+    zoom<Traits, AbstractWindow, PictureBox, MouseCapture>::~zoom()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    template <typename Traits, typename PictureBox>
-    void zoom<Traits, PictureBox>::set_horizontal_scale(scale_type scale)
+    template <typename Traits, typename AbstractWindow, typename PictureBox, typename MouseCapture>
+    void zoom<Traits, AbstractWindow, PictureBox, MouseCapture>::set_horizontal_scale(scale_type scale)
     {
         m_p_impl->set_horizontal_scale(std::move(scale));
     }
 
-    template <typename Traits, typename PictureBox>
-    void zoom<Traits, PictureBox>::horizontally_zoom_in(const bool snap_to_scale_list)
+    template <typename Traits, typename AbstractWindow, typename PictureBox, typename MouseCapture>
+    void zoom<Traits, AbstractWindow, PictureBox, MouseCapture>::horizontally_zoom_in(const bool snap_to_scale_list)
     {
         m_p_impl->horizontally_zoom_in(snap_to_scale_list);
     }
 
-    template <typename Traits, typename PictureBox>
-    void zoom<Traits, PictureBox>::horizontally_zoom_out(const bool snap_to_scale_list)
+    template <typename Traits, typename AbstractWindow, typename PictureBox, typename MouseCapture>
+    void zoom<Traits, AbstractWindow, PictureBox, MouseCapture>::horizontally_zoom_out(const bool snap_to_scale_list)
     {
         m_p_impl->horizontally_zoom_out(snap_to_scale_list);
     }
 
-    template <typename Traits, typename PictureBox>
-    void zoom<Traits, PictureBox>::set_vertical_scale(scale_type scale)
+    template <typename Traits, typename AbstractWindow, typename PictureBox, typename MouseCapture>
+    void zoom<Traits, AbstractWindow, PictureBox, MouseCapture>::set_vertical_scale(scale_type scale)
     {
         m_p_impl->set_vertical_scale(std::move(scale));
     }
 
-    template <typename Traits, typename PictureBox>
-    void zoom<Traits, PictureBox>::vertically_zoom_in(const bool snap_to_scale_list)
+    template <typename Traits, typename AbstractWindow, typename PictureBox, typename MouseCapture>
+    void zoom<Traits, AbstractWindow, PictureBox, MouseCapture>::vertically_zoom_in(const bool snap_to_scale_list)
     {
         m_p_impl->vertically_zoom_in(snap_to_scale_list);
     }
 
-    template <typename Traits, typename PictureBox>
-    void zoom<Traits, PictureBox>::vertically_zoom_out(const bool snap_to_scale_list)
+    template <typename Traits, typename AbstractWindow, typename PictureBox, typename MouseCapture>
+    void zoom<Traits, AbstractWindow, PictureBox, MouseCapture>::vertically_zoom_out(const bool snap_to_scale_list)
     {
         m_p_impl->vertically_zoom_out(snap_to_scale_list);
     }
@@ -219,7 +228,9 @@ namespace bobura { namespace view { namespace diagram
 
     template class zoom<
         typename boost::mpl::at<view_type_list, type::view::traits>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type
+        typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
     >;
 
 

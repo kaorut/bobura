@@ -747,6 +747,8 @@ namespace bobura
                 boost::mpl::at<setting_type_list, type::setting::config_traits>::type,
                 message::diagram_picture_box::type_list<
                     boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
+                    boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                    boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
                     boost::mpl::at<view_type_list, type::view::traits>::type
                 >
             >;

@@ -107,7 +107,8 @@ namespace bobura { namespace command
             typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
             typename boost::mpl::at<model_type_list, type::model::speed>::type,
             typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
+            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
         >,
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type

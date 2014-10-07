@@ -79,7 +79,8 @@ namespace bobura
                 boost::mpl::at<model_type_list, type::model::operating_distance>::type,
                 boost::mpl::at<model_type_list, type::model::speed>::type,
                 boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
+                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
             >;
 
         using command_set_traits_type =
@@ -126,7 +127,10 @@ namespace bobura
 
         using diagram_picture_box_message_type_list =
             message::diagram_picture_box::type_list<
-                picture_box_type, boost::mpl::at<view_type_list, type::view::traits>::type
+                picture_box_type,
+                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
+                boost::mpl::at<view_type_list, type::view::traits>::type
             >;
 
         using diagram_picture_box_type =

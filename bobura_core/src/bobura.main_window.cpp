@@ -144,7 +144,8 @@ namespace bobura
                 operating_distance_type,
                 speed_type,
                 font_type,
-                abstract_window_type
+                abstract_window_type,
+                typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
             >;
 
         using command_set_traits_type =

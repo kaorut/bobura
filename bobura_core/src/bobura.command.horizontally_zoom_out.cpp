@@ -32,6 +32,8 @@ namespace bobura { namespace command
 
         using abstract_window_type = typename horizontally_zoom_out::abstract_window_type;
 
+        using mouse_capture_type = typename horizontally_zoom_out::mouse_capture_type;
+
         using main_window_traits_type = typename horizontally_zoom_out::main_window_traits_type;
 
         using view_traits_type = typename horizontally_zoom_out::view_traits_type;
@@ -67,7 +69,13 @@ namespace bobura { namespace command
 
         using main_window_type = main_window<main_window_traits_type>;
 
-        using zoom_type = view::diagram::zoom<view_traits_type, typename main_window_traits_type::picture_box_type>;
+        using zoom_type =
+            view::diagram::zoom<
+                view_traits_type,
+                abstract_window_type,
+                typename main_window_traits_type::picture_box_type,
+                mouse_capture_type
+            >;
 
 
         // variables
@@ -108,7 +116,8 @@ namespace bobura { namespace command
             typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
             typename boost::mpl::at<model_type_list, type::model::speed>::type,
             typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type
+            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
         >,
         typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
         typename boost::mpl::at<view_type_list, type::view::traits>::type

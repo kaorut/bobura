@@ -22,6 +22,7 @@ namespace bobura { namespace command
         \tparam Speed             A speed type.
         \tparam Font              A font type.
         \tparam AbstractWindow    An abstract window type.
+        \tparam MouseCapture      A mouse capture type.
     */
     template <
         typename Size,
@@ -30,7 +31,8 @@ namespace bobura { namespace command
         typename OperatingDistance,
         typename Speed,
         typename Font,
-        typename AbstractWindow
+        typename AbstractWindow,
+        typename MouseCapture
     >
     class traits
     {
@@ -57,6 +59,9 @@ namespace bobura { namespace command
 
         //! The abstract window type.
         using abstract_window_type = AbstractWindow;
+
+        //! The mouse capture type.
+        using mouse_capture_type = MouseCapture;
 
 
     };
