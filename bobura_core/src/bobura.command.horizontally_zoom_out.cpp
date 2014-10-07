@@ -13,11 +13,11 @@
 
 #include <tetengo2.h>
 
-#include <bobura/basic_type_list.h>
 #include <bobura/command/horizontally_zoom_out.h>
 #include <bobura/command/traits.h>
 #include <bobura/main_window.h>
 #include <bobura/view/diagram/zoom.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura { namespace command

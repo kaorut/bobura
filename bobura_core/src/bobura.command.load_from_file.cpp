@@ -14,11 +14,11 @@
 
 #include <tetengo2.h>
 
-#include <bobura/basic_type_list.h>
 #include <bobura/command/load_from_file.h>
 #include <bobura/command/traits.h>
 #include <bobura/load_save/traits.h>
 #include <bobura/oudia_diagram_dialog.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura { namespace command

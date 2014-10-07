@@ -21,12 +21,12 @@
 #include <bobura/command/set.h>
 #include <bobura/command/set_traits.h>
 #include <bobura/command/traits.h>
-#include <bobura/basic_type_list.h>
 #include <bobura/diagram_picture_box.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/type_list.h>
 #include <bobura/message/type_list_impl.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura

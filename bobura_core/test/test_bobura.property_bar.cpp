@@ -11,8 +11,8 @@
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <bobura/basic_type_list.h>
 #include <bobura/property_bar.h>
+#include <bobura/type_list.h>
 
 
 namespace

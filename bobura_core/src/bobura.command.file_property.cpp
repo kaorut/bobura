@@ -10,10 +10,10 @@
 
 #include <tetengo2.h>
 
-#include <bobura/basic_type_list.h>
 #include <bobura/command/file_property.h>
 #include <bobura/command/traits.h>
 #include <bobura/file_property_dialog.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura { namespace command

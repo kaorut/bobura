@@ -17,12 +17,12 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
 #include <bobura/command/set_traits.h>
 #include <bobura/command/traits.h>
 #include <bobura/main_window.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura

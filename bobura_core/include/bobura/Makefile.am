@@ -6,7 +6,6 @@ extra_headers = \
     0namespace.dox \
     about_dialog.h \
     application.h \
-    basic_type_list.h \
     command/0namespace.dox \
     command/about.h \
     command/command_base.h \

@@ -15,12 +15,12 @@
 
 #include <tetengo2.h>
 
-#include <bobura/basic_type_list.h>
 #include <bobura/diagram_picture_box.h>
 #include <bobura/message/main_window.h>
 #include <bobura/message/type_list.h>
 #include <bobura/message/type_list_impl.h>
 #include <bobura/property_bar.h>
+#include <bobura/type_list.h>
 
 
 namespace

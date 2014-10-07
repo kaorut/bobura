@@ -15,9 +15,9 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/basic_type_list.h>
 #include <bobura/diagram_picture_box.h>
 #include <bobura/message/type_list_impl.h>
+#include <bobura/type_list.h>
 #include <bobura/view/diagram/zoom.h>
 
 

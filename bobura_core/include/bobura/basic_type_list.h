@@ -6,7 +6,7 @@
     $Id$
 */
 
-#if !defined(BOBURA_BASICTYPELIST_H)
+#if 0 //!defined(BOBURA_BASICTYPELIST_H)
 #define BOBURA_BASICTYPELIST_H
 
 #include <cstddef>

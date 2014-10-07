@@ -12,9 +12,9 @@
 #include <tetengo2.h>
 
 #include <bobura/about_dialog.h>
-#include <bobura/basic_type_list.h>
 #include <bobura/command/about.h>
 #include <bobura/command/traits.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura { namespace command
