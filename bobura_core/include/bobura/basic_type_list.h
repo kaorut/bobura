@@ -184,7 +184,9 @@ namespace bobura
         struct fast_canvas;    //!< The fast canvas type.
         struct fast_font;      //!< The fast font type.
         struct fast_solid_background; //!< The fast solid background type.
+        struct image;          //!< The image type.
         struct label;          //!< The label type.
+        struct link_label;     //!< The link label type.
         struct list_box;       //!< The list box type.
         struct map_box;        //!< The map box type.
         struct menu_bar;       //!< The menu bar type.
@@ -306,7 +308,15 @@ namespace bobura
             >;
         using color_type = tetengo2::gui::drawing::color;
         using button_type = tetengo2::gui::widget::button<widget_traits_type, widget_details_traits_type>;
+        using image_type = tetengo2::gui::widget::image<widget_traits_type, widget_details_traits_type>;
         using label_type = tetengo2::gui::widget::label<widget_traits_type, widget_details_traits_type>;
+        using link_label_type =
+            tetengo2::gui::widget::link_label<
+                widget_traits_type,
+                widget_details_traits_type,
+                boost::mpl::at<detail_type_list, type::detail::system_color>::type, 
+                boost::mpl::at<detail_type_list, type::detail::shell>::type
+            >;
         using list_box_type = tetengo2::gui::widget::list_box<widget_traits_type, widget_details_traits_type>;
         using mouse_capture_type =
             tetengo2::gui::mouse_capture<
@@ -370,7 +380,9 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::fast_font, detail::ui::fast_font_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::ui::fast_solid_background, detail::ui::fast_solid_background_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::image, detail::ui::image_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::label, detail::ui::label_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::link_label, detail::ui::link_label_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::list_box, detail::ui::list_box_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::map_box, detail::ui::map_box_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::menu_bar, detail::ui::menu_bar_type>,
@@ -407,7 +419,7 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::widget_traits, detail::ui::widget_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::window, detail::ui::window_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>>>>>>>>>>>>>>>>;
+        >>>>>>>>>>>>>>>>>>>>>>>>>>>>>;
 
 
     /**** Setting ***********************************************************/

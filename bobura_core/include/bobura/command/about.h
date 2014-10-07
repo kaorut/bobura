@@ -22,18 +22,28 @@ namespace bobura { namespace command
     /*!
         \brief The class template for an about command.
 
-        \tparam Traits         A traits type.
-        \tparam Position       A position type.
-        \tparam Dimension      A dimension type.
-        \tparam Dialog         A dialog type.
-        \tparam MessageCatalog A message catalog type.
-        \tparam ConfigTraits   A config traits type.
+        \tparam Traits                A traits type.
+        \tparam Position              A position type.
+        \tparam Dimension             A dimension type.
+        \tparam Dialog                A dialog type.
+        \tparam Label                 A label type.
+        \tparam LinkLabel             A link label type.
+        \tparam Image                 An image type.
+        \tparam Button                A button type.
+        \tparam TransparentBackground A transparent background type.
+        \tparam MessageCatalog        A message catalog type.
+        \tparam ConfigTraits          A config traits type.
     */
     template <
         typename Traits,
         typename Position,
         typename Dimension,
         typename Dialog,
+        typename Label,
+        typename LinkLabel,
+        typename Image,
+        typename Button,
+        typename TransparentBackground,
         typename MessageCatalog,
         typename ConfigTraits
     >
@@ -56,6 +66,21 @@ namespace bobura { namespace command
 
         //! The dialog type.
         using dialog_type = Dialog;
+
+        //! The label type.
+        using label_type = Label;
+
+        //! The link label type.
+        using link_label_type = LinkLabel;
+
+        //! The image type.
+        using image_type = Image;
+
+        //! The button type.
+        using button_type = Button;
+
+        //! The transparent background type.
+        using transparent_background_type = TransparentBackground;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;

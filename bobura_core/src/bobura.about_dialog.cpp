@@ -32,11 +32,27 @@ namespace bobura
             typename Position,
             typename Dimension,
             typename Dialog,
+            typename Label,
+            typename LinkLabel,
+            typename Image,
+            typename Button,
+            typename TransparentBackground,
             typename MessageCatalog,
             typename ConfigTraits
         >
-        class about_dialog<String, Position, Dimension, Dialog, MessageCatalog, ConfigTraits>::impl :
-            private boost::noncopyable
+        class about_dialog<
+            String,
+            Position,
+            Dimension,
+            Dialog,
+            Label,
+            LinkLabel,
+            Image,
+            Button,
+            TransparentBackground,
+            MessageCatalog,
+            ConfigTraits
+        >::impl : private boost::noncopyable
         {
         public:
             // types
@@ -50,6 +66,16 @@ namespace bobura
             using base_type = Dialog;
 
             using background_type = typename base_type::background_type;
+
+            using label_type = Label;
+
+            using link_label_type = LinkLabel;
+
+            using image_type = Image;
+
+            using button_type = Button;
+
+            using transparent_background_type = TransparentBackground;
 
             using message_catalog_type = MessageCatalog;
 
@@ -78,30 +104,9 @@ namespace bobura
         private:
             // types
 
-            using label_type = typename boost::mpl::at<ui_type_list, type::ui::label>::type;
-
             using color_type = typename label_type::color_type;
 
-            using link_label_type =
-                tetengo2::gui::widget::link_label<
-                    typename boost::mpl::at<ui_type_list, type::ui::widget_traits>::type,
-                    typename boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type,
-                    typename boost::mpl::at<detail_type_list, type::detail::system_color>::type,
-                    typename boost::mpl::at<detail_type_list, type::detail::shell>::type
-                >;
-
-            using image_type =
-                tetengo2::gui::widget::image<
-                    typename boost::mpl::at<ui_type_list, type::ui::widget_traits>::type,
-                    typename boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type
-                >;
-
             using icon_type = typename image_type::icon_type;
-
-            using button_type = typename boost::mpl::at<ui_type_list, type::ui::button>::type;
-
-            using transparent_background_type =
-                typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type;
 
             using about_dialog_message_type_list_type = message::about_dialog::type_list<base_type>;
 
@@ -253,10 +258,27 @@ namespace bobura
         typename Position,
         typename Dimension,
         typename Dialog,
+        typename Label,
+        typename LinkLabel,
+        typename Image,
+        typename Button,
+        typename TransparentBackground,
         typename MessageCatalog,
         typename ConfigTraits
     >
-    about_dialog<String, Position, Dimension, Dialog, MessageCatalog, ConfigTraits>::about_dialog(
+    about_dialog<
+        String,
+        Position,
+        Dimension,
+        Dialog,
+        Label,
+        LinkLabel,
+        Image,
+        Button,
+        TransparentBackground,
+        MessageCatalog,
+        ConfigTraits
+    >::about_dialog(
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog,
         const settings_type&        settings
@@ -271,10 +293,27 @@ namespace bobura
         typename Position,
         typename Dimension,
         typename Dialog,
+        typename Label,
+        typename LinkLabel,
+        typename Image,
+        typename Button,
+        typename TransparentBackground,
         typename MessageCatalog,
         typename ConfigTraits
     >
-    about_dialog<String, Position, Dimension, Dialog, MessageCatalog, ConfigTraits>::~about_dialog()
+    about_dialog<
+        String,
+        Position,
+        Dimension,
+        Dialog,
+        Label,
+        LinkLabel,
+        Image,
+        Button,
+        TransparentBackground,
+        MessageCatalog,
+        ConfigTraits
+    >::~about_dialog()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
@@ -284,6 +323,11 @@ namespace bobura
         typename boost::mpl::at<ui_type_list, type::ui::position>::type,
         typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::label>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::link_label>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::image>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::button>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
         typename boost::mpl::at<setting_type_list, type::setting::config_traits>::type
     >;

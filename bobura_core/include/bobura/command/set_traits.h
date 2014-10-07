@@ -15,21 +15,26 @@ namespace bobura { namespace command
     /*!
         \brief The class template for the command set traits.
 
-        \tparam Size             A size type.
-        \tparam String           A string type.
-        \tparam Position         A position type.
-        \tparam Dimension        A dimension type.
-        \tparam Dialog           A dialog type.
-        \tparam Color            A color type.
-        \tparam PointUnitSize    A point unit size type.
-        \tparam Scale            A scale type.
-        \tparam Shell            A shell type.
-        \tparam MessageCatalog   A message catalog type.
-        \tparam CommandTraits    A command traits type.
-        \tparam MainWindowTraits A main window traits type.
-        \tparam ViewTraits       A view traits type.
-        \tparam LoadSaveTraits   A loading and saving processing traits type.
-        \tparam ConfigTraits     A config traits type.
+        \tparam Size                  A size type.
+        \tparam String                A string type.
+        \tparam Position              A position type.
+        \tparam Dimension             A dimension type.
+        \tparam Dialog                A dialog type.
+        \tparam Label                 A label type.
+        \tparam LinkLabel             A link label type.
+        \tparam Image                 An image type.
+        \tparam Button                A button type.
+        \tparam TransparentBackground A transparent background type.
+        \tparam Color                 A color type.
+        \tparam PointUnitSize         A point unit size type.
+        \tparam Scale                 A scale type.
+        \tparam Shell                 A shell type.
+        \tparam MessageCatalog        A message catalog type.
+        \tparam CommandTraits         A command traits type.
+        \tparam MainWindowTraits      A main window traits type.
+        \tparam ViewTraits            A view traits type.
+        \tparam LoadSaveTraits        A loading and saving processing traits type.
+        \tparam ConfigTraits          A config traits type.
     */
     template <
         typename Size,
@@ -37,6 +42,11 @@ namespace bobura { namespace command
         typename Position,
         typename Dimension,
         typename Dialog,
+        typename Label,
+        typename LinkLabel,
+        typename Image,
+        typename Button,
+        typename TransparentBackground,
         typename Color,
         typename PointUnitSize,
         typename Scale,
@@ -67,6 +77,21 @@ namespace bobura { namespace command
 
         //! The dialog type.
         using dialog_type = Dialog;
+
+        //! The label type.
+        using label_type = Label;
+
+        //! The link label type.
+        using link_label_type = LinkLabel;
+
+        //! The image type.
+        using image_type = Image;
+
+        //! The button type.
+        using button_type = Button;
+
+        //! The transparent background type.
+        using transparent_background_type = TransparentBackground;
 
         //! The color type.
         using color_type = Color;

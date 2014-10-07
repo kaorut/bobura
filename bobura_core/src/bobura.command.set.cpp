@@ -32,9 +32,10 @@
 #include <bobura/command/set_vertical_scale.h>
 #include <bobura/command/train_kind.h>
 #include <bobura/command/traits.h>
-#include <bobura/type_list.h>
 #include <bobura/command/vertically_zoom_in.h>
 #include <bobura/command/vertically_zoom_out.h>
+#include <bobura/type_list.h>
+#include <bobura/view/scale_list.h>
 
 
 namespace bobura { namespace command
@@ -47,11 +48,23 @@ namespace bobura { namespace command
 
         using size_type = typename set::size_type;
 
+        using string_type = typename set::string_type;
+
         using position_type = typename set::position_type;
 
         using dimension_type = typename set::dimension_type;
 
         using dialog_type = typename set::dialog_type;
+
+        using label_type = typename set::label_type;
+
+        using link_label_type = typename set::link_label_type;
+
+        using image_type = typename set::image_type;
+
+        using button_type = typename set::button_type;
+
+        using transparent_background_type = typename set::transparent_background_type;
 
         using color_type = typename set::color_type;
 
@@ -247,7 +260,7 @@ namespace bobura { namespace command
 
         using command_ptr_type = std::unique_ptr<command_type>;
 
-        using scale_list_type = typename boost::mpl::at<view_type_list, type::view::scale_list>::type;
+        using scale_list_type = view::scale_list<size_type, string_type, scale_type>;
 
 
         // static functions
@@ -264,6 +277,11 @@ namespace bobura { namespace command
                         position_type,
                         dimension_type,
                         dialog_type,
+                        label_type,
+                        link_label_type,
+                        image_type,
+                        button_type,
+                        transparent_background_type,
                         message_catalog_type,
                         config_traits_type
                     >
@@ -619,6 +637,11 @@ namespace bobura { namespace command
             typename boost::mpl::at<ui_type_list, type::ui::position>::type,
             typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
             typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::label>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::link_label>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::image>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::button>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type,
             typename boost::mpl::at<ui_type_list, type::ui::color>::type,
             typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
             typename boost::mpl::at<view_type_list, type::view::scale>::type,
@@ -636,7 +659,7 @@ namespace bobura { namespace command
             typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
             typename boost::mpl::at<view_type_list, type::view::traits>::type,
             typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
-            typename boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type
+            typename boost::mpl::at<setting_type_list, type::setting::config_traits>::type
         >
     >;
 

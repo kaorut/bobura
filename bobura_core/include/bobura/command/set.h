@@ -60,6 +60,21 @@ namespace bobura { namespace command
         //! The dialog type.
         using dialog_type = typename traits_type::dialog_type;
 
+        //! The label type.
+        using label_type = typename traits_type::label_type;
+
+        //! The link label type.
+        using link_label_type = typename traits_type::link_label_type;
+
+        //! The image type.
+        using image_type = typename traits_type::image_type;
+
+        //! The button type.
+        using button_type = typename traits_type::button_type;
+
+        //! The transparent background type.
+        using transparent_background_type = typename traits_type::transparent_background_type;
+
         //! The color type.
         using color_type = typename traits_type::color_type;
 
