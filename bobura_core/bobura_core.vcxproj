@@ -102,7 +102,6 @@
     <ClInclude Include="include\bobura\0namespace.dox" />
     <ClInclude Include="include\bobura\about_dialog.h" />
     <ClInclude Include="include\bobura\application.h" />
-    <ClInclude Include="include\bobura\basic_type_list.h" />
     <ClInclude Include="include\bobura\command\0namespace.dox" />
     <ClInclude Include="include\bobura\command\about.h" />
     <ClInclude Include="include\bobura\command\command_base.h" />

@@ -231,9 +231,6 @@
     <ClInclude Include="include\bobura\view\diagram\zoom.h">
       <Filter>headers\bobura\view\diagram</Filter>
     </ClInclude>
-    <ClInclude Include="include\bobura\basic_type_list.h">
-      <Filter>headers\bobura</Filter>
-    </ClInclude>
     <ClInclude Include="include\bobura\detail_type_list.h">
       <Filter>headers\bobura</Filter>
     </ClInclude>
