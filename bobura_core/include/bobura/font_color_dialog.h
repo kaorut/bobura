@@ -26,8 +26,20 @@ namespace bobura
         \tparam Font          A font type.
         \tparam PointUnitSize A point unit size type.
         \tparam Color         A color type.
+        \tparam Canvas        A canvas type.
+        \tparam FontDialog    A font dialog type.
+        \tparam ColorDialog   A color dialog type.
     */
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
     class font_color_dialog : public Traits::dialog_type
     {
     public:
@@ -56,6 +68,15 @@ namespace bobura
 
         //! The color type.
         using color_type = Color;
+
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! The font dialog type.
+        using font_dialog_type = FontDialog;
+
+        //! The color dialog type.
+        using color_dialog_type = ColorDialog;
 
         //! The font and color type.
         using font_color_type = std::pair<const font_type&, const color_type&>;

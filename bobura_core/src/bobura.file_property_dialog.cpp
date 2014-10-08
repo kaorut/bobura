@@ -42,9 +42,9 @@ namespace bobura
 
             using label_type = typename traits_type::label_type;
 
-            using text_box_type = typename traits_type::text_box_type;
-
             using button_type = typename typename traits_type::button_type;
+
+            using text_box_type = typename traits_type::text_box_type;
 
             using transparent_background_type = typename traits_type::transparent_background_type;
 

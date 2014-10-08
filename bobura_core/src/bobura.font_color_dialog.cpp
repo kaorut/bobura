@@ -29,11 +29,23 @@
 
 namespace bobura
 {
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    class font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::impl : private boost::noncopyable
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    class font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::impl :
+        private boost::noncopyable
     {
     public:
         // types
+
+        using traits_type = typename font_color_dialog::traits_type;
 
         using size_type = typename font_color_dialog::size_type;
 
@@ -47,7 +59,25 @@ namespace bobura
 
         using color_type = typename font_color_dialog::color_type;
 
+        using canvas_type = typename font_color_dialog::canvas_type;
+
+        using font_dialog_type = typename font_color_dialog::font_dialog_type;
+
+        using color_dialog_type = typename font_color_dialog::color_dialog_type;
+
         using font_color_type = typename font_color_dialog::font_color_type;
+
+        using label_type = typename traits_type::label_type;
+
+        using button_type = typename traits_type::button_type;
+
+        using text_box_type = typename traits_type::text_box_type;
+
+        using list_box_type = typename traits_type::list_box_type;
+
+        using picture_box_type = typename traits_type::picture_box_type;
+
+        using transparent_background_type = typename traits_type::transparent_background_type;
 
 
         // constructors and destructor
@@ -181,24 +211,10 @@ namespace bobura
         }
 
 
-
     private:
         // types
 
         using string_type = typename base_type::string_type;
-
-        using label_type = typename boost::mpl::at<ui_type_list, type::ui::label>::type;
-
-        using list_box_type = typename boost::mpl::at<ui_type_list, type::ui::list_box>::type;
-
-        using text_box_type = typename boost::mpl::at<ui_type_list, type::ui::text_box>::type;
-
-        using button_type = typename boost::mpl::at<ui_type_list, type::ui::button>::type;
-
-        using picture_box_type = typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
-
-        using transparent_background_type =
-            typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type;
 
         using font_color_dialog_message_type_list_type =
             message::font_color_dialog::type_list<
@@ -576,8 +592,17 @@ namespace bobura
     };
 
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::font_color_dialog(
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::font_color_dialog(
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog
     )
@@ -586,37 +611,88 @@ namespace bobura
     m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog))
     {}
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::~font_color_dialog()
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::~font_color_dialog()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    const typename font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::color_type&
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::background()
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    const typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::color_type&
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::background()
     const
     {
         return m_p_impl->background();
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::set_background(
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_background(
         const color_type& color
     )
     {
         m_p_impl->set_background(color);
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    typename font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::font_color_type
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::company_line_name()
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::company_line_name()
     const
     {
         return m_p_impl->company_line_name();
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::set_company_line_name(
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    void font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::set_company_line_name(
         const font_type&  font,
         const color_type& color
     )
@@ -624,16 +700,36 @@ namespace bobura
         m_p_impl->set_company_line_name(font, color);
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    typename font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::font_color_type
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::note()
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::note()
     const
     {
         return m_p_impl->note();
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::set_note(
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_note(
         const font_type&  font,
         const color_type& color
     )
@@ -641,16 +737,36 @@ namespace bobura
         m_p_impl->set_note(font, color);
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    typename font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::font_color_type
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::time_line()
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::time_line()
     const
     {
         return m_p_impl->time_line();
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::set_time_line(
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_time_line(
         const font_type&  font,
         const color_type& color
     )
@@ -658,16 +774,38 @@ namespace bobura
         m_p_impl->set_time_line(font, color);
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    typename font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::font_color_type
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::local_station()
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::local_station()
     const
     {
         return m_p_impl->local_station();
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::set_local_station(
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    void font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::set_local_station(
         const font_type&  font,
         const color_type& color
     )
@@ -675,16 +813,38 @@ namespace bobura
         m_p_impl->set_local_station(font, color);
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    typename font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::font_color_type
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::principal_station()
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::principal_station()
     const
     {
         return m_p_impl->principal_station();
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::set_principal_station(
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    void font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::set_principal_station(
         const font_type&  font,
         const color_type& color
     )
@@ -692,16 +852,38 @@ namespace bobura
         m_p_impl->set_principal_station(font, color);
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    typename font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::font_color_type
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::local_terminal_station()
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type
+    font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::local_terminal_station()
     const
     {
         return m_p_impl->local_terminal_station();
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::set_local_terminal_station(
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_local_terminal_station(
         const font_type&  font,
         const color_type& color
     )
@@ -709,16 +891,40 @@ namespace bobura
         m_p_impl->set_local_terminal_station(font, color);
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    typename font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::font_color_type
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::principal_terminal_station()
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type
+    font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::principal_terminal_station()
     const
     {
         return m_p_impl->principal_terminal_station();
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::set_principal_terminal_station(
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    void font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::set_principal_terminal_station(
         const font_type&  font,
         const color_type& color
     )
@@ -726,24 +932,53 @@ namespace bobura
         m_p_impl->set_principal_terminal_station(font, color);
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    const typename font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::font_type&
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::train_name()
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    const typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_type&
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::train_name()
     const
     {
         return m_p_impl->train_name();
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::set_train_name(
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_train_name(
         const font_type& font
     )
     {
         m_p_impl->set_train_name(font);
     }
 
-    template <typename Traits, typename Size, typename Font, typename PointUnitSize, typename Color>
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color>::do_modal_impl()
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::do_modal_impl()
     {
         m_p_impl->do_modal_impl();
     }
@@ -754,7 +989,10 @@ namespace bobura
         typename boost::mpl::at<common_type_list, type::size>::type,
         typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
         typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::color>::type
+        typename boost::mpl::at<ui_type_list, type::ui::color>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
+        typename boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
+        typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type
     >;
 
 

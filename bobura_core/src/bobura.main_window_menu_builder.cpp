@@ -586,8 +586,11 @@ namespace bobura
             typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
             typename boost::mpl::at<ui_type_list, type::ui::color>::type,
             typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
             typename boost::mpl::at<view_type_list, type::view::scale>::type,
             typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
+            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
+            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
             typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
             command::traits<
                 typename boost::mpl::at<common_type_list, type::size>::type,

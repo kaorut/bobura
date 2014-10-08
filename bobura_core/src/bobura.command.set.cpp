@@ -60,9 +60,15 @@ namespace bobura { namespace command
 
         using point_unit_size_type = typename set::point_unit_size_type;
 
+        using canvas_type = typename set::canvas_type;
+
         using scale_type = typename set::scale_type;
 
         using shell_type = typename set::shell_type;
+
+        using font_dialog_type = typename set::font_dialog_type;
+
+        using color_dialog_type = typename set::color_dialog_type;
 
         using message_catalog_type = typename set::message_catalog_type;
 
@@ -297,6 +303,9 @@ namespace bobura { namespace command
                         dialog_type,
                         point_unit_size_type,
                         color_type,
+                        canvas_type,
+                        font_dialog_type,
+                        color_dialog_type,
                         message_catalog_type,
                         dialog_traits_type
                     >
@@ -636,8 +645,11 @@ namespace bobura { namespace command
             typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
             typename boost::mpl::at<ui_type_list, type::ui::color>::type,
             typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
+            typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
             typename boost::mpl::at<view_type_list, type::view::scale>::type,
             typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
+            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
+            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
             typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
             traits<
                 typename boost::mpl::at<common_type_list, type::size>::type,

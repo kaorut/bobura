@@ -25,10 +25,15 @@ namespace bobura { namespace command
         typename Dialog,
         typename PointUnitSize,
         typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog,
         typename MessageCatalog,
         typename DialogTraits
     >
-    class font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog, DialogTraits>::impl
+    class font_color<
+        Traits, Dialog, PointUnitSize, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
+    >::impl
     {
     public:
         // types
@@ -44,6 +49,12 @@ namespace bobura { namespace command
         using point_unit_size_type = typename font_color::point_unit_size_type;
 
         using color_type = typename font_color::color_type;
+
+        using canvas_type = typename font_color::canvas_type;
+
+        using font_dialog_type = typename font_color::font_dialog_type;
+
+        using color_dialog_type = typename font_color::color_dialog_type;
 
         using message_catalog_type = typename font_color::message_catalog_type;
 
@@ -118,7 +129,16 @@ namespace bobura { namespace command
         using font_color_type = typename font_color_set_type::font_color_type;
 
         using font_color_dialog_type =
-            font_color_dialog<dialog_traits_type, size_type, font_type, point_unit_size_type, color_type>;
+            font_color_dialog<
+                dialog_traits_type,
+                size_type,
+                font_type,
+                point_unit_size_type,
+                color_type,
+                canvas_type,
+                font_dialog_type,
+                color_dialog_type
+            >;
 
 
         // variables
@@ -134,10 +154,15 @@ namespace bobura { namespace command
         typename Dialog,
         typename PointUnitSize,
         typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog,
         typename MessageCatalog,
         typename DialogTraits
     >
-    font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog, DialogTraits>::font_color(
+    font_color<
+        Traits, Dialog, PointUnitSize, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
+    >::font_color(
         const message_catalog_type& message_catalog
     )
     :
@@ -149,10 +174,15 @@ namespace bobura { namespace command
         typename Dialog,
         typename PointUnitSize,
         typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog,
         typename MessageCatalog,
         typename DialogTraits
     >
-    font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog, DialogTraits>::~font_color()
+    font_color<
+        Traits, Dialog, PointUnitSize, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
+    >::~font_color()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
@@ -161,10 +191,15 @@ namespace bobura { namespace command
         typename Dialog,
         typename PointUnitSize,
         typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog,
         typename MessageCatalog,
         typename DialogTraits
     >
-    void font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog, DialogTraits>::execute_impl(
+    void font_color<
+        Traits, Dialog, PointUnitSize, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
+    >::execute_impl(
         model_type&           model,
         abstract_window_type& parent
     )
@@ -188,6 +223,9 @@ namespace bobura { namespace command
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
         typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
         typename boost::mpl::at<ui_type_list, type::ui::color>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
+        typename boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
+        typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
         typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type
     >;

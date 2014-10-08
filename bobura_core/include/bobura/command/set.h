@@ -66,11 +66,20 @@ namespace bobura { namespace command
         //! The point unit size type.
         using point_unit_size_type = typename traits_type::point_unit_size_type;
 
+        //! The canvas type.
+        using canvas_type = typename traits_type::canvas_type;
+
         //! The scale type.
         using scale_type = typename traits_type::scale_type;
 
         //! The shell type.
         using shell_type = typename traits_type::shell_type;
+
+        //! The font dialog type.
+        using font_dialog_type = typename traits_type::font_dialog_type;
+
+        //! The color dialog_type.
+        using color_dialog_type = typename traits_type::color_dialog_type;
 
         //! The message catalog type.
         using message_catalog_type = typename traits_type::message_catalog_type;

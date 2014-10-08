@@ -22,9 +22,11 @@ namespace bobura
         \tparam AbstractWindow        An abstract window type.
         \tparam Label                 A label type.
         \tparam LinkLabel             A link label type.
-        \tparam TextBox               A text box type.
         \tparam Image                 An image type.
         \tparam Button                A button type.
+        \tparam TextBox               A text box type.
+        \tparam ListBox               A list box type.
+        \tparam PictureBox            A picture box type.
         \tparam TransparentBackground A transparent background type.
         \tparam MessageCatalog        A message catalog type.
     */
@@ -36,9 +38,11 @@ namespace bobura
         typename AbstractWindow,
         typename Label,
         typename LinkLabel,
-        typename TextBox,
         typename Image,
         typename Button,
+        typename TextBox,
+        typename ListBox,
+        typename PictureBox,
         typename TransparentBackground,
         typename MessageCatalog
     >
@@ -68,14 +72,20 @@ namespace bobura
         //! The link label type.
         using link_label_type = LinkLabel;
 
-        //! The text box type.
-        using text_box_type = TextBox;
-
         //! The image type.
         using image_type = Image;
 
         //! The button type.
         using button_type = Button;
+
+        //! The text box type.
+        using text_box_type = TextBox;
+
+        //! The list box type.
+        using list_box_type = ListBox;
+
+        //! The picture box type.
+        using picture_box_type = PictureBox;
 
         //! The transparent background type.
         using transparent_background_type = TransparentBackground;
