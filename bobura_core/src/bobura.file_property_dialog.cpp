@@ -30,6 +30,8 @@ namespace bobura
         public:
             // types
 
+            using traits_type = typename file_property_dialog::traits_type;
+
             using string_type = typename file_property_dialog::string_type;
 
             using base_type = typename file_property_dialog::base_type;
@@ -37,6 +39,14 @@ namespace bobura
             using message_catalog_type = typename file_property_dialog::message_catalog_type;
 
             using background_type = typename file_property_dialog::background_type;
+
+            using label_type = typename traits_type::label_type;
+
+            using text_box_type = typename traits_type::text_box_type;
+
+            using button_type = typename typename traits_type::button_type;
+
+            using transparent_background_type = typename traits_type::transparent_background_type;
 
 
             // constructors and destructor
@@ -128,15 +138,6 @@ namespace bobura
 
         private:
             // types
-
-            using label_type = typename boost::mpl::at<ui_type_list, type::ui::label>::type;
-
-            using text_box_type = typename boost::mpl::at<ui_type_list, type::ui::text_box>::type;
-
-            using button_type = typename boost::mpl::at<ui_type_list, type::ui::button>::type;
-
-            using transparent_background_type =
-                typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type;
 
             using file_property_dialog_message_type_list_type = message::file_property_dialog::type_list<base_type>;
 

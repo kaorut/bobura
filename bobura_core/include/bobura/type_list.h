@@ -734,6 +734,7 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
                 boost::mpl::at<ui_type_list, type::ui::label>::type,
                 boost::mpl::at<ui_type_list, type::ui::link_label>::type,
+                boost::mpl::at<ui_type_list, type::ui::text_box>::type,
                 boost::mpl::at<ui_type_list, type::ui::image>::type,
                 boost::mpl::at<ui_type_list, type::ui::button>::type,
                 boost::mpl::at<ui_type_list, type::ui::transparent_background>::type,

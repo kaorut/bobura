@@ -22,6 +22,7 @@ namespace bobura
         \tparam AbstractWindow        An abstract window type.
         \tparam Label                 A label type.
         \tparam LinkLabel             A link label type.
+        \tparam TextBox               A text box type.
         \tparam Image                 An image type.
         \tparam Button                A button type.
         \tparam TransparentBackground A transparent background type.
@@ -35,6 +36,7 @@ namespace bobura
         typename AbstractWindow,
         typename Label,
         typename LinkLabel,
+        typename TextBox,
         typename Image,
         typename Button,
         typename TransparentBackground,
@@ -65,6 +67,9 @@ namespace bobura
 
         //! The link label type.
         using link_label_type = LinkLabel;
+
+        //! The text box type.
+        using text_box_type = TextBox;
 
         //! The image type.
         using image_type = Image;
