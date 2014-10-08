@@ -26,8 +26,16 @@ namespace bobura { namespace command
         \tparam PointUnitSize  A point unit size type.
         \tparam Color          A color type.
         \tparam MessageCatalog A message catalog type.
+        \tparam DialogTraits   A dialog traits type.
     */
-    template <typename Traits, typename Dialog, typename PointUnitSize, typename Color, typename MessageCatalog>
+    template <
+        typename Traits,
+        typename Dialog,
+        typename PointUnitSize,
+        typename Color,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
     class font_color : public command_base<Traits>
     {
     public:
@@ -47,6 +55,9 @@ namespace bobura { namespace command
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
+
+        //! The dialog traits type.
+        using dialog_traits_type = DialogTraits;
 
         //! The base type.
         using base_type = command_base<traits_type>;

@@ -20,8 +20,15 @@
 
 namespace bobura { namespace command
 {
-    template <typename Traits, typename Dialog, typename PointUnitSize, typename Color, typename MessageCatalog>
-    class font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog>::impl
+    template <
+        typename Traits,
+        typename Dialog,
+        typename PointUnitSize,
+        typename Color,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    class font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog, DialogTraits>::impl
     {
     public:
         // types
@@ -39,6 +46,8 @@ namespace bobura { namespace command
         using color_type = typename font_color::color_type;
 
         using message_catalog_type = typename font_color::message_catalog_type;
+
+        using dialog_traits_type = typename font_color::dialog_traits_type;
 
 
         // constructors and destructor
@@ -109,9 +118,7 @@ namespace bobura { namespace command
         using font_color_type = typename font_color_set_type::font_color_type;
 
         using font_color_dialog_type =
-            font_color_dialog<
-                size_type, dialog_type, font_type, point_unit_size_type, color_type, message_catalog_type
-            >;
+            font_color_dialog<dialog_traits_type, size_type, font_type, point_unit_size_type, color_type>;
 
 
         // variables
@@ -122,21 +129,42 @@ namespace bobura { namespace command
     };
 
 
-    template <typename Traits, typename Dialog, typename PointUnitSize, typename Color, typename MessageCatalog>
-    font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog>::font_color(
+    template <
+        typename Traits,
+        typename Dialog,
+        typename PointUnitSize,
+        typename Color,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog, DialogTraits>::font_color(
         const message_catalog_type& message_catalog
     )
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
     {}
 
-    template <typename Traits, typename Dialog, typename PointUnitSize, typename Color, typename MessageCatalog>
-    font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog>::~font_color()
+    template <
+        typename Traits,
+        typename Dialog,
+        typename PointUnitSize,
+        typename Color,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog, DialogTraits>::~font_color()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    template <typename Traits, typename Dialog, typename PointUnitSize, typename Color, typename MessageCatalog>
-    void font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog>::execute_impl(
+    template <
+        typename Traits,
+        typename Dialog,
+        typename PointUnitSize,
+        typename Color,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    void font_color<Traits, Dialog, PointUnitSize, Color, MessageCatalog, DialogTraits>::execute_impl(
         model_type&           model,
         abstract_window_type& parent
     )
@@ -160,7 +188,8 @@ namespace bobura { namespace command
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
         typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
         typename boost::mpl::at<ui_type_list, type::ui::color>::type,
-        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+        typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type
     >;
 
 

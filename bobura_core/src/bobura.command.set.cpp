@@ -293,7 +293,12 @@ namespace bobura { namespace command
             return
                 tetengo2::stdalt::make_unique<
                     command::font_color<
-                        command_traits_type, dialog_type, point_unit_size_type, color_type, message_catalog_type
+                        command_traits_type,
+                        dialog_type,
+                        point_unit_size_type,
+                        color_type,
+                        message_catalog_type,
+                        dialog_traits_type
                     >
                 >(message_catalog);
         }
