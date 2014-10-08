@@ -284,7 +284,7 @@ namespace bobura { namespace command
         {
             return
                 tetengo2::stdalt::make_unique<
-                    command::file_property<command_traits_type, dialog_type, message_catalog_type>
+                    command::file_property<command_traits_type, dialog_type, message_catalog_type, dialog_traits_type>
                 >(message_catalog);
         }
 

@@ -24,19 +24,19 @@ namespace bobura
 {
     namespace
     {
-        template <typename Dialog, typename MessageCatalog>
-        class file_property_dialog<Dialog, MessageCatalog>::impl : private boost::noncopyable
+        template <typename Traits>
+        class file_property_dialog<Traits>::impl : private boost::noncopyable
         {
         public:
             // types
 
-            using base_type = Dialog;
+            using string_type = typename file_property_dialog::string_type;
 
-            using string_type = typename base_type::string_type;
+            using base_type = typename file_property_dialog::base_type;
 
-            using background_type = typename base_type::background_type;
+            using message_catalog_type = typename file_property_dialog::message_catalog_type;
 
-            using message_catalog_type = MessageCatalog;
+            using background_type = typename file_property_dialog::background_type;
 
 
             // constructors and destructor
@@ -392,8 +392,8 @@ namespace bobura
     }
 
 
-    template <typename Dialog, typename MessageCatalog>
-    file_property_dialog<Dialog, MessageCatalog>::file_property_dialog(
+    template <typename Traits>
+    file_property_dialog<Traits>::file_property_dialog(
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog
     )
@@ -402,77 +402,76 @@ namespace bobura
     m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog))
     {}
 
-    template <typename Dialog, typename MessageCatalog>
-    file_property_dialog<Dialog, MessageCatalog>::~file_property_dialog()
+    template <typename Traits>
+    file_property_dialog<Traits>::~file_property_dialog()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    template <typename Dialog, typename MessageCatalog>
-    const typename file_property_dialog<Dialog, MessageCatalog>::string_type&
-    file_property_dialog<Dialog, MessageCatalog>::company_name()
+    template <typename Traits>
+    const typename file_property_dialog<Traits>::string_type&
+    file_property_dialog<Traits>::company_name()
     const
     {
         return m_p_impl->company_name();
     }
 
-    template <typename Dialog, typename MessageCatalog>
-    void file_property_dialog<Dialog, MessageCatalog>::set_company_name(string_type company_name)
+    template <typename Traits>
+    void file_property_dialog<Traits>::set_company_name(string_type company_name)
     {
         m_p_impl->set_company_name(std::move(company_name));
     }
 
-    template <typename Dialog, typename MessageCatalog>
-    const typename file_property_dialog<Dialog, MessageCatalog>::string_type&
-    file_property_dialog<Dialog, MessageCatalog>::line_name()
+    template <typename Traits>
+    const typename file_property_dialog<Traits>::string_type&
+    file_property_dialog<Traits>::line_name()
     const
     {
         return m_p_impl->line_name();
     }
 
-    template <typename Dialog, typename MessageCatalog>
-    void file_property_dialog<Dialog, MessageCatalog>::set_line_name(string_type line_name)
+    template <typename Traits>
+    void file_property_dialog<Traits>::set_line_name(string_type line_name)
     {
         m_p_impl->set_line_name(std::move(line_name));
     }
 
-    template <typename Dialog, typename MessageCatalog>
-    const typename file_property_dialog<Dialog, MessageCatalog>::string_type&
-    file_property_dialog<Dialog, MessageCatalog>::note()
+    template <typename Traits>
+    const typename file_property_dialog<Traits>::string_type&
+    file_property_dialog<Traits>::note()
     const
     {
         return m_p_impl->note();
     }
 
-    template <typename Dialog, typename MessageCatalog>
-    void file_property_dialog<Dialog, MessageCatalog>::set_note(string_type note)
+    template <typename Traits>
+    void file_property_dialog<Traits>::set_note(string_type note)
     {
         m_p_impl->set_note(std::move(note));
     }
 
-    template <typename Dialog, typename MessageCatalog>
-    const typename file_property_dialog<Dialog, MessageCatalog>::string_type&
-    file_property_dialog<Dialog, MessageCatalog>::file_name()
+    template <typename Traits>
+    const typename file_property_dialog<Traits>::string_type&
+    file_property_dialog<Traits>::file_name()
     const
     {
         return m_p_impl->file_name();
     }
 
-    template <typename Dialog, typename MessageCatalog>
-    void file_property_dialog<Dialog, MessageCatalog>::set_file_name(string_type file_name)
+    template <typename Traits>
+    void file_property_dialog<Traits>::set_file_name(string_type file_name)
     {
         m_p_impl->set_file_name(std::move(file_name));
     }
 
-    template <typename Dialog, typename MessageCatalog>
-    void file_property_dialog<Dialog, MessageCatalog>::set_result_impl()
+    template <typename Traits>
+    void file_property_dialog<Traits>::set_result_impl()
     {
         m_p_impl->set_result_impl();
     }
 
 
     template class file_property_dialog<
-        typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+        typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type
     >;
 
 

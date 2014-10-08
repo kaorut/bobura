@@ -18,8 +18,8 @@
 
 namespace bobura { namespace command
 {
-    template <typename Traits, typename Dialog, typename MessageCatalog>
-    class file_property<Traits, Dialog, MessageCatalog>::impl
+    template <typename Traits, typename Dialog, typename MessageCatalog, typename DialogTraits>
+    class file_property<Traits, Dialog, MessageCatalog, DialogTraits>::impl
     {
     public:
         // types
@@ -33,6 +33,8 @@ namespace bobura { namespace command
         using dialog_type = typename file_property::dialog_type;
 
         using message_catalog_type = typename file_property::message_catalog_type;
+
+        using dialog_traits_type = typename file_property::dialog_traits_type;
 
 
         // constructors and destructor
@@ -69,7 +71,7 @@ namespace bobura { namespace command
     private:
         // types
 
-        using file_property_dialog_type = file_property_dialog<dialog_type, message_catalog_type>;
+        using file_property_dialog_type = file_property_dialog<dialog_traits_type>;
 
 
         // variables
@@ -80,19 +82,24 @@ namespace bobura { namespace command
     };
 
 
-    template <typename Traits, typename Dialog, typename MessageCatalog>
-    file_property<Traits, Dialog, MessageCatalog>::file_property(const message_catalog_type& message_catalog)
+    template <typename Traits, typename Dialog, typename MessageCatalog, typename DialogTraits>
+    file_property<Traits, Dialog, MessageCatalog, DialogTraits>::file_property(
+        const message_catalog_type& message_catalog
+    )
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
     {}
 
-    template <typename Traits, typename Dialog, typename MessageCatalog>
-    file_property<Traits, Dialog, MessageCatalog>::~file_property()
+    template <typename Traits, typename Dialog, typename MessageCatalog, typename DialogTraits>
+    file_property<Traits, Dialog, MessageCatalog, DialogTraits>::~file_property()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    template <typename Traits, typename Dialog, typename MessageCatalog>
-    void file_property<Traits, Dialog, MessageCatalog>::execute_impl(model_type& model, abstract_window_type& parent)
+    template <typename Traits, typename Dialog, typename MessageCatalog, typename DialogTraits>
+    void file_property<Traits, Dialog, MessageCatalog, DialogTraits>::execute_impl(
+        model_type&           model,
+        abstract_window_type& parent
+    )
     const
     {
         m_p_impl->execute(model, parent);
@@ -111,7 +118,8 @@ namespace bobura { namespace command
             typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
         >,
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+        typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type
     >;
 
 
