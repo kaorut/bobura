@@ -26,6 +26,7 @@
 #include <bobura/config_traits.h>
 #include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
+#include <bobura/dialog_traits.h>
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/load_save/load_from_file.h>
 #include <bobura/load_save/new_file.h>
@@ -717,12 +718,27 @@ namespace bobura
 
     namespace type { namespace main_window
     {
+        struct dialog_traits;  //!< The dialog traits.
         struct traits;         //!< The traits.
     }}
 
 #if !defined(DOCUMENTATION)
     namespace detail { namespace main_window
     {
+        using dialog_traits_type =
+            dialog_traits<
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<ui_type_list, type::ui::position>::type,
+                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                boost::mpl::at<ui_type_list, type::ui::label>::type,
+                boost::mpl::at<ui_type_list, type::ui::link_label>::type,
+                boost::mpl::at<ui_type_list, type::ui::image>::type,
+                boost::mpl::at<ui_type_list, type::ui::button>::type,
+                boost::mpl::at<ui_type_list, type::ui::transparent_background>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+            >;
         using traits_type =
             main_window_traits<
                 boost::mpl::at<common_type_list, type::size>::type,
@@ -757,9 +773,11 @@ namespace bobura
 
     //! The main window type list.
     using main_window_type_list =
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::main_window::dialog_traits, detail::main_window::dialog_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::main_window::traits, detail::main_window::traits_type>,
         tetengo2::meta::assoc_list_end
-        >;
+        >>;
 
 
 }

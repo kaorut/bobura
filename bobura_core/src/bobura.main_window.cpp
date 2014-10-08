@@ -155,11 +155,6 @@ namespace bobura
                 position_type,
                 dimension_type,
                 typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::label>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::link_label>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::image>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::button>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type,
                 typename boost::mpl::at<ui_type_list, type::ui::color>::type,
                 typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
                 typename boost::mpl::at<view_type_list, type::view::scale>::type,
@@ -169,6 +164,7 @@ namespace bobura
                 traits_type,
                 typename boost::mpl::at<view_type_list, type::view::traits>::type,
                 typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
+                typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type,
                 config_traits_type
             >;
 

@@ -56,16 +56,6 @@ namespace bobura { namespace command
 
         using dialog_type = typename set::dialog_type;
 
-        using label_type = typename set::label_type;
-
-        using link_label_type = typename set::link_label_type;
-
-        using image_type = typename set::image_type;
-
-        using button_type = typename set::button_type;
-
-        using transparent_background_type = typename set::transparent_background_type;
-
         using color_type = typename set::color_type;
 
         using point_unit_size_type = typename set::point_unit_size_type;
@@ -83,6 +73,8 @@ namespace bobura { namespace command
         using view_traits_type = typename set::view_traits_type;
 
         using load_save_traits_type = typename set::load_save_traits_type;
+
+        using dialog_traits_type = typename set::dialog_traits_type;
 
         using config_traits_type = typename set::config_traits_type;
 
@@ -276,13 +268,8 @@ namespace bobura { namespace command
                         command_traits_type,
                         position_type,
                         dimension_type,
-                        dialog_type,
-                        label_type,
-                        link_label_type,
-                        image_type,
-                        button_type,
-                        transparent_background_type,
                         message_catalog_type,
+                        dialog_traits_type,
                         config_traits_type
                     >
                 >(message_catalog, settings);
@@ -296,9 +283,9 @@ namespace bobura { namespace command
         static command_ptr_type create_file_property(const message_catalog_type& message_catalog)
         {
             return
-                tetengo2::stdalt::make_unique<command::file_property<command_traits_type, dialog_type, message_catalog_type>>(
-                    message_catalog
-                );
+                tetengo2::stdalt::make_unique<
+                    command::file_property<command_traits_type, dialog_type, message_catalog_type>
+                >(message_catalog);
         }
 
         static command_ptr_type create_font_color(const message_catalog_type& message_catalog)
@@ -337,7 +324,8 @@ namespace bobura { namespace command
 
         static command_ptr_type create_new_file(const new_file_type& new_file)
         {
-            return tetengo2::stdalt::make_unique<command::new_file<command_traits_type, load_save_traits_type>>(new_file);
+            return
+                tetengo2::stdalt::make_unique<command::new_file<command_traits_type, load_save_traits_type>>(new_file);
         }
 
         static command_ptr_type create_nop()
@@ -353,7 +341,9 @@ namespace bobura { namespace command
         static command_ptr_type create_save_to_file(const save_to_file_type& save_to_file)
         {
             return
-                tetengo2::stdalt::make_unique<command::save_to_file<command_traits_type, load_save_traits_type>>(save_to_file);
+                tetengo2::stdalt::make_unique<
+                    command::save_to_file<command_traits_type, load_save_traits_type>
+                >(save_to_file);
         }
 
         static std::vector<command_ptr_type> create_set_horizontal_scale(diagram_view_type& diagram_view)
@@ -388,7 +378,9 @@ namespace bobura { namespace command
             {
                 commands.push_back(
                     tetengo2::stdalt::make_unique<
-                        command::set_vertical_scale<command_traits_type, scale_type, main_window_traits_type, view_traits_type>
+                        command::set_vertical_scale<
+                            command_traits_type, scale_type, main_window_traits_type, view_traits_type
+                        >
                     >(diagram_view, scale_list.at(i))
                 );
             }
@@ -637,11 +629,6 @@ namespace bobura { namespace command
             typename boost::mpl::at<ui_type_list, type::ui::position>::type,
             typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
             typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::label>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::link_label>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::image>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::button>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type,
             typename boost::mpl::at<ui_type_list, type::ui::color>::type,
             typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
             typename boost::mpl::at<view_type_list, type::view::scale>::type,
@@ -660,6 +647,7 @@ namespace bobura { namespace command
             typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
             typename boost::mpl::at<view_type_list, type::view::traits>::type,
             typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
+            typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type,
             typename boost::mpl::at<setting_type_list, type::setting::config_traits>::type
         >
     >;

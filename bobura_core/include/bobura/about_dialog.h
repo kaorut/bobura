@@ -21,68 +21,35 @@ namespace bobura
     /*!
         \brief The class template for the about dialog.
 
-        \tparam String                A string type.
-        \tparam Position              A position type.
-        \tparam Dimension             A dimension type.
-        \tparam Dialog                A dialog type.
-        \tparam Label                 A label type.
-        \tparam LinkLabel             A link label type.
-        \tparam Image                 An image type.
-        \tparam Button                A button type.
-        \tparam TransparentBackground A transparent background type.
-        \tparam MessageCatalog        A message catalog type.
-        \tparam ConfigTraits          A configuration traits type.
+        \tparam Traits       A traits type.
+        \tparam ConfigTraits A configuration traits type.
     */
-    template <
-        typename String,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename Label,
-        typename LinkLabel,
-        typename Image,
-        typename Button,
-        typename TransparentBackground,
-        typename MessageCatalog,
-        typename ConfigTraits
-    >
-    class about_dialog : public Dialog
+    template <typename Traits, typename ConfigTraits>
+    class about_dialog : public Traits::dialog_type
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The string type.
-        using string_type = String;
+        using string_type = typename traits_type::string_type;
 
         //! The position type.
-        using position_type = Position;
+        using position_type = typename traits_type::position_type;
 
         //! The dimension type.
-        using dimension_type = Dimension;
+        using dimension_type = typename traits_type::dimension_type;
 
         //! The base type.
-        using base_type = Dialog;
+        using base_type = typename traits_type::dialog_type;
 
         //! The abstract window type.
-        using abstract_window_type = typename base_type::base_type;
-
-        //! The label type.
-        using label_type = Label;
-
-        //! The link label type.
-        using link_label_type = LinkLabel;
-
-        //! The image type.
-        using image_type = Image;
-
-        //! The button type.
-        using button_type = Button;
-
-        //! The transparent background type.
-        using transparent_background_type = TransparentBackground;
+        using abstract_window_type = typename traits_type::abstract_window_type;
 
         //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        using message_catalog_type = typename traits_type::message_catalog_type;
 
         //! The configuration traits type.
         using config_traits_type = ConfigTraits;

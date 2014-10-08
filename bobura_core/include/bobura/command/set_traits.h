@@ -20,11 +20,6 @@ namespace bobura { namespace command
         \tparam Position              A position type.
         \tparam Dimension             A dimension type.
         \tparam Dialog                A dialog type.
-        \tparam Label                 A label type.
-        \tparam LinkLabel             A link label type.
-        \tparam Image                 An image type.
-        \tparam Button                A button type.
-        \tparam TransparentBackground A transparent background type.
         \tparam Color                 A color type.
         \tparam PointUnitSize         A point unit size type.
         \tparam Scale                 A scale type.
@@ -34,6 +29,7 @@ namespace bobura { namespace command
         \tparam MainWindowTraits      A main window traits type.
         \tparam ViewTraits            A view traits type.
         \tparam LoadSaveTraits        A loading and saving processing traits type.
+        \tparam DialogTraits          A dialog traits type.
         \tparam ConfigTraits          A config traits type.
     */
     template <
@@ -42,11 +38,6 @@ namespace bobura { namespace command
         typename Position,
         typename Dimension,
         typename Dialog,
-        typename Label,
-        typename LinkLabel,
-        typename Image,
-        typename Button,
-        typename TransparentBackground,
         typename Color,
         typename PointUnitSize,
         typename Scale,
@@ -56,6 +47,7 @@ namespace bobura { namespace command
         typename MainWindowTraits,
         typename ViewTraits,
         typename LoadSaveTraits,
+        typename DialogTraits,
         typename ConfigTraits
     >
     class set_traits
@@ -77,21 +69,6 @@ namespace bobura { namespace command
 
         //! The dialog type.
         using dialog_type = Dialog;
-
-        //! The label type.
-        using label_type = Label;
-
-        //! The link label type.
-        using link_label_type = LinkLabel;
-
-        //! The image type.
-        using image_type = Image;
-
-        //! The button type.
-        using button_type = Button;
-
-        //! The transparent background type.
-        using transparent_background_type = TransparentBackground;
 
         //! The color type.
         using color_type = Color;
@@ -119,6 +96,9 @@ namespace bobura { namespace command
 
         //! The loading and saving processing traits type.
         using load_save_traits_type = LoadSaveTraits;
+
+        //! The dialog traits type.
+        using dialog_traits_type = DialogTraits;
 
         //! The config traits type.
         using config_traits_type = ConfigTraits;
