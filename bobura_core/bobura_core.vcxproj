@@ -127,6 +127,7 @@
     <ClInclude Include="include\bobura\detail_type_list.h" />
     <ClInclude Include="include\bobura\diagram_picture_box.h" />
     <ClInclude Include="include\bobura\diagram_view.h" />
+    <ClInclude Include="include\bobura\dialog_traits.h" />
     <ClInclude Include="include\bobura\file_property_dialog.h" />
     <ClInclude Include="include\bobura\font_color_dialog.h" />
     <ClInclude Include="include\bobura\load_save\0namespace.dox" />

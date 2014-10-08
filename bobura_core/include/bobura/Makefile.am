@@ -31,6 +31,7 @@ extra_headers = \
     detail_type_list.h \
     diagram_picture_box.h \
     diagram_view.h \
+    dialog_traits.h \
     file_property_dialog.h \
     font_color_dialog.h \
     load_save/0namespace.dox \
