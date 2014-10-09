@@ -23,31 +23,32 @@ namespace bobura
     /*!
         \brief The class template for the OuDia diagram dialog.
 
-        \tparam Size           A size type.
-        \tparam String         A string type.
-        \tparam Dialog         A dialog type.
-        \tparam MessageCatalog A message catalog type.
+        \tparam Traits A traits type.
+        \tparam Size   A size type.
     */
-    template <typename Size, typename String, typename Dialog, typename MessageCatalog>
-    class oudia_diagram_dialog : public Dialog
+    template <typename Traits, typename Size>
+    class oudia_diagram_dialog : public Traits::dialog_type
     {
     public:
         // types
 
-        //! The size type.
-        using size_type = Size;
+        //! The traits type.
+        using traits_type = Traits;
 
         //! The string type.
-        using string_type = String;
+        using string_type = typename traits_type::string_type;
 
         //! The base type.
-        using base_type = Dialog;
+        using base_type = typename traits_type::dialog_type;
 
         //! The abstract window type.
-        using abstract_window_type = typename base_type::base_type;
+        using abstract_window_type = typename traits_type::abstract_window_type;
 
         //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        using message_catalog_type = typename traits_type::message_catalog_type;
+
+        //! The size type.
+        using size_type = Size;
 
 
         // constructors and destructor

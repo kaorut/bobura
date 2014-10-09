@@ -666,13 +666,25 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace load_save
     {
-        using oudia_diagram_dialog_type =
-            oudia_diagram_dialog<
-                boost::mpl::at<common_type_list, type::size>::type,
+        using dialog_traits_type =
+            dialog_traits<
                 boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<ui_type_list, type::ui::position>::type,
+                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
                 boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                boost::mpl::at<ui_type_list, type::ui::label>::type,
+                boost::mpl::at<ui_type_list, type::ui::link_label>::type,
+                boost::mpl::at<ui_type_list, type::ui::image>::type,
+                boost::mpl::at<ui_type_list, type::ui::button>::type,
+                boost::mpl::at<ui_type_list, type::ui::text_box>::type,
+                boost::mpl::at<ui_type_list, type::ui::list_box>::type,
+                boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
+                boost::mpl::at<ui_type_list, type::ui::transparent_background>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
+        using oudia_diagram_dialog_type =
+            oudia_diagram_dialog<dialog_traits_type, boost::mpl::at<common_type_list, type::size>::type>;
         using traits_type =
             bobura::load_save::traits<
                 boost::mpl::at<common_type_list, type::size>::type,

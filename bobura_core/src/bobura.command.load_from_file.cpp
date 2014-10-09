@@ -156,10 +156,8 @@ namespace bobura { namespace command
             typename boost::mpl::at<common_dialog_type_list, type::common_dialog::file_open_dialog>::type,
             typename boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
             oudia_diagram_dialog<
-                typename boost::mpl::at<common_type_list, type::size>::type,
-                typename boost::mpl::at<common_type_list, type::string>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+                typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type,
+                typename boost::mpl::at<common_type_list, type::size>::type
             >,
             typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
             typename boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type,
