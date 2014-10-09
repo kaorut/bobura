@@ -42,18 +42,6 @@ namespace bobura
 
         using size_type = typename oudia_diagram_dialog::size_type;
 
-        using position_type = typename traits_type::position_type;
-
-        using dimension_type = typename traits_type::dimension_type;
-
-        using label_type = typename traits_type::label_type;
-
-        using button_type = typename traits_type::button_type;
-
-        using list_box_type = typename traits_type::list_box_type;
-
-        using transparent_background_type = typename traits_type::transparent_background_type;
-
 
         // constructors and destructor
 
@@ -135,15 +123,27 @@ namespace bobura
     private:
         // types
 
-        using oudia_diagram_dialog_message_type_list_type = message::oudia_diagram_dialog::type_list<base_type>;
+        using position_type = typename traits_type::position_type;
 
         using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
         using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
+        using dimension_type = typename traits_type::dimension_type;
+
         using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
         using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+
+        using label_type = typename traits_type::label_type;
+
+        using button_type = typename traits_type::button_type;
+
+        using list_box_type = typename traits_type::list_box_type;
+
+        using transparent_background_type = typename traits_type::transparent_background_type;
+
+        using oudia_diagram_dialog_message_type_list_type = message::oudia_diagram_dialog::type_list<base_type>;
 
 
         // variables

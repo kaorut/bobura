@@ -40,14 +40,6 @@ namespace bobura
 
             using background_type = typename file_property_dialog::background_type;
 
-            using label_type = typename traits_type::label_type;
-
-            using button_type = typename typename traits_type::button_type;
-
-            using text_box_type = typename traits_type::text_box_type;
-
-            using transparent_background_type = typename traits_type::transparent_background_type;
-
 
             // constructors and destructor
 
@@ -139,19 +131,27 @@ namespace bobura
         private:
             // types
 
-            using file_property_dialog_message_type_list_type = message::file_property_dialog::type_list<base_type>;
-
-            using dimension_type = typename base_type::dimension_type;
+            using dimension_type = typename traits_type::dimension_type;
 
             using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
             using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
-            using position_type = typename base_type::position_type;
+            using position_type = typename traits_type::position_type;
 
             using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
             using top_type = typename tetengo2::gui::position<position_type>::top_type;
+
+            using label_type = typename traits_type::label_type;
+
+            using button_type = typename typename traits_type::button_type;
+
+            using text_box_type = typename traits_type::text_box_type;
+
+            using transparent_background_type = typename traits_type::transparent_background_type;
+
+            using file_property_dialog_message_type_list_type = message::file_property_dialog::type_list<base_type>;
 
 
             // variables

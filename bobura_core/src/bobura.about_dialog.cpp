@@ -47,16 +47,6 @@ namespace bobura
 
             using settings_type = typename about_dialog::settings_type;
 
-            using label_type = typename traits_type::label_type;
-
-            using link_label_type = typename traits_type::link_label_type;
-
-            using image_type = typename traits_type::image_type;
-
-            using button_type = typename traits_type::button_type;
-
-            using transparent_background_type = typename traits_type::transparent_background_type;
-
 
             // constructors and destructor
 
@@ -78,12 +68,6 @@ namespace bobura
         private:
             // types
 
-            using color_type = typename label_type::color_type;
-
-            using icon_type = typename image_type::icon_type;
-
-            using about_dialog_message_type_list_type = message::about_dialog::type_list<base_type>;
-
             using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
             using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
@@ -91,6 +75,22 @@ namespace bobura
             using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
             using top_type = typename tetengo2::gui::position<position_type>::top_type;
+
+            using label_type = typename traits_type::label_type;
+
+            using color_type = typename label_type::color_type;
+
+            using link_label_type = typename traits_type::link_label_type;
+
+            using image_type = typename traits_type::image_type;
+
+            using icon_type = typename image_type::icon_type;
+
+            using button_type = typename traits_type::button_type;
+
+            using transparent_background_type = typename traits_type::transparent_background_type;
+
+            using about_dialog_message_type_list_type = message::about_dialog::type_list<base_type>;
 
 
             // variables
