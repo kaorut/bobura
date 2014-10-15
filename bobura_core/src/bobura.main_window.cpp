@@ -35,19 +35,11 @@ namespace bobura
 
         using traits_type = typename main_window::traits_type;
 
-        using size_type = typename main_window::size_type;
-
-        using difference_type = typename main_window::difference_type;
-
         using string_type = typename main_window::string_type;
 
         using position_type = typename main_window::position_type;
 
         using dimension_type = typename main_window::dimension_type;
-
-        using operating_distance_type = typename main_window::operating_distance_type;
-
-        using speed_type = typename main_window::speed_type;
 
         using base_type = typename main_window::base_type;
 
@@ -130,6 +122,14 @@ namespace bobura
 
     private:
         // types
+
+        using size_type = typename traits_type::size_type;
+
+        using difference_type = typename traits_type::difference_type;
+
+        using operating_distance_type = typename traits_type::operating_distance_type;
+
+        using speed_type = typename traits_type::speed_type;
 
         using message_loop_break_type =
             tetengo2::gui::message::message_loop_break<

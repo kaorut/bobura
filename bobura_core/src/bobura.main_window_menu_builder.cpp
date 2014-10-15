@@ -19,7 +19,6 @@
 #include <bobura/command/traits.h>
 #include <bobura/diagram_view.h>
 #include <bobura/main_window_menu_builder.h>
-#include <bobura/message/type_list.h>
 #include <bobura/message/type_list_impl.h>
 #include <bobura/type_list.h>
 

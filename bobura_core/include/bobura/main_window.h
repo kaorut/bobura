@@ -17,6 +17,7 @@
 
 #include <bobura/diagram_picture_box.h>
 #include <bobura/load_save/confirm_file_save.h>
+#include <bobura/message/type_list_impl.h>
 #include <bobura/property_bar.h>
 #include <bobura/settings.h>
 
@@ -37,12 +38,6 @@ namespace bobura
         //! The traits type.
         using traits_type = Traits;
 
-        //! The size type.
-        using size_type = typename traits_type::size_type;
-
-        //! The difference type.
-        using difference_type = typename traits_type::difference_type;
-
         //! The string type.
         using string_type = typename traits_type::string_type;
 
@@ -51,15 +46,6 @@ namespace bobura
 
         //! The dimension type.
         using dimension_type = typename traits_type::dimension_type;
-
-        //! The output_stream type.
-        using output_stream_type = typename traits_type::output_stream_type;
-
-        //! The operating distance type.
-        using operating_distance_type = typename traits_type::operating_distance_type;
-
-        //! The speed type.
-        using speed_type = typename traits_type::speed_type;
 
         //! The base type.
         using base_type = typename traits_type::window_type;
@@ -76,33 +62,29 @@ namespace bobura
         //! The side bar type.
         using side_bar_type = typename traits_type::side_bar_type;
 
-        //! The message box type.
-        using message_box_type = typename traits_type::message_box_type;
-
-        //! The file save dialog type.
-        using file_save_dialog_type = typename traits_type::file_save_dialog_type;
-
         //! The font type.
         using font_type = typename traits_type::font_type;
 
         //! The mouse capture type.
         using mouse_capture_type = typename traits_type::mouse_capture_type;
 
-        //! The config traits type.
-        using config_traits_type = typename traits_type::config_traits_type;
+        //! The message catalog type.
+        using message_catalog_type = typename traits_type::message_catalog_type;
+
+        //! The view traits type.
+        using view_traits_type = typename traits_type::view_traits_type;
 
         //! The loading and saving processing traits type.
         using load_save_traits_type = typename traits_type::load_save_traits_type;
 
-        //! The message catalog type.
-        using message_catalog_type = typename traits_type::message_catalog_type;
-
-        //! The timetable file encoder type.
-        using timetable_file_encoder_type = typename traits_type::timetable_file_encoder_type;
+        //! The config traits type.
+        using config_traits_type = typename traits_type::config_traits_type;
 
         //! The diagram picture box message type list type.
         using diagram_picture_box_message_type_list_type =
-            typename traits_type::diagram_picture_box_message_type_list_type;
+            message::diagram_picture_box::type_list<
+                picture_box_type, abstract_window_type, mouse_capture_type, view_traits_type
+            >;
 
         //! The diagram picture box type.
         using diagram_picture_box_type =
