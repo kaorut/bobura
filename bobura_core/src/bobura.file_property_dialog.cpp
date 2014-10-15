@@ -131,17 +131,17 @@ namespace bobura
         private:
             // types
 
-            using dimension_type = typename traits_type::dimension_type;
-
-            using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-            using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
-
             using position_type = typename traits_type::position_type;
 
             using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
             using top_type = typename tetengo2::gui::position<position_type>::top_type;
+
+            using dimension_type = typename traits_type::dimension_type;
+
+            using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
+
+            using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
             using label_type = typename traits_type::label_type;
 

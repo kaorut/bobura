@@ -182,6 +182,7 @@ namespace bobura
         struct color;          //!< The color type.
         struct dialog;         //!< The dialog type.
         struct dimension;      //!< The dimension type.
+        struct dropdown_box;   //!< The dropdown box type.
         struct fast_canvas;    //!< The fast canvas type.
         struct fast_font;      //!< The fast font type.
         struct fast_solid_background; //!< The fast solid background type.
@@ -309,6 +310,7 @@ namespace bobura
             >;
         using color_type = tetengo2::gui::drawing::color;
         using button_type = tetengo2::gui::widget::button<widget_traits_type, widget_details_traits_type>;
+        using dropdown_box_type = tetengo2::gui::widget::dropdown_box<widget_traits_type, widget_details_traits_type>;
         using image_type = tetengo2::gui::widget::image<widget_traits_type, widget_details_traits_type>;
         using label_type = tetengo2::gui::widget::label<widget_traits_type, widget_details_traits_type>;
         using link_label_type =
@@ -377,6 +379,7 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::color, detail::ui::color_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::dialog, detail::ui::dialog_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::dimension, detail::ui::dimension_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::dropdown_box, detail::ui::dropdown_box_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::fast_canvas, detail::ui::fast_canvas_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::fast_font, detail::ui::fast_font_type>,
         tetengo2::meta::assoc_list<
@@ -420,7 +423,7 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::widget_traits, detail::ui::widget_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::window, detail::ui::window_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>>>>>>>>>>>>>>>>>>;
+        >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>;
 
 
     /**** Setting ***********************************************************/
@@ -679,6 +682,7 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::button>::type,
                 boost::mpl::at<ui_type_list, type::ui::text_box>::type,
                 boost::mpl::at<ui_type_list, type::ui::list_box>::type,
+                boost::mpl::at<ui_type_list, type::ui::dropdown_box>::type,
                 boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
                 boost::mpl::at<ui_type_list, type::ui::transparent_background>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
@@ -750,6 +754,7 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::button>::type,
                 boost::mpl::at<ui_type_list, type::ui::text_box>::type,
                 boost::mpl::at<ui_type_list, type::ui::list_box>::type,
+                boost::mpl::at<ui_type_list, type::ui::dropdown_box>::type,
                 boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
                 boost::mpl::at<ui_type_list, type::ui::transparent_background>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type

@@ -406,7 +406,15 @@ namespace bobura { namespace command
         {
             return
                 tetengo2::stdalt::make_unique<
-                    command::train_kind<command_traits_type, dialog_type, color_type, message_catalog_type>
+                    command::train_kind<
+                        command_traits_type,
+                        dialog_type,
+                        color_type,
+                        canvas_type,
+                        color_dialog_type,
+                        message_catalog_type,
+                        dialog_traits_type
+                    >
                 >(message_catalog);
         }
 

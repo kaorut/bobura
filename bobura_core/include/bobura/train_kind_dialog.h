@@ -22,34 +22,42 @@ namespace bobura
     /*!
         \brief The class template for the train kind dialog.
 
-        \tparam Size           A size type.
-        \tparam Dialog         A dialog type.
-        \tparam TrainKind      A train kind type.
-        \tparam Font           A font type.
-        \tparam Color          A color type.
-        \tparam MessageCatalog A message catalog type.
+        \tparam Traits      A traits type.
+        \tparam Size        A size type.
+        \tparam TrainKind   A train kind type.
+        \tparam Font        A font type.
+        \tparam Color       A color type.
+        \tparam Canvas      A canvas type.
+        \tparam ColorDialog A color dialog type.
     */
     template <
+        typename Traits,
         typename Size,
-        typename Dialog,
         typename TrainKind,
         typename Font,
         typename Color,
-        typename MessageCatalog
+        typename Canvas,
+        typename ColorDialog
     >
-    class train_kind_dialog : public Dialog
+    class train_kind_dialog : public Traits::dialog_type
     {
     public:
         // types
 
-        //! The size type.
-        using size_type = Size;
+        //! The traits type.
+        using traits_type = Traits;
 
         //! The base type.
-        using base_type = Dialog;
+        using base_type = typename traits_type::dialog_type;
 
         //! The abstract window type.
-        using abstract_window_type = typename base_type::base_type;
+        using abstract_window_type = typename traits_type::abstract_window_type;
+
+        //! The message catalog type.
+        using message_catalog_type = typename traits_type::message_catalog_type;
+
+        //! The size type.
+        using size_type = Size;
 
         //! The train kind type.
         using train_kind_type = TrainKind;
@@ -60,8 +68,11 @@ namespace bobura
         //! The color type.
         using color_type = Color;
 
-        //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! The color dialog type.
+        using color_dialog_type = ColorDialog;
 
         //! The information set type.
         class info_set_type

@@ -26,8 +26,16 @@
 
 namespace bobura { namespace command
 {
-    template <typename Traits, typename Dialog, typename Color, typename MessageCatalog>
-    class train_kind<Traits, Dialog, Color, MessageCatalog>::impl
+    template <
+        typename Traits,
+        typename Dialog,
+        typename Color,
+        typename Canvas,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    class train_kind<Traits, Dialog, Color, Canvas, ColorDialog, MessageCatalog, DialogTraits>::impl
     {
     public:
         // types
@@ -46,15 +54,23 @@ namespace bobura { namespace command
 
         using color_type = typename train_kind::color_type;
 
+        using canvas_type = typename train_kind::canvas_type;
+
+        using color_dialog_type = typename train_kind::color_dialog_type;
+
         using message_catalog_type = typename train_kind::message_catalog_type;
+
+        using dialog_traits_type = typename train_kind::dialog_traits_type;
 
         using train_kind_dialog_type =
             train_kind_dialog<
+                dialog_traits_type,
                 size_type,
-                dialog_type,
                 model::train_kind<string_type>,
-                font_type, color_type,
-                message_catalog_type
+                font_type,
+                color_type,
+                canvas_type,
+                color_dialog_type
             >;
 
 
@@ -165,19 +181,45 @@ namespace bobura { namespace command
     };
 
 
-    template <typename Traits, typename Dialog, typename Color, typename MessageCatalog>
-    train_kind<Traits, Dialog, Color, MessageCatalog>::train_kind(const message_catalog_type& message_catalog)
+    template <
+        typename Traits,
+        typename Dialog,
+        typename Color,
+        typename Canvas,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    train_kind<Traits, Dialog, Color, Canvas, ColorDialog, MessageCatalog, DialogTraits>::train_kind(
+        const message_catalog_type& message_catalog
+    )
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
     {}
 
-    template <typename Traits, typename Dialog, typename Color, typename MessageCatalog>
-    train_kind<Traits, Dialog, Color, MessageCatalog>::~train_kind()
+    template <
+        typename Traits,
+        typename Dialog,
+        typename Color,
+        typename Canvas,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    train_kind<Traits, Dialog, Color, Canvas, ColorDialog, MessageCatalog, DialogTraits>::~train_kind()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    template <typename Traits, typename Dialog, typename Color, typename MessageCatalog>
-    void train_kind<Traits, Dialog, Color, MessageCatalog>::execute_impl(
+    template <
+        typename Traits,
+        typename Dialog,
+        typename Color,
+        typename Canvas,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    void train_kind<Traits, Dialog, Color, Canvas, ColorDialog, MessageCatalog, DialogTraits>::execute_impl(
         model_type&           model,
         abstract_window_type& parent
     )
@@ -200,7 +242,10 @@ namespace bobura { namespace command
         >,
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
         typename boost::mpl::at<ui_type_list, type::ui::color>::type,
-        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+        typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
+        typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+        typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type
     >;
 
 

@@ -26,6 +26,7 @@ namespace bobura
         \tparam Button                A button type.
         \tparam TextBox               A text box type.
         \tparam ListBox               A list box type.
+        \tparam DropdownBox           A dropdown box type.
         \tparam PictureBox            A picture box type.
         \tparam TransparentBackground A transparent background type.
         \tparam MessageCatalog        A message catalog type.
@@ -42,6 +43,7 @@ namespace bobura
         typename Button,
         typename TextBox,
         typename ListBox,
+        typename DropdownBox,
         typename PictureBox,
         typename TransparentBackground,
         typename MessageCatalog
@@ -83,6 +85,9 @@ namespace bobura
 
         //! The list box type.
         using list_box_type = ListBox;
+
+        //! The dropdown box type.
+        using dropdown_box_type = DropdownBox;
 
         //! The picture box type.
         using picture_box_type = PictureBox;

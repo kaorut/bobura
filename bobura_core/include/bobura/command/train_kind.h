@@ -24,9 +24,20 @@ namespace bobura { namespace command
         \tparam Traits         A traits type.
         \tparam Dialog         A dialog type.
         \tparam Color          A color type.
+        \tparam Canvas         A canvas type.
+        \tparam ColorDialog    A color dialog type.
         \tparam MessageCatalog A message catalog type.
+        \tparam DialogTraits   A dialog traits type.
     */
-    template <typename Traits, typename Dialog, typename Color, typename MessageCatalog>
+    template <
+        typename Traits,
+        typename Dialog,
+        typename Color,
+        typename Canvas,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
     class train_kind : public command_base<Traits>
     {
     public:
@@ -41,8 +52,17 @@ namespace bobura { namespace command
         //! The color type.
         using color_type = Color;
 
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! THe color dialog type.
+        using color_dialog_type = ColorDialog;
+
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
+
+        //! The dialog traits type.
+        using dialog_traits_type = DialogTraits;
 
         //! The base type.
         using base_type = command_base<traits_type>;
