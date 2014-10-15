@@ -19,16 +19,14 @@
 
 #include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
-#include <bobura/command/set_traits.h>
-#include <bobura/command/traits.h>
 #include <bobura/main_window.h>
 #include <bobura/type_list.h>
 
 
 namespace bobura
 {
-    template <typename Traits>
-    class main_window<Traits>::impl : private boost::noncopyable
+    template <typename Traits, typename CommandSetTraits>
+    class main_window<Traits, CommandSetTraits>::impl : private boost::noncopyable
     {
     public:
         // types
@@ -47,9 +45,11 @@ namespace bobura
 
         using font_type = typename main_window::font_type;
 
-        using config_traits_type = typename main_window::config_traits_type;
-
         using message_catalog_type = typename main_window::message_catalog_type;
+
+        using view_traits_type = typename main_window::view_traits_type;
+
+        using command_set_traits_type = typename main_window::command_set_traits_type;
 
         using diagram_picture_box_type = typename main_window::diagram_picture_box_type;
 
@@ -131,55 +131,21 @@ namespace bobura
 
         using speed_type = typename traits_type::speed_type;
 
-        using message_loop_break_type =
-            tetengo2::gui::message::message_loop_break<
-                typename boost::mpl::at<detail_type_list, type::detail::message_loop>::type
-            >;
+        using popup_menu_type = typename traits_type::popup_menu_type;
 
-        using command_traits_type =
-            command::traits<
-                size_type,
-                difference_type,
-                string_type,
-                operating_distance_type,
-                speed_type,
-                font_type,
-                abstract_window_type,
-                typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
-            >;
+        using message_loop_break_type = typename traits_type::message_loop_break_type;
 
-        using command_set_traits_type =
-            command::set_traits<
-                size_type,
-                string_type,
-                position_type,
-                dimension_type,
-                typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::color>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
-                typename boost::mpl::at<view_type_list, type::view::scale>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
-                typename boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
-                typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
-                message_catalog_type,
-                command_traits_type,
-                traits_type,
-                typename boost::mpl::at<view_type_list, type::view::traits>::type,
-                typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
-                typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type,
-                config_traits_type
-            >;
+        using command_traits_type = typename command_set_traits_type::command_traits_type;
 
         using message_type_list_type =
             message::main_window::type_list<
-                typename boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
+                popup_menu_type,
                 command::set<command_set_traits_type>,
                 command::command_base<command_traits_type>,
                 timetable_model<
                     size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
                 >,
-                diagram_view<boost::mpl::at<view_type_list, type::view::traits>::type>,
+                diagram_view<view_traits_type>,
                 abstract_window_type,
                 diagram_picture_box_type,
                 property_bar_type,
@@ -261,8 +227,8 @@ namespace bobura
     };
 
 
-    template <typename Traits>
-    main_window<Traits>::main_window(
+    template <typename Traits, typename CommandSetTraits>
+    main_window<Traits, CommandSetTraits>::main_window(
         const message_catalog_type&   message_catalog,
         settings_type&                settings,
         const confirm_file_save_type& confirm_file_save
@@ -272,45 +238,55 @@ namespace bobura
     m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, confirm_file_save))
     {}
 
-    template <typename Traits>
-    main_window<Traits>::~main_window()
+    template <typename Traits, typename CommandSetTraits>
+    main_window<Traits, CommandSetTraits>::~main_window()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    template <typename Traits>
-    void main_window<Traits>::set_title(const boost::optional<string_type>& document_name, const bool changed)
+    template <typename Traits, typename CommandSetTraits>
+    void main_window<Traits, CommandSetTraits>::set_title(
+        const boost::optional<string_type>& document_name,
+        const bool                          changed
+    )
     {
         m_p_impl->set_title(document_name, changed);
     }
 
-    template <typename Traits>
-    const typename main_window<Traits>::diagram_picture_box_type& main_window<Traits>::get_diagram_picture_box()
+    template <typename Traits, typename CommandSetTraits>
+    const typename main_window<Traits, CommandSetTraits>::diagram_picture_box_type&
+    main_window<Traits, CommandSetTraits>::get_diagram_picture_box()
     const
     {
         return m_p_impl->get_diagram_picture_box();
     }
 
-    template <typename Traits>
-    typename main_window<Traits>::diagram_picture_box_type& main_window<Traits>::get_diagram_picture_box()
+    template <typename Traits, typename CommandSetTraits>
+    typename main_window<Traits, CommandSetTraits>::diagram_picture_box_type&
+    main_window<Traits, CommandSetTraits>::get_diagram_picture_box()
     {
         return m_p_impl->get_diagram_picture_box();
     }
 
-    template <typename Traits>
-    const typename main_window<Traits>::property_bar_type& main_window<Traits>::get_property_bar()
+    template <typename Traits, typename CommandSetTraits>
+    const typename main_window<Traits, CommandSetTraits>::property_bar_type&
+    main_window<Traits, CommandSetTraits>::get_property_bar()
     const
     {
         return m_p_impl->get_property_bar();
     }
 
-    template <typename Traits>
-    typename main_window<Traits>::property_bar_type& main_window<Traits>::get_property_bar()
+    template <typename Traits, typename CommandSetTraits>
+    typename main_window<Traits, CommandSetTraits>::property_bar_type&
+    main_window<Traits, CommandSetTraits>::get_property_bar()
     {
         return m_p_impl->get_property_bar();
     }
 
 
-    template class main_window<typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type>;
+    template class main_window<
+        typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
+        typename boost::mpl::at<main_window_type_list, type::main_window::command_set_traits>::type
+    >;
 
 
 }

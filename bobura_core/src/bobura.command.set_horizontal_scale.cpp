@@ -24,8 +24,14 @@
 
 namespace bobura { namespace command
 {
-    template <typename Traits, typename MainWindowTraits, typename ViewTraits, typename Scale>
-    class set_horizontal_scale<Traits, MainWindowTraits, ViewTraits, Scale>::impl
+    template <
+        typename Traits,
+        typename Scale,
+        typename CommandSetTraits,
+        typename MainWindowTraits,
+        typename ViewTraits
+    >
+    class set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::impl
     {
     public:
         // types
@@ -37,6 +43,8 @@ namespace bobura { namespace command
         using mouse_capture_type = typename set_horizontal_scale::mouse_capture_type;
 
         using scale_type = typename set_horizontal_scale::scale_type;
+
+        using command_set_traits_type = typename set_horizontal_scale::command_set_traits_type;
 
         using main_window_traits_type = typename set_horizontal_scale::main_window_traits_type;
 
@@ -78,7 +86,7 @@ namespace bobura { namespace command
     private:
         // types
 
-        using main_window_type = main_window<main_window_traits_type>;
+        using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
 
         using zoom_type =
             view::diagram::zoom<
@@ -99,8 +107,14 @@ namespace bobura { namespace command
     };
 
 
-    template <typename Traits, typename MainWindowTraits, typename ViewTraits, typename Scale>
-    set_horizontal_scale<Traits, MainWindowTraits, ViewTraits, Scale>::set_horizontal_scale(
+    template <
+        typename Traits,
+        typename Scale,
+        typename CommandSetTraits,
+        typename MainWindowTraits,
+        typename ViewTraits
+    >
+    set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::set_horizontal_scale(
         diagram_view_type& diagram_view,
         const scale_type&  scale
         )
@@ -108,21 +122,39 @@ namespace bobura { namespace command
     m_p_impl(tetengo2::stdalt::make_unique<impl>(diagram_view, scale))
     {}
 
-    template <typename Traits, typename MainWindowTraits, typename ViewTraits, typename Scale>
-    set_horizontal_scale<Traits, MainWindowTraits, ViewTraits, Scale>::~set_horizontal_scale()
+    template <
+        typename Traits,
+        typename Scale,
+        typename CommandSetTraits,
+        typename MainWindowTraits,
+        typename ViewTraits
+    >
+    set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::~set_horizontal_scale()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    template <typename Traits, typename MainWindowTraits, typename ViewTraits, typename Scale>
-    typename set_horizontal_scale<Traits, MainWindowTraits, ViewTraits, Scale>::state_type
-    set_horizontal_scale<Traits, MainWindowTraits, ViewTraits, Scale>::state_impl()
+    template <
+        typename Traits,
+        typename Scale,
+        typename CommandSetTraits,
+        typename MainWindowTraits,
+        typename ViewTraits
+    >
+    typename set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::state_type
+    set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::state_impl()
     const
     {
         return m_p_impl->state();
     }
 
-    template <typename Traits, typename MainWindowTraits, typename ViewTraits, typename Scale>
-    void set_horizontal_scale<Traits, MainWindowTraits, ViewTraits, Scale>::execute_impl(
+    template <
+        typename Traits,
+        typename Scale,
+        typename CommandSetTraits,
+        typename MainWindowTraits,
+        typename ViewTraits
+    >
+    void set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::execute_impl(
         model_type&           model,
         abstract_window_type& parent
     )
@@ -144,6 +176,7 @@ namespace bobura { namespace command
             typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
         >,
         typename boost::mpl::at<view_type_list, type::view::scale>::type,
+        typename boost::mpl::at<main_window_type_list, type::main_window::command_set_traits>::type,
         typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
         typename boost::mpl::at<view_type_list, type::view::traits>::type
     >;

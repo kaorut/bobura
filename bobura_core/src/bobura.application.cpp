@@ -19,8 +19,6 @@
 #include <bobura/application.h>
 #include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
-#include <bobura/command/set_traits.h>
-#include <bobura/command/traits.h>
 #include <bobura/diagram_picture_box.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
@@ -36,7 +34,10 @@ namespace bobura
 
         using main_window_traits_type = boost::mpl::at<main_window_type_list, type::main_window::traits>::type;
 
-        using main_window_type = main_window<main_window_traits_type>;
+        using command_set_traits_type =
+            boost::mpl::at<main_window_type_list, type::main_window::command_set_traits>::type;
+
+        using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
 
         using view_type = boost::mpl::at<view_type_list, type::view::view>::type;
 
@@ -70,40 +71,7 @@ namespace bobura
 
         using save_to_file_type = boost::mpl::at<load_save_type_list, type::load_save::save_to_file>::type;
 
-        using command_traits_type =
-            command::traits<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                boost::mpl::at<model_type_list, type::model::speed>::type,
-                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
-            >;
-
-        using command_set_traits_type =
-            command::set_traits<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<ui_type_list, type::ui::position>::type,
-                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                boost::mpl::at<ui_type_list, type::ui::color>::type,
-                boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
-                boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
-                boost::mpl::at<view_type_list, type::view::scale>::type,
-                boost::mpl::at<ui_type_list, type::ui::shell>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
-                message_catalog_type,
-                command_traits_type,
-                main_window_traits_type,
-                boost::mpl::at<view_type_list, type::view::traits>::type,
-                boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
-                boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type,
-                boost::mpl::at<setting_type_list, type::setting::config_traits>::type
-            >;
+        using command_traits_type = command_set_traits_type::command_traits_type;
 
         using command_set_type = command::set<command_set_traits_type>;
 

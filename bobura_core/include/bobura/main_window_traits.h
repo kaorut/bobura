@@ -26,6 +26,8 @@ namespace bobura
         \tparam PictureBox        A picture box type.
         \tparam MapBox            A map box type.
         \tparam SideBar           A side bar type.
+        \tparam PopupMenu         A popup menu type.
+        \tparam MessageLoopBreak  A message loop break type.
         \tparam Font              A font type.
         \tparam MouseCapture      A mouse capture type.
         \tparam MessageCatalog    A message catalog type.
@@ -45,6 +47,8 @@ namespace bobura
         typename PictureBox,
         typename MapBox,
         typename SideBar,
+        typename PopupMenu,
+        typename MessageLoopBreak,
         typename Font,
         typename MouseCapture,
         typename MessageCatalog,
@@ -89,6 +93,12 @@ namespace bobura
 
         //! The side bar type.
         using side_bar_type = SideBar;
+
+        //! The popup menu type.
+        using popup_menu_type = PopupMenu;
+
+        //! The message loop break type.
+        using message_loop_break_type = MessageLoopBreak;
 
         //! The font type.
         using font_type = Font;

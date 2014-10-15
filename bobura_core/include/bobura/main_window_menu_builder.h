@@ -91,7 +91,7 @@ namespace bobura
             timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
         //! The main window type.
-        using main_window_type = main_window<main_window_traits_type>;
+        using main_window_type = main_window<main_window_traits_type, command_set_traits>;
 
 
         // constructors and destructor

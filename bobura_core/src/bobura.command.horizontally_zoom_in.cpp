@@ -23,8 +23,8 @@
 
 namespace bobura { namespace command
 {
-    template <typename Traits, typename MainWindowTraits, typename ViewTraits>
-    class horizontally_zoom_in<Traits, MainWindowTraits, ViewTraits>::impl
+    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename ViewTraits>
+    class horizontally_zoom_in<Traits, CommandSetTraits, MainWindowTraits, ViewTraits>::impl
     {
     public:
         // types
@@ -34,6 +34,8 @@ namespace bobura { namespace command
         using abstract_window_type = typename horizontally_zoom_in::abstract_window_type;
 
         using mouse_capture_type = typename horizontally_zoom_in::mouse_capture_type;
+
+        using command_set_traits_type = typename horizontally_zoom_in::command_set_traits_type;
 
         using main_window_traits_type = typename horizontally_zoom_in::main_window_traits_type;
 
@@ -68,7 +70,7 @@ namespace bobura { namespace command
     private:
         // types
 
-        using main_window_type = main_window<main_window_traits_type>;
+        using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
 
         using zoom_type =
             view::diagram::zoom<
@@ -87,19 +89,21 @@ namespace bobura { namespace command
     };
 
 
-    template <typename Traits, typename MainWindowTraits, typename ViewTraits>
-    horizontally_zoom_in<Traits, MainWindowTraits, ViewTraits>::horizontally_zoom_in(diagram_view_type& diagram_view)
+    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename ViewTraits>
+    horizontally_zoom_in<Traits, CommandSetTraits, MainWindowTraits, ViewTraits>::horizontally_zoom_in(
+        diagram_view_type& diagram_view
+    )
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(diagram_view))
     {}
 
-    template <typename Traits, typename MainWindowTraits, typename ViewTraits>
-    horizontally_zoom_in<Traits, MainWindowTraits, ViewTraits>::~horizontally_zoom_in()
+    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename ViewTraits>
+    horizontally_zoom_in<Traits, CommandSetTraits, MainWindowTraits, ViewTraits>::~horizontally_zoom_in()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    template <typename Traits, typename MainWindowTraits, typename ViewTraits>
-    void horizontally_zoom_in<Traits, MainWindowTraits, ViewTraits>::execute_impl(
+    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename ViewTraits>
+    void horizontally_zoom_in<Traits, CommandSetTraits, MainWindowTraits, ViewTraits>::execute_impl(
         model_type&           model,
         abstract_window_type& parent
     )
@@ -120,6 +124,7 @@ namespace bobura { namespace command
             typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
             typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
         >,
+        typename boost::mpl::at<main_window_type_list, type::main_window::command_set_traits>::type,
         typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
         typename boost::mpl::at<view_type_list, type::view::traits>::type
     >;

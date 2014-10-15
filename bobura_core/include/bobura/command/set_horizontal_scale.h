@@ -24,10 +24,17 @@ namespace bobura { namespace command
 
         \tparam Traits           A traits type.
         \tparam Scale            A scale type.
+        \tparam CommandSetTraits A command set traits type.
         \tparam MainWindowTraits A main window traits type.
         \tparam ViewTraits       A view traits type.
     */
-    template <typename Traits, typename Scale, typename MainWindowTraits, typename ViewTraits>
+    template <
+        typename Traits,
+        typename Scale,
+        typename CommandSetTraits,
+        typename MainWindowTraits,
+        typename ViewTraits
+    >
     class set_horizontal_scale : public command_base<Traits>
     {
     public:
@@ -38,6 +45,9 @@ namespace bobura { namespace command
 
         //! The scale type.
         using scale_type = Scale;
+
+        //! The command set traits type.
+        using command_set_traits_type = CommandSetTraits;
 
         //! The main window traits type.
         using main_window_traits_type = MainWindowTraits;

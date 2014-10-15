@@ -23,10 +23,11 @@ namespace bobura { namespace command
         \brief The class template for a vertical zoom-in command.
 
         \tparam Traits           A traits type.
+        \tparam CommandSetTraits A command set traits type.
         \tparam MainWindowTraits A main window traits type.
         \tparam ViewTraits       A view traits type.
     */
-    template <typename Traits, typename MainWindowTraits, typename ViewTraits>
+    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename ViewTraits>
     class vertically_zoom_in : public command_base<Traits>
     {
     public:
@@ -34,6 +35,9 @@ namespace bobura { namespace command
 
         //! The traits type.
         using traits_type = Traits;
+
+        //! The command set traits type.
+        using command_set_traits_type = CommandSetTraits;
 
         //! The main window traits type.
         using main_window_traits_type = MainWindowTraits;

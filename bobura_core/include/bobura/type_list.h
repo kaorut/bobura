@@ -23,6 +23,8 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/command/set_traits.h>
+#include <bobura/command/traits.h>
 #include <bobura/config_traits.h>
 #include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
@@ -735,6 +737,7 @@ namespace bobura
     {
         struct dialog_traits;  //!< The dialog traits.
         struct traits;         //!< The traits.
+        struct command_set_traits; //!< The command set traits;
     }}
 
 #if !defined(DOCUMENTATION)
@@ -771,11 +774,48 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
                 boost::mpl::at<ui_type_list, type::ui::map_box>::type,
                 boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
+                boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
+                tetengo2::gui::message::message_loop_break<
+                    boost::mpl::at<detail_type_list, type::detail::message_loop>::type
+                >,
                 boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
                 boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
                 boost::mpl::at<view_type_list, type::view::traits>::type,
                 boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
+                boost::mpl::at<setting_type_list, type::setting::config_traits>::type
+            >;
+        using command_traits_type =
+            command::traits<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
+            >;
+        using command_set_traits_type =
+            command::set_traits<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<ui_type_list, type::ui::position>::type,
+                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+                boost::mpl::at<ui_type_list, type::ui::color>::type,
+                boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
+                boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
+                boost::mpl::at<view_type_list, type::view::scale>::type,
+                boost::mpl::at<ui_type_list, type::ui::shell>::type,
+                boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
+                boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+                command_traits_type,
+                traits_type,
+                boost::mpl::at<view_type_list, type::view::traits>::type,
+                boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
+                dialog_traits_type,
                 boost::mpl::at<setting_type_list, type::setting::config_traits>::type
             >;
     }}
@@ -786,8 +826,10 @@ namespace bobura
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::main_window::dialog_traits, detail::main_window::dialog_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::main_window::traits, detail::main_window::traits_type>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::main_window::command_set_traits, detail::main_window::command_set_traits_type>,
         tetengo2::meta::assoc_list_end
-        >>;
+        >>>;
 
 
 }

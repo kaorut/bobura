@@ -27,9 +27,10 @@ namespace bobura
     /*!
         \brief The class template for the main window.
 
-        \tparam Traits A traits type.
+        \tparam Traits           A traits type.
+        \tparam CommandSetTraits A command set traits type.
     */
-    template <typename Traits>
+    template <typename Traits, typename CommandSetTraits>
     class main_window : public Traits::window_type
     {
     public:
@@ -79,6 +80,9 @@ namespace bobura
 
         //! The config traits type.
         using config_traits_type = typename traits_type::config_traits_type;
+
+        //! The command set traits type.
+        using command_set_traits_type = CommandSetTraits;
 
         //! The diagram picture box message type list type.
         using diagram_picture_box_message_type_list_type =

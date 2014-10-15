@@ -46,6 +46,8 @@ namespace bobura { namespace command
     public:
         // types
 
+        using traits_type = typename set::traits_type;
+
         using size_type = typename set::size_type;
 
         using string_type = typename set::string_type;
@@ -316,7 +318,9 @@ namespace bobura { namespace command
         {
             return
                 tetengo2::stdalt::make_unique<
-                    command::horizontally_zoom_in<command_traits_type, main_window_traits_type, view_traits_type>
+                    command::horizontally_zoom_in<
+                        command_traits_type, traits_type, main_window_traits_type, view_traits_type
+                    >
                 >(diagram_view);
         }
 
@@ -324,7 +328,9 @@ namespace bobura { namespace command
         {
             return
                 tetengo2::stdalt::make_unique<
-                    command::horizontally_zoom_out<command_traits_type, main_window_traits_type, view_traits_type>
+                    command::horizontally_zoom_out<
+                        command_traits_type, traits_type, main_window_traits_type, view_traits_type
+                    >
                 >(diagram_view);
         }
 
@@ -372,7 +378,7 @@ namespace bobura { namespace command
                 commands.push_back(
                     tetengo2::stdalt::make_unique<
                         command::set_horizontal_scale<
-                            command_traits_type, scale_type, main_window_traits_type, view_traits_type
+                            command_traits_type, scale_type, traits_type, main_window_traits_type, view_traits_type
                         >
                     >(diagram_view, scale_list.at(i))
                 );
@@ -393,7 +399,7 @@ namespace bobura { namespace command
                 commands.push_back(
                     tetengo2::stdalt::make_unique<
                         command::set_vertical_scale<
-                            command_traits_type, scale_type, main_window_traits_type, view_traits_type
+                            command_traits_type, scale_type, traits_type, main_window_traits_type, view_traits_type
                         >
                     >(diagram_view, scale_list.at(i))
                 );
@@ -422,7 +428,9 @@ namespace bobura { namespace command
         {
             return
                 tetengo2::stdalt::make_unique<
-                    command::vertically_zoom_in<command_traits_type, main_window_traits_type, view_traits_type>
+                    command::vertically_zoom_in<
+                        command_traits_type, traits_type, main_window_traits_type, view_traits_type
+                    >
                 >(diagram_view);
         }
 
@@ -430,7 +438,9 @@ namespace bobura { namespace command
         {
             return
                 tetengo2::stdalt::make_unique<
-                    command::vertically_zoom_out<command_traits_type, main_window_traits_type, view_traits_type>
+                    command::vertically_zoom_out<
+                        command_traits_type, traits_type, main_window_traits_type, view_traits_type
+                    >
                 >(diagram_view);
         }
 
