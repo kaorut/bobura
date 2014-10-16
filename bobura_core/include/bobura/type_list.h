@@ -569,7 +569,7 @@ namespace bobura
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
                 type::model::station_grade_type_set,
-                bobura::model::station_info::grade_type_set<boost::mpl::at<common_type_list, type::string>::type>
+                model::station_info::grade_type_set<boost::mpl::at<common_type_list, type::string>::type>
             >,
         tetengo2::meta::assoc_list_end
         >>>>;
@@ -608,12 +608,12 @@ namespace bobura
     using view_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::view::traits, detail::view::traits_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::view::view, bobura::diagram_view<detail::view::traits_type>>,
+            boost::mpl::pair<type::view::view, diagram_view<detail::view::traits_type>>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::view::scale, detail::view::scale_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
                 type::view::scale_list,
-                bobura::view::scale_list<
+                view::scale_list<
                     boost::mpl::at<common_type_list, type::size>::type,
                     boost::mpl::at<common_type_list, type::string>::type,
                     detail::view::scale_type
