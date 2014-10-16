@@ -15,8 +15,6 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/command/set_traits.h>
-#include <bobura/command/traits.h>
 #include <bobura/diagram_view.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/type_list_impl.h>
@@ -577,36 +575,7 @@ namespace bobura
         typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
         typename boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-        command::set_traits<
-            typename boost::mpl::at<common_type_list, type::size>::type,
-            typename boost::mpl::at<common_type_list, type::string>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::position>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::color>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
-            typename boost::mpl::at<view_type_list, type::view::scale>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::shell>::type,
-            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
-            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
-            typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-            command::traits<
-                typename boost::mpl::at<common_type_list, type::size>::type,
-                typename boost::mpl::at<common_type_list, type::difference>::type,
-                typename boost::mpl::at<common_type_list, type::string>::type,
-                typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                typename boost::mpl::at<model_type_list, type::model::speed>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-                typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
-            >,
-            typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
-            typename boost::mpl::at<view_type_list, type::view::traits>::type,
-            typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
-            typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type,
-            typename boost::mpl::at<setting_type_list, type::setting::config_traits>::type
-        >,
+        typename boost::mpl::at<main_window_type_list, type::main_window::command_set_traits>::type,
         typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type
     >;
 
