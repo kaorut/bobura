@@ -11,7 +11,6 @@
 #include <tetengo2.h>
 
 #include <bobura/command/file_property.h>
-#include <bobura/command/traits.h>
 #include <bobura/file_property_dialog.h>
 #include <bobura/type_list.h>
 
@@ -107,16 +106,7 @@ namespace bobura { namespace command
 
 
     template class file_property<
-        traits<
-            typename boost::mpl::at<common_type_list, type::size>::type,
-            typename boost::mpl::at<common_type_list, type::difference>::type,
-            typename boost::mpl::at<common_type_list, type::string>::type,
-            typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-            typename boost::mpl::at<model_type_list, type::model::speed>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
-        >,
+        typename boost::mpl::at<main_window_type_list, type::main_window::command_traits>::type,
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
         typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type

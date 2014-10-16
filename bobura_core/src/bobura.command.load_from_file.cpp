@@ -15,9 +15,6 @@
 #include <tetengo2.h>
 
 #include <bobura/command/load_from_file.h>
-#include <bobura/command/traits.h>
-#include <bobura/load_save/traits.h>
-#include <bobura/oudia_diagram_dialog.h>
 #include <bobura/type_list.h>
 
 
@@ -132,37 +129,8 @@ namespace bobura { namespace command
 
 
     template class load_from_file<
-        traits<
-            typename boost::mpl::at<common_type_list, type::size>::type,
-            typename boost::mpl::at<common_type_list, type::difference>::type,
-            typename boost::mpl::at<common_type_list, type::string>::type,
-            typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-            typename boost::mpl::at<model_type_list, type::model::speed>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
-        >,
-        load_save::traits<
-            typename boost::mpl::at<common_type_list, type::size>::type,
-            typename boost::mpl::at<common_type_list, type::difference>::type,
-            typename boost::mpl::at<common_type_list, type::string>::type,
-            typename boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
-            typename boost::mpl::at<common_type_list, type::output_stream>::type,
-            typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-            typename boost::mpl::at<model_type_list, type::model::speed>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
-            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::file_open_dialog>::type,
-            typename boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
-            oudia_diagram_dialog<
-                typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type,
-                typename boost::mpl::at<common_type_list, type::size>::type
-            >,
-            typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-            typename boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type,
-            typename boost::mpl::at<locale_type_list, type::locale::windia_file_encoder>::type
-        >
+        typename boost::mpl::at<main_window_type_list, type::main_window::command_traits>::type,
+        typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type
     >;
 
 

@@ -737,7 +737,8 @@ namespace bobura
     {
         struct dialog_traits;  //!< The dialog traits.
         struct traits;         //!< The traits.
-        struct command_set_traits; //!< The command set traits;
+        struct command_traits; //!< The command traits.
+        struct command_set_traits; //!< The command set traits.
     }}
 
 #if !defined(DOCUMENTATION)
@@ -827,9 +828,11 @@ namespace bobura
             boost::mpl::pair<type::main_window::dialog_traits, detail::main_window::dialog_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::main_window::traits, detail::main_window::traits_type>,
         tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::main_window::command_traits, detail::main_window::command_traits_type>,
+        tetengo2::meta::assoc_list<
             boost::mpl::pair<type::main_window::command_set_traits, detail::main_window::command_set_traits_type>,
         tetengo2::meta::assoc_list_end
-        >>>;
+        >>>>;
 
 
 }

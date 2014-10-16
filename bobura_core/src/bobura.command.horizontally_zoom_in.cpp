@@ -14,7 +14,6 @@
 #include <tetengo2.h>
 
 #include <bobura/command/horizontally_zoom_in.h>
-#include <bobura/command/traits.h>
 #include <bobura/main_window.h>
 #include <bobura/view/diagram/zoom.h>
 #include <bobura/view/diagram/traits.h>
@@ -114,16 +113,7 @@ namespace bobura { namespace command
 
 
     template class horizontally_zoom_in<
-        traits<
-            typename boost::mpl::at<common_type_list, type::size>::type,
-            typename boost::mpl::at<common_type_list, type::difference>::type,
-            typename boost::mpl::at<common_type_list, type::string>::type,
-            typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-            typename boost::mpl::at<model_type_list, type::model::speed>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-            typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
-        >,
+        typename boost::mpl::at<main_window_type_list, type::main_window::command_traits>::type,
         typename boost::mpl::at<main_window_type_list, type::main_window::command_set_traits>::type,
         typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type,
         typename boost::mpl::at<view_type_list, type::view::traits>::type
