@@ -471,9 +471,7 @@ namespace bobura
     }
 
 
-    template class file_property_dialog<
-        typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type
-    >;
+    template class file_property_dialog<typename boost::mpl::at<traits_type_list, type::traits::dialog>::type>;
 
 
 }

@@ -575,8 +575,8 @@ namespace bobura
         typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
         typename boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-        typename boost::mpl::at<main_window_type_list, type::main_window::command_set_traits>::type,
-        typename boost::mpl::at<main_window_type_list, type::main_window::traits>::type
+        typename boost::mpl::at<traits_type_list, type::traits::command_set>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::main_window>::type
     >;
 
 

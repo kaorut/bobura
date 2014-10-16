@@ -127,11 +127,11 @@ namespace bobura { namespace command
 
 
     template class about<
-        typename boost::mpl::at<main_window_type_list, type::main_window::command_traits>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::command>::type,
         typename boost::mpl::at<ui_type_list, type::ui::position>::type,
         typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-        typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::dialog>::type,
         typename boost::mpl::at<setting_type_list, type::setting::config_traits>::type
     >;
 

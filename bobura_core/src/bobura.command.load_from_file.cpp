@@ -129,7 +129,7 @@ namespace bobura { namespace command
 
 
     template class load_from_file<
-        typename boost::mpl::at<main_window_type_list, type::main_window::command_traits>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::command>::type,
         typename boost::mpl::at<load_save_type_list, type::load_save::traits>::type
     >;
 

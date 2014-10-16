@@ -32,10 +32,9 @@ namespace bobura
     {
         using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
 
-        using main_window_traits_type = boost::mpl::at<main_window_type_list, type::main_window::traits>::type;
+        using main_window_traits_type = boost::mpl::at<traits_type_list, type::traits::main_window>::type;
 
-        using command_set_traits_type =
-            boost::mpl::at<main_window_type_list, type::main_window::command_set_traits>::type;
+        using command_set_traits_type = boost::mpl::at<traits_type_list, type::traits::command_set>::type;
 
         using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
 

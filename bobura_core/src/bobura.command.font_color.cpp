@@ -209,7 +209,7 @@ namespace bobura { namespace command
 
 
     template class font_color<
-        typename boost::mpl::at<main_window_type_list, type::main_window::command_traits>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::command>::type,
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
         typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
         typename boost::mpl::at<ui_type_list, type::ui::color>::type,
@@ -217,7 +217,7 @@ namespace bobura { namespace command
         typename boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
         typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-        typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type
+        typename boost::mpl::at<traits_type_list, type::traits::dialog>::type
     >;
 
 

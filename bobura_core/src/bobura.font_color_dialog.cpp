@@ -985,7 +985,7 @@ namespace bobura
 
 
     template class font_color_dialog<
-        typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::dialog>::type,
         typename boost::mpl::at<common_type_list, type::size>::type,
         typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
         typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,

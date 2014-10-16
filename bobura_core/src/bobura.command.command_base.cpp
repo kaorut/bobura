@@ -91,9 +91,7 @@ namespace bobura { namespace command
     }
 
 
-    template class command_base<
-        typename boost::mpl::at<main_window_type_list, type::main_window::command_traits>::type
-    >;
+    template class command_base<typename boost::mpl::at<traits_type_list, type::traits::command>::type>;
 
 
 }}

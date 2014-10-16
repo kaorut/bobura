@@ -229,13 +229,13 @@ namespace bobura { namespace command
 
 
     template class train_kind<
-        typename boost::mpl::at<main_window_type_list, type::main_window::command_traits>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::command>::type,
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
         typename boost::mpl::at<ui_type_list, type::ui::color>::type,
         typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
         typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-        typename boost::mpl::at<main_window_type_list, type::main_window::dialog_traits>::type
+        typename boost::mpl::at<traits_type_list, type::traits::dialog>::type
     >;
 
 

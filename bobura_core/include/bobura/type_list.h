@@ -731,18 +731,18 @@ namespace bobura
         >>>>>;
 
 
-    /**** Main Window *******************************************************/
+    /**** Traits *************************************************************/
 
-    namespace type { namespace main_window
+    namespace type { namespace traits
     {
-        struct dialog_traits;  //!< The dialog traits.
-        struct traits;         //!< The traits.
-        struct command_traits; //!< The command traits.
-        struct command_set_traits; //!< The command set traits.
+        struct dialog;         //!< The dialog traits.
+        struct main_window;    //!< The main window traits.
+        struct command;        //!< The command traits.
+        struct command_set;    //!< The command set traits.
     }}
 
 #if !defined(DOCUMENTATION)
-    namespace detail { namespace main_window
+    namespace detail { namespace traits
     {
         using dialog_traits_type =
             dialog_traits<
@@ -762,7 +762,7 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::transparent_background>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
-        using traits_type =
+        using main_window_traits_type =
             main_window_traits<
                 boost::mpl::at<common_type_list, type::size>::type,
                 boost::mpl::at<common_type_list, type::difference>::type,
@@ -813,7 +813,7 @@ namespace bobura
                 boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
                 command_traits_type,
-                traits_type,
+                main_window_traits_type,
                 boost::mpl::at<view_type_list, type::view::traits>::type,
                 boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
                 dialog_traits_type,
@@ -822,15 +822,14 @@ namespace bobura
     }}
 #endif
 
-    //! The main window type list.
-    using main_window_type_list =
+    //! The traits type list.
+    using traits_type_list =
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::dialog, detail::traits::dialog_traits_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::main_window::dialog_traits, detail::main_window::dialog_traits_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::main_window::traits, detail::main_window::traits_type>,
+            boost::mpl::pair<type::traits::main_window, detail::traits::main_window_traits_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::command, detail::traits::command_traits_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::main_window::command_traits, detail::main_window::command_traits_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::main_window::command_set_traits, detail::main_window::command_set_traits_type>,
+            boost::mpl::pair<type::traits::command_set, detail::traits::command_set_traits_type>,
         tetengo2::meta::assoc_list_end
         >>>>;
 
