@@ -19,6 +19,7 @@
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/type_list_impl.h>
 #include <bobura/type_list.h>
+#include <bobura/view/scale_list.h>
 
 
 namespace bobura
@@ -29,6 +30,7 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
+        typename Scale,
         typename Font,
         typename MenuBar,
         typename MessageCatalog,
@@ -41,6 +43,7 @@ namespace bobura
         String,
         OperatingDistance,
         Speed,
+        Scale,
         Font,
         MenuBar,
         MessageCatalog,
@@ -50,6 +53,12 @@ namespace bobura
     {
     public:
         // types
+
+        using size_type = typename main_window_menu_builder::size_type;
+
+        using string_type = typename main_window_menu_builder::string_type;
+
+        using scale_type = typename main_window_menu_builder::scale_type;
 
         using menu_bar_type = typename main_window_menu_builder::menu_bar_type;
 
@@ -138,7 +147,7 @@ namespace bobura
 
         using commands_type = std::vector<const command_type*>;
 
-        using view_scale_list_type = typename boost::mpl::at<view_type_list, type::view::scale_list>::type;
+        using view_scale_list_type = view::scale_list<size_type, string_type, scale_type>;
 
 
         // variables
@@ -469,6 +478,7 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
+        typename Scale,
         typename Font,
         typename MenuBar,
         typename MessageCatalog,
@@ -481,6 +491,7 @@ namespace bobura
         String,
         OperatingDistance,
         Speed,
+        Scale,
         Font,
         MenuBar,
         MessageCatalog,
@@ -502,6 +513,7 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
+        typename Scale,
         typename Font,
         typename MenuBar,
         typename MessageCatalog,
@@ -514,6 +526,7 @@ namespace bobura
         String,
         OperatingDistance,
         Speed,
+        Scale,
         Font,
         MenuBar,
         MessageCatalog,
@@ -529,6 +542,7 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
+        typename Scale,
         typename Font,
         typename MenuBar,
         typename MessageCatalog,
@@ -542,6 +556,7 @@ namespace bobura
             String,
             OperatingDistance,
             Speed,
+            Scale,
             Font,
             MenuBar,
             MessageCatalog,
@@ -554,6 +569,7 @@ namespace bobura
         String,
         OperatingDistance,
         Speed,
+        Scale,
         Font,
         MenuBar,
         MessageCatalog,
@@ -572,6 +588,7 @@ namespace bobura
         typename boost::mpl::at<common_type_list, type::string>::type,
         typename boost::mpl::at<model_type_list, type::model::operating_distance>::type,
         typename boost::mpl::at<model_type_list, type::model::speed>::type,
+        typename boost::mpl::at<view_type_list, type::view::scale>::type,
         typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
         typename boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,

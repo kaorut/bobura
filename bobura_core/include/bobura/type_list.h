@@ -39,7 +39,6 @@
 #include <bobura/oudia_diagram_dialog.h>
 #include <bobura/settings.h>
 #include <bobura/view/diagram/traits.h>
-#include <bobura/view/scale_list.h>
 
 
 namespace bobura
@@ -561,7 +560,6 @@ namespace bobura
     {
         struct traits;         //!< The traits type.
         struct scale;          //!< The scale type.
-        struct scale_list;     //!< The scale list type.
     }}
 
 #if !defined(DOCUMENTATION)
@@ -587,17 +585,8 @@ namespace bobura
     using view_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::view::traits, detail::view::traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::view::scale, detail::view::scale_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::view::scale_list,
-                view::scale_list<
-                    boost::mpl::at<common_type_list, type::size>::type,
-                    boost::mpl::at<common_type_list, type::string>::type,
-                    detail::view::scale_type
-                >
-            >,
         tetengo2::meta::assoc_list_end
-        >>>;
+        >>;
 
 
     /**** Loading and Saving ************************************************/

@@ -91,6 +91,7 @@ namespace bobura
                 boost::mpl::at<common_type_list, type::string>::type,
                 boost::mpl::at<model_type_list, type::model::operating_distance>::type,
                 boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<view_type_list, type::view::scale>::type,
                 boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
                 boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
                 message_catalog_type,

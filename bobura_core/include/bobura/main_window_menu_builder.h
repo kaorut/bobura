@@ -30,6 +30,7 @@ namespace bobura
         \tparam String            A string type.
         \tparam OperatingDistance An operating distance type.
         \tparam Speed             A speed type.
+        \tparam Scale             A scale type.
         \tparam Font              A font type.
         \tparam MenuBar           A menu bar type.
         \tparam MessageCatalog    A message catalog type.
@@ -42,6 +43,7 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
+        typename Scale,
         typename Font,
         typename MenuBar,
         typename MessageCatalog,
@@ -67,6 +69,9 @@ namespace bobura
 
         //! The speed type.
         using speed_type = Speed;
+
+        //! The scale type.
+        using scale_type = Scale;
 
         //! The font type.
         using font_type = Font;
