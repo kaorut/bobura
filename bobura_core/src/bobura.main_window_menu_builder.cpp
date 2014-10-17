@@ -136,7 +136,7 @@ namespace bobura
                 command_set_type,
                 typename command_set_type::command_type,
                 model_type,
-                diagram_view<boost::mpl::at<view_type_list, type::view::traits>::type>,
+                diagram_view<boost::mpl::at<traits_type_list, type::traits::view>::type>,
                 typename main_window_type::abstract_window_type,
                 typename main_window_type::diagram_picture_box_type,
                 typename main_window_type::property_bar_type,

@@ -23,7 +23,7 @@ namespace
 {
     // types
 
-    using view_traits_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::traits>::type;
+    using view_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type;
 
     using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
 
@@ -43,7 +43,7 @@ namespace
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
         >;
 
-    using view_type = bobura::diagram_view<boost::mpl::at<bobura::view_type_list, bobura::type::view::traits>::type>;
+    using view_type = bobura::diagram_view<view_traits_type>;
 
     using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
 

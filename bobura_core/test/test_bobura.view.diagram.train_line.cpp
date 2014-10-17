@@ -71,7 +71,7 @@ namespace
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
-    using traits_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::traits>::type;
+    using traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type;
 
     using selection_type = bobura::view::diagram::selection<traits_type>;
 

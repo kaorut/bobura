@@ -554,7 +554,6 @@ namespace bobura
 
     namespace type { namespace view
     {
-        struct traits;         //!< The traits type.
         struct scale;          //!< The scale type.
     }}
 
@@ -562,27 +561,14 @@ namespace bobura
     namespace detail { namespace view
     {
         using scale_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
-        using traits_type =
-            bobura::view::diagram::traits<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                boost::mpl::at<model_type_list, type::model::speed>::type,
-                scale_type,
-                boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
-                boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
-            >;
     }}
 #endif
 
     //! The view type list.
     using view_type_list =
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::view::traits, detail::view::traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::view::scale, detail::view::scale_type>,
         tetengo2::meta::assoc_list_end
-        >>;
+        >;
 
 
     /**** Traits *************************************************************/
@@ -591,6 +577,7 @@ namespace bobura
     {
         struct dialog;         //!< The dialog traits.
         struct load_save;      //!< The loading and saving processing traits.
+        struct view;           //!< The view traits.
         struct main_window;    //!< The main window traits.
         struct command;        //!< The command traits.
         struct command_set;    //!< The command set traits.
@@ -636,6 +623,18 @@ namespace bobura
                 boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type,
                 boost::mpl::at<locale_type_list, type::locale::windia_file_encoder>::type
             >;
+        using view_traits_type =
+            bobura::view::diagram::traits<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<view_type_list, type::view::scale>::type,
+                boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
+                boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
+            >;
         using main_window_traits_type =
             main_window_traits<
                 boost::mpl::at<common_type_list, type::size>::type,
@@ -656,7 +655,7 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
                 boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                boost::mpl::at<view_type_list, type::view::traits>::type,
+                view_traits_type,
                 load_save_traits_type,
                 boost::mpl::at<setting_type_list, type::setting::config_traits>::type
             >;
@@ -688,7 +687,7 @@ namespace bobura
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
                 command_traits_type,
                 main_window_traits_type,
-                boost::mpl::at<view_type_list, type::view::traits>::type,
+                view_traits_type,
                 load_save_traits_type,
                 dialog_traits_type,
                 boost::mpl::at<setting_type_list, type::setting::config_traits>::type
@@ -700,13 +699,14 @@ namespace bobura
     using traits_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::dialog, detail::traits::dialog_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::load_save, detail::traits::load_save_traits_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::view, detail::traits::view_traits_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::traits::main_window, detail::traits::main_window_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::command, detail::traits::command_traits_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::traits::command_set, detail::traits::command_set_traits_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>;
+        >>>>>>;
 
 
 }

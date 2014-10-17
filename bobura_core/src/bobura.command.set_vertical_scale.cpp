@@ -166,7 +166,7 @@ namespace bobura { namespace command
         typename boost::mpl::at<view_type_list, type::view::scale>::type,
         typename boost::mpl::at<traits_type_list, type::traits::command_set>::type,
         typename boost::mpl::at<traits_type_list, type::traits::main_window>::type,
-        typename boost::mpl::at<view_type_list, type::view::traits>::type
+        typename boost::mpl::at<traits_type_list, type::traits::view>::type
     >;
 
 

@@ -94,7 +94,7 @@ namespace
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    using view_type = bobura::diagram_view<boost::mpl::at<bobura::view_type_list, bobura::type::view::traits>::type>;
+    using view_type = bobura::diagram_view<boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type>;
 
     using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
 
@@ -103,7 +103,7 @@ namespace
             picture_box_type,
             abstract_window_type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::mouse_capture>::type,
-            boost::mpl::at<bobura::view_type_list, bobura::type::view::traits>::type
+            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type
         >;
 
     using diagram_picture_box_type =

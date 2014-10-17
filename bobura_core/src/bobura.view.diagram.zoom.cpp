@@ -227,7 +227,7 @@ namespace bobura { namespace view { namespace diagram
 
 
     template class zoom<
-        typename boost::mpl::at<view_type_list, type::view::traits>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::view>::type,
         typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
         typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
         typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type

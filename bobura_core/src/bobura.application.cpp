@@ -52,7 +52,7 @@ namespace bobura
 
         using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
 
-        using view_type = diagram_view<boost::mpl::at<view_type_list, type::view::traits>::type>;
+        using view_type = diagram_view<boost::mpl::at<traits_type_list, type::traits::view>::type>;
 
         using model_message_type_list_type =
             message::timetable_model::type_list<model_type, view_type, main_window_type>;
@@ -113,7 +113,7 @@ namespace bobura
                 picture_box_type,
                 boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
                 boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
-                boost::mpl::at<view_type_list, type::view::traits>::type
+                boost::mpl::at<traits_type_list, type::traits::view>::type
             >;
 
         using diagram_picture_box_type =
@@ -130,7 +130,7 @@ namespace bobura
                 command_set_type,
                 command_set_type::command_type,
                 model_type,
-                diagram_view<boost::mpl::at<view_type_list, type::view::traits>::type>,
+                view_type,
                 main_window_type::abstract_window_type,
                 main_window_type::diagram_picture_box_type,
                 main_window_type::property_bar_type,
