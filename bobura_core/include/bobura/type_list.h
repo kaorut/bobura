@@ -536,7 +536,6 @@ namespace bobura
     {
         struct operating_distance; //!< The operating distance type.
         struct speed;          //!< The speed type.
-        struct station_grade_type_set; //!< The station grade type set type.
     }}
 
 #if !defined(DOCUMENTATION)
@@ -552,13 +551,8 @@ namespace bobura
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::model::operating_distance, detail::model::operating_distance_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::speed, detail::model::speed_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::model::station_grade_type_set,
-                model::station_info::grade_type_set<boost::mpl::at<common_type_list, type::string>::type>
-            >,
         tetengo2::meta::assoc_list_end
-        >>>;
+        >>;
 
 
     /**** View **************************************************************/

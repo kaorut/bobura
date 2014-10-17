@@ -17,6 +17,7 @@
 #include <tetengo2.h>
 
 #include <bobura/message/diagram_view.h>
+#include <bobura/model/station_info/grade.h>
 #include <bobura/property_bar.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
@@ -87,7 +88,9 @@ namespace
     using station_type = station_location_type::station_type;
 
     using station_grade_type_set_type =
-        boost::mpl::at<bobura::model_type_list, bobura::type::model::station_grade_type_set>::type;
+        bobura::model::station_info::grade_type_set<
+            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type
+        >;
     
     using station_selected_type =
         bobura::message::diagram_view::station_selected<
