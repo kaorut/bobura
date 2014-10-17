@@ -16,6 +16,7 @@
 #include <tetengo2.h>
 
 #include <bobura/diagram_picture_box.h>
+#include <bobura/diagram_view.h>
 #include <bobura/message/main_window.h>
 #include <bobura/message/type_list_impl.h>
 #include <bobura/property_bar.h>
@@ -86,7 +87,7 @@ namespace
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    using view_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::view>::type;
+    using view_type = bobura::diagram_view<boost::mpl::at<bobura::view_type_list, bobura::type::view::traits>::type>;
 
     using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
 

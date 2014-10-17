@@ -13,6 +13,7 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/diagram_view.h>
 #include <bobura/message/diagram_picture_box.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
@@ -42,7 +43,7 @@ namespace
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
         >;
 
-    using view_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::view>::type;
+    using view_type = bobura::diagram_view<boost::mpl::at<bobura::view_type_list, bobura::type::view::traits>::type>;
 
     using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
 

@@ -20,6 +20,7 @@
 #include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
 #include <bobura/diagram_picture_box.h>
+#include <bobura/diagram_view.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/type_list_impl.h>
@@ -47,7 +48,7 @@ namespace bobura
 
         using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
 
-        using view_type = boost::mpl::at<view_type_list, type::view::view>::type;
+        using view_type = diagram_view<boost::mpl::at<view_type_list, type::view::traits>::type>;
 
         using model_message_type_list_type =
             message::timetable_model::type_list<model_type, view_type, main_window_type>;

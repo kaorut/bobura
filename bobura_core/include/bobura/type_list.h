@@ -560,7 +560,6 @@ namespace bobura
     namespace type { namespace view
     {
         struct traits;         //!< The traits type.
-        struct view;           //!< The view type.
         struct scale;          //!< The scale type.
         struct scale_list;     //!< The scale list type.
     }}
@@ -587,8 +586,6 @@ namespace bobura
     //! The view type list.
     using view_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::view::traits, detail::view::traits_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::view::view, diagram_view<detail::view::traits_type>>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::view::scale, detail::view::scale_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
@@ -600,7 +597,7 @@ namespace bobura
                 >
             >,
         tetengo2::meta::assoc_list_end
-        >>>>;
+        >>>;
 
 
     /**** Loading and Saving ************************************************/
