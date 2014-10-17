@@ -246,7 +246,7 @@ namespace bobura
 
     template class about_dialog<
         typename boost::mpl::at<traits_type_list, type::traits::dialog>::type,
-        typename boost::mpl::at<setting_type_list, type::setting::config_traits>::type
+        typename boost::mpl::at<traits_type_list, type::traits::config>::type
     >;
 
 

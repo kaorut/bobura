@@ -29,7 +29,7 @@ namespace
             boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
-            boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type
+            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type
         >;
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
@@ -43,7 +43,7 @@ namespace
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type,
             message_catalog_type,
-            boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type
+            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type
         >;
 
 

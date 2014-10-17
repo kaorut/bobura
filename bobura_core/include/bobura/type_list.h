@@ -27,11 +27,9 @@
 #include <bobura/command/traits.h>
 #include <bobura/config_traits.h>
 #include <bobura/detail_type_list.h>
-#include <bobura/diagram_view.h>
 #include <bobura/dialog_traits.h>
 #include <bobura/load_save/traits.h>
 #include <bobura/main_window_traits.h>
-#include <bobura/model/station_info/grade.h>
 #include <bobura/oudia_diagram_dialog.h>
 #include <bobura/view/diagram/traits.h>
 
@@ -416,33 +414,6 @@ namespace bobura
         >>>>>>>>>>>>>>>>>>>>>>>>>>>>>;
 
 
-    /**** Setting ***********************************************************/
-
-    namespace type { namespace setting
-    {
-        struct config_traits;  //!< The config traits type.
-    }}
-
-#if !defined(DOCUMENTATION)
-    namespace detail { namespace setting
-    {
-        using config_traits_type =
-            config_traits<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::config>::type
-            >;
-    }}
-#endif
-
-    //! The type list for the settings.
-    using setting_type_list =
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::setting::config_traits, detail::setting::config_traits_type>,
-        tetengo2::meta::assoc_list_end
-        >;
-
-
     /**** Common Dialog *****************************************************/
 
     namespace type { namespace common_dialog
@@ -568,6 +539,7 @@ namespace bobura
         struct dialog;         //!< The dialog traits.
         struct load_save;      //!< The loading and saving processing traits.
         struct view;           //!< The view traits.
+        struct config;         //!< The config traits.
         struct main_window;    //!< The main window traits.
         struct command;        //!< The command traits.
         struct command_set;    //!< The command set traits.
@@ -625,6 +597,13 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
+        using config_traits_type =
+            config_traits<
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
+                boost::mpl::at<detail_type_list, type::detail::config>::type
+            >;
         using main_window_traits_type =
             main_window_traits<
                 boost::mpl::at<common_type_list, type::size>::type,
@@ -647,7 +626,7 @@ namespace bobura
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
                 view_traits_type,
                 load_save_traits_type,
-                boost::mpl::at<setting_type_list, type::setting::config_traits>::type
+                config_traits_type
             >;
         using command_traits_type =
             command::traits<
@@ -680,7 +659,7 @@ namespace bobura
                 view_traits_type,
                 load_save_traits_type,
                 dialog_traits_type,
-                boost::mpl::at<setting_type_list, type::setting::config_traits>::type
+                config_traits_type
             >;
     }}
 #endif
@@ -690,13 +669,14 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::dialog, detail::traits::dialog_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::load_save, detail::traits::load_save_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::view, detail::traits::view_traits_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::config, detail::traits::config_traits_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::traits::main_window, detail::traits::main_window_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::command, detail::traits::command_traits_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::traits::command_set, detail::traits::command_set_traits_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>;
+        >>>>>>>;
 
 
 }

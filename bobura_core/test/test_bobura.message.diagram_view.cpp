@@ -52,7 +52,7 @@ namespace
 
     using map_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type;
 
-    using config_traits_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type;
+    using config_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
