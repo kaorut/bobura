@@ -17,6 +17,8 @@
 
 #include <bobura/diagram_picture_box.h>
 #include <bobura/diagram_view.h>
+#include <bobura/load_save/confirm_file_save.h>
+#include <bobura/load_save/save_to_file.h>
 #include <bobura/message/timetable_model.h>
 #include <bobura/message/type_list_impl.h>
 #include <bobura/timetable_model.h>
@@ -43,10 +45,15 @@ namespace
 
     using settings_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type;
 
-    using save_to_file_type = boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::save_to_file>::type;
+    using save_to_file_type =
+        bobura::load_save::save_to_file<
+            boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::traits>::type
+        >;
 
     using confirm_file_save_type =
-        boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::confirm_file_save>::type;
+        bobura::load_save::confirm_file_save<
+            boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::traits>::type
+        >;
 
     using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 

@@ -21,6 +21,10 @@
 #include <bobura/command/set.h>
 #include <bobura/diagram_picture_box.h>
 #include <bobura/diagram_view.h>
+#include <bobura/load_save/confirm_file_save.h>
+#include <bobura/load_save/load_from_file.h>
+#include <bobura/load_save/new_file.h>
+#include <bobura/load_save/save_to_file.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/type_list_impl.h>
@@ -72,13 +76,16 @@ namespace bobura
 
         using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
 
-        using confirm_file_save_type = boost::mpl::at<load_save_type_list, type::load_save::confirm_file_save>::type;
+        using confirm_file_save_type =
+            load_save::confirm_file_save<boost::mpl::at<load_save_type_list, type::load_save::traits>::type>;
 
-        using new_file_type = boost::mpl::at<load_save_type_list, type::load_save::new_file>::type;
+        using new_file_type = load_save::new_file<boost::mpl::at<load_save_type_list, type::load_save::traits>::type>;
 
-        using load_from_file_type = boost::mpl::at<load_save_type_list, type::load_save::load_from_file>::type;
+        using load_from_file_type =
+            load_save::load_from_file<boost::mpl::at<load_save_type_list, type::load_save::traits>::type>;
 
-        using save_to_file_type = boost::mpl::at<load_save_type_list, type::load_save::save_to_file>::type;
+        using save_to_file_type =
+            load_save::save_to_file<boost::mpl::at<load_save_type_list, type::load_save::traits>::type>;
 
         using command_traits_type = command_set_traits_type::command_traits_type;
 

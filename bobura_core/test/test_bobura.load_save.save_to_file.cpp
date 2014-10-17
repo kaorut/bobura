@@ -10,6 +10,7 @@
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <bobura/load_save/save_to_file.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 
@@ -32,7 +33,10 @@ namespace
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    using save_to_file_type = boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::save_to_file>::type;
+    using save_to_file_type =
+        bobura::load_save::save_to_file<
+            boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::traits>::type
+        >;
 
 
 }

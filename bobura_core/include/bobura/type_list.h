@@ -29,10 +29,6 @@
 #include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
 #include <bobura/dialog_traits.h>
-#include <bobura/load_save/confirm_file_save.h>
-#include <bobura/load_save/load_from_file.h>
-#include <bobura/load_save/new_file.h>
-#include <bobura/load_save/save_to_file.h>
 #include <bobura/load_save/traits.h>
 #include <bobura/main_window_traits.h>
 #include <bobura/model/station_info/grade.h>
@@ -594,10 +590,6 @@ namespace bobura
     namespace type { namespace load_save
     {
         struct traits;         //!< The traits.
-        struct new_file;       //!< The file initialization.
-        struct load_from_file; //!< The file loading.
-        struct save_to_file;   //!< The file saving.
-        struct confirm_file_save; //!< The file save confirmation.
     }}
 
 #if !defined(DOCUMENTATION)
@@ -648,20 +640,8 @@ namespace bobura
     //! The loading and saving processing type list.
     using load_save_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::load_save::traits, detail::load_save::traits_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::load_save::new_file, load_save::new_file<detail::load_save::traits_type>>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::load_save::load_from_file, load_save::load_from_file<detail::load_save::traits_type>
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::load_save::save_to_file, load_save::save_to_file<detail::load_save::traits_type>>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::load_save::confirm_file_save, load_save::confirm_file_save<detail::load_save::traits_type>
-            >,
         tetengo2::meta::assoc_list_end
-        >>>>>;
+        >;
 
 
     /**** Traits *************************************************************/
