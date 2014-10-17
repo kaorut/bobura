@@ -33,7 +33,6 @@
 #include <bobura/main_window_traits.h>
 #include <bobura/model/station_info/grade.h>
 #include <bobura/oudia_diagram_dialog.h>
-#include <bobura/settings.h>
 #include <bobura/view/diagram/traits.h>
 
 
@@ -422,7 +421,6 @@ namespace bobura
     namespace type { namespace setting
     {
         struct config_traits;  //!< The config traits type.
-        struct settings;       //!< The settings type.
     }}
 
 #if !defined(DOCUMENTATION)
@@ -435,22 +433,14 @@ namespace bobura
                 boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
                 boost::mpl::at<detail_type_list, type::detail::config>::type
             >;
-        using settings_type =
-            settings<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<ui_type_list, type::ui::position>::type,
-                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-                config_traits_type
-            >;
     }}
 #endif
 
     //! The type list for the settings.
     using setting_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::setting::config_traits, detail::setting::config_traits_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::setting::settings, detail::setting::settings_type>,
         tetengo2::meta::assoc_list_end
-        >>;
+        >;
 
 
     /**** Common Dialog *****************************************************/

@@ -12,6 +12,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/property_bar.h>
+#include <bobura/settings.h>
 #include <bobura/type_list.h>
 
 
@@ -23,7 +24,13 @@ namespace
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    using settings_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type;
+    using settings_type =
+        bobura::settings<
+            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
+            boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type
+        >;
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 

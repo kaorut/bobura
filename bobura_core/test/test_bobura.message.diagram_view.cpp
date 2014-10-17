@@ -19,6 +19,7 @@
 #include <bobura/message/diagram_view.h>
 #include <bobura/model/station_info/grade.h>
 #include <bobura/property_bar.h>
+#include <bobura/settings.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 
@@ -55,7 +56,13 @@ namespace
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    using settings_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type;
+    using settings_type =
+        bobura::settings<
+            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
+            config_traits_type
+        >;
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
