@@ -38,7 +38,6 @@
 #include <bobura/model/station_info/grade.h>
 #include <bobura/oudia_diagram_dialog.h>
 #include <bobura/settings.h>
-#include <bobura/timetable_model.h>
 #include <bobura/view/diagram/traits.h>
 #include <bobura/view/scale_list.h>
 
@@ -537,7 +536,6 @@ namespace bobura
     {
         struct operating_distance; //!< The operating distance type.
         struct speed;          //!< The speed type.
-        struct model;          //!< The model type.
         struct station_grade_type_set; //!< The station grade type set type.
     }}
 
@@ -556,23 +554,11 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::speed, detail::model::speed_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
-                type::model::model,
-                timetable_model<
-                    boost::mpl::at<common_type_list, type::size>::type,
-                    boost::mpl::at<common_type_list, type::difference>::type,
-                    boost::mpl::at<common_type_list, type::string>::type,
-                    detail::model::operating_distance_type,
-                    detail::model::speed_type,
-                    boost::mpl::at<ui_type_list, type::ui::fast_font>::type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
                 type::model::station_grade_type_set,
                 model::station_info::grade_type_set<boost::mpl::at<common_type_list, type::string>::type>
             >,
         tetengo2::meta::assoc_list_end
-        >>>>;
+        >>>;
 
 
     /**** View **************************************************************/

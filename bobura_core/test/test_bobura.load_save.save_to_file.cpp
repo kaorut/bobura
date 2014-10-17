@@ -10,6 +10,7 @@
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 
 
@@ -19,7 +20,15 @@ namespace
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
-    using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
+    using model_type =
+        bobura::timetable_model<
+            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            boost::mpl::at<bobura::model_type_list, bobura::type::model::operating_distance>::type,
+            boost::mpl::at<bobura::model_type_list, bobura::type::model::speed>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+        >;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 

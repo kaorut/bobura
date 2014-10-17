@@ -15,6 +15,7 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/selection.h>
 #include <bobura/view/diagram/time_line.h>
@@ -26,7 +27,15 @@ namespace
 
     using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
 
-    using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
+    using model_type =
+        bobura::timetable_model<
+            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            boost::mpl::at<bobura::model_type_list, bobura::type::model::operating_distance>::type,
+            boost::mpl::at<bobura::model_type_list, bobura::type::model::speed>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+        >;
 
     using time_type = model_type::timetable_type::train_type::stop_type::time_type;
 

@@ -23,6 +23,7 @@
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/type_list_impl.h>
+#include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 
 
@@ -30,7 +31,15 @@ namespace bobura
 {
     namespace
     {
-        using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
+        using model_type =
+            timetable_model<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<ui_type_list, type::ui::fast_font>::type
+            >;
 
         using main_window_traits_type = boost::mpl::at<traits_type_list, type::traits::main_window>::type;
 
