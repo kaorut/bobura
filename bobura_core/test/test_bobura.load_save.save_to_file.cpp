@@ -35,7 +35,7 @@ namespace
 
     using save_to_file_type =
         bobura::load_save::save_to_file<
-            boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::traits>::type
+            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type
         >;
 
 

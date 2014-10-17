@@ -585,70 +585,12 @@ namespace bobura
         >>;
 
 
-    /**** Loading and Saving ************************************************/
-
-    namespace type { namespace load_save
-    {
-        struct traits;         //!< The traits.
-    }}
-
-#if !defined(DOCUMENTATION)
-    namespace detail { namespace load_save
-    {
-        using dialog_traits_type =
-            dialog_traits<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<ui_type_list, type::ui::position>::type,
-                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-                boost::mpl::at<ui_type_list, type::ui::label>::type,
-                boost::mpl::at<ui_type_list, type::ui::link_label>::type,
-                boost::mpl::at<ui_type_list, type::ui::image>::type,
-                boost::mpl::at<ui_type_list, type::ui::button>::type,
-                boost::mpl::at<ui_type_list, type::ui::text_box>::type,
-                boost::mpl::at<ui_type_list, type::ui::list_box>::type,
-                boost::mpl::at<ui_type_list, type::ui::dropdown_box>::type,
-                boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
-                boost::mpl::at<ui_type_list, type::ui::transparent_background>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
-            >;
-        using oudia_diagram_dialog_type =
-            oudia_diagram_dialog<dialog_traits_type, boost::mpl::at<common_type_list, type::size>::type>;
-        using traits_type =
-            bobura::load_save::traits<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
-                boost::mpl::at<common_type_list, type::output_stream>::type,
-                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                boost::mpl::at<model_type_list, type::model::speed>::type,
-                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::file_open_dialog>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
-                oudia_diagram_dialog_type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type,
-                boost::mpl::at<locale_type_list, type::locale::windia_file_encoder>::type
-            >;
-    }}
-#endif
-
-    //! The loading and saving processing type list.
-    using load_save_type_list =
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::load_save::traits, detail::load_save::traits_type>,
-        tetengo2::meta::assoc_list_end
-        >;
-
-
     /**** Traits *************************************************************/
 
     namespace type { namespace traits
     {
         struct dialog;         //!< The dialog traits.
+        struct load_save;      //!< The loading and saving processing traits.
         struct main_window;    //!< The main window traits.
         struct command;        //!< The command traits.
         struct command_set;    //!< The command set traits.
@@ -675,6 +617,25 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::transparent_background>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
             >;
+        using load_save_traits_type =
+            bobura::load_save::traits<
+                boost::mpl::at<common_type_list, type::size>::type,
+                boost::mpl::at<common_type_list, type::difference>::type,
+                boost::mpl::at<common_type_list, type::string>::type,
+                boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
+                boost::mpl::at<common_type_list, type::output_stream>::type,
+                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
+                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
+                boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
+                boost::mpl::at<common_dialog_type_list, type::common_dialog::file_open_dialog>::type,
+                boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
+                oudia_diagram_dialog<dialog_traits_type, boost::mpl::at<common_type_list, type::size>::type>,
+                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+                boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type,
+                boost::mpl::at<locale_type_list, type::locale::windia_file_encoder>::type
+            >;
         using main_window_traits_type =
             main_window_traits<
                 boost::mpl::at<common_type_list, type::size>::type,
@@ -696,7 +657,7 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
                 boost::mpl::at<view_type_list, type::view::traits>::type,
-                boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
+                load_save_traits_type,
                 boost::mpl::at<setting_type_list, type::setting::config_traits>::type
             >;
         using command_traits_type =
@@ -728,7 +689,7 @@ namespace bobura
                 command_traits_type,
                 main_window_traits_type,
                 boost::mpl::at<view_type_list, type::view::traits>::type,
-                boost::mpl::at<load_save_type_list, type::load_save::traits>::type,
+                load_save_traits_type,
                 dialog_traits_type,
                 boost::mpl::at<setting_type_list, type::setting::config_traits>::type
             >;
@@ -738,13 +699,14 @@ namespace bobura
     //! The traits type list.
     using traits_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::dialog, detail::traits::dialog_traits_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::load_save, detail::traits::load_save_traits_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::traits::main_window, detail::traits::main_window_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::command, detail::traits::command_traits_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::traits::command_set, detail::traits::command_set_traits_type>,
         tetengo2::meta::assoc_list_end
-        >>>>;
+        >>>>>;
 
 
 }

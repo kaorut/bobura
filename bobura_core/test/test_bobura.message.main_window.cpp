@@ -82,12 +82,12 @@ namespace
 
     using save_to_file_type =
         bobura::load_save::save_to_file<
-            boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::traits>::type
+            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type
         >;
 
     using confirm_file_save_type =
         bobura::load_save::confirm_file_save<
-            boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::traits>::type
+            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type
         >;
 
     using settings_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type;

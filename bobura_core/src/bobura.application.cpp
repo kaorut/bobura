@@ -77,15 +77,15 @@ namespace bobura
         using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
 
         using confirm_file_save_type =
-            load_save::confirm_file_save<boost::mpl::at<load_save_type_list, type::load_save::traits>::type>;
+            load_save::confirm_file_save<boost::mpl::at<traits_type_list, type::traits::load_save>::type>;
 
-        using new_file_type = load_save::new_file<boost::mpl::at<load_save_type_list, type::load_save::traits>::type>;
+        using new_file_type = load_save::new_file<boost::mpl::at<traits_type_list, type::traits::load_save>::type>;
 
         using load_from_file_type =
-            load_save::load_from_file<boost::mpl::at<load_save_type_list, type::load_save::traits>::type>;
+            load_save::load_from_file<boost::mpl::at<traits_type_list, type::traits::load_save>::type>;
 
         using save_to_file_type =
-            load_save::save_to_file<boost::mpl::at<load_save_type_list, type::load_save::traits>::type>;
+            load_save::save_to_file<boost::mpl::at<traits_type_list, type::traits::load_save>::type>;
 
         using command_traits_type = command_set_traits_type::command_traits_type;
 
