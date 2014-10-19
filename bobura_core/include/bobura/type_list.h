@@ -45,6 +45,9 @@ namespace bobura
         struct string;         //!< The string type.
         struct input_stream_iterator; //!< The input stream iterator type.
         struct output_stream;  //!< The output stream type.
+        struct operating_distance; //!< The operating distance type.
+        struct speed;          //!< The speed type.
+        struct scale;          //!< The scale type.
     }
 
 #if !defined(DOCUMENTATION)
@@ -55,6 +58,9 @@ namespace bobura
         using io_string_type = std::string;
         using input_stream_iterator_type =
             boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
+        using operating_distance_type = boost::rational<size_type>;
+        using speed_type = boost::rational<size_type>;
+        using scale_type = boost::rational<size_type>;
     }
 #endif
 
@@ -66,8 +72,11 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::input_stream_iterator, detail::input_stream_iterator_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::output_stream, std::basic_ostream<detail::io_string_type::value_type>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::operating_distance, detail::operating_distance_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::speed, detail::speed_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::scale, detail::scale_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>;
+        >>>>>>>>;
 
 
     /**** Locale ************************************************************/
@@ -486,52 +495,6 @@ namespace bobura
         >>>>>;
 
 
-    /**** Model *************************************************************/
-
-    namespace type { namespace model
-    {
-        struct operating_distance; //!< The operating distance type.
-        struct speed;          //!< The speed type.
-    }}
-
-#if !defined(DOCUMENTATION)
-    namespace detail { namespace model
-    {
-        using operating_distance_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
-        using speed_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
-    }}
-#endif
-
-    //! The model type list.
-    using model_type_list =
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::model::operating_distance, detail::model::operating_distance_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::model::speed, detail::model::speed_type>,
-        tetengo2::meta::assoc_list_end
-        >>;
-
-
-    /**** View **************************************************************/
-
-    namespace type { namespace view
-    {
-        struct scale;          //!< The scale type.
-    }}
-
-#if !defined(DOCUMENTATION)
-    namespace detail { namespace view
-    {
-        using scale_type = boost::rational<boost::mpl::at<common_type_list, type::size>::type>;
-    }}
-#endif
-
-    //! The view type list.
-    using view_type_list =
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::view::scale, detail::view::scale_type>,
-        tetengo2::meta::assoc_list_end
-        >;
-
-
     /**** Traits *************************************************************/
 
     namespace type { namespace traits
@@ -573,8 +536,8 @@ namespace bobura
                 boost::mpl::at<common_type_list, type::string>::type,
                 boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
                 boost::mpl::at<common_type_list, type::output_stream>::type,
-                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<common_type_list, type::operating_distance>::type,
+                boost::mpl::at<common_type_list, type::speed>::type,
                 boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
                 boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
                 boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
@@ -590,9 +553,9 @@ namespace bobura
                 boost::mpl::at<common_type_list, type::size>::type,
                 boost::mpl::at<common_type_list, type::difference>::type,
                 boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                boost::mpl::at<model_type_list, type::model::speed>::type,
-                boost::mpl::at<view_type_list, type::view::scale>::type,
+                boost::mpl::at<common_type_list, type::operating_distance>::type,
+                boost::mpl::at<common_type_list, type::speed>::type,
+                boost::mpl::at<common_type_list, type::scale>::type,
                 boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
                 boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
                 boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
@@ -611,8 +574,8 @@ namespace bobura
                 boost::mpl::at<common_type_list, type::string>::type,
                 boost::mpl::at<ui_type_list, type::ui::position>::type,
                 boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<common_type_list, type::operating_distance>::type,
+                boost::mpl::at<common_type_list, type::speed>::type,
                 boost::mpl::at<ui_type_list, type::ui::window>::type,
                 boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
                 boost::mpl::at<ui_type_list, type::ui::map_box>::type,
@@ -633,8 +596,8 @@ namespace bobura
                 boost::mpl::at<common_type_list, type::size>::type,
                 boost::mpl::at<common_type_list, type::difference>::type,
                 boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<model_type_list, type::model::operating_distance>::type,
-                boost::mpl::at<model_type_list, type::model::speed>::type,
+                boost::mpl::at<common_type_list, type::operating_distance>::type,
+                boost::mpl::at<common_type_list, type::speed>::type,
                 boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
                 boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
                 boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
@@ -649,7 +612,7 @@ namespace bobura
                 boost::mpl::at<ui_type_list, type::ui::color>::type,
                 boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
                 boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
-                boost::mpl::at<view_type_list, type::view::scale>::type,
+                boost::mpl::at<common_type_list, type::scale>::type,
                 boost::mpl::at<ui_type_list, type::ui::shell>::type,
                 boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
                 boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,

@@ -26,14 +26,14 @@ namespace
             boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
             boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
             boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
-            boost::mpl::at<bobura::model_type_list, bobura::type::model::operating_distance>::type,
-            boost::mpl::at<bobura::model_type_list, bobura::type::model::speed>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
         >;
 
     using speed_type = model_type::speed_type;
 
-    using scale_type = boost::mpl::at<bobura::view_type_list, bobura::type::view::scale>::type;
+    using scale_type = boost::mpl::at<bobura::common_type_list, bobura::type::scale>::type;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
