@@ -21,46 +21,62 @@ namespace bobura
     /*!
         \brief The class template for the font and color dialog.
 
-        \tparam Dialog         A dialog type.
-        \tparam MessageCatalog A message catalog type.
-        \tparam IntSize        An integer size type.
-        \tparam Font           A font type.
-        \tparam PointSize      A point size type.
-        \tparam Color          A color type.
+        \tparam Traits        A traits type.
+        \tparam Size          An integer size type.
+        \tparam Font          A font type.
+        \tparam PointUnitSize A point unit size type.
+        \tparam Color         A color type.
+        \tparam Canvas        A canvas type.
+        \tparam FontDialog    A font dialog type.
+        \tparam ColorDialog   A color dialog type.
     */
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    class font_color_dialog : public Dialog
+    class font_color_dialog : public Traits::dialog_type
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The base type.
-        using base_type = Dialog;
+        using base_type = typename traits_type::dialog_type;
 
         //! The abstract window type.
-        using abstract_window_type = typename base_type::base_type;
+        using abstract_window_type = typename traits_type::abstract_window_type;
 
         //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        using message_catalog_type = typename traits_type::message_catalog_type;
 
-        //! The integer size type.
-        using int_size_type = IntSize;
+        //! The size type.
+        using size_type = Size;
 
         //! The font type.
         using font_type = Font;
 
-        //! The point size type.
-        using point_size_type = PointSize;
+        //! The point unit size type.
+        using point_unit_size_type = PointUnitSize;
 
         //! The color type.
         using color_type = Color;
+
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! The font dialog type.
+        using font_dialog_type = FontDialog;
+
+        //! The color dialog type.
+        using color_dialog_type = ColorDialog;
 
         //! The font and color type.
         using font_color_type = std::pair<const font_type&, const color_type&>;

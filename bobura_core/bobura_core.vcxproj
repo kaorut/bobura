@@ -102,7 +102,6 @@
     <ClInclude Include="include\bobura\0namespace.dox" />
     <ClInclude Include="include\bobura\about_dialog.h" />
     <ClInclude Include="include\bobura\application.h" />
-    <ClInclude Include="include\bobura\basic_type_list.h" />
     <ClInclude Include="include\bobura\command\0namespace.dox" />
     <ClInclude Include="include\bobura\command\about.h" />
     <ClInclude Include="include\bobura\command\command_base.h" />
@@ -118,14 +117,17 @@
     <ClInclude Include="include\bobura\command\save_to_file.h" />
     <ClInclude Include="include\bobura\command\set.h" />
     <ClInclude Include="include\bobura\command\set_horizontal_scale.h" />
+    <ClInclude Include="include\bobura\command\set_traits.h" />
     <ClInclude Include="include\bobura\command\set_vertical_scale.h" />
     <ClInclude Include="include\bobura\command\train_kind.h" />
+    <ClInclude Include="include\bobura\command\traits.h" />
     <ClInclude Include="include\bobura\command\vertically_zoom_in.h" />
     <ClInclude Include="include\bobura\command\vertically_zoom_out.h" />
     <ClInclude Include="include\bobura\config_traits.h" />
     <ClInclude Include="include\bobura\detail_type_list.h" />
     <ClInclude Include="include\bobura\diagram_picture_box.h" />
     <ClInclude Include="include\bobura\diagram_view.h" />
+    <ClInclude Include="include\bobura\dialog_traits.h" />
     <ClInclude Include="include\bobura\file_property_dialog.h" />
     <ClInclude Include="include\bobura\font_color_dialog.h" />
     <ClInclude Include="include\bobura\load_save\0namespace.dox" />
@@ -133,8 +135,10 @@
     <ClInclude Include="include\bobura\load_save\load_from_file.h" />
     <ClInclude Include="include\bobura\load_save\new_file.h" />
     <ClInclude Include="include\bobura\load_save\save_to_file.h" />
+    <ClInclude Include="include\bobura\load_save\traits.h" />
     <ClInclude Include="include\bobura\main_window.h" />
     <ClInclude Include="include\bobura\main_window_menu_builder.h" />
+    <ClInclude Include="include\bobura\main_window_traits.h" />
     <ClInclude Include="include\bobura\message\0namespace.dox" />
     <ClInclude Include="include\bobura\message\about_dialog.h" />
     <ClInclude Include="include\bobura\message\diagram_picture_box.h" />
@@ -164,6 +168,7 @@
     <ClInclude Include="include\bobura\view\diagram\station_line.h" />
     <ClInclude Include="include\bobura\view\diagram\time_line.h" />
     <ClInclude Include="include\bobura\view\diagram\train_line.h" />
+    <ClInclude Include="include\bobura\view\diagram\traits.h" />
     <ClInclude Include="include\bobura\view\diagram\utility.h" />
     <ClInclude Include="include\bobura\view\diagram\zoom.h" />
     <ClInclude Include="include\bobura\view\scale_list.h" />

@@ -9,6 +9,10 @@
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <bobura/load_save/confirm_file_save.h>
+#include <bobura/load_save/new_file.h>
+#include <bobura/load_save/save_to_file.h>
+#include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 
 
@@ -16,18 +20,34 @@ namespace
 {
     // types
 
-    using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
+    using model_type =
+        bobura::timetable_model<
+            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+        >;
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
-    using save_to_file_type = boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::save_to_file>::type;
+    using save_to_file_type =
+        bobura::load_save::save_to_file<
+            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type
+        >;
 
     using confirm_file_save_type =
-        boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::confirm_file_save>::type;
+        bobura::load_save::confirm_file_save<
+            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type
+        >;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    using new_file_type = boost::mpl::at<bobura::load_save_type_list, bobura::type::load_save::new_file>::type;
+    using new_file_type =
+        bobura::load_save::new_file<
+            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type
+        >;
 
 
 }

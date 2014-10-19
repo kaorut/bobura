@@ -19,26 +19,28 @@ namespace bobura
     /*!
         \brief The class template for the file property dialog.
 
-        \tparam Dialog         A dialog type.
-        \tparam MessageCatalog A message catalog type.
+        \tparam Traits A traits type.
     */
-    template <typename Dialog, typename MessageCatalog>
-    class file_property_dialog : public Dialog
+    template <typename Traits>
+    class file_property_dialog : public Traits::dialog_type
     {
     public:
         // types
 
-        //! The base type.
-        using base_type = Dialog;
-
-        //! The abstract window type.
-        using abstract_window_type = typename base_type::base_type;
+        //! The traits type.
+        using traits_type = Traits;
 
         //! The string type.
-        using string_type = typename base_type::string_type;
+        using string_type = typename traits_type::string_type;
+
+        //! The base type.
+        using base_type = typename traits_type::dialog_type;
+
+        //! The abstract window type.
+        using abstract_window_type = typename traits_type::abstract_window_type;
 
         //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        using message_catalog_type = typename traits_type::message_catalog_type;
 
 
         // constructors and destructor

@@ -20,14 +20,24 @@ namespace bobura { namespace command
 {
     /*!
         \brief The class template for an open-www.tetengo.org command.
+
+        \tparam Traits A traits type.
+        \tparam Shell  A shell type.
     */
-    class open_www_tetengo_org : public command_base
+    template <typename Traits, typename Shell>
+    class open_www_tetengo_org : public command_base<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
+        //! The shell type.
+        using shell_type = Shell;
+
         //! The base type.
-        using base_type = command_base;
+        using base_type = command_base<traits_type>;
 
 
         // constructors and destructor

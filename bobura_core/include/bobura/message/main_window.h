@@ -23,6 +23,8 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/command/command_base.h>
+
 
 namespace bobura { namespace message { namespace main_window
 {

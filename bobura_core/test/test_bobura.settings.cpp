@@ -16,6 +16,7 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/settings.h>
 #include <bobura/type_list.h>
 
 
@@ -35,7 +36,13 @@ namespace
 
     using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
-    using settings_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type;
+    using settings_type =
+        bobura::settings<
+            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
+            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type
+        >;
 
 
 }

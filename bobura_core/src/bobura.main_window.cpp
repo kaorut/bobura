@@ -17,34 +17,47 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/command/command_base.h>
+#include <bobura/command/set.h>
 #include <bobura/main_window.h>
-#include <bobura/message/type_list.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura
 {
-    class main_window::impl : private boost::noncopyable
+    template <typename Traits, typename CommandSetTraits>
+    class main_window<Traits, CommandSetTraits>::impl : private boost::noncopyable
     {
     public:
         // types
 
-        using base_type = main_window::base_type;
+        using traits_type = typename main_window::traits_type;
 
-        using string_type = base_type::string_type;
+        using string_type = typename main_window::string_type;
 
-        using icon_type = base_type::icon_type;
+        using position_type = typename main_window::position_type;
 
-        using window_state_type = base_type::window_state_type;
+        using dimension_type = typename main_window::dimension_type;
 
-        using message_catalog_type = main_window::message_catalog_type;
+        using base_type = typename main_window::base_type;
 
-        using diagram_picture_box_type = main_window::diagram_picture_box_type;
+        using abstract_window_type = typename main_window::abstract_window_type;
 
-        using property_bar_type = main_window::property_bar_type;
+        using font_type = typename main_window::font_type;
 
-        using settings_type = main_window::settings_type;
+        using message_catalog_type = typename main_window::message_catalog_type;
 
-        using confirm_file_save_type = main_window::confirm_file_save_type;
+        using view_traits_type = typename main_window::view_traits_type;
+
+        using command_set_traits_type = typename main_window::command_set_traits_type;
+
+        using diagram_picture_box_type = typename main_window::diagram_picture_box_type;
+
+        using property_bar_type = typename main_window::property_bar_type;
+        
+        using settings_type = typename main_window::settings_type;
+
+        using confirm_file_save_type = typename main_window::confirm_file_save_type;
 
 
         // constructors and destructor
@@ -80,27 +93,27 @@ namespace bobura
             m_base.set_text(title);
         }
 
-        const diagram_picture_box_type& diagram_picture_box()
+        const diagram_picture_box_type& get_diagram_picture_box()
         const
         {
             assert(m_p_diagram_picture_box);
             return *m_p_diagram_picture_box;
         }
 
-        diagram_picture_box_type& diagram_picture_box()
+        diagram_picture_box_type& get_diagram_picture_box()
         {
             assert(m_p_diagram_picture_box);
             return *m_p_diagram_picture_box;
         }
 
-        const property_bar_type& property_bar()
+        const property_bar_type& get_property_bar()
         const
         {
             assert(m_p_property_bar);
             return *m_p_property_bar;
         }
 
-        property_bar_type& property_bar()
+        property_bar_type& get_property_bar()
         {
             assert(m_p_property_bar);
             return *m_p_property_bar;
@@ -110,21 +123,34 @@ namespace bobura
     private:
         // types
 
-        using message_loop_break_type =
-            tetengo2::gui::message::message_loop_break<
-                boost::mpl::at<detail_type_list, type::detail::message_loop>::type
-            >;
+        using size_type = typename traits_type::size_type;
+
+        using difference_type = typename traits_type::difference_type;
+
+        using operating_distance_type = typename traits_type::operating_distance_type;
+
+        using speed_type = typename traits_type::speed_type;
+
+        using popup_menu_type = typename traits_type::popup_menu_type;
+
+        using message_loop_break_type = typename traits_type::message_loop_break_type;
+
+        using command_traits_type = typename command_set_traits_type::command_traits_type;
 
         using message_type_list_type =
-            boost::mpl::at<main_window_type_list, type::main_window::message_type_list>::type;
-
-        using position_type = base_type::position_type;
-
-        using left_type = tetengo2::gui::position<position_type>::left_type;
-
-        using top_type = tetengo2::gui::position<position_type>::top_type;
-
-        using dimension_type = base_type::dimension_type;
+            message::main_window::type_list<
+                popup_menu_type,
+                command::set<command_set_traits_type>,
+                command::command_base<command_traits_type>,
+                timetable_model<
+                    size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
+                >,
+                diagram_view<view_traits_type>,
+                abstract_window_type,
+                diagram_picture_box_type,
+                property_bar_type,
+                confirm_file_save_type
+            >;
 
 
         // variables
@@ -173,7 +199,7 @@ namespace bobura
                 [](base_type::canvas_type&) { return true; }
             );
             m_base.window_observer_set().closing().connect(
-                boost::mpl::at<message_type_list_type, message::main_window::type::window_closing>::type(
+                typename boost::mpl::at<message_type_list_type, message::main_window::type::window_closing>::type(
                     m_base, m_confirm_file_save, [this]() { this->save_settings(); }
                 )
             );
@@ -201,7 +227,8 @@ namespace bobura
     };
 
 
-    main_window::main_window(
+    template <typename Traits, typename CommandSetTraits>
+    main_window<Traits, CommandSetTraits>::main_window(
         const message_catalog_type&   message_catalog,
         settings_type&                settings,
         const confirm_file_save_type& confirm_file_save
@@ -211,36 +238,55 @@ namespace bobura
     m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, confirm_file_save))
     {}
 
-    main_window::~main_window()
+    template <typename Traits, typename CommandSetTraits>
+    main_window<Traits, CommandSetTraits>::~main_window()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    void main_window::set_title(const boost::optional<string_type>& document_name, const bool changed)
+    template <typename Traits, typename CommandSetTraits>
+    void main_window<Traits, CommandSetTraits>::set_title(
+        const boost::optional<string_type>& document_name,
+        const bool                          changed
+    )
     {
         m_p_impl->set_title(document_name, changed);
     }
 
-    const main_window::diagram_picture_box_type& main_window::diagram_picture_box()
+    template <typename Traits, typename CommandSetTraits>
+    const typename main_window<Traits, CommandSetTraits>::diagram_picture_box_type&
+    main_window<Traits, CommandSetTraits>::get_diagram_picture_box()
     const
     {
-        return m_p_impl->diagram_picture_box();
+        return m_p_impl->get_diagram_picture_box();
     }
 
-    main_window::diagram_picture_box_type& main_window::diagram_picture_box()
+    template <typename Traits, typename CommandSetTraits>
+    typename main_window<Traits, CommandSetTraits>::diagram_picture_box_type&
+    main_window<Traits, CommandSetTraits>::get_diagram_picture_box()
     {
-        return m_p_impl->diagram_picture_box();
+        return m_p_impl->get_diagram_picture_box();
     }
 
-    const main_window::property_bar_type& main_window::property_bar()
+    template <typename Traits, typename CommandSetTraits>
+    const typename main_window<Traits, CommandSetTraits>::property_bar_type&
+    main_window<Traits, CommandSetTraits>::get_property_bar()
     const
     {
-        return m_p_impl->property_bar();
+        return m_p_impl->get_property_bar();
     }
 
-    main_window::property_bar_type& main_window::property_bar()
+    template <typename Traits, typename CommandSetTraits>
+    typename main_window<Traits, CommandSetTraits>::property_bar_type&
+    main_window<Traits, CommandSetTraits>::get_property_bar()
     {
-        return m_p_impl->property_bar();
+        return m_p_impl->get_property_bar();
     }
+
+
+    template class main_window<
+        typename boost::mpl::at<traits_type_list, type::traits::main_window>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::command_set>::type
+    >;
 
 
 }

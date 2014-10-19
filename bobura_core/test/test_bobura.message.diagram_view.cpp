@@ -17,6 +17,10 @@
 #include <tetengo2.h>
 
 #include <bobura/message/diagram_view.h>
+#include <bobura/model/station_info/grade.h>
+#include <bobura/property_bar.h>
+#include <bobura/settings.h>
+#include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 
 
@@ -35,10 +39,10 @@ namespace
     using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
 
     using operating_distance_type =
-        boost::mpl::at<bobura::model_type_list, bobura::type::model::operating_distance>::type;
+        boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type;
 
     using speed_type =
-        boost::mpl::at<bobura::model_type_list, bobura::type::model::speed>::type;
+        boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type;
 
     using font_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type;
 
@@ -48,18 +52,41 @@ namespace
 
     using map_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type;
 
-    using config_traits_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type;
+    using config_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    using settings_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::settings>::type;
+    using settings_type =
+        bobura::settings<
+            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
+            config_traits_type
+        >;
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
     using property_bar_type =
-        boost::mpl::at<bobura::main_window_type_list, bobura::type::main_window::property_bar>::type;
+        bobura::property_bar<
+            string_type,
+            position_type,
+            dimension_type,
+            abstract_window_type,
+            side_bar_type,
+            map_box_type,
+            message_catalog_type,
+            config_traits_type
+        >;
 
-    using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
+    using model_type =
+        bobura::timetable_model<
+            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+        >;
 
     using timetable_type = model_type::timetable_type;
 
@@ -68,7 +95,9 @@ namespace
     using station_type = station_location_type::station_type;
 
     using station_grade_type_set_type =
-        boost::mpl::at<bobura::model_type_list, bobura::type::model::station_grade_type_set>::type;
+        bobura::model::station_info::grade_type_set<
+            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type
+        >;
     
     using station_selected_type =
         bobura::message::diagram_view::station_selected<
@@ -83,8 +112,8 @@ namespace
             abstract_window_type,
             side_bar_type,
             map_box_type,
-            config_traits_type,
-            message_catalog_type
+            message_catalog_type,
+            config_traits_type
         >;
 
     using train_type = model_type::timetable_type::train_type;
@@ -106,8 +135,8 @@ namespace
             abstract_window_type,
             side_bar_type,
             map_box_type,
-            config_traits_type,
-            message_catalog_type
+            message_catalog_type,
+            config_traits_type
         >;
 
     using all_unselected_type =
@@ -118,8 +147,8 @@ namespace
             abstract_window_type,
             side_bar_type,
             map_box_type,
-            config_traits_type,
-            message_catalog_type
+            message_catalog_type,
+            config_traits_type
         >;
 
 

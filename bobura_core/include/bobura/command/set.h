@@ -13,51 +13,112 @@
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
 
-#include <bobura/basic_type_list.h>
+#include <bobura/diagram_view.h>
+#include <bobura/load_save/load_from_file.h>
+#include <bobura/load_save/new_file.h>
+#include <bobura/load_save/save_to_file.h>
+#include <bobura/settings.h>
 
 
 namespace bobura { namespace command
 {
+    template <typename Traits>
     class command_base;
 
     class parameter_base;
 
 
     /*!
-        \brief The class for a command set.
+        \brief The class template for a command set.
+
+        \tparam Traits A traits type.
     */
+    template <typename Traits>
     class set : private boost::noncopyable
     {
     public:
         // types
 
-        //! The file initialization type.
-        using size_type = boost::mpl::at<common_type_list, type::size>::type;
+        //! The traits type.
+        using traits_type = Traits;
 
-        //! The file initialization type.
-        using new_file_type = boost::mpl::at<load_save_type_list, type::load_save::new_file>::type;
+        //! The size type.
+        using size_type = typename traits_type::size_type;
 
-        //! The file loading type.
-        using load_from_file_type = boost::mpl::at<load_save_type_list, type::load_save::load_from_file>::type;
+        //! The string type.
+        using string_type = typename traits_type::string_type;
 
-        //! The file saving type.
-        using save_to_file_type = boost::mpl::at<load_save_type_list, type::load_save::save_to_file>::type;
+        //! The position type.
+        using position_type = typename traits_type::position_type;
 
-        //! The diagram view type.
-        using diagram_view_type = boost::mpl::at<view_type_list, type::view::view>::type;
+        //! The dimension type.
+        using dimension_type = typename traits_type::dimension_type;
 
-        //! The settings type.
-        using settings_type = boost::mpl::at<setting_type_list, type::setting::settings>::type;
+        //! The dialog type.
+        using dialog_type = typename traits_type::dialog_type;
+
+        //! The color type.
+        using color_type = typename traits_type::color_type;
+
+        //! The point unit size type.
+        using point_unit_size_type = typename traits_type::point_unit_size_type;
+
+        //! The canvas type.
+        using canvas_type = typename traits_type::canvas_type;
+
+        //! The scale type.
+        using scale_type = typename traits_type::scale_type;
+
+        //! The shell type.
+        using shell_type = typename traits_type::shell_type;
+
+        //! The font dialog type.
+        using font_dialog_type = typename traits_type::font_dialog_type;
+
+        //! The color dialog_type.
+        using color_dialog_type = typename traits_type::color_dialog_type;
 
         //! The message catalog type.
-        using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
+        using message_catalog_type = typename traits_type::message_catalog_type;
+
+        //! The command traits type.
+        using command_traits_type = typename traits_type::command_traits_type;
+
+        //! The main window traits type.
+        using main_window_traits_type = typename traits_type::main_window_traits_type;
+
+        //! The view traits type.
+        using view_traits_type = typename traits_type::view_traits_type;
+
+        //! The loading and saving processing traits type.
+        using load_save_traits_type = typename traits_type::load_save_traits_type;
+
+        //! The dialog traits type.
+        using dialog_traits_type = typename traits_type::dialog_traits_type;
+
+        //! The config traits type.
+        using config_traits_type = typename traits_type::config_traits_type;
+
+        //! The file initialization type.
+        using new_file_type = load_save::new_file<load_save_traits_type>;
+
+        //! The file loading type.
+        using load_from_file_type = load_save::load_from_file<load_save_traits_type>;
+
+        //! The file saving type.
+        using save_to_file_type = load_save::save_to_file<load_save_traits_type>;
+
+        //! The diagram view type.
+        using diagram_view_type = diagram_view<view_traits_type>;
+
+        //! The settings type.
+        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
 
         //! The command type.
-        using command_type = command_base;
+        using command_type = command_base<command_traits_type>;
 
         //! The parameter type.
         using parameter_type = parameter_base;

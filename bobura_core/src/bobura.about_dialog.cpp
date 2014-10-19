@@ -18,8 +18,8 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/about_dialog.h>
-#include <bobura/message/type_list.h>
-#include <bobura/settings.h>
+#include <bobura/dialog_traits.h>
+#include <bobura/message/type_list_impl.h>
 #include <bobura/type_list.h>
 
 
@@ -27,35 +27,25 @@ namespace bobura
 {
     namespace
     {
-        template <
-            typename String,
-            typename Position,
-            typename Dimension,
-            typename Dialog,
-            typename MessageCatalog,
-            typename ConfigTraits
-        >
-        class about_dialog<String, Position, Dimension, Dialog, MessageCatalog, ConfigTraits>::impl :
-            private boost::noncopyable
+        template <typename Traits, typename ConfigTraits>
+        class about_dialog<Traits, ConfigTraits>::impl : private boost::noncopyable
         {
         public:
             // types
 
-            using string_type = String;
+            using traits_type = typename about_dialog::traits_type;
 
-            using position_type = Position;
+            using string_type = typename about_dialog::string_type;
 
-            using dimension_type = Dimension;
+            using position_type = typename about_dialog::position_type;
 
-            using base_type = Dialog;
+            using dimension_type = typename about_dialog::dimension_type;
 
-            using background_type = typename base_type::background_type;
+            using base_type = typename about_dialog::base_type;
 
-            using message_catalog_type = MessageCatalog;
+            using message_catalog_type = typename about_dialog::message_catalog_type;
 
-            using config_traits_type = ConfigTraits;
-
-            using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
+            using settings_type = typename about_dialog::settings_type;
 
 
             // constructors and destructor
@@ -78,33 +68,6 @@ namespace bobura
         private:
             // types
 
-            using label_type = typename boost::mpl::at<ui_type_list, type::ui::label>::type;
-
-            using color_type = typename label_type::color_type;
-
-            using link_label_type =
-                tetengo2::gui::widget::link_label<
-                    boost::mpl::at<ui_type_list, type::ui::widget_traits>::type,
-                    boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type,
-                    boost::mpl::at<detail_type_list, type::detail::system_color>::type,
-                    boost::mpl::at<detail_type_list, type::detail::shell>::type
-                >;
-
-            using image_type =
-                tetengo2::gui::widget::image<
-                    boost::mpl::at<ui_type_list, type::ui::widget_traits>::type,
-                    boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type
-                >;
-
-            using icon_type = typename image_type::icon_type;
-
-            using button_type = typename boost::mpl::at<ui_type_list, type::ui::button>::type;
-
-            using transparent_background_type =
-                typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type;
-
-            using about_dialog_message_type_list_type = message::about_dialog::type_list<base_type>;
-
             using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
             using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
@@ -112,6 +75,22 @@ namespace bobura
             using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
             using top_type = typename tetengo2::gui::position<position_type>::top_type;
+
+            using label_type = typename traits_type::label_type;
+
+            using color_type = typename label_type::color_type;
+
+            using link_label_type = typename traits_type::link_label_type;
+
+            using image_type = typename traits_type::image_type;
+
+            using icon_type = typename image_type::icon_type;
+
+            using button_type = typename traits_type::button_type;
+
+            using transparent_background_type = typename traits_type::transparent_background_type;
+
+            using about_dialog_message_type_list_type = message::about_dialog::type_list<base_type>;
 
 
             // variables
@@ -248,15 +227,8 @@ namespace bobura
     }
 
 
-    template <
-        typename String,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename MessageCatalog,
-        typename ConfigTraits
-    >
-    about_dialog<String, Position, Dimension, Dialog, MessageCatalog, ConfigTraits>::about_dialog(
+    template <typename Traits, typename ConfigTraits>
+    about_dialog<Traits, ConfigTraits>::about_dialog(
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog,
         const settings_type&        settings
@@ -266,26 +238,15 @@ namespace bobura
     m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings))
     {}
 
-    template <
-        typename String,
-        typename Position,
-        typename Dimension,
-        typename Dialog,
-        typename MessageCatalog,
-        typename ConfigTraits
-    >
-    about_dialog<String, Position, Dimension, Dialog, MessageCatalog, ConfigTraits>::~about_dialog()
+    template <typename Traits, typename ConfigTraits>
+    about_dialog<Traits, ConfigTraits>::~about_dialog()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
 
     template class about_dialog<
-        boost::mpl::at<common_type_list, type::string>::type,
-        boost::mpl::at<ui_type_list, type::ui::position>::type,
-        boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-        boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-        boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-        boost::mpl::at<setting_type_list, type::setting::config_traits>::type
+        typename boost::mpl::at<traits_type_list, type::traits::dialog>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::config>::type
     >;
 
 

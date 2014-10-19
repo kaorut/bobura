@@ -23,30 +23,32 @@ namespace bobura
     /*!
         \brief The class template for the OuDia diagram dialog.
 
-        \tparam Dialog         A dialog type.
-        \tparam MessageCatalog A message catalog type.
-        \tparam IntSize        An integer size type.
+        \tparam Traits A traits type.
+        \tparam Size   A size type.
     */
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    class oudia_diagram_dialog : public Dialog
+    template <typename Traits, typename Size>
+    class oudia_diagram_dialog : public Traits::dialog_type
     {
     public:
         // types
 
-        //! The base type.
-        using base_type = Dialog;
-
-        //! The abstract window type.
-        using abstract_window_type = typename base_type::base_type;
+        //! The traits type.
+        using traits_type = Traits;
 
         //! The string type.
-        using string_type = typename base_type::string_type;
+        using string_type = typename traits_type::string_type;
+
+        //! The base type.
+        using base_type = typename traits_type::dialog_type;
+
+        //! The abstract window type.
+        using abstract_window_type = typename traits_type::abstract_window_type;
 
         //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        using message_catalog_type = typename traits_type::message_catalog_type;
 
-        //! The integer size type.
-        using int_size_type = IntSize;
+        //! The size type.
+        using size_type = Size;
 
 
         // constructors and destructor
@@ -103,7 +105,7 @@ namespace bobura
 
             \return The selected index.
         */
-        const boost::optional<int_size_type>& selected_index()
+        const boost::optional<size_type>& selected_index()
         const;
 
         /*!
@@ -113,7 +115,7 @@ namespace bobura
 
             \throw std::out_of_range When index is greater than the diagram count.
         */
-        void set_selected_index(const int_size_type index);
+        void set_selected_index(const size_type index);
 
 
     private:

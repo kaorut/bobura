@@ -12,29 +12,65 @@
 #include <utility>
 #include <vector>
 
+#include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
 
 #include <tetengo2.h>
 
 #include <bobura/command/train_kind.h>
+#include <bobura/model/train_kind.h>
+#include <bobura/type_list.h>
+#include <bobura/train_kind_dialog.h>
 
 
 namespace bobura { namespace command
 {
-    class train_kind::impl
+    template <
+        typename Traits,
+        typename Dialog,
+        typename Color,
+        typename Canvas,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    class train_kind<Traits, Dialog, Color, Canvas, ColorDialog, MessageCatalog, DialogTraits>::impl
     {
     public:
         // types
 
-        using model_type = train_kind::model_type;
+        using model_type = typename train_kind::model_type;
 
-        using abstract_window_type = train_kind::abstract_window_type;
+        using abstract_window_type = typename train_kind::abstract_window_type;
 
-        using train_kind_dialog_type = train_kind::train_kind_dialog_type;
+        using size_type = typename train_kind::size_type;
 
-        using dialog_base_type = train_kind::dialog_base_type;
+        using string_type = typename train_kind::string_type;
 
-        using message_catalog_type = train_kind::message_catalog_type;
+        using font_type = typename train_kind::font_type;
+
+        using dialog_type = typename train_kind::dialog_type;
+
+        using color_type = typename train_kind::color_type;
+
+        using canvas_type = typename train_kind::canvas_type;
+
+        using color_dialog_type = typename train_kind::color_dialog_type;
+
+        using message_catalog_type = typename train_kind::message_catalog_type;
+
+        using dialog_traits_type = typename train_kind::dialog_traits_type;
+
+        using train_kind_dialog_type =
+            train_kind_dialog<
+                dialog_traits_type,
+                size_type,
+                model::train_kind<string_type>,
+                font_type,
+                color_type,
+                canvas_type,
+                color_dialog_type
+            >;
 
 
         // constructors and destructor
@@ -52,14 +88,14 @@ namespace bobura { namespace command
         {
             const auto& font_color_set = model.timetable().font_color_set();
             train_kind_dialog_type dialog{
-                parent, m_message_catalog, font_color_set.train_name(), font_color_set.background()
+                parent, font_color_set.train_name(), font_color_set.background(), m_message_catalog
             };
 
             auto info_sets = to_info_sets(model.timetable());
             dialog.set_info_sets(std::move(info_sets));
 
             dialog.do_modal();
-            if (dialog.result() != dialog_base_type::result_type::accepted)
+            if (dialog.result() != dialog_type::result_type::accepted)
                 return;
         
             model.timetable().assign_train_kinds(
@@ -72,19 +108,17 @@ namespace bobura { namespace command
     private:
         // types
 
-        using int_size_type = train_kind_dialog_type::int_size_type;
+        using info_set_type = typename train_kind_dialog_type::info_set_type;
 
-        using info_set_type = train_kind_dialog_type::info_set_type;
+        using timetable_type = typename model_type::timetable_type;
 
-        using timetable_type = model_type::timetable_type;
+        using train_kinds_type = typename timetable_type::train_kinds_type;
 
-        using train_kinds_type = timetable_type::train_kinds_type;
+        using train_kind_index_type = typename timetable_type::size_type;
 
-        using train_kind_index_type = timetable_type::size_type;
+        using train_kind_type = typename timetable_type::train_kind_type;
 
-        using train_kind_type = timetable_type::train_kind_type;
-
-        using font_color_set_type = timetable_type::font_color_set_type;
+        using font_color_set_type = typename timetable_type::font_color_set_type;
 
 
         // static functions
@@ -96,7 +130,7 @@ namespace bobura { namespace command
 
             for (auto i = timetable.train_kinds().begin(); i != timetable.train_kinds().end(); ++i)
             {
-                const int_size_type index = std::distance(timetable.train_kinds().begin(), i);
+                const size_type index = std::distance(timetable.train_kinds().begin(), i);
                 info_sets.emplace_back(boost::make_optional(index), timetable.train_kind_referred(i), *i);
             }
 
@@ -146,20 +180,63 @@ namespace bobura { namespace command
     };
 
 
-    train_kind::train_kind(const message_catalog_type& message_catalog)
+    template <
+        typename Traits,
+        typename Dialog,
+        typename Color,
+        typename Canvas,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    train_kind<Traits, Dialog, Color, Canvas, ColorDialog, MessageCatalog, DialogTraits>::train_kind(
+        const message_catalog_type& message_catalog
+    )
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
     {}
 
-    train_kind::~train_kind()
+    template <
+        typename Traits,
+        typename Dialog,
+        typename Color,
+        typename Canvas,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    train_kind<Traits, Dialog, Color, Canvas, ColorDialog, MessageCatalog, DialogTraits>::~train_kind()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    void train_kind::execute_impl(model_type& model, abstract_window_type& parent)
+    template <
+        typename Traits,
+        typename Dialog,
+        typename Color,
+        typename Canvas,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    void train_kind<Traits, Dialog, Color, Canvas, ColorDialog, MessageCatalog, DialogTraits>::execute_impl(
+        model_type&           model,
+        abstract_window_type& parent
+    )
     const
     {
         m_p_impl->execute(model, parent);
     }
+
+
+    template class train_kind<
+        typename boost::mpl::at<traits_type_list, type::traits::command>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::color>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
+        typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::dialog>::type
+    >;
 
 
 }}

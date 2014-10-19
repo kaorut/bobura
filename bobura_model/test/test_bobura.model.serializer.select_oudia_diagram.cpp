@@ -53,14 +53,16 @@ namespace
 
     struct oudia_diagram_dialog
     {
+        using size_type = std::size_t;
+
+        using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+
         using abstract_window_type =
             tetengo2::gui::widget::abstract_window<
                 boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::widget_traits>::type,
                 boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::widget_details_traits>::type,
                 boost::mpl::at<test_bobura::model::detail_type_list, test_bobura::model::type::detail::menu>::type
             >;
-
-        using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
         using message_catalog_type =
             tetengo2::message::message_catalog<
@@ -77,8 +79,6 @@ namespace
             accepted,
             canceled,
         };
-
-        using int_size_type = std::size_t;
 
         oudia_diagram_dialog(abstract_window_type&, const message_catalog_type&)
         {}
@@ -112,13 +112,13 @@ namespace
         void set_names(std::vector<string_type>)
         {}
 
-        boost::optional<int_size_type> selected_index()
+        boost::optional<size_type> selected_index()
         const
         {
             return boost::none;
         }
 
-        void set_selected_index(int_size_type)
+        void set_selected_index(size_type)
         {}
 
         

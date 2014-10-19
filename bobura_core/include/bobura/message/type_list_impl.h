@@ -63,8 +63,8 @@ namespace bobura { namespace message
             \tparam AbstractWindow    An abstract window type.
             \tparam SideBar           A side bar type.
             \tparam MapBox            A map box type.
-            \tparam ConfigTraits      A configuration traits type.
             \tparam MessageCatalog    A message catalog type.
+            \tparam ConfigTraits      A configuration traits type.
         */
         template <
             typename Size,
@@ -78,8 +78,8 @@ namespace bobura { namespace message
             typename AbstractWindow,
             typename SideBar,
             typename MapBox,
-            typename ConfigTraits,
-            typename MessageCatalog
+            typename MessageCatalog,
+            typename ConfigTraits
         >
         using type_list =
             tetengo2::meta::assoc_list<
@@ -186,133 +186,29 @@ namespace bobura { namespace message
         /*!
             \brief The meta function for the type list of the diagram picture box messages.
 
-            \tparam Size              A size type.
-            \tparam Difference        A difference type.
-            \tparam String            A string type.
-            \tparam OperatingDistance An operating distance type.
-            \tparam Speed             A speed type.
-            \tparam Scale             A scale type.
-            \tparam Canvas            A canvas type.
-            \tparam SolidBackground   A solid background type.
-            \tparam PictureBox        A picture box type.
-            \tparam MessageCatalog    A message catalog type.
+            \tparam PictureBox     A picture box type.
+            \tparam AbstractWindow An abstract window type.
+            \tparam MouseCapture   A mouse capture type.
+            \tparam ViewTraits     A view traits type.
         */
-        template <
-            typename Size,
-            typename Difference,
-            typename String,
-            typename OperatingDistance,
-            typename Speed,
-            typename Scale,
-            typename Canvas,
-            typename SolidBackground,
-            typename PictureBox,
-            typename MessageCatalog
-        >
+        template <typename PictureBox, typename AbstractWindow, typename MouseCapture, typename ViewTraits>
         using type_list =
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<
-                    type::mouse_pressed,
-                    mouse_pressed<
-                        Size,
-                        Difference,
-                        String,
-                        OperatingDistance,
-                        Speed,
-                        Canvas,
-                        SolidBackground,
-                        PictureBox,
-                        MessageCatalog
-                    >
-                >,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<
-                    type::mouse_released,
-                    mouse_released<
-                        Size,
-                        Difference,
-                        String,
-                        OperatingDistance,
-                        Speed,
-                        Canvas,
-                        SolidBackground,
-                        PictureBox,
-                        MessageCatalog
-                    >
-                >,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<
-                    type::mouse_moved,
-                    mouse_moved<
-                        Size,
-                        Difference,
-                        String,
-                        OperatingDistance,
-                        Speed,
-                        Canvas,
-                        SolidBackground,
-                        PictureBox,
-                        MessageCatalog
-                    >
-                >,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_pressed, mouse_pressed<PictureBox, ViewTraits>>,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_released, mouse_released<PictureBox, ViewTraits>>,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_moved, mouse_moved<PictureBox, ViewTraits>>,
             tetengo2::meta::assoc_list<
                 boost::mpl::pair<
                     type::mouse_wheeled,
                     mouse_wheeled<
-                        Size,
-                        Difference,
-                        String,
-                        OperatingDistance,
-                        Speed,
-                        Canvas,
-                        SolidBackground,
                         PictureBox,
-                        view::diagram::zoom<
-                            Size,
-                            Difference,
-                            String,
-                            OperatingDistance,
-                            Speed,
-                            Scale,
-                            Canvas,
-                            SolidBackground,
-                            PictureBox,
-                            MessageCatalog
-                        >,
-                        MessageCatalog
+                        view::diagram::zoom<ViewTraits, AbstractWindow, PictureBox, MouseCapture>,
+                        ViewTraits
                     >
                 >,
             tetengo2::meta::assoc_list<boost::mpl::pair<type::keyboard_key_down, keyboard_key_down<PictureBox>>,
+            tetengo2::meta::assoc_list<boost::mpl::pair<type::paint_paint, paint_paint<PictureBox, ViewTraits>>,
             tetengo2::meta::assoc_list<
-                boost::mpl::pair<
-                    type::paint_paint,
-                    paint_paint<
-                        Size,
-                        Difference,
-                        String,
-                        OperatingDistance,
-                        Speed,
-                        Canvas,
-                        SolidBackground,
-                        PictureBox,
-                        MessageCatalog
-                    >
-                >,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<
-                    type::scroll_bar_scrolled,
-                    scroll_bar_scrolled<
-                        Size,
-                        Difference,
-                        String,
-                        OperatingDistance,
-                        Speed,
-                        Canvas,
-                        SolidBackground,
-                        PictureBox,
-                        MessageCatalog
-                    >
-                >,
+                boost::mpl::pair<type::scroll_bar_scrolled, scroll_bar_scrolled<PictureBox, ViewTraits>>,
             tetengo2::meta::assoc_list_end
             >>>>>>>;
     }

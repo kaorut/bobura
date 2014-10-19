@@ -7,28 +7,41 @@
 */
 
 #include <boost/core/ignore_unused.hpp>
+#include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
 
+#include <bobura/about_dialog.h>
 #include <bobura/command/about.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura { namespace command
 {
-    class about::impl
+    template <
+        typename Traits,
+        typename Position,
+        typename Dimension,
+        typename MessageCatalog,
+        typename DialogTraits,
+        typename ConfigTraits
+    >
+    class about<Traits, Position, Dimension, MessageCatalog, DialogTraits, ConfigTraits>::impl
     {
     public:
         // types
 
-        using model_type = about::model_type;
+        using model_type = typename about::model_type;
 
-        using abstract_window_type = about::abstract_window_type;
+        using abstract_window_type = typename about::abstract_window_type;
 
-        using about_dialog_type = about::about_dialog_type;
+        using message_catalog_type = typename about::message_catalog_type;
 
-        using message_catalog_type = about::message_catalog_type;
+        using dialog_traits_type = typename about::dialog_traits_type;
 
-        using settings_type = about::settings_type;
+        using config_traits_type = typename about::config_traits_type;
+
+        using settings_type = typename about::settings_type;
 
 
         // constructors and destructor
@@ -52,6 +65,11 @@ namespace bobura { namespace command
 
 
     private:
+        // types
+
+        using about_dialog_type = about_dialog<dialog_traits_type, config_traits_type>;
+
+
         // variables
 
         const message_catalog_type& m_message_catalog;
@@ -62,20 +80,60 @@ namespace bobura { namespace command
     };
 
 
-    about::about(const message_catalog_type& message_catalog, const settings_type& settings)
+    template <
+        typename Traits,
+        typename Position,
+        typename Dimension,
+        typename MessageCatalog,
+        typename DialogTraits,
+        typename ConfigTraits
+    >
+    about<Traits, Position, Dimension, MessageCatalog, DialogTraits, ConfigTraits>::about(
+        const message_catalog_type& message_catalog,
+        const settings_type&        settings
+    )
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog, settings))
     {}
 
-    about::~about()
+    template <
+        typename Traits,
+        typename Position,
+        typename Dimension,
+        typename MessageCatalog,
+        typename DialogTraits,
+        typename ConfigTraits
+    >
+    about<Traits, Position, Dimension, MessageCatalog, DialogTraits, ConfigTraits>::~about()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    void about::execute_impl(model_type& model, abstract_window_type& parent)
+    template <
+        typename Traits,
+        typename Position,
+        typename Dimension,
+        typename MessageCatalog,
+        typename DialogTraits,
+        typename ConfigTraits
+    >
+    void about<Traits, Position, Dimension, MessageCatalog, DialogTraits, ConfigTraits>::execute_impl(
+        model_type&           model,
+        abstract_window_type& parent
+    )
     const
     {
         m_p_impl->execute(model, parent);
     }
+
+
+    template class about<
+        typename boost::mpl::at<traits_type_list, type::traits::command>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::position>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::dialog>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::config>::type
+    >;
 
 
 }}

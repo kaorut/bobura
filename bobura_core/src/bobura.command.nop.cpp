@@ -7,22 +7,25 @@
 */
 
 #include <boost/core/ignore_unused.hpp>
+#include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
 
 #include <bobura/command/nop.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura { namespace command
 {
-    class nop::impl
+    template <typename Traits>
+    class nop<Traits>::impl
     {
     public:
         // types
 
-        using model_type = nop::model_type;
+        using model_type = typename nop::model_type;
 
-        using abstract_window_type = nop::abstract_window_type;
+        using abstract_window_type = typename nop::abstract_window_type;
 
 
         // functions
@@ -37,20 +40,26 @@ namespace bobura { namespace command
     };
 
 
-    nop::nop()
+    template <typename Traits>
+    nop<Traits>::nop()
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>())
     {}
 
-    nop::~nop()
+    template <typename Traits>
+    nop<Traits>::~nop()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    void nop::execute_impl(model_type& model, abstract_window_type& parent)
+    template <typename Traits>
+    void nop<Traits>::execute_impl(model_type& model, abstract_window_type& parent)
     const
     {
         m_p_impl->execute(model, parent);
     }
+
+
+    template class nop<typename boost::mpl::at<traits_type_list, type::traits::command>::type>;
 
 
 }}

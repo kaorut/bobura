@@ -22,38 +22,37 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for the diagram view item.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Canvas            A canvas type.
+        \tparam Traits A traits type.
     */
-    template <typename Size, typename Difference, typename String, typename OperatingDistance, typename Canvas>
+    template <typename Traits>
     class item : private boost::noncopyable
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The size type.
-        using size_type = Size;
+        using size_type = typename traits_type::size_type;
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = typename traits_type::difference_type;
 
         //! The string type.
-        using string_type = String;
+        using string_type = typename traits_type::string_type;
 
         //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
+        using operating_distance_type = typename traits_type::operating_distance_type;
 
         //! The canvas type.
-        using canvas_type = Canvas;
+        using canvas_type = typename traits_type::canvas_type;
 
         //! The position type.
         using position_type = typename canvas_type::position_type;
 
         //! The selection type.
-        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+        using selection_type = selection<traits_type>;
 
 
         // constructors and destructor

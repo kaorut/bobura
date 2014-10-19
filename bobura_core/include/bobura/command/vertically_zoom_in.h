@@ -11,28 +11,45 @@
 
 #include <memory>
 
-#include <boost/mpl/at.hpp>
-
 #include <tetengo2.h>
 
 #include <bobura/command/command_base.h>
+#include <bobura/diagram_view.h>
 
 
 namespace bobura { namespace command
 {
     /*!
-        \brief The class for a vertical zoom-in command.
+        \brief The class template for a vertical zoom-in command.
+
+        \tparam Traits           A traits type.
+        \tparam CommandSetTraits A command set traits type.
+        \tparam MainWindowTraits A main window traits type.
+        \tparam ViewTraits       A view traits type.
     */
-    class vertically_zoom_in : public command_base
+    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename ViewTraits>
+    class vertically_zoom_in : public command_base<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
+        //! The command set traits type.
+        using command_set_traits_type = CommandSetTraits;
+
+        //! The main window traits type.
+        using main_window_traits_type = MainWindowTraits;
+
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
+
         //! The base type.
-        using base_type = command_base;
+        using base_type = command_base<traits_type>;
 
         //! The diagram view type.
-        using diagram_view_type = boost::mpl::at<view_type_list, type::view::view>::type;
+        using diagram_view_type = diagram_view<view_traits_type>;
 
 
         // constructors and destructor

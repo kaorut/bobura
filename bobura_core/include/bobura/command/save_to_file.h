@@ -11,28 +11,37 @@
 
 #include <memory>
 
-#include <boost/mpl/at.hpp>
-
 #include <tetengo2.h>
 
 #include <bobura/command/command_base.h>
+#include <bobura/load_save/save_to_file.h>
 
 
 namespace bobura { namespace command
 {
     /*!
-        \brief The class for a save-to-file command.
+        \brief The class template for a save-to-file command.
+
+        \tparam Traits         A traits type.
+        \tparam LoadSaveTraits A loading and saving processing traits type.
     */
-    class save_to_file : public command_base
+    template <typename Traits, typename LoadSaveTraits>
+    class save_to_file : public command_base<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
+        //! The loading and saving processing traits type.
+        using load_save_traits_type = LoadSaveTraits;
+
         //! The base type.
-        using base_type = command_base;
+        using base_type = command_base<traits_type>;
 
         //! The file saving type.
-        using save_to_file_type = boost::mpl::at<load_save_type_list, type::load_save::save_to_file>::type;
+        using save_to_file_type = load_save::save_to_file<load_save_traits_type>;
 
 
         // constructors and destructor

@@ -6,23 +6,27 @@
     $Id$
 */
 
+#include <boost/mpl/at.hpp>
+
 #include <tetengo2.h>
 
 #include <bobura/command/save_to_file.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura { namespace command
 {
-    class save_to_file::impl
+    template <typename Traits, typename LoadSaveTraits>
+    class save_to_file<Traits, LoadSaveTraits>::impl
     {
     public:
         // types
 
-        using model_type = save_to_file::model_type;
+        using model_type = typename save_to_file::model_type;
 
-        using abstract_window_type = save_to_file::abstract_window_type;
+        using abstract_window_type = typename save_to_file::abstract_window_type;
 
-        using save_to_file_type = save_to_file::save_to_file_type;
+        using save_to_file_type = typename save_to_file::save_to_file_type;
 
 
         // constructors and destructor
@@ -51,20 +55,29 @@ namespace bobura { namespace command
     };
 
 
-    save_to_file::save_to_file(const save_to_file_type& save_to_file)
+    template <typename Traits, typename LoadSaveTraits>
+    save_to_file<Traits, LoadSaveTraits>::save_to_file(const save_to_file_type& save_to_file)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(save_to_file))
     {}
 
-    save_to_file::~save_to_file()
+    template <typename Traits, typename LoadSaveTraits>
+    save_to_file<Traits, LoadSaveTraits>::~save_to_file()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    void save_to_file::execute_impl(model_type& model, abstract_window_type& parent)
+    template <typename Traits, typename LoadSaveTraits>
+    void save_to_file<Traits, LoadSaveTraits>::execute_impl(model_type& model, abstract_window_type& parent)
     const
     {
         m_p_impl->execute(model, parent);
     }
+
+
+    template class save_to_file<
+        typename boost::mpl::at<traits_type_list, type::traits::command>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::load_save>::type
+    >;
 
 
 }}

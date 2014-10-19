@@ -15,62 +15,60 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/main_window.h>
+#include <bobura/diagram_view.h>
 #include <bobura/main_window_menu_builder.h>
+#include <bobura/message/type_list_impl.h>
 #include <bobura/type_list.h>
+#include <bobura/view/scale_list.h>
 
 
 namespace bobura
 {
-    namespace
-    {
-        using menu_command_type =
-            tetengo2::gui::menu::command<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::menu>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
-
-        using popup_menu_type = boost::mpl::at<ui_type_list, type::ui::popup_menu>::type;
-
-        using menu_base_type = menu_command_type::base_type;
-
-        using string_type = menu_base_type::string_type;
-
-        using shortcut_key_type = menu_base_type::shortcut_key_type;
-
-        using virtual_key_type = shortcut_key_type::virtual_key_type;
-
-        using menu_separator_type =
-            tetengo2::gui::menu::separator<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::menu>::type,
-                boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
-
-        using main_window_message_type_list_type =
-            boost::mpl::at<main_window_type_list, type::main_window::message_type_list>::type;
-
-
-    }
-
-
-    class main_window_menu_builder::impl
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Scale,
+        typename Font,
+        typename MenuBar,
+        typename MessageCatalog,
+        typename CommandSetTraits,
+        typename MainWindowTraits
+    >
+    class main_window_menu_builder<
+        Size,
+        Difference,
+        String,
+        OperatingDistance,
+        Speed,
+        Scale,
+        Font,
+        MenuBar,
+        MessageCatalog,
+        CommandSetTraits,
+        MainWindowTraits
+    >::impl
     {
     public:
         // types
 
-        using menu_bar_type = main_window_menu_builder::menu_bar_type;
+        using size_type = typename main_window_menu_builder::size_type;
 
-        using command_set_type = main_window_menu_builder::command_set_type;
+        using string_type = typename main_window_menu_builder::string_type;
 
-        using model_type = main_window_menu_builder::model_type;
+        using scale_type = typename main_window_menu_builder::scale_type;
 
-        using main_window_type = main_window;
+        using menu_bar_type = typename main_window_menu_builder::menu_bar_type;
 
-        using message_catalog_type = main_window_menu_builder::message_catalog_type;
+        using command_set_type = typename main_window_menu_builder::command_set_type;
+
+        using model_type = typename main_window_menu_builder::model_type;
+
+        using main_window_type = typename main_window_menu_builder::main_window_type;
+
+        using message_catalog_type = typename main_window_menu_builder::message_catalog_type;
 
 
         // constructors and destructor
@@ -108,11 +106,48 @@ namespace bobura
     private:
         // types
 
-        using command_type = command_set_type::command_type;
+        using menu_command_type =
+            tetengo2::gui::menu::command<
+                typename boost::mpl::at<common_type_list, type::string>::type,
+                typename boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                typename boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                typename boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
+            >;
+
+        using popup_menu_type = typename boost::mpl::at<ui_type_list, type::ui::popup_menu>::type;
+
+        using menu_base_type = typename menu_command_type::base_type;
+
+        using shortcut_key_type = typename menu_base_type::shortcut_key_type;
+
+        using virtual_key_type = typename shortcut_key_type::virtual_key_type;
+
+        using menu_separator_type =
+            tetengo2::gui::menu::separator<
+                typename boost::mpl::at<common_type_list, type::string>::type,
+                typename boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
+                typename boost::mpl::at<detail_type_list, type::detail::menu>::type,
+                typename boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
+            >;
+
+        using main_window_message_type_list_type =
+            message::main_window::type_list<
+                popup_menu_type,
+                command_set_type,
+                typename command_set_type::command_type,
+                model_type,
+                diagram_view<boost::mpl::at<traits_type_list, type::traits::view>::type>,
+                typename main_window_type::abstract_window_type,
+                typename main_window_type::diagram_picture_box_type,
+                typename main_window_type::property_bar_type,
+                typename main_window_type::confirm_file_save_type
+            >;
+
+        using command_type = typename command_set_type::command_type;
 
         using commands_type = std::vector<const command_type*>;
 
-        using view_scale_list_type = boost::mpl::at<view_type_list, type::view::scale_list>::type;
+        using view_scale_list_type = view::scale_list<size_type, string_type, scale_type>;
 
 
         // variables
@@ -406,9 +441,9 @@ namespace bobura
         const
         {
             p_menu_command->menu_observer_set().selected().connect(
-                boost::mpl::at<
+                typename boost::mpl::at<
                     main_window_message_type_list_type, message::main_window::type::menu_command_selected
-                >::type{ command, m_model, m_main_window }
+                >::type(command, m_model, m_main_window)
             );
 
             popup_menu.insert(popup_menu.end(), std::move(p_menu_command));
@@ -427,7 +462,7 @@ namespace bobura
         const
         {
             popup_menu.menu_observer_set().selected().connect(
-                boost::mpl::at<
+                typename boost::mpl::at<
                     main_window_message_type_list_type, message::main_window::type::popup_menu_selected
                 >::type{ popup_menu, std::move(commands), m_model }
             );
@@ -437,7 +472,32 @@ namespace bobura
     };
 
 
-    main_window_menu_builder::main_window_menu_builder(
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Scale,
+        typename Font,
+        typename MenuBar,
+        typename MessageCatalog,
+        typename CommandSetTraits,
+        typename MainWindowTraits
+    >
+    main_window_menu_builder<
+        Size,
+        Difference,
+        String,
+        OperatingDistance,
+        Speed,
+        Scale,
+        Font,
+        MenuBar,
+        MessageCatalog,
+        CommandSetTraits,
+        MainWindowTraits
+    >::main_window_menu_builder(
         const command_set_type&     command_set,
         model_type&                 model,
         main_window_type&           main_window,
@@ -447,15 +507,94 @@ namespace bobura
     m_p_impl(tetengo2::stdalt::make_unique<impl>(command_set, model, main_window, message_catalog))
     {}
 
-    main_window_menu_builder::~main_window_menu_builder()
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Scale,
+        typename Font,
+        typename MenuBar,
+        typename MessageCatalog,
+        typename CommandSetTraits,
+        typename MainWindowTraits
+    >
+    main_window_menu_builder<
+        Size,
+        Difference,
+        String,
+        OperatingDistance,
+        Speed,
+        Scale,
+        Font,
+        MenuBar,
+        MessageCatalog,
+        CommandSetTraits,
+        MainWindowTraits
+    >::~main_window_menu_builder()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    std::unique_ptr<main_window_menu_builder::menu_bar_type> main_window_menu_builder::build()
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename OperatingDistance,
+        typename Speed,
+        typename Scale,
+        typename Font,
+        typename MenuBar,
+        typename MessageCatalog,
+        typename CommandSetTraits,
+        typename MainWindowTraits
+    >
+    std::unique_ptr<
+        typename main_window_menu_builder<
+            Size,
+            Difference,
+            String,
+            OperatingDistance,
+            Speed,
+            Scale,
+            Font,
+            MenuBar,
+            MessageCatalog,
+            CommandSetTraits,
+            MainWindowTraits
+        >::menu_bar_type
+    > main_window_menu_builder<
+        Size,
+        Difference,
+        String,
+        OperatingDistance,
+        Speed,
+        Scale,
+        Font,
+        MenuBar,
+        MessageCatalog,
+        CommandSetTraits,
+        MainWindowTraits
+    >::build()
     const
     {
         return m_p_impl->build();
     }
+
+
+    template class main_window_menu_builder<
+        typename boost::mpl::at<common_type_list, type::size>::type,
+        typename boost::mpl::at<common_type_list, type::difference>::type,
+        typename boost::mpl::at<common_type_list, type::string>::type,
+        typename boost::mpl::at<common_type_list, type::operating_distance>::type,
+        typename boost::mpl::at<common_type_list, type::speed>::type,
+        typename boost::mpl::at<common_type_list, type::scale>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::command_set>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::main_window>::type
+    >;
 
 
 }

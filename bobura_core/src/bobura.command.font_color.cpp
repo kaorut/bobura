@@ -8,27 +8,56 @@
 
 #include <utility>
 
+#include <boost/mpl/at.hpp>
+
 #include <tetengo2.h>
 
 #include <bobura/command/font_color.h>
+#include <bobura/font_color_dialog.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura { namespace command
 {
-    class font_color::impl
+    template <
+        typename Traits,
+        typename Dialog,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    class font_color<
+        Traits, Dialog, PointUnitSize, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
+    >::impl
     {
     public:
         // types
 
-        using model_type = font_color::model_type;
+        using traits_type = typename font_color::traits_type;
 
-        using abstract_window_type = font_color::abstract_window_type;
+        using model_type = typename font_color::model_type;
 
-        using font_color_dialog_type = font_color::font_color_dialog_type;
+        using abstract_window_type = typename font_color::abstract_window_type;
 
-        using dialog_base_type = font_color::dialog_base_type;
+        using dialog_type = typename font_color::dialog_type;
 
-        using message_catalog_type = font_color::message_catalog_type;
+        using point_unit_size_type = typename font_color::point_unit_size_type;
+
+        using color_type = typename font_color::color_type;
+
+        using canvas_type = typename font_color::canvas_type;
+
+        using font_dialog_type = typename font_color::font_dialog_type;
+
+        using color_dialog_type = typename font_color::color_dialog_type;
+
+        using message_catalog_type = typename font_color::message_catalog_type;
+
+        using dialog_traits_type = typename font_color::dialog_traits_type;
 
 
         // constructors and destructor
@@ -67,7 +96,7 @@ namespace bobura { namespace command
             dialog.set_train_name(font_color_set.train_name());
 
             dialog.do_modal();
-            if (dialog.result() != dialog_base_type::result_type::accepted)
+            if (dialog.result() != dialog_type::result_type::accepted)
                 return;
         
             font_color_set_type new_font_color_set{
@@ -90,9 +119,25 @@ namespace bobura { namespace command
     private:
         // types
 
-        using font_color_set_type = model_type::timetable_type::font_color_set_type;
+        using size_type = typename traits_type::size_type;
 
-        using font_color_type = font_color_set_type::font_color_type;
+        using font_type = typename traits_type::font_type;
+
+        using font_color_set_type = typename model_type::timetable_type::font_color_set_type;
+
+        using font_color_type = typename font_color_set_type::font_color_type;
+
+        using font_color_dialog_type =
+            font_color_dialog<
+                dialog_traits_type,
+                size_type,
+                font_type,
+                point_unit_size_type,
+                color_type,
+                canvas_type,
+                font_dialog_type,
+                color_dialog_type
+            >;
 
 
         // variables
@@ -103,20 +148,77 @@ namespace bobura { namespace command
     };
 
 
-    font_color::font_color(const message_catalog_type& message_catalog)
+    template <
+        typename Traits,
+        typename Dialog,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    font_color<
+        Traits, Dialog, PointUnitSize, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
+    >::font_color(
+        const message_catalog_type& message_catalog
+    )
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
     {}
 
-    font_color::~font_color()
+    template <
+        typename Traits,
+        typename Dialog,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    font_color<
+        Traits, Dialog, PointUnitSize, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
+    >::~font_color()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    void font_color::execute_impl(model_type& model, abstract_window_type& parent)
+    template <
+        typename Traits,
+        typename Dialog,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    void font_color<
+        Traits, Dialog, PointUnitSize, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
+    >::execute_impl(
+        model_type&           model,
+        abstract_window_type& parent
+    )
     const
     {
         m_p_impl->execute(model, parent);
     }
+
+
+    template class font_color<
+        typename boost::mpl::at<traits_type_list, type::traits::command>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::color>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
+        typename boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
+        typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
+        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::dialog>::type
+    >;
 
 
 }}

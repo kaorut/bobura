@@ -11,45 +11,112 @@
 
 #include <memory>
 
-#include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
 
 #include <tetengo2.h>
 
-#include <bobura/type_list.h>
+#include <bobura/diagram_picture_box.h>
+#include <bobura/load_save/confirm_file_save.h>
+#include <bobura/message/type_list_impl.h>
+#include <bobura/property_bar.h>
+#include <bobura/settings.h>
 
 
 namespace bobura
 {
     /*!
-        \brief The class for the main window.
+        \brief The class template for the main window.
+
+        \tparam Traits           A traits type.
+        \tparam CommandSetTraits A command set traits type.
     */
-    class main_window : public boost::mpl::at<ui_type_list, type::ui::window>::type
+    template <typename Traits, typename CommandSetTraits>
+    class main_window : public Traits::window_type
     {
     public:
         // types
 
-        //! The base type.
-        using base_type = boost::mpl::at<ui_type_list, type::ui::window>::type;
+        //! The traits type.
+        using traits_type = Traits;
 
         //! The string type.
-        using string_type = base_type::string_type;
+        using string_type = typename traits_type::string_type;
+
+        //! The position type.
+        using position_type = typename traits_type::position_type;
+
+        //! The dimension type.
+        using dimension_type = typename traits_type::dimension_type;
+
+        //! The base type.
+        using base_type = typename traits_type::window_type;
+
+        //! The abstract window type.
+        using abstract_window_type = typename base_type::base_type;
+
+        //! The picture box type.
+        using picture_box_type = typename traits_type::picture_box_type;
+
+        //! The map box type.
+        using map_box_type = typename traits_type::map_box_type;
+
+        //! The side bar type.
+        using side_bar_type = typename traits_type::side_bar_type;
+
+        //! The font type.
+        using font_type = typename traits_type::font_type;
+
+        //! The mouse capture type.
+        using mouse_capture_type = typename traits_type::mouse_capture_type;
 
         //! The message catalog type.
-        using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
+        using message_catalog_type = typename traits_type::message_catalog_type;
+
+        //! The view traits type.
+        using view_traits_type = typename traits_type::view_traits_type;
+
+        //! The loading and saving processing traits type.
+        using load_save_traits_type = typename traits_type::load_save_traits_type;
+
+        //! The config traits type.
+        using config_traits_type = typename traits_type::config_traits_type;
+
+        //! The command set traits type.
+        using command_set_traits_type = CommandSetTraits;
+
+        //! The diagram picture box message type list type.
+        using diagram_picture_box_message_type_list_type =
+            message::diagram_picture_box::type_list<
+                picture_box_type, abstract_window_type, mouse_capture_type, view_traits_type
+            >;
 
         //! The diagram picture box type.
         using diagram_picture_box_type =
-            boost::mpl::at<main_window_type_list, type::main_window::diagram_picture_box>::type;
+            diagram_picture_box<
+                picture_box_type,
+                abstract_window_type,
+                mouse_capture_type,
+                diagram_picture_box_message_type_list_type
+            >;
 
         //! The property bar type.
-        using property_bar_type = boost::mpl::at<main_window_type_list, type::main_window::property_bar>::type;
+        using property_bar_type =
+            property_bar<
+                string_type,
+                position_type,
+                dimension_type,
+                abstract_window_type,
+                side_bar_type,
+                map_box_type,
+                message_catalog_type,
+                config_traits_type
+            >;
         
         //! The settings type.
-        using settings_type = boost::mpl::at<setting_type_list, type::setting::settings>::type;
+        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
 
         //! The file save confirmation type.
-        using confirm_file_save_type = boost::mpl::at<load_save_type_list, type::load_save::confirm_file_save>::type;
+        using confirm_file_save_type = load_save::confirm_file_save<load_save_traits_type>;
 
 
         // constructors and destructor
@@ -89,7 +156,7 @@ namespace bobura
 
             \return The diagram picture box.
         */
-        const diagram_picture_box_type& diagram_picture_box()
+        const diagram_picture_box_type& get_diagram_picture_box()
         const;
 
         /*!
@@ -97,14 +164,14 @@ namespace bobura
 
             \return The diagram picture box.
         */
-        diagram_picture_box_type& diagram_picture_box();
+        diagram_picture_box_type& get_diagram_picture_box();
 
         /*!
             \brief Returns the property bar.
 
             \return The property bar.
         */
-        const property_bar_type& property_bar()
+        const property_bar_type& get_property_bar()
         const;
 
         /*!
@@ -112,7 +179,7 @@ namespace bobura
 
             \return The property bar.
         */
-        property_bar_type& property_bar();
+        property_bar_type& get_property_bar();
 
 
     private:

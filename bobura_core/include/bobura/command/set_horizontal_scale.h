@@ -11,35 +11,55 @@
 
 #include <memory>
 
-#include <boost/mpl/at.hpp>
-
 #include <tetengo2.h>
 
-#include <bobura/basic_type_list.h>
 #include <bobura/command/command_base.h>
+#include <bobura/diagram_view.h>
 
 
 namespace bobura { namespace command
 {
     /*!
-        \brief The class for a set-horizontal-scale command.
+        \brief The class template for a set-horizontal-scale command.
+
+        \tparam Traits           A traits type.
+        \tparam Scale            A scale type.
+        \tparam CommandSetTraits A command set traits type.
+        \tparam MainWindowTraits A main window traits type.
+        \tparam ViewTraits       A view traits type.
     */
-    class set_horizontal_scale : public command_base
+    template <
+        typename Traits,
+        typename Scale,
+        typename CommandSetTraits,
+        typename MainWindowTraits,
+        typename ViewTraits
+    >
+    class set_horizontal_scale : public command_base<Traits>
     {
     public:
         // types
 
-        //! The base type.
-        using base_type = command_base;
-
-        //! The diagram view type.
-        using diagram_view_type = boost::mpl::at<view_type_list, type::view::view>::type;
-
-        //! The scale list type.
-        using scale_list_type = boost::mpl::at<view_type_list, type::view::scale_list>::type;
+        //! The traits type.
+        using traits_type = Traits;
 
         //! The scale type.
-        using scale_type = scale_list_type::scale_type;
+        using scale_type = Scale;
+
+        //! The command set traits type.
+        using command_set_traits_type = CommandSetTraits;
+
+        //! The main window traits type.
+        using main_window_traits_type = MainWindowTraits;
+
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
+
+        //! The base type.
+        using base_type = command_base<traits_type>;
+
+        //! The diagram view type.
+        using diagram_view_type = diagram_view<view_traits_type>;
 
 
         // constructors and destructor

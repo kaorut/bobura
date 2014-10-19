@@ -38,45 +38,34 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a train line fragment in the diagram view.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Canvas            A canvas type.
-        \tparam MessageCatalog    A message catalog type.
+        \tparam Traits A traits type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Canvas,
-        typename MessageCatalog
-    >
-    class train_line_fragment : public item<Size, Difference, String, OperatingDistance, Canvas>
+    template <typename Traits>
+    class train_line_fragment : public item<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The size type.
-        using size_type = Size;
+        using size_type = typename traits_type::size_type;
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = typename traits_type::difference_type;
 
         //! The string type.
-        using string_type = String;
+        using string_type = typename traits_type::string_type;
 
         //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
+        using operating_distance_type = typename traits_type::operating_distance_type;
 
         //! The speed type.
-        using speed_type = Speed;
+        using speed_type = typename traits_type::speed_type;
 
         //! The canvas type.
-        using canvas_type = Canvas;
+        using canvas_type = typename traits_type::canvas_type;
 
         //! The position type.
         using position_type = typename canvas_type::position_type;
@@ -85,13 +74,13 @@ namespace bobura { namespace view { namespace diagram
         using font_type = typename canvas_type::font_type;
 
         //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        using message_catalog_type = typename traits_type::message_catalog_type;
 
         //! The base type.
-        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+        using base_type = item<traits_type>;
 
         //! The selection type.
-        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+        using selection_type = selection<traits_type>;
 
         //! The model type.
         using model_type =
@@ -441,45 +430,37 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a train line in the diagram view.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Canvas            A canvas type.
-        \tparam MessageCatalog    A message catalog type.
+        \tparam Traits A traits type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Canvas,
-        typename MessageCatalog
-    >
-    class train_line : public item<Size, Difference, String, OperatingDistance, Canvas>
+    template <typename Traits>
+    class train_line : public item<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The size type.
-        using size_type = Size;
+        using size_type = typename traits_type::size_type;
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = typename traits_type::difference_type;
 
         //! The string type.
-        using string_type = String;
+        using string_type = typename traits_type::string_type;
 
         //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
+        using operating_distance_type = typename traits_type::operating_distance_type;
 
         //! The speed type.
-        using speed_type = Speed;
+        using speed_type = typename traits_type::speed_type;
+
+        //! The scale type.
+        using scale_type = typename traits_type::scale_type;
 
         //! The canvas type.
-        using canvas_type = Canvas;
+        using canvas_type = typename traits_type::canvas_type;
 
         //! The position type.
         using position_type = typename canvas_type::position_type;
@@ -499,20 +480,17 @@ namespace bobura { namespace view { namespace diagram
         //! The height type.
         using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
-        //! The horizontal scale type.
-        using horizontal_scale_type = typename width_type::value_type;
-
         //! The font type.
         using font_type = typename canvas_type::font_type;
 
         //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        using message_catalog_type = typename traits_type::message_catalog_type;
 
         //! The base type.
-        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+        using base_type = item<traits_type>;
 
         //! The selection type.
-        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+        using selection_type = selection<traits_type>;
 
         //! The model type.
         using model_type =
@@ -563,7 +541,7 @@ namespace bobura { namespace view { namespace diagram
             const left_type&              station_header_right,
             const top_type&               header_bottom,
             const height_type&            time_header_height,
-            const horizontal_scale_type&  horizontal_scale,
+            const scale_type&             horizontal_scale,
             const station_intervals_type& station_intervals,
             const std::vector<top_type>&  station_positions,
             const message_catalog_type&   message_catalog
@@ -633,16 +611,7 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
-        using train_line_fragment_type =
-            train_line_fragment<
-                size_type,
-                difference_type,
-                string_type,
-                operating_distance_type,
-                speed_type,
-                canvas_type,
-                message_catalog_type
-            >;
+        using train_line_fragment_type = train_line_fragment<traits_type>;
 
         using direction_type = typename train_type::direction_type;
 
@@ -662,7 +631,7 @@ namespace bobura { namespace view { namespace diagram
             const left_type&              station_header_right,
             const top_type&               header_bottom,
             const height_type&            time_header_height,
-            const horizontal_scale_type&  horizontal_scale,
+            const scale_type&             horizontal_scale,
             const station_intervals_type& station_intervals,
             const std::vector<top_type>&  station_positions,
             const message_catalog_type&   message_catalog
@@ -831,7 +800,7 @@ namespace bobura { namespace view { namespace diagram
             const left_type&                       station_header_right,
             const top_type&                        header_bottom,
             const height_type&                     time_header_height,
-            const horizontal_scale_type&           horizontal_scale,
+            const scale_type&                      horizontal_scale,
             const std::vector<top_type>&           station_positions,
             const message_catalog_type&            message_catalog,
             std::vector<train_line_fragment_type>& fragments
@@ -924,7 +893,7 @@ namespace bobura { namespace view { namespace diagram
             const left_type&                       station_header_right,
             const top_type&                        header_bottom,
             const height_type&                     time_header_height,
-            const horizontal_scale_type&           horizontal_scale,
+            const scale_type&                      horizontal_scale,
             const std::vector<top_type>&           station_positions,
             const message_catalog_type&            message_catalog,
             std::vector<train_line_fragment_type>& fragments
@@ -1066,45 +1035,37 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a train line list in the diagram view.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Canvas            A canvas type.
-        \tparam MessageCatalog    A message catalog type.
+        \tparam Traits A traits type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Canvas,
-        typename MessageCatalog
-    >
-    class train_line_list : public item<Size, Difference, String, OperatingDistance, Canvas>
+    template <typename Traits>
+    class train_line_list : public item<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The size type.
-        using size_type = Size;
+        using size_type = typename traits_type::size_type;
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = typename traits_type::difference_type;
 
         //! The string type.
-        using string_type = String;
+        using string_type = typename traits_type::string_type;
 
         //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
+        using operating_distance_type = typename traits_type::operating_distance_type;
 
         //! The speed type.
-        using speed_type = Speed;
+        using speed_type = typename traits_type::speed_type;
+
+        //! The scale type.
+        using scale_type = typename traits_type::scale_type;
 
         //! The canvas type.
-        using canvas_type = Canvas;
+        using canvas_type = typename traits_type::canvas_type;
 
         //! The position type.
         using position_type = typename canvas_type::position_type;
@@ -1124,20 +1085,17 @@ namespace bobura { namespace view { namespace diagram
         //! The height type.
         using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
-        //! The horizontal scale type.
-        using horizontal_scale_type = typename width_type::value_type;
-
-        //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
-
         //! The font type.
         using font_type = typename canvas_type::font_type;
 
+        //! The message catalog type.
+        using message_catalog_type = typename traits_type::message_catalog_type;
+
         //! The base type.
-        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+        using base_type = item<traits_type>;
 
         //! The selection type.
-        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+        using selection_type = selection<traits_type>;
 
         //! The model type.
         using model_type =
@@ -1180,7 +1138,7 @@ namespace bobura { namespace view { namespace diagram
             const left_type&              station_header_right,
             const top_type&               header_bottom,
             const height_type&            time_header_height,
-            const horizontal_scale_type&  horizontal_scale,
+            const scale_type&             horizontal_scale,
             const station_intervals_type& station_intervals,
             const std::vector<top_type>&  station_positions,
             const message_catalog_type&   message_catalog
@@ -1250,16 +1208,7 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
-        using train_line_type =
-            train_line<
-                size_type,
-                difference_type,
-                string_type,
-                operating_distance_type,
-                speed_type,
-                canvas_type,
-                message_catalog_type
-            >;
+        using train_line_type = train_line<traits_type>;
 
         using timetable_type = typename model_type::timetable_type;
 
@@ -1283,7 +1232,7 @@ namespace bobura { namespace view { namespace diagram
             const left_type&              station_header_right,
             const top_type&               header_bottom,
             const height_type&            time_header_height,
-            const horizontal_scale_type&  horizontal_scale,
+            const scale_type&             horizontal_scale,
             const station_intervals_type& station_intervals,
             const std::vector<top_type>&  station_positions,
             const message_catalog_type&   message_catalog
@@ -1337,7 +1286,7 @@ namespace bobura { namespace view { namespace diagram
             const left_type&              station_header_right,
             const top_type&               header_bottom,
             const height_type&            time_header_height,
-            const horizontal_scale_type&  horizontal_scale,
+            const scale_type&             horizontal_scale,
             const station_intervals_type& station_intervals,
             const std::vector<top_type>&  station_positions,
             const message_catalog_type&   message_catalog,

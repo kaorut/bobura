@@ -41,7 +41,7 @@ namespace
 
     using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
 
-    using config_traits_type = boost::mpl::at<bobura::setting_type_list, bobura::type::setting::config_traits>::type;
+    using config_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type;
 
     using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
 

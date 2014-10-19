@@ -6,7 +6,6 @@ extra_headers = \
     0namespace.dox \
     about_dialog.h \
     application.h \
-    basic_type_list.h \
     command/0namespace.dox \
     command/about.h \
     command/command_base.h \
@@ -22,14 +21,17 @@ extra_headers = \
     command/save_to_file.h \
     command/set.h \
     command/set_horizontal_scale.h \
+    command/set_traits.h \
     command/set_vertical_scale.h \
     command/train_kind.h \
+    command/traits.h \
     command/vertically_zoom_in.h \
     command/vertically_zoom_out.h \
     config_traits.h \
     detail_type_list.h \
     diagram_picture_box.h \
     diagram_view.h \
+    dialog_traits.h \
     file_property_dialog.h \
     font_color_dialog.h \
     load_save/0namespace.dox \
@@ -37,8 +39,10 @@ extra_headers = \
     load_save/load_from_file.h \
     load_save/new_file.h \
     load_save/save_to_file.h \
+    load_save/traits.h \
     main_window.h \
     main_window_menu_builder.h \
+    main_window_traits.h \
     message/0namespace.dox \
     message/about_dialog.h \
     message/diagram_picture_box.h \
@@ -68,6 +72,7 @@ extra_headers = \
     view/diagram/station_line.h \
     view/diagram/time_line.h \
     view/diagram/train_line.h \
+    view/diagram/traits.h \
     view/diagram/utility.h \
     view/diagram/zoom.h \
     view/scale_list.h

@@ -22,94 +22,59 @@ namespace bobura { namespace load_save
     /*!
         \brief The class template for the file save confirmation.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OutputStream      An output stream type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Font              A font type.
-        \tparam AbstractWindow    An abstract window type.
-        \tparam MessageBox        A message box type.
-        \tparam FileSaveDialog    A file save dialog type.
-        \tparam MessageCatalog    A message catalog type.
-        \tparam Encoder           An encoder type.
+        \tparam Traits A traits type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OutputStream,
-        typename OperatingDistance,
-        typename Speed,
-        typename Font,
-        typename AbstractWindow,
-        typename MessageBox,
-        typename FileSaveDialog,
-        typename MessageCatalog,
-        typename Encoder
-    >
+    template <typename Traits>
     class confirm_file_save
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The size type.
-        using size_type = Size;
+        using size_type = typename traits_type::size_type;
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = typename traits_type::difference_type;
 
         //! The string type.
-        using string_type = String;
+        using string_type = typename traits_type::string_type;
 
         //! The output stream type.
-        using output_stream_type = OutputStream;
+        using output_stream_type = typename traits_type::output_stream_type;
 
         //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
+        using operating_distance_type = typename traits_type::operating_distance_type;
 
         //! The speed type.
-        using speed_type = Speed;
+        using speed_type = typename traits_type::speed_type;
 
         //! The font type.
-        using font_type = Font;
+        using font_type = typename traits_type::font_type;
 
         //! The abstract window type.
-        using abstract_window_type = AbstractWindow;
+        using abstract_window_type = typename traits_type::abstract_window_type;
 
         //! The message box type.
-        using message_box_type = MessageBox;
+        using message_box_type = typename traits_type::message_box_type;
 
         //! The file save dialog type.
-        using file_save_dialog_type = FileSaveDialog;
+        using file_save_dialog_type = typename traits_type::file_save_dialog_type;
 
         //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        using message_catalog_type = typename traits_type::message_catalog_type;
 
-        //! The encoder type.
-        using encoder_type = Encoder;
+        //! The timetable file encoder type.
+        using timetable_file_encoder_type = typename traits_type::timetable_file_encoder_type;
 
         //! The model type.
         using model_type =
             timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
         //! The file saving type.
-        using save_to_file_type =
-            save_to_file<
-                size_type,
-                difference_type,
-                string_type,
-                output_stream_type,
-                operating_distance_type,
-                speed_type,
-                font_type,
-                abstract_window_type,
-                message_box_type,
-                file_save_dialog_type,
-                message_catalog_type,
-                encoder_type
-            >;
+        using save_to_file_type = save_to_file<traits_type>;
 
 
         // constructors and destructor

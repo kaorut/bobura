@@ -11,44 +11,61 @@
 
 #include <memory>
 
-#include <boost/mpl/at.hpp>
-
 #include <tetengo2.h>
 
 #include <bobura/command/command_base.h>
-#include <bobura/model/train_kind.h>
-#include <bobura/train_kind_dialog.h>
 
 
 namespace bobura { namespace command
 {
     /*!
         \brief The class template for a train kind command.
+
+        \tparam Traits         A traits type.
+        \tparam Dialog         A dialog type.
+        \tparam Color          A color type.
+        \tparam Canvas         A canvas type.
+        \tparam ColorDialog    A color dialog type.
+        \tparam MessageCatalog A message catalog type.
+        \tparam DialogTraits   A dialog traits type.
     */
-    class train_kind : public command_base
+    template <
+        typename Traits,
+        typename Dialog,
+        typename Color,
+        typename Canvas,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    class train_kind : public command_base<Traits>
     {
     public:
         // types
 
-        //! The base type.
-        using base_type = command_base;
+        //! The traits type.
+        using traits_type = Traits;
 
-        //! The train kind dialog type.
-        using train_kind_dialog_type =
-            train_kind_dialog<
-                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                boost::mpl::at<common_type_list, type::size>::type,
-                bobura::model::train_kind<boost::mpl::at<common_type_list, type::string>::type>,
-                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                boost::mpl::at<ui_type_list, type::ui::color>::type
-            >;
+        //! The dialog type.
+        using dialog_type = Dialog;
 
-        //! The dialog base type.
-        using dialog_base_type = train_kind_dialog_type::base_type;
+        //! The color type.
+        using color_type = Color;
+
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! THe color dialog type.
+        using color_dialog_type = ColorDialog;
 
         //! The message catalog type.
-        using message_catalog_type = train_kind_dialog_type::message_catalog_type;
+        using message_catalog_type = MessageCatalog;
+
+        //! The dialog traits type.
+        using dialog_traits_type = DialogTraits;
+
+        //! The base type.
+        using base_type = command_base<traits_type>;
 
 
         // constructors and destructor

@@ -12,28 +12,38 @@
 #include <memory>
 
 #include <boost/filesystem.hpp>
-#include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
 
 #include <bobura/command/command_base.h>
+#include <bobura/load_save/load_from_file.h>
 
 
 namespace bobura { namespace command
 {
     /*!
-        \brief The class for a load-from-file command.
+        \brief The class template for a load-from-file command.
+
+        \tparam Traits         A traits type.
+        \tparam LoadSaveTraits A loading and saving processing traits type.
     */
-    class load_from_file : public command_base
+    template <typename Traits, typename LoadSaveTraits>
+    class load_from_file : public command_base<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
+        //! The loading and saving processing traits type.
+        using load_save_traits_type = LoadSaveTraits;
+
         //! The base type.
-        using base_type = command_base;
+        using base_type = command_base<traits_type>;
 
         //! The file loading type.
-        using load_from_file_type = boost::mpl::at<load_save_type_list, type::load_save::load_from_file>::type;
+        using load_from_file_type = load_save::load_from_file<load_save_traits_type>;
 
         //! The parameter type.
         class parameter_type : public parameter_base

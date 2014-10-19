@@ -30,32 +30,31 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a time line in the diagram view.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Canvas            A canvas type.
+        \tparam Traits A traits type.
     */
-    template <typename Size, typename Difference, typename String, typename OperatingDistance, typename Canvas>
-    class time_line : public item<Size, Difference, String, OperatingDistance, Canvas>
+    template <typename Traits>
+    class time_line : public item<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The size type.
-        using size_type = Size;
+        using size_type = typename traits_type::size_type;
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = typename traits_type::difference_type;
 
         //! The string type.
-        using string_type = String;
+        using string_type = typename traits_type::string_type;
 
         //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
+        using operating_distance_type = typename traits_type::operating_distance_type;
 
         //! The canvas type.
-        using canvas_type = Canvas;
+        using canvas_type = typename traits_type::canvas_type;
 
         //! The size type.
         using unit_size_type = typename canvas_type::unit_size_type;
@@ -70,10 +69,10 @@ namespace bobura { namespace view { namespace diagram
         using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
         //! The base type.
-        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+        using base_type = item<traits_type>;
 
         //! The selection type.
-        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+        using selection_type = selection<traits_type>;
 
 
         // constructors and destructor
@@ -186,43 +185,37 @@ namespace bobura { namespace view { namespace diagram
      /*!
         \brief The class template for a time line list in the diagram view.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Canvas            A canvas type.
+        \tparam Traits A traits type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Canvas
-    >
-    class time_line_list : public item<Size, Difference, String, OperatingDistance, Canvas>
+    template <typename Traits>
+    class time_line_list : public item<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The size type.
-        using size_type = Size;
+        using size_type = typename traits_type::size_type;
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = typename traits_type::difference_type;
 
         //! The string type.
-        using string_type = String;
+        using string_type = typename traits_type::string_type;
 
         //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
+        using operating_distance_type = typename traits_type::operating_distance_type;
 
         //! The speed type.
-        using speed_type = Speed;
+        using speed_type = typename traits_type::speed_type;
+
+        //! The scale type.
+        using scale_type = typename traits_type::scale_type;
 
         //! The canvas type.
-        using canvas_type = Canvas;
+        using canvas_type = typename traits_type::canvas_type;
 
         //! The position type.
         using position_type = typename canvas_type::position_type;
@@ -242,9 +235,6 @@ namespace bobura { namespace view { namespace diagram
         //! The height type.
         using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
-        //! The horizontal scale type.
-        using horizontal_scale_type = typename width_type::value_type;
-
         //! The font type.
         using font_type = typename canvas_type::font_type;
 
@@ -252,10 +242,10 @@ namespace bobura { namespace view { namespace diagram
         using color_type = typename canvas_type::color_type;
 
         //! The base type.
-        using base_type = item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+        using base_type = item<traits_type>;
 
         //! The selection type.
-        using selection_type = selection<size_type, difference_type, string_type, operating_distance_type>;
+        using selection_type = selection<traits_type>;
 
         //! The model type.
         using model_type =
@@ -285,16 +275,16 @@ namespace bobura { namespace view { namespace diagram
             \param horizontal_scale     A horizontal scale.
         */
         time_line_list(
-            const model_type&            model,
-            const time_span_type&        time_offset,
-            selection_type&              selection,
-            const dimension_type&        canvas_dimension,
-            const dimension_type&        timetable_dimension,
-            const position_type&         scroll_bar_position,
-            const left_type&             station_header_right,
-            const top_type&              header_bottom,
-            const height_type&           time_header_height,
-            const horizontal_scale_type& horizontal_scale
+            const model_type&     model,
+            const time_span_type& time_offset,
+            selection_type&       selection,
+            const dimension_type& canvas_dimension,
+            const dimension_type& timetable_dimension,
+            const position_type&  scroll_bar_position,
+            const left_type&      station_header_right,
+            const top_type&       header_bottom,
+            const height_type&    time_header_height,
+            const scale_type&     horizontal_scale
         )
         :
         base_type(selection),
@@ -361,8 +351,7 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
-        using time_line_type =
-            time_line<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+        using time_line_type = time_line<traits_type>;
 
         using unit_size_type = typename canvas_type::unit_size_type;
 
@@ -370,15 +359,15 @@ namespace bobura { namespace view { namespace diagram
         // static functions
 
         std::vector<time_line_type> make_time_lines(
-            const time_span_type&        time_offset,
-            selection_type&              selection,
-            const dimension_type&        canvas_dimension,
-            const dimension_type&        timetable_dimension,
-            const position_type&         scroll_bar_position,
-            const left_type&             station_header_right,
-            const top_type&              header_bottom,
-            const height_type&           time_header_height,
-            const horizontal_scale_type& horizontal_scale
+            const time_span_type& time_offset,
+            selection_type&       selection,
+            const dimension_type& canvas_dimension,
+            const dimension_type& timetable_dimension,
+            const position_type&  scroll_bar_position,
+            const left_type&      station_header_right,
+            const top_type&       header_bottom,
+            const height_type&    time_header_height,
+            const scale_type&     horizontal_scale
         )
         {
             const auto canvas_left = station_header_right;

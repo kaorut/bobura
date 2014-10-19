@@ -35,47 +35,37 @@ namespace bobura
    /*!
         \brief The class template for a diagram view.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Canvas            A canvas type.
-        \tparam SolidBackground   A solid background type.
-        \tparam MessageCatalog    A message catalog type.
+        \tparam Traits A traits type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Canvas,
-        typename SolidBackground,
-        typename MessageCatalog
-    >
+    template <typename Traits>
     class diagram_view : private boost::noncopyable
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The size type.
-        using size_type = Size;
+        using size_type = typename traits_type::size_type;
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = typename traits_type::difference_type;
 
         //! The string type.
-        using string_type = String;
+        using string_type = typename traits_type::string_type;
 
         //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
+        using operating_distance_type = typename traits_type::operating_distance_type;
 
         //! The speed type.
-        using speed_type = Speed;
+        using speed_type = typename traits_type::speed_type;
+
+        //! The scale type.
+        using scale_type = typename traits_type::scale_type;
 
         //! The canvas type.
-        using canvas_type = Canvas;
+        using canvas_type = typename traits_type::canvas_type;
 
         //! The position type.
         using position_type = typename canvas_type::position_type;
@@ -95,62 +85,36 @@ namespace bobura
         //! The height type.
         using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
-        //! The horizontal scale type.
-        using horizontal_scale_type = typename width_type::value_type;
-
-        //! The vertical scale type.
-        using vertical_scale_type = typename height_type::value_type;
-
         //! The font type.
         using font_type = typename canvas_type::font_type;
 
         //! The solid background type.
-        using solid_background_type = SolidBackground;
+        using solid_background_type = typename traits_type::solid_background_type;
 
         //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        using message_catalog_type = typename traits_type::message_catalog_type;
 
         //! The model type.
         using model_type =
             timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
         //! The header type.
-        using header_type =
-            view::diagram::header<
-                size_type, difference_type, string_type, operating_distance_type, speed_type, canvas_type
-            >;
+        using header_type = view::diagram::header<traits_type>;
 
         //! The item type.
-        using item_type =
-            view::diagram::item<size_type, difference_type, string_type, operating_distance_type, canvas_type>;
+        using item_type = view::diagram::item<traits_type>;
 
         //! The time line list type.
-        using time_line_list_type = 
-            view::diagram::time_line_list<
-                size_type, difference_type, string_type, operating_distance_type, speed_type, canvas_type
-            >;
+        using time_line_list_type = view::diagram::time_line_list<traits_type>;
 
         //! The station line list type.
-        using station_line_list_type =
-            view::diagram::station_line_list<
-                size_type, difference_type, string_type, operating_distance_type, speed_type, canvas_type
-            >;
+        using station_line_list_type = view::diagram::station_line_list<traits_type>;
 
         //! The train line list type.
-        using train_line_list_type =
-            view::diagram::train_line_list<
-                size_type,
-                difference_type,
-                string_type,
-                operating_distance_type,
-                speed_type,
-                canvas_type,
-                message_catalog_type
-            >;
+        using train_line_list_type = view::diagram::train_line_list<traits_type>;
 
         //! The selection type.
-        using selection_type =
-            view::diagram::selection<size_type, difference_type, string_type, operating_distance_type>;
+        using selection_type = view::diagram::selection<traits_type>;
 
         //! The selection observer set type.
         using selection_observer_set_type = typename selection_type::selection_observer_set_type;
@@ -214,7 +178,7 @@ namespace bobura
 
             \return The horizontal scale.
         */
-        const horizontal_scale_type& horizontal_scale()
+        const scale_type& horizontal_scale()
         const
         {
             return m_horizontal_scale;
@@ -225,7 +189,7 @@ namespace bobura
 
             \param scale A horizontal scale.
         */
-        void set_horizontal_scale(horizontal_scale_type scale)
+        void set_horizontal_scale(scale_type scale)
         {
             m_horizontal_scale = std::move(scale);
             update_dimension();
@@ -236,7 +200,7 @@ namespace bobura
 
             \return The vertical scale.
         */
-        const vertical_scale_type& vertical_scale()
+        const scale_type& vertical_scale()
         const
         {
             return m_vertical_scale;
@@ -247,7 +211,7 @@ namespace bobura
 
             \param scale A vertical scale.
         */
-        void set_vertical_scale(vertical_scale_type scale)
+        void set_vertical_scale(scale_type scale)
         {
             m_vertical_scale = std::move(scale);
             update_dimension();
@@ -424,7 +388,7 @@ namespace bobura
         class to_station_position
         {
         public:
-            explicit to_station_position(const vertical_scale_type& vertical_scale)
+            explicit to_station_position(const scale_type& vertical_scale)
             :
             m_vertical_scale(vertical_scale),
             m_sum(0)
@@ -440,7 +404,7 @@ namespace bobura
             }
 
         private:
-            const vertical_scale_type& m_vertical_scale;
+            const scale_type& m_vertical_scale;
 
             time_span_type m_sum;
 
@@ -455,9 +419,9 @@ namespace bobura
 
         selection_type m_selection;
 
-        horizontal_scale_type m_horizontal_scale;
+        scale_type m_horizontal_scale;
 
-        vertical_scale_type m_vertical_scale;
+        scale_type m_vertical_scale;
 
         dimension_type m_dimension;
 

@@ -19,15 +19,21 @@
 namespace bobura { namespace command
 {
     /*!
-        \brief The class for an exit command.
+        \brief The class template for an exit command.
+
+        \tparam Traits A traits type.
     */
-    class exit : public command_base
+    template <typename Traits>
+    class exit : public command_base<Traits>
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The base type.
-        using base_type = command_base;
+        using base_type = command_base<traits_type>;
 
 
         // constructors and destructor

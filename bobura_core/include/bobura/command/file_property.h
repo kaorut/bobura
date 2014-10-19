@@ -11,42 +11,41 @@
 
 #include <memory>
 
-#include <boost/mpl/at.hpp>
-
 #include <tetengo2.h>
 
 #include <bobura/command/command_base.h>
-#include <bobura/file_property_dialog.h>
 
 
 namespace bobura { namespace command
 {
     /*!
-        \brief The class for a file property command.
+        \brief The class template for a file property command.
+
+        \tparam Traits         A traits type.
+        \tparam Dialog         A dialog type.
+        \tparam MessageCatalog A message catalog type.
+        \tparam DialogTraits   A dialog traits type.
     */
-    class file_property : public command_base
+    template <typename Traits, typename Dialog, typename MessageCatalog, typename DialogTraits>
+    class file_property : public command_base<Traits>
     {
     public:
         // types
 
-        //! The base type.
-        using base_type = command_base;
+        //! The traits type.
+        using traits_type = Traits;
 
-        //! The file property dialog type.
-        using file_property_dialog_type =
-            file_property_dialog<
-                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
-            >;
-
-        //! The dialog base type.
-        using dialog_base_type = file_property_dialog_type::base_type;
-
-        //! The string type.
-        using string_type = file_property_dialog_type::string_type;
+        //! The dialog type.
+        using dialog_type = Dialog;
 
         //! The message catalog type.
-        using message_catalog_type = file_property_dialog_type::message_catalog_type;
+        using message_catalog_type = MessageCatalog;
+
+        //! The dialog traits type.
+        using dialog_traits_type = DialogTraits;
+
+        //! The base type.
+        using base_type = command_base<traits_type>;
 
 
         // constructors and destructor

@@ -9,11 +9,9 @@
 #if !defined(BOBURA_COMMAND_COMMANDBASE_H)
 #define BOBURA_COMMAND_COMMANDBASE_H
 
-#include <boost/mpl/at.hpp>
-
 #include <tetengo2.h>
 
-#include <bobura/basic_type_list.h>
+#include <bobura/timetable_model.h>
 
 
 namespace bobura { namespace command
@@ -75,18 +73,46 @@ namespace bobura { namespace command
     };
 
     /*!
-        \brief The class for a command base.
+        \brief The class template for a command base.
+
+        \tparam Traits A traits type.
     */
+    template <typename Traits>
     class command_base
     {
     public:
         // types
 
-        //! The model type.
-        using model_type = boost::mpl::at<model_type_list, type::model::model>::type;
+        //! The traits type.
+        using traits_type = Traits;
+
+        //! The size type.
+        using size_type = typename traits_type::size_type;
+
+        //! The difference type.
+        using difference_type = typename traits_type::difference_type;
+
+        //! The string type.
+        using string_type = typename traits_type::string_type;
+
+        //! The operating distance type.
+        using operating_distance_type = typename traits_type::operating_distance_type;
+
+        //! The speed type.
+        using speed_type = typename traits_type::speed_type;
+
+        //! The font type.
+        using font_type = typename traits_type::font_type;
 
         //! The abstract window type.
-        using abstract_window_type = boost::mpl::at<ui_type_list, type::ui::abstract_window>::type;
+        using abstract_window_type = typename traits_type::abstract_window_type;
+
+        //! The mouse capture type.
+        using mouse_capture_type = typename traits_type::mouse_capture_type;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
         //! The state type.
         enum class state_type

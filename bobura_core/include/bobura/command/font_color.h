@@ -11,43 +11,71 @@
 
 #include <memory>
 
-#include <boost/mpl/at.hpp>
-
 #include <tetengo2.h>
 
 #include <bobura/command/command_base.h>
-#include <bobura/font_color_dialog.h>
 
 
 namespace bobura { namespace command
 {
     /*!
         \brief The class template for a font and color command.
+
+        \tparam Traits         A traits type.
+        \tparam Dialog         A dialog type.
+        \tparam PointUnitSize  A point unit size type.
+        \tparam Color          A color type.
+        \tparam Canvas         A canvas type.
+        \tparam FontDialog     A font dialog type.
+        \tparam ColorDialog    A color dialog type.
+        \tparam MessageCatalog A message catalog type.
+        \tparam DialogTraits   A dialog traits type.
     */
-    class font_color : public command_base
+    template <
+        typename Traits,
+        typename Dialog,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog,
+        typename MessageCatalog,
+        typename DialogTraits
+    >
+    class font_color : public command_base<Traits>
     {
     public:
         // types
 
-        //! The base type.
-        using base_type = command_base;
+        //! The traits type.
+        using traits_type = Traits;
 
-        //! The font and color dialog type.
-        using font_color_dialog_type =
-            font_color_dialog<
-                boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
-                boost::mpl::at<ui_type_list, type::ui::color>::type
-            >;
+        //! The dialog type.
+        using dialog_type = Dialog;
 
-        //! The dialog base type.
-        using dialog_base_type = font_color_dialog_type::base_type;
+        //! The point unit size type.
+        using point_unit_size_type = PointUnitSize;
+
+        //! The color type.
+        using color_type = Color;
+
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! The font dialog type.
+        using font_dialog_type = FontDialog;
+
+        //! The color dialog type.
+        using color_dialog_type = ColorDialog;
 
         //! The message catalog type.
-        using message_catalog_type = font_color_dialog_type::message_catalog_type;
+        using message_catalog_type = MessageCatalog;
+
+        //! The dialog traits type.
+        using dialog_traits_type = DialogTraits;
+
+        //! The base type.
+        using base_type = command_base<traits_type>;
 
 
         // constructors and destructor

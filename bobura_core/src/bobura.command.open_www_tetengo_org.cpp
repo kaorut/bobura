@@ -10,28 +10,24 @@
 #include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/command/open_www_tetengo_org.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura { namespace command
 {
-    class open_www_tetengo_org::impl
+    template <typename Traits, typename Shell>
+    class open_www_tetengo_org<Traits, Shell>::impl
     {
     public:
         // types
 
-        using model_type = open_www_tetengo_org::model_type;
+        using model_type = typename open_www_tetengo_org::model_type;
 
-        using abstract_window_type = open_www_tetengo_org::abstract_window_type;
+        using abstract_window_type = typename open_www_tetengo_org::abstract_window_type;
 
-        using shell_type =
-            tetengo2::gui::shell<
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::shell>::type
-            >;
+        using shell_type = typename open_www_tetengo_org::shell_type;
 
 
         // functions
@@ -48,26 +44,35 @@ namespace bobura { namespace command
     private:
         // types
 
-        using string_type = shell_type::string_type;
+        using string_type = typename shell_type::string_type;
 
 
     };
 
 
-    open_www_tetengo_org::open_www_tetengo_org()
+    template <typename Traits, typename Shell>
+    open_www_tetengo_org<Traits, Shell>::open_www_tetengo_org()
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>())
     {}
 
-    open_www_tetengo_org::~open_www_tetengo_org()
+    template <typename Traits, typename Shell>
+    open_www_tetengo_org<Traits, Shell>::~open_www_tetengo_org()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    void open_www_tetengo_org::execute_impl(model_type& model, abstract_window_type& parent)
+    template <typename Traits, typename Shell>
+    void open_www_tetengo_org<Traits, Shell>::execute_impl(model_type& model, abstract_window_type& parent)
     const
     {
         m_p_impl->execute(model, parent);
     }
+
+
+    template class open_www_tetengo_org<
+        typename boost::mpl::at<traits_type_list, type::traits::command>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::shell>::type
+    >;
 
 
 }}

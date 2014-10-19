@@ -13,6 +13,7 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/diagram_view.h>
+#include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 
 
@@ -20,17 +21,19 @@ namespace
 {
     // types
 
-    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
-
-    using difference_type = boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type;
-
-    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
-
-    using model_type = boost::mpl::at<bobura::model_type_list, bobura::type::model::model>::type;
+    using model_type =
+        bobura::timetable_model<
+            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,
+            boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type,
+            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+        >;
 
     using speed_type = model_type::speed_type;
 
-    using operating_distance_type = model_type::timetable_type::station_location_type::operating_distance_type;
+    using scale_type = boost::mpl::at<bobura::common_type_list, bobura::type::scale>::type;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
@@ -48,31 +51,12 @@ namespace
 
     using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
-    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
-
-    using solid_background_type =
-        tetengo2::gui::drawing::solid_background<
-            boost::mpl::at<bobura::detail_type_list, bobura::type::detail::drawing>::type
-        >;
-
     using message_catalog_type =
         boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
-    using view_type =
-        bobura::diagram_view<
-            size_type,
-            difference_type,
-            string_type,
-            operating_distance_type,
-            speed_type,
-            canvas_type,
-            solid_background_type,
-            message_catalog_type
-        >;
+    using view_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type;
 
-    using horizontal_scale_type = view_type::horizontal_scale_type;
-
-    using vertical_scale_type = view_type::vertical_scale_type;
+    using view_type = bobura::diagram_view<view_traits_type>;
 
 
 }
@@ -130,11 +114,11 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         view.set_horizontal_scale(42);
 
-        BOOST_CHECK(view.horizontal_scale() == horizontal_scale_type{ 42 });
+        BOOST_CHECK(view.horizontal_scale() == scale_type{ 42 });
 
         view.set_horizontal_scale(24);
 
-        BOOST_CHECK(view.horizontal_scale() == horizontal_scale_type{ 24 });
+        BOOST_CHECK(view.horizontal_scale() == scale_type{ 24 });
     }
 
     BOOST_AUTO_TEST_CASE(vertical_scale)
@@ -158,11 +142,11 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         view.set_vertical_scale(42);
 
-        BOOST_CHECK(view.vertical_scale() == vertical_scale_type{ 42 });
+        BOOST_CHECK(view.vertical_scale() == scale_type{ 42 });
 
         view.set_vertical_scale(24);
 
-        BOOST_CHECK(view.vertical_scale() == vertical_scale_type{ 24 });
+        BOOST_CHECK(view.vertical_scale() == scale_type{ 24 });
     }
 
     BOOST_AUTO_TEST_CASE(dimension)

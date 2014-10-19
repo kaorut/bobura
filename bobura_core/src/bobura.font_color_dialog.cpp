@@ -23,593 +23,586 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/font_color_dialog.h>
-#include <bobura/message/type_list.h>
+#include <bobura/message/type_list_impl.h>
 #include <bobura/type_list.h>
 
 
 namespace bobura
 {
-    namespace
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    class font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::impl :
+        private boost::noncopyable
     {
-        template <
-            typename Dialog,
-            typename MessageCatalog,
-            typename IntSize,
-            typename Font,
-            typename PointSize,
-            typename Color
-        >
-        class font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::impl :
-            private boost::noncopyable
+    public:
+        // types
+
+        using traits_type = typename font_color_dialog::traits_type;
+
+        using size_type = typename font_color_dialog::size_type;
+
+        using base_type = typename font_color_dialog::base_type;
+
+        using message_catalog_type = typename font_color_dialog::message_catalog_type;
+
+        using font_type = typename font_color_dialog::font_type;
+
+        using point_unit_size_type = typename font_color_dialog::point_unit_size_type;
+
+        using color_type = typename font_color_dialog::color_type;
+
+        using canvas_type = typename font_color_dialog::canvas_type;
+
+        using font_dialog_type = typename font_color_dialog::font_dialog_type;
+
+        using color_dialog_type = typename font_color_dialog::color_dialog_type;
+
+        using font_color_type = typename font_color_dialog::font_color_type;
+
+
+        // constructors and destructor
+
+        impl(base_type& base, const message_catalog_type& message_catalog)
+        :
+        m_base(base),
+        m_font_color_list(9, internal_font_color_type{ boost::none, boost::none }),
+        m_message_catalog(message_catalog),
+        m_current_category_index(),
+        m_p_category_label(),
+        m_p_category_list_box(),
+        m_p_font_button(),
+        m_p_font_text_box(),
+        m_p_color_button(),
+        m_p_sample_label(),
+        m_p_sample_picture_box(),
+        m_p_ok_button(),
+        m_p_cancel_button()
         {
-        public:
-            // types
-
-            using base_type = Dialog;
-
-            using string_type = typename base_type::string_type;
-
-            using background_type = typename base_type::background_type;
-
-            using message_catalog_type = MessageCatalog;
-
-            using int_size_type = IntSize;
-
-            using font_type = Font;
-
-            using point_size_type = PointSize;
-
-            using color_type = Color;
-
-            using font_color_type =
-                typename font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::font_color_type;
-
-
-            // constructors and destructor
-
-            impl(base_type& base, const message_catalog_type& message_catalog)
-            :
-            m_base(base),
-            m_message_catalog(message_catalog),
-            m_font_color_list(9, internal_font_color_type{ boost::none, boost::none }),
-            m_current_category_index(),
-            m_p_category_label(),
-            m_p_category_list_box(),
-            m_p_font_button(),
-            m_p_font_text_box(),
-            m_p_color_button(),
-            m_p_sample_label(),
-            m_p_sample_picture_box(),
-            m_p_ok_button(),
-            m_p_cancel_button()
-            {
-                initialize_dialog();
-            }
-
-
-            // functions
-
-            const color_type& background()
-            const
-            {
-                return to_color(m_font_color_list[0]);
-            }
-
-            void set_background(const color_type& color)
-            {
-                m_font_color_list[0] = internal_font_color_type{ boost::none, boost::make_optional(color) };
-            }
-
-            font_color_type company_line_name()
-            const
-            {
-                return to_font_color(m_font_color_list[1]);
-            }
-
-            void set_company_line_name(const font_type& font, const color_type& color)
-            {
-                m_font_color_list[1] =
-                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
-            }
-
-            font_color_type note()
-            const
-            {
-                return to_font_color(m_font_color_list[2]);
-            }
-
-            void set_note(const font_type& font, const color_type& color)
-            {
-                m_font_color_list[2] =
-                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
-            }
-
-            font_color_type time_line()
-            const
-            {
-                return to_font_color(m_font_color_list[3]);
-            }
-
-            void set_time_line(const font_type& font, const color_type& color)
-            {
-                m_font_color_list[3] =
-                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
-            }
-
-            font_color_type local_station()
-            const
-            {
-                return to_font_color(m_font_color_list[4]);
-            }
-
-            void set_local_station(const font_type& font, const color_type& color)
-            {
-                m_font_color_list[4] =
-                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
-            }
+            initialize_dialog();
+        }
+
+
+        // functions
+
+        const color_type& background()
+        const
+        {
+            return to_color(m_font_color_list[0]);
+        }
+
+        void set_background(const color_type& color)
+        {
+            m_font_color_list[0] = internal_font_color_type{ boost::none, boost::make_optional(color) };
+        }
+
+        font_color_type company_line_name()
+        const
+        {
+            return to_font_color(m_font_color_list[1]);
+        }
+
+        void set_company_line_name(const font_type& font, const color_type& color)
+        {
+            m_font_color_list[1] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+        }
+
+        font_color_type note()
+        const
+        {
+            return to_font_color(m_font_color_list[2]);
+        }
+
+        void set_note(const font_type& font, const color_type& color)
+        {
+            m_font_color_list[2] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+        }
 
-            font_color_type principal_station()
-            const
-            {
-                return to_font_color(m_font_color_list[5]);
-            }
+        font_color_type time_line()
+        const
+        {
+            return to_font_color(m_font_color_list[3]);
+        }
 
-            void set_principal_station(const font_type& font, const color_type& color)
-            {
-                m_font_color_list[5] =
-                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
-            }
+        void set_time_line(const font_type& font, const color_type& color)
+        {
+            m_font_color_list[3] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+        }
 
-            font_color_type local_terminal_station()
-            const
-            {
-                return to_font_color(m_font_color_list[6]);
-            }
+        font_color_type local_station()
+        const
+        {
+            return to_font_color(m_font_color_list[4]);
+        }
 
-            void set_local_terminal_station(const font_type& font, const color_type& color)
-            {
-                m_font_color_list[6] =
-                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
-            }
+        void set_local_station(const font_type& font, const color_type& color)
+        {
+            m_font_color_list[4] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+        }
 
-            font_color_type principal_terminal_station()
-            const
-            {
-                return to_font_color(m_font_color_list[7]);
-            }
+        font_color_type principal_station()
+        const
+        {
+            return to_font_color(m_font_color_list[5]);
+        }
 
-            void set_principal_terminal_station(const font_type& font, const color_type& color)
-            {
-                m_font_color_list[7] =
-                    internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
-            }
+        void set_principal_station(const font_type& font, const color_type& color)
+        {
+            m_font_color_list[5] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+        }
 
-            const font_type& train_name()
-            const
-            {
-                return to_font(m_font_color_list[8]);
-            }
+        font_color_type local_terminal_station()
+        const
+        {
+            return to_font_color(m_font_color_list[6]);
+        }
 
-            void set_train_name(const font_type& font)
-            {
-                m_font_color_list[8] = internal_font_color_type{ boost::make_optional(font), boost::none };
-            }
+        void set_local_terminal_station(const font_type& font, const color_type& color)
+        {
+            m_font_color_list[6] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+        }
 
-            void do_modal_impl()
-            {
-                m_p_category_list_box->select_value(0);
-                m_current_category_index = boost::make_optional<int_size_type>(0);
-                update();
-            }
+        font_color_type principal_terminal_station()
+        const
+        {
+            return to_font_color(m_font_color_list[7]);
+        }
 
+        void set_principal_terminal_station(const font_type& font, const color_type& color)
+        {
+            m_font_color_list[7] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+        }
 
+        const font_type& train_name()
+        const
+        {
+            return to_font(m_font_color_list[8]);
+        }
 
-        private:
-            // types
+        void set_train_name(const font_type& font)
+        {
+            m_font_color_list[8] = internal_font_color_type{ boost::make_optional(font), boost::none };
+        }
 
-            using label_type = typename boost::mpl::at<ui_type_list, type::ui::label>::type;
+        void do_modal_impl()
+        {
+            m_p_category_list_box->select_value(0);
+            m_current_category_index = boost::make_optional<size_type>(0);
+            update();
+        }
 
-            using list_box_type = typename boost::mpl::at<ui_type_list, type::ui::list_box>::type;
 
-            using text_box_type = typename boost::mpl::at<ui_type_list, type::ui::text_box>::type;
+    private:
+        // types
 
-            using button_type = typename boost::mpl::at<ui_type_list, type::ui::button>::type;
+        using string_type = typename traits_type::string_type;
 
-            using picture_box_type = typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
+        using position_type = typename traits_type::position_type;
 
-            using transparent_background_type =
-                typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
-            using font_color_dialog_message_type_list_type =
-                message::font_color_dialog::type_list<
-                    int_size_type,
-                    base_type,
-                    list_box_type,
-                    typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
-                    typename boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
-                    typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
-                    message_catalog_type
-                >;
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
-            using dimension_type = typename base_type::dimension_type;
+        using dimension_type = typename traits_type::dimension_type;
 
-            using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
-            using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
-            using position_type = typename base_type::position_type;
+        using label_type = typename traits_type::label_type;
 
-            using left_type = typename tetengo2::gui::position<position_type>::left_type;
+        using button_type = typename traits_type::button_type;
 
-            using top_type = typename tetengo2::gui::position<position_type>::top_type;
+        using text_box_type = typename traits_type::text_box_type;
 
-            using internal_font_color_type = std::pair<boost::optional<font_type>, boost::optional<color_type>>;
+        using list_box_type = typename traits_type::list_box_type;
 
+        using picture_box_type = typename traits_type::picture_box_type;
 
-            // static functions
+        using transparent_background_type = typename traits_type::transparent_background_type;
 
-            static const font_type& to_font(const internal_font_color_type& internal_font_color)
-            {
-                if (!internal_font_color.first)
-                    BOOST_THROW_EXCEPTION(std::logic_error("The font has not been set."));
+        using internal_font_color_type = std::pair<boost::optional<font_type>, boost::optional<color_type>>;
 
-                return *internal_font_color.first;
-            }
+        using font_color_dialog_message_type_list_type =
+            message::font_color_dialog::type_list<
+                size_type,
+                base_type,
+                list_box_type,
+                canvas_type,
+                font_dialog_type,
+                color_dialog_type,
+                message_catalog_type
+            >;
 
-            static const color_type& to_color(const internal_font_color_type& internal_font_color)
-            {
-                if (!internal_font_color.second)
-                    BOOST_THROW_EXCEPTION(std::logic_error("The color has not been set."));
 
-                return *internal_font_color.second;
-            }
+        // static functions
 
-            static font_color_type to_font_color(const internal_font_color_type& internal_font_color)
-            {
-                if (!internal_font_color.first || !internal_font_color.second)
-                    BOOST_THROW_EXCEPTION(std::logic_error("The font and/or the color have not been set."));
+        static const font_type& to_font(const internal_font_color_type& internal_font_color)
+        {
+            if (!internal_font_color.first)
+                BOOST_THROW_EXCEPTION(std::logic_error("The font has not been set."));
 
-                return font_color_type{ *internal_font_color.first, *internal_font_color.second };
-            }
+            return *internal_font_color.first;
+        }
 
+        static const color_type& to_color(const internal_font_color_type& internal_font_color)
+        {
+            if (!internal_font_color.second)
+                BOOST_THROW_EXCEPTION(std::logic_error("The color has not been set."));
 
-            // variables
+            return *internal_font_color.second;
+        }
 
-            base_type& m_base;
+        static font_color_type to_font_color(const internal_font_color_type& internal_font_color)
+        {
+            if (!internal_font_color.first || !internal_font_color.second)
+                BOOST_THROW_EXCEPTION(std::logic_error("The font and/or the color have not been set."));
 
-            const message_catalog_type& m_message_catalog;
+            return font_color_type{ *internal_font_color.first, *internal_font_color.second };
+        }
 
-            std::vector<internal_font_color_type> m_font_color_list;
 
-            boost::optional<int_size_type> m_current_category_index;
+        // variables
 
-            std::unique_ptr<label_type> m_p_category_label;
+        base_type& m_base;
 
-            std::unique_ptr<list_box_type> m_p_category_list_box;
+        std::vector<internal_font_color_type> m_font_color_list;
 
-            std::unique_ptr<button_type> m_p_font_button;
+        const message_catalog_type& m_message_catalog;
 
-            std::unique_ptr<text_box_type> m_p_font_text_box;
+        boost::optional<size_type> m_current_category_index;
 
-            std::unique_ptr<button_type> m_p_color_button;
+        std::unique_ptr<label_type> m_p_category_label;
 
-            std::unique_ptr<label_type> m_p_sample_label;
+        std::unique_ptr<list_box_type> m_p_category_list_box;
 
-            std::unique_ptr<picture_box_type> m_p_sample_picture_box;
+        std::unique_ptr<button_type> m_p_font_button;
 
-            std::unique_ptr<button_type> m_p_ok_button;
+        std::unique_ptr<text_box_type> m_p_font_text_box;
 
-            std::unique_ptr<button_type> m_p_cancel_button;
+        std::unique_ptr<button_type> m_p_color_button;
 
+        std::unique_ptr<label_type> m_p_sample_label;
 
-            // functions
+        std::unique_ptr<picture_box_type> m_p_sample_picture_box;
 
-            void initialize_dialog()
-            {
-                m_base.set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Fonts And Colors")));
+        std::unique_ptr<button_type> m_p_ok_button;
 
-                m_p_category_label = create_category_label();
-                m_p_category_list_box = create_category_list_box();
-                m_p_font_button = create_font_button();
-                m_p_font_text_box = create_font_text_box();
-                m_p_color_button = create_color_button();
-                m_p_sample_label = create_sample_label();
-                m_p_sample_picture_box = create_sample_picture_box();
-                m_p_ok_button = create_ok_button();
-                m_p_cancel_button = create_cancel_button();
+        std::unique_ptr<button_type> m_p_cancel_button;
 
-                locate_controls();
 
-                insert_category_list_box_values();
-            }
+        // functions
 
-            std::unique_ptr<label_type> create_category_label()
-            {
-                auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
+        void initialize_dialog()
+        {
+            m_base.set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Fonts And Colors")));
 
-                p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:C&ategories:")));
-                auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
-                p_label->set_background(std::move(p_background));
+            m_p_category_label = create_category_label();
+            m_p_category_list_box = create_category_list_box();
+            m_p_font_button = create_font_button();
+            m_p_font_text_box = create_font_text_box();
+            m_p_color_button = create_color_button();
+            m_p_sample_label = create_sample_label();
+            m_p_sample_picture_box = create_sample_picture_box();
+            m_p_ok_button = create_ok_button();
+            m_p_cancel_button = create_cancel_button();
 
-                return std::move(p_label);
-            }
+            locate_controls();
 
-            std::unique_ptr<list_box_type> create_category_list_box()
-            {
-                auto p_list_box =
-                    tetengo2::stdalt::make_unique<list_box_type>(
-                        m_base, list_box_type::scroll_bar_style_type::vertical
-                    );
+            insert_category_list_box_values();
+        }
 
-                p_list_box->list_selection_observer_set().selection_changed().connect(
-                    typename boost::mpl::at<
-                        font_color_dialog_message_type_list_type,
-                        message::font_color_dialog::type::category_list_box_selection_changed
-                    >::type{ m_current_category_index, *p_list_box, [this]() { this->update(); } }
+        std::unique_ptr<label_type> create_category_label()
+        {
+            auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
+
+            p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:C&ategories:")));
+            auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
+            p_label->set_background(std::move(p_background));
+
+            return std::move(p_label);
+        }
+
+        std::unique_ptr<list_box_type> create_category_list_box()
+        {
+            auto p_list_box =
+                tetengo2::stdalt::make_unique<list_box_type>(m_base, list_box_type::scroll_bar_style_type::vertical);
+
+            p_list_box->list_selection_observer_set().selection_changed().connect(
+                typename boost::mpl::at<
+                    font_color_dialog_message_type_list_type,
+                    message::font_color_dialog::type::category_list_box_selection_changed
+                >::type{ m_current_category_index, *p_list_box, [this]() { this->update(); } }
+            );
+
+            return std::move(p_list_box);
+        }
+
+        std::unique_ptr<button_type> create_font_button()
+        {
+            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::normal);
+
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Font...")));
+            p_button->mouse_observer_set().clicked().connect(
+                typename boost::mpl::at<
+                    font_color_dialog_message_type_list_type,
+                    message::font_color_dialog::type::font_button_mouse_clicked
+                >::type(
+                    m_base,
+                    m_font_color_list,
+                    m_current_category_index,
+                    [this]() { this->update(); },
+                    m_message_catalog
+                )
+            );
+
+            return std::move(p_button);
+        }
+
+        std::unique_ptr<text_box_type> create_font_text_box()
+        {
+            auto p_text_box =
+                tetengo2::stdalt::make_unique<text_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
+
+            p_text_box->set_read_only(true);
+
+            return std::move(p_text_box);
+        }
+
+        std::unique_ptr<button_type> create_color_button()
+        {
+            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::normal);
+
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Color...")));
+            p_button->mouse_observer_set().clicked().connect(
+                typename boost::mpl::at<
+                    font_color_dialog_message_type_list_type,
+                    message::font_color_dialog::type::color_button_mouse_clicked
+                >::type(
+                    m_base,
+                    m_font_color_list,
+                    m_current_category_index,
+                    [this]() { this->update(); },
+                    m_message_catalog
+                )
+            );
+
+            return std::move(p_button);
+        }
+
+        std::unique_ptr<label_type> create_sample_label()
+        {
+            auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
+
+            p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Sample:")));
+            auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
+            p_label->set_background(std::move(p_background));
+
+            return std::move(p_label);
+        }
+
+        std::unique_ptr<picture_box_type> create_sample_picture_box()
+        {
+            auto p_picture_box =
+                tetengo2::stdalt::make_unique<picture_box_type>(
+                    m_base, list_box_type::scroll_bar_style_type::none
                 );
 
-                return std::move(p_list_box);
-            }
+            p_picture_box->set_dimension(dimension_type{ width_type{ 24 }, height_type{ 8 } });
+            p_picture_box->fast_paint_observer_set().paint().connect(
+                typename boost::mpl::at<
+                    font_color_dialog_message_type_list_type,
+                    message::font_color_dialog::type::sample_picture_box_paint
+                >::type{
+                    m_font_color_list,
+                    m_current_category_index,
+                    p_picture_box->client_dimension(),
+                    m_message_catalog
+                }
+            );
 
-            std::unique_ptr<button_type> create_font_button()
-            {
-                auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::normal);
+            return std::move(p_picture_box);
+        }
 
-                p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Font...")));
-                p_button->mouse_observer_set().clicked().connect(
-                    typename boost::mpl::at<
-                        font_color_dialog_message_type_list_type,
-                        message::font_color_dialog::type::font_button_mouse_clicked
-                    >::type(
-                        m_base,
-                        m_font_color_list,
-                        m_current_category_index,
-                        [this]() { this->update(); },
-                        m_message_catalog
+        std::unique_ptr<button_type> create_ok_button()
+        {
+            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::default_);
+
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Common:OK")));
+            p_button->mouse_observer_set().clicked().connect(
+                typename boost::mpl::at<
+                    font_color_dialog_message_type_list_type,
+                    message::font_color_dialog::type::ok_button_mouse_clicked
+                >::type{ m_base }
+            );
+
+            return std::move(p_button);
+        }
+
+        std::unique_ptr<button_type> create_cancel_button()
+        {
+            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::cancel);
+
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Common:Cancel")));
+            p_button->mouse_observer_set().clicked().connect(
+                typename boost::mpl::at<
+                    font_color_dialog_message_type_list_type,
+                    message::font_color_dialog::type::cancel_button_mouse_clicked
+                >::type{ m_base }
+            );
+
+            return std::move(p_button);
+        }
+
+        void locate_controls()
+        {
+            m_base.set_client_dimension(dimension_type{ width_type{ 46 }, height_type{ 22 } });
+
+            const left_type category_label_left{ 2 };
+
+            m_p_category_label->fit_to_content();
+            m_p_category_label->set_position(position_type{ category_label_left, top_type{ 1 } });
+
+            m_p_category_list_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 16 } });
+            m_p_category_list_box->set_position(
+                position_type{
+                    category_label_left,
+                    tetengo2::gui::position<position_type>::top(m_p_category_label->position()) +
+                    top_type::from(
+                        tetengo2::gui::dimension<dimension_type>::height(m_p_category_label->dimension())
                     )
-                );
+                }
+            );
 
-                return std::move(p_button);
-            }
-
-            std::unique_ptr<text_box_type> create_font_text_box()
-            {
-                auto p_text_box =
-                    tetengo2::stdalt::make_unique<text_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
-
-                p_text_box->set_read_only(true);
-
-                return std::move(p_text_box);
-            }
-
-            std::unique_ptr<button_type> create_color_button()
-            {
-                auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::normal);
-
-                p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Color...")));
-                p_button->mouse_observer_set().clicked().connect(
-                    typename boost::mpl::at<
-                        font_color_dialog_message_type_list_type,
-                        message::font_color_dialog::type::color_button_mouse_clicked
-                    >::type(
-                        m_base,
-                        m_font_color_list,
-                        m_current_category_index,
-                        [this]() { this->update(); },
-                        m_message_catalog
-                    )
-                );
-
-                return std::move(p_button);
-            }
-
-            std::unique_ptr<label_type> create_sample_label()
-            {
-                auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
-
-                p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Sample:")));
-                auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
-                p_label->set_background(std::move(p_background));
-
-                return std::move(p_label);
-            }
-
-            std::unique_ptr<picture_box_type> create_sample_picture_box()
-            {
-                auto p_picture_box =
-                    tetengo2::stdalt::make_unique<picture_box_type>(
-                        m_base, list_box_type::scroll_bar_style_type::none
-                    );
-
-                p_picture_box->set_dimension(dimension_type{ width_type{ 24 }, height_type{ 8 } });
-                p_picture_box->fast_paint_observer_set().paint().connect(
-                    typename boost::mpl::at<
-                        font_color_dialog_message_type_list_type,
-                        message::font_color_dialog::type::sample_picture_box_paint
-                    >::type{
-                        m_font_color_list,
-                        m_current_category_index,
-                        p_picture_box->client_dimension(),
-                        m_message_catalog
-                    }
-                );
-
-                return std::move(p_picture_box);
-            }
-
-            std::unique_ptr<button_type> create_ok_button()
-            {
-                auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::default_);
-
-                p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Common:OK")));
-                p_button->mouse_observer_set().clicked().connect(
-                    typename boost::mpl::at<
-                        font_color_dialog_message_type_list_type,
-                        message::font_color_dialog::type::ok_button_mouse_clicked
-                    >::type{ m_base }
-                );
-
-                return std::move(p_button);
-            }
-
-            std::unique_ptr<button_type> create_cancel_button()
-            {
-                auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::cancel);
-
-                p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Common:Cancel")));
-                p_button->mouse_observer_set().clicked().connect(
-                    typename boost::mpl::at<
-                        font_color_dialog_message_type_list_type,
-                        message::font_color_dialog::type::cancel_button_mouse_clicked
-                    >::type{ m_base }
-                );
-
-                return std::move(p_button);
-            }
-
-            void locate_controls()
-            {
-                m_base.set_client_dimension(dimension_type{ width_type{ 46 }, height_type{ 22 } });
-
-                const left_type category_label_left{ 2 };
-
-                m_p_category_label->fit_to_content();
-                m_p_category_label->set_position(position_type{ category_label_left, top_type{ 1 } });
-
-                m_p_category_list_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 16 } });
-                m_p_category_list_box->set_position(
-                    position_type{
-                        category_label_left,
-                        tetengo2::gui::position<position_type>::top(m_p_category_label->position()) +
-                        top_type::from(
-                            tetengo2::gui::dimension<dimension_type>::height(m_p_category_label->dimension())
-                        )
-                    }
-                );
-
-                const left_type font_button_left{ 20 };
+            const left_type font_button_left{ 20 };
             
-                m_p_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_font_button->set_position(position_type{ font_button_left, top_type{ 2 } });
+            m_p_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+            m_p_font_button->set_position(position_type{ font_button_left, top_type{ 2 } });
 
-                m_p_font_text_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 2 } });
-                m_p_font_text_box->set_position(position_type{ font_button_left + left_type{ 8 }, top_type{ 2 } });
+            m_p_font_text_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 2 } });
+            m_p_font_text_box->set_position(position_type{ font_button_left + left_type{ 8 }, top_type{ 2 } });
 
-                m_p_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_color_button->set_position(position_type{ font_button_left, top_type{ 5 } });
+            m_p_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+            m_p_color_button->set_position(position_type{ font_button_left, top_type{ 5 } });
 
-                m_p_sample_label->fit_to_content();
-                m_p_sample_label->set_position(position_type{ font_button_left, top_type{ 8 } });
+            m_p_sample_label->fit_to_content();
+            m_p_sample_label->set_position(position_type{ font_button_left, top_type{ 8 } });
 
-                m_p_sample_picture_box->set_position(
-                    position_type{
-                        font_button_left,
-                        tetengo2::gui::position<position_type>::top(m_p_sample_label->position()) +
-                        top_type::from(
-                            tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
-                        )
-                    }
-                );
+            m_p_sample_picture_box->set_position(
+                position_type{
+                    font_button_left,
+                    tetengo2::gui::position<position_type>::top(m_p_sample_label->position()) +
+                    top_type::from(
+                        tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
+                    )
+                }
+            );
 
-                m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_ok_button->set_position(position_type{ left_type{ 27 }, top_type{ 19 } });
+            m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+            m_p_ok_button->set_position(position_type{ left_type{ 27 }, top_type{ 19 } });
 
-                m_p_cancel_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_cancel_button->set_position(position_type{ left_type{ 36 }, top_type{ 19 } });
-            }
+            m_p_cancel_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+            m_p_cancel_button->set_position(position_type{ left_type{ 36 }, top_type{ 19 } });
+        }
 
-            void insert_category_list_box_values()
-            {
-                m_p_category_list_box->insert_value(
-                    m_p_category_list_box->value_count(),
-                    m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Background"))
-                );
-                m_p_category_list_box->insert_value(
-                    m_p_category_list_box->value_count(),
-                    m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Company and Line Names"))
-                );
-                m_p_category_list_box->insert_value(
-                    m_p_category_list_box->value_count(),
-                    m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Note"))
-                );
-                m_p_category_list_box->insert_value(
-                    m_p_category_list_box->value_count(),
-                    m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Time Lines"))
-                );
-                m_p_category_list_box->insert_value(
-                    m_p_category_list_box->value_count(),
-                    m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Local Stations"))
-                );
-                m_p_category_list_box->insert_value(
-                    m_p_category_list_box->value_count(),
-                    m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Principal Stations"))
-                );
-                m_p_category_list_box->insert_value(
-                    m_p_category_list_box->value_count(),
-                    m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Local Terminal Stations"))
-                );
-                m_p_category_list_box->insert_value(
-                    m_p_category_list_box->value_count(),
-                    m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Principal Terminal Stations"))
-                );
-                m_p_category_list_box->insert_value(
-                    m_p_category_list_box->value_count(),
-                    m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Train Names"))
-                );
-            }
+        void insert_category_list_box_values()
+        {
+            m_p_category_list_box->insert_value(
+                m_p_category_list_box->value_count(),
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Background"))
+            );
+            m_p_category_list_box->insert_value(
+                m_p_category_list_box->value_count(),
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Company and Line Names"))
+            );
+            m_p_category_list_box->insert_value(
+                m_p_category_list_box->value_count(),
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Note"))
+            );
+            m_p_category_list_box->insert_value(
+                m_p_category_list_box->value_count(),
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Time Lines"))
+            );
+            m_p_category_list_box->insert_value(
+                m_p_category_list_box->value_count(),
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Local Stations"))
+            );
+            m_p_category_list_box->insert_value(
+                m_p_category_list_box->value_count(),
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Principal Stations"))
+            );
+            m_p_category_list_box->insert_value(
+                m_p_category_list_box->value_count(),
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Local Terminal Stations"))
+            );
+            m_p_category_list_box->insert_value(
+                m_p_category_list_box->value_count(),
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Principal Terminal Stations"))
+            );
+            m_p_category_list_box->insert_value(
+                m_p_category_list_box->value_count(),
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Train Names"))
+            );
+        }
 
-            void update()
-            {
-                const auto font_name_and_size_ = font_name_and_size();
-                m_p_font_text_box->set_text(font_name_and_size_);
-                m_p_font_text_box->set_enabled(!font_name_and_size_.empty());
-                m_p_font_button->set_enabled(!font_name_and_size_.empty());
+        void update()
+        {
+            const auto font_name_and_size_ = font_name_and_size();
+            m_p_font_text_box->set_text(font_name_and_size_);
+            m_p_font_text_box->set_enabled(!font_name_and_size_.empty());
+            m_p_font_button->set_enabled(!font_name_and_size_.empty());
 
-                m_p_color_button->set_enabled(color_enabled());
+            m_p_color_button->set_enabled(color_enabled());
 
-                m_p_sample_picture_box->repaint();
-            }
+            m_p_sample_picture_box->repaint();
+        }
 
-            string_type font_name_and_size()
-            const
-            {
-                if (!m_current_category_index)
-                    return {};
+        string_type font_name_and_size()
+        const
+        {
+            if (!m_current_category_index)
+                return {};
 
-                const auto& font = m_font_color_list[*m_current_category_index].first;
-                if (!font)
-                    return {};
+            const auto& font = m_font_color_list[*m_current_category_index].first;
+            if (!font)
+                return {};
 
-                std::basic_ostringstream<typename string_type::value_type> stream;
-                stream <<
-                    boost::basic_format<typename string_type::value_type>(string_type{ TETENGO2_TEXT("%s, %dpt") }) %
-                    font->family() %
-                    boost::rational_cast<int>(point_size_type::from_pixels(font->size()).value());
+            std::basic_ostringstream<typename string_type::value_type> stream;
+            stream <<
+                boost::basic_format<typename string_type::value_type>(string_type{ TETENGO2_TEXT("%s, %dpt") }) %
+                font->family() %
+                boost::rational_cast<int>(point_unit_size_type::from_pixels(font->size()).value());
 
-                return stream.str();
-            }
+            return stream.str();
+        }
 
-            bool color_enabled()
-            {
-                return m_current_category_index && m_font_color_list[*m_current_category_index].second;
-            }
-
-
-        };
+        bool color_enabled()
+        {
+            return m_current_category_index && m_font_color_list[*m_current_category_index].second;
+        }
 
 
-    }
+    };
 
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::font_color_dialog(
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::font_color_dialog(
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog
     )
@@ -619,69 +612,87 @@ namespace bobura
     {}
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::~font_color_dialog()
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::~font_color_dialog()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    const typename font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::color_type&
-    font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::background()
+    const typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::color_type&
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::background()
     const
     {
         return m_p_impl->background();
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    void font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::set_background(const color_type& color)
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_background(
+        const color_type& color
+    )
     {
         m_p_impl->set_background(color);
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    typename font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::font_color_type
-    font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::company_line_name()
+    typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::company_line_name()
     const
     {
         return m_p_impl->company_line_name();
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    void font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::set_company_line_name(
+    void font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::set_company_line_name(
         const font_type&  font,
         const color_type& color
     )
@@ -690,29 +701,35 @@ namespace bobura
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    typename font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::font_color_type
-    font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::note()
+    typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::note()
     const
     {
         return m_p_impl->note();
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    void font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::set_note(
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_note(
         const font_type&  font,
         const color_type& color
     )
@@ -721,29 +738,35 @@ namespace bobura
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    typename font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::font_color_type
-    font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::time_line()
+    typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::time_line()
     const
     {
         return m_p_impl->time_line();
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    void font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::set_time_line(
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_time_line(
         const font_type&  font,
         const color_type& color
     )
@@ -752,29 +775,37 @@ namespace bobura
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    typename font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::font_color_type
-    font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::local_station()
+    typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::local_station()
     const
     {
         return m_p_impl->local_station();
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    void font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::set_local_station(
+    void font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::set_local_station(
         const font_type&  font,
         const color_type& color
     )
@@ -783,29 +814,37 @@ namespace bobura
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    typename font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::font_color_type
-    font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::principal_station()
+    typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::principal_station()
     const
     {
         return m_p_impl->principal_station();
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    void font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::set_principal_station(
+    void font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::set_principal_station(
         const font_type&  font,
         const color_type& color
     )
@@ -814,29 +853,37 @@ namespace bobura
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    typename font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::font_color_type
-    font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::local_terminal_station()
+    typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type
+    font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::local_terminal_station()
     const
     {
         return m_p_impl->local_terminal_station();
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    void font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::set_local_terminal_station(
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_local_terminal_station(
         const font_type&  font,
         const color_type& color
     )
@@ -845,29 +892,39 @@ namespace bobura
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    typename font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::font_color_type
-    font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::principal_terminal_station()
+    typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type
+    font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::principal_terminal_station()
     const
     {
         return m_p_impl->principal_terminal_station();
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    void font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::set_principal_terminal_station(
+    void font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::set_principal_terminal_station(
         const font_type&  font,
         const color_type& color
     )
@@ -876,54 +933,66 @@ namespace bobura
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    const typename font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::font_type&
-    font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::train_name()
+    const typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_type&
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::train_name()
     const
     {
         return m_p_impl->train_name();
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    void font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::set_train_name(const font_type& font)
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_train_name(
+        const font_type& font
+    )
     {
         m_p_impl->set_train_name(font);
     }
 
     template <
-        typename Dialog,
-        typename MessageCatalog,
-        typename IntSize,
+        typename Traits,
+        typename Size,
         typename Font,
-        typename PointSize,
-        typename Color
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
     >
-    void font_color_dialog<Dialog, MessageCatalog, IntSize, Font, PointSize, Color>::do_modal_impl()
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::do_modal_impl()
     {
         m_p_impl->do_modal_impl();
     }
 
 
     template class font_color_dialog<
-        typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::dialog>::type,
         typename boost::mpl::at<common_type_list, type::size>::type,
         typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
         typename boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::color>::type
+        typename boost::mpl::at<ui_type_list, type::ui::color>::type,
+        typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
+        typename boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
+        typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type
     >;
 
 

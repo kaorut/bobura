@@ -19,28 +19,28 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/message/type_list.h>
+#include <bobura/message/type_list_impl.h>
 #include <bobura/oudia_diagram_dialog.h>
 #include <bobura/type_list.h>
 
 
 namespace bobura
 {
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    class oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::impl : private boost::noncopyable
+    template <typename Traits, typename Size>
+    class oudia_diagram_dialog<Traits, Size>::impl : private boost::noncopyable
     {
     public:
         // types
 
-        using base_type = Dialog;
+        using traits_type = typename oudia_diagram_dialog::traits_type;
 
-        using string_type = typename base_type::string_type;
+        using string_type = typename oudia_diagram_dialog::string_type;
 
-        using background_type = typename base_type::background_type;
+        using base_type = typename oudia_diagram_dialog::base_type;
 
-        using message_catalog_type = MessageCatalog;
+        using message_catalog_type = typename oudia_diagram_dialog::message_catalog_type;
 
-        using int_size_type = IntSize;
+        using size_type = typename oudia_diagram_dialog::size_type;
 
 
         // constructors and destructor
@@ -98,13 +98,13 @@ namespace bobura
             m_selected_index = m_p_diagram_list_box->selected_value_index();
         }
 
-        const boost::optional<int_size_type>& selected_index()
+        const boost::optional<size_type>& selected_index()
         const
         {
             return m_selected_index;
         }
 
-        void set_selected_index(const int_size_type index)
+        void set_selected_index(const size_type index)
         {
             if (index >= m_p_diagram_list_box->value_count())
                 BOOST_THROW_EXCEPTION(std::out_of_range("index is greater than the diagram count."));
@@ -123,28 +123,27 @@ namespace bobura
     private:
         // types
 
-        using label_type = typename boost::mpl::at<ui_type_list, type::ui::label>::type;
+        using position_type = typename traits_type::position_type;
 
-        using list_box_type = typename boost::mpl::at<ui_type_list, type::ui::list_box>::type;
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
-        using button_type = typename boost::mpl::at<ui_type_list, type::ui::button>::type;
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
-        using transparent_background_type =
-            typename boost::mpl::at<ui_type_list, type::ui::transparent_background>::type;
-
-        using oudia_diagram_dialog_message_type_list_type = message::oudia_diagram_dialog::type_list<base_type>;
-
-        using dimension_type = typename base_type::dimension_type;
+        using dimension_type = typename traits_type::dimension_type;
 
         using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
         using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
-        using position_type = typename base_type::position_type;
+        using label_type = typename traits_type::label_type;
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
+        using button_type = typename traits_type::button_type;
 
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+        using list_box_type = typename traits_type::list_box_type;
+
+        using transparent_background_type = typename traits_type::transparent_background_type;
+
+        using oudia_diagram_dialog_message_type_list_type = message::oudia_diagram_dialog::type_list<base_type>;
 
 
         // variables
@@ -157,7 +156,7 @@ namespace bobura
 
         std::vector<string_type> m_names;
 
-        boost::optional<int_size_type> m_selected_index;
+        boost::optional<size_type> m_selected_index;
 
         std::unique_ptr<label_type> m_p_file_name_label;
 
@@ -287,8 +286,8 @@ namespace bobura
     };
 
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::oudia_diagram_dialog(
+    template <typename Traits, typename Size>
+    oudia_diagram_dialog<Traits, Size>::oudia_diagram_dialog(
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog
     )
@@ -297,63 +296,62 @@ namespace bobura
     m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog))
     {}
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::~oudia_diagram_dialog()
+    template <typename Traits, typename Size>
+    oudia_diagram_dialog<Traits, Size>::~oudia_diagram_dialog()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    const typename oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::string_type&
-    oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::file_name()
+    template <typename Traits, typename Size>
+    const typename oudia_diagram_dialog<Traits, Size>::string_type&
+    oudia_diagram_dialog<Traits, Size>::file_name()
     const
     {
         return m_p_impl->file_name();
     }
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    void oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::set_file_name(string_type file_name)
+    template <typename Traits, typename Size>
+    void oudia_diagram_dialog<Traits, Size>::set_file_name(string_type file_name)
     {
         m_p_impl->set_file_name(std::move(file_name));
     }
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    const std::vector<typename oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::string_type>&
-    oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::names()
+    template <typename Traits, typename Size>
+    const std::vector<typename oudia_diagram_dialog<Traits, Size>::string_type>&
+    oudia_diagram_dialog<Traits, Size>::names()
     const
     {
         return m_p_impl->names();
     }
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    void oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::set_names(std::vector<string_type> names)
+    template <typename Traits, typename Size>
+    void oudia_diagram_dialog<Traits, Size>::set_names(std::vector<string_type> names)
     {
         m_p_impl->set_names(std::move(names));
     }
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    const boost::optional<typename oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::int_size_type>&
-    oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::selected_index()
+    template <typename Traits, typename Size>
+    const boost::optional<typename oudia_diagram_dialog<Traits, Size>::size_type>&
+    oudia_diagram_dialog<Traits, Size>::selected_index()
     const
     {
         return m_p_impl->selected_index();
     }
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    void oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::set_selected_index(const int_size_type index)
+    template <typename Traits, typename Size>
+    void oudia_diagram_dialog<Traits, Size>::set_selected_index(const size_type index)
     {
         m_p_impl->set_selected_index(index);
     }
 
-    template <typename Dialog, typename MessageCatalog, typename IntSize>
-    void oudia_diagram_dialog<Dialog, MessageCatalog, IntSize>::set_result_impl()
+    template <typename Traits, typename Size>
+    void oudia_diagram_dialog<Traits, Size>::set_result_impl()
     {
         m_p_impl->set_result_impl();
     }
 
 
     template class oudia_diagram_dialog<
-        typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
-        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+        typename boost::mpl::at<traits_type_list, type::traits::dialog>::type,
         typename boost::mpl::at<common_type_list, type::size>::type
     >;
 
