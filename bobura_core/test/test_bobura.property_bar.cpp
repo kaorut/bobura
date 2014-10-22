@@ -24,26 +24,26 @@ namespace
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    using settings_type =
-        bobura::settings<
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
-            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type
-        >;
+    using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
+
+    using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
+
+    using config_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type;
+
+    using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
     using property_bar_type =
         bobura::property_bar<
             string_type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
+            position_type,
+            dimension_type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type,
             message_catalog_type,
-            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type
+            config_traits_type
         >;
 
 
