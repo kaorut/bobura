@@ -32,22 +32,15 @@ namespace
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
-    using save_to_file_type =
-        bobura::load_save::save_to_file<
-            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type
-        >;
+    using load_save_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type;
 
-    using confirm_file_save_type =
-        bobura::load_save::confirm_file_save<
-            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type
-        >;
+    using save_to_file_type = bobura::load_save::save_to_file<load_save_traits_type>;
+
+    using confirm_file_save_type = bobura::load_save::confirm_file_save<load_save_traits_type>;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    using new_file_type =
-        bobura::load_save::new_file<
-            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type
-        >;
+    using new_file_type = bobura::load_save::new_file<load_save_traits_type>;
 
 
 }
