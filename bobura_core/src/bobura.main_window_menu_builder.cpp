@@ -106,13 +106,14 @@ namespace bobura
     private:
         // types
 
+        using ui_encoder_type = typename boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type;
+
+        using menu_details_type = typename boost::mpl::at<detail_type_list, type::detail::menu>::type;
+
+        using virtual_key_details_type = typename boost::mpl::at<detail_type_list, type::detail::virtual_key>::type;
+
         using menu_command_type =
-            tetengo2::gui::menu::command<
-                typename boost::mpl::at<common_type_list, type::string>::type,
-                typename boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                typename boost::mpl::at<detail_type_list, type::detail::menu>::type,
-                typename boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
+            tetengo2::gui::menu::command<string_type, ui_encoder_type, menu_details_type, virtual_key_details_type>;
 
         using popup_menu_type = typename boost::mpl::at<ui_type_list, type::ui::popup_menu>::type;
 
@@ -123,12 +124,7 @@ namespace bobura
         using virtual_key_type = typename shortcut_key_type::virtual_key_type;
 
         using menu_separator_type =
-            tetengo2::gui::menu::separator<
-                typename boost::mpl::at<common_type_list, type::string>::type,
-                typename boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type,
-                typename boost::mpl::at<detail_type_list, type::detail::menu>::type,
-                typename boost::mpl::at<detail_type_list, type::detail::virtual_key>::type
-            >;
+            tetengo2::gui::menu::separator<string_type, ui_encoder_type, menu_details_type, virtual_key_details_type>;
 
         using main_window_message_type_list_type =
             message::main_window::type_list<
