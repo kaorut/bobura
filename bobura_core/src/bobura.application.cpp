@@ -36,14 +36,21 @@ namespace bobura
 {
     namespace
     {
+        using size_type = boost::mpl::at<common_type_list, type::size>::type;
+        
+        using difference_type = boost::mpl::at<common_type_list, type::difference>::type;
+
+        using string_type = boost::mpl::at<common_type_list, type::string>::type;
+
+        using operating_distance_type = boost::mpl::at<common_type_list, type::operating_distance>::type;
+
+        using speed_type = boost::mpl::at<common_type_list, type::speed>::type;
+
+        using fast_font_type = boost::mpl::at<ui_type_list, type::ui::fast_font>::type;
+
         using model_type =
             timetable_model<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<common_type_list, type::operating_distance>::type,
-                boost::mpl::at<common_type_list, type::speed>::type,
-                boost::mpl::at<ui_type_list, type::ui::fast_font>::type
+                size_type, difference_type, string_type, operating_distance_type, speed_type, fast_font_type
             >;
 
         using main_window_traits_type = boost::mpl::at<traits_type_list, type::traits::main_window>::type;
@@ -52,40 +59,43 @@ namespace bobura
 
         using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
 
-        using view_type = diagram_view<boost::mpl::at<traits_type_list, type::traits::view>::type>;
+        using view_traits_type = boost::mpl::at<traits_type_list, type::traits::view>::type;
+
+        using view_type = diagram_view<view_traits_type>;
 
         using model_message_type_list_type =
             message::timetable_model::type_list<model_type, view_type, main_window_type>;
 
-        using diagram_view_message_type_list_type =
-            message::diagram_view::type_list<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<ui_type_list, type::ui::position>::type,
-                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-                boost::mpl::at<common_type_list, type::operating_distance>::type,
-                boost::mpl::at<common_type_list, type::speed>::type,
-                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
-                boost::mpl::at<ui_type_list, type::ui::map_box>::type,
-                boost::mpl::at<traits_type_list, type::traits::config>::type,
-                boost::mpl::at<locale_type_list, type::locale::message_catalog>::type
-            >;
+        using abstract_window_type = boost::mpl::at<ui_type_list, type::ui::abstract_window>::type;
 
         using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
 
-        using confirm_file_save_type =
-            load_save::confirm_file_save<boost::mpl::at<traits_type_list, type::traits::load_save>::type>;
+        using diagram_view_message_type_list_type =
+            message::diagram_view::type_list<
+                size_type,
+                difference_type,
+                string_type,
+                boost::mpl::at<ui_type_list, type::ui::position>::type,
+                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
+                operating_distance_type,
+                speed_type,
+                fast_font_type,
+                abstract_window_type,
+                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
+                boost::mpl::at<ui_type_list, type::ui::map_box>::type,
+                boost::mpl::at<traits_type_list, type::traits::config>::type,
+                message_catalog_type
+            >;
 
-        using new_file_type = load_save::new_file<boost::mpl::at<traits_type_list, type::traits::load_save>::type>;
+        using load_save_traits_type = boost::mpl::at<traits_type_list, type::traits::load_save>::type;
 
-        using load_from_file_type =
-            load_save::load_from_file<boost::mpl::at<traits_type_list, type::traits::load_save>::type>;
+        using confirm_file_save_type = load_save::confirm_file_save<load_save_traits_type>;
 
-        using save_to_file_type =
-            load_save::save_to_file<boost::mpl::at<traits_type_list, type::traits::load_save>::type>;
+        using new_file_type = load_save::new_file<load_save_traits_type>;
+
+        using load_from_file_type = load_save::load_from_file<load_save_traits_type>;
+
+        using save_to_file_type = load_save::save_to_file<load_save_traits_type>;
 
         using command_traits_type = command_set_traits_type::command_traits_type;
 
@@ -93,13 +103,13 @@ namespace bobura
 
         using main_window_menu_builder_type =
             main_window_menu_builder<
-                boost::mpl::at<common_type_list, type::size>::type,
-                boost::mpl::at<common_type_list, type::difference>::type,
-                boost::mpl::at<common_type_list, type::string>::type,
-                boost::mpl::at<common_type_list, type::operating_distance>::type,
-                boost::mpl::at<common_type_list, type::speed>::type,
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                speed_type,
                 boost::mpl::at<common_type_list, type::scale>::type,
-                boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                fast_font_type,
                 boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
                 message_catalog_type,
                 command_set_traits_type,
@@ -108,20 +118,16 @@ namespace bobura
 
         using picture_box_type = boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
 
+        using mouse_capture_type = boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type;
+
         using diagram_picture_box_message_type_list =
             message::diagram_picture_box::type_list<
-                picture_box_type,
-                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
-                boost::mpl::at<traits_type_list, type::traits::view>::type
+                picture_box_type, abstract_window_type, mouse_capture_type, view_traits_type
             >;
 
         using diagram_picture_box_type =
             diagram_picture_box<
-                picture_box_type,
-                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-                boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type,
-                diagram_picture_box_message_type_list
+                picture_box_type, abstract_window_type, mouse_capture_type, diagram_picture_box_message_type_list
             >;
 
         using main_window_message_type_list_type =
@@ -139,14 +145,11 @@ namespace bobura
 
         using message_loop_type =
             tetengo2::gui::message::message_loop<
-                boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_loop>::type
+                abstract_window_type, boost::mpl::at<detail_type_list, type::detail::message_loop>::type
             >;
 
         using gui_fixture_type =
             tetengo2::gui::fixture<boost::mpl::at<detail_type_list, type::detail::gui_fixture>::type>;
-
-        using mouse_capture_type = boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type;
 
         using mouse_button_type = mouse_capture_type::mouse_button_type;
 
@@ -374,27 +377,23 @@ namespace bobura
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::paint_paint
                 >::type{ main_window.get_diagram_picture_box(), view }
             );
+            using scroll_bar_scrolled_type =
+                boost::mpl::at<
+                    diagram_picture_box_message_type_list, message::diagram_picture_box::type::scroll_bar_scrolled
+                >::type;
             assert(main_window.get_diagram_picture_box().has_vertical_scroll_bar());
             main_window.get_diagram_picture_box().vertical_scroll_bar().scroll_bar_observer_set().scrolling().connect(
-                boost::mpl::at<
-                    diagram_picture_box_message_type_list, message::diagram_picture_box::type::scroll_bar_scrolled
-                >::type{ main_window.get_diagram_picture_box(), view }
+                scroll_bar_scrolled_type{ main_window.get_diagram_picture_box(), view }
             );
             main_window.get_diagram_picture_box().vertical_scroll_bar().scroll_bar_observer_set().scrolled().connect(
-                boost::mpl::at<
-                    diagram_picture_box_message_type_list, message::diagram_picture_box::type::scroll_bar_scrolled
-                >::type{ main_window.get_diagram_picture_box(), view }
+                scroll_bar_scrolled_type{ main_window.get_diagram_picture_box(), view }
             );
             assert(main_window.get_diagram_picture_box().has_horizontal_scroll_bar());
             main_window.get_diagram_picture_box().horizontal_scroll_bar().scroll_bar_observer_set().scrolling().connect(
-                boost::mpl::at<
-                    diagram_picture_box_message_type_list, message::diagram_picture_box::type::scroll_bar_scrolled
-                >::type{ main_window.get_diagram_picture_box(), view }
+                scroll_bar_scrolled_type{ main_window.get_diagram_picture_box(), view }
             );
             main_window.get_diagram_picture_box().horizontal_scroll_bar().scroll_bar_observer_set().scrolled().connect(
-                boost::mpl::at<
-                    diagram_picture_box_message_type_list, message::diagram_picture_box::type::scroll_bar_scrolled
-                >::type{ main_window.get_diagram_picture_box(), view }
+                scroll_bar_scrolled_type{ main_window.get_diagram_picture_box(), view }
             );
         }
 
