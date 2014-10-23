@@ -28,50 +28,43 @@ namespace
 {
     // types
 
-    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+    using size_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
+
+    using string_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+
+    using widget_traits_type =
+        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::widget_traits>::type;
+
+    using widget_details_traits_type =
+        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::widget_details_traits>::type;
+
+    using menu_details_type =
+        boost::mpl::at<test_bobura::model::detail_type_list, test_bobura::model::type::detail::menu>::type;
 
     using window_type =
-        tetengo2::gui::widget::window<
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::widget_traits>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::widget_details_traits>::type,
-            boost::mpl::at<test_bobura::model::detail_type_list, test_bobura::model::type::detail::menu>::type
-        >;
+        tetengo2::gui::widget::window<widget_traits_type, widget_details_traits_type, menu_details_type>;
 
-    using io_string_type = std::string;
+    using io_string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type;
 
-    using input_stream_iterator_type =
-        boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
+    using input_stream_iterator_type = boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
 
-    using message_catalog_type =
+    using encoder_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type;
+
+    using message_catalog_type_ =
         tetengo2::message::message_catalog<
-            input_stream_iterator_type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type
+            input_stream_iterator_type, string_type_, size_type_, encoder_type, encoder_type
         >;
 
     struct oudia_diagram_dialog
     {
-        using size_type = std::size_t;
+        using size_type = size_type_;
 
-        using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+        using string_type = string_type_;
 
         using abstract_window_type =
-            tetengo2::gui::widget::abstract_window<
-                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::widget_traits>::type,
-                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::widget_details_traits>::type,
-                boost::mpl::at<test_bobura::model::detail_type_list, test_bobura::model::type::detail::menu>::type
-            >;
+            tetengo2::gui::widget::abstract_window<widget_traits_type, widget_details_traits_type, menu_details_type>;
 
-        using message_catalog_type =
-            tetengo2::message::message_catalog<
-                input_stream_iterator_type,
-                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
-                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
-                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type,
-                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type
-            >;
+        using message_catalog_type = message_catalog_type_;
 
         enum class result_type
         {
@@ -141,8 +134,8 @@ BOOST_AUTO_TEST_SUITE(select_oudia_diagram)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        string_type file_name{ TETENGO2_TEXT("hoge") };
-        const message_catalog_type message_catalog{};
+        string_type_ file_name{ TETENGO2_TEXT("hoge") };
+        const message_catalog_type_ message_catalog{};
         const select_oudia_diagram_type select_oudia_diagram{ parent, std::move(file_name), message_catalog };
     }
 
@@ -151,11 +144,11 @@ BOOST_AUTO_TEST_SUITE(select_oudia_diagram)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        string_type file_name{ TETENGO2_TEXT("hoge") };
-        const message_catalog_type message_catalog{};
+        string_type_ file_name{ TETENGO2_TEXT("hoge") };
+        const message_catalog_type_ message_catalog{};
         const select_oudia_diagram_type select_oudia_diagram{ parent, std::move(file_name), message_catalog };
 
-        std::vector<string_type> diagram_names{};
+        std::vector<string_type_> diagram_names{};
         const auto selected = select_oudia_diagram(diagram_names.begin(), diagram_names.end());
 
         BOOST_CHECK(selected == diagram_names.end());
