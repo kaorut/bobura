@@ -37,7 +37,7 @@ namespace
         bobura::timetable_model<
             boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
             boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            string_type,
             boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,
             boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
@@ -81,56 +81,50 @@ namespace
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
-    using save_to_file_type =
-        bobura::load_save::save_to_file<
-            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type
-        >;
+    using load_save_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type;
 
-    using confirm_file_save_type =
-        bobura::load_save::confirm_file_save<
-            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type
-        >;
+    using save_to_file_type = bobura::load_save::save_to_file<load_save_traits_type>;
 
-    using settings_type =
-        bobura::settings<
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
-            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type
-        >;
+    using confirm_file_save_type = bobura::load_save::confirm_file_save<load_save_traits_type>;
+
+    using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
+
+    using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
+
+    using config_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type;
+
+    using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    using view_type = bobura::diagram_view<boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type>;
+    using view_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type;
+
+    using view_type = bobura::diagram_view<view_traits_type>;
 
     using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
 
+    using mouse_capture_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::mouse_capture>::type;
+
     using diagram_picture_box_message_type_list =
         bobura::message::diagram_picture_box::type_list<
-            picture_box_type,
-            abstract_window_type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::mouse_capture>::type,
-            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type
+            picture_box_type, abstract_window_type, mouse_capture_type, view_traits_type
         >;
 
     using diagram_picture_box_type =
         bobura::diagram_picture_box<
-            picture_box_type,
-            abstract_window_type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::mouse_capture>::type,
-            diagram_picture_box_message_type_list
+            picture_box_type, abstract_window_type, mouse_capture_type, diagram_picture_box_message_type_list
         >;
 
     using property_bar_type =
         bobura::property_bar<
             string_type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
+            position_type,
+            dimension_type,
             abstract_window_type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type,
             message_catalog_type,
-            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type
+            config_traits_type
         >;
 
     using popup_menu_selected_type =

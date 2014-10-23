@@ -67,10 +67,9 @@ namespace test_bobura { namespace model
         using encoder_type  = tetengo2::text::encoder<internal_encoding_type, encoding_type>;
         using io_encoding_type = tetengo2::text::encoding::locale<io_string_type, encoding_details_type>;
         using io_encoder_type  = tetengo2::text::encoder<internal_encoding_type, io_encoding_type>;
+        using widget_details_type = boost::mpl::at<detail_type_list, type::detail::widget>::type;
         using ui_encoding_type =
-            tetengo2::text::encoding::locale<
-                boost::mpl::at<detail_type_list, type::detail::widget>::type::string_type, encoding_details_type
-            >;
+            tetengo2::text::encoding::locale<widget_details_type::string_type, encoding_details_type>;
         using ui_encoder_type  = tetengo2::text::encoder<internal_encoding_type, ui_encoding_type>;
         using exception_encoding_type = tetengo2::text::encoding::locale<exception_string_type, encoding_details_type>;
         using exception_encoder_type = tetengo2::text::encoder<internal_encoding_type, exception_encoding_type>;
@@ -87,7 +86,7 @@ namespace test_bobura { namespace model
             >;
         using widget_details_traits_type =
             tetengo2::gui::widget::widget_details_traits<
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
+                widget_details_type,
                 boost::mpl::at<detail_type_list, type::detail::drawing>::type,
                 boost::mpl::at<detail_type_list, type::detail::icon>::type,
                 boost::mpl::at<detail_type_list, type::detail::alert>::type,
@@ -137,39 +136,24 @@ namespace test_bobura { namespace model
 #if !defined(DOCUMENTATION)
     namespace detail { namespace model
     {
+        using size_type = boost::mpl::at<type_list, type::size>::type;
+        using difference_type = boost::mpl::at<type_list, type::difference>::type;
+        using string_type = boost::mpl::at<type_list, type::string>::type;
         using font_type =
             tetengo2::gui::drawing::font<
-                boost::mpl::at<type_list, type::string>::type,
-                boost::mpl::at<type_list, type::size>::type,
-                boost::mpl::at<detail_type_list, type::detail::drawing>::type
+                string_type, size_type, boost::mpl::at<detail_type_list, type::detail::drawing>::type
             >;
         using font_color_set_type = bobura::model::timetable_info::font_color_set<font_type>;
-        using grade_type_set_type =
-            bobura::model::station_info::grade_type_set<boost::mpl::at<type_list, type::string>::type>;
-        using operating_distance_type = boost::mpl::at<type_list, type::size>::type;
+        using grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
+        using operating_distance_type = size_type;
         using station_location_type =
-            bobura::model::timetable_info::station_location<
-                boost::mpl::at<type_list, type::string>::type, operating_distance_type
-            >;
-        using train_kind_type = bobura::model::train_kind<boost::mpl::at<type_list, type::string>::type>;
-        using time_span_type = bobura::model::train_info::time_span<boost::mpl::at<type_list, type::difference>::type>;
-        using time_type =
-            bobura::model::train_info::time<
-                boost::mpl::at<type_list, type::size>::type, boost::mpl::at<type_list, type::difference>::type
-            >;
-        using stop_type =
-            bobura::model::train_info::stop<
-                boost::mpl::at<type_list, type::size>::type,
-                boost::mpl::at<type_list, type::difference>::type,
-                boost::mpl::at<type_list, type::string>::type
-            >;
-        using train_type =
-            bobura::model::train<
-                boost::mpl::at<type_list, type::size>::type,
-                boost::mpl::at<type_list, type::difference>::type,
-                boost::mpl::at<type_list, type::string>::type
-            >;
-        using speed_type = boost::mpl::at<type_list, type::size>::type;
+            bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
+        using train_kind_type = bobura::model::train_kind<string_type>;
+        using time_span_type = bobura::model::train_info::time_span<difference_type>;
+        using time_type = bobura::model::train_info::time<size_type, difference_type>;
+        using stop_type = bobura::model::train_info::stop<size_type, difference_type, string_type>;
+        using train_type = bobura::model::train<size_type, difference_type, string_type>;
+        using speed_type = size_type;
     }}
 #endif
 
@@ -179,9 +163,7 @@ namespace test_bobura { namespace model
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::font_color_set, detail::model::font_color_set_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::grade_type_set, detail::model::grade_type_set_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::model::station, bobura::model::station<boost::mpl::at<type_list, type::string>::type>
-            >,
+            boost::mpl::pair<type::model::station, bobura::model::station<detail::model::string_type>>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::model::station_location, detail::model::station_location_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::train_kind, detail::model::train_kind_type>,
@@ -196,9 +178,9 @@ namespace test_bobura { namespace model
             boost::mpl::pair<
                 type::model::timetable,
                 bobura::model::timetable<
-                    boost::mpl::at<type_list, type::size>::type,
-                    boost::mpl::at<type_list, type::difference>::type,
-                    boost::mpl::at<type_list, type::string>::type,
+                    detail::model::size_type,
+                    detail::model::difference_type,
+                    detail::model::string_type,
                     detail::model::operating_distance_type,
                     detail::model::speed_type,
                     detail::model::font_type

@@ -43,7 +43,7 @@ namespace
         bobura::model::serializer::reader<
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            string_type,
             input_stream_iterator_type,
             boost::mpl::at<
                 test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance

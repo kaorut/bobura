@@ -24,17 +24,17 @@ namespace
 {
     // types
 
+    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
+
     using model_type =
         bobura::timetable_model<
             boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
             boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            string_type,
             boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,
             boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
         >;
-
-    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
 
     using timetable_type = model_type::timetable_type;
 

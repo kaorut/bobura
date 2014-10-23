@@ -24,6 +24,8 @@ namespace
 {
     // types
 
+    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+
     using operating_distance_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance>::type;
 
@@ -31,7 +33,7 @@ namespace
         bobura::model::timetable_info::station_interval_calculator<
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            string_type,
             operating_distance_type
         >;
 
@@ -50,8 +52,6 @@ namespace
     using station_intervals_type = station_interval_calculator_type::station_intervals_type;
 
     using station_interval_type = station_intervals_type::value_type;
-
-    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
     using station_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type;

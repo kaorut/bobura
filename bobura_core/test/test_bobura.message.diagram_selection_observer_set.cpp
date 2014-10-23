@@ -20,11 +20,17 @@ namespace
 {
     // types
 
+    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
+
+    using difference_type = boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type;
+
+    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
+
     using model_type =
         bobura::timetable_model<
-            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            size_type,
+            difference_type,
+            string_type,
             boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,
             boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
@@ -34,10 +40,7 @@ namespace
 
     using observer_set_type =
         bobura::message::diagram_selection_observer_set<
-            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
-            station_location_type::operating_distance_type
+            size_type, difference_type, string_type, station_location_type::operating_distance_type
         >;
 
 

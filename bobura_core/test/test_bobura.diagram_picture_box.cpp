@@ -26,20 +26,19 @@ namespace
 
     using abstract_window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type;
 
+    using mouse_capture_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::mouse_capture>::type;
+
     using diagram_picture_box_message_type_list =
         bobura::message::diagram_picture_box::type_list<
             picture_box_type,
             abstract_window_type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::mouse_capture>::type,
+            mouse_capture_type,
             boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type
         >;
 
     using diagram_picture_box_type =
         bobura::diagram_picture_box<
-            picture_box_type,
-            abstract_window_type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::mouse_capture>::type,
-            diagram_picture_box_message_type_list
+            picture_box_type, abstract_window_type, mouse_capture_type, diagram_picture_box_message_type_list
         >;
 
     using dimension_type = diagram_picture_box_type::dimension_type;

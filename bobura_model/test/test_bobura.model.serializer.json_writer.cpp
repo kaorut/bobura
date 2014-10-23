@@ -73,7 +73,7 @@ namespace
         bobura::model::serializer::json_writer<
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            string_type,
             output_stream_type,
             boost::mpl::at<
                 test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance

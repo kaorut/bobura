@@ -38,13 +38,11 @@ namespace
 
     using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
 
-    using operating_distance_type =
-        boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type;
+    using operating_distance_type = boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type;
 
-    using speed_type =
-        boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type;
+    using speed_type = boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type;
 
-    using font_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type;
+    using fast_font_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type;
 
     using abstract_window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type;
 
@@ -56,13 +54,7 @@ namespace
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    using settings_type =
-        bobura::settings<
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type,
-            config_traits_type
-        >;
+    using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
@@ -80,12 +72,7 @@ namespace
 
     using model_type =
         bobura::timetable_model<
-            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+            size_type, difference_type, string_type, operating_distance_type, speed_type, fast_font_type
         >;
 
     using timetable_type = model_type::timetable_type;
@@ -94,10 +81,7 @@ namespace
 
     using station_type = station_location_type::station_type;
 
-    using station_grade_type_set_type =
-        bobura::model::station_info::grade_type_set<
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type
-        >;
+    using station_grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
     
     using station_selected_type =
         bobura::message::diagram_view::station_selected<
@@ -108,7 +92,7 @@ namespace
             dimension_type,
             operating_distance_type,
             speed_type,
-            font_type,
+            fast_font_type,
             abstract_window_type,
             side_bar_type,
             map_box_type,
@@ -131,7 +115,7 @@ namespace
             dimension_type,
             operating_distance_type,
             speed_type,
-            font_type,
+            fast_font_type,
             abstract_window_type,
             side_bar_type,
             map_box_type,

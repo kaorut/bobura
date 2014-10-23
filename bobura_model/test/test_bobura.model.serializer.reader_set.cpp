@@ -26,6 +26,8 @@ namespace
 {
     // types
 
+    using size_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
+
     using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
     using window_type =
@@ -42,20 +44,20 @@ namespace
             >
         >;
 
+    using encoder_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type;
+
     using message_catalog_type =
         tetengo2::message::message_catalog<
-            input_stream_iterator_type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type
+            input_stream_iterator_type, string_type, size_type, encoder_type, encoder_type
         >;
+
+    using io_encoder_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type;
 
     using reader_set_type =
         bobura::model::serializer::reader_set<
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
+            size_type,
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            string_type,
             input_stream_iterator_type,
             boost::mpl::at<
                 test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
@@ -66,8 +68,8 @@ namespace
                 test_bobura::model::type::serialization::select_oudia_diagram
             >::type,
             boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type
+            io_encoder_type,
+            io_encoder_type
         >;
 
 

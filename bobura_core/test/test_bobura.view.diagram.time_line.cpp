@@ -29,7 +29,7 @@ namespace
 
     using model_type =
         bobura::timetable_model<
-            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
+            size_type,
             boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
             boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
             boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,

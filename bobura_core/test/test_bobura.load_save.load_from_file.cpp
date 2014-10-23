@@ -29,32 +29,37 @@ namespace
 {
     // types
 
+    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
+
+    using difference_type = boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type;
+
+    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
+
+    using operating_distance_type = boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type;
+
+    using speed_type = boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type;
+
+    using fast_font_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type;
+
     using model_type =
         bobura::timetable_model<
-            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+            size_type, difference_type, string_type, operating_distance_type, speed_type, fast_font_type
         >;
 
-    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
+    using message_catalog_type_ =
+        boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
-    struct oudia_diagram_dialog_type : public boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type
+    using dialog_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type;
+
+    struct oudia_diagram_dialog_type : public dialog_type
     {
-        using base_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type;
+        using base_type = dialog_type;
 
         using abstract_window_type = window_type::base_type;
 
-        using string_type = abstract_window_type::string_type;
-
-        using message_catalog_type =
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
-
-        using int_size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
+        using message_catalog_type = message_catalog_type_;
 
         oudia_diagram_dialog_type(abstract_window_type& parent, const message_catalog_type& message_catalog)
         :
@@ -90,14 +95,14 @@ namespace
             boost::ignore_unused(names);
         }
 
-        const boost::optional<int_size_type>& selected_index()
+        const boost::optional<size_type>& selected_index()
         const
         {
-            static const boost::optional<int_size_type> singleton{};
+            static const boost::optional<size_type> singleton{};
             return singleton;
         }
 
-        void set_selected_index(const int_size_type index)
+        void set_selected_index(const size_type index)
         {
             boost::ignore_unused(index);
         }
@@ -106,20 +111,20 @@ namespace
 
     using load_save_traits_type =
         bobura::load_save::traits<
-            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            size_type,
+            difference_type,
+            string_type,
             boost::mpl::at<bobura::common_type_list, bobura::type::input_stream_iterator>::type,
             boost::mpl::at<bobura::common_type_list, bobura::type::output_stream>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type,
+            operating_distance_type,
+            speed_type,
+            fast_font_type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type,
             boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::message_box>::type,
             boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::file_open_dialog>::type,
             boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::file_save_dialog>::type,
             oudia_diagram_dialog_type,
-            message_catalog_type,
+            message_catalog_type_,
             boost::mpl::at<bobura::locale_type_list, bobura::type::locale::timetable_file_encoder>::type,
             boost::mpl::at<bobura::locale_type_list, bobura::type::locale::windia_file_encoder>::type
         >;
@@ -149,14 +154,14 @@ BOOST_AUTO_TEST_SUITE(load_from_file)
 
         {
             model_type model{};
-            const message_catalog_type message_catalog{};
+            const message_catalog_type_ message_catalog{};
             const save_to_file_type save_to_file{ false, message_catalog };
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
             const load_from_file_type load_from_file{ false, confirm_file_save, message_catalog };
         }
         {
             model_type model{};
-            const message_catalog_type message_catalog{};
+            const message_catalog_type_ message_catalog{};
             const save_to_file_type save_to_file{ false, message_catalog };
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
             const load_from_file_type load_from_file{ true, confirm_file_save, message_catalog };
@@ -169,7 +174,7 @@ BOOST_AUTO_TEST_SUITE(load_from_file)
     
         {
             model_type model{};
-            const message_catalog_type message_catalog{};
+            const message_catalog_type_ message_catalog{};
             const save_to_file_type save_to_file{ false, message_catalog };
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
             const load_from_file_type load_from_file{ false, confirm_file_save, message_catalog };
@@ -180,7 +185,7 @@ BOOST_AUTO_TEST_SUITE(load_from_file)
         }
         {
             model_type model{};
-            const message_catalog_type message_catalog{};
+            const message_catalog_type_ message_catalog{};
             const save_to_file_type save_to_file{ false, message_catalog };
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
             const load_from_file_type load_from_file{ true, confirm_file_save, message_catalog };
@@ -192,7 +197,7 @@ BOOST_AUTO_TEST_SUITE(load_from_file)
         {
             model_type model{};
             model.set_path(boost::filesystem::path{ TETENGO2_TEXT("file_path") });
-            const message_catalog_type message_catalog{};
+            const message_catalog_type_ message_catalog{};
             const save_to_file_type save_to_file{ false, message_catalog };
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
             const load_from_file_type load_from_file{ false, confirm_file_save, message_catalog };
@@ -202,7 +207,7 @@ BOOST_AUTO_TEST_SUITE(load_from_file)
         }
         {
             model_type model{};
-            const message_catalog_type message_catalog{};
+            const message_catalog_type_ message_catalog{};
             const save_to_file_type save_to_file{ false, message_catalog };
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
             const load_from_file_type load_from_file{ false, confirm_file_save, message_catalog };
@@ -220,7 +225,7 @@ BOOST_AUTO_TEST_SUITE(load_from_file)
 
         {
             model_type model{};
-            const message_catalog_type message_catalog{};
+            const message_catalog_type_ message_catalog{};
             const save_to_file_type save_to_file{ false, message_catalog };
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
             const load_from_file_type load_from_file{ false, confirm_file_save, message_catalog };
@@ -231,7 +236,7 @@ BOOST_AUTO_TEST_SUITE(load_from_file)
         }
         {
             model_type model{};
-            const message_catalog_type message_catalog{};
+            const message_catalog_type_ message_catalog{};
             const save_to_file_type save_to_file{ false, message_catalog };
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
             const load_from_file_type load_from_file{ true, confirm_file_save, message_catalog };
