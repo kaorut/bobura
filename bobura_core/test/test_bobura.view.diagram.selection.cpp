@@ -31,9 +31,9 @@ namespace
 
     using model_type =
         bobura::timetable_model<
-            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
+            size_type,
             boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
+            string_type,
             boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,
             boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
@@ -43,10 +43,7 @@ namespace
 
     using station_type = station_location_type::station_type;
 
-    using station_grade_type_set_type =
-        bobura::model::station_info::grade_type_set<
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type
-        >;
+    using station_grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
     
     using train_type = model_type::timetable_type::train_type;
 
