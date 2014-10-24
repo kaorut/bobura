@@ -23,6 +23,7 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/application_traits.h>
 #include <bobura/command/set_traits.h>
 #include <bobura/command/traits.h>
 #include <bobura/config_traits.h>
@@ -455,6 +456,7 @@ namespace bobura
         struct main_window;    //!< The main window traits.
         struct command;        //!< The command traits.
         struct command_set;    //!< The command set traits.
+        struct application;    //!< The application traits.
     }}
 
 #if !defined(DOCUMENTATION)
@@ -588,6 +590,8 @@ namespace bobura
                 dialog_traits_type,
                 config_traits_type
             >;
+        using application_traits_type =
+            application_traits<string_type, position_type, dimension_type, config_traits_type>;
     }}
 #endif
 
@@ -602,8 +606,10 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::command, detail::traits::command_traits_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::traits::command_set, detail::traits::command_set_traits_type>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::traits::application, detail::traits::application_traits_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>;
+        >>>>>>>>;
 
 
 }

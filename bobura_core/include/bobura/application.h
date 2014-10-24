@@ -23,28 +23,29 @@ namespace bobura
    /*!
         \brief The class template for a bobura application.
 
-        \tparam String         A string type.
-        \tparam Position       A position type.
-        \tparam Dimension      A dimension type.
-        \tparam ConfigTraits   A configuration traits type.
+        \tparam Traits A traits type.
     */
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
+    template <typename Traits>
     class application : private boost::noncopyable
     {
     public:
         // types
 
+        //! The traits type.
+
+        using traits_type = Traits;
+
         //! The string type.
-        using string_type = String;
+        using string_type = typename traits_type::string_type;
 
         //! The position type.
-        using position_type = Position;
+        using position_type = typename traits_type::position_type;
 
         //! The dimension type.
-        using dimension_type = Dimension;
+        using dimension_type = typename traits_type::dimension_type;
 
         //! The configuration traits type.
-        using config_traits_type = ConfigTraits;
+        using config_traits_type = typename traits_type::config_traits_type;
 
         //! The settings type.
         using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;

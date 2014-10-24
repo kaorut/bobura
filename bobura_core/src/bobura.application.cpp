@@ -163,26 +163,13 @@ namespace bobura
     }
 
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    class application<String, Position, Dimension, ConfigTraits>::impl : private boost::noncopyable
+    template <typename Traits>
+    class application<Traits>::impl : private boost::noncopyable
     {
     public:
         // types
 
-        //! The string type.
-        using string_type = String;
-
-        //! The position type.
-        using position_type = Position;
-
-        //! The dimension type.
-        using dimension_type = Dimension;
-
-        //! The configuration traits type.
-        using config_traits_type = ConfigTraits;
-
-        //! The settings type.
-        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
+        using settings_type = typename application::settings_type;
 
 
         // constructors and destructor
@@ -422,30 +409,25 @@ namespace bobura
     };
 
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    application<String, Position, Dimension, ConfigTraits>::application(settings_type& settings)
+    template <typename Traits>
+    application<Traits>::application(settings_type& settings)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(settings))
     {}
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    application<String, Position, Dimension, ConfigTraits>::~application()
+    template <typename Traits>
+    application<Traits>::~application()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    int application<String, Position, Dimension, ConfigTraits>::run()
+    template <typename Traits>
+    int application<Traits>::run()
     {
         return m_p_impl->run();
     }
 
 
-    template class application<
-        boost::mpl::at<common_type_list, type::string>::type,
-        boost::mpl::at<ui_type_list, type::ui::position>::type,
-        boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-        boost::mpl::at<traits_type_list, type::traits::config>::type
-    >;
+    template class application<boost::mpl::at<traits_type_list, type::traits::application>::type>;
 
 
 }
