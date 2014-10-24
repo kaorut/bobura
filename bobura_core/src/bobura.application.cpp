@@ -14,7 +14,6 @@
 #include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/application.h>
 #include <bobura/command/command_base.h>
