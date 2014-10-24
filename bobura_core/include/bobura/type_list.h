@@ -23,6 +23,7 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/application_traits.h>
 #include <bobura/command/set_traits.h>
 #include <bobura/command/traits.h>
 #include <bobura/config_traits.h>
@@ -455,6 +456,7 @@ namespace bobura
         struct main_window;    //!< The main window traits.
         struct command;        //!< The command traits.
         struct command_set;    //!< The command set traits.
+        struct application;    //!< The application traits.
     }}
 
 #if !defined(DOCUMENTATION)
@@ -531,6 +533,10 @@ namespace bobura
                 boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
                 boost::mpl::at<detail_type_list, type::detail::config>::type
             >;
+        using map_box_type = boost::mpl::at<ui_type_list, type::ui::map_box>::type;
+        using side_bar_type = boost::mpl::at<ui_type_list, type::ui::side_bar>::type;
+        using popup_menu_type = boost::mpl::at<ui_type_list, type::ui::popup_menu>::type;
+        using message_loop_details_type = boost::mpl::at<detail_type_list, type::detail::message_loop>::type;
         using main_window_traits_type =
             main_window_traits<
                 size_type,
@@ -542,12 +548,10 @@ namespace bobura
                 speed_type,
                 boost::mpl::at<ui_type_list, type::ui::window>::type,
                 picture_box_type,
-                boost::mpl::at<ui_type_list, type::ui::map_box>::type,
-                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
-                boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
-                tetengo2::gui::message::message_loop_break<
-                    boost::mpl::at<detail_type_list, type::detail::message_loop>::type
-                >,
+                map_box_type,
+                side_bar_type,
+                popup_menu_type,
+                tetengo2::gui::message::message_loop_break<message_loop_details_type>,
                 fast_font_type,
                 mouse_capture_type,
                 message_catalog_type,
@@ -588,6 +592,43 @@ namespace bobura
                 dialog_traits_type,
                 config_traits_type
             >;
+        using gui_fixture_type =
+            tetengo2::gui::fixture<boost::mpl::at<detail_type_list, type::detail::gui_fixture>::type>;
+        using message_loop_type =
+            tetengo2::gui::message::message_loop<abstract_window_type, message_loop_details_type>;
+        using timer_type =
+            tetengo2::gui::timer<
+                boost::mpl::at<ui_type_list, type::ui::widget>::type,
+                boost::mpl::at<detail_type_list, type::detail::timer>::type
+            >;
+        using application_traits_type =
+            application_traits<
+                size_type,
+                difference_type,
+                string_type,
+                position_type,
+                dimension_type,
+                operating_distance_type,
+                speed_type,
+                scale_type,
+                gui_fixture_type,
+                fast_font_type,
+                abstract_window_type,
+                picture_box_type,
+                map_box_type,
+                side_bar_type,
+                boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
+                popup_menu_type,
+                message_loop_type,
+                mouse_capture_type,
+                timer_type,
+                message_catalog_type,
+                main_window_traits_type,
+                view_traits_type,
+                load_save_traits_type,
+                command_set_traits_type,
+                config_traits_type
+            >;
     }}
 #endif
 
@@ -602,8 +643,10 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::command, detail::traits::command_traits_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::traits::command_set, detail::traits::command_set_traits_type>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::traits::application, detail::traits::application_traits_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>;
+        >>>>>>>>;
 
 
 }

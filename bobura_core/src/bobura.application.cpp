@@ -34,155 +34,21 @@
 
 namespace bobura
 {
-    namespace
-    {
-        using size_type = boost::mpl::at<common_type_list, type::size>::type;
-        
-        using difference_type = boost::mpl::at<common_type_list, type::difference>::type;
-
-        using string_type = boost::mpl::at<common_type_list, type::string>::type;
-
-        using operating_distance_type = boost::mpl::at<common_type_list, type::operating_distance>::type;
-
-        using speed_type = boost::mpl::at<common_type_list, type::speed>::type;
-
-        using fast_font_type = boost::mpl::at<ui_type_list, type::ui::fast_font>::type;
-
-        using model_type =
-            timetable_model<
-                size_type, difference_type, string_type, operating_distance_type, speed_type, fast_font_type
-            >;
-
-        using main_window_traits_type = boost::mpl::at<traits_type_list, type::traits::main_window>::type;
-
-        using command_set_traits_type = boost::mpl::at<traits_type_list, type::traits::command_set>::type;
-
-        using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
-
-        using view_traits_type = boost::mpl::at<traits_type_list, type::traits::view>::type;
-
-        using view_type = diagram_view<view_traits_type>;
-
-        using model_message_type_list_type =
-            message::timetable_model::type_list<model_type, view_type, main_window_type>;
-
-        using abstract_window_type = boost::mpl::at<ui_type_list, type::ui::abstract_window>::type;
-
-        using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
-
-        using diagram_view_message_type_list_type =
-            message::diagram_view::type_list<
-                size_type,
-                difference_type,
-                string_type,
-                boost::mpl::at<ui_type_list, type::ui::position>::type,
-                boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-                operating_distance_type,
-                speed_type,
-                fast_font_type,
-                abstract_window_type,
-                boost::mpl::at<ui_type_list, type::ui::side_bar>::type,
-                boost::mpl::at<ui_type_list, type::ui::map_box>::type,
-                boost::mpl::at<traits_type_list, type::traits::config>::type,
-                message_catalog_type
-            >;
-
-        using load_save_traits_type = boost::mpl::at<traits_type_list, type::traits::load_save>::type;
-
-        using confirm_file_save_type = load_save::confirm_file_save<load_save_traits_type>;
-
-        using new_file_type = load_save::new_file<load_save_traits_type>;
-
-        using load_from_file_type = load_save::load_from_file<load_save_traits_type>;
-
-        using save_to_file_type = load_save::save_to_file<load_save_traits_type>;
-
-        using command_traits_type = command_set_traits_type::command_traits_type;
-
-        using command_set_type = command::set<command_set_traits_type>;
-
-        using main_window_menu_builder_type =
-            main_window_menu_builder<
-                size_type,
-                difference_type,
-                string_type,
-                operating_distance_type,
-                speed_type,
-                boost::mpl::at<common_type_list, type::scale>::type,
-                fast_font_type,
-                boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
-                message_catalog_type,
-                command_set_traits_type,
-                main_window_traits_type
-            >;
-
-        using picture_box_type = boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
-
-        using mouse_capture_type = boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type;
-
-        using diagram_picture_box_message_type_list =
-            message::diagram_picture_box::type_list<
-                picture_box_type, abstract_window_type, mouse_capture_type, view_traits_type
-            >;
-
-        using diagram_picture_box_type =
-            diagram_picture_box<
-                picture_box_type, abstract_window_type, mouse_capture_type, diagram_picture_box_message_type_list
-            >;
-
-        using main_window_message_type_list_type =
-            message::main_window::type_list<
-                boost::mpl::at<ui_type_list, type::ui::popup_menu>::type,
-                command_set_type,
-                command_set_type::command_type,
-                model_type,
-                view_type,
-                main_window_type::abstract_window_type,
-                main_window_type::diagram_picture_box_type,
-                main_window_type::property_bar_type,
-                main_window_type::confirm_file_save_type
-            >;
-
-        using message_loop_type =
-            tetengo2::gui::message::message_loop<
-                abstract_window_type, boost::mpl::at<detail_type_list, type::detail::message_loop>::type
-            >;
-
-        using gui_fixture_type =
-            tetengo2::gui::fixture<boost::mpl::at<detail_type_list, type::detail::gui_fixture>::type>;
-
-        using mouse_button_type = mouse_capture_type::mouse_button_type;
-
-        using timer_type =
-            tetengo2::gui::timer<
-                boost::mpl::at<ui_type_list, type::ui::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::timer>::type
-            >;
-
-
-    }
-
-
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    class application<String, Position, Dimension, ConfigTraits>::impl : private boost::noncopyable
+    template <typename Traits>
+    class application<Traits>::impl : private boost::noncopyable
     {
     public:
         // types
 
-        //! The string type.
-        using string_type = String;
+        using traits_type = typename application::traits_type;
 
-        //! The position type.
-        using position_type = Position;
+        using position_type = typename application::position_type;
 
-        //! The dimension type.
-        using dimension_type = Dimension;
+        using dimension_type = typename application::dimension_type;
 
-        //! The configuration traits type.
-        using config_traits_type = ConfigTraits;
+        using config_traits_type = typename application::config_traits_type;
 
-        //! The settings type.
-        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
+        using settings_type = typename application::settings_type;
 
 
         // constructors and destructor
@@ -222,6 +88,118 @@ namespace bobura
 
     private:
         // types
+
+        using size_type = typename traits_type::size_type;
+        
+        using difference_type = typename traits_type::difference_type;
+
+        using string_type = typename traits_type::string_type;
+
+        using operating_distance_type = typename traits_type::operating_distance_type;
+
+        using speed_type = typename traits_type::speed_type;
+
+        using font_type = typename traits_type::font_type;
+
+        using model_type =
+            timetable_model<
+                size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
+            >;
+
+        using view_traits_type = typename traits_type::view_traits_type;
+
+        using view_type = diagram_view<view_traits_type>;
+
+        using main_window_traits_type = typename traits_type::main_window_traits_type;
+
+        using command_set_traits_type = typename traits_type::command_set_traits_type;
+
+        using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
+
+        using model_message_type_list_type =
+            message::timetable_model::type_list<model_type, view_type, main_window_type>;
+
+        using abstract_window_type = typename traits_type::abstract_window_type;
+
+        using message_catalog_type = typename traits_type::message_catalog_type;
+
+        using diagram_view_message_type_list_type =
+            message::diagram_view::type_list<
+                size_type,
+                difference_type,
+                string_type,
+                position_type,
+                dimension_type,
+                operating_distance_type,
+                speed_type,
+                font_type,
+                abstract_window_type,
+                typename traits_type::side_bar_type,
+                typename traits_type::map_box_type,
+                config_traits_type,
+                message_catalog_type
+            >;
+
+        using load_save_traits_type = typename traits_type::load_save_traits_type;
+
+        using confirm_file_save_type = load_save::confirm_file_save<load_save_traits_type>;
+
+        using new_file_type = load_save::new_file<load_save_traits_type>;
+
+        using load_from_file_type = load_save::load_from_file<load_save_traits_type>;
+
+        using save_to_file_type = load_save::save_to_file<load_save_traits_type>;
+
+        using command_traits_type = typename command_set_traits_type::command_traits_type;
+
+        using command_set_type = command::set<command_set_traits_type>;
+
+        using main_window_menu_builder_type =
+            main_window_menu_builder<
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                speed_type,
+                typename traits_type::scale_type,
+                font_type,
+                typename traits_type::menu_bar_type,
+                message_catalog_type,
+                command_set_traits_type,
+                main_window_traits_type
+            >;
+
+        using picture_box_type = typename traits_type::picture_box_type;
+
+        using mouse_capture_type = typename traits_type::mouse_capture_type;
+
+        using diagram_picture_box_message_type_list =
+            message::diagram_picture_box::type_list<
+                picture_box_type, abstract_window_type, mouse_capture_type, view_traits_type
+            >;
+
+        using main_window_message_type_list_type =
+            message::main_window::type_list<
+                typename traits_type::popup_menu_type,
+                command_set_type,
+                typename command_set_type::command_type,
+                model_type,
+                view_type,
+                abstract_window_type,
+                diagram_picture_box<
+                    picture_box_type, abstract_window_type, mouse_capture_type, diagram_picture_box_message_type_list
+                >,
+                typename main_window_type::property_bar_type,
+                confirm_file_save_type
+            >;
+
+        using message_loop_type = typename traits_type::message_loop_type;
+
+        using gui_fixture_type = typename traits_type::gui_fixture_type;
+
+        using mouse_button_type = typename mouse_capture_type::mouse_button_type;
+
+        using timer_type = typename traits_type::timer_type;
 
         class command_set_holder_type : private boost::noncopyable
         {
@@ -422,30 +400,25 @@ namespace bobura
     };
 
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    application<String, Position, Dimension, ConfigTraits>::application(settings_type& settings)
+    template <typename Traits>
+    application<Traits>::application(settings_type& settings)
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(settings))
     {}
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    application<String, Position, Dimension, ConfigTraits>::~application()
+    template <typename Traits>
+    application<Traits>::~application()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    int application<String, Position, Dimension, ConfigTraits>::run()
+    template <typename Traits>
+    int application<Traits>::run()
     {
         return m_p_impl->run();
     }
 
 
-    template class application<
-        boost::mpl::at<common_type_list, type::string>::type,
-        boost::mpl::at<ui_type_list, type::ui::position>::type,
-        boost::mpl::at<ui_type_list, type::ui::dimension>::type,
-        boost::mpl::at<traits_type_list, type::traits::config>::type
-    >;
+    template class application<boost::mpl::at<traits_type_list, type::traits::application>::type>;
 
 
 }

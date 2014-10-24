@@ -45,7 +45,8 @@ namespace
 
     using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
 
-    using application_type = bobura::application<string_type, position_type, dimension_type, config_traits_type>;
+    using application_type =
+        bobura::application<boost::mpl::at<bobura::traits_type_list, bobura::type::traits::application>::type>;
 
 
     // functions
