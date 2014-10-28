@@ -77,6 +77,7 @@ namespace test_bobura { namespace model
         struct abstract_window; //!< The abstract window type.
         struct window;         //!< The window type.
         struct font;           //!< The font type.
+        struct color;          //!< The color type.
     }}
 
 #if !defined(DOCUMENTATION)
@@ -124,6 +125,7 @@ namespace test_bobura { namespace model
         using window_type =
             tetengo2::gui::widget::window<widget_traits_type, widget_details_traits_type, menu_details_type>;
         using font_type = tetengo2::gui::drawing::font<string_type, size_type, drawing_details_type>;
+        using color_type = tetengo2::gui::drawing::color;
     }}
 #endif
 
@@ -132,8 +134,9 @@ namespace test_bobura { namespace model
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::abstract_window, detail::ui::abstract_window_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::window, detail::ui::window_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::font, detail::ui::font_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::color, detail::ui::color_type>,
         tetengo2::meta::assoc_list_end
-        >>>;
+        >>>>;
 
 
 }}

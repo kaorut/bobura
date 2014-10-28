@@ -77,7 +77,8 @@ namespace
 
     using font_color_type = font_color_set_type::font_color_type;
 
-    using color_type = font_color_type::color_type;
+    using color_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::color>::type;
+
 
 
 }
