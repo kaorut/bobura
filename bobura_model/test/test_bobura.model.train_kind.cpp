@@ -12,6 +12,8 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/model/train_kind.h>
+
 #include "test_bobura.model.type_list.h"
 
 
@@ -23,8 +25,7 @@ namespace
 
     using color_type = tetengo2::gui::drawing::color;
 
-    using train_kind_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train_kind>::type;
+    using train_kind_type = bobura::model::train_kind<string_type>;
 
 
 }

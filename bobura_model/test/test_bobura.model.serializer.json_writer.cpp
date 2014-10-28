@@ -24,6 +24,7 @@
 #include <bobura/model/train.h>
 #include <bobura/model/train_info/stop.h>
 #include <bobura/model/train_info/time.h>
+#include <bobura/model/train_kind.h>
 
 #include "test_bobura.model.type_list.h"
 
@@ -63,8 +64,7 @@ namespace
 
     using stop_type = bobura::model::train_info::stop<size_type, difference_type, string_type>;
 
-    using train_kind_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train_kind>::type;
+    using train_kind_type = bobura::model::train_kind<string_type>;
 
     using train_type = bobura::model::train<size_type, difference_type, string_type>;
 
