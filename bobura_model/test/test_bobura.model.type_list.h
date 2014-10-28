@@ -19,8 +19,6 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/model/timetable_info/font_color_set.h>
-
 #include "test_bobura.model.detail_type_list.h"
 
 
@@ -116,13 +114,11 @@ namespace test_bobura { namespace model
     namespace detail { namespace model
     {
         using size_type = boost::mpl::at<type_list, type::size>::type;
-        using difference_type = boost::mpl::at<type_list, type::difference>::type;
         using string_type = boost::mpl::at<type_list, type::string>::type;
         using font_type =
             tetengo2::gui::drawing::font<
                 string_type, size_type, boost::mpl::at<detail_type_list, type::detail::drawing>::type
             >;
-        using font_color_set_type = bobura::model::timetable_info::font_color_set<font_type>;
         using operating_distance_type = size_type;
         using speed_type = size_type;
     }}
@@ -131,12 +127,11 @@ namespace test_bobura { namespace model
     //! The model type list.
     using model_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::font, detail::model::font_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::model::font_color_set, detail::model::font_color_set_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::model::operating_distance, detail::model::operating_distance_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::speed, detail::model::speed_type>,
         tetengo2::meta::assoc_list_end
-        >>>>;
+        >>>;
 
 
 }}
