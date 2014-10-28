@@ -17,6 +17,7 @@
 
 #include <bobura/model/serializer/json_reader.h>
 #include <bobura/model/timetable.h>
+#include <bobura/model/train_info/time.h>
 
 #include "test_bobura.model.type_list.h"
 
@@ -39,7 +40,7 @@ namespace
 
     using font_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type;
 
-    using time_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::time>::type;
+    using time_type = bobura::model::train_info::time<size_type, difference_type>;
 
     using timetable_type =
         bobura::model::timetable<
