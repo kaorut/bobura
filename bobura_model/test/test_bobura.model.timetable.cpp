@@ -18,6 +18,7 @@
 #include <tetengo2.h>
 
 #include <bobura/model/timetable.h>
+#include <bobura/model/train.h>
 
 #include "test_bobura.model.type_list.h"
 
@@ -58,8 +59,7 @@ namespace
     using train_kind_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train_kind>::type;
 
-    using train_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train>::type;
+    using train_type = bobura::model::train<size_type, difference_type, string_type>;
 
     using timetable_type =
         bobura::model::timetable<
