@@ -21,6 +21,7 @@
 
 #include <bobura/model/serializer/json_writer.h>
 #include <bobura/model/station.h>
+#include <bobura/model/station_info/grade.h>
 #include <bobura/model/timetable.h>
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
@@ -51,8 +52,7 @@ namespace
 
     using station_type = bobura::model::station<string_type>;
 
-    using grade_type_set_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::grade_type_set>::type;
+    using grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
 
     using local_type = grade_type_set_type::local_type;
 
