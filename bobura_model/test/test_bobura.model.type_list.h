@@ -20,7 +20,6 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/model/station_info/grade.h>
-#include <bobura/model/station.h>
 #include <bobura/model/timetable_info/font_color_set.h>
 
 #include "test_bobura.model.detail_type_list.h"
@@ -111,7 +110,6 @@ namespace test_bobura { namespace model
         struct font_color;     //!< The font and color type.
         struct font_color_set; //!< The font and color set type.
         struct grade_type_set; //!< The station grade type set type.
-        struct station;        //!< The station type.
         struct operating_distance; //!< The operating distance type.
         struct speed;          //!< The speed type.
     }}
@@ -139,12 +137,10 @@ namespace test_bobura { namespace model
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::font_color_set, detail::model::font_color_set_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::grade_type_set, detail::model::grade_type_set_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::model::station, bobura::model::station<detail::model::string_type>>,
-        tetengo2::meta::assoc_list<
             boost::mpl::pair<type::model::operating_distance, detail::model::operating_distance_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::speed, detail::model::speed_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>;
+        >>>>>;
 
 
 }}

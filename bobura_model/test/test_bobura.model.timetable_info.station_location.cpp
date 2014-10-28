@@ -10,6 +10,7 @@
 #include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
+#include <bobura/model/station.h>
 #include <bobura/model/timetable_info/station_location.h>
 
 #include "test_bobura.model.type_list.h"
@@ -24,8 +25,7 @@ namespace
     using operating_distance_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance>::type;
 
-    using station_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type;
+    using station_type = bobura::model::station<string_type>;
 
     using grade_type_set_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::grade_type_set>::type;

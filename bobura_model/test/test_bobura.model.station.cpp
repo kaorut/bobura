@@ -12,12 +12,16 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/station.h>
+
 #include "test_bobura.model.type_list.h"
 
 
 namespace
 {
     // types
+
+    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
     using grade_type_set_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::grade_type_set>::type;
@@ -30,10 +34,7 @@ namespace
 
     using principal_terminal_type = grade_type_set_type::principal_terminal_type;
 
-    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
-
-    using station_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type;
+    using station_type = bobura::model::station<string_type>;
 
 
 }
