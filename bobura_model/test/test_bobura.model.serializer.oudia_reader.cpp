@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <algorithm>
 #include <iterator>
 #include <memory>
 #include <sstream>
@@ -28,6 +29,8 @@
 namespace
 {
     // types
+
+    using size_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
 
     using string_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
@@ -55,7 +58,7 @@ namespace
 
     struct select_diagram_type
     {
-        using size_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
+        using size_type = size_type_;
 
         using string_type = string_type_;
 
@@ -96,7 +99,7 @@ namespace
 
     using reader_type =
         bobura::model::serializer::oudia_reader<
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
+            size_type_,
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
             string_type_,
             input_stream_iterator_type,

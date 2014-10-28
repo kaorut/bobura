@@ -9,15 +9,12 @@
 #if !defined(TESTBOBURA_MODEL_TYPELIST_H)
 #define TESTBOBURA_MODEL_TYPELIST_H
 
-#include <algorithm>
 #include <cstddef>
-#include <iterator>
 #include <string>
 #include <utility>
 
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/pair.hpp>
-#include <boost/spirit/include/support_multi_pass.hpp>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
