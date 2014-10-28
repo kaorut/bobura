@@ -77,11 +77,7 @@ namespace
         using encoder_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type;
 
         using abstract_window_type =
-            tetengo2::gui::widget::abstract_window<
-                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::widget_traits>::type,
-                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::widget_details_traits>::type,
-                boost::mpl::at<test_bobura::model::detail_type_list, test_bobura::model::type::detail::menu>::type
-            >;
+            boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::abstract_window>::type;
 
         using message_catalog_type =
             tetengo2::message::message_catalog<

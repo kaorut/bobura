@@ -16,7 +16,6 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/model/serializer/reader_set.h>
 
@@ -31,17 +30,8 @@ namespace
 
     using string_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
-    using widget_traits_type =
-        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::widget_traits>::type;
-
-    using widget_details_traits_type =
-        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::widget_details_traits>::type;
-
-    using menu_details_type =
-        boost::mpl::at<test_bobura::model::detail_type_list, test_bobura::model::type::detail::menu>::type;
-
     using window_type =
-        tetengo2::gui::widget::window<widget_traits_type, widget_details_traits_type, menu_details_type>;
+        boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::window>::type;
 
     using input_stream_iterator_type =
         boost::spirit::multi_pass<
@@ -68,7 +58,7 @@ namespace
         using encoder_type = encoder_type_;
 
         using abstract_window_type =
-            tetengo2::gui::widget::abstract_window<widget_traits_type, widget_details_traits_type, menu_details_type>;
+            boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::abstract_window>::type;
 
         using message_catalog_type = message_catalog_type_;
 
