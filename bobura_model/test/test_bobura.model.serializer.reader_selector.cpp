@@ -21,6 +21,7 @@
 #include <tetengo2.h>
 
 #include <bobura/model/serializer/reader_selector.h>
+#include <bobura/model/timetable.h>
 
 #include "test_bobura.model.type_list.h"
 
@@ -29,10 +30,24 @@ namespace
 {
     // types
 
+    using size_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
+
+    using difference_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type;
+
     using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
+    using operating_distance_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance>::type;
+
+    using speed_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type;
+
+    using font_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type;
+
     using timetable_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type;
+        bobura::model::timetable<
+            size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
+        >;
 
     using input_stream_iterator_type =
         boost::spirit::multi_pass<
@@ -43,15 +58,14 @@ namespace
 
     using reader_selector_type =
         bobura::model::serializer::reader_selector<
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
+            size_type,
+            difference_type,
             string_type,
             input_stream_iterator_type,
-            boost::mpl::at<
-                test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
-            >::type,
-            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type,
-            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type
+            operating_distance_type,
+            speed_type,
+            font_type
+
         >;
 
     using reader_type = reader_selector_type::base_type;

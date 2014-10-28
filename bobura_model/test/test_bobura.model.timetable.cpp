@@ -17,12 +17,28 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/timetable.h>
+
 #include "test_bobura.model.type_list.h"
 
 
 namespace
 {
     // types
+
+    using size_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
+
+    using difference_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type;
+
+    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+
+    using operating_distance_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance>::type;
+
+    using speed_type =
+        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type;
+
+    using font_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type;
 
     using station_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type;
@@ -45,10 +61,10 @@ namespace
     using train_type =
         boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train>::type;
 
-    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
-
     using timetable_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type;
+        bobura::model::timetable<
+            size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
+        >;
 
     using train_kinds_type = timetable_type::train_kinds_type;
 
@@ -57,8 +73,6 @@ namespace
     using font_color_set_type = timetable_type::font_color_set_type;
 
     using font_color_type = font_color_set_type::font_color_type;
-
-    using font_type = font_color_type::font_type;
 
     using color_type = font_color_type::color_type;
 

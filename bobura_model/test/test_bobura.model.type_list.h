@@ -21,7 +21,7 @@
 
 #include <bobura/model/station_info/grade.h>
 #include <bobura/model/station.h>
-#include <bobura/model/timetable.h>
+#include <bobura/model/timetable_info/font_color_set.h>
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
 #include <bobura/model/train_info/stop.h>
@@ -127,7 +127,6 @@ namespace test_bobura { namespace model
         struct station_interval_calculator; //!< The station interval calculator type.
         struct operating_distance; //!< The operating distance type.
         struct speed;          //!< The speed type.
-        struct timetable;      //!< The timetable type.
     }}
 
 #if !defined(DOCUMENTATION)
@@ -171,20 +170,8 @@ namespace test_bobura { namespace model
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::model::operating_distance, detail::model::operating_distance_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::speed, detail::model::speed_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::model::timetable,
-                bobura::model::timetable<
-                    detail::model::size_type,
-                    detail::model::difference_type,
-                    detail::model::string_type,
-                    detail::model::operating_distance_type,
-                    detail::model::speed_type,
-                    detail::model::font_type
-                >
-            >,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>>;
+        >>>>>>>>>>>>;
 
 
 }}
