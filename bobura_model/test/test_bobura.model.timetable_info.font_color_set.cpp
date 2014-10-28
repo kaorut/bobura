@@ -22,7 +22,7 @@ namespace
 {
     // types
 
-    using font_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type;
+    using font_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::font>::type;
 
     using font_color_set_type = bobura::model::timetable_info::font_color_set<font_type>;
 

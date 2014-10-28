@@ -39,7 +39,7 @@ namespace
 
     using speed_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::speed>::type;
 
-    using font_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type;
+    using font_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::font>::type;
 
     using timetable_type =
         bobura::model::timetable<
@@ -62,7 +62,6 @@ namespace
             operating_distance_type,
             speed_type,
             font_type
-
         >;
 
     using error_type = reader_type::error_type;

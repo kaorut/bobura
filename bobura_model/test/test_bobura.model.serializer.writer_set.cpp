@@ -33,7 +33,7 @@ namespace
             output_stream_type,
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::operating_distance>::type,
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::speed>::type,
-            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type,
+            boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::font>::type,
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type
         >;
 

@@ -105,15 +105,15 @@ namespace test_bobura { namespace model
         >>>>>>>>>>;
 
 
-    /**** Model *************************************************************/
+    /**** UI ****************************************************************/
 
-    namespace type { namespace model
+    namespace type { namespace ui
     {
         struct font;           //!< The font type.
     }}
 
 #if !defined(DOCUMENTATION)
-    namespace detail { namespace model
+    namespace detail { namespace ui
     {
         using size_type = boost::mpl::at<type_list, type::size>::type;
         using string_type = boost::mpl::at<type_list, type::string>::type;
@@ -124,9 +124,9 @@ namespace test_bobura { namespace model
     }}
 #endif
 
-    //! The model type list.
-    using model_type_list =
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::model::font, detail::model::font_type>,
+    //! The UI type list.
+    using ui_type_list =
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::font, detail::ui::font_type>,
         tetengo2::meta::assoc_list_end
         >;
 

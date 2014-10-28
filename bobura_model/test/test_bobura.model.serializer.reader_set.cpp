@@ -102,7 +102,7 @@ namespace
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::operating_distance>::type,
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::speed>::type,
             select_oudia_diagram_type,
-            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type,
+            boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::font>::type,
             io_encoder_type,
             io_encoder_type
         >;
