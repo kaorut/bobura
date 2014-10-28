@@ -23,7 +23,6 @@
 #include <bobura/model/station.h>
 #include <bobura/model/timetable_info/font_color_set.h>
 #include <bobura/model/timetable_info/station_location.h>
-#include <bobura/model/train_info/stop.h>
 #include <bobura/model/train_info/time.h>
 #include <bobura/model/train_info/time_span.h>
 #include <bobura/model/train_kind.h>
@@ -121,7 +120,6 @@ namespace test_bobura { namespace model
         struct train_kind;     //!< The train kind type.
         struct time_span;      //!< The time span type.
         struct time;           //!< The time type.
-        struct stop;           //!< The stop type.
         struct station_interval_calculator; //!< The station interval calculator type.
         struct operating_distance; //!< The operating distance type.
         struct speed;          //!< The speed type.
@@ -145,7 +143,6 @@ namespace test_bobura { namespace model
         using train_kind_type = bobura::model::train_kind<string_type>;
         using time_span_type = bobura::model::train_info::time_span<difference_type>;
         using time_type = bobura::model::train_info::time<size_type, difference_type>;
-        using stop_type = bobura::model::train_info::stop<size_type, difference_type, string_type>;
         using speed_type = size_type;
     }}
 #endif
@@ -162,12 +159,11 @@ namespace test_bobura { namespace model
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::train_kind, detail::model::train_kind_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::time_span, detail::model::time_span_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::time, detail::model::time_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::model::stop, detail::model::stop_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::model::operating_distance, detail::model::operating_distance_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::speed, detail::model::speed_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>;
+        >>>>>>>>>>;
 
 
 }}
