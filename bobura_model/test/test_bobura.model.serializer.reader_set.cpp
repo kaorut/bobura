@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <algorithm>
 #include <iterator>
 #include <utility>
 
@@ -15,7 +16,6 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/model/serializer/reader_set.h>
 
@@ -26,16 +26,12 @@ namespace
 {
     // types
 
-    using size_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
+    using size_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
 
-    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+    using string_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
     using window_type =
-        tetengo2::gui::widget::window<
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::widget_traits>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::widget_details_traits>::type,
-            boost::mpl::at<test_bobura::model::detail_type_list, test_bobura::model::type::detail::menu>::type
-        >;
+        boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::window>::type;
 
     using input_stream_iterator_type =
         boost::spirit::multi_pass<
@@ -44,30 +40,59 @@ namespace
             >
         >;
 
-    using encoder_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type;
+    using encoder_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type;
 
-    using message_catalog_type =
+    using message_catalog_type_ =
         tetengo2::message::message_catalog<
-            input_stream_iterator_type, string_type, size_type, encoder_type, encoder_type
+            input_stream_iterator_type, string_type_, size_type_, encoder_type_, encoder_type_
         >;
 
     using io_encoder_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type;
 
+    struct select_oudia_diagram_type
+    {
+        using size_type = size_type_;
+
+        using string_type = string_type_;
+
+        using encoder_type = encoder_type_;
+
+        using abstract_window_type =
+            boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::abstract_window>::type;
+
+        using message_catalog_type = message_catalog_type_;
+
+        string_type m_wanted;
+
+        select_oudia_diagram_type(abstract_window_type&, string_type, const message_catalog_type&)
+        :
+        m_wanted()
+        {}
+
+        explicit select_oudia_diagram_type(string_type wanted)
+        :
+        m_wanted(std::move(wanted))
+        {}
+
+        template <typename Iterator>
+        Iterator operator()(const Iterator first, const Iterator last)
+        const
+        {
+            return std::find(first, last, m_wanted);
+        }
+
+    };
+
     using reader_set_type =
         bobura::model::serializer::reader_set<
-            size_type,
+            size_type_,
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
-            string_type,
+            string_type_,
             input_stream_iterator_type,
-            boost::mpl::at<
-                test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
-            >::type,
-            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type,
-            boost::mpl::at<
-                test_bobura::model::serialization_type_list,
-                test_bobura::model::type::serialization::select_oudia_diagram
-            >::type,
-            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::operating_distance>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::speed>::type,
+            select_oudia_diagram_type,
+            boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::font>::type,
             io_encoder_type,
             io_encoder_type
         >;
@@ -91,8 +116,8 @@ BOOST_AUTO_TEST_SUITE(reader_set)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        string_type file_name{ TETENGO2_TEXT("hoge") };
-        const message_catalog_type message_catalog{};
+        string_type_ file_name{ TETENGO2_TEXT("hoge") };
+        const message_catalog_type_ message_catalog{};
         const auto p_readers = reader_set_type::create_readers(parent, std::move(file_name), message_catalog);
 
         BOOST_REQUIRE(!p_readers.empty());

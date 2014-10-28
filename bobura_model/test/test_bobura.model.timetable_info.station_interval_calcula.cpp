@@ -15,7 +15,11 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/station.h>
+#include <bobura/model/station_info/grade.h>
 #include <bobura/model/timetable_info/station_interval_calculator.h>
+#include <bobura/model/timetable_info/station_location.h>
+#include <bobura/model/train.h>
 
 #include "test_bobura.model.type_list.h"
 
@@ -24,40 +28,36 @@ namespace
 {
     // types
 
+    using size_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
+
+    using difference_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type;
+
     using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
     using operating_distance_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance>::type;
+        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::operating_distance>::type;
 
     using station_interval_calculator_type =
         bobura::model::timetable_info::station_interval_calculator<
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
-            string_type,
-            operating_distance_type
+            size_type, difference_type, string_type, operating_distance_type
         >;
 
     using station_location_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station_location>::type;
+        bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
 
-    using train_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train>::type;
+    using train_type = bobura::model::train<size_type, difference_type, string_type>;
 
     using stop_type = train_type::stop_type;
 
     using time_type = stop_type::time_type;
 
-    using size_type = time_type::size_type;
-
     using station_intervals_type = station_interval_calculator_type::station_intervals_type;
 
     using station_interval_type = station_intervals_type::value_type;
 
-    using station_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type;
+    using station_type = bobura::model::station<string_type>;
 
-    using grade_type_set_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::grade_type_set>::type;
+    using grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
 
 
     // functions

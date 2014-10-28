@@ -14,6 +14,10 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/train.h>
+#include <bobura/model/train_info/stop.h>
+#include <bobura/model/train_info/time.h>
+
 #include "test_bobura.model.type_list.h"
 
 
@@ -21,14 +25,17 @@ namespace
 {
     // types
 
-    using time_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::time>::type;
+    using size_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
 
-    using stop_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::stop>::type;
+    using difference_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type;
 
     using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
-    using train_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train>::type;
+    using time_type = bobura::model::train_info::time<size_type, difference_type>;
+
+    using stop_type = bobura::model::train_info::stop<size_type, difference_type, string_type>;
+
+    using train_type = bobura::model::train<size_type, difference_type, string_type>;
 
 
 }

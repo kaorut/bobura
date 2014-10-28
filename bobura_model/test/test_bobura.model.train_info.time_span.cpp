@@ -11,6 +11,8 @@
 #include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <bobura/model/train_info/time_span.h>
+
 #include "test_bobura.model.type_list.h"
 
 
@@ -18,8 +20,9 @@ namespace
 {
     // types
 
-    using time_span_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::time_span>::type;
+    using difference_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type;
+
+    using time_span_type = bobura::model::train_info::time_span<difference_type>;
 
     using hours_minutes_seconds_type_ = time_span_type::hours_minutes_seconds_type;
 

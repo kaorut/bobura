@@ -20,6 +20,14 @@
 #include <tetengo2.h>
 
 #include <bobura/model/serializer/json_writer.h>
+#include <bobura/model/station.h>
+#include <bobura/model/station_info/grade.h>
+#include <bobura/model/timetable.h>
+#include <bobura/model/timetable_info/station_location.h>
+#include <bobura/model/train.h>
+#include <bobura/model/train_info/stop.h>
+#include <bobura/model/train_info/time.h>
+#include <bobura/model/train_kind.h>
 
 #include "test_bobura.model.type_list.h"
 
@@ -28,41 +36,48 @@ namespace
 {
     // types
 
-    using station_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station>::type;
+    using size_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
 
-    using grade_type_set_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::grade_type_set>::type;
+    using difference_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type;
+
+    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+
+    using operating_distance_type =
+        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::operating_distance>::type;
+
+    using speed_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::speed>::type;
+
+    using font_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::font>::type;
+
+    using station_type = bobura::model::station<string_type>;
+
+    using grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
 
     using local_type = grade_type_set_type::local_type;
 
     using principal_type = grade_type_set_type::principal_type;
 
     using station_location_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station_location>::type;
+        bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
 
-    using time_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::time>::type;
+    using time_type = bobura::model::train_info::time<size_type, difference_type>;
 
-    using stop_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::stop>::type;
+    using stop_type = bobura::model::train_info::stop<size_type, difference_type, string_type>;
 
-    using train_kind_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train_kind>::type;
+    using train_kind_type = bobura::model::train_kind<string_type>;
 
-    using train_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::train>::type;
+    using train_type = bobura::model::train<size_type, difference_type, string_type>;
 
     using timetable_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::timetable>::type;
+        bobura::model::timetable<
+            size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
+        >;
 
     using font_color_set_type = timetable_type::font_color_set_type;
 
     using font_color_type = font_color_set_type::font_color_type;
 
-    using font_type = font_color_type::font_type;
-
-    using color_type = font_color_type::color_type;
-
-    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+    using color_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::color>::type;
 
     using output_stream_type =
         std::basic_ostream<
@@ -71,15 +86,13 @@ namespace
 
     using writer_type =
         bobura::model::serializer::json_writer<
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
+            size_type,
+            difference_type,
             string_type,
             output_stream_type,
-            boost::mpl::at<
-                test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
-            >::type,
-            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type,
-            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type,
+            operating_distance_type,
+            speed_type,
+            font_type,
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type
         >;
 
