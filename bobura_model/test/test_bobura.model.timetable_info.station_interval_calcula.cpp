@@ -16,6 +16,7 @@
 #include <tetengo2.h>
 
 #include <bobura/model/timetable_info/station_interval_calculator.h>
+#include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
 
 #include "test_bobura.model.type_list.h"
@@ -40,7 +41,7 @@ namespace
         >;
 
     using station_location_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station_location>::type;
+        bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
 
     using train_type = bobura::model::train<size_type, difference_type, string_type>;
 

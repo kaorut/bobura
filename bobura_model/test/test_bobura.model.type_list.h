@@ -22,7 +22,6 @@
 #include <bobura/model/station_info/grade.h>
 #include <bobura/model/station.h>
 #include <bobura/model/timetable_info/font_color_set.h>
-#include <bobura/model/timetable_info/station_location.h>
 
 #include "test_bobura.model.detail_type_list.h"
 
@@ -113,8 +112,6 @@ namespace test_bobura { namespace model
         struct font_color_set; //!< The font and color set type.
         struct grade_type_set; //!< The station grade type set type.
         struct station;        //!< The station type.
-        struct station_location; //!< The station location type.
-        struct station_interval_calculator; //!< The station interval calculator type.
         struct operating_distance; //!< The operating distance type.
         struct speed;          //!< The speed type.
     }}
@@ -132,8 +129,6 @@ namespace test_bobura { namespace model
         using font_color_set_type = bobura::model::timetable_info::font_color_set<font_type>;
         using grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
         using operating_distance_type = size_type;
-        using station_location_type =
-            bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
         using speed_type = size_type;
     }}
 #endif
@@ -146,12 +141,10 @@ namespace test_bobura { namespace model
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::model::station, bobura::model::station<detail::model::string_type>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::model::station_location, detail::model::station_location_type>,
-        tetengo2::meta::assoc_list<
             boost::mpl::pair<type::model::operating_distance, detail::model::operating_distance_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::speed, detail::model::speed_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>;
+        >>>>>>;
 
 
 }}

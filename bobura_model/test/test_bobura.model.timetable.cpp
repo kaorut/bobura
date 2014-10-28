@@ -18,6 +18,7 @@
 #include <tetengo2.h>
 
 #include <bobura/model/timetable.h>
+#include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
 #include <bobura/model/train_info/stop.h>
 #include <bobura/model/train_info/time.h>
@@ -53,7 +54,7 @@ namespace
     using local_type = grade_type_set_type::local_type;
 
     using station_location_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::station_location>::type;
+        bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
 
     using time_type = bobura::model::train_info::time<size_type, difference_type>;
 
