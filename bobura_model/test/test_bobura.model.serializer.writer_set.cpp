@@ -31,10 +31,8 @@ namespace
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
             output_stream_type,
-            boost::mpl::at<
-                test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance
-            >::type,
-            boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::operating_distance>::type,
+            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::speed>::type,
             boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type,
             boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type
         >;

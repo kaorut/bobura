@@ -34,6 +34,8 @@ namespace test_bobura { namespace model
         struct io_string;      //!< The I/O string type.
         struct encoder;        //!< The encoder type.
         struct io_encoder;     //!< The I/O encoder type.
+        struct operating_distance; //!< The operating distance type.
+        struct speed;          //!< The speed type.
         struct widget_traits;  //!< The widget traits type.
         struct widget_details_traits; //!< The widget details traits type.
     }
@@ -60,6 +62,8 @@ namespace test_bobura { namespace model
         using ui_encoder_type  = tetengo2::text::encoder<internal_encoding_type, ui_encoding_type>;
         using exception_encoding_type = tetengo2::text::encoding::locale<exception_string_type, encoding_details_type>;
         using exception_encoder_type = tetengo2::text::encoder<internal_encoding_type, exception_encoding_type>;
+        using operating_distance_type = size_type;
+        using speed_type = size_type;
         using widget_traits_type =
             tetengo2::gui::widget::widget_traits<
                 size_type,
@@ -93,10 +97,12 @@ namespace test_bobura { namespace model
         tetengo2::meta::assoc_list<boost::mpl::pair<type::io_string, detail::io_string_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::encoder, detail::encoder_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::io_encoder, detail::io_encoder_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::operating_distance, detail::operating_distance_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::speed, detail::speed_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::widget_traits, detail::widget_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::widget_details_traits, detail::widget_details_traits_type>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>;
+        >>>>>>>>>>;
 
 
     /**** Model *************************************************************/
@@ -104,10 +110,6 @@ namespace test_bobura { namespace model
     namespace type { namespace model
     {
         struct font;           //!< The font type.
-        struct font_color;     //!< The font and color type.
-        struct font_color_set; //!< The font and color set type.
-        struct operating_distance; //!< The operating distance type.
-        struct speed;          //!< The speed type.
     }}
 
 #if !defined(DOCUMENTATION)
@@ -119,19 +121,14 @@ namespace test_bobura { namespace model
             tetengo2::gui::drawing::font<
                 string_type, size_type, boost::mpl::at<detail_type_list, type::detail::drawing>::type
             >;
-        using operating_distance_type = size_type;
-        using speed_type = size_type;
     }}
 #endif
 
     //! The model type list.
     using model_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::model::font, detail::model::font_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::model::operating_distance, detail::model::operating_distance_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::model::speed, detail::model::speed_type>,
         tetengo2::meta::assoc_list_end
-        >>>;
+        >;
 
 
 }}

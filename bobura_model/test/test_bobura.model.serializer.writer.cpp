@@ -33,10 +33,9 @@ namespace
     using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
 
     using operating_distance_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::operating_distance>::type;
+        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::operating_distance>::type;
 
-    using speed_type =
-        boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::speed>::type;
+    using speed_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::speed>::type;
 
     using font_type = boost::mpl::at<test_bobura::model::model_type_list, test_bobura::model::type::model::font>::type;
 
