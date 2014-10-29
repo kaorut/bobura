@@ -98,62 +98,101 @@ namespace bobura
     {
 #if defined(USE_TETENGO2_DETAIL_TYPES_FOR_APPLICATION)
         using alert_type = tetengo2::detail::windows::alert;
+
         using common_dialog_type = tetengo2::detail::windows::common_dialog;
+
         using config_type = tetengo2::detail::windows::config;
+
         using cursor_type = tetengo2::detail::windows::cursor;
+
         using drawing_type = tetengo2::detail::windows::gdiplus::drawing;
+
         using fast_drawing_type = tetengo2::detail::windows::direct2d::drawing;
+
         using encoding_type = tetengo2::detail::windows::encoding;
+
         struct gui_fixture_type
         {
             tetengo2::detail::windows::gui_fixture m_windows_gui_fixture;
             tetengo2::detail::windows::gdiplus::gui_fixture m_gdiplus_gui_fixutre;
         };
+
         using icon_type = tetengo2::detail::windows::icon;
+
         using menu_type = tetengo2::detail::windows::menu;
+
         using message_handler_type = tetengo2::detail::windows::message_handler;
+
         using message_loop_type = tetengo2::detail::windows::message_loop;
+
         using mouse_capture_type = tetengo2::detail::windows::mouse_capture;
+
         using scroll_type = tetengo2::detail::windows::scroll;
+
         using shell_type = tetengo2::detail::windows::shell;
+
         using system_color_type = tetengo2::detail::windows::system_color;
+
         using timer_type = tetengo2::detail::windows::timer;
+
         using unit_type = tetengo2::detail::windows::unit;
+
         using virtual_key_type = tetengo2::detail::windows::virtual_key;
+
         using widget_type = tetengo2::detail::windows::widget;
 #else
         using alert_type = tetengo2::detail::stub::alert;
+
         using common_dialog_type = tetengo2::detail::stub::common_dialog;
+
 #   if BOOST_COMP_MSVC
         using config_type = tetengo2::detail::windows::config;
 #   else
         using config_type = tetengo2::detail::unixos::config;
 #   endif
+
         using cursor_type = tetengo2::detail::stub::cursor;
+
         using drawing_type = tetengo2::detail::stub::drawing;
+
         using fast_drawing_type = tetengo2::detail::stub::drawing;
+
 #   if BOOST_COMP_MSVC
         using encoding_type = tetengo2::detail::windows::encoding;
 #   else
         using encoding_type = tetengo2::detail::unixos::encoding;
 #   endif
+
         struct gui_fixture_type
         {
             tetengo2::detail::stub::gui_fixture m_stub_gui_fixture;
         };
+
         using icon_type = tetengo2::detail::stub::icon;
+
         using menu_type = tetengo2::detail::stub::menu;
+
         using message_handler_type = tetengo2::detail::stub::message_handler;
+
         using message_loop_type = tetengo2::detail::stub::message_loop;
+
         using mouse_capture_type = tetengo2::detail::stub::mouse_capture;
+
         using scroll_type = tetengo2::detail::stub::scroll;
+
         using shell_type = tetengo2::detail::stub::shell;
+
         using system_color_type = tetengo2::detail::stub::system_color;
+
         using timer_type = tetengo2::detail::stub::timer;
+
         using unit_type = tetengo2::detail::stub::unit;
+
         using virtual_key_type = tetengo2::detail::stub::virtual_key;
+
         using widget_type = tetengo2::detail::stub::widget;
 #endif
+
     }}
 #endif
 

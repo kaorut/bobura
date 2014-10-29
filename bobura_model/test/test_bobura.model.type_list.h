@@ -42,17 +42,29 @@ namespace test_bobura { namespace model
     namespace detail
     {
         using size_type = std::size_t;
+
         using difference_type = std::ptrdiff_t;
+
         using string_type = std::string;
+
         using io_string_type = std::string;
+
         using encoding_details_type = boost::mpl::at<detail_type_list, type::detail::encoding>::type;
+
         using internal_encoding_type = tetengo2::text::encoding::locale<string_type, encoding_details_type>;
+
         using encoding_type = tetengo2::text::encoding::locale<string_type, encoding_details_type>;
+
         using encoder_type  = tetengo2::text::encoder<internal_encoding_type, encoding_type>;
+
         using io_encoding_type = tetengo2::text::encoding::locale<io_string_type, encoding_details_type>;
+
         using io_encoder_type  = tetengo2::text::encoder<internal_encoding_type, io_encoding_type>;
+
         using operating_distance_type = size_type;
+
         using speed_type = size_type;
+
     }
 #endif
 

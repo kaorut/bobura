@@ -54,24 +54,35 @@ namespace test_bobura { namespace model
     namespace detail { namespace detail
     {
         using alert_details_type = tetengo2::detail::stub::alert;
+
 #if BOOST_COMP_MSVC
         using config_details_type = tetengo2::detail::windows::config;
 #else
         using config_details_type = tetengo2::detail::unixos::config;
 #endif
+
         using cursor_details_type = tetengo2::detail::stub::cursor;
+
         using drawing_details_type = tetengo2::detail::stub::drawing;
+
 #if BOOST_COMP_MSVC
         using encoding_details_type = tetengo2::detail::windows::encoding;
 #else
         using encoding_details_type = tetengo2::detail::unixos::encoding;
 #endif
+
         using icon_details_type = tetengo2::detail::stub::icon;
+
         using message_handler_details_type = tetengo2::detail::stub::message_handler;
+
         using menu_details_type = tetengo2::detail::stub::menu;
+
         using scroll_details_type = tetengo2::detail::stub::scroll;
+
         using virtual_key_details_type = tetengo2::detail::stub::virtual_key;
+
         using widget_details_type = tetengo2::detail::stub::widget;
+
     }}
 #endif
 
