@@ -22,7 +22,11 @@ namespace
 {
     // types
 
-    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+    using detail_type_list_type = test_bobura::model::detail_type_list;
+
+    using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
+
+    using string_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type;
 
     using font_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::font>::type;
 

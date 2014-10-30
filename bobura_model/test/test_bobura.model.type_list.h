@@ -49,17 +49,27 @@ namespace test_bobura { namespace model
 
         using io_string_type = std::string;
 
-        using encoding_details_type = boost::mpl::at<detail_type_list, type::detail::encoding>::type;
+        template <typename DetailTypeList>
+        using encoding_details_type = typename boost::mpl::at<DetailTypeList, type::detail::encoding>::type;
 
-        using internal_encoding_type = tetengo2::text::encoding::locale<string_type, encoding_details_type>;
+        template <typename DetailTypeList>
+        using internal_encoding_type =
+            tetengo2::text::encoding::locale<string_type, encoding_details_type<DetailTypeList>>;
 
-        using encoding_type = tetengo2::text::encoding::locale<string_type, encoding_details_type>;
+        template <typename DetailTypeList>
+        using encoding_type = tetengo2::text::encoding::locale<string_type, encoding_details_type<DetailTypeList>>;
 
-        using encoder_type  = tetengo2::text::encoder<internal_encoding_type, encoding_type>;
+        template <typename DetailTypeList>
+        using encoder_type =
+            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, encoding_type<DetailTypeList>>;
 
-        using io_encoding_type = tetengo2::text::encoding::locale<io_string_type, encoding_details_type>;
+        template <typename DetailTypeList>
+        using io_encoding_type =
+            tetengo2::text::encoding::locale<io_string_type, encoding_details_type<DetailTypeList>>;
 
-        using io_encoder_type  = tetengo2::text::encoder<internal_encoding_type, io_encoding_type>;
+        template <typename DetailTypeList>
+        using io_encoder_type =
+            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, io_encoding_type<DetailTypeList>>;
 
         using operating_distance_type = size_type;
 
@@ -68,14 +78,17 @@ namespace test_bobura { namespace model
     }
 #endif
 
-    //! The common type list.
-    using type_list =
+    /*!
+        \brief The common type list.
+    */
+    template <typename DetailTypeList>
+    using common_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::size, detail::size_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::difference, detail::difference_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::string, detail::string_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::io_string, detail::io_string_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::encoder, detail::encoder_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::io_encoder, detail::io_encoder_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::encoder, detail::encoder_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::io_encoder, detail::io_encoder_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::operating_distance, detail::operating_distance_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::speed, detail::speed_type>,
         tetengo2::meta::assoc_list_end
@@ -95,13 +108,14 @@ namespace test_bobura { namespace model
 #if !defined(DOCUMENTATION)
     namespace detail { namespace ui
     {
-        using size_type = boost::mpl::at<type_list, type::size>::type;
-        using difference_type = boost::mpl::at<type_list, type::difference>::type;
-        using string_type = boost::mpl::at<type_list, type::string>::type;
+        using size_type = model::detail::size_type;
+        using difference_type = model::detail::difference_type;
+        using string_type = model::detail::string_type;
         using position_type = std::pair<difference_type, difference_type>;
         using dimension_type = std::pair<size_t, size_t>;
         using widget_details_type = boost::mpl::at<detail_type_list, type::detail::widget>::type;
         using encoding_details_type = boost::mpl::at<detail_type_list, type::detail::encoding>::type;
+        using internal_encoding_type = tetengo2::text::encoding::locale<string_type, encoding_details_type>;
         using ui_encoding_type =
             tetengo2::text::encoding::locale<widget_details_type::string_type, encoding_details_type>;
         using ui_encoder_type  = tetengo2::text::encoder<internal_encoding_type, ui_encoding_type>;

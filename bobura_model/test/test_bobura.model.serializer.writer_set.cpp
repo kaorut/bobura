@@ -20,21 +20,25 @@ namespace
 {
     // types
 
+    using detail_type_list_type = test_bobura::model::detail_type_list;
+
+    using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
+
     using output_stream_type =
         std::basic_ostream<
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type::value_type
+            boost::mpl::at<common_type_list_type, test_bobura::model::type::io_string>::type::value_type
         >;
 
     using writer_set_type =
         bobura::model::serializer::writer_set<
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type,
+            boost::mpl::at<common_type_list_type, test_bobura::model::type::size>::type,
+            boost::mpl::at<common_type_list_type, test_bobura::model::type::difference>::type,
+            boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type,
             output_stream_type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::operating_distance>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::speed>::type,
+            boost::mpl::at<common_type_list_type, test_bobura::model::type::operating_distance>::type,
+            boost::mpl::at<common_type_list_type, test_bobura::model::type::speed>::type,
             boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::font>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type
+            boost::mpl::at<common_type_list_type, test_bobura::model::type::io_encoder>::type
         >;
 
 }

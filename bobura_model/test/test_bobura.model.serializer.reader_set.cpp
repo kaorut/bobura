@@ -26,28 +26,31 @@ namespace
 {
     // types
 
-    using size_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
+    using detail_type_list_type = test_bobura::model::detail_type_list;
 
-    using string_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+    using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
 
-    using window_type =
-        boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::window>::type;
+    using size_type_ = boost::mpl::at<common_type_list_type, test_bobura::model::type::size>::type;
+
+    using string_type_ = boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type;
+
+    using window_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::window>::type;
 
     using input_stream_iterator_type =
         boost::spirit::multi_pass<
             std::istreambuf_iterator<
-                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type::value_type
+                boost::mpl::at<common_type_list_type, test_bobura::model::type::io_string>::type::value_type
             >
         >;
 
-    using encoder_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type;
+    using encoder_type_ = boost::mpl::at<common_type_list_type, test_bobura::model::type::encoder>::type;
 
     using message_catalog_type_ =
         tetengo2::message::message_catalog<
             input_stream_iterator_type, string_type_, size_type_, encoder_type_, encoder_type_
         >;
 
-    using io_encoder_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type;
+    using io_encoder_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::io_encoder>::type;
 
     struct select_oudia_diagram_type
     {
@@ -86,11 +89,11 @@ namespace
     using reader_set_type =
         bobura::model::serializer::reader_set<
             size_type_,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type,
+            boost::mpl::at<common_type_list_type, test_bobura::model::type::difference>::type,
             string_type_,
             input_stream_iterator_type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::operating_distance>::type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::speed>::type,
+            boost::mpl::at<common_type_list_type, test_bobura::model::type::operating_distance>::type,
+            boost::mpl::at<common_type_list_type, test_bobura::model::type::speed>::type,
             select_oudia_diagram_type,
             boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::font>::type,
             io_encoder_type,
