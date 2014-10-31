@@ -29,11 +29,13 @@ namespace
 
     using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
 
+    using ui_type_list_type = test_bobura::model::ui_type_list<detail_type_list_type>;
+
     using size_type_ = boost::mpl::at<common_type_list_type, test_bobura::model::type::size>::type;
 
     using string_type_ = boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type;
 
-    using window_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::window>::type;
+    using window_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::window>::type;
 
     using io_string_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::io_string>::type;
 
@@ -53,7 +55,7 @@ namespace
         using string_type = string_type_;
 
         using abstract_window_type =
-            boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::abstract_window>::type;
+            boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::abstract_window>::type;
 
         using message_catalog_type = message_catalog_type_;
 

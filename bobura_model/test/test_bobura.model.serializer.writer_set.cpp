@@ -24,6 +24,8 @@ namespace
 
     using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
 
+    using ui_type_list_type = test_bobura::model::ui_type_list<detail_type_list_type>;
+
     using output_stream_type =
         std::basic_ostream<
             boost::mpl::at<common_type_list_type, test_bobura::model::type::io_string>::type::value_type
@@ -37,7 +39,7 @@ namespace
             output_stream_type,
             boost::mpl::at<common_type_list_type, test_bobura::model::type::operating_distance>::type,
             boost::mpl::at<common_type_list_type, test_bobura::model::type::speed>::type,
-            boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::font>::type,
+            boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::font>::type,
             boost::mpl::at<common_type_list_type, test_bobura::model::type::io_encoder>::type
         >;
 

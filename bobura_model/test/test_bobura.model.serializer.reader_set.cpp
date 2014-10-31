@@ -30,11 +30,13 @@ namespace
 
     using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
 
+    using ui_type_list_type = test_bobura::model::ui_type_list<detail_type_list_type>;
+
     using size_type_ = boost::mpl::at<common_type_list_type, test_bobura::model::type::size>::type;
 
     using string_type_ = boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type;
 
-    using window_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::window>::type;
+    using window_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::window>::type;
 
     using input_stream_iterator_type =
         boost::spirit::multi_pass<
@@ -61,7 +63,7 @@ namespace
         using encoder_type = encoder_type_;
 
         using abstract_window_type =
-            boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::abstract_window>::type;
+            boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::abstract_window>::type;
 
         using message_catalog_type = message_catalog_type_;
 
@@ -95,7 +97,7 @@ namespace
             boost::mpl::at<common_type_list_type, test_bobura::model::type::operating_distance>::type,
             boost::mpl::at<common_type_list_type, test_bobura::model::type::speed>::type,
             select_oudia_diagram_type,
-            boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::font>::type,
+            boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::font>::type,
             io_encoder_type,
             io_encoder_type
         >;

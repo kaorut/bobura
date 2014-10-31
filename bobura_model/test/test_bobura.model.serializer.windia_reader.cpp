@@ -29,6 +29,8 @@ namespace
 
     using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
 
+    using ui_type_list_type = test_bobura::model::ui_type_list<detail_type_list_type>;
+
     using size_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::size>::type;
 
     using difference_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::difference>::type;
@@ -40,7 +42,7 @@ namespace
 
     using speed_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::speed>::type;
 
-    using font_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::font>::type;
+    using font_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::font>::type;
 
     using timetable_type =
         bobura::model::timetable<
@@ -51,7 +53,7 @@ namespace
 
     using train_kind_type = timetable_type::train_kind_type;
 
-    using color_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::color>::type;
+    using color_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::color>::type;
 
     using train_type = timetable_type::train_type;
 

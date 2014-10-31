@@ -24,9 +24,11 @@ namespace
 
     using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
 
+    using ui_type_list_type = test_bobura::model::ui_type_list<detail_type_list_type>;
+
     using string_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type;
 
-    using color_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::color>::type;
+    using color_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::color>::type;
 
     using train_kind_type = bobura::model::train_kind<string_type>;
 
