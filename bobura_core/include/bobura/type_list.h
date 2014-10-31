@@ -108,58 +108,90 @@ namespace bobura
     {
         using string_type = bobura::detail::string_type;
 
-        using encoding_details_type = boost::mpl::at<detail_type_list, type::detail::encoding>::type;
+        template <typename DetailTypeList>
+        using encoding_details_type = typename boost::mpl::at<DetailTypeList, type::detail::encoding>::type;
 
-        using internal_encoding_type = tetengo2::text::encoding::locale<string_type, encoding_details_type>;
+        template <typename DetailTypeList>
+        using internal_encoding_type =
+            tetengo2::text::encoding::locale<string_type, encoding_details_type<DetailTypeList>>;
 
-        using utf8_encoding_type = tetengo2::text::encoding::utf8<encoding_details_type>;
+        template <typename DetailTypeList>
+        using utf8_encoding_type = tetengo2::text::encoding::utf8<encoding_details_type<DetailTypeList>>;
 
-        using cp932_encoding_type = tetengo2::text::encoding::cp932<encoding_details_type>;
+        template <typename DetailTypeList>
+        using cp932_encoding_type = tetengo2::text::encoding::cp932<encoding_details_type<DetailTypeList>>;
 
-        using exception_encoding_type = utf8_encoding_type;
+        template <typename DetailTypeList>
+        using exception_encoding_type = utf8_encoding_type<DetailTypeList>;
 
-        using exception_encoder_type = tetengo2::text::encoder<internal_encoding_type, exception_encoding_type>;
+        template <typename DetailTypeList>
+        using exception_encoder_type =
+            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, exception_encoding_type<DetailTypeList>>;
 
+        template <typename DetailTypeList>
         using ui_encoding_type =
             tetengo2::text::encoding::locale<
-                boost::mpl::at<detail_type_list, type::detail::widget>::type::string_type, encoding_details_type
+                typename boost::mpl::at<DetailTypeList, type::detail::widget>::type::string_type,
+                encoding_details_type<DetailTypeList>
             >;
 
-        using ui_encoder_type = tetengo2::text::encoder<internal_encoding_type, ui_encoding_type>;
+        template <typename DetailTypeList>
+        using ui_encoder_type =
+            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, ui_encoding_type<DetailTypeList>>;
 
+        template <typename DetailTypeList>
         using config_encoding_type =
             tetengo2::text::encoding::locale<
-                boost::mpl::at<detail_type_list, type::detail::config>::type::string_type, encoding_details_type
+                typename boost::mpl::at<DetailTypeList, type::detail::config>::type::string_type,
+                encoding_details_type<DetailTypeList>
             >;
 
-        using config_encoder_type = tetengo2::text::encoder<internal_encoding_type, config_encoding_type>;
+        template <typename DetailTypeList>
+        using config_encoder_type =
+            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, config_encoding_type<DetailTypeList>>;
 
-        using message_catalog_encoding_type = utf8_encoding_type;
+        template <typename DetailTypeList>
+        using message_catalog_encoding_type = utf8_encoding_type<DetailTypeList>;
 
+        template <typename DetailTypeList>
         using message_catalog_encoder_type =
-            tetengo2::text::encoder<internal_encoding_type, message_catalog_encoding_type>;
+            tetengo2::text::encoder<
+                internal_encoding_type<DetailTypeList>, message_catalog_encoding_type<DetailTypeList>
+            >;
 
-        using locale_name_encoding_type = tetengo2::text::encoding::locale<std::string, encoding_details_type>;
+        template <typename DetailTypeList>
+        using locale_name_encoding_type =
+            tetengo2::text::encoding::locale<std::string, encoding_details_type<DetailTypeList>>;
 
-        using locale_name_encoder_type = tetengo2::text::encoder<internal_encoding_type, locale_name_encoding_type>;
+        template <typename DetailTypeList>
+        using locale_name_encoder_type =
+            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, locale_name_encoding_type<DetailTypeList>>;
 
+        template <typename DetailTypeList>
         using message_catalog_type =
             tetengo2::message::message_catalog<
                 boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
                 string_type,
                 size_type,
-                message_catalog_encoder_type,
-                locale_name_encoder_type
+                message_catalog_encoder_type<DetailTypeList>,
+                locale_name_encoder_type<DetailTypeList>
             >;
 
-        using timetable_file_encoding_type = utf8_encoding_type;
+        template <typename DetailTypeList>
+        using timetable_file_encoding_type = utf8_encoding_type<DetailTypeList>;
 
+        template <typename DetailTypeList>
         using timetable_file_encoder_type =
-            tetengo2::text::encoder<internal_encoding_type, timetable_file_encoding_type>;
+            tetengo2::text::encoder<
+                internal_encoding_type<DetailTypeList>, timetable_file_encoding_type<DetailTypeList>
+            >;
 
-        using windia_file_encoding_type = cp932_encoding_type;
+        template <typename DetailTypeList>
+        using windia_file_encoding_type = cp932_encoding_type<DetailTypeList>;
 
-        using windia_file_encoder_type = tetengo2::text::encoder<internal_encoding_type, windia_file_encoding_type>;
+        template <typename DetailTypeList>
+        using windia_file_encoder_type =
+            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, windia_file_encoding_type<DetailTypeList>>;
 
     }}
 #endif
@@ -168,19 +200,29 @@ namespace bobura
     template <typename DetailTypeList>
     using locale_type_list =
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::locale::exception_encoder, detail::locale::exception_encoder_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::locale::config_encoder, detail::locale::config_encoder_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::locale::ui_encoder, detail::locale::ui_encoder_type>,
+            boost::mpl::pair<type::locale::exception_encoder, detail::locale::exception_encoder_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::locale::message_catalog_encoder, detail::locale::message_catalog_encoder_type>,
+            boost::mpl::pair<type::locale::config_encoder, detail::locale::config_encoder_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::locale::locale_name_encoder, detail::locale::locale_name_encoder_type>,
+            boost::mpl::pair<type::locale::ui_encoder, detail::locale::ui_encoder_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::locale::message_catalog, detail::locale::message_catalog_type>,
+            boost::mpl::pair<
+                type::locale::message_catalog_encoder, detail::locale::message_catalog_encoder_type<DetailTypeList>
+            >,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::locale::timetable_file_encoder, detail::locale::timetable_file_encoder_type>,
+            boost::mpl::pair<
+                type::locale::locale_name_encoder, detail::locale::locale_name_encoder_type<DetailTypeList>
+            >,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::locale::windia_file_encoder, detail::locale::windia_file_encoder_type>,
+            boost::mpl::pair<type::locale::message_catalog, detail::locale::message_catalog_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<
+                type::locale::timetable_file_encoder, detail::locale::timetable_file_encoder_type<DetailTypeList>
+            >,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<
+                type::locale::windia_file_encoder, detail::locale::windia_file_encoder_type<DetailTypeList>
+            >,
         tetengo2::meta::assoc_list_end
         >>>>>>>>;
 
@@ -229,7 +271,7 @@ namespace bobura
 
         using string_type = bobura::detail::string_type;
 
-        using ui_encoder_type = bobura::detail::locale::ui_encoder_type;
+        using ui_encoder_type = bobura::detail::locale::ui_encoder_type<detail_type_list>;
 
         using unit_details_type = boost::mpl::at<detail_type_list, type::detail::unit>::type;
 
@@ -285,7 +327,7 @@ namespace bobura
                 position_type,
                 dimension_type,
                 ui_encoder_type,
-                bobura::detail::locale::exception_encoder_type
+                bobura::detail::locale::exception_encoder_type<detail_type_list>
             >;
 
         using widget_details_traits_type =
@@ -558,7 +600,7 @@ namespace bobura
 
         using mouse_capture_type = boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type;
 
-        using message_catalog_type = bobura::detail::locale::message_catalog_type;
+        using message_catalog_type = bobura::detail::locale::message_catalog_type<detail_type_list>;
 
         using dialog_traits_type =
             dialog_traits<
@@ -595,8 +637,8 @@ namespace bobura
                 boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
                 oudia_diagram_dialog<dialog_traits_type, size_type>,
                 message_catalog_type,
-                bobura::detail::locale::timetable_file_encoder_type,
-                bobura::detail::locale::windia_file_encoder_type
+                bobura::detail::locale::timetable_file_encoder_type<detail_type_list>,
+                bobura::detail::locale::windia_file_encoder_type<detail_type_list>
             >;
 
         using view_traits_type =
@@ -616,7 +658,7 @@ namespace bobura
             config_traits<
                 string_type,
                 size_type,
-                bobura::detail::locale::config_encoder_type,
+                bobura::detail::locale::config_encoder_type<detail_type_list>,
                 boost::mpl::at<detail_type_list, type::detail::config>::type
             >;
 
