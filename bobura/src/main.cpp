@@ -35,7 +35,11 @@ namespace
 {
     // types
 
+    using detail_type_list_type = bobura::detail_type_list;
+
     using common_type_list_type = bobura::common_type_list;
+
+    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
     using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
 
@@ -80,8 +84,8 @@ namespace
                 boost::mpl::at<common_type_list_type, bobura::type::input_stream_iterator>::type,
                 string_type,
                 boost::mpl::at<common_type_list_type, bobura::type::size>::type,
-                boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog_encoder>::type,
-                boost::mpl::at<bobura::locale_type_list, bobura::type::locale::locale_name_encoder>::type
+                boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog_encoder>::type,
+                boost::mpl::at<locale_type_list_type, bobura::type::locale::locale_name_encoder>::type
             >;
         auto p_messages_facet =
             tetengo2::stdalt::make_unique<messages_facet_type>(
@@ -123,8 +127,8 @@ TETENGO2_STDALT_NOEXCEPT
 
     using alert_type =
         tetengo2::gui::alert<
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::ui_encoder>::type,
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::exception_encoder>::type,
+            boost::mpl::at<locale_type_list_type, bobura::type::locale::ui_encoder>::type,
+            boost::mpl::at<locale_type_list_type, bobura::type::locale::exception_encoder>::type,
             boost::mpl::at<bobura::detail_type_list, bobura::type::detail::alert>::type
         >;
 

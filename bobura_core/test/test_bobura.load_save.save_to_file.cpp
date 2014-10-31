@@ -19,9 +19,13 @@ namespace
 {
     // types
 
+    using detail_type_list_type = bobura::detail_type_list;
+
     using common_type_list_type = bobura::common_type_list;
 
-    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
+    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
+
+    using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
 
     using model_type =
         bobura::timetable_model<

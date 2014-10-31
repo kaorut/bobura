@@ -208,6 +208,14 @@ namespace bobura { namespace command
     }
 
 
+    namespace
+    {
+        using detail_type_list_type = detail_type_list;
+
+        using locale_type_list_type = locale_type_list<detail_type_list_type>;
+    
+    }
+
     template class font_color<
         typename boost::mpl::at<traits_type_list, type::traits::command>::type,
         typename boost::mpl::at<ui_type_list, type::ui::dialog>::type,
@@ -216,7 +224,7 @@ namespace bobura { namespace command
         typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
         typename boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
         typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
-        typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,
+        typename boost::mpl::at<locale_type_list_type, type::locale::message_catalog>::type,
         typename boost::mpl::at<traits_type_list, type::traits::dialog>::type
     >;
 

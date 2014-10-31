@@ -24,11 +24,15 @@ namespace
 {
     // types
 
+    using detail_type_list_type = bobura::detail_type_list;
+
     using common_type_list_type = bobura::common_type_list;
+
+    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
     using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
-    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
+    using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 

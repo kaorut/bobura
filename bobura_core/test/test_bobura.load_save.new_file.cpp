@@ -20,7 +20,11 @@ namespace
 {
     // types
 
+    using detail_type_list_type = bobura::detail_type_list;
+
     using common_type_list_type = bobura::common_type_list;
+
+    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
     using model_type =
         bobura::timetable_model<
@@ -32,7 +36,7 @@ namespace
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
         >;
 
-    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
+    using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
 
     using load_save_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type;
 

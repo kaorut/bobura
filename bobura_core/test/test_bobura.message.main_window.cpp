@@ -31,7 +31,11 @@ namespace
 {
     // types
 
+    using detail_type_list_type = bobura::detail_type_list;
+
     using common_type_list_type = bobura::common_type_list;
+
+    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
     using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
 
@@ -81,7 +85,7 @@ namespace
 
     };
 
-    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
+    using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
 
     using load_save_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type;
 

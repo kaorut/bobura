@@ -29,7 +29,11 @@ namespace
 {
     // types
 
+    using detail_type_list_type = bobura::detail_type_list;
+
     using common_type_list_type = bobura::common_type_list;
+
+    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
     using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
@@ -49,7 +53,7 @@ namespace
         >;
 
     using message_catalog_type_ =
-        boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
+        boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
 
     using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
 
@@ -127,8 +131,8 @@ namespace
             boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::file_save_dialog>::type,
             oudia_diagram_dialog_type,
             message_catalog_type_,
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::timetable_file_encoder>::type,
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::windia_file_encoder>::type
+            boost::mpl::at<locale_type_list_type, bobura::type::locale::timetable_file_encoder>::type,
+            boost::mpl::at<locale_type_list_type, bobura::type::locale::windia_file_encoder>::type
         >;
 
     using save_to_file_type = bobura::load_save::save_to_file<load_save_traits_type>;

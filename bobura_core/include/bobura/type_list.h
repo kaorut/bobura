@@ -78,7 +78,7 @@ namespace bobura
     using common_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::difference, std::ptrdiff_t>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::size, detail::size_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::string, detail::string_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::string, bobura::detail::string_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::input_stream_iterator, detail::input_stream_iterator_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::output_stream, std::basic_ostream<detail::io_string_type::value_type>>,
@@ -106,7 +106,7 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace locale
     {
-        using string_type = boost::mpl::at<common_type_list, type::string>::type;
+        using string_type = bobura::detail::string_type;
 
         using encoding_details_type = boost::mpl::at<detail_type_list, type::detail::encoding>::type;
 
@@ -118,15 +118,21 @@ namespace bobura
 
         using exception_encoding_type = utf8_encoding_type;
 
+        using exception_encoder_type = tetengo2::text::encoder<internal_encoding_type, exception_encoding_type>;
+
         using ui_encoding_type =
             tetengo2::text::encoding::locale<
                 boost::mpl::at<detail_type_list, type::detail::widget>::type::string_type, encoding_details_type
             >;
 
+        using ui_encoder_type = tetengo2::text::encoder<internal_encoding_type, ui_encoding_type>;
+
         using config_encoding_type =
             tetengo2::text::encoding::locale<
                 boost::mpl::at<detail_type_list, type::detail::config>::type::string_type, encoding_details_type
             >;
+
+        using config_encoder_type = tetengo2::text::encoder<internal_encoding_type, config_encoding_type>;
 
         using message_catalog_encoding_type = utf8_encoding_type;
 
@@ -159,24 +165,12 @@ namespace bobura
 #endif
 
     //! The type list for the locale.
+    template <typename DetailTypeList>
     using locale_type_list =
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::locale::exception_encoder,
-                tetengo2::text::encoder<
-                    detail::locale::internal_encoding_type, detail::locale::exception_encoding_type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::locale::config_encoder,
-                tetengo2::text::encoder<detail::locale::internal_encoding_type, detail::locale::config_encoding_type>
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::locale::ui_encoder,
-                tetengo2::text::encoder<detail::locale::internal_encoding_type, detail::locale::ui_encoding_type>
-            >,
+            boost::mpl::pair<type::locale::exception_encoder, detail::locale::exception_encoder_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::locale::config_encoder, detail::locale::config_encoder_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::locale::ui_encoder, detail::locale::ui_encoder_type>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::locale::message_catalog_encoder, detail::locale::message_catalog_encoder_type>,
         tetengo2::meta::assoc_list<
@@ -233,9 +227,9 @@ namespace bobura
 
         using difference_type = boost::mpl::at<common_type_list, type::difference>::type;
 
-        using string_type = boost::mpl::at<common_type_list, type::string>::type;
+        using string_type = bobura::detail::string_type;
 
-        using ui_encoder_type = boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type;
+        using ui_encoder_type = bobura::detail::locale::ui_encoder_type;
 
         using unit_details_type = boost::mpl::at<detail_type_list, type::detail::unit>::type;
 
@@ -291,7 +285,7 @@ namespace bobura
                 position_type,
                 dimension_type,
                 ui_encoder_type,
-                boost::mpl::at<locale_type_list, type::locale::exception_encoder>::type
+                bobura::detail::locale::exception_encoder_type
             >;
 
         using widget_details_traits_type =
@@ -445,7 +439,7 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace common_dialog
     {
-        using string_type = boost::mpl::at<common_type_list, type::string>::type;
+        using string_type = bobura::detail::string_type;
 
         using widget_traits_type = boost::mpl::at<ui_type_list, type::ui::widget_traits>::type;
 
@@ -540,7 +534,7 @@ namespace bobura
 
         using difference_type = boost::mpl::at<common_type_list, type::difference>::type;
 
-        using string_type = boost::mpl::at<common_type_list, type::string>::type;
+        using string_type = bobura::detail::string_type;
 
         using position_type = boost::mpl::at<ui_type_list, type::ui::position>::type;
 
@@ -564,7 +558,7 @@ namespace bobura
 
         using mouse_capture_type = boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type;
 
-        using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
+        using message_catalog_type = bobura::detail::locale::message_catalog_type;
 
         using dialog_traits_type =
             dialog_traits<
@@ -601,8 +595,8 @@ namespace bobura
                 boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
                 oudia_diagram_dialog<dialog_traits_type, size_type>,
                 message_catalog_type,
-                boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type,
-                boost::mpl::at<locale_type_list, type::locale::windia_file_encoder>::type
+                bobura::detail::locale::timetable_file_encoder_type,
+                bobura::detail::locale::windia_file_encoder_type
             >;
 
         using view_traits_type =
@@ -622,7 +616,7 @@ namespace bobura
             config_traits<
                 string_type,
                 size_type,
-                boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
+                bobura::detail::locale::config_encoder_type,
                 boost::mpl::at<detail_type_list, type::detail::config>::type
             >;
 
