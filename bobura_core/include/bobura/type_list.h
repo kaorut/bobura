@@ -54,6 +54,8 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail
     {
+        using difference_type = std::ptrdiff_t;
+
         using size_type = std::size_t;
 
         using string_type = std::wstring;
@@ -62,6 +64,8 @@ namespace bobura
 
         using input_stream_iterator_type =
             boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
+
+        using output_stream_type = std::basic_ostream<io_string_type::value_type>;
 
         using operating_distance_type = boost::rational<size_type>;
 
@@ -76,12 +80,11 @@ namespace bobura
         \brief The common type list.
     */
     using common_type_list =
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::difference, std::ptrdiff_t>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::difference, detail::difference_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::size, detail::size_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::string, bobura::detail::string_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::input_stream_iterator, detail::input_stream_iterator_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::output_stream, std::basic_ostream<detail::io_string_type::value_type>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::output_stream, detail::output_stream_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::operating_distance, detail::operating_distance_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::speed, detail::speed_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::scale, detail::scale_type>,
@@ -170,7 +173,7 @@ namespace bobura
         template <typename DetailTypeList>
         using message_catalog_type =
             tetengo2::message::message_catalog<
-                boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
+                bobura::detail::input_stream_iterator_type,
                 string_type,
                 size_type,
                 message_catalog_encoder_type<DetailTypeList>,
@@ -269,9 +272,9 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace ui
     {
-        using size_type = boost::mpl::at<common_type_list, type::size>::type;
+        using size_type = bobura::detail::size_type;
 
-        using difference_type = boost::mpl::at<common_type_list, type::difference>::type;
+        using difference_type = bobura::detail::difference_type;
 
         using string_type = bobura::detail::string_type;
 
@@ -576,9 +579,9 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace traits
     {
-        using size_type = boost::mpl::at<common_type_list, type::size>::type;
+        using size_type = bobura::detail::size_type;
 
-        using difference_type = boost::mpl::at<common_type_list, type::difference>::type;
+        using difference_type = bobura::detail::difference_type;
 
         using string_type = bobura::detail::string_type;
 
@@ -586,11 +589,11 @@ namespace bobura
 
         using dimension_type = boost::mpl::at<ui_type_list, type::ui::dimension>::type;
 
-        using operating_distance_type = boost::mpl::at<common_type_list, type::operating_distance>::type;
+        using operating_distance_type = bobura::detail::operating_distance_type;
 
-        using speed_type = boost::mpl::at<common_type_list, type::speed>::type;
+        using speed_type = bobura::detail::speed_type;
 
-        using scale_type = boost::mpl::at<common_type_list, type::scale>::type;
+        using scale_type = bobura::detail::scale_type;
 
         using fast_canvas_type = boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type;
 
@@ -630,8 +633,8 @@ namespace bobura
                 size_type,
                 difference_type,
                 string_type,
-                boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
-                boost::mpl::at<common_type_list, type::output_stream>::type,
+                bobura::detail::input_stream_iterator_type,
+                bobura::detail::output_stream_type,
                 operating_distance_type,
                 speed_type,
                 fast_font_type,
