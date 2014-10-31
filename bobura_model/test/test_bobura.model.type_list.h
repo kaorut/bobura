@@ -15,6 +15,7 @@
 
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/pair.hpp>
+#include <boost/predef.h>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
@@ -130,11 +131,14 @@ namespace test_bobura { namespace model
         using internal_encoding_type =
             tetengo2::text::encoding::locale<string_type, encoding_details_type<DetailTypeList>>;
 
+#if BOOST_COMP_MSVC
         template <typename DetailTypeList>
-        using ui_string_type = typename boost::mpl::at<DetailTypeList, type::detail::widget>::type::string_type;
+        using ui_string_type = typename boost::mpl::at<DetailTypeList, type::detail::widget>::type::string_type; // Ignore type list type duplication check.
+#else
         // The code below somehow causes a compilation error with VC++ 2013.
-        //template <typename DetailTypeList>
-        //using ui_string_type = typename widget_details_type<DetailTypeList>::string_type;
+        template <typename DetailTypeList>
+        using ui_string_type = typename widget_details_type<DetailTypeList>::string_type;
+#endif
 
         template <typename DetailTypeList>
         using ui_encoding_type =
