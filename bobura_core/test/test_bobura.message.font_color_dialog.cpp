@@ -24,7 +24,9 @@ namespace
 {
     // types
 
-    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
+    using common_type_list_type = bobura::common_type_list;
+
+    using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 

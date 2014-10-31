@@ -28,19 +28,21 @@ namespace
 {
     // types
 
-    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
+    using common_type_list_type = bobura::common_type_list;
 
-    using difference_type = boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type;
+    using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
-    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
+    using difference_type = boost::mpl::at<common_type_list_type, bobura::type::difference>::type;
+
+    using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
 
     using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
 
     using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
 
-    using operating_distance_type = boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type;
+    using operating_distance_type = boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type;
 
-    using speed_type = boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type;
+    using speed_type = boost::mpl::at<common_type_list_type, bobura::type::speed>::type;
 
     using fast_font_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type;
 

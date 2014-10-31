@@ -578,13 +578,19 @@ namespace bobura
     }
 
 
+    namespace
+    {
+        using common_type_list_type = common_type_list;
+
+    }
+
     template class main_window_menu_builder<
-        typename boost::mpl::at<common_type_list, type::size>::type,
-        typename boost::mpl::at<common_type_list, type::difference>::type,
-        typename boost::mpl::at<common_type_list, type::string>::type,
-        typename boost::mpl::at<common_type_list, type::operating_distance>::type,
-        typename boost::mpl::at<common_type_list, type::speed>::type,
-        typename boost::mpl::at<common_type_list, type::scale>::type,
+        typename boost::mpl::at<common_type_list_type, type::size>::type,
+        typename boost::mpl::at<common_type_list_type, type::difference>::type,
+        typename boost::mpl::at<common_type_list_type, type::string>::type,
+        typename boost::mpl::at<common_type_list_type, type::operating_distance>::type,
+        typename boost::mpl::at<common_type_list_type, type::speed>::type,
+        typename boost::mpl::at<common_type_list_type, type::scale>::type,
         typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
         typename boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
         typename boost::mpl::at<locale_type_list, type::locale::message_catalog>::type,

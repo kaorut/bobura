@@ -72,7 +72,9 @@ namespace bobura
     }
 #endif
 
-    //! The common type list.
+    /*!
+        \brief The common type list.
+    */
     using common_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::difference, std::ptrdiff_t>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::size, detail::size_type>,

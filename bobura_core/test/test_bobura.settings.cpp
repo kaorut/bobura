@@ -24,7 +24,9 @@ namespace
 {
     // types
 
-    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
+    using common_type_list_type = bobura::common_type_list;
+
+    using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
 
     using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
 

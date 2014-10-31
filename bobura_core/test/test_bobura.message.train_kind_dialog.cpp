@@ -25,9 +25,11 @@ namespace
 {
     // types
 
-    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
+    using common_type_list_type = bobura::common_type_list;
 
-    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
+    using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
+
+    using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
 
     using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
 
@@ -54,10 +56,10 @@ namespace
         using model_type =
         bobura::timetable_model<
             size_type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
+            boost::mpl::at<common_type_list_type, bobura::type::difference>::type,
             string_type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type,
+            boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
+            boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
         >;
 

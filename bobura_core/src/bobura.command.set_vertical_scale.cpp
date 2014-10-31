@@ -161,9 +161,15 @@ namespace bobura { namespace command
     }
 
 
+    namespace
+    {
+        using common_type_list_type = common_type_list;
+
+    }
+
     template class set_vertical_scale<
         typename boost::mpl::at<traits_type_list, type::traits::command>::type,
-        typename boost::mpl::at<common_type_list, type::scale>::type,
+        typename boost::mpl::at<common_type_list_type, type::scale>::type,
         typename boost::mpl::at<traits_type_list, type::traits::command_set>::type,
         typename boost::mpl::at<traits_type_list, type::traits::main_window>::type,
         typename boost::mpl::at<traits_type_list, type::traits::view>::type

@@ -347,9 +347,15 @@ namespace bobura
     }
 
 
+    namespace
+    {
+        using common_type_list_type = common_type_list;
+
+    }
+
     template class oudia_diagram_dialog<
         typename boost::mpl::at<traits_type_list, type::traits::dialog>::type,
-        typename boost::mpl::at<common_type_list, type::size>::type
+        typename boost::mpl::at<common_type_list_type, type::size>::type
     >;
 
 

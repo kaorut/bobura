@@ -25,15 +25,17 @@ namespace
 {
     // types
 
-    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
+    using common_type_list_type = bobura::common_type_list;
+
+    using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
     using model_type =
         bobura::timetable_model<
             size_type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type,
+            boost::mpl::at<common_type_list_type, bobura::type::difference>::type,
+            boost::mpl::at<common_type_list_type, bobura::type::string>::type,
+            boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
+            boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
             boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
         >;
 
@@ -55,7 +57,7 @@ namespace
 
     using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
-    using scale_type = boost::mpl::at<bobura::common_type_list, bobura::type::scale>::type;
+    using scale_type = boost::mpl::at<common_type_list_type, bobura::type::scale>::type;
 
     using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
 
