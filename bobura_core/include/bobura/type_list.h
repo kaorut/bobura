@@ -196,7 +196,11 @@ namespace bobura
     }}
 #endif
 
-    //! The type list for the locale.
+    /*!
+        \brief The locale type list.
+
+        \tparam DetailTypeList A detail type list.
+    */
     template <typename DetailTypeList>
     using locale_type_list =
         tetengo2::meta::assoc_list<
