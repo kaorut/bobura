@@ -609,57 +609,66 @@ namespace bobura
     {
         using string_type = bobura::detail::string_type;
 
-        using widget_traits_type = bobura::detail::ui::widget_traits_type<detail_type_list>;
+        template <typename DetailTypeList>
+        using widget_traits_type = bobura::detail::ui::widget_traits_type<DetailTypeList>;
 
-        using common_dialog_details_type = boost::mpl::at<detail_type_list, type::detail::common_dialog>::type;
+        template <typename DetailTypeList>
+        using common_dialog_details_type = typename boost::mpl::at<DetailTypeList, type::detail::common_dialog>::type;
 
-        using widget_details_traits_type = bobura::detail::ui::widget_details_traits_type<detail_type_list>;
+        template <typename DetailTypeList>
+        using widget_details_traits_type = bobura::detail::ui::widget_details_traits_type<DetailTypeList>;
 
-        using menu_details_type = boost::mpl::at<detail_type_list, type::detail::menu>::type;
+        template <typename DetailTypeList>
+        using menu_details_type = typename boost::mpl::at<DetailTypeList, type::detail::menu>::type;
 
+        template <typename DetailTypeList>
         using color_type =
             tetengo2::gui::common_dialog::color<
                 bobura::detail::ui::color_type,
-                widget_traits_type,
-                common_dialog_details_type,
-                widget_details_traits_type,
-                menu_details_type
+                widget_traits_type<DetailTypeList>,
+                common_dialog_details_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>
             >;
 
+        template <typename DetailTypeList>
         using file_open_type =
             tetengo2::gui::common_dialog::file_open<
                 string_type,
-                widget_traits_type,
-                common_dialog_details_type,
-                widget_details_traits_type,
-                menu_details_type
+                widget_traits_type<DetailTypeList>,
+                common_dialog_details_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>
             >;
 
+        template <typename DetailTypeList>
         using file_save_type =
             tetengo2::gui::common_dialog::file_save<
                 string_type,
-                widget_traits_type,
-                common_dialog_details_type,
-                widget_details_traits_type,
-                menu_details_type
+                widget_traits_type<DetailTypeList>,
+                common_dialog_details_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>
             >;
 
+        template <typename DetailTypeList>
         using font_type =
             tetengo2::gui::common_dialog::font<
-                bobura::detail::ui::fast_font_type<detail_type_list>,
-                widget_traits_type,
-                common_dialog_details_type,
-                widget_details_traits_type,
-                menu_details_type
+                bobura::detail::ui::fast_font_type<DetailTypeList>,
+                widget_traits_type<DetailTypeList>,
+                common_dialog_details_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>
             >;
 
+        template <typename DetailTypeList>
         using message_box_type =
             tetengo2::gui::common_dialog::message_box<
                 string_type,
-                widget_traits_type,
-                common_dialog_details_type,
-                widget_details_traits_type,
-                menu_details_type
+                widget_traits_type<DetailTypeList>,
+                common_dialog_details_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>
             >;
 
     }}
@@ -672,14 +681,18 @@ namespace bobura
     */
     template <typename DetailTypeList>
     using common_dialog_type_list =
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::common_dialog::color, detail::common_dialog::color_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::common_dialog::file_open, detail::common_dialog::file_open_type>,
+            boost::mpl::pair<type::common_dialog::color, detail::common_dialog::color_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::common_dialog::file_save, detail::common_dialog::file_save_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::common_dialog::font,  detail::common_dialog::font_type>,
+            boost::mpl::pair<type::common_dialog::file_open, detail::common_dialog::file_open_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::common_dialog::message_box,  detail::common_dialog::message_box_type>,
+            boost::mpl::pair<type::common_dialog::file_save, detail::common_dialog::file_save_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::common_dialog::font,  detail::common_dialog::font_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<
+                type::common_dialog::message_box,  detail::common_dialog::message_box_type<DetailTypeList>
+            >,
         tetengo2::meta::assoc_list_end
         >>>>>;
 
@@ -761,9 +774,9 @@ namespace bobura
                 speed_type,
                 fast_font_type,
                 abstract_window_type,
-                bobura::detail::common_dialog::message_box_type,
-                bobura::detail::common_dialog::file_open_type,
-                bobura::detail::common_dialog::file_save_type,
+                bobura::detail::common_dialog::message_box_type<detail_type_list>,
+                bobura::detail::common_dialog::file_open_type<detail_type_list>,
+                bobura::detail::common_dialog::file_save_type<detail_type_list>,
                 oudia_diagram_dialog<dialog_traits_type, size_type>,
                 message_catalog_type,
                 bobura::detail::locale::timetable_file_encoder_type<detail_type_list>,
@@ -846,8 +859,8 @@ namespace bobura
                 fast_canvas_type,
                 scale_type,
                 bobura::detail::ui::shell_type<detail_type_list>,
-                bobura::detail::common_dialog::font_type,
-                bobura::detail::common_dialog::color_type,
+                bobura::detail::common_dialog::font_type<detail_type_list>,
+                bobura::detail::common_dialog::color_type<detail_type_list>,
                 message_catalog_type,
                 command_traits_type,
                 main_window_traits_type,
