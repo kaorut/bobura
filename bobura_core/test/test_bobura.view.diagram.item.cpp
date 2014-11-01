@@ -28,6 +28,8 @@ namespace
 
     using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
+    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+
     using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
 
     using picture_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::picture_box>::type;
@@ -40,7 +42,7 @@ namespace
 
     using top_type = tetengo2::gui::position<position_type>::top_type;
 
-    using traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type;
+    using traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::view>::type;
 
     using selection_type = bobura::view::diagram::selection<traits_type>;
 

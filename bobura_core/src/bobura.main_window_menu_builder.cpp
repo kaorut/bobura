@@ -112,6 +112,8 @@ namespace bobura
     
         using ui_type_list_type = ui_type_list<detail_type_list_type>;
 
+        using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
         using ui_encoder_type = typename boost::mpl::at<locale_type_list_type, type::locale::ui_encoder>::type;
 
         using menu_details_type = typename boost::mpl::at<detail_type_list, type::detail::menu>::type;
@@ -138,7 +140,7 @@ namespace bobura
                 command_set_type,
                 typename command_set_type::command_type,
                 model_type,
-                diagram_view<boost::mpl::at<traits_type_list, type::traits::view>::type>,
+                diagram_view<boost::mpl::at<traits_type_list_type, type::traits::view>::type>,
                 typename main_window_type::abstract_window_type,
                 typename main_window_type::diagram_picture_box_type,
                 typename main_window_type::property_bar_type,
@@ -594,7 +596,10 @@ namespace bobura
     
         using ui_type_list_type = ui_type_list<detail_type_list_type>;
 
+        using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
     }
+
 
     template class main_window_menu_builder<
         typename boost::mpl::at<common_type_list_type, type::size>::type,
@@ -606,8 +611,8 @@ namespace bobura
         typename boost::mpl::at<ui_type_list_type, type::ui::fast_font>::type,
         typename boost::mpl::at<ui_type_list_type, type::ui::menu_bar>::type,
         typename boost::mpl::at<locale_type_list_type, type::locale::message_catalog>::type,
-        typename boost::mpl::at<traits_type_list, type::traits::command_set>::type,
-        typename boost::mpl::at<traits_type_list, type::traits::main_window>::type
+        typename boost::mpl::at<traits_type_list_type, type::traits::command_set>::type,
+        typename boost::mpl::at<traits_type_list_type, type::traits::main_window>::type
     >;
 
 

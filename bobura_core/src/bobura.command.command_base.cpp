@@ -91,7 +91,15 @@ namespace bobura { namespace command
     }
 
 
-    template class command_base<typename boost::mpl::at<traits_type_list, type::traits::command>::type>;
+    namespace
+    {
+        using detail_type_list_type = detail_type_list;
+
+        using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+    }
+
+    template class command_base<typename boost::mpl::at<traits_type_list_type, type::traits::command>::type>;
 
 
 }}

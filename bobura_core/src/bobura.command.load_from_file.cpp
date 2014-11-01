@@ -128,9 +128,17 @@ namespace bobura { namespace command
     }
 
 
+    namespace
+    {
+        using detail_type_list_type = detail_type_list;
+
+        using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+    }
+
     template class load_from_file<
-        typename boost::mpl::at<traits_type_list, type::traits::command>::type,
-        typename boost::mpl::at<traits_type_list, type::traits::load_save>::type
+        typename boost::mpl::at<traits_type_list_type, type::traits::command>::type,
+        typename boost::mpl::at<traits_type_list_type, type::traits::load_save>::type
     >;
 
 

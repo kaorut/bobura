@@ -914,7 +914,12 @@ namespace bobura
     }}
 #endif
 
-    //! The traits type list.
+    /*!
+        \brief The traits type list.
+
+        \tparam DetailTypeList A detail type list.
+    */
+    template <typename DetailTypeList>
     using traits_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::dialog, detail::traits::dialog_traits_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::load_save, detail::traits::load_save_traits_type>,

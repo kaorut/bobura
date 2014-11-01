@@ -417,7 +417,15 @@ namespace bobura
     }
 
 
-    template class application<boost::mpl::at<traits_type_list, type::traits::application>::type>;
+    namespace
+    {
+        using detail_type_list_type = detail_type_list;
+
+        using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+    }
+
+    template class application<boost::mpl::at<traits_type_list_type, type::traits::application>::type>;
 
 
 }

@@ -238,16 +238,18 @@ namespace bobura { namespace command
 
         using common_dialog_type_list_type = common_dialog_type_list<detail_type_list_type>;
 
+        using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
     }
 
     template class train_kind<
-        typename boost::mpl::at<traits_type_list, type::traits::command>::type,
+        typename boost::mpl::at<traits_type_list_type, type::traits::command>::type,
         typename boost::mpl::at<ui_type_list_type, type::ui::dialog>::type,
         typename boost::mpl::at<ui_type_list_type, type::ui::color>::type,
         typename boost::mpl::at<ui_type_list_type, type::ui::fast_canvas>::type,
         typename boost::mpl::at<common_dialog_type_list_type, type::common_dialog::color>::type,
         typename boost::mpl::at<locale_type_list_type, type::locale::message_catalog>::type,
-        typename boost::mpl::at<traits_type_list, type::traits::dialog>::type
+        typename boost::mpl::at<traits_type_list_type, type::traits::dialog>::type
     >;
 
 

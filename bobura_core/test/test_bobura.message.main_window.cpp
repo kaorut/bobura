@@ -39,6 +39,8 @@ namespace
 
     using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
+    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+
     using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
 
     using model_type =
@@ -89,7 +91,7 @@ namespace
 
     using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
 
-    using load_save_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::load_save>::type;
+    using load_save_traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::load_save>::type;
 
     using save_to_file_type = bobura::load_save::save_to_file<load_save_traits_type>;
 
@@ -99,13 +101,13 @@ namespace
 
     using dimension_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dimension>::type;
 
-    using config_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type;
+    using config_traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::config>::type;
 
     using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
 
     using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
 
-    using view_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type;
+    using view_traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::view>::type;
 
     using view_type = bobura::diagram_view<view_traits_type>;
 

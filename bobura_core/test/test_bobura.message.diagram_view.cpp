@@ -36,6 +36,8 @@ namespace
 
     using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
+    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+
     using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
     using difference_type = boost::mpl::at<common_type_list_type, bobura::type::difference>::type;
@@ -58,7 +60,7 @@ namespace
 
     using map_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::map_box>::type;
 
-    using config_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type;
+    using config_traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::config>::type;
 
     using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
 

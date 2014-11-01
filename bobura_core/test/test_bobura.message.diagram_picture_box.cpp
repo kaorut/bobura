@@ -31,7 +31,9 @@ namespace
 
     using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
-    using view_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type;
+    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+
+    using view_traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::view>::type;
 
     using picture_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::picture_box>::type;
 

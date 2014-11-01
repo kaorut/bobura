@@ -29,6 +29,8 @@ namespace
 
     using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
+    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+
     using model_type =
         bobura::timetable_model<
             boost::mpl::at<common_type_list_type, bobura::type::size>::type,
@@ -62,7 +64,7 @@ namespace
     using message_catalog_type =
         boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
 
-    using view_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type;
+    using view_traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::view>::type;
 
     using view_type = bobura::diagram_view<view_traits_type>;
 

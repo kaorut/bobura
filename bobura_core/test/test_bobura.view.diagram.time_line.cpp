@@ -31,6 +31,8 @@ namespace
 
     using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
+    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+
     using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
     using model_type =
@@ -67,7 +69,7 @@ namespace
 
     using unit_size_type = canvas_type::unit_size_type;
 
-    using traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type;
+    using traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::view>::type;
 
     using selection_type = bobura::view::diagram::selection<traits_type>;
 
