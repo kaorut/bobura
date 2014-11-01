@@ -971,6 +971,8 @@ namespace bobura
 
         using ui_type_list_type = ui_type_list<detail_type_list_type>;
 
+        using common_dialog_type_list_type = common_dialog_type_list<detail_type_list_type>;
+
     }
 
     template class train_kind_dialog<
@@ -980,7 +982,7 @@ namespace bobura
         typename boost::mpl::at<ui_type_list_type, type::ui::fast_font>::type,
         typename boost::mpl::at<ui_type_list_type, type::ui::color>::type,
         typename boost::mpl::at<ui_type_list_type, type::ui::fast_canvas>::type,
-        typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type
+        typename boost::mpl::at<common_dialog_type_list_type, type::common_dialog::color>::type
     >;
 
 

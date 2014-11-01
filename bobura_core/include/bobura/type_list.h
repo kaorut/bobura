@@ -598,8 +598,8 @@ namespace bobura
     namespace type { namespace common_dialog
     {
         struct color;          //!< The color dialog type.
-        struct file_open_dialog; //!< The file open dialog type.
-        struct file_save_dialog; //!< The file save dialog type.
+        struct file_open;      //!< The file open dialog type.
+        struct file_save;      //!< The file save dialog type.
         struct font;           //!< The font dialog type.
         struct message_box;    //!< The message box type.
     }}
@@ -617,66 +617,69 @@ namespace bobura
 
         using menu_details_type = boost::mpl::at<detail_type_list, type::detail::menu>::type;
 
+        using color_type =
+            tetengo2::gui::common_dialog::color<
+                bobura::detail::ui::color_type,
+                widget_traits_type,
+                common_dialog_details_type,
+                widget_details_traits_type,
+                menu_details_type
+            >;
+
+        using file_open_type =
+            tetengo2::gui::common_dialog::file_open<
+                string_type,
+                widget_traits_type,
+                common_dialog_details_type,
+                widget_details_traits_type,
+                menu_details_type
+            >;
+
+        using file_save_type =
+            tetengo2::gui::common_dialog::file_save<
+                string_type,
+                widget_traits_type,
+                common_dialog_details_type,
+                widget_details_traits_type,
+                menu_details_type
+            >;
+
+        using font_type =
+            tetengo2::gui::common_dialog::font<
+                bobura::detail::ui::fast_font_type<detail_type_list>,
+                widget_traits_type,
+                common_dialog_details_type,
+                widget_details_traits_type,
+                menu_details_type
+            >;
+
+        using message_box_type =
+            tetengo2::gui::common_dialog::message_box<
+                string_type,
+                widget_traits_type,
+                common_dialog_details_type,
+                widget_details_traits_type,
+                menu_details_type
+            >;
+
     }}
 #endif
 
-    //! The type list for the commong dialogs.
+    /*!
+        \brief The common dialog type list.
+
+        \tparam DetailTypeList A detail type list.
+    */
+    template <typename DetailTypeList>
     using common_dialog_type_list =
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::common_dialog::color, detail::common_dialog::color_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::common_dialog::color,
-                tetengo2::gui::common_dialog::color<
-                    bobura::detail::ui::color_type,
-                    detail::common_dialog::widget_traits_type,
-                    detail::common_dialog::common_dialog_details_type,
-                    detail::common_dialog::widget_details_traits_type,
-                    detail::common_dialog::menu_details_type
-                >
-            >,
+            boost::mpl::pair<type::common_dialog::file_open, detail::common_dialog::file_open_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::common_dialog::file_open_dialog,
-                tetengo2::gui::common_dialog::file_open<
-                    detail::common_dialog::string_type,
-                    detail::common_dialog::widget_traits_type,
-                    detail::common_dialog::common_dialog_details_type,
-                    detail::common_dialog::widget_details_traits_type,
-                    detail::common_dialog::menu_details_type
-                >
-            >,
+            boost::mpl::pair<type::common_dialog::file_save, detail::common_dialog::file_save_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::common_dialog::font,  detail::common_dialog::font_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::common_dialog::file_save_dialog,
-                tetengo2::gui::common_dialog::file_save<
-                    detail::common_dialog::string_type,
-                    detail::common_dialog::widget_traits_type,
-                    detail::common_dialog::common_dialog_details_type,
-                    detail::common_dialog::widget_details_traits_type,
-                    detail::common_dialog::menu_details_type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::common_dialog::font,
-                tetengo2::gui::common_dialog::font<
-                    detail::ui::fast_font_type<detail_type_list>,
-                    detail::common_dialog::widget_traits_type,
-                    detail::common_dialog::common_dialog_details_type,
-                    detail::common_dialog::widget_details_traits_type,
-                    detail::common_dialog::menu_details_type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::common_dialog::message_box,
-                tetengo2::gui::common_dialog::message_box<
-                    detail::common_dialog::string_type,
-                    detail::common_dialog::widget_traits_type,
-                    detail::common_dialog::common_dialog_details_type,
-                    detail::common_dialog::widget_details_traits_type,
-                    detail::common_dialog::menu_details_type
-                >
-            >,
+            boost::mpl::pair<type::common_dialog::message_box,  detail::common_dialog::message_box_type>,
         tetengo2::meta::assoc_list_end
         >>>>>;
 
@@ -758,9 +761,9 @@ namespace bobura
                 speed_type,
                 fast_font_type,
                 abstract_window_type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::file_open_dialog>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
+                bobura::detail::common_dialog::message_box_type,
+                bobura::detail::common_dialog::file_open_type,
+                bobura::detail::common_dialog::file_save_type,
                 oudia_diagram_dialog<dialog_traits_type, size_type>,
                 message_catalog_type,
                 bobura::detail::locale::timetable_file_encoder_type<detail_type_list>,
@@ -843,8 +846,8 @@ namespace bobura
                 fast_canvas_type,
                 scale_type,
                 bobura::detail::ui::shell_type<detail_type_list>,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
+                bobura::detail::common_dialog::font_type,
+                bobura::detail::common_dialog::color_type,
                 message_catalog_type,
                 command_traits_type,
                 main_window_traits_type,

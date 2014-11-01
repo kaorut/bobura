@@ -33,6 +33,8 @@ namespace
 
     using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
+    using common_dialog_type_list_type = bobura::common_dialog_type_list<detail_type_list_type>;
+
     using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
     using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
@@ -124,8 +126,7 @@ namespace
     };
 
 
-    using color_dialog_type =
-        boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::color>::type;
+    using color_dialog_type = boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::color>::type;
 
     class concrete_dialog : public dialog_type
     {

@@ -992,6 +992,8 @@ namespace bobura
 
         using ui_type_list_type = ui_type_list<detail_type_list_type>;
 
+        using common_dialog_type_list_type = common_dialog_type_list<detail_type_list_type>;
+
     }
 
     template class font_color_dialog<
@@ -1001,8 +1003,8 @@ namespace bobura
         typename boost::mpl::at<ui_type_list_type, type::ui::point_unit_size>::type,
         typename boost::mpl::at<ui_type_list_type, type::ui::color>::type,
         typename boost::mpl::at<ui_type_list_type, type::ui::fast_canvas>::type,
-        typename boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
-        typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type
+        typename boost::mpl::at<common_dialog_type_list_type, type::common_dialog::font>::type,
+        typename boost::mpl::at<common_dialog_type_list_type, type::common_dialog::color>::type
     >;
 
 

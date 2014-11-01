@@ -37,6 +37,8 @@ namespace
 
     using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
+    using common_dialog_type_list_type = bobura::common_dialog_type_list<detail_type_list_type>;
+
     using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
     using difference_type = boost::mpl::at<common_type_list_type, bobura::type::difference>::type;
@@ -128,9 +130,9 @@ namespace
             speed_type,
             fast_font_type,
             boost::mpl::at<ui_type_list_type, bobura::type::ui::abstract_window>::type,
-            boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::message_box>::type,
-            boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::file_open_dialog>::type,
-            boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::file_save_dialog>::type,
+            boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::message_box>::type,
+            boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::file_open>::type,
+            boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::file_save>::type,
             oudia_diagram_dialog_type,
             message_catalog_type_,
             boost::mpl::at<locale_type_list_type, bobura::type::locale::timetable_file_encoder>::type,

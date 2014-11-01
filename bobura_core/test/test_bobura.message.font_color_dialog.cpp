@@ -32,6 +32,8 @@ namespace
 
     using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
+    using common_dialog_type_list_type = bobura::common_dialog_type_list<detail_type_list_type>;
+
     using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
     using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
@@ -64,10 +66,10 @@ namespace
 
     using color_type = canvas_type::color_type;
 
-    using font_dialog_type = boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::font>::type;
+    using font_dialog_type = boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::font>::type;
 
     using color_dialog_type =
-        boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::color>::type;
+        boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::color>::type;
 
 
     // functions
