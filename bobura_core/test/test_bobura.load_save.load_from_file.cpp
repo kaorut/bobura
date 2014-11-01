@@ -35,6 +35,8 @@ namespace
 
     using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+
     using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
     using difference_type = boost::mpl::at<common_type_list_type, bobura::type::difference>::type;
@@ -45,7 +47,7 @@ namespace
 
     using speed_type = boost::mpl::at<common_type_list_type, bobura::type::speed>::type;
 
-    using fast_font_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type;
+    using fast_font_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type;
 
     using model_type =
         bobura::timetable_model<
@@ -55,9 +57,9 @@ namespace
     using message_catalog_type_ =
         boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
 
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
+    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
 
-    using dialog_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type;
+    using dialog_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dialog>::type;
 
     struct oudia_diagram_dialog_type : public dialog_type
     {
@@ -125,7 +127,7 @@ namespace
             operating_distance_type,
             speed_type,
             fast_font_type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type,
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::abstract_window>::type,
             boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::message_box>::type,
             boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::file_open_dialog>::type,
             boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::file_save_dialog>::type,

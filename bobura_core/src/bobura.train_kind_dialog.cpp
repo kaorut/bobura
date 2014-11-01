@@ -965,7 +965,11 @@ namespace bobura
 
     namespace
     {
+        using detail_type_list_type = detail_type_list;
+
         using common_type_list_type = common_type_list;
+
+        using ui_type_list_type = ui_type_list<detail_type_list_type>;
 
     }
 
@@ -973,9 +977,9 @@ namespace bobura
         typename boost::mpl::at<traits_type_list, type::traits::dialog>::type,
         typename boost::mpl::at<common_type_list_type, type::size>::type,
         model::train_kind<typename boost::mpl::at<common_type_list_type, type::string>::type>,
-        typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::color>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type,
+        typename boost::mpl::at<ui_type_list_type, type::ui::fast_font>::type,
+        typename boost::mpl::at<ui_type_list_type, type::ui::color>::type,
+        typename boost::mpl::at<ui_type_list_type, type::ui::fast_canvas>::type,
         typename boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type
     >;
 

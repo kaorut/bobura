@@ -26,6 +26,8 @@ namespace
 
     using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+
     using model_type =
         bobura::timetable_model<
             boost::mpl::at<common_type_list_type, bobura::type::size>::type,
@@ -33,7 +35,7 @@ namespace
             boost::mpl::at<common_type_list_type, bobura::type::string>::type,
             boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
             boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type
         >;
 
     using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
@@ -44,7 +46,7 @@ namespace
 
     using confirm_file_save_type = bobura::load_save::confirm_file_save<load_save_traits_type>;
 
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
+    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
 
     using new_file_type = bobura::load_save::new_file<load_save_traits_type>;
 

@@ -25,7 +25,11 @@ namespace
 {
     // types
 
+    using detail_type_list_type = bobura::detail_type_list;
+
     using common_type_list_type = bobura::common_type_list;
+
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
     using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
@@ -36,14 +40,14 @@ namespace
             boost::mpl::at<common_type_list_type, bobura::type::string>::type,
             boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
             boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type
         >;
 
     using time_type = model_type::timetable_type::train_type::stop_type::time_type;
 
     using time_span_type = time_type::time_span_type;
 
-    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
+    using picture_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::picture_box>::type;
 
     using position_type = picture_box_type::position_type;
 
@@ -59,7 +63,7 @@ namespace
 
     using scale_type = boost::mpl::at<common_type_list_type, bobura::type::scale>::type;
 
-    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
+    using canvas_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::canvas>::type;
 
     using unit_size_type = canvas_type::unit_size_type;
 

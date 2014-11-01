@@ -110,6 +110,8 @@ namespace bobura
 
         using locale_type_list_type = locale_type_list<detail_type_list_type>;
     
+        using ui_type_list_type = ui_type_list<detail_type_list_type>;
+
         using ui_encoder_type = typename boost::mpl::at<locale_type_list_type, type::locale::ui_encoder>::type;
 
         using menu_details_type = typename boost::mpl::at<detail_type_list, type::detail::menu>::type;
@@ -119,7 +121,7 @@ namespace bobura
         using menu_command_type =
             tetengo2::gui::menu::command<string_type, ui_encoder_type, menu_details_type, virtual_key_details_type>;
 
-        using popup_menu_type = typename boost::mpl::at<ui_type_list, type::ui::popup_menu>::type;
+        using popup_menu_type = typename boost::mpl::at<ui_type_list_type, type::ui::popup_menu>::type;
 
         using menu_base_type = typename menu_command_type::base_type;
 
@@ -590,6 +592,8 @@ namespace bobura
 
         using locale_type_list_type = locale_type_list<detail_type_list_type>;
     
+        using ui_type_list_type = ui_type_list<detail_type_list_type>;
+
     }
 
     template class main_window_menu_builder<
@@ -599,8 +603,8 @@ namespace bobura
         typename boost::mpl::at<common_type_list_type, type::operating_distance>::type,
         typename boost::mpl::at<common_type_list_type, type::speed>::type,
         typename boost::mpl::at<common_type_list_type, type::scale>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
+        typename boost::mpl::at<ui_type_list_type, type::ui::fast_font>::type,
+        typename boost::mpl::at<ui_type_list_type, type::ui::menu_bar>::type,
         typename boost::mpl::at<locale_type_list_type, type::locale::message_catalog>::type,
         typename boost::mpl::at<traits_type_list, type::traits::command_set>::type,
         typename boost::mpl::at<traits_type_list, type::traits::main_window>::type

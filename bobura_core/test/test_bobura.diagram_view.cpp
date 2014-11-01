@@ -27,6 +27,8 @@ namespace
 
     using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+
     using model_type =
         bobura::timetable_model<
             boost::mpl::at<common_type_list_type, bobura::type::size>::type,
@@ -34,16 +36,16 @@ namespace
             boost::mpl::at<common_type_list_type, bobura::type::string>::type,
             boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
             boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type
         >;
 
     using speed_type = model_type::speed_type;
 
     using scale_type = boost::mpl::at<common_type_list_type, bobura::type::scale>::type;
 
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
+    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
 
-    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
+    using picture_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::picture_box>::type;
 
     using position_type = picture_box_type::position_type;
 

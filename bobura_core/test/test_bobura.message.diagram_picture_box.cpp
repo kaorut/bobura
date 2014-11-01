@@ -29,9 +29,11 @@ namespace
 
     using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+
     using view_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type;
 
-    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
+    using picture_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::picture_box>::type;
 
     using mouse_observer_set_type = picture_box_type::mouse_observer_set_type;
 
@@ -46,18 +48,18 @@ namespace
             boost::mpl::at<common_type_list_type, bobura::type::string>::type,
             boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
             boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type
         >;
 
     using view_type = bobura::diagram_view<view_traits_type>;
 
-    using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
+    using position_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::position>::type;
 
     using left_type = tetengo2::gui::position<position_type>::left_type;
 
     using top_type = tetengo2::gui::position<position_type>::top_type;
 
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
+    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
 
     using mouse_pressed_type = bobura::message::diagram_picture_box::mouse_pressed<picture_box_type, view_traits_type>;
 

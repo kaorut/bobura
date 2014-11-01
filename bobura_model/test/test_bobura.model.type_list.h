@@ -98,7 +98,7 @@ namespace test_bobura { namespace model
         >>>>>>>>;
 
 
-    /**** UI ****************************************************************/
+    /**** User Interface ****************************************************/
 
     namespace type { namespace ui
     {
@@ -215,7 +215,7 @@ namespace test_bobura { namespace model
 #endif
 
     /*!
-        \brief The UI type list.
+        \brief The user interface type list.
 
         \tparam DetailTypeList A detail type list.
     */

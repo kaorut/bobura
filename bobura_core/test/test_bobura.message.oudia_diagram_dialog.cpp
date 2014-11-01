@@ -17,9 +17,13 @@ namespace
 {
     // types
 
-    using dialog_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type;
+    using detail_type_list_type = bobura::detail_type_list;
 
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+
+    using dialog_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dialog>::type;
+
+    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
 
     class concrete_dialog : public dialog_type
     {

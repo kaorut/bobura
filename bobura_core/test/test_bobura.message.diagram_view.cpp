@@ -34,31 +34,33 @@ namespace
 
     using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+
     using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
     using difference_type = boost::mpl::at<common_type_list_type, bobura::type::difference>::type;
 
     using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
 
-    using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
+    using position_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::position>::type;
 
-    using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
+    using dimension_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dimension>::type;
 
     using operating_distance_type = boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type;
 
     using speed_type = boost::mpl::at<common_type_list_type, bobura::type::speed>::type;
 
-    using fast_font_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type;
+    using fast_font_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type;
 
-    using abstract_window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type;
+    using abstract_window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::abstract_window>::type;
 
-    using side_bar_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type;
+    using side_bar_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::side_bar>::type;
 
-    using map_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type;
+    using map_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::map_box>::type;
 
     using config_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type;
 
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
+    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
 
     using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
 

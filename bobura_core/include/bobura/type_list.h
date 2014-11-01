@@ -366,6 +366,7 @@ namespace bobura
             >;
 
         using color_type = tetengo2::gui::drawing::color;
+
         using button_type = tetengo2::gui::widget::button<widget_traits_type, widget_details_traits_type>;
 
         using dropdown_box_type = tetengo2::gui::widget::dropdown_box<widget_traits_type, widget_details_traits_type>;
@@ -407,6 +408,12 @@ namespace bobura
                 widget_traits_type, widget_details_traits_type, fast_drawing_details_type
             >;
 
+        using point_unit_size_type =
+            tetengo2::gui::unit::point<boost::rational<size_type>, unit_details_type>;
+
+        using popup_menu_type =
+            tetengo2::gui::menu::popup<string_type, ui_encoder_type, menu_details_type, virtual_key_details_type>;
+
         using shell_type = tetengo2::gui::shell<string_type, ui_encoder_type, shell_details_type>;
 
         using side_bar_type =
@@ -423,7 +430,12 @@ namespace bobura
     }}
 #endif
 
-    //! The type list for the user interface.
+    /*!
+        \brief The locale type list.
+
+        \tparam DetailTypeList A detail type list.
+    */
+    template <typename DetailTypeList>
     using ui_type_list =
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::abstract_window, detail::ui::abstract_window_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::button, detail::ui::button_type>,
@@ -444,21 +456,8 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::menu_bar, detail::ui::menu_bar_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::mouse_capture, detail::ui::mouse_capture_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::picture_box, detail::ui::picture_box_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::ui::point_unit_size,
-                tetengo2::gui::unit::point<boost::rational<detail::ui::size_type>, detail::ui::unit_details_type>
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::ui::popup_menu,
-                tetengo2::gui::menu::popup<
-                    detail::ui::string_type,
-                    detail::ui::ui_encoder_type,
-                    detail::ui::menu_details_type,
-                    detail::ui::virtual_key_details_type
-                >
-            >,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::point_unit_size, detail::ui::point_unit_size_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::popup_menu, detail::ui::popup_menu_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::position, detail::ui::position_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::shell, detail::ui::shell_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::side_bar, detail::ui::side_bar_type>,
@@ -490,11 +489,11 @@ namespace bobura
     {
         using string_type = bobura::detail::string_type;
 
-        using widget_traits_type = boost::mpl::at<ui_type_list, type::ui::widget_traits>::type;
+        using widget_traits_type = bobura::detail::ui::widget_traits_type;
 
         using common_dialog_details_type = boost::mpl::at<detail_type_list, type::detail::common_dialog>::type;
 
-        using widget_details_traits_type = boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type;
+        using widget_details_traits_type = bobura::detail::ui::widget_details_traits_type;
 
         using menu_details_type = boost::mpl::at<detail_type_list, type::detail::menu>::type;
 
@@ -507,7 +506,7 @@ namespace bobura
             boost::mpl::pair<
                 type::common_dialog::color,
                 tetengo2::gui::common_dialog::color<
-                    boost::mpl::at<ui_type_list, type::ui::color>::type,
+                    bobura::detail::ui::color_type,
                     detail::common_dialog::widget_traits_type,
                     detail::common_dialog::common_dialog_details_type,
                     detail::common_dialog::widget_details_traits_type,
@@ -540,7 +539,7 @@ namespace bobura
             boost::mpl::pair<
                 type::common_dialog::font,
                 tetengo2::gui::common_dialog::font<
-                    boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
+                    bobura::detail::ui::fast_font_type,
                     detail::common_dialog::widget_traits_type,
                     detail::common_dialog::common_dialog_details_type,
                     detail::common_dialog::widget_details_traits_type,
@@ -585,9 +584,9 @@ namespace bobura
 
         using string_type = bobura::detail::string_type;
 
-        using position_type = boost::mpl::at<ui_type_list, type::ui::position>::type;
+        using position_type = bobura::detail::ui::position_type;
 
-        using dimension_type = boost::mpl::at<ui_type_list, type::ui::dimension>::type;
+        using dimension_type = bobura::detail::ui::dimension_type;
 
         using operating_distance_type = bobura::detail::operating_distance_type;
 
@@ -595,17 +594,17 @@ namespace bobura
 
         using scale_type = bobura::detail::scale_type;
 
-        using fast_canvas_type = boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type;
+        using fast_canvas_type = bobura::detail::ui::fast_canvas_type;
 
-        using fast_font_type = boost::mpl::at<ui_type_list, type::ui::fast_font>::type;
+        using fast_font_type = bobura::detail::ui::fast_font_type;
 
-        using dialog_type = boost::mpl::at<ui_type_list, type::ui::dialog>::type;
+        using dialog_type = bobura::detail::ui::dialog_type;
 
-        using abstract_window_type = boost::mpl::at<ui_type_list, type::ui::abstract_window>::type;
+        using abstract_window_type = bobura::detail::ui::abstract_window_type;
 
-        using picture_box_type = boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
+        using picture_box_type = bobura::detail::ui::picture_box_type;
 
-        using mouse_capture_type = boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type;
+        using mouse_capture_type = bobura::detail::ui::mouse_capture_type;
 
         using message_catalog_type = bobura::detail::locale::message_catalog_type<detail_type_list>;
 
@@ -616,15 +615,15 @@ namespace bobura
                 dimension_type,
                 dialog_type,
                 abstract_window_type,
-                boost::mpl::at<ui_type_list, type::ui::label>::type,
-                boost::mpl::at<ui_type_list, type::ui::link_label>::type,
-                boost::mpl::at<ui_type_list, type::ui::image>::type,
-                boost::mpl::at<ui_type_list, type::ui::button>::type,
-                boost::mpl::at<ui_type_list, type::ui::text_box>::type,
-                boost::mpl::at<ui_type_list, type::ui::list_box>::type,
-                boost::mpl::at<ui_type_list, type::ui::dropdown_box>::type,
+                bobura::detail::ui::label_type,
+                bobura::detail::ui::link_label_type,
+                bobura::detail::ui::image_type,
+                bobura::detail::ui::button_type,
+                bobura::detail::ui::text_box_type,
+                bobura::detail::ui::list_box_type,
+                bobura::detail::ui::dropdown_box_type,
                 picture_box_type,
-                boost::mpl::at<ui_type_list, type::ui::transparent_background>::type,
+                bobura::detail::ui::transparent_background_type,
                 message_catalog_type
             >;
 
@@ -657,7 +656,7 @@ namespace bobura
                 speed_type,
                 scale_type,
                 fast_canvas_type,
-                boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
+                bobura::detail::ui::fast_solid_background_type,
                 message_catalog_type
             >;
 
@@ -669,11 +668,11 @@ namespace bobura
                 boost::mpl::at<detail_type_list, type::detail::config>::type
             >;
 
-        using map_box_type = boost::mpl::at<ui_type_list, type::ui::map_box>::type;
+        using map_box_type = bobura::detail::ui::map_box_type;
 
-        using side_bar_type = boost::mpl::at<ui_type_list, type::ui::side_bar>::type;
+        using side_bar_type = bobura::detail::ui::side_bar_type;
 
-        using popup_menu_type = boost::mpl::at<ui_type_list, type::ui::popup_menu>::type;
+        using popup_menu_type = bobura::detail::ui::popup_menu_type;
 
         using message_loop_details_type = boost::mpl::at<detail_type_list, type::detail::message_loop>::type;
 
@@ -686,7 +685,7 @@ namespace bobura
                 dimension_type,
                 operating_distance_type,
                 speed_type,
-                boost::mpl::at<ui_type_list, type::ui::window>::type,
+                bobura::detail::ui::window_type,
                 picture_box_type,
                 map_box_type,
                 side_bar_type,
@@ -719,11 +718,11 @@ namespace bobura
                 position_type,
                 dimension_type,
                 dialog_type,
-                boost::mpl::at<ui_type_list, type::ui::color>::type,
-                boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
+                bobura::detail::ui::color_type,
+                bobura::detail::ui::point_unit_size_type,
                 fast_canvas_type,
                 scale_type,
-                boost::mpl::at<ui_type_list, type::ui::shell>::type,
+                bobura::detail::ui::shell_type,
                 boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
                 boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
                 message_catalog_type,
@@ -743,7 +742,7 @@ namespace bobura
 
         using timer_type =
             tetengo2::gui::timer<
-                boost::mpl::at<ui_type_list, type::ui::widget>::type,
+                bobura::detail::ui::widget_type,
                 boost::mpl::at<detail_type_list, type::detail::timer>::type
             >;
 
@@ -763,7 +762,7 @@ namespace bobura
                 picture_box_type,
                 map_box_type,
                 side_bar_type,
-                boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
+                bobura::detail::ui::menu_bar_type,
                 popup_menu_type,
                 message_loop_type,
                 mouse_capture_type,

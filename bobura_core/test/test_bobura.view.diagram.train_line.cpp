@@ -31,6 +31,8 @@ namespace
 
     using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+
     using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
 
     using model_type =
@@ -40,7 +42,7 @@ namespace
             string_type,
             boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
             boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type
         >;
     
     using train_type = model_type::timetable_type::train_type;
@@ -55,7 +57,7 @@ namespace
 
     using station_intervals_type = station_interval_calculator_type::station_intervals_type;
 
-    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
+    using picture_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::picture_box>::type;
 
     using position_type = picture_box_type::position_type;
 
@@ -71,7 +73,7 @@ namespace
 
     using scale_type = boost::mpl::at<common_type_list_type, bobura::type::scale>::type;
 
-    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
+    using canvas_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::canvas>::type;
 
     using color_type = canvas_type::color_type;
 

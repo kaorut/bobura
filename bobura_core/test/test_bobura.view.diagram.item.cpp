@@ -24,11 +24,15 @@ namespace
 {
     // types
 
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
+    using detail_type_list_type = bobura::detail_type_list;
 
-    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
-    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
+    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
+
+    using picture_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::picture_box>::type;
+
+    using canvas_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::canvas>::type;
 
     using position_type = canvas_type::position_type;
 

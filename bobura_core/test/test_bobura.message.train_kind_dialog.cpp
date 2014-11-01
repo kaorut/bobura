@@ -31,21 +31,23 @@ namespace
 
     using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+
     using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
     using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
 
     using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
 
-    using list_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::list_box>::type;
+    using list_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::list_box>::type;
 
-    using dialog_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type;
+    using dialog_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dialog>::type;
 
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
+    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
 
     using dimension_type = window_type::dimension_type;
 
-    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
+    using canvas_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::canvas>::type;
 
     using font_type = canvas_type::font_type;
 
@@ -64,7 +66,7 @@ namespace
             string_type,
             boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
             boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type
         >;
 
         using train_kind_type = model_type::timetable_type::train_kind_type;

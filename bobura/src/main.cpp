@@ -39,13 +39,15 @@ namespace
 
     using common_type_list_type = bobura::common_type_list;
 
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+
     using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
     using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
 
-    using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
+    using position_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::position>::type;
 
-    using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
+    using dimension_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dimension>::type;
 
     using config_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type;
 

@@ -25,7 +25,11 @@ namespace
 {
     // types
 
+    using detail_type_list_type = bobura::detail_type_list;
+
     using common_type_list_type = bobura::common_type_list;
+
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
     using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
@@ -38,7 +42,7 @@ namespace
             string_type,
             boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
             boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type
         >;
 
     using station_location_type = model_type::timetable_type::station_location_type;
