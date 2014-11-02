@@ -233,7 +233,7 @@ namespace bobura
         tetengo2::meta::assoc_list_end
         >>>>>>>>>>>>>>>>>>>>;
 #else
-        tetengo2::meta::assoc_list<tetengo2::meta::assoc_list_end>;
+        tetengo2::meta::assoc_list_end;
 #endif
 
     /*!
