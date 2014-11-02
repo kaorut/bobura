@@ -31,6 +31,7 @@
 #include <bobura/dialog_traits.h>
 #include <bobura/load_save/traits.h>
 #include <bobura/main_window_traits.h>
+#include <bobura/main_window_menu_builder_traits.h>
 #include <bobura/oudia_diagram_dialog.h>
 #include <bobura/view/diagram/traits.h>
 
@@ -896,7 +897,9 @@ namespace bobura
 
         template <typename DetailTypeList>
         using message_loop_type =
-            tetengo2::gui::message::message_loop<abstract_window_type<DetailTypeList>, message_loop_details_type<DetailTypeList>>;
+            tetengo2::gui::message::message_loop<
+                abstract_window_type<DetailTypeList>, message_loop_details_type<DetailTypeList>
+            >;
 
         template <typename DetailTypeList>
         using timer_type =

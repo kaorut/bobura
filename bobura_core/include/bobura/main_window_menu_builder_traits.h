@@ -40,7 +40,7 @@ namespace bobura
         typename CommandSetTraits,
         typename MainWindowTraits
     >
-    class main_window_traits
+    class main_window_menu_builder_traits
     {
     public:
         // types
@@ -73,7 +73,7 @@ namespace bobura
         using message_catalog_type = MessageCatalog;
 
         //! The command set traits type.
-        using command_set_traits = CommandSetTraits;
+        using command_set_traits_type = CommandSetTraits;
 
         //! The main window traits type.
         using main_window_traits_type = MainWindowTraits;

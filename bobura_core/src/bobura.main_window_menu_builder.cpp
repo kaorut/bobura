@@ -17,6 +17,7 @@
 
 #include <bobura/diagram_view.h>
 #include <bobura/main_window_menu_builder.h>
+#include <bobura/main_window_menu_builder_traits.h>
 #include <bobura/message/type_list_impl.h>
 #include <bobura/type_list.h>
 #include <bobura/view/scale_list.h>
@@ -24,41 +25,17 @@
 
 namespace bobura
 {
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Font,
-        typename MenuBar,
-        typename MessageCatalog,
-        typename CommandSetTraits,
-        typename MainWindowTraits
-    >
-    class main_window_menu_builder<
-        Size,
-        Difference,
-        String,
-        OperatingDistance,
-        Speed,
-        Scale,
-        Font,
-        MenuBar,
-        MessageCatalog,
-        CommandSetTraits,
-        MainWindowTraits
-    >::impl
+    template <typename Traits>
+    class main_window_menu_builder<Traits>::impl
     {
     public:
         // types
 
+        using traits_type = typename main_window_menu_builder::traits_type;
+
         using size_type = typename main_window_menu_builder::size_type;
 
         using string_type = typename main_window_menu_builder::string_type;
-
-        using scale_type = typename main_window_menu_builder::scale_type;
 
         using menu_bar_type = typename main_window_menu_builder::menu_bar_type;
 
@@ -105,6 +82,8 @@ namespace bobura
 
     private:
         // types
+
+        using scale_type = typename traits_type::scale_type;
 
         using detail_type_list_type = detail_type_list_for_application;
 
@@ -477,32 +456,8 @@ namespace bobura
     };
 
 
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Font,
-        typename MenuBar,
-        typename MessageCatalog,
-        typename CommandSetTraits,
-        typename MainWindowTraits
-    >
-    main_window_menu_builder<
-        Size,
-        Difference,
-        String,
-        OperatingDistance,
-        Speed,
-        Scale,
-        Font,
-        MenuBar,
-        MessageCatalog,
-        CommandSetTraits,
-        MainWindowTraits
-    >::main_window_menu_builder(
+    template <typename Traits>
+    main_window_menu_builder<Traits>::main_window_menu_builder(
         const command_set_type&     command_set,
         model_type&                 model,
         main_window_type&           main_window,
@@ -512,75 +467,13 @@ namespace bobura
     m_p_impl(tetengo2::stdalt::make_unique<impl>(command_set, model, main_window, message_catalog))
     {}
 
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Font,
-        typename MenuBar,
-        typename MessageCatalog,
-        typename CommandSetTraits,
-        typename MainWindowTraits
-    >
-    main_window_menu_builder<
-        Size,
-        Difference,
-        String,
-        OperatingDistance,
-        Speed,
-        Scale,
-        Font,
-        MenuBar,
-        MessageCatalog,
-        CommandSetTraits,
-        MainWindowTraits
-    >::~main_window_menu_builder()
+    template <typename Traits>
+    main_window_menu_builder<Traits>::~main_window_menu_builder()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Font,
-        typename MenuBar,
-        typename MessageCatalog,
-        typename CommandSetTraits,
-        typename MainWindowTraits
-    >
-    std::unique_ptr<
-        typename main_window_menu_builder<
-            Size,
-            Difference,
-            String,
-            OperatingDistance,
-            Speed,
-            Scale,
-            Font,
-            MenuBar,
-            MessageCatalog,
-            CommandSetTraits,
-            MainWindowTraits
-        >::menu_bar_type
-    > main_window_menu_builder<
-        Size,
-        Difference,
-        String,
-        OperatingDistance,
-        Speed,
-        Scale,
-        Font,
-        MenuBar,
-        MessageCatalog,
-        CommandSetTraits,
-        MainWindowTraits
-    >::build()
+    template <typename Traits>
+    std::unique_ptr<typename main_window_menu_builder<Traits>::menu_bar_type> main_window_menu_builder<Traits>::build()
     const
     {
         return m_p_impl->build();
@@ -603,17 +496,19 @@ namespace bobura
 
 
     template class main_window_menu_builder<
-        typename boost::mpl::at<common_type_list_type, type::size>::type,
-        typename boost::mpl::at<common_type_list_type, type::difference>::type,
-        typename boost::mpl::at<common_type_list_type, type::string>::type,
-        typename boost::mpl::at<common_type_list_type, type::operating_distance>::type,
-        typename boost::mpl::at<common_type_list_type, type::speed>::type,
-        typename boost::mpl::at<common_type_list_type, type::scale>::type,
-        typename boost::mpl::at<ui_type_list_type, type::ui::fast_font>::type,
-        typename boost::mpl::at<ui_type_list_type, type::ui::menu_bar>::type,
-        typename boost::mpl::at<locale_type_list_type, type::locale::message_catalog>::type,
-        typename boost::mpl::at<traits_type_list_type, type::traits::command_set>::type,
-        typename boost::mpl::at<traits_type_list_type, type::traits::main_window>::type
+        main_window_menu_builder_traits<
+            typename boost::mpl::at<common_type_list_type, type::size>::type,
+            typename boost::mpl::at<common_type_list_type, type::difference>::type,
+            typename boost::mpl::at<common_type_list_type, type::string>::type,
+            typename boost::mpl::at<common_type_list_type, type::operating_distance>::type,
+            typename boost::mpl::at<common_type_list_type, type::speed>::type,
+            typename boost::mpl::at<common_type_list_type, type::scale>::type,
+            typename boost::mpl::at<ui_type_list_type, type::ui::fast_font>::type,
+            typename boost::mpl::at<ui_type_list_type, type::ui::menu_bar>::type,
+            typename boost::mpl::at<locale_type_list_type, type::locale::message_catalog>::type,
+            typename boost::mpl::at<traits_type_list_type, type::traits::command_set>::type,
+            typename boost::mpl::at<traits_type_list_type, type::traits::main_window>::type
+        >
     >;
 
 
