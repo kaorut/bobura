@@ -53,43 +53,61 @@ namespace test_bobura { namespace model
 #if !defined(DOCUMENTATION)
     namespace detail { namespace detail
     {
-        using alert_details_type = tetengo2::detail::stub::alert;
+        namespace test
+        {
+            using alert_details_type = tetengo2::detail::stub::alert;
+
 #if BOOST_COMP_MSVC
-        using config_details_type = tetengo2::detail::windows::config;
+            using config_details_type = tetengo2::detail::windows::config;
 #else
-        using config_details_type = tetengo2::detail::unixos::config;
+            using config_details_type = tetengo2::detail::unixos::config;
 #endif
-        using cursor_details_type = tetengo2::detail::stub::cursor;
-        using drawing_details_type = tetengo2::detail::stub::drawing;
+
+            using cursor_details_type = tetengo2::detail::stub::cursor;
+
+            using drawing_details_type = tetengo2::detail::stub::drawing;
+
 #if BOOST_COMP_MSVC
-        using encoding_details_type = tetengo2::detail::windows::encoding;
+            using encoding_details_type = tetengo2::detail::windows::encoding;
 #else
-        using encoding_details_type = tetengo2::detail::unixos::encoding;
+            using encoding_details_type = tetengo2::detail::unixos::encoding;
 #endif
-        using icon_details_type = tetengo2::detail::stub::icon;
-        using message_handler_details_type = tetengo2::detail::stub::message_handler;
-        using menu_details_type = tetengo2::detail::stub::menu;
-        using scroll_details_type = tetengo2::detail::stub::scroll;
-        using virtual_key_details_type = tetengo2::detail::stub::virtual_key;
-        using widget_details_type = tetengo2::detail::stub::widget;
+
+            using icon_details_type = tetengo2::detail::stub::icon;
+
+            using message_handler_details_type = tetengo2::detail::stub::message_handler;
+
+            using menu_details_type = tetengo2::detail::stub::menu;
+
+            using scroll_details_type = tetengo2::detail::stub::scroll;
+
+            using virtual_key_details_type = tetengo2::detail::stub::virtual_key;
+
+            using widget_details_type = tetengo2::detail::stub::widget;
+
+        }
+
     }}
 #endif
 
-    //! The detail type list.
-    using detail_type_list =
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::alert, detail::detail::alert_details_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::config, detail::detail::config_details_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::drawing, detail::detail::drawing_details_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::cursor, detail::detail::cursor_details_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::encoding, detail::detail::encoding_details_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::icon, detail::detail::icon_details_type>,
+    /*!
+        \brief The detail type list for the testing.
+    */
+    using detail_type_list_for_test =
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::alert, detail::detail::test::alert_details_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::config, detail::detail::test::config_details_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::drawing, detail::detail::test::drawing_details_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::cursor, detail::detail::test::cursor_details_type>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::detail::message_handler, detail::detail::message_handler_details_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::menu, detail::detail::menu_details_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::scroll, detail::detail::scroll_details_type>,
+            boost::mpl::pair<type::detail::encoding, detail::detail::test::encoding_details_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::icon, detail::detail::test::icon_details_type>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::detail::message_handler, detail::detail::test::message_handler_details_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::menu, detail::detail::test::menu_details_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::scroll, detail::detail::test::scroll_details_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<
-            type::detail::virtual_key, detail::detail::virtual_key_details_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::widget, detail::detail::widget_details_type>,
+            type::detail::virtual_key, detail::detail::test::virtual_key_details_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::widget, detail::detail::test::widget_details_type>,
         tetengo2::meta::assoc_list_end
         >>>>>>>>>>>;
 

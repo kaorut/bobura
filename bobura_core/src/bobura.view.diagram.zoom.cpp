@@ -226,11 +226,21 @@ namespace bobura { namespace view { namespace diagram
     }
 
 
+    namespace
+    {
+        using detail_type_list_type = detail_type_list_for_application;
+
+        using ui_type_list_type = ui_type_list<detail_type_list_type>;
+
+        using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+    }
+
     template class zoom<
-        typename boost::mpl::at<traits_type_list, type::traits::view>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::abstract_window>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::picture_box>::type,
-        typename boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type
+        typename boost::mpl::at<traits_type_list_type, type::traits::view>::type,
+        typename boost::mpl::at<ui_type_list_type, type::ui::abstract_window>::type,
+        typename boost::mpl::at<ui_type_list_type, type::ui::picture_box>::type,
+        typename boost::mpl::at<ui_type_list_type, type::ui::mouse_capture>::type
     >;
 
 

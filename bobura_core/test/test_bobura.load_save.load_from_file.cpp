@@ -29,17 +29,27 @@ namespace
 {
     // types
 
-    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
+    using detail_type_list_type = bobura::detail_type_list_for_test;
 
-    using difference_type = boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type;
+    using common_type_list_type = bobura::common_type_list;
 
-    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
+    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
-    using operating_distance_type = boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type;
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
-    using speed_type = boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type;
+    using common_dialog_type_list_type = bobura::common_dialog_type_list<detail_type_list_type>;
 
-    using fast_font_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type;
+    using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
+
+    using difference_type = boost::mpl::at<common_type_list_type, bobura::type::difference>::type;
+
+    using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
+
+    using operating_distance_type = boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type;
+
+    using speed_type = boost::mpl::at<common_type_list_type, bobura::type::speed>::type;
+
+    using fast_font_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type;
 
     using model_type =
         bobura::timetable_model<
@@ -47,11 +57,11 @@ namespace
         >;
 
     using message_catalog_type_ =
-        boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
+        boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
 
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
+    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
 
-    using dialog_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type;
+    using dialog_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dialog>::type;
 
     struct oudia_diagram_dialog_type : public dialog_type
     {
@@ -114,19 +124,19 @@ namespace
             size_type,
             difference_type,
             string_type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::input_stream_iterator>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::output_stream>::type,
+            boost::mpl::at<common_type_list_type, bobura::type::input_stream_iterator>::type,
+            boost::mpl::at<common_type_list_type, bobura::type::output_stream>::type,
             operating_distance_type,
             speed_type,
             fast_font_type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type,
-            boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::message_box>::type,
-            boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::file_open_dialog>::type,
-            boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::file_save_dialog>::type,
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::abstract_window>::type,
+            boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::message_box>::type,
+            boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::file_open>::type,
+            boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::file_save>::type,
             oudia_diagram_dialog_type,
             message_catalog_type_,
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::timetable_file_encoder>::type,
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::windia_file_encoder>::type
+            boost::mpl::at<locale_type_list_type, bobura::type::locale::timetable_file_encoder>::type,
+            boost::mpl::at<locale_type_list_type, bobura::type::locale::windia_file_encoder>::type
         >;
 
     using save_to_file_type = bobura::load_save::save_to_file<load_save_traits_type>;

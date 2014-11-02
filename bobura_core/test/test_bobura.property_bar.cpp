@@ -20,28 +20,38 @@ namespace
 {
     // types
 
-    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
+    using detail_type_list_type = bobura::detail_type_list_for_test;
 
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
+    using common_type_list_type = bobura::common_type_list;
 
-    using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
+    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
-    using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
-    using config_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type;
+    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+
+    using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
+
+    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
+
+    using position_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::position>::type;
+
+    using dimension_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dimension>::type;
+
+    using config_traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::config>::type;
 
     using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
 
-    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
+    using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
 
     using property_bar_type =
         bobura::property_bar<
             string_type,
             position_type,
             dimension_type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type,
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::abstract_window>::type,
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::side_bar>::type,
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::map_box>::type,
             message_catalog_type,
             config_traits_type
         >;

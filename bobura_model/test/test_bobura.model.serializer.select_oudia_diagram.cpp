@@ -25,18 +25,23 @@ namespace
 {
     // types
 
-    using size_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
+    using detail_type_list_type = test_bobura::model::detail_type_list_for_test;
 
-    using string_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+    using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
 
-    using window_type =
-        boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::window>::type;
+    using ui_type_list_type = test_bobura::model::ui_type_list<detail_type_list_type>;
 
-    using io_string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type;
+    using size_type_ = boost::mpl::at<common_type_list_type, test_bobura::model::type::size>::type;
+
+    using string_type_ = boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type;
+
+    using window_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::window>::type;
+
+    using io_string_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::io_string>::type;
 
     using input_stream_iterator_type = boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
 
-    using encoder_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type;
+    using encoder_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::encoder>::type;
 
     using message_catalog_type_ =
         tetengo2::message::message_catalog<
@@ -50,7 +55,7 @@ namespace
         using string_type = string_type_;
 
         using abstract_window_type =
-            boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::abstract_window>::type;
+            boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::abstract_window>::type;
 
         using message_catalog_type = message_catalog_type_;
 

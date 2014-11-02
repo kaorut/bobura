@@ -31,18 +31,24 @@ namespace
 {
     // types
 
-    using size_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
+    using detail_type_list_type = test_bobura::model::detail_type_list_for_test;
 
-    using difference_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type;
+    using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
 
-    using string_type_ = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+    using ui_type_list_type = test_bobura::model::ui_type_list<detail_type_list_type>;
+
+    using size_type_ = boost::mpl::at<common_type_list_type, test_bobura::model::type::size>::type;
+
+    using difference_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::difference>::type;
+
+    using string_type_ = boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type;
 
     using operating_distance_type =
-        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::operating_distance>::type;
+        boost::mpl::at<common_type_list_type, test_bobura::model::type::operating_distance>::type;
 
-    using speed_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::speed>::type;
+    using speed_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::speed>::type;
 
-    using font_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::font>::type;
+    using font_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::font>::type;
 
     using timetable_type =
         bobura::model::timetable<
@@ -53,7 +59,7 @@ namespace
 
     using train_kind_type = timetable_type::train_kind_type;
 
-    using color_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::color>::type;
+    using color_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::color>::type;
 
     using train_type = timetable_type::train_type;
 
@@ -64,7 +70,7 @@ namespace
     using input_stream_iterator_type =
         boost::spirit::multi_pass<
             std::istreambuf_iterator<
-                boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_string>::type::value_type
+                boost::mpl::at<common_type_list_type, test_bobura::model::type::io_string>::type::value_type
             >
         >;
 
@@ -74,10 +80,10 @@ namespace
 
         using string_type = string_type_;
 
-        using encoder_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::encoder>::type;
+        using encoder_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::encoder>::type;
 
         using abstract_window_type =
-            boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::abstract_window>::type;
+            boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::abstract_window>::type;
 
         using message_catalog_type =
             tetengo2::message::message_catalog<
@@ -115,7 +121,7 @@ namespace
             speed_type,
             select_diagram_type,
             font_type,
-            boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::io_encoder>::type
+            boost::mpl::at<common_type_list_type, test_bobura::model::type::io_encoder>::type
         >;
 
     using error_type = reader_type::error_type;

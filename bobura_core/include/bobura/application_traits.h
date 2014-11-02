@@ -31,6 +31,8 @@ namespace bobura
         \tparam SideBar           A side bar type.
         \tparam MenuBar           A menu bar type.
         \tparam PopupMenu         A popup menu type.
+        \tparam MenuCommand       A menu command type.
+        \tparam MenuSeparator     A menu separator type.
         \tparam MessageLoop       A message loop type.
         \tparam MouseCapture      A mouse capture_type.
         \tparam Timer             A timer type.
@@ -58,6 +60,8 @@ namespace bobura
         typename SideBar,
         typename MenuBar,
         typename PopupMenu,
+        typename MenuCommand,
+        typename MenuSeparator,
         typename MessageLoop,
         typename MouseCapture,
         typename Timer,
@@ -120,6 +124,12 @@ namespace bobura
 
         //! The popup menu type.
         using popup_menu_type = PopupMenu;
+
+        //! The menu command type.
+        using menu_command_type = MenuCommand;
+
+        //! The menu separator type.
+        using menu_separator_type = MenuSeparator;
 
         //! The message loop type.
         using message_loop_type = MessageLoop;

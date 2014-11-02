@@ -31,6 +31,7 @@
 #include <bobura/dialog_traits.h>
 #include <bobura/load_save/traits.h>
 #include <bobura/main_window_traits.h>
+#include <bobura/main_window_menu_builder_traits.h>
 #include <bobura/oudia_diagram_dialog.h>
 #include <bobura/view/diagram/traits.h>
 
@@ -54,25 +55,37 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail
     {
+        using difference_type = std::ptrdiff_t;
+
         using size_type = std::size_t;
+
         using string_type = std::wstring;
+
         using io_string_type = std::string;
+
         using input_stream_iterator_type =
             boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
+
+        using output_stream_type = std::basic_ostream<io_string_type::value_type>;
+
         using operating_distance_type = boost::rational<size_type>;
+
         using speed_type = boost::rational<size_type>;
+
         using scale_type = boost::rational<size_type>;
+
     }
 #endif
 
-    //! The common type list.
+    /*!
+        \brief The common type list.
+    */
     using common_type_list =
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::difference, std::ptrdiff_t>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::difference, detail::difference_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::size, detail::size_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::string, detail::string_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::string, bobura::detail::string_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::input_stream_iterator, detail::input_stream_iterator_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::output_stream, std::basic_ostream<detail::io_string_type::value_type>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::output_stream, detail::output_stream_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::operating_distance, detail::operating_distance_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::speed, detail::speed_type>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::scale, detail::scale_type>,
@@ -97,70 +110,127 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace locale
     {
-        using string_type = boost::mpl::at<common_type_list, type::string>::type;
-        using encoding_details_type = boost::mpl::at<detail_type_list, type::detail::encoding>::type;
-        using internal_encoding_type = tetengo2::text::encoding::locale<string_type, encoding_details_type>;
-        using utf8_encoding_type = tetengo2::text::encoding::utf8<encoding_details_type>;
-        using cp932_encoding_type = tetengo2::text::encoding::cp932<encoding_details_type>;
-        using exception_encoding_type = utf8_encoding_type;
+        using string_type = bobura::detail::string_type;
+
+        template <typename DetailTypeList>
+        using encoding_details_type = typename boost::mpl::at<DetailTypeList, type::detail::encoding>::type;
+
+        template <typename DetailTypeList>
+        using internal_encoding_type =
+            tetengo2::text::encoding::locale<string_type, encoding_details_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
+        using utf8_encoding_type = tetengo2::text::encoding::utf8<encoding_details_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
+        using cp932_encoding_type = tetengo2::text::encoding::cp932<encoding_details_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
+        using exception_encoding_type = utf8_encoding_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using exception_encoder_type =
+            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, exception_encoding_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
         using ui_encoding_type =
             tetengo2::text::encoding::locale<
-                boost::mpl::at<detail_type_list, type::detail::widget>::type::string_type, encoding_details_type
+                typename boost::mpl::at<DetailTypeList, type::detail::widget>::type::string_type,
+                encoding_details_type<DetailTypeList>
             >;
+
+        template <typename DetailTypeList>
+        using ui_encoder_type =
+            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, ui_encoding_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
         using config_encoding_type =
             tetengo2::text::encoding::locale<
-                boost::mpl::at<detail_type_list, type::detail::config>::type::string_type, encoding_details_type
+                typename boost::mpl::at<DetailTypeList, type::detail::config>::type::string_type,
+                encoding_details_type<DetailTypeList>
             >;
-        using message_catalog_encoding_type = utf8_encoding_type;
+
+        template <typename DetailTypeList>
+        using config_encoder_type =
+            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, config_encoding_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
+        using message_catalog_encoding_type = utf8_encoding_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
         using message_catalog_encoder_type =
-            tetengo2::text::encoder<internal_encoding_type, message_catalog_encoding_type>;
-        using locale_name_encoding_type = tetengo2::text::encoding::locale<std::string, encoding_details_type>;
-        using locale_name_encoder_type = tetengo2::text::encoder<internal_encoding_type, locale_name_encoding_type>;
+            tetengo2::text::encoder<
+                internal_encoding_type<DetailTypeList>, message_catalog_encoding_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
+        using locale_name_encoding_type =
+            tetengo2::text::encoding::locale<std::string, encoding_details_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
+        using locale_name_encoder_type =
+            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, locale_name_encoding_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
         using message_catalog_type =
             tetengo2::message::message_catalog<
-                boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
+                bobura::detail::input_stream_iterator_type,
                 string_type,
                 size_type,
-                message_catalog_encoder_type,
-                locale_name_encoder_type
+                message_catalog_encoder_type<DetailTypeList>,
+                locale_name_encoder_type<DetailTypeList>
             >;
-        using timetable_file_encoding_type = utf8_encoding_type;
+
+        template <typename DetailTypeList>
+        using timetable_file_encoding_type = utf8_encoding_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
         using timetable_file_encoder_type =
-            tetengo2::text::encoder<internal_encoding_type, timetable_file_encoding_type>;
-        using windia_file_encoding_type = cp932_encoding_type;
-        using windia_file_encoder_type = tetengo2::text::encoder<internal_encoding_type, windia_file_encoding_type>;
+            tetengo2::text::encoder<
+                internal_encoding_type<DetailTypeList>, timetable_file_encoding_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
+        using windia_file_encoding_type = cp932_encoding_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using windia_file_encoder_type =
+            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, windia_file_encoding_type<DetailTypeList>>;
+
     }}
 #endif
 
-    //! The type list for the locale.
+    /*!
+        \brief The locale type list.
+
+        \tparam DetailTypeList A detail type list.
+    */
+    template <typename DetailTypeList>
     using locale_type_list =
         tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::locale::exception_encoder, detail::locale::exception_encoder_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::locale::config_encoder, detail::locale::config_encoder_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::locale::ui_encoder, detail::locale::ui_encoder_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
             boost::mpl::pair<
-                type::locale::exception_encoder,
-                tetengo2::text::encoder<
-                    detail::locale::internal_encoding_type, detail::locale::exception_encoding_type
-                >
+                type::locale::message_catalog_encoder, detail::locale::message_catalog_encoder_type<DetailTypeList>
             >,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
-                type::locale::config_encoder,
-                tetengo2::text::encoder<detail::locale::internal_encoding_type, detail::locale::config_encoding_type>
+                type::locale::locale_name_encoder, detail::locale::locale_name_encoder_type<DetailTypeList>
+            >,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::locale::message_catalog, detail::locale::message_catalog_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<
+                type::locale::timetable_file_encoder, detail::locale::timetable_file_encoder_type<DetailTypeList>
             >,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
-                type::locale::ui_encoder,
-                tetengo2::text::encoder<detail::locale::internal_encoding_type, detail::locale::ui_encoding_type>
+                type::locale::windia_file_encoder, detail::locale::windia_file_encoder_type<DetailTypeList>
             >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::locale::message_catalog_encoder, detail::locale::message_catalog_encoder_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::locale::locale_name_encoder, detail::locale::locale_name_encoder_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::locale::message_catalog, detail::locale::message_catalog_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::locale::timetable_file_encoder, detail::locale::timetable_file_encoder_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::locale::windia_file_encoder, detail::locale::windia_file_encoder_type>,
         tetengo2::meta::assoc_list_end
         >>>>>>>>;
 
@@ -185,6 +255,8 @@ namespace bobura
         struct list_box;       //!< The list box type.
         struct map_box;        //!< The map box type.
         struct menu_bar;       //!< The menu bar type.
+        struct menu_command;   //!< The menu command type.
+        struct menu_separator; //!< The menu separator type.
         struct mouse_capture;  //!< The mouse capture type.
         struct picture_box;    //!< The picture box type.
         struct point_unit_size; //!< The point unit size type.
@@ -203,163 +275,347 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace ui
     {
-        using size_type = boost::mpl::at<common_type_list, type::size>::type;
-        using difference_type = boost::mpl::at<common_type_list, type::difference>::type;
-        using string_type = boost::mpl::at<common_type_list, type::string>::type;
-        using ui_encoder_type = boost::mpl::at<locale_type_list, type::locale::ui_encoder>::type;
-        using unit_details_type = boost::mpl::at<detail_type_list, type::detail::unit>::type;
-        using drawing_details_type = boost::mpl::at<detail_type_list, type::detail::drawing>::type;
-        using fast_drawing_details_type = boost::mpl::at<detail_type_list, type::detail::fast_drawing>::type;
-        using icon_details_type = boost::mpl::at<detail_type_list, type::detail::icon>::type;
-        using virtual_key_details_type = boost::mpl::at<detail_type_list, type::detail::virtual_key>::type;
-        using menu_details_type = boost::mpl::at<detail_type_list, type::detail::menu>::type;
-        using shell_details_type = boost::mpl::at<detail_type_list, type::detail::shell>::type;
-        using system_color_details_type = boost::mpl::at<detail_type_list, type::detail::system_color>::type;
-        using mouse_capture_details_type = boost::mpl::at<detail_type_list, type::detail::mouse_capture>::type;
-        using unit_difference_type = tetengo2::gui::unit::em<boost::rational<difference_type>, unit_details_type>;
-        using position_type = std::pair<unit_difference_type, unit_difference_type>;
-        using unit_size_type = tetengo2::gui::unit::em<boost::rational<size_type>, unit_details_type>;
-        using dimension_type = std::pair<unit_size_type, unit_size_type>;
-        using fast_solid_background_type = tetengo2::gui::drawing::solid_background<fast_drawing_details_type>;
-        using transparent_background_type = tetengo2::gui::drawing::transparent_background<drawing_details_type>;
-        using fast_font_type = tetengo2::gui::drawing::font<string_type, size_type, fast_drawing_details_type>;
+        using size_type = bobura::detail::size_type;
+
+        using difference_type = bobura::detail::difference_type;
+
+        using string_type = bobura::detail::string_type;
+
+        template <typename DetailTypeList>
+        using ui_encoder_type = bobura::detail::locale::ui_encoder_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using unit_details_type = typename boost::mpl::at<DetailTypeList, type::detail::unit>::type;
+
+        template <typename DetailTypeList>
+        using drawing_details_type = typename boost::mpl::at<DetailTypeList, type::detail::drawing>::type;
+
+        template <typename DetailTypeList>
+        using fast_drawing_details_type = typename boost::mpl::at<DetailTypeList, type::detail::fast_drawing>::type;
+
+        template <typename DetailTypeList>
+        using icon_details_type = typename boost::mpl::at<DetailTypeList, type::detail::icon>::type;
+
+        template <typename DetailTypeList>
+        using virtual_key_details_type = typename boost::mpl::at<DetailTypeList, type::detail::virtual_key>::type;
+
+        template <typename DetailTypeList>
+        using menu_details_type = typename boost::mpl::at<DetailTypeList, type::detail::menu>::type;
+
+        template <typename DetailTypeList>
+        using shell_details_type = typename boost::mpl::at<DetailTypeList, type::detail::shell>::type;
+
+        template <typename DetailTypeList>
+        using system_color_details_type =
+            typename boost::mpl::at<DetailTypeList, type::detail::system_color>::type;
+
+        template <typename DetailTypeList>
+        using mouse_capture_details_type = typename boost::mpl::at<DetailTypeList, type::detail::mouse_capture>::type;
+
+        template <typename DetailTypeList>
+        using unit_difference_type =
+            tetengo2::gui::unit::em<boost::rational<difference_type>, unit_details_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
+        using position_type = std::pair<unit_difference_type<DetailTypeList>, unit_difference_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
+        using unit_size_type =
+            tetengo2::gui::unit::em<boost::rational<size_type>, unit_details_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
+        using dimension_type = std::pair<unit_size_type<DetailTypeList>, unit_size_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
+        using fast_solid_background_type =
+            tetengo2::gui::drawing::solid_background<fast_drawing_details_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
+        using transparent_background_type =
+            tetengo2::gui::drawing::transparent_background<drawing_details_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
+        using fast_font_type =
+            tetengo2::gui::drawing::font<string_type, size_type, fast_drawing_details_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
         using canvas_traits_type =
             tetengo2::gui::drawing::canvas_traits<
-                size_type, unit_size_type, string_type, position_type, dimension_type, ui_encoder_type
+                size_type,
+                unit_size_type<DetailTypeList>,
+                string_type,
+                position_type<DetailTypeList>,
+                dimension_type<DetailTypeList>,
+                ui_encoder_type<DetailTypeList>
             >;
+
+        template <typename DetailTypeList>
         using canvas_type =
-            tetengo2::gui::drawing::canvas<canvas_traits_type, drawing_details_type, icon_details_type>;
+            tetengo2::gui::drawing::canvas<
+                canvas_traits_type<DetailTypeList>,
+                drawing_details_type<DetailTypeList>,
+                icon_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
         using fast_canvas_type =
-            tetengo2::gui::drawing::canvas<canvas_traits_type, fast_drawing_details_type, icon_details_type>;
-        using mouse_observer_set_type = tetengo2::gui::message::mouse_observer_set<position_type, difference_type>;
+            tetengo2::gui::drawing::canvas<
+                canvas_traits_type<DetailTypeList>,
+                fast_drawing_details_type<DetailTypeList>,
+                icon_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
+        using mouse_observer_set_type = 
+            tetengo2::gui::message::mouse_observer_set<position_type<DetailTypeList>, difference_type>;
+
+        template <typename DetailTypeList>
         using widget_traits_type =
             tetengo2::gui::widget::widget_traits<
                 size_type,
-                unit_size_type,
+                unit_size_type<DetailTypeList>,
                 difference_type,
                 string_type,
-                position_type,
-                dimension_type,
-                ui_encoder_type,
-                boost::mpl::at<locale_type_list, type::locale::exception_encoder>::type
+                position_type<DetailTypeList>,
+                dimension_type<DetailTypeList>,
+                ui_encoder_type<DetailTypeList>,
+                bobura::detail::locale::exception_encoder_type<DetailTypeList>
             >;
+
+        template <typename DetailTypeList>
         using widget_details_traits_type =
             tetengo2::gui::widget::widget_details_traits<
-                boost::mpl::at<detail_type_list, type::detail::widget>::type,
-                drawing_details_type,
-                icon_details_type,
-                boost::mpl::at<detail_type_list, type::detail::alert>::type,
-                boost::mpl::at<detail_type_list, type::detail::cursor>::type,
-                boost::mpl::at<detail_type_list, type::detail::scroll>::type,
-                boost::mpl::at<detail_type_list, type::detail::message_handler>::type,
-                virtual_key_details_type
+                typename boost::mpl::at<DetailTypeList, type::detail::widget>::type,
+                drawing_details_type<DetailTypeList>,
+                icon_details_type<DetailTypeList>,
+                typename boost::mpl::at<DetailTypeList, type::detail::alert>::type,
+                typename boost::mpl::at<DetailTypeList, type::detail::cursor>::type,
+                typename boost::mpl::at<DetailTypeList, type::detail::scroll>::type,
+                typename boost::mpl::at<DetailTypeList, type::detail::message_handler>::type,
+                virtual_key_details_type<DetailTypeList>
             >;
-        using widget_type = tetengo2::gui::widget::widget<widget_traits_type, widget_details_traits_type>;
+
+        template <typename DetailTypeList>
+        using widget_type =
+            tetengo2::gui::widget::widget<
+                widget_traits_type<DetailTypeList>, widget_details_traits_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
         using abstract_window_type =
-            tetengo2::gui::widget::abstract_window<widget_traits_type, widget_details_traits_type, menu_details_type>;
+            tetengo2::gui::widget::abstract_window<
+                widget_traits_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
         using window_type =
-            tetengo2::gui::widget::window<widget_traits_type, widget_details_traits_type, menu_details_type>;
+            tetengo2::gui::widget::window<
+                widget_traits_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
         using dialog_type =
             tetengo2::gui::widget::dialog<
-                widget_traits_type,
-                widget_details_traits_type,
-                menu_details_type,
-                boost::mpl::at<detail_type_list, type::detail::message_loop>::type
+                widget_traits_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>,
+                typename boost::mpl::at<DetailTypeList, type::detail::message_loop>::type
             >;
+
         using color_type = tetengo2::gui::drawing::color;
-        using button_type = tetengo2::gui::widget::button<widget_traits_type, widget_details_traits_type>;
-        using dropdown_box_type = tetengo2::gui::widget::dropdown_box<widget_traits_type, widget_details_traits_type>;
-        using image_type = tetengo2::gui::widget::image<widget_traits_type, widget_details_traits_type>;
-        using label_type = tetengo2::gui::widget::label<widget_traits_type, widget_details_traits_type>;
+
+        template <typename DetailTypeList>
+        using button_type =
+            tetengo2::gui::widget::button<
+                widget_traits_type<DetailTypeList>, widget_details_traits_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
+        using dropdown_box_type =
+            tetengo2::gui::widget::dropdown_box<
+                widget_traits_type<DetailTypeList>, widget_details_traits_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
+        using image_type =
+            tetengo2::gui::widget::image<
+                widget_traits_type<DetailTypeList>, widget_details_traits_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
+        using label_type =
+            tetengo2::gui::widget::label<
+                widget_traits_type<DetailTypeList>, widget_details_traits_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
         using link_label_type =
             tetengo2::gui::widget::link_label<
-                widget_traits_type, widget_details_traits_type, system_color_details_type, shell_details_type
+                widget_traits_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                system_color_details_type<DetailTypeList>,
+                shell_details_type<DetailTypeList>
             >;
-        using list_box_type = tetengo2::gui::widget::list_box<widget_traits_type, widget_details_traits_type>;
+
+        template <typename DetailTypeList>
+        using list_box_type =
+            tetengo2::gui::widget::list_box<
+                widget_traits_type<DetailTypeList>, widget_details_traits_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
         using mouse_capture_type =
             tetengo2::gui::mouse_capture<
-                widget_type, mouse_observer_set_type::mouse_button_type, mouse_capture_details_type
+                widget_type<DetailTypeList>,
+                typename mouse_observer_set_type<DetailTypeList>::mouse_button_type,
+                mouse_capture_details_type<DetailTypeList>
             >;
+
+        template <typename DetailTypeList>
         using map_box_type =
             tetengo2::gui::widget::map_box<
-                widget_traits_type, widget_details_traits_type, mouse_capture_details_type, system_color_details_type
+                widget_traits_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                mouse_capture_details_type<DetailTypeList>,
+                system_color_details_type<DetailTypeList>
             >;
+
+        template <typename DetailTypeList>
         using menu_bar_type =
             tetengo2::gui::menu::menu_bar<
                 string_type,
                 tetengo2::gui::menu::shortcut_key_table<
-                    string_type, ui_encoder_type, menu_details_type, virtual_key_details_type
+                    string_type,
+                    ui_encoder_type<DetailTypeList>,
+                    menu_details_type<DetailTypeList>,
+                    virtual_key_details_type<DetailTypeList>
                 >,
-                ui_encoder_type,
-                menu_details_type,
-                virtual_key_details_type
+                ui_encoder_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>,
+                virtual_key_details_type<DetailTypeList>
             >;
+
+        template <typename DetailTypeList>
+        using menu_command_type =
+            tetengo2::gui::menu::command<
+                string_type,
+                ui_encoder_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>,
+                virtual_key_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
+        using menu_separator_type =
+            tetengo2::gui::menu::separator<
+                string_type,
+                ui_encoder_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>,
+                virtual_key_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
         using picture_box_type =
             tetengo2::gui::widget::picture_box<
-                widget_traits_type, widget_details_traits_type, fast_drawing_details_type
+                widget_traits_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                fast_drawing_details_type<DetailTypeList>
             >;
-        using shell_type = tetengo2::gui::shell<string_type, ui_encoder_type, shell_details_type>;
+
+        template <typename DetailTypeList>
+        using point_unit_size_type =
+            tetengo2::gui::unit::point<boost::rational<size_type>, unit_details_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
+        using popup_menu_type =
+            tetengo2::gui::menu::popup<
+                string_type,
+                ui_encoder_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>,
+                virtual_key_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
+        using shell_type =
+            tetengo2::gui::shell<string_type, ui_encoder_type<DetailTypeList>, shell_details_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
         using side_bar_type =
             tetengo2::gui::widget::side_bar<
-                widget_traits_type,
-                widget_details_traits_type,
-                mouse_capture_details_type,
-                system_color_details_type,
-                boost::mpl::at<detail_type_list, type::detail::timer>::type
+                widget_traits_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                mouse_capture_details_type<DetailTypeList>,
+                system_color_details_type<DetailTypeList>,
+                typename boost::mpl::at<DetailTypeList, type::detail::timer>::type
             >;
-        using text_box_type = tetengo2::gui::widget::text_box<widget_traits_type, widget_details_traits_type>;
+
+        template <typename DetailTypeList>
+        using text_box_type =
+            tetengo2::gui::widget::text_box<
+                widget_traits_type<DetailTypeList>, widget_details_traits_type<DetailTypeList>
+            >;
+
     }}
 #endif
 
-    //! The type list for the user interface.
+    /*!
+        \brief The locale type list.
+
+        \tparam DetailTypeList A detail type list.
+    */
+    template <typename DetailTypeList>
     using ui_type_list =
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::abstract_window, detail::ui::abstract_window_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::button, detail::ui::button_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::canvas, detail::ui::canvas_type>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::ui::abstract_window, detail::ui::abstract_window_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::button, detail::ui::button_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::canvas, detail::ui::canvas_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::color, detail::ui::color_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::dialog, detail::ui::dialog_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::dimension, detail::ui::dimension_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::dropdown_box, detail::ui::dropdown_box_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::fast_canvas, detail::ui::fast_canvas_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::fast_font, detail::ui::fast_font_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::dialog, detail::ui::dialog_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::dimension, detail::ui::dimension_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::ui::fast_solid_background, detail::ui::fast_solid_background_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::image, detail::ui::image_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::label, detail::ui::label_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::link_label, detail::ui::link_label_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::list_box, detail::ui::list_box_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::map_box, detail::ui::map_box_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::menu_bar, detail::ui::menu_bar_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::mouse_capture, detail::ui::mouse_capture_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::picture_box, detail::ui::picture_box_type>,
+            boost::mpl::pair<type::ui::dropdown_box, detail::ui::dropdown_box_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::ui::fast_canvas, detail::ui::fast_canvas_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::fast_font, detail::ui::fast_font_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::ui::fast_solid_background, detail::ui::fast_solid_background_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::image, detail::ui::image_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::label, detail::ui::label_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::ui::link_label, detail::ui::link_label_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::list_box, detail::ui::list_box_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::map_box, detail::ui::map_box_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::menu_bar, detail::ui::menu_bar_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::ui::menu_command, detail::ui::menu_command_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::ui::menu_separator, detail::ui::menu_separator_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::ui::mouse_capture, detail::ui::mouse_capture_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::ui::picture_box, detail::ui::picture_box_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::ui::point_unit_size, detail::ui::point_unit_size_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::popup_menu, detail::ui::popup_menu_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::position, detail::ui::position_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::shell, detail::ui::shell_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::side_bar, detail::ui::side_bar_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::text_box, detail::ui::text_box_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
-                type::ui::point_unit_size,
-                tetengo2::gui::unit::point<boost::rational<detail::ui::size_type>, detail::ui::unit_details_type>
+                type::ui::transparent_background, detail::ui::transparent_background_type<DetailTypeList>
             >,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::widget, detail::ui::widget_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::ui::popup_menu,
-                tetengo2::gui::menu::popup<
-                    detail::ui::string_type,
-                    detail::ui::ui_encoder_type,
-                    detail::ui::menu_details_type,
-                    detail::ui::virtual_key_details_type
-                >
-            >,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::position, detail::ui::position_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::shell, detail::ui::shell_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::side_bar, detail::ui::side_bar_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::text_box, detail::ui::text_box_type>,
+            boost::mpl::pair<type::ui::widget_details_traits, detail::ui::widget_details_traits_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::ui::transparent_background, detail::ui::transparent_background_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::widget, detail::ui::widget_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::ui::widget_details_traits, detail::ui::widget_details_traits_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::widget_traits, detail::ui::widget_traits_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::window, detail::ui::window_type>,
+            boost::mpl::pair<type::ui::widget_traits, detail::ui::widget_traits_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::window, detail::ui::window_type<DetailTypeList>>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>>>>>>>>>>>>>>>>>>;
+        >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>;
 
 
     /**** Common Dialog *****************************************************/
@@ -367,8 +623,8 @@ namespace bobura
     namespace type { namespace common_dialog
     {
         struct color;          //!< The color dialog type.
-        struct file_open_dialog; //!< The file open dialog type.
-        struct file_save_dialog; //!< The file save dialog type.
+        struct file_open;      //!< The file open dialog type.
+        struct file_save;      //!< The file save dialog type.
         struct font;           //!< The font dialog type.
         struct message_box;    //!< The message box type.
     }}
@@ -376,70 +632,91 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace common_dialog
     {
-        using string_type = boost::mpl::at<common_type_list, type::string>::type;
-        using widget_traits_type = boost::mpl::at<ui_type_list, type::ui::widget_traits>::type;
-        using common_dialog_details_type = boost::mpl::at<detail_type_list, type::detail::common_dialog>::type;
-        using widget_details_traits_type = boost::mpl::at<ui_type_list, type::ui::widget_details_traits>::type;
-        using menu_details_type = boost::mpl::at<detail_type_list, type::detail::menu>::type;
+        using string_type = bobura::detail::string_type;
+
+        template <typename DetailTypeList>
+        using widget_traits_type = bobura::detail::ui::widget_traits_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using common_dialog_details_type = typename boost::mpl::at<DetailTypeList, type::detail::common_dialog>::type;
+
+        template <typename DetailTypeList>
+        using widget_details_traits_type = bobura::detail::ui::widget_details_traits_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using menu_details_type = typename boost::mpl::at<DetailTypeList, type::detail::menu>::type;
+
+        template <typename DetailTypeList>
+        using color_type =
+            tetengo2::gui::common_dialog::color<
+                bobura::detail::ui::color_type,
+                widget_traits_type<DetailTypeList>,
+                common_dialog_details_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
+        using file_open_type =
+            tetengo2::gui::common_dialog::file_open<
+                string_type,
+                widget_traits_type<DetailTypeList>,
+                common_dialog_details_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
+        using file_save_type =
+            tetengo2::gui::common_dialog::file_save<
+                string_type,
+                widget_traits_type<DetailTypeList>,
+                common_dialog_details_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
+        using font_type =
+            tetengo2::gui::common_dialog::font<
+                bobura::detail::ui::fast_font_type<DetailTypeList>,
+                widget_traits_type<DetailTypeList>,
+                common_dialog_details_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
+        using message_box_type =
+            tetengo2::gui::common_dialog::message_box<
+                string_type,
+                widget_traits_type<DetailTypeList>,
+                common_dialog_details_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>
+            >;
+
     }}
 #endif
 
-    //! The type list for the commong dialogs.
+    /*!
+        \brief The common dialog type list.
+
+        \tparam DetailTypeList A detail type list.
+    */
+    template <typename DetailTypeList>
     using common_dialog_type_list =
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::common_dialog::color,
-                tetengo2::gui::common_dialog::color<
-                    boost::mpl::at<ui_type_list, type::ui::color>::type,
-                    detail::common_dialog::widget_traits_type,
-                    detail::common_dialog::common_dialog_details_type,
-                    detail::common_dialog::widget_details_traits_type,
-                    detail::common_dialog::menu_details_type
-                >
-            >,
+            boost::mpl::pair<type::common_dialog::color, detail::common_dialog::color_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::common_dialog::file_open, detail::common_dialog::file_open_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::common_dialog::file_save, detail::common_dialog::file_save_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::common_dialog::font,  detail::common_dialog::font_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<
-                type::common_dialog::file_open_dialog,
-                tetengo2::gui::common_dialog::file_open<
-                    detail::common_dialog::string_type,
-                    detail::common_dialog::widget_traits_type,
-                    detail::common_dialog::common_dialog_details_type,
-                    detail::common_dialog::widget_details_traits_type,
-                    detail::common_dialog::menu_details_type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::common_dialog::file_save_dialog,
-                tetengo2::gui::common_dialog::file_save<
-                    detail::common_dialog::string_type,
-                    detail::common_dialog::widget_traits_type,
-                    detail::common_dialog::common_dialog_details_type,
-                    detail::common_dialog::widget_details_traits_type,
-                    detail::common_dialog::menu_details_type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::common_dialog::font,
-                tetengo2::gui::common_dialog::font<
-                    boost::mpl::at<ui_type_list, type::ui::fast_font>::type,
-                    detail::common_dialog::widget_traits_type,
-                    detail::common_dialog::common_dialog_details_type,
-                    detail::common_dialog::widget_details_traits_type,
-                    detail::common_dialog::menu_details_type
-                >
-            >,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<
-                type::common_dialog::message_box,
-                tetengo2::gui::common_dialog::message_box<
-                    detail::common_dialog::string_type,
-                    detail::common_dialog::widget_traits_type,
-                    detail::common_dialog::common_dialog_details_type,
-                    detail::common_dialog::widget_details_traits_type,
-                    detail::common_dialog::menu_details_type
-                >
+                type::common_dialog::message_box,  detail::common_dialog::message_box_type<DetailTypeList>
             >,
         tetengo2::meta::assoc_list_end
         >>>>>;
@@ -462,58 +739,87 @@ namespace bobura
 #if !defined(DOCUMENTATION)
     namespace detail { namespace traits
     {
-        using size_type = boost::mpl::at<common_type_list, type::size>::type;
-        using difference_type = boost::mpl::at<common_type_list, type::difference>::type;
-        using string_type = boost::mpl::at<common_type_list, type::string>::type;
-        using position_type = boost::mpl::at<ui_type_list, type::ui::position>::type;
-        using dimension_type = boost::mpl::at<ui_type_list, type::ui::dimension>::type;
-        using operating_distance_type = boost::mpl::at<common_type_list, type::operating_distance>::type;
-        using speed_type = boost::mpl::at<common_type_list, type::speed>::type;
-        using scale_type = boost::mpl::at<common_type_list, type::scale>::type;
-        using fast_canvas_type = boost::mpl::at<ui_type_list, type::ui::fast_canvas>::type;
-        using fast_font_type = boost::mpl::at<ui_type_list, type::ui::fast_font>::type;
-        using dialog_type = boost::mpl::at<ui_type_list, type::ui::dialog>::type;
-        using abstract_window_type = boost::mpl::at<ui_type_list, type::ui::abstract_window>::type;
-        using picture_box_type = boost::mpl::at<ui_type_list, type::ui::picture_box>::type;
-        using mouse_capture_type = boost::mpl::at<ui_type_list, type::ui::mouse_capture>::type;
-        using message_catalog_type = boost::mpl::at<locale_type_list, type::locale::message_catalog>::type;
+        using size_type = bobura::detail::size_type;
+
+        using difference_type = bobura::detail::difference_type;
+
+        using string_type = bobura::detail::string_type;
+
+        template <typename DetailTypeList>
+        using position_type = bobura::detail::ui::position_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using dimension_type = bobura::detail::ui::dimension_type<DetailTypeList>;
+
+        using operating_distance_type = bobura::detail::operating_distance_type;
+
+        using speed_type = bobura::detail::speed_type;
+
+        using scale_type = bobura::detail::scale_type;
+
+        template <typename DetailTypeList>
+        using fast_canvas_type = bobura::detail::ui::fast_canvas_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using fast_font_type = bobura::detail::ui::fast_font_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using dialog_type = bobura::detail::ui::dialog_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using abstract_window_type = bobura::detail::ui::abstract_window_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using picture_box_type = bobura::detail::ui::picture_box_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using mouse_capture_type = bobura::detail::ui::mouse_capture_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using message_catalog_type = bobura::detail::locale::message_catalog_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
         using dialog_traits_type =
             dialog_traits<
                 string_type,
-                position_type,
-                dimension_type,
-                dialog_type,
-                abstract_window_type,
-                boost::mpl::at<ui_type_list, type::ui::label>::type,
-                boost::mpl::at<ui_type_list, type::ui::link_label>::type,
-                boost::mpl::at<ui_type_list, type::ui::image>::type,
-                boost::mpl::at<ui_type_list, type::ui::button>::type,
-                boost::mpl::at<ui_type_list, type::ui::text_box>::type,
-                boost::mpl::at<ui_type_list, type::ui::list_box>::type,
-                boost::mpl::at<ui_type_list, type::ui::dropdown_box>::type,
-                picture_box_type,
-                boost::mpl::at<ui_type_list, type::ui::transparent_background>::type,
-                message_catalog_type
+                position_type<DetailTypeList>,
+                dimension_type<DetailTypeList>,
+                dialog_type<DetailTypeList>,
+                abstract_window_type<DetailTypeList>,
+                bobura::detail::ui::label_type<DetailTypeList>,
+                bobura::detail::ui::link_label_type<DetailTypeList>,
+                bobura::detail::ui::image_type<DetailTypeList>,
+                bobura::detail::ui::button_type<DetailTypeList>,
+                bobura::detail::ui::text_box_type<DetailTypeList>,
+                bobura::detail::ui::list_box_type<DetailTypeList>,
+                bobura::detail::ui::dropdown_box_type<DetailTypeList>,
+                picture_box_type<DetailTypeList>,
+                bobura::detail::ui::transparent_background_type<DetailTypeList>,
+                message_catalog_type<DetailTypeList>
             >;
+
+        template <typename DetailTypeList>
         using load_save_traits_type =
             bobura::load_save::traits<
                 size_type,
                 difference_type,
                 string_type,
-                boost::mpl::at<common_type_list, type::input_stream_iterator>::type,
-                boost::mpl::at<common_type_list, type::output_stream>::type,
+                bobura::detail::input_stream_iterator_type,
+                bobura::detail::output_stream_type,
                 operating_distance_type,
                 speed_type,
-                fast_font_type,
-                abstract_window_type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::message_box>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::file_open_dialog>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::file_save_dialog>::type,
-                oudia_diagram_dialog<dialog_traits_type, size_type>,
-                message_catalog_type,
-                boost::mpl::at<locale_type_list, type::locale::timetable_file_encoder>::type,
-                boost::mpl::at<locale_type_list, type::locale::windia_file_encoder>::type
+                fast_font_type<DetailTypeList>,
+                abstract_window_type<DetailTypeList>,
+                bobura::detail::common_dialog::message_box_type<DetailTypeList>,
+                bobura::detail::common_dialog::file_open_type<DetailTypeList>,
+                bobura::detail::common_dialog::file_save_type<DetailTypeList>,
+                oudia_diagram_dialog<dialog_traits_type<DetailTypeList>, size_type>,
+                message_catalog_type<DetailTypeList>,
+                bobura::detail::locale::timetable_file_encoder_type<DetailTypeList>,
+                bobura::detail::locale::windia_file_encoder_type<DetailTypeList>
             >;
+
+        template <typename DetailTypeList>
         using view_traits_type =
             bobura::view::diagram::traits<
                 size_type,
@@ -522,43 +828,63 @@ namespace bobura
                 operating_distance_type,
                 speed_type,
                 scale_type,
-                fast_canvas_type,
-                boost::mpl::at<ui_type_list, type::ui::fast_solid_background>::type,
-                message_catalog_type
+                fast_canvas_type<DetailTypeList>,
+                bobura::detail::ui::fast_solid_background_type<DetailTypeList>,
+                message_catalog_type<DetailTypeList>
             >;
+
+        template <typename DetailTypeList>
         using config_traits_type =
             config_traits<
                 string_type,
                 size_type,
-                boost::mpl::at<locale_type_list, type::locale::config_encoder>::type,
-                boost::mpl::at<detail_type_list, type::detail::config>::type
+                bobura::detail::locale::config_encoder_type<DetailTypeList>,
+                typename boost::mpl::at<DetailTypeList, type::detail::config>::type
             >;
-        using map_box_type = boost::mpl::at<ui_type_list, type::ui::map_box>::type;
-        using side_bar_type = boost::mpl::at<ui_type_list, type::ui::side_bar>::type;
-        using popup_menu_type = boost::mpl::at<ui_type_list, type::ui::popup_menu>::type;
-        using message_loop_details_type = boost::mpl::at<detail_type_list, type::detail::message_loop>::type;
+
+        template <typename DetailTypeList>
+        using map_box_type = bobura::detail::ui::map_box_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using side_bar_type = bobura::detail::ui::side_bar_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using popup_menu_type = bobura::detail::ui::popup_menu_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using menu_command_type = bobura::detail::ui::menu_command_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using menu_separator_type = bobura::detail::ui::menu_separator_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using message_loop_details_type = typename boost::mpl::at<DetailTypeList, type::detail::message_loop>::type;
+
+        template <typename DetailTypeList>
         using main_window_traits_type =
             main_window_traits<
                 size_type,
                 difference_type,
                 string_type,
-                position_type,
-                dimension_type,
+                position_type<DetailTypeList>,
+                dimension_type<DetailTypeList>,
                 operating_distance_type,
                 speed_type,
-                boost::mpl::at<ui_type_list, type::ui::window>::type,
-                picture_box_type,
-                map_box_type,
-                side_bar_type,
-                popup_menu_type,
-                tetengo2::gui::message::message_loop_break<message_loop_details_type>,
-                fast_font_type,
-                mouse_capture_type,
-                message_catalog_type,
-                view_traits_type,
-                load_save_traits_type,
-                config_traits_type
+                bobura::detail::ui::window_type<DetailTypeList>,
+                picture_box_type<DetailTypeList>,
+                map_box_type<DetailTypeList>,
+                side_bar_type<DetailTypeList>,
+                popup_menu_type<DetailTypeList>,
+                tetengo2::gui::message::message_loop_break<message_loop_details_type<DetailTypeList>>,
+                fast_font_type<DetailTypeList>,
+                mouse_capture_type<DetailTypeList>,
+                message_catalog_type<DetailTypeList>,
+                view_traits_type<DetailTypeList>,
+                load_save_traits_type<DetailTypeList>,
+                config_traits_type<DetailTypeList>
             >;
+
+        template <typename DetailTypeList>
         using command_traits_type =
             command::traits<
                 size_type,
@@ -566,85 +892,105 @@ namespace bobura
                 string_type,
                 operating_distance_type,
                 speed_type,
-                fast_font_type,
-                abstract_window_type,
-                mouse_capture_type
+                fast_font_type<DetailTypeList>,
+                abstract_window_type<DetailTypeList>,
+                mouse_capture_type<DetailTypeList>
             >;
+
+        template <typename DetailTypeList>
         using command_set_traits_type =
             command::set_traits<
                 size_type,
                 string_type,
-                position_type,
-                dimension_type,
-                dialog_type,
-                boost::mpl::at<ui_type_list, type::ui::color>::type,
-                boost::mpl::at<ui_type_list, type::ui::point_unit_size>::type,
-                fast_canvas_type,
+                position_type<DetailTypeList>,
+                dimension_type<DetailTypeList>,
+                dialog_type<DetailTypeList>,
+                bobura::detail::ui::color_type,
+                bobura::detail::ui::point_unit_size_type<DetailTypeList>,
+                fast_canvas_type<DetailTypeList>,
                 scale_type,
-                boost::mpl::at<ui_type_list, type::ui::shell>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::font>::type,
-                boost::mpl::at<common_dialog_type_list, type::common_dialog::color>::type,
-                message_catalog_type,
-                command_traits_type,
-                main_window_traits_type,
-                view_traits_type,
-                load_save_traits_type,
-                dialog_traits_type,
-                config_traits_type
+                bobura::detail::ui::shell_type<DetailTypeList>,
+                bobura::detail::common_dialog::font_type<DetailTypeList>,
+                bobura::detail::common_dialog::color_type<DetailTypeList>,
+                message_catalog_type<DetailTypeList>,
+                command_traits_type<DetailTypeList>,
+                main_window_traits_type<DetailTypeList>,
+                view_traits_type<DetailTypeList>,
+                load_save_traits_type<DetailTypeList>,
+                dialog_traits_type<DetailTypeList>,
+                config_traits_type<DetailTypeList>
             >;
+
+        template <typename DetailTypeList>
         using gui_fixture_type =
-            tetengo2::gui::fixture<boost::mpl::at<detail_type_list, type::detail::gui_fixture>::type>;
+            tetengo2::gui::fixture<typename boost::mpl::at<DetailTypeList, type::detail::gui_fixture>::type>;
+
+        template <typename DetailTypeList>
         using message_loop_type =
-            tetengo2::gui::message::message_loop<abstract_window_type, message_loop_details_type>;
+            tetengo2::gui::message::message_loop<
+                abstract_window_type<DetailTypeList>, message_loop_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
         using timer_type =
             tetengo2::gui::timer<
-                boost::mpl::at<ui_type_list, type::ui::widget>::type,
-                boost::mpl::at<detail_type_list, type::detail::timer>::type
+                bobura::detail::ui::widget_type<DetailTypeList>,
+                typename boost::mpl::at<DetailTypeList, type::detail::timer>::type
             >;
+
+        template <typename DetailTypeList>
         using application_traits_type =
             application_traits<
                 size_type,
                 difference_type,
                 string_type,
-                position_type,
-                dimension_type,
+                position_type<DetailTypeList>,
+                dimension_type<DetailTypeList>,
                 operating_distance_type,
                 speed_type,
                 scale_type,
-                gui_fixture_type,
-                fast_font_type,
-                abstract_window_type,
-                picture_box_type,
-                map_box_type,
-                side_bar_type,
-                boost::mpl::at<ui_type_list, type::ui::menu_bar>::type,
-                popup_menu_type,
-                message_loop_type,
-                mouse_capture_type,
-                timer_type,
-                message_catalog_type,
-                main_window_traits_type,
-                view_traits_type,
-                load_save_traits_type,
-                command_set_traits_type,
-                config_traits_type
+                gui_fixture_type<DetailTypeList>,
+                fast_font_type<DetailTypeList>,
+                abstract_window_type<DetailTypeList>,
+                picture_box_type<DetailTypeList>,
+                map_box_type<DetailTypeList>,
+                side_bar_type<DetailTypeList>,
+                bobura::detail::ui::menu_bar_type<DetailTypeList>,
+                popup_menu_type<DetailTypeList>,
+                menu_command_type<DetailTypeList>,
+                menu_separator_type<DetailTypeList>,
+                message_loop_type<DetailTypeList>,
+                mouse_capture_type<DetailTypeList>,
+                timer_type<DetailTypeList>,
+                message_catalog_type<DetailTypeList>,
+                main_window_traits_type<DetailTypeList>,
+                view_traits_type<DetailTypeList>,
+                load_save_traits_type<DetailTypeList>,
+                command_set_traits_type<DetailTypeList>,
+                config_traits_type<DetailTypeList>
             >;
+
     }}
 #endif
 
-    //! The traits type list.
+    /*!
+        \brief The traits type list.
+
+        \tparam DetailTypeList A detail type list.
+    */
+    template <typename DetailTypeList>
     using traits_type_list =
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::dialog, detail::traits::dialog_traits_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::load_save, detail::traits::load_save_traits_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::view, detail::traits::view_traits_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::config, detail::traits::config_traits_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::dialog, detail::traits::dialog_traits_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::load_save, detail::traits::load_save_traits_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::view, detail::traits::view_traits_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::config, detail::traits::config_traits_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::traits::main_window, detail::traits::main_window_traits_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::command, detail::traits::command_traits_type>,
+            boost::mpl::pair<type::traits::main_window, detail::traits::main_window_traits_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::command, detail::traits::command_traits_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::traits::command_set, detail::traits::command_set_traits_type>,
+            boost::mpl::pair<type::traits::command_set, detail::traits::command_set_traits_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::traits::application, detail::traits::application_traits_type>,
+            boost::mpl::pair<type::traits::application, detail::traits::application_traits_type<DetailTypeList>>,
         tetengo2::meta::assoc_list_end
         >>>>>>>>;
 

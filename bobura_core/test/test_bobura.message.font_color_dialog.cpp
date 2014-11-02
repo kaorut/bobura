@@ -24,13 +24,23 @@ namespace
 {
     // types
 
-    using size_type = boost::mpl::at<bobura::common_type_list, bobura::type::size>::type;
+    using detail_type_list_type = bobura::detail_type_list_for_test;
 
-    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
+    using common_type_list_type = bobura::common_type_list;
 
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
+    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
 
-    using dialog_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dialog>::type;
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+
+    using common_dialog_type_list_type = bobura::common_dialog_type_list<detail_type_list_type>;
+
+    using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
+
+    using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
+
+    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
+
+    using dialog_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dialog>::type;
 
     class concrete_dialog : public dialog_type
     {
@@ -42,7 +52,7 @@ namespace
 
     };
 
-    using list_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::list_box>::type;
+    using list_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::list_box>::type;
 
     using dimension_type = window_type::dimension_type;
 
@@ -50,16 +60,16 @@ namespace
 
     using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
-    using canvas_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::canvas>::type;
+    using canvas_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::canvas>::type;
 
     using font_type = canvas_type::font_type;
 
     using color_type = canvas_type::color_type;
 
-    using font_dialog_type = boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::font>::type;
+    using font_dialog_type = boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::font>::type;
 
     using color_dialog_type =
-        boost::mpl::at<bobura::common_dialog_type_list, bobura::type::common_dialog::color>::type;
+        boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::color>::type;
 
 
     // functions

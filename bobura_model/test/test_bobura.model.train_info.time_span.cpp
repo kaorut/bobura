@@ -20,7 +20,11 @@ namespace
 {
     // types
 
-    using difference_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type;
+    using detail_type_list_type = test_bobura::model::detail_type_list_for_test;
+
+    using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
+
+    using difference_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::difference>::type;
 
     using time_span_type = bobura::model::train_info::time_span<difference_type>;
 

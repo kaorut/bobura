@@ -28,14 +28,18 @@ namespace
 {
     // types
 
-    using size_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
+    using detail_type_list_type = test_bobura::model::detail_type_list_for_test;
 
-    using difference_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type;
+    using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
 
-    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+    using size_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::size>::type;
+
+    using difference_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::difference>::type;
+
+    using string_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type;
 
     using operating_distance_type =
-        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::operating_distance>::type;
+        boost::mpl::at<common_type_list_type, test_bobura::model::type::operating_distance>::type;
 
     using station_interval_calculator_type =
         bobura::model::timetable_info::station_interval_calculator<

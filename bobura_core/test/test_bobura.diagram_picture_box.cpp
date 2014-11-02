@@ -20,20 +20,26 @@ namespace
 {
     // types
 
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
+    using detail_type_list_type = bobura::detail_type_list_for_test;
 
-    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
-    using abstract_window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::abstract_window>::type;
+    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
 
-    using mouse_capture_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::mouse_capture>::type;
+    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
+
+    using picture_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::picture_box>::type;
+
+    using abstract_window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::abstract_window>::type;
+
+    using mouse_capture_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::mouse_capture>::type;
 
     using diagram_picture_box_message_type_list =
         bobura::message::diagram_picture_box::type_list<
             picture_box_type,
             abstract_window_type,
             mouse_capture_type,
-            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type
+            boost::mpl::at<traits_type_list_type, bobura::type::traits::view>::type
         >;
 
     using diagram_picture_box_type =

@@ -33,19 +33,24 @@ namespace
 {
     // types
 
-    using size_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::size>::type;
+    using detail_type_list_type = test_bobura::model::detail_type_list_for_test;
 
-    using difference_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::difference>::type;
+    using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
 
-    using string_type = boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::string>::type;
+    using ui_type_list_type = test_bobura::model::ui_type_list<detail_type_list_type>;
+
+    using size_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::size>::type;
+
+    using difference_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::difference>::type;
+
+    using string_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type;
 
     using operating_distance_type =
-        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::operating_distance>::type;
+        boost::mpl::at<common_type_list_type, test_bobura::model::type::operating_distance>::type;
 
-    using speed_type =
-        boost::mpl::at<test_bobura::model::type_list, test_bobura::model::type::speed>::type;
+    using speed_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::speed>::type;
 
-    using font_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::font>::type;
+    using font_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::font>::type;
 
     using station_type = bobura::model::station<string_type>;
 
@@ -77,7 +82,7 @@ namespace
 
     using font_color_type = font_color_set_type::font_color_type;
 
-    using color_type = boost::mpl::at<test_bobura::model::ui_type_list, test_bobura::model::type::ui::color>::type;
+    using color_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::color>::type;
 
 
 

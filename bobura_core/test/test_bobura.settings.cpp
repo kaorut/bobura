@@ -24,13 +24,21 @@ namespace
 {
     // types
 
-    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
+    using detail_type_list_type = bobura::detail_type_list_for_test;
 
-    using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
+    using common_type_list_type = bobura::common_type_list;
+
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+
+    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+
+    using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
+
+    using position_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::position>::type;
 
     using left_type = tetengo2::gui::position<position_type>::left_type;
 
-    using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
+    using dimension_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dimension>::type;
 
     using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
 
@@ -41,7 +49,7 @@ namespace
             string_type,
             position_type,
             dimension_type,
-            boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type
+            boost::mpl::at<traits_type_list_type, bobura::type::traits::config>::type
         >;
 
 

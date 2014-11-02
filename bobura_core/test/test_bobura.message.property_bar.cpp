@@ -19,11 +19,15 @@ namespace
 {
     // types
 
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
+    using detail_type_list_type = bobura::detail_type_list_for_test;
 
-    using side_bar_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::side_bar>::type;
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
-    using map_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::map_box>::type;
+    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
+
+    using side_bar_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::side_bar>::type;
+
+    using map_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::map_box>::type;
 
     using resized_type = bobura::message::property_bar::resized<side_bar_type, map_box_type>;
 

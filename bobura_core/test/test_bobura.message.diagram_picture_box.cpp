@@ -23,35 +23,45 @@ namespace
 {
     // types
 
-    using view_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::view>::type;
+    using detail_type_list_type = bobura::detail_type_list_for_test;
 
-    using picture_box_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::picture_box>::type;
+    using common_type_list_type = bobura::common_type_list;
+
+    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
+
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+
+    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+
+    using view_traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::view>::type;
+
+    using picture_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::picture_box>::type;
 
     using mouse_observer_set_type = picture_box_type::mouse_observer_set_type;
 
     using mouse_button_type = mouse_observer_set_type::mouse_button_type;
 
-    using message_catalog_type = boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog>::type;
+    using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
 
     using model_type =
         bobura::timetable_model<
-            boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::difference>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::string>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::operating_distance>::type,
-            boost::mpl::at<bobura::common_type_list, bobura::type::speed>::type,
-            boost::mpl::at<bobura::ui_type_list, bobura::type::ui::fast_font>::type
+            boost::mpl::at<common_type_list_type, bobura::type::size>::type,
+            boost::mpl::at<common_type_list_type, bobura::type::difference>::type,
+            boost::mpl::at<common_type_list_type, bobura::type::string>::type,
+            boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
+            boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type
         >;
 
     using view_type = bobura::diagram_view<view_traits_type>;
 
-    using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
+    using position_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::position>::type;
 
     using left_type = tetengo2::gui::position<position_type>::left_type;
 
     using top_type = tetengo2::gui::position<position_type>::top_type;
 
-    using window_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::window>::type;
+    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
 
     using mouse_pressed_type = bobura::message::diagram_picture_box::mouse_pressed<picture_box_type, view_traits_type>;
 

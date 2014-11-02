@@ -25,78 +25,56 @@ namespace bobura
     /*!
         \brief The class template for the main window menu builder.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Scale             A scale type.
-        \tparam Font              A font type.
-        \tparam MenuBar           A menu bar type.
-        \tparam MessageCatalog    A message catalog type.
-        \tparam CommandSetTraits  A command set traits.
-        \tparam MainWindowTraits  A main window traits type.
+        \tparam Traits A traits type.
     */
-    template <
-        typename Size,
-        typename Difference,
-        typename String,
-        typename OperatingDistance,
-        typename Speed,
-        typename Scale,
-        typename Font,
-        typename MenuBar,
-        typename MessageCatalog,
-        typename CommandSetTraits,
-        typename MainWindowTraits
-    >
+    template <typename Traits>
     class main_window_menu_builder : private boost::noncopyable
     {
     public:
         // types
 
+        //! The traits type.
+        using traits_type = Traits;
+
         //! The size type.
-        using size_type = Size;
+        using size_type = typename traits_type::size_type;
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = typename traits_type::difference_type;
 
         //! The string type.
-        using string_type = String;
+        using string_type = typename traits_type::string_type;
 
         //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
+        using operating_distance_type = typename traits_type::operating_distance_type;
 
         //! The speed type.
-        using speed_type = Speed;
-
-        //! The scale type.
-        using scale_type = Scale;
+        using speed_type = typename traits_type::speed_type;
 
         //! The font type.
-        using font_type = Font;
+        using font_type = typename traits_type::font_type;
 
         //! The menu bar type.
-        using menu_bar_type = MenuBar;
+        using menu_bar_type = typename traits_type::menu_bar_type;
 
         //! The message catalog type.
-        using message_catalog_type = MessageCatalog;
+        using message_catalog_type = typename traits_type::message_catalog_type;
 
         //! The command set traits type.
-        using command_set_traits = CommandSetTraits;
+        using command_set_traits_type = typename traits_type::command_set_traits_type;
 
         //! The main window traits type.
-        using main_window_traits_type = MainWindowTraits;
+        using main_window_traits_type = typename traits_type::main_window_traits_type;
 
         //! The command set type.
-        using command_set_type = command::set<command_set_traits>;
+        using command_set_type = command::set<command_set_traits_type>;
 
         //! The model type.
         using model_type =
             timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
         //! The main window type.
-        using main_window_type = main_window<main_window_traits_type, command_set_traits>;
+        using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
 
 
         // constructors and destructor

@@ -35,18 +35,28 @@ namespace
 {
     // types
 
-    using string_type = boost::mpl::at<bobura::common_type_list, bobura::type::string>::type;
+    using detail_type_list_type = bobura::detail_type_list_for_application;
 
-    using position_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::position>::type;
+    using common_type_list_type = bobura::common_type_list;
 
-    using dimension_type = boost::mpl::at<bobura::ui_type_list, bobura::type::ui::dimension>::type;
+    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
-    using config_traits_type = boost::mpl::at<bobura::traits_type_list, bobura::type::traits::config>::type;
+    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
+
+    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+
+    using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
+
+    using position_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::position>::type;
+
+    using dimension_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dimension>::type;
+
+    using config_traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::config>::type;
 
     using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
 
     using application_type =
-        bobura::application<boost::mpl::at<bobura::traits_type_list, bobura::type::traits::application>::type>;
+        bobura::application<boost::mpl::at<traits_type_list_type, bobura::type::traits::application>::type>;
 
 
     // functions
@@ -75,11 +85,11 @@ namespace
     {
         using messages_facet_type =
             tetengo2::message::messages<
-                boost::mpl::at<bobura::common_type_list, bobura::type::input_stream_iterator>::type,
+                boost::mpl::at<common_type_list_type, bobura::type::input_stream_iterator>::type,
                 string_type,
-                boost::mpl::at<bobura::common_type_list, bobura::type::size>::type,
-                boost::mpl::at<bobura::locale_type_list, bobura::type::locale::message_catalog_encoder>::type,
-                boost::mpl::at<bobura::locale_type_list, bobura::type::locale::locale_name_encoder>::type
+                boost::mpl::at<common_type_list_type, bobura::type::size>::type,
+                boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog_encoder>::type,
+                boost::mpl::at<locale_type_list_type, bobura::type::locale::locale_name_encoder>::type
             >;
         auto p_messages_facet =
             tetengo2::stdalt::make_unique<messages_facet_type>(
@@ -121,9 +131,9 @@ TETENGO2_STDALT_NOEXCEPT
 
     using alert_type =
         tetengo2::gui::alert<
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::ui_encoder>::type,
-            boost::mpl::at<bobura::locale_type_list, bobura::type::locale::exception_encoder>::type,
-            boost::mpl::at<bobura::detail_type_list, bobura::type::detail::alert>::type
+            boost::mpl::at<locale_type_list_type, bobura::type::locale::ui_encoder>::type,
+            boost::mpl::at<locale_type_list_type, bobura::type::locale::exception_encoder>::type,
+            boost::mpl::at<detail_type_list_type, bobura::type::detail::alert>::type
         >;
 
     try
