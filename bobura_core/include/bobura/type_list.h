@@ -720,9 +720,11 @@ namespace bobura
 
         using string_type = bobura::detail::string_type;
 
-        using position_type = bobura::detail::ui::position_type<detail_type_list>;
+        template <typename DetailTypeList>
+        using position_type = bobura::detail::ui::position_type<DetailTypeList>;
 
-        using dimension_type = bobura::detail::ui::dimension_type<detail_type_list>;
+        template <typename DetailTypeList>
+        using dimension_type = bobura::detail::ui::dimension_type<DetailTypeList>;
 
         using operating_distance_type = bobura::detail::operating_distance_type;
 
@@ -730,39 +732,48 @@ namespace bobura
 
         using scale_type = bobura::detail::scale_type;
 
-        using fast_canvas_type = bobura::detail::ui::fast_canvas_type<detail_type_list>;
+        template <typename DetailTypeList>
+        using fast_canvas_type = bobura::detail::ui::fast_canvas_type<DetailTypeList>;
 
-        using fast_font_type = bobura::detail::ui::fast_font_type<detail_type_list>;
+        template <typename DetailTypeList>
+        using fast_font_type = bobura::detail::ui::fast_font_type<DetailTypeList>;
 
-        using dialog_type = bobura::detail::ui::dialog_type<detail_type_list>;
+        template <typename DetailTypeList>
+        using dialog_type = bobura::detail::ui::dialog_type<DetailTypeList>;
 
-        using abstract_window_type = bobura::detail::ui::abstract_window_type<detail_type_list>;
+        template <typename DetailTypeList>
+        using abstract_window_type = bobura::detail::ui::abstract_window_type<DetailTypeList>;
 
-        using picture_box_type = bobura::detail::ui::picture_box_type<detail_type_list>;
+        template <typename DetailTypeList>
+        using picture_box_type = bobura::detail::ui::picture_box_type<DetailTypeList>;
 
-        using mouse_capture_type = bobura::detail::ui::mouse_capture_type<detail_type_list>;
+        template <typename DetailTypeList>
+        using mouse_capture_type = bobura::detail::ui::mouse_capture_type<DetailTypeList>;
 
-        using message_catalog_type = bobura::detail::locale::message_catalog_type<detail_type_list>;
+        template <typename DetailTypeList>
+        using message_catalog_type = bobura::detail::locale::message_catalog_type<DetailTypeList>;
 
+        template <typename DetailTypeList>
         using dialog_traits_type =
             dialog_traits<
                 string_type,
-                position_type,
-                dimension_type,
-                dialog_type,
-                abstract_window_type,
-                bobura::detail::ui::label_type<detail_type_list>,
-                bobura::detail::ui::link_label_type<detail_type_list>,
-                bobura::detail::ui::image_type<detail_type_list>,
-                bobura::detail::ui::button_type<detail_type_list>,
-                bobura::detail::ui::text_box_type<detail_type_list>,
-                bobura::detail::ui::list_box_type<detail_type_list>,
-                bobura::detail::ui::dropdown_box_type<detail_type_list>,
-                picture_box_type,
-                bobura::detail::ui::transparent_background_type<detail_type_list>,
-                message_catalog_type
+                position_type<DetailTypeList>,
+                dimension_type<DetailTypeList>,
+                dialog_type<DetailTypeList>,
+                abstract_window_type<DetailTypeList>,
+                bobura::detail::ui::label_type<DetailTypeList>,
+                bobura::detail::ui::link_label_type<DetailTypeList>,
+                bobura::detail::ui::image_type<DetailTypeList>,
+                bobura::detail::ui::button_type<DetailTypeList>,
+                bobura::detail::ui::text_box_type<DetailTypeList>,
+                bobura::detail::ui::list_box_type<DetailTypeList>,
+                bobura::detail::ui::dropdown_box_type<DetailTypeList>,
+                picture_box_type<DetailTypeList>,
+                bobura::detail::ui::transparent_background_type<DetailTypeList>,
+                message_catalog_type<DetailTypeList>
             >;
 
+        template <typename DetailTypeList>
         using load_save_traits_type =
             bobura::load_save::traits<
                 size_type,
@@ -772,17 +783,18 @@ namespace bobura
                 bobura::detail::output_stream_type,
                 operating_distance_type,
                 speed_type,
-                fast_font_type,
-                abstract_window_type,
-                bobura::detail::common_dialog::message_box_type<detail_type_list>,
-                bobura::detail::common_dialog::file_open_type<detail_type_list>,
-                bobura::detail::common_dialog::file_save_type<detail_type_list>,
-                oudia_diagram_dialog<dialog_traits_type, size_type>,
-                message_catalog_type,
-                bobura::detail::locale::timetable_file_encoder_type<detail_type_list>,
-                bobura::detail::locale::windia_file_encoder_type<detail_type_list>
+                fast_font_type<DetailTypeList>,
+                abstract_window_type<DetailTypeList>,
+                bobura::detail::common_dialog::message_box_type<DetailTypeList>,
+                bobura::detail::common_dialog::file_open_type<DetailTypeList>,
+                bobura::detail::common_dialog::file_save_type<DetailTypeList>,
+                oudia_diagram_dialog<dialog_traits_type<DetailTypeList>, size_type>,
+                message_catalog_type<DetailTypeList>,
+                bobura::detail::locale::timetable_file_encoder_type<DetailTypeList>,
+                bobura::detail::locale::windia_file_encoder_type<DetailTypeList>
             >;
 
+        template <typename DetailTypeList>
         using view_traits_type =
             bobura::view::diagram::traits<
                 size_type,
@@ -791,50 +803,57 @@ namespace bobura
                 operating_distance_type,
                 speed_type,
                 scale_type,
-                fast_canvas_type,
-                bobura::detail::ui::fast_solid_background_type<detail_type_list>,
-                message_catalog_type
+                fast_canvas_type<DetailTypeList>,
+                bobura::detail::ui::fast_solid_background_type<DetailTypeList>,
+                message_catalog_type<DetailTypeList>
             >;
 
+        template <typename DetailTypeList>
         using config_traits_type =
             config_traits<
                 string_type,
                 size_type,
-                bobura::detail::locale::config_encoder_type<detail_type_list>,
-                boost::mpl::at<detail_type_list, type::detail::config>::type
+                bobura::detail::locale::config_encoder_type<DetailTypeList>,
+                typename boost::mpl::at<DetailTypeList, type::detail::config>::type
             >;
 
-        using map_box_type = bobura::detail::ui::map_box_type<detail_type_list>;
+        template <typename DetailTypeList>
+        using map_box_type = bobura::detail::ui::map_box_type<DetailTypeList>;
 
-        using side_bar_type = bobura::detail::ui::side_bar_type<detail_type_list>;
+        template <typename DetailTypeList>
+        using side_bar_type = bobura::detail::ui::side_bar_type<DetailTypeList>;
 
-        using popup_menu_type = bobura::detail::ui::popup_menu_type<detail_type_list>;
+        template <typename DetailTypeList>
+        using popup_menu_type = bobura::detail::ui::popup_menu_type<DetailTypeList>;
 
-        using message_loop_details_type = boost::mpl::at<detail_type_list, type::detail::message_loop>::type;
+        template <typename DetailTypeList>
+        using message_loop_details_type = typename boost::mpl::at<DetailTypeList, type::detail::message_loop>::type;
 
+        template <typename DetailTypeList>
         using main_window_traits_type =
             main_window_traits<
                 size_type,
                 difference_type,
                 string_type,
-                position_type,
-                dimension_type,
+                position_type<DetailTypeList>,
+                dimension_type<DetailTypeList>,
                 operating_distance_type,
                 speed_type,
-                bobura::detail::ui::window_type<detail_type_list>,
-                picture_box_type,
-                map_box_type,
-                side_bar_type,
-                popup_menu_type,
-                tetengo2::gui::message::message_loop_break<message_loop_details_type>,
-                fast_font_type,
-                mouse_capture_type,
-                message_catalog_type,
-                view_traits_type,
-                load_save_traits_type,
-                config_traits_type
+                bobura::detail::ui::window_type<DetailTypeList>,
+                picture_box_type<DetailTypeList>,
+                map_box_type<DetailTypeList>,
+                side_bar_type<DetailTypeList>,
+                popup_menu_type<DetailTypeList>,
+                tetengo2::gui::message::message_loop_break<message_loop_details_type<DetailTypeList>>,
+                fast_font_type<DetailTypeList>,
+                mouse_capture_type<DetailTypeList>,
+                message_catalog_type<DetailTypeList>,
+                view_traits_type<DetailTypeList>,
+                load_save_traits_type<DetailTypeList>,
+                config_traits_type<DetailTypeList>
             >;
 
+        template <typename DetailTypeList>
         using command_traits_type =
             command::traits<
                 size_type,
@@ -842,73 +861,78 @@ namespace bobura
                 string_type,
                 operating_distance_type,
                 speed_type,
-                fast_font_type,
-                abstract_window_type,
-                mouse_capture_type
+                fast_font_type<DetailTypeList>,
+                abstract_window_type<DetailTypeList>,
+                mouse_capture_type<DetailTypeList>
             >;
 
+        template <typename DetailTypeList>
         using command_set_traits_type =
             command::set_traits<
                 size_type,
                 string_type,
-                position_type,
-                dimension_type,
-                dialog_type,
+                position_type<DetailTypeList>,
+                dimension_type<DetailTypeList>,
+                dialog_type<DetailTypeList>,
                 bobura::detail::ui::color_type,
-                bobura::detail::ui::point_unit_size_type<detail_type_list>,
-                fast_canvas_type,
+                bobura::detail::ui::point_unit_size_type<DetailTypeList>,
+                fast_canvas_type<DetailTypeList>,
                 scale_type,
-                bobura::detail::ui::shell_type<detail_type_list>,
-                bobura::detail::common_dialog::font_type<detail_type_list>,
-                bobura::detail::common_dialog::color_type<detail_type_list>,
-                message_catalog_type,
-                command_traits_type,
-                main_window_traits_type,
-                view_traits_type,
-                load_save_traits_type,
-                dialog_traits_type,
-                config_traits_type
+                bobura::detail::ui::shell_type<DetailTypeList>,
+                bobura::detail::common_dialog::font_type<DetailTypeList>,
+                bobura::detail::common_dialog::color_type<DetailTypeList>,
+                message_catalog_type<DetailTypeList>,
+                command_traits_type<DetailTypeList>,
+                main_window_traits_type<DetailTypeList>,
+                view_traits_type<DetailTypeList>,
+                load_save_traits_type<DetailTypeList>,
+                dialog_traits_type<DetailTypeList>,
+                config_traits_type<DetailTypeList>
             >;
 
+        template <typename DetailTypeList>
         using gui_fixture_type =
-            tetengo2::gui::fixture<boost::mpl::at<detail_type_list, type::detail::gui_fixture>::type>;
+            tetengo2::gui::fixture<typename boost::mpl::at<DetailTypeList, type::detail::gui_fixture>::type>;
 
+        template <typename DetailTypeList>
         using message_loop_type =
-            tetengo2::gui::message::message_loop<abstract_window_type, message_loop_details_type>;
+            tetengo2::gui::message::message_loop<abstract_window_type<DetailTypeList>, message_loop_details_type<DetailTypeList>>;
 
+        template <typename DetailTypeList>
         using timer_type =
             tetengo2::gui::timer<
-                bobura::detail::ui::widget_type<detail_type_list>,
-                boost::mpl::at<detail_type_list, type::detail::timer>::type
+                bobura::detail::ui::widget_type<DetailTypeList>,
+                typename boost::mpl::at<DetailTypeList, type::detail::timer>::type
             >;
 
+        template <typename DetailTypeList>
         using application_traits_type =
             application_traits<
                 size_type,
                 difference_type,
                 string_type,
-                position_type,
-                dimension_type,
+                position_type<DetailTypeList>,
+                dimension_type<DetailTypeList>,
                 operating_distance_type,
                 speed_type,
                 scale_type,
-                gui_fixture_type,
-                fast_font_type,
-                abstract_window_type,
-                picture_box_type,
-                map_box_type,
-                side_bar_type,
-                bobura::detail::ui::menu_bar_type<detail_type_list>,
-                popup_menu_type,
-                message_loop_type,
-                mouse_capture_type,
-                timer_type,
-                message_catalog_type,
-                main_window_traits_type,
-                view_traits_type,
-                load_save_traits_type,
-                command_set_traits_type,
-                config_traits_type
+                gui_fixture_type<DetailTypeList>,
+                fast_font_type<DetailTypeList>,
+                abstract_window_type<DetailTypeList>,
+                picture_box_type<DetailTypeList>,
+                map_box_type<DetailTypeList>,
+                side_bar_type<DetailTypeList>,
+                bobura::detail::ui::menu_bar_type<DetailTypeList>,
+                popup_menu_type<DetailTypeList>,
+                message_loop_type<DetailTypeList>,
+                mouse_capture_type<DetailTypeList>,
+                timer_type<DetailTypeList>,
+                message_catalog_type<DetailTypeList>,
+                main_window_traits_type<DetailTypeList>,
+                view_traits_type<DetailTypeList>,
+                load_save_traits_type<DetailTypeList>,
+                command_set_traits_type<DetailTypeList>,
+                config_traits_type<DetailTypeList>
             >;
 
     }}
@@ -921,17 +945,17 @@ namespace bobura
     */
     template <typename DetailTypeList>
     using traits_type_list =
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::dialog, detail::traits::dialog_traits_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::load_save, detail::traits::load_save_traits_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::view, detail::traits::view_traits_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::config, detail::traits::config_traits_type>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::dialog, detail::traits::dialog_traits_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::load_save, detail::traits::load_save_traits_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::view, detail::traits::view_traits_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::config, detail::traits::config_traits_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::traits::main_window, detail::traits::main_window_traits_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::command, detail::traits::command_traits_type>,
+            boost::mpl::pair<type::traits::main_window, detail::traits::main_window_traits_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<boost::mpl::pair<type::traits::command, detail::traits::command_traits_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::traits::command_set, detail::traits::command_set_traits_type>,
+            boost::mpl::pair<type::traits::command_set, detail::traits::command_set_traits_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::traits::application, detail::traits::application_traits_type>,
+            boost::mpl::pair<type::traits::application, detail::traits::application_traits_type<DetailTypeList>>,
         tetengo2::meta::assoc_list_end
         >>>>>>>>;
 
