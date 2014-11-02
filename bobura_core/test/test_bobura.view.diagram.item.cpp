@@ -24,7 +24,7 @@ namespace
 {
     // types
 
-    using detail_type_list_type = bobura::detail_type_list;
+    using detail_type_list_type = bobura::detail_type_list_for_test;
 
     using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 

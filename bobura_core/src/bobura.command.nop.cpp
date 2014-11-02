@@ -61,7 +61,7 @@ namespace bobura { namespace command
 
     namespace
     {
-        using detail_type_list_type = detail_type_list;
+        using detail_type_list_type = detail_type_list_for_application;
 
         using traits_type_list_type = traits_type_list<detail_type_list_type>;
 

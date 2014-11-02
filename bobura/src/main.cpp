@@ -35,7 +35,7 @@ namespace
 {
     // types
 
-    using detail_type_list_type = bobura::detail_type_list;
+    using detail_type_list_type = bobura::detail_type_list_for_application;
 
     using common_type_list_type = bobura::common_type_list;
 
@@ -133,7 +133,7 @@ TETENGO2_STDALT_NOEXCEPT
         tetengo2::gui::alert<
             boost::mpl::at<locale_type_list_type, bobura::type::locale::ui_encoder>::type,
             boost::mpl::at<locale_type_list_type, bobura::type::locale::exception_encoder>::type,
-            boost::mpl::at<bobura::detail_type_list, bobura::type::detail::alert>::type
+            boost::mpl::at<detail_type_list_type, bobura::type::detail::alert>::type
         >;
 
     try

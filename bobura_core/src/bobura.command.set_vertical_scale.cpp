@@ -163,7 +163,7 @@ namespace bobura { namespace command
 
     namespace
     {
-        using detail_type_list_type = detail_type_list;
+        using detail_type_list_type = detail_type_list_for_application;
 
         using common_type_list_type = common_type_list;
 

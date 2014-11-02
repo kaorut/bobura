@@ -106,7 +106,7 @@ namespace bobura
     private:
         // types
 
-        using detail_type_list_type = detail_type_list;
+        using detail_type_list_type = detail_type_list_for_application;
 
         using locale_type_list_type = locale_type_list<detail_type_list_type>;
     
@@ -116,9 +116,10 @@ namespace bobura
 
         using ui_encoder_type = typename boost::mpl::at<locale_type_list_type, type::locale::ui_encoder>::type;
 
-        using menu_details_type = typename boost::mpl::at<detail_type_list, type::detail::menu>::type;
+        using menu_details_type = typename boost::mpl::at<detail_type_list_type, type::detail::menu>::type;
 
-        using virtual_key_details_type = typename boost::mpl::at<detail_type_list, type::detail::virtual_key>::type;
+        using virtual_key_details_type =
+            typename boost::mpl::at<detail_type_list_type, type::detail::virtual_key>::type;
 
         using menu_command_type =
             tetengo2::gui::menu::command<string_type, ui_encoder_type, menu_details_type, virtual_key_details_type>;
@@ -588,7 +589,7 @@ namespace bobura
 
     namespace
     {
-        using detail_type_list_type = detail_type_list;
+        using detail_type_list_type = detail_type_list_for_application;
 
         using common_type_list_type = common_type_list;
 

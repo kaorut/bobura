@@ -210,7 +210,7 @@ namespace bobura { namespace command
 
     namespace
     {
-        using detail_type_list_type = detail_type_list;
+        using detail_type_list_type = detail_type_list_for_application;
 
         using locale_type_list_type = locale_type_list<detail_type_list_type>;
     
