@@ -165,9 +165,13 @@ namespace bobura
                     typename traits_type::scale_type,
                     font_type,
                     typename traits_type::menu_bar_type,
+                    typename traits_type::popup_menu_type,
+                    typename traits_type::menu_command_type,
+                    typename traits_type::menu_separator_type,
                     message_catalog_type,
                     command_set_traits_type,
-                    main_window_traits_type
+                    main_window_traits_type,
+                    view_traits_type
                 >
             >;
 

@@ -23,9 +23,13 @@ namespace bobura
         \tparam Scale             A scale type.
         \tparam Font              A font type.
         \tparam MenuBar           A menu bar type.
+        \tparam PopupMenu         A popup menu type.
+        \tparam MenuCommand       A menu command type.
+        \tparam MenuSeparator     A menu separator type.
         \tparam MessageCatalog    A message catalog type.
         \tparam CommandSetTraits  A command set traits.
         \tparam MainWindowTraits  A main window traits type.
+        \tparam ViewTraits        A view traits type.
     */
     template <
         typename Size,
@@ -36,9 +40,13 @@ namespace bobura
         typename Scale,
         typename Font,
         typename MenuBar,
+        typename PopupMenu,
+        typename MenuCommand,
+        typename MenuSeparator,
         typename MessageCatalog,
         typename CommandSetTraits,
-        typename MainWindowTraits
+        typename MainWindowTraits,
+        typename ViewTraits
     >
     class main_window_menu_builder_traits
     {
@@ -69,6 +77,15 @@ namespace bobura
         //! The menu bar type.
         using menu_bar_type = MenuBar;
 
+        //! The popup menu type.
+        using popup_menu_type = PopupMenu;
+
+        //! The menu command type.
+        using menu_command_type = MenuCommand;
+
+        //! The menu separator type.
+        using menu_separator_type = MenuSeparator;
+
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
@@ -77,6 +94,9 @@ namespace bobura
 
         //! The main window traits type.
         using main_window_traits_type = MainWindowTraits;
+
+        //! The view traits type.
+        using view_traits_type = ViewTraits;
 
 
     };

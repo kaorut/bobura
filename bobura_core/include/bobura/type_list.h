@@ -255,6 +255,8 @@ namespace bobura
         struct list_box;       //!< The list box type.
         struct map_box;        //!< The map box type.
         struct menu_bar;       //!< The menu bar type.
+        struct menu_command;   //!< The menu command type.
+        struct menu_separator; //!< The menu separator type.
         struct mouse_capture;  //!< The mouse capture type.
         struct picture_box;    //!< The picture box type.
         struct point_unit_size; //!< The point unit size type.
@@ -498,6 +500,24 @@ namespace bobura
             >;
 
         template <typename DetailTypeList>
+        using menu_command_type =
+            tetengo2::gui::menu::command<
+                string_type,
+                ui_encoder_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>,
+                virtual_key_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
+        using menu_separator_type =
+            tetengo2::gui::menu::separator<
+                string_type,
+                ui_encoder_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>,
+                virtual_key_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
         using picture_box_type =
             tetengo2::gui::widget::picture_box<
                 widget_traits_type<DetailTypeList>,
@@ -570,6 +590,10 @@ namespace bobura
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::map_box, detail::ui::map_box_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::menu_bar, detail::ui::menu_bar_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::ui::menu_command, detail::ui::menu_command_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
+            boost::mpl::pair<type::ui::menu_separator, detail::ui::menu_separator_type<DetailTypeList>>,
+        tetengo2::meta::assoc_list<
             boost::mpl::pair<type::ui::mouse_capture, detail::ui::mouse_capture_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<
             boost::mpl::pair<type::ui::picture_box, detail::ui::picture_box_type<DetailTypeList>>,
@@ -591,7 +615,7 @@ namespace bobura
             boost::mpl::pair<type::ui::widget_traits, detail::ui::widget_traits_type<DetailTypeList>>,
         tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::window, detail::ui::window_type<DetailTypeList>>,
         tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>>>>>>>>>>>>>>>>>>;
+        >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>;
 
 
     /**** Common Dialog *****************************************************/
@@ -828,6 +852,12 @@ namespace bobura
         using popup_menu_type = bobura::detail::ui::popup_menu_type<DetailTypeList>;
 
         template <typename DetailTypeList>
+        using menu_command_type = bobura::detail::ui::menu_command_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using menu_separator_type = bobura::detail::ui::menu_separator_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
         using message_loop_details_type = typename boost::mpl::at<DetailTypeList, type::detail::message_loop>::type;
 
         template <typename DetailTypeList>
@@ -927,6 +957,8 @@ namespace bobura
                 side_bar_type<DetailTypeList>,
                 bobura::detail::ui::menu_bar_type<DetailTypeList>,
                 popup_menu_type<DetailTypeList>,
+                menu_command_type<DetailTypeList>,
+                menu_separator_type<DetailTypeList>,
                 message_loop_type<DetailTypeList>,
                 mouse_capture_type<DetailTypeList>,
                 timer_type<DetailTypeList>,

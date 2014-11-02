@@ -13,9 +13,7 @@
 #include <boost/mpl/at.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
-#include <bobura/diagram_view.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/main_window_menu_builder_traits.h>
 #include <bobura/message/type_list_impl.h>
@@ -85,34 +83,19 @@ namespace bobura
 
         using scale_type = typename traits_type::scale_type;
 
-        using detail_type_list_type = detail_type_list_for_application;
+        using popup_menu_type = typename traits_type::popup_menu_type;
 
-        using locale_type_list_type = locale_type_list<detail_type_list_type>;
-    
-        using ui_type_list_type = ui_type_list<detail_type_list_type>;
+        using menu_command_type = typename traits_type::menu_command_type;
 
-        using traits_type_list_type = traits_type_list<detail_type_list_type>;
+        using menu_separator_type = typename traits_type::menu_separator_type;
 
-        using ui_encoder_type = typename boost::mpl::at<locale_type_list_type, type::locale::ui_encoder>::type;
-
-        using menu_details_type = typename boost::mpl::at<detail_type_list_type, type::detail::menu>::type;
-
-        using virtual_key_details_type =
-            typename boost::mpl::at<detail_type_list_type, type::detail::virtual_key>::type;
-
-        using menu_command_type =
-            tetengo2::gui::menu::command<string_type, ui_encoder_type, menu_details_type, virtual_key_details_type>;
-
-        using popup_menu_type = typename boost::mpl::at<ui_type_list_type, type::ui::popup_menu>::type;
-
-        using menu_base_type = typename menu_command_type::base_type;
+        using menu_base_type = typename popup_menu_type::base_type;
 
         using shortcut_key_type = typename menu_base_type::shortcut_key_type;
 
         using virtual_key_type = typename shortcut_key_type::virtual_key_type;
 
-        using menu_separator_type =
-            tetengo2::gui::menu::separator<string_type, ui_encoder_type, menu_details_type, virtual_key_details_type>;
+        using view_traits_type = typename traits_type::view_traits_type;
 
         using main_window_message_type_list_type =
             message::main_window::type_list<
@@ -120,7 +103,7 @@ namespace bobura
                 command_set_type,
                 typename command_set_type::command_type,
                 model_type,
-                diagram_view<boost::mpl::at<traits_type_list_type, type::traits::view>::type>,
+                view_traits_type,
                 typename main_window_type::abstract_window_type,
                 typename main_window_type::diagram_picture_box_type,
                 typename main_window_type::property_bar_type,
@@ -505,9 +488,13 @@ namespace bobura
             typename boost::mpl::at<common_type_list_type, type::scale>::type,
             typename boost::mpl::at<ui_type_list_type, type::ui::fast_font>::type,
             typename boost::mpl::at<ui_type_list_type, type::ui::menu_bar>::type,
+            typename boost::mpl::at<ui_type_list_type, type::ui::popup_menu>::type,
+            typename boost::mpl::at<ui_type_list_type, type::ui::menu_command>::type,
+            typename boost::mpl::at<ui_type_list_type, type::ui::menu_separator>::type,
             typename boost::mpl::at<locale_type_list_type, type::locale::message_catalog>::type,
             typename boost::mpl::at<traits_type_list_type, type::traits::command_set>::type,
-            typename boost::mpl::at<traits_type_list_type, type::traits::main_window>::type
+            typename boost::mpl::at<traits_type_list_type, type::traits::main_window>::type,
+            typename boost::mpl::at<traits_type_list_type, type::traits::view>::type
         >
     >;
 
