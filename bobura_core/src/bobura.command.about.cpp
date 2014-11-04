@@ -128,24 +128,27 @@ namespace bobura { namespace command
 
     namespace
     {
-        using detail_type_list_type = detail_type_list_for_application;
+        namespace application
+        {
+            using detail_type_list_type = detail_type_list_for_application;
 
-        using locale_type_list_type = locale_type_list<detail_type_list_type>;
+            using locale_type_list_type = locale_type_list<detail_type_list_type>;
     
-        using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = ui_type_list<detail_type_list_type>;
 
-        using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+        }
 
     }
 
-
     template class about<
-        typename boost::mpl::at<traits_type_list_type, type::traits::command>::type,
-        typename boost::mpl::at<ui_type_list_type, type::ui::position>::type,
-        typename boost::mpl::at<ui_type_list_type, type::ui::dimension>::type,
-        typename boost::mpl::at<locale_type_list_type, type::locale::message_catalog>::type,
-        typename boost::mpl::at<traits_type_list_type, type::traits::dialog>::type,
-        typename boost::mpl::at<traits_type_list_type, type::traits::config>::type
+        typename boost::mpl::at<application::traits_type_list_type, type::traits::command>::type,
+        typename boost::mpl::at<application::ui_type_list_type, type::ui::position>::type,
+        typename boost::mpl::at<application::ui_type_list_type, type::ui::dimension>::type,
+        typename boost::mpl::at<application::locale_type_list_type, type::locale::message_catalog>::type,
+        typename boost::mpl::at<application::traits_type_list_type, type::traits::dialog>::type,
+        typename boost::mpl::at<application::traits_type_list_type, type::traits::config>::type
     >;
 
 
