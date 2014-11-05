@@ -18,7 +18,6 @@
 #include <tetengo2.h>
 
 #include <bobura/command/train_kind.h>
-#include <bobura/model/train_kind.h>
 #include <bobura/type_list.h>
 #include <bobura/train_kind_dialog.h>
 
@@ -63,13 +62,7 @@ namespace bobura { namespace command
 
         using train_kind_dialog_type =
             train_kind_dialog<
-                dialog_traits_type,
-                size_type,
-                model::train_kind<string_type>,
-                font_type,
-                color_type,
-                canvas_type,
-                color_dialog_type
+                dialog_traits_type, size_type, string_type, font_type, color_type, canvas_type, color_dialog_type
             >;
 
 
