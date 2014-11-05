@@ -14,6 +14,7 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
+#include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
@@ -349,6 +350,7 @@ namespace bobura
 
     namespace
     {
+#if BOOST_COMP_MSVC
         namespace application
         {
             using detail_type_list_type = detail_type_list_for_application;
@@ -358,6 +360,7 @@ namespace bobura
             using traits_type_list_type = traits_type_list<detail_type_list_type>;
 
         }
+#endif
 
         namespace test
         {
@@ -371,10 +374,12 @@ namespace bobura
 
     }
 
+#if BOOST_COMP_MSVC
     template class oudia_diagram_dialog<
         typename boost::mpl::at<application::traits_type_list_type, type::traits::dialog>::type,
         typename boost::mpl::at<application::common_type_list_type, type::size>::type
     >;
+#endif
 
     template class oudia_diagram_dialog<
         typename boost::mpl::at<test::traits_type_list_type, type::traits::dialog>::type,

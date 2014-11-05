@@ -11,6 +11,7 @@
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/mpl/at.hpp>
+#include <boost/predef.h>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
@@ -143,7 +144,7 @@ namespace bobura
 
         using label_type = typename traits_type::label_type;
 
-        using button_type = typename typename traits_type::button_type;
+        using button_type = typename traits_type::button_type;
 
         using text_box_type = typename traits_type::text_box_type;
 
@@ -468,6 +469,7 @@ namespace bobura
 
     namespace
     {
+#if BOOST_COMP_MSVC
         namespace application
         {
             using detail_type_list_type = detail_type_list_for_application;
@@ -475,6 +477,7 @@ namespace bobura
             using traits_type_list_type = traits_type_list<detail_type_list_type>;
 
         }
+#endif
 
         namespace test
         {
@@ -486,9 +489,11 @@ namespace bobura
 
     }
 
+#if BOOST_COMP_MSVC
     template class file_property_dialog<
         typename boost::mpl::at<application::traits_type_list_type, type::traits::dialog>::type
     >;
+#endif
 
     template class file_property_dialog<
         typename boost::mpl::at<test::traits_type_list_type, type::traits::dialog>::type

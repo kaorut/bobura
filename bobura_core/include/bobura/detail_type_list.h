@@ -233,35 +233,7 @@ namespace bobura
         tetengo2::meta::assoc_list_end
         >>>>>>>>>>>>>>>>>>>>;
 #else
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::alert, detail::detail::test::alert_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::detail::common_dialog, detail::detail::test::common_dialog_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::cursor, detail::detail::test::cursor_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::config, detail::detail::test::config_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::drawing, detail::detail::test::drawing_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::detail::fast_drawing, detail::detail::test::fast_drawing_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::encoding, detail::detail::test::encoding_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::gui_fixture, detail::detail::test::gui_fixture_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::icon, detail::detail::test::icon_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::menu, detail::detail::test::menu_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::detail::message_handler, detail::detail::test::message_handler_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::detail::message_loop, detail::detail::test::message_loop_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::detail::mouse_capture, detail::detail::test::mouse_capture_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::scroll, detail::detail::test::scroll_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::shell, detail::detail::test::shell_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::detail::system_color, detail::detail::test::system_color_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::timer, detail::detail::test::timer_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::unit, detail::detail::test::unit_type>,
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::detail::virtual_key, detail::detail::test::virtual_key_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::detail::widget, detail::detail::test::widget_type>,
-        tetengo2::meta::assoc_list_end
-        >>>>>>>>>>>>>>>>>>>>;
+        tetengo2::meta::assoc_list_end;
 #endif
 
     /*!

@@ -16,6 +16,7 @@
 #include <boost/format.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
+#include <boost/predef.h>
 #include <boost/rational.hpp>
 #include <boost/throw_exception.hpp>
 
@@ -986,6 +987,7 @@ namespace bobura
 
     namespace
     {
+#if BOOST_COMP_MSVC
         namespace application
         {
             using detail_type_list_type = detail_type_list_for_application;
@@ -999,6 +1001,7 @@ namespace bobura
             using traits_type_list_type = traits_type_list<detail_type_list_type>;
 
         }
+#endif
 
         namespace test
         {
@@ -1016,6 +1019,7 @@ namespace bobura
 
     }
 
+#if BOOST_COMP_MSVC
     template class font_color_dialog<
         typename boost::mpl::at<application::traits_type_list_type, type::traits::dialog>::type,
         typename boost::mpl::at<application::common_type_list_type, type::size>::type,
@@ -1026,6 +1030,7 @@ namespace bobura
         typename boost::mpl::at<application::common_dialog_type_list_type, type::common_dialog::font>::type,
         typename boost::mpl::at<application::common_dialog_type_list_type, type::common_dialog::color>::type
     >;
+#endif
 
     template class font_color_dialog<
         typename boost::mpl::at<test::traits_type_list_type, type::traits::dialog>::type,

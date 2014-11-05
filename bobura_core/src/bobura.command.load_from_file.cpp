@@ -11,6 +11,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
+#include <boost/predef.h>
 
 #include <tetengo2.h>
 
@@ -26,9 +27,9 @@ namespace bobura { namespace command
     public:
         // types
 
-        using model_type = typename load_from_file::model_type;
-
         using abstract_window_type = typename load_from_file::abstract_window_type;
+
+        using model_type = typename load_from_file::model_type;
 
         using load_from_file_type = typename load_from_file::load_from_file_type;
 
@@ -130,6 +131,7 @@ namespace bobura { namespace command
 
     namespace
     {
+#if BOOST_COMP_MSVC
         namespace application
         {
             using detail_type_list_type = detail_type_list_for_application;
@@ -137,6 +139,7 @@ namespace bobura { namespace command
             using traits_type_list_type = traits_type_list<detail_type_list_type>;
 
         }
+#endif
 
         namespace test
         {
@@ -148,10 +151,12 @@ namespace bobura { namespace command
 
     }
 
+#if BOOST_COMP_MSVC
     template class load_from_file<
         typename boost::mpl::at<application::traits_type_list_type, type::traits::command>::type,
         typename boost::mpl::at<application::traits_type_list_type, type::traits::load_save>::type
     >;
+#endif
 
     template class load_from_file<
         typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,

@@ -54,6 +54,12 @@ namespace bobura
         //! The abstract window type.
         using abstract_window_type = typename base_type::base_type;
 
+        //! The icon type.
+        using icon_type = typename base_type::icon_type;
+
+        //! The window state type.
+        using window_state_type = typename base_type::window_state_type;
+
         //! The picture box type.
         using picture_box_type = typename traits_type::picture_box_type;
 

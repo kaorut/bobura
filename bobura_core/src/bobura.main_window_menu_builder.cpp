@@ -11,6 +11,7 @@
 #include <vector>
 
 #include <boost/mpl/at.hpp>
+#include <boost/predef.h>
 
 #include <tetengo2.h>
 
@@ -465,6 +466,7 @@ namespace bobura
 
     namespace
     {
+#if BOOST_COMP_MSVC
         namespace application
         {
             using detail_type_list_type = detail_type_list_for_application;
@@ -478,6 +480,7 @@ namespace bobura
             using traits_type_list_type = traits_type_list<detail_type_list_type>;
 
         }
+#endif
 
         namespace test
         {
@@ -495,6 +498,7 @@ namespace bobura
 
     }
 
+#if BOOST_COMP_MSVC
     template class main_window_menu_builder<
         main_window_menu_builder_traits<
             typename boost::mpl::at<application::common_type_list_type, type::size>::type,
@@ -514,6 +518,7 @@ namespace bobura
             typename boost::mpl::at<application::traits_type_list_type, type::traits::view>::type
         >
     >;
+#endif
 
     template class main_window_menu_builder<
         main_window_menu_builder_traits<

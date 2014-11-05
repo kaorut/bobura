@@ -10,6 +10,7 @@
 
 #include <boost/core/ignore_unused.hpp>
 #include <boost/mpl/at.hpp>
+#include <boost/predef.h>
 
 #include <tetengo2.h>
 
@@ -114,6 +115,7 @@ namespace bobura { namespace command
 
     namespace
     {
+#if BOOST_COMP_MSVC
         namespace application
         {
             using detail_type_list_type = detail_type_list_for_application;
@@ -121,6 +123,7 @@ namespace bobura { namespace command
             using traits_type_list_type = traits_type_list<detail_type_list_type>;
 
         }
+#endif
 
         namespace test
         {
@@ -132,12 +135,14 @@ namespace bobura { namespace command
 
     }
 
+#if BOOST_COMP_MSVC
     template class horizontally_zoom_in<
         typename boost::mpl::at<application::traits_type_list_type, type::traits::command>::type,
         typename boost::mpl::at<application::traits_type_list_type, type::traits::command_set>::type,
         typename boost::mpl::at<application::traits_type_list_type, type::traits::main_window>::type,
         typename boost::mpl::at<application::traits_type_list_type, type::traits::view>::type
     >;
+#endif
 
     template class horizontally_zoom_in<
         typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,
