@@ -293,6 +293,14 @@ namespace bobura
 
         }
 
+        namespace test
+        {
+            using detail_type_list_type = detail_type_list_for_test;
+
+            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+        }
+
     }
 
     template class main_window<

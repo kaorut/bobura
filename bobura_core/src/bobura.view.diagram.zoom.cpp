@@ -238,6 +238,16 @@ namespace bobura { namespace view { namespace diagram
 
         }
 
+        namespace test
+        {
+            using detail_type_list_type = detail_type_list_for_test;
+
+            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+
+            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+        }
+
     }
 
     template class zoom<

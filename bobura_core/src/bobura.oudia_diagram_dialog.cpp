@@ -359,6 +359,16 @@ namespace bobura
 
         }
 
+        namespace test
+        {
+            using detail_type_list_type = detail_type_list_for_test;
+
+            using common_type_list_type = common_type_list;
+
+            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+        }
+
     }
 
     template class oudia_diagram_dialog<

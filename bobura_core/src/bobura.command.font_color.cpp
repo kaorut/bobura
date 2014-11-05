@@ -224,6 +224,20 @@ namespace bobura { namespace command
 
         }
 
+        namespace test
+        {
+            using detail_type_list_type = detail_type_list_for_test;
+
+            using locale_type_list_type = locale_type_list<detail_type_list_type>;
+    
+            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+
+            using common_dialog_type_list_type = common_dialog_type_list<detail_type_list_type>;
+
+            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+        }
+
     }
 
     template class font_color<

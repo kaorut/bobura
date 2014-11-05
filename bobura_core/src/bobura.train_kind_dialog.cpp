@@ -979,6 +979,20 @@ namespace bobura
 
         }
 
+        namespace test
+        {
+            using detail_type_list_type = detail_type_list_for_test;
+
+            using common_type_list_type = common_type_list;
+
+            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+
+            using common_dialog_type_list_type = common_dialog_type_list<detail_type_list_type>;
+
+            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+        }
+
     }
 
     template class train_kind_dialog<
