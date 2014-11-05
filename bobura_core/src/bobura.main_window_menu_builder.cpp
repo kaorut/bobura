@@ -479,6 +479,20 @@ namespace bobura
 
         }
 
+        namespace test
+        {
+            using detail_type_list_type = detail_type_list_for_test;
+
+            using common_type_list_type = common_type_list;
+
+            using locale_type_list_type = locale_type_list<detail_type_list_type>;
+    
+            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+
+            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+        }
+
     }
 
     template class main_window_menu_builder<
@@ -498,6 +512,26 @@ namespace bobura
             typename boost::mpl::at<application::traits_type_list_type, type::traits::command_set>::type,
             typename boost::mpl::at<application::traits_type_list_type, type::traits::main_window>::type,
             typename boost::mpl::at<application::traits_type_list_type, type::traits::view>::type
+        >
+    >;
+
+    template class main_window_menu_builder<
+        main_window_menu_builder_traits<
+            typename boost::mpl::at<test::common_type_list_type, type::size>::type,
+            typename boost::mpl::at<test::common_type_list_type, type::difference>::type,
+            typename boost::mpl::at<test::common_type_list_type, type::string>::type,
+            typename boost::mpl::at<test::common_type_list_type, type::operating_distance>::type,
+            typename boost::mpl::at<test::common_type_list_type, type::speed>::type,
+            typename boost::mpl::at<test::common_type_list_type, type::scale>::type,
+            typename boost::mpl::at<test::ui_type_list_type, type::ui::fast_font>::type,
+            typename boost::mpl::at<test::ui_type_list_type, type::ui::menu_bar>::type,
+            typename boost::mpl::at<test::ui_type_list_type, type::ui::popup_menu>::type,
+            typename boost::mpl::at<test::ui_type_list_type, type::ui::menu_command>::type,
+            typename boost::mpl::at<test::ui_type_list_type, type::ui::menu_separator>::type,
+            typename boost::mpl::at<test::locale_type_list_type, type::locale::message_catalog>::type,
+            typename boost::mpl::at<test::traits_type_list_type, type::traits::command_set>::type,
+            typename boost::mpl::at<test::traits_type_list_type, type::traits::main_window>::type,
+            typename boost::mpl::at<test::traits_type_list_type, type::traits::view>::type
         >
     >;
 

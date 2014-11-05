@@ -173,6 +173,16 @@ namespace bobura { namespace command
 
         }
 
+        namespace test
+        {
+            using detail_type_list_type = detail_type_list_for_test;
+
+            using common_type_list_type = common_type_list;
+
+            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+        }
+
     }
 
     template class set_horizontal_scale<
@@ -181,6 +191,14 @@ namespace bobura { namespace command
         typename boost::mpl::at<application::traits_type_list_type, type::traits::command_set>::type,
         typename boost::mpl::at<application::traits_type_list_type, type::traits::main_window>::type,
         typename boost::mpl::at<application::traits_type_list_type, type::traits::view>::type
+    >;
+
+    template class set_horizontal_scale<
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,
+        typename boost::mpl::at<test::common_type_list_type, type::scale>::type,
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::command_set>::type,
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::main_window>::type,
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::view>::type
     >;
 
 

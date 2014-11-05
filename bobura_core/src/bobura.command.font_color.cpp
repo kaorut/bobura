@@ -224,6 +224,20 @@ namespace bobura { namespace command
 
         }
 
+        namespace test
+        {
+            using detail_type_list_type = detail_type_list_for_test;
+
+            using locale_type_list_type = locale_type_list<detail_type_list_type>;
+    
+            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+
+            using common_dialog_type_list_type = common_dialog_type_list<detail_type_list_type>;
+
+            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+        }
+
     }
 
     template class font_color<
@@ -236,6 +250,18 @@ namespace bobura { namespace command
         typename boost::mpl::at<application::common_dialog_type_list_type, type::common_dialog::color>::type,
         typename boost::mpl::at<application::locale_type_list_type, type::locale::message_catalog>::type,
         typename boost::mpl::at<application::traits_type_list_type, type::traits::dialog>::type
+    >;
+
+    template class font_color<
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,
+        typename boost::mpl::at<test::ui_type_list_type, type::ui::dialog>::type,
+        typename boost::mpl::at<test::ui_type_list_type, type::ui::point_unit_size>::type,
+        typename boost::mpl::at<test::ui_type_list_type, type::ui::color>::type,
+        typename boost::mpl::at<test::ui_type_list_type, type::ui::fast_canvas>::type,
+        typename boost::mpl::at<test::common_dialog_type_list_type, type::common_dialog::font>::type,
+        typename boost::mpl::at<test::common_dialog_type_list_type, type::common_dialog::color>::type,
+        typename boost::mpl::at<test::locale_type_list_type, type::locale::message_catalog>::type,
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::dialog>::type
     >;
 
 
