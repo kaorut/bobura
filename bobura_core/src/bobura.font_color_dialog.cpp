@@ -986,27 +986,31 @@ namespace bobura
 
     namespace
     {
-        using detail_type_list_type = detail_type_list_for_application;
+        namespace application
+        {
+            using detail_type_list_type = detail_type_list_for_application;
 
-        using common_type_list_type = common_type_list;
+            using common_type_list_type = common_type_list;
 
-        using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = ui_type_list<detail_type_list_type>;
 
-        using common_dialog_type_list_type = common_dialog_type_list<detail_type_list_type>;
+            using common_dialog_type_list_type = common_dialog_type_list<detail_type_list_type>;
 
-        using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+        }
 
     }
 
     template class font_color_dialog<
-        typename boost::mpl::at<traits_type_list_type, type::traits::dialog>::type,
-        typename boost::mpl::at<common_type_list_type, type::size>::type,
-        typename boost::mpl::at<ui_type_list_type, type::ui::fast_font>::type,
-        typename boost::mpl::at<ui_type_list_type, type::ui::point_unit_size>::type,
-        typename boost::mpl::at<ui_type_list_type, type::ui::color>::type,
-        typename boost::mpl::at<ui_type_list_type, type::ui::fast_canvas>::type,
-        typename boost::mpl::at<common_dialog_type_list_type, type::common_dialog::font>::type,
-        typename boost::mpl::at<common_dialog_type_list_type, type::common_dialog::color>::type
+        typename boost::mpl::at<application::traits_type_list_type, type::traits::dialog>::type,
+        typename boost::mpl::at<application::common_type_list_type, type::size>::type,
+        typename boost::mpl::at<application::ui_type_list_type, type::ui::fast_font>::type,
+        typename boost::mpl::at<application::ui_type_list_type, type::ui::point_unit_size>::type,
+        typename boost::mpl::at<application::ui_type_list_type, type::ui::color>::type,
+        typename boost::mpl::at<application::ui_type_list_type, type::ui::fast_canvas>::type,
+        typename boost::mpl::at<application::common_dialog_type_list_type, type::common_dialog::font>::type,
+        typename boost::mpl::at<application::common_dialog_type_list_type, type::common_dialog::color>::type
     >;
 
 

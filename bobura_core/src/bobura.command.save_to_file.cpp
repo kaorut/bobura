@@ -76,15 +76,19 @@ namespace bobura { namespace command
 
     namespace
     {
-        using detail_type_list_type = detail_type_list_for_application;
+        namespace application
+        {
+            using detail_type_list_type = detail_type_list_for_application;
 
-        using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+
+        }
 
     }
 
     template class save_to_file<
-        typename boost::mpl::at<traits_type_list_type, type::traits::command>::type,
-        typename boost::mpl::at<traits_type_list_type, type::traits::load_save>::type
+        typename boost::mpl::at<application::traits_type_list_type, type::traits::command>::type,
+        typename boost::mpl::at<application::traits_type_list_type, type::traits::load_save>::type
     >;
 
 
