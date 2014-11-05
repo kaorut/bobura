@@ -16,6 +16,8 @@
 
 #include <tetengo2.h>
 
+#include <bobura/model/train_kind.h>
+
 
 namespace bobura
 {
@@ -24,7 +26,7 @@ namespace bobura
 
         \tparam Traits      A traits type.
         \tparam Size        A size type.
-        \tparam TrainKind   A train kind type.
+        \tparam String      A string type.
         \tparam Font        A font type.
         \tparam Color       A color type.
         \tparam Canvas      A canvas type.
@@ -33,7 +35,7 @@ namespace bobura
     template <
         typename Traits,
         typename Size,
-        typename TrainKind,
+        typename String,
         typename Font,
         typename Color,
         typename Canvas,
@@ -59,8 +61,8 @@ namespace bobura
         //! The size type.
         using size_type = Size;
 
-        //! The train kind type.
-        using train_kind_type = TrainKind;
+        //! THe string type.
+        using string_type = String;
 
         //! The font type.
         using font_type = Font;
@@ -79,7 +81,7 @@ namespace bobura
         {
         public:
             //! The train kind type.
-            using train_kind_type = TrainKind;
+            using train_kind_type = bobura::model::train_kind<string_type>;
 
             /*!
                 \brief Creates an information set.
