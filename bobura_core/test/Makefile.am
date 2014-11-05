@@ -1,7 +1,7 @@
 # Automake Settings
 # Copyright (C) 2007-2014 kaoru
 # $Id$
-
+#
 headers =
 
 extra_headers =
@@ -56,8 +56,10 @@ bobura_core_test_CPPFLAGS = \
     -I$(TETENGO2_DETAIL_INCLUDE) \
     -I$(TETENGO2_GUI_INCLUDE)
 bobura_core_test_LDFLAGS = \
+    -L$(top_builddir)/bobura_core/src \
     -L$(TETENGO2_LIB)
 bobura_core_test_LDADD = \
+    -lbobura_core \
     -ltetengo2 \
     $(UNITTEST_LIBS)
 bobura_core_test_SOURCES = $(headers) $(sources)
