@@ -39,10 +39,6 @@ namespace bobura { namespace command
 
         using traits_type = typename font_color::traits_type;
 
-        using model_type = typename font_color::model_type;
-
-        using abstract_window_type = typename font_color::abstract_window_type;
-
         using dialog_type = typename font_color::dialog_type;
 
         using point_unit_size_type = typename font_color::point_unit_size_type;
@@ -58,6 +54,10 @@ namespace bobura { namespace command
         using message_catalog_type = typename font_color::message_catalog_type;
 
         using dialog_traits_type = typename font_color::dialog_traits_type;
+
+        using abstract_window_type = typename font_color::abstract_window_type;
+
+        using model_type = typename font_color::model_type;
 
 
         // constructors and destructor

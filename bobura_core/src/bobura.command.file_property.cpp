@@ -25,15 +25,15 @@ namespace bobura { namespace command
 
         using string_type = typename file_property::string_type;
 
-        using model_type = typename file_property::model_type;
-
-        using abstract_window_type = typename file_property::abstract_window_type;
-
         using dialog_type = typename file_property::dialog_type;
 
         using message_catalog_type = typename file_property::message_catalog_type;
 
         using dialog_traits_type = typename file_property::dialog_traits_type;
+
+        using abstract_window_type = typename file_property::abstract_window_type;
+
+        using model_type = typename file_property::model_type;
 
 
         // constructors and destructor

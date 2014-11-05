@@ -27,10 +27,6 @@ namespace bobura { namespace command
     public:
         // types
 
-        using model_type = typename horizontally_zoom_out::model_type;
-
-        using abstract_window_type = typename horizontally_zoom_out::abstract_window_type;
-
         using mouse_capture_type = typename horizontally_zoom_out::mouse_capture_type;
 
         using command_set_traits_type = typename horizontally_zoom_out::command_set_traits_type;
@@ -40,6 +36,10 @@ namespace bobura { namespace command
         using view_traits_type = typename horizontally_zoom_out::view_traits_type;
 
         using diagram_view_type = typename horizontally_zoom_out::diagram_view_type;
+
+        using abstract_window_type = typename horizontally_zoom_out::abstract_window_type;
+
+        using model_type = typename horizontally_zoom_out::model_type;
 
 
         // constructors and destructor

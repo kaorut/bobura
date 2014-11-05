@@ -31,15 +31,15 @@ namespace bobura { namespace command
     public:
         // types
 
-        using model_type = typename about::model_type;
-
-        using abstract_window_type = typename about::abstract_window_type;
-
         using message_catalog_type = typename about::message_catalog_type;
 
         using dialog_traits_type = typename about::dialog_traits_type;
 
         using config_traits_type = typename about::config_traits_type;
+
+        using abstract_window_type = typename about::abstract_window_type;
+
+        using model_type = typename about::model_type;
 
         using settings_type = typename about::settings_type;
 
