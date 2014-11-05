@@ -308,5 +308,10 @@ namespace bobura
         typename boost::mpl::at<application::traits_type_list_type, type::traits::command_set>::type
     >;
 
+    template class main_window<
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::main_window>::type,
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::command_set>::type
+    >;
+
 
 }

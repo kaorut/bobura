@@ -98,5 +98,10 @@ namespace bobura { namespace command
         typename boost::mpl::at<application::ui_type_list_type, type::ui::shell>::type
     >;
 
+    template class open_www_tetengo_org<
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,
+        typename boost::mpl::at<test::ui_type_list_type, type::ui::shell>::type
+    >;
+
 
 }}

@@ -376,5 +376,10 @@ namespace bobura
         typename boost::mpl::at<application::common_type_list_type, type::size>::type
     >;
 
+    template class oudia_diagram_dialog<
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::dialog>::type,
+        typename boost::mpl::at<test::common_type_list_type, type::size>::type
+    >;
+
 
 }

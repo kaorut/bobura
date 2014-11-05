@@ -257,5 +257,12 @@ namespace bobura { namespace view { namespace diagram
         typename boost::mpl::at<application::ui_type_list_type, type::ui::mouse_capture>::type
     >;
 
+    template class zoom<
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::view>::type,
+        typename boost::mpl::at<test::ui_type_list_type, type::ui::abstract_window>::type,
+        typename boost::mpl::at<test::ui_type_list_type, type::ui::picture_box>::type,
+        typename boost::mpl::at<test::ui_type_list_type, type::ui::mouse_capture>::type
+    >;
+
 
 }}}

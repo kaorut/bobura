@@ -138,5 +138,12 @@ namespace bobura { namespace command
         typename boost::mpl::at<application::traits_type_list_type, type::traits::view>::type
     >;
 
+    template class horizontally_zoom_out<
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::command_set>::type,
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::main_window>::type,
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::view>::type
+    >;
+
 
 }}

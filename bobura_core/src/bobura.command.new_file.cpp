@@ -99,5 +99,10 @@ namespace bobura { namespace command
         typename boost::mpl::at<application::traits_type_list_type, type::traits::load_save>::type
     >;
 
+    template class new_file<
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::load_save>::type
+    >;
+
 
 }}

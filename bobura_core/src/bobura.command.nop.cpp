@@ -81,5 +81,7 @@ namespace bobura { namespace command
 
     template class nop<typename boost::mpl::at<application::traits_type_list_type, type::traits::command>::type>;
 
+    template class nop<typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type>;
+
 
 }}

@@ -193,5 +193,13 @@ namespace bobura { namespace command
         typename boost::mpl::at<application::traits_type_list_type, type::traits::view>::type
     >;
 
+    template class set_vertical_scale<
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,
+        typename boost::mpl::at<test::common_type_list_type, type::scale>::type,
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::command_set>::type,
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::main_window>::type,
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::view>::type
+    >;
+
 
 }}

@@ -163,5 +163,14 @@ namespace bobura { namespace command
         typename boost::mpl::at<application::traits_type_list_type, type::traits::config>::type
     >;
 
+    template class about<
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,
+        typename boost::mpl::at<test::ui_type_list_type, type::ui::position>::type,
+        typename boost::mpl::at<test::ui_type_list_type, type::ui::dimension>::type,
+        typename boost::mpl::at<test::locale_type_list_type, type::locale::message_catalog>::type,
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::dialog>::type,
+        typename boost::mpl::at<test::traits_type_list_type, type::traits::config>::type
+    >;
+
 
 }}

@@ -674,5 +674,7 @@ namespace bobura { namespace command
 
     template class set<typename boost::mpl::at<application::traits_type_list_type, type::traits::command_set>::type>;
 
+    template class set<typename boost::mpl::at<test::traits_type_list_type, type::traits::command_set>::type>;
+
 
 }}
