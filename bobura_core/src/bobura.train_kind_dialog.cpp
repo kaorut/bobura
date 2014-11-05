@@ -30,13 +30,13 @@ namespace bobura
     template <
         typename Traits,
         typename Size,
-        typename TrainKind,
+        typename String,
         typename Font,
         typename Color,
         typename Canvas,
         typename ColorDialog
     >
-    class train_kind_dialog<Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog>::impl :
+    class train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::impl :
         private boost::noncopyable
     {
     public:
@@ -49,8 +49,6 @@ namespace bobura
         using base_type = typename train_kind_dialog::base_type;
 
         using message_catalog_type = typename train_kind_dialog::message_catalog_type;
-
-        using train_kind_type = typename train_kind_dialog::train_kind_type;
 
         using font_type = typename train_kind_dialog::font_type;
 
@@ -161,6 +159,8 @@ namespace bobura
                 color_dialog_type,
                 message_catalog_type
             >;
+
+        using train_kind_type = typename info_set_type::train_kind_type;
 
         using weight_type = typename train_kind_type::weight_type;
 
@@ -795,13 +795,13 @@ namespace bobura
     template <
         typename Traits,
         typename Size,
-        typename TrainKind,
+        typename String,
         typename Font,
         typename Color,
         typename Canvas,
         typename ColorDialog
     >
-    train_kind_dialog<Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog>::info_set_type::info_set_type(
+    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::info_set_type(
         boost::optional<size_type> original_index,
         const bool                 referred,
         train_kind_type            train_kind
@@ -816,16 +816,16 @@ namespace bobura
     template <
         typename Traits,
         typename Size,
-        typename TrainKind,
+        typename String,
         typename Font,
         typename Color,
         typename Canvas,
         typename ColorDialog
     >
     const boost::optional<
-        typename train_kind_dialog<Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog>::size_type
+        typename train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::size_type
     >&
-    train_kind_dialog<Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog>::info_set_type::original_index()
+    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::original_index()
     const
     {
         return m_original_index;
@@ -834,13 +834,13 @@ namespace bobura
     template <
         typename Traits,
         typename Size,
-        typename TrainKind,
+        typename String,
         typename Font,
         typename Color,
         typename Canvas,
         typename ColorDialog
     >
-    bool train_kind_dialog<Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog>::info_set_type::referred()
+    bool train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::referred()
     const
     {
         return m_referred;
@@ -849,16 +849,16 @@ namespace bobura
     template <
         typename Traits,
         typename Size,
-        typename TrainKind,
+        typename String,
         typename Font,
         typename Color,
         typename Canvas,
         typename ColorDialog
     >
     const typename train_kind_dialog<
-        Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog
+        Traits, Size, String, Font, Color, Canvas, ColorDialog
     >::info_set_type::train_kind_type&
-    train_kind_dialog<Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog>::info_set_type::train_kind()
+    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::train_kind()
     const
     {
         return m_train_kind;
@@ -867,16 +867,16 @@ namespace bobura
     template <
         typename Traits,
         typename Size,
-        typename TrainKind,
+        typename String,
         typename Font,
         typename Color,
         typename Canvas,
         typename ColorDialog
     >
     typename train_kind_dialog<
-        Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog
+        Traits, Size, String, Font, Color, Canvas, ColorDialog
     >::info_set_type::train_kind_type&
-    train_kind_dialog<Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog>::info_set_type::train_kind()
+    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::train_kind()
     {
         return m_train_kind;
     }
@@ -884,13 +884,13 @@ namespace bobura
     template <
         typename Traits,
         typename Size,
-        typename TrainKind,
+        typename String,
         typename Font,
         typename Color,
         typename Canvas,
         typename ColorDialog
     >
-    train_kind_dialog<Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog>::train_kind_dialog(
+    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::train_kind_dialog(
         abstract_window_type&       parent,
         const font_type&            font,
         const color_type&           background_color,
@@ -904,29 +904,29 @@ namespace bobura
     template <
         typename Traits,
         typename Size,
-        typename TrainKind,
+        typename String,
         typename Font,
         typename Color,
         typename Canvas,
         typename ColorDialog
     >
-    train_kind_dialog<Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog>::~train_kind_dialog()
+    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::~train_kind_dialog()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
     template <
         typename Traits,
         typename Size,
-        typename TrainKind,
+        typename String,
         typename Font,
         typename Color,
         typename Canvas,
         typename ColorDialog
     >
     const std::vector<
-        typename train_kind_dialog<Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog>::info_set_type
+        typename train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type
     >
-    train_kind_dialog<Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog>::info_sets()
+    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_sets()
     const
     {
         return m_p_impl->info_sets();
@@ -935,13 +935,13 @@ namespace bobura
     template <
         typename Traits,
         typename Size,
-        typename TrainKind,
+        typename String,
         typename Font,
         typename Color,
         typename Canvas,
         typename ColorDialog
     >
-    void train_kind_dialog<Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog>::set_info_sets(
+    void train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::set_info_sets(
         std::vector<info_set_type> info_sets
     )
     {
@@ -951,13 +951,13 @@ namespace bobura
     template <
         typename Traits,
         typename Size,
-        typename TrainKind,
+        typename String,
         typename Font,
         typename Color,
         typename Canvas,
         typename ColorDialog
     >
-    void train_kind_dialog<Traits, Size, TrainKind, Font, Color, Canvas, ColorDialog>::do_modal_impl()
+    void train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::do_modal_impl()
     {
         m_p_impl->do_modal_impl();
     }
@@ -984,7 +984,7 @@ namespace bobura
     template class train_kind_dialog<
         typename boost::mpl::at<application::traits_type_list_type, type::traits::dialog>::type,
         typename boost::mpl::at<application::common_type_list_type, type::size>::type,
-        model::train_kind<typename boost::mpl::at<application::common_type_list_type, type::string>::type>,
+        typename boost::mpl::at<application::common_type_list_type, type::string>::type,
         typename boost::mpl::at<application::ui_type_list_type, type::ui::fast_font>::type,
         typename boost::mpl::at<application::ui_type_list_type, type::ui::color>::type,
         typename boost::mpl::at<application::ui_type_list_type, type::ui::fast_canvas>::type,
