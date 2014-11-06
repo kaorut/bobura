@@ -132,6 +132,10 @@
     <ClCompile Include="test\test_bobura.view.diagram.utility.cpp" />
     <ClCompile Include="test\test_bobura.view.scale_list.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res.test\win32\COMCTL32.DLL.Win32.manifest" />
+    <Manifest Include="res.test\win32\COMCTL32.DLL.x64.manifest" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
