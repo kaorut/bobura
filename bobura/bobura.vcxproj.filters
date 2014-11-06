@@ -35,12 +35,6 @@
     <None Include="res\images\kuma.png">
       <Filter>resources\images</Filter>
     </None>
-    <None Include="res\win32\COMCTL32.DLL.x64.manifest">
-      <Filter>resources\win32</Filter>
-    </None>
-    <None Include="res\win32\COMCTL32.DLL.Win32.manifest">
-      <Filter>resources\win32</Filter>
-    </None>
     <None Include="res\messages\_catalogs.json">
       <Filter>resources\messages</Filter>
     </None>
@@ -62,11 +56,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="res\win32\high_dpi.manifest">
-      <Filter>resources\win32</Filter>
-    </Manifest>
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="res\win32\bobura_app.ico">
       <Filter>resources\win32</Filter>
     </Image>
@@ -76,5 +65,10 @@
     <Image Include="res\win32\bttbz2_file.ico">
       <Filter>resources\win32</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\win32\bobura.exe.manifest">
+      <Filter>resources\win32</Filter>
+    </Manifest>
   </ItemGroup>
 </Project>

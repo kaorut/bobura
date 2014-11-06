@@ -114,16 +114,12 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\win32\COMCTL32.DLL.Win32.manifest" />
-    <None Include="res\win32\COMCTL32.DLL.x64.manifest" />
-  </ItemGroup>
-  <ItemGroup>
-    <Manifest Include="res\win32\high_dpi.manifest" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="res\win32\bobura_app.ico" />
     <Image Include="res\win32\bttbz2_file.ico" />
     <Image Include="res\win32\btt_file.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\win32\bobura.exe.manifest" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

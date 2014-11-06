@@ -18,7 +18,8 @@ call "$(SolutionDir)tools\copy_bobura_resource.bat" "$(ProjectDir)" "$(OutDir)"
 call "$(SolutionDir)lib\tetengo2\tools\codesign.bat" "$(TargetPath)"</Command>
     </PostBuildEvent>
     <Manifest>
-      <AdditionalManifestFiles>$(ProjectDir)res\win32\COMCTL32.DLL.$(PlatformName).manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <AdditionalManifestFiles>$(ProjectDir)res\win32\$(TargetFileName).manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup />
