@@ -97,7 +97,7 @@ Building on UNIX
 
 On UNIX, we cannot build a Bobura executable yet. However, we can build the Bobura libraries and use them.
 
-You need the following tools in order to build Bobura and Tetengo2 libraries:
+You need the following tools in order to build Bobura libraries:
 
 - [GCC 4.7.2 or 4.8.3](http://www.gnu.org/)
 - [GNU Make](http://www.gnu.org/)
