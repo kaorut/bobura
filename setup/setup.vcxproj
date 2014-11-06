@@ -81,10 +81,10 @@
     <ClInclude Include="res\win32\resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="res\win32\COMCTL32.DLL.Win32.manifest" />
+    <Image Include="res\win32\application.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\win32\application.ico" />
+    <Manifest Include="res\win32\setup.exe.manifest" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

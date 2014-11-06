@@ -51,13 +51,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="res\win32\COMCTL32.DLL.Win32.manifest">
-      <Filter>resources\win32</Filter>
-    </Manifest>
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="res\win32\application.ico">
       <Filter>resources\win32</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\win32\setup.exe.manifest">
+      <Filter>resources\win32</Filter>
+    </Manifest>
   </ItemGroup>
 </Project>
