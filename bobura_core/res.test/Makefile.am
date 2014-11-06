@@ -3,5 +3,4 @@
 # $Id$
 
 EXTRA_DIST = \
-    win32/COMCTL32.DLL.Win32.manifest \
-    win32/COMCTL32.DLL.x64.manifest
+    win32/bobura_core.test.exe.manifest

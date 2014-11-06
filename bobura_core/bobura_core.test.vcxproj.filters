@@ -130,10 +130,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="res.test\win32\COMCTL32.DLL.Win32.manifest">
-      <Filter>resources\win32</Filter>
-    </Manifest>
-    <Manifest Include="res.test\win32\COMCTL32.DLL.x64.manifest">
+    <Manifest Include="res.test\win32\bobura_core.test.exe.manifest">
       <Filter>resources\win32</Filter>
     </Manifest>
   </ItemGroup>

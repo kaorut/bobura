@@ -17,7 +17,7 @@
       <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration).$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
-      <AdditionalManifestFiles>$(ProjectDir)res\win32\COMCTL32.DLL.$(PlatformName).manifest</AdditionalManifestFiles>
+      <AdditionalManifestFiles>$(ProjectDir)res\win32\$(TargetFileName).manifest</AdditionalManifestFiles>
     </Manifest>
     <PostBuildEvent>
       <Command>call "$(SolutionDir)lib\tetengo2\tools\codesign.bat" "$(TargetPath)"
