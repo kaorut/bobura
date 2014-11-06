@@ -15,6 +15,7 @@
 
 #include <tetengo2.h>
 
+#include <bobura/command/nop.h>
 #include <bobura/diagram_picture_box.h>
 #include <bobura/diagram_view.h>
 #include <bobura/load_save/confirm_file_save.h>
@@ -57,37 +58,8 @@ namespace
 
     using abstract_window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::abstract_window>::type;
 
-    struct command_type
-    {
-    public:
-        enum class state_type
-        {
-            default_,
-            checked,
-            selected,
-        };
-
-        virtual bool enabled(const model_type& model)
-        const
-        {
-            boost::ignore_unused(model);
-
-            return true;
-        }
-
-        virtual state_type state()
-        const
-        {
-            return state_type::default_;
-        }
-
-        virtual void execute(model_type& model, abstract_window_type& parent)
-        const
-        {
-            boost::ignore_unused(model, parent);
-        }
-
-    };
+    using command_type =
+        bobura::command::nop<boost::mpl::at<traits_type_list_type, bobura::type::traits::command>::type>;
 
     using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
 
