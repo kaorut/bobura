@@ -10,6 +10,7 @@
 
 #include <boost/core/ignore_unused.hpp>
 #include <boost/mpl/at.hpp>
+#include <boost/predef.h>
 
 #include <tetengo2.h>
 
@@ -27,10 +28,6 @@ namespace bobura { namespace command
     public:
         // types
 
-        using model_type = typename horizontally_zoom_out::model_type;
-
-        using abstract_window_type = typename horizontally_zoom_out::abstract_window_type;
-
         using mouse_capture_type = typename horizontally_zoom_out::mouse_capture_type;
 
         using command_set_traits_type = typename horizontally_zoom_out::command_set_traits_type;
@@ -40,6 +37,10 @@ namespace bobura { namespace command
         using view_traits_type = typename horizontally_zoom_out::view_traits_type;
 
         using diagram_view_type = typename horizontally_zoom_out::diagram_view_type;
+
+        using abstract_window_type = typename horizontally_zoom_out::abstract_window_type;
+
+        using model_type = typename horizontally_zoom_out::model_type;
 
 
         // constructors and destructor
@@ -113,6 +114,7 @@ namespace bobura { namespace command
 
     namespace
     {
+#if BOOST_COMP_MSVC
         namespace application
         {
             using detail_type_list_type = detail_type_list_for_application;
@@ -120,6 +122,7 @@ namespace bobura { namespace command
             using traits_type_list_type = traits_type_list<detail_type_list_type>;
 
         }
+#endif
 
         namespace test
         {
@@ -131,12 +134,14 @@ namespace bobura { namespace command
 
     }
 
+#if BOOST_COMP_MSVC
     template class horizontally_zoom_out<
         typename boost::mpl::at<application::traits_type_list_type, type::traits::command>::type,
         typename boost::mpl::at<application::traits_type_list_type, type::traits::command_set>::type,
         typename boost::mpl::at<application::traits_type_list_type, type::traits::main_window>::type,
         typename boost::mpl::at<application::traits_type_list_type, type::traits::view>::type
     >;
+#endif
 
     template class horizontally_zoom_out<
         typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,

@@ -66,6 +66,12 @@ namespace bobura { namespace command
         //! The base type.
         using base_type = command_base<traits_type>;
 
+        //! The abstract window type.
+        using abstract_window_type = typename base_type::abstract_window_type;
+
+        //! The model type.
+        using model_type = typename base_type::model_type;
+
         //! The settings type.
         using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
 

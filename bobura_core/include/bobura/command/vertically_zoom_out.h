@@ -48,6 +48,12 @@ namespace bobura { namespace command
         //! The base type.
         using base_type = command_base<traits_type>;
 
+        //! The abstract window type.
+        using abstract_window_type = typename base_type::abstract_window_type;
+
+        //! The model type.
+        using model_type = typename base_type::model_type;
+
         //! The diagram view type.
         using diagram_view_type = diagram_view<view_traits_type>;
 

@@ -17,6 +17,7 @@
 #include <bobura/message/diagram_picture_box.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
+#include <bobura/view/diagram/zoom.h>
 
 
 namespace
@@ -70,38 +71,16 @@ namespace
 
     using mouse_moved_type = bobura::message::diagram_picture_box::mouse_moved<picture_box_type, view_traits_type>;
 
-    struct dummy_view_zoom_type
-    {
-    public:
-        dummy_view_zoom_type(picture_box_type& picture_box, view_type& diagram_view)
-        {
-            boost::ignore_unused(picture_box, diagram_view);
-        }
-
-        void horizontally_zoom_in(bool snap_to_scale_list)
-        {
-            boost::ignore_unused(snap_to_scale_list);
-        }
-
-        void horizontally_zoom_out(bool snap_to_scale_list)
-        {
-            boost::ignore_unused(snap_to_scale_list);
-        }
-
-        void vertically_zoom_in(bool snap_to_scale_list)
-        {
-            boost::ignore_unused(snap_to_scale_list);
-        }
-
-        void vertically_zoom_out(bool snap_to_scale_list)
-        {
-            boost::ignore_unused(snap_to_scale_list);
-        }
-
-    };
+    using view_zoom_type =
+        bobura::view::diagram::zoom<
+            view_traits_type,
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::abstract_window>::type,
+            picture_box_type,
+            boost::mpl::at<ui_type_list_type, bobura::type::ui::mouse_capture>::type
+        >;
 
     using mouse_wheeled_type =
-        bobura::message::diagram_picture_box::mouse_wheeled<picture_box_type, dummy_view_zoom_type, view_traits_type>;
+        bobura::message::diagram_picture_box::mouse_wheeled<picture_box_type, view_zoom_type, view_traits_type>;
 
     using virtual_key_type = picture_box_type::keyboard_observer_set_type::virtual_key_type;
 

@@ -40,6 +40,12 @@ namespace bobura { namespace command
         //! The base type.
         using base_type = command_base<traits_type>;
 
+        //! The abstract window type.
+        using abstract_window_type = typename base_type::abstract_window_type;
+
+        //! The model type.
+        using model_type = typename base_type::model_type;
+
         //! The file initialization type.
         using new_file_type = load_save::new_file<load_save_traits_type>;
 

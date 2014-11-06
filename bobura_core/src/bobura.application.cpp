@@ -12,6 +12,7 @@
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/mpl/at.hpp>
+#include <boost/predef.h>
 
 #include <tetengo2.h>
 
@@ -286,45 +287,45 @@ namespace bobura
         )
         {
             m_model.observer_set().reset().connect(
-                boost::mpl::at<model_message_type_list_type, message::timetable_model::type::reset>::type{
+                typename boost::mpl::at<model_message_type_list_type, message::timetable_model::type::reset>::type{
                     m_model, view, main_window
                 }
             );
             m_model.observer_set().changed().connect(
-                boost::mpl::at<model_message_type_list_type, message::timetable_model::type::changed>::type{
+                typename boost::mpl::at<model_message_type_list_type, message::timetable_model::type::changed>::type{
                     m_model, view, main_window
                 }
             );
 
             view.selection_observer_set().station_selected().connect(
-                boost::mpl::at<
+                typename boost::mpl::at<
                     diagram_view_message_type_list_type, message::diagram_view::type::station_selected
                 >::type{ main_window.get_property_bar(), m_model, message_catalog }
             );
             view.selection_observer_set().train_selected().connect(
-                boost::mpl::at<diagram_view_message_type_list_type, message::diagram_view::type::train_selected>::type{
-                    main_window.get_property_bar(), m_model, message_catalog
-                }
+                typename boost::mpl::at<
+                    diagram_view_message_type_list_type, message::diagram_view::type::train_selected
+                >::type{ main_window.get_property_bar(), m_model, message_catalog }
             );
             view.selection_observer_set().all_unselected().connect(
-                boost::mpl::at<diagram_view_message_type_list_type, message::diagram_view::type::all_unselected>::type{
-                    main_window.get_property_bar()
-                }
+                typename boost::mpl::at<
+                    diagram_view_message_type_list_type, message::diagram_view::type::all_unselected
+                >::type{ main_window.get_property_bar() }
             );
             
             main_window.file_drop_observer_set().file_dropped().connect(
-                boost::mpl::at<main_window_message_type_list_type, message::main_window::type::file_dropped>::type{
-                    command_set, m_model, main_window
-                }
+                typename boost::mpl::at<
+                    main_window_message_type_list_type, message::main_window::type::file_dropped
+                >::type{ command_set, m_model, main_window }
             );
             main_window.size_observer_set().resized().connect(
-                boost::mpl::at<main_window_message_type_list_type, message::main_window::type::window_resized>::type{
-                    view, main_window, main_window.get_diagram_picture_box(), main_window.get_property_bar()
-                }
+                typename boost::mpl::at<
+                    main_window_message_type_list_type, message::main_window::type::window_resized
+                >::type{ view, main_window, main_window.get_diagram_picture_box(), main_window.get_property_bar() }
             );
 
             main_window.get_diagram_picture_box().mouse_observer_set().pressed().connect(
-                boost::mpl::at<
+                typename boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::mouse_pressed
                 >::type(
                     main_window.get_diagram_picture_box(),
@@ -336,7 +337,7 @@ namespace bobura
                 )
             );
             main_window.get_diagram_picture_box().mouse_observer_set().released().connect(
-                boost::mpl::at<
+                typename boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::mouse_released
                 >::type(
                     [&main_window](const mouse_button_type mouse_button)
@@ -347,22 +348,22 @@ namespace bobura
                 )
             );
             main_window.get_diagram_picture_box().mouse_observer_set().moved().connect(
-                boost::mpl::at<
+                typename boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::mouse_moved
                 >::type{ main_window.get_diagram_picture_box(), view }
             );
             main_window.get_diagram_picture_box().mouse_observer_set().wheeled().connect(
-                boost::mpl::at<
+                typename boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::mouse_wheeled
                 >::type{ main_window.get_diagram_picture_box(), view }
             );
             main_window.get_diagram_picture_box().fast_paint_observer_set().paint().connect(
-                boost::mpl::at<
+                typename boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::paint_paint
                 >::type{ main_window.get_diagram_picture_box(), view }
             );
             using scroll_bar_scrolled_type =
-                boost::mpl::at<
+                typename boost::mpl::at<
                     diagram_picture_box_message_type_list, message::diagram_picture_box::type::scroll_bar_scrolled
                 >::type;
             assert(main_window.get_diagram_picture_box().has_vertical_scroll_bar());
@@ -426,6 +427,7 @@ namespace bobura
 
     namespace
     {
+#if BOOST_COMP_MSVC
         namespace application_
         {
             using detail_type_list_type = detail_type_list_for_application;
@@ -433,6 +435,7 @@ namespace bobura
             using traits_type_list_type = traits_type_list<detail_type_list_type>;
 
         }
+#endif
 
         namespace test
         {
@@ -444,7 +447,9 @@ namespace bobura
 
     }
 
+#if BOOST_COMP_MSVC
     template class application<boost::mpl::at<application_::traits_type_list_type, type::traits::application>::type>;
+#endif
 
     template class application<boost::mpl::at<test::traits_type_list_type, type::traits::application>::type>;
 

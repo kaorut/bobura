@@ -22,6 +22,12 @@
     <Filter Include="sources\test_bobura\view\diagram">
       <UniqueIdentifier>{e17730fd-fc2c-46fa-8ca0-614174a26045}</UniqueIdentifier>
     </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{e0887d8c-42cf-42a0-b7fb-199a1bee77ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\win32">
+      <UniqueIdentifier>{87e75879-1ad1-4e1c-8654-19555498328e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\precompiled\precompiled.h">
@@ -122,5 +128,13 @@
     <ClCompile Include="test\test_bobura.message.diagram_view.cpp">
       <Filter>sources\test_bobura\message</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res.test\win32\COMCTL32.DLL.Win32.manifest">
+      <Filter>resources\win32</Filter>
+    </Manifest>
+    <Manifest Include="res.test\win32\COMCTL32.DLL.x64.manifest">
+      <Filter>resources\win32</Filter>
+    </Manifest>
   </ItemGroup>
 </Project>

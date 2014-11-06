@@ -74,7 +74,7 @@ namespace
             >
         >;
 
-    struct select_diagram_type
+    struct select_oudia_diagram_type
     {
         using size_type = size_type_;
 
@@ -92,12 +92,12 @@ namespace
 
         string_type m_wanted;
 
-        select_diagram_type(abstract_window_type&, string_type, const message_catalog_type&)
+        select_oudia_diagram_type(abstract_window_type&, string_type, const message_catalog_type&)
         :
         m_wanted()
         {}
 
-        explicit select_diagram_type(string_type wanted)
+        explicit select_oudia_diagram_type(string_type wanted)
         :
         m_wanted(std::move(wanted))
         {}
@@ -119,7 +119,7 @@ namespace
             input_stream_iterator_type,
             operating_distance_type,
             speed_type,
-            select_diagram_type,
+            select_oudia_diagram_type,
             font_type,
             boost::mpl::at<common_type_list_type, test_bobura::model::type::io_encoder>::type
         >;
@@ -412,11 +412,11 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
 
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
+                tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             const reader_type reader(std::move(p_select_diagram));
         }
         {
-            std::unique_ptr<select_diagram_type> p_select_diagram{};
+            std::unique_ptr<select_oudia_diagram_type> p_select_diagram{};
             BOOST_CHECK_THROW(reader_type(std::move(p_select_diagram)), std::invalid_argument);
         }
     }
@@ -427,7 +427,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
 
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
+                tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream{ data_empty };
@@ -440,7 +440,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
+                tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream{ data_no_train };
@@ -453,7 +453,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
+                tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream{ data_too_old_version };
@@ -466,7 +466,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
+                tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream{ data_too_new_version };
@@ -490,7 +490,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
 
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
+                tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream{ data_empty };
@@ -507,7 +507,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
+                tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream{ data_no_train };
@@ -539,7 +539,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
+                tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream{ data_full };
@@ -698,7 +698,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type_{ TETENGO2_TEXT("Dia2") });
+                tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia2") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream{ data_full };
@@ -717,7 +717,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type_{ TETENGO2_TEXT("Dia3") });
+                tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia3") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream{ data_full };
@@ -734,7 +734,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
+                tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream{ data_too_old_version };
@@ -751,7 +751,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
         }
         {
             auto p_select_diagram =
-                tetengo2::stdalt::make_unique<select_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
+                tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
             std::istringstream input_stream{ data_too_new_version };

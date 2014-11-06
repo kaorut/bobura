@@ -8,6 +8,7 @@
 
 #include <boost/core/ignore_unused.hpp>
 #include <boost/mpl/at.hpp>
+#include <boost/predef.h>
 
 #include <tetengo2.h>
 
@@ -31,15 +32,15 @@ namespace bobura { namespace command
     public:
         // types
 
-        using model_type = typename about::model_type;
-
-        using abstract_window_type = typename about::abstract_window_type;
-
         using message_catalog_type = typename about::message_catalog_type;
 
         using dialog_traits_type = typename about::dialog_traits_type;
 
         using config_traits_type = typename about::config_traits_type;
+
+        using abstract_window_type = typename about::abstract_window_type;
+
+        using model_type = typename about::model_type;
 
         using settings_type = typename about::settings_type;
 
@@ -128,6 +129,7 @@ namespace bobura { namespace command
 
     namespace
     {
+#if BOOST_COMP_MSVC
         namespace application
         {
             using detail_type_list_type = detail_type_list_for_application;
@@ -139,6 +141,7 @@ namespace bobura { namespace command
             using traits_type_list_type = traits_type_list<detail_type_list_type>;
 
         }
+#endif
 
         namespace test
         {
@@ -154,6 +157,7 @@ namespace bobura { namespace command
 
     }
 
+#if BOOST_COMP_MSVC
     template class about<
         typename boost::mpl::at<application::traits_type_list_type, type::traits::command>::type,
         typename boost::mpl::at<application::ui_type_list_type, type::ui::position>::type,
@@ -162,6 +166,7 @@ namespace bobura { namespace command
         typename boost::mpl::at<application::traits_type_list_type, type::traits::dialog>::type,
         typename boost::mpl::at<application::traits_type_list_type, type::traits::config>::type
     >;
+#endif
 
     template class about<
         typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,

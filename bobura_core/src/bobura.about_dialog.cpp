@@ -13,6 +13,7 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/format.hpp>
 #include <boost/mpl/at.hpp>
+#include <boost/predef.h>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
@@ -241,13 +242,15 @@ namespace bobura
 
     namespace
     {
-        namespace application
+ #if BOOST_COMP_MSVC
+       namespace application
         {
             using detail_type_list_type = detail_type_list_for_application;
 
             using traits_type_list_type = traits_type_list<detail_type_list_type>;
 
         }
+#endif
 
         namespace test
         {
@@ -259,10 +262,12 @@ namespace bobura
 
     }
 
+#if BOOST_COMP_MSVC
     template class about_dialog<
         typename boost::mpl::at<application::traits_type_list_type, type::traits::dialog>::type,
         typename boost::mpl::at<application::traits_type_list_type, type::traits::config>::type
     >;
+#endif
 
     template class about_dialog<
         typename boost::mpl::at<test::traits_type_list_type, type::traits::dialog>::type,

@@ -11,6 +11,7 @@
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/mpl/at.hpp>
+#include <boost/predef.h>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
@@ -160,7 +161,11 @@ namespace bobura { namespace view { namespace diagram
 
         static position_type to_position(const scroll_bar_size_type left, const scroll_bar_size_type top)
         {
-            return position_type{ left_type{ left }, top_type{ top } };
+            return
+                position_type{
+                    left_type{ static_cast<typename left_type::value_type>(left) },
+                    top_type{ static_cast<typename top_type::value_type>(top) }
+                };
         }
 
 
@@ -228,6 +233,7 @@ namespace bobura { namespace view { namespace diagram
 
     namespace
     {
+#if BOOST_COMP_MSVC
         namespace application
         {
             using detail_type_list_type = detail_type_list_for_application;
@@ -237,6 +243,7 @@ namespace bobura { namespace view { namespace diagram
             using traits_type_list_type = traits_type_list<detail_type_list_type>;
 
         }
+#endif
 
         namespace test
         {
@@ -250,12 +257,14 @@ namespace bobura { namespace view { namespace diagram
 
     }
 
+#if BOOST_COMP_MSVC
     template class zoom<
         typename boost::mpl::at<application::traits_type_list_type, type::traits::view>::type,
         typename boost::mpl::at<application::ui_type_list_type, type::ui::abstract_window>::type,
         typename boost::mpl::at<application::ui_type_list_type, type::ui::picture_box>::type,
         typename boost::mpl::at<application::ui_type_list_type, type::ui::mouse_capture>::type
     >;
+#endif
 
     template class zoom<
         typename boost::mpl::at<test::traits_type_list_type, type::traits::view>::type,

@@ -9,6 +9,7 @@
 #include <utility>
 
 #include <boost/mpl/at.hpp>
+#include <boost/predef.h>
 
 #include <tetengo2.h>
 
@@ -39,10 +40,6 @@ namespace bobura { namespace command
 
         using traits_type = typename font_color::traits_type;
 
-        using model_type = typename font_color::model_type;
-
-        using abstract_window_type = typename font_color::abstract_window_type;
-
         using dialog_type = typename font_color::dialog_type;
 
         using point_unit_size_type = typename font_color::point_unit_size_type;
@@ -58,6 +55,10 @@ namespace bobura { namespace command
         using message_catalog_type = typename font_color::message_catalog_type;
 
         using dialog_traits_type = typename font_color::dialog_traits_type;
+
+        using abstract_window_type = typename font_color::abstract_window_type;
+
+        using model_type = typename font_color::model_type;
 
 
         // constructors and destructor
@@ -210,6 +211,7 @@ namespace bobura { namespace command
 
     namespace
     {
+#if BOOST_COMP_MSVC
         namespace application
         {
             using detail_type_list_type = detail_type_list_for_application;
@@ -223,6 +225,7 @@ namespace bobura { namespace command
             using traits_type_list_type = traits_type_list<detail_type_list_type>;
 
         }
+#endif
 
         namespace test
         {
@@ -240,6 +243,7 @@ namespace bobura { namespace command
 
     }
 
+#if BOOST_COMP_MSVC
     template class font_color<
         typename boost::mpl::at<application::traits_type_list_type, type::traits::command>::type,
         typename boost::mpl::at<application::ui_type_list_type, type::ui::dialog>::type,
@@ -251,6 +255,7 @@ namespace bobura { namespace command
         typename boost::mpl::at<application::locale_type_list_type, type::locale::message_catalog>::type,
         typename boost::mpl::at<application::traits_type_list_type, type::traits::dialog>::type
     >;
+#endif
 
     template class font_color<
         typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,

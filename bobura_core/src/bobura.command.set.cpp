@@ -11,6 +11,7 @@
 
 #include <boost/filesystem.hpp>
 #include <boost/mpl/at.hpp>
+#include <boost/predef.h>
 
 #include <tetengo2.h>
 
@@ -113,6 +114,7 @@ namespace bobura { namespace command
         )
         :
         m_p_about(create_about(message_catalog, settings)),
+        m_p_ask_file_path_and_save_to_file(create_save_to_file(ask_file_path_and_save_to_file)),
         m_p_exit(create_exit()),
         m_p_file_property(create_file_property(message_catalog)),
         m_p_font_color(create_font_color(message_catalog)),
@@ -124,7 +126,6 @@ namespace bobura { namespace command
         m_p_open_www_tetengo_org(create_open_www_tetengo_org()),
         m_p_reload(create_load_from_file(reload)),
         m_p_save_to_file(create_save_to_file(save_to_file)),
-        m_p_ask_file_path_and_save_to_file(create_save_to_file(ask_file_path_and_save_to_file)),
         m_p_set_horizontal_scale(create_set_horizontal_scale(diagram_view)),
         m_p_set_vertical_scale(create_set_vertical_scale(diagram_view)),
         m_p_train_kind(create_train_kind(message_catalog)),
@@ -187,9 +188,9 @@ namespace bobura { namespace command
         const
         {
             return
-                tetengo2::stdalt::make_unique<command::load_from_file<
-                    command_traits_type, load_save_traits_type
-                >::parameter_type>(path);
+                tetengo2::stdalt::make_unique<
+                    typename command::load_from_file<command_traits_type, load_save_traits_type>::parameter_type
+                >(path);
         }
 
         const command_type& new_file()
@@ -654,6 +655,7 @@ namespace bobura { namespace command
 
     namespace
     {
+#if BOOST_COMP_MSVC
         namespace application
         {
             using detail_type_list_type = detail_type_list_for_application;
@@ -661,6 +663,7 @@ namespace bobura { namespace command
             using traits_type_list_type = traits_type_list<detail_type_list_type>;
 
         }
+#endif
 
         namespace test
         {
@@ -672,7 +675,9 @@ namespace bobura { namespace command
 
     }
 
+#if BOOST_COMP_MSVC
     template class set<typename boost::mpl::at<application::traits_type_list_type, type::traits::command_set>::type>;
+#endif
 
     template class set<typename boost::mpl::at<test::traits_type_list_type, type::traits::command_set>::type>;
 

@@ -1,7 +1,7 @@
 # Automake Settings
 # Copyright (C) 2007-2014 kaoru
 # $Id$
-
+#
 headers =
 
 extra_headers =
@@ -47,6 +47,8 @@ EXTRA_DIST = $(extra_headers) $(extra_sources)
 
 TESTS = bobura_core.test
 
+bobura_core_test_DEPENDENCIES = \
+    $(top_builddir)/bobura_core/src/libbobura_core.a
 bobura_core_test_CPPFLAGS = \
     -I$(top_srcdir)/bobura_core/include \
     -I$(top_srcdir)/bobura_model/include \
@@ -54,13 +56,20 @@ bobura_core_test_CPPFLAGS = \
     -I$(TETENGO2_DETAIL_INCLUDE) \
     -I$(TETENGO2_GUI_INCLUDE)
 bobura_core_test_LDFLAGS = \
+    -L$(top_builddir)/bobura_core/src \
     -L$(TETENGO2_LIB)
 bobura_core_test_LDADD = \
+    -lbobura_core \
     -ltetengo2 \
     $(UNITTEST_LIBS)
 bobura_core_test_SOURCES = $(headers) $(sources)
 
 $(top_builddir)/precompiled/precompiled.h.gch: $(top_srcdir)/precompiled/precompiled.h
 	pushd $(top_builddir)/precompiled; \
+	$(MAKE) all; \
+	popd
+
+$(top_builddir)/bobura_core/src/libbobura_core.a:
+	pushd $(top_builddir)/libbobura_core/src; \
 	$(MAKE) all; \
 	popd

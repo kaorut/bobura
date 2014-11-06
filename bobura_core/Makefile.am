@@ -2,7 +2,7 @@
 # Copyright (C) 2007-2014 kaoru
 # $Id$
 
-SUBDIRS = include src test
+SUBDIRS = include res.test src test
 
 EXTRA_DIST = \
     bobura_core.vcxproj bobura_core.vcxproj.filters \

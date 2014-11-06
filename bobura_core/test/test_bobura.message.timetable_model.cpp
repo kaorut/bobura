@@ -19,6 +19,7 @@
 #include <bobura/diagram_view.h>
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/load_save/save_to_file.h>
+#include <bobura/main_window.h>
 #include <bobura/message/timetable_model.h>
 #include <bobura/message/type_list_impl.h>
 #include <bobura/settings.h>
@@ -74,62 +75,11 @@ namespace
 
     using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
 
-    class main_window_type : public window_type
-    {
-    public:
-        using base_type = window_type;
-
-        using picture_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::picture_box>::type;
-
-        using abstract_window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::abstract_window>::type;
-
-        using mouse_capture_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::mouse_capture>::type;
-
-        using diagram_picture_box_message_type_list =
-            bobura::message::diagram_picture_box::type_list<
-                picture_box_type, abstract_window_type, mouse_capture_type, view_traits_type
-            >;
-
-        using diagram_picture_box_type =
-            bobura::diagram_picture_box<
-                picture_box_type, abstract_window_type, mouse_capture_type, diagram_picture_box_message_type_list
-            >;
-
-        main_window_type(
-            const message_catalog_type&   message_catalog,
-            const settings_type&          settings,
-            const confirm_file_save_type& confirm_file_save
-        )
-        :
-        base_type(),
-        m_diagram_picture_box(*this)
-        {
-            boost::ignore_unused(message_catalog, settings, confirm_file_save);
-        }
-
-        virtual ~main_window_type()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
-
-        void set_title(const boost::optional<string_type>& document_name, const bool changed)
-        {
-            boost::ignore_unused(document_name, changed);
-        }
-
-        const diagram_picture_box_type& get_diagram_picture_box()
-        const
-        {
-            return m_diagram_picture_box;
-        }
-
-        diagram_picture_box_type& get_diagram_picture_box()
-        {
-            return m_diagram_picture_box;
-        }
-
-    private:
-        diagram_picture_box_type m_diagram_picture_box;
-
-    };
+    using main_window_type =
+        bobura::main_window<
+            boost::mpl::at<traits_type_list_type, bobura::type::traits::main_window>::type,
+            boost::mpl::at<traits_type_list_type, bobura::type::traits::command_set>::type
+        >;
 
 
 }

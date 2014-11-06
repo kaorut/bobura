@@ -13,6 +13,7 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
+#include <boost/predef.h>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
@@ -40,6 +41,10 @@ namespace bobura
         using dimension_type = typename main_window::dimension_type;
 
         using base_type = typename main_window::base_type;
+
+        using icon_type = typename main_window::icon_type;
+
+        using window_state_type = typename main_window::window_state_type;
 
         using abstract_window_type = typename main_window::abstract_window_type;
 
@@ -196,7 +201,7 @@ namespace bobura
                 [this]() { this->m_p_diagram_picture_box->set_focus(); }
             );
             m_base.paint_observer_set().paint_background().connect(
-                [](base_type::canvas_type&) { return true; }
+                [](typename base_type::canvas_type&) { return true; }
             );
             m_base.window_observer_set().closing().connect(
                 typename boost::mpl::at<message_type_list_type, message::main_window::type::window_closing>::type(
@@ -285,6 +290,7 @@ namespace bobura
 
     namespace
     {
+#if BOOST_COMP_MSVC
         namespace application
         {
             using detail_type_list_type = detail_type_list_for_application;
@@ -292,6 +298,7 @@ namespace bobura
             using traits_type_list_type = traits_type_list<detail_type_list_type>;
 
         }
+#endif
 
         namespace test
         {
@@ -303,10 +310,12 @@ namespace bobura
 
     }
 
+#if BOOST_COMP_MSVC
     template class main_window<
         typename boost::mpl::at<application::traits_type_list_type, type::traits::main_window>::type,
         typename boost::mpl::at<application::traits_type_list_type, type::traits::command_set>::type
     >;
+#endif
 
     template class main_window<
         typename boost::mpl::at<test::traits_type_list_type, type::traits::main_window>::type,

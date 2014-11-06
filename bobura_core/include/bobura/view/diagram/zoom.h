@@ -13,6 +13,8 @@
 
 #include <boost/core/noncopyable.hpp>
 
+#include <tetengo2.h>
+
 #include <bobura/diagram_view.h>
 #include <bobura/view/scale_list.h>
 
@@ -92,7 +94,8 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys a zoom of a view.
         */
-        ~zoom();
+        ~zoom()
+        TETENGO2_STDALT_NOEXCEPT;
 
 
         // functions

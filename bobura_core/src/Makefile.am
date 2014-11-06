@@ -2,7 +2,11 @@
 # Copyright (C) 2007-2014 kaoru
 # $Id$
 
-extra_sources = \
+headers =
+
+extra_headers =
+
+sources = \
     bobura.about_dialog.cpp \
     bobura.application.cpp \
     bobura.command.about.cpp \
@@ -31,4 +35,22 @@ extra_sources = \
     bobura.train_kind_dialog.cpp \
     bobura.view.diagram.zoom.cpp
 
-EXTRA_DIST = $(extra_sources)
+extra_sources =
+
+BUILT_SOURCES = $(PRECOMPILE_BUILT_SOURCES)
+
+lib_LIBRARIES = libbobura_core.a
+EXTRA_DIST = $(extra_headers) $(extra_sources)
+
+libbobura_core_a_CPPFLAGS = \
+    -I$(top_srcdir)/bobura_core/include \
+    -I$(top_srcdir)/bobura_model/include \
+    -I$(TETENGO2_INCLUDE) \
+    -I$(TETENGO2_DETAIL_INCLUDE) \
+    -I$(TETENGO2_GUI_INCLUDE)
+libbobura_core_a_SOURCES = $(headers) $(sources)
+
+$(top_builddir)/precompiled/precompiled.h.gch: $(top_srcdir)/precompiled/precompiled.h
+	pushd $(top_builddir)/precompiled; \
+	$(MAKE) all; \
+	popd

@@ -37,7 +37,7 @@ namespace
 
     using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
 
-    using common_dialog_type_list_type = bobura::common_dialog_type_list<detail_type_list_type>;
+    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
 
     using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
 
@@ -61,83 +61,7 @@ namespace
 
     using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
 
-    using dialog_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dialog>::type;
-
-    struct oudia_diagram_dialog_type : public dialog_type
-    {
-        using base_type = dialog_type;
-
-        using abstract_window_type = window_type::base_type;
-
-        using message_catalog_type = message_catalog_type_;
-
-        oudia_diagram_dialog_type(abstract_window_type& parent, const message_catalog_type& message_catalog)
-        :
-        base_type(parent)
-        {
-            boost::ignore_unused(message_catalog);
-        }
-
-        virtual ~oudia_diagram_dialog_type()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
-
-        const string_type& file_name()
-        const
-        {
-            static const string_type singleton{};
-            return singleton;
-        }
-
-        void set_file_name(string_type file_name)
-        {
-            boost::ignore_unused(file_name);
-        }
-
-        const std::vector<string_type>& names()
-        const
-        {
-            static const std::vector<string_type> singleton{};
-            return singleton;
-        }
-
-        void set_names(std::vector<string_type> names)
-        {
-            boost::ignore_unused(names);
-        }
-
-        const boost::optional<size_type>& selected_index()
-        const
-        {
-            static const boost::optional<size_type> singleton{};
-            return singleton;
-        }
-
-        void set_selected_index(const size_type index)
-        {
-            boost::ignore_unused(index);
-        }
-
-    };
-
-    using load_save_traits_type =
-        bobura::load_save::traits<
-            size_type,
-            difference_type,
-            string_type,
-            boost::mpl::at<common_type_list_type, bobura::type::input_stream_iterator>::type,
-            boost::mpl::at<common_type_list_type, bobura::type::output_stream>::type,
-            operating_distance_type,
-            speed_type,
-            fast_font_type,
-            boost::mpl::at<ui_type_list_type, bobura::type::ui::abstract_window>::type,
-            boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::message_box>::type,
-            boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::file_open>::type,
-            boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::file_save>::type,
-            oudia_diagram_dialog_type,
-            message_catalog_type_,
-            boost::mpl::at<locale_type_list_type, bobura::type::locale::timetable_file_encoder>::type,
-            boost::mpl::at<locale_type_list_type, bobura::type::locale::windia_file_encoder>::type
-        >;
+    using load_save_traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::load_save>::type;
 
     using save_to_file_type = bobura::load_save::save_to_file<load_save_traits_type>;
 
