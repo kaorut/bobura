@@ -73,28 +73,28 @@ namespace test_bobura { namespace model { namespace type_list
     template <typename DetailTypeList>
     struct common
     {
-        //!< The size type.
+        //! The size type.
         using size_type = detail::common::size_type;
 
-        //!< The difference type.
+        //! The difference type.
         using difference_type = detail::common::difference_type;
 
-        //!< The string type.
+        //! The string type.
         using string_type = detail::common::string_type;
 
-        //!< The I/O string type.
+        //! The I/O string type.
         using io_string_type = detail::common::io_string_type;
 
-        //!< The encoder type.
+        //! The encoder type.
         using encoder_type = detail::common::encoder_type<DetailTypeList>;
 
-        //!< The I/O encoder type.
+        //! The I/O encoder type.
         using io_encoder_type = detail::common::io_encoder_type<DetailTypeList>;
 
-        //!< The operating distance type.
+        //! The operating distance type.
         using operating_distance_type = detail::common::operating_distance_type;
 
-        //!< The speed type.
+        //! The speed type.
         using speed_type = detail::common::speed_type;
 
     };
@@ -216,16 +216,16 @@ namespace test_bobura { namespace model { namespace type_list
     template <typename DetailTypeList>
     struct ui
     {
-        //!< The abstract window type.
+        //! The abstract window type.
         using abstract_window_type = detail::ui::abstract_window_type<DetailTypeList>;
 
-        //!< The window type.
+        //! The window type.
         using window_type = detail::ui::window_type<DetailTypeList>;
 
-        //!< The font type.
+        //! The font type.
         using font_type = detail::ui::font_type<DetailTypeList>;
 
-        //!< The color type.
+        //! The color type.
         using color_type = detail::ui::color_type;
 
     };

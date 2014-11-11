@@ -79,37 +79,37 @@ namespace test_bobura { namespace model { namespace type_list
     */
     struct detail_for_test
     {
-        //!< The alert type.
+        //! The alert type.
         using alert_type = detail::detail::test::alert_details_type;
 
-        //!< The configuration type.
+        //! The configuration type.
         using config_type = detail::detail::test::config_details_type;
 
-        //!< The drawing type.
+        //! The drawing type.
         using drawing_type = detail::detail::test::drawing_details_type;
 
-        //!< The cursor type.
+        //! The cursor type.
         using cursor_type = detail::detail::test::cursor_details_type;
 
-        //!< The encoding type.
+        //! The encoding type.
         using encoding_type = detail::detail::test::encoding_details_type;
 
-        //!< The icon type.
+        //! The icon type.
         using icon_type = detail::detail::test::icon_details_type;
 
-        //!< The menu type.
+        //! The menu type.
         using menu_type = detail::detail::test::menu_details_type;
 
-        //!< The message handler type.
+        //! The message handler type.
         using message_handler_type = detail::detail::test::message_handler_details_type;
 
-        //!< The scroll type.
+        //! The scroll type.
         using scroll_type = detail::detail::test::scroll_details_type;
 
-        //!< The virtual key type.
+        //! The virtual key type.
         using virtual_key_type = detail::detail::test::virtual_key_details_type;
 
-        //!< The widget type.
+        //! The widget type.
         using widget_type = detail::detail::test::widget_details_type;
 
     };
