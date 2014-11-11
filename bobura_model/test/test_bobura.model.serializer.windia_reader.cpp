@@ -10,7 +10,6 @@
 #include <sstream>
 #include <string>
 
-#include <boost/mpl/at.hpp>
 #include <boost/predef.h>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
@@ -25,24 +24,23 @@ namespace
 {
     // types
 
-    using detail_type_list_type = test_bobura::model::detail_type_list_for_test;
+    using detail_type_list_type = test_bobura::model::type_list::detail_for_test;
 
-    using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
+    using common_type_list_type = test_bobura::model::type_list::common<detail_type_list_type>;
 
-    using ui_type_list_type = test_bobura::model::ui_type_list<detail_type_list_type>;
+    using ui_type_list_type = test_bobura::model::type_list::ui<detail_type_list_type>;
 
-    using size_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::size>::type;
+    using size_type = common_type_list_type::size_type;
 
-    using difference_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::difference>::type;
+    using difference_type = common_type_list_type::difference_type;
 
-    using string_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type;
+    using string_type = common_type_list_type::string_type;
 
-    using operating_distance_type =
-        boost::mpl::at<common_type_list_type, test_bobura::model::type::operating_distance>::type;
+    using operating_distance_type = common_type_list_type::operating_distance_type;
 
-    using speed_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::speed>::type;
+    using speed_type = common_type_list_type::speed_type;
 
-    using font_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::font>::type;
+    using font_type = ui_type_list_type::font_type;
 
     using timetable_type =
         bobura::model::timetable<
@@ -53,7 +51,7 @@ namespace
 
     using train_kind_type = timetable_type::train_kind_type;
 
-    using color_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::color>::type;
+    using color_type = ui_type_list_type::color_type;
 
     using train_type = timetable_type::train_type;
 
@@ -62,11 +60,7 @@ namespace
     using time_type = stop_type::time_type;
 
     using input_stream_iterator_type =
-        boost::spirit::multi_pass<
-            std::istreambuf_iterator<
-                boost::mpl::at<common_type_list_type, test_bobura::model::type::io_string>::type::value_type
-            >
-        >;
+        boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>;
 
     using reader_type =
         bobura::model::serializer::windia_reader<
@@ -77,7 +71,7 @@ namespace
             operating_distance_type,
             speed_type,
             font_type,
-            boost::mpl::at<common_type_list_type, test_bobura::model::type::io_encoder>::type
+            common_type_list_type::io_encoder_type
         >;
 
     using error_type = reader_type::error_type;

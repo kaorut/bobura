@@ -8,7 +8,6 @@
 
 #include <ostream>
 
-#include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/model/serializer/writer_set.h>
@@ -20,27 +19,24 @@ namespace
 {
     // types
 
-    using detail_type_list_type = test_bobura::model::detail_type_list_for_test;
+    using detail_type_list_type = test_bobura::model::type_list::detail_for_test;
 
-    using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
+    using common_type_list_type = test_bobura::model::type_list::common<detail_type_list_type>;
 
-    using ui_type_list_type = test_bobura::model::ui_type_list<detail_type_list_type>;
+    using ui_type_list_type = test_bobura::model::type_list::ui<detail_type_list_type>;
 
-    using output_stream_type =
-        std::basic_ostream<
-            boost::mpl::at<common_type_list_type, test_bobura::model::type::io_string>::type::value_type
-        >;
+    using output_stream_type = std::basic_ostream<common_type_list_type::io_string_type::value_type>;
 
     using writer_set_type =
         bobura::model::serializer::writer_set<
-            boost::mpl::at<common_type_list_type, test_bobura::model::type::size>::type,
-            boost::mpl::at<common_type_list_type, test_bobura::model::type::difference>::type,
-            boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type,
+            common_type_list_type::size_type,
+            common_type_list_type::difference_type,
+            common_type_list_type::string_type,
             output_stream_type,
-            boost::mpl::at<common_type_list_type, test_bobura::model::type::operating_distance>::type,
-            boost::mpl::at<common_type_list_type, test_bobura::model::type::speed>::type,
-            boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::font>::type,
-            boost::mpl::at<common_type_list_type, test_bobura::model::type::io_encoder>::type
+            common_type_list_type::operating_distance_type,
+            common_type_list_type::speed_type,
+            ui_type_list_type::font_type,
+            common_type_list_type::io_encoder_type
         >;
 
 }
