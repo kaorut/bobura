@@ -9,7 +9,6 @@
 #if !defined(BOBURA_DETAILTYPELIST_H)
 #define BOBURA_DETAILTYPELIST_H
 
-#include <boost/mpl/pair.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2/detail/stub/alert.h>

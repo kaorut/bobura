@@ -15,8 +15,6 @@
 #include <string>
 #include <utility>
 
-#include <boost/mpl/at.hpp>
-#include <boost/mpl/pair.hpp>
 #include <boost/rational.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 
@@ -245,11 +243,14 @@ namespace bobura { namespace type_list
         using ui_encoder_type = type_list::detail::locale::ui_encoder_type<DetailTypeList>;
 
         template <typename DetailTypeList>
+        using alert_details_type = typename DetailTypeList::alert_type;
+
+        template <typename DetailTypeList>
         using alert_type =
             tetengo2::gui::alert<
                 ui_encoder_type<DetailTypeList>,
                 exception_encoder_type<DetailTypeList>,
-                typename DetailTypeList::alert_type
+                alert_details_type<DetailTypeList>
             >;
 
         template <typename DetailTypeList>
@@ -355,7 +356,7 @@ namespace bobura { namespace type_list
                 typename DetailTypeList::widget_type,
                 drawing_details_type<DetailTypeList>,
                 icon_details_type<DetailTypeList>,
-                typename DetailTypeList::alert_type,
+                alert_details_type<DetailTypeList>,
                 typename DetailTypeList::cursor_type,
                 typename DetailTypeList::scroll_type,
                 typename DetailTypeList::message_handler_type,
