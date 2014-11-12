@@ -10,7 +10,6 @@
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
@@ -236,22 +235,22 @@ namespace bobura { namespace view { namespace diagram
 #if BOOST_COMP_MSVC
         namespace application
         {
-            using detail_type_list_type = detail_type_list_for_application;
+            using detail_type_list_type = type_list_temp::detail_for_application;
 
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = type_list_temp::ui<detail_type_list_type>;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 #endif
 
         namespace test
         {
-            using detail_type_list_type = detail_type_list_for_test;
+            using detail_type_list_type = type_list_temp::detail_for_test;
 
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = type_list_temp::ui<detail_type_list_type>;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 
@@ -259,18 +258,18 @@ namespace bobura { namespace view { namespace diagram
 
 #if BOOST_COMP_MSVC
     template class zoom<
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::view>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::abstract_window>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::picture_box>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::mouse_capture>::type
+        typename application::traits_type_list_type::view_type,
+        typename application::ui_type_list_type::abstract_window_type,
+        typename application::ui_type_list_type::picture_box_type,
+        typename application::ui_type_list_type::mouse_capture_type
     >;
 #endif
 
     template class zoom<
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::view>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::abstract_window>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::picture_box>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::mouse_capture>::type
+        typename test::traits_type_list_type::view_type,
+        typename test::ui_type_list_type::abstract_window_type,
+        typename test::ui_type_list_type::picture_box_type,
+        typename test::ui_type_list_type::mouse_capture_type
     >;
 
 

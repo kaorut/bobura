@@ -7,7 +7,6 @@
 */
 
 #include <boost/core/ignore_unused.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
@@ -132,26 +131,26 @@ namespace bobura { namespace command
 #if BOOST_COMP_MSVC
         namespace application
         {
-            using detail_type_list_type = detail_type_list_for_application;
+            using detail_type_list_type = type_list_temp::detail_for_application;
 
-            using locale_type_list_type = locale_type_list<detail_type_list_type>;
+            using locale_type_list_type = type_list_temp::locale<detail_type_list_type>;
     
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = type_list_temp::ui<detail_type_list_type>;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 #endif
 
         namespace test
         {
-            using detail_type_list_type = detail_type_list_for_test;
+            using detail_type_list_type = type_list_temp::detail_for_test;
 
-            using locale_type_list_type = locale_type_list<detail_type_list_type>;
+            using locale_type_list_type = type_list_temp::locale<detail_type_list_type>;
     
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = type_list_temp::ui<detail_type_list_type>;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 
@@ -159,22 +158,22 @@ namespace bobura { namespace command
 
 #if BOOST_COMP_MSVC
     template class about<
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::command>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::position>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::dimension>::type,
-        typename boost::mpl::at<application::locale_type_list_type, type::locale::message_catalog>::type,
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::dialog>::type,
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::config>::type
+        typename application::traits_type_list_type::command_type,
+        typename application::ui_type_list_type::position_type,
+        typename application::ui_type_list_type::dimension_type,
+        typename application::locale_type_list_type::message_catalog_type,
+        typename application::traits_type_list_type::dialog_type,
+        typename application::traits_type_list_type::config_type
     >;
 #endif
 
     template class about<
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::position>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::dimension>::type,
-        typename boost::mpl::at<test::locale_type_list_type, type::locale::message_catalog>::type,
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::dialog>::type,
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::config>::type
+        typename test::traits_type_list_type::command_type,
+        typename test::ui_type_list_type::position_type,
+        typename test::ui_type_list_type::dimension_type,
+        typename test::locale_type_list_type::message_catalog_type,
+        typename test::traits_type_list_type::dialog_type,
+        typename test::traits_type_list_type::config_type
     >;
 
 

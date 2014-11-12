@@ -969,30 +969,30 @@ namespace bobura
 #if BOOST_COMP_MSVC
         namespace application
         {
-            using detail_type_list_type = detail_type_list_for_application;
+            using detail_type_list_type = type_list_temp::detail_for_application;
 
-            using common_type_list_type = common_type_list;
+            using common_type_list_type = type_list_temp::common;
 
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = type_list_temp::ui<detail_type_list_type>;
 
-            using common_dialog_type_list_type = common_dialog_type_list<detail_type_list_type>;
+            using common_dialog_type_list_type = type_list_temp::common_dialog<detail_type_list_type>;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 #endif
 
         namespace test
         {
-            using detail_type_list_type = detail_type_list_for_test;
+            using detail_type_list_type = type_list_temp::detail_for_test;
 
-            using common_type_list_type = common_type_list;
+            using common_type_list_type = type_list_temp::common;
 
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = type_list_temp::ui<detail_type_list_type>;
 
-            using common_dialog_type_list_type = common_dialog_type_list<detail_type_list_type>;
+            using common_dialog_type_list_type = type_list_temp::common_dialog<detail_type_list_type>;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 
@@ -1000,24 +1000,24 @@ namespace bobura
 
 #if BOOST_COMP_MSVC
     template class train_kind_dialog<
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::dialog>::type,
-        typename boost::mpl::at<application::common_type_list_type, type::size>::type,
-        typename boost::mpl::at<application::common_type_list_type, type::string>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::fast_font>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::color>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::fast_canvas>::type,
-        typename boost::mpl::at<application::common_dialog_type_list_type, type::common_dialog::color>::type
+        typename application::traits_type_list_type::dialog_type,
+        typename application::common_type_list_type::size_type,
+        typename application::common_type_list_type::string_type,
+        typename application::ui_type_list_type::fast_font_type,
+        typename application::ui_type_list_type::color_type,
+        typename application::ui_type_list_type::fast_canvas_type,
+        typename application::common_dialog_type_list_type::color_type
     >;
 #endif
 
     template class train_kind_dialog<
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::dialog>::type,
-        typename boost::mpl::at<test::common_type_list_type, type::size>::type,
-        typename boost::mpl::at<test::common_type_list_type, type::string>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::fast_font>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::color>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::fast_canvas>::type,
-        typename boost::mpl::at<test::common_dialog_type_list_type, type::common_dialog::color>::type
+        typename test::traits_type_list_type::dialog_type,
+        typename test::common_type_list_type::size_type,
+        typename test::common_type_list_type::string_type,
+        typename test::ui_type_list_type::fast_font_type,
+        typename test::ui_type_list_type::color_type,
+        typename test::ui_type_list_type::fast_canvas_type,
+        typename test::common_dialog_type_list_type::color_type
     >;
 
 

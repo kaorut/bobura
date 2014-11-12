@@ -430,28 +430,28 @@ namespace bobura
 #if BOOST_COMP_MSVC
         namespace application_
         {
-            using detail_type_list_type = detail_type_list_for_application;
+            using detail_type_list_type = type_list_temp::detail_for_application;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 #endif
 
         namespace test
         {
-            using detail_type_list_type = detail_type_list_for_test;
+            using detail_type_list_type = type_list_temp::detail_for_test;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 
     }
 
 #if BOOST_COMP_MSVC
-    template class application<boost::mpl::at<application_::traits_type_list_type, type::traits::application>::type>;
+    template class application<application_::traits_type_list_type::application_type>;
 #endif
 
-    template class application<boost::mpl::at<test::traits_type_list_type, type::traits::application>::type>;
+    template class application<test::traits_type_list_type::application_type>;
 
 
 }

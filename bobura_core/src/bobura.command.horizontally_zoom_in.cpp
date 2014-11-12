@@ -9,7 +9,6 @@
 #include <cassert>
 
 #include <boost/core/ignore_unused.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
@@ -118,18 +117,18 @@ namespace bobura { namespace command
 #if BOOST_COMP_MSVC
         namespace application
         {
-            using detail_type_list_type = detail_type_list_for_application;
+            using detail_type_list_type = type_list_temp::detail_for_application;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 #endif
 
         namespace test
         {
-            using detail_type_list_type = detail_type_list_for_test;
+            using detail_type_list_type = type_list_temp::detail_for_test;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 
@@ -137,18 +136,18 @@ namespace bobura { namespace command
 
 #if BOOST_COMP_MSVC
     template class horizontally_zoom_in<
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::command>::type,
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::command_set>::type,
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::main_window>::type,
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::view>::type
+        typename application::traits_type_list_type::command_type,
+        typename application::traits_type_list_type::command_set_type,
+        typename application::traits_type_list_type::main_window_type,
+        typename application::traits_type_list_type::view_type
     >;
 #endif
 
     template class horizontally_zoom_in<
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::command_set>::type,
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::main_window>::type,
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::view>::type
+        typename test::traits_type_list_type::command_type,
+        typename test::traits_type_list_type::command_set_type,
+        typename test::traits_type_list_type::main_window_type,
+        typename test::traits_type_list_type::view_type
     >;
 
 

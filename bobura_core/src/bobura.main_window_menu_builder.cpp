@@ -469,30 +469,30 @@ namespace bobura
 #if BOOST_COMP_MSVC
         namespace application
         {
-            using detail_type_list_type = detail_type_list_for_application;
+            using detail_type_list_type = type_list_temp::detail_for_application;
 
-            using common_type_list_type = common_type_list;
+            using common_type_list_type = type_list_temp::common;
 
-            using locale_type_list_type = locale_type_list<detail_type_list_type>;
+            using locale_type_list_type = type_list_temp::locale<detail_type_list_type>;
     
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = type_list_temp::ui<detail_type_list_type>;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 #endif
 
         namespace test
         {
-            using detail_type_list_type = detail_type_list_for_test;
+            using detail_type_list_type = type_list_temp::detail_for_test;
 
-            using common_type_list_type = common_type_list;
+            using common_type_list_type = type_list_temp::common;
 
-            using locale_type_list_type = locale_type_list<detail_type_list_type>;
+            using locale_type_list_type = type_list_temp::locale<detail_type_list_type>;
     
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = type_list_temp::ui<detail_type_list_type>;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 
@@ -501,42 +501,42 @@ namespace bobura
 #if BOOST_COMP_MSVC
     template class main_window_menu_builder<
         main_window_menu_builder_traits<
-            typename boost::mpl::at<application::common_type_list_type, type::size>::type,
-            typename boost::mpl::at<application::common_type_list_type, type::difference>::type,
-            typename boost::mpl::at<application::common_type_list_type, type::string>::type,
-            typename boost::mpl::at<application::common_type_list_type, type::operating_distance>::type,
-            typename boost::mpl::at<application::common_type_list_type, type::speed>::type,
-            typename boost::mpl::at<application::common_type_list_type, type::scale>::type,
-            typename boost::mpl::at<application::ui_type_list_type, type::ui::fast_font>::type,
-            typename boost::mpl::at<application::ui_type_list_type, type::ui::menu_bar>::type,
-            typename boost::mpl::at<application::ui_type_list_type, type::ui::popup_menu>::type,
-            typename boost::mpl::at<application::ui_type_list_type, type::ui::menu_command>::type,
-            typename boost::mpl::at<application::ui_type_list_type, type::ui::menu_separator>::type,
-            typename boost::mpl::at<application::locale_type_list_type, type::locale::message_catalog>::type,
-            typename boost::mpl::at<application::traits_type_list_type, type::traits::command_set>::type,
-            typename boost::mpl::at<application::traits_type_list_type, type::traits::main_window>::type,
-            typename boost::mpl::at<application::traits_type_list_type, type::traits::view>::type
+            typename application::common_type_list_type::size_type,
+            typename application::common_type_list_type::difference_type,
+            typename application::common_type_list_type::string_type,
+            typename application::common_type_list_type::operating_distance_type,
+            typename application::common_type_list_type::speed_type,
+            typename application::common_type_list_type::scale_type,
+            typename application::ui_type_list_type::fast_font_type,
+            typename application::ui_type_list_type::menu_bar_type,
+            typename application::ui_type_list_type::popup_menu_type,
+            typename application::ui_type_list_type::menu_command_type,
+            typename application::ui_type_list_type::menu_separator_type,
+            typename application::locale_type_list_type::message_catalog_type,
+            typename application::traits_type_list_type::command_set_type,
+            typename application::traits_type_list_type::main_window_type,
+            typename application::traits_type_list_type::view_type
         >
     >;
 #endif
 
     template class main_window_menu_builder<
         main_window_menu_builder_traits<
-            typename boost::mpl::at<test::common_type_list_type, type::size>::type,
-            typename boost::mpl::at<test::common_type_list_type, type::difference>::type,
-            typename boost::mpl::at<test::common_type_list_type, type::string>::type,
-            typename boost::mpl::at<test::common_type_list_type, type::operating_distance>::type,
-            typename boost::mpl::at<test::common_type_list_type, type::speed>::type,
-            typename boost::mpl::at<test::common_type_list_type, type::scale>::type,
-            typename boost::mpl::at<test::ui_type_list_type, type::ui::fast_font>::type,
-            typename boost::mpl::at<test::ui_type_list_type, type::ui::menu_bar>::type,
-            typename boost::mpl::at<test::ui_type_list_type, type::ui::popup_menu>::type,
-            typename boost::mpl::at<test::ui_type_list_type, type::ui::menu_command>::type,
-            typename boost::mpl::at<test::ui_type_list_type, type::ui::menu_separator>::type,
-            typename boost::mpl::at<test::locale_type_list_type, type::locale::message_catalog>::type,
-            typename boost::mpl::at<test::traits_type_list_type, type::traits::command_set>::type,
-            typename boost::mpl::at<test::traits_type_list_type, type::traits::main_window>::type,
-            typename boost::mpl::at<test::traits_type_list_type, type::traits::view>::type
+            typename test::common_type_list_type::size_type,
+            typename test::common_type_list_type::difference_type,
+            typename test::common_type_list_type::string_type,
+            typename test::common_type_list_type::operating_distance_type,
+            typename test::common_type_list_type::speed_type,
+            typename test::common_type_list_type::scale_type,
+            typename test::ui_type_list_type::fast_font_type,
+            typename test::ui_type_list_type::menu_bar_type,
+            typename test::ui_type_list_type::popup_menu_type,
+            typename test::ui_type_list_type::menu_command_type,
+            typename test::ui_type_list_type::menu_separator_type,
+            typename test::locale_type_list_type::message_catalog_type,
+            typename test::traits_type_list_type::command_set_type,
+            typename test::traits_type_list_type::main_window_type,
+            typename test::traits_type_list_type::view_type
         >
     >;
 

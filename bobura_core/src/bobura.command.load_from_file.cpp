@@ -9,7 +9,6 @@
 #include <utility>
 
 #include <boost/filesystem.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 
@@ -138,18 +137,18 @@ namespace bobura { namespace command
 #if BOOST_COMP_MSVC
         namespace application
         {
-            using detail_type_list_type = detail_type_list_for_application;
+            using detail_type_list_type = type_list_temp::detail_for_application;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 #endif
 
         namespace test
         {
-            using detail_type_list_type = detail_type_list_for_test;
+            using detail_type_list_type = type_list_temp::detail_for_test;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 
@@ -157,14 +156,13 @@ namespace bobura { namespace command
 
 #if BOOST_COMP_MSVC
     template class load_from_file<
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::command>::type,
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::load_save>::type
+        typename application::traits_type_list_type::command_type,
+        typename application::traits_type_list_type::load_save_type
     >;
 #endif
 
     template class load_from_file<
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::load_save>::type
+        typename test::traits_type_list_type::command_type, typename test::traits_type_list_type::load_save_type
     >;
 #endif
 

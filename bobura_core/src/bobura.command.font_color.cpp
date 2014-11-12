@@ -8,7 +8,6 @@
 
 #include <utility>
 
-#include <boost/mpl/at.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
@@ -214,30 +213,30 @@ namespace bobura { namespace command
 #if BOOST_COMP_MSVC
         namespace application
         {
-            using detail_type_list_type = detail_type_list_for_application;
+            using detail_type_list_type = type_list_temp::detail_for_application;
 
-            using locale_type_list_type = locale_type_list<detail_type_list_type>;
+            using locale_type_list_type = type_list_temp::locale<detail_type_list_type>;
     
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = type_list_temp::ui<detail_type_list_type>;
 
-            using common_dialog_type_list_type = common_dialog_type_list<detail_type_list_type>;
+            using common_dialog_type_list_type = type_list_temp::common_dialog<detail_type_list_type>;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 #endif
 
         namespace test
         {
-            using detail_type_list_type = detail_type_list_for_test;
+            using detail_type_list_type = type_list_temp::detail_for_test;
 
-            using locale_type_list_type = locale_type_list<detail_type_list_type>;
+            using locale_type_list_type = type_list_temp::locale<detail_type_list_type>;
     
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = type_list_temp::ui<detail_type_list_type>;
 
-            using common_dialog_type_list_type = common_dialog_type_list<detail_type_list_type>;
+            using common_dialog_type_list_type = type_list_temp::common_dialog<detail_type_list_type>;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
 
         }
 
@@ -245,28 +244,28 @@ namespace bobura { namespace command
 
 #if BOOST_COMP_MSVC
     template class font_color<
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::command>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::dialog>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::point_unit_size>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::color>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::fast_canvas>::type,
-        typename boost::mpl::at<application::common_dialog_type_list_type, type::common_dialog::font>::type,
-        typename boost::mpl::at<application::common_dialog_type_list_type, type::common_dialog::color>::type,
-        typename boost::mpl::at<application::locale_type_list_type, type::locale::message_catalog>::type,
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::dialog>::type
+        typename application::traits_type_list_type::command_type,
+        typename application::ui_type_list_type::dialog_type,
+        typename application::ui_type_list_type::point_unit_size_type,
+        typename application::ui_type_list_type::color_type,
+        typename application::ui_type_list_type::fast_canvas_type,
+        typename application::common_dialog_type_list_type::font_type,
+        typename application::common_dialog_type_list_type::color_type,
+        typename application::locale_type_list_type::message_catalog_type,
+        typename application::traits_type_list_type::dialog_type
     >;
 #endif
 
     template class font_color<
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::dialog>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::point_unit_size>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::color>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::fast_canvas>::type,
-        typename boost::mpl::at<test::common_dialog_type_list_type, type::common_dialog::font>::type,
-        typename boost::mpl::at<test::common_dialog_type_list_type, type::common_dialog::color>::type,
-        typename boost::mpl::at<test::locale_type_list_type, type::locale::message_catalog>::type,
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::dialog>::type
+        typename test::traits_type_list_type::command_type,
+        typename test::ui_type_list_type::dialog_type,
+        typename test::ui_type_list_type::point_unit_size_type,
+        typename test::ui_type_list_type::color_type,
+        typename test::ui_type_list_type::fast_canvas_type,
+        typename test::common_dialog_type_list_type::font_type,
+        typename test::common_dialog_type_list_type::color_type,
+        typename test::locale_type_list_type::message_catalog_type,
+        typename test::traits_type_list_type::dialog_type
     >;
 
 
