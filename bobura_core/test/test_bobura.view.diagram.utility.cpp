@@ -8,7 +8,6 @@
 
 #include <vector>
 
-#include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -24,13 +23,13 @@ namespace
 {
     // types
 
-    using detail_type_list_type = bobura::detail_type_list_for_test;
+    using detail_type_list_type = bobura::type_list_temp::detail_for_test;
 
-    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+    using ui_type_list_type = bobura::type_list_temp::ui<detail_type_list_type>;
 
-    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
+    using window_type = ui_type_list_type::window_type;
 
-    using picture_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::picture_box>::type;
+    using picture_box_type = ui_type_list_type::picture_box_type;
 
     using position_type = picture_box_type::position_type;
 
@@ -38,7 +37,7 @@ namespace
 
     using top_type = tetengo2::gui::position<position_type>::top_type;
 
-    using canvas_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::canvas>::type;
+    using canvas_type = ui_type_list_type::canvas_type;
 
     using time_span_type = bobura::model::train_info::time_span<int>;
 

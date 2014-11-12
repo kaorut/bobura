@@ -10,7 +10,6 @@
 #include <vector>
 
 #include <boost/filesystem.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -24,33 +23,28 @@ namespace
 {
     // types
 
-    using detail_type_list_type = bobura::detail_type_list_for_test;
+    using detail_type_list_type = bobura::type_list_temp::detail_for_test;
 
-    using common_type_list_type = bobura::common_type_list;
+    using common_type_list_type = bobura::type_list_temp::common;
 
-    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+    using ui_type_list_type = bobura::type_list_temp::ui<detail_type_list_type>;
 
-    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+    using traits_type_list_type = bobura::type_list_temp::traits<detail_type_list_type>;
 
-    using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
+    using string_type = common_type_list_type::string_type;
 
-    using position_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::position>::type;
+    using position_type = ui_type_list_type::position_type;
 
     using left_type = tetengo2::gui::position<position_type>::left_type;
 
-    using dimension_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dimension>::type;
+    using dimension_type = ui_type_list_type::dimension_type;
 
     using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
 
     using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
     using settings_type =
-        bobura::settings<
-            string_type,
-            position_type,
-            dimension_type,
-            boost::mpl::at<traits_type_list_type, bobura::type::traits::config>::type
-        >;
+        bobura::settings<string_type, position_type, dimension_type, traits_type_list_type::config_type>;
 
 
 }

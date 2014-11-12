@@ -8,7 +8,6 @@
 
 #include <vector>
 
-#include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -29,55 +28,52 @@ namespace
 {
     // types
 
-    using detail_type_list_type = bobura::detail_type_list_for_test;
+    using detail_type_list_type = bobura::type_list_temp::detail_for_test;
 
-    using common_type_list_type = bobura::common_type_list;
+    using common_type_list_type = bobura::type_list_temp::common;
 
-    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
+    using locale_type_list_type = bobura::type_list_temp::locale<detail_type_list_type>;
 
-    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+    using ui_type_list_type = bobura::type_list_temp::ui<detail_type_list_type>;
 
-    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+    using traits_type_list_type = bobura::type_list_temp::traits<detail_type_list_type>;
 
-    using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
+    using string_type = common_type_list_type::string_type;
 
     using model_type =
         bobura::timetable_model<
-            boost::mpl::at<common_type_list_type, bobura::type::size>::type,
-            boost::mpl::at<common_type_list_type, bobura::type::difference>::type,
+            common_type_list_type::size_type,
+            common_type_list_type::difference_type,
             string_type,
-            boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
-            boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
-            boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type
+            common_type_list_type::operating_distance_type,
+            common_type_list_type::speed_type,
+            ui_type_list_type::fast_font_type
         >;
 
-    using view_traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::view>::type;
+    using view_traits_type = traits_type_list_type::view_type;
 
     using view_type = bobura::diagram_view<view_traits_type>;
 
-    using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
+    using message_catalog_type = locale_type_list_type::message_catalog_type;
 
     using settings_type =
         bobura::settings<
             string_type,
-            boost::mpl::at<ui_type_list_type, bobura::type::ui::position>::type,
-            boost::mpl::at<ui_type_list_type, bobura::type::ui::dimension>::type,
-            boost::mpl::at<traits_type_list_type, bobura::type::traits::config>::type
+            ui_type_list_type::position_type,
+            ui_type_list_type::dimension_type,
+            traits_type_list_type::config_type
         >;
 
-    using load_save_traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::load_save>::type;
+    using load_save_traits_type = traits_type_list_type::load_save_type;
 
     using save_to_file_type = bobura::load_save::save_to_file<load_save_traits_type>;
 
     using confirm_file_save_type = bobura::load_save::confirm_file_save<load_save_traits_type>;
 
-    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
+    using window_type = ui_type_list_type::window_type;
 
     using main_window_type =
-        bobura::main_window<
-            boost::mpl::at<traits_type_list_type, bobura::type::traits::main_window>::type,
-            boost::mpl::at<traits_type_list_type, bobura::type::traits::command_set>::type
-        >;
+        bobura::main_window<traits_type_list_type::main_window_type, traits_type_list_type::command_set_type>;
 
 
 }

@@ -11,7 +11,6 @@
 #include <utility>
 
 #include <boost/filesystem.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -24,22 +23,22 @@ namespace
 {
     // types
 
-    using detail_type_list_type = bobura::detail_type_list_for_test;
+    using detail_type_list_type = bobura::type_list_temp::detail_for_test;
 
-    using common_type_list_type = bobura::common_type_list;
+    using common_type_list_type = bobura::type_list_temp::common;
 
-    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+    using ui_type_list_type = bobura::type_list_temp::ui<detail_type_list_type>;
 
-    using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
+    using string_type = common_type_list_type::string_type;
 
     using model_type =
         bobura::timetable_model<
-            boost::mpl::at<common_type_list_type, bobura::type::size>::type,
-            boost::mpl::at<common_type_list_type, bobura::type::difference>::type,
+            common_type_list_type::size_type,
+            common_type_list_type::difference_type,
             string_type,
-            boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
-            boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
-            boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type
+            common_type_list_type::operating_distance_type,
+            common_type_list_type::speed_type,
+            ui_type_list_type::fast_font_type
         >;
 
     using timetable_type = model_type::timetable_type;

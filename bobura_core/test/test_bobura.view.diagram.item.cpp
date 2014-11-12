@@ -9,7 +9,6 @@
 #include <utility>
 
 #include <boost/core/ignore_unused.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -24,17 +23,17 @@ namespace
 {
     // types
 
-    using detail_type_list_type = bobura::detail_type_list_for_test;
+    using detail_type_list_type = bobura::type_list_temp::detail_for_test;
 
-    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+    using ui_type_list_type = bobura::type_list_temp::ui<detail_type_list_type>;
 
-    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+    using traits_type_list_type = bobura::type_list_temp::traits<detail_type_list_type>;
 
-    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
+    using window_type = ui_type_list_type::window_type;
 
-    using picture_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::picture_box>::type;
+    using picture_box_type = ui_type_list_type::picture_box_type;
 
-    using canvas_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::canvas>::type;
+    using canvas_type = ui_type_list_type::canvas_type;
 
     using position_type = canvas_type::position_type;
 
@@ -42,7 +41,7 @@ namespace
 
     using top_type = tetengo2::gui::position<position_type>::top_type;
 
-    using traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::view>::type;
+    using traits_type = traits_type_list_type::view_type;
 
     using selection_type = bobura::view::diagram::selection<traits_type>;
 

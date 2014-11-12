@@ -9,7 +9,6 @@
 #include <vector>
 
 #include <boost/core/ignore_unused.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -25,31 +24,31 @@ namespace
 {
     // types
 
-    using detail_type_list_type = bobura::detail_type_list_for_test;
+    using detail_type_list_type = bobura::type_list_temp::detail_for_test;
 
-    using common_type_list_type = bobura::common_type_list;
+    using common_type_list_type = bobura::type_list_temp::common;
 
-    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
+    using locale_type_list_type = bobura::type_list_temp::locale<detail_type_list_type>;
 
-    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+    using ui_type_list_type = bobura::type_list_temp::ui<detail_type_list_type>;
 
-    using common_dialog_type_list_type = bobura::common_dialog_type_list<detail_type_list_type>;
+    using common_dialog_type_list_type = bobura::type_list_temp::common_dialog<detail_type_list_type>;
 
-    using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
+    using size_type = common_type_list_type::size_type;
 
-    using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
+    using string_type = common_type_list_type::string_type;
 
-    using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
+    using message_catalog_type = locale_type_list_type::message_catalog_type;
 
-    using list_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::list_box>::type;
+    using list_box_type = ui_type_list_type::list_box_type;
 
-    using dialog_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dialog>::type;
+    using dialog_type = ui_type_list_type::dialog_type;
 
-    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
+    using window_type = ui_type_list_type::window_type;
 
     using dimension_type = window_type::dimension_type;
 
-    using canvas_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::canvas>::type;
+    using canvas_type = ui_type_list_type::canvas_type;
 
     using font_type = canvas_type::font_type;
 
@@ -64,11 +63,11 @@ namespace
         using model_type =
         bobura::timetable_model<
             size_type,
-            boost::mpl::at<common_type_list_type, bobura::type::difference>::type,
+            common_type_list_type::difference_type,
             string_type,
-            boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
-            boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
-            boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type
+            common_type_list_type::operating_distance_type,
+            common_type_list_type::speed_type,
+            ui_type_list_type::fast_font_type
         >;
 
         using train_kind_type = model_type::timetable_type::train_kind_type;
@@ -126,7 +125,7 @@ namespace
     };
 
 
-    using color_dialog_type = boost::mpl::at<common_dialog_type_list_type, bobura::type::common_dialog::color>::type;
+    using color_dialog_type = common_dialog_type_list_type::color_type;
 
     class concrete_dialog : public dialog_type
     {
