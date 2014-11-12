@@ -127,12 +127,7 @@ TETENGO2_STDALT_NOEXCEPT
 {
     boost::ignore_unused(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 
-    using alert_type =
-        tetengo2::gui::alert<
-            locale_type_list_type::ui_encoder_type,
-            locale_type_list_type::exception_encoder_type,
-            detail_type_list_type::alert_type
-        >;
+    using alert_type = ui_type_list_type::alert_type;
 
     try
     {
