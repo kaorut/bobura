@@ -235,22 +235,22 @@ namespace bobura { namespace view { namespace diagram
 #if BOOST_COMP_MSVC
         namespace application
         {
-            using detail_type_list_type = type_list_temp::detail_for_application;
+            using detail_type_list_type = type_list::detail_for_application;
 
-            using ui_type_list_type = type_list_temp::ui<detail_type_list_type>;
+            using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
-            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
+            using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
 #endif
 
         namespace test
         {
-            using detail_type_list_type = type_list_temp::detail_for_test;
+            using detail_type_list_type = type_list::detail_for_test;
 
-            using ui_type_list_type = type_list_temp::ui<detail_type_list_type>;
+            using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
-            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
+            using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
 

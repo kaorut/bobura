@@ -990,30 +990,30 @@ namespace bobura
 #if BOOST_COMP_MSVC
         namespace application
         {
-            using detail_type_list_type = type_list_temp::detail_for_application;
+            using detail_type_list_type = type_list::detail_for_application;
 
-            using common_type_list_type = type_list_temp::common;
+            using common_type_list_type = type_list::common;
 
-            using ui_type_list_type = type_list_temp::ui<detail_type_list_type>;
+            using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
-            using common_dialog_type_list_type = type_list_temp::common_dialog<detail_type_list_type>;
+            using common_dialog_type_list_type = type_list::common_dialog<detail_type_list_type>;
 
-            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
+            using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
 #endif
 
         namespace test
         {
-            using detail_type_list_type = type_list_temp::detail_for_test;
+            using detail_type_list_type = type_list::detail_for_test;
 
-            using common_type_list_type = type_list_temp::common;
+            using common_type_list_type = type_list::common;
 
-            using ui_type_list_type = type_list_temp::ui<detail_type_list_type>;
+            using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
-            using common_dialog_type_list_type = type_list_temp::common_dialog<detail_type_list_type>;
+            using common_dialog_type_list_type = type_list::common_dialog<detail_type_list_type>;
 
-            using traits_type_list_type = type_list_temp::traits<detail_type_list_type>;
+            using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
 

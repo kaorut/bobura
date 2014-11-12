@@ -23,11 +23,11 @@ namespace
 {
     // types
 
-    using detail_type_list_type = bobura::type_list_temp::detail_for_test;
+    using detail_type_list_type = bobura::type_list::detail_for_test;
 
-    using common_type_list_type = bobura::type_list_temp::common;
+    using common_type_list_type = bobura::type_list::common;
 
-    using ui_type_list_type = bobura::type_list_temp::ui<detail_type_list_type>;
+    using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
     using string_type = common_type_list_type::string_type;
 
