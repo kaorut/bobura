@@ -21,7 +21,6 @@
 #include <bobura/message/main_window.h>
 #include <bobura/message/oudia_diagram_dialog.h>
 #include <bobura/message/property_bar.h>
-#include <bobura/message/timetable_model.h>
 #include <bobura/message/train_kind_dialog.h>
 #include <bobura/message/type_list.h>
 #include <bobura/view/diagram/zoom.h>
@@ -29,24 +28,6 @@
 
 namespace bobura { namespace message
 {
-    namespace timetable_model
-    {
-        /*!
-            \brief The meta function for the type list of the timetable model messages.
-
-            \tparam TimetableModel A timetable model type.
-            \tparam DiagramView    A diagram view type.
-            \tparam MainWindow     A main window type.
-        */
-        template <typename TimetableModel, typename DiagramView, typename MainWindow>
-        using type_list =
-            tetengo2::meta::assoc_list<boost::mpl::pair<type::reset, reset<TimetableModel, DiagramView, MainWindow>>,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<type::changed, changed<TimetableModel, DiagramView, MainWindow>>,
-            tetengo2::meta::assoc_list_end
-            >>;
-    }
-
     namespace diagram_view
     {
         /*!

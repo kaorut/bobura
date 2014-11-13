@@ -12,19 +12,6 @@
 
 namespace bobura { namespace message
 {
-    namespace timetable_model
-    {
-        namespace type
-        {
-            //! The reset observer type.
-            struct reset;
-
-            //! The changed observer type.
-            struct changed;
-
-        }
-    }
-
     namespace diagram_view
     {
         namespace type

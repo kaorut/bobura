@@ -27,7 +27,7 @@
 #include <bobura/load_save/save_to_file.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
-#include <bobura/message/type_list_impl.h>
+#include <bobura/message/timetable_model.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 
@@ -116,8 +116,9 @@ namespace bobura
 
         using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
 
-        using model_message_type_list_type =
-            message::timetable_model::type_list<model_type, view_type, main_window_type>;
+        using model_reset_observer_type = message::timetable_model::reset<model_type, view_type, main_window_type>;
+
+        using model_changed_observer_type = message::timetable_model::changed<model_type, view_type, main_window_type>;
 
         using abstract_window_type = typename traits_type::abstract_window_type;
 
@@ -265,16 +266,8 @@ namespace bobura
             const message_catalog_type& message_catalog
         )
         {
-            m_model.observer_set().reset().connect(
-                typename boost::mpl::at<model_message_type_list_type, message::timetable_model::type::reset>::type{
-                    m_model, view, main_window
-                }
-            );
-            m_model.observer_set().changed().connect(
-                typename boost::mpl::at<model_message_type_list_type, message::timetable_model::type::changed>::type{
-                    m_model, view, main_window
-                }
-            );
+            m_model.observer_set().reset().connect(model_reset_observer_type{ m_model, view, main_window });
+            m_model.observer_set().changed().connect(model_changed_observer_type{ m_model, view, main_window });
 
             view.selection_observer_set().station_selected().connect(
                 typename boost::mpl::at<
