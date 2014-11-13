@@ -924,6 +924,29 @@ namespace bobura { namespace type_list
             >;
 
         template <typename DetailTypeList>
+        using menu_bar_type = type_list::detail::ui::menu_bar_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
+        using main_window_menu_builder_traits_type =
+            bobura::main_window_menu_builder_traits<
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                speed_type,
+                scale_type,
+                fast_font_type<DetailTypeList>,
+                menu_bar_type<DetailTypeList>,
+                popup_menu_type<DetailTypeList>,
+                menu_command_type<DetailTypeList>,
+                menu_separator_type<DetailTypeList>,
+                message_catalog_type<DetailTypeList>,
+                command_set_traits_type<DetailTypeList>,
+                main_window_traits_type<DetailTypeList>,
+                view_traits_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
         using gui_fixture_type = tetengo2::gui::fixture<typename DetailTypeList::gui_fixture_type>;
 
         template <typename DetailTypeList>
@@ -955,7 +978,7 @@ namespace bobura { namespace type_list
                 picture_box_type<DetailTypeList>,
                 map_box_type<DetailTypeList>,
                 side_bar_type<DetailTypeList>,
-                type_list::detail::ui::menu_bar_type<DetailTypeList>,
+                menu_bar_type<DetailTypeList>,
                 popup_menu_type<DetailTypeList>,
                 menu_command_type<DetailTypeList>,
                 menu_separator_type<DetailTypeList>,
@@ -967,6 +990,7 @@ namespace bobura { namespace type_list
                 view_traits_type<DetailTypeList>,
                 load_save_traits_type<DetailTypeList>,
                 command_set_traits_type<DetailTypeList>,
+                main_window_menu_builder_traits_type<DetailTypeList>,
                 config_traits_type<DetailTypeList>
             >;
 
@@ -1001,6 +1025,10 @@ namespace bobura { namespace type_list
 
         //! The command set traits.
         using command_set_type = detail::traits::command_set_traits_type<DetailTypeList>;
+
+        //! The main window menu builder traits type.
+        using main_window_menu_buiilder_type =
+            detail::traits::main_window_menu_builder_traits_type<DetailTypeList>;
 
         //! The application traits.
         using application_type = detail::traits::application_traits_type<DetailTypeList>;

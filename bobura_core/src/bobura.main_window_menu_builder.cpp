@@ -16,7 +16,6 @@
 #include <tetengo2.h>
 
 #include <bobura/main_window_menu_builder.h>
-#include <bobura/main_window_menu_builder_traits.h>
 #include <bobura/message/type_list_impl.h>
 #include <bobura/type_list.h>
 #include <bobura/view/scale_list.h>
@@ -471,12 +470,6 @@ namespace bobura
         {
             using detail_type_list_type = type_list::detail_for_application;
 
-            using common_type_list_type = type_list::common;
-
-            using locale_type_list_type = type_list::locale<detail_type_list_type>;
-    
-            using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
@@ -486,12 +479,6 @@ namespace bobura
         {
             using detail_type_list_type = type_list::detail_for_test;
 
-            using common_type_list_type = type_list::common;
-
-            using locale_type_list_type = type_list::locale<detail_type_list_type>;
-    
-            using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
@@ -500,45 +487,11 @@ namespace bobura
 
 #if BOOST_COMP_MSVC
     template class main_window_menu_builder<
-        main_window_menu_builder_traits<
-            typename application::common_type_list_type::size_type,
-            typename application::common_type_list_type::difference_type,
-            typename application::common_type_list_type::string_type,
-            typename application::common_type_list_type::operating_distance_type,
-            typename application::common_type_list_type::speed_type,
-            typename application::common_type_list_type::scale_type,
-            typename application::ui_type_list_type::fast_font_type,
-            typename application::ui_type_list_type::menu_bar_type,
-            typename application::ui_type_list_type::popup_menu_type,
-            typename application::ui_type_list_type::menu_command_type,
-            typename application::ui_type_list_type::menu_separator_type,
-            typename application::locale_type_list_type::message_catalog_type,
-            typename application::traits_type_list_type::command_set_type,
-            typename application::traits_type_list_type::main_window_type,
-            typename application::traits_type_list_type::view_type
-        >
+        typename application::traits_type_list_type::main_window_menu_buiilder_type
     >;
 #endif
 
-    template class main_window_menu_builder<
-        main_window_menu_builder_traits<
-            typename test::common_type_list_type::size_type,
-            typename test::common_type_list_type::difference_type,
-            typename test::common_type_list_type::string_type,
-            typename test::common_type_list_type::operating_distance_type,
-            typename test::common_type_list_type::speed_type,
-            typename test::common_type_list_type::scale_type,
-            typename test::ui_type_list_type::fast_font_type,
-            typename test::ui_type_list_type::menu_bar_type,
-            typename test::ui_type_list_type::popup_menu_type,
-            typename test::ui_type_list_type::menu_command_type,
-            typename test::ui_type_list_type::menu_separator_type,
-            typename test::locale_type_list_type::message_catalog_type,
-            typename test::traits_type_list_type::command_set_type,
-            typename test::traits_type_list_type::main_window_type,
-            typename test::traits_type_list_type::view_type
-        >
-    >;
+    template class main_window_menu_builder<typename test::traits_type_list_type::main_window_menu_buiilder_type>;
 
 
 }

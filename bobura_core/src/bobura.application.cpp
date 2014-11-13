@@ -27,7 +27,6 @@
 #include <bobura/load_save/save_to_file.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
-#include <bobura/main_window_menu_builder_traits.h>
 #include <bobura/message/type_list_impl.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
@@ -151,30 +150,10 @@ namespace bobura
 
         using save_to_file_type = load_save::save_to_file<load_save_traits_type>;
 
-        using command_traits_type = typename command_set_traits_type::command_traits_type;
-
         using command_set_type = command::set<command_set_traits_type>;
 
         using main_window_menu_builder_type =
-            main_window_menu_builder<
-                main_window_menu_builder_traits<
-                    size_type,
-                    difference_type,
-                    string_type,
-                    operating_distance_type,
-                    speed_type,
-                    typename traits_type::scale_type,
-                    font_type,
-                    typename traits_type::menu_bar_type,
-                    typename traits_type::popup_menu_type,
-                    typename traits_type::menu_command_type,
-                    typename traits_type::menu_separator_type,
-                    message_catalog_type,
-                    command_set_traits_type,
-                    main_window_traits_type,
-                    view_traits_type
-                >
-            >;
+            main_window_menu_builder<typename traits_type::main_window_menu_builder_traits_type>;
 
         using picture_box_type = typename traits_type::picture_box_type;
 
