@@ -28,6 +28,7 @@
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/timetable_model.h>
+#include <bobura/message/diagram_view.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 
@@ -124,8 +125,8 @@ namespace bobura
 
         using message_catalog_type = typename traits_type::message_catalog_type;
 
-        using diagram_view_message_type_list_type =
-            message::diagram_view::type_list<
+        using view_station_selected_observer_type =
+            message::diagram_view::station_selected<
                 size_type,
                 difference_type,
                 string_type,
@@ -137,8 +138,37 @@ namespace bobura
                 abstract_window_type,
                 typename traits_type::side_bar_type,
                 typename traits_type::map_box_type,
-                config_traits_type,
-                message_catalog_type
+                message_catalog_type,
+                config_traits_type
+            >;
+
+        using view_train_selected_observer_type =
+            message::diagram_view::train_selected<
+                size_type,
+                difference_type,
+                string_type,
+                position_type,
+                dimension_type,
+                operating_distance_type,
+                speed_type,
+                font_type,
+                abstract_window_type,
+                typename traits_type::side_bar_type,
+                typename traits_type::map_box_type,
+                message_catalog_type,
+                config_traits_type
+            >;
+
+        using view_all_unselected_observer_type =
+            message::diagram_view::all_unselected<
+                string_type,
+                position_type,
+                dimension_type,
+                abstract_window_type,
+                typename traits_type::side_bar_type,
+                typename traits_type::map_box_type,
+                message_catalog_type,
+                config_traits_type
             >;
 
         using load_save_traits_type = typename traits_type::load_save_traits_type;
@@ -270,19 +300,13 @@ namespace bobura
             m_model.observer_set().changed().connect(model_changed_observer_type{ m_model, view, main_window });
 
             view.selection_observer_set().station_selected().connect(
-                typename boost::mpl::at<
-                    diagram_view_message_type_list_type, message::diagram_view::type::station_selected
-                >::type{ main_window.get_property_bar(), m_model, message_catalog }
+                view_station_selected_observer_type( main_window.get_property_bar(), m_model, message_catalog )
             );
             view.selection_observer_set().train_selected().connect(
-                typename boost::mpl::at<
-                    diagram_view_message_type_list_type, message::diagram_view::type::train_selected
-                >::type{ main_window.get_property_bar(), m_model, message_catalog }
+                view_train_selected_observer_type{ main_window.get_property_bar(), m_model, message_catalog }
             );
             view.selection_observer_set().all_unselected().connect(
-                typename boost::mpl::at<
-                    diagram_view_message_type_list_type, message::diagram_view::type::all_unselected
-                >::type{ main_window.get_property_bar() }
+                view_all_unselected_observer_type{ main_window.get_property_bar() }
             );
             
             main_window.file_drop_observer_set().file_dropped().connect(

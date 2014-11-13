@@ -12,22 +12,6 @@
 
 namespace bobura { namespace message
 {
-    namespace diagram_view
-    {
-        namespace type
-        {
-            //! The station selection observer type.
-            struct station_selected;
-
-            //! The train selection observer type.
-            struct train_selected;
-
-            //! The unselection observer type.
-            struct all_unselected;
-
-        }
-    }
-
     namespace main_window
     {
         namespace type

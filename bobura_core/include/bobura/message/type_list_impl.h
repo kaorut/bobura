@@ -15,7 +15,6 @@
 
 #include <bobura/message/about_dialog.h>
 #include <bobura/message/diagram_picture_box.h>
-#include <bobura/message/diagram_view.h>
 #include <bobura/message/file_property_dialog.h>
 #include <bobura/message/font_color_dialog.h>
 #include <bobura/message/main_window.h>
@@ -28,97 +27,6 @@
 
 namespace bobura { namespace message
 {
-    namespace diagram_view
-    {
-        /*!
-            \brief The meta function for the type list of the diagram view messages.
-
-            \tparam Size              A size type.
-            \tparam Difference        A difference type.
-            \tparam String            A string type.
-            \tparam Position          A position type.
-            \tparam Dimension         A dimension type.
-            \tparam OperatingDistance An operating distance type.
-            \tparam Speed             A speed type.
-            \tparam Font              A font type.
-            \tparam AbstractWindow    An abstract window type.
-            \tparam SideBar           A side bar type.
-            \tparam MapBox            A map box type.
-            \tparam MessageCatalog    A message catalog type.
-            \tparam ConfigTraits      A configuration traits type.
-        */
-        template <
-            typename Size,
-            typename Difference,
-            typename String,
-            typename Position,
-            typename Dimension,
-            typename OperatingDistance,
-            typename Speed,
-            typename Font,
-            typename AbstractWindow,
-            typename SideBar,
-            typename MapBox,
-            typename MessageCatalog,
-            typename ConfigTraits
-        >
-        using type_list =
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<
-                    type::station_selected,
-                    bobura::message::diagram_view::station_selected<
-                        Size,
-                        Difference,
-                        String,
-                        Position,
-                        Dimension,
-                        OperatingDistance,
-                        Speed,
-                        Font,
-                        AbstractWindow,
-                        SideBar,
-                        MapBox,
-                        ConfigTraits,
-                        MessageCatalog
-                    >
-                >,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<
-                    type::train_selected,
-                    message::diagram_view::train_selected<
-                        Size,
-                        Difference,
-                        String,
-                        Position,
-                        Dimension,
-                        OperatingDistance,
-                        Speed,
-                        Font,
-                        AbstractWindow,
-                        SideBar,
-                        MapBox,
-                        ConfigTraits,
-                        MessageCatalog
-                    >
-                >,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<
-                    type::all_unselected,
-                    message::diagram_view::all_unselected<
-                        String,
-                        Position,
-                        Dimension,
-                        AbstractWindow,
-                        SideBar,
-                        MapBox,
-                        ConfigTraits,
-                        MessageCatalog
-                    >
-                >,
-            tetengo2::meta::assoc_list_end
-            >>>;
-    }
-
     namespace main_window
     {
         /*!
