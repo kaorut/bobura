@@ -11,7 +11,6 @@
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 
@@ -21,6 +20,7 @@
 #include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
 #include <bobura/main_window.h>
+#include <bobura/message/main_window.h>
 #include <bobura/type_list.h>
 
 
@@ -128,34 +128,10 @@ namespace bobura
     private:
         // types
 
-        using size_type = typename traits_type::size_type;
-
-        using difference_type = typename traits_type::difference_type;
-
-        using operating_distance_type = typename traits_type::operating_distance_type;
-
-        using speed_type = typename traits_type::speed_type;
-
-        using popup_menu_type = typename traits_type::popup_menu_type;
-
         using message_loop_break_type = typename traits_type::message_loop_break_type;
 
-        using command_traits_type = typename command_set_traits_type::command_traits_type;
-
-        using message_type_list_type =
-            message::main_window::type_list<
-                popup_menu_type,
-                command::set<command_set_traits_type>,
-                command::command_base<command_traits_type>,
-                timetable_model<
-                    size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
-                >,
-                diagram_view<view_traits_type>,
-                abstract_window_type,
-                diagram_picture_box_type,
-                property_bar_type,
-                confirm_file_save_type
-            >;
+        using main_window_window_closing_observer_type =
+            message::main_window::window_closing<abstract_window_type, confirm_file_save_type>;
 
 
         // variables
@@ -204,9 +180,9 @@ namespace bobura
                 [](typename base_type::canvas_type&) { return true; }
             );
             m_base.window_observer_set().closing().connect(
-                typename boost::mpl::at<message_type_list_type, message::main_window::type::window_closing>::type(
+                main_window_window_closing_observer_type{
                     m_base, m_confirm_file_save, [this]() { this->save_settings(); }
-                )
+                }
             );
             m_base.window_observer_set().destroyed().connect([](){ return message_loop_break_type{}(0); });
         }

@@ -12,28 +12,6 @@
 
 namespace bobura { namespace message
 {
-    namespace main_window
-    {
-        namespace type
-        {
-            //! The popup menu selection observer type.
-            struct popup_menu_selected;
-
-            //! The menu command selection observer type.
-            struct menu_command_selected;
-
-            //! The file drop observer type.
-            struct file_dropped;
-
-            //! The window resized observer type.
-            struct window_resized;
-
-            //! The window closing observer type.
-            struct window_closing;
-
-        }
-    }
-
     namespace diagram_picture_box
     {
         namespace type

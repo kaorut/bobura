@@ -865,18 +865,13 @@ namespace bobura { namespace type_list
         template <typename DetailTypeList>
         using main_window_traits_type =
             main_window_traits<
-                size_type,
-                difference_type,
                 string_type,
                 position_type<DetailTypeList>,
                 dimension_type<DetailTypeList>,
-                operating_distance_type,
-                speed_type,
                 type_list::detail::ui::window_type<DetailTypeList>,
                 picture_box_type<DetailTypeList>,
                 map_box_type<DetailTypeList>,
                 side_bar_type<DetailTypeList>,
-                popup_menu_type<DetailTypeList>,
                 tetengo2::gui::message::message_loop_break<message_loop_details_type<DetailTypeList>>,
                 fast_font_type<DetailTypeList>,
                 mouse_capture_type<DetailTypeList>,

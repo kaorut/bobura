@@ -10,13 +10,12 @@
 #include <utility>
 #include <vector>
 
-#include <boost/mpl/at.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
 
 #include <bobura/main_window_menu_builder.h>
-#include <bobura/message/type_list_impl.h>
+#include <bobura/message/main_window.h>
 #include <bobura/type_list.h>
 #include <bobura/view/scale_list.h>
 
@@ -95,19 +94,14 @@ namespace bobura
 
         using virtual_key_type = typename shortcut_key_type::virtual_key_type;
 
-        using view_traits_type = typename traits_type::view_traits_type;
+        using main_window_popup_menu_selected_observer_type =
+            message::main_window::popup_menu_selected<
+                popup_menu_type, typename command_set_type::command_type, model_type
+            >;
 
-        using main_window_message_type_list_type =
-            message::main_window::type_list<
-                popup_menu_type,
-                command_set_type,
-                typename command_set_type::command_type,
-                model_type,
-                view_traits_type,
-                typename main_window_type::abstract_window_type,
-                typename main_window_type::diagram_picture_box_type,
-                typename main_window_type::property_bar_type,
-                typename main_window_type::confirm_file_save_type
+        using main_window_menu_command_selected_observer_type =
+            message::main_window::menu_command_selected<
+                typename command_set_type::command_type, model_type, typename main_window_type::abstract_window_type
             >;
 
         using command_type = typename command_set_type::command_type;
@@ -408,9 +402,7 @@ namespace bobura
         const
         {
             p_menu_command->menu_observer_set().selected().connect(
-                typename boost::mpl::at<
-                    main_window_message_type_list_type, message::main_window::type::menu_command_selected
-                >::type(command, m_model, m_main_window)
+                main_window_menu_command_selected_observer_type{ command, m_model, m_main_window }
             );
 
             popup_menu.insert(popup_menu.end(), std::move(p_menu_command));
@@ -429,9 +421,7 @@ namespace bobura
         const
         {
             popup_menu.menu_observer_set().selected().connect(
-                typename boost::mpl::at<
-                    main_window_message_type_list_type, message::main_window::type::popup_menu_selected
-                >::type{ popup_menu, std::move(commands), m_model }
+                main_window_popup_menu_selected_observer_type{ popup_menu, std::move(commands), m_model }
             );
         }
 

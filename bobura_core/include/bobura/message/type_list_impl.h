@@ -17,7 +17,6 @@
 #include <bobura/message/diagram_picture_box.h>
 #include <bobura/message/file_property_dialog.h>
 #include <bobura/message/font_color_dialog.h>
-#include <bobura/message/main_window.h>
 #include <bobura/message/oudia_diagram_dialog.h>
 #include <bobura/message/property_bar.h>
 #include <bobura/message/train_kind_dialog.h>
@@ -27,49 +26,6 @@
 
 namespace bobura { namespace message
 {
-    namespace main_window
-    {
-        /*!
-            \brief The meta function for the type list of the main window messages.
-
-            \tparam PopupMenu         A popup menu type.
-            \tparam CommandSet        A command set type.
-            \tparam Command           A command type.
-            \tparam Model             A model type.
-            \tparam View              A view type.
-            \tparam AbstractWindow    An abstract window type.
-            \tparam DiagramPictureBox A diagram picture box type.
-            \tparam PropertyBar       A property bar type.
-            \tparam ConfirmFileSave   A file save confirmation type.
-        */
-        template <
-            typename PopupMenu,
-            typename CommandSet,
-            typename Command,
-            typename Model,
-            typename View,
-            typename AbstractWindow,
-            typename DiagramPictureBox,
-            typename PropertyBar,
-            typename ConfirmFileSave
-        >
-        using type_list =
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<type::popup_menu_selected, popup_menu_selected<PopupMenu, Command, Model>>,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<type::menu_command_selected, menu_command_selected<Command, Model, AbstractWindow>>,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<type::file_dropped, file_dropped<CommandSet, Model, AbstractWindow>>,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<
-                    type::window_resized, window_resized<View, AbstractWindow, DiagramPictureBox, PropertyBar>
-                >,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<type::window_closing, window_closing<AbstractWindow, ConfirmFileSave>>,
-            tetengo2::meta::assoc_list_end
-            >>>>>;
-    }
-
     namespace diagram_picture_box
     {
         /*!

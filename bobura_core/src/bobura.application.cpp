@@ -27,8 +27,9 @@
 #include <bobura/load_save/save_to_file.h>
 #include <bobura/main_window.h>
 #include <bobura/main_window_menu_builder.h>
-#include <bobura/message/timetable_model.h>
 #include <bobura/message/diagram_view.h>
+#include <bobura/message/main_window.h>
+#include <bobura/message/timetable_model.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 
@@ -195,20 +196,21 @@ namespace bobura
                 picture_box_type, abstract_window_type, mouse_capture_type, view_traits_type
             >;
 
-        using main_window_message_type_list_type =
-            message::main_window::type_list<
-                typename traits_type::popup_menu_type,
-                command_set_type,
-                typename command_set_type::command_type,
-                model_type,
+        using main_window_file_dropped_observer_type =
+            message::main_window::file_dropped<command_set_type, model_type, abstract_window_type>;
+
+        using main_window_window_resized_observer_type =
+            message::main_window::window_resized<
                 view_type,
                 abstract_window_type,
                 diagram_picture_box<
                     picture_box_type, abstract_window_type, mouse_capture_type, diagram_picture_box_message_type_list
                 >,
-                typename main_window_type::property_bar_type,
-                confirm_file_save_type
+                typename main_window_type::property_bar_type
             >;
+
+        using main_window_window_closing_observer_type =
+            message::main_window::window_closing<abstract_window_type, confirm_file_save_type>;
 
         using message_loop_type = typename traits_type::message_loop_type;
 
@@ -310,14 +312,12 @@ namespace bobura
             );
             
             main_window.file_drop_observer_set().file_dropped().connect(
-                typename boost::mpl::at<
-                    main_window_message_type_list_type, message::main_window::type::file_dropped
-                >::type{ command_set, m_model, main_window }
+                main_window_file_dropped_observer_type{ command_set, m_model, main_window }
             );
             main_window.size_observer_set().resized().connect(
-                typename boost::mpl::at<
-                    main_window_message_type_list_type, message::main_window::type::window_resized
-                >::type{ view, main_window, main_window.get_diagram_picture_box(), main_window.get_property_bar() }
+                main_window_window_resized_observer_type{
+                    view, main_window, main_window.get_diagram_picture_box(), main_window.get_property_bar()
+                }
             );
 
             main_window.get_diagram_picture_box().mouse_observer_set().pressed().connect(
