@@ -13,8 +13,6 @@
 #include <string>
 #include <utility>
 
-#include <boost/mpl/at.hpp>
-#include <boost/mpl/pair.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
@@ -23,24 +21,12 @@
 #include "test_bobura.model.detail_type_list.h"
 
 
-namespace test_bobura { namespace model
+namespace test_bobura { namespace model { namespace type_list
 {
-    /**** Common ************************************************************/
-
-    namespace type
-    {
-        struct size;           //!< The size type.
-        struct difference;     //!< The difference type.
-        struct string;         //!< The string type.
-        struct io_string;      //!< The I/O string type.
-        struct encoder;        //!< The encoder type.
-        struct io_encoder;     //!< The I/O encoder type.
-        struct operating_distance; //!< The operating distance type.
-        struct speed;          //!< The speed type.
-    }
+    /**** Common *****************************************************************************************************/
 
 #if !defined(DOCUMENTATION)
-    namespace detail
+    namespace detail { namespace common
     {
         using size_type = std::size_t;
 
@@ -51,7 +37,7 @@ namespace test_bobura { namespace model
         using io_string_type = std::string;
 
         template <typename DetailTypeList>
-        using encoding_details_type = typename boost::mpl::at<DetailTypeList, type::detail::encoding>::type;
+        using encoding_details_type = typename DetailTypeList::encoding_type;
 
         template <typename DetailTypeList>
         using internal_encoding_type =
@@ -76,7 +62,7 @@ namespace test_bobura { namespace model
 
         using speed_type = size_type;
 
-    }
+    }}
 #endif
 
     /*!
@@ -85,47 +71,55 @@ namespace test_bobura { namespace model
         \tparam DetailTypeList A detail type list.
     */
     template <typename DetailTypeList>
-    using common_type_list =
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::size, detail::size_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::difference, detail::difference_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::string, detail::string_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::io_string, detail::io_string_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::encoder, detail::encoder_type<DetailTypeList>>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::io_encoder, detail::io_encoder_type<DetailTypeList>>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::operating_distance, detail::operating_distance_type>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::speed, detail::speed_type>,
-        tetengo2::meta::assoc_list_end
-        >>>>>>>>;
-
-
-    /**** User Interface ****************************************************/
-
-    namespace type { namespace ui
+    struct common
     {
-        struct abstract_window; //!< The abstract window type.
-        struct window;         //!< The window type.
-        struct font;           //!< The font type.
-        struct color;          //!< The color type.
-    }}
+        //! The size type.
+        using size_type = detail::common::size_type;
+
+        //! The difference type.
+        using difference_type = detail::common::difference_type;
+
+        //! The string type.
+        using string_type = detail::common::string_type;
+
+        //! The I/O string type.
+        using io_string_type = detail::common::io_string_type;
+
+        //! The encoder type.
+        using encoder_type = detail::common::encoder_type<DetailTypeList>;
+
+        //! The I/O encoder type.
+        using io_encoder_type = detail::common::io_encoder_type<DetailTypeList>;
+
+        //! The operating distance type.
+        using operating_distance_type = detail::common::operating_distance_type;
+
+        //! The speed type.
+        using speed_type = detail::common::speed_type;
+
+    };
+
+
+    /**** User Interface *********************************************************************************************/
 
 #if !defined(DOCUMENTATION)
     namespace detail { namespace ui
     {
-        using size_type = model::detail::size_type;
+        using size_type = type_list::detail::common::size_type;
 
-        using difference_type = model::detail::difference_type;
+        using difference_type = type_list::detail::common::difference_type;
 
-        using string_type = model::detail::string_type;
+        using string_type = type_list::detail::common::string_type;
 
         using position_type = std::pair<difference_type, difference_type>;
 
         using dimension_type = std::pair<size_t, size_t>;
 
         template <typename DetailTypeList>
-        using widget_details_type = typename boost::mpl::at<DetailTypeList, type::detail::widget>::type;
+        using widget_details_type = typename DetailTypeList::widget_type;
 
         template <typename DetailTypeList>
-        using encoding_details_type = typename boost::mpl::at<DetailTypeList, type::detail::encoding>::type;
+        using encoding_details_type = typename DetailTypeList::encoding_type;
 
         template <typename DetailTypeList>
         using internal_encoding_type =
@@ -133,7 +127,7 @@ namespace test_bobura { namespace model
 
 #if BOOST_COMP_MSVC
         template <typename DetailTypeList>
-        using ui_string_type = typename boost::mpl::at<DetailTypeList, type::detail::widget>::type::string_type; // Ignore type list type duplication check.
+        using ui_string_type = typename DetailTypeList::widget_type::string_type; // Ignore type list type duplication check.
 #else
         // The code below somehow causes a compilation error with VC++ 2013.
         template <typename DetailTypeList>
@@ -172,23 +166,23 @@ namespace test_bobura { namespace model
             >;
 
         template <typename DetailTypeList>
-        using drawing_details_type = typename boost::mpl::at<DetailTypeList, type::detail::drawing>::type;
+        using drawing_details_type = typename DetailTypeList::drawing_type;
 
         template <typename DetailTypeList>
         using widget_details_traits_type =
             tetengo2::gui::widget::widget_details_traits<
                 widget_details_type<DetailTypeList>,
                 drawing_details_type<DetailTypeList>,
-                typename boost::mpl::at<DetailTypeList, type::detail::icon>::type,
-                typename boost::mpl::at<DetailTypeList, type::detail::alert>::type,
-                typename boost::mpl::at<DetailTypeList, type::detail::cursor>::type,
-                typename boost::mpl::at<DetailTypeList, type::detail::scroll>::type,
-                typename boost::mpl::at<DetailTypeList, type::detail::message_handler>::type,
-                typename boost::mpl::at<DetailTypeList, type::detail::virtual_key>::type
+                typename DetailTypeList::icon_type,
+                typename DetailTypeList::alert_type,
+                typename DetailTypeList::cursor_type,
+                typename DetailTypeList::scroll_type,
+                typename DetailTypeList::message_handler_type,
+                typename DetailTypeList::virtual_key_type
             >;
 
         template <typename DetailTypeList>
-        using menu_details_type = typename boost::mpl::at<DetailTypeList, type::detail::menu>::type;
+        using menu_details_type = typename DetailTypeList::menu_type;
 
         template <typename DetailTypeList>
         using abstract_window_type =
@@ -220,17 +214,24 @@ namespace test_bobura { namespace model
         \tparam DetailTypeList A detail type list.
     */
     template <typename DetailTypeList>
-    using ui_type_list =
-        tetengo2::meta::assoc_list<
-            boost::mpl::pair<type::ui::abstract_window, detail::ui::abstract_window_type<DetailTypeList>>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::window, detail::ui::window_type<DetailTypeList>>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::font, detail::ui::font_type<DetailTypeList>>,
-        tetengo2::meta::assoc_list<boost::mpl::pair<type::ui::color, detail::ui::color_type>,
-        tetengo2::meta::assoc_list_end
-        >>>>;
+    struct ui
+    {
+        //! The abstract window type.
+        using abstract_window_type = detail::ui::abstract_window_type<DetailTypeList>;
 
+        //! The window type.
+        using window_type = detail::ui::window_type<DetailTypeList>;
 
-}}
+        //! The font type.
+        using font_type = detail::ui::font_type<DetailTypeList>;
+
+        //! The color type.
+        using color_type = detail::ui::color_type;
+
+    };
+    
+
+}}}
 
 
 #endif

@@ -8,7 +8,6 @@
 
 #include <utility>
 
-#include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
@@ -25,26 +24,26 @@ namespace
 {
     // types
 
-    using detail_type_list_type = bobura::detail_type_list_for_test;
+    using detail_type_list_type = bobura::type_list::detail_for_test;
 
-    using common_type_list_type = bobura::common_type_list;
+    using common_type_list_type = bobura::type_list::common;
 
-    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+    using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
-    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+    using traits_type_list_type = bobura::type_list::traits<detail_type_list_type>;
 
-    using size_type = boost::mpl::at<common_type_list_type, bobura::type::size>::type;
+    using size_type = common_type_list_type::size_type;
 
-    using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
+    using string_type = common_type_list_type::string_type;
 
     using model_type =
         bobura::timetable_model<
             size_type,
-            boost::mpl::at<common_type_list_type, bobura::type::difference>::type,
+            common_type_list_type::difference_type,
             string_type,
-            boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
-            boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
-            boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type
+            common_type_list_type::operating_distance_type,
+            common_type_list_type::speed_type,
+            ui_type_list_type::fast_font_type
         >;
 
     using station_location_type = model_type::timetable_type::station_location_type;
@@ -55,7 +54,7 @@ namespace
     
     using train_type = model_type::timetable_type::train_type;
 
-    using traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::view>::type;
+    using traits_type = traits_type_list_type::view_type;
 
     using selection_type = bobura::view::diagram::selection<traits_type>;
 

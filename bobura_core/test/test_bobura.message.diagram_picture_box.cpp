@@ -6,7 +6,6 @@
     $Id$
 */
 
-#include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -23,45 +22,45 @@ namespace
 {
     // types
 
-    using detail_type_list_type = bobura::detail_type_list_for_test;
+    using detail_type_list_type = bobura::type_list::detail_for_test;
 
-    using common_type_list_type = bobura::common_type_list;
+    using common_type_list_type = bobura::type_list::common;
 
-    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
+    using locale_type_list_type = bobura::type_list::locale<detail_type_list_type>;
 
-    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+    using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
-    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+    using traits_type_list_type = bobura::type_list::traits<detail_type_list_type>;
 
-    using view_traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::view>::type;
+    using view_traits_type = traits_type_list_type::view_type;
 
-    using picture_box_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::picture_box>::type;
+    using picture_box_type = ui_type_list_type::picture_box_type;
 
     using mouse_observer_set_type = picture_box_type::mouse_observer_set_type;
 
     using mouse_button_type = mouse_observer_set_type::mouse_button_type;
 
-    using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
+    using message_catalog_type = locale_type_list_type::message_catalog_type;
 
     using model_type =
         bobura::timetable_model<
-            boost::mpl::at<common_type_list_type, bobura::type::size>::type,
-            boost::mpl::at<common_type_list_type, bobura::type::difference>::type,
-            boost::mpl::at<common_type_list_type, bobura::type::string>::type,
-            boost::mpl::at<common_type_list_type, bobura::type::operating_distance>::type,
-            boost::mpl::at<common_type_list_type, bobura::type::speed>::type,
-            boost::mpl::at<ui_type_list_type, bobura::type::ui::fast_font>::type
+            common_type_list_type::size_type,
+            common_type_list_type::difference_type,
+            common_type_list_type::string_type,
+            common_type_list_type::operating_distance_type,
+            common_type_list_type::speed_type,
+            ui_type_list_type::fast_font_type
         >;
 
     using view_type = bobura::diagram_view<view_traits_type>;
 
-    using position_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::position>::type;
+    using position_type = ui_type_list_type::position_type;
 
     using left_type = tetengo2::gui::position<position_type>::left_type;
 
     using top_type = tetengo2::gui::position<position_type>::top_type;
 
-    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
+    using window_type = ui_type_list_type::window_type;
 
     using mouse_pressed_type = bobura::message::diagram_picture_box::mouse_pressed<picture_box_type, view_traits_type>;
 
@@ -73,9 +72,9 @@ namespace
     using view_zoom_type =
         bobura::view::diagram::zoom<
             view_traits_type,
-            boost::mpl::at<ui_type_list_type, bobura::type::ui::abstract_window>::type,
+            ui_type_list_type::abstract_window_type,
             picture_box_type,
-            boost::mpl::at<ui_type_list_type, bobura::type::ui::mouse_capture>::type
+            ui_type_list_type::mouse_capture_type
         >;
 
     using mouse_wheeled_type =

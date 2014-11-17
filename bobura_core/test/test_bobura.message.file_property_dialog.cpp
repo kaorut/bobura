@@ -6,7 +6,6 @@
     $Id$
 */
 
-#include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/message/file_property_dialog.h>
@@ -17,13 +16,13 @@ namespace
 {
     // types
 
-    using detail_type_list_type = bobura::detail_type_list_for_test;
+    using detail_type_list_type = bobura::type_list::detail_for_test;
 
-    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+    using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
-    using dialog_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dialog>::type;
+    using dialog_type = ui_type_list_type::dialog_type;
 
-    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
+    using window_type = ui_type_list_type::window_type;
 
     class concrete_dialog : public dialog_type
     {

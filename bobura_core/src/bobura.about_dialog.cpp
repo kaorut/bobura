@@ -245,18 +245,18 @@ namespace bobura
  #if BOOST_COMP_MSVC
        namespace application
         {
-            using detail_type_list_type = detail_type_list_for_application;
+            using detail_type_list_type = type_list::detail_for_application;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
 #endif
 
         namespace test
         {
-            using detail_type_list_type = detail_type_list_for_test;
+            using detail_type_list_type = type_list::detail_for_test;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
 
@@ -264,14 +264,13 @@ namespace bobura
 
 #if BOOST_COMP_MSVC
     template class about_dialog<
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::dialog>::type,
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::config>::type
+        typename application::traits_type_list_type::dialog_type,
+        typename application::traits_type_list_type::config_type
     >;
 #endif
 
     template class about_dialog<
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::dialog>::type,
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::config>::type
+        typename test::traits_type_list_type::dialog_type, typename test::traits_type_list_type::config_type
     >;
 
 

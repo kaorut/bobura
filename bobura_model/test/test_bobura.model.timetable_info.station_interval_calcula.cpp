@@ -9,7 +9,6 @@
 #include <utility>
 #include <vector>
 
-#include <boost/mpl/at.hpp>
 #include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
@@ -28,18 +27,17 @@ namespace
 {
     // types
 
-    using detail_type_list_type = test_bobura::model::detail_type_list_for_test;
+    using detail_type_list_type = test_bobura::model::type_list::detail_for_test;
 
-    using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
+    using common_type_list_type = test_bobura::model::type_list::common<detail_type_list_type>;
 
-    using size_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::size>::type;
+    using size_type = common_type_list_type::size_type;
 
-    using difference_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::difference>::type;
+    using difference_type = common_type_list_type::difference_type;
 
-    using string_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type;
+    using string_type = common_type_list_type::string_type;
 
-    using operating_distance_type =
-        boost::mpl::at<common_type_list_type, test_bobura::model::type::operating_distance>::type;
+    using operating_distance_type = common_type_list_type::operating_distance_type;
 
     using station_interval_calculator_type =
         bobura::model::timetable_info::station_interval_calculator<

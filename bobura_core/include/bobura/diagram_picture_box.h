@@ -13,13 +13,12 @@
 #include <memory>
 #include <utility>
 
-#include <boost/mpl/at.hpp>
 #include <boost/rational.hpp>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/message/type_list.h>
+#include <bobura/message/diagram_picture_box.h>
 
 
 namespace bobura
@@ -30,9 +29,8 @@ namespace bobura
         \tparam PictureBox      A picture box type.
         \tparam AbstractWindow  An abstract window type.
         \tparam MouseCapture    A mouse capture type.
-        \tparam MessageTypeList A message type list.
     */
-    template <typename PictureBox, typename AbstractWindow, typename MouseCapture, typename MessageTypeList>
+    template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
     class diagram_picture_box : public PictureBox
     {
     public:
@@ -56,8 +54,11 @@ namespace bobura
         //! The mouse button type.
         using mouse_button_type = typename mouse_capture_type::mouse_button_type;
 
-        //! The message type list type.
-        using message_type_list_type = MessageTypeList;
+        ////! The message type list type.
+        //using message_type_list_type = MessageTypeList;
+
+        //! The key-down observer set type.
+        using key_down_observer_type = message::diagram_picture_box::keyboard_key_down<base_type>;
 
 
         // constructors and destructor
@@ -159,11 +160,7 @@ namespace bobura
 
         void set_observers()
         {
-            this->keyboard_observer_set().key_down().connect(
-                typename boost::mpl::at<
-                    message_type_list_type, message::diagram_picture_box::type::keyboard_key_down
-                >::type{ *this }
-            );
+            this->keyboard_observer_set().key_down().connect(key_down_observer_type{ *this });
         }
 
         template <typename Size>

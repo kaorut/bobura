@@ -15,33 +15,34 @@ namespace bobura
    /*!
         \brief The class template for an application traits.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam Position          A position type.
-        \tparam Dimension         A dimension type.
-        \tparam OperatingDistance A string type.
-        \tparam Spped             A string type.
-        \tparam Scale             A scale type.
-        \tparam GuiFixture        A GUI fixture type.
-        \tparam Font              A font type.
-        \tparam AbstractWindow    An abstract window type.
-        \tparam PictureBox        A picture box type.
-        \tparam MapBox            A map box type.
-        \tparam SideBar           A side bar type.
-        \tparam MenuBar           A menu bar type.
-        \tparam PopupMenu         A popup menu type.
-        \tparam MenuCommand       A menu command type.
-        \tparam MenuSeparator     A menu separator type.
-        \tparam MessageLoop       A message loop type.
-        \tparam MouseCapture      A mouse capture_type.
-        \tparam Timer             A timer type.
-        \tparam MessageCatalog    A message catalog type.
-        \tparam MainWindowTraits  A main window traits type.
-        \tparam ViewTraits        A view traits type.
-        \tparam LoadSaveTraits    A loading and saving processing traits.
-        \tparam CommandSetTraits  A command set traits type.
-        \tparam ConfigTraits      A configuration traits type.
+        \tparam Size                        A size type.
+        \tparam Difference                  A difference type.
+        \tparam String                      A string type.
+        \tparam Position                    A position type.
+        \tparam Dimension                   A dimension type.
+        \tparam OperatingDistance           A string type.
+        \tparam Spped                       A string type.
+        \tparam Scale                       A scale type.
+        \tparam GuiFixture                  A GUI fixture type.
+        \tparam Font                        A font type.
+        \tparam AbstractWindow              An abstract window type.
+        \tparam PictureBox                  A picture box type.
+        \tparam MapBox                      A map box type.
+        \tparam SideBar                     A side bar type.
+        \tparam MenuBar                     A menu bar type.
+        \tparam PopupMenu                   A popup menu type.
+        \tparam MenuCommand                 A menu command type.
+        \tparam MenuSeparator               A menu separator type.
+        \tparam MessageLoop                 A message loop type.
+        \tparam MouseCapture                A mouse capture_type.
+        \tparam Timer                       A timer type.
+        \tparam MessageCatalog              A message catalog type.
+        \tparam MainWindowTraits            A main window traits type.
+        \tparam ViewTraits                  A view traits type.
+        \tparam LoadSaveTraits              A loading and saving processing traits type.
+        \tparam CommandSetTraits            A command set traits type.
+        \tparam MainWindowMenuBuilderTraits A main window menu builder traits type.
+        \tparam ConfigTraits                A configuration traits type.
     */
     template <
         typename Size,
@@ -70,6 +71,7 @@ namespace bobura
         typename ViewTraits,
         typename LoadSaveTraits,
         typename CommandSetTraits,
+        typename MainWindowMenuBuilderTraits,
         typename ConfigTraits
     >
     class application_traits
@@ -143,17 +145,20 @@ namespace bobura
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
-        //! The main window type.
+        //! The main window traits type.
         using main_window_traits_type = MainWindowTraits;
 
-        //! The view type.
+        //! The view traits type.
         using view_traits_type = ViewTraits;
 
         //! The loading and saving processing traits type.
         using load_save_traits_type = LoadSaveTraits;
 
-        //! The command set type.
+        //! The command set traits type.
         using command_set_traits_type = CommandSetTraits;
+
+        //! The main window menu builder traits type.
+        using main_window_menu_builder_traits_type = MainWindowMenuBuilderTraits;
 
         //! The configuration traits type.
         using config_traits_type = ConfigTraits;

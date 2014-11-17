@@ -10,14 +10,12 @@
 #include <utility>
 #include <vector>
 
-#include <boost/mpl/at.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
 
 #include <bobura/main_window_menu_builder.h>
-#include <bobura/main_window_menu_builder_traits.h>
-#include <bobura/message/type_list_impl.h>
+#include <bobura/message/main_window.h>
 #include <bobura/type_list.h>
 #include <bobura/view/scale_list.h>
 
@@ -96,19 +94,14 @@ namespace bobura
 
         using virtual_key_type = typename shortcut_key_type::virtual_key_type;
 
-        using view_traits_type = typename traits_type::view_traits_type;
+        using main_window_popup_menu_selected_observer_type =
+            message::main_window::popup_menu_selected<
+                popup_menu_type, typename command_set_type::command_type, model_type
+            >;
 
-        using main_window_message_type_list_type =
-            message::main_window::type_list<
-                popup_menu_type,
-                command_set_type,
-                typename command_set_type::command_type,
-                model_type,
-                view_traits_type,
-                typename main_window_type::abstract_window_type,
-                typename main_window_type::diagram_picture_box_type,
-                typename main_window_type::property_bar_type,
-                typename main_window_type::confirm_file_save_type
+        using main_window_menu_command_selected_observer_type =
+            message::main_window::menu_command_selected<
+                typename command_set_type::command_type, model_type, typename main_window_type::abstract_window_type
             >;
 
         using command_type = typename command_set_type::command_type;
@@ -409,9 +402,7 @@ namespace bobura
         const
         {
             p_menu_command->menu_observer_set().selected().connect(
-                typename boost::mpl::at<
-                    main_window_message_type_list_type, message::main_window::type::menu_command_selected
-                >::type(command, m_model, m_main_window)
+                main_window_menu_command_selected_observer_type{ command, m_model, m_main_window }
             );
 
             popup_menu.insert(popup_menu.end(), std::move(p_menu_command));
@@ -430,9 +421,7 @@ namespace bobura
         const
         {
             popup_menu.menu_observer_set().selected().connect(
-                typename boost::mpl::at<
-                    main_window_message_type_list_type, message::main_window::type::popup_menu_selected
-                >::type{ popup_menu, std::move(commands), m_model }
+                main_window_popup_menu_selected_observer_type{ popup_menu, std::move(commands), m_model }
             );
         }
 
@@ -469,30 +458,18 @@ namespace bobura
 #if BOOST_COMP_MSVC
         namespace application
         {
-            using detail_type_list_type = detail_type_list_for_application;
+            using detail_type_list_type = type_list::detail_for_application;
 
-            using common_type_list_type = common_type_list;
-
-            using locale_type_list_type = locale_type_list<detail_type_list_type>;
-    
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
-
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
 #endif
 
         namespace test
         {
-            using detail_type_list_type = detail_type_list_for_test;
+            using detail_type_list_type = type_list::detail_for_test;
 
-            using common_type_list_type = common_type_list;
-
-            using locale_type_list_type = locale_type_list<detail_type_list_type>;
-    
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
-
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
 
@@ -500,45 +477,11 @@ namespace bobura
 
 #if BOOST_COMP_MSVC
     template class main_window_menu_builder<
-        main_window_menu_builder_traits<
-            typename boost::mpl::at<application::common_type_list_type, type::size>::type,
-            typename boost::mpl::at<application::common_type_list_type, type::difference>::type,
-            typename boost::mpl::at<application::common_type_list_type, type::string>::type,
-            typename boost::mpl::at<application::common_type_list_type, type::operating_distance>::type,
-            typename boost::mpl::at<application::common_type_list_type, type::speed>::type,
-            typename boost::mpl::at<application::common_type_list_type, type::scale>::type,
-            typename boost::mpl::at<application::ui_type_list_type, type::ui::fast_font>::type,
-            typename boost::mpl::at<application::ui_type_list_type, type::ui::menu_bar>::type,
-            typename boost::mpl::at<application::ui_type_list_type, type::ui::popup_menu>::type,
-            typename boost::mpl::at<application::ui_type_list_type, type::ui::menu_command>::type,
-            typename boost::mpl::at<application::ui_type_list_type, type::ui::menu_separator>::type,
-            typename boost::mpl::at<application::locale_type_list_type, type::locale::message_catalog>::type,
-            typename boost::mpl::at<application::traits_type_list_type, type::traits::command_set>::type,
-            typename boost::mpl::at<application::traits_type_list_type, type::traits::main_window>::type,
-            typename boost::mpl::at<application::traits_type_list_type, type::traits::view>::type
-        >
+        typename application::traits_type_list_type::main_window_menu_buiilder_type
     >;
 #endif
 
-    template class main_window_menu_builder<
-        main_window_menu_builder_traits<
-            typename boost::mpl::at<test::common_type_list_type, type::size>::type,
-            typename boost::mpl::at<test::common_type_list_type, type::difference>::type,
-            typename boost::mpl::at<test::common_type_list_type, type::string>::type,
-            typename boost::mpl::at<test::common_type_list_type, type::operating_distance>::type,
-            typename boost::mpl::at<test::common_type_list_type, type::speed>::type,
-            typename boost::mpl::at<test::common_type_list_type, type::scale>::type,
-            typename boost::mpl::at<test::ui_type_list_type, type::ui::fast_font>::type,
-            typename boost::mpl::at<test::ui_type_list_type, type::ui::menu_bar>::type,
-            typename boost::mpl::at<test::ui_type_list_type, type::ui::popup_menu>::type,
-            typename boost::mpl::at<test::ui_type_list_type, type::ui::menu_command>::type,
-            typename boost::mpl::at<test::ui_type_list_type, type::ui::menu_separator>::type,
-            typename boost::mpl::at<test::locale_type_list_type, type::locale::message_catalog>::type,
-            typename boost::mpl::at<test::traits_type_list_type, type::traits::command_set>::type,
-            typename boost::mpl::at<test::traits_type_list_type, type::traits::main_window>::type,
-            typename boost::mpl::at<test::traits_type_list_type, type::traits::view>::type
-        >
-    >;
+    template class main_window_menu_builder<typename test::traits_type_list_type::main_window_menu_buiilder_type>;
 
 
 }

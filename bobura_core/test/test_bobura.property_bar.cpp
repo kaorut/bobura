@@ -8,7 +8,6 @@
 
 #include <vector>
 
-#include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/property_bar.h>
@@ -20,38 +19,38 @@ namespace
 {
     // types
 
-    using detail_type_list_type = bobura::detail_type_list_for_test;
+    using detail_type_list_type = bobura::type_list::detail_for_test;
 
-    using common_type_list_type = bobura::common_type_list;
+    using common_type_list_type = bobura::type_list::common;
 
-    using locale_type_list_type = bobura::locale_type_list<detail_type_list_type>;
+    using locale_type_list_type = bobura::type_list::locale<detail_type_list_type>;
 
-    using ui_type_list_type = bobura::ui_type_list<detail_type_list_type>;
+    using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
-    using traits_type_list_type = bobura::traits_type_list<detail_type_list_type>;
+    using traits_type_list_type = bobura::type_list::traits<detail_type_list_type>;
 
-    using string_type = boost::mpl::at<common_type_list_type, bobura::type::string>::type;
+    using string_type = common_type_list_type::string_type;
 
-    using window_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::window>::type;
+    using window_type = ui_type_list_type::window_type;
 
-    using position_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::position>::type;
+    using position_type = ui_type_list_type::position_type;
 
-    using dimension_type = boost::mpl::at<ui_type_list_type, bobura::type::ui::dimension>::type;
+    using dimension_type = ui_type_list_type::dimension_type;
 
-    using config_traits_type = boost::mpl::at<traits_type_list_type, bobura::type::traits::config>::type;
+    using config_traits_type = traits_type_list_type::config_type;
 
     using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
 
-    using message_catalog_type = boost::mpl::at<locale_type_list_type, bobura::type::locale::message_catalog>::type;
+    using message_catalog_type = locale_type_list_type::message_catalog_type;
 
     using property_bar_type =
         bobura::property_bar<
             string_type,
             position_type,
             dimension_type,
-            boost::mpl::at<ui_type_list_type, bobura::type::ui::abstract_window>::type,
-            boost::mpl::at<ui_type_list_type, bobura::type::ui::side_bar>::type,
-            boost::mpl::at<ui_type_list_type, bobura::type::ui::map_box>::type,
+            ui_type_list_type::abstract_window_type,
+            ui_type_list_type::side_bar_type,
+            ui_type_list_type::map_box_type,
             message_catalog_type,
             config_traits_type
         >;

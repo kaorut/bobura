@@ -10,7 +10,6 @@
 #include <iterator>
 #include <utility>
 
-#include <boost/mpl/at.hpp>
 #include <boost/predef.h>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
@@ -26,33 +25,29 @@ namespace
 {
     // types
 
-    using detail_type_list_type = test_bobura::model::detail_type_list_for_test;
+    using detail_type_list_type = test_bobura::model::type_list::detail_for_test;
 
-    using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
+    using common_type_list_type = test_bobura::model::type_list::common<detail_type_list_type>;
 
-    using ui_type_list_type = test_bobura::model::ui_type_list<detail_type_list_type>;
+    using ui_type_list_type = test_bobura::model::type_list::ui<detail_type_list_type>;
 
-    using size_type_ = boost::mpl::at<common_type_list_type, test_bobura::model::type::size>::type;
+    using size_type_ = common_type_list_type::size_type;
 
-    using string_type_ = boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type;
+    using string_type_ = common_type_list_type::string_type;
 
-    using window_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::window>::type;
+    using window_type = ui_type_list_type::window_type;
 
     using input_stream_iterator_type =
-        boost::spirit::multi_pass<
-            std::istreambuf_iterator<
-                boost::mpl::at<common_type_list_type, test_bobura::model::type::io_string>::type::value_type
-            >
-        >;
+        boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>;
 
-    using encoder_type_ = boost::mpl::at<common_type_list_type, test_bobura::model::type::encoder>::type;
+    using encoder_type_ = common_type_list_type::encoder_type;
 
     using message_catalog_type_ =
         tetengo2::message::message_catalog<
             input_stream_iterator_type, string_type_, size_type_, encoder_type_, encoder_type_
         >;
 
-    using io_encoder_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::io_encoder>::type;
+    using io_encoder_type = common_type_list_type::io_encoder_type;
 
     struct select_oudia_diagram_type
     {
@@ -62,8 +57,7 @@ namespace
 
         using encoder_type = encoder_type_;
 
-        using abstract_window_type =
-            boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::abstract_window>::type;
+        using abstract_window_type = ui_type_list_type::abstract_window_type;
 
         using message_catalog_type = message_catalog_type_;
 
@@ -91,13 +85,13 @@ namespace
     using reader_set_type =
         bobura::model::serializer::reader_set<
             size_type_,
-            boost::mpl::at<common_type_list_type, test_bobura::model::type::difference>::type,
+            common_type_list_type::difference_type,
             string_type_,
             input_stream_iterator_type,
-            boost::mpl::at<common_type_list_type, test_bobura::model::type::operating_distance>::type,
-            boost::mpl::at<common_type_list_type, test_bobura::model::type::speed>::type,
+            common_type_list_type::operating_distance_type,
+            common_type_list_type::speed_type,
             select_oudia_diagram_type,
-            boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::font>::type,
+            ui_type_list_type::font_type,
             io_encoder_type,
             io_encoder_type
         >;

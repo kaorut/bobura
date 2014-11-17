@@ -8,7 +8,6 @@
 
 #include <utility>
 
-#include <boost/mpl/at.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -22,17 +21,17 @@ namespace
 {
     // types
 
-    using detail_type_list_type = test_bobura::model::detail_type_list_for_test;
+    using detail_type_list_type = test_bobura::model::type_list::detail_for_test;
 
-    using common_type_list_type = test_bobura::model::common_type_list<detail_type_list_type>;
+    using common_type_list_type = test_bobura::model::type_list::common<detail_type_list_type>;
 
-    using ui_type_list_type = test_bobura::model::ui_type_list<detail_type_list_type>;
+    using ui_type_list_type = test_bobura::model::type_list::ui<detail_type_list_type>;
 
-    using string_type = boost::mpl::at<common_type_list_type, test_bobura::model::type::string>::type;
+    using string_type = common_type_list_type::string_type;
 
-    using font_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::font>::type;
+    using font_type = ui_type_list_type::font_type;
 
-    using color_type = boost::mpl::at<ui_type_list_type, test_bobura::model::type::ui::color>::type;
+    using color_type = ui_type_list_type::color_type;
 
     using font_color_set_type = bobura::model::timetable_info::font_color_set<font_type>;
 

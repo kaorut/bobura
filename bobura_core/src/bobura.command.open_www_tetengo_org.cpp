@@ -7,7 +7,6 @@
 */
 
 #include <boost/core/ignore_unused.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
@@ -75,22 +74,22 @@ namespace bobura { namespace command
 #if BOOST_COMP_MSVC
         namespace application
         {
-            using detail_type_list_type = detail_type_list_for_application;
+            using detail_type_list_type = type_list::detail_for_application;
 
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
 #endif
 
         namespace test
         {
-            using detail_type_list_type = detail_type_list_for_test;
+            using detail_type_list_type = type_list::detail_for_test;
 
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
 
@@ -98,14 +97,12 @@ namespace bobura { namespace command
 
 #if BOOST_COMP_MSVC
     template class open_www_tetengo_org<
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::command>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::shell>::type
+        typename application::traits_type_list_type::command_type, typename application::ui_type_list_type::shell_type
     >;
 #endif
 
     template class open_www_tetengo_org<
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::command>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::shell>::type
+        typename test::traits_type_list_type::command_type, typename test::ui_type_list_type::shell_type
     >;
 
 

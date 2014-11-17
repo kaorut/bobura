@@ -10,14 +10,12 @@
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
 #include <bobura/diagram_picture_box.h>
-#include <bobura/message/type_list_impl.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/zoom.h>
 
@@ -29,8 +27,6 @@ namespace bobura { namespace view { namespace diagram
     {
     public:
         // types
-
-        using traits_type = typename zoom::traits_type;
 
         using abstract_window_type = typename zoom::abstract_window_type;
 
@@ -45,14 +41,7 @@ namespace bobura { namespace view { namespace diagram
         using scale_type = typename zoom::scale_type;
 
         using diagram_picture_box_type =
-            diagram_picture_box<
-                picture_box_type,
-                abstract_window_type,
-                mouse_capture_type,
-                message::diagram_picture_box::type_list<
-                    picture_box_type, abstract_window_type, mouse_capture_type, traits_type
-                >
-            >;
+            diagram_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
 
 
         // constructors and destructor
@@ -236,22 +225,22 @@ namespace bobura { namespace view { namespace diagram
 #if BOOST_COMP_MSVC
         namespace application
         {
-            using detail_type_list_type = detail_type_list_for_application;
+            using detail_type_list_type = type_list::detail_for_application;
 
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
 #endif
 
         namespace test
         {
-            using detail_type_list_type = detail_type_list_for_test;
+            using detail_type_list_type = type_list::detail_for_test;
 
-            using ui_type_list_type = ui_type_list<detail_type_list_type>;
+            using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
-            using traits_type_list_type = traits_type_list<detail_type_list_type>;
+            using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
 
@@ -259,18 +248,18 @@ namespace bobura { namespace view { namespace diagram
 
 #if BOOST_COMP_MSVC
     template class zoom<
-        typename boost::mpl::at<application::traits_type_list_type, type::traits::view>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::abstract_window>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::picture_box>::type,
-        typename boost::mpl::at<application::ui_type_list_type, type::ui::mouse_capture>::type
+        typename application::traits_type_list_type::view_type,
+        typename application::ui_type_list_type::abstract_window_type,
+        typename application::ui_type_list_type::picture_box_type,
+        typename application::ui_type_list_type::mouse_capture_type
     >;
 #endif
 
     template class zoom<
-        typename boost::mpl::at<test::traits_type_list_type, type::traits::view>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::abstract_window>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::picture_box>::type,
-        typename boost::mpl::at<test::ui_type_list_type, type::ui::mouse_capture>::type
+        typename test::traits_type_list_type::view_type,
+        typename test::ui_type_list_type::abstract_window_type,
+        typename test::ui_type_list_type::picture_box_type,
+        typename test::ui_type_list_type::mouse_capture_type
     >;
 
 
