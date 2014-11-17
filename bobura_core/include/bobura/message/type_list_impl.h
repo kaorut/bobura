@@ -17,7 +17,6 @@
 #include <bobura/message/file_property_dialog.h>
 #include <bobura/message/font_color_dialog.h>
 #include <bobura/message/oudia_diagram_dialog.h>
-#include <bobura/message/property_bar.h>
 #include <bobura/message/train_kind_dialog.h>
 #include <bobura/message/type_list.h>
 #include <bobura/view/diagram/zoom.h>
@@ -25,22 +24,6 @@
 
 namespace bobura { namespace message
 {
-    namespace property_bar
-    {
-        /*!
-            \brief The meta function for the type list of the property bar messages.
-
-            \tparam SideBar A side bar bar type.
-            \tparam MapBox  A map box type.
-        */
-        template <typename SideBar, typename MapBox>
-        using type_list =
-            tetengo2::meta::assoc_list<boost::mpl::pair<type::resized, resized<SideBar, MapBox>>,
-            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_pressed, mouse_pressed<MapBox>>,
-            tetengo2::meta::assoc_list_end
-            >>;
-    }
-
     namespace oudia_diagram_dialog
     {
         /*!

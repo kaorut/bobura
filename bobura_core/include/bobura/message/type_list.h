@@ -12,19 +12,6 @@
 
 namespace bobura { namespace message
 {
-    namespace property_bar
-    {
-        namespace type
-        {
-            //! The resized observer type.
-            struct resized;
-
-            //! The mouse-pressed observer type.
-            struct mouse_pressed;
-
-        }
-    }
-
     namespace oudia_diagram_dialog
     {
         namespace type

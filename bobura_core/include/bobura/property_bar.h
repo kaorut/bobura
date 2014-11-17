@@ -149,9 +149,10 @@ namespace bobura
 
         using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
-        using resized_type = message::property_bar::resized<base_type, map_box_type>;
+        using resized_observer_type = message::property_bar::resized<base_type, map_box_type>;
 
-        using mouse_pressed_type = message::property_bar::mouse_pressed<map_box_type>;
+        using mouse_pressed_observer_type = message::property_bar::mouse_pressed<map_box_type>;
+
 
         // variables
 
@@ -170,9 +171,9 @@ namespace bobura
 
             m_p_map_box = tetengo2::stdalt::make_unique<map_box_type>(*this);
 
-            this->size_observer_set().resized().connect(resized_type{ *this, *m_p_map_box });
+            this->size_observer_set().resized().connect(resized_observer_type{ *this, *m_p_map_box });
 
-            m_p_map_box->mouse_observer_set().pressed().connect(mouse_pressed_type{ *m_p_map_box });
+            m_p_map_box->mouse_observer_set().pressed().connect(mouse_pressed_observer_type{ *m_p_map_box });
 
             load_settings();
         }
