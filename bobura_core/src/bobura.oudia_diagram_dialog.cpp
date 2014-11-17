@@ -20,7 +20,7 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/message/type_list_impl.h>
+#include <bobura/message/oudia_diagram_dialog.h>
 #include <bobura/oudia_diagram_dialog.h>
 #include <bobura/type_list.h>
 
@@ -144,19 +144,9 @@ namespace bobura
 
         using transparent_background_type = typename traits_type::transparent_background_type;
 
-        using oudia_diagram_dialog_message_type_list_type = message::oudia_diagram_dialog::type_list<base_type>;
+        using ok_button_mouse_clicked_type = message::oudia_diagram_dialog::ok_button_mouse_clicked<base_type>;
 
-        using ok_button_mouse_clicked_type =
-            typename boost::mpl::at<
-                oudia_diagram_dialog_message_type_list_type,
-                message::oudia_diagram_dialog::type::ok_button_mouse_clicked
-            >::type;
-
-        using cancel_button_mouse_clicked_type =
-            typename boost::mpl::at<
-                oudia_diagram_dialog_message_type_list_type,
-                message::oudia_diagram_dialog::type::cancel_button_mouse_clicked
-            >::type;
+        using cancel_button_mouse_clicked_type = message::oudia_diagram_dialog::cancel_button_mouse_clicked<base_type>;
 
 
         // variables
