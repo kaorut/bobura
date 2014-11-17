@@ -14,7 +14,6 @@
 #include <tetengo2.h>
 
 #include <bobura/message/about_dialog.h>
-#include <bobura/message/diagram_picture_box.h>
 #include <bobura/message/file_property_dialog.h>
 #include <bobura/message/font_color_dialog.h>
 #include <bobura/message/oudia_diagram_dialog.h>
@@ -26,38 +25,6 @@
 
 namespace bobura { namespace message
 {
-    namespace diagram_picture_box
-    {
-        /*!
-            \brief The meta function for the type list of the diagram picture box messages.
-
-            \tparam PictureBox     A picture box type.
-            \tparam AbstractWindow An abstract window type.
-            \tparam MouseCapture   A mouse capture type.
-            \tparam ViewTraits     A view traits type.
-        */
-        template <typename PictureBox, typename AbstractWindow, typename MouseCapture, typename ViewTraits>
-        using type_list =
-            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_pressed, mouse_pressed<PictureBox, ViewTraits>>,
-            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_released, mouse_released<PictureBox, ViewTraits>>,
-            tetengo2::meta::assoc_list<boost::mpl::pair<type::mouse_moved, mouse_moved<PictureBox, ViewTraits>>,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<
-                    type::mouse_wheeled,
-                    mouse_wheeled<
-                        PictureBox,
-                        view::diagram::zoom<ViewTraits, AbstractWindow, PictureBox, MouseCapture>,
-                        ViewTraits
-                    >
-                >,
-            tetengo2::meta::assoc_list<boost::mpl::pair<type::keyboard_key_down, keyboard_key_down<PictureBox>>,
-            tetengo2::meta::assoc_list<boost::mpl::pair<type::paint_paint, paint_paint<PictureBox, ViewTraits>>,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<type::scroll_bar_scrolled, scroll_bar_scrolled<PictureBox, ViewTraits>>,
-            tetengo2::meta::assoc_list_end
-            >>>>>>>;
-    }
-
     namespace property_bar
     {
         /*!

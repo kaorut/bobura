@@ -17,7 +17,6 @@
 
 #include <bobura/diagram_picture_box.h>
 #include <bobura/load_save/confirm_file_save.h>
-#include <bobura/message/type_list_impl.h>
 #include <bobura/property_bar.h>
 #include <bobura/settings.h>
 
@@ -90,20 +89,9 @@ namespace bobura
         //! The command set traits type.
         using command_set_traits_type = CommandSetTraits;
 
-        //! The diagram picture box message type list type.
-        using diagram_picture_box_message_type_list_type =
-            message::diagram_picture_box::type_list<
-                picture_box_type, abstract_window_type, mouse_capture_type, view_traits_type
-            >;
-
         //! The diagram picture box type.
         using diagram_picture_box_type =
-            diagram_picture_box<
-                picture_box_type,
-                abstract_window_type,
-                mouse_capture_type,
-                diagram_picture_box_message_type_list_type
-            >;
+            diagram_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
 
         //! The property bar type.
         using property_bar_type =

@@ -16,7 +16,6 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/diagram_picture_box.h>
-#include <bobura/message/type_list_impl.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/zoom.h>
 
@@ -28,8 +27,6 @@ namespace bobura { namespace view { namespace diagram
     {
     public:
         // types
-
-        using traits_type = typename zoom::traits_type;
 
         using abstract_window_type = typename zoom::abstract_window_type;
 
@@ -44,14 +41,7 @@ namespace bobura { namespace view { namespace diagram
         using scale_type = typename zoom::scale_type;
 
         using diagram_picture_box_type =
-            diagram_picture_box<
-                picture_box_type,
-                abstract_window_type,
-                mouse_capture_type,
-                message::diagram_picture_box::type_list<
-                    picture_box_type, abstract_window_type, mouse_capture_type, traits_type
-                >
-            >;
+            diagram_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
 
 
         // constructors and destructor

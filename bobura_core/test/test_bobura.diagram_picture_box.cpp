@@ -11,7 +11,6 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/diagram_picture_box.h>
-#include <bobura/message/type_list_impl.h>
 #include <bobura/type_list.h>
 
 
@@ -33,15 +32,8 @@ namespace
 
     using mouse_capture_type = ui_type_list_type::mouse_capture_type;
 
-    using diagram_picture_box_message_type_list =
-        bobura::message::diagram_picture_box::type_list<
-            picture_box_type, abstract_window_type, mouse_capture_type, traits_type_list_type::view_type
-        >;
-
     using diagram_picture_box_type =
-        bobura::diagram_picture_box<
-            picture_box_type, abstract_window_type, mouse_capture_type, diagram_picture_box_message_type_list
-        >;
+        bobura::diagram_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
 
     using dimension_type = diagram_picture_box_type::dimension_type;
 

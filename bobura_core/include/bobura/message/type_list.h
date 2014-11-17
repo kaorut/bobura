@@ -12,34 +12,6 @@
 
 namespace bobura { namespace message
 {
-    namespace diagram_picture_box
-    {
-        namespace type
-        {
-            //! The mouse pressed type.
-            struct mouse_pressed;
-
-            //! The mouse released type.
-            struct mouse_released;
-
-            //! The mouse moved type.
-            struct mouse_moved;
-
-            //! The mouse observer type.
-            struct mouse_wheeled;
-
-            //! The keyboard key down observer type.
-            struct keyboard_key_down;
-
-            //! The paint observer type.
-            struct paint_paint;
-
-            //! The scroll bar observer type.
-            struct scroll_bar_scrolled;
-
-        }
-    }
-
     namespace property_bar
     {
         namespace type
