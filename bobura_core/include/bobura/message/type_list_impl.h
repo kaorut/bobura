@@ -14,7 +14,6 @@
 #include <tetengo2.h>
 
 #include <bobura/message/about_dialog.h>
-#include <bobura/message/font_color_dialog.h>
 #include <bobura/message/train_kind_dialog.h>
 #include <bobura/message/type_list.h>
 #include <bobura/view/diagram/zoom.h>
@@ -22,55 +21,6 @@
 
 namespace bobura { namespace message
 {
-    namespace font_color_dialog
-    {
-        /*!
-            \brief The meta function for the type list of the font and color dialog messages.
-
-            \tparam Size           A size type.
-            \tparam Dialog         A dialog type.
-            \tparam ListBox        A list box type.
-            \tparam Canvas         A canvas type.
-            \tparam FontDialog     A font dialog type.
-            \tparam ColorDialog    A color dialog type.
-            \tparam MessageCatalog A message catalog type.
-        */
-        template <
-            typename Size,
-            typename Dialog,
-            typename ListBox,
-            typename Canvas,
-            typename FontDialog,
-            typename ColorDialog,
-            typename MessageCatalog
-        >
-        using type_list =
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<
-                    type::category_list_box_selection_changed, category_list_box_selection_changed<Size, ListBox>
-                >,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<
-                    type::sample_picture_box_paint, sample_picture_box_paint<Size, Canvas, MessageCatalog>
-                >,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<
-                    type::font_button_mouse_clicked,
-                    font_button_mouse_clicked<Size, Dialog, FontDialog, Canvas, MessageCatalog>
-                >,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<
-                    type::color_button_mouse_clicked,
-                    color_button_mouse_clicked<Size, Dialog, ColorDialog, Canvas, MessageCatalog>
-                >,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<type::ok_button_mouse_clicked, ok_button_mouse_clicked<Dialog>>,
-            tetengo2::meta::assoc_list<
-                boost::mpl::pair<type::cancel_button_mouse_clicked, cancel_button_mouse_clicked<Dialog>>,
-            tetengo2::meta::assoc_list_end
-            >>>>>>;
-    }
-
     namespace train_kind_dialog
     {
         /*!
