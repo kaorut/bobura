@@ -12,15 +12,6 @@
 
 namespace bobura { namespace message
 {
-    namespace about_dialog
-    {
-        namespace type
-        {
-            //! The OK button mouse click observer type.
-            struct ok_button_mouse_clicked;
-
-        }
-    }
 
 
 }}
