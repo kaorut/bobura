@@ -10,14 +10,13 @@
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
 #include <bobura/file_property_dialog.h>
-#include <bobura/message/type_list_impl.h>
+#include <bobura/message/file_property_dialog.h>
 #include <bobura/type_list.h>
 
 
@@ -150,7 +149,11 @@ namespace bobura
 
         using transparent_background_type = typename traits_type::transparent_background_type;
 
-        using file_property_dialog_message_type_list_type = message::file_property_dialog::type_list<base_type>;
+        using ok_button_mouse_clicked_observer_type =
+            message::file_property_dialog::ok_button_mouse_clicked<base_type>;
+
+        using cancel_button_mouse_clicked_observer_type =
+            message::file_property_dialog::cancel_button_mouse_clicked<base_type>;
 
 
         // variables
@@ -291,12 +294,7 @@ namespace bobura
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::default_);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Common:OK")));
-            p_button->mouse_observer_set().clicked().connect(
-                typename boost::mpl::at<
-                    file_property_dialog_message_type_list_type,
-                    message::file_property_dialog::type::ok_button_mouse_clicked
-                >::type{ m_base }
-            );
+            p_button->mouse_observer_set().clicked().connect(ok_button_mouse_clicked_observer_type{ m_base });
 
             return std::move(p_button);
         }
@@ -306,12 +304,7 @@ namespace bobura
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::cancel);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Common:Cancel")));
-            p_button->mouse_observer_set().clicked().connect(
-                typename boost::mpl::at<
-                    file_property_dialog_message_type_list_type,
-                    message::file_property_dialog::type::cancel_button_mouse_clicked
-                >::type{ m_base }
-            );
+            p_button->mouse_observer_set().clicked().connect(cancel_button_mouse_clicked_observer_type{ m_base });
 
             return std::move(p_button);
         }
