@@ -12,7 +12,6 @@
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/format.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
@@ -20,7 +19,7 @@
 
 #include <bobura/about_dialog.h>
 #include <bobura/dialog_traits.h>
-#include <bobura/message/type_list_impl.h>
+#include <bobura/message/about_dialog.h>
 #include <bobura/type_list.h>
 
 
@@ -89,7 +88,7 @@ namespace bobura
 
         using transparent_background_type = typename traits_type::transparent_background_type;
 
-        using about_dialog_message_type_list_type = message::about_dialog::type_list<base_type>;
+        using ok_button_mouse_clicked_observer_type = message::about_dialog::ok_button_mouse_clicked<base_type>;
 
 
         // variables
@@ -185,11 +184,7 @@ namespace bobura
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::default_);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Common:OK")));
-            p_button->mouse_observer_set().clicked().connect(
-                typename boost::mpl::at<
-                    about_dialog_message_type_list_type, message::about_dialog::type::ok_button_mouse_clicked
-                >::type{ m_base }
-            );
+            p_button->mouse_observer_set().clicked().connect(ok_button_mouse_clicked_observer_type{ m_base });
 
             return std::move(p_button);
         }

@@ -14,7 +14,6 @@
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/format.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/rational.hpp>
@@ -24,7 +23,7 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/font_color_dialog.h>
-#include <bobura/message/type_list_impl.h>
+#include <bobura/message/font_color_dialog.h>
 #include <bobura/type_list.h>
 
 
@@ -231,16 +230,26 @@ namespace bobura
 
         using internal_font_color_type = std::pair<boost::optional<font_type>, boost::optional<color_type>>;
 
-        using font_color_dialog_message_type_list_type =
-            message::font_color_dialog::type_list<
-                size_type,
-                base_type,
-                list_box_type,
-                canvas_type,
-                font_dialog_type,
-                color_dialog_type,
-                message_catalog_type
+        using category_list_box_selection_changed_observer_type =
+            message::font_color_dialog::category_list_box_selection_changed<size_type, list_box_type>;
+
+        using sample_picture_box_paint_observer_type =
+            message::font_color_dialog::sample_picture_box_paint<size_type, canvas_type, message_catalog_type>;
+
+        using font_button_mouse_clicked_observer_type =
+            message::font_color_dialog::font_button_mouse_clicked<
+                size_type, base_type, FontDialog, canvas_type, message_catalog_type
             >;
+
+        using color_button_mouse_clicked_observer_type =
+            message::font_color_dialog::color_button_mouse_clicked<
+                size_type, base_type, ColorDialog, canvas_type, message_catalog_type
+            >;
+
+        using ok_button_mouse_clicked_observer_type = message::font_color_dialog::ok_button_mouse_clicked<base_type>;
+
+        using cancel_button_mouse_clicked_observer_type =
+            message::font_color_dialog::cancel_button_mouse_clicked<base_type>;
 
 
         // static functions
@@ -337,10 +346,9 @@ namespace bobura
                 tetengo2::stdalt::make_unique<list_box_type>(m_base, list_box_type::scroll_bar_style_type::vertical);
 
             p_list_box->list_selection_observer_set().selection_changed().connect(
-                typename boost::mpl::at<
-                    font_color_dialog_message_type_list_type,
-                    message::font_color_dialog::type::category_list_box_selection_changed
-                >::type{ m_current_category_index, *p_list_box, [this]() { this->update(); } }
+                category_list_box_selection_changed_observer_type{
+                    m_current_category_index, *p_list_box, [this]() { this->update(); }
+                }
             );
 
             return std::move(p_list_box);
@@ -352,16 +360,13 @@ namespace bobura
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Font...")));
             p_button->mouse_observer_set().clicked().connect(
-                typename boost::mpl::at<
-                    font_color_dialog_message_type_list_type,
-                    message::font_color_dialog::type::font_button_mouse_clicked
-                >::type(
+                font_button_mouse_clicked_observer_type{
                     m_base,
                     m_font_color_list,
                     m_current_category_index,
                     [this]() { this->update(); },
                     m_message_catalog
-                )
+                }
             );
 
             return std::move(p_button);
@@ -383,16 +388,13 @@ namespace bobura
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Color...")));
             p_button->mouse_observer_set().clicked().connect(
-                typename boost::mpl::at<
-                    font_color_dialog_message_type_list_type,
-                    message::font_color_dialog::type::color_button_mouse_clicked
-                >::type(
+                color_button_mouse_clicked_observer_type{
                     m_base,
                     m_font_color_list,
                     m_current_category_index,
                     [this]() { this->update(); },
                     m_message_catalog
-                )
+                }
             );
 
             return std::move(p_button);
@@ -418,10 +420,7 @@ namespace bobura
 
             p_picture_box->set_dimension(dimension_type{ width_type{ 24 }, height_type{ 8 } });
             p_picture_box->fast_paint_observer_set().paint().connect(
-                typename boost::mpl::at<
-                    font_color_dialog_message_type_list_type,
-                    message::font_color_dialog::type::sample_picture_box_paint
-                >::type{
+                sample_picture_box_paint_observer_type{
                     m_font_color_list,
                     m_current_category_index,
                     p_picture_box->client_dimension(),
@@ -437,12 +436,7 @@ namespace bobura
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::default_);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Common:OK")));
-            p_button->mouse_observer_set().clicked().connect(
-                typename boost::mpl::at<
-                    font_color_dialog_message_type_list_type,
-                    message::font_color_dialog::type::ok_button_mouse_clicked
-                >::type{ m_base }
-            );
+            p_button->mouse_observer_set().clicked().connect(ok_button_mouse_clicked_observer_type{ m_base });
 
             return std::move(p_button);
         }
@@ -452,12 +446,7 @@ namespace bobura
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::cancel);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Common:Cancel")));
-            p_button->mouse_observer_set().clicked().connect(
-                typename boost::mpl::at<
-                    font_color_dialog_message_type_list_type,
-                    message::font_color_dialog::type::cancel_button_mouse_clicked
-                >::type{ m_base }
-            );
+            p_button->mouse_observer_set().clicked().connect(cancel_button_mouse_clicked_observer_type{ m_base });
 
             return std::move(p_button);
         }

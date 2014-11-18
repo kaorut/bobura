@@ -54,8 +54,6 @@ pkg_headers = \
     message/timetable_model.h \
     message/timetable_model_observer_set.h \
     message/train_kind_dialog.h \
-    message/type_list.h \
-    message/type_list_impl.h \
     oudia_diagram_dialog.h \
     property_bar.h \
     settings.h \

@@ -18,7 +18,6 @@
 #include <bobura/load_save/save_to_file.h>
 #include <bobura/main_window.h>
 #include <bobura/message/timetable_model.h>
-#include <bobura/message/type_list_impl.h>
 #include <bobura/settings.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
