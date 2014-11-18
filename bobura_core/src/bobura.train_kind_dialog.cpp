@@ -13,7 +13,6 @@
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
@@ -21,7 +20,7 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/message/type_list_impl.h>
+#include <bobura/message/train_kind_dialog.h>
 #include <bobura/train_kind_dialog.h>
 #include <bobura/type_list.h>
 
@@ -150,16 +149,41 @@ namespace bobura
 
         using transparent_background_type = typename traits_type::transparent_background_type;
 
-        using train_kind_dialog_message_type_list_type =
-            message::train_kind_dialog::type_list<
-                info_set_type,
-                size_type,
-                base_type,
-                list_box_type,
-                canvas_type,
-                color_dialog_type,
-                message_catalog_type
-            >;
+        using train_kind_list_box_selection_changed_observer_type =
+            message::train_kind_dialog::train_kind_list_box_selection_changed<size_type, list_box_type>;
+
+        using add_button_mouse_clicked_observer_type =
+            message::train_kind_dialog::add_button_mouse_clicked<info_set_type, size_type, message_catalog_type>;
+
+        using delete_button_mouse_clicked_observer_type =
+            message::train_kind_dialog::delete_button_mouse_clicked<info_set_type, size_type>;
+
+        using up_button_mouse_clicked_observer_type =
+            message::train_kind_dialog::up_button_mouse_clicked<info_set_type, size_type>;
+
+        using down_button_mouse_clicked_observer_type =
+            message::train_kind_dialog::down_button_mouse_clicked<info_set_type, size_type>;
+
+        using name_text_box_changed_observer_type = message::train_kind_dialog::name_text_box_changed;
+
+        using abbreviation_text_box_changed_observer_type = message::train_kind_dialog::abbreviation_text_box_changed;
+
+        using color_button_mouse_clicked_observer_type =
+            message::train_kind_dialog::color_button_mouse_clicked<base_type, ColorDialog>;
+
+        using weight_dropdown_box_selection_changed_observer_type =
+            message::train_kind_dialog::weight_dropdown_box_selection_changed;
+
+        using line_style_dropdown_box_selection_changed_observer_type =
+            message::train_kind_dialog::line_style_dropdown_box_selection_changed;
+
+        using sample_picture_box_paint_observer_type =
+            message::train_kind_dialog::sample_picture_box_paint<info_set_type, size_type, Canvas>;
+
+        using ok_button_mouse_clicked_observer_type = message::train_kind_dialog::ok_button_mouse_clicked<base_type>;
+
+        using cancel_button_mouse_clicked_observer_type =
+            message::train_kind_dialog::cancel_button_mouse_clicked<base_type>;
 
         using train_kind_type = typename info_set_type::train_kind_type;
 
@@ -332,10 +356,9 @@ namespace bobura
                 tetengo2::stdalt::make_unique<list_box_type>(m_base, list_box_type::scroll_bar_style_type::vertical);
 
             p_list_box->list_selection_observer_set().selection_changed().connect(
-                typename boost::mpl::at<
-                    train_kind_dialog_message_type_list_type,
-                    message::train_kind_dialog::type::train_kind_list_box_selection_changed
-                >::type{ m_current_train_kind_index, *p_list_box, [this]() { this->update(); } }
+                train_kind_list_box_selection_changed_observer_type{
+                    m_current_train_kind_index, *p_list_box, [this]() { this->update(); }
+                }
             );
 
             return std::move(p_list_box);
@@ -347,10 +370,9 @@ namespace bobura
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:&Add")));
             p_button->mouse_observer_set().clicked().connect(
-                typename boost::mpl::at<
-                    train_kind_dialog_message_type_list_type,
-                    message::train_kind_dialog::type::add_button_mouse_clicked
-                >::type{ m_info_sets, m_current_train_kind_index, [this]() { this->sync(); }, m_message_catalog }
+                add_button_mouse_clicked_observer_type{
+                    m_info_sets, m_current_train_kind_index, [this]() { this->sync(); }, m_message_catalog
+                }
             );
 
             return std::move(p_button);
@@ -362,10 +384,9 @@ namespace bobura
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:D&elete")));
             p_button->mouse_observer_set().clicked().connect(
-                typename boost::mpl::at<
-                    train_kind_dialog_message_type_list_type,
-                    message::train_kind_dialog::type::delete_button_mouse_clicked
-                >::type{ m_info_sets, m_current_train_kind_index, [this]() { this->sync(); } }
+                delete_button_mouse_clicked_observer_type{
+                    m_info_sets, m_current_train_kind_index, [this]() { this->sync(); }
+                }
             );
 
             return std::move(p_button);
@@ -377,10 +398,9 @@ namespace bobura
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:&Up")));
             p_button->mouse_observer_set().clicked().connect(
-                typename boost::mpl::at<
-                    train_kind_dialog_message_type_list_type,
-                    message::train_kind_dialog::type::up_button_mouse_clicked
-                >::type{ m_info_sets, m_current_train_kind_index, [this]() { this->sync(); } }
+                up_button_mouse_clicked_observer_type{
+                    m_info_sets, m_current_train_kind_index, [this]() { this->sync(); }
+                }
             );
 
             return std::move(p_button);
@@ -392,10 +412,9 @@ namespace bobura
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:&Down")));
             p_button->mouse_observer_set().clicked().connect(
-                typename boost::mpl::at<
-                    train_kind_dialog_message_type_list_type,
-                    message::train_kind_dialog::type::down_button_mouse_clicked
-                >::type{ m_info_sets, m_current_train_kind_index, [this]() { this->sync(); } }
+                down_button_mouse_clicked_observer_type{
+                    m_info_sets, m_current_train_kind_index, [this]() { this->sync(); }
+                }
             );
 
             return std::move(p_button);
@@ -418,9 +437,7 @@ namespace bobura
                 tetengo2::stdalt::make_unique<text_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
 
             p_text_box->text_box_observer_set().changed().connect(
-                typename boost::mpl::at<
-                    train_kind_dialog_message_type_list_type, message::train_kind_dialog::type::name_text_box_changed
-                >::type{ [this]() { this->apply(); } }
+                name_text_box_changed_observer_type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_text_box);
@@ -443,10 +460,7 @@ namespace bobura
                 tetengo2::stdalt::make_unique<text_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
 
             p_text_box->text_box_observer_set().changed().connect(
-                typename boost::mpl::at<
-                    train_kind_dialog_message_type_list_type,
-                    message::train_kind_dialog::type::abbreviation_text_box_changed
-                >::type{ [this]() { this->apply(); } }
+                abbreviation_text_box_changed_observer_type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_text_box);
@@ -458,10 +472,9 @@ namespace bobura
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Line &Color...")));
             p_button->mouse_observer_set().clicked().connect(
-                typename boost::mpl::at<
-                    train_kind_dialog_message_type_list_type,
-                    message::train_kind_dialog::type::color_button_mouse_clicked
-                >::type{ m_base, m_current_train_kind_color, [this]() { this->apply(); } }
+                color_button_mouse_clicked_observer_type{
+                    m_base, m_current_train_kind_color, [this]() { this->apply(); }
+                }
             );
 
             return std::move(p_button);
@@ -491,10 +504,7 @@ namespace bobura
             p_dropdown_box->select_value(0);
 
             p_dropdown_box->list_selection_observer_set().selection_changed().connect(
-                typename boost::mpl::at<
-                    train_kind_dialog_message_type_list_type,
-                    message::train_kind_dialog::type::weight_dropdown_box_selection_changed
-                >::type{ [this]() { this->apply(); } }
+                weight_dropdown_box_selection_changed_observer_type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_dropdown_box);
@@ -530,10 +540,7 @@ namespace bobura
             p_dropdown_box->select_value(0);
 
             p_dropdown_box->list_selection_observer_set().selection_changed().connect(
-                typename boost::mpl::at<
-                    train_kind_dialog_message_type_list_type,
-                    message::train_kind_dialog::type::line_style_dropdown_box_selection_changed
-                >::type{ [this]() { this->apply(); } }
+                line_style_dropdown_box_selection_changed_observer_type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_dropdown_box);
@@ -560,10 +567,7 @@ namespace bobura
 
             p_picture_box->set_dimension(dimension_type{ width_type{ 20 }, height_type{ 4 } });
             p_picture_box->fast_paint_observer_set().paint().connect(
-                typename boost::mpl::at<
-                    train_kind_dialog_message_type_list_type,
-                    message::train_kind_dialog::type::sample_picture_box_paint
-                >::type{
+                sample_picture_box_paint_observer_type{
                     m_info_sets, m_current_train_kind_index, font, background_color, p_picture_box->client_dimension()
                 }
             );
@@ -576,12 +580,7 @@ namespace bobura
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::default_);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Common:OK")));
-            p_button->mouse_observer_set().clicked().connect(
-                typename boost::mpl::at<
-                    train_kind_dialog_message_type_list_type,
-                    message::train_kind_dialog::type::ok_button_mouse_clicked
-                >::type{ m_base }
-            );
+            p_button->mouse_observer_set().clicked().connect(ok_button_mouse_clicked_observer_type{ m_base });
 
             return std::move(p_button);
         }
@@ -591,12 +590,7 @@ namespace bobura
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::cancel);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Common:Cancel")));
-            p_button->mouse_observer_set().clicked().connect(
-                typename boost::mpl::at<
-                    train_kind_dialog_message_type_list_type,
-                    message::train_kind_dialog::type::cancel_button_mouse_clicked
-                >::type{ m_base }
-            );
+            p_button->mouse_observer_set().clicked().connect(cancel_button_mouse_clicked_observer_type{ m_base });
 
             return std::move(p_button);
         }
