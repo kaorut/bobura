@@ -213,12 +213,6 @@
     <ClInclude Include="include\bobura\view\diagram\train_line.h">
       <Filter>headers\bobura\view\diagram</Filter>
     </ClInclude>
-    <ClInclude Include="include\bobura\message\type_list.h">
-      <Filter>headers\bobura\message</Filter>
-    </ClInclude>
-    <ClInclude Include="include\bobura\message\type_list_impl.h">
-      <Filter>headers\bobura\message</Filter>
-    </ClInclude>
     <ClInclude Include="include\bobura\view\diagram\utility.h">
       <Filter>headers\bobura\view\diagram</Filter>
     </ClInclude>
