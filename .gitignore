@@ -1,5 +1,6 @@
 *.$hd
 *.a
+*.aps
 *.gch
 *.log
 *.msi
