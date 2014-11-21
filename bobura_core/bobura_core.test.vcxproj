@@ -121,6 +121,7 @@
     <ClCompile Include="test\test_bobura.command.set_vertical_scale.cpp" />
     <ClCompile Include="test\test_bobura.command.train_kind.cpp" />
     <ClCompile Include="test\test_bobura.command.vertically_zoom_in.cpp" />
+    <ClCompile Include="test\test_bobura.command.vertically_zoom_out.cpp" />
     <ClCompile Include="test\test_bobura.diagram_picture_box.cpp" />
     <ClCompile Include="test\test_bobura.diagram_view.cpp" />
     <ClCompile Include="test\test_bobura.file_property_dialog.cpp" />
