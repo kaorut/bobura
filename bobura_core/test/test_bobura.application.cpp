@@ -6,8 +6,14 @@
     $Id$
 */
 
+#include <vector>
+
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2.h>
+
+#include <bobura/application.h>
+#include <bobura/settings.h>
 #include <bobura/type_list.h>
 
 
@@ -19,11 +25,20 @@ namespace
 
     using common_type_list_type = bobura::type_list::common;
 
-    using locale_type_list_type = bobura::type_list::locale<detail_type_list_type>;
-
     using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
     using traits_type_list_type = bobura::type_list::traits<detail_type_list_type>;
+
+    using string_type = common_type_list_type::string_type;
+
+    using config_traits_type = traits_type_list_type::config_type;
+
+    using settings_type =
+        bobura::settings<
+            string_type, ui_type_list_type::position_type, ui_type_list_type::dimension_type, config_traits_type
+        >;
+
+    using application_type = bobura::application<traits_type_list_type::application_type>;
 
 
 }
@@ -37,14 +52,24 @@ BOOST_AUTO_TEST_SUITE(application)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        settings_type settings{
+            std::vector<string_type>{1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
+            string_type{ TETENGO2_TEXT("test_bobura") }
+        };
+        const application_type application{ settings };
     }
 
     BOOST_AUTO_TEST_CASE(run)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        settings_type settings{
+            std::vector<string_type>{1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
+            string_type{ TETENGO2_TEXT("test_bobura") }
+        };
+        application_type application{ settings };
+
+        application.run();
     }
 
 
