@@ -1,11 +1,20 @@
-bobura::command::parameter_base::as
+bobura::command::load_from_file::parameter_type::
+bobura::command::parameter_base::
+bobura::command::[a-zA-Z0-9_]+::enabled_impl
+bobura::command::[a-zA-Z0-9_]+::execute_impl
+bobura::command::[a-zA-Z0-9_]+::state_impl
 bobura::diagram_view::to_station_position::
+bobura::file_property_dialog::set_result_impl
+bobura::font_color_dialog::do_modal_impl
 bobura::model::serializer::oudia_reader::file_type::
 bobura::model::serializer::oudia_reader::[a-z_]*state::
 bobura::model::serializer::windia_reader::[a-z_]*state::
 bobura::model::serializer::windia_reader::preset_train_kind_type::
 bobura::model::timetable::replace_train_kind_index::
+bobura::oudia_diagram_dialog::set_result_impl
 bobura::settings::value_impl::
+bobura::train_kind_dialog::do_modal_impl
+bobura::train_kind_dialog::info_set_type::
 setup::encode
 
 test_bobura::model::serializer::reader_selector::selects
