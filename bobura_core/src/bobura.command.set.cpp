@@ -177,6 +177,10 @@ namespace bobura { namespace command
             return *m_p_horizontally_zoom_out;
         }
 
+#if !( \
+    BOOST_OS_LINUX && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
+    )
         const command_type& load_from_file()
         const
         {
@@ -191,6 +195,7 @@ namespace bobura { namespace command
                     typename command::load_from_file<command_traits_type, load_save_traits_type>::parameter_type
                 >(path);
         }
+#endif
 
         const command_type& new_file()
         const
@@ -332,6 +337,10 @@ namespace bobura { namespace command
                 >(diagram_view);
         }
 
+#if !( \
+    BOOST_OS_LINUX && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
+    )
         static command_ptr_type create_load_from_file(const load_from_file_type& load_from_file)
         {
             return
@@ -339,6 +348,12 @@ namespace bobura { namespace command
                     load_from_file
                 );
         }
+#else
+        static command_ptr_type create_load_from_file(const load_from_file_type&)
+        {
+            return command_ptr_type();
+        }
+#endif
 
         static command_ptr_type create_new_file(const new_file_type& new_file)
         {
@@ -565,6 +580,10 @@ namespace bobura { namespace command
         return m_p_impl->horizontally_zoom_out();
     }
 
+#if !( \
+    BOOST_OS_LINUX && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
+    )
     template <typename Traits>
     const typename set<Traits>::command_type& set<Traits>::load_from_file()
     const
@@ -580,6 +599,7 @@ namespace bobura { namespace command
     {
         return m_p_impl->create_load_from_file_parameter(path);
     }
+#endif
 
     template <typename Traits>
     const typename set<Traits>::command_type& set<Traits>::new_file()

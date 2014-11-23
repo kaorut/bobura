@@ -392,9 +392,14 @@ namespace bobura
                     main_window,
                     [this, &main_window, &command_set](bool& stop)
                     {
+#if !( \
+    BOOST_OS_LINUX && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
+    )
                         const auto p_parameter =
                             command_set.create_load_from_file_parameter(*this->m_settings.input());
                         command_set.load_from_file().execute(this->m_model, main_window, *p_parameter);
+#endif
 
                         stop = true;
                     },

@@ -138,6 +138,10 @@ namespace bobura
                 commands,
                 shortcut_key_type{ virtual_key_type::char_n(), false, true, false }
             );
+#if !( \
+    BOOST_OS_LINUX && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
+    )
             append_menu_command(
                 *p_popup_menu,
                 m_message_catalog.get(TETENGO2_TEXT("Menu:File:&Open...")),
@@ -145,6 +149,7 @@ namespace bobura
                 commands,
                 shortcut_key_type{ virtual_key_type::char_o(), false, true, false }
             );
+#endif
             append_menu_command(
                 *p_popup_menu,
                 m_message_catalog.get(TETENGO2_TEXT("Menu:File:&Reload")),
