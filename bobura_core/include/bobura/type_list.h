@@ -1022,7 +1022,7 @@ namespace bobura { namespace type_list
         using command_set_type = detail::traits::command_set_traits_type<DetailTypeList>;
 
         //! The main window menu builder traits type.
-        using main_window_menu_buiilder_type =
+        using main_window_menu_builder_type =
             detail::traits::main_window_menu_builder_traits_type<DetailTypeList>;
 
         //! The application traits.
