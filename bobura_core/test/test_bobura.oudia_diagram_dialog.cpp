@@ -6,6 +6,10 @@
     $Id$
 */
 
+#include <stdexcept>
+#include <utility>
+#include <vector>
+
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -83,28 +87,72 @@ BOOST_AUTO_TEST_SUITE(oudia_diagram_dialog)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        window_type parent{};
+        const message_catalog_type message_catalog{};
+        const oudia_diagram_dialog_type oudia_diagram_dialog{ parent, message_catalog };
+
+        BOOST_CHECK(oudia_diagram_dialog.names().empty());
     }
 
     BOOST_AUTO_TEST_CASE(set_names)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        window_type parent{};
+        const message_catalog_type message_catalog{};
+        oudia_diagram_dialog_type oudia_diagram_dialog{ parent, message_catalog };
+
+        std::vector<string_type> names{
+            string_type{ TETENGO2_TEXT("hoge") },
+            string_type{ TETENGO2_TEXT("fuga") },
+            string_type{ TETENGO2_TEXT("piyo") }
+        };
+        oudia_diagram_dialog.set_names(std::move(names));
+
+        const std::vector<string_type> expected{
+            string_type{ TETENGO2_TEXT("hoge") },
+            string_type{ TETENGO2_TEXT("fuga") },
+            string_type{ TETENGO2_TEXT("piyo") }
+        };
+        BOOST_CHECK(oudia_diagram_dialog.names() == expected);
     }
 
     BOOST_AUTO_TEST_CASE(selected_index)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        window_type parent{};
+        const message_catalog_type message_catalog{};
+        const oudia_diagram_dialog_type oudia_diagram_dialog{ parent, message_catalog };
+
+        BOOST_CHECK(!oudia_diagram_dialog.selected_index());
     }
 
     BOOST_AUTO_TEST_CASE(set_selected_index)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        window_type parent{};
+        const message_catalog_type message_catalog{};
+        oudia_diagram_dialog_type oudia_diagram_dialog{ parent, message_catalog };
+
+        std::vector<string_type> names{
+            string_type{ TETENGO2_TEXT("hoge") },
+            string_type{ TETENGO2_TEXT("fuga") },
+            string_type{ TETENGO2_TEXT("piyo") }
+        };
+        oudia_diagram_dialog.set_names(std::move(names));
+
+        BOOST_CHECK_THROW(oudia_diagram_dialog.set_selected_index(3), std::out_of_range);
+
+        oudia_diagram_dialog.set_selected_index(1);
+
+        BOOST_CHECK(oudia_diagram_dialog.selected_index());
+        BOOST_CHECK(*oudia_diagram_dialog.selected_index() == 1);
+
+        oudia_diagram_dialog.set_names(std::vector<string_type>{});
+
+        BOOST_CHECK(!oudia_diagram_dialog.selected_index());
     }
 
 
