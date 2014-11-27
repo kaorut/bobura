@@ -61,7 +61,7 @@ namespace
         {}
 
     private:
-        virtual void execute_impl(model_type& model, abstract_window_type& parent)
+        virtual void execute_impl(model_type&, abstract_window_type&)
         const
         {}
 
