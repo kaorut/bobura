@@ -6,8 +6,14 @@
     $Id$
 */
 
+#include <vector>
+
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2.h>
+
+#include <bobura/command/about.h>
+#include <bobura/settings.h>
 #include <bobura/type_list.h>
 
 
@@ -25,6 +31,28 @@ namespace
 
     using traits_type_list_type = bobura::type_list::traits<detail_type_list_type>;
 
+    using string_type = common_type_list_type::string_type;
+
+    using position_type = ui_type_list_type::position_type;
+
+    using dimension_type = ui_type_list_type::dimension_type;
+
+    using message_catalog_type = locale_type_list_type::message_catalog_type;
+
+    using config_traits_type = traits_type_list_type::config_type;
+
+    using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
+
+    using about_command_type =
+        bobura::command::about<
+            traits_type_list_type::command_type,
+            position_type,
+            dimension_type,
+            message_catalog_type,
+            traits_type_list_type::dialog_type,
+            config_traits_type
+        >;
+
 
 }
 
@@ -38,7 +66,12 @@ BOOST_AUTO_TEST_SUITE(about)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        const message_catalog_type message_catalog{};
+        const settings_type settings{
+            std::vector<string_type>{1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
+            string_type{ TETENGO2_TEXT("test_bobura") }
+        };
+        const about_command_type command{ message_catalog, settings };
     }
 
 
