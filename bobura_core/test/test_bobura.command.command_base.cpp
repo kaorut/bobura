@@ -8,6 +8,9 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2.h>
+
+#include <bobura/command/command_base.h>
 #include <bobura/type_list.h>
 
 
@@ -19,11 +22,50 @@ namespace
 
     using common_type_list_type = bobura::type_list::common;
 
-    using locale_type_list_type = bobura::type_list::locale<detail_type_list_type>;
-
     using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
     using traits_type_list_type = bobura::type_list::traits<detail_type_list_type>;
+
+    using string_type = common_type_list_type::string_type;
+
+    using window_type = ui_type_list_type::window_type;
+
+    using model_type =
+        bobura::timetable_model<
+            common_type_list_type::size_type,
+            common_type_list_type::difference_type,
+            string_type,
+            common_type_list_type::operating_distance_type,
+            common_type_list_type::speed_type,
+            ui_type_list_type::fast_font_type
+        >;
+
+    using parameter_base_type = bobura::command::parameter_base;
+
+    class concrete_parameter_type : public parameter_base_type
+    {
+    public:
+        virtual ~concrete_parameter_type()
+        TETENGO2_STDALT_NOEXCEPT
+        {}
+
+    };
+
+    using command_base_type = bobura::command::command_base<traits_type_list_type::command_type>;
+
+    class concrete_command_type : public command_base_type
+    {
+    public:
+        virtual ~concrete_command_type()
+        TETENGO2_STDALT_NOEXCEPT
+        {}
+
+    private:
+        virtual void execute_impl(model_type& model, abstract_window_type& parent)
+        const
+        {}
+
+    };
 
 
 }
@@ -31,6 +73,35 @@ namespace
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(command)
+BOOST_AUTO_TEST_SUITE(parameter_base)
+    // test cases
+
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const concrete_parameter_type parameter;
+    }
+
+    BOOST_AUTO_TEST_CASE(as)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        {
+            const concrete_parameter_type parameter;
+            const parameter_base_type& parameter_base = parameter;
+
+            BOOST_CHECK_EQUAL(&parameter_base.as<concrete_parameter_type>(), &parameter);
+        }
+        {
+            concrete_parameter_type parameter;
+            parameter_base_type& parameter_base = parameter;
+
+            BOOST_CHECK_EQUAL(&parameter_base.as<concrete_parameter_type>(), &parameter);
+        }
+    }
+
+BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(command_base)
     // test cases
 
@@ -38,21 +109,38 @@ BOOST_AUTO_TEST_SUITE(command_base)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        const concrete_command_type command{};
+
+        const model_type model{};
+        BOOST_CHECK(command.enabled(model));
     }
 
     BOOST_AUTO_TEST_CASE(state)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        const concrete_command_type command{};
+
+        BOOST_CHECK(command.state() == command_base_type::state_type::default_);
     }
 
     BOOST_AUTO_TEST_CASE(execute)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        const concrete_command_type command{};
+
+        {
+            model_type model{};
+            window_type parent{};
+            command.execute(model, parent);
+        }
+        {
+            model_type model{};
+            window_type parent{};
+            const concrete_parameter_type parameter;
+            command.execute(model, parent, parameter);
+        }
     }
 
 
