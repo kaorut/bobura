@@ -156,10 +156,10 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
         };
         BOOST_CHECK_EQUAL(train_kind_dialog.info_sets().size(), expected.size());
         BOOST_CHECK(train_kind_dialog.info_sets()[0].original_index() == expected[0].original_index());
-        BOOST_CHECK(train_kind_dialog.info_sets()[0].referred() == expected[0].referred());
+        BOOST_CHECK_EQUAL(train_kind_dialog.info_sets()[0].referred(), expected[0].referred());
         BOOST_CHECK(train_kind_dialog.info_sets()[0].train_kind() == expected[0].train_kind());
         BOOST_CHECK(train_kind_dialog.info_sets()[1].original_index() == expected[1].original_index());
-        BOOST_CHECK(train_kind_dialog.info_sets()[1].referred() == expected[1].referred());
+        BOOST_CHECK_EQUAL(train_kind_dialog.info_sets()[1].referred(), expected[1].referred());
         BOOST_CHECK(train_kind_dialog.info_sets()[1].train_kind() == expected[1].train_kind());
     }
 
