@@ -58,13 +58,15 @@ namespace
             ui_type_list_type::fast_font_type
         >;
 
-    using save_to_file_type = bobura::load_save::save_to_file<traits_type_list_type::load_save_type>;
+    using load_save_traits_type = traits_type_list_type::load_save_type;
 
-    using confirm_file_save_type = bobura::load_save::confirm_file_save<traits_type_list_type::load_save_type>;
+    using save_to_file_type = bobura::load_save::save_to_file<load_save_traits_type>;
 
-    using new_file_type = bobura::load_save::new_file<traits_type_list_type::load_save_type>;
+    using confirm_file_save_type = bobura::load_save::confirm_file_save<load_save_traits_type>;
 
-    using load_from_file_type = bobura::load_save::load_from_file<traits_type_list_type::load_save_type>;
+    using new_file_type = bobura::load_save::new_file<load_save_traits_type>;
+
+    using load_from_file_type = bobura::load_save::load_from_file<load_save_traits_type>;
 
     using view_type = bobura::diagram_view<traits_type_list_type::view_type>;
 

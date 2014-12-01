@@ -46,9 +46,11 @@ namespace
             string_type, ui_type_list_type::position_type, ui_type_list_type::dimension_type, config_traits_type
         >;
 
-    using save_to_file_type = bobura::load_save::save_to_file<traits_type_list_type::load_save_type>;
+    using load_save_traits_type = traits_type_list_type::load_save_type;
 
-    using confirm_file_save_type = bobura::load_save::confirm_file_save<traits_type_list_type::load_save_type>;
+    using save_to_file_type = bobura::load_save::save_to_file<load_save_traits_type>;
+
+    using confirm_file_save_type = bobura::load_save::confirm_file_save<load_save_traits_type>;
 
     using model_type =
         bobura::timetable_model<
