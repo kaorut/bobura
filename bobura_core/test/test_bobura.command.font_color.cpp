@@ -8,6 +8,7 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include <bobura/command/font_color.h>
 #include <bobura/type_list.h>
 
 
@@ -23,7 +24,24 @@ namespace
 
     using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
+    using common_dialog_type_list_type = bobura::type_list::common_dialog<detail_type_list_type>;
+
     using traits_type_list_type = bobura::type_list::traits<detail_type_list_type>;
+
+    using message_catalog_type = locale_type_list_type::message_catalog_type;
+
+    using font_color_command_type =
+        bobura::command::font_color<
+            traits_type_list_type::command_type,
+            ui_type_list_type::dialog_type,
+            ui_type_list_type::point_unit_size_type,
+            ui_type_list_type::color_type,
+            ui_type_list_type::fast_canvas_type,
+            common_dialog_type_list_type::font_type,
+            common_dialog_type_list_type::color_type,
+            message_catalog_type,
+            traits_type_list_type::dialog_type
+        >;
 
 
 }
@@ -38,7 +56,8 @@ BOOST_AUTO_TEST_SUITE(font_color)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        const message_catalog_type message_catalog{};
+        const font_color_command_type command{ message_catalog };
     }
 
 

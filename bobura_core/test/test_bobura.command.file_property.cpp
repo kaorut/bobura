@@ -8,6 +8,7 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include <bobura/command/file_property.h>
 #include <bobura/type_list.h>
 
 
@@ -25,6 +26,16 @@ namespace
 
     using traits_type_list_type = bobura::type_list::traits<detail_type_list_type>;
 
+    using message_catalog_type = locale_type_list_type::message_catalog_type;
+
+    using file_property_command_type =
+        bobura::command::file_property<
+            traits_type_list_type::command_type,
+            ui_type_list_type::dialog_type,
+            message_catalog_type,
+            traits_type_list_type::dialog_type
+        >;
+
 
 }
 
@@ -38,7 +49,8 @@ BOOST_AUTO_TEST_SUITE(file_property)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        const message_catalog_type message_catalog{};
+        const file_property_command_type command{ message_catalog };
     }
 
 

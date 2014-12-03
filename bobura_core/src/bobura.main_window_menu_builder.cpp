@@ -482,11 +482,11 @@ namespace bobura
 
 #if BOOST_COMP_MSVC
     template class main_window_menu_builder<
-        typename application::traits_type_list_type::main_window_menu_buiilder_type
+        typename application::traits_type_list_type::main_window_menu_builder_type
     >;
 #endif
 
-    template class main_window_menu_builder<typename test::traits_type_list_type::main_window_menu_buiilder_type>;
+    template class main_window_menu_builder<typename test::traits_type_list_type::main_window_menu_builder_type>;
 
 
 }
