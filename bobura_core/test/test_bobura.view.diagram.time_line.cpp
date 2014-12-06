@@ -127,6 +127,13 @@ BOOST_AUTO_TEST_SUITE(time_line)
         time_line1 = std::move(time_line2);
     }
 
+    BOOST_AUTO_TEST_CASE(draw_on)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+    }
+
 
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(time_line_list)
@@ -185,6 +192,13 @@ BOOST_AUTO_TEST_SUITE(time_line_list)
         };
 
         time_line_list1 = std::move(time_line_list2);
+    }
+
+    BOOST_AUTO_TEST_CASE(draw_on)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
     }
 
 

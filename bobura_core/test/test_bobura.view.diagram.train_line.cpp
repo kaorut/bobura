@@ -161,6 +161,34 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
         train_line_fragment1 = std::move(train_line_fragment2);
     }
 
+    BOOST_AUTO_TEST_CASE(draw_on)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+    }
+
+    BOOST_AUTO_TEST_CASE(p_item_by_position)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+    }
+
+    BOOST_AUTO_TEST_CASE(selected)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+    }
+
+    BOOST_AUTO_TEST_CASE(select)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+    }
+
 
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(train_line)
@@ -266,6 +294,20 @@ BOOST_AUTO_TEST_SUITE(train_line)
         train_line1 = std::move(train_line2);
     }
 
+    BOOST_AUTO_TEST_CASE(draw_on)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+    }
+
+    BOOST_AUTO_TEST_CASE(p_item_by_position)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+    }
+
 
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(train_line_list)
@@ -334,6 +376,20 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
         };
 
         train_line_list1 = std::move(train_line_list2);
+    }
+
+    BOOST_AUTO_TEST_CASE(draw_on)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+    }
+
+    BOOST_AUTO_TEST_CASE(p_item_by_position)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
     }
 
 
