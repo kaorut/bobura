@@ -126,6 +126,13 @@ BOOST_AUTO_TEST_SUITE(company_line_name_header)
         header1 = std::move(header2);
     }
 
+    BOOST_AUTO_TEST_CASE(draw_on)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+    }
+
 
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(note_header)
@@ -170,6 +177,13 @@ BOOST_AUTO_TEST_SUITE(note_header)
         };
 
         header1 = std::move(header2);
+    }
+
+    BOOST_AUTO_TEST_CASE(draw_on)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
     }
 
 
@@ -217,6 +231,13 @@ BOOST_AUTO_TEST_SUITE(header)
         const header_type header{ model, selection, *p_canvas, dimension_type{ width_type{ 42 }, height_type{ 24 } } };
 
         header.dimension();
+    }
+
+    BOOST_AUTO_TEST_CASE(draw_on)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
     }
 
 
