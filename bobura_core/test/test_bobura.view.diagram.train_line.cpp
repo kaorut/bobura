@@ -74,6 +74,8 @@ namespace
 
     using scale_type = common_type_list_type::scale_type;
 
+    using window_type = ui_type_list_type::window_type;
+
     using canvas_type = ui_type_list_type::canvas_type;
 
     using color_type = canvas_type::color_type;
@@ -165,28 +167,146 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        const train_type train{
+            train_type::direction_type::down,
+            string_type{ TETENGO2_TEXT("number") },
+            0,
+            string_type{ TETENGO2_TEXT("name") },
+            string_type{ TETENGO2_TEXT("name_number") },
+            string_type{ TETENGO2_TEXT("note") }
+        };
+        selection_type selection{};
+        const message_catalog_type message_catalog{};
+        const train_line_fragment_type train_line_fragment{
+            train,
+            42,
+            selection,
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            true,
+            message_catalog
+        };
+
+        window_type window{};
+        const auto p_canvas = window.create_canvas();
+        train_line_fragment.draw_on(*p_canvas);
     }
 
     BOOST_AUTO_TEST_CASE(p_item_by_position)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        const train_type train{
+            train_type::direction_type::down,
+            string_type{ TETENGO2_TEXT("number") },
+            0,
+            string_type{ TETENGO2_TEXT("name") },
+            string_type{ TETENGO2_TEXT("name_number") },
+            string_type{ TETENGO2_TEXT("note") }
+        };
+        selection_type selection{};
+        const message_catalog_type message_catalog{};
+        const train_line_fragment_type train_line_fragment{
+            train,
+            42,
+            selection,
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            true,
+            message_catalog
+        };
+
+        {
+            const position_type position{ left_type{ 24 }, top_type{ 42 } };
+            BOOST_CHECK_EQUAL(train_line_fragment.p_item_by_position(position), &train_line_fragment);
+        }
+        {
+            const position_type position{ left_type{ 42 }, top_type{ 42 } };
+            BOOST_CHECK(!train_line_fragment.p_item_by_position(position));
+        }
     }
 
     BOOST_AUTO_TEST_CASE(selected)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        const train_type train{
+            train_type::direction_type::down,
+            string_type{ TETENGO2_TEXT("number") },
+            0,
+            string_type{ TETENGO2_TEXT("name") },
+            string_type{ TETENGO2_TEXT("name_number") },
+            string_type{ TETENGO2_TEXT("note") }
+        };
+        selection_type selection{};
+        const message_catalog_type message_catalog{};
+        const train_line_fragment_type train_line_fragment{
+            train,
+            42,
+            selection,
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            true,
+            message_catalog
+        };
+
+        BOOST_CHECK(!train_line_fragment.selected());
     }
 
     BOOST_AUTO_TEST_CASE(select)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        {
+            const train_type train{
+                train_type::direction_type::down,
+                string_type{ TETENGO2_TEXT("number") },
+                0,
+                string_type{ TETENGO2_TEXT("name") },
+                string_type{ TETENGO2_TEXT("name_number") },
+                string_type{ TETENGO2_TEXT("note") }
+            };
+            selection_type selection{};
+            const message_catalog_type message_catalog{};
+            train_line_fragment_type train_line_fragment{
+                train,
+                42,
+                selection,
+                position_type{ left_type{ 24 }, top_type{ 42 } },
+                position_type{ left_type{ 42 }, top_type{ 24 } },
+                true,
+                message_catalog
+            };
+
+            train_line_fragment.select(false);
+
+            BOOST_CHECK(train_line_fragment.selected());
+        }
+        {
+            const train_type train{
+                train_type::direction_type::down,
+                string_type{ TETENGO2_TEXT("number") },
+                0,
+                string_type{ TETENGO2_TEXT("name") },
+                string_type{ TETENGO2_TEXT("name_number") },
+                string_type{ TETENGO2_TEXT("note") }
+            };
+            selection_type selection{};
+            const message_catalog_type message_catalog{};
+            train_line_fragment_type train_line_fragment{
+                train,
+                42,
+                selection,
+                position_type{ left_type{ 24 }, top_type{ 42 } },
+                position_type{ left_type{ 42 }, top_type{ 24 } },
+                true,
+                message_catalog
+            };
+
+            train_line_fragment.select(true);
+
+            BOOST_CHECK(train_line_fragment.selected());
+        }
     }
 
 
@@ -298,14 +418,83 @@ BOOST_AUTO_TEST_SUITE(train_line)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        selection_type selection{};
+        const train_kind_type train_kind{
+            string_type{ TETENGO2_TEXT("name") },
+            string_type{ TETENGO2_TEXT("abbrev") },
+            color_type{ 0x12, 0x34, 0x56 },
+            train_kind_type::weight_type::normal,
+            train_kind_type::line_style_type::solid
+        };
+        const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
+        const message_catalog_type message_catalog{};
+        const train_line_type train_line{
+            train_type{
+                train_type::direction_type::down,
+                string_type{ TETENGO2_TEXT("number") },
+                0,
+                string_type{ TETENGO2_TEXT("name") },
+                string_type{ TETENGO2_TEXT("name_number") },
+                string_type{ TETENGO2_TEXT("note") }
+            },
+            train_kind,
+            time_span_type{ 42 * 60 },
+            selection,
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            scale_type{ 42 },
+            station_intervals,
+            std::vector<top_type>(2, top_type{ 0 }),
+            message_catalog
+        };
+
+        window_type window{};
+        const auto p_canvas = window.create_canvas();
+        train_line.draw_on(*p_canvas);
     }
 
     BOOST_AUTO_TEST_CASE(p_item_by_position)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        selection_type selection{};
+        const train_kind_type train_kind{
+            string_type{ TETENGO2_TEXT("name") },
+            string_type{ TETENGO2_TEXT("abbrev") },
+            color_type{ 0x12, 0x34, 0x56 },
+            train_kind_type::weight_type::normal,
+            train_kind_type::line_style_type::solid
+        };
+        const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
+        const message_catalog_type message_catalog{};
+        const train_line_type train_line{
+            train_type{
+                train_type::direction_type::down,
+                string_type{ TETENGO2_TEXT("number") },
+                0,
+                string_type{ TETENGO2_TEXT("name") },
+                string_type{ TETENGO2_TEXT("name_number") },
+                string_type{ TETENGO2_TEXT("note") }
+            },
+            train_kind,
+            time_span_type{ 42 * 60 },
+            selection,
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            scale_type{ 42 },
+            station_intervals,
+            std::vector<top_type>(2, top_type{ 0 }),
+            message_catalog
+        };
+
+        const position_type position{ left_type{ 24 }, top_type{ 42 } };
+        BOOST_CHECK(!train_line.p_item_by_position(position));
     }
 
 
@@ -382,14 +571,55 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        const model_type model{};
+        selection_type selection{};
+        const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
+        const message_catalog_type message_catalog{};
+        const train_line_list_type train_line_list{
+            model,
+            time_span_type{ 42 * 60 },
+            selection,
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            scale_type{ 42 },
+            station_intervals,
+            std::vector<top_type>(2, top_type{ 0 }),
+            message_catalog
+        };
+
+        window_type window{};
+        const auto p_canvas = window.create_canvas();
+        train_line_list.draw_on(*p_canvas);
     }
 
     BOOST_AUTO_TEST_CASE(p_item_by_position)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        const model_type model{};
+        selection_type selection{};
+        const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
+        const message_catalog_type message_catalog{};
+        const train_line_list_type train_line_list{
+            model,
+            time_span_type{ 42 * 60 },
+            selection,
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            scale_type{ 42 },
+            station_intervals,
+            std::vector<top_type>(2, top_type{ 0 }),
+            message_catalog
+        };
+
+        const position_type position{ left_type{ 24 }, top_type{ 42 } };
+        BOOST_CHECK(!train_line_list.p_item_by_position(position));
     }
 
 
