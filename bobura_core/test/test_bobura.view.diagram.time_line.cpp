@@ -64,6 +64,8 @@ namespace
 
     using scale_type = common_type_list_type::scale_type;
 
+    using window_type = ui_type_list_type::window_type;
+
     using canvas_type = ui_type_list_type::canvas_type;
 
     using unit_size_type = canvas_type::unit_size_type;
@@ -131,7 +133,19 @@ BOOST_AUTO_TEST_SUITE(time_line)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        selection_type selection{};
+        const time_line_type time_line{
+            selection,
+            left_type{ 42 },
+            top_type{ 24 },
+            top_type{ 42 },
+            unit_size_type{ unit_size_type::value_type{ 1, 2 } },
+            boost::make_optional<time_type::size_type>(12)
+        };
+
+        window_type window{};
+        const auto p_canvas = window.create_canvas();
+        time_line.draw_on(*p_canvas);
     }
 
 
@@ -198,7 +212,24 @@ BOOST_AUTO_TEST_SUITE(time_line_list)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        const model_type model{};
+        selection_type selection{};
+        const time_line_list_type time_line_list{
+            model,
+            time_span_type{ 42 * 60 },
+            selection,
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            scale_type{ 42 }
+        };
+
+        window_type window{};
+        const auto p_canvas = window.create_canvas();
+        time_line_list.draw_on(*p_canvas);
     }
 
 

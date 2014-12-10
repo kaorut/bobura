@@ -73,6 +73,8 @@ namespace
 
     using scale_type = common_type_list_type::scale_type;
 
+    using window_type = ui_type_list_type::window_type;
+
     using canvas_type = ui_type_list_type::canvas_type;
 
     using font_type = canvas_type::font_type;
@@ -168,25 +170,98 @@ BOOST_AUTO_TEST_SUITE(station_line)
         station_line1 = std::move(station_line2);
     }
 
+// This test case causes a segmentation fault on Cygwin.
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 9, 0)) \
+)
     BOOST_AUTO_TEST_CASE(draw_on)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        station_type station{
+            string_type{ TETENGO2_TEXT("name") },
+            station_grade_type_set_type::local_type::instance(),
+            false,
+            false,
+            string_type{ TETENGO2_TEXT("note") }
+        };
+        const station_location_type station_location{ std::move(station), 42 };
+        selection_type selection{};
+        const station_line_type station_line{
+            station_location,
+            selection,
+            left_type{ 42 },
+            left_type{ 12 },
+            top_type{ 24 },
+            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+        };
+
+        window_type window{};
+        const auto p_canvas = window.create_canvas();
+        station_line.draw_on(*p_canvas);
     }
+#endif
 
     BOOST_AUTO_TEST_CASE(p_item_by_position)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        station_type station{
+            string_type{ TETENGO2_TEXT("name") },
+            station_grade_type_set_type::local_type::instance(),
+            false,
+            false,
+            string_type{ TETENGO2_TEXT("note") }
+        };
+        const station_location_type station_location{ std::move(station), 42 };
+        selection_type selection{};
+        station_line_type station_line{
+            station_location,
+            selection,
+            left_type{ 42 },
+            left_type{ 12 },
+            top_type{ 24 },
+            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+        };
+
+        {
+            const position_type position{ left_type{ 6 }, top_type{ 24 } };
+            BOOST_CHECK_EQUAL(station_line.p_item_by_position(position), &station_line);
+        }
+        {
+            const position_type position{ left_type{ 24 }, top_type{ 24 } };
+            BOOST_CHECK(!station_line.p_item_by_position(position));
+        }
+        {
+            const position_type position{ left_type{ 6 }, top_type{ 48 } };
+            BOOST_CHECK(!station_line.p_item_by_position(position));
+        }
     }
 
     BOOST_AUTO_TEST_CASE(selected)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        station_type station{
+            string_type{ TETENGO2_TEXT("name") },
+            station_grade_type_set_type::local_type::instance(),
+            false,
+            false,
+            string_type{ TETENGO2_TEXT("note") }
+        };
+        const station_location_type station_location{ std::move(station), 42 };
+        selection_type selection{};
+        const station_line_type station_line{
+            station_location,
+            selection,
+            left_type{ 42 },
+            left_type{ 12 },
+            top_type{ 24 },
+            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+        };
+
+        BOOST_CHECK(!station_line.selected());
     }
 
 
@@ -194,7 +269,52 @@ BOOST_AUTO_TEST_SUITE(station_line)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        {
+            station_type station{
+                string_type{ TETENGO2_TEXT("name") },
+                station_grade_type_set_type::local_type::instance(),
+                false,
+                false,
+                string_type{ TETENGO2_TEXT("note") }
+            };
+            const station_location_type station_location{ std::move(station), 42 };
+            selection_type selection{};
+            station_line_type station_line{
+                station_location,
+                selection,
+                left_type{ 42 },
+                left_type{ 12 },
+                top_type{ 24 },
+                font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+            };
+
+            station_line.select(false);
+
+            BOOST_CHECK(station_line.selected());
+        }
+        {
+            station_type station{
+                string_type{ TETENGO2_TEXT("name") },
+                station_grade_type_set_type::local_type::instance(),
+                false,
+                false,
+                string_type{ TETENGO2_TEXT("note") }
+            };
+            const station_location_type station_location{ std::move(station), 42 };
+            selection_type selection{};
+            station_line_type station_line{
+                station_location,
+                selection,
+                left_type{ 42 },
+                left_type{ 12 },
+                top_type{ 24 },
+                font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+            };
+
+            station_line.select(true);
+
+            BOOST_CHECK(station_line.selected());
+        }
     }
 #endif
 
@@ -262,14 +382,47 @@ BOOST_AUTO_TEST_SUITE(station_line_list)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        const model_type model{};
+        selection_type selection{};
+        const station_line_list_type station_line_list{
+            model,
+            time_span_type{ 42 * 60 },
+            selection,
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            scale_type{ 42 },
+            std::vector<top_type>(2, top_type{ 42 })
+        };
+
+        window_type window{};
+        const auto p_canvas = window.create_canvas();
+        station_line_list.draw_on(*p_canvas);
     }
 
     BOOST_AUTO_TEST_CASE(p_item_by_position)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_WARN_MESSAGE(false, "Not implemented yet.");
+        const model_type model{};
+        selection_type selection{};
+        station_line_list_type station_line_list{
+            model,
+            time_span_type{ 42 * 60 },
+            selection,
+            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            position_type{ left_type{ 24 }, top_type{ 42 } },
+            left_type{ 24 },
+            top_type{ 42 },
+            height_type{ 24 },
+            scale_type{ 42 },
+            std::vector<top_type>(2, top_type{ 42 })
+        };
+
+        const position_type position{ left_type{ 24 }, top_type{ 42 } };
+        BOOST_CHECK(!station_line_list.p_item_by_position(position));
     }
 
 
