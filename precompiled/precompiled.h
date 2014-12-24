@@ -44,8 +44,6 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/math/constants/constants.hpp>
-#include <boost/mpl/at.hpp>
-#include <boost/mpl/pair.hpp>
 #include <boost/operators.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
