@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::load_save::traits.
 
-    Copyright (C) 2007-2014 kaoru
+    Copyright (C) 2007-2015 kaoru
 
     $Id$
 */

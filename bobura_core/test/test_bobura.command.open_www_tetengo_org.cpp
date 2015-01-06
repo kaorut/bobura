@@ -1,7 +1,7 @@
 /*! \file
     \brief Test of class bobura::command::open_www_tetengo_org.
 
-    Copyright (C) 2007-2014 kaoru
+    Copyright (C) 2007-2015 kaoru
 
     $Id$
 */
