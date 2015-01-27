@@ -99,7 +99,7 @@ On UNIX, we cannot build a Bobura executable yet. However, we can build the Bobu
 
 You need the following tools in order to build Bobura libraries:
 
-- [GCC 4.7.2 or 4.8.3](http://www.gnu.org/)
+- [GCC 4.7.2 or 4.9.2](http://www.gnu.org/)
 - [GNU Make](http://www.gnu.org/)
 - [Boost C++ Libraries 1.57.0](http://www.boost.org/)
 - [bzip2](http://www.bzip.org)
