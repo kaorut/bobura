@@ -107,6 +107,7 @@
     <ClCompile Include="test\test_bobura.model.message.timetable_observer_set.cpp" />
     <ClCompile Include="test\test_bobura.model.serializer.bzip2_reader.cpp" />
     <ClCompile Include="test\test_bobura.model.serializer.bzip2_writer.cpp" />
+    <ClCompile Include="test\test_bobura.model.serializer.exec_json_reading_task.cpp" />
     <ClCompile Include="test\test_bobura.model.serializer.json_reader.cpp" />
     <ClCompile Include="test\test_bobura.model.serializer.json_writer.cpp" />
     <ClCompile Include="test\test_bobura.model.serializer.oudia_reader.cpp" />

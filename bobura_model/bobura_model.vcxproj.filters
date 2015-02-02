@@ -117,5 +117,8 @@
     <ClInclude Include="include\bobura\model\train_info\time.h">
       <Filter>headers\bobura::model\train_info</Filter>
     </ClInclude>
+    <ClInclude Include="include\bobura\model\serializer\exec_json_reading_task.h">
+      <Filter>headers\bobura::model\serializer</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
