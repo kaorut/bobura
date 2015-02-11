@@ -25,6 +25,7 @@
 #include <tetengo2.h>
 
 #include <bobura/load_save/confirm_file_save.h>
+#include <bobura/model/serializer/exec_json_reading_task.h>
 #include <bobura/model/serializer/reader_selector.h>
 #include <bobura/model/serializer/reader_set.h>
 #include <bobura/model/serializer/select_oudia_diagram.h>
@@ -83,6 +84,9 @@ namespace bobura { namespace load_save
         //! The file save dialog type.
         using file_save_dialog_type = typename traits_type::file_save_dialog_type;
 
+        //! The progress dialog type.
+        using progress_dialog_type = typename traits_type::progress_dialog_type;
+
         //! The OuDia diagram dialog type.
         using oudia_diagram_dialog_type = typename traits_type::oudia_diagram_dialog_type;
 
@@ -108,6 +112,9 @@ namespace bobura { namespace load_save
                 size_type, difference_type, string_type, iterator, operating_distance_type, speed_type, font_type
             >;
 
+        //! The JSON reading task execution type.
+        using exec_json_reading_task_type = model::serializer::exec_json_reading_task<progress_dialog_type>;
+
         //! The OuDia diagram selector type.
         using select_oudia_diagram_type = model::serializer::select_oudia_diagram<oudia_diagram_dialog_type>;
 
@@ -120,6 +127,7 @@ namespace bobura { namespace load_save
                 iterator,
                 operating_distance_type,
                 speed_type,
+                exec_json_reading_task_type,
                 select_oudia_diagram_type,
                 font_type,
                 timetable_file_encoder_type,

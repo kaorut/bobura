@@ -27,6 +27,7 @@ namespace bobura { namespace load_save
         \tparam MessageBox           A message box type.
         \tparam FileOpenDialog       A file open dialog type.
         \tparam FileSaveDialog       A file save dialog type.
+        \tparam ProgressDialog       A progress dialog type.
         \tparam OuDiaDiagramDialog   An OuDia diagram dialog type.
         \tparam MessageCatalog       A message catalog type.
         \tparam TimetableFileEncoder An timetable file encoder type.
@@ -45,6 +46,7 @@ namespace bobura { namespace load_save
         typename MessageBox,
         typename FileOpenDialog,
         typename FileSaveDialog,
+        typename ProgressDialog,
         typename OuDiaDiagramDialog,
         typename MessageCatalog,
         typename TimetableFileEncoder,
@@ -90,6 +92,9 @@ namespace bobura { namespace load_save
 
         //! The file save dialog type.
         using file_save_dialog_type = FileSaveDialog;
+
+        //! The progress dialog type.
+        using progress_dialog_type = ProgressDialog;
 
         //! The OuDia diagram dialog type.
         using oudia_diagram_dialog_type = OuDiaDiagramDialog;

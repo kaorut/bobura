@@ -30,16 +30,17 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a reader set.
 
-        \tparam Size               A size type.
-        \tparam Difference         A difference type.
-        \tparam String             A string type.
-        \tparam ForwardIterator    A forward iterator type.
-        \tparam OperatingDistance  An operating distance type.
-        \tparam Speed              A speed type.
-        \tparam SelectOuDiaDiagram An OuDia diagram selecting type.
-        \tparam Font               A font type.
-        \tparam Utf8Encoder        A UTF-8 encoder type.
-        \tparam Cp932Encoder       A CP932 encoder type.
+        \tparam Size                A size type.
+        \tparam Difference          A difference type.
+        \tparam String              A string type.
+        \tparam ForwardIterator     A forward iterator type.
+        \tparam OperatingDistance   An operating distance type.
+        \tparam Speed               A speed type.
+        \tparam ExecJsonReadingTask A JSON reading task execution type.
+        \tparam SelectOuDiaDiagram  An OuDia diagram selecting type.
+        \tparam Font                A font type.
+        \tparam Utf8Encoder         A UTF-8 encoder type.
+        \tparam Cp932Encoder        A CP932 encoder type.
     */
     template <
         typename Size,
@@ -48,6 +49,7 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
+        typename ExecJsonReadingTask,
         typename SelectOuDiaDiagram,
         typename Font,
         typename Utf8Encoder,
@@ -75,6 +77,9 @@ namespace bobura { namespace model { namespace serializer
 
         //! The speed type.
         using speed_type = Speed;
+
+        //! The JSON reading task execution type.
+        using exec_json_reading_task_type = ExecJsonReadingTask;
 
         //! The OuDia diagram selecting type.
         using select_oudia_diagram_type = SelectOuDiaDiagram;
@@ -109,6 +114,7 @@ namespace bobura { namespace model { namespace serializer
                 double,
                 operating_distance_type,
                 speed_type,
+                exec_json_reading_task_type,
                 font_type,
                 utf8_encoder_type
             >;

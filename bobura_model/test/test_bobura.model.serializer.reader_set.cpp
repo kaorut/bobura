@@ -49,6 +49,14 @@ namespace
 
     using io_encoder_type = common_type_list_type::io_encoder_type;
 
+    struct exec_json_reading_task_type
+    {
+        void operator()()
+        const
+        {}
+
+    };
+
     struct select_oudia_diagram_type
     {
         using size_type = size_type_;
@@ -90,6 +98,7 @@ namespace
             input_stream_iterator_type,
             common_type_list_type::operating_distance_type,
             common_type_list_type::speed_type,
+            exec_json_reading_task_type,
             select_oudia_diagram_type,
             ui_type_list_type::font_type,
             io_encoder_type,

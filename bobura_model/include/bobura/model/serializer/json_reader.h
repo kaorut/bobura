@@ -31,16 +31,17 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a JSON reader.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam ForwardIterator   A forward iterator type.
-        \tparam Integer           An integer type.
-        \tparam Float             A floating point number type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Font              A font type.
-        \tparam Encoder           An encoder type.
+        \tparam Size                A size type.
+        \tparam Difference          A difference type.
+        \tparam String              A string type.
+        \tparam ForwardIterator     A forward iterator type.
+        \tparam Integer             An integer type.
+        \tparam Float               A floating point number type.
+        \tparam OperatingDistance   An operating distance type.
+        \tparam Speed               A speed type.
+        \tparam ExecJsonReadingTask A JSON reading task execution type.
+        \tparam Font                A font type.
+        \tparam Encoder             An encoder type.
     */
     template <
         typename Size,
@@ -51,6 +52,7 @@ namespace bobura { namespace model { namespace serializer
         typename Float,
         typename OperatingDistance,
         typename Speed,
+        typename ExecJsonReadingTask,
         typename Font,
         typename Encoder
     >
@@ -82,6 +84,9 @@ namespace bobura { namespace model { namespace serializer
 
         //! The speed type.
         using speed_type = Speed;
+
+        //! The JSON reading task execution type.
+        using exec_json_reading_task_type = ExecJsonReadingTask;
 
         //! The font type.
         using font_type = Font;

@@ -59,6 +59,14 @@ namespace
     using input_stream_iterator_type =
         boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>;
 
+    struct exec_json_reading_task_type
+    {
+        void operator()()
+        const
+        {}
+
+    };
+
     using reader_type =
         bobura::model::serializer::json_reader<
             size_type,
@@ -69,6 +77,7 @@ namespace
             double,
             operating_distance_type,
             speed_type,
+            exec_json_reading_task_type,
             font_type,
             common_type_list_type::io_encoder_type
         >;
