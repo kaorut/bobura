@@ -15,25 +15,29 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a JSON reading task execution.
 
-        \tparam ProgressDialog A progress dialog type.
+        \tparam Dialog A progress dialog type.
+        \tparam Timer  A timer type.
     */
-    template <typename ProgressDialog>
+    template <typename Dialog, typename Timer>
     class exec_json_reading_task
     {
     public:
         // types
 
-        //! The progress dialog type.
-        using progress_dialog_type = ProgressDialog;
+        //! The dialog type.
+        using dialog_type = Dialog;
 
         //! The abstract window type.
-        using abstract_window_type = typename progress_dialog_type::abstract_window_type;
+        using abstract_window_type = typename dialog_type::abstract_window_type;
 
         //! The string type.
-        using string_type = typename progress_dialog_type::string_type;
+        using string_type = typename dialog_type::string_type;
 
         //! The message catalog type.
-        using message_catalog_type = typename progress_dialog_type::message_catalog_type;
+        using message_catalog_type = typename dialog_type::message_catalog_type;
+
+        //! The timer type.
+        using timer_type = Timer;
 
 
         // constructors and destructor

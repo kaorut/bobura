@@ -84,8 +84,11 @@ namespace bobura { namespace load_save
         //! The file save dialog type.
         using file_save_dialog_type = typename traits_type::file_save_dialog_type;
 
-        //! The progress dialog type.
-        using progress_dialog_type = typename traits_type::progress_dialog_type;
+        //! The dialog type.
+        using dialog_type = typename traits_type::dialog_type;
+
+        //! The timer type.
+        using timer_type = typename traits_type::timer_type;
 
         //! The OuDia diagram dialog type.
         using oudia_diagram_dialog_type = typename traits_type::oudia_diagram_dialog_type;
@@ -113,7 +116,7 @@ namespace bobura { namespace load_save
             >;
 
         //! The JSON reading task execution type.
-        using exec_json_reading_task_type = model::serializer::exec_json_reading_task<progress_dialog_type>;
+        using exec_json_reading_task_type = model::serializer::exec_json_reading_task<dialog_type, timer_type>;
 
         //! The OuDia diagram selector type.
         using select_oudia_diagram_type = model::serializer::select_oudia_diagram<oudia_diagram_dialog_type>;

@@ -527,14 +527,9 @@ namespace bobura { namespace type_list
             >;
 
         template <typename DetailTypeList>
-        using progress_dialog_type =
-            tetengo2::gui::widget::progress_dialog<
-                widget_traits_type<DetailTypeList>,
-                int,
-                widget_details_traits_type<DetailTypeList>,
-                menu_details_type<DetailTypeList>,
-                typename DetailTypeList::message_loop_type,
-                typename DetailTypeList::timer_type
+        using timer_type =
+            tetengo2::gui::timer<
+                type_list::detail::ui::widget_type<DetailTypeList>, typename DetailTypeList::timer_type
             >;
 
     }}
@@ -644,8 +639,8 @@ namespace bobura { namespace type_list
         //! The window type.
         using window_type = detail::ui::window_type<DetailTypeList>;
 
-        //! The progress dialog type.
-        using progress_dialog_type = detail::ui::progress_dialog_type<DetailTypeList>;
+        //! The timer type.
+        using timer_type = detail::ui::timer_type<DetailTypeList>;
 
     };
 
@@ -828,7 +823,8 @@ namespace bobura { namespace type_list
                 type_list::detail::common_dialog::message_box_type<DetailTypeList>,
                 type_list::detail::common_dialog::file_open_type<DetailTypeList>,
                 type_list::detail::common_dialog::file_save_type<DetailTypeList>,
-                type_list::detail::ui::progress_dialog_type<DetailTypeList>,
+                dialog_type<DetailTypeList>,
+                type_list::detail::ui::timer_type<DetailTypeList>,
                 oudia_diagram_dialog<dialog_traits_type<DetailTypeList>, size_type>,
                 message_catalog_type<DetailTypeList>,
                 type_list::detail::locale::timetable_file_encoder_type<DetailTypeList>,
@@ -965,10 +961,7 @@ namespace bobura { namespace type_list
             >;
 
         template <typename DetailTypeList>
-        using timer_type =
-            tetengo2::gui::timer<
-                type_list::detail::ui::widget_type<DetailTypeList>, typename DetailTypeList::timer_type
-            >;
+        using timer_type = type_list::detail::ui::timer_type<DetailTypeList>;
 
         template <typename DetailTypeList>
         using application_traits_type =
