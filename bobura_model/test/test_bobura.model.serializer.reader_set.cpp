@@ -49,9 +49,11 @@ namespace
 
     using io_encoder_type = common_type_list_type::io_encoder_type;
 
+    using abstract_window_type_ = ui_type_list_type::abstract_window_type;
+
     struct exec_json_reading_task_type
     {
-        using abstract_window_type = ui_type_list_type::abstract_window_type;
+        using abstract_window_type = abstract_window_type_;
 
         using message_catalog_type = message_catalog_type_;
 
@@ -72,7 +74,7 @@ namespace
 
         using encoder_type = encoder_type_;
 
-        using abstract_window_type = ui_type_list_type::abstract_window_type;
+        using abstract_window_type = abstract_window_type_;
 
         using message_catalog_type = message_catalog_type_;
 
