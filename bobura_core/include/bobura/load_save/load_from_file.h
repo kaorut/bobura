@@ -116,7 +116,8 @@ namespace bobura { namespace load_save
             >;
 
         //! The JSON reading task execution type.
-        using exec_json_reading_task_type = model::serializer::exec_json_reading_task<dialog_type, timer_type>;
+        using exec_json_reading_task_type =
+            model::serializer::exec_json_reading_task<string_type, dialog_type, timer_type, message_catalog_type>;
 
         //! The OuDia diagram selector type.
         using select_oudia_diagram_type = model::serializer::select_oudia_diagram<oudia_diagram_dialog_type>;

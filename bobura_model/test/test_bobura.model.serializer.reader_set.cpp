@@ -51,6 +51,13 @@ namespace
 
     struct exec_json_reading_task_type
     {
+        using abstract_window_type = ui_type_list_type::abstract_window_type;
+
+        using message_catalog_type = message_catalog_type_;
+
+        exec_json_reading_task_type(abstract_window_type&, const message_catalog_type&)
+        {}
+
         void operator()()
         const
         {}

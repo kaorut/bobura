@@ -7,8 +7,10 @@
 */
 
 #include <iterator>
+#include <memory>
 #include <sstream>
 #include <string>
+#include <utility>
 
 #include <boost/predef.h>
 #include <boost/spirit/include/support_multi_pass.hpp>
@@ -520,6 +522,20 @@ BOOST_AUTO_TEST_SUITE(serializer)
 BOOST_AUTO_TEST_SUITE(json_reader)
     // test cases
 
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        {
+            auto p_exec_json_reading_task = std::make_unique<exec_json_reading_task_type>();
+            reader_type json_reader{ std::move(p_exec_json_reading_task) };
+        }
+        {
+            std::unique_ptr<exec_json_reading_task_type> p_exec_json_reading_task;
+            BOOST_CHECK_THROW(reader_type json_reader{ std::move(p_exec_json_reading_task) }, std::invalid_argument);
+        }
+    }
+
 #if !( \
     BOOST_OS_LINUX && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
@@ -528,7 +544,8 @@ BOOST_AUTO_TEST_SUITE(json_reader)
     {
         BOOST_TEST_PASSPOINT();
 
-        reader_type json_reader{};
+        auto p_exec_json_reading_task = std::make_unique<exec_json_reading_task_type>();
+        reader_type json_reader{ std::move(p_exec_json_reading_task) };
         {
             std::istringstream input_stream{ json_empty0 };
             BOOST_CHECK(
@@ -580,7 +597,8 @@ BOOST_AUTO_TEST_SUITE(json_reader)
     {
         BOOST_TEST_PASSPOINT();
 
-        reader_type json_reader{};
+        auto p_exec_json_reading_task = std::make_unique<exec_json_reading_task_type>();
+        reader_type json_reader{ std::move(p_exec_json_reading_task) };
         {
             std::istringstream input_stream{ json_not_json };
             auto error = error_type::none;

@@ -121,7 +121,23 @@ namespace bobura { namespace model { namespace serializer
         // constructors and destructor
 
         /*!
-            \brief Destroys the json_reader.
+            \brief Creates a JSON reader.
+
+            \param p_exec_json_reading_task A unique pointer to a JSON reading task execution.
+
+            \throw std::invalid_argument When p_exec_json_reading_task is nullptr.
+        */
+        explicit json_reader(std::unique_ptr<exec_json_reading_task_type> p_exec_json_reading_task)
+        :
+        base_type(),
+        m_p_exec_json_reading_task(std::move(p_exec_json_reading_task))
+        {
+            if (!m_p_exec_json_reading_task)
+                BOOST_THROW_EXCEPTION(std::invalid_argument("JSON reading task execution is nullptr."));
+        }
+
+        /*!
+            \brief Destroys the JSON reader.
         */
         virtual ~json_reader()
         TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
@@ -1181,6 +1197,11 @@ namespace bobura { namespace model { namespace serializer
         }
 
 
+        // variables
+
+        const std::unique_ptr<exec_json_reading_task_type> m_p_exec_json_reading_task;
+
+
         // virtual functions
 
         virtual bool selects_impl(const iterator first, const iterator last)
@@ -1209,6 +1230,7 @@ namespace bobura { namespace model { namespace serializer
                 );
             pull_parser_type pull_parser{ std::move(p_push_parser), 5 };
 
+            (*m_p_exec_json_reading_task)();
             return read_timetable(pull_parser, error);
         }
 

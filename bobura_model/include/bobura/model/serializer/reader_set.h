@@ -178,9 +178,9 @@ namespace bobura { namespace model { namespace serializer
         {
             std::vector<std::unique_ptr<reader_type>> readers{};
 
-            readers.push_back(tetengo2::stdalt::make_unique<json_reader_type>());
+            readers.push_back(create_json_reader(parent, message_catalog));
             readers.push_back(
-                tetengo2::stdalt::make_unique<bzip2_reader_type>(tetengo2::stdalt::make_unique<json_reader_type>())
+                tetengo2::stdalt::make_unique<bzip2_reader_type>(create_json_reader(parent, message_catalog))
             );
             readers.push_back(create_oudia_reader(parent, std::move(file_name), message_catalog));
             readers.push_back(tetengo2::stdalt::make_unique<windia_reader_type>());
@@ -191,6 +191,16 @@ namespace bobura { namespace model { namespace serializer
 
     private:
         // static functions
+
+        static std::unique_ptr<reader_type> create_json_reader(
+            abstract_window_type&       parent,
+            const message_catalog_type& message_catalog
+        )
+        {
+            auto p_exec_json_reading_task =
+                tetengo2::stdalt::make_unique<exec_json_reading_task_type>(parent, message_catalog);
+            return tetengo2::stdalt::make_unique<json_reader_type>(std::move(p_exec_json_reading_task));
+        }
 
         static std::unique_ptr<reader_type> create_oudia_reader(
             abstract_window_type&       parent,
