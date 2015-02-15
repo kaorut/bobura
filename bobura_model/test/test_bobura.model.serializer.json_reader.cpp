@@ -525,6 +525,10 @@ BOOST_AUTO_TEST_SUITE(serializer)
 BOOST_AUTO_TEST_SUITE(json_reader)
     // test cases
 
+#if !( \
+    BOOST_OS_LINUX && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
+    )
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -539,10 +543,6 @@ BOOST_AUTO_TEST_SUITE(json_reader)
         }
     }
 
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     BOOST_AUTO_TEST_CASE(selects)
     {
         BOOST_TEST_PASSPOINT();
