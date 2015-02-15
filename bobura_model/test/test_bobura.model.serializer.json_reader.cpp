@@ -538,7 +538,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             reader_type json_reader{ std::move(p_exec_json_reading_task) };
         }
         {
-            std::unique_ptr<exec_json_reading_task_type> p_exec_json_reading_task;
+            std::unique_ptr<exec_json_reading_task_type> p_exec_json_reading_task{};
             BOOST_CHECK_THROW(reader_type json_reader{ std::move(p_exec_json_reading_task) }, std::invalid_argument);
         }
     }

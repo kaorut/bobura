@@ -9,6 +9,9 @@
 #if !defined(BOBURA_MODEL_SERIALIZER_EXECJSONREADINGTASK_H)
 #define BOBURA_MODEL_SERIALIZER_EXECJSONREADINGTASK_H
 
+#include <tetengo2.h>
+#include <tetengo2.gui.h>
+
 
 namespace bobura { namespace model { namespace serializer
 {
@@ -41,6 +44,20 @@ namespace bobura { namespace model { namespace serializer
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
+        //! The progress dialog type.
+        using progress_dialog_type =
+            tetengo2::gui::widget::progress_dialog<
+                typename dialog_type::traits_type,
+                int,
+                typename dialog_type::details_traits_type,
+                typename dialog_type::menu_details_type,
+                typename dialog_type::message_loop_details_type,
+                typename timer_type::timer_details_type
+            >;
+
+        //! The promise type.
+        using promise_type = typename progress_dialog_type::promise_type;
+
 
         // constructors and destructor
 
@@ -65,6 +82,13 @@ namespace bobura { namespace model { namespace serializer
         void operator()()
         const
         {
+            auto task =
+                [](promise_type& p)
+                {
+                    p.set_value(42);
+                };
+            progress_dialog_type dialog{ m_parent, task };
+            dialog.do_modal();
 
         }
 
