@@ -9,6 +9,8 @@
 #if !defined(BOBURA_MODEL_SERIALIZER_EXECJSONREADINGTASK_H)
 #define BOBURA_MODEL_SERIALIZER_EXECJSONREADINGTASK_H
 
+#include <utility>
+
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
@@ -82,14 +84,14 @@ namespace bobura { namespace model { namespace serializer
         void operator()()
         const
         {
+            string_type title{ m_message_catalog.get(TETENGO2_TEXT("App:Bobura")) };
             auto task =
                 [](promise_type& p)
                 {
                     p.set_value(42);
                 };
-            progress_dialog_type dialog{ m_parent, task };
+            progress_dialog_type dialog{ m_parent, std::move(title), std::move(task) };
             dialog.do_modal();
-
         }
 
 
