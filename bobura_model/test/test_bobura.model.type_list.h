@@ -10,10 +10,12 @@
 #define TESTBOBURA_MODEL_TYPELIST_H
 
 #include <cstddef>
+#include <iterator>
 #include <string>
 #include <utility>
 
 #include <boost/predef.h>
+#include <boost/spirit/include/support_multi_pass.hpp>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
@@ -62,6 +64,19 @@ namespace test_bobura { namespace model { namespace type_list
 
         using speed_type = size_type;
 
+        using input_stream_iterator_type =
+            boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
+
+        template <typename DetailTypeList>
+        using message_catalog_type =
+            tetengo2::message::message_catalog<
+                input_stream_iterator_type,
+                string_type,
+                size_type,
+                encoder_type<DetailTypeList>,
+                encoder_type<DetailTypeList>
+            >;
+
     }}
 #endif
 
@@ -96,6 +111,9 @@ namespace test_bobura { namespace model { namespace type_list
 
         //! The speed type.
         using speed_type = detail::common::speed_type;
+
+        //! The message catalog type.
+        using message_catalog_type = detail::common::message_catalog_type<DetailTypeList>;
 
     };
 
@@ -193,6 +211,9 @@ namespace test_bobura { namespace model { namespace type_list
             >;
 
         template <typename DetailTypeList>
+        using widget_type = typename abstract_window_type<DetailTypeList>::base_type;
+
+        template <typename DetailTypeList>
         using window_type =
             tetengo2::gui::widget::window<
                 widget_traits_type<DetailTypeList>,
@@ -201,9 +222,27 @@ namespace test_bobura { namespace model { namespace type_list
             >;
 
         template <typename DetailTypeList>
+        using message_loop_details_type = typename DetailTypeList::message_loop_type;
+
+        template <typename DetailTypeList>
+        using dialog_type =
+            tetengo2::gui::widget::dialog<
+                widget_traits_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                menu_details_type<DetailTypeList>,
+                message_loop_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
         using font_type = tetengo2::gui::drawing::font<string_type, size_type, drawing_details_type<DetailTypeList>>;
 
         using color_type = tetengo2::gui::drawing::color;
+
+        template <typename DetailTypeList>
+        using timer_details_type = typename DetailTypeList::timer_type;
+
+        template <typename DetailTypeList>
+        using timer_type = tetengo2::gui::timer<widget_type<DetailTypeList>, timer_details_type<DetailTypeList>>;
 
     }}
 #endif
@@ -222,11 +261,17 @@ namespace test_bobura { namespace model { namespace type_list
         //! The window type.
         using window_type = detail::ui::window_type<DetailTypeList>;
 
+        //! The dialog type.
+        using dialog_type = detail::ui::dialog_type<DetailTypeList>;
+
         //! The font type.
         using font_type = detail::ui::font_type<DetailTypeList>;
 
         //! The color type.
         using color_type = detail::ui::color_type;
+
+        //! The timer type.
+        using timer_type = detail::ui::timer_type<DetailTypeList>;
 
     };
     

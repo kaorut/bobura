@@ -17,8 +17,10 @@
 #include <tetengo2/detail/stub/drawing.h>
 #include <tetengo2/detail/stub/icon.h>
 #include <tetengo2/detail/stub/message_handler.h>
+#include <tetengo2/detail/stub/message_loop.h>
 #include <tetengo2/detail/stub/menu.h>
 #include <tetengo2/detail/stub/scroll.h>
+#include <tetengo2/detail/stub/timer.h>
 #include <tetengo2/detail/stub/virtual_key.h>
 #include <tetengo2/detail/stub/widget.h>
 #if BOOST_COMP_MSVC
@@ -61,6 +63,8 @@ namespace test_bobura { namespace model { namespace type_list
 
             using message_handler_details_type = tetengo2::detail::stub::message_handler;
 
+            using message_loop_type = tetengo2::detail::stub::message_loop;
+
             using menu_details_type = tetengo2::detail::stub::menu;
 
             using scroll_details_type = tetengo2::detail::stub::scroll;
@@ -68,6 +72,10 @@ namespace test_bobura { namespace model { namespace type_list
             using virtual_key_details_type = tetengo2::detail::stub::virtual_key;
 
             using widget_details_type = tetengo2::detail::stub::widget;
+
+            using widget_details_type = tetengo2::detail::stub::widget;
+
+            using timer_details_type = tetengo2::detail::stub::timer;
 
         }
 
@@ -103,6 +111,9 @@ namespace test_bobura { namespace model { namespace type_list
         //! The message handler type.
         using message_handler_type = detail::detail::test::message_handler_details_type;
 
+        //! The detail implementation type of the message loop.
+        using message_loop_type = detail::detail::test::message_loop_type;
+
         //! The scroll type.
         using scroll_type = detail::detail::test::scroll_details_type;
 
@@ -111,6 +122,9 @@ namespace test_bobura { namespace model { namespace type_list
 
         //! The widget type.
         using widget_type = detail::detail::test::widget_details_type;
+
+        //! The timer type.
+        using timer_type = detail::detail::test::timer_details_type; 
 
     };
 
