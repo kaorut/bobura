@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <functional>
 #include <iterator>
 #include <memory>
 #include <sstream>
@@ -66,9 +67,13 @@ namespace
 
     struct exec_json_reading_task_type
     {
-        void operator()()
+        using read_timetable_type = std::function<std::unique_ptr<timetable_type> ()>;
+
+        std::unique_ptr<timetable_type> operator()(read_timetable_type read_timetable)
         const
-        {}
+        {
+            return read_timetable();
+        }
 
     };
 

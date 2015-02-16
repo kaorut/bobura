@@ -7,7 +7,9 @@
 */
 
 #include <algorithm>
+#include <functional>
 #include <iterator>
+#include <memory>
 #include <utility>
 
 #include <boost/predef.h>
@@ -33,7 +35,15 @@ namespace
 
     using size_type_ = common_type_list_type::size_type;
 
+    using difference_type_ = common_type_list_type::difference_type;
+
     using string_type_ = common_type_list_type::string_type;
+
+    using operating_distance_type_ = common_type_list_type::operating_distance_type;
+
+    using speed_type_ = common_type_list_type::speed_type;
+
+    using font_type_ = ui_type_list_type::font_type;
 
     using window_type = ui_type_list_type::window_type;
 
@@ -53,16 +63,37 @@ namespace
 
     struct exec_json_reading_task_type
     {
+        using size_type = size_type_;
+
+        using difference_type = difference_type_;
+
+        using string_type = string_type_;
+
+        using operating_distance_type = operating_distance_type_;
+
+        using speed_type = speed_type_;
+
+        using font_type = font_type_;
+
+        using timetable_type =
+            bobura::model::timetable<
+                size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
+            >;
+
         using abstract_window_type = abstract_window_type_;
 
         using message_catalog_type = message_catalog_type_;
 
+        using read_timetable_type = std::function<std::unique_ptr<timetable_type> ()>;
+
         exec_json_reading_task_type(abstract_window_type&, const message_catalog_type&)
         {}
 
-        void operator()()
+        std::unique_ptr<timetable_type> operator()(read_timetable_type read_timetable)
         const
-        {}
+        {
+            return read_timetable();
+        }
 
     };
 
@@ -102,14 +133,14 @@ namespace
     using reader_set_type =
         bobura::model::serializer::reader_set<
             size_type_,
-            common_type_list_type::difference_type,
+            difference_type_,
             string_type_,
             input_stream_iterator_type,
-            common_type_list_type::operating_distance_type,
-            common_type_list_type::speed_type,
+            operating_distance_type_,
+            speed_type_,
             exec_json_reading_task_type,
             select_oudia_diagram_type,
-            ui_type_list_type::font_type,
+            font_type_,
             io_encoder_type,
             io_encoder_type
         >;

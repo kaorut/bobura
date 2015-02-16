@@ -9,10 +9,14 @@
 #if !defined(BOBURA_MODEL_SERIALIZER_EXECJSONREADINGTASK_H)
 #define BOBURA_MODEL_SERIALIZER_EXECJSONREADINGTASK_H
 
+#include <functional>
+#include <memory>
 #include <utility>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
+
+#include <bobura/model/timetable.h>
 
 
 namespace bobura { namespace model { namespace serializer
@@ -20,19 +24,52 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a JSON reading task execution.
 
-        \tparam String         A string type.
+        \tparam Timetable      A timetable type.
         \tparam Dialog         A progress dialog type.
         \tparam Timer          A timer type.
         \tparam MessageCatalog A message catalog type.
     */
-    template <typename String, typename Dialog, typename Timer, typename MessageCatalog>
+    template <
+        typename Size,
+        typename Difference,
+        typename String,
+        typename ForwardIterator,
+        typename OperatingDistance,
+        typename Speed,
+        typename Font,
+        typename Dialog,
+        typename Timer,
+        typename MessageCatalog
+    >
     class exec_json_reading_task
     {
     public:
         // types
 
+        //! The size type.
+        using size_type = Size;
+
+        //! The difference type.
+        using difference_type = Difference;
+
         //! The string type.
         using string_type = String;
+
+        //! The iterator type.
+        using iterator = ForwardIterator;
+
+        //! The operating distance type.
+        using operating_distance_type = OperatingDistance;
+
+        //! The speed type.
+        using speed_type = Speed;
+
+        //! The font type.
+        using font_type = Font;
+
+        //! The timetable type.
+        using timetable_type =
+            timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
         //! The dialog type.
         using dialog_type = Dialog;
@@ -50,7 +87,7 @@ namespace bobura { namespace model { namespace serializer
         using progress_dialog_type =
             tetengo2::gui::widget::progress_dialog<
                 typename dialog_type::traits_type,
-                int,
+                std::unique_ptr<timetable_type>,
                 typename dialog_type::details_traits_type,
                 typename dialog_type::menu_details_type,
                 typename dialog_type::message_loop_details_type,
@@ -59,6 +96,12 @@ namespace bobura { namespace model { namespace serializer
 
         //! The promise type.
         using promise_type = typename progress_dialog_type::promise_type;
+
+        //! The task type.
+        using task_type = typename progress_dialog_type::task_type;
+
+        //! The timetable reading type.
+        using read_timetable_type = std::function<std::unique_ptr<timetable_type> ()>;
 
 
         // constructors and destructor
@@ -80,18 +123,24 @@ namespace bobura { namespace model { namespace serializer
 
         /*!
             \brief Execute a JSON reading task.
+
+            \param read_timetable A timetable reading.
+
+            \return A unique pointer to a timetable.
         */
-        void operator()()
+        std::unique_ptr<timetable_type> operator()(read_timetable_type read_timetable)
         const
         {
             string_type title{ m_message_catalog.get(TETENGO2_TEXT("App:Bobura")) };
             auto task =
-                [](promise_type& p)
+                [](promise_type& promise)
                 {
-                    p.set_value(42);
+                    promise.set_value(std::unique_ptr<timetable_type>{});
                 };
             progress_dialog_type dialog{ m_parent, std::move(title), std::move(task) };
             dialog.do_modal();
+
+            return read_timetable();
         }
 
 

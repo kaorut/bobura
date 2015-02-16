@@ -1232,8 +1232,10 @@ namespace bobura { namespace model { namespace serializer
                 );
             pull_parser_type pull_parser{ std::move(p_push_parser), 5 };
 
-            (*m_p_exec_json_reading_task)();
-            return read_timetable(pull_parser, error);
+            return
+                (*m_p_exec_json_reading_task)(
+                    [this, &pull_parser, &error]() { return read_timetable(pull_parser, error); }
+                );
         }
 
 
