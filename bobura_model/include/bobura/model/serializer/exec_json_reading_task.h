@@ -133,14 +133,16 @@ namespace bobura { namespace model { namespace serializer
         {
             string_type title{ m_message_catalog.get(TETENGO2_TEXT("App:Bobura")) };
             auto task =
-                [](promise_type& promise)
+                [&read_timetable](promise_type& promise)
                 {
-                    promise.set_value(std::unique_ptr<timetable_type>{});
+                    auto p_timetable = read_timetable();
+                    promise.set_value(std::move(p_timetable));
                 };
             progress_dialog_type dialog{ m_parent, std::move(title), std::move(task) };
             dialog.do_modal();
 
-            return read_timetable();
+            auto p_timetable = dialog.task_future().get();
+            return p_timetable ? std::move(*p_timetable) : std::unique_ptr<timetable_type>{};
         }
 
 
