@@ -69,6 +69,8 @@ namespace
             message_catalog_type
         >;
 
+    using promise_type = exec_json_reading_task_type::promise_type;
+
 
 }
 
@@ -97,7 +99,7 @@ BOOST_AUTO_TEST_SUITE(exec_json_reading_task)
             const message_catalog_type message_catalog{};
             const exec_json_reading_task_type task{ parent, message_catalog };
 
-            auto p_result = task([](){ return std::unique_ptr<timetable_type>{}; });
+            auto p_result = task([](promise_type& promise){ return std::unique_ptr<timetable_type>{}; });
             BOOST_CHECK(!p_result);
         }
         {
@@ -107,7 +109,8 @@ BOOST_AUTO_TEST_SUITE(exec_json_reading_task)
 
             auto p_result =
                 task(
-                    [](){
+                    [](promise_type& promise)
+                    {
                         auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
                         p_timetable->set_line_name(string_type{ TETENGO2_TEXT("hoge") });
                         return std::move(p_timetable);

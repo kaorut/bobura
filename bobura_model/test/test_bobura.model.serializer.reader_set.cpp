@@ -84,7 +84,9 @@ namespace
 
         using message_catalog_type = message_catalog_type_;
 
-        using read_timetable_type = std::function<std::unique_ptr<timetable_type> ()>;
+        using promise_type = tetengo2::concurrent::progressive_promise<int, int>;
+
+        using read_timetable_type = std::function<std::unique_ptr<timetable_type> (promise_type& promise)>;
 
         exec_json_reading_task_type(abstract_window_type&, const message_catalog_type&)
         {}
@@ -92,7 +94,8 @@ namespace
         std::unique_ptr<timetable_type> operator()(read_timetable_type read_timetable)
         const
         {
-            return read_timetable();
+            promise_type promise{ 0 };
+            return read_timetable(promise);
         }
 
     };

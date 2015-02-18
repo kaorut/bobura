@@ -9,6 +9,7 @@
 #if !defined(BOBURA_MODEL_SERIALIZER_EXECJSONREADINGTASK_H)
 #define BOBURA_MODEL_SERIALIZER_EXECJSONREADINGTASK_H
 
+#include <exception>
 #include <functional>
 #include <memory>
 #include <utility>
@@ -101,7 +102,7 @@ namespace bobura { namespace model { namespace serializer
         using task_type = typename progress_dialog_type::task_type;
 
         //! The timetable reading type.
-        using read_timetable_type = std::function<std::unique_ptr<timetable_type> ()>;
+        using read_timetable_type = std::function<std::unique_ptr<timetable_type> (promise_type& promise)>;
 
 
         // constructors and destructor
@@ -135,14 +136,20 @@ namespace bobura { namespace model { namespace serializer
             auto task =
                 [&read_timetable](promise_type& promise)
                 {
-                    auto p_timetable = read_timetable();
-                    promise.set_value(std::move(p_timetable));
+                    try
+                    {
+                        auto p_timetable = read_timetable(promise);
+                        promise.set_value(std::move(p_timetable));
+                    }
+                    catch (std::exception& e)
+                    {
+                        promise.set_exception(std::make_exception_ptr(e));
+                    }
                 };
             progress_dialog_type dialog{ m_parent, std::move(title), std::move(task) };
             dialog.do_modal();
 
-            auto p_timetable = dialog.task_future().get();
-            return p_timetable ? std::move(*p_timetable) : std::unique_ptr<timetable_type>{};
+            return dialog.task_future().get();
         }
 
 

@@ -119,6 +119,9 @@ namespace bobura { namespace model { namespace serializer
         //! The error type.
         using error_type = typename base_type::error_type;
 
+        //! The promise type.
+        using promise_type = typename exec_json_reading_task_type::promise_type;
+
 
         // constructors and destructor
 
@@ -201,9 +204,19 @@ namespace bobura { namespace model { namespace serializer
             return singleton;
         }
 
-        static std::unique_ptr<timetable_type> read_timetable(pull_parser_type& pull_parser, error_type& error)
+        static std::unique_ptr<timetable_type> read_timetable(
+            pull_parser_type& pull_parser,
+            error_type&       error,
+            promise_type&     promise
+        )
         {
             auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
+
+            if (promise.abort_requested())
+            {
+                error = error_type::canceled;
+                return std::unique_ptr<timetable_type>{};
+            }
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
@@ -211,6 +224,12 @@ namespace bobura { namespace model { namespace serializer
                 return std::unique_ptr<timetable_type>{};
             }
             pull_parser.next();
+
+            if (promise.abort_requested())
+            {
+                error = error_type::canceled;
+                return std::unique_ptr<timetable_type>{};
+            }
 
             auto header = read_header(pull_parser);
             if (!header)
@@ -234,6 +253,12 @@ namespace bobura { namespace model { namespace serializer
                     p_timetable->set_note(std::move(found->second));
             }
 
+            if (promise.abort_requested())
+            {
+                error = error_type::canceled;
+                return std::unique_ptr<timetable_type>{};
+            }
+
             auto font_color_set = read_font_color_set(pull_parser);
             if (!font_color_set)
             {
@@ -241,6 +266,12 @@ namespace bobura { namespace model { namespace serializer
                 return std::unique_ptr<timetable_type>{};
             }
             p_timetable->set_font_color_set(std::move(*font_color_set));
+
+            if (promise.abort_requested())
+            {
+                error = error_type::canceled;
+                return std::unique_ptr<timetable_type>{};
+            }
 
             auto stations = read_stations(pull_parser);
             if (!stations)
@@ -251,6 +282,12 @@ namespace bobura { namespace model { namespace serializer
             for (auto& station: *stations)
                 p_timetable->insert_station_location(p_timetable->station_locations().end(), std::move(station));
 
+            if (promise.abort_requested())
+            {
+                error = error_type::canceled;
+                return std::unique_ptr<timetable_type>{};
+            }
+
             auto train_kinds = read_train_kinds(pull_parser);
             if (!train_kinds)
             {
@@ -259,6 +296,12 @@ namespace bobura { namespace model { namespace serializer
             }
             for (auto& train_kind: *train_kinds)
                 p_timetable->insert_train_kind(p_timetable->train_kinds().end(), std::move(train_kind));
+
+            if (promise.abort_requested())
+            {
+                error = error_type::canceled;
+                return std::unique_ptr<timetable_type>{};
+            }
 
             auto down_trains = read_trains(pull_parser, direction_type::down, stations->size(), train_kinds->size());
             if (!down_trains)
@@ -269,6 +312,12 @@ namespace bobura { namespace model { namespace serializer
             for (auto& train: *down_trains)
                 p_timetable->insert_down_train(p_timetable->down_trains().end(), std::move(train));
 
+            if (promise.abort_requested())
+            {
+                error = error_type::canceled;
+                return std::unique_ptr<timetable_type>{};
+            }
+
             auto up_trains = read_trains(pull_parser, direction_type::up, stations->size(), train_kinds->size());
             if (!up_trains)
             {
@@ -278,12 +327,24 @@ namespace bobura { namespace model { namespace serializer
             for (auto& train: *up_trains)
                 p_timetable->insert_up_train(p_timetable->up_trains().end(), std::move(train));
 
+            if (promise.abort_requested())
+            {
+                error = error_type::canceled;
+                return std::unique_ptr<timetable_type>{};
+            }
+
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
                 error = error_type::corrupted;
                 return std::unique_ptr<timetable_type>{};
             }
             pull_parser.next();
+
+            if (promise.abort_requested())
+            {
+                error = error_type::canceled;
+                return std::unique_ptr<timetable_type>{};
+            }
 
             return std::move(p_timetable);
         }
@@ -1234,7 +1295,10 @@ namespace bobura { namespace model { namespace serializer
 
             return
                 (*m_p_exec_json_reading_task)(
-                    [this, &pull_parser, &error]() { return read_timetable(pull_parser, error); }
+                    [this, &pull_parser, &error](promise_type& promise)
+                    {
+                        return read_timetable(pull_parser, error, promise);
+                    }
                 );
         }
 
