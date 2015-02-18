@@ -763,7 +763,7 @@ namespace bobura { namespace model { namespace serializer
                 abbreviation = std::move(member->second);
             }
 
-            boost::optional<color_type> color{};
+            color_type color{ 0, 0, 0 };
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
@@ -771,12 +771,13 @@ namespace bobura { namespace model { namespace serializer
                 if (member->first != string_type{ TETENGO2_TEXT("color") })
                     return boost::none;
 
-                color = to_color(std::move(member->second));
-                if (!color)
+                auto color_ = to_color(std::move(member->second));
+                if (!color_)
                     return boost::none;
+                color = std::move(*color_);
             }
 
-            boost::optional<weight_type> weight{};
+            auto weight = weight_type::normal;
             {
                 const auto member = read_integer_member<int>(pull_parser);
                 if (!member)
@@ -784,12 +785,13 @@ namespace bobura { namespace model { namespace serializer
                 if (member->first != string_type{ TETENGO2_TEXT("weight") })
                     return boost::none;
 
-                weight = to_weight(member->second);
-                if (!weight)
+                const auto weight_ = to_weight(member->second);
+                if (!weight_)
                     return boost::none;
+                weight = *weight_;
             }
 
-            boost::optional<line_style_type> line_style{};
+            auto line_style = line_style_type::solid;
             {
                 const auto member = read_integer_member<int>(pull_parser);
                 if (!member)
@@ -797,9 +799,10 @@ namespace bobura { namespace model { namespace serializer
                 if (member->first != string_type{ TETENGO2_TEXT("line_style") })
                     return boost::none;
 
-                line_style = to_line_style(member->second);
-                if (!line_style)
+                const auto line_style_ = to_line_style(member->second);
+                if (!line_style_)
                     return boost::none;
+                line_style = *line_style_;
             }
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
@@ -808,7 +811,7 @@ namespace bobura { namespace model { namespace serializer
 
             return
                 boost::make_optional(
-                    train_kind_type(std::move(name), std::move(abbreviation), std::move(*color), *weight, *line_style)
+                    train_kind_type(std::move(name), std::move(abbreviation), std::move(color), weight, line_style)
                 );
         }
 
