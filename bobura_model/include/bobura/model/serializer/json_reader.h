@@ -231,12 +231,9 @@ namespace bobura { namespace model { namespace serializer
                 return std::unique_ptr<timetable_type>{};
             }
 
-            auto header = read_header(pull_parser);
+            auto header = read_header(pull_parser, error, promise);
             if (!header)
-            {
-                error = error_type::corrupted;
                 return std::unique_ptr<timetable_type>{};
-            }
             {
                 const auto found = header->find(string_type{ TETENGO2_TEXT("company_name") });
                 if (found != header->end())
@@ -259,12 +256,9 @@ namespace bobura { namespace model { namespace serializer
                 return std::unique_ptr<timetable_type>{};
             }
 
-            auto font_color_set = read_font_color_set(pull_parser);
+            auto font_color_set = read_font_color_set(pull_parser, error, promise);
             if (!font_color_set)
-            {
-                error = error_type::corrupted;
                 return std::unique_ptr<timetable_type>{};
-            }
             p_timetable->set_font_color_set(std::move(*font_color_set));
 
             if (promise.abort_requested())
@@ -273,12 +267,9 @@ namespace bobura { namespace model { namespace serializer
                 return std::unique_ptr<timetable_type>{};
             }
 
-            auto stations = read_stations(pull_parser);
+            auto stations = read_stations(pull_parser, error, promise);
             if (!stations)
-            {
-                error = error_type::corrupted;
                 return std::unique_ptr<timetable_type>{};
-            }
             for (auto& station: *stations)
                 p_timetable->insert_station_location(p_timetable->station_locations().end(), std::move(station));
 
@@ -288,12 +279,9 @@ namespace bobura { namespace model { namespace serializer
                 return std::unique_ptr<timetable_type>{};
             }
 
-            auto train_kinds = read_train_kinds(pull_parser);
+            auto train_kinds = read_train_kinds(pull_parser, error, promise);
             if (!train_kinds)
-            {
-                error = error_type::corrupted;
                 return std::unique_ptr<timetable_type>{};
-            }
             for (auto& train_kind: *train_kinds)
                 p_timetable->insert_train_kind(p_timetable->train_kinds().end(), std::move(train_kind));
 
@@ -303,12 +291,10 @@ namespace bobura { namespace model { namespace serializer
                 return std::unique_ptr<timetable_type>{};
             }
 
-            auto down_trains = read_trains(pull_parser, direction_type::down, stations->size(), train_kinds->size());
+            auto down_trains =
+                read_trains(pull_parser, error, promise, direction_type::down, stations->size(), train_kinds->size());
             if (!down_trains)
-            {
-                error = error_type::corrupted;
                 return std::unique_ptr<timetable_type>{};
-            }
             for (auto& train: *down_trains)
                 p_timetable->insert_down_train(p_timetable->down_trains().end(), std::move(train));
 
@@ -318,12 +304,10 @@ namespace bobura { namespace model { namespace serializer
                 return std::unique_ptr<timetable_type>{};
             }
 
-            auto up_trains = read_trains(pull_parser, direction_type::up, stations->size(), train_kinds->size());
+            auto up_trains =
+                read_trains(pull_parser, error, promise, direction_type::up, stations->size(), train_kinds->size());
             if (!up_trains)
-            {
-                error = error_type::corrupted;
                 return std::unique_ptr<timetable_type>{};
-            }
             for (auto& train: *up_trains)
                 p_timetable->insert_up_train(p_timetable->up_trains().end(), std::move(train));
 
@@ -349,12 +333,19 @@ namespace bobura { namespace model { namespace serializer
             return std::move(p_timetable);
         }
 
-        static boost::optional<header_type> read_header(pull_parser_type& pull_parser)
+        static boost::optional<header_type> read_header(
+            pull_parser_type& pull_parser,
+            error_type&       error,
+            promise_type&
+        )
         {
             header_type header{};
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
+            {
+                error = error_type::corrupted;
                 return boost::none;
+            }
             pull_parser.next();
 
             for (;;)
@@ -367,16 +358,26 @@ namespace bobura { namespace model { namespace serializer
             }
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
+            {
+                error = error_type::corrupted;
                 return boost::none;
+            }
             pull_parser.next();
 
             return boost::make_optional(std::move(header));
         }
 
-        static boost::optional<font_color_set_type> read_font_color_set(pull_parser_type& pull_parser)
+        static boost::optional<font_color_set_type> read_font_color_set(
+            pull_parser_type& pull_parser,
+            error_type&       error,
+            promise_type&
+        )
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
+            {
+                error = error_type::corrupted;
                 return boost::none;
+            }
             pull_parser.next();
 
             auto background_color = font_color_set_type::default_().background();
@@ -397,65 +398,96 @@ namespace bobura { namespace model { namespace serializer
                 if      (element->first == string_type{ TETENGO2_TEXT("background") })
                 {
                     if (element->second.which() != 2)
+                    {
+                        error = error_type::corrupted;
                         return boost::none;
+                    }
                     background_color = std::move(boost::get<color_type>(element->second));
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("company_line_name") })
                 {
                     if (element->second.which() != 0)
+                    {
+                        error = error_type::corrupted;
                         return boost::none;
+                    }
                     company_line_name_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("note") })
                 {
                     if (element->second.which() != 0)
+                    {
+                        error = error_type::corrupted;
                         return boost::none;
+                    }
                     note_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("time_line") })
                 {
                     if (element->second.which() != 0)
+                    {
+                        error = error_type::corrupted;
                         return boost::none;
+                    }
                     time_line_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("local_station") })
                 {
                     if (element->second.which() != 0)
+                    {
+                        error = error_type::corrupted;
                         return boost::none;
+                    }
                     local_station_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("principal_station") })
                 {
                     if (element->second.which() != 0)
+                    {
+                        error = error_type::corrupted;
                         return boost::none;
+                    }
                     principal_station_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("local_terminal_station") })
                 {
                     if (element->second.which() != 0)
+                    {
+                        error = error_type::corrupted;
                         return boost::none;
+                    }
                     local_terminal_station_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("principal_terminal_station") })
                 {
                     if (element->second.which() != 0)
+                    {
+                        error = error_type::corrupted;
                         return boost::none;
+                    }
                     principal_terminal_station_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("train_name") })
                 {
                     if (element->second.which() != 1)
+                    {
+                        error = error_type::corrupted;
                         return boost::none;
+                    }
                     train_name_font = std::move(boost::get<font_type>(element->second));
                 }
                 else
                 {
+                    error = error_type::corrupted;
                     return boost::none;
                 }
             }
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
+            {
+                error = error_type::corrupted;
                 return boost::none;
+            }
             pull_parser.next();
 
             return
@@ -580,12 +612,19 @@ namespace bobura { namespace model { namespace serializer
             return to_color(encoder().decode(std::move(*color_string)));
         }
 
-        static boost::optional<std::vector<station_location_type>> read_stations(pull_parser_type& pull_parser)
+        static boost::optional<std::vector<station_location_type>> read_stations(
+            pull_parser_type& pull_parser,
+            error_type&       error,
+            promise_type&
+        )
         {
             std::vector<station_location_type> stations{};
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
+            {
+                error = error_type::corrupted;
                 return boost::none;
+            }
             pull_parser.next();
 
             for (;;)
@@ -598,7 +637,10 @@ namespace bobura { namespace model { namespace serializer
             }
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
+            {
+                error = error_type::corrupted;
                 return boost::none;
+            }
             pull_parser.next();
 
             return boost::make_optional(std::move(stations));
@@ -711,12 +753,19 @@ namespace bobura { namespace model { namespace serializer
                 return nullptr;
         }
 
-        static boost::optional<std::vector<train_kind_type>> read_train_kinds(pull_parser_type& pull_parser)
+        static boost::optional<std::vector<train_kind_type>> read_train_kinds(
+            pull_parser_type& pull_parser,
+            error_type&       error,
+            promise_type&
+        )
         {
             std::vector<train_kind_type> train_kinds{};
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
+            {
+                error = error_type::corrupted;
                 return boost::none;
+            }
             pull_parser.next();
 
             for (;;)
@@ -729,7 +778,10 @@ namespace bobura { namespace model { namespace serializer
             }
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
+            {
+                error = error_type::corrupted;
                 return boost::none;
+            }
             pull_parser.next();
 
             return boost::make_optional(std::move(train_kinds));
@@ -874,6 +926,8 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<std::vector<train_type>> read_trains(
             pull_parser_type&    pull_parser,
+            error_type&          error,
+            promise_type&,
             const direction_type direction,
             const std::size_t    station_count,
             const std::size_t    kind_count
@@ -882,7 +936,10 @@ namespace bobura { namespace model { namespace serializer
             std::vector<train_type> trains{};
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
+            {
+                error = error_type::corrupted;
                 return boost::none;
+            }
             pull_parser.next();
 
             for (;;)
@@ -895,7 +952,10 @@ namespace bobura { namespace model { namespace serializer
             }
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
+            {
+                error = error_type::corrupted;
                 return boost::none;
+            }
             pull_parser.next();
 
             return boost::make_optional(std::move(trains));
