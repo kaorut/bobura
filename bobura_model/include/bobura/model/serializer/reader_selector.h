@@ -125,7 +125,7 @@ namespace bobura { namespace model { namespace serializer
 
             BOOST_THROW_EXCEPTION(std::logic_error("This function cannot be called."));
         }
-#if defined(__GNUC__)
+#if BOOST_COMP_GNUC
 #   pragma GCC diagnostic warning "-Wreturn-type"
 #endif
 

@@ -25,6 +25,7 @@
 #include <tetengo2.h>
 
 #include <bobura/load_save/confirm_file_save.h>
+#include <bobura/model/serializer/exec_json_reading_task.h>
 #include <bobura/model/serializer/reader_selector.h>
 #include <bobura/model/serializer/reader_set.h>
 #include <bobura/model/serializer/select_oudia_diagram.h>
@@ -83,6 +84,12 @@ namespace bobura { namespace load_save
         //! The file save dialog type.
         using file_save_dialog_type = typename traits_type::file_save_dialog_type;
 
+        //! The dialog type.
+        using dialog_type = typename traits_type::dialog_type;
+
+        //! The timer type.
+        using timer_type = typename traits_type::timer_type;
+
         //! The OuDia diagram dialog type.
         using oudia_diagram_dialog_type = typename traits_type::oudia_diagram_dialog_type;
 
@@ -108,6 +115,21 @@ namespace bobura { namespace load_save
                 size_type, difference_type, string_type, iterator, operating_distance_type, speed_type, font_type
             >;
 
+        //! The JSON reading task execution type.
+        using exec_json_reading_task_type =
+            model::serializer::exec_json_reading_task<
+                size_type,
+                difference_type,
+                string_type,
+                iterator,
+                operating_distance_type,
+                speed_type,
+                font_type,
+                dialog_type,
+                timer_type,
+                message_catalog_type
+            >;
+
         //! The OuDia diagram selector type.
         using select_oudia_diagram_type = model::serializer::select_oudia_diagram<oudia_diagram_dialog_type>;
 
@@ -120,6 +142,7 @@ namespace bobura { namespace load_save
                 iterator,
                 operating_distance_type,
                 speed_type,
+                exec_json_reading_task_type,
                 select_oudia_diagram_type,
                 font_type,
                 timetable_file_encoder_type,

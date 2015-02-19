@@ -115,6 +115,7 @@ std::locale                                      locale
 std::locale::classic                             locale
 std::locale::global                              locale
 std::logic_error                                 stdexcept
+std::make_exception_ptr                          exception
 std::make_pair                                   utility
 std::max                                         algorithm
 std::min                                         algorithm

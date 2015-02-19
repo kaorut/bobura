@@ -6,6 +6,7 @@ pkg_headers = \
     model/message/timetable_observer_set.h \
     model/serializer/bzip2_reader.h \
     model/serializer/bzip2_writer.h \
+    model/serializer/exec_json_reading_task.h \
     model/serializer/json_reader.h \
     model/serializer/json_writer.h \
     model/serializer/oudia_reader.h \

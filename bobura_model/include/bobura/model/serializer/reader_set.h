@@ -30,16 +30,17 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a reader set.
 
-        \tparam Size               A size type.
-        \tparam Difference         A difference type.
-        \tparam String             A string type.
-        \tparam ForwardIterator    A forward iterator type.
-        \tparam OperatingDistance  An operating distance type.
-        \tparam Speed              A speed type.
-        \tparam SelectOuDiaDiagram An OuDia diagram selecting type.
-        \tparam Font               A font type.
-        \tparam Utf8Encoder        A UTF-8 encoder type.
-        \tparam Cp932Encoder       A CP932 encoder type.
+        \tparam Size                A size type.
+        \tparam Difference          A difference type.
+        \tparam String              A string type.
+        \tparam ForwardIterator     A forward iterator type.
+        \tparam OperatingDistance   An operating distance type.
+        \tparam Speed               A speed type.
+        \tparam ExecJsonReadingTask A JSON reading task execution type.
+        \tparam SelectOuDiaDiagram  An OuDia diagram selecting type.
+        \tparam Font                A font type.
+        \tparam Utf8Encoder         A UTF-8 encoder type.
+        \tparam Cp932Encoder        A CP932 encoder type.
     */
     template <
         typename Size,
@@ -48,6 +49,7 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
+        typename ExecJsonReadingTask,
         typename SelectOuDiaDiagram,
         typename Font,
         typename Utf8Encoder,
@@ -75,6 +77,9 @@ namespace bobura { namespace model { namespace serializer
 
         //! The speed type.
         using speed_type = Speed;
+
+        //! The JSON reading task execution type.
+        using exec_json_reading_task_type = ExecJsonReadingTask;
 
         //! The OuDia diagram selecting type.
         using select_oudia_diagram_type = SelectOuDiaDiagram;
@@ -109,6 +114,7 @@ namespace bobura { namespace model { namespace serializer
                 double,
                 operating_distance_type,
                 speed_type,
+                exec_json_reading_task_type,
                 font_type,
                 utf8_encoder_type
             >;
@@ -172,9 +178,9 @@ namespace bobura { namespace model { namespace serializer
         {
             std::vector<std::unique_ptr<reader_type>> readers{};
 
-            readers.push_back(tetengo2::stdalt::make_unique<json_reader_type>());
+            readers.push_back(create_json_reader(parent, message_catalog));
             readers.push_back(
-                tetengo2::stdalt::make_unique<bzip2_reader_type>(tetengo2::stdalt::make_unique<json_reader_type>())
+                tetengo2::stdalt::make_unique<bzip2_reader_type>(create_json_reader(parent, message_catalog))
             );
             readers.push_back(create_oudia_reader(parent, std::move(file_name), message_catalog));
             readers.push_back(tetengo2::stdalt::make_unique<windia_reader_type>());
@@ -185,6 +191,16 @@ namespace bobura { namespace model { namespace serializer
 
     private:
         // static functions
+
+        static std::unique_ptr<reader_type> create_json_reader(
+            abstract_window_type&       parent,
+            const message_catalog_type& message_catalog
+        )
+        {
+            auto p_exec_json_reading_task =
+                tetengo2::stdalt::make_unique<exec_json_reading_task_type>(parent, message_catalog);
+            return tetengo2::stdalt::make_unique<json_reader_type>(std::move(p_exec_json_reading_task));
+        }
 
         static std::unique_ptr<reader_type> create_oudia_reader(
             abstract_window_type&       parent,

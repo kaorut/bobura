@@ -6,13 +6,19 @@
     $Id$
 */
 
+#include <functional>
 #include <iterator>
+#include <memory>
 #include <sstream>
+#include <stdexcept>
 #include <string>
+#include <utility>
 
 #include <boost/predef.h>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
+
+#include <tetengo2.h>
 
 #include <bobura/model/serializer/json_reader.h>
 #include <bobura/model/timetable.h>
@@ -59,6 +65,21 @@ namespace
     using input_stream_iterator_type =
         boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>;
 
+    struct exec_json_reading_task_type
+    {
+        using promise_type = tetengo2::concurrent::progressive_promise<int, int>;
+
+        using read_timetable_type = std::function<std::unique_ptr<timetable_type> (promise_type& promise)>;
+
+        std::unique_ptr<timetable_type> operator()(read_timetable_type read_timetable)
+        const
+        {
+            promise_type promise{ 0 };
+            return read_timetable(promise);
+        }
+
+    };
+
     using reader_type =
         bobura::model::serializer::json_reader<
             size_type,
@@ -69,6 +90,7 @@ namespace
             double,
             operating_distance_type,
             speed_type,
+            exec_json_reading_task_type,
             font_type,
             common_type_list_type::io_encoder_type
         >;
@@ -515,11 +537,26 @@ BOOST_AUTO_TEST_SUITE(json_reader)
     BOOST_OS_LINUX && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
     )
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        {
+            auto p_exec_json_reading_task = tetengo2::stdalt::make_unique<exec_json_reading_task_type>();
+            reader_type json_reader{ std::move(p_exec_json_reading_task) };
+        }
+        {
+            std::unique_ptr<exec_json_reading_task_type> p_exec_json_reading_task{};
+            BOOST_CHECK_THROW(reader_type json_reader{ std::move(p_exec_json_reading_task) }, std::invalid_argument);
+        }
+    }
+
     BOOST_AUTO_TEST_CASE(selects)
     {
         BOOST_TEST_PASSPOINT();
 
-        reader_type json_reader{};
+        auto p_exec_json_reading_task = tetengo2::stdalt::make_unique<exec_json_reading_task_type>();
+        reader_type json_reader{ std::move(p_exec_json_reading_task) };
         {
             std::istringstream input_stream{ json_empty0 };
             BOOST_CHECK(
@@ -571,7 +608,8 @@ BOOST_AUTO_TEST_SUITE(json_reader)
     {
         BOOST_TEST_PASSPOINT();
 
-        reader_type json_reader{};
+        auto p_exec_json_reading_task = tetengo2::stdalt::make_unique<exec_json_reading_task_type>();
+        reader_type json_reader{ std::move(p_exec_json_reading_task) };
         {
             std::istringstream input_stream{ json_not_json };
             auto error = error_type::none;
