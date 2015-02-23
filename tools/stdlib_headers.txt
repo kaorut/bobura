@@ -51,6 +51,7 @@ boost::iostreams::bzip2_error                    boost/iostreams/filter/bzip2.hp
 boost::iostreams::filtering_istream              boost/iostreams/filtering_stream.hpp
 boost::iostreams::filtering_ostream              boost/iostreams/filtering_stream.hpp
 boost::lexical_cast                              boost/lexical_cast.hpp
+boost::make_iterator_range                       boost/range/iterator_range.hpp
 boost::make_optional                             boost/optional.hpp
 boost::math::constants::pi                       boost/math/constants/constants.hpp
 boost::next                                      boost/utility.hpp
