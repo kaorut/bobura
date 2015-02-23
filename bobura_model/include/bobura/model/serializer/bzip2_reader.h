@@ -127,7 +127,8 @@ namespace bobura { namespace model { namespace serializer
             if (input_string_type{ first, boost::next(first, 2) } != input_string_type(TETENGO2_TEXT("BZ")))
                 return false;
 
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(first, last) };
+            const input_string_type input_string{ first, last };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(input_string) };
             boost::iostreams::filtering_istream filtering_input_stream{};
             filtering_input_stream.push(boost::iostreams::bzip2_decompressor());
             filtering_input_stream.push(input_stream);
@@ -157,7 +158,8 @@ namespace bobura { namespace model { namespace serializer
         virtual std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
         override
         {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(first, last) };
+            const input_string_type input_string{ first, last };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(input_string) };
             boost::iostreams::filtering_istream filtering_input_stream{};
             filtering_input_stream.push(boost::iostreams::bzip2_decompressor());
             filtering_input_stream.push(input_stream);

@@ -49,6 +49,7 @@
 #include <boost/predef.h>
 #include <boost/program_options.hpp>
 #include <boost/range/adaptors.hpp>
+#include <boost/range/iterator_range.hpp>
 #include <boost/rational.hpp>
 #include <boost/signals2.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
