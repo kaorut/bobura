@@ -11,14 +11,14 @@
 
 #include <iterator>
 #include <memory>
-#include <sstream>
 #include <string>
 #include <utility>
 
 #include <boost/iostreams/filter/bzip2.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
+#include <boost/range/iterator_range.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
-#include <boost/utility/string_ref.hpp>
+#include <boost/utility.hpp>
 
 #include <tetengo2.h>
 
@@ -111,9 +111,6 @@ namespace bobura { namespace model { namespace serializer
 
         using input_string_type = std::basic_string<typename iterator::value_type>;
 
-        using input_string_ref_type =
-            boost::basic_string_ref<typename iterator::value_type, std::char_traits<typename iterator::value_type>>;
-
 
         // variables
 
@@ -125,13 +122,13 @@ namespace bobura { namespace model { namespace serializer
         virtual bool selects_impl(const iterator first, const iterator last)
         override
         {
-            const input_string_type input_string{ first, last };
-            if (input_string.length() < 2)
+            if (std::distance(first, last) < 2)
                 return false;
-            if (input_string_ref_type{ input_string }.substr(0, 2) != input_string_ref_type(TETENGO2_TEXT("BZ")))
+            if (input_string_type{ first, boost::next(first, 2) } != input_string_type(TETENGO2_TEXT("BZ")))
                 return false;
 
-            std::istringstream input_stream{ input_string };
+            const input_string_type input_string{ first, last };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(input_string) };
             boost::iostreams::filtering_istream filtering_input_stream{};
             filtering_input_stream.push(boost::iostreams::bzip2_decompressor());
             filtering_input_stream.push(input_stream);
@@ -161,7 +158,8 @@ namespace bobura { namespace model { namespace serializer
         virtual std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
         override
         {
-            std::istringstream input_stream{ input_string_type{ first, last } };
+            const input_string_type input_string{ first, last };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(input_string) };
             boost::iostreams::filtering_istream filtering_input_stream{};
             filtering_input_stream.push(boost::iostreams::bzip2_decompressor());
             filtering_input_stream.push(input_stream);
