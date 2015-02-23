@@ -9,12 +9,13 @@
 #include <algorithm>
 #include <iterator>
 #include <memory>
-#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <utility>
 
+#include <boost/iostreams/filtering_stream.hpp>
 #include <boost/predef.h>
+#include <boost/range/iterator_range.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -423,7 +424,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
-            std::istringstream input_stream{ data_empty };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_empty) };
             BOOST_CHECK(
                 !reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -436,7 +437,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
-            std::istringstream input_stream{ data_no_train };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_no_train) };
             BOOST_CHECK(
                 reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -449,7 +450,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
-            std::istringstream input_stream{ data_too_old_version };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_too_old_version) };
             BOOST_CHECK(
                 !reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -462,7 +463,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
-            std::istringstream input_stream{ data_too_new_version };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_too_new_version) };
             BOOST_CHECK(
                 !reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -486,7 +487,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
-            std::istringstream input_stream{ data_empty };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_empty) };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(
@@ -503,7 +504,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
-            std::istringstream input_stream{ data_no_train };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_no_train) };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(
@@ -535,7 +536,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
-            std::istringstream input_stream{ data_full };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_full) };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(
@@ -694,7 +695,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia2") });
             reader_type reader(std::move(p_select_diagram));
 
-            std::istringstream input_stream{ data_full };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_full) };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(
@@ -713,7 +714,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia3") });
             reader_type reader(std::move(p_select_diagram));
 
-            std::istringstream input_stream{ data_full };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_full) };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(
@@ -730,7 +731,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
-            std::istringstream input_stream{ data_too_old_version };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_too_old_version) };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(
@@ -747,7 +748,7 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 tetengo2::stdalt::make_unique<select_oudia_diagram_type>(string_type_{ TETENGO2_TEXT("Dia1") });
             reader_type reader(std::move(p_select_diagram));
 
-            std::istringstream input_stream{ data_too_new_version };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_too_new_version) };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(

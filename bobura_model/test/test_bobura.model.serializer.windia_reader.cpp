@@ -7,10 +7,11 @@
 */
 
 #include <iterator>
-#include <sstream>
 #include <string>
 
+#include <boost/iostreams/filtering_stream.hpp>
 #include <boost/predef.h>
+#include <boost/range/iterator_range.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -146,7 +147,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         {
             reader_type reader{};
 
-            std::istringstream input_stream{ data0 };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data0) };
             BOOST_CHECK(
                 !reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -157,7 +158,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         {
             reader_type reader{};
 
-            std::istringstream input_stream{ data1 };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data1) };
             BOOST_CHECK(
                 reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -168,7 +169,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         {
             reader_type reader{};
 
-            std::istringstream input_stream{ data3 };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data3) };
             BOOST_CHECK(
                 !reader.selects(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
@@ -190,7 +191,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         {
             reader_type reader{};
 
-            std::istringstream input_stream{ data0 };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data0) };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(
@@ -205,7 +206,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         {
             reader_type reader{};
 
-            std::istringstream input_stream{ data1 };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data1) };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(
@@ -225,7 +226,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         {
             reader_type reader{};
 
-            std::istringstream input_stream{ data2 };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data2) };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(
@@ -380,7 +381,7 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
         {
             reader_type reader{};
 
-            std::istringstream input_stream{ data3 };
+            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data3) };
             auto error = error_type::none;
             const auto p_timetable =
                 reader.read(
