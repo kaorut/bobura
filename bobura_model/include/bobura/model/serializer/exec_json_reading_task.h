@@ -89,6 +89,7 @@ namespace bobura { namespace model { namespace serializer
             tetengo2::gui::widget::progress_dialog<
                 typename dialog_type::traits_type,
                 std::unique_ptr<timetable_type>,
+                message_catalog_type,
                 typename dialog_type::details_traits_type,
                 typename dialog_type::menu_details_type,
                 typename dialog_type::message_loop_details_type,
@@ -133,6 +134,8 @@ namespace bobura { namespace model { namespace serializer
         const
         {
             string_type title{ m_message_catalog.get(TETENGO2_TEXT("App:Bobura")) };
+            string_type waiting_message{ m_message_catalog.get(TETENGO2_TEXT("Dialog:JsonReading:Please wait...")) };
+            string_type canceling_message{ m_message_catalog.get(TETENGO2_TEXT("Dialog:JsonReading:Canceling...")) };
             auto task =
                 [&read_timetable](promise_type& promise)
                 {
@@ -146,7 +149,14 @@ namespace bobura { namespace model { namespace serializer
                         promise.set_exception(std::make_exception_ptr(e));
                     }
                 };
-            progress_dialog_type dialog{ m_parent, std::move(title), std::move(task) };
+            progress_dialog_type dialog{
+                m_parent,
+                std::move(title),
+                std::move(waiting_message),
+                std::move(canceling_message),
+                std::move(task),
+                m_message_catalog
+            };
             dialog.do_modal();
 
             return dialog.task_future().get();
