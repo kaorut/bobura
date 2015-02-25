@@ -2,7 +2,8 @@
     "header":
     {
         "title":     "Message Catalog for Japanese",
-        "copyright": "Copyright (C) 2007-2015 kaoru"
+        "copyright": "Copyright (C) 2007-2015 kaoru",
+        "": ""
     },
     
     "body":
@@ -76,6 +77,9 @@
         "Dialog:FileOpenSave:WinDIA Files":                 "WinDIA ファイル",
         "Dialog:FileOpenSave:All Files":                    "すべてのファイル",
         
+        "Dialog:JsonReading:Opening the timetable file...":           "時刻表ファイルを開いています...",
+        "Dialog:JsonReading:Canceling opening the timetable file...": "時刻表ファイルの読み込みを中止しています...",
+
         "Dialog:OuDiaDiagram:Diagram Selection":          "ダイヤグラムの選択",
         "Dialog:OuDiaDiagram:&Select a diagram to load:": "読み込むダイヤグラムを選択してください(&S):",
         
@@ -134,6 +138,8 @@
         "Message:File:The timetable file is corrupted.": "時刻表ファイルが破損しています。",
         "Message:File:Unsupported format file.":         "このアプリケーションでは読み込めない形式のファイルです。",
         "Message:File:Can't create a temporary file.":   "一時ファイルを作成できません。",
-        "Message:File:Can't write to the file.":         "ファイルに書き込みできません。"
+        "Message:File:Can't write to the file.":         "ファイルに書き込みできません。",
+        
+        "": ""
     }
 }

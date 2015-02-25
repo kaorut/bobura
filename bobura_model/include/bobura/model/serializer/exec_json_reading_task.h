@@ -141,8 +141,12 @@ namespace bobura { namespace model { namespace serializer
         const
         {
             string_type title{ m_message_catalog.get(TETENGO2_TEXT("App:Bobura")) };
-            string_type waiting_message{ m_message_catalog.get(TETENGO2_TEXT("Dialog:JsonReading:Please wait...")) };
-            string_type canceling_message{ m_message_catalog.get(TETENGO2_TEXT("Dialog:JsonReading:Canceling...")) };
+            string_type waiting_message{
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:JsonReading:Opening the timetable file..."))
+            };
+            string_type canceling_message{
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:JsonReading:Canceling opening the timetable file..."))
+            };
             auto task =
                 [&read_timetable](promise_type& promise)
                 {
