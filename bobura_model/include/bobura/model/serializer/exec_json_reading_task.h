@@ -25,21 +25,27 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a JSON reading task execution.
 
-        \tparam Timetable      A timetable type.
-        \tparam Dialog         A progress dialog type.
-        \tparam Timer          A timer type.
-        \tparam MessageCatalog A message catalog type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Font              A font type.
+        \tparam Dialog            A progress dialog type.
+        \tparam Timer             A timer type.
+        \tparam SystemColorSet    A system color set type.
+        \tparam MessageCatalog    A message catalog type.
     */
     template <
         typename Size,
         typename Difference,
         typename String,
-        typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
         typename Font,
         typename Dialog,
         typename Timer,
+        typename SystemColorSet,
         typename MessageCatalog
     >
     class exec_json_reading_task
@@ -55,9 +61,6 @@ namespace bobura { namespace model { namespace serializer
 
         //! The string type.
         using string_type = String;
-
-        //! The iterator type.
-        using iterator = ForwardIterator;
 
         //! The operating distance type.
         using operating_distance_type = OperatingDistance;
@@ -81,6 +84,9 @@ namespace bobura { namespace model { namespace serializer
         //! The timer type.
         using timer_type = Timer;
 
+        //! The system color set type.
+        using system_color_set_type = SystemColorSet;
+
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
@@ -93,7 +99,8 @@ namespace bobura { namespace model { namespace serializer
                 typename dialog_type::details_traits_type,
                 typename dialog_type::menu_details_type,
                 typename dialog_type::message_loop_details_type,
-                typename timer_type::timer_details_type
+                typename timer_type::timer_details_type,
+                typename system_color_set_type::system_color_details_type
             >;
 
         //! The promise type.

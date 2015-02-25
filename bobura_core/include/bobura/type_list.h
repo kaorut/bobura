@@ -514,12 +514,6 @@ namespace bobura { namespace type_list
         using timer_details_type = typename DetailTypeList::timer_type;
 
         template <typename DetailTypeList>
-        using timer_type =
-            tetengo2::gui::timer<
-                type_list::detail::ui::widget_type<DetailTypeList>, timer_details_type<DetailTypeList>
-            >;
-
-        template <typename DetailTypeList>
         using side_bar_type =
             tetengo2::gui::widget::side_bar<
                 widget_traits_type<DetailTypeList>,
@@ -530,9 +524,19 @@ namespace bobura { namespace type_list
             >;
 
         template <typename DetailTypeList>
+        using system_color_set_type =
+            tetengo2::gui::drawing::system_color_set<system_color_details_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
         using text_box_type =
             tetengo2::gui::widget::text_box<
                 widget_traits_type<DetailTypeList>, widget_details_traits_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
+        using timer_type =
+            tetengo2::gui::timer<
+                type_list::detail::ui::widget_type<DetailTypeList>, timer_details_type<DetailTypeList>
             >;
 
     }}
@@ -828,6 +832,7 @@ namespace bobura { namespace type_list
                 type_list::detail::common_dialog::file_save_type<DetailTypeList>,
                 dialog_type<DetailTypeList>,
                 type_list::detail::ui::timer_type<DetailTypeList>,
+                type_list::detail::ui::system_color_set_type<DetailTypeList>,
                 oudia_diagram_dialog<dialog_traits_type<DetailTypeList>, size_type>,
                 message_catalog_type<DetailTypeList>,
                 type_list::detail::locale::timetable_file_encoder_type<DetailTypeList>,

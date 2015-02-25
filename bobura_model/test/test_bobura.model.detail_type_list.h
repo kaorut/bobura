@@ -20,6 +20,7 @@
 #include <tetengo2/detail/stub/message_loop.h>
 #include <tetengo2/detail/stub/menu.h>
 #include <tetengo2/detail/stub/scroll.h>
+#include <tetengo2/detail/stub/system_color.h>
 #include <tetengo2/detail/stub/timer.h>
 #include <tetengo2/detail/stub/virtual_key.h>
 #include <tetengo2/detail/stub/widget.h>
@@ -77,6 +78,8 @@ namespace test_bobura { namespace model { namespace type_list
 
             using timer_details_type = tetengo2::detail::stub::timer;
 
+            using system_color_details_type = tetengo2::detail::stub::system_color;
+
         }
 
     }}
@@ -125,6 +128,9 @@ namespace test_bobura { namespace model { namespace type_list
 
         //! The timer type.
         using timer_type = detail::detail::test::timer_details_type; 
+
+        //! The system color type.
+        using system_color_type = detail::detail::test::system_color_details_type;
 
     };
 

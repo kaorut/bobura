@@ -6,11 +6,9 @@
     $Id$
 */
 
-#include <iterator>
 #include <memory>
 #include <utility>
 
-#include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/model/serializer/exec_json_reading_task.h>
@@ -35,9 +33,6 @@ namespace
 
     using string_type = common_type_list_type::string_type;
 
-    using input_stream_iterator_type =
-        boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>;
-
     using operating_distance_type = common_type_list_type::operating_distance_type;
 
     using speed_type = common_type_list_type::speed_type;
@@ -53,6 +48,8 @@ namespace
 
     using timer_type = ui_type_list_type::timer_type;
 
+    using system_color_set_type = ui_type_list_type::system_color_set_type;
+
     using message_catalog_type = common_type_list_type::message_catalog_type;
 
     using exec_json_reading_task_type =
@@ -60,12 +57,12 @@ namespace
             size_type,
             difference_type,
             string_type,
-            input_stream_iterator_type,
             operating_distance_type,
             speed_type,
             font_type,
             dialog_type,
             timer_type,
+            system_color_set_type,
             message_catalog_type
         >;
 

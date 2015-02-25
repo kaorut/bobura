@@ -29,6 +29,7 @@ namespace bobura { namespace load_save
         \tparam FileSaveDialog       A file save dialog type.
         \tparam Dialog               A dialog type.
         \tparam Timer                A timer type.
+        \tparam SystemColorSet       A system color set type.
         \tparam OuDiaDiagramDialog   An OuDia diagram dialog type.
         \tparam MessageCatalog       A message catalog type.
         \tparam TimetableFileEncoder An timetable file encoder type.
@@ -49,6 +50,7 @@ namespace bobura { namespace load_save
         typename FileSaveDialog,
         typename Dialog,
         typename Timer,
+        typename SystemColorSet,
         typename OuDiaDiagramDialog,
         typename MessageCatalog,
         typename TimetableFileEncoder,
@@ -100,6 +102,9 @@ namespace bobura { namespace load_save
 
         //! The timer type.
         using timer_type = Timer;
+
+        //! The system color set type.
+        using system_color_set_type = SystemColorSet;
 
         //! The OuDia diagram dialog type.
         using oudia_diagram_dialog_type = OuDiaDiagramDialog;

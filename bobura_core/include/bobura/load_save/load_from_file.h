@@ -90,6 +90,9 @@ namespace bobura { namespace load_save
         //! The timer type.
         using timer_type = typename traits_type::timer_type;
 
+        //! The system color set type.
+        using system_color_set_type = typename traits_type::system_color_set_type;
+
         //! The OuDia diagram dialog type.
         using oudia_diagram_dialog_type = typename traits_type::oudia_diagram_dialog_type;
 
@@ -121,12 +124,12 @@ namespace bobura { namespace load_save
                 size_type,
                 difference_type,
                 string_type,
-                iterator,
                 operating_distance_type,
                 speed_type,
                 font_type,
                 dialog_type,
                 timer_type,
+                system_color_set_type,
                 message_catalog_type
             >;
 
