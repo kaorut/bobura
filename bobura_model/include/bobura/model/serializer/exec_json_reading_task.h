@@ -25,21 +25,27 @@ namespace bobura { namespace model { namespace serializer
     /*!
         \brief The class template for a JSON reading task execution.
 
-        \tparam Timetable      A timetable type.
-        \tparam Dialog         A progress dialog type.
-        \tparam Timer          A timer type.
-        \tparam MessageCatalog A message catalog type.
+        \tparam Size              A size type.
+        \tparam Difference        A difference type.
+        \tparam String            A string type.
+        \tparam OperatingDistance An operating distance type.
+        \tparam Speed             A speed type.
+        \tparam Font              A font type.
+        \tparam Dialog            A progress dialog type.
+        \tparam Timer             A timer type.
+        \tparam SystemColorSet    A system color set type.
+        \tparam MessageCatalog    A message catalog type.
     */
     template <
         typename Size,
         typename Difference,
         typename String,
-        typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
         typename Font,
         typename Dialog,
         typename Timer,
+        typename SystemColorSet,
         typename MessageCatalog
     >
     class exec_json_reading_task
@@ -55,9 +61,6 @@ namespace bobura { namespace model { namespace serializer
 
         //! The string type.
         using string_type = String;
-
-        //! The iterator type.
-        using iterator = ForwardIterator;
 
         //! The operating distance type.
         using operating_distance_type = OperatingDistance;
@@ -81,6 +84,9 @@ namespace bobura { namespace model { namespace serializer
         //! The timer type.
         using timer_type = Timer;
 
+        //! The system color set type.
+        using system_color_set_type = SystemColorSet;
+
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
@@ -89,10 +95,12 @@ namespace bobura { namespace model { namespace serializer
             tetengo2::gui::widget::progress_dialog<
                 typename dialog_type::traits_type,
                 std::unique_ptr<timetable_type>,
+                message_catalog_type,
                 typename dialog_type::details_traits_type,
                 typename dialog_type::menu_details_type,
                 typename dialog_type::message_loop_details_type,
-                typename timer_type::timer_details_type
+                typename timer_type::timer_details_type,
+                typename system_color_set_type::system_color_details_type
             >;
 
         //! The promise type.
@@ -133,6 +141,12 @@ namespace bobura { namespace model { namespace serializer
         const
         {
             string_type title{ m_message_catalog.get(TETENGO2_TEXT("App:Bobura")) };
+            string_type waiting_message{
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:JsonReading:Opening the timetable file..."))
+            };
+            string_type canceling_message{
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:JsonReading:Canceling opening the timetable file..."))
+            };
             auto task =
                 [&read_timetable](promise_type& promise)
                 {
@@ -146,7 +160,14 @@ namespace bobura { namespace model { namespace serializer
                         promise.set_exception(std::make_exception_ptr(e));
                     }
                 };
-            progress_dialog_type dialog{ m_parent, std::move(title), std::move(task) };
+            progress_dialog_type dialog{
+                m_parent,
+                std::move(title),
+                std::move(waiting_message),
+                std::move(canceling_message),
+                std::move(task),
+                m_message_catalog
+            };
             dialog.do_modal();
 
             return dialog.task_future().get();

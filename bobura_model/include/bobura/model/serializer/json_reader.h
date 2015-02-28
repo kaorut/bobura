@@ -927,7 +927,7 @@ namespace bobura { namespace model { namespace serializer
         static boost::optional<std::vector<train_type>> read_trains(
             pull_parser_type&    pull_parser,
             error_type&          error,
-            promise_type&,
+            promise_type&        promise,
             const direction_type direction,
             const std::size_t    station_count,
             const std::size_t    kind_count
@@ -942,13 +942,14 @@ namespace bobura { namespace model { namespace serializer
             }
             pull_parser.next();
 
-            for (;;)
+            for (std::size_t i = 0; ; ++i) // temporary
             {
                 auto train = read_train(pull_parser, direction, station_count, kind_count);
                 if (!train)
                     break;
 
                 trains.push_back(std::move(*train));
+                promise.set_progress(typename promise_type::progress_type{ i, 100 }); // temporary
             }
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))

@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <cstddef>
 #include <functional>
 #include <iterator>
 #include <memory>
@@ -16,6 +17,7 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/predef.h>
 #include <boost/range/iterator_range.hpp>
+#include <boost/rational.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -68,7 +70,7 @@ namespace
 
     struct exec_json_reading_task_type
     {
-        using promise_type = tetengo2::concurrent::progressive_promise<int, int>;
+        using promise_type = tetengo2::concurrent::progressive_promise<int, boost::rational<std::size_t>>;
 
         using read_timetable_type = std::function<std::unique_ptr<timetable_type> (promise_type& promise)>;
 

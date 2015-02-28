@@ -244,6 +244,13 @@ namespace test_bobura { namespace model { namespace type_list
         template <typename DetailTypeList>
         using timer_type = tetengo2::gui::timer<widget_type<DetailTypeList>, timer_details_type<DetailTypeList>>;
 
+        template <typename DetailTypeList>
+        using system_color_details_type = typename DetailTypeList::system_color_type;
+
+        template <typename DetailTypeList>
+        using system_color_set_type =
+            tetengo2::gui::drawing::system_color_set<system_color_details_type<DetailTypeList>>;
+
     }}
 #endif
 
@@ -272,6 +279,9 @@ namespace test_bobura { namespace model { namespace type_list
 
         //! The timer type.
         using timer_type = detail::ui::timer_type<DetailTypeList>;
+
+        //! The system color set type.
+        using system_color_set_type = detail::ui::system_color_set_type<DetailTypeList>;
 
     };
     
