@@ -7,12 +7,14 @@
 */
 
 #include <algorithm>
+#include <cstddef>
 #include <functional>
 #include <iterator>
 #include <memory>
 #include <utility>
 
 #include <boost/predef.h>
+#include <boost/rational.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -84,7 +86,7 @@ namespace
 
         using message_catalog_type = message_catalog_type_;
 
-        using promise_type = tetengo2::concurrent::progressive_promise<int, int>;
+        using promise_type = tetengo2::concurrent::progressive_promise<int, boost::rational<std::size_t>>;
 
         using read_timetable_type = std::function<std::unique_ptr<timetable_type> (promise_type& promise)>;
 
