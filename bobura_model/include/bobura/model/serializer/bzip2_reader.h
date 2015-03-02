@@ -135,15 +135,19 @@ namespace bobura { namespace model { namespace serializer
 
             try
             {
-                return
-                    m_p_reader->selects(
+                const auto first =
+                    tetengo2::make_observable_forward_iterator(
                         boost::spirit::make_default_multi_pass(
-                            std::istreambuf_iterator<typename iterator::value_type>(filtering_input_stream)
-                        ),
-                        boost::spirit::make_default_multi_pass(
-                            std::istreambuf_iterator<typename iterator::value_type>()
+                            std::istreambuf_iterator<typename iterator::value_type>{ filtering_input_stream }
                         )
                     );
+                const auto last =
+                    tetengo2::make_observable_forward_iterator(
+                        boost::spirit::make_default_multi_pass(
+                            std::istreambuf_iterator<typename iterator::value_type>{}
+                        )
+                    );
+                return m_p_reader->selects(first, last);
             }
             catch (const boost::iostreams::bzip2_error&)
             {
@@ -166,16 +170,19 @@ namespace bobura { namespace model { namespace serializer
 
             try
             {
-                return
-                    m_p_reader->read(
+                const auto first =
+                    tetengo2::make_observable_forward_iterator(
                         boost::spirit::make_default_multi_pass(
-                            std::istreambuf_iterator<typename iterator::value_type>(filtering_input_stream)
-                        ),
-                        boost::spirit::make_default_multi_pass(
-                            std::istreambuf_iterator<typename iterator::value_type>()
-                        ),
-                        error
+                            std::istreambuf_iterator<typename iterator::value_type>{ filtering_input_stream }
+                        )
                     );
+                const auto last =
+                    tetengo2::make_observable_forward_iterator(
+                        boost::spirit::make_default_multi_pass(
+                            std::istreambuf_iterator<typename iterator::value_type>{}
+                        )
+                    );
+                return m_p_reader->read(first, last, error);
             }
             catch (const boost::iostreams::bzip2_error&)
             {

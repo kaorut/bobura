@@ -67,7 +67,9 @@ namespace
     using time_type = stop_type::time_type;
 
     using input_stream_iterator_type =
-        boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>;
+        tetengo2::observable_forward_iterator<
+            boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>
+        >;
 
     struct select_oudia_diagram_type
     {
@@ -425,12 +427,15 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             reader_type reader(std::move(p_select_diagram));
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_empty) };
-            BOOST_CHECK(
-                !reader.selects(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
+                );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                )
-            );
+                );
+            BOOST_CHECK(!reader.selects(first, last));
         }
         {
             auto p_select_diagram =
@@ -438,12 +443,15 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             reader_type reader(std::move(p_select_diagram));
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_no_train) };
-            BOOST_CHECK(
-                reader.selects(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
+                );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                )
-            );
+                );
+            BOOST_CHECK(reader.selects(first, last));
         }
         {
             auto p_select_diagram =
@@ -451,12 +459,15 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             reader_type reader(std::move(p_select_diagram));
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_too_old_version) };
-            BOOST_CHECK(
-                !reader.selects(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
+                );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                )
-            );
+                );
+            BOOST_CHECK(!reader.selects(first, last));
         }
         {
             auto p_select_diagram =
@@ -464,12 +475,15 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             reader_type reader(std::move(p_select_diagram));
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_too_new_version) };
-            BOOST_CHECK(
-                !reader.selects(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
+                );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                )
-            );
+                );
+            BOOST_CHECK(!reader.selects(first, last));
         }
     }
 
@@ -488,13 +502,16 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             reader_type reader(std::move(p_select_diagram));
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_empty) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = reader.read(first, last, error);
 
             BOOST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
@@ -505,13 +522,16 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             reader_type reader(std::move(p_select_diagram));
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_no_train) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = reader.read(first, last, error);
 
             BOOST_REQUIRE(p_timetable);
             BOOST_CHECK(error == error_type::none);
@@ -537,13 +557,16 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             reader_type reader(std::move(p_select_diagram));
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_full) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = reader.read(first, last, error);
 
             BOOST_REQUIRE(p_timetable);
             BOOST_CHECK(error == error_type::none);
@@ -696,13 +719,16 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             reader_type reader(std::move(p_select_diagram));
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_full) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = reader.read(first, last, error);
 
             BOOST_REQUIRE(p_timetable);
             BOOST_CHECK(error == error_type::none);
@@ -715,13 +741,16 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             reader_type reader(std::move(p_select_diagram));
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_full) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = reader.read(first, last, error);
 
             BOOST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::canceled);
@@ -732,13 +761,16 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             reader_type reader(std::move(p_select_diagram));
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_too_old_version) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = reader.read(first, last, error);
 
             BOOST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
@@ -749,13 +781,16 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
             reader_type reader(std::move(p_select_diagram));
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_too_new_version) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = reader.read(first, last, error);
 
             BOOST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);

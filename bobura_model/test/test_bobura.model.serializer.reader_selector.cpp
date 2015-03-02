@@ -53,7 +53,9 @@ namespace
         >;
 
     using input_stream_iterator_type =
-        boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>;
+        tetengo2::observable_forward_iterator<
+            boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>
+        >;
 
     using reader_selector_type =
         bobura::model::serializer::reader_selector<
@@ -152,13 +154,15 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
         reader_selector_type reader_selector{ std::move(concrete_readers) };
 
         std::istringstream input_stream{ "hoge" };
-        BOOST_CHECK_THROW(
-            reader_selector.selects(
-                boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
+        const auto first =
+            tetengo2::make_observable_forward_iterator(
+                boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
+            );
+        const auto last =
+            tetengo2::make_observable_forward_iterator(
                 boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-            ),
-            std::logic_error
-        );
+            );
+        BOOST_CHECK_THROW(reader_selector.selects(first, last), std::logic_error);
     }
 
     BOOST_AUTO_TEST_CASE(read)
@@ -170,13 +174,16 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             reader_selector_type reader_selector{ std::move(concrete_readers) };
 
             std::istringstream input_stream{ "hoge" };
-            auto error = error_type::none;
-            const auto p_timetable =
-                reader_selector.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = reader_selector.read(first, last, error);
 
             BOOST_REQUIRE(p_timetable);
             BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("hoge") });
@@ -186,13 +193,16 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             reader_selector_type reader_selector{ std::move(concrete_readers) };
 
             std::istringstream input_stream{ "fuga" };
-            auto error = error_type::none;
-            const auto p_timetable =
-                reader_selector.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = reader_selector.read(first, last, error);
 
             BOOST_REQUIRE(p_timetable);
             BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("fuga") });
@@ -202,13 +212,16 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             reader_selector_type reader_selector{ std::move(concrete_readers) };
 
             std::istringstream input_stream{ "piyo" };
-            auto error = error_type::none;
-            const auto p_timetable =
-                reader_selector.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = reader_selector.read(first, last, error);
 
             BOOST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::unsupported);

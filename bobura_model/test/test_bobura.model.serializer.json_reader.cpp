@@ -66,7 +66,9 @@ namespace
     using color_type = ui_type_list_type::color_type;
 
     using input_stream_iterator_type =
-        boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>;
+        tetengo2::observable_forward_iterator<
+            boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>
+        >;
 
     struct exec_json_reading_task_type
     {
@@ -562,50 +564,65 @@ BOOST_AUTO_TEST_SUITE(json_reader)
         reader_type json_reader{ std::move(p_exec_json_reading_task) };
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty0) };
-            BOOST_CHECK(
-                !json_reader.selects(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
+                );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                )
-            );
+                );
+            BOOST_CHECK(!json_reader.selects(first, last));
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty1) };
-            BOOST_CHECK(
-                json_reader.selects(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
+                );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                )
-            );
+                );
+            BOOST_CHECK(json_reader.selects(first, last));
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty2) };
-            BOOST_CHECK(
-                json_reader.selects(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
+                );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                )
-            );
+                );
+            BOOST_CHECK(json_reader.selects(first, last));
         }
         {
             boost::iostreams::filtering_istream input_stream{
                 boost::make_iterator_range(json_white_space_before_start_element)
             };
-            BOOST_CHECK(
-                json_reader.selects(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
+                );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                )
-            );
+                );
+            BOOST_CHECK(json_reader.selects(first, last));
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_not_json) };
-            BOOST_CHECK(
-                !json_reader.selects(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
+                );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                )
-            );
+                );
+            BOOST_CHECK(!json_reader.selects(first, last));
         }
     }
 
@@ -617,39 +634,48 @@ BOOST_AUTO_TEST_SUITE(json_reader)
         reader_type json_reader{ std::move(p_exec_json_reading_task) };
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_not_json) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                json_reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = json_reader.read(first, last, error);
 
             BOOST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty1) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                json_reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = json_reader.read(first, last, error);
 
             BOOST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty2) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                json_reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = json_reader.read(first, last, error);
 
             BOOST_REQUIRE(p_timetable);
             BOOST_CHECK(error == error_type::none);
@@ -657,13 +683,16 @@ BOOST_AUTO_TEST_SUITE(json_reader)
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_line_name_only) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                json_reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = json_reader.read(first, last, error);
 
             BOOST_REQUIRE(p_timetable);
             BOOST_CHECK(error == error_type::none);
@@ -671,13 +700,16 @@ BOOST_AUTO_TEST_SUITE(json_reader)
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_station_only) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                json_reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = json_reader.read(first, last, error);
 
             BOOST_REQUIRE(p_timetable);
             BOOST_CHECK(error == error_type::none);
@@ -706,26 +738,32 @@ BOOST_AUTO_TEST_SUITE(json_reader)
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_invalid_station_grade) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                json_reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = json_reader.read(first, last, error);
 
             BOOST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_full_content) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                json_reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = json_reader.read(first, last, error);
 
             BOOST_REQUIRE(p_timetable);
             BOOST_CHECK(error == error_type::none);
@@ -819,65 +857,80 @@ BOOST_AUTO_TEST_SUITE(json_reader)
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_invalid_stop_time) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                json_reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = json_reader.read(first, last, error);
 
             BOOST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_too_many_stops) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                json_reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = json_reader.read(first, last, error);
 
             BOOST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_invalid_time_format) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                json_reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = json_reader.read(first, last, error);
 
             BOOST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_train_with_no_stop) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                json_reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = json_reader.read(first, last, error);
 
             BOOST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_invalid_kind_index) };
-            auto error = error_type::none;
-            const auto p_timetable =
-                json_reader.read(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                    error
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+                );
+            auto error = error_type::none;
+            const auto p_timetable = json_reader.read(first, last, error);
 
             BOOST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);

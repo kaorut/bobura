@@ -50,7 +50,9 @@ namespace
     using window_type = ui_type_list_type::window_type;
 
     using input_stream_iterator_type =
-        boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>;
+        tetengo2::observable_forward_iterator<
+            boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>
+        >;
 
     using encoder_type_ = common_type_list_type::encoder_type;
 
