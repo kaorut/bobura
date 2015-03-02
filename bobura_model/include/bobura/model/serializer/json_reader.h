@@ -928,7 +928,7 @@ namespace bobura { namespace model { namespace serializer
         static boost::optional<std::vector<train_type>> read_trains(
             pull_parser_type&    pull_parser,
             error_type&          error,
-            promise_type&        promise,
+            promise_type&,
             const direction_type direction,
             const std::size_t    station_count,
             const std::size_t    kind_count
