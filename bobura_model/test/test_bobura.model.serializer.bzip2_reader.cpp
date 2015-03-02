@@ -51,7 +51,9 @@ namespace
         >;
 
     using input_stream_iterator_type =
-        boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>;
+        tetengo2::observable_forward_iterator<
+            boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>
+        >;
 
     using bzip2_reader_type =
         bobura::model::serializer::bzip2_reader<
@@ -122,24 +124,30 @@ BOOST_AUTO_TEST_SUITE(bzip2_reader)
             bzip2_reader_type bzip2_reader{ std::move(p_reader) };
 
             std::istringstream input_stream{ "BZ" };
-            BOOST_CHECK(
-                bzip2_reader.selects(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
+                );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                )
-            );
+                );
+            BOOST_CHECK(bzip2_reader.selects(first, last));
         }
         {
             auto p_reader = tetengo2::stdalt::make_unique<concrete_reader>();
             bzip2_reader_type bzip2_reader{ std::move(p_reader) };
 
             std::istringstream input_stream{ "AZ" };
-            BOOST_CHECK(
-                !bzip2_reader.selects(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
+                );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                )
-            );
+                );
+            BOOST_CHECK(!bzip2_reader.selects(first, last));
         }
     }
 
@@ -151,13 +159,16 @@ BOOST_AUTO_TEST_SUITE(bzip2_reader)
         bzip2_reader_type bzip2_reader{ std::move(p_reader) };
 
         std::istringstream input_stream{ "BZ" };
-        auto error = error_type::none;
-        const auto p_timetable =
-            bzip2_reader.read(
-                boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                error
+        const auto first =
+            tetengo2::make_observable_forward_iterator(
+                boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
             );
+        const auto last =
+            tetengo2::make_observable_forward_iterator(
+                boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+            );
+        auto error = error_type::none;
+        const auto p_timetable = bzip2_reader.read(first, last, error);
 
         BOOST_REQUIRE(p_timetable);
         BOOST_CHECK(error == error_type::none);

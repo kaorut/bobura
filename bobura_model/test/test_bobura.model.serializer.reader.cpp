@@ -51,7 +51,9 @@ namespace
         >;
 
     using input_stream_iterator_type =
-        boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>;
+        tetengo2::observable_forward_iterator<
+            boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>
+        >;
 
     using reader_type =
         bobura::model::serializer::reader<
@@ -121,21 +123,27 @@ BOOST_AUTO_TEST_SUITE(reader)
 
         {
             std::istringstream input_stream{ "hoge" };
-            BOOST_CHECK(
-                reader.selects(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
+                );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                )
-            );
+                );
+            BOOST_CHECK(reader.selects(first, last));
         }
         {
             std::istringstream input_stream{ "fuga" };
-            BOOST_CHECK(
-                !reader.selects(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
+            const auto first =
+                tetengo2::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
+                );
+            const auto last =
+                tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                )
-            );
+                );
+            BOOST_CHECK(!reader.selects(first, last));
         }
     }
 #endif
@@ -146,13 +154,16 @@ BOOST_AUTO_TEST_SUITE(reader)
 
         concrete_reader reader{};
         std::istringstream input_stream{ "hoge" };
-        auto error = error_type::none;
-        const auto p_timetable =
-            reader.read(
-                boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)),
-                boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()),
-                error
+        const auto first =
+            tetengo2::make_observable_forward_iterator(
+                boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
             );
+        const auto last =
+            tetengo2::make_observable_forward_iterator(
+                boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
+            );
+        auto error = error_type::none;
+        const auto p_timetable = reader.read(first, last, error);
 
         BOOST_REQUIRE(p_timetable);
         BOOST_CHECK(error == error_type::none);

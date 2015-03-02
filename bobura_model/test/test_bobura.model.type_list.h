@@ -65,7 +65,9 @@ namespace test_bobura { namespace model { namespace type_list
         using speed_type = size_type;
 
         using input_stream_iterator_type =
-            boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>;
+            tetengo2::observable_forward_iterator<
+                boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>
+            >;
 
         template <typename DetailTypeList>
         using message_catalog_type =
