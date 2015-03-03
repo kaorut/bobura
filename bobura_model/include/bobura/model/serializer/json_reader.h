@@ -1355,33 +1355,43 @@ namespace bobura { namespace model { namespace serializer
                 (*m_p_exec_json_reading_task)(
                     [this, first, last, &error](promise_type& promise)
                     {
-                        auto observing_first = first;
-                        const auto content_size = static_cast<std::size_t>(std::distance(first.base(), last.base()));
-                        std::size_t skip = 0;
-                        observing_first.increment_signal().connect(
-                            [&skip, observing_first, content_size, &promise](const iterator current)
-                            {
-                                ++skip;
-                                if (skip % 50000 == 0)
-                                {
-                                    const auto progress =
-                                        static_cast<std::size_t>(
-                                            std::distance(observing_first.base(), current.base())
-                                        );
-                                    promise.set_progress({ progress, content_size });
-                                }
-                            }
-                        );
-
-                        auto p_push_parser =
-                            tetengo2::stdalt::make_unique<push_parser_type>(
-                                observing_first, last, tetengo2::stdalt::make_unique<grammar_type>()
-                            );
-                        pull_parser_type pull_parser{ std::move(p_push_parser), 5 };
-
-                        return read_timetable(pull_parser, error, promise);
+                        return read_impl_impl(first, last, error, promise);
                     }
                 );
+        }
+
+
+        // functions
+
+        std::unique_ptr<timetable_type> read_impl_impl(
+            const iterator first,
+            const iterator last,
+            error_type&    error,
+            promise_type&  promise
+        )
+        {
+            auto observing_first = first;
+            const auto content_size = static_cast<std::size_t>(first.distance_to(last));
+            std::size_t skip = 0;
+            observing_first.set_increment_observer(
+                [&skip, observing_first, content_size, &promise](const iterator current)
+                {
+                    ++skip;
+                    if (skip % 50000 == 0)
+                    {
+                        const auto progress = static_cast<std::size_t>(observing_first.distance_to(current));
+                        promise.set_progress({ progress, content_size });
+                    }
+                }
+            );
+
+            auto p_push_parser =
+                tetengo2::stdalt::make_unique<push_parser_type>(
+                    observing_first, last, tetengo2::stdalt::make_unique<grammar_type>()
+                );
+            pull_parser_type pull_parser{ std::move(p_push_parser), 5 };
+
+            return read_timetable(pull_parser, error, promise);
         }
 
 
