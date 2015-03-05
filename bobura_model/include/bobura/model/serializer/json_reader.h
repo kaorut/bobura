@@ -1376,7 +1376,7 @@ namespace bobura { namespace model { namespace serializer
                 [&skip, observing_first, content_size, &promise](const iterator current)
                 {
                     ++skip;
-                    if (skip % 50000 == 0)
+                    if (skip % 16384 == 0)
                     {
                         const auto progress = static_cast<std::size_t>(observing_first.distance_to(current));
                         promise.set_progress({ progress, content_size });
