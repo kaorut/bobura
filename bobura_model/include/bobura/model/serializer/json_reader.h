@@ -212,24 +212,12 @@ namespace bobura { namespace model { namespace serializer
         {
             auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
 
-            if (promise.abort_requested())
-            {
-                error = error_type::canceled;
-                return std::unique_ptr<timetable_type>{};
-            }
-
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
                 error = error_type::corrupted;
                 return std::unique_ptr<timetable_type>{};
             }
             pull_parser.next();
-
-            if (promise.abort_requested())
-            {
-                error = error_type::canceled;
-                return std::unique_ptr<timetable_type>{};
-            }
 
             auto header = read_header(pull_parser, error, promise);
             if (!header)
@@ -250,22 +238,10 @@ namespace bobura { namespace model { namespace serializer
                     p_timetable->set_note(std::move(found->second));
             }
 
-            if (promise.abort_requested())
-            {
-                error = error_type::canceled;
-                return std::unique_ptr<timetable_type>{};
-            }
-
             auto font_color_set = read_font_color_set(pull_parser, error, promise);
             if (!font_color_set)
                 return std::unique_ptr<timetable_type>{};
             p_timetable->set_font_color_set(std::move(*font_color_set));
-
-            if (promise.abort_requested())
-            {
-                error = error_type::canceled;
-                return std::unique_ptr<timetable_type>{};
-            }
 
             auto stations = read_stations(pull_parser, error, promise);
             if (!stations)
@@ -273,23 +249,11 @@ namespace bobura { namespace model { namespace serializer
             for (auto& station: *stations)
                 p_timetable->insert_station_location(p_timetable->station_locations().end(), std::move(station));
 
-            if (promise.abort_requested())
-            {
-                error = error_type::canceled;
-                return std::unique_ptr<timetable_type>{};
-            }
-
             auto train_kinds = read_train_kinds(pull_parser, error, promise);
             if (!train_kinds)
                 return std::unique_ptr<timetable_type>{};
             for (auto& train_kind: *train_kinds)
                 p_timetable->insert_train_kind(p_timetable->train_kinds().end(), std::move(train_kind));
-
-            if (promise.abort_requested())
-            {
-                error = error_type::canceled;
-                return std::unique_ptr<timetable_type>{};
-            }
 
             auto down_trains =
                 read_trains(pull_parser, error, promise, direction_type::down, stations->size(), train_kinds->size());
@@ -298,24 +262,12 @@ namespace bobura { namespace model { namespace serializer
             for (auto& train: *down_trains)
                 p_timetable->insert_down_train(p_timetable->down_trains().end(), std::move(train));
 
-            if (promise.abort_requested())
-            {
-                error = error_type::canceled;
-                return std::unique_ptr<timetable_type>{};
-            }
-
             auto up_trains =
                 read_trains(pull_parser, error, promise, direction_type::up, stations->size(), train_kinds->size());
             if (!up_trains)
                 return std::unique_ptr<timetable_type>{};
             for (auto& train: *up_trains)
                 p_timetable->insert_up_train(p_timetable->up_trains().end(), std::move(train));
-
-            if (promise.abort_requested())
-            {
-                error = error_type::canceled;
-                return std::unique_ptr<timetable_type>{};
-            }
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
@@ -324,19 +276,13 @@ namespace bobura { namespace model { namespace serializer
             }
             pull_parser.next();
 
-            if (promise.abort_requested())
-            {
-                error = error_type::canceled;
-                return std::unique_ptr<timetable_type>{};
-            }
-
             return std::move(p_timetable);
         }
 
         static boost::optional<header_type> read_header(
             pull_parser_type& pull_parser,
             error_type&       error,
-            promise_type&
+            promise_type&     promise
         )
         {
             header_type header{};
@@ -350,6 +296,12 @@ namespace bobura { namespace model { namespace serializer
 
             for (;;)
             {
+                if (promise.abort_requested())
+                {
+                    error = error_type::canceled;
+                    return boost::none;
+                }
+
                 auto member = read_string_member(pull_parser);
                 if (!member)
                     break;
@@ -370,7 +322,7 @@ namespace bobura { namespace model { namespace serializer
         static boost::optional<font_color_set_type> read_font_color_set(
             pull_parser_type& pull_parser,
             error_type&       error,
-            promise_type&
+            promise_type&     promise
         )
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
@@ -391,6 +343,12 @@ namespace bobura { namespace model { namespace serializer
             auto train_name_font = font_color_set_type::default_().train_name();
             for (;;)
             {
+                if (promise.abort_requested())
+                {
+                    error = error_type::canceled;
+                    return boost::none;
+                }
+
                 auto element = read_font_color_set_element(pull_parser);
                 if (!element)
                     break;
@@ -615,7 +573,7 @@ namespace bobura { namespace model { namespace serializer
         static boost::optional<std::vector<station_location_type>> read_stations(
             pull_parser_type& pull_parser,
             error_type&       error,
-            promise_type&
+            promise_type&     promise
         )
         {
             std::vector<station_location_type> stations{};
@@ -629,6 +587,12 @@ namespace bobura { namespace model { namespace serializer
 
             for (;;)
             {
+                if (promise.abort_requested())
+                {
+                    error = error_type::canceled;
+                    return boost::none;
+                }
+
                 auto station = read_station(pull_parser);
                 if (!station)
                     break;
@@ -756,7 +720,7 @@ namespace bobura { namespace model { namespace serializer
         static boost::optional<std::vector<train_kind_type>> read_train_kinds(
             pull_parser_type& pull_parser,
             error_type&       error,
-            promise_type&
+            promise_type&     promise
         )
         {
             std::vector<train_kind_type> train_kinds{};
@@ -770,6 +734,12 @@ namespace bobura { namespace model { namespace serializer
 
             for (;;)
             {
+                if (promise.abort_requested())
+                {
+                    error = error_type::canceled;
+                    return boost::none;
+                }
+
                 auto train_kind = read_train_kind(pull_parser);
                 if (!train_kind)
                     break;
@@ -927,7 +897,7 @@ namespace bobura { namespace model { namespace serializer
         static boost::optional<std::vector<train_type>> read_trains(
             pull_parser_type&    pull_parser,
             error_type&          error,
-            promise_type&,
+            promise_type&        promise,
             const direction_type direction,
             const std::size_t    station_count,
             const std::size_t    kind_count
@@ -944,9 +914,20 @@ namespace bobura { namespace model { namespace serializer
 
             for (;;)
             {
-                auto train = read_train(pull_parser, direction, station_count, kind_count);
+                if (promise.abort_requested())
+                {
+                    error = error_type::canceled;
+                    return boost::none;
+                }
+
+                auto train = read_train(pull_parser, error, promise, direction, station_count, kind_count);
                 if (!train)
-                    break;
+                {
+                    if (error == error_type::canceled)
+                        return boost::none;
+                    else
+                        break;
+                }
 
                 trains.push_back(std::move(*train));
             }
@@ -963,6 +944,8 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<train_type> read_train(
             pull_parser_type&    pull_parser,
+            error_type&          error,
+            promise_type&        promise,
             const direction_type direction,
             const std::size_t    station_count,
             const std::size_t    kind_count
@@ -1033,7 +1016,7 @@ namespace bobura { namespace model { namespace serializer
                 direction, std::move(number), kind_index, std::move(name), std::move(name_number), std::move(note)
             };
 
-            auto stops = read_stops(pull_parser);
+            auto stops = read_stops(pull_parser, error, promise);
             if (!stops)
                 return boost::none;
             if (stops->size() > station_count)
@@ -1055,7 +1038,11 @@ namespace bobura { namespace model { namespace serializer
             return stop_type{ time_type::uninitialized(), time_type::uninitialized(), false, string_type{} };
         }
 
-        static boost::optional<std::vector<stop_type>> read_stops(pull_parser_type& pull_parser)
+        static boost::optional<std::vector<stop_type>> read_stops(
+            pull_parser_type& pull_parser,
+            error_type&       error,
+            promise_type&     promise
+        )
         {
             std::vector<stop_type> stops{};
 
@@ -1074,6 +1061,12 @@ namespace bobura { namespace model { namespace serializer
 
             for (;;)
             {
+                if (promise.abort_requested())
+                {
+                    error = error_type::canceled;
+                    return boost::none;
+                }
+
                 auto stop = read_stop(pull_parser);
                 if (!stop)
                     break;
@@ -1376,7 +1369,7 @@ namespace bobura { namespace model { namespace serializer
                 [&skip, observing_first, content_size, &promise](const iterator current)
                 {
                     ++skip;
-                    if (skip % 50000 == 0)
+                    if (skip % 16384 == 0)
                     {
                         const auto progress = static_cast<std::size_t>(observing_first.distance_to(current));
                         promise.set_progress({ progress, content_size });
