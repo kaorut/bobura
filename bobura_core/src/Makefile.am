@@ -30,6 +30,7 @@ sources = \
     bobura.file_property_dialog.cpp \
     bobura.font_color_dialog.cpp \
     bobura.load_save.confirm_file_save.cpp \
+    bobura.load_save.load_from_file.cpp \
     bobura.main_window.cpp \
     bobura.main_window_menu_builder.cpp \
     bobura.oudia_diagram_dialog.cpp \
