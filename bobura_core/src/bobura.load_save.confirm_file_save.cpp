@@ -27,11 +27,7 @@ namespace bobura { namespace load_save
 
         using traits_type = Traits;
 
-        using string_type = typename traits_type::string_type;
-
         using abstract_window_type = typename traits_type::abstract_window_type;
-
-        using message_box_type = typename traits_type::message_box_type;
 
         using message_catalog_type = typename traits_type::message_catalog_type;
 
@@ -76,6 +72,13 @@ namespace bobura { namespace load_save
 
 
     private:
+        // types
+
+        using string_type = typename traits_type::string_type;
+
+        using message_box_type = typename traits_type::message_box_type;
+
+
         // variables
 
         model_type& m_model;
