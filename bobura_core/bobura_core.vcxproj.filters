@@ -37,6 +37,9 @@
     <Filter Include="sources\bobura\view\diagram">
       <UniqueIdentifier>{dc5d02ae-19b0-4505-99fd-6fa0b11d6f63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sources\bobura\load_save">
+      <UniqueIdentifier>{ba09c701-0e46-4703-a766-15adcc7e90e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\precompiled\precompiled.h">
@@ -346,6 +349,9 @@
     </ClCompile>
     <ClCompile Include="src\bobura.command.open_www_tetengo_org.cpp">
       <Filter>sources\bobura\command</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.load_save.confirm_file_save.cpp">
+      <Filter>sources\bobura\load_save</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

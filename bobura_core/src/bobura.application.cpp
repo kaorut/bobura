@@ -453,10 +453,10 @@ namespace bobura
     }
 
 #if BOOST_COMP_MSVC
-    template class application<application_::traits_type_list_type::application_type>;
+    template class application<typename application_::traits_type_list_type::application_type>;
 #endif
 
-    template class application<test::traits_type_list_type::application_type>;
+    template class application<typename test::traits_type_list_type::application_type>;
 
 
 }

@@ -42,9 +42,6 @@ namespace bobura { namespace load_save
         //! The string type.
         using string_type = typename traits_type::string_type;
 
-        //! The output stream type.
-        using output_stream_type = typename traits_type::output_stream_type;
-
         //! The operating distance type.
         using operating_distance_type = typename traits_type::operating_distance_type;
 
@@ -57,17 +54,8 @@ namespace bobura { namespace load_save
         //! The abstract window type.
         using abstract_window_type = typename traits_type::abstract_window_type;
 
-        //! The message box type.
-        using message_box_type = typename traits_type::message_box_type;
-
-        //! The file save dialog type.
-        using file_save_dialog_type = typename traits_type::file_save_dialog_type;
-
         //! The message catalog type.
         using message_catalog_type = typename traits_type::message_catalog_type;
-
-        //! The timetable file encoder type.
-        using timetable_file_encoder_type = typename traits_type::timetable_file_encoder_type;
 
         //! The model type.
         using model_type =
@@ -90,12 +78,13 @@ namespace bobura { namespace load_save
             model_type&                 model,
             const save_to_file_type&    save_to_file,
             const message_catalog_type& message_catalog
-        )
-        :
-        m_model(model),
-        m_save_to_file(save_to_file),
-        m_message_catalog(message_catalog)
-        {}
+        );
+
+        /*!
+            \brief Destroys the file save confirmation.
+        */
+        ~confirm_file_save()
+        TETENGO2_STDALT_NOEXCEPT;
 
 
         // functions
@@ -109,60 +98,18 @@ namespace bobura { namespace load_save
             \retval false Otherwise.
         */
         bool operator()(abstract_window_type& parent)
-        const
-        {
-            if (!m_model.changed())
-                return true;
-
-            const auto selected_button = create_message_box(parent)->do_modal();
-            if (selected_button == message_box_type::button_id_type::cancel)
-                return false;
-            if (selected_button == message_box_type::button_id_type::yes)
-            {
-                if (!m_save_to_file(m_model, parent))
-                    return false;
-            }
-
-            return true;
-        }
+        const;
 
 
     private:
+        // types
+
+        class impl;
+
+
         // variables
 
-        model_type& m_model;
-
-        const save_to_file_type& m_save_to_file;
-
-        const message_catalog_type& m_message_catalog;
-
-
-        // functions
-
-        std::unique_ptr<message_box_type> create_message_box(abstract_window_type& parent)
-        const
-        {
-            const auto file_path =
-                m_model.has_path() ?
-                m_model.path().template string<string_type>() :
-                m_message_catalog.get(TETENGO2_TEXT("Common:Untitled"));
-
-            return
-                tetengo2::stdalt::make_unique<message_box_type>(
-                    parent,
-                    m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
-                    m_message_catalog.get(
-                        TETENGO2_TEXT("Message:File:The file has been changed. Do you want to save the changes?")
-                    ),
-                    file_path,
-                    message_box_type::button_style_type::yes_no(
-                        true,
-                        m_message_catalog.get(TETENGO2_TEXT("Message:File:&Save")),
-                        m_message_catalog.get(TETENGO2_TEXT("Message:File:&Don't save"))
-                    ),
-                    message_box_type::icon_style_type::warning
-                );
-        }
+        const std::unique_ptr<impl> m_p_impl;
 
 
     };
