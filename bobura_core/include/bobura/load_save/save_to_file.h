@@ -70,7 +70,7 @@ namespace bobura { namespace load_save
                                      When the model does not have a path, a file selection dialog is always shown.
             \param message_catalog   A message catalog.
         */
-        save_to_file(const bool ask_file_path, const message_catalog_type& message_catalog);
+        save_to_file(bool ask_file_path, const message_catalog_type& message_catalog);
 
         /*!
             \brief Destroys the file saving.

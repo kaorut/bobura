@@ -78,7 +78,7 @@ namespace bobura { namespace load_save
             \param message_catalog   A message catalog.
         */
         load_from_file(
-            const bool                    ask_file_path,
+            bool                          ask_file_path,
             const confirm_file_save_type& confirm_file_save,
             const message_catalog_type&   message_catalog
         );
