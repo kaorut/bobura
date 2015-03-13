@@ -9,6 +9,8 @@
 #if !defined(BOBURA_LOADSAVE_NEWFILE_H)
 #define BOBURA_LOADSAVE_NEWFILE_H
 
+#include <memory>
+
 #include <tetengo2.h>
 
 #include <bobura/load_save/confirm_file_save.h>
@@ -18,7 +20,7 @@
 namespace bobura { namespace load_save
 {
     /*!
-        \brief The class template for a new-file load_save.
+        \brief The class template for a file initialization.
 
         \tparam Traits A traits type.
     */
@@ -40,9 +42,6 @@ namespace bobura { namespace load_save
         //! The string type.
         using string_type = typename traits_type::string_type;
 
-        //! The output stream type.
-        using output_stream_type = typename traits_type::output_stream_type;
-
         //! The operating distance type.
         using operating_distance_type = typename traits_type::operating_distance_type;
 
@@ -55,18 +54,6 @@ namespace bobura { namespace load_save
         //! The abstract window type.
         using abstract_window_type = typename traits_type::abstract_window_type;
 
-        //! The message box type.
-        using message_box_type = typename traits_type::message_box_type;
-
-        //! The file save dialog type.
-        using file_save_dialog_type = typename traits_type::file_save_dialog_type;
-
-        //! The message catalog type.
-        using message_catalog_type = typename traits_type::message_catalog_type;
-
-        //! The timetable file encoder type.
-        using timetable_file_encoder_type = typename traits_type::timetable_file_encoder_type;
-
         //! The model type.
         using model_type =
             timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
@@ -78,14 +65,17 @@ namespace bobura { namespace load_save
         // constructors and destructor
 
         /*!
-            \brief Creates a new-file load_save.
+            \brief Creates a file initialization.
 
             \param confirm_file_save A file save confirmation.
         */
-        explicit new_file(const confirm_file_save_type& confirm_file_save)
-        :
-        m_confirm_file_save(confirm_file_save)
-        {}
+        explicit new_file(const confirm_file_save_type& confirm_file_save);
+
+        /*!
+            \brief Destroys the file initialization.
+        */
+        ~new_file()
+        TETENGO2_STDALT_NOEXCEPT;
 
 
         // functions
@@ -97,24 +87,18 @@ namespace bobura { namespace load_save
             \param parent A parent window.
         */
         void operator()(model_type& model, abstract_window_type& parent)
-        const
-        {
-            if (!m_confirm_file_save(parent))
-                return;
-
-            model.reset_timetable(tetengo2::stdalt::make_unique<timetable_type>());
-        }
+        const;
 
 
     private:
         // types
 
-        using timetable_type = typename model_type::timetable_type;
+        class impl;
 
 
         // variables
 
-        const confirm_file_save_type& m_confirm_file_save;
+        const std::unique_ptr<impl> m_p_impl;
 
 
     };

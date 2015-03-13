@@ -202,6 +202,7 @@
     <ClCompile Include="src\bobura.font_color_dialog.cpp" />
     <ClCompile Include="src\bobura.load_save.confirm_file_save.cpp" />
     <ClCompile Include="src\bobura.load_save.load_from_file.cpp" />
+    <ClCompile Include="src\bobura.load_save.new_file.cpp" />
     <ClCompile Include="src\bobura.main_window.cpp" />
     <ClCompile Include="src\bobura.main_window_menu_builder.cpp" />
     <ClCompile Include="src\bobura.oudia_diagram_dialog.cpp" />
