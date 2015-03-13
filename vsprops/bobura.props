@@ -9,7 +9,7 @@
       <PreprocessorDefinitions>USE_TETENGO2_DETAIL_TYPES_FOR_APPLICATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>comctl32.lib;gdiplus.lib;d2d1.lib;dwrite.lib;bobura_core.lib;tetengo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;gdiplus.lib;d2d1.lib;dwrite.lib;bobura_core.lib;bobura_model.lib;tetengo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>

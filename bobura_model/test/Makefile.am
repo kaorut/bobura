@@ -46,14 +46,18 @@ EXTRA_DIST = $(extra_headers) $(extra_sources)
 
 TESTS = bobura_model.test
 
+bobura_model_test_DEPENDENCIES = \
+    $(top_builddir)/bobura_core/src/libbobura_model.a
 bobura_model_test_CPPFLAGS = \
     -I$(top_srcdir)/bobura_model/include \
     -I$(TETENGO2_INCLUDE) \
     -I$(TETENGO2_DETAIL_INCLUDE) \
     -I$(TETENGO2_GUI_INCLUDE)
 bobura_model_test_LDFLAGS = \
+    -L$(top_builddir)/bobura_model/src \
     -L$(TETENGO2_LIB)
 bobura_model_test_LDADD = \
+    -lbobura_model \
     -ltetengo2 \
     $(UNITTEST_LIBS)
 bobura_model_test_SOURCES = $(headers) $(sources)

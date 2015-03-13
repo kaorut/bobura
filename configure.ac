@@ -23,6 +23,7 @@ AC_CONFIG_FILES([
     bobura_model/Makefile
     bobura_model/include/Makefile
     bobura_model/include/bobura/Makefile
+    bobura_model/src/Makefile
     bobura_model/test/Makefile
     docsrc/Makefile
     iconsrc/Makefile

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\precompiled\precompiled.h" />
     <ClInclude Include="include\bobura\model\0namespace.dox" />
     <ClInclude Include="include\bobura\model\message\0namespace.dox" />
     <ClInclude Include="include\bobura\model\message\timetable_observer_set.h" />
@@ -52,32 +53,39 @@
     <ClInclude Include="include\bobura\model\train_info\time_span.h" />
     <ClInclude Include="include\bobura\model\train_kind.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\precompiled\precompiled.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.bzip2_reader.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E3D6C3EA-1A16-45EB-80A6-69B4AFAD366C}</ProjectGuid>
     <RootNamespace>bobura_model</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Utility</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
@@ -89,25 +97,37 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\lib\tetengo2\vsprops\common.props" />
-    <Import Project="..\lib\tetengo2\vsprops\header_only_lib.props" />
+    <Import Project="..\lib\tetengo2\vsprops\compilation.props" />
+    <Import Project="..\lib\tetengo2\vsprops\compilation_win32.props" />
+    <Import Project="..\lib\tetengo2\vsprops\compilation_debug.props" />
+    <Import Project="..\lib\tetengo2\vsprops\static_lib.props" />
     <Import Project="..\vsprops\bobura_model.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\lib\tetengo2\vsprops\common.props" />
-    <Import Project="..\lib\tetengo2\vsprops\header_only_lib.props" />
+    <Import Project="..\lib\tetengo2\vsprops\compilation.props" />
+    <Import Project="..\lib\tetengo2\vsprops\compilation_x64.props" />
+    <Import Project="..\lib\tetengo2\vsprops\compilation_debug.props" />
+    <Import Project="..\lib\tetengo2\vsprops\static_lib.props" />
     <Import Project="..\vsprops\bobura_model.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\lib\tetengo2\vsprops\common.props" />
-    <Import Project="..\lib\tetengo2\vsprops\header_only_lib.props" />
+    <Import Project="..\lib\tetengo2\vsprops\compilation.props" />
+    <Import Project="..\lib\tetengo2\vsprops\compilation_win32.props" />
+    <Import Project="..\lib\tetengo2\vsprops\compilation_release.props" />
+    <Import Project="..\lib\tetengo2\vsprops\static_lib.props" />
     <Import Project="..\vsprops\bobura_model.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\lib\tetengo2\vsprops\common.props" />
-    <Import Project="..\lib\tetengo2\vsprops\header_only_lib.props" />
+    <Import Project="..\lib\tetengo2\vsprops\compilation.props" />
+    <Import Project="..\lib\tetengo2\vsprops\compilation_x64.props" />
+    <Import Project="..\lib\tetengo2\vsprops\compilation_release.props" />
+    <Import Project="..\lib\tetengo2\vsprops\static_lib.props" />
     <Import Project="..\vsprops\bobura_model.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
