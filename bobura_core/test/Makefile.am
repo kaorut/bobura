@@ -76,7 +76,7 @@ TESTS = bobura_core.test
 
 bobura_core_test_DEPENDENCIES = \
     $(top_builddir)/bobura_core/src/libbobura_core.a \
-    $(top_builddir)/bobura_core/src/libbobura_model.a
+    $(top_builddir)/bobura_model/src/libbobura_model.a
 bobura_core_test_CPPFLAGS = \
     -I$(top_srcdir)/bobura_core/include \
     -I$(top_srcdir)/bobura_model/include \
