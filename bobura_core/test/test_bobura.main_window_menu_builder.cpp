@@ -8,6 +8,7 @@
 
 #include <vector>
 
+#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/command/set.h>
