@@ -42,26 +42,13 @@ namespace bobura { namespace model { namespace serializer
     public:
         // types
 
-        using size_type = Size;
-
-        using difference_type = Difference;
-
-        using string_type = String;
-
         using iterator = ForwardIterator;
 
-        using operating_distance_type = OperatingDistance;
+        using base_type = typename bzip2_reader::base_type;
 
-        using speed_type = Speed;
+        using timetable_type = typename bzip2_reader::timetable_type;
 
-        using font_type = Font;
-
-        using base_type =
-            reader<size_type, difference_type, string_type, iterator, operating_distance_type, speed_type, font_type>;
-
-        using timetable_type = typename base_type::timetable_type;
-
-        using error_type = typename base_type::error_type;
+        using error_type = typename bzip2_reader::error_type;
 
 
         // constructors and destructor
