@@ -153,9 +153,19 @@ namespace bobura { namespace load_save
     private:
         // types
 
+        using size_type = typename traits_type::size_type;
+
+        using difference_type = typename traits_type::difference_type;
+
         using string_type = typename traits_type::string_type;
 
         using iterator = typename traits_type::iterator;
+
+        using operating_distance_type = typename traits_type::operating_distance_type;
+
+        using speed_type = typename traits_type::speed_type;
+
+        using font_type = typename traits_type::font_type;
 
         using output_stream_type = typename traits_type::output_stream_type;
 
