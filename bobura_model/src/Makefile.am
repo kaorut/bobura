@@ -17,6 +17,7 @@ lib_LIBRARIES = libbobura_model.a
 EXTRA_DIST = $(extra_headers) $(extra_sources)
 
 libbobura_model_a_CPPFLAGS = \
+    -I$(top_srcdir)/bobura_core/include \
     -I$(top_srcdir)/bobura_model/include \
     -I$(TETENGO2_INCLUDE) \
     -I$(TETENGO2_DETAIL_INCLUDE) \

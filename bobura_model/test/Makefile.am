@@ -49,6 +49,7 @@ TESTS = bobura_model.test
 bobura_model_test_DEPENDENCIES = \
     $(top_builddir)/bobura_model/src/libbobura_model.a
 bobura_model_test_CPPFLAGS = \
+    -I$(top_srcdir)/bobura_core/include \
     -I$(top_srcdir)/bobura_model/include \
     -I$(TETENGO2_INCLUDE) \
     -I$(TETENGO2_DETAIL_INCLUDE) \

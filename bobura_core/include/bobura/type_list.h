@@ -305,6 +305,9 @@ namespace bobura { namespace type_list
             tetengo2::gui::drawing::transparent_background<drawing_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
+        using font_type = tetengo2::gui::drawing::font<string_type, size_type, drawing_details_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
         using fast_font_type =
             tetengo2::gui::drawing::font<string_type, size_type, fast_drawing_details_type<DetailTypeList>>;
 
@@ -578,6 +581,9 @@ namespace bobura { namespace type_list
 
         //! The fast canvas type.
         using fast_canvas_type = detail::ui::fast_canvas_type<DetailTypeList>;
+
+        //! The font type.
+        using font_type = detail::ui::font_type<DetailTypeList>;
 
         //! The fast font type.
         using fast_font_type = detail::ui::fast_font_type<DetailTypeList>;

@@ -9,16 +9,7 @@
 #if !defined(BOBURA_MODEL_SERIALIZER_BZIP2READER_H)
 #define BOBURA_MODEL_SERIALIZER_BZIP2READER_H
 
-#include <iterator>
 #include <memory>
-#include <string>
-#include <utility>
-
-#include <boost/iostreams/filter/bzip2.hpp>
-#include <boost/iostreams/filtering_stream.hpp>
-#include <boost/range/iterator_range.hpp>
-#include <boost/spirit/include/support_multi_pass.hpp>
-#include <boost/utility.hpp>
 
 #include <tetengo2.h>
 
@@ -93,107 +84,33 @@ namespace bobura { namespace model { namespace serializer
 
             \param p_reader A unique pointer to a reader.
         */
-        explicit bzip2_reader(std::unique_ptr<base_type> p_reader)
-        :
-        base_type(),
-        m_p_reader(std::move(p_reader))
-        {}
+        explicit bzip2_reader(std::unique_ptr<base_type> p_reader);
 
         /*!
             \brief Destroys the bzip2_reader.
         */
         virtual ~bzip2_reader()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        TETENGO2_STDALT_NOEXCEPT;
 
 
     private:
         // types
 
-        using input_string_type = std::basic_string<typename iterator::value_type>;
+        class impl;
 
 
         // variables
 
-        const std::unique_ptr<base_type> m_p_reader;
+        const std::unique_ptr<impl> m_p_impl;
 
 
         // virtual functions
 
         virtual bool selects_impl(const iterator first, const iterator last)
-        override
-        {
-            if (std::distance(first, last) < 2)
-                return false;
-            if (input_string_type{ first, boost::next(first, 2) } != input_string_type(TETENGO2_TEXT("BZ")))
-                return false;
-
-            const input_string_type input_string{ first, last };
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(input_string) };
-            boost::iostreams::filtering_istream filtering_input_stream{};
-            filtering_input_stream.push(boost::iostreams::bzip2_decompressor());
-            filtering_input_stream.push(input_stream);
-
-            try
-            {
-                const auto first =
-                    tetengo2::make_observable_forward_iterator(
-                        boost::spirit::make_default_multi_pass(
-                            std::istreambuf_iterator<typename iterator::value_type>{ filtering_input_stream }
-                        )
-                    );
-                const auto last =
-                    tetengo2::make_observable_forward_iterator(
-                        boost::spirit::make_default_multi_pass(
-                            std::istreambuf_iterator<typename iterator::value_type>{}
-                        )
-                    );
-                return m_p_reader->selects(first, last);
-            }
-            catch (const boost::iostreams::bzip2_error&)
-            {
-                return false;
-            }
-            catch (...)
-            {
-                throw;
-            }
-        }
+        override;
 
         virtual std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
-        override
-        {
-            const input_string_type input_string{ first, last };
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(input_string) };
-            boost::iostreams::filtering_istream filtering_input_stream{};
-            filtering_input_stream.push(boost::iostreams::bzip2_decompressor());
-            filtering_input_stream.push(input_stream);
-
-            try
-            {
-                const auto first =
-                    tetengo2::make_observable_forward_iterator(
-                        boost::spirit::make_default_multi_pass(
-                            std::istreambuf_iterator<typename iterator::value_type>{ filtering_input_stream }
-                        )
-                    );
-                const auto last =
-                    tetengo2::make_observable_forward_iterator(
-                        boost::spirit::make_default_multi_pass(
-                            std::istreambuf_iterator<typename iterator::value_type>{}
-                        )
-                    );
-                return m_p_reader->read(first, last, error);
-            }
-            catch (const boost::iostreams::bzip2_error&)
-            {
-                error = error_type::corrupted;
-                return std::unique_ptr<timetable_type>{};
-            }
-            catch (...)
-            {
-                throw;
-            }
-        }
+        override;
 
 
     };

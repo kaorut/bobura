@@ -5,6 +5,8 @@ bobura::command::[a-zA-Z0-9_]+::state_impl
 bobura::diagram_view::to_station_position::
 bobura::file_property_dialog::set_result_impl
 bobura::font_color_dialog::do_modal_impl
+bobura::model::serializer::[a-zA-Z0-9_]+_reader::selects_impl
+bobura::model::serializer::[a-zA-Z0-9_]+_reader::read_impl
 bobura::model::serializer::oudia_reader::file_type::
 bobura::model::serializer::oudia_reader::[a-z_]*state::
 bobura::model::serializer::windia_reader::[a-z_]*state::
