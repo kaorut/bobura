@@ -6,8 +6,6 @@
     $Id$
 */
 
-#include <cstddef>
-#include <functional>
 #include <iterator>
 #include <memory>
 #include <stdexcept>
@@ -17,7 +15,6 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/predef.h>
 #include <boost/range/iterator_range.hpp>
-#include <boost/rational.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
