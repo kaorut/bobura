@@ -639,6 +639,9 @@ namespace bobura { namespace type_list
         //! The side bar type.
         using side_bar_type = detail::ui::side_bar_type<DetailTypeList>;
 
+        //! The system color set type.
+        using system_color_set_type = detail::ui::system_color_set_type<DetailTypeList>;
+
         //! The text box type.
         using text_box_type = detail::ui::text_box_type<DetailTypeList>;
 

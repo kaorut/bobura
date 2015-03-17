@@ -11,21 +11,24 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2.h>
+
 #include <bobura/model/serializer/exec_json_reading_task.h>
 #include <bobura/model/timetable.h>
-
-#include "test_bobura.model.type_list.h"
+#include <bobura/type_list.h>
 
 
 namespace
 {
     // types
 
-    using detail_type_list_type = test_bobura::model::type_list::detail_for_test;
+    using detail_type_list_type = bobura::type_list::detail_for_test;
 
-    using common_type_list_type = test_bobura::model::type_list::common<detail_type_list_type>;
+    using common_type_list_type = bobura::type_list::common;
 
-    using ui_type_list_type = test_bobura::model::type_list::ui<detail_type_list_type>;
+    using locale_type_list_type = bobura::type_list::locale<detail_type_list_type>;
+
+    using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
     using size_type = common_type_list_type::size_type;
 
@@ -50,7 +53,7 @@ namespace
 
     using system_color_set_type = ui_type_list_type::system_color_set_type;
 
-    using message_catalog_type = common_type_list_type::message_catalog_type;
+    using message_catalog_type = locale_type_list_type::message_catalog_type;
 
     using exec_json_reading_task_type =
         bobura::model::serializer::exec_json_reading_task<

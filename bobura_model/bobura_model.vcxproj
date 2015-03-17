@@ -60,6 +60,7 @@
     </ClCompile>
     <ClCompile Include="src\bobura.model.serializer.bzip2_reader.cpp" />
     <ClCompile Include="src\bobura.model.serializer.bzip2_writer.cpp" />
+    <ClCompile Include="src\bobura.model.serializer.exec_json_reading_task.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E3D6C3EA-1A16-45EB-80A6-69B4AFAD366C}</ProjectGuid>
