@@ -19,7 +19,6 @@
 
 #include <bobura/model/serializer/bzip2_reader.h>
 #include <bobura/model/timetable.h>
-
 #include <bobura/type_list.h>
 
 

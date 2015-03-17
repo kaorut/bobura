@@ -220,6 +220,7 @@ namespace bobura { namespace model { namespace serializer
         return m_p_impl->read_impl(first, last, error);
     }
 
+
     namespace
     {
  #if BOOST_COMP_MSVC

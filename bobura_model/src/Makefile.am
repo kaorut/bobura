@@ -7,7 +7,8 @@ headers =
 extra_headers =
 
 sources = \
-    bobura.model.serializer.bzip2_reader.cpp
+    bobura.model.serializer.bzip2_reader.cpp \
+    bobura.model.serializer.bzip2_writer.cpp
 
 extra_sources =
 
