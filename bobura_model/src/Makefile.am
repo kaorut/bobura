@@ -10,7 +10,8 @@ sources = \
     bobura.model.serializer.bzip2_reader.cpp \
     bobura.model.serializer.bzip2_writer.cpp \
     bobura.model.serializer.exec_json_reading_task.cpp \
-    bobura.model.serializer.json_reader.cpp
+    bobura.model.serializer.json_reader.cpp \
+    bobura.model.serializer.json_writer.cpp
 
 extra_sources =
 

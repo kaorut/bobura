@@ -7,7 +7,6 @@
 */
 
 #include <memory>
-#include <ostream>
 #include <sstream>
 #include <string>
 #include <utility>
@@ -27,19 +26,20 @@
 #include <bobura/model/train_info/stop.h>
 #include <bobura/model/train_info/time.h>
 #include <bobura/model/train_kind.h>
-
-#include "test_bobura.model.type_list.h"
+#include <bobura/type_list.h>
 
 
 namespace
 {
     // types
 
-    using detail_type_list_type = test_bobura::model::type_list::detail_for_test;
+    using detail_type_list_type = bobura::type_list::detail_for_test;
 
-    using common_type_list_type = test_bobura::model::type_list::common<detail_type_list_type>;
+    using common_type_list_type = bobura::type_list::common;
 
-    using ui_type_list_type = test_bobura::model::type_list::ui<detail_type_list_type>;
+    using locale_type_list_type = bobura::type_list::locale<detail_type_list_type>;
+
+    using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
     using size_type = common_type_list_type::size_type;
 
@@ -83,7 +83,7 @@ namespace
 
     using color_type = ui_type_list_type::color_type;
 
-    using output_stream_type = std::basic_ostream<common_type_list_type::io_string_type::value_type>;
+    using output_stream_type = common_type_list_type::output_stream_type;
 
     using writer_type =
         bobura::model::serializer::json_writer<
@@ -94,7 +94,7 @@ namespace
             operating_distance_type,
             speed_type,
             font_type,
-            common_type_list_type::io_encoder_type
+            locale_type_list_type::timetable_file_encoder_type
         >;
 
 
@@ -356,6 +356,13 @@ BOOST_AUTO_TEST_SUITE(model)
 BOOST_AUTO_TEST_SUITE(serializer)
 BOOST_AUTO_TEST_SUITE(json_writer)
     // test cases
+
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const writer_type json_writer{};
+    }
 
     BOOST_AUTO_TEST_CASE(extension)
     {
