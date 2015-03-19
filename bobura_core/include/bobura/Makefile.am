@@ -49,7 +49,6 @@ pkg_headers = \
     message/file_property_dialog.h \
     message/font_color_dialog.h \
     message/main_window.h \
-    message/oudia_diagram_dialog.h \
     message/property_bar.h \
     message/timetable_model.h \
     message/timetable_model_observer_set.h \

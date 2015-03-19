@@ -128,5 +128,8 @@
     <ClCompile Include="test\test_bobura.model.serializer.oudia_diagram_dialog.cpp">
       <Filter>sources\test_bobura::model\serializer</Filter>
     </ClCompile>
+    <ClCompile Include="test\test_bobura.model.message.oudia_diagram_dialog.cpp">
+      <Filter>sources\test_bobura::model\message</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

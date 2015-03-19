@@ -153,9 +153,6 @@
     <ClInclude Include="include\bobura\command\open_www_tetengo_org.h">
       <Filter>headers\bobura\command</Filter>
     </ClInclude>
-    <ClInclude Include="include\bobura\message\oudia_diagram_dialog.h">
-      <Filter>headers\bobura\message</Filter>
-    </ClInclude>
     <ClInclude Include="include\bobura\message\property_bar.h">
       <Filter>headers\bobura\message</Filter>
     </ClInclude>

@@ -3,6 +3,7 @@
 # $Id$
 
 pkg_headers = \
+    model/message/oudia_diagram_dialog.h \
     model/message/timetable_observer_set.h \
     model/serializer/bzip2_reader.h \
     model/serializer/bzip2_writer.h \

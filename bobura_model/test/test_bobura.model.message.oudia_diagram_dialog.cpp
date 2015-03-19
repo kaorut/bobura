@@ -8,7 +8,7 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <bobura/message/oudia_diagram_dialog.h>
+#include <bobura/model/message/oudia_diagram_dialog.h>
 #include <bobura/type_list.h>
 
 

@@ -45,7 +45,6 @@ sources = \
     test_bobura.message.file_property_dialog.cpp \
     test_bobura.message.font_color_dialog.cpp \
     test_bobura.message.main_window.cpp \
-    test_bobura.message.oudia_diagram_dialog.cpp \
     test_bobura.message.property_bar.cpp \
     test_bobura.message.timetable_model.cpp \
     test_bobura.message.timetable_model_observer_set.cpp \

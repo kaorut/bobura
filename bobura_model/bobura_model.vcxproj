@@ -22,6 +22,7 @@
     <ClInclude Include="..\precompiled\precompiled.h" />
     <ClInclude Include="include\bobura\model\0namespace.dox" />
     <ClInclude Include="include\bobura\model\message\0namespace.dox" />
+    <ClInclude Include="include\bobura\model\message\oudia_diagram_dialog.h" />
     <ClInclude Include="include\bobura\model\message\timetable_observer_set.h" />
     <ClInclude Include="include\bobura\model\serializer\0namespace.dox" />
     <ClInclude Include="include\bobura\model\serializer\bzip2_reader.h" />
