@@ -13,6 +13,7 @@
 #include <boost/optional.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
+#include <boost/utility.hpp>
 
 #include <tetengo2.h>
 
@@ -113,6 +114,8 @@ namespace
 
     using select_oudia_diagram_type = bobura::model::serializer::select_oudia_diagram<oudia_diagram_dialog>;
 
+    using select_oudia_diagram_for_test_type = bobura::model::serializer::select_oudia_diagram_for_test<string_type_>;
+
 
 }
 
@@ -146,6 +149,34 @@ BOOST_AUTO_TEST_SUITE(select_oudia_diagram)
         const auto selected = select_oudia_diagram(diagram_names.begin(), diagram_names.end());
 
         BOOST_CHECK(selected == diagram_names.end());
+    }
+
+
+BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE(select_oudia_diagram_for_test)
+    // test cases
+
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        string_type_ name{ TETENGO2_TEXT("hoge") };
+        const select_oudia_diagram_for_test_type select_oudia_diagram_for_test{ std::move(name) };
+    }
+
+    BOOST_AUTO_TEST_CASE(operator_paren)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        string_type_ name{ TETENGO2_TEXT("hoge") };
+        const select_oudia_diagram_for_test_type select_oudia_diagram_for_test{ std::move(name) };
+
+        std::vector<string_type_> diagram_names{
+            string_type_{ TETENGO2_TEXT("fuga") }, string_type_{ TETENGO2_TEXT("hoge") }
+        };
+        const auto selected = select_oudia_diagram_for_test(diagram_names.begin(), diagram_names.end());
+
+        BOOST_CHECK(selected == boost::next(diagram_names.begin()));
     }
 
 

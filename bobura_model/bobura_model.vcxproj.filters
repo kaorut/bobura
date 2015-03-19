@@ -132,6 +132,9 @@
     <ClInclude Include="..\precompiled\precompiled.h">
       <Filter>headers</Filter>
     </ClInclude>
+    <ClInclude Include="include\bobura\model\serializer\oudia_diagram_dialog.h">
+      <Filter>headers\bobura::model\serializer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\bobura.model.serializer.bzip2_reader.cpp">
@@ -153,6 +156,9 @@
       <Filter>sources\bobura::model\serializer</Filter>
     </ClCompile>
     <ClCompile Include="src\bobura.model.serializer.oudia_reader.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.oudia_diagram_dialog.cpp">
       <Filter>sources\bobura::model\serializer</Filter>
     </ClCompile>
   </ItemGroup>

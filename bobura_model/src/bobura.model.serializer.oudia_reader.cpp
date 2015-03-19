@@ -1120,6 +1120,9 @@ namespace bobura { namespace model { namespace serializer
                     >
                 >;
 
+            using select_oudia_diagram_for_test_type =
+                select_oudia_diagram_for_test<typename type_list::common::string_type>;
+
         }
 
     }
@@ -1146,6 +1149,18 @@ namespace bobura { namespace model { namespace serializer
         typename test::common_type_list_type::operating_distance_type,
         typename test::common_type_list_type::speed_type,
         test::select_oudia_diagram_type,
+        typename test::ui_type_list_type::fast_font_type,
+        typename test::locale_type_list_type::windia_file_encoder_type
+    >;
+
+    template class oudia_reader<
+        typename test::common_type_list_type::size_type,
+        typename test::common_type_list_type::difference_type,
+        typename test::common_type_list_type::string_type,
+        typename test::common_type_list_type::input_stream_iterator_type,
+        typename test::common_type_list_type::operating_distance_type,
+        typename test::common_type_list_type::speed_type,
+        test::select_oudia_diagram_for_test_type,
         typename test::ui_type_list_type::fast_font_type,
         typename test::locale_type_list_type::windia_file_encoder_type
     >;

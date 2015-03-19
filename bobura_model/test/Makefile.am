@@ -16,6 +16,7 @@ sources = \
     test_bobura.model.serializer.exec_json_reading_task.cpp \
     test_bobura.model.serializer.json_reader.cpp \
     test_bobura.model.serializer.json_writer.cpp \
+    test_bobura.model.serializer.oudia_diagram_dialog.cpp \
     test_bobura.model.serializer.oudia_reader.cpp \
     test_bobura.model.serializer.select_oudia_diagram.cpp \
     test_bobura.model.serializer.reader.cpp \

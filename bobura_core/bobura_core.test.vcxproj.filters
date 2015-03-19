@@ -203,9 +203,6 @@
     <ClCompile Include="test\test_bobura.main_window_menu_builder.cpp">
       <Filter>sources\test_bobura</Filter>
     </ClCompile>
-    <ClCompile Include="test\test_bobura.oudia_diagram_dialog.cpp">
-      <Filter>sources\test_bobura</Filter>
-    </ClCompile>
     <ClCompile Include="test\test_bobura.train_kind_dialog.cpp">
       <Filter>sources\test_bobura</Filter>
     </ClCompile>

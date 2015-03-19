@@ -9,6 +9,7 @@
 #if !defined(BOBURA_MODEL_SERIALIZER_SELECTOUDIADIAGRAM_H)
 #define BOBURA_MODEL_SERIALIZER_SELECTOUDIADIAGRAM_H
 
+#include <algorithm>
 #include <cassert>
 #include <iterator>
 #include <utility>
@@ -119,6 +120,63 @@ namespace bobura { namespace model { namespace serializer
         const string_type m_file_name;
 
         const message_catalog_type& m_message_catalog;
+
+
+    };
+
+
+    /*!
+        \brief The class template for an OuDia diagram selecting for testing.
+
+        \tparam String A string type.
+    */
+    template <typename String>
+    class select_oudia_diagram_for_test
+    {
+    public:
+        // types
+
+        //! The string type.
+        using string_type = String;
+
+
+        // constructors and destructor
+
+        /*!
+            \brief Creates an OuDia diagram selecting for testing.
+
+            \param name A diagram name.
+        */
+        explicit select_oudia_diagram_for_test(string_type name)
+        :
+        m_name(std::move(name))
+        {}
+
+
+        // functions
+
+        /*!
+            \brief Selects an OuDia diagram.
+
+            \tparam FowardIterator A forward iterator type.
+
+            \param first The first position of the diagrams.
+            \param last  The last position of the diagrams.
+
+            \return Always first.
+        */
+        template <typename ForwardIterator>
+        ForwardIterator operator()(const ForwardIterator first, const ForwardIterator last)
+        const
+        {
+            return std::find(first, last, m_name);
+        }
+
+
+    private:
+        // variables
+
+        const string_type m_name;
 
 
     };

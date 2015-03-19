@@ -35,7 +35,6 @@ sources = \
     bobura.load_save.save_to_file.cpp \
     bobura.main_window.cpp \
     bobura.main_window_menu_builder.cpp \
-    bobura.oudia_diagram_dialog.cpp \
     bobura.train_kind_dialog.cpp \
     bobura.view.diagram.zoom.cpp
 

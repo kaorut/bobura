@@ -156,9 +156,6 @@
     <ClInclude Include="include\bobura\message\oudia_diagram_dialog.h">
       <Filter>headers\bobura\message</Filter>
     </ClInclude>
-    <ClInclude Include="include\bobura\oudia_diagram_dialog.h">
-      <Filter>headers\bobura</Filter>
-    </ClInclude>
     <ClInclude Include="include\bobura\message\property_bar.h">
       <Filter>headers\bobura\message</Filter>
     </ClInclude>
@@ -339,9 +336,6 @@
       <Filter>sources\bobura</Filter>
     </ClCompile>
     <ClCompile Include="src\bobura.font_color_dialog.cpp">
-      <Filter>sources\bobura</Filter>
-    </ClCompile>
-    <ClCompile Include="src\bobura.oudia_diagram_dialog.cpp">
       <Filter>sources\bobura</Filter>
     </ClCompile>
     <ClCompile Include="src\bobura.main_window.cpp">

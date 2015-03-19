@@ -30,7 +30,7 @@
 #include <bobura/load_save/traits.h>
 #include <bobura/main_window_traits.h>
 #include <bobura/main_window_menu_builder_traits.h>
-#include <bobura/oudia_diagram_dialog.h>
+#include <bobura/model/serializer/oudia_diagram_dialog.h>
 #include <bobura/view/diagram/traits.h>
 
 
