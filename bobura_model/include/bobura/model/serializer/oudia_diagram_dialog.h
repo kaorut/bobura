@@ -1,5 +1,5 @@
 /*! \file
-    \brief The definition of bobura::oudia_diagram_dialog.
+    \brief The definition of bobura::model::serializer::oudia_diagram_dialog.
 
     Copyright (C) 2007-2015 kaoru
 
@@ -18,7 +18,7 @@
 #include <tetengo2.h>
 
 
-namespace bobura
+namespace bobura { namespace model { namespace serializer
 {
     /*!
         \brief The class template for the OuDia diagram dialog.
@@ -138,6 +138,7 @@ namespace bobura
     };
 
 
-}
+}}}
+
 
 #endif

@@ -1,5 +1,5 @@
 /*! \file
-    \brief The definition of bobura::message::oudia_diagram_dialog.
+    \brief The definition of bobura::model::message::oudia_diagram_dialog.
 
     Copyright (C) 2007-2015 kaoru
 
@@ -10,7 +10,7 @@
 #define BOBURA_MESSAGE_OUDIADIAGRAMDIALOG_H
 
 
-namespace bobura { namespace message { namespace oudia_diagram_dialog
+namespace bobura { namespace model { namespace message { namespace oudia_diagram_dialog
 {
      /*!
         \brief The class template for a mouse click observer of the OK button.
@@ -111,7 +111,7 @@ namespace bobura { namespace message { namespace oudia_diagram_dialog
     };
 
 
-}}}
+}}}}
 
 
 #endif

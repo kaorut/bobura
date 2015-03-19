@@ -844,7 +844,7 @@ namespace bobura { namespace type_list
                 dialog_type<DetailTypeList>,
                 type_list::detail::ui::timer_type<DetailTypeList>,
                 type_list::detail::ui::system_color_set_type<DetailTypeList>,
-                oudia_diagram_dialog<dialog_traits_type<DetailTypeList>, size_type>,
+                model::serializer::oudia_diagram_dialog<dialog_traits_type<DetailTypeList>, size_type>,
                 message_catalog_type<DetailTypeList>,
                 type_list::detail::locale::timetable_file_encoder_type<DetailTypeList>,
                 type_list::detail::locale::windia_file_encoder_type<DetailTypeList>

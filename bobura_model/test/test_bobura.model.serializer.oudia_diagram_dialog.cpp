@@ -1,5 +1,5 @@
 /*! \file
-    \brief Test of class bobura::oudia_diagram_dialog.
+    \brief Test of class bobura::model::serializer::oudia_diagram_dialog.
 
     Copyright (C) 2007-2015 kaoru
 
@@ -39,13 +39,17 @@ namespace
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
     using oudia_diagram_dialog_type =
-        bobura::oudia_diagram_dialog<traits_type_list_type::dialog_type, common_type_list_type::size_type>;
+        bobura::model::serializer::oudia_diagram_dialog<
+            traits_type_list_type::dialog_type, common_type_list_type::size_type
+        >;
 
 
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
+BOOST_AUTO_TEST_SUITE(model)
+BOOST_AUTO_TEST_SUITE(serializer)
 BOOST_AUTO_TEST_SUITE(oudia_diagram_dialog)
     // test cases
 
@@ -156,5 +160,7 @@ BOOST_AUTO_TEST_SUITE(oudia_diagram_dialog)
     }
 
 
+BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
