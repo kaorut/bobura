@@ -21,19 +21,18 @@
 
 #include <bobura/model/serializer/reader_selector.h>
 #include <bobura/model/timetable.h>
-
-#include "test_bobura.model.type_list.h"
+#include <bobura/type_list.h>
 
 
 namespace
 {
     // types
 
-    using detail_type_list_type = test_bobura::model::type_list::detail_for_test;
+    using detail_type_list_type = bobura::type_list::detail_for_test;
 
-    using common_type_list_type = test_bobura::model::type_list::common<detail_type_list_type>;
+    using common_type_list_type = bobura::type_list::common;
 
-    using ui_type_list_type = test_bobura::model::type_list::ui<detail_type_list_type>;
+    using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
     using size_type = common_type_list_type::size_type;
 
@@ -52,10 +51,7 @@ namespace
             size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
         >;
 
-    using input_stream_iterator_type =
-        tetengo2::observable_forward_iterator<
-            boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>
-        >;
+    using input_stream_iterator_type = common_type_list_type::input_stream_iterator_type;
 
     using reader_selector_type =
         bobura::model::serializer::reader_selector<
@@ -72,7 +68,6 @@ namespace
 
     using error_type = reader_type::error_type;
 
-#if 0
     class concrete_reader : public reader_type
     {
     public:
@@ -109,12 +104,10 @@ namespace
 
 
     };
-#endif
 
 
     // functions
 
-#if 0
     std::vector<std::unique_ptr<reader_type>> create_concrete_readers()
     {
         std::vector<std::unique_ptr<reader_type>> readers{};
@@ -124,13 +117,11 @@ namespace
 
         return std::move(readers);
     }
-#endif
 
 
 }
 
 
-#if 0
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(model)
 BOOST_AUTO_TEST_SUITE(serializer)
@@ -238,4 +229,3 @@ BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
-#endif

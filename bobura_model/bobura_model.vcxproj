@@ -68,6 +68,7 @@
     <ClCompile Include="src\bobura.model.serializer.oudia_diagram_dialog.cpp" />
     <ClCompile Include="src\bobura.model.serializer.oudia_reader.cpp" />
     <ClCompile Include="src\bobura.model.serializer.reader.cpp" />
+    <ClCompile Include="src\bobura.model.serializer.reader_selector.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E3D6C3EA-1A16-45EB-80A6-69B4AFAD366C}</ProjectGuid>

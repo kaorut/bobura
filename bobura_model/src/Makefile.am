@@ -14,7 +14,8 @@ sources = \
     bobura.model.serializer.json_writer.cpp \
     bobura.model.serializer.oudia_diagram_dialog.cpp \
     bobura.model.serializer.oudia_reader.cpp \
-    bobura.model.serializer.reader.cpp
+    bobura.model.serializer.reader.cpp \
+    bobura.model.serializer.reader_selector.cpp
 
 extra_sources =
 

@@ -167,5 +167,8 @@
     <ClCompile Include="src\bobura.model.serializer.reader.cpp">
       <Filter>sources\bobura::model\serializer</Filter>
     </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.reader_selector.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

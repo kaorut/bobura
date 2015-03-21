@@ -7,6 +7,8 @@ bobura::file_property_dialog::set_result_impl
 bobura::font_color_dialog::do_modal_impl
 bobura::model::serializer::[a-zA-Z0-9_]+_reader::selects_impl
 bobura::model::serializer::[a-zA-Z0-9_]+_reader::read_impl
+bobura::model::serializer::reader_selector::selects_impl
+bobura::model::serializer::reader_selector::read_impl
 bobura::model::serializer::[a-zA-Z0-9_]+_writer::extension_impl
 bobura::model::serializer::[a-zA-Z0-9_]+_writer::write_impl
 bobura::model::serializer::oudia_diagram_dialog::set_result_impl

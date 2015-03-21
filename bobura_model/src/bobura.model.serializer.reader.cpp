@@ -1,5 +1,5 @@
 /*! \file
-    \brief The definition of bobura::model::serializer::bzip2_reader.
+    \brief The definition of bobura::model::serializer::reader.
 
     Copyright (C) 2007-2015 kaoru
 
