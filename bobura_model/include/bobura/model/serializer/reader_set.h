@@ -10,19 +10,13 @@
 #define BOBURA_MODEL_SERIALIZER_READERSET_H
 
 #include <memory>
-#include <utility>
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
 
 #include <tetengo2.h>
 
-#include <bobura/model/serializer/bzip2_reader.h>
-#include <bobura/model/serializer/json_reader.h>
-#include <bobura/model/serializer/oudia_reader.h>
 #include <bobura/model/serializer/reader.h>
-#include <bobura/model/serializer/reader_selector.h>
-#include <bobura/model/serializer/windia_reader.h>
 
 
 namespace bobura { namespace model { namespace serializer
@@ -103,61 +97,6 @@ namespace bobura { namespace model { namespace serializer
         using reader_type =
             reader<size_type, difference_type, string_type, iterator, operating_distance_type, speed_type, font_type>;
 
-        //! The JSON reader type.
-        using json_reader_type =
-            json_reader<
-                size_type,
-                difference_type,
-                string_type,
-                iterator,
-                int,
-                double,
-                operating_distance_type,
-                speed_type,
-                exec_json_reading_task_type,
-                font_type,
-                utf8_encoder_type
-            >;
-
-        //! The bzip2 reader type.
-        using bzip2_reader_type =
-            bzip2_reader<
-                size_type,
-                difference_type,
-                string_type,
-                iterator,
-                operating_distance_type,
-                speed_type,
-                font_type
-            >;
-
-        //! The OuDia reader type.
-        using oudia_reader_type =
-            oudia_reader<
-                size_type,
-                difference_type,
-                string_type,
-                iterator,
-                operating_distance_type,
-                speed_type,
-                select_oudia_diagram_type,
-                font_type,
-                cp932_encoder_type
-            >;
-
-        //! The WinDIA reader type.
-        using windia_reader_type =
-            windia_reader<
-                size_type,
-                difference_type,
-                string_type,
-                iterator,
-                operating_distance_type,
-                speed_type,
-                font_type,
-                cp932_encoder_type
-            >;
-
 
         // static functions
 
@@ -174,46 +113,13 @@ namespace bobura { namespace model { namespace serializer
             abstract_window_type&       parent,
             string_type                 file_name,
             const message_catalog_type& message_catalog
-        )
-        {
-            std::vector<std::unique_ptr<reader_type>> readers{};
-
-            readers.push_back(create_json_reader(parent, message_catalog));
-            readers.push_back(
-                tetengo2::stdalt::make_unique<bzip2_reader_type>(create_json_reader(parent, message_catalog))
-            );
-            readers.push_back(create_oudia_reader(parent, std::move(file_name), message_catalog));
-            readers.push_back(tetengo2::stdalt::make_unique<windia_reader_type>());
-
-            return std::move(readers);
-        }
+        );
 
 
     private:
-        // static functions
+        // types
 
-        static std::unique_ptr<reader_type> create_json_reader(
-            abstract_window_type&       parent,
-            const message_catalog_type& message_catalog
-        )
-        {
-            auto p_exec_json_reading_task =
-                tetengo2::stdalt::make_unique<exec_json_reading_task_type>(parent, message_catalog);
-            return tetengo2::stdalt::make_unique<json_reader_type>(std::move(p_exec_json_reading_task));
-        }
-
-        static std::unique_ptr<reader_type> create_oudia_reader(
-            abstract_window_type&       parent,
-            string_type                 file_name,
-            const message_catalog_type& message_catalog
-        )
-        {
-            auto p_select_oudia_diagram =
-                tetengo2::stdalt::make_unique<select_oudia_diagram_type>(
-                    parent, std::move(file_name), message_catalog
-                );
-            return tetengo2::stdalt::make_unique<oudia_reader_type>(std::move(p_select_oudia_diagram));
-        }
+        class impl;
 
 
         // forbidden operations
