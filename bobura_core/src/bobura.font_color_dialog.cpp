@@ -1024,7 +1024,7 @@ namespace bobura
     template class font_color_dialog<
         typename test::traits_type_list_type::dialog_type,
         typename test::common_type_list_type::size_type,
-        typename test::ui_type_list_type::fast_font_type,
+        typename test::ui_type_list_type::font_type,
         typename test::ui_type_list_type::point_unit_size_type,
         typename test::ui_type_list_type::color_type,
         typename test::ui_type_list_type::fast_canvas_type,

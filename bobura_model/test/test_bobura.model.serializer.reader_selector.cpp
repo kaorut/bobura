@@ -72,6 +72,7 @@ namespace
 
     using error_type = reader_type::error_type;
 
+#if 0
     class concrete_reader : public reader_type
     {
     public:
@@ -108,10 +109,12 @@ namespace
 
 
     };
+#endif
 
 
     // functions
 
+#if 0
     std::vector<std::unique_ptr<reader_type>> create_concrete_readers()
     {
         std::vector<std::unique_ptr<reader_type>> readers{};
@@ -121,11 +124,13 @@ namespace
 
         return std::move(readers);
     }
+#endif
 
 
 }
 
 
+#if 0
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(model)
 BOOST_AUTO_TEST_SUITE(serializer)
@@ -233,3 +238,4 @@ BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
+#endif

@@ -266,7 +266,7 @@ namespace bobura { namespace model { namespace serializer
         typename test::common_type_list_type::input_stream_iterator_type,
         typename test::common_type_list_type::operating_distance_type,
         typename test::common_type_list_type::speed_type,
-        typename test::ui_type_list_type::fast_font_type
+        typename test::ui_type_list_type::font_type
     >;
 
 
