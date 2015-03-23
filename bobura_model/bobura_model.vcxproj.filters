@@ -173,5 +173,8 @@
     <ClCompile Include="src\bobura.model.serializer.reader_set.cpp">
       <Filter>sources\bobura::model\serializer</Filter>
     </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.select_oudia_diagram.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
