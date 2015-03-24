@@ -17,7 +17,8 @@ sources = \
     bobura.model.serializer.reader.cpp \
     bobura.model.serializer.reader_selector.cpp \
     bobura.model.serializer.reader_set.cpp \
-    bobura.model.serializer.select_oudia_diagram.cpp
+    bobura.model.serializer.select_oudia_diagram.cpp \
+    bobura.model.serializer.windia_reader.cpp
 
 extra_sources =
 
