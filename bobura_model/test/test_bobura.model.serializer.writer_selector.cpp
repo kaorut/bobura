@@ -68,6 +68,7 @@ namespace
 
     using writer_type = writer_selector_type::base_type;
 
+#if 0
     class concrete_writer : public writer_type
     {
     public:
@@ -102,10 +103,12 @@ namespace
 
 
     };
+#endif
 
 
     // functions
 
+#if 0
     std::vector<std::unique_ptr<writer_type>> create_concrete_writers()
     {
         std::vector<std::unique_ptr<writer_type>> writers{};
@@ -119,11 +122,13 @@ namespace
 
         return std::move(writers);
     }
+#endif
 
 
 }
 
 
+#if 0
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(model)
 BOOST_AUTO_TEST_SUITE(serializer)
@@ -211,3 +216,4 @@ BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
+#endif
