@@ -15,6 +15,8 @@
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2.h>
+
 #include <bobura/model/serializer/windia_reader.h>
 #include <bobura/model/timetable.h>
 #include <bobura/type_list.h>
@@ -63,6 +65,8 @@ namespace
 
     using input_stream_iterator_type = common_type_list_type::input_stream_iterator_type;
 
+    using windia_file_encoder_type = locale_type_list_type::windia_file_encoder_type;
+
     using reader_type =
         bobura::model::serializer::windia_reader<
             size_type,
@@ -72,10 +76,16 @@ namespace
             operating_distance_type,
             speed_type,
             font_type,
-            locale_type_list_type::windia_file_encoder_type
+            windia_file_encoder_type
         >;
 
     using error_type = reader_type::error_type;
+
+    using utf8_encoder_type =
+        tetengo2::text::encoder<
+            windia_file_encoder_type::internal_encoding_type,
+            tetengo2::text::encoding::utf8<detail_type_list_type::encoding_type>
+        >;
 
 
     // variables
@@ -291,7 +301,10 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
             {
                 const auto& train_kind = p_timetable->train_kinds()[0];
 
-                BOOST_CHECK(train_kind.name() == string_type{ TETENGO2_TEXT("\u666E\u901A") }); // futsuu
+                static const utf8_encoder_type utf8_encoder;
+                const std::string futsuu_in_utf8{ "\xE6\x99\xAE\xE9\x80\x9A" }; // futsuu
+                const string_type futsuu = utf8_encoder.decode(futsuu_in_utf8);
+                BOOST_CHECK(train_kind.name() == utf8_encoder.decode(futsuu_in_utf8));
                 BOOST_CHECK((train_kind.color() == color_type{ 0, 0, 0 }));
                 BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::normal);
             }
