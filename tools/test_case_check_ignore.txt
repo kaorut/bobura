@@ -12,6 +12,9 @@ bobura::model::serializer::reader_selector::read_impl
 bobura::model::serializer::writer::selects_impl
 bobura::model::serializer::[a-zA-Z0-9_]+_writer::extension_impl
 bobura::model::serializer::[a-zA-Z0-9_]+_writer::write_impl
+bobura::model::serializer::writer_selector::selects_impl
+bobura::model::serializer::writer_selector::extension_impl
+bobura::model::serializer::writer_selector::write_impl
 bobura::model::serializer::oudia_diagram_dialog::set_result_impl
 bobura::model::timetable::replace_train_kind_index::
 bobura::settings::value_impl::
