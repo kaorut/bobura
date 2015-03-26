@@ -185,5 +185,8 @@
     <ClCompile Include="src\bobura.model.serializer.writer_selector.cpp">
       <Filter>sources\bobura::model\serializer</Filter>
     </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.writer_set.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

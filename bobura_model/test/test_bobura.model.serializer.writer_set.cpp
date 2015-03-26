@@ -6,26 +6,25 @@
     $Id$
 */
 
-#include <ostream>
-
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/model/serializer/writer_set.h>
-
-#include "test_bobura.model.type_list.h"
+#include <bobura/type_list.h>
 
 
 namespace
 {
     // types
 
-    using detail_type_list_type = test_bobura::model::type_list::detail_for_test;
+    using detail_type_list_type = bobura::type_list::detail_for_test;
 
-    using common_type_list_type = test_bobura::model::type_list::common<detail_type_list_type>;
+    using common_type_list_type = bobura::type_list::common;
 
-    using ui_type_list_type = test_bobura::model::type_list::ui<detail_type_list_type>;
+    using locale_type_list_type = bobura::type_list::locale<detail_type_list_type>;
 
-    using output_stream_type = std::basic_ostream<common_type_list_type::io_string_type::value_type>;
+    using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
+
+    using output_stream_type = common_type_list_type::output_stream_type;
 
     using writer_set_type =
         bobura::model::serializer::writer_set<
@@ -36,13 +35,12 @@ namespace
             common_type_list_type::operating_distance_type,
             common_type_list_type::speed_type,
             ui_type_list_type::font_type,
-            common_type_list_type::io_encoder_type
+            locale_type_list_type::timetable_file_encoder_type
         >;
 
 }
 
 
-#if 0 // until writer_set implementation is moved to .cpp.
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(model)
 BOOST_AUTO_TEST_SUITE(serializer)
@@ -64,4 +62,3 @@ BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
-#endif

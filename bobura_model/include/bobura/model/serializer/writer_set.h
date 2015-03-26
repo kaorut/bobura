@@ -10,15 +10,12 @@
 #define BOBURA_MODEL_SERIALIZER_WRITERSET_H
 
 #include <memory>
-#include <utility>
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
 
 #include <tetengo2.h>
 
-#include <bobura/model/serializer/bzip2_writer.h>
-#include <bobura/model/serializer/json_writer.h>
 #include <bobura/model/serializer/writer.h>
 #include <bobura/model/serializer/writer_selector.h>
 
@@ -88,31 +85,6 @@ namespace bobura { namespace model { namespace serializer
                 font_type
             >;
 
-        //! The bzip2 writer type.
-        using bzip2_writer_type =
-            bzip2_writer<
-                size_type,
-                difference_type,
-                string_type,
-                output_stream_type,
-                operating_distance_type,
-                speed_type,
-                font_type
-            >;
-
-        //! The JSON writer type.
-        using json_writer_type =
-            json_writer<
-                size_type,
-                difference_type,
-                string_type,
-                output_stream_type,
-                operating_distance_type,
-                speed_type,
-                font_type,
-                encoder_type
-            >;
-
 
         // static functions
 
@@ -121,20 +93,15 @@ namespace bobura { namespace model { namespace serializer
 
             \return Unique pointers to writers.
         */
-        static std::vector<std::unique_ptr<writer_type>> create_writers()
-        {
-            std::vector<std::unique_ptr<writer_type>> writers{};
-
-            writers.push_back(tetengo2::stdalt::make_unique<json_writer_type>());
-            writers.push_back(
-                tetengo2::stdalt::make_unique<bzip2_writer_type>(tetengo2::stdalt::make_unique<json_writer_type>())
-            );
-
-            return std::move(writers);
-        }
+        static std::vector<std::unique_ptr<writer_type>> create_writers();
 
 
     private:
+        // types
+
+        class impl;
+
+
         // forbidden operations
 
         writer_set()
