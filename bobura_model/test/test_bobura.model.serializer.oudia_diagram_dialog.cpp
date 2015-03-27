@@ -132,6 +132,11 @@ BOOST_AUTO_TEST_SUITE(oudia_diagram_dialog)
         BOOST_CHECK(!oudia_diagram_dialog.selected_index());
     }
 
+// This test case causes a segmentation fault on Cygwin.
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+)
     BOOST_AUTO_TEST_CASE(set_selected_index)
     {
         BOOST_TEST_PASSPOINT();
@@ -158,6 +163,7 @@ BOOST_AUTO_TEST_SUITE(oudia_diagram_dialog)
 
         BOOST_CHECK(!oudia_diagram_dialog.selected_index());
     }
+#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()
