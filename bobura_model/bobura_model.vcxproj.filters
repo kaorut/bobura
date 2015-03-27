@@ -31,6 +31,9 @@
     <Filter Include="sources\bobura::model\serializer">
       <UniqueIdentifier>{7f6741a0-da3d-420a-9aa3-14e2e5e0b5c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sources\bobura::model\message">
+      <UniqueIdentifier>{212a1d57-4d08-4319-be4f-8fa0f0b4c979}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\bobura\model\message\timetable_observer_set.h">
@@ -187,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="src\bobura.model.serializer.writer_set.cpp">
       <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.message.timetable_observer_set.cpp">
+      <Filter>sources\bobura::model\message</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

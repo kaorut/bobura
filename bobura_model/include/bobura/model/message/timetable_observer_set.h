@@ -9,8 +9,12 @@
 #if !defined(TETENGO2_MODEL_MESSAGE_TIMETABLEOBSERVERSET_H)
 #define TETENGO2_MODEL_MESSAGE_TIMETABLEOBSERVERSET_H
 
+#include <memory>
+
 #include <boost/core/noncopyable.hpp>
 #include <boost/signals2.hpp>
+
+#include <tetengo2.h>
 
 
 namespace bobura { namespace model { namespace message
@@ -32,6 +36,20 @@ namespace bobura { namespace model { namespace message
         using changed_signal_type = boost::signals2::signal<changed_type>;
 
 
+        // constructors and destructor
+
+        /*!
+            \brief Creates a timetable observer set.
+        */
+        timetable_observer_set();
+
+        /*!
+           \brief Destroys the timetable observer set.
+        */
+        ~timetable_observer_set()
+        TETENGO2_STDALT_NOEXCEPT;
+
+
         // functions
 
         /*!
@@ -40,26 +58,25 @@ namespace bobura { namespace model { namespace message
             \return The observer called when a timetable is changed.
         */
         const changed_signal_type& changed()
-        const
-        {
-            return m_changed;
-        }
+        const;
 
         /*!
             \brief Returns the observer called when a timetable is changed.
 
             \return The observer called when a timetable is changed.
         */
-        changed_signal_type& changed()
-        {
-            return m_changed;
-        }
+        changed_signal_type& changed();
 
 
     private:
+        // types
+
+        class impl;
+
+
         // variables
 
-        changed_signal_type m_changed;
+        const std::unique_ptr<impl> m_p_impl;
 
 
     };
