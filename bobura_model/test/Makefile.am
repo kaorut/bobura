@@ -10,12 +10,14 @@ extra_headers =
 
 sources = \
     master.cpp \
+    test_bobura.model.message.oudia_diagram_dialog.cpp \
     test_bobura.model.message.timetable_observer_set.cpp \
     test_bobura.model.serializer.bzip2_reader.cpp \
     test_bobura.model.serializer.bzip2_writer.cpp \
     test_bobura.model.serializer.exec_json_reading_task.cpp \
     test_bobura.model.serializer.json_reader.cpp \
     test_bobura.model.serializer.json_writer.cpp \
+    test_bobura.model.serializer.oudia_diagram_dialog.cpp \
     test_bobura.model.serializer.oudia_reader.cpp \
     test_bobura.model.serializer.select_oudia_diagram.cpp \
     test_bobura.model.serializer.reader.cpp \
@@ -46,14 +48,19 @@ EXTRA_DIST = $(extra_headers) $(extra_sources)
 
 TESTS = bobura_model.test
 
+bobura_model_test_DEPENDENCIES = \
+    $(top_builddir)/bobura_model/src/libbobura_model.a
 bobura_model_test_CPPFLAGS = \
+    -I$(top_srcdir)/bobura_core/include \
     -I$(top_srcdir)/bobura_model/include \
     -I$(TETENGO2_INCLUDE) \
     -I$(TETENGO2_DETAIL_INCLUDE) \
     -I$(TETENGO2_GUI_INCLUDE)
 bobura_model_test_LDFLAGS = \
+    -L$(top_builddir)/bobura_model/src \
     -L$(TETENGO2_LIB)
 bobura_model_test_LDADD = \
+    -lbobura_model \
     -ltetengo2 \
     $(UNITTEST_LIBS)
 bobura_model_test_SOURCES = $(headers) $(sources)

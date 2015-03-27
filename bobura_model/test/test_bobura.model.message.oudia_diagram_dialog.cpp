@@ -1,5 +1,5 @@
 /*! \file
-    \brief Test of class bobura::message::oudia_diagram_dialog.
+    \brief Test of class bobura::model::message::oudia_diagram_dialog.
 
     Copyright (C) 2007-2015 kaoru
 
@@ -8,7 +8,7 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <bobura/message/oudia_diagram_dialog.h>
+#include <bobura/model/message/oudia_diagram_dialog.h>
 #include <bobura/type_list.h>
 
 
@@ -39,6 +39,7 @@ namespace
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
+BOOST_AUTO_TEST_SUITE(model)
 BOOST_AUTO_TEST_SUITE(message)
 BOOST_AUTO_TEST_SUITE(oudia_diagram_dialog)
 BOOST_AUTO_TEST_SUITE(ok_button_mouse_clicked)
@@ -50,7 +51,7 @@ BOOST_AUTO_TEST_SUITE(ok_button_mouse_clicked)
 
         window_type parent{};
         concrete_dialog dialog{ parent };
-        const bobura::message::oudia_diagram_dialog::ok_button_mouse_clicked<dialog_type> observer{ dialog };
+        const bobura::model::message::oudia_diagram_dialog::ok_button_mouse_clicked<dialog_type> observer{ dialog };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -59,7 +60,7 @@ BOOST_AUTO_TEST_SUITE(ok_button_mouse_clicked)
 
         window_type parent{};
         concrete_dialog dialog{ parent };
-        const bobura::message::oudia_diagram_dialog::ok_button_mouse_clicked<dialog_type> observer{ dialog };
+        const bobura::model::message::oudia_diagram_dialog::ok_button_mouse_clicked<dialog_type> observer{ dialog };
 
         observer();
     }
@@ -75,7 +76,9 @@ BOOST_AUTO_TEST_SUITE(cancel_button_mouse_clicked)
 
         window_type parent{};
         concrete_dialog dialog{ parent };
-        const bobura::message::oudia_diagram_dialog::cancel_button_mouse_clicked<dialog_type> observer{ dialog };
+        const bobura::model::message::oudia_diagram_dialog::cancel_button_mouse_clicked<dialog_type> observer{
+            dialog
+        };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -84,12 +87,15 @@ BOOST_AUTO_TEST_SUITE(cancel_button_mouse_clicked)
 
         window_type parent{};
         concrete_dialog dialog{ parent };
-        const bobura::message::oudia_diagram_dialog::cancel_button_mouse_clicked<dialog_type> observer{ dialog };
+        const bobura::model::message::oudia_diagram_dialog::cancel_button_mouse_clicked<dialog_type> observer{
+            dialog
+        };
 
         observer();
     }
 
 
+BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

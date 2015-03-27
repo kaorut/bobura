@@ -5,7 +5,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)lib\tetengo2\tetengo2\include;$(SolutionDir)lib\tetengo2\tetengo2_detail\include;$(SolutionDir)lib\tetengo2\tetengo2_gui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)bobura_core\include;$(SolutionDir)lib\tetengo2\tetengo2\include;$(SolutionDir)lib\tetengo2\tetengo2_detail\include;$(SolutionDir)lib\tetengo2\tetengo2_gui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>cscript "$(SolutionDir)lib\tetengo2\tools\copy_boost_dlls.js" "$(ProjectDir)$(ProjectName).boost_libs.txt" "$(SolutionDir)bobura_config.h" "$(SolutionDir)" $(ConfigurationName) $(PlatformName)
@@ -19,7 +19,7 @@ echo Skipping the unit test...
     </PostBuildEvent>
     <Link>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>tetengo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gdiplus.lib;bobura_model.lib;tetengo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />

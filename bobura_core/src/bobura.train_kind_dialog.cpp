@@ -1008,7 +1008,7 @@ namespace bobura
         typename test::traits_type_list_type::dialog_type,
         typename test::common_type_list_type::size_type,
         typename test::common_type_list_type::string_type,
-        typename test::ui_type_list_type::fast_font_type,
+        typename test::ui_type_list_type::font_type,
         typename test::ui_type_list_type::color_type,
         typename test::ui_type_list_type::fast_canvas_type,
         typename test::common_dialog_type_list_type::color_type

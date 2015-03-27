@@ -9,14 +9,11 @@
 #if !defined(BOBURA_MODEL_SERIALIZER_WRITERSELECTOR_H)
 #define BOBURA_MODEL_SERIALIZER_WRITERSELECTOR_H
 
-#include <algorithm>
 #include <memory>
 #include <stdexcept>
-#include <utility>
 #include <vector>
 
 #include <boost/filesystem.hpp>
-#include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
 
@@ -102,64 +99,36 @@ namespace bobura { namespace model { namespace serializer
             \throw std::invalid_argument When the count of the writers is
                                          empty.
         */
-        writer_selector(std::vector<std::unique_ptr<base_type>> p_writers, boost::filesystem::path path)
-        :
-        m_p_writers(std::move(p_writers)),
-        m_path(std::move(path))
-        {
-            if (m_p_writers.empty())
-                BOOST_THROW_EXCEPTION(std::invalid_argument("No writer is specified."));
-        }
+        writer_selector(std::vector<std::unique_ptr<base_type>> p_writers, boost::filesystem::path path);
 
         /*!
             \brief Destroys the writer_selector.
         */
         virtual ~writer_selector()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        TETENGO2_STDALT_NOEXCEPT;
 
 
     private:
+        // types
+
+        class impl;
+
+
         // variables
 
-        const std::vector<std::unique_ptr<base_type>> m_p_writers;
-
-        const boost::filesystem::path m_path;
+        const std::unique_ptr<impl> m_p_impl;
 
 
         // virtual functions
 
         virtual bool selects_impl(const boost::filesystem::path& path)
-        const override
-        {
-            return
-                std::find_if(
-                    m_p_writers.begin(),
-                    m_p_writers.end(),
-                    [&path](const std::unique_ptr<base_type>& p_writer) { return p_writer->selects(path); }
-                ) != m_p_writers.end();
-        }
+        const override;
 
         virtual boost::filesystem::path extension_impl()
-        const override
-        {
-            BOOST_THROW_EXCEPTION(std::logic_error("No extension."));
-            return boost::filesystem::path(); // for warning suppression
-        }
+        const override;
 
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream)
-        override
-        {
-            const auto found =
-                std::find_if(
-                    m_p_writers.begin(),
-                    m_p_writers.end(),
-                    [this](const std::unique_ptr<base_type>& p_writer) { return p_writer->selects(this->m_path); }
-                );
-            if (found == m_p_writers.end())
-                BOOST_THROW_EXCEPTION(std::logic_error("No writer selects this file type."));
-
-            (*found)->write(timetable, output_stream);
-        }
+        override;
 
 
     };

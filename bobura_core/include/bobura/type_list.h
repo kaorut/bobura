@@ -30,7 +30,7 @@
 #include <bobura/load_save/traits.h>
 #include <bobura/main_window_traits.h>
 #include <bobura/main_window_menu_builder_traits.h>
-#include <bobura/oudia_diagram_dialog.h>
+#include <bobura/model/serializer/oudia_diagram_dialog.h>
 #include <bobura/view/diagram/traits.h>
 
 
@@ -303,6 +303,9 @@ namespace bobura { namespace type_list
         template <typename DetailTypeList>
         using transparent_background_type =
             tetengo2::gui::drawing::transparent_background<drawing_details_type<DetailTypeList>>;
+
+        template <typename DetailTypeList>
+        using font_type = tetengo2::gui::drawing::font<string_type, size_type, drawing_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using fast_font_type =
@@ -579,6 +582,9 @@ namespace bobura { namespace type_list
         //! The fast canvas type.
         using fast_canvas_type = detail::ui::fast_canvas_type<DetailTypeList>;
 
+        //! The font type.
+        using font_type = detail::ui::font_type<DetailTypeList>;
+
         //! The fast font type.
         using fast_font_type = detail::ui::fast_font_type<DetailTypeList>;
 
@@ -632,6 +638,9 @@ namespace bobura { namespace type_list
 
         //! The side bar type.
         using side_bar_type = detail::ui::side_bar_type<DetailTypeList>;
+
+        //! The system color set type.
+        using system_color_set_type = detail::ui::system_color_set_type<DetailTypeList>;
 
         //! The text box type.
         using text_box_type = detail::ui::text_box_type<DetailTypeList>;
@@ -835,7 +844,7 @@ namespace bobura { namespace type_list
                 dialog_type<DetailTypeList>,
                 type_list::detail::ui::timer_type<DetailTypeList>,
                 type_list::detail::ui::system_color_set_type<DetailTypeList>,
-                oudia_diagram_dialog<dialog_traits_type<DetailTypeList>, size_type>,
+                model::serializer::oudia_diagram_dialog<dialog_traits_type<DetailTypeList>, size_type>,
                 message_catalog_type<DetailTypeList>,
                 type_list::detail::locale::timetable_file_encoder_type<DetailTypeList>,
                 type_list::detail::locale::windia_file_encoder_type<DetailTypeList>

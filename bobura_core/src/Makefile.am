@@ -29,9 +29,12 @@ sources = \
     bobura.command.vertically_zoom_out.cpp \
     bobura.file_property_dialog.cpp \
     bobura.font_color_dialog.cpp \
+    bobura.load_save.confirm_file_save.cpp \
+    bobura.load_save.load_from_file.cpp \
+    bobura.load_save.new_file.cpp \
+    bobura.load_save.save_to_file.cpp \
     bobura.main_window.cpp \
     bobura.main_window_menu_builder.cpp \
-    bobura.oudia_diagram_dialog.cpp \
     bobura.train_kind_dialog.cpp \
     bobura.view.diagram.zoom.cpp
 

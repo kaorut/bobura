@@ -15,21 +15,24 @@
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2.h>
+
 #include <bobura/model/serializer/windia_reader.h>
 #include <bobura/model/timetable.h>
-
-#include "test_bobura.model.type_list.h"
+#include <bobura/type_list.h>
 
 
 namespace
 {
     // types
 
-    using detail_type_list_type = test_bobura::model::type_list::detail_for_test;
+    using detail_type_list_type = bobura::type_list::detail_for_test;
 
-    using common_type_list_type = test_bobura::model::type_list::common<detail_type_list_type>;
+    using common_type_list_type = bobura::type_list::common;
 
-    using ui_type_list_type = test_bobura::model::type_list::ui<detail_type_list_type>;
+    using locale_type_list_type = bobura::type_list::locale<detail_type_list_type>;
+
+    using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
     using size_type = common_type_list_type::size_type;
 
@@ -60,10 +63,9 @@ namespace
 
     using time_type = stop_type::time_type;
 
-    using input_stream_iterator_type =
-        tetengo2::observable_forward_iterator<
-            boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>
-        >;
+    using input_stream_iterator_type = common_type_list_type::input_stream_iterator_type;
+
+    using windia_file_encoder_type = locale_type_list_type::windia_file_encoder_type;
 
     using reader_type =
         bobura::model::serializer::windia_reader<
@@ -74,10 +76,16 @@ namespace
             operating_distance_type,
             speed_type,
             font_type,
-            common_type_list_type::io_encoder_type
+            windia_file_encoder_type
         >;
 
     using error_type = reader_type::error_type;
+
+    using utf8_encoder_type =
+        tetengo2::text::encoder<
+            windia_file_encoder_type::internal_encoding_type,
+            tetengo2::text::encoding::utf8<detail_type_list_type::encoding_type>
+        >;
 
 
     // variables
@@ -141,6 +149,13 @@ BOOST_AUTO_TEST_SUITE(model)
 BOOST_AUTO_TEST_SUITE(serializer)
 BOOST_AUTO_TEST_SUITE(windia_reader)
     // test cases
+
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const reader_type reader{};
+    }
 
     BOOST_AUTO_TEST_CASE(selects)
     {
@@ -286,7 +301,10 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
             {
                 const auto& train_kind = p_timetable->train_kinds()[0];
 
-                BOOST_CHECK(train_kind.name() == string_type{ TETENGO2_TEXT("\x95\x81\x92\xCA") }); // futsuu
+                static const utf8_encoder_type utf8_encoder;
+                const std::string futsuu_in_utf8{ "\xE6\x99\xAE\xE9\x80\x9A" }; // futsuu
+                const string_type futsuu = utf8_encoder.decode(futsuu_in_utf8);
+                BOOST_CHECK(train_kind.name() == utf8_encoder.decode(futsuu_in_utf8));
                 BOOST_CHECK((train_kind.color() == color_type{ 0, 0, 0 }));
                 BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::normal);
             }

@@ -3,12 +3,14 @@
 # $Id$
 
 pkg_headers = \
+    model/message/oudia_diagram_dialog.h \
     model/message/timetable_observer_set.h \
     model/serializer/bzip2_reader.h \
     model/serializer/bzip2_writer.h \
     model/serializer/exec_json_reading_task.h \
     model/serializer/json_reader.h \
     model/serializer/json_writer.h \
+    model/serializer/oudia_diagram_dialog.h \
     model/serializer/oudia_reader.h \
     model/serializer/select_oudia_diagram.h \
     model/serializer/reader.h \

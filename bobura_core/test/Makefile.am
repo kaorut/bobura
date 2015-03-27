@@ -45,12 +45,10 @@ sources = \
     test_bobura.message.file_property_dialog.cpp \
     test_bobura.message.font_color_dialog.cpp \
     test_bobura.message.main_window.cpp \
-    test_bobura.message.oudia_diagram_dialog.cpp \
     test_bobura.message.property_bar.cpp \
     test_bobura.message.timetable_model.cpp \
     test_bobura.message.timetable_model_observer_set.cpp \
     test_bobura.message.train_kind_dialog.cpp \
-    test_bobura.oudia_diagram_dialog.cpp \
     test_bobura.property_bar.cpp \
     test_bobura.settings.cpp \
     test_bobura.timetable_model.cpp \
@@ -75,7 +73,8 @@ EXTRA_DIST = $(extra_headers) $(extra_sources)
 TESTS = bobura_core.test
 
 bobura_core_test_DEPENDENCIES = \
-    $(top_builddir)/bobura_core/src/libbobura_core.a
+    $(top_builddir)/bobura_core/src/libbobura_core.a \
+    $(top_builddir)/bobura_model/src/libbobura_model.a
 bobura_core_test_CPPFLAGS = \
     -I$(top_srcdir)/bobura_core/include \
     -I$(top_srcdir)/bobura_model/include \
@@ -84,9 +83,11 @@ bobura_core_test_CPPFLAGS = \
     -I$(TETENGO2_GUI_INCLUDE)
 bobura_core_test_LDFLAGS = \
     -L$(top_builddir)/bobura_core/src \
+    -L$(top_builddir)/bobura_model/src \
     -L$(TETENGO2_LIB)
 bobura_core_test_LDADD = \
     -lbobura_core \
+    -lbobura_model \
     -ltetengo2 \
     $(UNITTEST_LIBS)
 bobura_core_test_SOURCES = $(headers) $(sources)

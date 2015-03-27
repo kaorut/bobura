@@ -9,12 +9,8 @@
 #if !defined(BOBURA_MODEL_SERIALIZER_SELECTOUDIADIAGRAM_H)
 #define BOBURA_MODEL_SERIALIZER_SELECTOUDIADIAGRAM_H
 
-#include <cassert>
-#include <iterator>
-#include <utility>
+#include <memory>
 #include <vector>
-
-#include <boost/utility.hpp>
 
 
 namespace bobura { namespace model { namespace serializer
@@ -39,6 +35,9 @@ namespace bobura { namespace model { namespace serializer
         //! The string type.
         using string_type = typename oudia_diagram_dialog_type::string_type;
 
+        //! The iterator type.
+        using iterator = typename std::vector<string_type>::const_iterator;
+
         //! The message catalog type.
         using message_catalog_type = typename oudia_diagram_dialog_type::message_catalog_type;
 
@@ -56,12 +55,13 @@ namespace bobura { namespace model { namespace serializer
             abstract_window_type&       parent,
             string_type                 file_name,
             const message_catalog_type& message_catalog
-        )
-        :
-        m_parent(parent),
-        m_file_name(std::move(file_name)),
-        m_message_catalog(message_catalog)
-        {}
+        );
+
+        /*!
+            \brief Destroys the OuDia diagram selecting.
+        */
+        ~select_oudia_diagram()
+        TETENGO2_STDALT_NOEXCEPT;
 
 
         // functions
@@ -69,56 +69,86 @@ namespace bobura { namespace model { namespace serializer
         /*!
             \brief Selects an OuDia diagram.
 
-            \tparam FowardIterator A forward iterator type.
-
             \param first The first position of the diagrams.
             \param last  The last position of the diagrams.
 
             \return The selected position.
         */
-        template <typename ForwardIterator>
-        ForwardIterator operator()(const ForwardIterator first, const ForwardIterator last)
-        const
-        {
-            if (std::distance(first, last) < 2)
-                return first;
-
-            oudia_diagram_dialog_type dialog{ m_parent, m_message_catalog };
-
-            dialog.set_file_name(m_file_name);
-            dialog.set_names(std::vector<string_type>(first, last));
-            dialog.set_selected_index(0);
-
-            dialog.do_modal();
-            if (dialog.result() != oudia_diagram_dialog_type::result_type::accepted)
-                return last;
-
-            const auto selected_index = dialog.selected_index();
-            if (selected_index)
-            {
-                assert(*selected_index < static_cast<selected_index_type>(std::distance(first, last)));
-                return boost::next(first, *selected_index);
-            }
-            else
-            {
-                return last;
-            }
-        }
+        iterator operator()(const iterator first, const iterator last)
+        const;
 
 
     private:
         // types
 
-        using selected_index_type = typename oudia_diagram_dialog_type::size_type;
+        class impl;
 
 
         // variables
 
-        abstract_window_type& m_parent;
+        const std::unique_ptr<impl> m_p_impl;
 
-        const string_type m_file_name;
 
-        const message_catalog_type& m_message_catalog;
+    };
+
+
+    /*!
+        \brief The class template for an OuDia diagram selecting for testing.
+
+        \tparam String A string type.
+    */
+    template <typename String>
+    class select_oudia_diagram_for_test
+    {
+    public:
+        // types
+
+        //! The string type.
+        using string_type = String;
+
+        //! The iterator type.
+        using iterator = typename std::vector<string_type>::const_iterator;
+
+
+        // constructors and destructor
+
+        /*!
+            \brief Creates an OuDia diagram selecting for testing.
+
+            \param name A diagram name.
+        */
+        explicit select_oudia_diagram_for_test(string_type name);
+
+        /*!
+            \brief Destroys the OuDia diagram selecting for testing.
+        */
+        ~select_oudia_diagram_for_test()
+        TETENGO2_STDALT_NOEXCEPT;
+
+
+        // functions
+
+        /*!
+            \brief Selects an OuDia diagram.
+
+            \param first The first position of the diagrams.
+            \param last  The last position of the diagrams.
+
+            \return Always first.
+        */
+        iterator operator()(const iterator first, const iterator last)
+        const;
+
+
+    private:
+        // types
+
+        class impl;
+
+
+        // variables
+
+        const std::unique_ptr<impl> m_p_impl;
 
 
     };

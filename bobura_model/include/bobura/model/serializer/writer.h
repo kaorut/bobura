@@ -11,7 +11,6 @@
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/utility.hpp>
 
 #include <tetengo2.h>
 
@@ -77,7 +76,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the writer.
         */
         virtual ~writer()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        TETENGO2_STDALT_NOEXCEPT;
 
 
         // functions
@@ -90,10 +89,7 @@ namespace bobura { namespace model { namespace serializer
             \return The extension.
         */
         boost::filesystem::path extension()
-        const
-        {
-            return extension_impl();
-        }
+        const;
 
         /*!
             \brief Checks whether this writer selects a file type.
@@ -104,10 +100,7 @@ namespace bobura { namespace model { namespace serializer
             \retval false Otherwise.
         */
         bool selects(const boost::filesystem::path& path)
-        const
-        {
-            return selects_impl(path);
-        }
+        const;
 
         /*!
             \brief Writes a timetable.
@@ -115,10 +108,7 @@ namespace bobura { namespace model { namespace serializer
             \param timetable     A timetable.
             \param output_stream An output stream.
         */
-        void write(const timetable_type& timetable, output_stream_type& output_stream)
-        {
-            write_impl(timetable, output_stream);
-        }
+        void write(const timetable_type& timetable, output_stream_type& output_stream);
 
 
     protected:
@@ -127,29 +117,14 @@ namespace bobura { namespace model { namespace serializer
         /*!
             \brief Creates a writer.
         */
-        writer()
-        {}
+        writer();
 
 
     private:
         // virtual functions
 
         virtual bool selects_impl(const boost::filesystem::path& path)
-        const
-        {
-            using path_string_type = typename boost::filesystem::path::string_type;
-
-            const auto path_string = path.native();
-            const auto extension_string = extension_impl().native();
-            if (path_string.length() < extension_string.length())
-                return false;
-            
-            const path_string_type path_extension_string{
-                boost::prior(path_string.end(), extension_string.length()), path_string.end()
-            };
-
-            return path_extension_string == extension_string;
-        }
+        const;
 
         virtual boost::filesystem::path extension_impl()
         const = 0;

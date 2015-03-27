@@ -10,11 +10,8 @@
 #define BOBURA_MODEL_SERIALIZER_BZIP2WRITER_H
 
 #include <memory>
-#include <utility>
 
 #include <boost/filesystem.hpp>
-#include <boost/iostreams/filter/bzip2.hpp>
-#include <boost/iostreams/filtering_stream.hpp>
 
 #include <tetengo2.h>
 
@@ -93,44 +90,33 @@ namespace bobura { namespace model { namespace serializer
 
             \param p_writer A unique pointer to a writer.
         */
-        explicit bzip2_writer(std::unique_ptr<base_type> p_writer)
-        :
-        base_type(),
-        m_p_writer(std::move(p_writer)) 
-        {}
+        explicit bzip2_writer(std::unique_ptr<base_type> p_writer);
 
         /*!
             \brief Destroys the bzip2 writer.
         */
         virtual ~bzip2_writer()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        TETENGO2_STDALT_NOEXCEPT;
 
 
     private:
+        // types
+
+        class impl;
+
+
         // variables
 
-        const std::unique_ptr<base_type> m_p_writer;
+        const std::unique_ptr<impl> m_p_impl;
 
 
         // virtual functions
 
         virtual boost::filesystem::path extension_impl()
-        const override
-        {
-            return
-                boost::filesystem::path(m_p_writer->extension().native() +
-                typename boost::filesystem::path::string_type{ TETENGO2_TEXT("_bz2") });
-        }
+        const override;
 
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream)
-        override
-        {
-            boost::iostreams::filtering_ostream filtering_output_stream{};
-            filtering_output_stream.push(boost::iostreams::bzip2_compressor());
-            filtering_output_stream.push(output_stream);
-
-            m_p_writer->write(timetable, filtering_output_stream);
-        }
+        override;
 
 
     };

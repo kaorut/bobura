@@ -7,7 +7,6 @@
 */
 
 #include <memory>
-#include <ostream>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -22,19 +21,18 @@
 
 #include <bobura/model/serializer/writer_selector.h>
 #include <bobura/model/timetable.h>
-
-#include "test_bobura.model.type_list.h"
+#include <bobura/type_list.h>
 
 
 namespace
 {
     // types
 
-    using detail_type_list_type = test_bobura::model::type_list::detail_for_test;
+    using detail_type_list_type = bobura::type_list::detail_for_test;
 
-    using common_type_list_type = test_bobura::model::type_list::common<detail_type_list_type>;
+    using common_type_list_type = bobura::type_list::common;
 
-    using ui_type_list_type = test_bobura::model::type_list::ui<detail_type_list_type>;
+    using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
     using size_type = common_type_list_type::size_type;
 
@@ -53,7 +51,7 @@ namespace
             size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
         >;
 
-    using output_stream_type = std::basic_ostream<common_type_list_type::io_string_type::value_type>;
+    using output_stream_type = common_type_list_type::output_stream_type;
 
     using writer_selector_type =
         bobura::model::serializer::writer_selector<

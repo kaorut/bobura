@@ -22,6 +22,15 @@
     <Filter Include="headers\bobura::model\message">
       <UniqueIdentifier>{57026888-7127-4c38-8e88-a34cc9cb35bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sources">
+      <UniqueIdentifier>{541b8bbe-7a31-4060-bfd2-ef60f721fe14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\bobura::model">
+      <UniqueIdentifier>{4d0f7b1f-50ca-4653-8fa3-7f13e69c09c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\bobura::model\serializer">
+      <UniqueIdentifier>{7f6741a0-da3d-420a-9aa3-14e2e5e0b5c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\bobura\model\message\timetable_observer_set.h">
@@ -120,5 +129,64 @@
     <ClInclude Include="include\bobura\model\serializer\exec_json_reading_task.h">
       <Filter>headers\bobura::model\serializer</Filter>
     </ClInclude>
+    <ClInclude Include="..\precompiled\precompiled.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bobura\model\serializer\oudia_diagram_dialog.h">
+      <Filter>headers\bobura::model\serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bobura\model\message\oudia_diagram_dialog.h">
+      <Filter>headers\bobura::model\message</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\bobura.model.serializer.bzip2_reader.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\precompiled\precompiled.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.bzip2_writer.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.exec_json_reading_task.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.json_reader.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.json_writer.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.oudia_reader.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.oudia_diagram_dialog.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.reader.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.reader_selector.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.reader_set.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.select_oudia_diagram.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.windia_reader.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.writer.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.writer_selector.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.serializer.writer_set.cpp">
+      <Filter>sources\bobura::model\serializer</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

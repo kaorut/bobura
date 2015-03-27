@@ -9,3 +9,7 @@
 /*! \namespace bobura::model::message
     \brief The namespace for message observers.
 */
+
+/*! \namespace bobura::model::message::oudia_diagram_dialog
+    \brief The namespace for message observers of the OuDia diagram dialog.
+*/

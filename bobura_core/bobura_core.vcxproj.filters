@@ -37,6 +37,9 @@
     <Filter Include="sources\bobura\view\diagram">
       <UniqueIdentifier>{dc5d02ae-19b0-4505-99fd-6fa0b11d6f63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sources\bobura\load_save">
+      <UniqueIdentifier>{ba09c701-0e46-4703-a766-15adcc7e90e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\precompiled\precompiled.h">
@@ -149,12 +152,6 @@
     </ClInclude>
     <ClInclude Include="include\bobura\command\open_www_tetengo_org.h">
       <Filter>headers\bobura\command</Filter>
-    </ClInclude>
-    <ClInclude Include="include\bobura\message\oudia_diagram_dialog.h">
-      <Filter>headers\bobura\message</Filter>
-    </ClInclude>
-    <ClInclude Include="include\bobura\oudia_diagram_dialog.h">
-      <Filter>headers\bobura</Filter>
     </ClInclude>
     <ClInclude Include="include\bobura\message\property_bar.h">
       <Filter>headers\bobura\message</Filter>
@@ -338,14 +335,23 @@
     <ClCompile Include="src\bobura.font_color_dialog.cpp">
       <Filter>sources\bobura</Filter>
     </ClCompile>
-    <ClCompile Include="src\bobura.oudia_diagram_dialog.cpp">
-      <Filter>sources\bobura</Filter>
-    </ClCompile>
     <ClCompile Include="src\bobura.main_window.cpp">
       <Filter>sources\bobura</Filter>
     </ClCompile>
     <ClCompile Include="src\bobura.command.open_www_tetengo_org.cpp">
       <Filter>sources\bobura\command</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.load_save.confirm_file_save.cpp">
+      <Filter>sources\bobura\load_save</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.load_save.load_from_file.cpp">
+      <Filter>sources\bobura\load_save</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.load_save.new_file.cpp">
+      <Filter>sources\bobura\load_save</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.load_save.save_to_file.cpp">
+      <Filter>sources\bobura\load_save</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

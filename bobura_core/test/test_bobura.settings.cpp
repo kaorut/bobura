@@ -10,6 +10,7 @@
 #include <vector>
 
 #include <boost/filesystem.hpp>
+#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -50,6 +51,10 @@ namespace
 }
 
 
+#if !( \
+    BOOST_OS_LINUX && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
+    )
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(settings)
     // test cases
@@ -375,3 +380,4 @@ BOOST_AUTO_TEST_SUITE(settings)
 
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
+#endif

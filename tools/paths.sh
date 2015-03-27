@@ -11,6 +11,7 @@ list_sources()
         $1/bobura_core/include \
         $1/bobura_core/src \
         $1/bobura_model/include \
+        $1/bobura_model/src \
         $1/setup/include \
         $1/setup/src \
         -type f \

@@ -6,8 +6,6 @@
     $Id$
 */
 
-#include <cstddef>
-#include <functional>
 #include <iterator>
 #include <memory>
 #include <stdexcept>
@@ -17,28 +15,29 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/predef.h>
 #include <boost/range/iterator_range.hpp>
-#include <boost/rational.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
 
+#include <bobura/model/serializer/exec_json_reading_task.h>
 #include <bobura/model/serializer/json_reader.h>
 #include <bobura/model/timetable.h>
 #include <bobura/model/train_info/time.h>
-
-#include "test_bobura.model.type_list.h"
+#include <bobura/type_list.h>
 
 
 namespace
 {
     // types
 
-    using detail_type_list_type = test_bobura::model::type_list::detail_for_test;
+    using detail_type_list_type = bobura::type_list::detail_for_test;
 
-    using common_type_list_type = test_bobura::model::type_list::common<detail_type_list_type>;
+    using common_type_list_type = bobura::type_list::common;
 
-    using ui_type_list_type = test_bobura::model::type_list::ui<detail_type_list_type>;
+    using locale_type_list_type = bobura::type_list::locale<detail_type_list_type>;
+
+    using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
     using size_type = common_type_list_type::size_type;
 
@@ -65,25 +64,29 @@ namespace
 
     using color_type = ui_type_list_type::color_type;
 
-    using input_stream_iterator_type =
-        tetengo2::observable_forward_iterator<
-            boost::spirit::multi_pass<std::istreambuf_iterator<common_type_list_type::io_string_type::value_type>>
+    using input_stream_iterator_type = common_type_list_type::input_stream_iterator_type;
+
+    using dialog_type = ui_type_list_type::dialog_type;
+
+    using timer_type = ui_type_list_type::timer_type;
+
+    using system_color_set_type = ui_type_list_type::system_color_set_type;
+
+    using message_catalog_type = locale_type_list_type::message_catalog_type;
+
+    using exec_json_reading_task_type =
+        bobura::model::serializer::exec_json_reading_task<
+            size_type,
+            difference_type,
+            string_type,
+            operating_distance_type,
+            speed_type,
+            font_type,
+            dialog_type,
+            timer_type,
+            system_color_set_type,
+            message_catalog_type
         >;
-
-    struct exec_json_reading_task_type
-    {
-        using promise_type = tetengo2::concurrent::progressive_promise<int, boost::rational<std::size_t>>;
-
-        using read_timetable_type = std::function<std::unique_ptr<timetable_type> (promise_type& promise)>;
-
-        std::unique_ptr<timetable_type> operator()(read_timetable_type read_timetable)
-        const
-        {
-            promise_type promise{ 0 };
-            return read_timetable(promise);
-        }
-
-    };
 
     using reader_type =
         bobura::model::serializer::json_reader<
@@ -97,10 +100,12 @@ namespace
             speed_type,
             exec_json_reading_task_type,
             font_type,
-            common_type_list_type::io_encoder_type
+            locale_type_list_type::timetable_file_encoder_type
         >;
 
     using error_type = reader_type::error_type;
+
+    using window_type = ui_type_list_type::window_type;
 
 
     // variables
@@ -547,7 +552,10 @@ BOOST_AUTO_TEST_SUITE(json_reader)
         BOOST_TEST_PASSPOINT();
 
         {
-            auto p_exec_json_reading_task = tetengo2::stdalt::make_unique<exec_json_reading_task_type>();
+            window_type window;
+            const message_catalog_type message_catalog;
+            auto p_exec_json_reading_task =
+                tetengo2::stdalt::make_unique<exec_json_reading_task_type>(window, message_catalog);
             reader_type json_reader{ std::move(p_exec_json_reading_task) };
         }
         {
@@ -560,7 +568,10 @@ BOOST_AUTO_TEST_SUITE(json_reader)
     {
         BOOST_TEST_PASSPOINT();
 
-        auto p_exec_json_reading_task = tetengo2::stdalt::make_unique<exec_json_reading_task_type>();
+        window_type window;
+        const message_catalog_type message_catalog;
+        auto p_exec_json_reading_task =
+            tetengo2::stdalt::make_unique<exec_json_reading_task_type>(window, message_catalog);
         reader_type json_reader{ std::move(p_exec_json_reading_task) };
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty0) };
@@ -630,7 +641,10 @@ BOOST_AUTO_TEST_SUITE(json_reader)
     {
         BOOST_TEST_PASSPOINT();
 
-        auto p_exec_json_reading_task = tetengo2::stdalt::make_unique<exec_json_reading_task_type>();
+        window_type window;
+        const message_catalog_type message_catalog;
+        auto p_exec_json_reading_task =
+            tetengo2::stdalt::make_unique<exec_json_reading_task_type>(window, message_catalog);
         reader_type json_reader{ std::move(p_exec_json_reading_task) };
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_not_json) };

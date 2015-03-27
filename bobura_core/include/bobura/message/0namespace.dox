@@ -34,10 +34,6 @@
     \brief The namespace for message observers of the main window.
 */
 
-/*! \namespace bobura::message::oudia_diagram_dialog
-    \brief The namespace for message observers of the OuDia diagram dialog.
-*/
-
 /*! \namespace bobura::message::property_bar
     \brief The namespace for message observers of the property bar.
 */

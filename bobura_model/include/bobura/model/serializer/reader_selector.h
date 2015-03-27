@@ -9,15 +9,9 @@
 #if !defined(BOBURA_MODEL_SERIALIZER_READERSELECTOR_H)
 #define BOBURA_MODEL_SERIALIZER_READERSELECTOR_H
 
-#include <algorithm>
 #include <memory>
 #include <stdexcept>
-#include <utility>
 #include <vector>
-
-#include <boost/core/ignore_unused.hpp>
-#include <boost/predef.h>
-#include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
 
@@ -92,63 +86,33 @@ namespace bobura { namespace model { namespace serializer
 
             \throw std::invalid_argument When the count of the readers is empty.
         */
-        explicit reader_selector(std::vector<std::unique_ptr<base_type>> p_readers)
-        :
-        m_p_readers(std::move(p_readers))
-        {
-            if (m_p_readers.empty())
-                BOOST_THROW_EXCEPTION(std::invalid_argument("No reader is specified."));
-        }
+        explicit reader_selector(std::vector<std::unique_ptr<base_type>> p_readers);
 
         /*!
             \brief Destroys the reader_selector.
         */
         virtual ~reader_selector()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        TETENGO2_STDALT_NOEXCEPT;
 
 
     private:
+        // types
+
+        class impl;
+
+
         // variables
 
-        const std::vector<std::unique_ptr<base_type>> m_p_readers;
+        const std::unique_ptr<impl> m_p_impl;
 
 
         // virtual functions
 
-#if BOOST_COMP_GNUC
-#   pragma GCC diagnostic ignored "-Wreturn-type"
-#endif
         virtual bool selects_impl(const iterator first, const iterator last)
-        override
-        {
-            boost::ignore_unused(first, last);
-
-            BOOST_THROW_EXCEPTION(std::logic_error("This function cannot be called."));
-        }
-#if BOOST_COMP_GNUC
-#   pragma GCC diagnostic warning "-Wreturn-type"
-#endif
+        override;
 
         virtual std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
-        override
-        {
-            const auto found =
-                std::find_if(
-                    m_p_readers.begin(),
-                    m_p_readers.end(),
-                    [first, last](const std::unique_ptr<base_type>& p_reader)
-                    {
-                        return p_reader->selects(first, last);
-                    }
-                );
-            if (found == m_p_readers.end())
-            {
-                error = error_type::unsupported;
-                return std::unique_ptr<timetable_type>{};
-            }
-
-            return (*found)->read(first, last, error);
-        }
+        override;
 
 
     };

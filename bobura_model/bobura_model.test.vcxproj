@@ -104,12 +104,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="test\master.cpp" />
+    <ClCompile Include="test\test_bobura.model.message.oudia_diagram_dialog.cpp" />
     <ClCompile Include="test\test_bobura.model.message.timetable_observer_set.cpp" />
     <ClCompile Include="test\test_bobura.model.serializer.bzip2_reader.cpp" />
     <ClCompile Include="test\test_bobura.model.serializer.bzip2_writer.cpp" />
     <ClCompile Include="test\test_bobura.model.serializer.exec_json_reading_task.cpp" />
     <ClCompile Include="test\test_bobura.model.serializer.json_reader.cpp" />
     <ClCompile Include="test\test_bobura.model.serializer.json_writer.cpp" />
+    <ClCompile Include="test\test_bobura.model.serializer.oudia_diagram_dialog.cpp" />
     <ClCompile Include="test\test_bobura.model.serializer.oudia_reader.cpp" />
     <ClCompile Include="test\test_bobura.model.serializer.reader.cpp" />
     <ClCompile Include="test\test_bobura.model.serializer.reader_selector.cpp" />

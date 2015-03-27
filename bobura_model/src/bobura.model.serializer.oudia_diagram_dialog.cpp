@@ -1,5 +1,5 @@
 /*! \file
-    \brief The definition of bobura::oudia_diagram_dialog.
+    \brief The definition of bobura::model::serializer::oudia_diagram_dialog.
 
     Copyright (C) 2007-2015 kaoru
 
@@ -19,12 +19,12 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/message/oudia_diagram_dialog.h>
-#include <bobura/oudia_diagram_dialog.h>
+#include <bobura/model/message/oudia_diagram_dialog.h>
+#include <bobura/model/serializer/oudia_diagram_dialog.h>
 #include <bobura/type_list.h>
 
 
-namespace bobura
+namespace bobura { namespace model { namespace serializer
 {
     template <typename Traits, typename Size>
     class oudia_diagram_dialog<Traits, Size>::impl : private boost::noncopyable
@@ -375,4 +375,4 @@ namespace bobura
     >;
 
 
-}
+}}}

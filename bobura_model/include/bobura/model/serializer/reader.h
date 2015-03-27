@@ -86,7 +86,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the reader.
         */
         virtual ~reader()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        TETENGO2_STDALT_NOEXCEPT;
 
 
         // functions
@@ -100,10 +100,7 @@ namespace bobura { namespace model { namespace serializer
             \retval true  When this reader selects the file type.
             \retval false Otherwise.
         */
-        bool selects(const iterator first, const iterator last)
-        {
-            return selects_impl(first, last);
-        }
+        bool selects(const iterator first, const iterator last);
 
         /*!
             \brief Reads a timetable.
@@ -116,10 +113,7 @@ namespace bobura { namespace model { namespace serializer
 
             \return A unique pointer to a timetable.
         */
-        std::unique_ptr<timetable_type> read(const iterator first, const iterator last, error_type& error)
-        {
-            return read_impl(first, last, error);
-        }
+        std::unique_ptr<timetable_type> read(const iterator first, const iterator last, error_type& error);
 
 
     protected:
@@ -128,8 +122,7 @@ namespace bobura { namespace model { namespace serializer
         /*!
             \brief Creates a reader.
         */
-        reader()
-        {}
+        reader();
 
 
     private:
