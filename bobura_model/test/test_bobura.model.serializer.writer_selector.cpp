@@ -15,6 +15,7 @@
 
 #include <boost/core/ignore_unused.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>

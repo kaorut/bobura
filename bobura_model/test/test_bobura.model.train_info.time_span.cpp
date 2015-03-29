@@ -8,6 +8,7 @@
 
 #include <stdexcept>
 
+#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/model/train_info/time_span.h>
