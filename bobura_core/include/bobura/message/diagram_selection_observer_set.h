@@ -9,9 +9,13 @@
 #if !defined(TETENGO2_MESSAGE_DIAGRAMSELECTIONOBSERVERSET_H)
 #define TETENGO2_MESSAGE_DIAGRAMSELECTIONOBSERVERSET_H
 
+#include <memory>
+
 #include <boost/core/noncopyable.hpp>
 #include <boost/optional.hpp>
 #include <boost/signals2.hpp>
+
+#include <tetengo2.h>
 
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
@@ -51,7 +55,6 @@ namespace bobura { namespace message
         //! The train type.
         using train_type = model::train<size_type, difference_type, string_type>;
 
-
         /*!
             \brief The observer type of station selection.
 
@@ -86,6 +89,20 @@ namespace bobura { namespace message
         using all_unselected_signal_type = boost::signals2::signal<all_unselected_type>;
 
 
+        // constructors and destructor
+
+        /*!
+            \brief Creates a diagram selection observer set.
+        */
+        diagram_selection_observer_set();
+
+        /*!
+            \brief Destroys the diagram selection observer set.
+        */
+        ~diagram_selection_observer_set()
+        TETENGO2_STDALT_NOEXCEPT;
+
+
         // functions
 
         /*!
@@ -94,20 +111,14 @@ namespace bobura { namespace message
             \return The observer called when a station is selected.
         */
         const station_selected_signal_type& station_selected()
-        const
-        {
-            return m_station_selected;
-        }
+        const;
 
         /*!
             \brief Returns the observer called when station is selected.
 
             \return The observer called when a station is selected.
         */
-        station_selected_signal_type& station_selected()
-        {
-            return m_station_selected;
-        }
+        station_selected_signal_type& station_selected();
 
         /*!
             \brief Returns the observer called when a train is selected.
@@ -115,20 +126,14 @@ namespace bobura { namespace message
             \return The observer called when a train is selected.
         */
         const train_selected_signal_type& train_selected()
-        const
-        {
-            return m_train_selected;
-        }
+        const;
 
         /*!
             \brief Returns the observer called when a train is selected.
 
             \return The observer called when a train is selected.
         */
-        train_selected_signal_type& train_selected()
-        {
-            return m_train_selected;
-        }
+        train_selected_signal_type& train_selected();
 
         /*!
             \brief Returns the observer called when all the items are unselected.
@@ -136,30 +141,25 @@ namespace bobura { namespace message
             \return The observer called when all the items are unselected.
         */
         const all_unselected_signal_type& all_unselected()
-        const
-        {
-            return m_all_unselected;
-        }
+        const;
 
         /*!
             \brief Returns the observer called when all the items are unselected.
 
             \return The observer called when all the items are unselected.
         */
-        all_unselected_signal_type& all_unselected()
-        {
-            return m_all_unselected;
-        }
+        all_unselected_signal_type& all_unselected();
 
 
     private:
+        // types
+
+        class impl;
+
+
         // variables
 
-        station_selected_signal_type m_station_selected;
-
-        train_selected_signal_type m_train_selected;
-
-        all_unselected_signal_type m_all_unselected;
+        const std::unique_ptr<impl> m_p_impl;
 
 
     };
