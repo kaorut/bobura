@@ -21,9 +21,7 @@ namespace
 {
     // types
 
-    using detail_type_list_type = test_bobura::model::type_list::detail_for_test;
-
-    using common_type_list_type = test_bobura::model::type_list::common<detail_type_list_type>;
+    using common_type_list_type = test_bobura::model::type_list::common;
 
     using string_type = common_type_list_type::string_type;
 
