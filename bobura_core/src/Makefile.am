@@ -36,6 +36,7 @@ sources = \
     bobura.main_window.cpp \
     bobura.main_window_menu_builder.cpp \
     bobura.message.diagram_selection_observer_set.cpp \
+    bobura.message.timetable_model_observer_set.cpp \
     bobura.train_kind_dialog.cpp \
     bobura.view.diagram.zoom.cpp
 
