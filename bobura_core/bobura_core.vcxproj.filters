@@ -362,5 +362,8 @@
     <ClCompile Include="src\bobura.message.timetable_model_observer_set.cpp">
       <Filter>sources\bobura\message</Filter>
     </ClCompile>
+    <ClCompile Include="src\bobura.view.diagram.header.cpp">
+      <Filter>sources\bobura\view\diagram</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
