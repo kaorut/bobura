@@ -34,18 +34,6 @@ namespace bobura { namespace view { namespace diagram
         //! The traits type.
         using traits_type = Traits;
 
-        //! The size type.
-        using size_type = typename traits_type::size_type;
-
-        //! The difference type.
-        using difference_type = typename traits_type::difference_type;
-
-        //! The string type.
-        using string_type = typename traits_type::string_type;
-
-        //! The operating distance type.
-        using operating_distance_type = typename traits_type::operating_distance_type;
-
         //! The canvas type.
         using canvas_type = typename traits_type::canvas_type;
 

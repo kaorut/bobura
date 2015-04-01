@@ -28,19 +28,11 @@ namespace bobura { namespace view { namespace diagram
 
         using traits_type = Traits;
 
-        using size_type = typename traits_type::size_type;
-
-        using difference_type = typename traits_type::difference_type;
-
-        using string_type = typename traits_type::string_type;
-
-        using operating_distance_type = typename traits_type::operating_distance_type;
-
         using canvas_type = typename traits_type::canvas_type;
 
         using position_type = typename canvas_type::position_type;
 
-        using selection_type = selection<traits_type>;
+        using selection_type = typename item::selection_type;
 
 
         // constructors and destructor
