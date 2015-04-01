@@ -20,6 +20,9 @@ bobura::model::timetable::replace_train_kind_index::
 bobura::settings::value_impl::
 bobura::train_kind_dialog::do_modal_impl
 bobura::train_kind_dialog::info_set_type::
+bobura::view::diagram::[a-zA-Z0-9_]+::p_item_by_position_impl
+bobura::view::diagram::[a-zA-Z0-9_]+::selected_impl
+bobura::view::diagram::[a-zA-Z0-9_]+::select_impl
 bobura::view::diagram::[a-zA-Z0-9_]+::draw_on_impl
 setup::encode
 

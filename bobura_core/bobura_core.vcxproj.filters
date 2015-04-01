@@ -365,5 +365,8 @@
     <ClCompile Include="src\bobura.view.diagram.header.cpp">
       <Filter>sources\bobura\view\diagram</Filter>
     </ClCompile>
+    <ClCompile Include="src\bobura.view.diagram.item.cpp">
+      <Filter>sources\bobura\view\diagram</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

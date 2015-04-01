@@ -9,7 +9,8 @@
 #if !defined(BOBURA_VIEW_DIAGRAM_ITEM_H)
 #define BOBURA_VIEW_DIAGRAM_ITEM_H
 
-#include <boost/core/ignore_unused.hpp>
+#include <memory>
+
 #include <boost/core/noncopyable.hpp>
 
 #include <tetengo2.h>
@@ -62,16 +63,13 @@ namespace bobura { namespace view { namespace diagram
 
             \param selection A selection.
         */
-        explicit item(selection_type& selection)
-        :
-        m_p_selection(&selection)
-        {}
+        explicit item(selection_type& selection);
 
         /*!
             \brief Destroys the item.
         */
         virtual ~item()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        TETENGO2_STDALT_NOEXCEPT;
 
 
         // functions
@@ -83,15 +81,7 @@ namespace bobura { namespace view { namespace diagram
 
             \return This item.
         */
-        item& operator=(item&& another)
-        {
-            if (&another == this)
-                return *this;
-
-            m_p_selection = another.m_p_selection;
-
-            return *this;
-        }
+        item& operator=(item&& another);
 
         /*!
             \brief Draws this item on the canvas.
@@ -99,10 +89,7 @@ namespace bobura { namespace view { namespace diagram
             \param canvas A canvas.
         */
         void draw_on(canvas_type& canvas)
-        const
-        {
-            draw_on_impl(canvas);
-        }
+        const;
 
         /*!
             \brief Returns a ponter to the item by the position.
@@ -114,10 +101,7 @@ namespace bobura { namespace view { namespace diagram
 
             \return A pointer to the item.
         */
-        item* p_item_by_position(const position_type& position)
-        {
-            return p_item_by_position_impl(position);
-        }
+        item* p_item_by_position(const position_type& position);
 
         /*!
             \brief Returns a ponter to the item by the position.
@@ -130,10 +114,7 @@ namespace bobura { namespace view { namespace diagram
             \return A pointer to the item.
         */
         const item* p_item_by_position(const position_type& position)
-        const
-        {
-            return const_cast<item*>(this)->p_item_by_position_impl(position);
-        }
+        const;
 
         /*!
             \brief Returns the selection.
@@ -141,20 +122,14 @@ namespace bobura { namespace view { namespace diagram
             \return The selection.
         */
         const selection_type& get_selection()
-        const
-        {
-            return *m_p_selection;
-        }
+        const;
 
         /*!
             \brief Returns the selection.
 
             \return The selection.
         */
-        selection_type& get_selection()
-        {
-            return *m_p_selection;
-        }
+        selection_type& get_selection();
 
         /*!
             \brief Returns the selected status.
@@ -162,53 +137,38 @@ namespace bobura { namespace view { namespace diagram
             \return The selected status.
         */
         bool selected()
-        const
-        {
-            return selected_impl();
-        }
+        const;
 
         /*!
             \brief Selects this item.
 
             \param switch_selection_style Specify true to switch the selection style.
         */
-        void select(const bool switch_selection_style)
-        {
-            select_impl(switch_selection_style);
-        }
+        void select(const bool switch_selection_style);
 
 
     private:
+        // types
+
+        class impl;
+
+
         // variables
 
-        selection_type* m_p_selection;
+        std::unique_ptr<impl> m_p_impl;
 
 
         // virtual functions
 
         virtual void draw_on_impl(canvas_type& canvas)
-        const
-        {
-            boost::ignore_unused(canvas);
-        }
+        const;
 
-        virtual item* p_item_by_position_impl(const position_type& position)
-        {
-            boost::ignore_unused(position);
-
-            return nullptr;
-        }
+        virtual item* p_item_by_position_impl(const position_type& position);
 
         virtual bool selected_impl()
-        const
-        {
-            return false;
-        }
+        const;
 
-        virtual void select_impl(const bool switch_selection_style)
-        {
-            boost::ignore_unused(switch_selection_style);
-        }
+        virtual void select_impl(const bool switch_selection_style);
 
 
     };
