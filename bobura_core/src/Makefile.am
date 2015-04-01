@@ -41,6 +41,7 @@ sources = \
     bobura.view.diagram.header.cpp \
     bobura.view.diagram.item.cpp \
     bobura.view.diagram.selection.cpp \
+    bobura.view.diagram.station_line.cpp \
     bobura.view.diagram.zoom.cpp
 
 extra_sources =
