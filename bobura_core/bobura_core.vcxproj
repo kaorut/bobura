@@ -209,6 +209,7 @@
     <ClCompile Include="src\bobura.train_kind_dialog.cpp" />
     <ClCompile Include="src\bobura.view.diagram.header.cpp" />
     <ClCompile Include="src\bobura.view.diagram.item.cpp" />
+    <ClCompile Include="src\bobura.view.diagram.selection.cpp" />
     <ClCompile Include="src\bobura.view.diagram.zoom.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

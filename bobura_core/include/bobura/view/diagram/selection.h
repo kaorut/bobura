@@ -9,10 +9,8 @@
 #if !defined(BOBURA_VIEW_DIAGRAM_SELECTION_H)
 #define BOBURA_VIEW_DIAGRAM_SELECTION_H
 
-#include <cassert>
 #include <limits>
 #include <memory>
-#include <utility>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/optional.hpp>
@@ -68,24 +66,20 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Creates a selection.
         */
-        selection()
-        :
-        m_p_selected_station_location(nullptr),
-        m_p_selected_train(nullptr),
-        m_p_selection_observer_set(tetengo2::stdalt::make_unique<selection_observer_set_type>())
-        {}
+        selection();
 
         /*!
             \brief Moves a selection.
 
             \param another Another selection.
         */
-        selection(selection&& another)
-        :
-        m_p_selected_station_location(another.m_p_selected_station_location),
-        m_p_selected_train(another.m_p_selected_train),
-        m_p_selection_observer_set(std::move(another.m_p_selection_observer_set))
-        {}
+        selection(selection&& another);
+
+        /*!
+            \brief Destroys the selection.
+        */
+        ~selection()
+        TETENGO2_STDALT_NOEXCEPT;
 
 
         // functions
@@ -99,13 +93,7 @@ namespace bobura { namespace view { namespace diagram
             \retval false Otherwise.
         */
         bool selected(const station_location_type& station_location)
-        const
-        {
-            if (!m_p_selected_station_location)
-                return false;
-
-            return &station_location == m_p_selected_station_location;
-        }
+        const;
 
         /*!
             \brief Checks whether the train is selected.
@@ -119,38 +107,14 @@ namespace bobura { namespace view { namespace diagram
             \retval false Otherwise.
         */
         bool selected(const train_type& train, const boost::optional<size_type>& departure_stop_index)
-        const
-        {
-            if (!m_p_selected_train)
-                return false;
-            if (!departure_stop_index != !m_departure_stop_index)
-                return false;
-            if (!departure_stop_index)
-            {
-                assert(!m_departure_stop_index);
-                return &train == m_p_selected_train;
-            }
-            return
-                &train == m_p_selected_train &&
-                (
-                    *departure_stop_index == std::numeric_limits<size_type>::max() ||
-                    *departure_stop_index == *m_departure_stop_index
-                );
-        }
+        const;
 
         /*!
             \brief Selects a station location.
 
             \param station_location A station location.
         */
-        void select(const station_location_type& station_location)
-        {
-            unselect_all();
-
-            m_p_selected_station_location = &station_location;
-
-            m_p_selection_observer_set->station_selected()(station_location);
-        }
+        void select(const station_location_type& station_location);
 
         /*!
             \brief Selects a train.
@@ -161,27 +125,12 @@ namespace bobura { namespace view { namespace diagram
         void select(
             const train_type&                 train,
             const boost::optional<size_type>& departure_stop_index
-        )
-        {
-            unselect_all();
-
-            m_p_selected_train = &train;
-            m_departure_stop_index = departure_stop_index;
-
-            m_p_selection_observer_set->train_selected()(train, departure_stop_index);
-        }
+        );
 
         /*!
             \brief Unselects all the items.
         */
-        void unselect_all()
-        {
-            m_p_selected_station_location = nullptr;
-            m_p_selected_train = nullptr;
-            m_departure_stop_index = boost::none;
-
-            m_p_selection_observer_set->all_unselected()();
-        }
+        void unselect_all();
 
         /*!
             \brief Returns the selection observer set.
@@ -189,32 +138,25 @@ namespace bobura { namespace view { namespace diagram
             \return The selection observer set.
         */
         const selection_observer_set_type& selection_observer_set()
-        const
-        {
-            return *m_p_selection_observer_set;
-        }
+        const;
 
         /*!
             \brief Returns the selection observer set.
 
             \return The selection observer set.
         */
-        selection_observer_set_type& selection_observer_set()
-        {
-            return *m_p_selection_observer_set;
-        }
+        selection_observer_set_type& selection_observer_set();
 
 
     private:
+        // types
+
+        class impl;
+
+
         // variables
 
-        const station_location_type* m_p_selected_station_location;
-
-        const train_type* m_p_selected_train;
-
-        boost::optional<size_type> m_departure_stop_index;
-
-        std::unique_ptr<selection_observer_set_type> m_p_selection_observer_set;
+        const std::unique_ptr<impl> m_p_impl;
 
 
     };
