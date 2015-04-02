@@ -9,20 +9,16 @@
 #if !defined(BOBURA_VIEW_DIAGRAM_TIMELINE_H)
 #define BOBURA_VIEW_DIAGRAM_TIMELINE_H
 
-#include <algorithm>
-#include <cassert>
-#include <utility>
-#include <vector>
+#include <memory>
 
-#include <boost/lexical_cast.hpp>
 #include <boost/optional.hpp>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/timetable_model.h>
 #include <bobura/view/diagram/item.h>
 #include <bobura/view/diagram/selection.h>
-#include <bobura/view/diagram/utility.h>
 
 
 namespace bobura { namespace view { namespace diagram
@@ -44,15 +40,6 @@ namespace bobura { namespace view { namespace diagram
         //! The size type.
         using size_type = typename traits_type::size_type;
 
-        //! The difference type.
-        using difference_type = typename traits_type::difference_type;
-
-        //! The string type.
-        using string_type = typename traits_type::string_type;
-
-        //! The operating distance type.
-        using operating_distance_type = typename traits_type::operating_distance_type;
-
         //! The canvas type.
         using canvas_type = typename traits_type::canvas_type;
 
@@ -67,9 +54,6 @@ namespace bobura { namespace view { namespace diagram
 
         //! The top type.
         using top_type = typename tetengo2::gui::position<position_type>::top_type;
-
-        //! The base type.
-        using base_type = item<traits_type>;
 
         //! The selection type.
         using selection_type = selection<traits_type>;
@@ -94,36 +78,20 @@ namespace bobura { namespace view { namespace diagram
             const top_type&            bottom,
             unit_size_type             width,
             boost::optional<size_type> hours
-        )
-        :
-        base_type(selection),
-        m_left(std::move(left)),
-        m_top(top),
-        m_bottom(bottom),
-        m_width(std::move(width)),
-        m_hours(std::move(hours))
-        {}
+        );
 
         /*!
             \brief Moves a time line.
 
             \param another Another time line.
         */
-        time_line(time_line&& another)
-        :
-        base_type(another.get_selection()),
-        m_left(std::move(another.m_left)),
-        m_top(std::move(another.m_top)),
-        m_bottom(std::move(another.m_bottom)),
-        m_width(std::move(another.m_width)),
-        m_hours(another.m_hours)
-        {}
+        time_line(time_line&& another);
 
         /*!
             \brief Destroys the time line.
         */
         virtual ~time_line()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        TETENGO2_STDALT_NOEXCEPT;
 
 
         // functions
@@ -135,48 +103,26 @@ namespace bobura { namespace view { namespace diagram
 
             \return This time line.
         */
-        time_line& operator=(time_line&& another)
-        {
-            if (&another == this)
-                return *this;
-
-            m_left = std::move(another.m_left);
-            m_top = std::move(another.m_top);
-            m_bottom = std::move(another.m_bottom);
-            m_width = std::move(another.m_width);
-            m_hours = another.m_hours;
-            base_type::operator=(std::move(another));
-
-            return *this;
-        }
+        time_line& operator=(time_line&& another);
 
 
     private:
+        // types
+
+        using base_type = item<traits_type>;
+
+        class impl;
+
+
         // variables
 
-        left_type m_left;
-
-        top_type m_top;
-
-        top_type m_bottom;
-
-        unit_size_type m_width;
-
-        boost::optional<size_type> m_hours;
+        const std::unique_ptr<impl> m_p_impl;
 
 
         // virtual functions
 
         virtual void draw_on_impl(canvas_type& canvas)
-        const override
-        {
-            if (m_hours)
-                canvas.draw_text(boost::lexical_cast<string_type>(*m_hours), position_type{ m_left, m_top });
-
-            canvas.set_line_style(canvas_type::line_style_type::solid);
-            canvas.set_line_width(m_width);
-            canvas.draw_line(position_type{ m_left, m_top }, position_type{ m_left, m_bottom });
-        }
+        const override;
 
 
     };
@@ -229,20 +175,11 @@ namespace bobura { namespace view { namespace diagram
         //! The dimension type.
         using dimension_type = typename canvas_type::dimension_type;
 
-        //! The width type.
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
         //! The height type.
         using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
         //! The font type.
         using font_type = typename canvas_type::font_type;
-
-        //! The color type.
-        using color_type = typename canvas_type::color_type;
-
-        //! The base type.
-        using base_type = item<traits_type>;
 
         //! The selection type.
         using selection_type = selection<traits_type>;
@@ -285,44 +222,20 @@ namespace bobura { namespace view { namespace diagram
             const top_type&       header_bottom,
             const height_type&    time_header_height,
             const scale_type&     horizontal_scale
-        )
-        :
-        base_type(selection),
-        m_p_font(&model.timetable().font_color_set().time_line().font()),
-        m_p_color(&model.timetable().font_color_set().time_line().color()),
-        m_time_lines(
-            make_time_lines(
-                time_offset,
-                selection,
-                canvas_dimension,
-                timetable_dimension,
-                scroll_bar_position,
-                station_header_right,
-                header_bottom,
-                time_header_height,
-                horizontal_scale
-            )
-        )
-        {}
+        );
 
         /*!
             \brief Moves a time line list.
 
             \param another Another time line list.
         */
-        time_line_list(time_line_list&& another)
-        :
-        base_type(another.get_selection()),
-        m_p_font(another.m_p_font),
-        m_p_color(another.m_p_color),
-        m_time_lines(std::move(another.m_time_lines))
-        {}
+        time_line_list(time_line_list&& another);
 
         /*!
             \brief Destroys the time line list.
         */
         virtual ~time_line_list()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        TETENGO2_STDALT_NOEXCEPT;
 
 
         // functions
@@ -334,168 +247,26 @@ namespace bobura { namespace view { namespace diagram
 
             \return This time line list.
         */
-        time_line_list& operator=(time_line_list&& another)
-        {
-            if (&another == this)
-                return *this;
-
-            m_p_font = another.m_p_font;
-            m_p_color = another.m_p_color;
-            m_time_lines = std::move(another.m_time_lines);
-            base_type::operator=(std::move(another));
-
-            return *this;
-        }
+        time_line_list& operator=(time_line_list&& another);
 
 
     private:
         // types
 
-        using time_line_type = time_line<traits_type>;
+        using base_type = item<traits_type>;
 
-        using unit_size_type = typename canvas_type::unit_size_type;
+        class impl;
 
-
-        // static functions
-
-        std::vector<time_line_type> make_time_lines(
-            const time_span_type& time_offset,
-            selection_type&       selection,
-            const dimension_type& canvas_dimension,
-            const dimension_type& timetable_dimension,
-            const position_type&  scroll_bar_position,
-            const left_type&      station_header_right,
-            const top_type&       header_bottom,
-            const height_type&    time_header_height,
-            const scale_type&     horizontal_scale
-        )
-        {
-            const auto canvas_left = station_header_right;
-            const auto canvas_right =
-                left_type::from(tetengo2::gui::dimension<dimension_type>::width(canvas_dimension));
-
-            const auto canvas_top = header_bottom + top_type::from(time_header_height);
-            const auto canvas_bottom =
-                top_type::from(tetengo2::gui::dimension<dimension_type>::height(canvas_dimension));
-            const auto station_position_bottom =
-                top_type::from(tetengo2::gui::dimension<dimension_type>::height(timetable_dimension)) +
-                canvas_top -
-                tetengo2::gui::position<position_type>::top(scroll_bar_position);
-            const auto line_bottom = std::min(canvas_bottom, station_position_bottom);
-
-            const auto horizontal_scale_left = left_type::from(width_type{ horizontal_scale });
-            const auto minute_interval =
-                time_to_left(
-                    time_type{ 60 }, time_offset, 0, left_type{ 0 }, station_header_right, horizontal_scale_left
-                ) -
-                time_to_left(
-                    time_type{ 0 }, time_offset, 0, left_type{ 0 }, station_header_right, horizontal_scale_left
-                );
-
-            std::vector<time_line_type> time_lines{};
-            time_lines.reserve(24 * 60);
-            for (size_type i = 0; i <= 24 * 60; ++i)
-            {
-                const time_type time{ i * 60 + time_offset.seconds() };
-                const auto hours_minutes_seconds = time.hours_minutes_seconds();
-                const auto hours = hours_minutes_seconds.hours();
-                const auto minutes = hours_minutes_seconds.minutes();
-                assert(hours_minutes_seconds.seconds() == 0);
-
-                auto position =
-                    time_to_left(
-                        time,
-                        time_offset,
-                        i == 24 * 60,
-                        tetengo2::gui::position<position_type>::left(scroll_bar_position),
-                        station_header_right,
-                        horizontal_scale_left
-                    );
-                if (position < canvas_left)
-                    continue;
-                if (position > canvas_right)
-                    break;
-
-                if (minutes == 0)
-                {
-                    time_lines.emplace_back(
-                        selection,
-                        std::move(position),
-                        header_bottom,
-                        line_bottom,
-                        normal_line_width<unit_size_type>(),
-                        boost::make_optional(hours)
-                    );
-                }
-                else if (minutes % 10 == 0)
-                {
-                    if (minute_interval >= typename left_type::value_type{ 4, 12 * 10 })
-                    {
-                        time_lines.emplace_back(
-                            selection,
-                            std::move(position),
-                            canvas_top,
-                            line_bottom,
-                            normal_line_width<unit_size_type>() / 2,
-                            boost::none
-                        );
-                    }
-                }
-                else if (minutes % 2 == 0)
-                {
-                    if (minute_interval >= typename left_type::value_type{ 4, 12 * 2 })
-                    {
-                        time_lines.emplace_back(
-                            selection,
-                            std::move(position),
-                            canvas_top,
-                            line_bottom,
-                            normal_line_width<unit_size_type>() / 4,
-                            boost::none
-                        );
-                    }
-                }
-                else
-                {
-                    if (minute_interval >= typename left_type::value_type{ 4, 12 })
-                    {
-                        time_lines.emplace_back(
-                            selection,
-                            std::move(position),
-                            canvas_top,
-                            line_bottom,
-                            normal_line_width<unit_size_type>() / 4,
-                            boost::none
-                        );
-                    }
-                }
-            }
-            time_lines.shrink_to_fit();
-
-            return std::move(time_lines);
-        }
-
-
+        
         // variables
 
-        const font_type* m_p_font;
-
-        const color_type* m_p_color;
-
-        std::vector<time_line_type> m_time_lines;
+        const std::unique_ptr<impl> m_p_impl;
 
 
         // virtual functions
 
         virtual void draw_on_impl(canvas_type& canvas)
-        const override
-        {
-            canvas.set_font(*m_p_font);
-            canvas.set_color(*m_p_color);
-
-            for (const auto& time_line: m_time_lines)
-                time_line.draw_on(canvas);
-        }
+        const override;
 
 
     };
