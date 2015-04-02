@@ -43,6 +43,7 @@ sources = \
     bobura.view.diagram.selection.cpp \
     bobura.view.diagram.station_line.cpp \
     bobura.view.diagram.time_line.cpp \
+    bobura.view.diagram.train_line.cpp \
     bobura.view.diagram.zoom.cpp
 
 extra_sources =
