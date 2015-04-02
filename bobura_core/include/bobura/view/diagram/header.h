@@ -53,9 +53,6 @@ namespace bobura { namespace view { namespace diagram
         //! The dimension type.
         using dimension_type = typename canvas_type::dimension_type;
 
-        //! The base type.
-        using base_type = item<traits_type>;
-
         //! The selection type.
         using selection_type = selection<traits_type>;
 
@@ -110,6 +107,8 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
+        using base_type = item<traits_type>;
+
         class impl;
 
 
@@ -158,9 +157,6 @@ namespace bobura { namespace view { namespace diagram
 
         //! The dimension type.
         using dimension_type = typename canvas_type::dimension_type;
-
-        //! The base type.
-        using base_type = item<traits_type>;
 
         //! The selection type.
         using selection_type = selection<traits_type>;
@@ -216,6 +212,8 @@ namespace bobura { namespace view { namespace diagram
     private:
         // types
 
+        using base_type = item<traits_type>;
+
         class impl;
 
 
@@ -270,9 +268,6 @@ namespace bobura { namespace view { namespace diagram
 
         //! The font type.
         using font_type = typename canvas_type::font_type;
-
-        //! The base type.
-        using base_type = item<traits_type>;
 
         //! The selection type.
         using selection_type = selection<traits_type>;
@@ -335,6 +330,8 @@ namespace bobura { namespace view { namespace diagram
 
     private:
         // types
+
+        using base_type = item<traits_type>;
 
         class impl;
 
