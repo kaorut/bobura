@@ -9,8 +9,12 @@
 #if !defined(TETENGO2_MESSAGE_TIMETABLEMODELOBSERVERSET_H)
 #define TETENGO2_MESSAGE_TIMETABLEMODELOBSERVERSET_H
 
+#include <memory>
+
 #include <boost/core/noncopyable.hpp>
 #include <boost/signals2.hpp>
+
+#include <tetengo2.h>
 
 
 namespace bobura { namespace message
@@ -40,6 +44,20 @@ namespace bobura { namespace message
         using changed_signal_type = boost::signals2::signal<changed_type>;
 
 
+        // constructors and destructor
+
+        /*!
+            \brief Creates a timetable model observer set.
+        */
+        timetable_model_observer_set();
+
+        /*!
+            \brief Destroys the timetable model observer set.
+        */
+        ~timetable_model_observer_set()
+        TETENGO2_STDALT_NOEXCEPT;
+
+
         // functions
 
         /*!
@@ -48,20 +66,14 @@ namespace bobura { namespace message
             \return The observer called when a timetable model is reset.
         */
         const reset_signal_type& reset()
-        const
-        {
-            return m_reset;
-        }
+        const;
 
         /*!
             \brief Returns the observer called when a timetable model is reset.
 
             \return The observer called when a timetable model is reset.
         */
-        reset_signal_type& reset()
-        {
-            return m_reset;
-        }
+        reset_signal_type& reset();
 
         /*!
             \brief Returns the observer called when a timetable model is
@@ -70,28 +82,25 @@ namespace bobura { namespace message
             \return The observer called when a timetable model is changed.
         */
         const changed_signal_type& changed()
-        const
-        {
-            return m_changed;
-        }
+        const;
 
         /*!
             \brief Returns the observer called when a timetable model is changed.
 
             \return The observer called when a timetable model is changed.
         */
-        changed_signal_type& changed()
-        {
-            return m_changed;
-        }
+        changed_signal_type& changed();
 
 
     private:
+        // types
+
+        class impl;
+
+
         // variables
 
-        reset_signal_type m_reset;
-
-        changed_signal_type m_changed;
+        std::unique_ptr<impl> m_p_impl;
 
 
     };

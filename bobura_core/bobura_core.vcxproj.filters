@@ -40,6 +40,9 @@
     <Filter Include="sources\bobura\load_save">
       <UniqueIdentifier>{ba09c701-0e46-4703-a766-15adcc7e90e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sources\bobura\message">
+      <UniqueIdentifier>{8d79d3e3-d45b-47d6-bba7-404477c60efc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\precompiled\precompiled.h">
@@ -352,6 +355,36 @@
     </ClCompile>
     <ClCompile Include="src\bobura.load_save.save_to_file.cpp">
       <Filter>sources\bobura\load_save</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.message.diagram_selection_observer_set.cpp">
+      <Filter>sources\bobura\message</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.message.timetable_model_observer_set.cpp">
+      <Filter>sources\bobura\message</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.view.diagram.header.cpp">
+      <Filter>sources\bobura\view\diagram</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.view.diagram.item.cpp">
+      <Filter>sources\bobura\view\diagram</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.view.diagram.selection.cpp">
+      <Filter>sources\bobura\view\diagram</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.view.diagram.station_line.cpp">
+      <Filter>sources\bobura\view\diagram</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.view.diagram.time_line.cpp">
+      <Filter>sources\bobura\view\diagram</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.view.diagram.train_line.cpp">
+      <Filter>sources\bobura\view\diagram</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.view.diagram.utility.cpp">
+      <Filter>sources\bobura\view\diagram</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.view.scale_list.cpp">
+      <Filter>sources\bobura\view</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -35,8 +35,18 @@ sources = \
     bobura.load_save.save_to_file.cpp \
     bobura.main_window.cpp \
     bobura.main_window_menu_builder.cpp \
+    bobura.message.diagram_selection_observer_set.cpp \
+    bobura.message.timetable_model_observer_set.cpp \
     bobura.train_kind_dialog.cpp \
-    bobura.view.diagram.zoom.cpp
+    bobura.view.diagram.header.cpp \
+    bobura.view.diagram.item.cpp \
+    bobura.view.diagram.selection.cpp \
+    bobura.view.diagram.station_line.cpp \
+    bobura.view.diagram.time_line.cpp \
+    bobura.view.diagram.train_line.cpp \
+    bobura.view.diagram.utility.cpp \
+    bobura.view.diagram.zoom.cpp \
+    bobura.view.scale_list.cpp
 
 extra_sources =
 

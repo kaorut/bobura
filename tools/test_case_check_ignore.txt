@@ -20,6 +20,10 @@ bobura::model::timetable::replace_train_kind_index::
 bobura::settings::value_impl::
 bobura::train_kind_dialog::do_modal_impl
 bobura::train_kind_dialog::info_set_type::
+bobura::view::diagram::[a-zA-Z0-9_]+::p_item_by_position_impl
+bobura::view::diagram::[a-zA-Z0-9_]+::selected_impl
+bobura::view::diagram::[a-zA-Z0-9_]+::select_impl
+bobura::view::diagram::[a-zA-Z0-9_]+::draw_on_impl
 setup::encode
 
 test_bobura::model::serializer::reader_selector::selects
@@ -33,3 +37,7 @@ test_bobura::model::serializer::[a-zA-Z0-9_]+_writer::extension
 test_bobura::model::serializer::[a-zA-Z0-9_]+_writer::selects
 test_bobura::model::serializer::[a-zA-Z0-9_]+_writer::write
 test_bobura::model::station_info::[a-zA-Z0-9_]+::name
+test_bobura::view::diagram::[a-zA-Z0-9_]+::draw_on
+test_bobura::view::diagram::[a-zA-Z0-9_]+::p_item_by_position
+test_bobura::view::diagram::[a-zA-Z0-9_]+::selected
+test_bobura::view::diagram::[a-zA-Z0-9_]+::select

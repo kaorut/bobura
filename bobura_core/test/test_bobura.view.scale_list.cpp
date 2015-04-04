@@ -6,12 +6,11 @@
     $Id$
 */
 
-#include <cstddef>
-#include <string>
-
-#include <boost/rational.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2.h>
+
+#include <bobura/type_list.h>
 #include <bobura/view/scale_list.h>
 
 
@@ -19,9 +18,15 @@ namespace
 {
     // types
 
-    using scale_type = boost::rational<int>;
+    using common_type_list_type = bobura::type_list::common;
 
-    using scale_list_type = bobura::view::scale_list<std::size_t, std::string, scale_type>;
+    using size_type = common_type_list_type::size_type;
+    
+    using string_type = common_type_list_type::string_type;
+
+    using scale_type = common_type_list_type::scale_type;
+
+    using scale_list_type = bobura::view::scale_list<size_type, string_type, scale_type>;
 
 
 }
@@ -31,6 +36,13 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(view)
 BOOST_AUTO_TEST_SUITE(scale_list)
     // test cases
+
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const scale_list_type scale_list{};
+    }
 
     BOOST_AUTO_TEST_CASE(size)
     {
@@ -63,14 +75,14 @@ BOOST_AUTO_TEST_SUITE(scale_list)
 
         const scale_list_type scale_list{};
 
-        BOOST_CHECK(scale_list.label_at(0) == "10%");
-        BOOST_CHECK(scale_list.label_at(1) == "25%");
-        BOOST_CHECK(scale_list.label_at(2) == "50%");
-        BOOST_CHECK(scale_list.label_at(3) == "75%");
-        BOOST_CHECK(scale_list.label_at(4) == "100%");
-        BOOST_CHECK(scale_list.label_at(5) == "150%");
-        BOOST_CHECK(scale_list.label_at(6) == "200%");
-        BOOST_CHECK(scale_list.label_at(7) == "400%");
+        BOOST_CHECK(scale_list.label_at(0) == string_type{ TETENGO2_TEXT("10%") });
+        BOOST_CHECK(scale_list.label_at(1) == string_type{ TETENGO2_TEXT("25%") });
+        BOOST_CHECK(scale_list.label_at(2) == string_type{ TETENGO2_TEXT("50%") });
+        BOOST_CHECK(scale_list.label_at(3) == string_type{ TETENGO2_TEXT("75%") });
+        BOOST_CHECK(scale_list.label_at(4) == string_type{ TETENGO2_TEXT("100%") });
+        BOOST_CHECK(scale_list.label_at(5) == string_type{ TETENGO2_TEXT("150%") });
+        BOOST_CHECK(scale_list.label_at(6) == string_type{ TETENGO2_TEXT("200%") });
+        BOOST_CHECK(scale_list.label_at(7) == string_type{ TETENGO2_TEXT("400%") });
     }
 
     BOOST_AUTO_TEST_CASE(index_of)

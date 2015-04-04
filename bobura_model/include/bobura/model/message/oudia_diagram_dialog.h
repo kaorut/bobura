@@ -61,7 +61,8 @@ namespace bobura { namespace model { namespace message { namespace oudia_diagram
 
     };
 
-     /*!
+
+    /*!
         \brief The class template for a mouse click observer of the cancel button.
 
         \tparam Dialog A dialog type.

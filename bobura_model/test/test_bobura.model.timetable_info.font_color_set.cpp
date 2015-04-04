@@ -23,7 +23,7 @@ namespace
 
     using detail_type_list_type = test_bobura::model::type_list::detail_for_test;
 
-    using common_type_list_type = test_bobura::model::type_list::common<detail_type_list_type>;
+    using common_type_list_type = test_bobura::model::type_list::common;
 
     using ui_type_list_type = test_bobura::model::type_list::ui<detail_type_list_type>;
 

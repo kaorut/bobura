@@ -14,6 +14,7 @@
 #include <vector>
 
 #include <boost/core/ignore_unused.hpp>
+#include <boost/predef.h>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -136,12 +137,23 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             auto concrete_readers = create_concrete_readers();
             const reader_selector_type reader_selector{ std::move(concrete_readers) };
         }
+// This test case causes a segmentation fault on Cygwin.
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+)
         {
             std::vector<std::unique_ptr<reader_type>> concrete_readers{};
             BOOST_CHECK_THROW(reader_selector_type{ std::move(concrete_readers) }, std::invalid_argument);
         }
+#endif
     }
 
+// This test case causes a segmentation fault on Cygwin.
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+)
     BOOST_AUTO_TEST_CASE(selects)
     {
         BOOST_TEST_PASSPOINT();
@@ -160,6 +172,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             );
         BOOST_CHECK_THROW(reader_selector.selects(first, last), std::logic_error);
     }
+#endif
 
     BOOST_AUTO_TEST_CASE(read)
     {
