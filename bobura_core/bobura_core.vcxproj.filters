@@ -383,5 +383,8 @@
     <ClCompile Include="src\bobura.view.diagram.utility.cpp">
       <Filter>sources\bobura\view\diagram</Filter>
     </ClCompile>
+    <ClCompile Include="src\bobura.view.scale_list.cpp">
+      <Filter>sources\bobura\view</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -45,7 +45,8 @@ sources = \
     bobura.view.diagram.time_line.cpp \
     bobura.view.diagram.train_line.cpp \
     bobura.view.diagram.utility.cpp \
-    bobura.view.diagram.zoom.cpp
+    bobura.view.diagram.zoom.cpp \
+    bobura.view.scale_list.cpp
 
 extra_sources =
 
