@@ -29,6 +29,7 @@
 
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/train_line.h>
+#include <bobura/view/diagram/utility.h>
 
 
 namespace bobura { namespace view { namespace diagram

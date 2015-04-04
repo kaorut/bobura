@@ -18,7 +18,6 @@
 #include <bobura/timetable_model.h>
 #include <bobura/view/diagram/item.h>
 #include <bobura/view/diagram/selection.h>
-#include <bobura/view/diagram/utility.h>
 
 
 namespace bobura { namespace view { namespace diagram
