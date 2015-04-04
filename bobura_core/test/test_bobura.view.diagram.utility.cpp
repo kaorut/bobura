@@ -25,7 +25,13 @@ namespace
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
 
+    using common_type_list_type = bobura::type_list::common;
+
     using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
+
+    using size_type = common_type_list_type::size_type;
+
+    using difference_type = common_type_list_type::difference_type;
 
     using window_type = ui_type_list_type::window_type;
 
@@ -39,11 +45,11 @@ namespace
 
     using canvas_type = ui_type_list_type::canvas_type;
 
-    using time_span_type = bobura::model::train_info::time_span<int>;
+    using time_span_type = bobura::model::train_info::time_span<difference_type>;
 
-    using time_type = bobura::model::train_info::time<int, int>;
+    using time_type = bobura::model::train_info::time<size_type, difference_type>;
 
-    using unit_size_type = tetengo2::gui::position<position_type>::left_type;
+    using unit_size_type = canvas_type::unit_size_type;
 
 
 }
@@ -73,7 +79,7 @@ BOOST_AUTO_TEST_SUITE(diagram)
 
         const auto result =
             bobura::view::diagram::station_index_to_top(
-                station_positions, 1, top_type{ 2 }, top_type{ 3 }, top_type{ 4 }
+                station_positions, size_type{ 1 }, top_type{ 2 }, top_type{ 3 }, top_type{ 4 }
             );
 
         BOOST_CHECK_EQUAL(result.value(), 47);
