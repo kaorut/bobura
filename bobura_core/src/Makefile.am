@@ -28,6 +28,7 @@ sources = \
     bobura.command.vertically_zoom_in.cpp \
     bobura.command.vertically_zoom_out.cpp \
     bobura.diagram_picture_box.cpp \
+    bobura.diagram_view.cpp \
     bobura.file_property_dialog.cpp \
     bobura.font_color_dialog.cpp \
     bobura.load_save.confirm_file_save.cpp \

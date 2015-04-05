@@ -197,6 +197,7 @@
     <ClCompile Include="src\bobura.command.vertically_zoom_in.cpp" />
     <ClCompile Include="src\bobura.command.vertically_zoom_out.cpp" />
     <ClCompile Include="src\bobura.diagram_picture_box.cpp" />
+    <ClCompile Include="src\bobura.diagram_view.cpp" />
     <ClCompile Include="src\bobura.file_property_dialog.cpp" />
     <ClCompile Include="src\bobura.font_color_dialog.cpp" />
     <ClCompile Include="src\bobura.load_save.confirm_file_save.cpp" />

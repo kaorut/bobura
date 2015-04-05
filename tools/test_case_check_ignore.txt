@@ -2,7 +2,6 @@ bobura::command::load_from_file::parameter_type::
 bobura::command::[a-zA-Z0-9_]+::enabled_impl
 bobura::command::[a-zA-Z0-9_]+::execute_impl
 bobura::command::[a-zA-Z0-9_]+::state_impl
-bobura::diagram_view::to_station_position::
 bobura::file_property_dialog::set_result_impl
 bobura::font_color_dialog::do_modal_impl
 bobura::model::serializer::[a-zA-Z0-9_]+_reader::selects_impl
