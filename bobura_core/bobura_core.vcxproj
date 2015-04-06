@@ -209,6 +209,7 @@
     <ClCompile Include="src\bobura.message.diagram_selection_observer_set.cpp" />
     <ClCompile Include="src\bobura.message.timetable_model_observer_set.cpp" />
     <ClCompile Include="src\bobura.property_bar.cpp" />
+    <ClCompile Include="src\bobura.settings.cpp" />
     <ClCompile Include="src\bobura.train_kind_dialog.cpp" />
     <ClCompile Include="src\bobura.view.diagram.header.cpp" />
     <ClCompile Include="src\bobura.view.diagram.item.cpp" />

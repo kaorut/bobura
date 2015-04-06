@@ -1,5 +1,5 @@
 /*! \file
-    \brief The definition of bobura::diagram_view.
+    \brief The definition of bobura::property_bar.
 
     Copyright (C) 2007-2015 kaoru
 
@@ -7,6 +7,7 @@
 */
 
 #include <cassert>
+#include <memory>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>

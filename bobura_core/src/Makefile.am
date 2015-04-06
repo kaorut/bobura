@@ -40,6 +40,7 @@ sources = \
     bobura.message.diagram_selection_observer_set.cpp \
     bobura.message.timetable_model_observer_set.cpp \
     bobura.property_bar.cpp \
+    bobura.settings.cpp \
     bobura.train_kind_dialog.cpp \
     bobura.view.diagram.header.cpp \
     bobura.view.diagram.item.cpp \

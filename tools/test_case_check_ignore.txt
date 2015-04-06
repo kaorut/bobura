@@ -16,7 +16,6 @@ bobura::model::serializer::writer_selector::extension_impl
 bobura::model::serializer::writer_selector::write_impl
 bobura::model::serializer::oudia_diagram_dialog::set_result_impl
 bobura::model::timetable::replace_train_kind_index::
-bobura::settings::value_impl::
 bobura::train_kind_dialog::do_modal_impl
 bobura::train_kind_dialog::info_set_type::
 bobura::view::diagram::[a-zA-Z0-9_]+::p_item_by_position_impl
