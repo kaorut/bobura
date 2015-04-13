@@ -115,7 +115,7 @@ namespace bobura { namespace model { namespace serializer
 
             \throw std::out_of_range When index is greater than the diagram count.
         */
-        void set_selected_index(const size_type index);
+        void set_selected_index(size_type index);
 
 
     private:

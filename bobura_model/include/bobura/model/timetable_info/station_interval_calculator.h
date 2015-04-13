@@ -107,6 +107,7 @@ namespace bobura { namespace model { namespace timetable_info
         m_up_trains(up_trains)
         {}
 
+
         // functions
 
         /*!
