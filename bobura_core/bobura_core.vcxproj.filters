@@ -398,5 +398,8 @@
     <ClCompile Include="src\bobura.settings.cpp">
       <Filter>sources\bobura</Filter>
     </ClCompile>
+    <ClCompile Include="src\bobura.timetable_model.cpp">
+      <Filter>sources\bobura</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
