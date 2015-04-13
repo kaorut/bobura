@@ -132,7 +132,7 @@ namespace bobura { namespace view { namespace diagram
 
             \param switch_selection_style Specify true to switch the selection style.
         */
-        void select(const bool switch_selection_style);
+        void select(bool switch_selection_style);
 
 
     private:
@@ -156,7 +156,7 @@ namespace bobura { namespace view { namespace diagram
         virtual bool selected_impl()
         const;
 
-        virtual void select_impl(const bool switch_selection_style);
+        virtual void select_impl(bool switch_selection_style);
 
 
     };

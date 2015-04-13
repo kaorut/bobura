@@ -143,7 +143,7 @@ namespace bobura
             \param document_name A document name.
             \param changed       A changed status.
         */
-        void set_title(const boost::optional<string_type>& document_name, const bool changed);
+        void set_title(const boost::optional<string_type>& document_name, bool changed);
 
         /*!
             \brief Returns the diagram picture box.

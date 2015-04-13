@@ -90,7 +90,7 @@ namespace bobura
                 \param referred       A referred status.
                 \param train_kind     A train kind.
             */
-            info_set_type(boost::optional<size_type> original_index, const bool referred, train_kind_type train_kind);
+            info_set_type(boost::optional<size_type> original_index, bool referred, train_kind_type train_kind);
 
 
             /*!

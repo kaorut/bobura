@@ -37,7 +37,7 @@ namespace bobura { namespace view { namespace diagram
     Left time_to_left(
         const model::train_info::time<Size, Difference>& time,
         const model::train_info::time_span<Difference>&  time_offset,
-        const int                                        previous_or_next_day,
+        int                                              previous_or_next_day,
         const Left&                                      horizontal_scroll_bar_position,
         const Left&                                      station_header_right,
         const Left&                                      horizontal_scale
@@ -60,7 +60,7 @@ namespace bobura { namespace view { namespace diagram
     template <typename Size, typename Top>
     Top station_index_to_top(
         const std::vector<Top>& station_positions,
-        const Size              station_index,
+        Size                    station_index,
         const Top&              vertical_scroll_bar_position,
         const Top&              header_bottom,
         const Top&              time_header_bottom
@@ -108,7 +108,7 @@ namespace bobura { namespace view { namespace diagram
         \param selected A selected status.
     */
     template <typename Canvas, typename Position>
-    void draw_selectable_line(Canvas& canvas, const Position& from, const Position& to, const bool selected);
+    void draw_selectable_line(Canvas& canvas, const Position& from, const Position& to, bool selected);
 
 
 }}}

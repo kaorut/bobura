@@ -151,7 +151,7 @@ namespace bobura { namespace view { namespace diagram
         virtual bool selected_impl()
         const override;
 
-        virtual void select_impl(const bool switch_selection_style)
+        virtual void select_impl(bool switch_selection_style)
         override;
 
 

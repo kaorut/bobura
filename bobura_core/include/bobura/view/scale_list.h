@@ -75,7 +75,7 @@ namespace bobura { namespace view
 
             \throw std::out_of_range When index is out of range.
         */
-        const scale_type& at(const size_type index)
+        const scale_type& at(size_type index)
         const;
 
         /*!
@@ -87,7 +87,7 @@ namespace bobura { namespace view
 
             \throw std::out_of_range When index is out of range.
         */
-        const string_type& label_at(const size_type index)
+        const string_type& label_at(size_type index)
         const;
 
         /*!
