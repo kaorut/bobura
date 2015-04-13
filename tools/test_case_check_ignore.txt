@@ -2,7 +2,6 @@ bobura::command::load_from_file::parameter_type::
 bobura::command::[a-zA-Z0-9_]+::enabled_impl
 bobura::command::[a-zA-Z0-9_]+::execute_impl
 bobura::command::[a-zA-Z0-9_]+::state_impl
-bobura::diagram_view::to_station_position::
 bobura::file_property_dialog::set_result_impl
 bobura::font_color_dialog::do_modal_impl
 bobura::model::serializer::[a-zA-Z0-9_]+_reader::selects_impl
@@ -17,7 +16,6 @@ bobura::model::serializer::writer_selector::extension_impl
 bobura::model::serializer::writer_selector::write_impl
 bobura::model::serializer::oudia_diagram_dialog::set_result_impl
 bobura::model::timetable::replace_train_kind_index::
-bobura::settings::value_impl::
 bobura::train_kind_dialog::do_modal_impl
 bobura::train_kind_dialog::info_set_type::
 bobura::view::diagram::[a-zA-Z0-9_]+::p_item_by_position_impl

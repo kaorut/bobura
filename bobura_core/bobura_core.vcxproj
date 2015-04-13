@@ -196,6 +196,8 @@
     <ClCompile Include="src\bobura.command.train_kind.cpp" />
     <ClCompile Include="src\bobura.command.vertically_zoom_in.cpp" />
     <ClCompile Include="src\bobura.command.vertically_zoom_out.cpp" />
+    <ClCompile Include="src\bobura.diagram_picture_box.cpp" />
+    <ClCompile Include="src\bobura.diagram_view.cpp" />
     <ClCompile Include="src\bobura.file_property_dialog.cpp" />
     <ClCompile Include="src\bobura.font_color_dialog.cpp" />
     <ClCompile Include="src\bobura.load_save.confirm_file_save.cpp" />
@@ -206,6 +208,9 @@
     <ClCompile Include="src\bobura.main_window_menu_builder.cpp" />
     <ClCompile Include="src\bobura.message.diagram_selection_observer_set.cpp" />
     <ClCompile Include="src\bobura.message.timetable_model_observer_set.cpp" />
+    <ClCompile Include="src\bobura.property_bar.cpp" />
+    <ClCompile Include="src\bobura.settings.cpp" />
+    <ClCompile Include="src\bobura.timetable_model.cpp" />
     <ClCompile Include="src\bobura.train_kind_dialog.cpp" />
     <ClCompile Include="src\bobura.view.diagram.header.cpp" />
     <ClCompile Include="src\bobura.view.diagram.item.cpp" />

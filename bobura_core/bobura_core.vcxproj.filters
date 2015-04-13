@@ -386,5 +386,20 @@
     <ClCompile Include="src\bobura.view.scale_list.cpp">
       <Filter>sources\bobura\view</Filter>
     </ClCompile>
+    <ClCompile Include="src\bobura.diagram_picture_box.cpp">
+      <Filter>sources\bobura</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.diagram_view.cpp">
+      <Filter>sources\bobura</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.property_bar.cpp">
+      <Filter>sources\bobura</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.settings.cpp">
+      <Filter>sources\bobura</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.timetable_model.cpp">
+      <Filter>sources\bobura</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

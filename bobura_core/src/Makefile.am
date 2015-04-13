@@ -27,6 +27,8 @@ sources = \
     bobura.command.train_kind.cpp \
     bobura.command.vertically_zoom_in.cpp \
     bobura.command.vertically_zoom_out.cpp \
+    bobura.diagram_picture_box.cpp \
+    bobura.diagram_view.cpp \
     bobura.file_property_dialog.cpp \
     bobura.font_color_dialog.cpp \
     bobura.load_save.confirm_file_save.cpp \
@@ -37,6 +39,9 @@ sources = \
     bobura.main_window_menu_builder.cpp \
     bobura.message.diagram_selection_observer_set.cpp \
     bobura.message.timetable_model_observer_set.cpp \
+    bobura.property_bar.cpp \
+    bobura.settings.cpp \
+    bobura.timetable_model.cpp \
     bobura.train_kind_dialog.cpp \
     bobura.view.diagram.header.cpp \
     bobura.view.diagram.item.cpp \

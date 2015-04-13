@@ -9,13 +9,10 @@
 #if !defined(BOBURA_PROPERTYBAR_H)
 #define BOBURA_PROPERTYBAR_H
 
-#include <cassert>
 #include <memory>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
-#include <bobura/message/property_bar.h>
 #include <bobura/settings.h>
 
 
@@ -89,21 +86,13 @@ namespace bobura
             abstract_window_type&       parent,
             settings_type&              settings,
             const message_catalog_type& message_catalog
-        )
-        :
-        base_type(parent),
-        m_settings(settings),
-        m_message_catalog(message_catalog),
-        m_p_map_box()
-        {
-            initialize_property_bar();
-        }
+        );
 
         /*!
             \brief Destroys the property bar.
         */
         virtual ~property_bar()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        TETENGO2_STDALT_NOEXCEPT;
 
 
         // functions
@@ -114,92 +103,30 @@ namespace bobura
             \return The map box.
         */
         const map_box_type& map_box()
-        const
-        {
-            assert(m_p_map_box);
-            return *m_p_map_box;
-        }
+        const;
 
         /*!
             \brief Returns the map box.
 
             \return The map box.
         */
-        map_box_type& map_box()
-        {
-            assert(m_p_map_box);
-            return *m_p_map_box;
-        }
+        map_box_type& map_box();
 
         /*!
             \brief Saves the settings.
         */
-        void save_settings()
-        {
-            m_settings.set_property_bar_width(this->normal_preferred_width());
-            m_settings.set_property_bar_minimized(this->minimized());
-            m_settings.set_property_bar_splitter_position(m_p_map_box->splitter_position());
-        }
+        void save_settings();
 
 
     private:
         // types
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
-
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-        using resized_observer_type = message::property_bar::resized<base_type, map_box_type>;
-
-        using mouse_pressed_observer_type = message::property_bar::mouse_pressed<map_box_type>;
+        class impl;
 
 
         // variables
 
-        settings_type& m_settings;
-
-        const message_catalog_type& m_message_catalog;
-
-        std::unique_ptr<map_box_type> m_p_map_box;
-
-
-        // functions
-
-        void initialize_property_bar()
-        {
-            this->set_text(m_message_catalog.get(TETENGO2_TEXT("PropertyBar:Properties")));
-
-            m_p_map_box = tetengo2::stdalt::make_unique<map_box_type>(*this);
-
-            this->size_observer_set().resized().connect(resized_observer_type{ *this, *m_p_map_box });
-
-            m_p_map_box->mouse_observer_set().pressed().connect(mouse_pressed_observer_type{ *m_p_map_box });
-
-            load_settings();
-        }
-
-        void load_settings()
-        {
-            const auto width = m_settings.property_bar_width();
-            if (width)
-                this->set_width(*width);
-            else
-                this->set_width(width_type{ 32 });
-
-            this->size_observer_set().resized()();
-
-            const auto minimized = m_settings.property_bar_minimized();
-            if (minimized)
-                this->set_minimized(*minimized);
-            else
-                this->set_minimized(false);
-
-            const auto splitter_position = m_settings.property_bar_splitter_position();
-            if (splitter_position)
-                m_p_map_box->set_splitter_position(*splitter_position);
-            else
-                m_p_map_box->set_splitter_position(left_type{ 16 });
-        }
+        const std::unique_ptr<impl> m_p_impl;
 
 
     };
