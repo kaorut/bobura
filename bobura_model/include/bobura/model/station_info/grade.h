@@ -268,7 +268,7 @@ namespace bobura { namespace model { namespace station_info
         \tparam String A string type.
     */
     template <typename String>
-    class grade_type_set : boost::noncopyable
+    class grade_type_set : private boost::noncopyable
     {
     public:
         // types

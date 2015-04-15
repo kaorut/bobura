@@ -30,7 +30,7 @@ namespace bobura { namespace view { namespace diagram
         \tparam MouseCapture   A mouse capture type.
     */
     template <typename Traits, typename AbstractWindow, typename PictureBox, typename MouseCapture>
-    class zoom : boost::noncopyable
+    class zoom : private boost::noncopyable
     {
     public:
         // types
