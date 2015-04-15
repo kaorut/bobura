@@ -107,10 +107,10 @@ namespace bobura { namespace model { namespace serializer
 
         // virtual functions
 
-        virtual bool selects_impl(const iterator first, const iterator last)
+        virtual bool selects_impl(iterator first, iterator last)
         override;
 
-        virtual std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
+        virtual std::unique_ptr<timetable_type> read_impl(iterator first, iterator last, error_type& error)
         override;
 
 

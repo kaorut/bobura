@@ -74,7 +74,7 @@ namespace bobura { namespace model { namespace serializer
 
             \return The selected position.
         */
-        iterator operator()(const iterator first, const iterator last)
+        iterator operator()(iterator first, iterator last)
         const;
 
 
@@ -136,7 +136,7 @@ namespace bobura { namespace model { namespace serializer
 
             \return Always first.
         */
-        iterator operator()(const iterator first, const iterator last)
+        iterator operator()(iterator first, iterator last)
         const;
 
 

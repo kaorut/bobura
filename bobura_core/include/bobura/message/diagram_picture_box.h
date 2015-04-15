@@ -52,7 +52,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         using view_type = bobura::diagram_view<view_traits_type>;
 
         //! The set-mouse-capture function type.
-        using set_mouse_capture_type = std::function<void (const mouse_button_type)>;
+        using set_mouse_capture_type = std::function<void (mouse_button_type)>;
 
 
         // constructors and destructor
@@ -153,7 +153,7 @@ namespace bobura { namespace message { namespace diagram_picture_box
         using view_type = bobura::diagram_view<view_traits_type>;
 
         //! The release-mouse-capture function type.
-        using release_mouse_capture_type = std::function<bool (const mouse_button_type)>;
+        using release_mouse_capture_type = std::function<bool (mouse_button_type)>;
 
 
         // constructors and destructor

@@ -89,11 +89,11 @@ namespace bobura { namespace view { namespace diagram
         */
         train_line_fragment(
             const train_type&           train,
-            const size_type             departure_stop_index,
+            size_type                   departure_stop_index,
             selection_type&             selection,
             position_type               departure,
             position_type               arrival,
-            const bool                  draw_train_name,
+            bool                        draw_train_name,
             const message_catalog_type& message_catalog
         );
 
@@ -147,7 +147,7 @@ namespace bobura { namespace view { namespace diagram
         virtual bool selected_impl()
         const override;
 
-        virtual void select_impl(const bool switch_selection_style)
+        virtual void select_impl(bool switch_selection_style)
         override;
 
 

@@ -134,7 +134,7 @@ namespace bobura
 
             \param status A maximized status.
         */
-        void set_main_window_maximized(const bool status);
+        void set_main_window_maximized(bool status);
 
         /*!
             \brief Returns the property bar width.
@@ -164,7 +164,7 @@ namespace bobura
 
             \param status A minimized status.
         */
-        void set_property_bar_minimized(const bool status);
+        void set_property_bar_minimized(bool status);
 
         /*!
             \brief Returns the splitter bar position in the property bar.

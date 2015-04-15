@@ -68,7 +68,7 @@ namespace bobura
 
             \param mouse_button A mouse button.
         */
-        void set_mouse_capture(const mouse_button_type mouse_button);
+        void set_mouse_capture(mouse_button_type mouse_button);
 
         /*!
             \brief Releases a mouse capture.
@@ -78,7 +78,7 @@ namespace bobura
             \retval true  When the mouse is actually captured.
             \retval false Otherwise.
         */
-        bool release_mouse_capture(const mouse_button_type mouse_button);
+        bool release_mouse_capture(mouse_button_type mouse_button);
 
         /*!
             \brief Updates the scroll bars.

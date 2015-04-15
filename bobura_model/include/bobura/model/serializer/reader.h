@@ -100,7 +100,7 @@ namespace bobura { namespace model { namespace serializer
             \retval true  When this reader selects the file type.
             \retval false Otherwise.
         */
-        bool selects(const iterator first, const iterator last);
+        bool selects(iterator first, iterator last);
 
         /*!
             \brief Reads a timetable.
@@ -113,7 +113,7 @@ namespace bobura { namespace model { namespace serializer
 
             \return A unique pointer to a timetable.
         */
-        std::unique_ptr<timetable_type> read(const iterator first, const iterator last, error_type& error);
+        std::unique_ptr<timetable_type> read(iterator first, iterator last, error_type& error);
 
 
     protected:
@@ -128,10 +128,10 @@ namespace bobura { namespace model { namespace serializer
     private:
         // virtual functions
 
-        virtual bool selects_impl(const iterator first, const iterator last)
+        virtual bool selects_impl(iterator first, iterator last)
         = 0;
 
-        virtual std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
+        virtual std::unique_ptr<timetable_type> read_impl(iterator first, iterator last, error_type& error)
         = 0;
 
 

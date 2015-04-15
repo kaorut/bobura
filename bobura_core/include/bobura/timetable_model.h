@@ -167,7 +167,7 @@ namespace bobura
 
             \param changed A changed status.
         */
-        void set_changed(const bool changed);
+        void set_changed(bool changed);
 
         /*!
             \brief Returns the observer set.
