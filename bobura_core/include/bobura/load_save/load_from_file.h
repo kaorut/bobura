@@ -11,6 +11,7 @@
 
 #include <memory>
 
+#include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/optional.hpp>
 
@@ -28,7 +29,7 @@ namespace bobura { namespace load_save
         \tparam Traits A traits type.
     */
     template <typename Traits>
-    class load_from_file
+    class load_from_file : private boost::noncopyable
     {
     public:
         // types

@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
@@ -17,7 +18,7 @@
 namespace bobura { namespace load_save
 {
     template <typename Traits>
-    class new_file<Traits>::impl
+    class new_file<Traits>::impl : private boost::noncopyable
     {
     public:
         // types

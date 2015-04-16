@@ -9,6 +9,7 @@
 #include <ios>
 #include <memory>
 
+#include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/optional.hpp>
@@ -26,7 +27,7 @@
 namespace bobura { namespace load_save
 {
     template <typename Traits>
-    class save_to_file<Traits>::impl
+    class save_to_file<Traits>::impl : private boost::noncopyable
     {
     public:
         // types

@@ -9,6 +9,8 @@
 #if !defined(BOBURA_COMMAND_COMMANDBASE_H)
 #define BOBURA_COMMAND_COMMANDBASE_H
 
+#include <boost/core/noncopyable.hpp>
+
 #include <tetengo2.h>
 
 #include <bobura/timetable_model.h>
@@ -19,7 +21,7 @@ namespace bobura { namespace command
     /*!
         \brief The command parameter base type.
     */
-    class parameter_base
+    class parameter_base : private boost::noncopyable
     {
     public:
         // constructor and destructors
@@ -73,13 +75,14 @@ namespace bobura { namespace command
 
     };
 
+
     /*!
         \brief The class template for a command base.
 
         \tparam Traits A traits type.
     */
     template <typename Traits>
-    class command_base
+    class command_base : private boost::noncopyable
     {
     public:
         // types

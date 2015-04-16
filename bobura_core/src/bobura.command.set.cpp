@@ -9,6 +9,7 @@
 #include <memory>
 #include <vector>
 
+#include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/predef.h>
 
@@ -39,7 +40,7 @@
 namespace bobura { namespace command
 {
     template <typename Traits>
-    class set<Traits>::impl
+    class set<Traits>::impl : private boost::noncopyable
     {
     public:
         // types
