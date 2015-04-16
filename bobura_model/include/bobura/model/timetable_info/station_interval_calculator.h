@@ -14,6 +14,7 @@
 #include <utility>
 #include <vector>
 
+#include <boost/core/noncopyable.hpp>
 #include <boost/optional.hpp>
 
 #include <bobura/model/timetable_info/station_location.h>
@@ -31,7 +32,7 @@ namespace bobura { namespace model { namespace timetable_info
         \tparam OperatingDistance An operating distance type.
     */
     template <typename Size, typename Difference, typename String, typename OperatingDistance>
-    class station_interval_calculator
+    class station_interval_calculator : private boost::noncopyable
     {
     public:
         // types

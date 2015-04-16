@@ -145,7 +145,7 @@ namespace bobura { namespace model { namespace serializer
 
         using direction_type = typename train_type::direction_type;
 
-        class state
+        class state : private boost::noncopyable
         {
         public:
             virtual ~state()

@@ -12,6 +12,8 @@
 #include <memory>
 #include <vector>
 
+#include <boost/core/noncopyable.hpp>
+
 
 namespace bobura { namespace model { namespace serializer
 {
@@ -21,7 +23,7 @@ namespace bobura { namespace model { namespace serializer
         \tparam OuDiaDiagramDialog An OuDia diagram dialog type.
     */
     template <typename OuDiaDiagramDialog>
-    class select_oudia_diagram
+    class select_oudia_diagram : private boost::noncopyable
     {
     public:
         // types
@@ -98,7 +100,7 @@ namespace bobura { namespace model { namespace serializer
         \tparam String A string type.
     */
     template <typename String>
-    class select_oudia_diagram_for_test
+    class select_oudia_diagram_for_test : private boost::noncopyable
     {
     public:
         // types
