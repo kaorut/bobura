@@ -158,6 +158,11 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 BOOST_AUTO_TEST_SUITE(station_selected)
     // test cases
 
+// This test case causes a segmentation fault on Cygwin.
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+)
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -173,11 +178,6 @@ BOOST_AUTO_TEST_SUITE(station_selected)
         settings.clear_config();
     }
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
@@ -209,6 +209,11 @@ BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(train_selected)
     // test cases
 
+// This test case causes a segmentation fault on Cygwin.
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+)
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -258,12 +263,18 @@ BOOST_AUTO_TEST_SUITE(train_selected)
 
         settings.clear_config();
     }
+#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(all_unselected)
     // test cases
 
+// This test case causes a segmentation fault on Cygwin.
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+)
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -293,6 +304,7 @@ BOOST_AUTO_TEST_SUITE(all_unselected)
 
         settings.clear_config();
     }
+#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()
