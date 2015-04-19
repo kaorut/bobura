@@ -7,6 +7,7 @@
 */
 
 #include <boost/core/ignore_unused.hpp>
+#include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
@@ -18,7 +19,7 @@
 namespace bobura { namespace command
 {
     template <typename Traits>
-    class exit<Traits>::impl
+    class exit<Traits>::impl : private boost::noncopyable
     {
     public:
         // types

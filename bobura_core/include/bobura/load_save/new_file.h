@@ -11,6 +11,8 @@
 
 #include <memory>
 
+#include <boost/core/noncopyable.hpp>
+
 #include <tetengo2.h>
 
 #include <bobura/load_save/confirm_file_save.h>
@@ -25,7 +27,7 @@ namespace bobura { namespace load_save
         \tparam Traits A traits type.
     */
     template <typename Traits>
-    class new_file
+    class new_file : private boost::noncopyable
     {
     public:
         // types

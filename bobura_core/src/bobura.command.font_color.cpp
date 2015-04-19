@@ -8,6 +8,8 @@
 
 #include <utility>
 
+#include <boost/core/noncopyable.hpp>
+
 #include <boost/predef.h>
 
 #include <tetengo2.h>
@@ -32,7 +34,8 @@ namespace bobura { namespace command
     >
     class font_color<
         Traits, Dialog, PointUnitSize, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
-    >::impl
+    >::impl :
+        private boost::noncopyable
     {
     public:
         // types

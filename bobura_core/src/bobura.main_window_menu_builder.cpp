@@ -10,6 +10,7 @@
 #include <utility>
 #include <vector>
 
+#include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
@@ -23,7 +24,7 @@
 namespace bobura
 {
     template <typename Traits>
-    class main_window_menu_builder<Traits>::impl
+    class main_window_menu_builder<Traits>::impl : private boost::noncopyable
     {
     public:
         // types

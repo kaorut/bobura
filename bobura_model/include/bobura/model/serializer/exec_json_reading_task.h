@@ -12,6 +12,8 @@
 #include <functional>
 #include <memory>
 
+#include <boost/core/noncopyable.hpp>
+
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
@@ -46,7 +48,7 @@ namespace bobura { namespace model { namespace serializer
         typename SystemColorSet,
         typename MessageCatalog
     >
-    class exec_json_reading_task
+    class exec_json_reading_task : private boost::noncopyable
     {
     public:
         // types
