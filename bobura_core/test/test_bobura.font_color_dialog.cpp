@@ -8,6 +8,7 @@
 
 #include <stdexcept>
 
+#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/font_color_dialog.h>
