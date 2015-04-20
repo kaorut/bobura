@@ -43,7 +43,7 @@ Building on Windows
 You need the following tools in order to build Bobura:
 
 - [Visual Studio 2013 Update 4](http://www.microsoft.com/) (Express for Desktop is not available. Use Community instead.)
-- [Boost C++ Libraries 1.57.0](http://www.boost.org/)
+- [Boost C++ Libraries 1.58.0](http://www.boost.org/)
 - [bzip2](http://www.bzip.org)
 - [WiX 3.9 R2](http://wixtoolset.org/)
 - [Doxygen 1.8.9.1](http://www.doxygen.org) (to generate API documents)
@@ -101,7 +101,7 @@ You need the following tools in order to build Bobura libraries:
 
 - [GCC 4.7.2 or 4.9.2](http://www.gnu.org/)
 - [GNU Make](http://www.gnu.org/)
-- [Boost C++ Libraries 1.57.0](http://www.boost.org/)
+- [Boost C++ Libraries 1.58.0](http://www.boost.org/)
 - [bzip2](http://www.bzip.org)
 - [libiconv](http://www.gnu.org/) (on Cygwin)
 - [Doxygen 1.8.9.1](http://www.doxygen.org) (to generate API documents)
