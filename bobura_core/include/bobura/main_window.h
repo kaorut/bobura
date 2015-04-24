@@ -77,9 +77,6 @@ namespace bobura
         //! The message catalog type.
         using message_catalog_type = typename traits_type::message_catalog_type;
 
-        //! The view traits type.
-        using view_traits_type = typename traits_type::view_traits_type;
-
         //! The loading and saving processing traits type.
         using load_save_traits_type = typename traits_type::load_save_traits_type;
 

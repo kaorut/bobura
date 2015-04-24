@@ -21,8 +21,8 @@
 
 namespace bobura { namespace command
 {
-    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename ViewTraits>
-    class vertically_zoom_out<Traits, CommandSetTraits, MainWindowTraits, ViewTraits>::impl
+    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename DiagramViewTraits>
+    class vertically_zoom_out<Traits, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::impl
     {
     public:
         // types
@@ -33,7 +33,7 @@ namespace bobura { namespace command
 
         using main_window_traits_type = typename vertically_zoom_out::main_window_traits_type;
 
-        using view_traits_type = typename vertically_zoom_out::view_traits_type;
+        using diagram_view_traits_type = typename vertically_zoom_out::diagram_view_traits_type;
 
         using abstract_window_type = typename vertically_zoom_out::abstract_window_type;
 
@@ -72,7 +72,7 @@ namespace bobura { namespace command
 
         using zoom_type =
             view::diagram::zoom<
-                view_traits_type,
+                diagram_view_traits_type,
                 abstract_window_type,
                 typename main_window_traits_type::picture_box_type,
                 mouse_capture_type
@@ -87,21 +87,21 @@ namespace bobura { namespace command
     };
 
 
-    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename ViewTraits>
-    vertically_zoom_out<Traits, CommandSetTraits, MainWindowTraits, ViewTraits>::vertically_zoom_out(
+    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename DiagramViewTraits>
+    vertically_zoom_out<Traits, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::vertically_zoom_out(
         diagram_view_type& diagram_view
     )
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(diagram_view))
     {}
 
-    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename ViewTraits>
-    vertically_zoom_out<Traits, CommandSetTraits, MainWindowTraits, ViewTraits>::~vertically_zoom_out()
+    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename DiagramViewTraits>
+    vertically_zoom_out<Traits, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::~vertically_zoom_out()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
-    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename ViewTraits>
-    void vertically_zoom_out<Traits, CommandSetTraits, MainWindowTraits, ViewTraits>::execute_impl(
+    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename DiagramViewTraits>
+    void vertically_zoom_out<Traits, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::execute_impl(
         model_type& model, 
         abstract_window_type& parent
     )

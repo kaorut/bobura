@@ -36,10 +36,6 @@ namespace bobura
 
         using string_type = typename main_window::string_type;
 
-        using position_type = typename main_window::position_type;
-
-        using dimension_type = typename main_window::dimension_type;
-
         using base_type = typename main_window::base_type;
 
         using icon_type = typename main_window::icon_type;
@@ -48,13 +44,7 @@ namespace bobura
 
         using abstract_window_type = typename main_window::abstract_window_type;
 
-        using font_type = typename main_window::font_type;
-
         using message_catalog_type = typename main_window::message_catalog_type;
-
-        using view_traits_type = typename main_window::view_traits_type;
-
-        using command_set_traits_type = typename main_window::command_set_traits_type;
 
         using view_picture_box_type = typename main_window::view_picture_box_type;
 

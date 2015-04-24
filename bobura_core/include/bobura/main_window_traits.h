@@ -26,7 +26,7 @@ namespace bobura
         \tparam Font              A font type.
         \tparam MouseCapture      A mouse capture type.
         \tparam MessageCatalog    A message catalog type.
-        \tparam ViewTraits        A view traits type.
+        \tparam DiagramViewTraits A diagram view traits type.
         \tparam LoadSaveTraits    A loading and saving processing traits type.
         \tparam ConfigTraits      A configuration traits type.
     */
@@ -42,7 +42,7 @@ namespace bobura
         typename Font,
         typename MouseCapture,
         typename MessageCatalog,
-        typename ViewTraits,
+        typename DiagramViewTraits,
         typename LoadSaveTraits,
         typename ConfigTraits
     >
@@ -84,8 +84,8 @@ namespace bobura
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
-        //! The view traits type.
-        using view_traits_type = ViewTraits;
+        //! The diagram view traits type.
+        using diagram_view_traits_type = DiagramViewTraits;
 
         //! The loading and saving processing traits type.
         using load_save_traits_type = LoadSaveTraits;

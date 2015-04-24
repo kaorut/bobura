@@ -90,8 +90,8 @@ namespace bobura { namespace command
         //! The main window traits type.
         using main_window_traits_type = typename traits_type::main_window_traits_type;
 
-        //! The view traits type.
-        using view_traits_type = typename traits_type::view_traits_type;
+        //! The diagram view traits type.
+        using diagram_view_traits_type = typename traits_type::diagram_view_traits_type;
 
         //! The loading and saving processing traits type.
         using load_save_traits_type = typename traits_type::load_save_traits_type;
@@ -112,7 +112,7 @@ namespace bobura { namespace command
         using save_to_file_type = load_save::save_to_file<load_save_traits_type>;
 
         //! The diagram view type.
-        using diagram_view_type = diagram_view<view_traits_type>;
+        using diagram_view_type = diagram_view<diagram_view_traits_type>;
 
         //! The settings type.
         using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;

@@ -26,9 +26,9 @@ namespace bobura { namespace command
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename ViewTraits
+        typename DiagramViewTraits
     >
-    class set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::impl
+    class set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::impl
     {
     public:
         // types
@@ -41,7 +41,7 @@ namespace bobura { namespace command
 
         using main_window_traits_type = typename set_vertical_scale::main_window_traits_type;
 
-        using view_traits_type = typename set_vertical_scale::view_traits_type;
+        using diagram_view_traits_type = typename set_vertical_scale::diagram_view_traits_type;
 
         using abstract_window_type = typename set_vertical_scale::abstract_window_type;
 
@@ -89,7 +89,7 @@ namespace bobura { namespace command
 
         using zoom_type =
             view::diagram::zoom<
-                view_traits_type,
+                diagram_view_traits_type,
                 abstract_window_type,
                 typename main_window_traits_type::picture_box_type,
                 mouse_capture_type
@@ -111,9 +111,9 @@ namespace bobura { namespace command
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename ViewTraits
+        typename DiagramViewTraits
     >
-    set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::set_vertical_scale(
+    set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::set_vertical_scale(
         diagram_view_type& diagram_view,
         const scale_type&  scale
     )
@@ -126,9 +126,9 @@ namespace bobura { namespace command
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename ViewTraits
+        typename DiagramViewTraits
     >
-    set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::~set_vertical_scale()
+    set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::~set_vertical_scale()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
@@ -137,10 +137,10 @@ namespace bobura { namespace command
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename ViewTraits
+        typename DiagramViewTraits
     >
-    typename set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::state_type
-    set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::state_impl()
+    typename set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::state_type
+    set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::state_impl()
     const
     {
         return m_p_impl->state();
@@ -151,9 +151,9 @@ namespace bobura { namespace command
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename ViewTraits
+        typename DiagramViewTraits
     >
-    void set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::execute_impl(
+    void set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::execute_impl(
         model_type&           model,
         abstract_window_type& parent
     )

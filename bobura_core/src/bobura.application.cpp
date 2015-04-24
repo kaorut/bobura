@@ -113,9 +113,9 @@ namespace bobura
                 size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
             >;
 
-        using view_traits_type = typename traits_type::view_traits_type;
+        using diagram_view_traits_type = typename traits_type::diagram_view_traits_type;
 
-        using diagram_view_type = diagram_view<view_traits_type>;
+        using diagram_view_type = diagram_view<diagram_view_traits_type>;
 
         using main_window_traits_type = typename traits_type::main_window_traits_type;
 
@@ -215,26 +215,28 @@ namespace bobura
             message::main_window::window_closing<abstract_window_type, confirm_file_save_type>;
 
         using diagram_view_picture_box_mouse_pressed_observer_type =
-            message::view_picture_box::mouse_pressed<picture_box_type, view_traits_type>;
+            message::view_picture_box::mouse_pressed<picture_box_type, diagram_view_traits_type>;
 
         using diagram_view_picture_box_mouse_released_observer_type =
-            message::view_picture_box::mouse_released<picture_box_type, view_traits_type>;
+            message::view_picture_box::mouse_released<picture_box_type, diagram_view_traits_type>;
 
         using diagram_view_picture_box_mouse_moved_observer_type =
-            message::view_picture_box::mouse_moved<picture_box_type, view_traits_type>;
+            message::view_picture_box::mouse_moved<picture_box_type, diagram_view_traits_type>;
 
         using diagram_view_picture_box_mouse_wheeled_observer_type =
             message::view_picture_box::mouse_wheeled<
                 picture_box_type,
-                view::diagram::zoom<view_traits_type, abstract_window_type, picture_box_type, mouse_capture_type>,
-                view_traits_type
+                view::diagram::zoom<
+                    diagram_view_traits_type, abstract_window_type, picture_box_type, mouse_capture_type
+                >,
+                diagram_view_traits_type
             >;
 
         using diagram_view_picture_box_paint_paint_observer_type =
-            message::view_picture_box::paint_paint<picture_box_type, view_traits_type>;
+            message::view_picture_box::paint_paint<picture_box_type, diagram_view_traits_type>;
 
         using diagram_view_picture_box_scroll_bar_scrolled_observer_type =
-            message::view_picture_box::scroll_bar_scrolled<picture_box_type, view_traits_type>;
+            message::view_picture_box::scroll_bar_scrolled<picture_box_type, diagram_view_traits_type>;
 
         using message_loop_type = typename traits_type::message_loop_type;
 
