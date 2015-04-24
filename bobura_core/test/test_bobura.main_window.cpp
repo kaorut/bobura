@@ -152,7 +152,7 @@ BOOST_AUTO_TEST_SUITE(main_window)
         }
     }
 
-    BOOST_AUTO_TEST_CASE(get_diagram_picture_box)
+    BOOST_AUTO_TEST_CASE(get_diagram_view_picture_box)
     {
         BOOST_TEST_PASSPOINT();
 
@@ -167,7 +167,7 @@ BOOST_AUTO_TEST_SUITE(main_window)
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
             const main_window_type main_window{ message_catalog, settings, confirm_file_save };
 
-            main_window.get_diagram_picture_box();
+            main_window.get_diagram_view_picture_box();
         }
         {
             const message_catalog_type message_catalog{};
@@ -180,7 +180,7 @@ BOOST_AUTO_TEST_SUITE(main_window)
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
             main_window_type main_window{ message_catalog, settings, confirm_file_save };
 
-            main_window.get_diagram_picture_box();
+            main_window.get_diagram_view_picture_box();
         }
     }
 

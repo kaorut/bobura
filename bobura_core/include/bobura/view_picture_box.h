@@ -1,13 +1,13 @@
 /*! \file
-    \brief The definition of bobura::diagram_picture_box.
+    \brief The definition of bobura::view_picture_box.
 
     Copyright (C) 2007-2015 kaoru
 
     $Id$
 */
 
-#if !defined(BOBURA_DIAGRAMPICTUREBOX_H)
-#define BOBURA_DIAGRAMPICTUREBOX_H
+#if !defined(BOBURA_VIEWPICTUREBOX_H)
+#define BOBURA_VIEWPICTUREBOX_H
 
 #include <memory>
 
@@ -17,14 +17,14 @@
 namespace bobura
 {
     /*!
-        \brief The class template for the diagram picture box.
+        \brief The class template for the view picture box.
 
         \tparam PictureBox      A picture box type.
         \tparam AbstractWindow  An abstract window type.
         \tparam MouseCapture    A mouse capture type.
     */
     template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
-    class diagram_picture_box : public PictureBox
+    class view_picture_box : public PictureBox
     {
     public:
         // types
@@ -48,16 +48,16 @@ namespace bobura
         // constructors and destructor
 
         /*!
-            \brief Creates a diagram picture box.
+            \brief Creates a view picture box.
 
             \param parent A parent.
         */
-        explicit diagram_picture_box(abstract_window_type& parent);
+        explicit view_picture_box(abstract_window_type& parent);
 
         /*!
-            \brief Destroys the diagram picture box.
+            \brief Destroys the view picture box.
         */
-        virtual ~diagram_picture_box()
+        virtual ~view_picture_box()
         TETENGO2_STDALT_NOEXCEPT;
 
 

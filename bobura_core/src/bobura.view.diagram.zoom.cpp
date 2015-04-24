@@ -15,9 +15,9 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/diagram_picture_box.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/zoom.h>
+#include <bobura/view_picture_box.h>
 
 
 namespace bobura { namespace view { namespace diagram
@@ -40,18 +40,17 @@ namespace bobura { namespace view { namespace diagram
 
         using scale_type = typename zoom::scale_type;
 
-        using diagram_picture_box_type =
-            diagram_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
+        using view_picture_box_type = view_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
 
 
         // constructors and destructor
 
         impl(picture_box_type& picture_box, diagram_view_type& diagram_view)
         :
-        m_p_diagram_picture_box(dynamic_cast<diagram_picture_box_type*>(&picture_box)),
+        m_p_diagram_view_picture_box(dynamic_cast<view_picture_box_type*>(&picture_box)),
         m_diagram_view(diagram_view)
         {
-            assert(m_p_diagram_picture_box);
+            assert(m_p_diagram_view_picture_box);
         }
 
 
@@ -60,10 +59,10 @@ namespace bobura { namespace view { namespace diagram
         void set_horizontal_scale(scale_type scale)
         {
             m_diagram_view.set_horizontal_scale(std::move(scale));
-            m_p_diagram_picture_box->update_scroll_bars(
-                m_diagram_view.dimension(), m_diagram_view.page_size(m_p_diagram_picture_box->client_dimension())
+            m_p_diagram_view_picture_box->update_scroll_bars(
+                m_diagram_view.dimension(), m_diagram_view.page_size(m_p_diagram_view_picture_box->client_dimension())
             );
-            m_p_diagram_picture_box->repaint();
+            m_p_diagram_view_picture_box->repaint();
         }
 
         void horizontally_zoom_in(const bool snap_to_scale_list)
@@ -81,10 +80,10 @@ namespace bobura { namespace view { namespace diagram
         void set_vertical_scale(scale_type scale)
         {
             m_diagram_view.set_vertical_scale(std::move(scale));
-            m_p_diagram_picture_box->update_scroll_bars(
-                m_diagram_view.dimension(), m_diagram_view.page_size(m_p_diagram_picture_box->client_dimension())
+            m_p_diagram_view_picture_box->update_scroll_bars(
+                m_diagram_view.dimension(), m_diagram_view.page_size(m_p_diagram_view_picture_box->client_dimension())
             );
-            m_p_diagram_picture_box->repaint();
+            m_p_diagram_view_picture_box->repaint();
         }
 
         void vertically_zoom_in(const bool snap_to_scale_list)
@@ -161,7 +160,7 @@ namespace bobura { namespace view { namespace diagram
 
         // variables
 
-        diagram_picture_box_type* const m_p_diagram_picture_box;
+        view_picture_box_type* const m_p_diagram_view_picture_box;
 
         diagram_view_type& m_diagram_view;
 

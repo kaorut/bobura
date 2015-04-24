@@ -94,8 +94,8 @@ namespace bobura { namespace message { namespace timetable_model
             detail::set_main_window_title(m_timetable_model, m_main_window);
             m_diagram_view.update_dimension();
             m_diagram_view.unselect_all_items();
-            reset_scroll_bars(m_main_window.get_diagram_picture_box(), m_diagram_view);
-            m_main_window.get_diagram_picture_box().repaint(true);
+            reset_scroll_bars(m_main_window.get_diagram_view_picture_box(), m_diagram_view);
+            m_main_window.get_diagram_view_picture_box().repaint(true);
             m_main_window.size_observer_set().resized()();
         }
 
@@ -105,16 +105,16 @@ namespace bobura { namespace message { namespace timetable_model
 
         using dimension_type = typename diagram_view_type::dimension_type;
 
-        using diagram_picture_box_type = typename main_window_type::diagram_picture_box_type;
+        using view_picture_box_type = typename main_window_type::view_picture_box_type;
 
-        using scroll_bar_type = typename diagram_picture_box_type::scroll_bar_type;
+        using scroll_bar_type = typename view_picture_box_type::scroll_bar_type;
 
         using scroll_bar_size_type = typename scroll_bar_type::size_type;
 
 
         // static functions
 
-        static void reset_scroll_bars(diagram_picture_box_type& picture_box, const diagram_view_type& view)
+        static void reset_scroll_bars(view_picture_box_type& picture_box, const diagram_view_type& view)
         {
             assert(picture_box.has_vertical_scroll_bar());
             reset_scroll_bar(
@@ -209,7 +209,7 @@ namespace bobura { namespace message { namespace timetable_model
         {
             detail::set_main_window_title(m_timetable_model, m_main_window);
             m_diagram_view.update_dimension();
-            m_main_window.get_diagram_picture_box().repaint(true);
+            m_main_window.get_diagram_view_picture_box().repaint(true);
             m_main_window.size_observer_set().resized()();
         }
 

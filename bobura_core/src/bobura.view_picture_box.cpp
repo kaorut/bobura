@@ -1,5 +1,5 @@
 /*! \file
-    \brief The definition of bobura::diagram_picture_box.
+    \brief The definition of bobura::view_picture_box.
 
     Copyright (C) 2007-2015 kaoru
 
@@ -17,29 +17,29 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/diagram_picture_box.h>
-#include <bobura/message/diagram_picture_box.h>
+#include <bobura/message/view_picture_box.h>
 #include <bobura/type_list.h>
+#include <bobura/view_picture_box.h>
 
 
 namespace bobura
 {
     template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
-    class diagram_picture_box<PictureBox, AbstractWindow, MouseCapture>::impl : private boost::noncopyable
+    class view_picture_box<PictureBox, AbstractWindow, MouseCapture>::impl : private boost::noncopyable
     {
     public:
         // types
 
-        using dimension_type = typename diagram_picture_box::dimension_type;
+        using dimension_type = typename view_picture_box::dimension_type;
 
         using abstract_window_type = AbstractWindow;
 
-        using mouse_button_type = typename diagram_picture_box::mouse_button_type;
+        using mouse_button_type = typename view_picture_box::mouse_button_type;
 
 
         // constructors and destructor
 
-        explicit impl(diagram_picture_box& self, abstract_window_type&)
+        explicit impl(view_picture_box& self, abstract_window_type&)
         :
         m_p_mouse_capture()
         {
@@ -49,7 +49,7 @@ namespace bobura
 
         // functions
 
-        void set_mouse_capture(diagram_picture_box& self, const mouse_button_type mouse_button)
+        void set_mouse_capture(view_picture_box& self, const mouse_button_type mouse_button)
         {
             assert(!m_p_mouse_capture);
             m_p_mouse_capture = tetengo2::stdalt::make_unique<mouse_capture_type>(self, mouse_button);
@@ -69,7 +69,7 @@ namespace bobura
         }
 
         void update_scroll_bars(
-            diagram_picture_box&  self,
+            view_picture_box&  self,
             const dimension_type& view_dimension,
             const dimension_type& page_dimension
         )
@@ -101,7 +101,7 @@ namespace bobura
 
         using mouse_capture_type = MouseCapture;
         
-        using key_down_observer_type = message::diagram_picture_box::keyboard_key_down<base_type>;
+        using key_down_observer_type = message::view_picture_box::keyboard_key_down<base_type>;
 
         using scroll_bar_type = typename base_type::scroll_bar_type;
 
@@ -115,7 +115,7 @@ namespace bobura
 
         // functions
 
-        void set_observers(diagram_picture_box& self)
+        void set_observers(view_picture_box& self)
         {
             self.keyboard_observer_set().key_down().connect(key_down_observer_type{ self });
         }
@@ -200,7 +200,7 @@ namespace bobura
 
 
     template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
-    diagram_picture_box<PictureBox, AbstractWindow, MouseCapture>::diagram_picture_box(
+    view_picture_box<PictureBox, AbstractWindow, MouseCapture>::view_picture_box(
         abstract_window_type& parent
     )
     :
@@ -209,12 +209,12 @@ namespace bobura
     {}
 
     template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
-    diagram_picture_box<PictureBox, AbstractWindow, MouseCapture>::~diagram_picture_box()
+    view_picture_box<PictureBox, AbstractWindow, MouseCapture>::~view_picture_box()
     TETENGO2_STDALT_NOEXCEPT
     {}
 
     template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
-    void diagram_picture_box<PictureBox, AbstractWindow, MouseCapture>::set_mouse_capture(
+    void view_picture_box<PictureBox, AbstractWindow, MouseCapture>::set_mouse_capture(
         const mouse_button_type mouse_button
     )
     {
@@ -222,7 +222,7 @@ namespace bobura
     }
 
     template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
-    bool diagram_picture_box<PictureBox, AbstractWindow, MouseCapture>::release_mouse_capture(
+    bool view_picture_box<PictureBox, AbstractWindow, MouseCapture>::release_mouse_capture(
         const mouse_button_type mouse_button
     )
     {
@@ -230,7 +230,7 @@ namespace bobura
     }
 
     template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
-    void diagram_picture_box<PictureBox, AbstractWindow, MouseCapture>::update_scroll_bars(
+    void view_picture_box<PictureBox, AbstractWindow, MouseCapture>::update_scroll_bars(
         const dimension_type& view_dimension,
         const dimension_type& page_dimension
     )
@@ -262,14 +262,14 @@ namespace bobura
     }
 
 #if BOOST_COMP_MSVC
-    template class diagram_picture_box<
+    template class view_picture_box<
         typename application::ui_type_list_type::picture_box_type,
         typename application::ui_type_list_type::abstract_window_type,
         typename application::ui_type_list_type::mouse_capture_type
     >;
 #endif
 
-    template class diagram_picture_box<
+    template class view_picture_box<
         typename test::ui_type_list_type::picture_box_type,
         typename test::ui_type_list_type::abstract_window_type,
         typename test::ui_type_list_type::mouse_capture_type

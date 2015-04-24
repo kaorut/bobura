@@ -8,11 +8,11 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <bobura/diagram_picture_box.h>
 #include <bobura/diagram_view.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/zoom.h>
+#include <bobura/view_picture_box.h>
 
 
 namespace
@@ -47,8 +47,7 @@ namespace
 
     using mouse_capture_type = ui_type_list_type::mouse_capture_type;
 
-    using diagram_picture_box_type =
-        bobura::diagram_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
+    using view_picture_box_type = bobura::view_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
 
     using view_traits_type = traits_type_list_type::view_type;
 
@@ -83,7 +82,7 @@ BOOST_AUTO_TEST_SUITE(zoom)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        diagram_picture_box_type picture_box{ parent };
+        view_picture_box_type picture_box{ parent };
         const timetable_model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type view{ model, message_catalog };
@@ -95,7 +94,7 @@ BOOST_AUTO_TEST_SUITE(zoom)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        diagram_picture_box_type picture_box{ parent };
+        view_picture_box_type picture_box{ parent };
         const timetable_model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type view{ model, message_catalog };
@@ -109,7 +108,7 @@ BOOST_AUTO_TEST_SUITE(zoom)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        diagram_picture_box_type picture_box{ parent };
+        view_picture_box_type picture_box{ parent };
         const timetable_model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type view{ model, message_catalog };
@@ -124,7 +123,7 @@ BOOST_AUTO_TEST_SUITE(zoom)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        diagram_picture_box_type picture_box{ parent };
+        view_picture_box_type picture_box{ parent };
         const timetable_model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type view{ model, message_catalog };
@@ -139,7 +138,7 @@ BOOST_AUTO_TEST_SUITE(zoom)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        diagram_picture_box_type picture_box{ parent };
+        view_picture_box_type picture_box{ parent };
         const timetable_model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type view{ model, message_catalog };
@@ -153,7 +152,7 @@ BOOST_AUTO_TEST_SUITE(zoom)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        diagram_picture_box_type picture_box{ parent };
+        view_picture_box_type picture_box{ parent };
         const timetable_model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type view{ model, message_catalog };
@@ -168,7 +167,7 @@ BOOST_AUTO_TEST_SUITE(zoom)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        diagram_picture_box_type picture_box{ parent };
+        view_picture_box_type picture_box{ parent };
         const timetable_model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type view{ model, message_catalog };

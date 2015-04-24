@@ -13,7 +13,6 @@
 
 #include <tetengo2.h>
 
-#include <bobura/diagram_picture_box.h>
 #include <bobura/diagram_view.h>
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/load_save/save_to_file.h>
