@@ -520,10 +520,10 @@ namespace bobura
     }
 
 #if BOOST_COMP_MSVC
-    template class diagram_view<typename application::traits_type_list_type::view_type>;
+    template class diagram_view<typename application::traits_type_list_type::diagram_view_type>;
 #endif
 
-    template class diagram_view<typename test::traits_type_list_type::view_type>;
+    template class diagram_view<typename test::traits_type_list_type::diagram_view_type>;
 
 
 }

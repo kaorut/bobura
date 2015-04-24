@@ -74,11 +74,11 @@ namespace bobura
         int run()
         {
             const message_catalog_type message_catalog{};
-            view_type view{ m_model, message_catalog };
-            const command_set_holder_type command_set_holder{ m_settings, m_model, view, message_catalog };
+            diagram_view_type diagram_view{ m_model, message_catalog };
+            const command_set_holder_type command_set_holder{ m_settings, m_model, diagram_view, message_catalog };
 
             main_window_type main_window(message_catalog, m_settings, command_set_holder.confirm_file_save()); 
-            set_message_observers(command_set_holder.command_set(), view, main_window, message_catalog);
+            set_message_observers(command_set_holder.command_set(), diagram_view, main_window, message_catalog);
             m_model.reset_timetable();
             main_window.set_menu_bar(
                 main_window_menu_builder_type(
@@ -115,7 +115,7 @@ namespace bobura
 
         using view_traits_type = typename traits_type::view_traits_type;
 
-        using view_type = diagram_view<view_traits_type>;
+        using diagram_view_type = diagram_view<view_traits_type>;
 
         using main_window_traits_type = typename traits_type::main_window_traits_type;
 
@@ -123,9 +123,11 @@ namespace bobura
 
         using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
 
-        using model_reset_observer_type = message::timetable_model::reset<model_type, view_type, main_window_type>;
+        using model_reset_observer_type =
+            message::timetable_model::reset<model_type, diagram_view_type, main_window_type>;
 
-        using model_changed_observer_type = message::timetable_model::changed<model_type, view_type, main_window_type>;
+        using model_changed_observer_type =
+            message::timetable_model::changed<model_type, diagram_view_type, main_window_type>;
 
         using abstract_window_type = typename traits_type::abstract_window_type;
 
@@ -203,7 +205,10 @@ namespace bobura
 
         using main_window_window_resized_observer_type =
             message::main_window::window_resized<
-                view_type, abstract_window_type, view_picture_box_type, typename main_window_type::property_bar_type
+                diagram_view_type,
+                abstract_window_type,
+                view_picture_box_type,
+                typename main_window_type::property_bar_type
             >;
 
         using main_window_window_closing_observer_type =
@@ -245,7 +250,7 @@ namespace bobura
             command_set_holder_type(
                 settings_type&              settings,
                 model_type&                 model,
-                view_type&                  view,
+                diagram_view_type&          diagram_view,
                 const message_catalog_type& message_catalog
             )
             :
@@ -261,7 +266,7 @@ namespace bobura
                 m_reload,
                 m_save_to_file,
                 m_ask_file_path_and_save_to_file,
-                view,
+                diagram_view,
                 settings,
                 message_catalog
             )
@@ -312,23 +317,25 @@ namespace bobura
 
         void set_message_observers(
             const command_set_type&     command_set,
-            view_type&                  view,
+            diagram_view_type&         diagram_view,
             main_window_type&           main_window,
             const message_catalog_type& message_catalog
         )
         {
             view_picture_box_type& diagram_view_picture_box = main_window.get_diagram_view_picture_box();
 
-            m_model.observer_set().reset().connect(model_reset_observer_type{ m_model, view, main_window });
-            m_model.observer_set().changed().connect(model_changed_observer_type{ m_model, view, main_window });
+            m_model.observer_set().reset().connect(model_reset_observer_type{ m_model, diagram_view, main_window });
+            m_model.observer_set().changed().connect(
+                model_changed_observer_type{ m_model, diagram_view, main_window }
+            );
 
-            view.selection_observer_set().station_selected().connect(
+            diagram_view.selection_observer_set().station_selected().connect(
                 view_station_selected_observer_type( main_window.get_property_bar(), m_model, message_catalog )
             );
-            view.selection_observer_set().train_selected().connect(
+            diagram_view.selection_observer_set().train_selected().connect(
                 view_train_selected_observer_type{ main_window.get_property_bar(), m_model, message_catalog }
             );
-            view.selection_observer_set().all_unselected().connect(
+            diagram_view.selection_observer_set().all_unselected().connect(
                 view_all_unselected_observer_type{ main_window.get_property_bar() }
             );
             
@@ -337,7 +344,7 @@ namespace bobura
             );
             main_window.size_observer_set().resized().connect(
                 main_window_window_resized_observer_type{
-                    view, main_window, diagram_view_picture_box, main_window.get_property_bar()
+                    diagram_view, main_window, diagram_view_picture_box, main_window.get_property_bar()
                 }
             );
 
@@ -348,7 +355,7 @@ namespace bobura
                     {
                         diagram_view_picture_box.set_mouse_capture(mouse_button);
                     },
-                    view
+                    diagram_view
                 }
             );
             diagram_view_picture_box.mouse_observer_set().released().connect(
@@ -357,31 +364,31 @@ namespace bobura
                     {
                         return diagram_view_picture_box.release_mouse_capture(mouse_button);
                     },
-                    view
+                    diagram_view
                 }
             );
             diagram_view_picture_box.mouse_observer_set().moved().connect(
-                diagram_view_picture_box_mouse_moved_observer_type{ diagram_view_picture_box, view }
+                diagram_view_picture_box_mouse_moved_observer_type{ diagram_view_picture_box, diagram_view }
             );
             diagram_view_picture_box.mouse_observer_set().wheeled().connect(
-                diagram_view_picture_box_mouse_wheeled_observer_type{ diagram_view_picture_box, view }
+                diagram_view_picture_box_mouse_wheeled_observer_type{ diagram_view_picture_box, diagram_view }
             );
             diagram_view_picture_box.fast_paint_observer_set().paint().connect(
-                diagram_view_picture_box_paint_paint_observer_type{ diagram_view_picture_box, view }
+                diagram_view_picture_box_paint_paint_observer_type{ diagram_view_picture_box, diagram_view }
             );
             assert(diagram_view_picture_box.has_vertical_scroll_bar());
             diagram_view_picture_box.vertical_scroll_bar().scroll_bar_observer_set().scrolling().connect(
-                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ diagram_view_picture_box, view }
+                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ diagram_view_picture_box, diagram_view }
             );
             diagram_view_picture_box.vertical_scroll_bar().scroll_bar_observer_set().scrolled().connect(
-                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ diagram_view_picture_box, view }
+                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ diagram_view_picture_box, diagram_view }
             );
             assert(diagram_view_picture_box.has_horizontal_scroll_bar());
             diagram_view_picture_box.horizontal_scroll_bar().scroll_bar_observer_set().scrolling().connect(
-                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ diagram_view_picture_box, view }
+                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ diagram_view_picture_box, diagram_view }
             );
             diagram_view_picture_box.horizontal_scroll_bar().scroll_bar_observer_set().scrolled().connect(
-                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ diagram_view_picture_box, view }
+                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ diagram_view_picture_box, diagram_view }
             );
         }
 

@@ -624,18 +624,18 @@ namespace bobura { namespace view { namespace diagram
     }
 
 #if BOOST_COMP_MSVC
-    template class company_line_name_header<typename application::traits_type_list_type::view_type>;
+    template class company_line_name_header<typename application::traits_type_list_type::diagram_view_type>;
 
-    template class note_header<typename application::traits_type_list_type::view_type>;
+    template class note_header<typename application::traits_type_list_type::diagram_view_type>;
 
-    template class header<typename application::traits_type_list_type::view_type>;
+    template class header<typename application::traits_type_list_type::diagram_view_type>;
 #endif
 
-    template class company_line_name_header<typename test::traits_type_list_type::view_type>;
+    template class company_line_name_header<typename test::traits_type_list_type::diagram_view_type>;
 
-    template class note_header<typename test::traits_type_list_type::view_type>;
+    template class note_header<typename test::traits_type_list_type::diagram_view_type>;
 
-    template class header<typename test::traits_type_list_type::view_type>;
+    template class header<typename test::traits_type_list_type::diagram_view_type>;
 
 
 }}}

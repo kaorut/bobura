@@ -62,9 +62,9 @@ namespace
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
-    using view_traits_type = traits_type_list_type::view_type;
+    using diagram_view_traits_type = traits_type_list_type::diagram_view_type;
 
-    using view_type = bobura::diagram_view<view_traits_type>;
+    using diagram_view_type = bobura::diagram_view<diagram_view_traits_type>;
 
 
 }
@@ -80,7 +80,7 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        const view_type view{ model, message_catalog };
+        const diagram_view_type diagram_view{ model, message_catalog };
     }
 
     BOOST_AUTO_TEST_CASE(draw_on)
@@ -89,12 +89,12 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        view_type view{ model, message_catalog };
+        diagram_view_type diagram_view{ model, message_catalog };
 
         window_type window{};
         const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
         const auto p_canvas = picture_box.create_canvas();
-        view.draw_on(
+        diagram_view.draw_on(
             *p_canvas,
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
             position_type{ left_type{ 2 }, top_type{ 3 } }
@@ -107,9 +107,9 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        const view_type view{ model, message_catalog };
+        const diagram_view_type diagram_view{ model, message_catalog };
 
-        view.horizontal_scale();
+        diagram_view.horizontal_scale();
     }
 
     BOOST_AUTO_TEST_CASE(set_horizontal_scale)
@@ -118,15 +118,15 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        view_type view{ model, message_catalog };
+        diagram_view_type diagram_view{ model, message_catalog };
 
-        view.set_horizontal_scale(42);
+        diagram_view.set_horizontal_scale(42);
 
-        BOOST_CHECK(view.horizontal_scale() == scale_type{ 42 });
+        BOOST_CHECK(diagram_view.horizontal_scale() == scale_type{ 42 });
 
-        view.set_horizontal_scale(24);
+        diagram_view.set_horizontal_scale(24);
 
-        BOOST_CHECK(view.horizontal_scale() == scale_type{ 24 });
+        BOOST_CHECK(diagram_view.horizontal_scale() == scale_type{ 24 });
     }
 
     BOOST_AUTO_TEST_CASE(vertical_scale)
@@ -135,9 +135,9 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        const view_type view{ model, message_catalog };
+        const diagram_view_type diagram_view{ model, message_catalog };
 
-        view.vertical_scale();
+        diagram_view.vertical_scale();
     }
 
     BOOST_AUTO_TEST_CASE(set_vertical_scale)
@@ -146,15 +146,15 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        view_type view{ model, message_catalog };
+        diagram_view_type diagram_view{ model, message_catalog };
 
-        view.set_vertical_scale(42);
+        diagram_view.set_vertical_scale(42);
 
-        BOOST_CHECK(view.vertical_scale() == scale_type{ 42 });
+        BOOST_CHECK(diagram_view.vertical_scale() == scale_type{ 42 });
 
-        view.set_vertical_scale(24);
+        diagram_view.set_vertical_scale(24);
 
-        BOOST_CHECK(view.vertical_scale() == scale_type{ 24 });
+        BOOST_CHECK(diagram_view.vertical_scale() == scale_type{ 24 });
     }
 
     BOOST_AUTO_TEST_CASE(dimension)
@@ -163,9 +163,9 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        const view_type view{ model, message_catalog };
+        const diagram_view_type diagram_view{ model, message_catalog };
 
-        view.dimension();
+        diagram_view.dimension();
     }
 
     BOOST_AUTO_TEST_CASE(update_dimension)
@@ -174,9 +174,9 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        view_type view{ model, message_catalog };
+        diagram_view_type diagram_view{ model, message_catalog };
 
-        view.update_dimension();
+        diagram_view.update_dimension();
     }
 
     BOOST_AUTO_TEST_CASE(page_size)
@@ -185,9 +185,9 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        const view_type view{ model, message_catalog };
+        const diagram_view_type diagram_view{ model, message_catalog };
 
-        view.page_size(dimension_type{ width_type{ 42 }, height_type{ 24 } });
+        diagram_view.page_size(dimension_type{ width_type{ 42 }, height_type{ 24 } });
     }
 
     BOOST_AUTO_TEST_CASE(p_item_by_position)
@@ -197,16 +197,16 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
         {
             const model_type model{};
             const message_catalog_type message_catalog{};
-            const view_type view{ model, message_catalog };
+            const diagram_view_type diagram_view{ model, message_catalog };
 
-            view.p_item_by_position(position_type{ left_type{ 42 }, top_type{ 24 } });
+            diagram_view.p_item_by_position(position_type{ left_type{ 42 }, top_type{ 24 } });
         }
         {
             const model_type model{};
             const message_catalog_type message_catalog{};
-            view_type view{ model, message_catalog };
+            diagram_view_type diagram_view{ model, message_catalog };
 
-            view.p_item_by_position(position_type{ left_type{ 42 }, top_type{ 24 } });
+            diagram_view.p_item_by_position(position_type{ left_type{ 42 }, top_type{ 24 } });
         }
     }
 
@@ -216,9 +216,9 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        view_type view{ model, message_catalog };
+        diagram_view_type diagram_view{ model, message_catalog };
 
-        view.unselect_all_items();
+        diagram_view.unselect_all_items();
     }
 
     BOOST_AUTO_TEST_CASE(selection_observer_set)
@@ -228,16 +228,16 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
         {
             const model_type model{};
             const message_catalog_type message_catalog{};
-            const view_type view{ model, message_catalog };
+            const diagram_view_type diagram_view{ model, message_catalog };
 
-            view.selection_observer_set();
+            diagram_view.selection_observer_set();
         }
         {
             const model_type model{};
             const message_catalog_type message_catalog{};
-            view_type view{ model, message_catalog };
+            diagram_view_type diagram_view{ model, message_catalog };
 
-            view.selection_observer_set();
+            diagram_view.selection_observer_set();
         }
     }
 

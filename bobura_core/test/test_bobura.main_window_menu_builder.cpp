@@ -69,7 +69,7 @@ namespace
 
     using load_from_file_type = bobura::load_save::load_from_file<load_save_traits_type>;
 
-    using view_type = bobura::diagram_view<traits_type_list_type::view_type>;
+    using diagram_view_type = bobura::diagram_view<traits_type_list_type::diagram_view_type>;
 
     using command_set_type = bobura::command::set<traits_type_list_type::command_set_type>;
 
@@ -112,7 +112,7 @@ BOOST_AUTO_TEST_SUITE(main_window_menu_builder)
         const new_file_type new_file{ confirm_file_save };
         const load_from_file_type load_from_file{ true, confirm_file_save, message_catalog };
         const load_from_file_type reload{ false, confirm_file_save, message_catalog };
-        view_type diagram_view{ model, message_catalog };
+        diagram_view_type diagram_view{ model, message_catalog };
         const command_set_type command_set{
             new_file,
             load_from_file,
@@ -143,7 +143,7 @@ BOOST_AUTO_TEST_SUITE(main_window_menu_builder)
         const new_file_type new_file{ confirm_file_save };
         const load_from_file_type load_from_file{ true, confirm_file_save, message_catalog };
         const load_from_file_type reload{ false, confirm_file_save, message_catalog };
-        view_type diagram_view{ model, message_catalog };
+        diagram_view_type diagram_view{ model, message_catalog };
         const command_set_type command_set{
             new_file,
             load_from_file,

@@ -54,7 +54,7 @@ namespace
     
     using train_type = model_type::timetable_type::train_type;
 
-    using traits_type = traits_type_list_type::view_type;
+    using traits_type = traits_type_list_type::diagram_view_type;
 
     using selection_type = bobura::view::diagram::selection<traits_type>;
 

@@ -247,7 +247,7 @@ namespace bobura { namespace view { namespace diagram
 
 #if BOOST_COMP_MSVC
     template class zoom<
-        typename application::traits_type_list_type::view_type,
+        typename application::traits_type_list_type::diagram_view_type,
         typename application::ui_type_list_type::abstract_window_type,
         typename application::ui_type_list_type::picture_box_type,
         typename application::ui_type_list_type::mouse_capture_type
@@ -255,7 +255,7 @@ namespace bobura { namespace view { namespace diagram
 #endif
 
     template class zoom<
-        typename test::traits_type_list_type::view_type,
+        typename test::traits_type_list_type::diagram_view_type,
         typename test::ui_type_list_type::abstract_window_type,
         typename test::ui_type_list_type::picture_box_type,
         typename test::ui_type_list_type::mouse_capture_type

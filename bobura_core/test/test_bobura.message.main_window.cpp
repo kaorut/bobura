@@ -76,9 +76,9 @@ namespace
 
     using window_type = ui_type_list_type::window_type;
 
-    using view_traits_type = traits_type_list_type::view_type;
+    using diagram_view_traits_type = traits_type_list_type::diagram_view_type;
 
-    using view_type = bobura::diagram_view<view_traits_type>;
+    using diagram_view_type = bobura::diagram_view<diagram_view_traits_type>;
 
     using picture_box_type = ui_type_list_type::picture_box_type;
 
@@ -106,7 +106,7 @@ namespace
 
     using window_resized_type =
         bobura::message::main_window::window_resized<
-            view_type, abstract_window_type, view_picture_box_type, property_bar_type
+            diagram_view_type, abstract_window_type, view_picture_box_type, property_bar_type
         >;
 
 
@@ -215,13 +215,13 @@ BOOST_AUTO_TEST_SUITE(window_resized)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        view_type view{ model, message_catalog };
+        diagram_view_type diagram_view{ model, message_catalog };
         window_type window{};
         view_picture_box_type diagram_view_picture_box{ window };
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         property_bar_type property_bar{ window, settings, message_catalog };
-        const window_resized_type observer{ view, window, diagram_view_picture_box, property_bar };
+        const window_resized_type observer{ diagram_view, window, diagram_view_picture_box, property_bar };
 
         settings.clear_config();
     }
@@ -232,13 +232,13 @@ BOOST_AUTO_TEST_SUITE(window_resized)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        view_type view{ model, message_catalog };
+        diagram_view_type diagram_view{ model, message_catalog };
         window_type window{};
         view_picture_box_type diagram_view_picture_box{ window };
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         property_bar_type property_bar{ window, settings, message_catalog };
-        const window_resized_type observer{ view, window, diagram_view_picture_box, property_bar };
+        const window_resized_type observer{ diagram_view, window, diagram_view_picture_box, property_bar };
 
         observer();
 

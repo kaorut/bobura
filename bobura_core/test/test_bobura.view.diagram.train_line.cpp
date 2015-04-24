@@ -82,7 +82,7 @@ namespace
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
-    using traits_type = traits_type_list_type::view_type;
+    using traits_type = traits_type_list_type::diagram_view_type;
 
     using selection_type = bobura::view::diagram::selection<traits_type>;
 

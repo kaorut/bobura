@@ -557,14 +557,14 @@ namespace bobura { namespace view { namespace diagram
     }
 
 #if BOOST_COMP_MSVC
-    template class station_line<typename application::traits_type_list_type::view_type>;
+    template class station_line<typename application::traits_type_list_type::diagram_view_type>;
 
-    template class station_line_list<typename application::traits_type_list_type::view_type>;
+    template class station_line_list<typename application::traits_type_list_type::diagram_view_type>;
 #endif
 
-    template class station_line<typename test::traits_type_list_type::view_type>;
+    template class station_line<typename test::traits_type_list_type::diagram_view_type>;
 
-    template class station_line_list<typename test::traits_type_list_type::view_type>;
+    template class station_line_list<typename test::traits_type_list_type::diagram_view_type>;
 
 
 }}}

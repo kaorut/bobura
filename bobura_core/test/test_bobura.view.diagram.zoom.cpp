@@ -49,7 +49,7 @@ namespace
 
     using view_picture_box_type = bobura::view_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
 
-    using view_traits_type = traits_type_list_type::view_type;
+    using view_traits_type = traits_type_list_type::diagram_view_type;
 
     using font_type = ui_type_list_type::fast_font_type;
 

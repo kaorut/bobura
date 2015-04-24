@@ -41,7 +41,7 @@ namespace
 
     using top_type = tetengo2::gui::position<position_type>::top_type;
 
-    using traits_type = traits_type_list_type::view_type;
+    using traits_type = traits_type_list_type::diagram_view_type;
 
     using selection_type = bobura::view::diagram::selection<traits_type>;
 

@@ -139,7 +139,7 @@ namespace bobura { namespace command
         typename application::traits_type_list_type::command_type,
         typename application::traits_type_list_type::command_set_type,
         typename application::traits_type_list_type::main_window_type,
-        typename application::traits_type_list_type::view_type
+        typename application::traits_type_list_type::diagram_view_type
     >;
 #endif
 
@@ -147,7 +147,7 @@ namespace bobura { namespace command
         typename test::traits_type_list_type::command_type,
         typename test::traits_type_list_type::command_set_type,
         typename test::traits_type_list_type::main_window_type,
-        typename test::traits_type_list_type::view_type
+        typename test::traits_type_list_type::diagram_view_type
     >;
 
 
