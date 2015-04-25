@@ -8,11 +8,11 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <bobura/diagram_picture_box.h>
 #include <bobura/diagram_view.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/zoom.h>
+#include <bobura/view_picture_box.h>
 
 
 namespace
@@ -47,10 +47,9 @@ namespace
 
     using mouse_capture_type = ui_type_list_type::mouse_capture_type;
 
-    using diagram_picture_box_type =
-        bobura::diagram_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
+    using view_picture_box_type = bobura::view_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
 
-    using view_traits_type = traits_type_list_type::view_type;
+    using diagram_view_traits_type = traits_type_list_type::diagram_view_type;
 
     using font_type = ui_type_list_type::fast_font_type;
 
@@ -61,10 +60,12 @@ namespace
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
-    using diagram_view_type = bobura::diagram_view<view_traits_type>;
+    using diagram_view_type = bobura::diagram_view<diagram_view_traits_type>;
 
     using zoom_type =
-        bobura::view::diagram::zoom<view_traits_type, abstract_window_type, picture_box_type, mouse_capture_type>;
+        bobura::view::diagram::zoom<
+            diagram_view_traits_type, abstract_window_type, picture_box_type, mouse_capture_type
+        >;
 
     using scale_type = zoom_type::scale_type;
 
@@ -83,7 +84,7 @@ BOOST_AUTO_TEST_SUITE(zoom)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        diagram_picture_box_type picture_box{ parent };
+        view_picture_box_type picture_box{ parent };
         const timetable_model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type view{ model, message_catalog };
@@ -95,7 +96,7 @@ BOOST_AUTO_TEST_SUITE(zoom)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        diagram_picture_box_type picture_box{ parent };
+        view_picture_box_type picture_box{ parent };
         const timetable_model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type view{ model, message_catalog };
@@ -109,7 +110,7 @@ BOOST_AUTO_TEST_SUITE(zoom)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        diagram_picture_box_type picture_box{ parent };
+        view_picture_box_type picture_box{ parent };
         const timetable_model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type view{ model, message_catalog };
@@ -124,7 +125,7 @@ BOOST_AUTO_TEST_SUITE(zoom)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        diagram_picture_box_type picture_box{ parent };
+        view_picture_box_type picture_box{ parent };
         const timetable_model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type view{ model, message_catalog };
@@ -139,7 +140,7 @@ BOOST_AUTO_TEST_SUITE(zoom)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        diagram_picture_box_type picture_box{ parent };
+        view_picture_box_type picture_box{ parent };
         const timetable_model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type view{ model, message_catalog };
@@ -153,7 +154,7 @@ BOOST_AUTO_TEST_SUITE(zoom)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        diagram_picture_box_type picture_box{ parent };
+        view_picture_box_type picture_box{ parent };
         const timetable_model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type view{ model, message_catalog };
@@ -168,7 +169,7 @@ BOOST_AUTO_TEST_SUITE(zoom)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        diagram_picture_box_type picture_box{ parent };
+        view_picture_box_type picture_box{ parent };
         const timetable_model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type view{ model, message_catalog };

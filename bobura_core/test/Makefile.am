@@ -28,7 +28,6 @@ sources = \
     test_bobura.command.train_kind.cpp \
     test_bobura.command.vertically_zoom_in.cpp \
     test_bobura.command.vertically_zoom_out.cpp \
-    test_bobura.diagram_picture_box.cpp \
     test_bobura.diagram_view.cpp \
     test_bobura.file_property_dialog.cpp \
     test_bobura.font_color_dialog.cpp \
@@ -39,7 +38,6 @@ sources = \
     test_bobura.main_window.cpp \
     test_bobura.main_window_menu_builder.cpp \
     test_bobura.message.about_dialog.cpp \
-    test_bobura.message.diagram_picture_box.cpp \
     test_bobura.message.diagram_selection_observer_set.cpp \
     test_bobura.message.diagram_view.cpp \
     test_bobura.message.file_property_dialog.cpp \
@@ -49,6 +47,7 @@ sources = \
     test_bobura.message.timetable_model.cpp \
     test_bobura.message.timetable_model_observer_set.cpp \
     test_bobura.message.train_kind_dialog.cpp \
+    test_bobura.message.view_picture_box.cpp \
     test_bobura.property_bar.cpp \
     test_bobura.settings.cpp \
     test_bobura.timetable_model.cpp \
@@ -61,7 +60,8 @@ sources = \
     test_bobura.view.diagram.train_line.cpp \
     test_bobura.view.diagram.utility.cpp \
     test_bobura.view.diagram.zoom.cpp \
-    test_bobura.view.scale_list.cpp
+    test_bobura.view.scale_list.cpp \
+    test_bobura.view_picture_box.cpp
 
 extra_sources =
 

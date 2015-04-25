@@ -22,12 +22,12 @@ namespace bobura { namespace command
     /*!
         \brief The class template for a vertical zoom-out command.
 
-        \tparam Traits           A traits type.
-        \tparam CommandSetTraits A command set traits type.
-        \tparam MainWindowTraits A main window traits type.
-        \tparam ViewTraits       A view traits type.
+        \tparam Traits            A traits type.
+        \tparam CommandSetTraits  A command set traits type.
+        \tparam MainWindowTraits  A main window traits type.
+        \tparam DiagramViewTraits A diagram view traits type.
     */
-    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename ViewTraits>
+    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename DiagramViewTraits>
     class vertically_zoom_out : public command_base<Traits>
     {
     public:
@@ -42,8 +42,8 @@ namespace bobura { namespace command
         //! The main window traits type.
         using main_window_traits_type = MainWindowTraits;
 
-        //! The view traits type.
-        using view_traits_type = ViewTraits;
+        //! The diagram view traits type.
+        using diagram_view_traits_type = DiagramViewTraits;
 
         //! The base type.
         using base_type = command_base<traits_type>;
@@ -55,7 +55,7 @@ namespace bobura { namespace command
         using model_type = typename base_type::model_type;
 
         //! The diagram view type.
-        using diagram_view_type = diagram_view<view_traits_type>;
+        using diagram_view_type = diagram_view<diagram_view_traits_type>;
 
 
         // constructors and destructor

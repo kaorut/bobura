@@ -851,7 +851,7 @@ namespace bobura { namespace type_list
             >;
 
         template <typename DetailTypeList>
-        using view_traits_type =
+        using diagram_view_traits_type =
             bobura::view::diagram::traits<
                 size_type,
                 difference_type,
@@ -905,7 +905,7 @@ namespace bobura { namespace type_list
                 fast_font_type<DetailTypeList>,
                 mouse_capture_type<DetailTypeList>,
                 message_catalog_type<DetailTypeList>,
-                view_traits_type<DetailTypeList>,
+                diagram_view_traits_type<DetailTypeList>,
                 load_save_traits_type<DetailTypeList>,
                 config_traits_type<DetailTypeList>
             >;
@@ -941,7 +941,7 @@ namespace bobura { namespace type_list
                 message_catalog_type<DetailTypeList>,
                 command_traits_type<DetailTypeList>,
                 main_window_traits_type<DetailTypeList>,
-                view_traits_type<DetailTypeList>,
+                diagram_view_traits_type<DetailTypeList>,
                 load_save_traits_type<DetailTypeList>,
                 dialog_traits_type<DetailTypeList>,
                 config_traits_type<DetailTypeList>
@@ -967,7 +967,7 @@ namespace bobura { namespace type_list
                 message_catalog_type<DetailTypeList>,
                 command_set_traits_type<DetailTypeList>,
                 main_window_traits_type<DetailTypeList>,
-                view_traits_type<DetailTypeList>
+                diagram_view_traits_type<DetailTypeList>
             >;
 
         template <typename DetailTypeList>
@@ -1008,7 +1008,7 @@ namespace bobura { namespace type_list
                 timer_type<DetailTypeList>,
                 message_catalog_type<DetailTypeList>,
                 main_window_traits_type<DetailTypeList>,
-                view_traits_type<DetailTypeList>,
+                diagram_view_traits_type<DetailTypeList>,
                 load_save_traits_type<DetailTypeList>,
                 command_set_traits_type<DetailTypeList>,
                 main_window_menu_builder_traits_type<DetailTypeList>,
@@ -1032,8 +1032,8 @@ namespace bobura { namespace type_list
         //! The loading and saving processing traits.
         using load_save_type = detail::traits::load_save_traits_type<DetailTypeList>;
 
-        //! The view traits.
-        using view_type = detail::traits::view_traits_type<DetailTypeList>;
+        //! The diagram view traits.
+        using diagram_view_type = detail::traits::diagram_view_traits_type<DetailTypeList>;
 
         //! The config traits.
         using config_type = detail::traits::config_traits_type<DetailTypeList>;

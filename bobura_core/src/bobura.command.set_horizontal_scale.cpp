@@ -26,9 +26,9 @@ namespace bobura { namespace command
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename ViewTraits
+        typename DiagramViewTraits
     >
-    class set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::impl
+    class set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::impl
     {
     public:
         // types
@@ -41,7 +41,7 @@ namespace bobura { namespace command
 
         using main_window_traits_type = typename set_horizontal_scale::main_window_traits_type;
 
-        using view_traits_type = typename set_horizontal_scale::view_traits_type;
+        using diagram_view_traits_type = typename set_horizontal_scale::diagram_view_traits_type;
 
         using abstract_window_type = typename set_horizontal_scale::abstract_window_type;
 
@@ -76,7 +76,7 @@ namespace bobura { namespace command
 
             auto* const p_main_window = dynamic_cast<main_window_type*>(&parent);
             assert(p_main_window);
-            zoom_type zoom{ p_main_window->get_diagram_picture_box(), m_diagram_view };
+            zoom_type zoom{ p_main_window->get_diagram_view_picture_box(), m_diagram_view };
 
             zoom.set_horizontal_scale(m_scale);
         }
@@ -89,7 +89,7 @@ namespace bobura { namespace command
 
         using zoom_type =
             view::diagram::zoom<
-                view_traits_type,
+                diagram_view_traits_type,
                 abstract_window_type,
                 typename main_window_traits_type::picture_box_type,
                 mouse_capture_type
@@ -111,9 +111,9 @@ namespace bobura { namespace command
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename ViewTraits
+        typename DiagramViewTraits
     >
-    set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::set_horizontal_scale(
+    set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::set_horizontal_scale(
         diagram_view_type& diagram_view,
         const scale_type&  scale
         )
@@ -126,9 +126,9 @@ namespace bobura { namespace command
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename ViewTraits
+        typename DiagramViewTraits
     >
-    set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::~set_horizontal_scale()
+    set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::~set_horizontal_scale()
     TETENGO2_STDALT_NOEXCEPT
     {}
     
@@ -137,10 +137,10 @@ namespace bobura { namespace command
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename ViewTraits
+        typename DiagramViewTraits
     >
-    typename set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::state_type
-    set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::state_impl()
+    typename set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::state_type
+    set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::state_impl()
     const
     {
         return m_p_impl->state();
@@ -151,9 +151,9 @@ namespace bobura { namespace command
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename ViewTraits
+        typename DiagramViewTraits
     >
-    void set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, ViewTraits>::execute_impl(
+    void set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::execute_impl(
         model_type&           model,
         abstract_window_type& parent
     )
@@ -195,7 +195,7 @@ namespace bobura { namespace command
         typename application::common_type_list_type::scale_type,
         typename application::traits_type_list_type::command_set_type,
         typename application::traits_type_list_type::main_window_type,
-        typename application::traits_type_list_type::view_type
+        typename application::traits_type_list_type::diagram_view_type
     >;
 #endif
 
@@ -204,7 +204,7 @@ namespace bobura { namespace command
         typename test::common_type_list_type::scale_type,
         typename test::traits_type_list_type::command_set_type,
         typename test::traits_type_list_type::main_window_type,
-        typename test::traits_type_list_type::view_type
+        typename test::traits_type_list_type::diagram_view_type
     >;
 
 

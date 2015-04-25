@@ -28,7 +28,6 @@ pkg_headers = \
     command/vertically_zoom_out.h \
     config_traits.h \
     detail_type_list.h \
-    diagram_picture_box.h \
     diagram_view.h \
     dialog_traits.h \
     file_property_dialog.h \
@@ -43,7 +42,6 @@ pkg_headers = \
     main_window_menu_builder_traits.h \
     main_window_traits.h \
     message/about_dialog.h \
-    message/diagram_picture_box.h \
     message/diagram_selection_observer_set.h \
     message/diagram_view.h \
     message/file_property_dialog.h \
@@ -53,6 +51,7 @@ pkg_headers = \
     message/timetable_model.h \
     message/timetable_model_observer_set.h \
     message/train_kind_dialog.h \
+    message/view_picture_box.h \
     property_bar.h \
     settings.h \
     timetable_model.h \
@@ -68,7 +67,8 @@ pkg_headers = \
     view/diagram/traits.h \
     view/diagram/utility.h \
     view/diagram/zoom.h \
-    view/scale_list.h
+    view/scale_list.h \
+    view_picture_box.h
 
 extra_headers = \
     0namespace.dox \

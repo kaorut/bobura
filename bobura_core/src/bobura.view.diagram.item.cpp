@@ -218,10 +218,10 @@ namespace bobura { namespace view { namespace diagram
     }
 
 #if BOOST_COMP_MSVC
-    template class item<typename application::traits_type_list_type::view_type>;
+    template class item<typename application::traits_type_list_type::diagram_view_type>;
 #endif
 
-    template class item<typename test::traits_type_list_type::view_type>;
+    template class item<typename test::traits_type_list_type::diagram_view_type>;
 
 
 }}}

@@ -285,25 +285,25 @@ namespace bobura { namespace message { namespace main_window
     /*!
         \brief The class template for a window resized observer of the main window.
 
-        \tparam View              A view type.
-        \tparam AbstractWindow    An abstract window type.
-        \tparam DiagramPictureBox A diagram picture box type.
-        \tparam PropertyBar       A property bar type.
+        \tparam DiagramView    A diagram view type.
+        \tparam AbstractWindow An abstract window type.
+        \tparam ViewPictureBox A view picture box type.
+        \tparam PropertyBar    A property bar type.
     */
-    template <typename View, typename AbstractWindow, typename DiagramPictureBox, typename PropertyBar>
+    template <typename DiagramView, typename AbstractWindow, typename ViewPictureBox, typename PropertyBar>
     class window_resized
     {
     public:
         // types
 
-        //! The view type.
-        using view_type = View;
+        //! The diagram view type.
+        using diagram_view_type = DiagramView;
 
         //! The abstract window type.
         using abstract_window_type = AbstractWindow;
 
-        //! The diagram picture box type.
-        using diagram_picture_box_type = DiagramPictureBox;
+        //! The view picture box type.
+        using view_picture_box_type = ViewPictureBox;
 
         //! The property bar type.
         using property_bar_type = PropertyBar;
@@ -314,21 +314,21 @@ namespace bobura { namespace message { namespace main_window
         /*!
             \brief Creates a window resized observer of the main window.
 
-            \param view                A view.
-            \param window              A window.
-            \param diagram_picture_box A diagram picture box.
-            \param property_bar        A property bar.
+            \param diagram_view             A view.
+            \param window                   A window.
+            \param diagram_view_picture_box A diagram view picture box.
+            \param property_bar             A property bar.
         */
         window_resized(
-            view_type&                view,
-            abstract_window_type&     window,
-            diagram_picture_box_type& diagram_picture_box,
-            property_bar_type&        property_bar
+            diagram_view_type&     diagram_view,
+            abstract_window_type&  window,
+            view_picture_box_type& diagram_view_picture_box,
+            property_bar_type&     property_bar
         )
         :
-        m_view(view),
+        m_diagram_view(diagram_view),
         m_window(window),
-        m_diagram_picture_box(diagram_picture_box),
+        m_diagram_view_picture_box(diagram_view_picture_box),
         m_property_bar(property_bar)
         {}
 
@@ -363,12 +363,12 @@ namespace bobura { namespace message { namespace main_window
                     window_width > property_bar_width ? window_width - property_bar_width : width_type{ 0 },
                     window_height
                 };
-                m_diagram_picture_box.set_position_and_dimension(position, dimension);
-                m_view.update_dimension();
-                m_diagram_picture_box.update_scroll_bars(
-                    m_view.dimension(), m_view.page_size(m_diagram_picture_box.client_dimension())
+                m_diagram_view_picture_box.set_position_and_dimension(position, dimension);
+                m_diagram_view.update_dimension();
+                m_diagram_view_picture_box.update_scroll_bars(
+                    m_diagram_view.dimension(), m_diagram_view.page_size(m_diagram_view_picture_box.client_dimension())
                 );
-                m_diagram_picture_box.repaint();
+                m_diagram_view_picture_box.repaint();
             }
         }
 
@@ -378,7 +378,7 @@ namespace bobura { namespace message { namespace main_window
 
         using window_state_type = typename abstract_window_type::window_state_type;
 
-        using control_type = typename diagram_picture_box_type::base_type::base_type;
+        using control_type = typename view_picture_box_type::base_type::base_type;
 
         using position_type = typename control_type::position_type;
 
@@ -393,11 +393,11 @@ namespace bobura { namespace message { namespace main_window
 
         // variables
 
-        view_type& m_view;
+        diagram_view_type& m_diagram_view;
 
         abstract_window_type& m_window;
 
-        diagram_picture_box_type& m_diagram_picture_box;
+        view_picture_box_type& m_diagram_view_picture_box;
 
         property_bar_type& m_property_bar;
 

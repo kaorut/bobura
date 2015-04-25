@@ -77,17 +77,8 @@
     <ClCompile Include="test\test_bobura.load_save.new_file.cpp">
       <Filter>sources\test_bobura\load_save</Filter>
     </ClCompile>
-    <ClCompile Include="test\test_bobura.message.diagram_picture_box.cpp">
-      <Filter>sources\test_bobura\message</Filter>
-    </ClCompile>
-    <ClCompile Include="test\test_bobura.diagram_view.cpp">
-      <Filter>sources\test_bobura</Filter>
-    </ClCompile>
     <ClCompile Include="test\test_bobura.view.scale_list.cpp">
       <Filter>sources\test_bobura\view</Filter>
-    </ClCompile>
-    <ClCompile Include="test\test_bobura.diagram_picture_box.cpp">
-      <Filter>sources\test_bobura</Filter>
     </ClCompile>
     <ClCompile Include="test\test_bobura.message.font_color_dialog.cpp">
       <Filter>sources\test_bobura\message</Filter>
@@ -123,9 +114,6 @@
       <Filter>sources\test_bobura\message</Filter>
     </ClCompile>
     <ClCompile Include="test\test_bobura.message.diagram_selection_observer_set.cpp">
-      <Filter>sources\test_bobura\message</Filter>
-    </ClCompile>
-    <ClCompile Include="test\test_bobura.message.diagram_view.cpp">
       <Filter>sources\test_bobura\message</Filter>
     </ClCompile>
     <ClCompile Include="test\test_bobura.about_dialog.cpp">
@@ -205,6 +193,15 @@
     </ClCompile>
     <ClCompile Include="test\test_bobura.command.vertically_zoom_out.cpp">
       <Filter>sources\test_bobura\command</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_bobura.view_picture_box.cpp">
+      <Filter>sources\test_bobura</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_bobura.message.view_picture_box.cpp">
+      <Filter>sources\test_bobura\message</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_bobura.diagram_view.cpp">
+      <Filter>sources\test_bobura</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

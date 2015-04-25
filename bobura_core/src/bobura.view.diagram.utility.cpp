@@ -118,17 +118,17 @@ namespace bobura { namespace view { namespace diagram
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
-            using position_type = application::traits_type_list_type::view_type::canvas_type::position_type;
+            using position_type = application::traits_type_list_type::diagram_view_type::canvas_type::position_type;
 
             using left_type = tetengo2::gui::position<position_type>::left_type;
 
             using top_type = tetengo2::gui::position<position_type>::left_type;
 
-            using size_type = application::traits_type_list_type::view_type::size_type;
+            using size_type = application::traits_type_list_type::diagram_view_type::size_type;
 
-            using difference_type = application::traits_type_list_type::view_type::difference_type;
+            using difference_type = application::traits_type_list_type::diagram_view_type::difference_type;
 
-            using canvas_type = application::traits_type_list_type::view_type::canvas_type;
+            using canvas_type = application::traits_type_list_type::diagram_view_type::canvas_type;
 
             using unit_size_type = canvas_type::unit_size_type;
 
@@ -141,17 +141,17 @@ namespace bobura { namespace view { namespace diagram
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
-            using position_type = test::traits_type_list_type::view_type::canvas_type::position_type;
+            using position_type = test::traits_type_list_type::diagram_view_type::canvas_type::position_type;
 
             using left_type = tetengo2::gui::position<position_type>::left_type;
 
             using top_type = tetengo2::gui::position<position_type>::top_type;
 
-            using size_type = test::traits_type_list_type::view_type::size_type;
+            using size_type = test::traits_type_list_type::diagram_view_type::size_type;
 
-            using difference_type = test::traits_type_list_type::view_type::difference_type;
+            using difference_type = test::traits_type_list_type::diagram_view_type::difference_type;
 
-            using canvas_type = test::traits_type_list_type::view_type::canvas_type;
+            using canvas_type = test::traits_type_list_type::diagram_view_type::canvas_type;
 
             using unit_size_type = canvas_type::unit_size_type;
 

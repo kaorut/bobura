@@ -29,7 +29,7 @@ namespace bobura
         \tparam MessageCatalog    A message catalog type.
         \tparam CommandSetTraits  A command set traits.
         \tparam MainWindowTraits  A main window traits type.
-        \tparam ViewTraits        A view traits type.
+        \tparam DiagramViewTraits A diagram view traits type.
     */
     template <
         typename Size,
@@ -46,7 +46,7 @@ namespace bobura
         typename MessageCatalog,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename ViewTraits
+        typename DiagramViewTraits
     >
     class main_window_menu_builder_traits
     {
@@ -95,8 +95,8 @@ namespace bobura
         //! The main window traits type.
         using main_window_traits_type = MainWindowTraits;
 
-        //! The view traits type.
-        using view_traits_type = ViewTraits;
+        //! The diagram view traits type.
+        using diagram_view_traits_type = DiagramViewTraits;
 
 
     };

@@ -27,7 +27,6 @@ sources = \
     bobura.command.train_kind.cpp \
     bobura.command.vertically_zoom_in.cpp \
     bobura.command.vertically_zoom_out.cpp \
-    bobura.diagram_picture_box.cpp \
     bobura.diagram_view.cpp \
     bobura.file_property_dialog.cpp \
     bobura.font_color_dialog.cpp \
@@ -51,7 +50,8 @@ sources = \
     bobura.view.diagram.train_line.cpp \
     bobura.view.diagram.utility.cpp \
     bobura.view.diagram.zoom.cpp \
-    bobura.view.scale_list.cpp
+    bobura.view.scale_list.cpp \
+    bobura.view_picture_box.cpp
 
 extra_sources =
 

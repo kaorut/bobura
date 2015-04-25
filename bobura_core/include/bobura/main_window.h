@@ -15,10 +15,10 @@
 
 #include <tetengo2.h>
 
-#include <bobura/diagram_picture_box.h>
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/property_bar.h>
 #include <bobura/settings.h>
+#include <bobura/view_picture_box.h>
 
 
 namespace bobura
@@ -77,9 +77,6 @@ namespace bobura
         //! The message catalog type.
         using message_catalog_type = typename traits_type::message_catalog_type;
 
-        //! The view traits type.
-        using view_traits_type = typename traits_type::view_traits_type;
-
         //! The loading and saving processing traits type.
         using load_save_traits_type = typename traits_type::load_save_traits_type;
 
@@ -89,9 +86,8 @@ namespace bobura
         //! The command set traits type.
         using command_set_traits_type = CommandSetTraits;
 
-        //! The diagram picture box type.
-        using diagram_picture_box_type =
-            diagram_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
+        //! The view picture box type.
+        using view_picture_box_type = view_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
 
         //! The property bar type.
         using property_bar_type =
@@ -146,19 +142,19 @@ namespace bobura
         void set_title(const boost::optional<string_type>& document_name, bool changed);
 
         /*!
-            \brief Returns the diagram picture box.
+            \brief Returns the diagram view picture box.
 
-            \return The diagram picture box.
+            \return The diagram view picture box.
         */
-        const diagram_picture_box_type& get_diagram_picture_box()
+        const view_picture_box_type& get_diagram_view_picture_box()
         const;
 
         /*!
-            \brief Returns the diagram picture box.
+            \brief Returns the diagram view picture box.
 
-            \return The diagram picture box.
+            \return The diagram view picture box.
         */
-        diagram_picture_box_type& get_diagram_picture_box();
+        view_picture_box_type& get_diagram_view_picture_box();
 
         /*!
             \brief Returns the property bar.

@@ -40,9 +40,9 @@ namespace
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
-    using view_traits_type = traits_type_list_type::view_type;
+    using diagram_view_traits_type = traits_type_list_type::diagram_view_type;
 
-    using view_type = bobura::diagram_view<view_traits_type>;
+    using diagram_view_type = bobura::diagram_view<diagram_view_traits_type>;
 
     using scale_type = common_type_list_type::scale_type;
 
@@ -52,7 +52,7 @@ namespace
             scale_type,
             traits_type_list_type::command_set_type,
             traits_type_list_type::main_window_type,
-            view_traits_type
+            diagram_view_traits_type
         >;
 
 
@@ -70,7 +70,7 @@ BOOST_AUTO_TEST_SUITE(set_horizontal_scale)
 
         model_type model{};
         const message_catalog_type message_catalog{};
-        view_type diagram_view{ model, message_catalog };
+        diagram_view_type diagram_view{ model, message_catalog };
         const set_horizontal_scale_command_type command{ diagram_view, scale_type{ 42 } };
     }
 

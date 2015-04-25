@@ -36,10 +36,6 @@ namespace bobura
 
         using string_type = typename main_window::string_type;
 
-        using position_type = typename main_window::position_type;
-
-        using dimension_type = typename main_window::dimension_type;
-
         using base_type = typename main_window::base_type;
 
         using icon_type = typename main_window::icon_type;
@@ -48,15 +44,9 @@ namespace bobura
 
         using abstract_window_type = typename main_window::abstract_window_type;
 
-        using font_type = typename main_window::font_type;
-
         using message_catalog_type = typename main_window::message_catalog_type;
 
-        using view_traits_type = typename main_window::view_traits_type;
-
-        using command_set_traits_type = typename main_window::command_set_traits_type;
-
-        using diagram_picture_box_type = typename main_window::diagram_picture_box_type;
+        using view_picture_box_type = typename main_window::view_picture_box_type;
 
         using property_bar_type = typename main_window::property_bar_type;
         
@@ -76,7 +66,7 @@ namespace bobura
         :
         m_base(base),
         m_message_catalog(message_catalog),
-        m_p_diagram_picture_box(),
+        m_p_diagram_view_picture_box(),
         m_p_property_bar(),
         m_settings(settings),
         m_confirm_file_save(confirm_file_save)
@@ -98,17 +88,17 @@ namespace bobura
             m_base.set_text(title);
         }
 
-        const diagram_picture_box_type& get_diagram_picture_box()
+        const view_picture_box_type& get_diagram_view_picture_box()
         const
         {
-            assert(m_p_diagram_picture_box);
-            return *m_p_diagram_picture_box;
+            assert(m_p_diagram_view_picture_box);
+            return *m_p_diagram_view_picture_box;
         }
 
-        diagram_picture_box_type& get_diagram_picture_box()
+        view_picture_box_type& get_diagram_view_picture_box()
         {
-            assert(m_p_diagram_picture_box);
-            return *m_p_diagram_picture_box;
+            assert(m_p_diagram_view_picture_box);
+            return *m_p_diagram_view_picture_box;
         }
 
         const property_bar_type& get_property_bar()
@@ -140,7 +130,7 @@ namespace bobura
 
         const message_catalog_type& m_message_catalog;
 
-        std::unique_ptr<diagram_picture_box_type> m_p_diagram_picture_box;
+        std::unique_ptr<view_picture_box_type> m_p_diagram_view_picture_box;
 
         std::unique_ptr<property_bar_type> m_p_property_bar;
 
@@ -153,7 +143,7 @@ namespace bobura
 
         void initialize_window()
         {
-            m_p_diagram_picture_box = tetengo2::stdalt::make_unique<diagram_picture_box_type>(m_base);
+            m_p_diagram_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(m_base);
             m_p_property_bar = tetengo2::stdalt::make_unique<property_bar_type>(m_base, m_settings, m_message_catalog);
 
             set_message_observers();
@@ -174,7 +164,7 @@ namespace bobura
         void set_message_observers()
         {
             m_base.focus_observer_set().got_focus().connect(
-                [this]() { this->m_p_diagram_picture_box->set_focus(); }
+                [this]() { this->m_p_diagram_view_picture_box->set_focus(); }
             );
             m_base.paint_observer_set().paint_background().connect(
                 [](typename base_type::canvas_type&) { return true; }
@@ -234,18 +224,18 @@ namespace bobura
     }
 
     template <typename Traits, typename CommandSetTraits>
-    const typename main_window<Traits, CommandSetTraits>::diagram_picture_box_type&
-    main_window<Traits, CommandSetTraits>::get_diagram_picture_box()
+    const typename main_window<Traits, CommandSetTraits>::view_picture_box_type&
+    main_window<Traits, CommandSetTraits>::get_diagram_view_picture_box()
     const
     {
-        return m_p_impl->get_diagram_picture_box();
+        return m_p_impl->get_diagram_view_picture_box();
     }
 
     template <typename Traits, typename CommandSetTraits>
-    typename main_window<Traits, CommandSetTraits>::diagram_picture_box_type&
-    main_window<Traits, CommandSetTraits>::get_diagram_picture_box()
+    typename main_window<Traits, CommandSetTraits>::view_picture_box_type&
+    main_window<Traits, CommandSetTraits>::get_diagram_view_picture_box()
     {
-        return m_p_impl->get_diagram_picture_box();
+        return m_p_impl->get_diagram_view_picture_box();
     }
 
     template <typename Traits, typename CommandSetTraits>

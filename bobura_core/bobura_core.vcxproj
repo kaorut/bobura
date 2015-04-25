@@ -126,7 +126,6 @@
     <ClInclude Include="include\bobura\command\vertically_zoom_out.h" />
     <ClInclude Include="include\bobura\config_traits.h" />
     <ClInclude Include="include\bobura\detail_type_list.h" />
-    <ClInclude Include="include\bobura\diagram_picture_box.h" />
     <ClInclude Include="include\bobura\diagram_view.h" />
     <ClInclude Include="include\bobura\dialog_traits.h" />
     <ClInclude Include="include\bobura\file_property_dialog.h" />
@@ -143,7 +142,6 @@
     <ClInclude Include="include\bobura\main_window_traits.h" />
     <ClInclude Include="include\bobura\message\0namespace.dox" />
     <ClInclude Include="include\bobura\message\about_dialog.h" />
-    <ClInclude Include="include\bobura\message\diagram_picture_box.h" />
     <ClInclude Include="include\bobura\message\diagram_selection_observer_set.h" />
     <ClInclude Include="include\bobura\message\diagram_view.h" />
     <ClInclude Include="include\bobura\message\file_property_dialog.h" />
@@ -153,6 +151,7 @@
     <ClInclude Include="include\bobura\message\timetable_model.h" />
     <ClInclude Include="include\bobura\message\timetable_model_observer_set.h" />
     <ClInclude Include="include\bobura\message\train_kind_dialog.h" />
+    <ClInclude Include="include\bobura\message\view_picture_box.h" />
     <ClInclude Include="include\bobura\property_bar.h" />
     <ClInclude Include="include\bobura\settings.h" />
     <ClInclude Include="include\bobura\timetable_model.h" />
@@ -170,6 +169,7 @@
     <ClInclude Include="include\bobura\view\diagram\utility.h" />
     <ClInclude Include="include\bobura\view\diagram\zoom.h" />
     <ClInclude Include="include\bobura\view\scale_list.h" />
+    <ClInclude Include="include\bobura\view_picture_box.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\precompiled\precompiled.cpp">
@@ -196,7 +196,6 @@
     <ClCompile Include="src\bobura.command.train_kind.cpp" />
     <ClCompile Include="src\bobura.command.vertically_zoom_in.cpp" />
     <ClCompile Include="src\bobura.command.vertically_zoom_out.cpp" />
-    <ClCompile Include="src\bobura.diagram_picture_box.cpp" />
     <ClCompile Include="src\bobura.diagram_view.cpp" />
     <ClCompile Include="src\bobura.file_property_dialog.cpp" />
     <ClCompile Include="src\bobura.font_color_dialog.cpp" />
@@ -221,6 +220,7 @@
     <ClCompile Include="src\bobura.view.diagram.utility.cpp" />
     <ClCompile Include="src\bobura.view.diagram.zoom.cpp" />
     <ClCompile Include="src\bobura.view.scale_list.cpp" />
+    <ClCompile Include="src\bobura.view_picture_box.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
