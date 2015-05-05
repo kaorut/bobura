@@ -102,11 +102,6 @@ BOOST_AUTO_TEST_SUITE(diagram)
 BOOST_AUTO_TEST_SUITE(station_line)
     // test cases
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -323,7 +318,6 @@ BOOST_AUTO_TEST_SUITE(station_line)
             BOOST_CHECK(station_line.selected());
         }
     }
-#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()

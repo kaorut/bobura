@@ -6,7 +6,6 @@
     $Id$
 */
 
-#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/model/station.h>
@@ -45,11 +44,6 @@ BOOST_AUTO_TEST_SUITE(timetable_info)
 BOOST_AUTO_TEST_SUITE(station_location)
     // test cases
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -58,13 +52,7 @@ BOOST_AUTO_TEST_SUITE(station_location)
             station_type(string_type{}, local_type::instance(), false, false, string_type{}), 0
         };
     }
-#endif
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     BOOST_AUTO_TEST_CASE(operator_equal)
     {
         BOOST_TEST_PASSPOINT();
@@ -118,13 +106,7 @@ BOOST_AUTO_TEST_SUITE(station_location)
             BOOST_CHECK(station_location1 != station_location2);
         }
     }
-#endif
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     BOOST_AUTO_TEST_CASE(get_station)
     {
         BOOST_TEST_PASSPOINT();
@@ -138,13 +120,7 @@ BOOST_AUTO_TEST_SUITE(station_location)
             station_type(string_type{}, local_type::instance(), false, false, string_type{})
         );
     }
-#endif
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     BOOST_AUTO_TEST_CASE(operating_distance)
     {
         BOOST_TEST_PASSPOINT();
@@ -171,13 +147,7 @@ BOOST_AUTO_TEST_SUITE(station_location)
             BOOST_CHECK_EQUAL(station_location.operating_distance(), 2U);
         }
     }
-#endif
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     BOOST_AUTO_TEST_CASE(before)
     {
         BOOST_TEST_PASSPOINT();
@@ -213,7 +183,6 @@ BOOST_AUTO_TEST_SUITE(station_location)
             BOOST_CHECK(!station_location1.before(station_location2));
         }
     }
-#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()

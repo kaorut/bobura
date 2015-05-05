@@ -20,10 +20,6 @@
 
 namespace bobura { namespace command
 {
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     template <typename Traits, typename LoadSaveTraits>
     class load_from_file<Traits, LoadSaveTraits>::impl
     {
@@ -164,7 +160,6 @@ namespace bobura { namespace command
     template class load_from_file<
         typename test::traits_type_list_type::command_type, typename test::traits_type_list_type::load_save_type
     >;
-#endif
 
 
 }}
