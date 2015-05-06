@@ -15,8 +15,6 @@
 
 #include <boost/operators.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/train_info/stop.h>
 
 
@@ -274,7 +272,7 @@ namespace bobura { namespace model
         */
         void insert_stop(const typename stops_type::const_iterator position, stop_type stop)
         {
-            m_stops.insert(tetengo2::stdalt::as_insertion_iterator(m_stops, position), std::move(stop));
+            m_stops.insert(position, std::move(stop));
         }
 
         /*!
@@ -288,10 +286,7 @@ namespace bobura { namespace model
             const typename stops_type::const_iterator last
         )
         {
-            m_stops.erase(
-                tetengo2::stdalt::as_insertion_iterator(m_stops, first),
-                tetengo2::stdalt::as_insertion_iterator(m_stops, last)
-            );
+            m_stops.erase(first, last);
         }
 
         /*!
