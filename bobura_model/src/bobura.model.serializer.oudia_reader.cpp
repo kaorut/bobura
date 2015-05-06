@@ -173,7 +173,7 @@ namespace bobura { namespace model { namespace serializer
         {
         public:
             virtual ~state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
             bool parse(const string_type& line)
             {
@@ -218,7 +218,7 @@ namespace bobura { namespace model { namespace serializer
         {
         public:
             virtual ~unknown_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
         };
 
@@ -231,7 +231,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~initial_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
         private:
             timetable_type& m_timetable;
@@ -256,7 +256,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~rosen_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
         private:
             timetable_type& m_timetable;
@@ -284,7 +284,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~eki_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
         private:
             static const station_grade_type& to_station_grade(
@@ -380,7 +380,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~ressyasyubetsu_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
         private:
             using weight_type = typename train_kind_type::weight_type;
@@ -468,7 +468,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~dia_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
         private:
             string_type& m_current_diagram_name;
@@ -493,7 +493,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~kudari_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
         private:
             direction_type& m_direction;
@@ -516,7 +516,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~nobori_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
         private:
             direction_type& m_direction;
@@ -545,7 +545,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~ressya_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
         private:
             using stop_type = typename train_type::stop_type;
