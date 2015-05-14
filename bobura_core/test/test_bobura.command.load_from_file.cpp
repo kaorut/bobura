@@ -6,7 +6,6 @@
     $Id$
 */
 
-#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/command/load_from_file.h>
@@ -63,10 +62,6 @@ BOOST_AUTO_TEST_SUITE(command)
 BOOST_AUTO_TEST_SUITE(load_from_file)
     // test cases
 
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -78,7 +73,6 @@ BOOST_AUTO_TEST_SUITE(load_from_file)
         const load_from_file_type load_from_file{ true, confirm_file_save, message_catalog };
         const load_from_file_command_type command{ load_from_file };
     }
-#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()

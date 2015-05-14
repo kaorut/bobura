@@ -9,7 +9,6 @@
 #include <vector>
 
 #include <boost/filesystem.hpp>
-#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -84,10 +83,6 @@ namespace
 }
 
 
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(command)
 BOOST_AUTO_TEST_SUITE(set)
@@ -339,10 +334,6 @@ BOOST_AUTO_TEST_SUITE(set)
         command_set.horizontally_zoom_out();
     }
 
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     BOOST_AUTO_TEST_CASE(load_from_file)
     {
         BOOST_TEST_PASSPOINT();
@@ -405,7 +396,6 @@ BOOST_AUTO_TEST_SUITE(set)
         const boost::filesystem::path path{ string_type{ TETENGO2_TEXT("hoge.txt") } };
         command_set.create_load_from_file_parameter(path);
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(new_file)
     {
@@ -725,4 +715,3 @@ BOOST_AUTO_TEST_SUITE(set)
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
-#endif

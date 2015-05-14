@@ -52,7 +52,7 @@ namespace bobura { namespace model { namespace station_info
             \brief Destroys the grade.
         */
         virtual ~grade()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        = default;
 
 
     private:
@@ -99,7 +99,7 @@ namespace bobura { namespace model { namespace station_info
         // constructors and destructor
 
         virtual ~local()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        = default;
 
 
         // virtual functions
@@ -148,7 +148,7 @@ namespace bobura { namespace model { namespace station_info
         // constructors and destructor
 
         virtual ~principal()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        = default;
 
 
         // virtual functions
@@ -197,7 +197,7 @@ namespace bobura { namespace model { namespace station_info
         // constructors and destructor
 
         virtual ~local_terminal()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        = default;
 
 
         // virtual functions
@@ -246,7 +246,7 @@ namespace bobura { namespace model { namespace station_info
         // constructors and destructor
 
         virtual ~principal_terminal()
-        TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+        = default;
 
 
         // virtual functions

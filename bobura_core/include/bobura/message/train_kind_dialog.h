@@ -157,7 +157,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
                 boost::next(m_info_sets.begin(), *m_current_train_kind_index) : m_info_sets.end();
 
             m_info_sets.emplace(
-                tetengo2::stdalt::as_insertion_iterator(m_info_sets, insertion_position),
+                insertion_position,
                 boost::none,
                 false,
                 train_kind_type{
@@ -252,7 +252,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
             assert(*m_current_train_kind_index < m_info_sets.size());
             const auto deletion_position = boost::next(m_info_sets.begin(), *m_current_train_kind_index);
 
-            m_info_sets.erase(tetengo2::stdalt::as_insertion_iterator(m_info_sets, deletion_position));
+            m_info_sets.erase(deletion_position);
             if (*m_current_train_kind_index >= m_info_sets.size())
             {
                 if (m_info_sets.empty())

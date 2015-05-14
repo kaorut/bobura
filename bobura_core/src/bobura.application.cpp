@@ -35,10 +35,6 @@
 #include <bobura/view_picture_box.h>
 
 
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
 namespace bobura
 {
     template <typename Traits>
@@ -467,4 +463,3 @@ namespace bobura
 
 
 }
-#endif

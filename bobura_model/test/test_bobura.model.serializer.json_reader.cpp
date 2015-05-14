@@ -543,14 +543,10 @@ BOOST_AUTO_TEST_SUITE(serializer)
 BOOST_AUTO_TEST_SUITE(json_reader)
     // test cases
 
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
 // This test case causes a segmentation fault on Cygwin.
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(construction)
     {
@@ -955,7 +951,6 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             BOOST_CHECK(error == error_type::corrupted);
         }
     }
-#endif
 #endif
 
 

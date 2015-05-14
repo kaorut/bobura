@@ -51,10 +51,6 @@ namespace
 }
 
 
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(settings)
     // test cases
@@ -139,7 +135,7 @@ BOOST_AUTO_TEST_SUITE(settings)
 // This test case causes a segmentation fault on Cygwin.
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(main_window_dimension)
     {
@@ -231,7 +227,7 @@ BOOST_AUTO_TEST_SUITE(settings)
 // This test case causes a segmentation fault on Cygwin.
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(set_main_window_maximized)
     {
@@ -283,7 +279,7 @@ BOOST_AUTO_TEST_SUITE(settings)
 // This test case causes a segmentation fault on Cygwin.
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(set_property_bar_width)
     {
@@ -320,7 +316,7 @@ BOOST_AUTO_TEST_SUITE(settings)
 // This test case causes a segmentation fault on Cygwin.
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(set_property_bar_minimized)
     {
@@ -372,7 +368,7 @@ BOOST_AUTO_TEST_SUITE(settings)
 // This test case causes a segmentation fault on Cygwin.
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(set_property_bar_splitter_position)
     {
@@ -410,4 +406,3 @@ BOOST_AUTO_TEST_SUITE(settings)
 
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
-#endif

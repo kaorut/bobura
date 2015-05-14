@@ -99,11 +99,6 @@ BOOST_AUTO_TEST_SUITE(timetable)
         const timetable_type timetable{};
     }
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     BOOST_AUTO_TEST_CASE(operator_equal)
     {
         BOOST_TEST_PASSPOINT();
@@ -305,7 +300,6 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(timetable1 == timetable2);
         }
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(company_name)
     {
@@ -367,11 +361,6 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_CHECK(timetable.note() == string_type{ TETENGO2_TEXT("hoge") });
     }
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     BOOST_AUTO_TEST_CASE(station_locations)
     {
         BOOST_TEST_PASSPOINT();
@@ -433,17 +422,11 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK(timetable.station_locations() == station_locations);
         }
     }
-#endif
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
 // This test case causes a segmentation fault on Cygwin.
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(insert_station_location)
     {
@@ -875,13 +858,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
     }
 #endif
-#endif
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     BOOST_AUTO_TEST_CASE(erase_station_locations)
     {
         BOOST_TEST_PASSPOINT();
@@ -1338,7 +1315,6 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_EQUAL(timetable.up_trains()[0].stops().size(), timetable.station_locations().size());
         }
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(station_intervals)
     {
@@ -1630,7 +1606,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
 // This test case causes a segmentation fault on Cygwin.
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(erase_train_kind)
     {
@@ -1775,7 +1751,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
 // This test case causes a segmentation fault on Cygwin.
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(assign_train_kinds)
     {
@@ -2132,15 +2108,10 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
     }
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
 // This test case causes a segmentation fault on Cygwin.
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(insert_down_train)
     {
@@ -2433,17 +2404,11 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
     }
 #endif
-#endif
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
 // This test case causes a segmentation fault on Cygwin.
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(insert_up_train)
     {
@@ -2735,7 +2700,6 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
         }
     }
-#endif
 #endif
 
     BOOST_AUTO_TEST_CASE(erase_down_trains)
@@ -3128,15 +3092,10 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
     }
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
 // This test case causes a segmentation fault on Cygwin.
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(scheduled_speed)
     {
@@ -3371,7 +3330,6 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
         }
     }
-#endif
 #endif
 
     BOOST_AUTO_TEST_CASE(font_color_set)

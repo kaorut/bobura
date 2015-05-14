@@ -18,7 +18,6 @@
 #include <vector>
 
 #include <boost/filesystem.hpp>
-#include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
@@ -259,13 +258,8 @@ namespace bobura { namespace message { namespace main_window
             if (paths.empty())
                 return;
 
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
             const auto p_paramter = m_command_set.create_load_from_file_parameter(paths[0]);
             m_command_set.load_from_file().execute(m_model, m_parent, *p_paramter);
-#endif
         }
 
 
