@@ -261,12 +261,12 @@ namespace bobura { namespace model
             std::for_each(
                 m_down_trains.begin(),
                 m_down_trains.end(),
-                [TETENGO2_STDALT_LAMBDA_THIS_BUG_WA offset](train_type& train) { insert_train_stop(train, offset); } 
+                [offset](train_type& train) { insert_train_stop(train, offset); } 
             );
             std::for_each(
                 m_up_trains.begin(),
                 m_up_trains.end(),
-                [TETENGO2_STDALT_LAMBDA_THIS_BUG_WA offset](train_type& train) { insert_train_stop(train, offset); }
+                [offset](train_type& train) { insert_train_stop(train, offset); }
             );
 
             m_observer_set.changed()();
@@ -296,18 +296,12 @@ namespace bobura { namespace model
             std::for_each(
                 m_down_trains.begin(),
                 m_down_trains.end(),
-                [TETENGO2_STDALT_LAMBDA_THIS_BUG_WA first_offset, last_offset](train_type& train)
-                {
-                    erase_train_stops(train, first_offset, last_offset);
-                }
+                [first_offset, last_offset](train_type& train) { erase_train_stops(train, first_offset, last_offset); }
             );
             std::for_each(
                 m_up_trains.begin(),
                 m_up_trains.end(),
-                [TETENGO2_STDALT_LAMBDA_THIS_BUG_WA first_offset, last_offset](train_type& train)
-                {
-                    erase_train_stops(train, first_offset, last_offset);
-                }
+                [first_offset, last_offset](train_type& train) { erase_train_stops(train, first_offset, last_offset); }
             );
 
             m_observer_set.changed()();
@@ -396,18 +390,12 @@ namespace bobura { namespace model
             std::for_each(
                 m_down_trains.begin(),
                 m_down_trains.end(),
-                [TETENGO2_STDALT_LAMBDA_THIS_BUG_WA inserted_index](train_type& train)
-                {
-                    update_train_kind_index(train, inserted_index, 1);
-                }
+                [inserted_index](train_type& train) { update_train_kind_index(train, inserted_index, 1); }
             );
             std::for_each(
                 m_up_trains.begin(),
                 m_up_trains.end(),
-                [TETENGO2_STDALT_LAMBDA_THIS_BUG_WA inserted_index](train_type& train)
-                {
-                    update_train_kind_index(train, inserted_index, 1);
-                }
+                [inserted_index](train_type& train) { update_train_kind_index(train, inserted_index, 1); }
             );
 
             m_observer_set.changed();
@@ -457,18 +445,12 @@ namespace bobura { namespace model
             std::for_each(
                 m_down_trains.begin(),
                 m_down_trains.end(),
-                [TETENGO2_STDALT_LAMBDA_THIS_BUG_WA erased_index](train_type& train)
-                {
-                    update_train_kind_index(train, erased_index, -1);
-                }
+                [erased_index](train_type& train) { update_train_kind_index(train, erased_index, -1); }
             );
             std::for_each(
                 m_up_trains.begin(),
                 m_up_trains.end(),
-                [TETENGO2_STDALT_LAMBDA_THIS_BUG_WA erased_index](train_type& train)
-                {
-                    update_train_kind_index(train, erased_index, -1);
-                }
+                [erased_index](train_type& train) { update_train_kind_index(train, erased_index, -1); }
             );
 
             m_observer_set.changed();
