@@ -1560,10 +1560,6 @@ namespace bobura { namespace model { namespace serializer
     >;
 #endif
 
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     template class json_reader<
         typename test::common_type_list_type::size_type,
         typename test::common_type_list_type::difference_type,
@@ -1577,7 +1573,6 @@ namespace bobura { namespace model { namespace serializer
         typename test::ui_type_list_type::font_type,
         typename test::locale_type_list_type::timetable_file_encoder_type
     >;
-#endif
 
 
 }}}

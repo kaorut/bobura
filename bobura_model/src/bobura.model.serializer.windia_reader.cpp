@@ -149,7 +149,7 @@ namespace bobura { namespace model { namespace serializer
         {
         public:
             virtual ~state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
             virtual bool parse(const string_type& line)
             = 0;
@@ -160,7 +160,7 @@ namespace bobura { namespace model { namespace serializer
         {
         public:
             virtual ~initial_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
             virtual bool parse(const string_type& line)
             override
@@ -181,7 +181,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~windia_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
             virtual bool parse(const string_type& line)
             override
@@ -205,7 +205,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~station_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
             virtual bool parse(const string_type& line)
             override
@@ -277,7 +277,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~line_kind_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
             virtual bool parse(const string_type& line)
             override
@@ -423,7 +423,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~train_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
             virtual bool parse(const string_type& line)
             override
@@ -641,7 +641,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~down_train_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
         private:
             virtual direction_type direction_impl()
@@ -669,7 +669,7 @@ namespace bobura { namespace model { namespace serializer
             {}
 
             virtual ~up_train_state()
-            TETENGO2_STDALT_DESTRUCTOR_DEFAULT_IMPLEMENTATION;
+            = default;
 
         private:
             virtual direction_type direction_impl()

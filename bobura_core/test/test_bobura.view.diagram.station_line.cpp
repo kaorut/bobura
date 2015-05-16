@@ -102,11 +102,6 @@ BOOST_AUTO_TEST_SUITE(diagram)
 BOOST_AUTO_TEST_SUITE(station_line)
     // test cases
 
-// This test case causes a segmentation fault on Linux.
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -171,10 +166,15 @@ BOOST_AUTO_TEST_SUITE(station_line)
         station_line1 = std::move(station_line2);
     }
 
+// This test case causes a segmentation fault on Linux.
+#if !( \
+    BOOST_OS_LINUX && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+)
 // This test case causes a segmentation fault on Cygwin.
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(draw_on)
     {
@@ -202,6 +202,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
         const auto p_canvas = window.create_canvas();
         station_line.draw_on(*p_canvas);
     }
+#endif
 #endif
 
     BOOST_AUTO_TEST_CASE(p_item_by_position)
@@ -317,7 +318,6 @@ BOOST_AUTO_TEST_SUITE(station_line)
             BOOST_CHECK(station_line.selected());
         }
     }
-#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()
