@@ -21,8 +21,6 @@
 #include <boost/throw_exception.hpp>
 #include <boost/utility.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/message/timetable_observer_set.h>
 #include <bobura/model/timetable_info/font_color_set.h>
 #include <bobura/model/timetable_info/station_interval_calculator.h>
