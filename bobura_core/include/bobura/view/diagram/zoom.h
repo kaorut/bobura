@@ -24,12 +24,11 @@ namespace bobura { namespace view { namespace diagram
     /*!
         \brief The class template for a zoom of a view.
 
-        \tparam Traits         A traits type.
-        \tparam AbstractWindow An abstract window type.
-        \tparam PictureBox     A picture box type.
-        \tparam MouseCapture   A mouse capture type.
+        \tparam Traits       A traits type.
+        \tparam PictureBox   A picture box type.
+        \tparam MouseCapture A mouse capture type.
     */
-    template <typename Traits, typename AbstractWindow, typename PictureBox, typename MouseCapture>
+    template <typename Traits, typename PictureBox, typename MouseCapture>
     class zoom : private boost::noncopyable
     {
     public:
@@ -64,9 +63,6 @@ namespace bobura { namespace view { namespace diagram
 
         //! The message catalog type.
         using message_catalog_type = typename traits_type::message_catalog_type;
-
-        //! The abstract window type.
-        using abstract_window_type = AbstractWindow;
 
         //! The picture box type.
         using picture_box_type = PictureBox;

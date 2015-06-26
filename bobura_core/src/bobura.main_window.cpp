@@ -46,6 +46,8 @@ namespace bobura
 
         using message_catalog_type = typename main_window::message_catalog_type;
 
+        using tab_frame_type = typename main_window::tab_frame_type;
+
         using view_picture_box_type = typename main_window::view_picture_box_type;
 
         using property_bar_type = typename main_window::property_bar_type;
@@ -66,6 +68,7 @@ namespace bobura
         :
         m_base(base),
         m_message_catalog(message_catalog),
+        m_p_tab_frame(),
         m_p_diagram_view_picture_box(),
         m_p_property_bar(),
         m_settings(settings),
@@ -130,6 +133,8 @@ namespace bobura
 
         const message_catalog_type& m_message_catalog;
 
+        std::unique_ptr<tab_frame_type> m_p_tab_frame;
+
         std::unique_ptr<view_picture_box_type> m_p_diagram_view_picture_box;
 
         std::unique_ptr<property_bar_type> m_p_property_bar;
@@ -143,7 +148,8 @@ namespace bobura
 
         void initialize_window()
         {
-            m_p_diagram_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(m_base);
+            m_p_tab_frame = tetengo2::stdalt::make_unique<tab_frame_type>(m_base);
+            m_p_diagram_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
             m_p_property_bar = tetengo2::stdalt::make_unique<property_bar_type>(m_base, m_settings, m_message_catalog);
 
             set_message_observers();

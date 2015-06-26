@@ -72,12 +72,7 @@ namespace
         bobura::message::view_picture_box::mouse_moved<picture_box_type, diagram_view_traits_type>;
 
     using view_zoom_type =
-        bobura::view::diagram::zoom<
-            diagram_view_traits_type,
-            ui_type_list_type::abstract_window_type,
-            picture_box_type,
-            ui_type_list_type::mouse_capture_type
-        >;
+        bobura::view::diagram::zoom<diagram_view_traits_type, picture_box_type, ui_type_list_type::mouse_capture_type>;
 
     using mouse_wheeled_type =
         bobura::message::view_picture_box::mouse_wheeled<picture_box_type, view_zoom_type, diagram_view_traits_type>;

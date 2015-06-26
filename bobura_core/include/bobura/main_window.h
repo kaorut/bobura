@@ -62,6 +62,9 @@ namespace bobura
         //! The picture box type.
         using picture_box_type = typename traits_type::picture_box_type;
 
+        //! The tab frame type.
+        using tab_frame_type = typename traits_type::tab_frame_type;
+
         //! The map box type.
         using map_box_type = typename traits_type::map_box_type;
 
@@ -87,7 +90,7 @@ namespace bobura
         using command_set_traits_type = CommandSetTraits;
 
         //! The view picture box type.
-        using view_picture_box_type = view_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
+        using view_picture_box_type = view_picture_box<picture_box_type, mouse_capture_type>;
 
         //! The property bar type.
         using property_bar_type =

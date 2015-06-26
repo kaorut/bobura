@@ -84,7 +84,7 @@ namespace
 
     using mouse_capture_type = ui_type_list_type::mouse_capture_type;
 
-    using view_picture_box_type = bobura::view_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
+    using view_picture_box_type = bobura::view_picture_box<picture_box_type, mouse_capture_type>;
 
     using property_bar_type =
         bobura::property_bar<

@@ -194,7 +194,7 @@ namespace bobura
 
         using mouse_capture_type = typename traits_type::mouse_capture_type;
 
-        using view_picture_box_type = view_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
+        using view_picture_box_type = view_picture_box<picture_box_type, mouse_capture_type>;
 
         using main_window_file_dropped_observer_type =
             message::main_window::file_dropped<command_set_type, model_type, abstract_window_type>;
@@ -223,7 +223,7 @@ namespace bobura
             message::view_picture_box::mouse_wheeled<
                 picture_box_type,
                 view::diagram::zoom<
-                    diagram_view_traits_type, abstract_window_type, picture_box_type, mouse_capture_type
+                    diagram_view_traits_type,  picture_box_type, mouse_capture_type
                 >,
                 diagram_view_traits_type
             >;

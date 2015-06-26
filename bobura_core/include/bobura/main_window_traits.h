@@ -20,6 +20,7 @@ namespace bobura
         \tparam Dimension         A dimension type.
         \tparam Window            A window type.
         \tparam PictureBox        A picture box type.
+        \tparam TabFrame          A tab frame type.
         \tparam MapBox            A map box type.
         \tparam SideBar           A side bar type.
         \tparam MessageLoopBreak  A message loop break type.
@@ -36,6 +37,7 @@ namespace bobura
         typename Dimension,
         typename Window,
         typename PictureBox,
+        typename TabFrame,
         typename MapBox,
         typename SideBar,
         typename MessageLoopBreak,
@@ -65,6 +67,9 @@ namespace bobura
 
         //! The picture box type.
         using picture_box_type = PictureBox;
+
+        //! The tab frame type.
+        using tab_frame_type = TabFrame;
 
         //! The map box type.
         using map_box_type = MapBox;

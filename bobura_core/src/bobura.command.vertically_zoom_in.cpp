@@ -72,10 +72,7 @@ namespace bobura { namespace command
 
         using zoom_type =
             view::diagram::zoom<
-                diagram_view_traits_type,
-                abstract_window_type,
-                typename main_window_traits_type::picture_box_type,
-                mouse_capture_type
+                diagram_view_traits_type, typename main_window_traits_type::picture_box_type, mouse_capture_type
             >;
 
 
