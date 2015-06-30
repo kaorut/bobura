@@ -91,6 +91,19 @@ namespace bobura
             m_base.set_text(title);
         }
 
+        const tab_frame_type& get_tab_frame()
+        const
+        {
+            assert(m_p_tab_frame);
+            return *m_p_tab_frame;
+        }
+
+        tab_frame_type& get_tab_frame()
+        {
+            assert(m_p_tab_frame);
+            return *m_p_tab_frame;
+        }
+
         const view_picture_box_type& get_diagram_view_picture_box()
         const
         {
@@ -227,6 +240,21 @@ namespace bobura
     )
     {
         m_p_impl->set_title(document_name, changed);
+    }
+
+    template <typename Traits, typename CommandSetTraits>
+    const typename main_window<Traits, CommandSetTraits>::tab_frame_type&
+    main_window<Traits, CommandSetTraits>::get_tab_frame()
+    const
+    {
+        return m_p_impl->get_tab_frame();
+    }
+
+    template <typename Traits, typename CommandSetTraits>
+    typename main_window<Traits, CommandSetTraits>::tab_frame_type&
+    main_window<Traits, CommandSetTraits>::get_tab_frame()
+    {
+        return m_p_impl->get_tab_frame();
     }
 
     template <typename Traits, typename CommandSetTraits>

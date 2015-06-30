@@ -145,6 +145,21 @@ namespace bobura
         void set_title(const boost::optional<string_type>& document_name, bool changed);
 
         /*!
+            \brief Returns the tab frame.
+
+            \return The tab frame.
+        */
+        const tab_frame_type& get_tab_frame()
+        const;
+
+        /*!
+            \brief Returns the tab frame.
+
+            \return The tab frame.
+        */
+        tab_frame_type& get_tab_frame();
+
+        /*!
             \brief Returns the diagram view picture box.
 
             \return The diagram view picture box.

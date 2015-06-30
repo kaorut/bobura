@@ -1013,6 +1013,7 @@ namespace bobura { namespace type_list
                 fast_font_type<DetailTypeList>,
                 abstract_window_type<DetailTypeList>,
                 picture_box_type<DetailTypeList>,
+                tab_frame_type<DetailTypeList>,
                 map_box_type<DetailTypeList>,
                 side_bar_type<DetailTypeList>,
                 menu_bar_type<DetailTypeList>,

@@ -281,10 +281,17 @@ namespace bobura { namespace message { namespace main_window
 
         \tparam DiagramView    A diagram view type.
         \tparam AbstractWindow An abstract window type.
+        \tparam TabFrame       A tab frame type.
         \tparam ViewPictureBox A view picture box type.
         \tparam PropertyBar    A property bar type.
     */
-    template <typename DiagramView, typename AbstractWindow, typename ViewPictureBox, typename PropertyBar>
+    template <
+        typename DiagramView,
+        typename AbstractWindow,
+        typename TabFrame,
+        typename ViewPictureBox,
+        typename PropertyBar
+    >
     class window_resized
     {
     public:
@@ -295,6 +302,9 @@ namespace bobura { namespace message { namespace main_window
 
         //! The abstract window type.
         using abstract_window_type = AbstractWindow;
+
+        //! The tab frame type.
+        using tab_frame_type = TabFrame;
 
         //! The view picture box type.
         using view_picture_box_type = ViewPictureBox;
@@ -310,18 +320,21 @@ namespace bobura { namespace message { namespace main_window
 
             \param diagram_view             A view.
             \param window                   A window.
+            \param tab_frame                A tab frame.
             \param diagram_view_picture_box A diagram view picture box.
             \param property_bar             A property bar.
         */
         window_resized(
             diagram_view_type&     diagram_view,
             abstract_window_type&  window,
+            tab_frame_type&        tab_frame,
             view_picture_box_type& diagram_view_picture_box,
             property_bar_type&     property_bar
         )
         :
         m_diagram_view(diagram_view),
         m_window(window),
+        m_tab_frame(tab_frame),
         m_diagram_view_picture_box(diagram_view_picture_box),
         m_property_bar(property_bar)
         {}
@@ -390,6 +403,8 @@ namespace bobura { namespace message { namespace main_window
         diagram_view_type& m_diagram_view;
 
         abstract_window_type& m_window;
+
+        tab_frame_type& m_tab_frame;
 
         view_picture_box_type& m_diagram_view_picture_box;
 
