@@ -370,12 +370,13 @@ namespace bobura { namespace message { namespace main_window
                     window_width > property_bar_width ? window_width - property_bar_width : width_type{ 0 },
                     window_height
                 };
-                m_diagram_view_picture_box.set_position_and_dimension(position, dimension);
+                m_tab_frame.set_position_and_dimension(position, dimension);
+                m_tab_frame.repaint();
+
                 m_diagram_view.update_dimension();
                 m_diagram_view_picture_box.update_scroll_bars(
                     m_diagram_view.dimension(), m_diagram_view.page_size(m_diagram_view_picture_box.client_dimension())
                 );
-                m_diagram_view_picture_box.repaint();
             }
         }
 
