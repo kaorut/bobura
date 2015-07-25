@@ -423,7 +423,7 @@ namespace bobura
 
     template <typename Traits>
     application<Traits>::~application()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>

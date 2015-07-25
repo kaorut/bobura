@@ -416,7 +416,7 @@ namespace bobura
 
     template <typename String, typename Position, typename Dimension, typename ConfigTraits>
     settings<String, Position, Dimension, ConfigTraits>::~settings()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename String, typename Position, typename Dimension, typename ConfigTraits>

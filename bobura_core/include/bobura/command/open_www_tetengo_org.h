@@ -57,7 +57,7 @@ namespace bobura { namespace command
             \brief Destroys the open-www.tetengo.org command.
         */
         virtual ~open_www_tetengo_org()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:

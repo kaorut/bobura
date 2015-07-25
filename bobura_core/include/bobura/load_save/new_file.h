@@ -77,7 +77,7 @@ namespace bobura { namespace load_save
             \brief Destroys the file initialization.
         */
         ~new_file()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

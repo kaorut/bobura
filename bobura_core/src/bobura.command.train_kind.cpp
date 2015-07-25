@@ -199,7 +199,7 @@ namespace bobura { namespace command
         typename DialogTraits
     >
     train_kind<Traits, Dialog, Color, Canvas, ColorDialog, MessageCatalog, DialogTraits>::~train_kind()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
     
     template <

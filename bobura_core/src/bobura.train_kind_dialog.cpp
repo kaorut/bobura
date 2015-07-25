@@ -906,7 +906,7 @@ namespace bobura
         typename ColorDialog
     >
     train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::~train_kind_dialog()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
     
     template <

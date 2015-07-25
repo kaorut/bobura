@@ -105,7 +105,7 @@ namespace bobura { namespace command
         typename ConfigTraits
     >
     about<Traits, Position, Dimension, MessageCatalog, DialogTraits, ConfigTraits>::~about()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
     
     template <

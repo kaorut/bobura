@@ -105,7 +105,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the writer_selector.
         */
         virtual ~writer_selector()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:

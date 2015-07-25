@@ -97,7 +97,7 @@ namespace bobura { namespace command
             \brief Destroys a font and color command.
         */
         virtual ~font_color()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:

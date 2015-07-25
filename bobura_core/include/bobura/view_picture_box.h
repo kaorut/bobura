@@ -58,7 +58,7 @@ namespace bobura
             \brief Destroys the view picture box.
         */
         virtual ~view_picture_box()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

@@ -99,7 +99,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the JSON writer.
         */
         virtual ~json_writer()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:

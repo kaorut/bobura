@@ -130,7 +130,7 @@ namespace
     }
 
     void show_error_message(const ::HINSTANCE instance_handle, const std::string& message = {})
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {
         try
         {
@@ -168,7 +168,7 @@ int WINAPI wWinMain(
     const ::LPWSTR    lpCmdLine,
     const int         nCmdShow
 )
-TETENGO2_STDALT_NOEXCEPT
+noexcept
 {
     boost::ignore_unused(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
     try

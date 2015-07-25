@@ -76,7 +76,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the writer.
         */
         virtual ~writer()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

@@ -177,7 +177,7 @@ namespace bobura { namespace model { namespace serializer
         typename Font
     >
     bzip2_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::~bzip2_reader()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <

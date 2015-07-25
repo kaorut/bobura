@@ -55,7 +55,7 @@ namespace bobura { namespace message
             \brief Destroys the timetable model observer set.
         */
         ~timetable_model_observer_set()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

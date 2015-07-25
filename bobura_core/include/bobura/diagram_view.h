@@ -97,7 +97,7 @@ namespace bobura
             \brief Destroys the diagram view.
         */
         ~diagram_view()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

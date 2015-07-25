@@ -443,7 +443,7 @@ namespace bobura
 
     template <typename Traits>
     main_window_menu_builder<Traits>::~main_window_menu_builder()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>

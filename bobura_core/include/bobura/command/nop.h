@@ -53,7 +53,7 @@ namespace bobura { namespace command
             \brief Destroys a no-operation command.
         */
         virtual ~nop()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:

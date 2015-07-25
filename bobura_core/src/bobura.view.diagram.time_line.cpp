@@ -150,7 +150,7 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     time_line<Traits>::~time_line()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>
@@ -457,7 +457,7 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     time_line_list<Traits>::~time_line_list()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>

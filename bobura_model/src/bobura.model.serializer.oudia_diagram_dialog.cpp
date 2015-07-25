@@ -285,7 +285,7 @@ namespace bobura { namespace model { namespace serializer
 
     template <typename Traits, typename Size>
     oudia_diagram_dialog<Traits, Size>::~oudia_diagram_dialog()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits, typename Size>

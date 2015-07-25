@@ -92,7 +92,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the reader_selector.
         */
         virtual ~reader_selector()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:

@@ -199,7 +199,7 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     station_line<Traits>::~station_line()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>
@@ -503,7 +503,7 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     station_line_list<Traits>::~station_line_list()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>

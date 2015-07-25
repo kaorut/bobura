@@ -85,7 +85,7 @@ namespace bobura { namespace command
             \brief Destroys the set-vertical-scale command.
         */
         virtual ~set_vertical_scale()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:

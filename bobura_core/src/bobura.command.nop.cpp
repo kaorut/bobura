@@ -49,7 +49,7 @@ namespace bobura { namespace command
 
     template <typename Traits>
     nop<Traits>::~nop()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
     
     template <typename Traits>

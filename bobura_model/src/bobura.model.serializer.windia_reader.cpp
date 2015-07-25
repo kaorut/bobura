@@ -1077,7 +1077,7 @@ namespace bobura { namespace model { namespace serializer
         typename Encoder
     >
     windia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font, Encoder>::~windia_reader()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <

@@ -63,7 +63,7 @@ namespace bobura { namespace command
             \brief Destroys the new-file command.
         */
         virtual ~new_file()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:

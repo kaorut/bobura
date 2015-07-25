@@ -93,7 +93,7 @@ namespace bobura { namespace message
 
     template <typename Size, typename Difference, typename String, typename OperatingDistance>
     diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::~diagram_selection_observer_set()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Size, typename Difference, typename String, typename OperatingDistance>

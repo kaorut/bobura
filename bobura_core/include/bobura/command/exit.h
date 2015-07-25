@@ -53,7 +53,7 @@ namespace bobura { namespace command
             \brief Destroys the exit command.
         */
         virtual ~exit()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:
