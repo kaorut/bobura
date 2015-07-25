@@ -63,7 +63,7 @@ namespace bobura { namespace command
 
     template <typename Traits, typename LoadSaveTraits>
     save_to_file<Traits, LoadSaveTraits>::~save_to_file()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
     
     template <typename Traits, typename LoadSaveTraits>

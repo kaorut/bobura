@@ -91,7 +91,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys a zoom of a view.
         */
         ~zoom()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

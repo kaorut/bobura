@@ -63,7 +63,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the OuDia diagram selecting.
         */
         ~select_oudia_diagram()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions
@@ -125,7 +125,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the OuDia diagram selecting for testing.
         */
         ~select_oudia_diagram_for_test()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

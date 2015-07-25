@@ -83,7 +83,7 @@ namespace bobura
             \brief Destroys the model.
         */
         ~timetable_model()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

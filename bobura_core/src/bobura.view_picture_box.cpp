@@ -208,7 +208,7 @@ namespace bobura
 
     template <typename PictureBox, typename MouseCapture>
     view_picture_box<PictureBox, MouseCapture>::~view_picture_box()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename PictureBox, typename MouseCapture>

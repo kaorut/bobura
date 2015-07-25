@@ -28,7 +28,7 @@ namespace bobura { namespace model { namespace serializer
         typename Font
     >
     reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::~reader()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <

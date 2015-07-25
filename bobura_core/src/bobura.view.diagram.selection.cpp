@@ -160,7 +160,7 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     selection<Traits>::~selection()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>

@@ -71,7 +71,7 @@ namespace bobura { namespace command
             \brief Destroys the vertical zoom-out command.
         */
         virtual ~vertically_zoom_out()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:

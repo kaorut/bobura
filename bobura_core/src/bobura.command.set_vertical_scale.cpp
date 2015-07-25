@@ -126,7 +126,7 @@ namespace bobura { namespace command
         typename DiagramViewTraits
     >
     set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::~set_vertical_scale()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
     
     template <

@@ -51,7 +51,7 @@ namespace bobura { namespace command
 
     template <typename Traits>
     exit<Traits>::~exit()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
     
     template <typename Traits>

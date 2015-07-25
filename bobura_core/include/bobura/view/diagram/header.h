@@ -89,7 +89,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the company and line name header.
         */
         virtual ~company_line_name_header()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions
@@ -194,7 +194,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the note header.
         */
         virtual ~note_header()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions
@@ -305,7 +305,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the header.
         */
         virtual ~header()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

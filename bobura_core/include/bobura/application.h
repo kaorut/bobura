@@ -64,7 +64,7 @@ namespace bobura
             \brief Destroys the bobura application.
         */
         ~application()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

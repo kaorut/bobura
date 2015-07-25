@@ -232,7 +232,7 @@ namespace bobura
 
     template <typename Traits, typename CommandSetTraits>
     main_window<Traits, CommandSetTraits>::~main_window()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits, typename CommandSetTraits>

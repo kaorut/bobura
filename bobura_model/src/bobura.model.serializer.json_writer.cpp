@@ -818,7 +818,7 @@ namespace bobura { namespace model { namespace serializer
         typename Encoder
     >
     json_writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font, Encoder>::~json_writer()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <

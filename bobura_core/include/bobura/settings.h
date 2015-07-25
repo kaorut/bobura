@@ -69,7 +69,7 @@ namespace bobura
             \brief Destroys the settings.
         */
         ~settings()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

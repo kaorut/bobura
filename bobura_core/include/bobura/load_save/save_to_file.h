@@ -78,7 +78,7 @@ namespace bobura { namespace load_save
             \brief Destroys the file saving.
         */
         ~save_to_file()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

@@ -72,7 +72,7 @@ namespace bobura { namespace message
     {}
 
     timetable_model_observer_set::~timetable_model_observer_set()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     const timetable_model_observer_set::reset_signal_type& timetable_model_observer_set::reset()

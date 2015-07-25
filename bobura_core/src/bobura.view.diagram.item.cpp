@@ -108,7 +108,7 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     item<Traits>::~item()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>

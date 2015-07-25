@@ -185,7 +185,7 @@ namespace bobura { namespace command
     font_color<
         Traits, Dialog, PointUnitSize, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
     >::~font_color()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
     
     template <

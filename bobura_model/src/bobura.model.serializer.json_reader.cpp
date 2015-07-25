@@ -1406,7 +1406,7 @@ namespace bobura { namespace model { namespace serializer
         Font,
         Encoder
     >::~json_reader()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <

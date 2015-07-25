@@ -393,7 +393,7 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     train_line_fragment<Traits>::~train_line_fragment()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>
@@ -1004,7 +1004,7 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     train_line<Traits>::~train_line()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>
@@ -1311,7 +1311,7 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     train_line_list<Traits>::~train_line_list()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>

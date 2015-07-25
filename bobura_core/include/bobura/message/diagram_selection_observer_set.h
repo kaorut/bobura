@@ -100,7 +100,7 @@ namespace bobura { namespace message
             \brief Destroys the diagram selection observer set.
         */
         ~diagram_selection_observer_set()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

@@ -58,7 +58,7 @@ namespace bobura { namespace command
 
     template <typename Traits, typename Shell>
     open_www_tetengo_org<Traits, Shell>::~open_www_tetengo_org()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
     
     template <typename Traits, typename Shell>

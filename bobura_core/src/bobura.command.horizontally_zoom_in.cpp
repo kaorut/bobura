@@ -95,7 +95,7 @@ namespace bobura { namespace command
 
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename DiagramViewTraits>
     horizontally_zoom_in<Traits, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::~horizontally_zoom_in()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
     
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename DiagramViewTraits>

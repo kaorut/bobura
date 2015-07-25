@@ -28,7 +28,7 @@ namespace bobura { namespace model { namespace serializer
         typename Font
     >
     writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::~writer()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <

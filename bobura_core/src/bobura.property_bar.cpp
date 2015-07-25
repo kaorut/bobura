@@ -189,7 +189,7 @@ namespace bobura
     property_bar<
         String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog, ConfigTraits
     >::~property_bar()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <

@@ -143,7 +143,7 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     company_line_name_header<Traits>::~company_line_name_header()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>
@@ -286,7 +286,7 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     note_header<Traits>::~note_header()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
 
@@ -571,7 +571,7 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     header<Traits>::~header()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>
