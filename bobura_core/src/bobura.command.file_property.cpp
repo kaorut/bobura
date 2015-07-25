@@ -91,7 +91,7 @@ namespace bobura { namespace command
 
     template <typename Traits, typename Dialog, typename MessageCatalog, typename DialogTraits>
     file_property<Traits, Dialog, MessageCatalog, DialogTraits>::~file_property()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
     
     template <typename Traits, typename Dialog, typename MessageCatalog, typename DialogTraits>

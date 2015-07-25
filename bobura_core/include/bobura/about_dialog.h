@@ -77,7 +77,7 @@ namespace bobura
             \brief Destroys the about dialog.
         */
         virtual ~about_dialog()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:

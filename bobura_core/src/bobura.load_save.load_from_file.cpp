@@ -336,7 +336,7 @@ namespace bobura { namespace load_save
 
     template <typename Traits>
     load_from_file<Traits>::~load_from_file()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>

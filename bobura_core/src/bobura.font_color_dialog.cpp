@@ -612,7 +612,7 @@ namespace bobura
         typename ColorDialog
     >
     font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::~font_color_dialog()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <

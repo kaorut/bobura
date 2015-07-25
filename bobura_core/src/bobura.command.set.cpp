@@ -522,7 +522,7 @@ namespace bobura { namespace command
 
     template <typename Traits>
     set<Traits>::~set()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>

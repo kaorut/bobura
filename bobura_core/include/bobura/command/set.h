@@ -153,7 +153,7 @@ namespace bobura { namespace command
             \brief Destroys the command set.
         */
         virtual ~set()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

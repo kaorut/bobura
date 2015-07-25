@@ -124,7 +124,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the JSON reading task execution.
         */
         ~exec_json_reading_task()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

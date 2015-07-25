@@ -46,7 +46,7 @@ namespace
     {
     public:
         virtual ~concrete_parameter_type()
-        TETENGO2_STDALT_NOEXCEPT
+        noexcept
         {}
 
     };
@@ -57,7 +57,7 @@ namespace
     {
     public:
         virtual ~concrete_command_type()
-        TETENGO2_STDALT_NOEXCEPT
+        noexcept
         {}
 
     private:

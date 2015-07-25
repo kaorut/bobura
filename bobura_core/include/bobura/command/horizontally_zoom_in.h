@@ -71,7 +71,7 @@ namespace bobura { namespace command
             \brief Destroys the horizontal zoom-in command.
         */
         virtual ~horizontally_zoom_in()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:

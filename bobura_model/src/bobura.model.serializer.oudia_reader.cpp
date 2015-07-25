@@ -1030,7 +1030,7 @@ namespace bobura { namespace model { namespace serializer
     oudia_reader<
         Size, Difference, String, ForwardIterator, OperatingDistance, Speed, SelectDiagram, Font, Encoder
     >::~oudia_reader()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <

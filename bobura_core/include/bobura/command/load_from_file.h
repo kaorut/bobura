@@ -66,7 +66,7 @@ namespace bobura { namespace command
                 \brief Destroys the parameter.
             */
             virtual ~parameter_type()
-            TETENGO2_STDALT_NOEXCEPT;
+            noexcept;
 
             /*!
                 \brief Returns the path.
@@ -95,7 +95,7 @@ namespace bobura { namespace command
             \brief Destroys the load-from-file command.
         */
         virtual ~load_from_file()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:

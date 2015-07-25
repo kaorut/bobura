@@ -65,7 +65,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the OuDia diagram dialog.
         */
         virtual ~oudia_diagram_dialog()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

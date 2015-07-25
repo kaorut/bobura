@@ -132,7 +132,7 @@ namespace bobura { namespace model { namespace serializer
         typename Font
     >
     reader_selector<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::~reader_selector()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <

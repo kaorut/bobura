@@ -394,7 +394,7 @@ namespace bobura
 
     template <typename Traits>
     file_property_dialog<Traits>::~file_property_dialog()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>

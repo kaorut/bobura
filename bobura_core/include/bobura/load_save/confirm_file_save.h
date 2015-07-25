@@ -86,7 +86,7 @@ namespace bobura { namespace load_save
             \brief Destroys the file save confirmation.
         */
         ~confirm_file_save()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

@@ -18,7 +18,7 @@
 namespace bobura { namespace command
 {
     parameter_base::~parameter_base()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     parameter_base::parameter_base()
@@ -26,7 +26,7 @@ namespace bobura { namespace command
 
     template <typename Traits>
     command_base<Traits>::~command_base()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>

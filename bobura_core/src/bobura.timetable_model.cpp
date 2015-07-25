@@ -197,7 +197,7 @@ namespace bobura
         typename Font
     >
     timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::~timetable_model()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <

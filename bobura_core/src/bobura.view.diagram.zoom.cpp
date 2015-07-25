@@ -179,7 +179,7 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits, typename AbstractWindow, typename PictureBox, typename MouseCapture>
     zoom<Traits, AbstractWindow, PictureBox, MouseCapture>::~zoom()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits, typename AbstractWindow, typename PictureBox, typename MouseCapture>

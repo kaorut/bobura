@@ -123,7 +123,7 @@ int WINAPI wWinMain(
     const ::LPWSTR    lpCmdLine,
     const int         nCmdShow
 )
-TETENGO2_STDALT_NOEXCEPT
+noexcept
 {
     boost::ignore_unused(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 

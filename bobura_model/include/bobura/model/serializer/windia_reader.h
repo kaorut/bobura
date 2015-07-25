@@ -91,7 +91,7 @@ namespace bobura { namespace model { namespace serializer
             \brief Destroys the WubDIA reader.
         */
         virtual ~windia_reader()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:

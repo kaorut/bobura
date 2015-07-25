@@ -210,7 +210,7 @@ namespace bobura
 
     template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
     view_picture_box<PictureBox, AbstractWindow, MouseCapture>::~view_picture_box()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename PictureBox, typename AbstractWindow, typename MouseCapture>

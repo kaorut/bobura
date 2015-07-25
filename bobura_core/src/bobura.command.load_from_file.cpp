@@ -81,7 +81,7 @@ namespace bobura { namespace command
 
     template <typename Traits, typename LoadSaveTraits>
     load_from_file<Traits, LoadSaveTraits>::parameter_type::~parameter_type()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits, typename LoadSaveTraits>
@@ -99,7 +99,7 @@ namespace bobura { namespace command
 
     template <typename Traits, typename LoadSaveTraits>
     load_from_file<Traits, LoadSaveTraits>::~load_from_file()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
     
     template <typename Traits, typename LoadSaveTraits>

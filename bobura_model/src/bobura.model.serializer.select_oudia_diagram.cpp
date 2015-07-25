@@ -112,7 +112,7 @@ namespace bobura { namespace model { namespace serializer
 
     template <typename OuDiaDiagramDialog>
     select_oudia_diagram<OuDiaDiagramDialog>::~select_oudia_diagram()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename OuDiaDiagramDialog>
@@ -171,7 +171,7 @@ namespace bobura { namespace model { namespace serializer
 
     template <typename String>
     select_oudia_diagram_for_test<String>::~select_oudia_diagram_for_test()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename String>

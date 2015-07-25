@@ -154,7 +154,7 @@ namespace bobura { namespace model { namespace serializer
     exec_json_reading_task<
         Size, Difference, String, OperatingDistance, Speed, Font, Dialog, Timer, SystemColorSet, MessageCatalog
     >::~exec_json_reading_task()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <

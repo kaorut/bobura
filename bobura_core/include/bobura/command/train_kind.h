@@ -87,7 +87,7 @@ namespace bobura { namespace command
             \brief Destroys a train kind command.
         */
         virtual ~train_kind()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
     private:

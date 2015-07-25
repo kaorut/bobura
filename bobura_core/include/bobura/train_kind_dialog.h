@@ -155,7 +155,7 @@ namespace bobura
             \brief Destroys the train kind dialog.
         */
         virtual ~train_kind_dialog()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

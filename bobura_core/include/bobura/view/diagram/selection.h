@@ -79,7 +79,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Destroys the selection.
         */
         ~selection()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

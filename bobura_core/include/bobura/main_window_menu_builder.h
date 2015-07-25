@@ -98,7 +98,7 @@ namespace bobura
             \brief Destroys the main window menu builder.
         */
         ~main_window_menu_builder()
-        TETENGO2_STDALT_NOEXCEPT;
+        noexcept;
 
 
         // functions

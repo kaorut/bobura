@@ -231,7 +231,7 @@ namespace bobura
 
     template <typename Traits, typename ConfigTraits>
     about_dialog<Traits, ConfigTraits>::~about_dialog()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
 

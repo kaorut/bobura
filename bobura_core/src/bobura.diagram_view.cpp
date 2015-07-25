@@ -401,7 +401,7 @@ namespace bobura
 
     template <typename Traits>
     diagram_view<Traits>::~diagram_view()
-    TETENGO2_STDALT_NOEXCEPT
+    noexcept
     {}
 
     template <typename Traits>
