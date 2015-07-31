@@ -70,6 +70,7 @@ namespace bobura
         m_message_catalog(message_catalog),
         m_p_tab_frame(),
         m_p_diagram_view_picture_box(),
+        m_p_timetable_view_picture_box(),
         m_p_property_bar(),
         m_settings(settings),
         m_confirm_file_save(confirm_file_save)
@@ -117,6 +118,19 @@ namespace bobura
             return *m_p_diagram_view_picture_box;
         }
 
+        const view_picture_box_type& get_timetable_view_picture_box()
+        const
+        {
+            assert(m_p_timetable_view_picture_box);
+            return *m_p_timetable_view_picture_box;
+        }
+
+        view_picture_box_type& get_timetable_view_picture_box()
+        {
+            assert(m_p_timetable_view_picture_box);
+            return *m_p_timetable_view_picture_box;
+        }
+
         const property_bar_type& get_property_bar()
         const
         {
@@ -150,6 +164,8 @@ namespace bobura
 
         std::unique_ptr<view_picture_box_type> m_p_diagram_view_picture_box;
 
+        std::unique_ptr<view_picture_box_type> m_p_timetable_view_picture_box;
+
         std::unique_ptr<property_bar_type> m_p_property_bar;
 
         settings_type& m_settings;
@@ -162,8 +178,12 @@ namespace bobura
         void initialize_window()
         {
             m_p_tab_frame = tetengo2::stdalt::make_unique<tab_frame_type>(m_base);
+
             m_p_diagram_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
             m_p_tab_frame->tab_at(0).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Diagram")));
+
+            m_p_timetable_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
+            m_p_tab_frame->tab_at(1).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Timetable")));
 
             m_p_property_bar = tetengo2::stdalt::make_unique<property_bar_type>(m_base, m_settings, m_message_catalog);
 
@@ -272,6 +292,21 @@ namespace bobura
     main_window<Traits, CommandSetTraits>::get_diagram_view_picture_box()
     {
         return m_p_impl->get_diagram_view_picture_box();
+    }
+
+    template <typename Traits, typename CommandSetTraits>
+    const typename main_window<Traits, CommandSetTraits>::view_picture_box_type& 
+    main_window<Traits, CommandSetTraits>::get_timetable_view_picture_box()
+    const
+    {
+        return m_p_impl->get_timetable_view_picture_box();
+    }
+
+    template <typename Traits, typename CommandSetTraits>
+    typename main_window<Traits, CommandSetTraits>::view_picture_box_type&
+    main_window<Traits, CommandSetTraits>::get_timetable_view_picture_box()
+    {
+        return m_p_impl->get_timetable_view_picture_box();
     }
 
     template <typename Traits, typename CommandSetTraits>

@@ -175,6 +175,21 @@ namespace bobura
         view_picture_box_type& get_diagram_view_picture_box();
 
         /*!
+            \brief Returns the timetable view picture box.
+
+            \return The timetable view picture box.
+        */
+        const view_picture_box_type& get_timetable_view_picture_box()
+        const;
+
+        /*!
+            \brief Returns the timetable view picture box.
+
+            \return The timetable view picture box.
+        */
+        view_picture_box_type& get_timetable_view_picture_box();
+
+        /*!
             \brief Returns the property bar.
 
             \return The property bar.
