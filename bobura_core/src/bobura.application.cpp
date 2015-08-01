@@ -194,7 +194,9 @@ namespace bobura
 
         using mouse_capture_type = typename traits_type::mouse_capture_type;
 
-        using view_picture_box_type = view_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
+        using tab_frame_type = typename traits_type::tab_frame_type;
+
+        using view_picture_box_type = view_picture_box<picture_box_type, mouse_capture_type>;
 
         using main_window_file_dropped_observer_type =
             message::main_window::file_dropped<command_set_type, model_type, abstract_window_type>;
@@ -203,6 +205,7 @@ namespace bobura
             message::main_window::window_resized<
                 diagram_view_type,
                 abstract_window_type,
+                tab_frame_type,
                 view_picture_box_type,
                 typename main_window_type::property_bar_type
             >;
@@ -223,7 +226,7 @@ namespace bobura
             message::view_picture_box::mouse_wheeled<
                 picture_box_type,
                 view::diagram::zoom<
-                    diagram_view_traits_type, abstract_window_type, picture_box_type, mouse_capture_type
+                    diagram_view_traits_type,  picture_box_type, mouse_capture_type
                 >,
                 diagram_view_traits_type
             >;
@@ -315,7 +318,7 @@ namespace bobura
 
         void set_message_observers(
             const command_set_type&     command_set,
-            diagram_view_type&         diagram_view,
+            diagram_view_type&          diagram_view,
             main_window_type&           main_window,
             const message_catalog_type& message_catalog
         )
@@ -342,7 +345,11 @@ namespace bobura
             );
             main_window.size_observer_set().resized().connect(
                 main_window_window_resized_observer_type{
-                    diagram_view, main_window, diagram_view_picture_box, main_window.get_property_bar()
+                    diagram_view,
+                    main_window,
+                    main_window.get_tab_frame(),
+                    diagram_view_picture_box,
+                    main_window.get_property_bar()
                 }
             );
 

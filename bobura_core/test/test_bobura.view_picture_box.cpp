@@ -28,11 +28,9 @@ namespace
 
     using picture_box_type = ui_type_list_type::picture_box_type;
 
-    using abstract_window_type = ui_type_list_type::abstract_window_type;
-
     using mouse_capture_type = ui_type_list_type::mouse_capture_type;
 
-    using view_picture_box_type = bobura::view_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
+    using view_picture_box_type = bobura::view_picture_box<picture_box_type, mouse_capture_type>;
 
     using dimension_type = view_picture_box_type::dimension_type;
 

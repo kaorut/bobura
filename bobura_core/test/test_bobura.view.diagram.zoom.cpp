@@ -47,7 +47,7 @@ namespace
 
     using mouse_capture_type = ui_type_list_type::mouse_capture_type;
 
-    using view_picture_box_type = bobura::view_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
+    using view_picture_box_type = bobura::view_picture_box<picture_box_type, mouse_capture_type>;
 
     using diagram_view_traits_type = traits_type_list_type::diagram_view_type;
 
@@ -63,9 +63,7 @@ namespace
     using diagram_view_type = bobura::diagram_view<diagram_view_traits_type>;
 
     using zoom_type =
-        bobura::view::diagram::zoom<
-            diagram_view_traits_type, abstract_window_type, picture_box_type, mouse_capture_type
-        >;
+        bobura::view::diagram::zoom<diagram_view_traits_type, picture_box_type, mouse_capture_type>;
 
     using scale_type = zoom_type::scale_type;
 

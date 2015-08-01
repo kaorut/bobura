@@ -533,6 +533,15 @@ namespace bobura { namespace type_list
             tetengo2::gui::drawing::system_color_set<system_color_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
+        using tab_frame_type =
+            tetengo2::gui::widget::tab_frame<
+                widget_traits_type<DetailTypeList>,
+                widget_details_traits_type<DetailTypeList>,
+                mouse_capture_details_type<DetailTypeList>,
+                system_color_details_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
         using text_box_type =
             tetengo2::gui::widget::text_box<
                 widget_traits_type<DetailTypeList>, widget_details_traits_type<DetailTypeList>
@@ -641,6 +650,9 @@ namespace bobura { namespace type_list
 
         //! The system color set type.
         using system_color_set_type = detail::ui::system_color_set_type<DetailTypeList>;
+
+        //! The tab frame type.
+        using tab_frame_type = detail::ui::tab_frame_type<DetailTypeList>;
 
         //! The text box type.
         using text_box_type = detail::ui::text_box_type<DetailTypeList>;
@@ -874,6 +886,9 @@ namespace bobura { namespace type_list
             >;
 
         template <typename DetailTypeList>
+        using tab_frame_type = type_list::detail::ui::tab_frame_type<DetailTypeList>;
+
+        template <typename DetailTypeList>
         using map_box_type = type_list::detail::ui::map_box_type<DetailTypeList>;
 
         template <typename DetailTypeList>
@@ -899,6 +914,7 @@ namespace bobura { namespace type_list
                 dimension_type<DetailTypeList>,
                 type_list::detail::ui::window_type<DetailTypeList>,
                 picture_box_type<DetailTypeList>,
+                tab_frame_type<DetailTypeList>,
                 map_box_type<DetailTypeList>,
                 side_bar_type<DetailTypeList>,
                 tetengo2::gui::message::message_loop_break<message_loop_details_type<DetailTypeList>>,
@@ -997,6 +1013,7 @@ namespace bobura { namespace type_list
                 fast_font_type<DetailTypeList>,
                 abstract_window_type<DetailTypeList>,
                 picture_box_type<DetailTypeList>,
+                tab_frame_type<DetailTypeList>,
                 map_box_type<DetailTypeList>,
                 side_bar_type<DetailTypeList>,
                 menu_bar_type<DetailTypeList>,

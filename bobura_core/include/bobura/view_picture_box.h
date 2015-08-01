@@ -19,11 +19,10 @@ namespace bobura
     /*!
         \brief The class template for the view picture box.
 
-        \tparam PictureBox      A picture box type.
-        \tparam AbstractWindow  An abstract window type.
-        \tparam MouseCapture    A mouse capture type.
+        \tparam PictureBox   A picture box type.
+        \tparam MouseCapture A mouse capture type.
     */
-    template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
+    template <typename PictureBox, typename MouseCapture>
     class view_picture_box : public PictureBox
     {
     public:
@@ -32,11 +31,11 @@ namespace bobura
         //! The base type.
         using base_type = PictureBox;
 
+        //! The widget type.
+        using widget_type = typename base_type::base_type::base_type;
+
         //! The dimension type.
         using dimension_type = typename base_type::dimension_type;
-
-        //! The abstract window type.
-        using abstract_window_type = AbstractWindow;
 
         //! The mouse capture type.
         using mouse_capture_type = MouseCapture;
@@ -52,7 +51,7 @@ namespace bobura
 
             \param parent A parent.
         */
-        explicit view_picture_box(abstract_window_type& parent);
+        explicit view_picture_box(widget_type& parent);
 
         /*!
             \brief Destroys the view picture box.

@@ -62,6 +62,9 @@ namespace bobura
         //! The picture box type.
         using picture_box_type = typename traits_type::picture_box_type;
 
+        //! The tab frame type.
+        using tab_frame_type = typename traits_type::tab_frame_type;
+
         //! The map box type.
         using map_box_type = typename traits_type::map_box_type;
 
@@ -87,7 +90,7 @@ namespace bobura
         using command_set_traits_type = CommandSetTraits;
 
         //! The view picture box type.
-        using view_picture_box_type = view_picture_box<picture_box_type, abstract_window_type, mouse_capture_type>;
+        using view_picture_box_type = view_picture_box<picture_box_type, mouse_capture_type>;
 
         //! The property bar type.
         using property_bar_type =
@@ -142,6 +145,21 @@ namespace bobura
         void set_title(const boost::optional<string_type>& document_name, bool changed);
 
         /*!
+            \brief Returns the tab frame.
+
+            \return The tab frame.
+        */
+        const tab_frame_type& get_tab_frame()
+        const;
+
+        /*!
+            \brief Returns the tab frame.
+
+            \return The tab frame.
+        */
+        tab_frame_type& get_tab_frame();
+
+        /*!
             \brief Returns the diagram view picture box.
 
             \return The diagram view picture box.
@@ -155,6 +173,21 @@ namespace bobura
             \return The diagram view picture box.
         */
         view_picture_box_type& get_diagram_view_picture_box();
+
+        /*!
+            \brief Returns the timetable view picture box.
+
+            \return The timetable view picture box.
+        */
+        const view_picture_box_type& get_timetable_view_picture_box()
+        const;
+
+        /*!
+            \brief Returns the timetable view picture box.
+
+            \return The timetable view picture box.
+        */
+        view_picture_box_type& get_timetable_view_picture_box();
 
         /*!
             \brief Returns the property bar.

@@ -24,22 +24,22 @@
 
 namespace bobura
 {
-    template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
-    class view_picture_box<PictureBox, AbstractWindow, MouseCapture>::impl : private boost::noncopyable
+    template <typename PictureBox, typename MouseCapture>
+    class view_picture_box<PictureBox, MouseCapture>::impl : private boost::noncopyable
     {
     public:
         // types
 
-        using dimension_type = typename view_picture_box::dimension_type;
+        using widget_type = typename view_picture_box::widget_type;
 
-        using abstract_window_type = AbstractWindow;
+        using dimension_type = typename view_picture_box::dimension_type;
 
         using mouse_button_type = typename view_picture_box::mouse_button_type;
 
 
         // constructors and destructor
 
-        explicit impl(view_picture_box& self, abstract_window_type&)
+        explicit impl(view_picture_box& self, widget_type&)
         :
         m_p_mouse_capture()
         {
@@ -199,38 +199,32 @@ namespace bobura
     };
 
 
-    template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
-    view_picture_box<PictureBox, AbstractWindow, MouseCapture>::view_picture_box(
-        abstract_window_type& parent
-    )
+    template <typename PictureBox, typename MouseCapture>
+    view_picture_box<PictureBox, MouseCapture>::view_picture_box(widget_type& parent)
     :
     base_type(parent, base_type::scroll_bar_style_type::both),
     m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, parent))
     {}
 
-    template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
-    view_picture_box<PictureBox, AbstractWindow, MouseCapture>::~view_picture_box()
+    template <typename PictureBox, typename MouseCapture>
+    view_picture_box<PictureBox, MouseCapture>::~view_picture_box()
     noexcept
     {}
 
-    template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
-    void view_picture_box<PictureBox, AbstractWindow, MouseCapture>::set_mouse_capture(
-        const mouse_button_type mouse_button
-    )
+    template <typename PictureBox, typename MouseCapture>
+    void view_picture_box<PictureBox, MouseCapture>::set_mouse_capture(const mouse_button_type mouse_button)
     {
         m_p_impl->set_mouse_capture(*this, mouse_button);
     }
 
-    template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
-    bool view_picture_box<PictureBox, AbstractWindow, MouseCapture>::release_mouse_capture(
-        const mouse_button_type mouse_button
-    )
+    template <typename PictureBox, typename MouseCapture>
+    bool view_picture_box<PictureBox, MouseCapture>::release_mouse_capture(const mouse_button_type mouse_button)
     {
         return m_p_impl->release_mouse_capture(mouse_button);
     }
 
-    template <typename PictureBox, typename AbstractWindow, typename MouseCapture>
-    void view_picture_box<PictureBox, AbstractWindow, MouseCapture>::update_scroll_bars(
+    template <typename PictureBox, typename MouseCapture>
+    void view_picture_box<PictureBox, MouseCapture>::update_scroll_bars(
         const dimension_type& view_dimension,
         const dimension_type& page_dimension
     )
@@ -264,14 +258,12 @@ namespace bobura
 #if BOOST_COMP_MSVC
     template class view_picture_box<
         typename application::ui_type_list_type::picture_box_type,
-        typename application::ui_type_list_type::abstract_window_type,
         typename application::ui_type_list_type::mouse_capture_type
     >;
 #endif
 
     template class view_picture_box<
         typename test::ui_type_list_type::picture_box_type,
-        typename test::ui_type_list_type::abstract_window_type,
         typename test::ui_type_list_type::mouse_capture_type
     >;
 

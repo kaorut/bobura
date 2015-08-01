@@ -27,6 +27,7 @@ namespace bobura
         \tparam Font                        A font type.
         \tparam AbstractWindow              An abstract window type.
         \tparam PictureBox                  A picture box type.
+        \tparam TabFrame                    A tab frame type.
         \tparam MapBox                      A map box type.
         \tparam SideBar                     A side bar type.
         \tparam MenuBar                     A menu bar type.
@@ -57,6 +58,7 @@ namespace bobura
         typename Font,
         typename AbstractWindow,
         typename PictureBox,
+        typename TabFrame,
         typename MapBox,
         typename SideBar,
         typename MenuBar,
@@ -114,6 +116,9 @@ namespace bobura
 
         //! The picture box type.
         using picture_box_type = PictureBox;
+
+        //! The tab frame type.
+        using tab_frame_type = TabFrame;
 
         //! The max box type.
         using map_box_type = MapBox;
