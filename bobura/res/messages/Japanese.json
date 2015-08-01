@@ -43,7 +43,8 @@
         "Menu:Help:&About":                "バージョン情報(&A)",
         
         
-        "Tab:Diagram": "ダイヤグラム",
+        "Tab:Diagram":   "ダイヤグラム",
+        "Tab:Timetable": "時刻表",
         
         
         "Diagram:%1% No. %2%": "%1%%2%号",
