@@ -120,6 +120,8 @@
     <ClInclude Include="include\bobura\command\set_horizontal_scale.h" />
     <ClInclude Include="include\bobura\command\set_traits.h" />
     <ClInclude Include="include\bobura\command\set_vertical_scale.h" />
+    <ClInclude Include="include\bobura\command\show_diagram.h" />
+    <ClInclude Include="include\bobura\command\show_timetable.h" />
     <ClInclude Include="include\bobura\command\train_kind.h" />
     <ClInclude Include="include\bobura\command\traits.h" />
     <ClInclude Include="include\bobura\command\vertically_zoom_in.h" />
@@ -193,6 +195,8 @@
     <ClCompile Include="src\bobura.command.set.cpp" />
     <ClCompile Include="src\bobura.command.set_horizontal_scale.cpp" />
     <ClCompile Include="src\bobura.command.set_vertical_scale.cpp" />
+    <ClCompile Include="src\bobura.command.show_diagram.cpp" />
+    <ClCompile Include="src\bobura.command.show_timetable.cpp" />
     <ClCompile Include="src\bobura.command.train_kind.cpp" />
     <ClCompile Include="src\bobura.command.vertically_zoom_in.cpp" />
     <ClCompile Include="src\bobura.command.vertically_zoom_out.cpp" />
