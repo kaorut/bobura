@@ -168,6 +168,16 @@ namespace bobura
         const;
 
         /*!
+            \brief Shows the diagram tab.
+        */
+        void show_diagram_tab();
+
+        /*!
+            \brief Shows the timetable tab.
+        */
+        void show_timetable_tab();
+
+        /*!
             \brief Returns the diagram view picture box.
 
             \return The diagram view picture box.

@@ -105,6 +105,26 @@ namespace bobura
             return *m_p_tab_frame;
         }
 
+        void show_diagram_tab()
+        {
+            assert(m_p_tab_frame);
+            assert(
+                &m_p_tab_frame->tab_at(0).body().template get<view_picture_box_type>() ==
+                m_p_diagram_view_picture_box.get()
+            );
+            m_p_tab_frame->select_tab(0);
+        }
+
+        void show_timetable_tab()
+        {
+            assert(m_p_tab_frame);
+            assert(
+                &m_p_tab_frame->tab_at(1).body().template get<view_picture_box_type>() ==
+                m_p_timetable_view_picture_box.get()
+            );
+            m_p_tab_frame->select_tab(1);
+        }
+
         const view_picture_box_type& get_diagram_view_picture_box()
         const
         {
@@ -200,6 +220,8 @@ namespace bobura
                 m_base.set_window_state(window_state_type::maximized);
             else
                 m_base.set_window_state(window_state_type::normal);
+
+            show_diagram_tab();
         }
 
         void set_message_observers()
@@ -277,6 +299,18 @@ namespace bobura
     main_window<Traits, CommandSetTraits>::get_tab_frame()
     {
         return m_p_impl->get_tab_frame();
+    }
+
+    template <typename Traits, typename CommandSetTraits>
+    void main_window<Traits, CommandSetTraits>::show_diagram_tab()
+    {
+        m_p_impl->show_diagram_tab();
+    }
+
+    template <typename Traits, typename CommandSetTraits>
+    void main_window<Traits, CommandSetTraits>::show_timetable_tab()
+    {
+        m_p_impl->show_timetable_tab();
     }
 
     template <typename Traits, typename CommandSetTraits>
