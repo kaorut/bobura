@@ -6,8 +6,8 @@
     $Id$
 */
 
-#if !defined(BOBURA_COMMAND_NOP_H)
-#define BOBURA_COMMAND_NOP_H
+#if !defined(BOBURA_COMMAND_SHOWTIMETABLE_H)
+#define BOBURA_COMMAND_SHOWTIMETABLE_H
 
 #include <memory>
 
