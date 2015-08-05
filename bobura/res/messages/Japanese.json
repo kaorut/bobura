@@ -31,6 +31,8 @@
         "Menu:Diagram:Train &Kinds...":      "列車種別(&K)...",
         
         "Menu:&View":                          "表示(&V)",
+        "Menu:View:Show &Diagram":             "ダイヤグラムを表示(&D)",
+        "Menu:View:Show &Timetable":           "時刻表を表示(&T)",
         "Menu:View:&Horizontal Zoom":          "時刻方向拡大縮小(&H)",
         "Menu:View:Horizontal Zoom:Zoom &In":  "拡大(&I)",
         "Menu:View:Horizontal Zoom:Zoom &Out": "縮小(&O)",

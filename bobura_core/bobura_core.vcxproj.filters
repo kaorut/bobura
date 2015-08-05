@@ -261,6 +261,12 @@
     <ClInclude Include="include\bobura\view_picture_box.h">
       <Filter>headers\bobura</Filter>
     </ClInclude>
+    <ClInclude Include="include\bobura\command\show_diagram.h">
+      <Filter>headers\bobura\command</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bobura\command\show_timetable.h">
+      <Filter>headers\bobura\command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\precompiled\precompiled.cpp">
@@ -400,6 +406,12 @@
     </ClCompile>
     <ClCompile Include="src\bobura.view_picture_box.cpp">
       <Filter>sources\bobura</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.command.show_diagram.cpp">
+      <Filter>sources\bobura\command</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.command.show_timetable.cpp">
+      <Filter>sources\bobura\command</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

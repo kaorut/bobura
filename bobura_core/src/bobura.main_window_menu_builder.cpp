@@ -219,6 +219,23 @@ namespace bobura
                 tetengo2::stdalt::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:&View")));
             commands_type commands{};
 
+            append_menu_command(
+                *p_popup_menu,
+                m_message_catalog.get(TETENGO2_TEXT("Menu:View:Show &Diagram")),
+                m_command_set.show_diagram(),
+                commands,
+                shortcut_key_type{ virtual_key_type::char_d(), false, true, false }
+            );
+            append_menu_command(
+                *p_popup_menu,
+                m_message_catalog.get(TETENGO2_TEXT("Menu:View:Show &Timetable")),
+                m_command_set.show_timetable(),
+                commands,
+                shortcut_key_type{ virtual_key_type::char_t(), false, true, false }
+            );
+
+            append_menu_separator(*p_popup_menu, commands);
+
             append_popup_menu(*p_popup_menu, build_horizontal_zoom_menu(), commands);
             append_popup_menu(*p_popup_menu, build_vertical_zoom_menu(), commands);
 

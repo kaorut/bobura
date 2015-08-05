@@ -294,6 +294,22 @@ namespace bobura { namespace command
         const;
 
         /*!
+            \brief Returns the command show-diagram.
+
+            \return The command.
+        */
+        const command_type& show_diagram()
+        const;
+
+        /*!
+            \brief Returns the command show-timetable.
+
+            \return The command.
+        */
+        const command_type& show_timetable()
+        const;
+
+        /*!
             \brief Returns the command train-kind.
 
             \return The command.

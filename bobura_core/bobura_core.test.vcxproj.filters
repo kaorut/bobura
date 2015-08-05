@@ -203,6 +203,12 @@
     <ClCompile Include="test\test_bobura.diagram_view.cpp">
       <Filter>sources\test_bobura</Filter>
     </ClCompile>
+    <ClCompile Include="test\test_bobura.command.show_diagram.cpp">
+      <Filter>sources\test_bobura\command</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_bobura.command.show_timetable.cpp">
+      <Filter>sources\test_bobura\command</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="res.test\win32\bobura_core.test.exe.manifest">
