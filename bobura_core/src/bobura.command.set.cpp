@@ -433,12 +433,18 @@ namespace bobura { namespace command
 
         static command_ptr_type create_show_diagram()
         {
-            return tetengo2::stdalt::make_unique<command::show_diagram<command_traits_type>>();
+            return
+                tetengo2::stdalt::make_unique<
+                    command::show_diagram<command_traits_type, traits_type, main_window_traits_type>
+                >();
         }
 
         static command_ptr_type create_show_timetable()
         {
-            return tetengo2::stdalt::make_unique<command::show_timetable<command_traits_type>>();
+            return
+                tetengo2::stdalt::make_unique<
+                    command::show_timetable<command_traits_type, traits_type, main_window_traits_type>
+                >();
         }
 
         static command_ptr_type create_train_kind(const message_catalog_type& message_catalog)

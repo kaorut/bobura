@@ -20,7 +20,12 @@ namespace
 
     using traits_type_list_type = bobura::type_list::traits<detail_type_list_type>;
 
-    using show_diagram_command_type = bobura::command::show_diagram<traits_type_list_type::command_type>;
+    using show_diagram_command_type =
+        bobura::command::show_diagram<
+            traits_type_list_type::command_type,
+            traits_type_list_type::command_set_type,
+            traits_type_list_type::main_window_type
+        >;
 
 
 }

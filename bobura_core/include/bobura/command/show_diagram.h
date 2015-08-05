@@ -23,7 +23,7 @@ namespace bobura { namespace command
 
         \tparam Traits A traits type.
     */
-    template <typename Traits>
+    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits>
     class show_diagram : public command_base<Traits>
     {
     public:
@@ -31,6 +31,12 @@ namespace bobura { namespace command
 
         //! The traits type.
         using traits_type = Traits;
+
+        //! The command set traits type.
+        using command_set_traits_type = CommandSetTraits;
+
+        //! The main window traits type.
+        using main_window_traits_type = MainWindowTraits;
 
         //! The base type.
         using base_type = command_base<traits_type>;
