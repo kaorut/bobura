@@ -6,11 +6,11 @@
     $Id$
 */
 
+#include <iterator>
 #include <utility>
 #include <vector>
 
 #include <boost/test/unit_test.hpp>
-#include <boost/utility.hpp>
 
 #include <tetengo2.h>
 
@@ -110,7 +110,7 @@ BOOST_AUTO_TEST_SUITE(select_oudia_diagram_for_test)
         };
         const auto selected = select_oudia_diagram_for_test(diagram_names.begin(), diagram_names.end());
 
-        BOOST_CHECK(selected == boost::next(diagram_names.begin()));
+        BOOST_CHECK(selected == std::next(diagram_names.begin()));
     }
 
 

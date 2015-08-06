@@ -14,7 +14,6 @@
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
-#include <boost/utility.hpp>
 
 #include <tetengo2.h>
 
@@ -73,7 +72,7 @@ namespace bobura { namespace model { namespace serializer
             if (selected_index)
             {
                 assert(*selected_index < static_cast<selected_index_type>(std::distance(first, last)));
-                return boost::next(first, *selected_index);
+                return std::next(first, *selected_index);
             }
             else
             {

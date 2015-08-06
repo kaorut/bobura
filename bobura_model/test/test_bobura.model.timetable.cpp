@@ -6,13 +6,13 @@
     $Id$
 */
 
+#include <iterator>
 #include <stdexcept>
 #include <utility>
 #include <vector>
 
 #include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
-#include <boost/utility.hpp>
 
 #include <tetengo2.h>
 
@@ -1406,8 +1406,8 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
 
             BOOST_CHECK(timetable.train_kind_referred(timetable.train_kinds().begin()));
-            BOOST_CHECK(timetable.train_kind_referred(boost::next(timetable.train_kinds().begin(), 1)));
-            BOOST_CHECK(!timetable.train_kind_referred(boost::next(timetable.train_kinds().begin(), 2)));
+            BOOST_CHECK(timetable.train_kind_referred(std::next(timetable.train_kinds().begin(), 1)));
+            BOOST_CHECK(!timetable.train_kind_referred(std::next(timetable.train_kinds().begin(), 2)));
         }
         {
             timetable_type timetable{};
@@ -1541,7 +1541,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             train_kind_type::weight_type::normal,
             train_kind_type::line_style_type::solid
         };
-        timetable.insert_train_kind(boost::next(timetable.train_kinds().begin(), 1), kind1);
+        timetable.insert_train_kind(std::next(timetable.train_kinds().begin(), 1), kind1);
         
         BOOST_REQUIRE_EQUAL(timetable.train_kinds().size(), 3U);
         BOOST_CHECK(timetable.train_kinds()[0].name() == string_type{ TETENGO2_TEXT("Rapid") });
@@ -1700,7 +1700,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                 }
             );
 
-            timetable.erase_train_kind(boost::next(timetable.train_kinds().begin(), 1));
+            timetable.erase_train_kind(std::next(timetable.train_kinds().begin(), 1));
 
             BOOST_CHECK_EQUAL(timetable.down_trains()[0].kind_index(), 0U);
             BOOST_CHECK_LT(timetable.down_trains()[0].kind_index(), timetable.train_kinds().size());
@@ -3234,8 +3234,8 @@ BOOST_AUTO_TEST_SUITE(timetable)
             const auto speed =
                 timetable.scheduled_speed(
                     timetable.down_trains()[0],
-                    boost::next(timetable.down_trains()[0].stops().begin(), 1),
-                    boost::next(timetable.down_trains()[0].stops().begin(), 2)
+                    std::next(timetable.down_trains()[0].stops().begin(), 1),
+                    std::next(timetable.down_trains()[0].stops().begin(), 2)
                 );
             BOOST_CHECK_EQUAL(speed, 3U);
         }
@@ -3243,8 +3243,8 @@ BOOST_AUTO_TEST_SUITE(timetable)
             const auto speed =
                 timetable.scheduled_speed(
                     timetable.up_trains()[0],
-                    boost::next(timetable.up_trains()[0].stops().begin(), 2),
-                    boost::next(timetable.up_trains()[0].stops().begin(), 1)
+                    std::next(timetable.up_trains()[0].stops().begin(), 2),
+                    std::next(timetable.up_trains()[0].stops().begin(), 1)
                 );
             BOOST_CHECK_EQUAL(speed, 4U);
         }
@@ -3253,8 +3253,8 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_THROW(
                 timetable.scheduled_speed(
                     unknown_train,
-                    boost::next(unknown_train.stops().begin(), 1),
-                    boost::next(unknown_train.stops().begin(), 2)
+                    std::next(unknown_train.stops().begin(), 1),
+                    std::next(unknown_train.stops().begin(), 2)
                 ),
                 std::invalid_argument
             );
@@ -3264,7 +3264,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                 timetable.scheduled_speed(
                     timetable.down_trains()[0],
                     timetable.down_trains()[0].stops().end(),
-                    boost::next(timetable.down_trains()[0].stops().begin(), 2)
+                    std::next(timetable.down_trains()[0].stops().begin(), 2)
                 ),
                 std::invalid_argument
             );
@@ -3273,7 +3273,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_THROW(
                 timetable.scheduled_speed(
                     timetable.down_trains()[0],
-                    boost::next(timetable.down_trains()[0].stops().begin(), 1),
+                    std::next(timetable.down_trains()[0].stops().begin(), 1),
                     timetable.down_trains()[0].stops().end()
                 ),
                 std::invalid_argument
@@ -3283,8 +3283,8 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_THROW(
                 timetable.scheduled_speed(
                     timetable.down_trains()[0],
-                    boost::next(timetable.down_trains()[0].stops().begin(), 1),
-                    boost::next(timetable.down_trains()[0].stops().begin(), 1)
+                    std::next(timetable.down_trains()[0].stops().begin(), 1),
+                    std::next(timetable.down_trains()[0].stops().begin(), 1)
                 ),
                 std::invalid_argument
             );
@@ -3293,8 +3293,8 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_THROW(
                 timetable.scheduled_speed(
                     timetable.down_trains()[0],
-                    boost::next(timetable.down_trains()[0].stops().begin(), 2),
-                    boost::next(timetable.down_trains()[0].stops().begin(), 1)
+                    std::next(timetable.down_trains()[0].stops().begin(), 2),
+                    std::next(timetable.down_trains()[0].stops().begin(), 1)
                 ),
                 std::invalid_argument
             );
@@ -3303,8 +3303,8 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_THROW(
                 timetable.scheduled_speed(
                     timetable.up_trains()[0],
-                    boost::next(timetable.up_trains()[0].stops().begin(), 1),
-                    boost::next(timetable.up_trains()[0].stops().begin(), 2)
+                    std::next(timetable.up_trains()[0].stops().begin(), 1),
+                    std::next(timetable.up_trains()[0].stops().begin(), 2)
                 ),
                 std::invalid_argument
             );
@@ -3313,8 +3313,8 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_THROW(
                 timetable.scheduled_speed(
                     timetable.down_trains()[0],
-                    boost::next(timetable.down_trains()[0].stops().begin(), 0),
-                    boost::next(timetable.down_trains()[0].stops().begin(), 1)
+                    std::next(timetable.down_trains()[0].stops().begin(), 0),
+                    std::next(timetable.down_trains()[0].stops().begin(), 1)
                 ),
                 std::invalid_argument
             );
@@ -3323,8 +3323,8 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_CHECK_THROW(
                 timetable.scheduled_speed(
                     timetable.down_trains()[0],
-                    boost::next(timetable.down_trains()[0].stops().begin(), 2),
-                    boost::next(timetable.down_trains()[0].stops().begin(), 3)
+                    std::next(timetable.down_trains()[0].stops().begin(), 2),
+                    std::next(timetable.down_trains()[0].stops().begin(), 3)
                 ),
                 std::invalid_argument
             );

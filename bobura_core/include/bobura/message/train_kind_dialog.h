@@ -11,13 +11,13 @@
 
 #include <cassert>
 #include <functional>
+#include <iterator>
 #include <stdexcept>
 #include <utility>
 #include <vector>
 
 #include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/utility.hpp>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
@@ -154,7 +154,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         {
             const auto insertion_position =
                 m_current_train_kind_index ?
-                boost::next(m_info_sets.begin(), *m_current_train_kind_index) : m_info_sets.end();
+                std::next(m_info_sets.begin(), *m_current_train_kind_index) : m_info_sets.end();
 
             m_info_sets.emplace(
                 insertion_position,
@@ -250,7 +250,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         {
             assert(m_current_train_kind_index);
             assert(*m_current_train_kind_index < m_info_sets.size());
-            const auto deletion_position = boost::next(m_info_sets.begin(), *m_current_train_kind_index);
+            const auto deletion_position = std::next(m_info_sets.begin(), *m_current_train_kind_index);
 
             m_info_sets.erase(deletion_position);
             if (*m_current_train_kind_index >= m_info_sets.size())

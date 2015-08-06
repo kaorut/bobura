@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cstddef>
+#include <iterator>
 #include <memory>
 #include <stdexcept>
 #include <string>
@@ -21,7 +22,6 @@
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
-#include <boost/utility.hpp>
 #include <boost/utility/string_ref.hpp>
 
 #include <tetengo2.h>
@@ -365,7 +365,7 @@ namespace bobura { namespace model { namespace serializer
                     if (!new_train_kind)
                         return false;
                     m_timetable.set_train_kind(
-                        boost::next(m_timetable.train_kinds().begin(), i), std::move(*new_train_kind)
+                        std::next(m_timetable.train_kinds().begin(), i), std::move(*new_train_kind)
                     );
                 }
                 for (std::size_t i = train_kind_count; i < props.size(); ++i)
@@ -406,7 +406,7 @@ namespace bobura { namespace model { namespace serializer
                 };
 
                 m_timetable.set_train_kind(
-                    boost::next(m_timetable.train_kinds().begin(), index), std::move(new_kind)
+                    std::next(m_timetable.train_kinds().begin(), index), std::move(new_kind)
                 );
 
                 return true;
