@@ -6,10 +6,10 @@
     $Id$
 */
 
+#include <iterator>
 #include <utility>
 
 #include <boost/test/unit_test.hpp>
-#include <boost/utility.hpp>
 
 #include <tetengo2.h>
 
@@ -737,13 +737,13 @@ BOOST_AUTO_TEST_SUITE(train)
                 stops.end()
             };
 
-            BOOST_CHECK(train.previous_stop(boost::next(train.stops().begin(), 0)) == train.stops().end());
-            BOOST_CHECK(train.previous_stop(boost::next(train.stops().begin(), 1)) == train.stops().end());
+            BOOST_CHECK(train.previous_stop(std::next(train.stops().begin(), 0)) == train.stops().end());
+            BOOST_CHECK(train.previous_stop(std::next(train.stops().begin(), 1)) == train.stops().end());
             BOOST_CHECK(
-                train.previous_stop(boost::next(train.stops().begin(), 2)) == boost::next(train.stops().begin(), 1)
+                train.previous_stop(std::next(train.stops().begin(), 2)) == std::next(train.stops().begin(), 1)
             );
             BOOST_CHECK(
-                train.previous_stop(boost::next(train.stops().begin(), 3)) == boost::next(train.stops().begin(), 2)
+                train.previous_stop(std::next(train.stops().begin(), 3)) == std::next(train.stops().begin(), 2)
             );
         }
         {
@@ -770,13 +770,13 @@ BOOST_AUTO_TEST_SUITE(train)
             };
 
             BOOST_CHECK(
-                train.previous_stop(boost::next(train.stops().begin(), 0)) == boost::next(train.stops().begin(), 1)
+                train.previous_stop(std::next(train.stops().begin(), 0)) == std::next(train.stops().begin(), 1)
             );
             BOOST_CHECK(
-                train.previous_stop(boost::next(train.stops().begin(), 1)) == boost::next(train.stops().begin(), 2)
+                train.previous_stop(std::next(train.stops().begin(), 1)) == std::next(train.stops().begin(), 2)
             );
-            BOOST_CHECK(train.previous_stop(boost::next(train.stops().begin(), 2)) == train.stops().end());
-            BOOST_CHECK(train.previous_stop(boost::next(train.stops().begin(), 3)) == train.stops().end());
+            BOOST_CHECK(train.previous_stop(std::next(train.stops().begin(), 2)) == train.stops().end());
+            BOOST_CHECK(train.previous_stop(std::next(train.stops().begin(), 3)) == train.stops().end());
         }
     }
 
@@ -809,13 +809,13 @@ BOOST_AUTO_TEST_SUITE(train)
             };
 
             BOOST_CHECK(
-                train.next_stop(boost::next(train.stops().begin(), 0)) == boost::next(train.stops().begin(), 1)
+                train.next_stop(std::next(train.stops().begin(), 0)) == std::next(train.stops().begin(), 1)
             );
             BOOST_CHECK(
-                train.next_stop(boost::next(train.stops().begin(), 1)) == boost::next(train.stops().begin(), 2)
+                train.next_stop(std::next(train.stops().begin(), 1)) == std::next(train.stops().begin(), 2)
             );
-            BOOST_CHECK(train.next_stop(boost::next(train.stops().begin(), 2)) == train.stops().end());
-            BOOST_CHECK(train.next_stop(boost::next(train.stops().begin(), 3)) == train.stops().end());
+            BOOST_CHECK(train.next_stop(std::next(train.stops().begin(), 2)) == train.stops().end());
+            BOOST_CHECK(train.next_stop(std::next(train.stops().begin(), 3)) == train.stops().end());
         }
         {
             const train_type::stops_type stops{
@@ -840,13 +840,13 @@ BOOST_AUTO_TEST_SUITE(train)
                 stops.end()
             };
 
-            BOOST_CHECK(train.next_stop(boost::next(train.stops().begin(), 0)) == train.stops().end());
-            BOOST_CHECK(train.next_stop(boost::next(train.stops().begin(), 1)) == train.stops().end());
+            BOOST_CHECK(train.next_stop(std::next(train.stops().begin(), 0)) == train.stops().end());
+            BOOST_CHECK(train.next_stop(std::next(train.stops().begin(), 1)) == train.stops().end());
             BOOST_CHECK(
-                train.next_stop(boost::next(train.stops().begin(), 2)) == boost::next(train.stops().begin(), 1)
+                train.next_stop(std::next(train.stops().begin(), 2)) == std::next(train.stops().begin(), 1)
             );
             BOOST_CHECK(
-                train.next_stop(boost::next(train.stops().begin(), 3)) == boost::next(train.stops().begin(), 2)
+                train.next_stop(std::next(train.stops().begin(), 3)) == std::next(train.stops().begin(), 2)
             );
         }
     }
@@ -875,7 +875,7 @@ BOOST_AUTO_TEST_SUITE(train)
                 stops.end()
             };
 
-            BOOST_CHECK(train.origin_stop() == boost::next(train.stops().begin(), 0));
+            BOOST_CHECK(train.origin_stop() == std::next(train.stops().begin(), 0));
         }
         {
             const train_type::stops_type stops{
@@ -900,7 +900,7 @@ BOOST_AUTO_TEST_SUITE(train)
                 stops.end()
             };
 
-            BOOST_CHECK(train.origin_stop() == boost::next(train.stops().begin(), 1));
+            BOOST_CHECK(train.origin_stop() == std::next(train.stops().begin(), 1));
         }
         {
             const train_type::stops_type stops{
@@ -921,7 +921,7 @@ BOOST_AUTO_TEST_SUITE(train)
                 stops.end()
             };
 
-            BOOST_CHECK(train.origin_stop() == boost::next(train.stops().begin(), 3));
+            BOOST_CHECK(train.origin_stop() == std::next(train.stops().begin(), 3));
         }
         {
             const train_type::stops_type stops{
@@ -946,7 +946,7 @@ BOOST_AUTO_TEST_SUITE(train)
                 stops.end()
             };
 
-            BOOST_CHECK(train.origin_stop() == boost::next(train.stops().begin(), 2));
+            BOOST_CHECK(train.origin_stop() == std::next(train.stops().begin(), 2));
         }
         {
             const train_type::stops_type stops{
@@ -997,7 +997,7 @@ BOOST_AUTO_TEST_SUITE(train)
                 stops.end()
             };
 
-            BOOST_CHECK(train.destination_stop() == boost::next(train.stops().begin(), 3));
+            BOOST_CHECK(train.destination_stop() == std::next(train.stops().begin(), 3));
         }
         {
             const train_type::stops_type stops{
@@ -1022,7 +1022,7 @@ BOOST_AUTO_TEST_SUITE(train)
                 stops.end()
             };
 
-            BOOST_CHECK(train.destination_stop() == boost::next(train.stops().begin(), 2));
+            BOOST_CHECK(train.destination_stop() == std::next(train.stops().begin(), 2));
         }
         {
             const train_type::stops_type stops{
@@ -1043,7 +1043,7 @@ BOOST_AUTO_TEST_SUITE(train)
                 stops.end()
             };
 
-            BOOST_CHECK(train.destination_stop() == boost::next(train.stops().begin(), 0));
+            BOOST_CHECK(train.destination_stop() == std::next(train.stops().begin(), 0));
         }
         {
             const train_type::stops_type stops{
@@ -1068,7 +1068,7 @@ BOOST_AUTO_TEST_SUITE(train)
                 stops.end()
             };
 
-            BOOST_CHECK(train.destination_stop() == boost::next(train.stops().begin(), 1));
+            BOOST_CHECK(train.destination_stop() == std::next(train.stops().begin(), 1));
         }
         {
             const train_type::stops_type stops{

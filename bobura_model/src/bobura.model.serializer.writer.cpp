@@ -6,9 +6,10 @@
     $Id$
 */
 
+#include <iterator>
+
 #include <boost/filesystem.hpp>
 #include <boost/predef.h>
-#include <boost/utility.hpp>
 
 #include <tetengo2.h>
 
@@ -114,7 +115,7 @@ namespace bobura { namespace model { namespace serializer
             return false;
             
         const path_string_type path_extension_string{
-            boost::prior(path_string.end(), extension_string.length()), path_string.end()
+            std::prev(path_string.end(), extension_string.length()), path_string.end()
         };
 
         return path_extension_string == extension_string;

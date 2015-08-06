@@ -21,7 +21,6 @@
 #include <boost/optional.hpp>
 #include <boost/rational.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/utility.hpp>
 
 #include <tetengo2.h>
 
@@ -492,7 +491,7 @@ namespace bobura { namespace message { namespace diagram_view
 
             string_type text{};
 
-            const stop_iterator i_departure = boost::next(train.stops().begin(), stop_index);
+            const stop_iterator i_departure = std::next(train.stops().begin(), stop_index);
             {
                 string_type stop_text_ = stop_text(train.stops().begin(), i_departure, false, true);
                 if (stop_text_.empty())
@@ -670,7 +669,7 @@ namespace bobura { namespace message { namespace diagram_view
         {
             if (departure_stop_index)
             {
-                const auto departure = boost::next(train.stops().begin(), *departure_stop_index);
+                const auto departure = std::next(train.stops().begin(), *departure_stop_index);
                 return std::make_pair(departure, train.next_stop(departure));
             }
             else

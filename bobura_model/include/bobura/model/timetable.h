@@ -19,7 +19,6 @@
 
 #include <boost/operators.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/utility.hpp>
 
 #include <bobura/model/message/timetable_observer_set.h>
 #include <bobura/model/timetable_info/font_color_set.h>
@@ -820,7 +819,7 @@ namespace bobura { namespace model
         )
         const
         {
-            if (position != m_station_locations.begin() && !boost::prior(position)->before(station_location))
+            if (position != m_station_locations.begin() && !std::prev(position)->before(station_location))
                 return false;
 
             if (position != m_station_locations.end() && !station_location.before(*position))

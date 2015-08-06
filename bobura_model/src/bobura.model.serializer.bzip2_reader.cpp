@@ -17,7 +17,6 @@
 #include <boost/predef.h>
 #include <boost/range/iterator_range.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
-#include <boost/utility.hpp>
 
 #include <tetengo2.h>
 
@@ -65,7 +64,7 @@ namespace bobura { namespace model { namespace serializer
         {
             if (std::distance(first, last) < 2)
                 return false;
-            if (input_string_type{ first, boost::next(first, 2) } != input_string_type(TETENGO2_TEXT("BZ")))
+            if (input_string_type{ first, std::next(first, 2) } != input_string_type(TETENGO2_TEXT("BZ")))
                 return false;
 
             const input_string_type input_string{ first, last };
