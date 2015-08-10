@@ -57,6 +57,7 @@ pkg_headers = \
     property_bar.h \
     settings.h \
     timetable_model.h \
+    timetable_view.h \
     train_kind_dialog.h \
     type_list.h \
     view/diagram/0namespace.dox \
@@ -70,6 +71,7 @@ pkg_headers = \
     view/diagram/utility.h \
     view/diagram/zoom.h \
     view/scale_list.h \
+    view/timetable/traits.h \
     view_picture_box.h
 
 extra_headers = \
@@ -77,7 +79,9 @@ extra_headers = \
     command/0namespace.dox \
     load_save/0namespace.dox \
     message/0namespace.dox \
-    view/0namespace.dox
+    view/0namespace.dox \
+    view/diagram/0namespace.dox \
+    view/timetable/0namespace.dox
 
 nobase_pkginclude_HEADERS = $(pkg_headers)
 EXTRA_DIST = $(extra_headers)

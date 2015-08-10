@@ -53,6 +53,7 @@ sources = \
     test_bobura.property_bar.cpp \
     test_bobura.settings.cpp \
     test_bobura.timetable_model.cpp \
+    test_bobura.timetable_view.cpp \
     test_bobura.train_kind_dialog.cpp \
     test_bobura.view.diagram.header.cpp \
     test_bobura.view.diagram.item.cpp \

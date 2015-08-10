@@ -43,6 +43,7 @@ sources = \
     bobura.property_bar.cpp \
     bobura.settings.cpp \
     bobura.timetable_model.cpp \
+    bobura.timetable_view.cpp \
     bobura.train_kind_dialog.cpp \
     bobura.view.diagram.header.cpp \
     bobura.view.diagram.item.cpp \
