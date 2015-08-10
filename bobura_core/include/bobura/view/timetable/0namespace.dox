@@ -1,0 +1,11 @@
+/*! \file
+    The Doxygen documents for namespaces.
+
+    Copyright (C) 2007-2015 kaoru
+
+    $Id$
+*/
+
+/*! \namespace bobura::view::timetable
+    \brief The namespace for the view of the timetable.
+*/

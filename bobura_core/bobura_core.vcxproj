@@ -157,6 +157,7 @@
     <ClInclude Include="include\bobura\property_bar.h" />
     <ClInclude Include="include\bobura\settings.h" />
     <ClInclude Include="include\bobura\timetable_model.h" />
+    <ClInclude Include="include\bobura\timetable_view.h" />
     <ClInclude Include="include\bobura\train_kind_dialog.h" />
     <ClInclude Include="include\bobura\type_list.h" />
     <ClInclude Include="include\bobura\view\0namespace.dox" />
@@ -171,6 +172,7 @@
     <ClInclude Include="include\bobura\view\diagram\utility.h" />
     <ClInclude Include="include\bobura\view\diagram\zoom.h" />
     <ClInclude Include="include\bobura\view\scale_list.h" />
+    <ClInclude Include="include\bobura\view\timetable\traits.h" />
     <ClInclude Include="include\bobura\view_picture_box.h" />
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +216,7 @@
     <ClCompile Include="src\bobura.property_bar.cpp" />
     <ClCompile Include="src\bobura.settings.cpp" />
     <ClCompile Include="src\bobura.timetable_model.cpp" />
+    <ClCompile Include="src\bobura.timetable_view.cpp" />
     <ClCompile Include="src\bobura.train_kind_dialog.cpp" />
     <ClCompile Include="src\bobura.view.diagram.header.cpp" />
     <ClCompile Include="src\bobura.view.diagram.item.cpp" />
@@ -225,6 +228,9 @@
     <ClCompile Include="src\bobura.view.diagram.zoom.cpp" />
     <ClCompile Include="src\bobura.view.scale_list.cpp" />
     <ClCompile Include="src\bobura.view_picture_box.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\bobura\view\timetable\0namespace.dox" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -43,6 +43,9 @@
     <Filter Include="sources\bobura\message">
       <UniqueIdentifier>{8d79d3e3-d45b-47d6-bba7-404477c60efc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="headers\bobura\view\timetable">
+      <UniqueIdentifier>{b5aba615-db21-4bed-8c03-250453f09bcc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\precompiled\precompiled.h">
@@ -267,6 +270,12 @@
     <ClInclude Include="include\bobura\command\show_timetable.h">
       <Filter>headers\bobura\command</Filter>
     </ClInclude>
+    <ClInclude Include="include\bobura\view\timetable\traits.h">
+      <Filter>headers\bobura\view\timetable</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bobura\timetable_view.h">
+      <Filter>headers\bobura</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\precompiled\precompiled.cpp">
@@ -413,5 +422,13 @@
     <ClCompile Include="src\bobura.command.show_timetable.cpp">
       <Filter>sources\bobura\command</Filter>
     </ClCompile>
+    <ClCompile Include="src\bobura.timetable_view.cpp">
+      <Filter>sources\bobura</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\bobura\view\timetable\0namespace.dox">
+      <Filter>headers\bobura\view\timetable</Filter>
+    </None>
   </ItemGroup>
 </Project>

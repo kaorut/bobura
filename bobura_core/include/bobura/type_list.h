@@ -32,6 +32,7 @@
 #include <bobura/main_window_menu_builder_traits.h>
 #include <bobura/model/serializer/oudia_diagram_dialog.h>
 #include <bobura/view/diagram/traits.h>
+#include <bobura/view/timetable/traits.h>
 
 
 namespace bobura { namespace type_list
@@ -877,6 +878,18 @@ namespace bobura { namespace type_list
             >;
 
         template <typename DetailTypeList>
+        using timetable_view_traits_type =
+            bobura::view::timetable::traits<
+                size_type,
+                difference_type,
+                string_type,
+                operating_distance_type,
+                speed_type,
+                fast_canvas_type<DetailTypeList>,
+                message_catalog_type<DetailTypeList>
+            >;
+
+        template <typename DetailTypeList>
         using config_traits_type =
             config_traits<
                 string_type,
@@ -1051,6 +1064,9 @@ namespace bobura { namespace type_list
 
         //! The diagram view traits.
         using diagram_view_type = detail::traits::diagram_view_traits_type<DetailTypeList>;
+
+        //! The timetable view traits.
+        using timetable_view_type = detail::traits::timetable_view_traits_type<DetailTypeList>;
 
         //! The config traits.
         using config_type = detail::traits::config_traits_type<DetailTypeList>;
