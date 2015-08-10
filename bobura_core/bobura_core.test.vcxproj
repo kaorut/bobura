@@ -146,6 +146,7 @@
     <ClCompile Include="test\test_bobura.property_bar.cpp" />
     <ClCompile Include="test\test_bobura.settings.cpp" />
     <ClCompile Include="test\test_bobura.timetable_model.cpp" />
+    <ClCompile Include="test\test_bobura.timetable_view.cpp" />
     <ClCompile Include="test\test_bobura.train_kind_dialog.cpp" />
     <ClCompile Include="test\test_bobura.view.diagram.header.cpp" />
     <ClCompile Include="test\test_bobura.view.diagram.item.cpp" />
