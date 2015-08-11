@@ -1039,6 +1039,7 @@ namespace bobura { namespace type_list
                 message_catalog_type<DetailTypeList>,
                 main_window_traits_type<DetailTypeList>,
                 diagram_view_traits_type<DetailTypeList>,
+                timetable_view_traits_type<DetailTypeList>,
                 load_save_traits_type<DetailTypeList>,
                 command_set_traits_type<DetailTypeList>,
                 main_window_menu_builder_traits_type<DetailTypeList>,

@@ -40,6 +40,7 @@ namespace bobura
         \tparam MessageCatalog              A message catalog type.
         \tparam MainWindowTraits            A main window traits type.
         \tparam DiagramViewTraits           A diagram view traits type.
+        \tparam TimetableViewTraits         A timetable view traits type.
         \tparam LoadSaveTraits              A loading and saving processing traits type.
         \tparam CommandSetTraits            A command set traits type.
         \tparam MainWindowMenuBuilderTraits A main window menu builder traits type.
@@ -71,6 +72,7 @@ namespace bobura
         typename MessageCatalog,
         typename MainWindowTraits,
         typename DiagramViewTraits,
+        typename TimetableViewTraits,
         typename LoadSaveTraits,
         typename CommandSetTraits,
         typename MainWindowMenuBuilderTraits,
@@ -155,6 +157,9 @@ namespace bobura
 
         //! The diagram view traits type.
         using diagram_view_traits_type = DiagramViewTraits;
+
+        //! The timetable view traits type.
+        using timetable_view_traits_type = TimetableViewTraits;
 
         //! The loading and saving processing traits type.
         using load_save_traits_type = LoadSaveTraits;

@@ -30,6 +30,7 @@
 #include <bobura/message/timetable_model.h>
 #include <bobura/message/view_picture_box.h>
 #include <bobura/timetable_model.h>
+#include <bobura/timetable_view.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/zoom.h>
 #include <bobura/view_picture_box.h>
@@ -71,10 +72,13 @@ namespace bobura
         {
             const message_catalog_type message_catalog{};
             diagram_view_type diagram_view{ m_model, message_catalog };
+            timetable_view_type timetable_view{ m_model, message_catalog };
             const command_set_holder_type command_set_holder{ m_settings, m_model, diagram_view, message_catalog };
 
             main_window_type main_window(message_catalog, m_settings, command_set_holder.confirm_file_save()); 
-            set_message_observers(command_set_holder.command_set(), diagram_view, main_window, message_catalog);
+            set_message_observers(
+                command_set_holder.command_set(), diagram_view, timetable_view, main_window, message_catalog
+            );
             m_model.reset_timetable();
             main_window.set_menu_bar(
                 main_window_menu_builder_type(
@@ -112,6 +116,10 @@ namespace bobura
         using diagram_view_traits_type = typename traits_type::diagram_view_traits_type;
 
         using diagram_view_type = diagram_view<diagram_view_traits_type>;
+
+        using timetable_view_traits_type = typename traits_type::timetable_view_traits_type;
+
+        using timetable_view_type = timetable_view<timetable_view_traits_type>;
 
         using main_window_traits_type = typename traits_type::main_window_traits_type;
 
@@ -319,6 +327,7 @@ namespace bobura
         void set_message_observers(
             const command_set_type&     command_set,
             diagram_view_type&          diagram_view,
+            timetable_view_type&        timetable_view,
             main_window_type&           main_window,
             const message_catalog_type& message_catalog
         )
