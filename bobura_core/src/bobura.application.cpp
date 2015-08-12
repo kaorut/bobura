@@ -10,6 +10,7 @@
 #include <chrono>
 #include <memory>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
@@ -332,80 +333,96 @@ namespace bobura
             const message_catalog_type& message_catalog
         )
         {
-            view_picture_box_type& diagram_view_picture_box = main_window.get_diagram_view_picture_box();
-
             m_model.observer_set().reset().connect(model_reset_observer_type{ m_model, diagram_view, main_window });
-            m_model.observer_set().changed().connect(
-                model_changed_observer_type{ m_model, diagram_view, main_window }
-            );
+            m_model.observer_set().changed().connect(model_changed_observer_type{ m_model, diagram_view, main_window });
 
-            diagram_view.selection_observer_set().station_selected().connect(
-                view_station_selected_observer_type( main_window.get_property_bar(), m_model, message_catalog )
-            );
-            diagram_view.selection_observer_set().train_selected().connect(
-                view_train_selected_observer_type{ main_window.get_property_bar(), m_model, message_catalog }
-            );
-            diagram_view.selection_observer_set().all_unselected().connect(
-                view_all_unselected_observer_type{ main_window.get_property_bar() }
-            );
-            
+            set_diagram_view_message_observers(command_set, diagram_view, main_window, message_catalog);
+            set_timetable_view_message_observers(command_set, timetable_view, main_window, message_catalog);
+
             main_window.file_drop_observer_set().file_dropped().connect(
                 main_window_file_dropped_observer_type{ command_set, m_model, main_window }
             );
+        }
+
+        void set_diagram_view_message_observers(
+            const command_set_type&     command_set,
+            diagram_view_type&          view,
+            main_window_type&           main_window,
+            const message_catalog_type& message_catalog
+        )
+        {
+            view.selection_observer_set().station_selected().connect(
+                view_station_selected_observer_type( main_window.get_property_bar(), m_model, message_catalog )
+            );
+            view.selection_observer_set().train_selected().connect(
+                view_train_selected_observer_type{ main_window.get_property_bar(), m_model, message_catalog }
+            );
+            view.selection_observer_set().all_unselected().connect(
+                view_all_unselected_observer_type{ main_window.get_property_bar() }
+            );
+            
+            view_picture_box_type& picture_box = main_window.get_diagram_view_picture_box();
+
             main_window.size_observer_set().resized().connect(
                 main_window_window_resized_observer_type{
-                    diagram_view,
-                    main_window,
-                    main_window.get_tab_frame(),
-                    diagram_view_picture_box,
-                    main_window.get_property_bar()
+                    view, main_window, main_window.get_tab_frame(), picture_box, main_window.get_property_bar()
                 }
             );
 
-            diagram_view_picture_box.mouse_observer_set().pressed().connect(
+            picture_box.mouse_observer_set().pressed().connect(
                 diagram_view_picture_box_mouse_pressed_observer_type{
-                    diagram_view_picture_box,
-                    [&main_window, &diagram_view_picture_box](const mouse_button_type mouse_button)
+                    picture_box,
+                    [&main_window, &picture_box](const mouse_button_type mouse_button)
                     {
-                        diagram_view_picture_box.set_mouse_capture(mouse_button);
+                        picture_box.set_mouse_capture(mouse_button);
                     },
-                    diagram_view
+                    view
                 }
             );
-            diagram_view_picture_box.mouse_observer_set().released().connect(
+            picture_box.mouse_observer_set().released().connect(
                 diagram_view_picture_box_mouse_released_observer_type{
-                    [&main_window, &diagram_view_picture_box](const mouse_button_type mouse_button)
+                    [&main_window, &picture_box](const mouse_button_type mouse_button)
                     {
-                        return diagram_view_picture_box.release_mouse_capture(mouse_button);
+                        return picture_box.release_mouse_capture(mouse_button);
                     },
-                    diagram_view
+                    view
                 }
             );
-            diagram_view_picture_box.mouse_observer_set().moved().connect(
-                diagram_view_picture_box_mouse_moved_observer_type{ diagram_view_picture_box, diagram_view }
+            picture_box.mouse_observer_set().moved().connect(
+                diagram_view_picture_box_mouse_moved_observer_type{ picture_box, view }
             );
-            diagram_view_picture_box.mouse_observer_set().wheeled().connect(
-                diagram_view_picture_box_mouse_wheeled_observer_type{ diagram_view_picture_box, diagram_view }
+            picture_box.mouse_observer_set().wheeled().connect(
+                diagram_view_picture_box_mouse_wheeled_observer_type{ picture_box, view }
             );
-            diagram_view_picture_box.fast_paint_observer_set().paint().connect(
-                diagram_view_picture_box_paint_paint_observer_type{ diagram_view_picture_box, diagram_view }
+            picture_box.fast_paint_observer_set().paint().connect(
+                diagram_view_picture_box_paint_paint_observer_type{ picture_box, view }
             );
-            assert(diagram_view_picture_box.has_vertical_scroll_bar());
-            diagram_view_picture_box.vertical_scroll_bar().scroll_bar_observer_set().scrolling().connect(
-                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ diagram_view_picture_box, diagram_view }
+            assert(picture_box.has_vertical_scroll_bar());
+            picture_box.vertical_scroll_bar().scroll_bar_observer_set().scrolling().connect(
+                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ picture_box, view }
             );
-            diagram_view_picture_box.vertical_scroll_bar().scroll_bar_observer_set().scrolled().connect(
-                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ diagram_view_picture_box, diagram_view }
+            picture_box.vertical_scroll_bar().scroll_bar_observer_set().scrolled().connect(
+                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ picture_box, view }
             );
-            assert(diagram_view_picture_box.has_horizontal_scroll_bar());
-            diagram_view_picture_box.horizontal_scroll_bar().scroll_bar_observer_set().scrolling().connect(
-                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ diagram_view_picture_box, diagram_view }
+            assert(picture_box.has_horizontal_scroll_bar());
+            picture_box.horizontal_scroll_bar().scroll_bar_observer_set().scrolling().connect(
+                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ picture_box, view }
             );
-            diagram_view_picture_box.horizontal_scroll_bar().scroll_bar_observer_set().scrolled().connect(
-                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ diagram_view_picture_box, diagram_view }
+            picture_box.horizontal_scroll_bar().scroll_bar_observer_set().scrolled().connect(
+                diagram_view_picture_box_scroll_bar_scrolled_observer_type{ picture_box, view }
             );
         }
 
+        void set_timetable_view_message_observers(
+            const command_set_type&     command_set,
+            timetable_view_type&        view,
+            main_window_type&           main_window,
+            const message_catalog_type& message_catalog
+        )
+        {
+            boost::ignore_unused(command_set, view, main_window, message_catalog);
+        }
+        
         void load_input_file(main_window_type& main_window, const command_set_type& command_set)
         {
             if (!m_settings.input())
