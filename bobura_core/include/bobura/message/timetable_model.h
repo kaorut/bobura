@@ -44,9 +44,10 @@ namespace bobura { namespace message { namespace timetable_model
 
         \tparam TimetableModel A timetable model type.
         \tparam DiagramView    A diagram view type.
+        \tparam TimetableView  A timetable view type.
         \tparam MainWindow     A main window type.
     */
-    template <typename TimetableModel, typename DiagramView, typename MainWindow>
+    template <typename TimetableModel, typename DiagramView, typename TimetableView, typename MainWindow>
     class reset
     {
     public:
@@ -57,6 +58,9 @@ namespace bobura { namespace message { namespace timetable_model
 
         //! The diagram view type.
         using diagram_view_type = DiagramView;
+
+        //! The timetable view type.
+        using timetable_view_type = TimetableView;
 
         //! The main window type.
         using main_window_type = MainWindow;
@@ -69,16 +73,19 @@ namespace bobura { namespace message { namespace timetable_model
 
             \param timetable_model A timetable model.
             \param diagram_view    A diagram view.
+            \param timetable_view  A timetable view.
             \param main_window     A main window.
         */
         reset(
             const timetable_model_type& timetable_model,
             diagram_view_type&          diagram_view,
+            timetable_view_type&        timetable_view,
             main_window_type&           main_window
         )
         :
         m_timetable_model(timetable_model),
         m_diagram_view(diagram_view),
+        m_timetable_view(timetable_view),
         m_main_window(main_window)
         {}
 
@@ -152,6 +159,8 @@ namespace bobura { namespace message { namespace timetable_model
 
         diagram_view_type& m_diagram_view;
 
+        timetable_view_type& m_timetable_view;
+
         main_window_type& m_main_window;
 
 
@@ -163,9 +172,10 @@ namespace bobura { namespace message { namespace timetable_model
 
         \tparam TimetableModel A timetable model type.
         \tparam DiagramView    A diagram view type.
+        \tparam TimetableView  A timetable view type.
         \tparam MainWindow     A main window type.
     */
-    template <typename TimetableModel, typename DiagramView, typename MainWindow>
+    template <typename TimetableModel, typename DiagramView, typename TimetableView, typename MainWindow>
     class changed
     {
     public:
@@ -176,6 +186,9 @@ namespace bobura { namespace message { namespace timetable_model
 
         //! The diagram view type.
         using diagram_view_type = DiagramView;
+
+        //! The timetable view type.
+        using timetable_view_type = TimetableView;
 
         //! The main window type.
         using main_window_type = MainWindow;
@@ -188,16 +201,19 @@ namespace bobura { namespace message { namespace timetable_model
 
             \param timetable_model A timetable model.
             \param diagram_view    A diagram view.
+            \param timetable_view  A timetable view.
             \param main_window     A main window.
         */
         changed(
             const timetable_model_type& timetable_model,
             diagram_view_type&          diagram_view,
+            timetable_view_type&        timetable_view,
             main_window_type&           main_window
         )
         :
         m_timetable_model(timetable_model),
         m_diagram_view(diagram_view),
+        m_timetable_view(timetable_view),
         m_main_window(main_window)
         {}
 
@@ -224,6 +240,8 @@ namespace bobura { namespace message { namespace timetable_model
         const timetable_model_type& m_timetable_model;
 
         diagram_view_type& m_diagram_view;
+
+        timetable_view_type& m_timetable_view;
 
         main_window_type& m_main_window;
 

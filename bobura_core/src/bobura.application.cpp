@@ -129,10 +129,10 @@ namespace bobura
         using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
 
         using model_reset_observer_type =
-            message::timetable_model::reset<model_type, diagram_view_type, main_window_type>;
+            message::timetable_model::reset<model_type, diagram_view_type, timetable_view_type, main_window_type>;
 
         using model_changed_observer_type =
-            message::timetable_model::changed<model_type, diagram_view_type, main_window_type>;
+            message::timetable_model::changed<model_type, diagram_view_type, timetable_view_type, main_window_type>;
 
         using abstract_window_type = typename traits_type::abstract_window_type;
 
@@ -333,11 +333,15 @@ namespace bobura
             const message_catalog_type& message_catalog
         )
         {
-            m_model.observer_set().reset().connect(model_reset_observer_type{ m_model, diagram_view, main_window });
-            m_model.observer_set().changed().connect(model_changed_observer_type{ m_model, diagram_view, main_window });
+            m_model.observer_set().reset().connect(
+                model_reset_observer_type{ m_model, diagram_view, timetable_view, main_window }
+            );
+            m_model.observer_set().changed().connect(
+                model_changed_observer_type{ m_model, diagram_view, timetable_view, main_window }
+            );
 
-            set_diagram_view_message_observers(command_set, diagram_view, main_window, message_catalog);
-            set_timetable_view_message_observers(command_set, timetable_view, main_window, message_catalog);
+            set_diagram_view_message_observers(diagram_view, main_window, message_catalog);
+            set_timetable_view_message_observers(timetable_view, main_window, message_catalog);
 
             main_window.file_drop_observer_set().file_dropped().connect(
                 main_window_file_dropped_observer_type{ command_set, m_model, main_window }
@@ -345,7 +349,6 @@ namespace bobura
         }
 
         void set_diagram_view_message_observers(
-            const command_set_type&     command_set,
             diagram_view_type&          view,
             main_window_type&           main_window,
             const message_catalog_type& message_catalog
@@ -414,13 +417,12 @@ namespace bobura
         }
 
         void set_timetable_view_message_observers(
-            const command_set_type&     command_set,
             timetable_view_type&        view,
             main_window_type&           main_window,
             const message_catalog_type& message_catalog
         )
         {
-            boost::ignore_unused(command_set, view, main_window, message_catalog);
+            boost::ignore_unused(view, main_window, message_catalog);
         }
         
         void load_input_file(main_window_type& main_window, const command_set_type& command_set)
