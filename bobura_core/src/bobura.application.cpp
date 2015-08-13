@@ -342,7 +342,7 @@ namespace bobura
             );
 
             set_diagram_view_message_observers(diagram_view, main_window, message_catalog);
-            set_timetable_view_message_observers(timetable_view, main_window, message_catalog);
+            set_timetable_view_message_observers(timetable_view, main_window);
 
             main_window.size_observer_set().resized().connect(
                 main_window_window_resized_observer_type{
@@ -376,7 +376,7 @@ namespace bobura
                 view_all_unselected_observer_type{ main_window.get_property_bar() }
             );
             
-            view_picture_box_type& picture_box = main_window.get_diagram_view_picture_box();
+            auto& picture_box = main_window.get_diagram_view_picture_box();
 
             picture_box.mouse_observer_set().pressed().connect(
                 diagram_view_picture_box_mouse_pressed_observer_type{
@@ -422,13 +422,56 @@ namespace bobura
             );
         }
 
-        void set_timetable_view_message_observers(
-            timetable_view_type&        view,
-            main_window_type&           main_window,
-            const message_catalog_type& message_catalog
-        )
+        void set_timetable_view_message_observers(timetable_view_type& view, main_window_type& main_window)
         {
-            boost::ignore_unused(view, main_window, message_catalog);
+            boost::ignore_unused(view);
+
+            /*auto& picture_box =*/ main_window.get_timetable_view_picture_box();
+
+/*
+            picture_box.mouse_observer_set().pressed().connect(
+                timetable_view_picture_box_mouse_pressed_observer_type{
+                    picture_box,
+                    [&main_window, &picture_box](const mouse_button_type mouse_button)
+                    {
+                        picture_box.set_mouse_capture(mouse_button);
+                    },
+                    view
+                }
+            );
+            picture_box.mouse_observer_set().released().connect(
+                timetable_view_picture_box_mouse_released_observer_type{
+                    [&main_window, &picture_box](const mouse_button_type mouse_button)
+                    {
+                        return picture_box.release_mouse_capture(mouse_button);
+                    },
+                    view
+                }
+            );
+            picture_box.mouse_observer_set().moved().connect(
+                timetable_view_picture_box_mouse_moved_observer_type{ picture_box, view }
+            );
+            picture_box.mouse_observer_set().wheeled().connect(
+                timetable_view_picture_box_mouse_wheeled_observer_type{ picture_box, view }
+            );
+            picture_box.fast_paint_observer_set().paint().connect(
+                timetable_view_picture_box_paint_paint_observer_type{ picture_box, view }
+            );
+            assert(picture_box.has_vertical_scroll_bar());
+            picture_box.vertical_scroll_bar().scroll_bar_observer_set().scrolling().connect(
+                timetable_view_picture_box_scroll_bar_scrolled_observer_type{ picture_box, view }
+            );
+            picture_box.vertical_scroll_bar().scroll_bar_observer_set().scrolled().connect(
+                timetable_view_picture_box_scroll_bar_scrolled_observer_type{ picture_box, view }
+            );
+            assert(picture_box.has_horizontal_scroll_bar());
+            picture_box.horizontal_scroll_bar().scroll_bar_observer_set().scrolling().connect(
+                timetable_view_picture_box_scroll_bar_scrolled_observer_type{ picture_box, view }
+            );
+            picture_box.horizontal_scroll_bar().scroll_bar_observer_set().scrolled().connect(
+                timetable_view_picture_box_scroll_bar_scrolled_observer_type{ picture_box, view }
+            );
+*/
         }
         
         void load_input_file(main_window_type& main_window, const command_set_type& command_set)
