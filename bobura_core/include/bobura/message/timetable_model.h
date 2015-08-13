@@ -102,10 +102,15 @@ namespace bobura { namespace message { namespace timetable_model
 
             m_diagram_view.update_dimension();
             m_diagram_view.unselect_all_items();
-            reset_scroll_bars(m_main_window.get_diagram_view_picture_box(), m_diagram_view);
+            reset_diagram_scroll_bars(m_main_window.get_diagram_view_picture_box(), m_diagram_view);
             m_main_window.get_diagram_view_picture_box().repaint(true);
-            m_main_window.size_observer_set().resized()();
 
+            m_timetable_view.update_dimension();
+            m_timetable_view.unselect_all_items();
+            reset_timetable_scroll_bars(m_main_window.get_diagram_view_picture_box(), m_timetable_view);
+            m_main_window.get_timetable_view_picture_box().repaint(true);
+
+            m_main_window.size_observer_set().resized()();
             m_main_window.show_diagram_tab();
         }
 
@@ -124,7 +129,28 @@ namespace bobura { namespace message { namespace timetable_model
 
         // static functions
 
-        static void reset_scroll_bars(view_picture_box_type& picture_box, const diagram_view_type& view)
+        static void reset_diagram_scroll_bars(view_picture_box_type& picture_box, const diagram_view_type& view)
+        {
+            assert(picture_box.has_vertical_scroll_bar());
+            reset_scroll_bar(
+                picture_box.vertical_scroll_bar(),
+                boost::rational_cast<scroll_bar_size_type>(
+                    tetengo2::gui::dimension<dimension_type>::height(view.dimension()).value()
+                )
+            );
+
+            assert(picture_box.has_horizontal_scroll_bar());
+            reset_scroll_bar(
+                picture_box.horizontal_scroll_bar(),
+                boost::rational_cast<scroll_bar_size_type>(
+                    tetengo2::gui::dimension<dimension_type>::width(view.dimension()).value()
+                )
+            );
+
+            picture_box.update_scroll_bars(view.dimension(), view.page_size(picture_box.client_dimension()));
+        }
+
+        static void reset_timetable_scroll_bars(view_picture_box_type& picture_box, const timetable_view_type& view)
         {
             assert(picture_box.has_vertical_scroll_bar());
             reset_scroll_bar(
@@ -230,6 +256,10 @@ namespace bobura { namespace message { namespace timetable_model
 
             m_diagram_view.update_dimension();
             m_main_window.get_diagram_view_picture_box().repaint(true);
+
+            m_timetable_view.update_dimension();
+            m_main_window.get_timetable_view_picture_box().repaint(true);
+
             m_main_window.size_observer_set().resized()();
         }
 

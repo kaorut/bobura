@@ -99,6 +99,34 @@ namespace bobura
             const position_type&  scroll_bar_position
         );
 
+        /*!
+            \brief Returns the dimension.
+
+            \return The dimension.
+        */
+        const dimension_type& dimension()
+        const;
+
+        /*!
+            \brief Update the dimension.
+        */
+        void update_dimension();
+
+        /*!
+            \brief Returns the page size.
+
+            \param canvas_dimension A canvas dimension.
+
+            \return The page size.
+        */
+        dimension_type page_size(const dimension_type& canvas_dimension)
+        const;
+
+        /*!
+            \brief Unselects all items.
+        */
+        void unselect_all_items();
+
 
     private:
         // types

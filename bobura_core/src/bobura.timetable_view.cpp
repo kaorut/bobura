@@ -11,6 +11,7 @@
 #include <boost/predef.h>
 
 #include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include <bobura/timetable_view.h>
 #include <bobura/type_list.h>
@@ -57,8 +58,40 @@ namespace bobura
             boost::ignore_unused(canvas, canvas_dimension, scroll_bar_position);
         }
 
+        const dimension_type& dimension()
+        const
+        {
+            static const dimension_type singleton{ width_type{ 42 }, height_type{ 24 } };
+            return singleton;
+        }
+
+        void update_dimension()
+        {
+
+        }
+
+        dimension_type page_size(const dimension_type& canvas_dimension)
+        const
+        {
+            boost::ignore_unused(canvas_dimension);
+
+            return dimension_type{ width_type{ 42 }, height_type{ 24 } };
+        }
+
+        void unselect_all_items()
+        {
+
+        }
+
 
     private:
+        // types
+
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
+
+        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+
+
         // variables
 
         const model_type& m_model;
@@ -88,6 +121,34 @@ namespace bobura
     )
     {
         m_p_impl->draw_on(canvas, canvas_dimension, scroll_bar_position);
+    }
+
+    template <typename Traits>
+    const typename timetable_view<Traits>::dimension_type& timetable_view<Traits>::dimension()
+    const
+    {
+        return m_p_impl->dimension();
+    }
+
+    template <typename Traits>
+    void timetable_view<Traits>::update_dimension()
+    {
+        m_p_impl->update_dimension();
+    }
+
+    template <typename Traits>
+    typename timetable_view<Traits>::dimension_type timetable_view<Traits>::page_size(
+        const dimension_type& canvas_dimension
+    )
+    const
+    {
+        return m_p_impl->page_size(canvas_dimension);
+    }
+
+    template <typename Traits>
+    void timetable_view<Traits>::unselect_all_items()
+    {
+        m_p_impl->unselect_all_items();
     }
 
         

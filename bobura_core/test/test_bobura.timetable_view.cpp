@@ -97,6 +97,49 @@ BOOST_AUTO_TEST_SUITE(timetable_view)
         );
     }
 
+    BOOST_AUTO_TEST_CASE(dimension)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        const timetable_view_type timetable_view{ model, message_catalog };
+
+        timetable_view.dimension();
+    }
+
+    BOOST_AUTO_TEST_CASE(update_dimension)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        timetable_view_type timetable_view{ model, message_catalog };
+
+        timetable_view.update_dimension();
+    }
+
+    BOOST_AUTO_TEST_CASE(page_size)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        const timetable_view_type timetable_view{ model, message_catalog };
+
+        timetable_view.page_size(dimension_type{ width_type{ 42 }, height_type{ 24 } });
+    }
+
+    BOOST_AUTO_TEST_CASE(unselect_all_items)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const model_type model{};
+        const message_catalog_type message_catalog{};
+        timetable_view_type timetable_view{ model, message_catalog };
+
+        timetable_view.unselect_all_items();
+    }
 
 
 BOOST_AUTO_TEST_SUITE_END()
