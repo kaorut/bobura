@@ -213,6 +213,7 @@ namespace bobura
         using main_window_window_resized_observer_type =
             message::main_window::window_resized<
                 diagram_view_type,
+                timetable_view_type,
                 abstract_window_type,
                 tab_frame_type,
                 view_picture_box_type,
@@ -343,6 +344,17 @@ namespace bobura
             set_diagram_view_message_observers(diagram_view, main_window, message_catalog);
             set_timetable_view_message_observers(timetable_view, main_window, message_catalog);
 
+            main_window.size_observer_set().resized().connect(
+                main_window_window_resized_observer_type{
+                    diagram_view,
+                    timetable_view,
+                    main_window,
+                    main_window.get_tab_frame(),
+                    main_window.get_diagram_view_picture_box(),
+                    main_window.get_timetable_view_picture_box(),
+                    main_window.get_property_bar()
+                }
+            );
             main_window.file_drop_observer_set().file_dropped().connect(
                 main_window_file_dropped_observer_type{ command_set, m_model, main_window }
             );
@@ -365,12 +377,6 @@ namespace bobura
             );
             
             view_picture_box_type& picture_box = main_window.get_diagram_view_picture_box();
-
-            main_window.size_observer_set().resized().connect(
-                main_window_window_resized_observer_type{
-                    view, main_window, main_window.get_tab_frame(), picture_box, main_window.get_property_bar()
-                }
-            );
 
             picture_box.mouse_observer_set().pressed().connect(
                 diagram_view_picture_box_mouse_pressed_observer_type{

@@ -22,6 +22,7 @@
 #include <bobura/property_bar.h>
 #include <bobura/settings.h>
 #include <bobura/timetable_model.h>
+#include <bobura/timetable_view.h>
 #include <bobura/type_list.h>
 #include <bobura/view_picture_box.h>
 
@@ -80,6 +81,10 @@ namespace
 
     using diagram_view_type = bobura::diagram_view<diagram_view_traits_type>;
 
+    using timetable_view_traits_type = traits_type_list_type::timetable_view_type;
+
+    using timetable_view_type = bobura::timetable_view<timetable_view_traits_type>;
+
     using picture_box_type = ui_type_list_type::picture_box_type;
 
     using mouse_capture_type = ui_type_list_type::mouse_capture_type;
@@ -108,7 +113,12 @@ namespace
 
     using window_resized_type =
         bobura::message::main_window::window_resized<
-            diagram_view_type, abstract_window_type, tab_frame_type, view_picture_box_type, property_bar_type
+            diagram_view_type,
+            timetable_view_type,
+            abstract_window_type,
+            tab_frame_type,
+            view_picture_box_type,
+            property_bar_type
         >;
 
 
@@ -214,13 +224,23 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         const model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
+        timetable_view_type timetable_view{ model, message_catalog };
         window_type window{};
         tab_frame_type tab_frame{ window };
         view_picture_box_type diagram_view_picture_box{ tab_frame };
+        view_picture_box_type timetable_view_picture_box{ tab_frame };
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         property_bar_type property_bar{ window, settings, message_catalog };
-        const window_resized_type observer{ diagram_view, window, tab_frame, diagram_view_picture_box, property_bar };
+        const window_resized_type observer{
+            diagram_view,
+            timetable_view,
+            window,
+            tab_frame,
+            diagram_view_picture_box,
+            timetable_view_picture_box,
+            property_bar
+        };
 
         settings.clear_config();
     }
@@ -232,13 +252,23 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         const model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
+        timetable_view_type timetable_view{ model, message_catalog };
         window_type window{};
         tab_frame_type tab_frame{ window };
         view_picture_box_type diagram_view_picture_box{ tab_frame };
+        view_picture_box_type timetable_view_picture_box{ tab_frame };
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         property_bar_type property_bar{ window, settings, message_catalog };
-        const window_resized_type observer{ diagram_view, window, tab_frame, diagram_view_picture_box, property_bar };
+        const window_resized_type observer{
+            diagram_view,
+            timetable_view,
+            window,
+            tab_frame,
+            diagram_view_picture_box,
+            timetable_view_picture_box,
+            property_bar
+        };
 
         observer();
 
