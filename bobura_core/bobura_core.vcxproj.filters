@@ -46,6 +46,9 @@
     <Filter Include="headers\bobura\view\timetable">
       <UniqueIdentifier>{b5aba615-db21-4bed-8c03-250453f09bcc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="headers\bobura\message\view_picture_box">
+      <UniqueIdentifier>{4e25cd53-5e52-4d65-b84d-4b36b0b2d760}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\precompiled\precompiled.h">
@@ -258,9 +261,6 @@
     <ClInclude Include="include\bobura\main_window_menu_builder_traits.h">
       <Filter>headers\bobura</Filter>
     </ClInclude>
-    <ClInclude Include="include\bobura\message\view_picture_box.h">
-      <Filter>headers\bobura\message</Filter>
-    </ClInclude>
     <ClInclude Include="include\bobura\view_picture_box.h">
       <Filter>headers\bobura</Filter>
     </ClInclude>
@@ -275,6 +275,12 @@
     </ClInclude>
     <ClInclude Include="include\bobura\timetable_view.h">
       <Filter>headers\bobura</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bobura\message\view_picture_box\diagram.h">
+      <Filter>headers\bobura\message\view_picture_box</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bobura\message\view_picture_box\timetable.h">
+      <Filter>headers\bobura\message\view_picture_box</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -429,6 +435,9 @@
   <ItemGroup>
     <None Include="include\bobura\view\timetable\0namespace.dox">
       <Filter>headers\bobura\view\timetable</Filter>
+    </None>
+    <None Include="include\bobura\message\view_picture_box\0namespace.dox">
+      <Filter>headers\bobura\message\view_picture_box</Filter>
     </None>
   </ItemGroup>
 </Project>

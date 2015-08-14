@@ -1,5 +1,5 @@
 /*! \file
-    \brief Test of class bobura::message::view_picture_box.
+    \brief Test of class bobura::message::view_picture_box::diagram.
 
     Copyright (C) 2007-2015 kaoru
 
@@ -12,7 +12,7 @@
 #include <tetengo2.gui.h>
 
 #include <bobura/diagram_view.h>
-#include <bobura/message/view_picture_box.h>
+#include <bobura/message/view_picture_box/diagram.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/zoom.h>
@@ -63,29 +63,31 @@ namespace
     using window_type = ui_type_list_type::window_type;
 
     using mouse_pressed_type =
-        bobura::message::view_picture_box::mouse_pressed<picture_box_type, diagram_view_traits_type>;
+        bobura::message::view_picture_box::diagram::mouse_pressed<picture_box_type, diagram_view_traits_type>;
 
     using mouse_released_type =
-        bobura::message::view_picture_box::mouse_released<picture_box_type, diagram_view_traits_type>;
+        bobura::message::view_picture_box::diagram::mouse_released<picture_box_type, diagram_view_traits_type>;
 
     using mouse_moved_type =
-        bobura::message::view_picture_box::mouse_moved<picture_box_type, diagram_view_traits_type>;
+        bobura::message::view_picture_box::diagram::mouse_moved<picture_box_type, diagram_view_traits_type>;
 
     using view_zoom_type =
         bobura::view::diagram::zoom<diagram_view_traits_type, picture_box_type, ui_type_list_type::mouse_capture_type>;
 
     using mouse_wheeled_type =
-        bobura::message::view_picture_box::mouse_wheeled<picture_box_type, view_zoom_type, diagram_view_traits_type>;
+        bobura::message::view_picture_box::diagram::mouse_wheeled<
+            picture_box_type, view_zoom_type, diagram_view_traits_type
+        >;
 
     using virtual_key_type = picture_box_type::keyboard_observer_set_type::virtual_key_type;
 
-    using keyboard_key_down_type = bobura::message::view_picture_box::keyboard_key_down<picture_box_type>;
+    using keyboard_key_down_type = bobura::message::view_picture_box::diagram::keyboard_key_down<picture_box_type>;
 
     using paint_paint_type =
-        bobura::message::view_picture_box::paint_paint<picture_box_type, diagram_view_traits_type>;
+        bobura::message::view_picture_box::diagram::paint_paint<picture_box_type, diagram_view_traits_type>;
 
     using scroll_bar_scrolled_type =
-        bobura::message::view_picture_box::scroll_bar_scrolled<picture_box_type, diagram_view_traits_type>;
+        bobura::message::view_picture_box::diagram::scroll_bar_scrolled<picture_box_type, diagram_view_traits_type>;
 
 
     // functions
@@ -105,6 +107,7 @@ namespace
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(message)
 BOOST_AUTO_TEST_SUITE(view_picture_box)
+BOOST_AUTO_TEST_SUITE(diagram)
 BOOST_AUTO_TEST_SUITE(mouse_pressed)
     // test cases
 
@@ -312,6 +315,7 @@ BOOST_AUTO_TEST_SUITE(scroll_bar_scrolled)
     }
 
 
+BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

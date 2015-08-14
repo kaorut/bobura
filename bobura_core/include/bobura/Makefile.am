@@ -53,7 +53,8 @@ pkg_headers = \
     message/timetable_model.h \
     message/timetable_model_observer_set.h \
     message/train_kind_dialog.h \
-    message/view_picture_box.h \
+    message/view_picture_box/diagram.h \
+    message/view_picture_box/timetable.h \
     property_bar.h \
     settings.h \
     timetable_model.h \
@@ -79,6 +80,7 @@ extra_headers = \
     command/0namespace.dox \
     load_save/0namespace.dox \
     message/0namespace.dox \
+    message/view_picture_box/0namespace.dox \
     view/0namespace.dox \
     view/diagram/0namespace.dox \
     view/timetable/0namespace.dox

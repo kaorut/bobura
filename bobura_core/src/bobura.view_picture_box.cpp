@@ -17,7 +17,7 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/message/view_picture_box.h>
+#include <bobura/message/view_picture_box/diagram.h>
 #include <bobura/type_list.h>
 #include <bobura/view_picture_box.h>
 
@@ -101,7 +101,7 @@ namespace bobura
 
         using mouse_capture_type = MouseCapture;
         
-        using key_down_observer_type = message::view_picture_box::keyboard_key_down<base_type>;
+        using key_down_observer_type = message::view_picture_box::diagram::keyboard_key_down<base_type>;
 
         using scroll_bar_type = typename base_type::scroll_bar_type;
 

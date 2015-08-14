@@ -31,6 +31,9 @@
     <Filter Include="sources\test_bobura\command">
       <UniqueIdentifier>{33c79967-b6e2-43ee-ad8c-46a23d6ccbc8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sources\test_bobura\message\view_picture_box">
+      <UniqueIdentifier>{f7bccbb2-7607-4269-9498-0c65b89894c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\precompiled\precompiled.h">
@@ -197,9 +200,6 @@
     <ClCompile Include="test\test_bobura.view_picture_box.cpp">
       <Filter>sources\test_bobura</Filter>
     </ClCompile>
-    <ClCompile Include="test\test_bobura.message.view_picture_box.cpp">
-      <Filter>sources\test_bobura\message</Filter>
-    </ClCompile>
     <ClCompile Include="test\test_bobura.diagram_view.cpp">
       <Filter>sources\test_bobura</Filter>
     </ClCompile>
@@ -211,6 +211,12 @@
     </ClCompile>
     <ClCompile Include="test\test_bobura.timetable_view.cpp">
       <Filter>sources\test_bobura</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_bobura.message.view_picture_box.diagram.cpp">
+      <Filter>sources\test_bobura\message\view_picture_box</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_bobura.message.view_picture_box.timetable.cpp">
+      <Filter>sources\test_bobura\message\view_picture_box</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

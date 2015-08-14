@@ -1,13 +1,13 @@
 /*! \file
-    \brief The definition of bobura::message::view_picture_box.
+    \brief The definition of bobura::message::view_picture_box::diagram.
 
     Copyright (C) 2007-2015 kaoru
 
     $Id$
 */
 
-#if !defined(BOBURA_MESSAGE_VIEWPICTUREBOX_H)
-#define BOBURA_MESSAGE_VIEWPICTUREBOX_H
+#if !defined(BOBURA_MESSAGE_VIEWPICTUREBOX_DIAGRAM_H)
+#define BOBURA_MESSAGE_VIEWPICTUREBOX_DIAGRAM_H
 
 #include <cassert>
 #include <functional>
@@ -22,7 +22,7 @@
 #include <bobura/diagram_view.h>
 
 
-namespace bobura { namespace message { namespace view_picture_box
+namespace bobura { namespace message { namespace view_picture_box { namespace diagram
 {
     /*!
         \brief The class template for a mouse pressed observer of the picture box.
@@ -818,7 +818,7 @@ namespace bobura { namespace message { namespace view_picture_box
     };
 
 
-}}}
+}}}}
 
 
 #endif
