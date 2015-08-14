@@ -1,0 +1,19 @@
+/*! \file
+    The Doxygen documents for namespaces.
+
+    Copyright (C) 2007-2015 kaoru
+
+    $Id$
+*/
+
+/*! \namespace bobura::message::view_picture_box
+    \brief The namespace for message observers of the view picture box.
+*/
+
+/*! \namespace bobura::message::view_picture_box::diagram
+    \brief The namespace for message observers of the view picture box for diagram.
+*/
+
+/*! \namespace bobura::message::view_picture_box::timetable
+    \brief The namespace for message observers of the view picture box for timetable.
+*/

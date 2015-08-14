@@ -14,10 +14,6 @@
     \brief The namespace for message observers of the about dialog.
 */
 
-/*! \namespace bobura::message::diagram_picture_box
-    \brief The namespace for message observers of the diagram picture box.
-*/
-
 /*! \namespace bobura::message::diagram_view
     \brief The namespace for message observers of the diagram view.
 */
