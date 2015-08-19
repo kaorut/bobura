@@ -132,9 +132,8 @@ BOOST_AUTO_TEST_SUITE(settings)
         settings.clear_config();
     }
 
-// This test case causes a segmentation fault on Cygwin.
+// This test case causes a segmentation fault with GCC.
 #if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(main_window_dimension)
@@ -224,9 +223,8 @@ BOOST_AUTO_TEST_SUITE(settings)
         settings.clear_config();
     }
 
-// This test case causes a segmentation fault on Cygwin.
+// This test case causes a segmentation fault with GCC.
 #if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(set_main_window_maximized)
@@ -276,9 +274,8 @@ BOOST_AUTO_TEST_SUITE(settings)
         settings.clear_config();
     }
 
-// This test case causes a segmentation fault on Cygwin.
+// This test case causes a segmentation fault with GCC.
 #if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(set_property_bar_width)
@@ -313,9 +310,8 @@ BOOST_AUTO_TEST_SUITE(settings)
         settings.clear_config();
     }
 
-// This test case causes a segmentation fault on Cygwin.
+// This test case causes a segmentation fault with GCC.
 #if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(set_property_bar_minimized)
@@ -365,9 +361,8 @@ BOOST_AUTO_TEST_SUITE(settings)
         settings.clear_config();
     }
 
-// This test case causes a segmentation fault on Cygwin.
+// This test case causes a segmentation fault with GCC.
 #if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(set_property_bar_splitter_position)
