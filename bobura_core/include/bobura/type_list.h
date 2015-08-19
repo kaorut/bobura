@@ -886,6 +886,7 @@ namespace bobura { namespace type_list
                 operating_distance_type,
                 speed_type,
                 fast_canvas_type<DetailTypeList>,
+                type_list::detail::ui::fast_solid_background_type<DetailTypeList>,
                 message_catalog_type<DetailTypeList>
             >;
 

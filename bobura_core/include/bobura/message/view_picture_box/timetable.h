@@ -710,16 +710,16 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
         {
             boost::ignore_unused(canvas);
 
-            //assert(m_picture_box.has_vertical_scroll_bar());
-            //assert(m_picture_box.has_horizontal_scroll_bar());
-            //m_view.draw_on(
-            //    canvas,
-            //    m_picture_box.client_dimension(),
-            //    to_position(
-            //        m_picture_box.horizontal_scroll_bar().tracking_position(),
-            //        m_picture_box.vertical_scroll_bar().tracking_position()
-            //    )
-            //);
+            assert(m_picture_box.has_vertical_scroll_bar());
+            assert(m_picture_box.has_horizontal_scroll_bar());
+            m_view.draw_on(
+                canvas,
+                m_picture_box.client_dimension(),
+                to_position(
+                    m_picture_box.horizontal_scroll_bar().tracking_position(),
+                    m_picture_box.vertical_scroll_bar().tracking_position()
+                )
+            );
         }
 
 

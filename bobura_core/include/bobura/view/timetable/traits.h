@@ -31,6 +31,7 @@ namespace bobura { namespace view { namespace timetable
         typename OperatingDistance,
         typename Speed,
         typename Canvas,
+        typename SolidBackground,
         typename MessageCatalog
     >
     class traits
@@ -55,6 +56,9 @@ namespace bobura { namespace view { namespace timetable
 
         //! The canvas type.
         using canvas_type = Canvas;
+
+        //! The solid background type.
+        using solid_background_type = SolidBackground;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;

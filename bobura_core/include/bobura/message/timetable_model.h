@@ -107,7 +107,7 @@ namespace bobura { namespace message { namespace timetable_model
 
             m_timetable_view.update_dimension();
             m_timetable_view.unselect_all_items();
-            reset_timetable_scroll_bars(m_main_window.get_diagram_view_picture_box(), m_timetable_view);
+            reset_timetable_scroll_bars(m_main_window.get_timetable_view_picture_box(), m_timetable_view);
             m_main_window.get_timetable_view_picture_box().repaint(true);
 
             m_main_window.size_observer_set().resized()();

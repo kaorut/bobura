@@ -43,7 +43,8 @@ namespace bobura
         impl(const model_type& model, const message_catalog_type& message_catalog)
         :
         m_model(model),
-        m_message_catalog(message_catalog)
+        m_message_catalog(message_catalog),
+        m_dimension(width_type{ 0 }, height_type{ 0 })
         {}
 
 
@@ -55,27 +56,28 @@ namespace bobura
             const position_type&  scroll_bar_position
         )
         {
-            boost::ignore_unused(canvas, canvas_dimension, scroll_bar_position);
+            boost::ignore_unused(scroll_bar_position);
+
+            clear_background(canvas, canvas_dimension);
         }
 
         const dimension_type& dimension()
         const
         {
-            static const dimension_type singleton{ width_type{ 42 }, height_type{ 24 } };
-            return singleton;
+            return m_dimension;
         }
 
         void update_dimension()
         {
-
+            m_dimension = dimension_type{ width_type{ 42 }, height_type{ 24 } };
         }
 
         dimension_type page_size(const dimension_type& canvas_dimension)
         const
         {
-            boost::ignore_unused(canvas_dimension);
-
-            return dimension_type{ width_type{ 42 }, height_type{ 24 } };
+            const auto& page_width = tetengo2::gui::dimension<dimension_type>::width(canvas_dimension);
+            const auto& page_height = tetengo2::gui::dimension<dimension_type>::height(canvas_dimension);
+            return { page_width, page_height };
         }
 
         void unselect_all_items()
@@ -87,9 +89,15 @@ namespace bobura
     private:
         // types
 
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
+
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+
         using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
 
         using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+
+        using solid_background_type = typename traits_type::solid_background_type;
 
 
         // variables
@@ -97,6 +105,22 @@ namespace bobura
         const model_type& m_model;
 
         const message_catalog_type& m_message_catalog;
+
+        dimension_type m_dimension;
+
+
+        // functions
+
+        void clear_background(canvas_type& canvas, const dimension_type& canvas_dimension)
+        const
+        {
+            canvas.set_background(
+                tetengo2::stdalt::make_unique<const solid_background_type>(
+                    m_model.timetable().font_color_set().background()
+                )
+            );
+            canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, canvas_dimension);
+        }
 
 
     };
