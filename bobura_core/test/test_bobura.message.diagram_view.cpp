@@ -148,19 +148,14 @@ namespace
 }
 
 
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 7, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(4, 8, 0)) \
-    )
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(message)
 BOOST_AUTO_TEST_SUITE(diagram_view)
 BOOST_AUTO_TEST_SUITE(station_selected)
     // test cases
 
-// This test case causes a segmentation fault on Cygwin.
+// This test case causes a segmentation fault with GCC.
 #if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(construction)
@@ -209,9 +204,8 @@ BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(train_selected)
     // test cases
 
-// This test case causes a segmentation fault on Cygwin.
+// This test case causes a segmentation fault with GCC.
 #if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(construction)
@@ -270,9 +264,8 @@ BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(all_unselected)
     // test cases
 
-// This test case causes a segmentation fault on Cygwin.
+// This test case causes a segmentation fault with GCC.
 #if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(construction)
@@ -311,4 +304,3 @@ BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
-#endif
