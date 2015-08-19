@@ -30,6 +30,7 @@
 #include <bobura/message/main_window.h>
 #include <bobura/message/timetable_model.h>
 #include <bobura/message/view_picture_box/diagram.h>
+#include <bobura/message/view_picture_box/timetable.h>
 #include <bobura/timetable_model.h>
 #include <bobura/timetable_view.h>
 #include <bobura/type_list.h>
@@ -241,11 +242,35 @@ namespace bobura
                 diagram_view_traits_type
             >;
 
+        using diagram_view_picture_box_key_down_observer_type =
+            message::view_picture_box::diagram::keyboard_key_down<picture_box_type>;
+
         using diagram_view_picture_box_paint_paint_observer_type =
             message::view_picture_box::diagram::paint_paint<picture_box_type, diagram_view_traits_type>;
 
         using diagram_view_picture_box_scroll_bar_scrolled_observer_type =
             message::view_picture_box::diagram::scroll_bar_scrolled<picture_box_type, diagram_view_traits_type>;
+
+        using timetable_view_picture_box_mouse_pressed_observer_type =
+            message::view_picture_box::timetable::mouse_pressed<picture_box_type, timetable_view_traits_type>;
+
+        using timetable_view_picture_box_mouse_released_observer_type =
+            message::view_picture_box::timetable::mouse_released<picture_box_type, timetable_view_traits_type>;
+
+        using timetable_view_picture_box_mouse_moved_observer_type =
+            message::view_picture_box::timetable::mouse_moved<picture_box_type, timetable_view_traits_type>;
+
+        using timetable_view_picture_box_mouse_wheeled_observer_type =
+            message::view_picture_box::timetable::mouse_wheeled<picture_box_type, timetable_view_traits_type>;
+
+        using timetable_view_picture_box_key_down_observer_type =
+            message::view_picture_box::timetable::keyboard_key_down<picture_box_type>;
+
+        using timetable_view_picture_box_paint_paint_observer_type =
+            message::view_picture_box::timetable::paint_paint<picture_box_type, timetable_view_traits_type>;
+
+        using timetable_view_picture_box_scroll_bar_scrolled_observer_type =
+            message::view_picture_box::timetable::scroll_bar_scrolled<picture_box_type, timetable_view_traits_type>;
 
         using message_loop_type = typename traits_type::message_loop_type;
 
@@ -403,6 +428,9 @@ namespace bobura
             picture_box.mouse_observer_set().wheeled().connect(
                 diagram_view_picture_box_mouse_wheeled_observer_type{ picture_box, view }
             );
+            picture_box.keyboard_observer_set().key_down().connect(
+                diagram_view_picture_box_key_down_observer_type{ picture_box }
+            );
             picture_box.fast_paint_observer_set().paint().connect(
                 diagram_view_picture_box_paint_paint_observer_type{ picture_box, view }
             );
@@ -426,9 +454,8 @@ namespace bobura
         {
             boost::ignore_unused(view);
 
-            /*auto& picture_box =*/ main_window.get_timetable_view_picture_box();
+            auto& picture_box = main_window.get_timetable_view_picture_box();
 
-/*
             picture_box.mouse_observer_set().pressed().connect(
                 timetable_view_picture_box_mouse_pressed_observer_type{
                     picture_box,
@@ -454,6 +481,9 @@ namespace bobura
             picture_box.mouse_observer_set().wheeled().connect(
                 timetable_view_picture_box_mouse_wheeled_observer_type{ picture_box, view }
             );
+            picture_box.keyboard_observer_set().key_down().connect(
+                timetable_view_picture_box_key_down_observer_type{ picture_box }
+            );
             picture_box.fast_paint_observer_set().paint().connect(
                 timetable_view_picture_box_paint_paint_observer_type{ picture_box, view }
             );
@@ -471,7 +501,6 @@ namespace bobura
             picture_box.horizontal_scroll_bar().scroll_bar_observer_set().scrolled().connect(
                 timetable_view_picture_box_scroll_bar_scrolled_observer_type{ picture_box, view }
             );
-*/
         }
         
         void load_input_file(main_window_type& main_window, const command_set_type& command_set)

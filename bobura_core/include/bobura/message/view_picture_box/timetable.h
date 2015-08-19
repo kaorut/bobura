@@ -314,7 +314,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
         \tparam Zoom       A zoom type.
         \tparam ViewTraits A view traits type.
     */
-    template <typename PictureBox, typename Zoom, typename ViewTraits>
+    template <typename PictureBox, typename ViewTraits>
     class mouse_wheeled
     {
     public:
@@ -334,9 +334,6 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
 
         //! The direction type.
         using direction_type = typename picture_box_type::mouse_observer_set_type::direction_type;
-
-        //! The view zoom type.
-        using view_zoom_type = Zoom;
 
         //! The view traits type.
         using view_traits_type = ViewTraits;
@@ -407,84 +404,84 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
 
         // functions
 
-        bool is_vertical(const direction_type direction, const bool shift)
-        const
-        {
-            return
-                (!shift && direction == picture_box_type::mouse_observer_set_type::direction_type::vertical) ||
-                (shift && direction == picture_box_type::mouse_observer_set_type::direction_type::horizontal);
-        }
+        //bool is_vertical(const direction_type direction, const bool shift)
+        //const
+        //{
+        //    return
+        //        (!shift && direction == picture_box_type::mouse_observer_set_type::direction_type::vertical) ||
+        //        (shift && direction == picture_box_type::mouse_observer_set_type::direction_type::horizontal);
+        //}
 
-        void scroll(const delta_type& delta, const bool vertical)
-        const
-        {
-            if (vertical)
-            {
-                assert(m_picture_box.has_vertical_scroll_bar());
-                if (!m_picture_box.vertical_scroll_bar().enabled())
-                    return;
+        //void scroll(const delta_type& delta, const bool vertical)
+        //const
+        //{
+        //    if (vertical)
+        //    {
+        //        assert(m_picture_box.has_vertical_scroll_bar());
+        //        if (!m_picture_box.vertical_scroll_bar().enabled())
+        //            return;
 
-                const auto new_position = calculate_new_position(m_picture_box.vertical_scroll_bar(), delta);
-                m_picture_box.vertical_scroll_bar().set_position(new_position);
-                m_picture_box.vertical_scroll_bar().scroll_bar_observer_set().scrolled()(new_position);
-            }
-            else
-            {
-                assert(m_picture_box.has_horizontal_scroll_bar());
-                if (!m_picture_box.horizontal_scroll_bar().enabled())
-                    return;
+        //        const auto new_position = calculate_new_position(m_picture_box.vertical_scroll_bar(), delta);
+        //        m_picture_box.vertical_scroll_bar().set_position(new_position);
+        //        m_picture_box.vertical_scroll_bar().scroll_bar_observer_set().scrolled()(new_position);
+        //    }
+        //    else
+        //    {
+        //        assert(m_picture_box.has_horizontal_scroll_bar());
+        //        if (!m_picture_box.horizontal_scroll_bar().enabled())
+        //            return;
 
-                const auto new_position = calculate_new_position(m_picture_box.horizontal_scroll_bar(), delta);
-                m_picture_box.horizontal_scroll_bar().set_position(new_position);
-                m_picture_box.horizontal_scroll_bar().scroll_bar_observer_set().scrolled()(new_position);
-            }
-        }
+        //        const auto new_position = calculate_new_position(m_picture_box.horizontal_scroll_bar(), delta);
+        //        m_picture_box.horizontal_scroll_bar().set_position(new_position);
+        //        m_picture_box.horizontal_scroll_bar().scroll_bar_observer_set().scrolled()(new_position);
+        //    }
+        //}
 
-        scroll_bar_size_type calculate_new_position(
-            const typename picture_box_type::scroll_bar_type& scroll_bar,
-            const delta_type&                                 delta
-        )
-        const
-        {
-            using delta_int_type = typename delta_type::int_type;
-            auto int_delta = boost::rational_cast<delta_int_type>(delta * 3);
-            if (int_delta == 0)
-            {
-                if (delta > 0)
-                    ++int_delta;
-                else
-                    --int_delta;
-            }
-            const delta_int_type new_position = scroll_bar.position() + int_delta;
+        //scroll_bar_size_type calculate_new_position(
+        //    const typename picture_box_type::scroll_bar_type& scroll_bar,
+        //    const delta_type&                                 delta
+        //)
+        //const
+        //{
+        //    using delta_int_type = typename delta_type::int_type;
+        //    auto int_delta = boost::rational_cast<delta_int_type>(delta * 3);
+        //    if (int_delta == 0)
+        //    {
+        //        if (delta > 0)
+        //            ++int_delta;
+        //        else
+        //            --int_delta;
+        //    }
+        //    const delta_int_type new_position = scroll_bar.position() + int_delta;
 
-            if (new_position < static_cast<delta_int_type>(scroll_bar.range().first))
-                return scroll_bar.range().first;
-            if (new_position > static_cast<delta_int_type>(scroll_bar.range().second - scroll_bar.page_size() + 1))
-                return scroll_bar.range().second - scroll_bar.page_size() + 1;
+        //    if (new_position < static_cast<delta_int_type>(scroll_bar.range().first))
+        //        return scroll_bar.range().first;
+        //    if (new_position > static_cast<delta_int_type>(scroll_bar.range().second - scroll_bar.page_size() + 1))
+        //        return scroll_bar.range().second - scroll_bar.page_size() + 1;
 
-            return new_position;
-        }
+        //    return new_position;
+        //}
 
-        void zoom(const delta_type delta, const bool vertical)
-        const
-        {
-            view_zoom_type zoom{ m_picture_box, m_view };
+        //void zoom(const delta_type delta, const bool vertical)
+        //const
+        //{
+        //    view_zoom_type zoom{ m_picture_box, m_view };
 
-            if (vertical)
-            {
-                if (delta > 0)
-                    zoom.vertically_zoom_in(false);
-                else
-                    zoom.vertically_zoom_out(false);
-            }
-            else
-            {
-                if (delta > 0)
-                    zoom.horizontally_zoom_in(false);
-                else
-                    zoom.horizontally_zoom_out(false);
-            }
-        }
+        //    if (vertical)
+        //    {
+        //        if (delta > 0)
+        //            zoom.vertically_zoom_in(false);
+        //        else
+        //            zoom.vertically_zoom_out(false);
+        //    }
+        //    else
+        //    {
+        //        if (delta > 0)
+        //            zoom.horizontally_zoom_in(false);
+        //        else
+        //            zoom.horizontally_zoom_out(false);
+        //    }
+        //}
 
 
     };

@@ -17,7 +17,6 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/message/view_picture_box/diagram.h>
 #include <bobura/type_list.h>
 #include <bobura/view_picture_box.h>
 
@@ -39,12 +38,10 @@ namespace bobura
 
         // constructors and destructor
 
-        explicit impl(view_picture_box& self, widget_type&)
+        explicit impl(widget_type&)
         :
         m_p_mouse_capture()
-        {
-            set_observers(self);
-        }
+        {}
 
 
         // functions
@@ -101,8 +98,6 @@ namespace bobura
 
         using mouse_capture_type = MouseCapture;
         
-        using key_down_observer_type = message::view_picture_box::diagram::keyboard_key_down<base_type>;
-
         using scroll_bar_type = typename base_type::scroll_bar_type;
 
         using scroll_bar_size_type = typename scroll_bar_type::size_type;
@@ -114,11 +109,6 @@ namespace bobura
 
 
         // functions
-
-        void set_observers(view_picture_box& self)
-        {
-            self.keyboard_observer_set().key_down().connect(key_down_observer_type{ self });
-        }
 
         template <typename Size>
         void update_scroll_bar(
@@ -203,7 +193,7 @@ namespace bobura
     view_picture_box<PictureBox, MouseCapture>::view_picture_box(widget_type& parent)
     :
     base_type(parent, base_type::scroll_bar_style_type::both),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, parent))
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(parent))
     {}
 
     template <typename PictureBox, typename MouseCapture>
