@@ -74,12 +74,18 @@ namespace bobura
         {
             const message_catalog_type message_catalog{};
             diagram_view_type diagram_view{ m_model, message_catalog };
-            timetable_view_type timetable_view{ m_model, message_catalog };
+            timetable_view_type timetable_down_view{ m_model, message_catalog };
+            timetable_view_type timetable_up_view{ m_model, message_catalog };
             const command_set_holder_type command_set_holder{ m_settings, m_model, diagram_view, message_catalog };
 
             main_window_type main_window(message_catalog, m_settings, command_set_holder.confirm_file_save()); 
             set_message_observers(
-                command_set_holder.command_set(), diagram_view, timetable_view, main_window, message_catalog
+                command_set_holder.command_set(),
+                diagram_view,
+                timetable_down_view,
+                timetable_up_view,
+                main_window,
+                message_catalog
             );
             m_model.reset_timetable();
             main_window.set_menu_bar(
@@ -354,29 +360,37 @@ namespace bobura
         void set_message_observers(
             const command_set_type&     command_set,
             diagram_view_type&          diagram_view,
-            timetable_view_type&        timetable_view,
+            timetable_view_type&        timetable_down_view,
+            timetable_view_type&        timetable_up_view,
             main_window_type&           main_window,
             const message_catalog_type& message_catalog
         )
         {
             m_model.observer_set().reset().connect(
-                model_reset_observer_type{ m_model, diagram_view, timetable_view, main_window }
+                model_reset_observer_type{ m_model, diagram_view, timetable_down_view, timetable_up_view, main_window }
             );
             m_model.observer_set().changed().connect(
-                model_changed_observer_type{ m_model, diagram_view, timetable_view, main_window }
+                model_changed_observer_type{
+                    m_model, diagram_view, timetable_down_view, timetable_up_view, main_window
+                }
             );
 
             set_diagram_view_message_observers(diagram_view, main_window, message_catalog);
-            set_timetable_view_message_observers(timetable_view, main_window);
+            set_timetable_view_message_observers(
+                timetable_down_view, main_window.get_timetable_down_view_picture_box()
+            );
+            set_timetable_view_message_observers(timetable_up_view, main_window.get_timetable_up_view_picture_box());
 
             main_window.size_observer_set().resized().connect(
                 main_window_window_resized_observer_type{
                     diagram_view,
-                    timetable_view,
+                    timetable_down_view,
+                    timetable_up_view,
                     main_window,
                     main_window.get_tab_frame(),
                     main_window.get_diagram_view_picture_box(),
-                    main_window.get_timetable_view_picture_box(),
+                    main_window.get_timetable_down_view_picture_box(),
+                    main_window.get_timetable_up_view_picture_box(),
                     main_window.get_property_bar()
                 }
             );
@@ -450,16 +464,14 @@ namespace bobura
             );
         }
 
-        void set_timetable_view_message_observers(timetable_view_type& view, main_window_type& main_window)
+        void set_timetable_view_message_observers(timetable_view_type& view, view_picture_box_type& picture_box)
         {
             boost::ignore_unused(view);
-
-            auto& picture_box = main_window.get_timetable_view_picture_box();
 
             picture_box.mouse_observer_set().pressed().connect(
                 timetable_view_picture_box_mouse_pressed_observer_type{
                     picture_box,
-                    [&main_window, &picture_box](const mouse_button_type mouse_button)
+                    [&picture_box](const mouse_button_type mouse_button)
                     {
                         picture_box.set_mouse_capture(mouse_button);
                     },
@@ -468,7 +480,7 @@ namespace bobura
             );
             picture_box.mouse_observer_set().released().connect(
                 timetable_view_picture_box_mouse_released_observer_type{
-                    [&main_window, &picture_box](const mouse_button_type mouse_button)
+                    [&picture_box](const mouse_button_type mouse_button)
                     {
                         return picture_box.release_mouse_capture(mouse_button);
                     },

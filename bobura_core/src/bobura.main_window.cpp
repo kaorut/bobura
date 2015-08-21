@@ -70,7 +70,8 @@ namespace bobura
         m_message_catalog(message_catalog),
         m_p_tab_frame(),
         m_p_diagram_view_picture_box(),
-        m_p_timetable_view_picture_box(),
+        m_p_timetable_down_view_picture_box(),
+        m_p_timetable_up_view_picture_box(),
         m_p_property_bar(),
         m_settings(settings),
         m_confirm_file_save(confirm_file_save)
@@ -115,14 +116,24 @@ namespace bobura
             m_p_tab_frame->select_tab(0);
         }
 
-        void show_timetable_tab()
+        void show_timetable_down_tab()
         {
             assert(m_p_tab_frame);
             assert(
                 &m_p_tab_frame->tab_at(1).body().template get<view_picture_box_type>() ==
-                m_p_timetable_view_picture_box.get()
+                m_p_timetable_down_view_picture_box.get()
             );
             m_p_tab_frame->select_tab(1);
+        }
+
+        void show_timetable_up_tab()
+        {
+            assert(m_p_tab_frame);
+            assert(
+                &m_p_tab_frame->tab_at(2).body().template get<view_picture_box_type>() ==
+                m_p_timetable_up_view_picture_box.get()
+            );
+            m_p_tab_frame->select_tab(2);
         }
 
         const view_picture_box_type& get_diagram_view_picture_box()
@@ -138,17 +149,30 @@ namespace bobura
             return *m_p_diagram_view_picture_box;
         }
 
-        const view_picture_box_type& get_timetable_view_picture_box()
+        const view_picture_box_type& get_timetable_down_view_picture_box()
         const
         {
-            assert(m_p_timetable_view_picture_box);
-            return *m_p_timetable_view_picture_box;
+            assert(m_p_timetable_down_view_picture_box);
+            return *m_p_timetable_down_view_picture_box;
         }
 
-        view_picture_box_type& get_timetable_view_picture_box()
+        view_picture_box_type& get_timetable_down_view_picture_box()
         {
-            assert(m_p_timetable_view_picture_box);
-            return *m_p_timetable_view_picture_box;
+            assert(m_p_timetable_down_view_picture_box);
+            return *m_p_timetable_down_view_picture_box;
+        }
+
+        const view_picture_box_type& get_timetable_up_view_picture_box()
+        const
+        {
+            assert(m_p_timetable_up_view_picture_box);
+            return *m_p_timetable_up_view_picture_box;
+        }
+
+        view_picture_box_type& get_timetable_up_view_picture_box()
+        {
+            assert(m_p_timetable_up_view_picture_box);
+            return *m_p_timetable_up_view_picture_box;
         }
 
         const property_bar_type& get_property_bar()
@@ -184,7 +208,9 @@ namespace bobura
 
         std::unique_ptr<view_picture_box_type> m_p_diagram_view_picture_box;
 
-        std::unique_ptr<view_picture_box_type> m_p_timetable_view_picture_box;
+        std::unique_ptr<view_picture_box_type> m_p_timetable_down_view_picture_box;
+
+        std::unique_ptr<view_picture_box_type> m_p_timetable_up_view_picture_box;
 
         std::unique_ptr<property_bar_type> m_p_property_bar;
 
@@ -202,8 +228,11 @@ namespace bobura
             m_p_diagram_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
             m_p_tab_frame->tab_at(0).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Diagram")));
 
-            m_p_timetable_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
-            m_p_tab_frame->tab_at(1).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Timetable")));
+            m_p_timetable_down_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
+            m_p_tab_frame->tab_at(1).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Timetable Down")));
+
+            m_p_timetable_up_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
+            m_p_tab_frame->tab_at(2).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Timetable Up")));
 
             m_p_property_bar = tetengo2::stdalt::make_unique<property_bar_type>(m_base, m_settings, m_message_catalog);
 
@@ -308,9 +337,15 @@ namespace bobura
     }
 
     template <typename Traits, typename CommandSetTraits>
-    void main_window<Traits, CommandSetTraits>::show_timetable_tab()
+    void main_window<Traits, CommandSetTraits>::show_timetable_down_tab()
     {
-        m_p_impl->show_timetable_tab();
+        m_p_impl->show_timetable_down_tab();
+    }
+
+    template <typename Traits, typename CommandSetTraits>
+    void main_window<Traits, CommandSetTraits>::show_timetable_up_tab()
+    {
+        m_p_impl->show_timetable_up_tab();
     }
 
     template <typename Traits, typename CommandSetTraits>
@@ -330,17 +365,32 @@ namespace bobura
 
     template <typename Traits, typename CommandSetTraits>
     const typename main_window<Traits, CommandSetTraits>::view_picture_box_type& 
-    main_window<Traits, CommandSetTraits>::get_timetable_view_picture_box()
+    main_window<Traits, CommandSetTraits>::get_timetable_down_view_picture_box()
     const
     {
-        return m_p_impl->get_timetable_view_picture_box();
+        return m_p_impl->get_timetable_down_view_picture_box();
     }
 
     template <typename Traits, typename CommandSetTraits>
     typename main_window<Traits, CommandSetTraits>::view_picture_box_type&
-    main_window<Traits, CommandSetTraits>::get_timetable_view_picture_box()
+    main_window<Traits, CommandSetTraits>::get_timetable_down_view_picture_box()
     {
-        return m_p_impl->get_timetable_view_picture_box();
+        return m_p_impl->get_timetable_down_view_picture_box();
+    }
+
+    template <typename Traits, typename CommandSetTraits>
+    const typename main_window<Traits, CommandSetTraits>::view_picture_box_type& 
+    main_window<Traits, CommandSetTraits>::get_timetable_up_view_picture_box()
+    const
+    {
+        return m_p_impl->get_timetable_up_view_picture_box();
+    }
+
+    template <typename Traits, typename CommandSetTraits>
+    typename main_window<Traits, CommandSetTraits>::view_picture_box_type&
+    main_window<Traits, CommandSetTraits>::get_timetable_up_view_picture_box()
+    {
+        return m_p_impl->get_timetable_up_view_picture_box();
     }
 
     template <typename Traits, typename CommandSetTraits>

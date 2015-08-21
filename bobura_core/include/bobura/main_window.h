@@ -173,9 +173,14 @@ namespace bobura
         void show_diagram_tab();
 
         /*!
-            \brief Shows the timetable tab.
+            \brief Shows the timetable down tab.
         */
-        void show_timetable_tab();
+        void show_timetable_down_tab();
+
+        /*!
+            \brief Shows the timetable up tab.
+        */
+        void show_timetable_up_tab();
 
         /*!
             \brief Returns the diagram view picture box.
@@ -185,19 +190,34 @@ namespace bobura
         view_picture_box_type& get_diagram_view_picture_box();
 
         /*!
-            \brief Returns the timetable view picture box.
+            \brief Returns the timetable down view picture box.
 
-            \return The timetable view picture box.
+            \return The timetable down view picture box.
         */
-        const view_picture_box_type& get_timetable_view_picture_box()
+        const view_picture_box_type& get_timetable_down_view_picture_box()
         const;
 
         /*!
-            \brief Returns the timetable view picture box.
+            \brief Returns the timetable down view picture box.
 
-            \return The timetable view picture box.
+            \return The timetable down view picture box.
         */
-        view_picture_box_type& get_timetable_view_picture_box();
+        view_picture_box_type& get_timetable_down_view_picture_box();
+
+        /*!
+            \brief Returns the timetable up view picture box.
+
+            \return The timetable up view picture box.
+        */
+        const view_picture_box_type& get_timetable_up_view_picture_box()
+        const;
+
+        /*!
+            \brief Returns the timetable up view picture box.
+
+            \return The timetable up view picture box.
+        */
+        view_picture_box_type& get_timetable_up_view_picture_box();
 
         /*!
             \brief Returns the property bar.

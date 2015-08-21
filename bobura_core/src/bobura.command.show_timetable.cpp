@@ -45,7 +45,7 @@ namespace bobura { namespace command
 
             auto* const p_main_window = dynamic_cast<main_window_type*>(&parent);
             assert(p_main_window);
-            p_main_window->show_timetable_tab();
+            p_main_window->show_timetable_down_tab();
         }
 
 

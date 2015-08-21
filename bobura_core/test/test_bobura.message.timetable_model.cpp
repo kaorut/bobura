@@ -100,7 +100,8 @@ BOOST_AUTO_TEST_SUITE(reset)
         model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_down_view{ model, message_catalog };
+        timetable_view_type timetable_up_view{ model, message_catalog };
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const save_to_file_type save_to_file{ false, message_catalog };
@@ -108,7 +109,7 @@ BOOST_AUTO_TEST_SUITE(reset)
         main_window_type main_window{ message_catalog, settings, confirm_file_save };
         const bobura::message::timetable_model::reset<
             model_type, diagram_view_type, timetable_view_type, main_window_type
-        > observer(model, diagram_view, timetable_view, main_window);
+        > observer(model, diagram_view, timetable_down_view, timetable_up_view,main_window);
 
         settings.clear_config();
     }
@@ -120,7 +121,8 @@ BOOST_AUTO_TEST_SUITE(reset)
         model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_down_view{ model, message_catalog };
+        timetable_view_type timetable_up_view{ model, message_catalog };
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const save_to_file_type save_to_file{ false, message_catalog };
@@ -128,7 +130,7 @@ BOOST_AUTO_TEST_SUITE(reset)
         main_window_type main_window{ message_catalog, settings, confirm_file_save };
         const bobura::message::timetable_model::reset<
             model_type, diagram_view_type, timetable_view_type, main_window_type
-        > observer(model, diagram_view, timetable_view, main_window);
+        > observer(model, diagram_view, timetable_down_view, timetable_up_view,main_window);
 
         observer();
 
@@ -152,7 +154,8 @@ BOOST_AUTO_TEST_SUITE(changed)
         model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_down_view{ model, message_catalog };
+        timetable_view_type timetable_up_view{ model, message_catalog };
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const save_to_file_type save_to_file{ false, message_catalog };
@@ -160,7 +163,7 @@ BOOST_AUTO_TEST_SUITE(changed)
         main_window_type main_window{ message_catalog, settings, confirm_file_save };
         const bobura::message::timetable_model::changed<
             model_type, diagram_view_type, timetable_view_type, main_window_type
-        > observer(model, diagram_view, timetable_view, main_window);
+        > observer(model, diagram_view, timetable_down_view, timetable_up_view,main_window);
 
         settings.clear_config();
     }
@@ -172,7 +175,8 @@ BOOST_AUTO_TEST_SUITE(changed)
         model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_down_view{ model, message_catalog };
+        timetable_view_type timetable_up_view{ model, message_catalog };
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const save_to_file_type save_to_file{ false, message_catalog };
@@ -180,7 +184,7 @@ BOOST_AUTO_TEST_SUITE(changed)
         main_window_type main_window{ message_catalog, settings, confirm_file_save };
         const bobura::message::timetable_model::changed<
             model_type, diagram_view_type, timetable_view_type, main_window_type
-        > observer(model, diagram_view, timetable_view, main_window);
+        > observer(model, diagram_view, timetable_down_view, timetable_up_view,main_window);
 
         observer();
 

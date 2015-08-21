@@ -71,21 +71,23 @@ namespace bobura { namespace message { namespace timetable_model
         /*!
             \brief Creates a timetable model reset observer.
 
-            \param timetable_model A timetable model.
-            \param diagram_view    A diagram view.
-            \param timetable_view  A timetable view.
-            \param main_window     A main window.
+            \param timetable_model      A timetable model.
+            \param diagram_view         A diagram view.
+            \param timetable_down_view  A timetable down view.
+            \param main_window          A main window.
         */
         reset(
             const timetable_model_type& timetable_model,
             diagram_view_type&          diagram_view,
-            timetable_view_type&        timetable_view,
+            timetable_view_type&        timetable_down_view,
+            timetable_view_type&        timetable_up_view,
             main_window_type&           main_window
         )
         :
         m_timetable_model(timetable_model),
         m_diagram_view(diagram_view),
-        m_timetable_view(timetable_view),
+        m_timetable_down_view(timetable_down_view),
+        m_timetable_up_view(timetable_up_view),
         m_main_window(main_window)
         {}
 
@@ -105,10 +107,19 @@ namespace bobura { namespace message { namespace timetable_model
             reset_diagram_scroll_bars(m_main_window.get_diagram_view_picture_box(), m_diagram_view);
             m_main_window.get_diagram_view_picture_box().repaint(true);
 
-            m_timetable_view.update_dimension();
-            m_timetable_view.unselect_all_items();
-            reset_timetable_scroll_bars(m_main_window.get_timetable_view_picture_box(), m_timetable_view);
-            m_main_window.get_timetable_view_picture_box().repaint(true);
+            m_timetable_down_view.update_dimension();
+            m_timetable_down_view.unselect_all_items();
+            reset_timetable_scroll_bars(
+                m_main_window.get_timetable_down_view_picture_box(), m_timetable_down_view
+            );
+            m_main_window.get_timetable_down_view_picture_box().repaint(true);
+
+            m_timetable_up_view.update_dimension();
+            m_timetable_up_view.unselect_all_items();
+            reset_timetable_scroll_bars(
+                m_main_window.get_timetable_up_view_picture_box(), m_timetable_up_view
+            );
+            m_main_window.get_timetable_up_view_picture_box().repaint(true);
 
             m_main_window.size_observer_set().resized()();
             m_main_window.show_diagram_tab();
@@ -185,7 +196,9 @@ namespace bobura { namespace message { namespace timetable_model
 
         diagram_view_type& m_diagram_view;
 
-        timetable_view_type& m_timetable_view;
+        timetable_view_type& m_timetable_down_view;
+
+        timetable_view_type& m_timetable_up_view;
 
         main_window_type& m_main_window;
 
@@ -225,21 +238,24 @@ namespace bobura { namespace message { namespace timetable_model
         /*!
             \brief Creates a timetable model change observer.
 
-            \param timetable_model A timetable model.
-            \param diagram_view    A diagram view.
-            \param timetable_view  A timetable view.
-            \param main_window     A main window.
+            \param timetable_model      A timetable model.
+            \param diagram_view         A diagram view.
+            \param timetable_down_view  A timetable down view.
+            \param timetable_up_view    A timetable up view.
+            \param main_window          A main window.
         */
         changed(
             const timetable_model_type& timetable_model,
             diagram_view_type&          diagram_view,
-            timetable_view_type&        timetable_view,
+            timetable_view_type&        timetable_down_view,
+            timetable_view_type&        timetable_up_view,
             main_window_type&           main_window
         )
         :
         m_timetable_model(timetable_model),
         m_diagram_view(diagram_view),
-        m_timetable_view(timetable_view),
+        m_timetable_down_view(timetable_down_view),
+        m_timetable_up_view(timetable_up_view),
         m_main_window(main_window)
         {}
 
@@ -257,8 +273,11 @@ namespace bobura { namespace message { namespace timetable_model
             m_diagram_view.update_dimension();
             m_main_window.get_diagram_view_picture_box().repaint(true);
 
-            m_timetable_view.update_dimension();
-            m_main_window.get_timetable_view_picture_box().repaint(true);
+            m_timetable_down_view.update_dimension();
+            m_main_window.get_timetable_down_view_picture_box().repaint(true);
+
+            m_timetable_up_view.update_dimension();
+            m_main_window.get_timetable_up_view_picture_box().repaint(true);
 
             m_main_window.size_observer_set().resized()();
         }
@@ -271,7 +290,9 @@ namespace bobura { namespace message { namespace timetable_model
 
         diagram_view_type& m_diagram_view;
 
-        timetable_view_type& m_timetable_view;
+        timetable_view_type& m_timetable_down_view;
+
+        timetable_view_type& m_timetable_up_view;
 
         main_window_type& m_main_window;
 

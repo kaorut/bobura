@@ -223,21 +223,25 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         const model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_down_view{ model, message_catalog };
+        timetable_view_type timetable_up_view{ model, message_catalog };
         window_type window{};
         tab_frame_type tab_frame{ window };
         view_picture_box_type diagram_view_picture_box{ tab_frame };
-        view_picture_box_type timetable_view_picture_box{ tab_frame };
+        view_picture_box_type timetable_down_view_picture_box{ tab_frame };
+        view_picture_box_type timetable_up_view_picture_box{ tab_frame };
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         property_bar_type property_bar{ window, settings, message_catalog };
         const window_resized_type observer{
             diagram_view,
-            timetable_view,
+            timetable_down_view,
+            timetable_up_view,
             window,
             tab_frame,
             diagram_view_picture_box,
-            timetable_view_picture_box,
+            timetable_down_view_picture_box,
+            timetable_up_view_picture_box,
             property_bar
         };
 
@@ -251,21 +255,25 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         const model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_down_view{ model, message_catalog };
+        timetable_view_type timetable_up_view{ model, message_catalog };
         window_type window{};
         tab_frame_type tab_frame{ window };
         view_picture_box_type diagram_view_picture_box{ tab_frame };
-        view_picture_box_type timetable_view_picture_box{ tab_frame };
+        view_picture_box_type timetable_down_view_picture_box{ tab_frame };
+        view_picture_box_type timetable_up_view_picture_box{ tab_frame };
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         property_bar_type property_bar{ window, settings, message_catalog };
         const window_resized_type observer{
             diagram_view,
-            timetable_view,
+            timetable_down_view,
+            timetable_up_view,
             window,
             tab_frame,
             diagram_view_picture_box,
-            timetable_view_picture_box,
+            timetable_down_view_picture_box,
+            timetable_up_view_picture_box,
             property_bar
         };
 
