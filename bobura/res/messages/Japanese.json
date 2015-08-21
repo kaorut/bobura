@@ -45,8 +45,9 @@
         "Menu:Help:&About":                "バージョン情報(&A)",
         
         
-        "Tab:Diagram":   "ダイヤグラム",
-        "Tab:Timetable": "時刻表",
+        "Tab:Diagram":        "ダイヤグラム",
+        "Tab:Timetable Down": "時刻表 下り",
+        "Tab:Timetable Up":   "時刻表 上り",
         
         
         "Diagram:%1% No. %2%": "%1%%2%号",
