@@ -10,7 +10,6 @@
 #include <chrono>
 #include <memory>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
@@ -466,8 +465,6 @@ namespace bobura
 
         void set_timetable_view_message_observers(timetable_view_type& view, view_picture_box_type& picture_box)
         {
-            boost::ignore_unused(view);
-
             picture_box.mouse_observer_set().pressed().connect(
                 timetable_view_picture_box_mouse_pressed_observer_type{
                     picture_box,
