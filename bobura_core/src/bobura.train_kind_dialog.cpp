@@ -550,7 +550,7 @@ namespace bobura
         {
             auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
 
-            p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Sa&mple:")));
+            p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Sample:")));
             auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
             p_label->set_background(std::move(p_background));
 
@@ -673,6 +673,15 @@ namespace bobura
             m_p_line_style_dropdown_box->set_position(position_type{ name_text_box_left, top_type{ 13 } });
 
             m_p_sample_label->fit_to_content();
+            m_p_sample_label->set_dimension(
+                dimension_type{
+                    std::max(
+                        tetengo2::gui::dimension<dimension_type>::width(m_p_sample_label->dimension()),
+                        width_type{ m_p_sample_label->text().length() }
+                    ),
+                    tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
+                }
+            );
             m_p_sample_label->set_position(position_type{ name_label_left, top_type{ 16 } });
 
             m_p_sample_picture_box->set_position(

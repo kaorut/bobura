@@ -404,7 +404,7 @@ namespace bobura
         {
             auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
 
-            p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Sample:")));
+            p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Sample:")));
             auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
             p_label->set_background(std::move(p_background));
 
@@ -483,6 +483,15 @@ namespace bobura
             m_p_color_button->set_position(position_type{ font_button_left, top_type{ 5 } });
 
             m_p_sample_label->fit_to_content();
+            m_p_sample_label->set_dimension(
+                dimension_type{
+                    std::max(
+                        tetengo2::gui::dimension<dimension_type>::width(m_p_sample_label->dimension()),
+                        width_type{ m_p_sample_label->text().length() }
+                    ),
+                    tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
+                }
+            );
             m_p_sample_label->set_position(position_type{ font_button_left, top_type{ 8 } });
 
             m_p_sample_picture_box->set_position(
