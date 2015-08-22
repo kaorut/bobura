@@ -70,8 +70,9 @@ namespace bobura
             auto p_menu_bar = tetengo2::stdalt::make_unique<menu_bar_type>();
 
             p_menu_bar->insert(p_menu_bar->end(), build_file_menu());
-            p_menu_bar->insert(p_menu_bar->end(), build_format_menu());
             p_menu_bar->insert(p_menu_bar->end(), build_view_menu());
+            p_menu_bar->insert(p_menu_bar->end(), build_format_menu());
+            p_menu_bar->insert(p_menu_bar->end(), build_train_menu());
             p_menu_bar->insert(p_menu_bar->end(), build_help_menu());
 
             return std::move(p_menu_bar);
@@ -191,22 +192,33 @@ namespace bobura
         const
         {
             auto p_popup_menu =
-                tetengo2::stdalt::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:D&iagram")));
+                tetengo2::stdalt::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:F&ormat")));
             commands_type commands{};
 
             append_menu_command(
                 *p_popup_menu,
-                m_message_catalog.get(TETENGO2_TEXT("Menu:Diagram:&Fonts And Colors...")),
+                m_message_catalog.get(TETENGO2_TEXT("Menu:Format:&Fonts And Colors...")),
                 m_command_set.font_color(),
                 commands
             );
+
+            connect_popup_menu_observer(*p_popup_menu, std::move(commands));
+            return std::move(p_popup_menu);
+        }
+
+        std::unique_ptr<popup_menu_type> build_train_menu()
+        const
+        {
+            auto p_popup_menu =
+                tetengo2::stdalt::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:&Train")));
+            commands_type commands{};
+
             append_menu_command(
                 *p_popup_menu,
-                m_message_catalog.get(TETENGO2_TEXT("Menu:Diagram:Train &Kinds...")),
+                m_message_catalog.get(TETENGO2_TEXT("Menu:Train:Train &Kinds...")),
                 m_command_set.train_kind(),
                 commands
             );
-
 
             connect_popup_menu_observer(*p_popup_menu, std::move(commands));
             return std::move(p_popup_menu);

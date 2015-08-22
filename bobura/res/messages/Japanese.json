@@ -26,10 +26,6 @@
         "Menu:File:Proper&ty...": "プロパティ(&T)...",
         "Menu:File:E&xit":        "終了(&X)",
         
-        "Menu:D&iagram":                     "ダイヤグラム(&D)",
-        "Menu:Diagram:&Fonts And Colors...": "フォントと色(&F)...",
-        "Menu:Diagram:Train &Kinds...":      "列車種別(&K)...",
-        
         "Menu:&View":                          "表示(&V)",
         "Menu:View:Show &Diagram":             "ダイヤグラムを表示(&D)",
         "Menu:View:Show &Timetable":           "時刻表を表示(&T)",
@@ -39,6 +35,12 @@
         "Menu:View:&Vertical Zoom":            "駅方向拡大縮小(&V)",
         "Menu:View:Vertical Zoom:Zoom &In":    "拡大(&I)",
         "Menu:View:Vertical Zoom:Zoom &Out":   "縮小(&O)",
+        
+        "Menu:F&ormat":                     "書式(&O)",
+        "Menu:Format:&Fonts And Colors...": "フォントと色(&F)...",
+        
+        "Menu:&Train":                "列車(&T)",
+        "Menu:Train:Train &Kinds...": "列車種別(&K)...",
         
         "Menu:&Help":                      "ヘルプ(&H)",
         "Menu:Help:&Open www.tetengo.org": "www.tetengo.org を開く(&O)",
