@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <algorithm>
 #include <memory>
 #include <sstream>
 #include <stdexcept>
