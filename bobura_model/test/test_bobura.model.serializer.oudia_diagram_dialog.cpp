@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_SUITE(oudia_diagram_dialog)
         const message_catalog_type message_catalog{};
         const oudia_diagram_dialog_type oudia_diagram_dialog{ parent, message_catalog };
 
-        BOOST_CHECK(oudia_diagram_dialog.file_name().empty());
+        BOOST_TEST(oudia_diagram_dialog.file_name().empty());
     }
 
     BOOST_AUTO_TEST_CASE(set_file_name)
@@ -96,7 +96,7 @@ BOOST_AUTO_TEST_SUITE(oudia_diagram_dialog)
         const message_catalog_type message_catalog{};
         const oudia_diagram_dialog_type oudia_diagram_dialog{ parent, message_catalog };
 
-        BOOST_CHECK(oudia_diagram_dialog.names().empty());
+        BOOST_TEST(oudia_diagram_dialog.names().empty());
     }
 
     BOOST_AUTO_TEST_CASE(set_names)
@@ -130,7 +130,7 @@ BOOST_AUTO_TEST_SUITE(oudia_diagram_dialog)
         const message_catalog_type message_catalog{};
         const oudia_diagram_dialog_type oudia_diagram_dialog{ parent, message_catalog };
 
-        BOOST_CHECK(!oudia_diagram_dialog.selected_index());
+        BOOST_TEST(!oudia_diagram_dialog.selected_index());
     }
 
 // This test case causes a segmentation fault on Cygwin.
@@ -157,12 +157,12 @@ BOOST_AUTO_TEST_SUITE(oudia_diagram_dialog)
 
         oudia_diagram_dialog.set_selected_index(1);
 
-        BOOST_CHECK(oudia_diagram_dialog.selected_index());
+        BOOST_TEST(oudia_diagram_dialog.selected_index().is_initialized());
         BOOST_CHECK(*oudia_diagram_dialog.selected_index() == 1);
 
         oudia_diagram_dialog.set_names(std::vector<string_type>{});
 
-        BOOST_CHECK(!oudia_diagram_dialog.selected_index());
+        BOOST_TEST(!oudia_diagram_dialog.selected_index().is_initialized());
     }
 #endif
 

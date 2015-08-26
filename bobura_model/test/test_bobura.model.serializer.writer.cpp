@@ -113,9 +113,9 @@ BOOST_AUTO_TEST_SUITE(writer)
 
         const concrete_writer writer{};
 
-        BOOST_CHECK(writer.selects(boost::filesystem::path{ TETENGO2_TEXT("hoge") }));
-        BOOST_CHECK(!writer.selects(boost::filesystem::path{ TETENGO2_TEXT("fuga") }));
-        BOOST_CHECK(!writer.selects(boost::filesystem::path{}));
+        BOOST_TEST(writer.selects(boost::filesystem::path{ TETENGO2_TEXT("hoge") }));
+        BOOST_TEST(!writer.selects(boost::filesystem::path{ TETENGO2_TEXT("fuga") }));
+        BOOST_TEST(!writer.selects(boost::filesystem::path{}));
     }
 
     BOOST_AUTO_TEST_CASE(write)

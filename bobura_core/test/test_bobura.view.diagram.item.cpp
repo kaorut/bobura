@@ -151,13 +151,13 @@ BOOST_AUTO_TEST_SUITE(item)
             selection_type selection{};
             const concrete_item item{ selection };
 
-            BOOST_CHECK_EQUAL(&item.get_selection(), &selection);
+            BOOST_TEST(&item.get_selection() == &selection);
         }
         {
             selection_type selection{};
             concrete_item item{ selection };
 
-            BOOST_CHECK_EQUAL(&item.get_selection(), &selection);
+            BOOST_TEST(&item.get_selection() == &selection);
         }
     }
 
@@ -168,7 +168,7 @@ BOOST_AUTO_TEST_SUITE(item)
         selection_type selection{};
         const concrete_item item{ selection };
 
-        BOOST_CHECK(!item.selected());
+        BOOST_TEST(!item.selected());
     }
 
     BOOST_AUTO_TEST_CASE(select)
@@ -180,7 +180,7 @@ BOOST_AUTO_TEST_SUITE(item)
 
         item.select(false);
 
-        BOOST_CHECK(item.selected());
+        BOOST_TEST(item.selected());
     }
 
 

@@ -319,7 +319,7 @@ BOOST_AUTO_TEST_SUITE(window_closing)
         auto cancel = false;
         observer(cancel);
 
-        BOOST_CHECK(!cancel);
+        BOOST_TEST(!cancel);
     }
 
 

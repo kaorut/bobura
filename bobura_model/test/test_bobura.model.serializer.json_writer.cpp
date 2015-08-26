@@ -379,9 +379,9 @@ BOOST_AUTO_TEST_SUITE(json_writer)
 
         const writer_type json_writer{};
 
-        BOOST_CHECK(json_writer.selects(boost::filesystem::path{ TETENGO2_TEXT(".btt") }));
-        BOOST_CHECK(!json_writer.selects(boost::filesystem::path{ TETENGO2_TEXT(".hoge") }));
-        BOOST_CHECK(!json_writer.selects(boost::filesystem::path{}));
+        BOOST_TEST(json_writer.selects(boost::filesystem::path{ TETENGO2_TEXT(".btt") }));
+        BOOST_TEST(!json_writer.selects(boost::filesystem::path{ TETENGO2_TEXT(".hoge") }));
+        BOOST_TEST(!json_writer.selects(boost::filesystem::path{}));
     }
 
 // This test case causes a segmentation fault on Cygwin.

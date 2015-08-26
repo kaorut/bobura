@@ -91,7 +91,7 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
         const message_catalog_type message_catalog{};
         const train_kind_dialog_type train_kind_dialog{ parent, font, background_color, message_catalog };
 
-        BOOST_CHECK(train_kind_dialog.info_sets().empty());
+        BOOST_TEST(train_kind_dialog.info_sets().empty());
     }
 
     BOOST_AUTO_TEST_CASE(set_info_sets)
@@ -154,12 +154,12 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
                 }
             }
         };
-        BOOST_CHECK_EQUAL(train_kind_dialog.info_sets().size(), expected.size());
+        BOOST_TEST(train_kind_dialog.info_sets().size() == expected.size());
         BOOST_CHECK(train_kind_dialog.info_sets()[0].original_index() == expected[0].original_index());
-        BOOST_CHECK_EQUAL(train_kind_dialog.info_sets()[0].referred(), expected[0].referred());
+        BOOST_TEST(train_kind_dialog.info_sets()[0].referred() == expected[0].referred());
         BOOST_CHECK(train_kind_dialog.info_sets()[0].train_kind() == expected[0].train_kind());
         BOOST_CHECK(train_kind_dialog.info_sets()[1].original_index() == expected[1].original_index());
-        BOOST_CHECK_EQUAL(train_kind_dialog.info_sets()[1].referred(), expected[1].referred());
+        BOOST_TEST(train_kind_dialog.info_sets()[1].referred() == expected[1].referred());
         BOOST_CHECK(train_kind_dialog.info_sets()[1].train_kind() == expected[1].train_kind());
     }
 

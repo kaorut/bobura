@@ -89,7 +89,7 @@ BOOST_AUTO_TEST_SUITE(settings)
             const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
             settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
-            BOOST_CHECK(!settings.input());
+            BOOST_TEST(!settings.input().is_initialized());
 
             settings.clear_config();
         }
@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_SUITE(settings)
             };
             settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
-            BOOST_REQUIRE(settings.input());
+            BOOST_TEST_REQUIRE(settings.input().is_initialized());
             BOOST_CHECK(*settings.input() == boost::filesystem::path{ string_type{ TETENGO2_TEXT("input_file") } });
 
             settings.clear_config();
@@ -156,12 +156,12 @@ BOOST_AUTO_TEST_SUITE(settings)
 
             const auto dimension = settings.main_window_dimension();
 
-            BOOST_REQUIRE(dimension);
-            BOOST_CHECK_EQUAL(
-                tetengo2::gui::dimension<dimension_type>::width(*dimension).to_pixels<std::size_t>(), 240U
+            BOOST_TEST_REQUIRE(dimension.is_initialized());
+            BOOST_TEST(
+                tetengo2::gui::dimension<dimension_type>::width(*dimension).to_pixels<std::size_t>() == 240U
             );
-            BOOST_CHECK_EQUAL(
-                tetengo2::gui::dimension<dimension_type>::height(*dimension).to_pixels<std::size_t>(), 120U
+            BOOST_TEST(
+                tetengo2::gui::dimension<dimension_type>::height(*dimension).to_pixels<std::size_t>() == 120U
             );
 
             settings.clear_config();
@@ -176,12 +176,12 @@ BOOST_AUTO_TEST_SUITE(settings)
 
             const auto dimension = settings.main_window_dimension();
 
-            BOOST_REQUIRE(dimension);
-            BOOST_CHECK_EQUAL(
-                tetengo2::gui::dimension<dimension_type>::width(*dimension).to_pixels<std::size_t>(), 240U
+            BOOST_TEST_REQUIRE(dimension.is_initialized());
+            BOOST_TEST(
+                tetengo2::gui::dimension<dimension_type>::width(*dimension).to_pixels<std::size_t>() == 240U
             );
-            BOOST_CHECK_EQUAL(
-                tetengo2::gui::dimension<dimension_type>::height(*dimension).to_pixels<std::size_t>(), 120U
+            BOOST_TEST(
+                tetengo2::gui::dimension<dimension_type>::height(*dimension).to_pixels<std::size_t>() == 120U
             );
 
             settings.clear_config();
@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_SUITE(settings)
 
         const auto dimension = settings.main_window_dimension();
 
-        BOOST_REQUIRE(dimension);
+        BOOST_TEST_REQUIRE(dimension.is_initialized());
         BOOST_CHECK(tetengo2::gui::dimension<dimension_type>::width(*dimension) == width_type{ 42 });
         BOOST_CHECK(tetengo2::gui::dimension<dimension_type>::height(*dimension) == height_type{ 24 });
 
@@ -230,8 +230,8 @@ BOOST_AUTO_TEST_SUITE(settings)
 
             const auto maximized = settings.main_window_maximized();
 
-            BOOST_REQUIRE(maximized);
-            BOOST_CHECK(!*maximized);
+            BOOST_TEST_REQUIRE(maximized.is_initialized());
+            BOOST_TEST(!*maximized);
 
             settings.clear_config();
         }
@@ -243,8 +243,8 @@ BOOST_AUTO_TEST_SUITE(settings)
 
             const auto maximized = settings.main_window_maximized();
 
-            BOOST_REQUIRE(maximized);
-            BOOST_CHECK(*maximized);
+            BOOST_TEST_REQUIRE(maximized.is_initialized());
+            BOOST_TEST(*maximized);
 
             settings.clear_config();
         }
@@ -273,7 +273,7 @@ BOOST_AUTO_TEST_SUITE(settings)
 
         const auto width = settings.property_bar_width();
 
-        BOOST_REQUIRE(width);
+        BOOST_TEST_REQUIRE(width.is_initialized());
         BOOST_CHECK(*width == width_type{ 42 });
 
         settings.clear_config();
@@ -303,8 +303,8 @@ BOOST_AUTO_TEST_SUITE(settings)
 
             const auto minimized = settings.property_bar_minimized();
 
-            BOOST_REQUIRE(minimized);
-            BOOST_CHECK(!*minimized);
+            BOOST_TEST_REQUIRE(minimized.is_initialized());
+            BOOST_TEST(!*minimized);
 
             settings.clear_config();
         }
@@ -316,8 +316,8 @@ BOOST_AUTO_TEST_SUITE(settings)
 
             const auto minimized = settings.property_bar_minimized();
 
-            BOOST_REQUIRE(minimized);
-            BOOST_CHECK(*minimized);
+            BOOST_TEST_REQUIRE(minimized.is_initialized());
+            BOOST_TEST(*minimized);
 
             settings.clear_config();
         }
@@ -346,7 +346,7 @@ BOOST_AUTO_TEST_SUITE(settings)
 
         const auto position = settings.property_bar_splitter_position();
 
-        BOOST_REQUIRE(position);
+        BOOST_TEST_REQUIRE(position.is_initialized());
         BOOST_CHECK(*position == left_type{ 42 });
 
         settings.clear_config();
@@ -362,7 +362,7 @@ BOOST_AUTO_TEST_SUITE(settings)
 
         settings.clear_config();
 
-        BOOST_CHECK(!settings.main_window_maximized());
+        BOOST_TEST(!settings.main_window_maximized());
 
         settings.clear_config();
     }

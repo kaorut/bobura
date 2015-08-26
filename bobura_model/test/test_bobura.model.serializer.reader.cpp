@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_SUITE(reader)
                 tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
-            BOOST_CHECK(reader.selects(first, last));
+            BOOST_TEST(reader.selects(first, last));
         }
         {
             std::istringstream input_stream{ "fuga" };
@@ -134,7 +134,7 @@ BOOST_AUTO_TEST_SUITE(reader)
                 tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
-            BOOST_CHECK(!reader.selects(first, last));
+            BOOST_TEST(!reader.selects(first, last));
         }
     }
 
@@ -155,7 +155,7 @@ BOOST_AUTO_TEST_SUITE(reader)
         auto error = error_type::none;
         const auto p_timetable = reader.read(first, last, error);
 
-        BOOST_REQUIRE(p_timetable);
+        BOOST_TEST_REQUIRE(p_timetable.get());
         BOOST_CHECK(error == error_type::none);
     }
 

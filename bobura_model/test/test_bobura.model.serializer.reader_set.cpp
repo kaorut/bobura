@@ -112,8 +112,8 @@ BOOST_AUTO_TEST_SUITE(reader_set)
         const message_catalog_type message_catalog{};
         const auto p_readers = reader_set_type::create_readers(parent, std::move(file_name), message_catalog);
 
-        BOOST_REQUIRE(!p_readers.empty());
-        BOOST_CHECK(p_readers[0]);
+        BOOST_TEST_REQUIRE(!p_readers.empty());
+        BOOST_TEST(p_readers[0].get());
     }
 
 

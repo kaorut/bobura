@@ -91,13 +91,13 @@ BOOST_AUTO_TEST_SUITE(parameter_base)
             const concrete_parameter_type parameter;
             const parameter_base_type& parameter_base = parameter;
 
-            BOOST_CHECK_EQUAL(&parameter_base.as<concrete_parameter_type>(), &parameter);
+            BOOST_TEST(&parameter_base.as<concrete_parameter_type>() == &parameter);
         }
         {
             concrete_parameter_type parameter;
             parameter_base_type& parameter_base = parameter;
 
-            BOOST_CHECK_EQUAL(&parameter_base.as<concrete_parameter_type>(), &parameter);
+            BOOST_TEST(&parameter_base.as<concrete_parameter_type>() == &parameter);
         }
     }
 
@@ -112,7 +112,7 @@ BOOST_AUTO_TEST_SUITE(command_base)
         const concrete_command_type command{};
 
         const model_type model{};
-        BOOST_CHECK(command.enabled(model));
+        BOOST_TEST(command.enabled(model));
     }
 
     BOOST_AUTO_TEST_CASE(state)

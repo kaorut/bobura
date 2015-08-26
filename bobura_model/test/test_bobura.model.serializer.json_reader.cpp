@@ -583,7 +583,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
                 tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
-            BOOST_CHECK(!json_reader.selects(first, last));
+            BOOST_TEST(!json_reader.selects(first, last));
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty1) };
@@ -595,7 +595,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
                 tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
-            BOOST_CHECK(json_reader.selects(first, last));
+            BOOST_TEST(json_reader.selects(first, last));
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty2) };
@@ -607,7 +607,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
                 tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
-            BOOST_CHECK(json_reader.selects(first, last));
+            BOOST_TEST(json_reader.selects(first, last));
         }
         {
             boost::iostreams::filtering_istream input_stream{
@@ -621,7 +621,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
                 tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
-            BOOST_CHECK(json_reader.selects(first, last));
+            BOOST_TEST(json_reader.selects(first, last));
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_not_json) };
@@ -633,7 +633,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
                 tetengo2::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
-            BOOST_CHECK(!json_reader.selects(first, last));
+            BOOST_TEST(!json_reader.selects(first, last));
         }
     }
 
@@ -659,7 +659,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             auto error = error_type::none;
             const auto p_timetable = json_reader.read(first, last, error);
 
-            BOOST_REQUIRE(!p_timetable);
+            BOOST_TEST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
@@ -675,7 +675,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             auto error = error_type::none;
             const auto p_timetable = json_reader.read(first, last, error);
 
-            BOOST_REQUIRE(!p_timetable);
+            BOOST_TEST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
@@ -691,9 +691,9 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             auto error = error_type::none;
             const auto p_timetable = json_reader.read(first, last, error);
 
-            BOOST_REQUIRE(p_timetable);
+            BOOST_TEST_REQUIRE(p_timetable.get());
             BOOST_CHECK(error == error_type::none);
-            BOOST_CHECK(p_timetable->line_name().empty());
+            BOOST_TEST(p_timetable->line_name().empty());
         }
         {
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_line_name_only) };
@@ -708,7 +708,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             auto error = error_type::none;
             const auto p_timetable = json_reader.read(first, last, error);
 
-            BOOST_REQUIRE(p_timetable);
+            BOOST_TEST_REQUIRE(p_timetable.get());
             BOOST_CHECK(error == error_type::none);
             BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("hoge") });
         }
@@ -725,29 +725,29 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             auto error = error_type::none;
             const auto p_timetable = json_reader.read(first, last, error);
 
-            BOOST_REQUIRE(p_timetable);
+            BOOST_TEST_REQUIRE(p_timetable.get());
             BOOST_CHECK(error == error_type::none);
             BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("hoge") });
-            BOOST_REQUIRE_EQUAL(p_timetable->station_locations().size(), 2U);
+            BOOST_TEST_REQUIRE(p_timetable->station_locations().size() == 2U);
             {
                 const auto& station_location = p_timetable->station_locations()[0];
                 const auto& station = station_location.get_station();
                 BOOST_CHECK(station.name() == string_type{ TETENGO2_TEXT("stationA") });
                 BOOST_CHECK(station.grade().name() == string_type{ TETENGO2_TEXT("local") });
-                BOOST_CHECK(!station.shows_down_arrival_times());
-                BOOST_CHECK(station.shows_up_arrival_times());
+                BOOST_TEST(!station.shows_down_arrival_times());
+                BOOST_TEST(station.shows_up_arrival_times());
                 BOOST_CHECK(station.note() == string_type{ TETENGO2_TEXT("noteA") });
-                BOOST_CHECK_EQUAL(station_location.operating_distance(), 42U);
+                BOOST_TEST(station_location.operating_distance() == 42U);
             }
             {
                 const auto& station_location = p_timetable->station_locations()[1];
                 const auto& station = station_location.get_station();
                 BOOST_CHECK(station.name() == string_type{ TETENGO2_TEXT("stationB") });
                 BOOST_CHECK(station.grade().name() == string_type{ TETENGO2_TEXT("principal") });
-                BOOST_CHECK(station.shows_down_arrival_times());
-                BOOST_CHECK(!station.shows_up_arrival_times());
+                BOOST_TEST(station.shows_down_arrival_times());
+                BOOST_TEST(!station.shows_up_arrival_times());
                 BOOST_CHECK(station.note() == string_type{ TETENGO2_TEXT("noteB") });
-                BOOST_CHECK_EQUAL(station_location.operating_distance(), 4242U);
+                BOOST_TEST(station_location.operating_distance() == 4242U);
             }
         }
         {
@@ -763,7 +763,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             auto error = error_type::none;
             const auto p_timetable = json_reader.read(first, last, error);
 
-            BOOST_REQUIRE(!p_timetable);
+            BOOST_TEST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
@@ -779,7 +779,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             auto error = error_type::none;
             const auto p_timetable = json_reader.read(first, last, error);
 
-            BOOST_REQUIRE(p_timetable);
+            BOOST_TEST_REQUIRE(p_timetable.get());
             BOOST_CHECK(error == error_type::none);
 
             BOOST_CHECK(p_timetable->company_name() == string_type{ TETENGO2_TEXT("hoge") });
@@ -803,69 +803,69 @@ BOOST_AUTO_TEST_SUITE(json_reader)
                 );
             }
 
-            BOOST_REQUIRE_EQUAL(p_timetable->down_trains().size(), 2U);
+            BOOST_TEST_REQUIRE(p_timetable->down_trains().size() == 2U);
             {
                 const auto& train = p_timetable->down_trains()[0];
                 BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("101D") });
                 BOOST_CHECK(train.note() == string_type{ TETENGO2_TEXT("fuga") });
                 const auto& stops = train.stops();
-                BOOST_REQUIRE_EQUAL(train.stops().size(), 2U);
+                BOOST_TEST_REQUIRE(train.stops().size() == 2U);
                 {
                     const auto& stop = stops[0];
-                    BOOST_CHECK(!stop.arrival().initialized());
-                    BOOST_CHECK(!stop.departure().initialized());
-                    BOOST_CHECK(!stop.operational());
-                    BOOST_CHECK(stop.platform().empty());
+                    BOOST_TEST(!stop.arrival().initialized());
+                    BOOST_TEST(!stop.departure().initialized());
+                    BOOST_TEST(!stop.operational());
+                    BOOST_TEST(stop.platform().empty());
                 }
                 {
                     const auto& stop = stops[1];
-                    BOOST_CHECK(!stop.arrival().initialized());
-                    BOOST_CHECK(!stop.departure().initialized());
-                    BOOST_CHECK(!stop.operational());
-                    BOOST_CHECK(stop.platform().empty());
+                    BOOST_TEST(!stop.arrival().initialized());
+                    BOOST_TEST(!stop.departure().initialized());
+                    BOOST_TEST(!stop.operational());
+                    BOOST_TEST(stop.platform().empty());
                 }
             }
             {
                 const auto& train = p_timetable->down_trains()[1];
                 BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("123D") });
-                BOOST_CHECK(train.note().empty());
+                BOOST_TEST(train.note().empty());
                 const auto& stops = train.stops();
-                BOOST_REQUIRE_EQUAL(train.stops().size(), 2U);
+                BOOST_TEST_REQUIRE(train.stops().size() == 2U);
                 {
                     const auto& stop = stops[0];
-                    BOOST_CHECK(!stop.arrival().initialized());
+                    BOOST_TEST(!stop.arrival().initialized());
                     BOOST_CHECK((stop.departure() == time_type{ 6, 0, 30 }));
-                    BOOST_CHECK(stop.operational());
+                    BOOST_TEST(stop.operational());
                     BOOST_CHECK(stop.platform() == string_type{ TETENGO2_TEXT("1") });
                 }
                 {
                     const auto& stop = stops[1];
                     BOOST_CHECK((stop.arrival() == time_type{ 6, 5, 45 }));
-                    BOOST_CHECK(!stop.departure().initialized());
-                    BOOST_CHECK(!stop.operational());
-                    BOOST_CHECK(stop.platform().empty());
+                    BOOST_TEST(!stop.departure().initialized());
+                    BOOST_TEST(!stop.operational());
+                    BOOST_TEST(stop.platform().empty());
                 }
             }
-            BOOST_REQUIRE_EQUAL(p_timetable->up_trains().size(), 1U);
+            BOOST_TEST_REQUIRE(p_timetable->up_trains().size() == 1U);
             {
                 const auto& train = p_timetable->up_trains()[0];
                 BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("9324M") });
                 BOOST_CHECK(train.note() == string_type{ TETENGO2_TEXT("piyo") });
                 const auto& stops = train.stops();
-                BOOST_REQUIRE_EQUAL(train.stops().size(), 2U);
+                BOOST_TEST_REQUIRE(train.stops().size() == 2U);
                 {
                     const auto& stop = stops[0];
-                    BOOST_CHECK(!stop.arrival().initialized());
+                    BOOST_TEST(!stop.arrival().initialized());
                     BOOST_CHECK((stop.departure() == time_type{ 6, 20, 0 }));
-                    BOOST_CHECK(!stop.operational());
+                    BOOST_TEST(!stop.operational());
                     BOOST_CHECK(stop.platform() == string_type{ TETENGO2_TEXT("0A") });
                 }
                 {
                     const auto& stop = stops[1];
-                    BOOST_CHECK(!stop.arrival().initialized());
-                    BOOST_CHECK(!stop.departure().initialized());
-                    BOOST_CHECK(!stop.operational());
-                    BOOST_CHECK(stop.platform().empty());
+                    BOOST_TEST(!stop.arrival().initialized());
+                    BOOST_TEST(!stop.departure().initialized());
+                    BOOST_TEST(!stop.operational());
+                    BOOST_TEST(stop.platform().empty());
                 }
             }
         }
@@ -882,7 +882,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             auto error = error_type::none;
             const auto p_timetable = json_reader.read(first, last, error);
 
-            BOOST_REQUIRE(!p_timetable);
+            BOOST_TEST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
@@ -898,7 +898,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             auto error = error_type::none;
             const auto p_timetable = json_reader.read(first, last, error);
 
-            BOOST_REQUIRE(!p_timetable);
+            BOOST_TEST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
@@ -914,7 +914,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             auto error = error_type::none;
             const auto p_timetable = json_reader.read(first, last, error);
 
-            BOOST_REQUIRE(!p_timetable);
+            BOOST_TEST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
@@ -930,7 +930,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             auto error = error_type::none;
             const auto p_timetable = json_reader.read(first, last, error);
 
-            BOOST_REQUIRE(!p_timetable);
+            BOOST_TEST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
         {
@@ -946,7 +946,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             auto error = error_type::none;
             const auto p_timetable = json_reader.read(first, last, error);
 
-            BOOST_REQUIRE(!p_timetable);
+            BOOST_TEST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::corrupted);
         }
     }

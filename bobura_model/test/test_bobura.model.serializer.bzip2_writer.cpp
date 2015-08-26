@@ -119,9 +119,9 @@ BOOST_AUTO_TEST_SUITE(bzip2_writer)
         auto p_writer = tetengo2::stdalt::make_unique<concrete_writer>();
         const bzip2_writer_type bzip2_writer{ std::move(p_writer) };
 
-        BOOST_CHECK(bzip2_writer.selects(boost::filesystem::path{ TETENGO2_TEXT("hoge.ext_bz2") }));
-        BOOST_CHECK(!bzip2_writer.selects(boost::filesystem::path{ TETENGO2_TEXT("hoge.ext") }));
-        BOOST_CHECK(!bzip2_writer.selects(boost::filesystem::path{}));
+        BOOST_TEST(bzip2_writer.selects(boost::filesystem::path{ TETENGO2_TEXT("hoge.ext_bz2") }));
+        BOOST_TEST(!bzip2_writer.selects(boost::filesystem::path{ TETENGO2_TEXT("hoge.ext") }));
+        BOOST_TEST(!bzip2_writer.selects(boost::filesystem::path{}));
     }
 
     BOOST_AUTO_TEST_CASE(write)
