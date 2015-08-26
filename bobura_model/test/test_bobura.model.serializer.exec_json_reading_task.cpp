@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_SUITE(exec_json_reading_task)
             const exec_json_reading_task_type task{ parent, message_catalog };
 
             auto p_result = task([](promise_type&){ return std::unique_ptr<timetable_type>{}; });
-            BOOST_CHECK(!p_result);
+            BOOST_TEST(!p_result);
         }
         {
             window_type parent{};
@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_SUITE(exec_json_reading_task)
                         return std::move(p_timetable);
                     }
                 );
-            BOOST_REQUIRE(p_result);
+            BOOST_TEST_REQUIRE(p_result.get());
             BOOST_CHECK(p_result->line_name() == string_type{ TETENGO2_TEXT("hoge") });
         }
     }

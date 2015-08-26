@@ -70,7 +70,7 @@ BOOST_AUTO_TEST_SUITE(hours_minutes_seconds_type)
 
         const hours_minutes_seconds_type_ hours_minutes_seconds(12, 34, 56);
 
-        BOOST_CHECK_EQUAL(hours_minutes_seconds.hours(), 12);
+        BOOST_TEST(hours_minutes_seconds.hours() == 12);
     }
 
     BOOST_AUTO_TEST_CASE(minutes)
@@ -79,7 +79,7 @@ BOOST_AUTO_TEST_SUITE(hours_minutes_seconds_type)
 
         const hours_minutes_seconds_type_ hours_minutes_seconds(12, 34, 56);
 
-        BOOST_CHECK_EQUAL(hours_minutes_seconds.minutes(), 34);
+        BOOST_TEST(hours_minutes_seconds.minutes() == 34);
     }
 
     BOOST_AUTO_TEST_CASE(seconds)
@@ -88,7 +88,7 @@ BOOST_AUTO_TEST_SUITE(hours_minutes_seconds_type)
 
         const hours_minutes_seconds_type_ hours_minutes_seconds(12, 34, 56);
 
-        BOOST_CHECK_EQUAL(hours_minutes_seconds.seconds(), 56);
+        BOOST_TEST(hours_minutes_seconds.seconds() == 56);
     }
 
 
@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_SUITE_END()
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_CHECK_EQUAL(time_span_type::seconds_of_whole_day(), 24 * 60 * 60);
+        BOOST_TEST(time_span_type::seconds_of_whole_day() == 24 * 60 * 60);
     }
 
 // This test case causes a segmentation fault on Cygwin.
@@ -114,102 +114,102 @@ BOOST_AUTO_TEST_SUITE_END()
         {
             const time_span_type time_span(0);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), 0);
+            BOOST_TEST(time_span.seconds() == 0);
         }
         {
             const time_span_type time_span(1);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), 1);
+            BOOST_TEST(time_span.seconds() == 1);
         }
         {
             const time_span_type time_span(2);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), 2);
+            BOOST_TEST(time_span.seconds() == 2);
         }
         {
             const time_span_type time_span(-1);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), -1);
+            BOOST_TEST(time_span.seconds() == -1);
         }
         {
             const time_span_type time_span(-2);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), -2);
+            BOOST_TEST(time_span.seconds() == -2);
         }
         {
             const time_span_type time_span(0, 0, 0);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), 0);
+            BOOST_TEST(time_span.seconds() == 0);
         }
         {
             const time_span_type time_span(1, 0, 0);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), 3600);
+            BOOST_TEST(time_span.seconds() == 3600);
         }
         {
             const time_span_type time_span(-1, 0, 0);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), -3600);
+            BOOST_TEST(time_span.seconds() == -3600);
         }
         {
             const time_span_type time_span(0, 1, 0);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), 60);
+            BOOST_TEST(time_span.seconds() == 60);
         }
         {
             const time_span_type time_span(0, 59, 0);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), 3540);
+            BOOST_TEST(time_span.seconds() == 3540);
         }
         {
             const time_span_type time_span(0, -1, 0);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), -60);
+            BOOST_TEST(time_span.seconds() == -60);
         }
         {
             const time_span_type time_span(0, -59, 0);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), -3540);
+            BOOST_TEST(time_span.seconds() == -3540);
         }
         {
             const time_span_type time_span(0, 0, 1);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), 1);
+            BOOST_TEST(time_span.seconds() == 1);
         }
         {
             const time_span_type time_span(0, 0, 59);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), 59);
+            BOOST_TEST(time_span.seconds() == 59);
         }
         {
             const time_span_type time_span(0, 0, -1);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), -1);
+            BOOST_TEST(time_span.seconds() == -1);
         }
         {
             const time_span_type time_span(0, 0, -59);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), -59);
+            BOOST_TEST(time_span.seconds() == -59);
         }
         {
             const time_span_type time_span(1, 1, 1);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), 3661);
+            BOOST_TEST(time_span.seconds() == 3661);
         }
         {
             const time_span_type time_span(1, 59, 59);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), 7199);
+            BOOST_TEST(time_span.seconds() == 7199);
         }
         {
             const time_span_type time_span(-1, -1, -1);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), -3661);
+            BOOST_TEST(time_span.seconds() == -3661);
         }
         {
             const time_span_type time_span(-1, -59, -59);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), -7199);
+            BOOST_TEST(time_span.seconds() == -7199);
         }
         {
             BOOST_CHECK_THROW((time_span_type{ 0, 60, 0 }), std::out_of_range);
@@ -251,7 +251,7 @@ BOOST_AUTO_TEST_SUITE_END()
 
             time_span1 += time_span2;
 
-            BOOST_CHECK_EQUAL(time_span1.seconds(), 3);
+            BOOST_TEST(time_span1.seconds() == 3);
         }
         {
             time_span_type time_span1(0, 0, 59);
@@ -275,7 +275,7 @@ BOOST_AUTO_TEST_SUITE_END()
 
             const auto time_span3 = time_span1 + time_span2;
 
-            BOOST_CHECK_EQUAL(time_span3.seconds(), 3);
+            BOOST_TEST(time_span3.seconds() == 3);
         }
         {
             const time_span_type time_span1(0, 59, 59);
@@ -305,7 +305,7 @@ BOOST_AUTO_TEST_SUITE_END()
 
             time_span1 -= time_span2;
 
-            BOOST_CHECK_EQUAL(time_span1.seconds(), -1);
+            BOOST_TEST(time_span1.seconds() == -1);
         }
         {
             time_span_type time_span1(0, 0, 59);
@@ -329,7 +329,7 @@ BOOST_AUTO_TEST_SUITE_END()
 
             const auto time_span3 = time_span1 - time_span2;
 
-            BOOST_CHECK_EQUAL(time_span3.seconds(), -1);
+            BOOST_TEST(time_span3.seconds() == -1);
         }
         {
             const time_span_type time_span1(0, 59, 59);
@@ -461,27 +461,27 @@ BOOST_AUTO_TEST_SUITE_END()
         {
             const time_span_type time_span(0);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), 0);
+            BOOST_TEST(time_span.seconds() == 0);
         }
         {
             const time_span_type time_span(1);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), 1);
+            BOOST_TEST(time_span.seconds() == 1);
         }
         {
             const time_span_type time_span(2);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), 2);
+            BOOST_TEST(time_span.seconds() == 2);
         }
         {
             const time_span_type time_span(-1);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), -1);
+            BOOST_TEST(time_span.seconds() == -1);
         }
         {
             const time_span_type time_span(-2);
 
-            BOOST_CHECK_EQUAL(time_span.seconds(), -2);
+            BOOST_TEST(time_span.seconds() == -2);
         }
     }
 

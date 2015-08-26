@@ -168,9 +168,9 @@ BOOST_AUTO_TEST_SUITE(writer_selector)
         auto concrete_writers = create_concrete_writers();
         const writer_selector_type writer_selector{ std::move(concrete_writers), boost::filesystem::path{} };
 
-        BOOST_CHECK(writer_selector.selects(boost::filesystem::path{ TETENGO2_TEXT("piyo.hoge") }));
-        BOOST_CHECK(!writer_selector.selects(boost::filesystem::path{ TETENGO2_TEXT("piyo.foo") }));
-        BOOST_CHECK(!writer_selector.selects(boost::filesystem::path{}));
+        BOOST_TEST(writer_selector.selects(boost::filesystem::path{ TETENGO2_TEXT("piyo.hoge") }));
+        BOOST_TEST(!writer_selector.selects(boost::filesystem::path{ TETENGO2_TEXT("piyo.foo") }));
+        BOOST_TEST(!writer_selector.selects(boost::filesystem::path{}));
     }
 
 // This test case causes a segmentation fault on Cygwin.

@@ -194,7 +194,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             auto error = error_type::none;
             const auto p_timetable = reader_selector.read(first, last, error);
 
-            BOOST_REQUIRE(p_timetable);
+            BOOST_TEST_REQUIRE(p_timetable.get());
             BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("hoge") });
         }
         {
@@ -213,7 +213,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             auto error = error_type::none;
             const auto p_timetable = reader_selector.read(first, last, error);
 
-            BOOST_REQUIRE(p_timetable);
+            BOOST_TEST_REQUIRE(p_timetable.get());
             BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("fuga") });
         }
         {
@@ -232,7 +232,7 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             auto error = error_type::none;
             const auto p_timetable = reader_selector.read(first, last, error);
 
-            BOOST_REQUIRE(!p_timetable);
+            BOOST_TEST_REQUIRE(!p_timetable);
             BOOST_CHECK(error == error_type::unsupported);
         }
     }

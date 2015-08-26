@@ -146,7 +146,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
     {
         BOOST_TEST_PASSPOINT();
 
-        BOOST_CHECK(station_interval_calculator_type::default_interval().seconds() > 0);
+        BOOST_TEST(station_interval_calculator_type::default_interval().seconds() > 0);
     }
 
     BOOST_AUTO_TEST_CASE(construction)
@@ -171,7 +171,7 @@ BOOST_AUTO_TEST_SUITE(station_interval_calculator)
 
             const auto intervals = calculator.calculate();
 
-            BOOST_CHECK(intervals.empty());
+            BOOST_TEST(intervals.empty());
         }
         {
             // |DOWN|   | UP |
