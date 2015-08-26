@@ -68,7 +68,7 @@ BOOST_AUTO_TEST_SUITE(diagram)
                 time_type{ 1 }, time_span_type{ 2 }, 0, left_type{ 3 }, left_type{ 4 }, left_type{ 5 }
             );
 
-        BOOST_CHECK_EQUAL(result.value(), (left_type::value_type{ 86435, 36 }));
+        BOOST_TEST(result.value() == (left_type::value_type{ 86435, 36 }));
     }
 
     BOOST_AUTO_TEST_CASE(station_index_to_top)
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_SUITE(diagram)
                 station_positions, size_type{ 1 }, top_type{ 2 }, top_type{ 3 }, top_type{ 4 }
             );
 
-        BOOST_CHECK_EQUAL(result.value(), 47);
+        BOOST_TEST(result.value() == 47);
     }
 
     BOOST_AUTO_TEST_CASE(normal_line_width)

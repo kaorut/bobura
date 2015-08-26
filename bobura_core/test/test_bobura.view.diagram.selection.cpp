@@ -95,7 +95,7 @@ BOOST_AUTO_TEST_SUITE(selection)
         };
         const station_location_type station_location{ std::move(station), 42 };
 
-        BOOST_CHECK(!selection.selected(station_location));
+        BOOST_TEST(!selection.selected(station_location));
     }
 
     BOOST_AUTO_TEST_CASE(selected_O_train)
@@ -113,7 +113,7 @@ BOOST_AUTO_TEST_SUITE(selection)
             string_type{ TETENGO2_TEXT("note") }
         };
 
-        BOOST_CHECK(!selection.selected(train, boost::none));
+        BOOST_TEST(!selection.selected(train, boost::none));
     }
 
     BOOST_AUTO_TEST_CASE(select_O_station)
@@ -152,10 +152,10 @@ BOOST_AUTO_TEST_SUITE(selection)
 
         selection.select(station_location);
 
-        BOOST_CHECK(selection.selected(station_location));
-        BOOST_CHECK(!selection.selected(train, boost::none));
-        BOOST_CHECK(!selection.selected(train, boost::make_optional<size_type>(42)));
-        BOOST_CHECK_EQUAL(p_selected_station_location, &station_location);
+        BOOST_TEST(selection.selected(station_location));
+        BOOST_TEST(!selection.selected(train, boost::none));
+        BOOST_TEST(!selection.selected(train, boost::make_optional<size_type>(42)));
+        BOOST_TEST(p_selected_station_location == &station_location);
     }
 
     BOOST_AUTO_TEST_CASE(select_O_train)
@@ -199,10 +199,10 @@ BOOST_AUTO_TEST_SUITE(selection)
         
             selection.select(train, boost::none);
         
-            BOOST_CHECK(!selection.selected(station_location));
-            BOOST_CHECK(selection.selected(train, boost::none));
-            BOOST_CHECK(!selection.selected(train, boost::make_optional<size_type>(42)));
-            BOOST_CHECK_EQUAL(p_selected_train, &train);
+            BOOST_TEST(!selection.selected(station_location));
+            BOOST_TEST(selection.selected(train, boost::none));
+            BOOST_TEST(!selection.selected(train, boost::make_optional<size_type>(42)));
+            BOOST_TEST(p_selected_train == &train);
             BOOST_CHECK(selected_departure_stop_index == boost::none);
         }
         {
@@ -242,10 +242,10 @@ BOOST_AUTO_TEST_SUITE(selection)
         
             selection.select(train, boost::make_optional<size_type>(42));
         
-            BOOST_CHECK(!selection.selected(station_location));
-            BOOST_CHECK(!selection.selected(train, boost::none));
-            BOOST_CHECK(selection.selected(train, boost::make_optional<size_type>(42)));
-            BOOST_CHECK_EQUAL(p_selected_train, &train);
+            BOOST_TEST(!selection.selected(station_location));
+            BOOST_TEST(!selection.selected(train, boost::none));
+            BOOST_TEST(selection.selected(train, boost::make_optional<size_type>(42)));
+            BOOST_TEST(p_selected_train == &train);
             BOOST_CHECK(selected_departure_stop_index == boost::make_optional<size_type>(42));
         }
         {
@@ -285,10 +285,10 @@ BOOST_AUTO_TEST_SUITE(selection)
         
             selection.select(train, boost::make_optional<size_type>(42));
         
-            BOOST_CHECK(!selection.selected(station_location));
-            BOOST_CHECK(!selection.selected(train, boost::none));
-            BOOST_CHECK(selection.selected(train, boost::make_optional<size_type>(42)));
-            BOOST_CHECK_EQUAL(p_selected_train, &train);
+            BOOST_TEST(!selection.selected(station_location));
+            BOOST_TEST(!selection.selected(train, boost::none));
+            BOOST_TEST(selection.selected(train, boost::make_optional<size_type>(42)));
+            BOOST_TEST(p_selected_train == &train);
             BOOST_CHECK(selected_departure_stop_index == boost::make_optional<size_type>(42));
         }
     }
@@ -320,8 +320,8 @@ BOOST_AUTO_TEST_SUITE(selection)
 
             selection.unselect_all();
 
-            BOOST_CHECK(!selection.selected(station_location));
-            BOOST_CHECK(all_unselected_called);
+            BOOST_TEST(!selection.selected(station_location));
+            BOOST_TEST(all_unselected_called);
         }
         {
             selection_type selection{};
@@ -346,8 +346,8 @@ BOOST_AUTO_TEST_SUITE(selection)
 
             selection.unselect_all();
 
-            BOOST_CHECK(!selection.selected(train, boost::none));
-            BOOST_CHECK(all_unselected_called);
+            BOOST_TEST(!selection.selected(train, boost::none));
+            BOOST_TEST(all_unselected_called);
         }
     }
 

@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_SUITE(timetable_model)
 
         const auto& timetable = model.timetable();
 
-        BOOST_CHECK(timetable.line_name().empty());
+        BOOST_TEST(timetable.line_name().empty());
     }
 
 // This test case causes a segmentation fault on Cygwin.
@@ -117,14 +117,14 @@ BOOST_AUTO_TEST_SUITE(timetable_model)
         {
             const model_type model{};
 
-            BOOST_CHECK(!model.has_path());
+            BOOST_TEST(!model.has_path());
         }
         {
             model_type model{};
             auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
             model.reset_timetable(std::move(p_timetable), string_type{ TETENGO2_TEXT("hoge") });
 
-            BOOST_CHECK(model.has_path());
+            BOOST_TEST(model.has_path());
         }
     }
 
@@ -167,7 +167,7 @@ BOOST_AUTO_TEST_SUITE(timetable_model)
 
         const model_type model{};
 
-        BOOST_CHECK(!model.changed());
+        BOOST_TEST(!model.changed());
     }
 
     BOOST_AUTO_TEST_CASE(set_changed)
@@ -179,14 +179,14 @@ BOOST_AUTO_TEST_SUITE(timetable_model)
 
             model.set_changed(false);
 
-            BOOST_CHECK(!model.changed());
+            BOOST_TEST(!model.changed());
         }
         {
             model_type model{};
 
             model.set_changed(true);
 
-            BOOST_CHECK(model.changed());
+            BOOST_TEST(model.changed());
         }
     }
 

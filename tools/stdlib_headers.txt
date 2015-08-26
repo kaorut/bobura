@@ -24,8 +24,10 @@ BOOST_OS_CYGWIN                                  boost/predef.h
 BOOST_OS_LINUX                                   boost/predef.h
 BOOST_REQUIRE                                    boost/test/unit_test.hpp
 BOOST_REQUIRE_EQUAL                              boost/test/unit_test.hpp
+BOOST_TEST                                       boost/test/unit_test.hpp
 BOOST_TEST_MODULE                                boost/test/unit_test.hpp
 BOOST_TEST_PASSPOINT                             boost/test/unit_test.hpp
+BOOST_TEST_REQUIRE                               boost/test/unit_test.hpp
 BOOST_THROW_EXCEPTION                            boost/throw_exception.hpp
 BOOST_VERSION_NUMBER                             boost/predef.h
 WINAPI                                           Windows.h
