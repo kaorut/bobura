@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_SUITE(load_from_file)
 
             const boost::optional<boost::filesystem::path> path{};
 
-            BOOST_CHECK(!load_from_file.reloadable(model, path));
+            BOOST_TEST(!load_from_file.reloadable(model, path));
         }
         {
             model_type model{};
@@ -117,7 +117,7 @@ BOOST_AUTO_TEST_SUITE(load_from_file)
 
             const boost::optional<boost::filesystem::path> path{};
 
-            BOOST_CHECK(load_from_file.reloadable(model, path));
+            BOOST_TEST(load_from_file.reloadable(model, path));
         }
         {
             model_type model{};
@@ -128,7 +128,7 @@ BOOST_AUTO_TEST_SUITE(load_from_file)
             const load_from_file_type load_from_file{ false, confirm_file_save, message_catalog };
 
             const boost::optional<boost::filesystem::path> path{};
-            BOOST_CHECK(load_from_file.reloadable(model, path));
+            BOOST_TEST(load_from_file.reloadable(model, path));
         }
         {
             model_type model{};
@@ -140,7 +140,7 @@ BOOST_AUTO_TEST_SUITE(load_from_file)
             const boost::optional<boost::filesystem::path> path{
                 boost::filesystem::path{ TETENGO2_TEXT("file_path") }
             };
-            BOOST_CHECK(load_from_file.reloadable(model, path));
+            BOOST_TEST(load_from_file.reloadable(model, path));
         }
     }
 

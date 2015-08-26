@@ -152,7 +152,7 @@ BOOST_AUTO_TEST_SUITE(main_window_menu_builder)
         main_window_type main_window{ message_catalog, settings, confirm_file_save };
         const main_window_menu_builder_type main_window_menu_builder{ command_set, model, main_window, message_catalog };
 
-        BOOST_CHECK(main_window_menu_builder.build());
+        BOOST_TEST(main_window_menu_builder.build().get());
     }
 #endif
 

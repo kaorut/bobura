@@ -229,15 +229,15 @@ BOOST_AUTO_TEST_SUITE(station_line)
 
         {
             const position_type position{ left_type{ 6 }, top_type{ 24 } };
-            BOOST_CHECK_EQUAL(station_line.p_item_by_position(position), &station_line);
+            BOOST_TEST(station_line.p_item_by_position(position) == &station_line);
         }
         {
             const position_type position{ left_type{ 24 }, top_type{ 24 } };
-            BOOST_CHECK(!station_line.p_item_by_position(position));
+            BOOST_TEST(!station_line.p_item_by_position(position));
         }
         {
             const position_type position{ left_type{ 6 }, top_type{ 48 } };
-            BOOST_CHECK(!station_line.p_item_by_position(position));
+            BOOST_TEST(!station_line.p_item_by_position(position));
         }
     }
 
@@ -263,7 +263,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
             font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
         };
 
-        BOOST_CHECK(!station_line.selected());
+        BOOST_TEST(!station_line.selected());
     }
 
 
@@ -292,7 +292,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
 
             station_line.select(false);
 
-            BOOST_CHECK(station_line.selected());
+            BOOST_TEST(station_line.selected());
         }
         {
             station_type station{
@@ -315,7 +315,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
 
             station_line.select(true);
 
-            BOOST_CHECK(station_line.selected());
+            BOOST_TEST(station_line.selected());
         }
     }
 
@@ -423,7 +423,7 @@ BOOST_AUTO_TEST_SUITE(station_line_list)
         };
 
         const position_type position{ left_type{ 24 }, top_type{ 42 } };
-        BOOST_CHECK(!station_line_list.p_item_by_position(position));
+        BOOST_TEST(!station_line_list.p_item_by_position(position));
     }
 
 

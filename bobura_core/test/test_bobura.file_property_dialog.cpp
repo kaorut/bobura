@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_SUITE(file_property_dialog)
         const message_catalog_type message_catalog{};
         const file_property_dialog_type file_property_dialog{ parent, message_catalog };
 
-        BOOST_CHECK(file_property_dialog.company_name().empty());
+        BOOST_TEST(file_property_dialog.company_name().empty());
     }
 
     BOOST_AUTO_TEST_CASE(set_company_name)
@@ -85,7 +85,7 @@ BOOST_AUTO_TEST_SUITE(file_property_dialog)
         const message_catalog_type message_catalog{};
         const file_property_dialog_type file_property_dialog{ parent, message_catalog };
 
-        BOOST_CHECK(file_property_dialog.line_name().empty());
+        BOOST_TEST(file_property_dialog.line_name().empty());
     }
 
     BOOST_AUTO_TEST_CASE(set_line_name)
@@ -109,7 +109,7 @@ BOOST_AUTO_TEST_SUITE(file_property_dialog)
         const message_catalog_type message_catalog{};
         const file_property_dialog_type file_property_dialog{ parent, message_catalog };
 
-        BOOST_CHECK(file_property_dialog.note().empty());
+        BOOST_TEST(file_property_dialog.note().empty());
     }
 
     BOOST_AUTO_TEST_CASE(set_note)
@@ -133,7 +133,7 @@ BOOST_AUTO_TEST_SUITE(file_property_dialog)
         const message_catalog_type message_catalog{};
         const file_property_dialog_type file_property_dialog{ parent, message_catalog };
 
-        BOOST_CHECK(file_property_dialog.file_name().empty());
+        BOOST_TEST(file_property_dialog.file_name().empty());
     }
 
     BOOST_AUTO_TEST_CASE(set_file_name)

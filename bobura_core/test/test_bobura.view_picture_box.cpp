@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_SUITE(view_picture_box)
 
             const auto captured = picture_box.release_mouse_capture(mouse_button_type::left);
 
-            BOOST_CHECK(!captured);
+            BOOST_TEST(!captured);
         }
         {
             window_type window{};
@@ -86,7 +86,7 @@ BOOST_AUTO_TEST_SUITE(view_picture_box)
             picture_box.set_mouse_capture(mouse_button_type::left);
             const auto captured = picture_box.release_mouse_capture(mouse_button_type::left);
 
-            BOOST_CHECK(captured);
+            BOOST_TEST(captured);
         }
     }
 

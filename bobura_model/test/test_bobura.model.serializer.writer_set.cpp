@@ -53,8 +53,8 @@ BOOST_AUTO_TEST_SUITE(writer_set)
 
         const auto p_writers = writer_set_type::create_writers();
 
-        BOOST_CHECK(!p_writers.empty());
-        BOOST_CHECK(p_writers[0]);
+        BOOST_TEST(!p_writers.empty());
+        BOOST_TEST(p_writers[0].get());
     }
 
 

@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_SUITE(train)
                 string_type{ TETENGO2_TEXT("x") }
             };
 
-            BOOST_CHECK(train.stops().empty());
+            BOOST_TEST(train.stops().empty());
         }
         {
             const train_type train{
@@ -73,7 +73,7 @@ BOOST_AUTO_TEST_SUITE(train)
                 string_type{ TETENGO2_TEXT("x") }
             };
 
-            BOOST_CHECK(train.stops().empty());
+            BOOST_TEST(train.stops().empty());
         }
         {
             const train_type::stops_type stops{
@@ -406,7 +406,7 @@ BOOST_AUTO_TEST_SUITE(train)
             string_type{ TETENGO2_TEXT("x") }
         };
 
-        BOOST_CHECK_EQUAL(train.kind_index(), 42U);
+        BOOST_TEST(train.kind_index() == 42U);
     }
 
     BOOST_AUTO_TEST_CASE(set_kind_index)
@@ -424,7 +424,7 @@ BOOST_AUTO_TEST_SUITE(train)
 
         train.set_kind_index(24);
 
-        BOOST_CHECK_EQUAL(train.kind_index(), 24U);
+        BOOST_TEST(train.kind_index() == 24U);
     }
 
     BOOST_AUTO_TEST_CASE(name)
@@ -603,7 +603,7 @@ BOOST_AUTO_TEST_SUITE(train)
 
             train.erase_stops(train.stops().begin(), train.stops().end());
 
-            BOOST_CHECK(train.stops().empty());
+            BOOST_TEST(train.stops().empty());
         }
         {
             const train_type::stops_type stops{
@@ -624,7 +624,7 @@ BOOST_AUTO_TEST_SUITE(train)
 
             train.erase_stops(train.stops().begin(), train.stops().end());
 
-            BOOST_CHECK(train.stops().empty());
+            BOOST_TEST(train.stops().empty());
         }
         {
             const train_type::stops_type stops{
@@ -646,7 +646,7 @@ BOOST_AUTO_TEST_SUITE(train)
 
             train.erase_stops(train.stops().begin(), train.stops().end());
 
-            BOOST_CHECK(train.stops().empty());
+            BOOST_TEST(train.stops().empty());
         }
         {
             const train_type::stops_type stops{
@@ -667,14 +667,14 @@ BOOST_AUTO_TEST_SUITE(train)
 
             train.erase_stops(train.stops().begin(), train.stops().begin());
 
-            BOOST_REQUIRE_EQUAL(train.stops().size(), 2U);
+            BOOST_TEST_REQUIRE(train.stops().size() == 2U);
             BOOST_CHECK(train.stops()[0].arrival() == time_type{ 0 });
             BOOST_CHECK(train.stops()[0].departure() == time_type{ 0 });
-            BOOST_CHECK(!train.stops()[0].operational());
+            BOOST_TEST(!train.stops()[0].operational());
             BOOST_CHECK(train.stops()[0].platform() == string_type{});
             BOOST_CHECK(train.stops()[1].arrival() == time_type{ 1 });
             BOOST_CHECK(train.stops()[1].departure() == time_type{ 2 });
-            BOOST_CHECK(train.stops()[1].operational());
+            BOOST_TEST(train.stops()[1].operational());
             BOOST_CHECK(train.stops()[1].platform() == string_type{ TETENGO2_TEXT("a") });
         }
         {
@@ -697,14 +697,14 @@ BOOST_AUTO_TEST_SUITE(train)
 
             train.erase_stops(train.stops().begin() + 1, train.stops().begin() + 2);
 
-            BOOST_REQUIRE_EQUAL(train.stops().size(), 2U);
+            BOOST_TEST_REQUIRE(train.stops().size() == 2U);
             BOOST_CHECK(train.stops()[0].arrival() == time_type{ 0 });
             BOOST_CHECK(train.stops()[0].departure() == time_type{ 0 });
-            BOOST_CHECK(!train.stops()[0].operational());
+            BOOST_TEST(!train.stops()[0].operational());
             BOOST_CHECK(train.stops()[0].platform() == string_type{});
             BOOST_CHECK(train.stops()[1].arrival() == time_type{ 3 });
             BOOST_CHECK(train.stops()[1].departure() == time_type{ 4 });
-            BOOST_CHECK(!train.stops()[1].operational());
+            BOOST_TEST(!train.stops()[1].operational());
             BOOST_CHECK(train.stops()[1].platform() == string_type{ TETENGO2_TEXT("b") });
         }
     }

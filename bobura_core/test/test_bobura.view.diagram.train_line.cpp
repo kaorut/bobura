@@ -218,11 +218,11 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
 
         {
             const position_type position{ left_type{ 24 }, top_type{ 42 } };
-            BOOST_CHECK_EQUAL(train_line_fragment.p_item_by_position(position), &train_line_fragment);
+            BOOST_TEST(train_line_fragment.p_item_by_position(position) == &train_line_fragment);
         }
         {
             const position_type position{ left_type{ 42 }, top_type{ 42 } };
-            BOOST_CHECK(!train_line_fragment.p_item_by_position(position));
+            BOOST_TEST(!train_line_fragment.p_item_by_position(position));
         }
     }
 
@@ -250,7 +250,7 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             message_catalog
         };
 
-        BOOST_CHECK(!train_line_fragment.selected());
+        BOOST_TEST(!train_line_fragment.selected());
     }
 
     BOOST_AUTO_TEST_CASE(select)
@@ -280,7 +280,7 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
 
             train_line_fragment.select(false);
 
-            BOOST_CHECK(train_line_fragment.selected());
+            BOOST_TEST(train_line_fragment.selected());
         }
         {
             const train_type train{
@@ -305,7 +305,7 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
 
             train_line_fragment.select(true);
 
-            BOOST_CHECK(train_line_fragment.selected());
+            BOOST_TEST(train_line_fragment.selected());
         }
     }
 
@@ -494,7 +494,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
         };
 
         const position_type position{ left_type{ 24 }, top_type{ 42 } };
-        BOOST_CHECK(!train_line.p_item_by_position(position));
+        BOOST_TEST(!train_line.p_item_by_position(position));
     }
 
 
@@ -619,7 +619,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
         };
 
         const position_type position{ left_type{ 24 }, top_type{ 42 } };
-        BOOST_CHECK(!train_line_list.p_item_by_position(position));
+        BOOST_TEST(!train_line_list.p_item_by_position(position));
     }
 
 

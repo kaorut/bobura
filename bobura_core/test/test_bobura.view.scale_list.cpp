@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_SUITE(scale_list)
 
         const scale_list_type scale_list{};
 
-        BOOST_CHECK_EQUAL(scale_list.size(), 8U);
+        BOOST_TEST(scale_list.size() == 8U);
     }
 
     BOOST_AUTO_TEST_CASE(at)
@@ -91,15 +91,15 @@ BOOST_AUTO_TEST_SUITE(scale_list)
 
         const scale_list_type scale_list{};
 
-        BOOST_CHECK_EQUAL(*scale_list.index_of(scale_type{ 1, 10 }), 0U);
-        BOOST_CHECK_EQUAL(*scale_list.index_of(scale_type{ 1, 4 }), 1U);
-        BOOST_CHECK_EQUAL(*scale_list.index_of(scale_type{ 1, 2 }), 2U);
-        BOOST_CHECK_EQUAL(*scale_list.index_of(scale_type{ 3, 4 }), 3U);
-        BOOST_CHECK_EQUAL(*scale_list.index_of(scale_type{ 1 }), 4U);
-        BOOST_CHECK_EQUAL(*scale_list.index_of(scale_type{ 3, 2 }), 5U);
-        BOOST_CHECK_EQUAL(*scale_list.index_of(scale_type{ 2 }), 6U);
-        BOOST_CHECK_EQUAL(*scale_list.index_of(scale_type{ 4 }), 7U);
-        BOOST_CHECK(!scale_list.index_of(scale_type{ 3 }));
+        BOOST_TEST(*scale_list.index_of(scale_type{ 1, 10 }) == 0U);
+        BOOST_TEST(*scale_list.index_of(scale_type{ 1, 4 }) == 1U);
+        BOOST_TEST(*scale_list.index_of(scale_type{ 1, 2 }) == 2U);
+        BOOST_TEST(*scale_list.index_of(scale_type{ 3, 4 }) == 3U);
+        BOOST_TEST(*scale_list.index_of(scale_type{ 1 }) == 4U);
+        BOOST_TEST(*scale_list.index_of(scale_type{ 3, 2 }) == 5U);
+        BOOST_TEST(*scale_list.index_of(scale_type{ 2 }) == 6U);
+        BOOST_TEST(*scale_list.index_of(scale_type{ 4 }) == 7U);
+        BOOST_TEST(!scale_list.index_of(scale_type{ 3 }));
     }
 
     BOOST_AUTO_TEST_CASE(larger)

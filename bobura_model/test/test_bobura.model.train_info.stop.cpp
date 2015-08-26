@@ -51,7 +51,7 @@ BOOST_AUTO_TEST_SUITE(stop)
 
             BOOST_CHECK(stop.arrival() == time_type{ 0 });
             BOOST_CHECK(stop.departure() == time_type{ 0 });
-            BOOST_CHECK(!stop.operational());
+            BOOST_TEST(!stop.operational());
             BOOST_CHECK(stop.platform() == string_type{});
         }
         {
@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_SUITE(stop)
 
             BOOST_CHECK(stop.arrival() == time_type{ 0 });
             BOOST_CHECK(stop.departure() == time_type{ 1 });
-            BOOST_CHECK(stop.operational());
+            BOOST_TEST(stop.operational());
             BOOST_CHECK(stop.platform() == string_type{ TETENGO2_TEXT("1") });
         }
         {
@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_SUITE(stop)
 
             BOOST_CHECK(stop.arrival() == time_type{ 1 });
             BOOST_CHECK(stop.departure() == time_type{ 2 });
-            BOOST_CHECK(stop.operational());
+            BOOST_TEST(stop.operational());
             BOOST_CHECK(stop.platform() == string_type{ TETENGO2_TEXT("ZZZ") });
         }
     }
@@ -153,24 +153,24 @@ BOOST_AUTO_TEST_SUITE(stop)
         {
             const stop_type stop{ time_type{ 1 }, time_type{ 2 }, false, string_type{ TETENGO2_TEXT("1") } };
 
-            BOOST_CHECK(!stop.passing());
+            BOOST_TEST(!stop.passing());
         }
         {
             const stop_type stop{ time_type::uninitialized(), time_type{ 2 }, false, string_type{ TETENGO2_TEXT("1") } };
 
-            BOOST_CHECK(!stop.passing());
+            BOOST_TEST(!stop.passing());
         }
         {
             const stop_type stop{ time_type{ 1 }, time_type::uninitialized(), false, string_type{ TETENGO2_TEXT("1") } };
 
-            BOOST_CHECK(!stop.passing());
+            BOOST_TEST(!stop.passing());
         }
         {
             const stop_type stop{
                 time_type::uninitialized(), time_type::uninitialized(), false, string_type{ TETENGO2_TEXT("1") }
             };
 
-            BOOST_CHECK(stop.passing());
+            BOOST_TEST(stop.passing());
         }
     }
 
@@ -181,12 +181,12 @@ BOOST_AUTO_TEST_SUITE(stop)
         {
             const stop_type stop{ time_type{ 1 }, time_type{ 2 }, false, string_type{ TETENGO2_TEXT("1") } };
 
-            BOOST_CHECK(!stop.operational());
+            BOOST_TEST(!stop.operational());
         }
         {
             const stop_type stop{ time_type{ 3 }, time_type{ 4 }, true, string_type{ TETENGO2_TEXT("2") } };
 
-            BOOST_CHECK(stop.operational());
+            BOOST_TEST(stop.operational());
         }
     }
 
