@@ -218,6 +218,9 @@
     <ClCompile Include="test\test_bobura.command.show_timetable_down.cpp">
       <Filter>sources\test_bobura\command</Filter>
     </ClCompile>
+    <ClCompile Include="test\test_bobura.command.show_timetable_up.cpp">
+      <Filter>sources\test_bobura\command</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="res.test\win32\bobura_core.test.exe.manifest">

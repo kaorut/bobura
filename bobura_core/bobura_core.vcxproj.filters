@@ -282,6 +282,9 @@
     <ClInclude Include="include\bobura\command\show_timetable_down.h">
       <Filter>headers\bobura\command</Filter>
     </ClInclude>
+    <ClInclude Include="include\bobura\command\show_timetable_up.h">
+      <Filter>headers\bobura\command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\precompiled\precompiled.cpp">
@@ -429,6 +432,9 @@
       <Filter>sources\bobura</Filter>
     </ClCompile>
     <ClCompile Include="src\bobura.command.show_timetable_down.cpp">
+      <Filter>sources\bobura\command</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.command.show_timetable_up.cpp">
       <Filter>sources\bobura\command</Filter>
     </ClCompile>
   </ItemGroup>

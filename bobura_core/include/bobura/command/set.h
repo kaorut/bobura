@@ -302,11 +302,19 @@ namespace bobura { namespace command
         const;
 
         /*!
-            \brief Returns the command show-timetable.
+            \brief Returns the command show-timetable-down.
 
             \return The command.
         */
-        const command_type& show_timetable()
+        const command_type& show_timetable_down()
+        const;
+
+        /*!
+            \brief Returns the command show-timetable-up.
+
+            \return The command.
+        */
+        const command_type& show_timetable_up()
         const;
 
         /*!
