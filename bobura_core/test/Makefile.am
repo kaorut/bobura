@@ -26,7 +26,8 @@ sources = \
     test_bobura.command.set_horizontal_scale.cpp \
     test_bobura.command.set_vertical_scale.cpp \
     test_bobura.command.show_diagram.cpp \
-    test_bobura.command.show_timetable.cpp \
+    test_bobura.command.show_timetable_down.cpp \
+    test_bobura.command.show_timetable_up.cpp \
     test_bobura.command.train_kind.cpp \
     test_bobura.command.vertically_zoom_in.cpp \
     test_bobura.command.vertically_zoom_out.cpp \

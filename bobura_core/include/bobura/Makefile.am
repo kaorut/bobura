@@ -23,7 +23,8 @@ pkg_headers = \
     command/set_traits.h \
     command/set_vertical_scale.h \
     command/show_diagram.h \
-    command/show_timetable.h \
+    command/show_timetable_down.h \
+    command/show_timetable_up.h \
     command/train_kind.h \
     command/traits.h \
     command/vertically_zoom_in.h \
