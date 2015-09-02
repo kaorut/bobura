@@ -50,7 +50,7 @@ namespace bobura { namespace command
         nop();
 
         /*!
-            \brief Destroys a no-operation command.
+            \brief Destroys the no-operation command.
         */
         virtual ~nop()
         noexcept;

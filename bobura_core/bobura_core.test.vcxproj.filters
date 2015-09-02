@@ -206,9 +206,6 @@
     <ClCompile Include="test\test_bobura.command.show_diagram.cpp">
       <Filter>sources\test_bobura\command</Filter>
     </ClCompile>
-    <ClCompile Include="test\test_bobura.command.show_timetable.cpp">
-      <Filter>sources\test_bobura\command</Filter>
-    </ClCompile>
     <ClCompile Include="test\test_bobura.timetable_view.cpp">
       <Filter>sources\test_bobura</Filter>
     </ClCompile>
@@ -217,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="test\test_bobura.message.view_picture_box.timetable.cpp">
       <Filter>sources\test_bobura\message\view_picture_box</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_bobura.command.show_timetable_down.cpp">
+      <Filter>sources\test_bobura\command</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

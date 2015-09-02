@@ -84,7 +84,7 @@ namespace bobura { namespace command
         explicit train_kind(const message_catalog_type& message_catalog);
 
         /*!
-            \brief Destroys a train kind command.
+            \brief Destroys the train kind command.
         */
         virtual ~train_kind()
         noexcept;

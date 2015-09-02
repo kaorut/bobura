@@ -94,7 +94,7 @@ namespace bobura { namespace command
         explicit font_color(const message_catalog_type& message_catalog);
 
         /*!
-            \brief Destroys a font and color command.
+            \brief Destroys the font and color command.
         */
         virtual ~font_color()
         noexcept;

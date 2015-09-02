@@ -88,7 +88,7 @@ namespace bobura { namespace view { namespace diagram
         zoom(picture_box_type& picture_box, diagram_view_type& diagram_view);
 
         /*!
-            \brief Destroys a zoom of a view.
+            \brief Destroys the zoom of a view.
         */
         ~zoom()
         noexcept;

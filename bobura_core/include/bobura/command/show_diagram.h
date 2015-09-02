@@ -19,7 +19,7 @@
 namespace bobura { namespace command
 {
     /*!
-        \brief The class template for a no-operation command.
+        \brief The class template for a show-diagram command.
 
         \tparam Traits A traits type.
     */
@@ -51,12 +51,12 @@ namespace bobura { namespace command
         // constructors and destructor
 
         /*!
-            \brief Create a no-operation command.
+            \brief Create a show-diagram command.
         */
         show_diagram();
 
         /*!
-            \brief Destroys a no-operation command.
+            \brief Destroys the show-diagram command.
         */
         virtual ~show_diagram()
         noexcept;
