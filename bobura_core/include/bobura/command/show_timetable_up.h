@@ -94,8 +94,8 @@ namespace bobura { namespace command
     $Id$
 */
 
-#if !defined(BOBURA_COMMAND_SHOWTIMETABLE_H)
-#define BOBURA_COMMAND_SHOWTIMETABLE_H
+#if !defined(BOBURA_COMMAND_SHOWTIMETABLEDOWN_H)
+#define BOBURA_COMMAND_SHOWTIMETABLEDOWN_H
 
 #include <memory>
 
