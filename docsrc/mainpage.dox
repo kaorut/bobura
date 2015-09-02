@@ -165,7 +165,7 @@ $ make
 $ sudo make install
 ~~~~
 
-The following instruction tests the Bobura and Tetengo2 libraries:
+The following instruction tests the Bobura libraries:
 
 ~~~~{.sh}
 $ make check
