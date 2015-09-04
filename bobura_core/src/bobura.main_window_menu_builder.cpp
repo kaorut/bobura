@@ -240,10 +240,17 @@ namespace bobura
             );
             append_menu_command(
                 *p_popup_menu,
-                m_message_catalog.get(TETENGO2_TEXT("Menu:View:Show &Timetable")),
+                m_message_catalog.get(TETENGO2_TEXT("Menu:View:Show Timetable (D&own)")),
                 m_command_set.show_timetable_down(),
                 commands,
                 shortcut_key_type{ virtual_key_type::char_t(), false, true, false }
+            );
+            append_menu_command(
+                *p_popup_menu,
+                m_message_catalog.get(TETENGO2_TEXT("Menu:View:Show Timetable (&Up)")),
+                m_command_set.show_timetable_up(),
+                commands,
+                shortcut_key_type{ virtual_key_type::char_y(), false, true, false }
             );
 
             append_menu_separator(*p_popup_menu, commands);

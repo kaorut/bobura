@@ -229,10 +229,10 @@ namespace bobura
             m_p_tab_frame->tab_at(0).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Diagram")));
 
             m_p_timetable_down_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
-            m_p_tab_frame->tab_at(1).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Timetable Down")));
+            m_p_tab_frame->tab_at(1).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Timetable (Down)")));
 
             m_p_timetable_up_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
-            m_p_tab_frame->tab_at(2).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Timetable Up")));
+            m_p_tab_frame->tab_at(2).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Timetable (Up)")));
 
             m_p_property_bar = tetengo2::stdalt::make_unique<property_bar_type>(m_base, m_settings, m_message_catalog);
 
