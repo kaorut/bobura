@@ -62,7 +62,7 @@ namespace
     {
         const auto length = ::GetLocaleInfoA(id, type, nullptr, 0);
         if (length == 0)
-            BOOST_THROW_EXCEPTION(std::runtime_error("Can't get locale info."));
+            throw std::runtime_error("Can't get locale info.");
 
         std::vector<char> info(length, '\0');
         ::GetLocaleInfoA(id, type, info.data(), length);
