@@ -8,6 +8,7 @@
 
 #include <utility>
 
+#include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
@@ -41,7 +42,9 @@ namespace bobura { namespace view { namespace timetable
         :
         m_position(left_type{ 0 }, top_type{ 0 }),
         m_dimension(width_type{ 0 }, height_type{ 0 })
-        {}
+        {
+            boost::ignore_unused(model, canvas, canvas_dimension);
+        }
 
         impl(impl&& another)
         :
@@ -72,6 +75,7 @@ namespace bobura { namespace view { namespace timetable
         void draw_on_impl(canvas_type& canvas)
         const
         {
+            boost::ignore_unused(canvas);
             // TODO Implement it.
         }
 
