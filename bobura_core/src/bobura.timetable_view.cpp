@@ -6,6 +6,8 @@
     $Id$
 */
 
+#include <cassert>
+
 #include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
@@ -56,9 +58,9 @@ namespace bobura
             const position_type&  scroll_bar_position
         )
         {
-            boost::ignore_unused(scroll_bar_position);
-
             clear_background(canvas, canvas_dimension);
+        
+            ensure_items_created(canvas, canvas_dimension, scroll_bar_position);
         }
 
         const dimension_type& dimension()
@@ -120,6 +122,24 @@ namespace bobura
                 )
             );
             canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, canvas_dimension);
+        }
+
+        void ensure_items_created(
+            canvas_type&          canvas,
+            const dimension_type& canvas_dimension,
+            const position_type&  scroll_bar_position
+        )
+        {
+            boost::ignore_unused(canvas, canvas_dimension, scroll_bar_position);
+#if 0
+            if (m_p_header)
+            {
+                //assert(m_p_time_line_list && m_p_station_line_list && m_p_train_line_list);
+                return;
+            }
+
+            m_p_header = tetengo2::stdalt::make_unique<header_type>(m_model, m_selection, canvas, canvas_dimension);
+#endif
         }
 
 
