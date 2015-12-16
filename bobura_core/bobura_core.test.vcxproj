@@ -159,6 +159,8 @@
     <ClCompile Include="test\test_bobura.view.diagram.utility.cpp" />
     <ClCompile Include="test\test_bobura.view.diagram.zoom.cpp" />
     <ClCompile Include="test\test_bobura.view.scale_list.cpp" />
+    <ClCompile Include="test\test_bobura.view.timetable.header.cpp" />
+    <ClCompile Include="test\test_bobura.view.timetable.item.cpp" />
     <ClCompile Include="test\test_bobura.view_picture_box.cpp" />
   </ItemGroup>
   <ItemGroup>

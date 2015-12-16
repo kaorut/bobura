@@ -54,6 +54,8 @@ sources = \
     bobura.view.diagram.train_line.cpp \
     bobura.view.diagram.utility.cpp \
     bobura.view.diagram.zoom.cpp \
+    bobura.view.timetable.header.cpp \
+    bobura.view.timetable.item.cpp \
     bobura.view.scale_list.cpp \
     bobura.view_picture_box.cpp
 

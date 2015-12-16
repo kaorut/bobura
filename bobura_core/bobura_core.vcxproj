@@ -174,6 +174,8 @@
     <ClInclude Include="include\bobura\view\diagram\utility.h" />
     <ClInclude Include="include\bobura\view\diagram\zoom.h" />
     <ClInclude Include="include\bobura\view\scale_list.h" />
+    <ClInclude Include="include\bobura\view\timetable\header.h" />
+    <ClInclude Include="include\bobura\view\timetable\item.h" />
     <ClInclude Include="include\bobura\view\timetable\traits.h" />
     <ClInclude Include="include\bobura\view_picture_box.h" />
   </ItemGroup>
@@ -230,6 +232,8 @@
     <ClCompile Include="src\bobura.view.diagram.utility.cpp" />
     <ClCompile Include="src\bobura.view.diagram.zoom.cpp" />
     <ClCompile Include="src\bobura.view.scale_list.cpp" />
+    <ClCompile Include="src\bobura.view.timetable.header.cpp" />
+    <ClCompile Include="src\bobura.view.timetable.item.cpp" />
     <ClCompile Include="src\bobura.view_picture_box.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -73,6 +73,8 @@ pkg_headers = \
     view/diagram/utility.h \
     view/diagram/zoom.h \
     view/scale_list.h \
+    view/timetable/header.h \
+    view/timetable/item.h \
     view/timetable/traits.h \
     view_picture_box.h
 
