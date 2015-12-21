@@ -1,13 +1,13 @@
 /*! \file
-    \brief The definition of bobura::command::nop.
+    \brief The definition of bobura::command::show_timetable_up.
 
     Copyright (C) 2007-2015 kaoru
 
     $Id$
 */
 
-#if !defined(BOBURA_COMMAND_NOP_H)
-#define BOBURA_COMMAND_NOP_H
+#if !defined(BOBURA_COMMAND_SHOWTIMETABLEUP_H)
+#define BOBURA_COMMAND_SHOWTIMETABLEUP_H
 
 #include <memory>
 
@@ -19,18 +19,24 @@
 namespace bobura { namespace command
 {
     /*!
-        \brief The class template for a no-operation command.
+        \brief The class template for a show-timetable-up command.
 
         \tparam Traits A traits type.
     */
-    template <typename Traits>
-    class nop : public command_base<Traits>
+    template <typename Traits, typename CommandSetTraits, typename MainWindowTraits>
+    class show_timetable_up : public command_base<Traits>
     {
     public:
         // types
 
         //! The traits type.
         using traits_type = Traits;
+
+        //! The command set traits type.
+        using command_set_traits_type = CommandSetTraits;
+
+        //! The main window traits type.
+        using main_window_traits_type = MainWindowTraits;
 
         //! The base type.
         using base_type = command_base<traits_type>;
@@ -45,14 +51,14 @@ namespace bobura { namespace command
         // constructors and destructor
 
         /*!
-            \brief Create a no-operation command.
+            \brief Create a show-timetable-up command.
         */
-        nop();
+        show_timetable_up();
 
         /*!
-            \brief Destroys the no-operation command.
+            \brief Destroys the show-timetable-up command.
         */
-        virtual ~nop()
+        virtual ~show_timetable_up()
         noexcept;
 
 

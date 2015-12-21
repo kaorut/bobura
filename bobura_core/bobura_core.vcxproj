@@ -121,7 +121,8 @@
     <ClInclude Include="include\bobura\command\set_traits.h" />
     <ClInclude Include="include\bobura\command\set_vertical_scale.h" />
     <ClInclude Include="include\bobura\command\show_diagram.h" />
-    <ClInclude Include="include\bobura\command\show_timetable.h" />
+    <ClInclude Include="include\bobura\command\show_timetable_down.h" />
+    <ClInclude Include="include\bobura\command\show_timetable_up.h" />
     <ClInclude Include="include\bobura\command\train_kind.h" />
     <ClInclude Include="include\bobura\command\traits.h" />
     <ClInclude Include="include\bobura\command\vertically_zoom_in.h" />
@@ -173,6 +174,8 @@
     <ClInclude Include="include\bobura\view\diagram\utility.h" />
     <ClInclude Include="include\bobura\view\diagram\zoom.h" />
     <ClInclude Include="include\bobura\view\scale_list.h" />
+    <ClInclude Include="include\bobura\view\timetable\header.h" />
+    <ClInclude Include="include\bobura\view\timetable\item.h" />
     <ClInclude Include="include\bobura\view\timetable\traits.h" />
     <ClInclude Include="include\bobura\view_picture_box.h" />
   </ItemGroup>
@@ -199,7 +202,8 @@
     <ClCompile Include="src\bobura.command.set_horizontal_scale.cpp" />
     <ClCompile Include="src\bobura.command.set_vertical_scale.cpp" />
     <ClCompile Include="src\bobura.command.show_diagram.cpp" />
-    <ClCompile Include="src\bobura.command.show_timetable.cpp" />
+    <ClCompile Include="src\bobura.command.show_timetable_down.cpp" />
+    <ClCompile Include="src\bobura.command.show_timetable_up.cpp" />
     <ClCompile Include="src\bobura.command.train_kind.cpp" />
     <ClCompile Include="src\bobura.command.vertically_zoom_in.cpp" />
     <ClCompile Include="src\bobura.command.vertically_zoom_out.cpp" />
@@ -228,6 +232,8 @@
     <ClCompile Include="src\bobura.view.diagram.utility.cpp" />
     <ClCompile Include="src\bobura.view.diagram.zoom.cpp" />
     <ClCompile Include="src\bobura.view.scale_list.cpp" />
+    <ClCompile Include="src\bobura.view.timetable.header.cpp" />
+    <ClCompile Include="src\bobura.view.timetable.item.cpp" />
     <ClCompile Include="src\bobura.view_picture_box.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,13 +1,13 @@
 /*! \file
-    \brief The definition of bobura::command::show_timetable.
+    \brief The definition of bobura::command::show_timetable_down.
 
     Copyright (C) 2007-2015 kaoru
 
     $Id$
 */
 
-#if !defined(BOBURA_COMMAND_SHOWTIMETABLE_H)
-#define BOBURA_COMMAND_SHOWTIMETABLE_H
+#if !defined(BOBURA_COMMAND_SHOWTIMETABLEDOWN_H)
+#define BOBURA_COMMAND_SHOWTIMETABLEDOWN_H
 
 #include <memory>
 
@@ -19,12 +19,12 @@
 namespace bobura { namespace command
 {
     /*!
-        \brief The class template for a no-operation command.
+        \brief The class template for a show-timetable-down command.
 
         \tparam Traits A traits type.
     */
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits>
-    class show_timetable : public command_base<Traits>
+    class show_timetable_down : public command_base<Traits>
     {
     public:
         // types
@@ -51,14 +51,14 @@ namespace bobura { namespace command
         // constructors and destructor
 
         /*!
-            \brief Create a no-operation command.
+            \brief Create a show-timetable-down command.
         */
-        show_timetable();
+        show_timetable_down();
 
         /*!
-            \brief Destroys a no-operation command.
+            \brief Destroys the show-timetable-down command.
         */
-        virtual ~show_timetable()
+        virtual ~show_timetable_down()
         noexcept;
 
 

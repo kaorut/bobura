@@ -25,7 +25,8 @@ sources = \
     bobura.command.set_horizontal_scale.cpp \
     bobura.command.set_vertical_scale.cpp \
     bobura.command.show_diagram.cpp \
-    bobura.command.show_timetable.cpp \
+    bobura.command.show_timetable_down.cpp \
+    bobura.command.show_timetable_up.cpp \
     bobura.command.train_kind.cpp \
     bobura.command.vertically_zoom_in.cpp \
     bobura.command.vertically_zoom_out.cpp \
@@ -53,6 +54,8 @@ sources = \
     bobura.view.diagram.train_line.cpp \
     bobura.view.diagram.utility.cpp \
     bobura.view.diagram.zoom.cpp \
+    bobura.view.timetable.header.cpp \
+    bobura.view.timetable.item.cpp \
     bobura.view.scale_list.cpp \
     bobura.view_picture_box.cpp
 

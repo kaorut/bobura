@@ -31,7 +31,8 @@
 #include <bobura/command/set_horizontal_scale.h>
 #include <bobura/command/set_vertical_scale.h>
 #include <bobura/command/show_diagram.h>
-#include <bobura/command/show_timetable.h>
+#include <bobura/command/show_timetable_down.h>
+#include <bobura/command/show_timetable_up.h>
 #include <bobura/command/train_kind.h>
 #include <bobura/command/vertically_zoom_in.h>
 #include <bobura/command/vertically_zoom_out.h>
@@ -131,7 +132,8 @@ namespace bobura { namespace command
         m_p_set_horizontal_scale(create_set_horizontal_scale(diagram_view)),
         m_p_set_vertical_scale(create_set_vertical_scale(diagram_view)),
         m_p_show_diagram(create_show_diagram()),
-        m_p_show_timetable(create_show_timetable()),
+        m_p_show_timetable_down(create_show_timetable_down()),
+        m_p_show_timetable_up(create_show_timetable_up()),
         m_p_train_kind(create_train_kind(message_catalog)),
         m_p_vertically_zoom_in(create_vertically_zoom_in(diagram_view)),
         m_p_vertically_zoom_out(create_vertically_zoom_out(diagram_view))
@@ -245,10 +247,16 @@ namespace bobura { namespace command
             return *m_p_show_diagram;
         }
 
-        const command_type& show_timetable()
+        const command_type& show_timetable_down()
         const
         {
-            return *m_p_show_timetable;
+            return *m_p_show_timetable_down;
+        }
+
+        const command_type& show_timetable_up()
+        const
+        {
+            return *m_p_show_timetable_up;
         }
 
         const command_type& train_kind()
@@ -439,11 +447,19 @@ namespace bobura { namespace command
                 >();
         }
 
-        static command_ptr_type create_show_timetable()
+        static command_ptr_type create_show_timetable_down()
         {
             return
                 tetengo2::stdalt::make_unique<
-                    command::show_timetable<command_traits_type, traits_type, main_window_traits_type>
+                    command::show_timetable_down<command_traits_type, traits_type, main_window_traits_type>
+                >();
+        }
+
+        static command_ptr_type create_show_timetable_up()
+        {
+            return
+                tetengo2::stdalt::make_unique<
+                    command::show_timetable_up<command_traits_type, traits_type, main_window_traits_type>
                 >();
         }
 
@@ -518,7 +534,9 @@ namespace bobura { namespace command
 
         const command_ptr_type m_p_show_diagram;
 
-        const command_ptr_type m_p_show_timetable;
+        const command_ptr_type m_p_show_timetable_down;
+
+        const command_ptr_type m_p_show_timetable_up;
 
         const command_ptr_type m_p_train_kind;
 
@@ -683,10 +701,17 @@ namespace bobura { namespace command
     }
 
     template <typename Traits>
-    const typename set<Traits>::command_type& set<Traits>::show_timetable()
+    const typename set<Traits>::command_type& set<Traits>::show_timetable_down()
     const
     {
-        return m_p_impl->show_timetable();
+        return m_p_impl->show_timetable_down();
+    }
+
+    template <typename Traits>
+    const typename set<Traits>::command_type& set<Traits>::show_timetable_up()
+    const
+    {
+        return m_p_impl->show_timetable_up();
     }
 
     template <typename Traits>

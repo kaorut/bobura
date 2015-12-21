@@ -34,6 +34,9 @@
     <Filter Include="sources\test_bobura\message\view_picture_box">
       <UniqueIdentifier>{f7bccbb2-7607-4269-9498-0c65b89894c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sources\test_bobura\view\timetable">
+      <UniqueIdentifier>{00ead1c3-333d-45e1-be8d-ab370e2862d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\precompiled\precompiled.h">
@@ -206,9 +209,6 @@
     <ClCompile Include="test\test_bobura.command.show_diagram.cpp">
       <Filter>sources\test_bobura\command</Filter>
     </ClCompile>
-    <ClCompile Include="test\test_bobura.command.show_timetable.cpp">
-      <Filter>sources\test_bobura\command</Filter>
-    </ClCompile>
     <ClCompile Include="test\test_bobura.timetable_view.cpp">
       <Filter>sources\test_bobura</Filter>
     </ClCompile>
@@ -217,6 +217,18 @@
     </ClCompile>
     <ClCompile Include="test\test_bobura.message.view_picture_box.timetable.cpp">
       <Filter>sources\test_bobura\message\view_picture_box</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_bobura.command.show_timetable_down.cpp">
+      <Filter>sources\test_bobura\command</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_bobura.command.show_timetable_up.cpp">
+      <Filter>sources\test_bobura\command</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_bobura.view.timetable.header.cpp">
+      <Filter>sources\test_bobura\view\timetable</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_bobura.view.timetable.item.cpp">
+      <Filter>sources\test_bobura\view\timetable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

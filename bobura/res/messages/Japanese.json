@@ -28,7 +28,8 @@
         
         "Menu:&View":                          "表示(&V)",
         "Menu:View:Show &Diagram":             "ダイヤグラムを表示(&D)",
-        "Menu:View:Show &Timetable":           "時刻表を表示(&T)",
+        "Menu:View:Show Timetable (D&own)":    "時刻表（下り）を表示(&O)",
+        "Menu:View:Show Timetable (&Up)":      "時刻表（上り）を表示(&U)",
         "Menu:View:&Horizontal Zoom":          "時刻方向拡大縮小(&H)",
         "Menu:View:Horizontal Zoom:Zoom &In":  "拡大(&I)",
         "Menu:View:Horizontal Zoom:Zoom &Out": "縮小(&O)",
@@ -47,9 +48,9 @@
         "Menu:Help:&About":                "バージョン情報(&A)",
         
         
-        "Tab:Diagram":        "ダイヤグラム",
-        "Tab:Timetable Down": "時刻表 下り",
-        "Tab:Timetable Up":   "時刻表 上り",
+        "Tab:Diagram":          "ダイヤグラム",
+        "Tab:Timetable (Down)": "時刻表（下り）",
+        "Tab:Timetable (Up)":   "時刻表（上り）",
         
         
         "Diagram:%1% No. %2%": "%1%%2%号",
