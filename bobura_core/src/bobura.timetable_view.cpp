@@ -7,6 +7,7 @@
 */
 
 #include <cassert>
+#include <memory>
 
 #include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
@@ -17,6 +18,7 @@
 
 #include <bobura/timetable_view.h>
 #include <bobura/type_list.h>
+#include <bobura/view/timetable/header.h>
 
 
 namespace bobura
@@ -46,7 +48,8 @@ namespace bobura
         :
         m_model(model),
         m_message_catalog(message_catalog),
-        m_dimension(width_type{ 0 }, height_type{ 0 })
+        m_dimension(width_type{ 0 }, height_type{ 0 }),
+        m_p_header()
         {}
 
 
@@ -61,6 +64,7 @@ namespace bobura
             clear_background(canvas, canvas_dimension);
         
             ensure_items_created(canvas, canvas_dimension, scroll_bar_position);
+            m_p_header->draw_on(canvas);
         }
 
         const dimension_type& dimension()
@@ -72,6 +76,8 @@ namespace bobura
         void update_dimension()
         {
             m_dimension = dimension_type{ width_type{ 42 }, height_type{ 24 } };
+
+            m_p_header.reset();
         }
 
         dimension_type page_size(const dimension_type& canvas_dimension)
@@ -101,6 +107,8 @@ namespace bobura
 
         using solid_background_type = typename traits_type::solid_background_type;
 
+        using header_type = view::timetable::header<traits_type>;
+
 
         // variables
 
@@ -109,6 +117,8 @@ namespace bobura
         const message_catalog_type& m_message_catalog;
 
         dimension_type m_dimension;
+
+        std::unique_ptr<header_type> m_p_header;
 
 
         // functions
@@ -130,16 +140,14 @@ namespace bobura
             const position_type&  scroll_bar_position
         )
         {
-            boost::ignore_unused(canvas, canvas_dimension, scroll_bar_position);
-#if 0
+            boost::ignore_unused(scroll_bar_position);
             if (m_p_header)
             {
                 //assert(m_p_time_line_list && m_p_station_line_list && m_p_train_line_list);
                 return;
             }
 
-            m_p_header = tetengo2::stdalt::make_unique<header_type>(m_model, m_selection, canvas, canvas_dimension);
-#endif
+            m_p_header = tetengo2::stdalt::make_unique<header_type>(m_model, canvas, canvas_dimension);
         }
 
 
