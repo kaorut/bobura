@@ -39,13 +39,16 @@ namespace bobura
 
         using message_catalog_type = typename traits_type::message_catalog_type;
 
+        using direction_type = typename timetable_view::direction_type;
+
         using model_type = typename timetable_view::model_type;
 
 
         // constructors and destructor
 
-        impl(const model_type& model, const message_catalog_type& message_catalog)
+        impl(const direction_type direction, const model_type& model, const message_catalog_type& message_catalog)
         :
+        m_direction(direction),
         m_model(model),
         m_message_catalog(message_catalog),
         m_dimension(width_type{ 0 }, height_type{ 0 }),
@@ -112,6 +115,8 @@ namespace bobura
 
         // variables
 
+        const direction_type m_direction;
+
         const model_type& m_model;
 
         const message_catalog_type& m_message_catalog;
@@ -155,9 +160,13 @@ namespace bobura
 
 
     template <typename Traits>
-    timetable_view<Traits>::timetable_view(const model_type& model, const message_catalog_type& message_catalog)
+    timetable_view<Traits>::timetable_view(
+        const direction_type        direction,
+        const model_type&           model,
+        const message_catalog_type& message_catalog
+    )
     :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(model, message_catalog))
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog))
     {}
 
     template <typename Traits>

@@ -76,7 +76,7 @@ BOOST_AUTO_TEST_SUITE(timetable_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        const timetable_view_type timetable_view{ model, message_catalog };
+        const timetable_view_type timetable_view{ timetable_view_type::direction_type::down, model, message_catalog };
     }
 
     BOOST_AUTO_TEST_CASE(draw_on)
@@ -85,7 +85,7 @@ BOOST_AUTO_TEST_SUITE(timetable_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_view{ timetable_view_type::direction_type::down, model, message_catalog };
 
         window_type window{};
         const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_SUITE(timetable_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        const timetable_view_type timetable_view{ model, message_catalog };
+        const timetable_view_type timetable_view{ timetable_view_type::direction_type::down, model, message_catalog };
 
         timetable_view.dimension();
     }
@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_SUITE(timetable_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_view{ timetable_view_type::direction_type::down, model, message_catalog };
 
         timetable_view.update_dimension();
     }
@@ -125,7 +125,7 @@ BOOST_AUTO_TEST_SUITE(timetable_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        const timetable_view_type timetable_view{ model, message_catalog };
+        const timetable_view_type timetable_view{ timetable_view_type::direction_type::down, model, message_catalog };
 
         timetable_view.page_size(dimension_type{ width_type{ 42 }, height_type{ 24 } });
     }
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_SUITE(timetable_view)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_view{ timetable_view_type::direction_type::down, model, message_catalog };
 
         timetable_view.unselect_all_items();
     }

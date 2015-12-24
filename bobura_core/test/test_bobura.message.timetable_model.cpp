@@ -100,8 +100,8 @@ BOOST_AUTO_TEST_SUITE(reset)
         model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_down_view{ model, message_catalog };
-        timetable_view_type timetable_up_view{ model, message_catalog };
+        timetable_view_type timetable_down_view{ timetable_view_type::direction_type::down, model, message_catalog };
+        timetable_view_type timetable_up_view{ timetable_view_type::direction_type::up, model, message_catalog };
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const save_to_file_type save_to_file{ false, message_catalog };
@@ -121,8 +121,8 @@ BOOST_AUTO_TEST_SUITE(reset)
         model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_down_view{ model, message_catalog };
-        timetable_view_type timetable_up_view{ model, message_catalog };
+        timetable_view_type timetable_down_view{ timetable_view_type::direction_type::down, model, message_catalog };
+        timetable_view_type timetable_up_view{ timetable_view_type::direction_type::up, model, message_catalog };
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const save_to_file_type save_to_file{ false, message_catalog };
@@ -154,8 +154,8 @@ BOOST_AUTO_TEST_SUITE(changed)
         model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_down_view{ model, message_catalog };
-        timetable_view_type timetable_up_view{ model, message_catalog };
+        timetable_view_type timetable_down_view{ timetable_view_type::direction_type::down, model, message_catalog };
+        timetable_view_type timetable_up_view{ timetable_view_type::direction_type::up, model, message_catalog };
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const save_to_file_type save_to_file{ false, message_catalog };
@@ -175,8 +175,8 @@ BOOST_AUTO_TEST_SUITE(changed)
         model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_down_view{ model, message_catalog };
-        timetable_view_type timetable_up_view{ model, message_catalog };
+        timetable_view_type timetable_down_view{ timetable_view_type::direction_type::down, model, message_catalog };
+        timetable_view_type timetable_up_view{ timetable_view_type::direction_type::up, model, message_catalog };
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const save_to_file_type save_to_file{ false, message_catalog };

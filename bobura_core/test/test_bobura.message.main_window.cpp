@@ -223,8 +223,8 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         const model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_down_view{ model, message_catalog };
-        timetable_view_type timetable_up_view{ model, message_catalog };
+        timetable_view_type timetable_down_view{ timetable_view_type::direction_type::down, model, message_catalog };
+        timetable_view_type timetable_up_view{ timetable_view_type::direction_type::up, model, message_catalog };
         window_type window{};
         tab_frame_type tab_frame{ window };
         view_picture_box_type diagram_view_picture_box{ tab_frame };
@@ -255,8 +255,8 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         const model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_down_view{ model, message_catalog };
-        timetable_view_type timetable_up_view{ model, message_catalog };
+        timetable_view_type timetable_down_view{ timetable_view_type::direction_type::down, model, message_catalog };
+        timetable_view_type timetable_up_view{ timetable_view_type::direction_type::up, model, message_catalog };
         window_type window{};
         tab_frame_type tab_frame{ window };
         view_picture_box_type diagram_view_picture_box{ tab_frame };
