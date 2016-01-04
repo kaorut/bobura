@@ -1,6 +1,6 @@
 @echo off
 rem Copies Bobura resource files
-rem Copyright (C) 2007-2015 kaoru
+rem Copyright (C) 2007-2016 kaoru
 rem $Id$
 
 xcopy /y /i "%1res\messages" "%2messages"

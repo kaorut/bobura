@@ -1,7 +1,7 @@
 /*! \file
     \brief Test of class bobura::message::view_picture_box::diagram.
 
-    Copyright (C) 2007-2015 kaoru
+    Copyright (C) 2007-2016 kaoru
 
     $Id$
 */

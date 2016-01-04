@@ -1,7 +1,7 @@
 /*! \file
     \brief Test of class bobura::model::serializer::bzip2_reader.
 
-    Copyright (C) 2007-2015 kaoru
+    Copyright (C) 2007-2016 kaoru
 
     $Id$
 */
