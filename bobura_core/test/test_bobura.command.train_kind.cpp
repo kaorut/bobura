@@ -1,7 +1,7 @@
 /*! \file
     \brief Test of class bobura::command::train_kind.
 
-    Copyright (C) 2007-2015 kaoru
+    Copyright (C) 2007-2016 kaoru
 
     $Id$
 */
