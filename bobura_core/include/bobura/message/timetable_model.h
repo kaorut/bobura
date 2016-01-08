@@ -74,6 +74,7 @@ namespace bobura { namespace message { namespace timetable_model
             \param timetable_model      A timetable model.
             \param diagram_view         A diagram view.
             \param timetable_down_view  A timetable down view.
+            \param timetable_up_view    A timetable up view.
             \param main_window          A main window.
         */
         reset(
