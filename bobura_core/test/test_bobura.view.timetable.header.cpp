@@ -66,6 +66,8 @@ namespace
 
     using traits_type = traits_type_list_type::timetable_view_type;
 
+    using line_name_header_type = bobura::view::timetable::line_name_header<traits_type>;
+
     using note_header_type = bobura::view::timetable::note_header<traits_type>;
 
     using header_type = bobura::view::timetable::header<traits_type>;
@@ -77,6 +79,64 @@ namespace
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(view)
 BOOST_AUTO_TEST_SUITE(timetable)
+BOOST_AUTO_TEST_SUITE(line_name_header)
+    // test cases
+
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        line_name_header_type header1{
+            string_type{ TETENGO2_TEXT("hoge") },
+            font_type::dialog_font(),
+            color_type{ 12, 34, 56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+        };
+        const line_name_header_type header2{ std::move(header1) };
+    }
+
+    BOOST_AUTO_TEST_CASE(operator_assign)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        line_name_header_type header1{
+            string_type{ TETENGO2_TEXT("hoge") },
+            font_type::dialog_font(),
+            color_type{ 12, 34, 56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+        };
+        line_name_header_type header2{
+            string_type{ TETENGO2_TEXT("hoge") },
+            font_type::dialog_font(),
+            color_type{ 12, 34, 56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+        };
+
+        header1 = std::move(header2);
+    }
+
+    BOOST_AUTO_TEST_CASE(draw_on)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const line_name_header_type header{
+            string_type{ TETENGO2_TEXT("hoge") },
+            font_type::dialog_font(),
+            color_type{ 12, 34, 56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+        };
+
+        window_type window{};
+        const auto p_canvas = window.create_canvas();
+        header.draw_on(*p_canvas);
+    }
+
+
+BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(note_header)
     // test cases
 
