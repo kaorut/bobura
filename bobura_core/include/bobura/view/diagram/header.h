@@ -21,7 +21,7 @@
 
 namespace bobura { namespace view { namespace diagram
 {
-     /*!
+    /*!
         \brief The class template for a header of the company and line name in the diagram view.
 
         \tparam Traits A traits type.
@@ -126,7 +126,7 @@ namespace bobura { namespace view { namespace diagram
     };
 
 
-     /*!
+    /*!
         \brief The class template for a header of the note in the diagram view.
 
         \tparam Traits A traits type.
@@ -231,7 +231,7 @@ namespace bobura { namespace view { namespace diagram
     };
 
 
-     /*!
+    /*!
         \brief The class template for a header in the diagram view.
 
         \tparam Traits A traits type.

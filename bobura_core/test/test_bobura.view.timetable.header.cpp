@@ -46,13 +46,27 @@ namespace
 
     using picture_box_type = ui_type_list_type::picture_box_type;
 
+    using position_type = picture_box_type::position_type;
+
+    using left_type = tetengo2::gui::position<position_type>::left_type;
+
+    using top_type = tetengo2::gui::position<position_type>::top_type;
+
     using dimension_type = picture_box_type::dimension_type;
 
     using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
 
     using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
+    using canvas_type = ui_type_list_type::canvas_type;
+
+    using font_type = canvas_type::font_type;
+
+    using color_type = canvas_type::color_type;
+
     using traits_type = traits_type_list_type::timetable_view_type;
+
+    using note_header_type = bobura::view::timetable::note_header<traits_type>;
 
     using header_type = bobura::view::timetable::header<traits_type>;
 
@@ -63,6 +77,64 @@ namespace
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(view)
 BOOST_AUTO_TEST_SUITE(timetable)
+BOOST_AUTO_TEST_SUITE(note_header)
+    // test cases
+
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        note_header_type header1{
+            string_type{ TETENGO2_TEXT("hoge") },
+            font_type::dialog_font(),
+            color_type{ 12, 34, 56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+        };
+        const note_header_type header2{ std::move(header1) };
+    }
+
+    BOOST_AUTO_TEST_CASE(operator_assign)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        note_header_type header1{
+            string_type{ TETENGO2_TEXT("hoge") },
+            font_type::dialog_font(),
+            color_type{ 12, 34, 56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+        };
+        note_header_type header2{
+            string_type{ TETENGO2_TEXT("hoge") },
+            font_type::dialog_font(),
+            color_type{ 12, 34, 56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+        };
+
+        header1 = std::move(header2);
+    }
+
+    BOOST_AUTO_TEST_CASE(draw_on)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const note_header_type header{
+            string_type{ TETENGO2_TEXT("hoge") },
+            font_type::dialog_font(),
+            color_type{ 12, 34, 56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+        };
+
+        window_type window{};
+        const auto p_canvas = window.create_canvas();
+        header.draw_on(*p_canvas);
+    }
+
+
+BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(header)
     // test cases
 

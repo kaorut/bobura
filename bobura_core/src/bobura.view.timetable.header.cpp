@@ -7,6 +7,8 @@
 */
 
 #include <algorithm>
+#include <cassert>
+#include <memory>
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
@@ -22,6 +24,139 @@
 
 namespace bobura { namespace view { namespace timetable
 {
+    template <typename Traits>
+    class note_header<Traits>::impl : private boost::noncopyable
+    {
+    public:
+        // types
+
+        using traits_type = Traits;
+
+        using string_type = typename traits_type::string_type;
+
+        using canvas_type = typename traits_type::canvas_type;
+
+        using font_type = typename canvas_type::font_type;
+
+        using color_type = typename canvas_type::color_type;
+
+        using position_type = typename canvas_type::position_type;
+
+        using dimension_type = typename canvas_type::dimension_type;
+
+
+        // constructors and destructor
+
+        impl(
+            string_type       note,
+            const font_type&  font,
+            const color_type& color,
+            position_type     position,
+            dimension_type    dimension
+        )
+        :
+        m_note(std::move(note)),
+        m_p_font(&font),
+        m_p_color(&color),
+        m_position(std::move(position)),
+        m_dimension(std::move(dimension))
+        {}
+
+        impl(impl&& another)
+        :
+        m_note(std::move(another.m_note)),
+        m_p_font(another.m_p_font),
+        m_p_color(another.m_p_color),
+        m_position(std::move(another.m_position)),
+        m_dimension(std::move(another.m_dimension))
+        {}
+
+
+        // functions
+
+        impl& operator=(impl&& another)
+        {
+            if (&another == this)
+                return *this;
+
+            m_note = std::move(another.m_note);
+            m_p_font = another.m_p_font;
+            m_p_color = another.m_p_color;
+            m_position = std::move(another.m_position);
+            m_dimension = std::move(another.m_dimension);
+
+            return *this;
+        }
+
+        void draw_on_impl(canvas_type& canvas)
+        const
+        {
+            canvas.set_font(*m_p_font);
+            canvas.set_color(*m_p_color);
+            canvas.draw_text(m_note, m_position);
+        }
+
+
+    private:
+        // variables
+
+        string_type m_note;
+
+        const font_type* m_p_font;
+
+        const color_type* m_p_color;
+
+        position_type m_position;
+
+        dimension_type m_dimension;
+
+
+    };
+
+
+    template <typename Traits>
+    note_header<Traits>::note_header(
+        string_type       note,
+        const font_type&  font,
+        const color_type& color,
+        position_type     position,
+        dimension_type    dimension
+    )
+    :
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(note), font, color, std::move(position), std::move(dimension)))
+    {}
+
+    template <typename Traits>
+    note_header<Traits>::note_header(note_header&& another)
+    :
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    {}
+
+    template <typename Traits>
+    note_header<Traits>::~note_header()
+    noexcept
+    {}
+
+    template <typename Traits>
+    note_header<Traits>& note_header<Traits>::operator=(note_header<Traits>&& another)
+    {
+        if (&another == this)
+            return *this;
+
+        *m_p_impl = std::move(*another.m_p_impl);
+        base_type::operator=(std::move(another));
+
+        return *this;
+    }
+
+    template <typename Traits>
+    void note_header<Traits>::draw_on_impl(canvas_type& canvas)
+    const
+    {
+        m_p_impl->draw_on_impl(canvas);
+    }
+
+
     template <typename Traits>
     class header<Traits>::impl : private boost::noncopyable
     {
@@ -41,6 +176,7 @@ namespace bobura { namespace view { namespace timetable
 
         impl(const model_type& model, canvas_type& canvas, const dimension_type& canvas_dimension)
         :
+        m_p_note_header(),
         m_position(left_type{ 0 }, top_type{ 0 }),
         m_dimension(width_type{ 0 }, height_type{ 0 })
         {
@@ -66,10 +202,21 @@ namespace bobura { namespace view { namespace timetable
                 m_position,
                 m_dimension
             );
+
+            const auto& note_color = model.timetable().font_color_set().note().color();
+            m_p_note_header =
+                tetengo2::stdalt::make_unique<note_header_type>(
+                    std::move(note),
+                    note_font,
+                    note_color,
+                    std::move(note_position),
+                    std::move(note_dimension)
+                );                    
         }
 
         impl(impl&& another)
         :
+        m_p_note_header(std::move(another.m_p_note_header)),
         m_position(std::move(another.m_position)),
         m_dimension(std::move(another.m_dimension))
         {}
@@ -82,6 +229,7 @@ namespace bobura { namespace view { namespace timetable
             if (&another == this)
                 return *this;
 
+            m_p_note_header = std::move(another.m_p_note_header);
             m_position = std::move(another.m_position);
             m_dimension = std::move(another.m_dimension);
 
@@ -108,11 +256,16 @@ namespace bobura { namespace view { namespace timetable
             canvas.draw_line(position_type{ left, top }, position_type{ right, top });
             canvas.draw_line(position_type{ left, top }, position_type{ left, bottom });
             canvas.draw_line(position_type{ right, top }, position_type{ right, bottom });
+
+            assert(m_p_note_header);
+            m_p_note_header->draw_on(canvas);
         }
 
 
     private:
         // types
+
+        using note_header_type = note_header<traits_type>;
 
         using string_type = typename traits_type::string_type;
 
@@ -220,6 +373,8 @@ namespace bobura { namespace view { namespace timetable
 
         // variables
 
+        std::unique_ptr<note_header_type> m_p_note_header;
+
         position_type m_position;
 
         dimension_type m_dimension;
@@ -297,8 +452,12 @@ namespace bobura { namespace view { namespace timetable
     }
 
 #if BOOST_COMP_MSVC
+    template class note_header<typename application::traits_type_list_type::timetable_view_type>;
+
     template class header<typename application::traits_type_list_type::timetable_view_type>;
 #endif
+
+    template class note_header<typename test::traits_type_list_type::timetable_view_type>;
 
     template class header<typename test::traits_type_list_type::timetable_view_type>;
 
