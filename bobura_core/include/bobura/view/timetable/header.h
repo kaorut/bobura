@@ -13,8 +13,9 @@
 
 #include <tetengo2.h>
 
-#include <bobura/view/timetable/item.h>
 #include <bobura/timetable_model.h>
+#include <bobura/view/timetable/item.h>
+#include <bobura/view/timetable/utility.h>
 
 
 namespace bobura { namespace view { namespace timetable
@@ -357,6 +358,9 @@ namespace bobura { namespace view { namespace timetable
         //! The font type.
         using font_type = typename canvas_type::font_type;
 
+        //! The message catalog type.
+        using message_catalog_type = typename traits_type::message_catalog_type;
+
         //! The model type.
         using model_type =
             timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
@@ -367,11 +371,19 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Creates a header.
 
+            \param direction        A direction.
             \param model            A model.
+            \param message_catalog  A message catalog.
             \param canvas           A canvas.
             \param canvas_dimension A canvas dimension.
         */
-        header(const model_type& model,canvas_type& canvas,const dimension_type& canvas_dimension);
+        header(
+            direction_type              direction,
+            const model_type&           model,
+            const message_catalog_type& message_catalog,
+            canvas_type&                canvas,
+            const dimension_type&       canvas_dimension
+        );
 
         /*!
             \brief Moves a header.

@@ -154,7 +154,10 @@ namespace bobura
                 return;
             }
 
-            m_p_header = tetengo2::stdalt::make_unique<header_type>(m_model, canvas, canvas_dimension);
+            m_p_header =
+                tetengo2::stdalt::make_unique<header_type>(
+                    m_direction, m_model, m_message_catalog, canvas, canvas_dimension
+                );
         }
 
 

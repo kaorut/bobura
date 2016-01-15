@@ -16,6 +16,7 @@
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 #include <bobura/view/timetable/header.h>
+#include <bobura/view/timetable/utility.h>
 
 
 namespace
@@ -25,6 +26,8 @@ namespace
     using detail_type_list_type = bobura::type_list::detail_for_test;
 
     using common_type_list_type = bobura::type_list::common;
+
+    using locale_type_list_type = bobura::type_list::locale<detail_type_list_type>;
 
     using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
@@ -41,6 +44,8 @@ namespace
             common_type_list_type::speed_type,
             ui_type_list_type::fast_font_type
         >;
+
+    using message_catalog_type = locale_type_list_type::message_catalog_type;
 
     using window_type = ui_type_list_type::window_type;
 
@@ -63,6 +68,8 @@ namespace
     using font_type = canvas_type::font_type;
 
     using color_type = canvas_type::color_type;
+
+    using direction_type = bobura::view::timetable::direction_type;
 
     using traits_type = traits_type_list_type::timetable_view_type;
 
@@ -263,10 +270,17 @@ BOOST_AUTO_TEST_SUITE(header)
         BOOST_TEST_PASSPOINT();
 
         const model_type model{};
+        const message_catalog_type message_catalog{};
         window_type window{};
         const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
         const auto p_canvas = picture_box.create_canvas();
-        header_type header1{ model, *p_canvas, dimension_type{ width_type{ 42 }, height_type{ 24 } } };
+        header_type header1{
+            direction_type::down,
+            model,
+            message_catalog,
+            *p_canvas,
+            dimension_type{ width_type{ 42 }, height_type{ 24 } }
+        };
         const header_type header2{ std::move(header1) };
     }
 
@@ -275,11 +289,24 @@ BOOST_AUTO_TEST_SUITE(header)
         BOOST_TEST_PASSPOINT();
 
         const model_type model{};
+        const message_catalog_type message_catalog{};
         window_type window{};
         const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
         const auto p_canvas = picture_box.create_canvas();
-        header_type header1{ model, *p_canvas, dimension_type{ width_type{ 42 }, height_type{ 24 } } };
-        header_type header2{ model, *p_canvas, dimension_type{ width_type{ 42 }, height_type{ 24 } } };
+        header_type header1{
+            direction_type::down,
+            model,
+            message_catalog,
+            *p_canvas,
+            dimension_type{ width_type{ 42 }, height_type{ 24 } }
+        };
+        header_type header2{
+            direction_type::down,
+            model,
+            message_catalog,
+            *p_canvas,
+            dimension_type{ width_type{ 42 }, height_type{ 24 } }
+        };
 
         header1 = std::move(header2);
     }
@@ -289,10 +316,17 @@ BOOST_AUTO_TEST_SUITE(header)
         BOOST_TEST_PASSPOINT();
 
         const model_type model{};
+        const message_catalog_type message_catalog{};
         window_type window{};
         const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
         const auto p_canvas = picture_box.create_canvas();
-        const header_type header{ model, *p_canvas, dimension_type{ width_type{ 42 }, height_type{ 24 } } };
+        const header_type header{
+            direction_type::down,
+            model,
+            message_catalog,
+            *p_canvas,
+            dimension_type{ width_type{ 42 }, height_type{ 24 } }
+        };
 
         header.dimension();
     }
@@ -302,10 +336,17 @@ BOOST_AUTO_TEST_SUITE(header)
         BOOST_TEST_PASSPOINT();
 
         const model_type model{};
+        const message_catalog_type message_catalog{};
         window_type window{};
         const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
         const auto p_canvas = picture_box.create_canvas();
-        const header_type header{ model, *p_canvas, dimension_type{ width_type{ 42 }, height_type{ 24 } } };
+        const header_type header{
+            direction_type::down,
+            model,
+            message_catalog,
+            *p_canvas,
+            dimension_type{ width_type{ 42 }, height_type{ 24 } }
+        };
 
         header.draw_on(*p_canvas);
     }

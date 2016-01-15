@@ -6,12 +6,12 @@
     $Id$
 */
 
-#include <algorithm>
 #include <cassert>
 #include <memory>
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
+#include <boost/format.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2.h>
@@ -445,12 +445,20 @@ namespace bobura { namespace view { namespace timetable
 
         using dimension_type = typename canvas_type::dimension_type;
 
+        using message_catalog_type = typename traits_type::message_catalog_type;
+
         using model_type = typename header::model_type;
 
 
         // constructors and destructor
 
-        impl(const model_type& model, canvas_type& canvas, const dimension_type& canvas_dimension)
+        impl(
+            const direction_type        direction,
+            const model_type&           model,
+            const message_catalog_type& message_catalog,
+            canvas_type&                canvas,
+            const dimension_type&       canvas_dimension
+        )
         :
         m_p_company_name_header(),
         m_p_line_name_header(),
@@ -460,7 +468,7 @@ namespace bobura { namespace view { namespace timetable
         {
             auto company_name = make_company_name(model);
             const auto& company_name_font = model.timetable().font_color_set().company_line_name().font();
-            auto line_name = make_line_name(model);
+            auto line_name = make_line_name(direction, model, message_catalog);
             const auto& line_name_font = model.timetable().font_color_set().company_line_name().font();
             auto note = make_note(model);
             const auto& note_font = model.timetable().font_color_set().note().font();
@@ -609,9 +617,30 @@ namespace bobura { namespace view { namespace timetable
             return model.timetable().company_name();
         }
 
-        static string_type make_line_name(const model_type& model)
+        static string_type make_line_name(
+            const direction_type        direction,
+            const model_type&           model,
+            const message_catalog_type& message_catalog
+        )
         {
-            return model.timetable().line_name();
+            switch (direction)
+            {
+            case direction_type::down:
+                return
+                    (
+                        boost::basic_format<typename string_type::value_type>(
+                            message_catalog.get(TETENGO2_TEXT("Timetable:(%1% - Down)"))
+                        ) % model.timetable().line_name()
+                    ).str();
+            default:
+                assert(direction == direction_type::up);
+                return
+                    (
+                        boost::basic_format<typename string_type::value_type>(
+                            message_catalog.get(TETENGO2_TEXT("Timetable:(%1% - Up)"))
+                        ) % model.timetable().line_name()
+                    ).str();
+            }
         }
 
         static string_type make_note(const model_type& model)
@@ -735,10 +764,16 @@ namespace bobura { namespace view { namespace timetable
 
 
     template <typename Traits>
-    header<Traits>::header(const model_type& model, canvas_type& canvas, const dimension_type& canvas_dimension)
+    header<Traits>::header(
+        const direction_type        direction,
+        const model_type&           model,
+        const message_catalog_type& message_catalog,
+        canvas_type&                canvas,
+        const dimension_type&       canvas_dimension
+    )
     :
     base_type(),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(model, canvas, canvas_dimension))
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog, canvas, canvas_dimension))
     {}
 
     template <typename Traits>
