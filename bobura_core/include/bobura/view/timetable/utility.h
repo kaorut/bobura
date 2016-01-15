@@ -12,6 +12,20 @@
 
 namespace bobura { namespace view { namespace timetable
 {
+    // types
+
+    /*!
+        \brief The direction type.
+    */
+    enum class direction_type
+    {
+        down, //!< Down.
+        up,   //!< Up.
+    };
+
+
+    // functions
+
     /*!
         \brief Returns the normal line width.
 

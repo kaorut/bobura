@@ -14,6 +14,7 @@
 #include <boost/core/noncopyable.hpp>
 
 #include <bobura/timetable_model.h>
+#include <bobura/view/timetable/utility.h>
 
 
 namespace bobura
@@ -62,13 +63,6 @@ namespace bobura
         //! The message catalog type.
         using message_catalog_type = typename traits_type::message_catalog_type;
 
-        //! The direction type.
-        enum class direction_type
-        {
-            down, //!< Down.
-            up,   //!< Up.
-        };
-
         //! The model type.
         using model_type =
             timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
@@ -83,7 +77,11 @@ namespace bobura
             \param model           A model.
             \param message_catalog A message catalog.
         */
-        timetable_view(direction_type direction, const model_type& model, const message_catalog_type& message_catalog);
+        timetable_view(
+            view::timetable::direction_type direction,
+            const model_type&               model,
+            const message_catalog_type&     message_catalog
+        );
 
         /*!
             \brief Destroys the timetable view.
