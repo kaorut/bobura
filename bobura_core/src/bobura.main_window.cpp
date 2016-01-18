@@ -258,8 +258,12 @@ namespace bobura
             m_base.focus_observer_set().got_focus().connect(
                 [this]() { this->m_p_diagram_view_picture_box->set_focus(); }
             );
+            m_base.paint_observer_set().paint_background().disconnect_all_slots();
             m_base.paint_observer_set().paint_background().connect(
-                [](typename base_type::canvas_type&) { return true; }
+                [](typename base_type::canvas_type&)
+                {
+                    return true;
+                }
             );
             m_base.window_observer_set().closing().connect(
                 main_window_window_closing_observer_type{
