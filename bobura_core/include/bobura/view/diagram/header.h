@@ -22,6 +22,111 @@
 namespace bobura { namespace view { namespace diagram
 {
     /*!
+        \brief The class template for a header of the company name in the diagram view.
+
+        \tparam Traits A traits type.
+    */
+    template <typename Traits>
+    class company_name_header : public item<Traits>
+    {
+    public:
+        // types
+
+        //! The traits type.
+        using traits_type = Traits;
+
+        //! The string type.
+        using string_type = typename traits_type::string_type;
+
+        //! The canvas type.
+        using canvas_type = typename traits_type::canvas_type;
+
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
+        //! The color type.
+        using color_type = typename canvas_type::color_type;
+
+        //! The position type.
+        using position_type = typename canvas_type::position_type;
+
+        //! The dimension type.
+        using dimension_type = typename canvas_type::dimension_type;
+
+        //! The selection type.
+        using selection_type = selection<traits_type>;
+
+
+        // constructors and destructor
+
+        /*!
+            \brief Creates a company name header.
+
+            \param selection         A selection.
+            \param company_line_name A company name.
+            \param font              A font.
+            \param color             A color.
+            \param position          A position.
+            \param dimension         A dimension.
+        */
+        company_name_header(
+            selection_type&   selection,
+            string_type       company_name,
+            const font_type&  font,
+            const color_type& color,
+            position_type     position,
+            dimension_type    dimension
+        );
+
+        /*!
+            \brief Moves a company name header.
+
+            \param another Another company name header.
+        */
+        company_name_header(company_name_header&& another);
+
+        /*!
+            \brief Destroys the company name header.
+        */
+        virtual ~company_name_header()
+        noexcept;
+
+
+        // functions
+
+        /*!
+            \brief Assigns a company name header.
+
+            \param another Another company name header.
+
+            \return This company name header.
+        */
+        company_name_header& operator=(company_name_header&& another);
+
+
+    private:
+        // types
+
+        using base_type = item<traits_type>;
+
+        class impl;
+
+
+        // variables
+
+        const std::unique_ptr<impl> m_p_impl;
+
+
+        // virtual functions
+
+        virtual void draw_on_impl(canvas_type& canvas)
+        const override;
+
+
+    };
+
+
+    /*!
         \brief The class template for a header of the company and line name in the diagram view.
 
         \tparam Traits A traits type.
