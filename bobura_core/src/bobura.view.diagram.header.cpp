@@ -659,9 +659,9 @@ namespace bobura { namespace view { namespace diagram
             canvas.set_font(company_name_font);
             auto company_name_dimension_ = canvas.calc_text_dimension(company_name);
             const auto& company_name_width = tetengo2::gui::dimension<dimension_type>::width(company_name_dimension_);
-            //const auto& company_name_height =
-            //    company_name.empty() ?
-            //    height_type{ 0 } : tetengo2::gui::dimension<dimension_type>::height(company_name_dimension_);
+            const auto& company_name_height =
+                company_name.empty() ?
+                height_type{ 0 } : tetengo2::gui::dimension<dimension_type>::height(company_name_dimension_);
 
             canvas.set_font(line_name_font);
             auto line_name_dimension_ = canvas.calc_text_dimension(line_name);
@@ -681,40 +681,45 @@ namespace bobura { namespace view { namespace diagram
             position_type company_name_position_{ left_type{ 0 }, top_type{ 0 } };
             position_type line_name_position_{ left_type{ 0 }, top_type{ 0 } };
             position_type note_position_{ left_type{ 0 }, top_type{ 0 } };
-            width_type header_width{ 0 };
+            auto header_width = canvas_width;
             height_type header_height{ 0 };
             if (company_name_width + line_name_width + note_width + line_names_spacing <= canvas_width)
             {
-                header_width = canvas_width;
-
-                const auto height_diff = top_type::from(line_name_height) - top_type::from(note_height);
-                if (height_diff > 0)
-                {
-                    const top_type note_top{ height_diff / top_type{ 2 } };
-                    company_name_position_ = position_type{ left_type{ 0 }, top_type{ 0 } };
-                    line_name_position_ =
-                        position_type{ left_type::from(company_name_width) + line_names_spacing, top_type{ 0 } };
-                    note_position_ = position_type{ left_type::from(canvas_width - note_width), note_top };
-                    header_height = line_name_height;
-                }
-                else
-                {
-                    const top_type line_name_top{ (top_type{ 0 } - height_diff) / top_type{ 2 } };
-                    company_name_position_ = position_type{ left_type{ 0 }, line_name_top };
-                    line_name_position_ =
-                        position_type{ left_type::from(company_name_width) + line_names_spacing, line_name_top };
-                    note_position_ = position_type{ left_type::from(canvas_width - note_width), top_type{ 0 } };
-                    header_height = note_height;
-                }
+                const auto max_element_height = std::max({ company_name_height, line_name_height, note_height });
+                company_name_position_ =
+                    position_type{ left_type{ 0 }, top_type::from(max_element_height - company_name_height) / 2 };
+                line_name_position_ =
+                    position_type{
+                        left_type::from(company_name_width) + line_names_spacing,
+                        top_type::from(max_element_height - line_name_height) / 2
+                    };
+                note_position_ =
+                    position_type{
+                        left_type::from(canvas_width - note_width),
+                        top_type::from(max_element_height - note_height) / 2
+                    };
+                header_height = max_element_height;
+            }
+            else if (company_name_width + line_name_width + line_names_spacing <= canvas_width)
+            {
+                const auto max_element_height = std::max({ company_name_height, line_name_height });
+                company_name_position_ =
+                    position_type{ left_type{ 0 }, top_type::from(max_element_height - company_name_height) / 2 };
+                line_name_position_ =
+                    position_type{
+                        left_type::from(company_name_width) + line_names_spacing,
+                        top_type::from(max_element_height - line_name_height) / 2
+                    };
+                note_position_ = position_type{ left_type{ 0 }, top_type::from(max_element_height) };
+                header_height = max_element_height + note_height;
             }
             else
             {
                 company_name_position_ = position_type{ left_type{ 0 }, top_type{ 0 } };
-                line_name_position_ =
-                    position_type{ left_type::from(company_name_width) + line_names_spacing, top_type{ 0 } };
-                note_position_ = position_type{ left_type{ 0 }, top_type::from(line_name_height) };
-                header_width = std::max(line_name_width, note_width);
-                header_height = line_name_height + note_height;
+                line_name_position_ = position_type{ left_type{ 0 }, top_type::from(company_name_height) };
+                note_position_ =
+                    position_type{ left_type{ 0 }, top_type::from(company_name_height + line_name_height) };
+                header_height = company_name_height + line_name_height + note_height;
             }
 
             company_name_position = std::move(company_name_position_);
