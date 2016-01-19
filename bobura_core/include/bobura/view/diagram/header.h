@@ -62,12 +62,12 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Creates a company name header.
 
-            \param selection         A selection.
-            \param company_line_name A company name.
-            \param font              A font.
-            \param color             A color.
-            \param position          A position.
-            \param dimension         A dimension.
+            \param selection    A selection.
+            \param company_name A company name.
+            \param font         A font.
+            \param color        A color.
+            \param position     A position.
+            \param dimension    A dimension.
         */
         company_name_header(
             selection_type&   selection,
