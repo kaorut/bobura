@@ -22,12 +22,12 @@
 namespace bobura { namespace view { namespace diagram
 {
     /*!
-        \brief The class template for a header of the company and line name in the diagram view.
+        \brief The class template for a header of the company name in the diagram view.
 
         \tparam Traits A traits type.
     */
     template <typename Traits>
-    class company_line_name_header : public item<Traits>
+    class company_name_header : public item<Traits>
     {
     public:
         // types
@@ -60,18 +60,18 @@ namespace bobura { namespace view { namespace diagram
         // constructors and destructor
 
         /*!
-            \brief Creates a company and line name header.
+            \brief Creates a company name header.
 
-            \param selection         A selection.
-            \param company_line_name A company and line name.
-            \param font              A font.
-            \param color             A color.
-            \param position          A position.
-            \param dimension         A dimension.
+            \param selection    A selection.
+            \param company_name A company name.
+            \param font         A font.
+            \param color        A color.
+            \param position     A position.
+            \param dimension    A dimension.
         */
-        company_line_name_header(
+        company_name_header(
             selection_type&   selection,
-            string_type       company_line_name,
+            string_type       company_name,
             const font_type&  font,
             const color_type& color,
             position_type     position,
@@ -79,29 +79,134 @@ namespace bobura { namespace view { namespace diagram
         );
 
         /*!
-            \brief Moves a company and line name header.
+            \brief Moves a company name header.
 
-            \param another Another company and line name header.
+            \param another Another company name header.
         */
-        company_line_name_header(company_line_name_header&& another);
+        company_name_header(company_name_header&& another);
 
         /*!
-            \brief Destroys the company and line name header.
+            \brief Destroys the company name header.
         */
-        virtual ~company_line_name_header()
+        virtual ~company_name_header()
         noexcept;
 
 
         // functions
 
         /*!
-            \brief Assigns a company and line name header.
+            \brief Assigns a company name header.
 
-            \param another Another company and line name header.
+            \param another Another company name header.
 
-            \return This company and line name header.
+            \return This company name header.
         */
-        company_line_name_header& operator=(company_line_name_header&& another);
+        company_name_header& operator=(company_name_header&& another);
+
+
+    private:
+        // types
+
+        using base_type = item<traits_type>;
+
+        class impl;
+
+
+        // variables
+
+        const std::unique_ptr<impl> m_p_impl;
+
+
+        // virtual functions
+
+        virtual void draw_on_impl(canvas_type& canvas)
+        const override;
+
+
+    };
+
+
+    /*!
+        \brief The class template for a header of the line name in the diagram view.
+
+        \tparam Traits A traits type.
+    */
+    template <typename Traits>
+    class line_name_header : public item<Traits>
+    {
+    public:
+        // types
+
+        //! The traits type.
+        using traits_type = Traits;
+
+        //! The string type.
+        using string_type = typename traits_type::string_type;
+
+        //! The canvas type.
+        using canvas_type = typename traits_type::canvas_type;
+
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
+        //! The color type.
+        using color_type = typename canvas_type::color_type;
+
+        //! The position type.
+        using position_type = typename canvas_type::position_type;
+
+        //! The dimension type.
+        using dimension_type = typename canvas_type::dimension_type;
+
+        //! The selection type.
+        using selection_type = selection<traits_type>;
+
+
+        // constructors and destructor
+
+        /*!
+            \brief Creates a line name header.
+
+            \param selection A selection.
+            \param line_name A line name.
+            \param font      A font.
+            \param color     A color.
+            \param position  A position.
+            \param dimension A dimension.
+        */
+        line_name_header(
+            selection_type&   selection,
+            string_type       line_name,
+            const font_type&  font,
+            const color_type& color,
+            position_type     position,
+            dimension_type    dimension
+        );
+
+        /*!
+            \brief Moves a line name header.
+
+            \param another Another line name header.
+        */
+        line_name_header(line_name_header&& another);
+
+        /*!
+            \brief Destroys the line name header.
+        */
+        virtual ~line_name_header()
+        noexcept;
+
+
+        // functions
+
+        /*!
+            \brief Assigns a line name header.
+
+            \param another Another line name header.
+
+            \return This line name header.
+        */
+        line_name_header& operator=(line_name_header&& another);
 
 
     private:
@@ -168,7 +273,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Creates a note header.
 
             \param selection A selection.
-            \param note      A company and line name.
+            \param note      A note.
             \param font      A font.
             \param color     A color.
             \param position  A position.
