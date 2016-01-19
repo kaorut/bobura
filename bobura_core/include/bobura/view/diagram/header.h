@@ -127,12 +127,12 @@ namespace bobura { namespace view { namespace diagram
 
 
     /*!
-        \brief The class template for a header of the company and line name in the diagram view.
+        \brief The class template for a header of the line name in the diagram view.
 
         \tparam Traits A traits type.
     */
     template <typename Traits>
-    class company_line_name_header : public item<Traits>
+    class line_name_header : public item<Traits>
     {
     public:
         // types
@@ -165,18 +165,18 @@ namespace bobura { namespace view { namespace diagram
         // constructors and destructor
 
         /*!
-            \brief Creates a company and line name header.
+            \brief Creates a line name header.
 
-            \param selection         A selection.
-            \param company_line_name A company and line name.
-            \param font              A font.
-            \param color             A color.
-            \param position          A position.
-            \param dimension         A dimension.
+            \param selection A selection.
+            \param line_name A line name.
+            \param font      A font.
+            \param color     A color.
+            \param position  A position.
+            \param dimension A dimension.
         */
-        company_line_name_header(
+        line_name_header(
             selection_type&   selection,
-            string_type       company_line_name,
+            string_type       line_name,
             const font_type&  font,
             const color_type& color,
             position_type     position,
@@ -184,29 +184,29 @@ namespace bobura { namespace view { namespace diagram
         );
 
         /*!
-            \brief Moves a company and line name header.
+            \brief Moves a line name header.
 
-            \param another Another company and line name header.
+            \param another Another line name header.
         */
-        company_line_name_header(company_line_name_header&& another);
+        line_name_header(line_name_header&& another);
 
         /*!
-            \brief Destroys the company and line name header.
+            \brief Destroys the line name header.
         */
-        virtual ~company_line_name_header()
+        virtual ~line_name_header()
         noexcept;
 
 
         // functions
 
         /*!
-            \brief Assigns a company and line name header.
+            \brief Assigns a line name header.
 
-            \param another Another company and line name header.
+            \param another Another line name header.
 
-            \return This company and line name header.
+            \return This line name header.
         */
-        company_line_name_header& operator=(company_line_name_header&& another);
+        line_name_header& operator=(line_name_header&& another);
 
 
     private:
@@ -273,7 +273,7 @@ namespace bobura { namespace view { namespace diagram
             \brief Creates a note header.
 
             \param selection A selection.
-            \param note      A company and line name.
+            \param note      A note.
             \param font      A font.
             \param color     A color.
             \param position  A position.
