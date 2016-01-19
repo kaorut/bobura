@@ -14,6 +14,7 @@
 #include <boost/core/noncopyable.hpp>
 
 #include <bobura/timetable_model.h>
+#include <bobura/view/timetable/utility.h>
 
 
 namespace bobura
@@ -72,10 +73,15 @@ namespace bobura
         /*!
             \brief Creates a timetable view.
 
+            \param direction       A direction.
             \param model           A model.
             \param message_catalog A message catalog.
         */
-        timetable_view(const model_type& model, const message_catalog_type& message_catalog);
+        timetable_view(
+            view::timetable::direction_type direction,
+            const model_type&               model,
+            const message_catalog_type&     message_catalog
+        );
 
         /*!
             \brief Destroys the timetable view.

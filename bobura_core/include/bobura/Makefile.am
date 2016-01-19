@@ -76,6 +76,7 @@ pkg_headers = \
     view/timetable/header.h \
     view/timetable/item.h \
     view/timetable/traits.h \
+    view/timetable/utility.h \
     view_picture_box.h
 
 extra_headers = \

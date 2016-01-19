@@ -34,6 +34,7 @@
 #include <bobura/timetable_view.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/zoom.h>
+#include <bobura/view/timetable/utility.h>
 #include <bobura/view_picture_box.h>
 
 
@@ -73,8 +74,12 @@ namespace bobura
         {
             const message_catalog_type message_catalog{};
             diagram_view_type diagram_view{ m_model, message_catalog };
-            timetable_view_type timetable_down_view{ m_model, message_catalog };
-            timetable_view_type timetable_up_view{ m_model, message_catalog };
+            timetable_view_type timetable_down_view{
+                view::timetable::direction_type::down, m_model, message_catalog
+            };
+            timetable_view_type timetable_up_view{
+                view::timetable::direction_type::up, m_model, message_catalog
+            };
             const command_set_holder_type command_set_holder{ m_settings, m_model, diagram_view, message_catalog };
 
             main_window_type main_window(message_catalog, m_settings, command_set_holder.confirm_file_save()); 

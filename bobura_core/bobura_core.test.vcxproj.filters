@@ -230,6 +230,9 @@
     <ClCompile Include="test\test_bobura.view.timetable.item.cpp">
       <Filter>sources\test_bobura\view\timetable</Filter>
     </ClCompile>
+    <ClCompile Include="test\test_bobura.view.timetable.utility.cpp">
+      <Filter>sources\test_bobura\view\timetable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="res.test\win32\bobura_core.test.exe.manifest">

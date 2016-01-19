@@ -24,6 +24,7 @@
 #include <bobura/timetable_model.h>
 #include <bobura/timetable_view.h>
 #include <bobura/type_list.h>
+#include <bobura/view/timetable/utility.h>
 #include <bobura/view_picture_box.h>
 
 
@@ -58,6 +59,8 @@ namespace
     using abstract_window_type = ui_type_list_type::abstract_window_type;
 
     using command_type = bobura::command::nop<traits_type_list_type::command_type>;
+
+    using direction_type = bobura::view::timetable::direction_type;
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
@@ -223,8 +226,8 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         const model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_down_view{ model, message_catalog };
-        timetable_view_type timetable_up_view{ model, message_catalog };
+        timetable_view_type timetable_down_view{ direction_type::down, model, message_catalog };
+        timetable_view_type timetable_up_view{ direction_type::up, model, message_catalog };
         window_type window{};
         tab_frame_type tab_frame{ window };
         view_picture_box_type diagram_view_picture_box{ tab_frame };
@@ -255,8 +258,8 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         const model_type model{};
         const message_catalog_type message_catalog{};
         diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_down_view{ model, message_catalog };
-        timetable_view_type timetable_up_view{ model, message_catalog };
+        timetable_view_type timetable_down_view{ direction_type::down, model, message_catalog };
+        timetable_view_type timetable_up_view{ direction_type::up, model, message_catalog };
         window_type window{};
         tab_frame_type tab_frame{ window };
         view_picture_box_type diagram_view_picture_box{ tab_frame };

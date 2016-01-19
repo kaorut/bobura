@@ -14,14 +14,14 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/timetable_model.h>
 #include <bobura/view/diagram/item.h>
 #include <bobura/view/diagram/selection.h>
-#include <bobura/timetable_model.h>
 
 
 namespace bobura { namespace view { namespace diagram
 {
-     /*!
+    /*!
         \brief The class template for a header of the company and line name in the diagram view.
 
         \tparam Traits A traits type.
@@ -126,7 +126,7 @@ namespace bobura { namespace view { namespace diagram
     };
 
 
-     /*!
+    /*!
         \brief The class template for a header of the note in the diagram view.
 
         \tparam Traits A traits type.
@@ -231,7 +231,7 @@ namespace bobura { namespace view { namespace diagram
     };
 
 
-     /*!
+    /*!
         \brief The class template for a header in the diagram view.
 
         \tparam Traits A traits type.

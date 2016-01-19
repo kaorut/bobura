@@ -15,6 +15,7 @@
 #include <bobura/message/view_picture_box/timetable.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
+#include <bobura/view/timetable/utility.h>
 
 
 namespace
@@ -36,6 +37,8 @@ namespace
     using mouse_observer_set_type = picture_box_type::mouse_observer_set_type;
 
     using mouse_button_type = mouse_observer_set_type::mouse_button_type;
+
+    using direction_type = bobura::view::timetable::direction_type;
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
@@ -110,7 +113,7 @@ BOOST_AUTO_TEST_SUITE(mouse_pressed)
         picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::vertical };
         const model_type model{};
         const message_catalog_type message_catalog{};
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         const mouse_pressed_type mouse_pressed{ picture_box, set_mouse_capture, timetable_view };
     }
 
@@ -122,7 +125,7 @@ BOOST_AUTO_TEST_SUITE(mouse_pressed)
         picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::vertical };
         const model_type model{};
         const message_catalog_type message_catalog{};
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         const mouse_pressed_type mouse_pressed{ picture_box, set_mouse_capture, timetable_view };
 
         mouse_pressed(mouse_button_type::left, position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
@@ -139,7 +142,7 @@ BOOST_AUTO_TEST_SUITE(mouse_released)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         const mouse_released_type mouse_released{ release_mouse_capture, timetable_view };
     }
 
@@ -149,7 +152,7 @@ BOOST_AUTO_TEST_SUITE(mouse_released)
 
         const model_type model{};
         const message_catalog_type message_catalog{};
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         const mouse_released_type mouse_released{ release_mouse_capture, timetable_view };
 
         mouse_released(mouse_button_type::left, position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
@@ -168,7 +171,7 @@ BOOST_AUTO_TEST_SUITE(mouse_moved)
         picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::vertical };
         const model_type model{};
         const message_catalog_type message_catalog{};
-        const timetable_view_type timetable_view{ model, message_catalog };
+        const timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         const mouse_moved_type mouse_moved{ picture_box, timetable_view };
     }
 
@@ -180,7 +183,7 @@ BOOST_AUTO_TEST_SUITE(mouse_moved)
         picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::vertical };
         const model_type model{};
         const message_catalog_type message_catalog{};
-        const timetable_view_type timetable_view{ model, message_catalog };
+        const timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         const mouse_moved_type mouse_moved{ picture_box, timetable_view };
 
         mouse_moved(position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
@@ -199,7 +202,7 @@ BOOST_AUTO_TEST_SUITE(mouse_wheeled)
         //picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::vertical };
         //const model_type model{};
         //const message_catalog_type message_catalog{};
-        //timetable_view_type timetable_view{ model, message_catalog };
+        //timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         //const mouse_wheeled_type mouse_wheeled{ picture_box, timetable_view };
     }
 
@@ -211,7 +214,7 @@ BOOST_AUTO_TEST_SUITE(mouse_wheeled)
         //picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::vertical };
         //const model_type model{};
         //const message_catalog_type message_catalog{};
-        //timetable_view_type timetable_view{ model, message_catalog };
+        //timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         //const mouse_wheeled_type mouse_wheeled{ picture_box, timetable_view };
 
         //mouse_wheeled(42, mouse_observer_set_type::direction_type::vertical, false, false, false);
@@ -255,7 +258,7 @@ BOOST_AUTO_TEST_SUITE(paint_paint)
         const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::none };
         const model_type model{};
         const message_catalog_type message_catalog{};
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         const paint_paint_type paint{ picture_box, timetable_view };
     }
 
@@ -267,7 +270,7 @@ BOOST_AUTO_TEST_SUITE(paint_paint)
         const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
         const model_type model{};
         const message_catalog_type message_catalog{};
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         const paint_paint_type paint{ picture_box, timetable_view };
 
         auto p_canvas = picture_box.create_canvas();
@@ -287,7 +290,7 @@ BOOST_AUTO_TEST_SUITE(scroll_bar_scrolled)
         const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
         const model_type model{};
         const message_catalog_type message_catalog{};
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         const scroll_bar_scrolled_type scrolled{ picture_box, timetable_view };
     }
 
@@ -299,7 +302,7 @@ BOOST_AUTO_TEST_SUITE(scroll_bar_scrolled)
         const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
         const model_type model{};
         const message_catalog_type message_catalog{};
-        timetable_view_type timetable_view{ model, message_catalog };
+        timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         const scroll_bar_scrolled_type scrolled{ picture_box, timetable_view };
 
         scrolled(42);
