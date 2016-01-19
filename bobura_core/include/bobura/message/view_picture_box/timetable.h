@@ -712,14 +712,21 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
 
             assert(m_picture_box.has_vertical_scroll_bar());
             assert(m_picture_box.has_horizontal_scroll_bar());
+
+            const auto client_dimension = m_picture_box.client_dimension();
+
+            canvas.begin_transaction(client_dimension);
+
             m_view.draw_on(
                 canvas,
-                m_picture_box.client_dimension(),
+                client_dimension,
                 to_position(
                     m_picture_box.horizontal_scroll_bar().tracking_position(),
                     m_picture_box.vertical_scroll_bar().tracking_position()
                 )
             );
+
+            canvas.end_transaction();
         }
 
 

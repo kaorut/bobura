@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <algorithm>
 #include <cassert>
 #include <memory>
 #include <utility>
@@ -466,11 +467,11 @@ namespace bobura { namespace view { namespace timetable
         m_position(left_type{ 0 }, top_type{ 0 }),
         m_dimension(width_type{ 0 }, height_type{ 0 })
         {
-            auto company_name = make_company_name(model);
+            const auto& company_name = model.timetable().company_name();
             const auto& company_name_font = model.timetable().font_color_set().company_line_name().font();
             auto line_name = make_line_name(direction, model, message_catalog);
             const auto& line_name_font = model.timetable().font_color_set().company_line_name().font();
-            auto note = make_note(model);
+            const auto& note = model.timetable().note();
             const auto& note_font = model.timetable().font_color_set().note().font();
             position_type company_name_position{ left_type{ 0 }, top_type{ 0 } };
             dimension_type company_name_dimension{ width_type{ 0 }, height_type{ 0 } };
@@ -612,11 +613,6 @@ namespace bobura { namespace view { namespace timetable
 
         // static functions
 
-        static string_type make_company_name(const model_type& model)
-        {
-            return model.timetable().company_name();
-        }
-
         static string_type make_line_name(
             const direction_type        direction,
             const model_type&           model,
@@ -641,11 +637,6 @@ namespace bobura { namespace view { namespace timetable
                         ) % model.timetable().line_name()
                     ).str();
             }
-        }
-
-        static string_type make_note(const model_type& model)
-        {
-            return model.timetable().note();
         }
 
         static void calculate_positions_and_dimensions(
@@ -706,33 +697,24 @@ namespace bobura { namespace view { namespace timetable
                         (canvas_width - (company_name_width + line_name_width + company_line_names_spacing)) / 2
                     );
 
-                const auto height_diff = top_type::from(company_name_height) - top_type::from(line_name_height);
-                if (height_diff > 0)
-                {
-                    company_name_position_ = position_type{ company_name_left, company_line_name_top };
-                    line_name_position_ =
-                        position_type{
-                            company_name_left + left_type::from(company_name_width + company_line_names_spacing),
-                            company_line_name_top + height_diff
-                        };
-                    header_height = note_height + company_name_height + top_padding * 2;
-                }
-                else
-                {
-                    company_name_position_ = position_type{ company_name_left, company_line_name_top + height_diff};
-                    line_name_position_ =
-                        position_type{
-                            company_name_left + left_type::from(company_name_width + company_line_names_spacing),
-                            company_line_name_top
-                        };
-                    header_height = note_height + line_name_height + top_padding * 2;
-                }
+                const auto max_element_height = std::max({ company_name_height, line_name_height });
+                company_name_position_ =
+                    position_type{
+                        company_name_left,
+                        company_line_name_top + top_type::from(max_element_height - company_name_height) / 2
+                    };
+                line_name_position_ =
+                    position_type{
+                        company_name_left + left_type::from(company_name_width + company_line_names_spacing),
+                        company_line_name_top + top_type::from(max_element_height - line_name_height) / 2
+                    };
+                header_height = note_height + max_element_height + top_padding * 2;
             }
             else
             {
                 company_name_position_ = position_type{ left_padding, company_line_name_top };
                 line_name_position_ =
-                    position_type{ left_padding, company_line_name_top + top_type::from(line_name_height) };
+                    position_type{ left_padding, company_line_name_top + top_type::from(company_name_height) };
                 header_height = note_height + company_name_height + line_name_height + top_padding * 2;
             }
 
