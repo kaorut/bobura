@@ -394,18 +394,21 @@ namespace bobura { namespace message { namespace main_window
                 m_diagram_view_picture_box.update_scroll_bars(
                     m_diagram_view.dimension(), m_diagram_view.page_size(m_diagram_view_picture_box.client_dimension())
                 );
+                m_diagram_view_picture_box.repaint();
 
                 m_timetable_down_view.update_dimension();
                 m_timetable_down_view_picture_box.update_scroll_bars(
                     m_timetable_down_view.dimension(),
                     m_timetable_down_view.page_size(m_timetable_down_view_picture_box.client_dimension())
                 );
+                m_timetable_down_view_picture_box.repaint();
 
                 m_timetable_up_view.update_dimension();
                 m_timetable_up_view_picture_box.update_scroll_bars(
                     m_timetable_up_view.dimension(),
                     m_timetable_up_view.page_size(m_timetable_up_view_picture_box.client_dimension())
                 );
+                m_timetable_up_view_picture_box.repaint();
             }
         }
 
