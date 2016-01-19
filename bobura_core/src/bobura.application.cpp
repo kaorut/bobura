@@ -444,6 +444,7 @@ namespace bobura
             picture_box.keyboard_observer_set().key_down().connect(
                 diagram_view_picture_box_key_down_observer_type{ picture_box }
             );
+            picture_box.fast_paint_observer_set().paint_background().disconnect_all_slots();
             picture_box.fast_paint_observer_set().paint().connect(
                 diagram_view_picture_box_paint_paint_observer_type{ picture_box, view }
             );
@@ -493,6 +494,7 @@ namespace bobura
             picture_box.keyboard_observer_set().key_down().connect(
                 timetable_view_picture_box_key_down_observer_type{ picture_box }
             );
+            picture_box.fast_paint_observer_set().paint_background().disconnect_all_slots();
             picture_box.fast_paint_observer_set().paint().connect(
                 timetable_view_picture_box_paint_paint_observer_type{ picture_box, view }
             );
