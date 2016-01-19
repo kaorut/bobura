@@ -485,11 +485,11 @@ namespace bobura { namespace view { namespace diagram
         m_position(left_type{ 0 }, top_type{ 0 }),
         m_dimension(width_type{ 0 }, height_type{ 0 })
         {
-            auto company_name = make_company_name(model);
+            const auto& company_name = model.timetable().company_name();
             const auto& company_name_font = model.timetable().font_color_set().company_line_name().font();
-            auto line_name = make_line_name(model);
+            const auto& line_name = model.timetable().line_name();
             const auto& line_name_font = model.timetable().font_color_set().company_line_name().font();
-            auto note = make_note(model);
+            const auto& note = model.timetable().note();
             const auto& note_font = model.timetable().font_color_set().note().font();
             position_type company_name_position{ left_type{ 0 }, top_type{ 0 } };
             dimension_type company_name_dimension{ width_type{ 0 }, height_type{ 0 } };
@@ -620,21 +620,6 @@ namespace bobura { namespace view { namespace diagram
 
         // static functions
 
-        static string_type make_company_name(const model_type& model)
-        {
-            return model.timetable().company_name();
-        }
-
-        static string_type make_line_name(const model_type& model)
-        {
-            return model.timetable().line_name();
-        }
-
-        static string_type make_note(const model_type& model)
-        {
-            return model.timetable().note();
-        }
-
         static void calculate_positions_and_dimensions(
             canvas_type&          canvas,
             const dimension_type& canvas_dimension,
@@ -681,7 +666,7 @@ namespace bobura { namespace view { namespace diagram
             position_type company_name_position_{ left_type{ 0 }, top_type{ 0 } };
             position_type line_name_position_{ left_type{ 0 }, top_type{ 0 } };
             position_type note_position_{ left_type{ 0 }, top_type{ 0 } };
-            auto header_width = canvas_width;
+            const auto& header_width = canvas_width;
             height_type header_height{ 0 };
             if (company_name_width + line_name_width + note_width + line_names_spacing <= canvas_width)
             {
