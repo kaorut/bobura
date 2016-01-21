@@ -125,7 +125,7 @@ BOOST_AUTO_TEST_SUITE(train_kind)
         BOOST_CHECK(kind.abbreviation() == string_type{ TETENGO2_TEXT("fuga") });
     }
 
-    BOOST_AUTO_TEST_CASE(color)
+    BOOST_AUTO_TEST_CASE(diagram_line_color)
     {
         BOOST_TEST_PASSPOINT();
 
@@ -137,10 +137,10 @@ BOOST_AUTO_TEST_SUITE(train_kind)
             train_kind_type::line_style_type::solid
         };
 
-        BOOST_CHECK((kind.color() == color_type{ 0, 128, 255 }));
+        BOOST_CHECK((kind.diagram_line_color() == color_type{ 0, 128, 255 }));
     }
 
-    BOOST_AUTO_TEST_CASE(weight)
+    BOOST_AUTO_TEST_CASE(diagram_line_weight)
     {
         BOOST_TEST_PASSPOINT();
 
@@ -152,10 +152,10 @@ BOOST_AUTO_TEST_SUITE(train_kind)
             train_kind_type::line_style_type::solid
         };
 
-        BOOST_CHECK(kind.weight() == train_kind_type::weight_type::normal);
+        BOOST_CHECK(kind.diagram_line_weight() == train_kind_type::weight_type::normal);
     }
 
-    BOOST_AUTO_TEST_CASE(line_style)
+    BOOST_AUTO_TEST_CASE(diagram_line_style)
     {
         BOOST_TEST_PASSPOINT();
 
@@ -167,7 +167,7 @@ BOOST_AUTO_TEST_SUITE(train_kind)
             train_kind_type::line_style_type::solid
         };
 
-        BOOST_CHECK(kind.line_style() == train_kind_type::line_style_type::solid);
+        BOOST_CHECK(kind.diagram_line_style() == train_kind_type::line_style_type::solid);
     }
 
 

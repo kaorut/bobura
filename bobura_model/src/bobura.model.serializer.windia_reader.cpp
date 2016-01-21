@@ -400,9 +400,9 @@ namespace bobura { namespace model { namespace serializer
                 train_kind_type new_kind{
                     string_type(name_and_abbreviation[0].begin(), name_and_abbreviation[0].end()),
                     string_type(name_and_abbreviation[1].begin(), name_and_abbreviation[1].end()),
-                    m_timetable.train_kinds()[index].color(),
-                    m_timetable.train_kinds()[index].weight(),
-                    m_timetable.train_kinds()[index].line_style()
+                    m_timetable.train_kinds()[index].diagram_line_color(),
+                    m_timetable.train_kinds()[index].diagram_line_weight(),
+                    m_timetable.train_kinds()[index].diagram_line_style()
                 };
 
                 m_timetable.set_train_kind(
@@ -975,23 +975,37 @@ namespace bobura { namespace model { namespace serializer
             const unsigned int                             prop
         )
         {
-            const auto line_style = to_line_style(prop & 0x03);
+            const auto diagram_line_style = to_line_style(prop & 0x03);
             const auto custom_color = (prop & 0x40) != 0;
-            const auto color = 
+            const auto diagram_line_color = 
                 custom_color ?
                 to_color((prop & 0x3C) / 0x04) :
-                (base ? boost::make_optional(base->color()) : boost::make_optional(color_type{ 0, 0, 0 }));
-            if (!color)
+                (
+                    base ?
+                    boost::make_optional(base->diagram_line_color()) : boost::make_optional(color_type{ 0, 0, 0 })
+                );
+            if (!diagram_line_color)
                 return boost::none;
-            const auto weight = to_weight((prop & 0x80) != 0);
+            const auto diagram_line_weight = to_weight((prop & 0x80) != 0);
 
             return
                 base ?
                 boost::make_optional(
-                    train_kind_type(base->name(), base->abbreviation(), std::move(*color), weight, line_style)
+                    train_kind_type(
+                        base->name(),
+                        base->abbreviation(),
+                        std::move(*diagram_line_color),
+                        diagram_line_weight,
+                        diagram_line_style
+                    )
                 ) :
                 boost::make_optional(
-                    train_kind_type(string_type{}, string_type{}, std::move(*color), weight, line_style)
+                    train_kind_type(
+                        string_type{},
+                        string_type{},
+                        std::move(*diagram_line_color),
+                        diagram_line_weight, diagram_line_style
+                    )
                 );
         }
 

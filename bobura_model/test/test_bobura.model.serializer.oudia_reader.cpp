@@ -512,8 +512,8 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 const auto& train_kind = p_timetable->train_kinds()[0];
 
                 BOOST_CHECK(train_kind.name() == string_type{ TETENGO2_TEXT("futsuu") });
-                BOOST_CHECK((train_kind.color() == color_type{ 0, 0, 0 }));
-                BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::normal);
+                BOOST_CHECK((train_kind.diagram_line_color() == color_type{ 0, 0, 0 }));
+                BOOST_CHECK(train_kind.diagram_line_weight() == train_kind_type::weight_type::normal);
             }
 
             BOOST_TEST(p_timetable->down_trains().empty());
@@ -569,15 +569,15 @@ BOOST_AUTO_TEST_SUITE(oudia_reader)
                 const auto& train_kind = p_timetable->train_kinds()[0];
 
                 BOOST_CHECK(train_kind.name() == string_type{ TETENGO2_TEXT("futsuu") });
-                BOOST_CHECK((train_kind.color() == color_type{ 0, 0, 0 }));
-                BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::normal);
+                BOOST_CHECK((train_kind.diagram_line_color() == color_type{ 0, 0, 0 }));
+                BOOST_CHECK(train_kind.diagram_line_weight() == train_kind_type::weight_type::normal);
             }
             {
                 const auto& train_kind = p_timetable->train_kinds()[1];
 
                 BOOST_CHECK(train_kind.name() == string_type{ TETENGO2_TEXT("Super Kaisoku") });
-                BOOST_CHECK((train_kind.color() == color_type{ 0xAB, 0xCD, 0xEF }));
-                BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::bold);
+                BOOST_CHECK((train_kind.diagram_line_color() == color_type{ 0xAB, 0xCD, 0xEF }));
+                BOOST_CHECK(train_kind.diagram_line_weight() == train_kind_type::weight_type::bold);
             }
 
             BOOST_TEST_REQUIRE(p_timetable->down_trains().size() == 3U);

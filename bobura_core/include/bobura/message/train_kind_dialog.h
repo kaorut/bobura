@@ -764,18 +764,18 @@ namespace bobura { namespace message { namespace train_kind_dialog
             const auto& train_kind = m_info_sets[*m_current_train_kind_index].train_kind();
 
             canvas.set_font(fixed_size_font(m_font));
-            canvas.set_color(train_kind.color());
+            canvas.set_color(train_kind.diagram_line_color());
 
             const auto& text = train_kind.abbreviation().empty() ? train_kind.name() : train_kind.abbreviation();
             const auto text_and_line_tops = sample_text_and_line_tops(canvas, text);
             canvas.draw_text(text, position_type{ left_type{ 1 }, text_and_line_tops.first });
 
             auto line_width =
-                train_kind.weight() == train_kind_type::weight_type::bold ?
+                train_kind.diagram_line_weight() == train_kind_type::weight_type::bold ?
                 width_type{ size_type{ 1, 6 } } : width_type{ size_type{ 1, 12 } };
             canvas.set_line_width(std::move(line_width));
             
-            canvas.set_line_style(to_canvas_line_style(train_kind.line_style()));
+            canvas.set_line_style(to_canvas_line_style(train_kind.diagram_line_style()));
             canvas.draw_line(
                 position_type{ left_type{ 0 }, text_and_line_tops.second },
                 position_type{

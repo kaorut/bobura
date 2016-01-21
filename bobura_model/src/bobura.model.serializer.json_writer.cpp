@@ -590,18 +590,26 @@ namespace bobura { namespace model { namespace serializer
             output_stream << comma();
 
             new_line(level + 2, output_stream);
-            write_object_entry(string_type{ TETENGO2_TEXT("color") }, to_string(train_kind.color()), output_stream);
-            output_stream << comma();
-
-            new_line(level + 2, output_stream);
             write_object_entry(
-                string_type{ TETENGO2_TEXT("weight") }, static_cast<int>(train_kind.weight()), output_stream
+                string_type{ TETENGO2_TEXT("diagram_line_color") },
+                to_string(train_kind.diagram_line_color()),
+                output_stream
             );
             output_stream << comma();
 
             new_line(level + 2, output_stream);
             write_object_entry(
-                string_type{ TETENGO2_TEXT("line_style") }, static_cast<int>(train_kind.line_style()), output_stream
+                string_type{ TETENGO2_TEXT("diagram_line_weight") },
+                static_cast<int>(train_kind.diagram_line_weight()),
+                output_stream
+            );
+            output_stream << comma();
+
+            new_line(level + 2, output_stream);
+            write_object_entry(
+                string_type{ TETENGO2_TEXT("diagram_line_style") },
+                static_cast<int>(train_kind.diagram_line_style()),
+                output_stream
             );
 
             new_line(level + 1, output_stream);

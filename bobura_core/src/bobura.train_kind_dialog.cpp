@@ -749,12 +749,12 @@ namespace bobura
                 assert(m_info_sets.size() == m_p_train_kind_list_box->value_count());
                 const auto& train_kind = m_info_sets[*selected_index].train_kind();
 
-                m_current_train_kind_color = train_kind.color();
+                m_current_train_kind_color = train_kind.diagram_line_color();
                 m_p_name_text_box->set_text(train_kind.name());
                 m_p_abbreviation_text_box->set_text(train_kind.abbreviation());
-                m_p_weight_dropdown_box->select_value(to_weight_dropdown_box_index(train_kind.weight()));
+                m_p_weight_dropdown_box->select_value(to_weight_dropdown_box_index(train_kind.diagram_line_weight()));
                 m_p_line_style_dropdown_box->select_value(
-                    to_line_style_dropdown_box_index(train_kind.line_style())
+                    to_line_style_dropdown_box_index(train_kind.diagram_line_style())
                 );
             }
             else

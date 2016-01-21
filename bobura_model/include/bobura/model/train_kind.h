@@ -58,25 +58,25 @@ namespace bobura { namespace model
         /*!
             \brief Creates a train kind.
 
-            \param name         A name.
-            \param abbreviation An abbreviated name.
-            \param color        A color.
-            \param weight       A weight.
-            \param line_style   A line style.
+            \param name                 A name.
+            \param abbreviation         An abbreviated name.
+            \param diagram_line_color   A diagram line color.
+            \param diagram_line_weight  A diagram line weight.
+            \param diagram_line_style   A diagram line style.
         */
         train_kind(
             string_type           name,
             string_type           abbreviation,
-            color_type            color,
-            const weight_type     weight,
-            const line_style_type line_style
+            color_type            diagram_line_color,
+            const weight_type     diagram_line_weight,
+            const line_style_type diagram_line_style
         )
         :
         m_name(std::move(name)),
         m_abbreviation(std::move(abbreviation)),
-        m_color(std::move(color)),
-        m_weight(weight),
-        m_line_style(line_style)
+        m_diagram_line_color(std::move(diagram_line_color)),
+        m_diagram_line_weight(diagram_line_weight),
+        m_diagram_line_style(diagram_line_style)
         {}
 
 
@@ -96,9 +96,9 @@ namespace bobura { namespace model
             return
                 one.m_name == another.m_name &&
                 one.m_abbreviation == another.m_abbreviation &&
-                one.m_color == another.m_color &&
-                one.m_weight == another.m_weight &&
-                one.m_line_style == another.m_line_style;
+                one.m_diagram_line_color == another.m_diagram_line_color &&
+                one.m_diagram_line_weight == another.m_diagram_line_weight &&
+                one.m_diagram_line_style == another.m_diagram_line_style;
         }
 
         /*!
@@ -124,36 +124,36 @@ namespace bobura { namespace model
         }
 
         /*!
-            \brief Returns the color.
+            \brief Returns the diagram line color.
 
-            \return The color.
+            \return The diagram line color.
         */
-        const color_type& color()
+        const color_type& diagram_line_color()
         const
         {
-            return m_color;
+            return m_diagram_line_color;
         }
 
         /*!
-            \brief Returns the weight.
+            \brief Returns the diagram line weight.
 
-            \return The weight.
+            \return The diagram line weight.
         */
-        weight_type weight()
+        weight_type diagram_line_weight()
         const
         {
-            return m_weight;
+            return m_diagram_line_weight;
         }
 
         /*!
-            \brief Returns the line style.
+            \brief Returns the diagram line style.
 
-            \return The line style.
+            \return The diagram line style.
         */
-        line_style_type line_style()
+        line_style_type diagram_line_style()
         const
         {
-            return m_line_style;
+            return m_diagram_line_style;
         }
 
 
@@ -164,11 +164,11 @@ namespace bobura { namespace model
 
         string_type m_abbreviation;
 
-        color_type m_color;
+        color_type m_diagram_line_color;
 
-        weight_type m_weight;
+        weight_type m_diagram_line_weight;
 
-        line_style_type m_line_style;
+        line_style_type m_diagram_line_style;
 
 
     };
