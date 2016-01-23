@@ -217,15 +217,15 @@ namespace
             const font_color_type font_color{ font, color };
 
             const font_color_set_type font_color_set{
-                std::move(color),
-                std::move(font_color),
+                font_color,
+                font_color,
                 font_color_set_type::default_().note(),
                 font_color_set_type::default_().time_line(),
                 font_color_set_type::default_().local_station(),
                 font_color_set_type::default_().principal_station(),
                 font_color_set_type::default_().local_terminal_station(),
                 font_color_set_type::default_().principal_terminal_station(),
-                std::move(font)
+                font_color
             };
 
             p_timetable->set_font_color_set(font_color_set);

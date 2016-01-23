@@ -12,6 +12,7 @@
 #include <utility>
 
 #include <boost/operators.hpp>
+#include <boost/optional.hpp>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
@@ -42,20 +43,20 @@ namespace bobura { namespace model { namespace timetable_info
         /*!
             \brief Creates a font and color.
 
-            \param font  A font.
-            \param color A color.
+            \param diagram_font  A font for the diagram.
+            \param diagram_color A color for the diagram.
         */
-        font_color(font_type font, color_type color)
+        font_color(boost::optional<font_type> diagram_font, boost::optional<color_type> diagram_color)
         :
-        m_font(std::move(font)),
-        m_color(std::move(color))
+        m_diagram_font(std::move(diagram_font)),
+        m_diagram_color(std::move(diagram_color))
         {}
 
 
         // functions
 
         /*!
-            \brief Checks whether one font and color is equal to another.
+            \brief Checks whether one font and color  is equal to another.
 
             \param one     One font and color.
             \param another Another font and color.
@@ -65,38 +66,38 @@ namespace bobura { namespace model { namespace timetable_info
         */
         friend bool operator==(const font_color& one, const font_color& another)
         {
-            return one.m_font == another.m_font && one.m_color == another.m_color;
+            return one.m_diagram_font == another.m_diagram_font && one.m_diagram_color == another.m_diagram_color;
         }
 
         /*!
-            \brief Returns the font.
+            \brief Returns the font for the diagram.
 
-            \return The font.
+            \return The font for the diagram.
         */
-        const font_type& font()
+        const boost::optional<font_type>& diagram_font()
         const
         {
-            return m_font;
+            return m_diagram_font;
         }
 
         /*!
-            \brief Returns the color.
+            \brief Returns the color for the diagram.
 
-            \return The color.
+            \return The color for the diagram.
         */
-        const color_type& color()
+        const boost::optional<color_type>& diagram_color()
         const
         {
-            return m_color;
+            return m_diagram_color;
         }
 
 
     private:
         // variables
 
-        font_type m_font;
+        boost::optional<font_type> m_diagram_font;
 
-        color_type m_color;
+        boost::optional<color_type> m_diagram_color;
 
 
     };
@@ -142,7 +143,7 @@ namespace bobura { namespace model { namespace timetable_info
         /*!
             \brief Creates a font and color set.
 
-            \param background                 A color for the background.
+            \param background                 A font and color for the background.
             \param company_line_name          A font and color for the company and line names.
             \param note                       A font and color for the note.
             \param time_line                  A font and color for the time line.
@@ -150,10 +151,10 @@ namespace bobura { namespace model { namespace timetable_info
             \param principal_station          A font and color for the principal station.
             \param local_terminal_station     A font and color for the local terminal station.
             \param principal_terminal_station A font and color for the principal terminal station.
-            \param train_name                 A font for the train name.
+            \param train_name                 A font and color for the train name.
         */
         font_color_set(
-            color_type      background,
+            font_color_type background,
             font_color_type company_line_name,
             font_color_type note,
             font_color_type time_line,
@@ -161,7 +162,7 @@ namespace bobura { namespace model { namespace timetable_info
             font_color_type principal_station,
             font_color_type local_terminal_station,
             font_color_type principal_terminal_station,
-            font_type       train_name
+            font_color_type train_name
         )
         :
         m_background(std::move(background)),
@@ -202,20 +203,20 @@ namespace bobura { namespace model { namespace timetable_info
         }
 
         /*!
-            \brief Returns the color set for the background.
+            \brief Returns the font and color for the background.
 
-            \return The color set for the background.
+            \return The font and color for the background.
         */
-        const color_type& background()
+        const font_color_type& background()
         const
         {
             return m_background;
         }
 
         /*!
-            \brief Returns the font and color set for the company and line names.
+            \brief Returns the font and color for the company and line names.
 
-            \return The font and color set for the company and line names.
+            \return The font and color for the company and line names.
         */
         const font_color_type& company_line_name()
         const
@@ -290,11 +291,11 @@ namespace bobura { namespace model { namespace timetable_info
         }
 
         /*!
-            \brief Returns the font for the train name.
+            \brief Returns the font and color for the train name.
 
-            \return The font for the train name.
+            \return The font and color for the train name.
         */
-        const font_type& train_name()
+        const font_color_type& train_name()
         const
         {
             return m_train_name;
@@ -316,25 +317,38 @@ namespace bobura { namespace model { namespace timetable_info
                 default_font.strikeout()
             };
 
-            color_type default_back_color{ 0xF8, 0xFF, 0xF0 };
+            font_color_type default_back_font_color{
+                boost::none, boost::make_optional(color_type{ 0xF8, 0xFF, 0xF0 })
+            };
 
             font_color_type default_line_name_font_color{
-                std::move(default_line_name_font), color_type{ 0x40, 0x40, 0x40 }
+                boost::make_optional(std::move(default_line_name_font)),
+                boost::make_optional(color_type{ 0x40, 0x40, 0x40 })
             };
-            font_color_type default_note_font_color{ default_font, color_type{ 0x40, 0x40, 0x40 } };
-            font_color_type default_time_line_font_color{ default_font, color_type{ 0x80, 0x80, 0x80 } };
-            font_color_type default_local_station_font_color{ default_font, color_type{ 0xA0, 0xA0, 0xA0 } };
-            font_color_type default_principal_station_font_color{ default_font, color_type{ 0x40, 0x40, 0xA0 } };
+            font_color_type default_note_font_color{
+                boost::make_optional(default_font), boost::make_optional(color_type{ 0x40, 0x40, 0x40 })
+            };
+            font_color_type default_time_line_font_color{
+                boost::make_optional(default_font), boost::make_optional(color_type{ 0x80, 0x80, 0x80 })
+            };
+            font_color_type default_local_station_font_color{
+                boost::make_optional(default_font), boost::make_optional(color_type{ 0xA0, 0xA0, 0xA0 })
+            };
+            font_color_type default_principal_station_font_color{
+                boost::make_optional(default_font), boost::make_optional(color_type{ 0x40, 0x40, 0xA0 })
+            };
             font_color_type default_local_terminal_station_font_color{
-                default_font, color_type{ 0xA0, 0x40, 0x40 }
+                boost::make_optional(default_font), boost::make_optional(color_type{ 0xA0, 0x40, 0x40 })
             };
             font_color_type default_principal_terminal_station_font_color(
-                default_font, color_type{ 0x00, 0x00, 0x00 }
+                boost::make_optional(default_font), boost::make_optional(color_type{ 0x00, 0x00, 0x00 })
             );
+
+            font_color_type default_train_name_font_color{ boost::make_optional(default_font), boost::none };
 
             return
                 font_color_set{
-                    std::move(default_back_color),
+                    std::move(default_back_font_color),
                     std::move(default_line_name_font_color),
                     std::move(default_note_font_color),
                     std::move(default_time_line_font_color),
@@ -342,14 +356,14 @@ namespace bobura { namespace model { namespace timetable_info
                     std::move(default_principal_station_font_color),
                     std::move(default_local_terminal_station_font_color),
                     std::move(default_principal_terminal_station_font_color),
-                    std::move(default_font)
+                    std::move(default_train_name_font_color)
                 };
         }
 
 
         // variables
 
-        color_type m_background;
+        font_color_type m_background;
 
         font_color_type m_company_line_name;
 
@@ -365,7 +379,7 @@ namespace bobura { namespace model { namespace timetable_info
 
         font_color_type m_principal_terminal_station;
 
-        font_type m_train_name;
+        font_color_type m_train_name;
 
 
     };

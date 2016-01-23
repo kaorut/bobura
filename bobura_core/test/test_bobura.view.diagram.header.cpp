@@ -92,11 +92,12 @@ BOOST_AUTO_TEST_SUITE(company_name_header)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
+        const color_type color{ 12, 34, 56 };
         company_name_header_type header1{
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type{ 12, 34, 56 },
+            color,
             position_type{ left_type{ 42 }, top_type{ 24 } },
             dimension_type{ width_type{ 24 }, height_type{ 42 } }
         };
@@ -108,11 +109,12 @@ BOOST_AUTO_TEST_SUITE(company_name_header)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
+        const color_type color{ 12, 34, 56 };
         company_name_header_type header1{
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type{ 12, 34, 56 },
+            color,
             position_type{ left_type{ 42 }, top_type{ 24 } },
             dimension_type{ width_type{ 24 }, height_type{ 42 } }
         };
@@ -120,7 +122,7 @@ BOOST_AUTO_TEST_SUITE(company_name_header)
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type{ 12, 34, 56 },
+            color,
             position_type{ left_type{ 42 }, top_type{ 24 } },
             dimension_type{ width_type{ 24 }, height_type{ 42 } }
         };
@@ -133,11 +135,12 @@ BOOST_AUTO_TEST_SUITE(company_name_header)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
+        const color_type color{ 12, 34, 56 };
         const company_name_header_type header{
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type{ 12, 34, 56 },
+            color,
             position_type{ left_type{ 42 }, top_type{ 24 } },
             dimension_type{ width_type{ 24 }, height_type{ 42 } }
         };
@@ -157,11 +160,12 @@ BOOST_AUTO_TEST_SUITE(line_name_header)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
+        const color_type color{ 12, 34, 56 };
         line_name_header_type header1{
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type{ 12, 34, 56 },
+            color,
             position_type{ left_type{ 42 }, top_type{ 24 } },
             dimension_type{ width_type{ 24 }, height_type{ 42 } }
         };
@@ -173,11 +177,12 @@ BOOST_AUTO_TEST_SUITE(line_name_header)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
+        const color_type color{ 12, 34, 56 };
         line_name_header_type header1{
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type{ 12, 34, 56 },
+            color,
             position_type{ left_type{ 42 }, top_type{ 24 } },
             dimension_type{ width_type{ 24 }, height_type{ 42 } }
         };
@@ -185,7 +190,7 @@ BOOST_AUTO_TEST_SUITE(line_name_header)
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type{ 12, 34, 56 },
+            color,
             position_type{ left_type{ 42 }, top_type{ 24 } },
             dimension_type{ width_type{ 24 }, height_type{ 42 } }
         };
@@ -198,11 +203,12 @@ BOOST_AUTO_TEST_SUITE(line_name_header)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
+        const color_type color{ 12, 34, 56 };
         const line_name_header_type header{
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type{ 12, 34, 56 },
+            color,
             position_type{ left_type{ 42 }, top_type{ 24 } },
             dimension_type{ width_type{ 24 }, height_type{ 42 } }
         };
@@ -222,11 +228,12 @@ BOOST_AUTO_TEST_SUITE(note_header)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
+        const color_type color{ 12, 34, 56 };
         note_header_type header1{
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type{ 12, 34, 56 },
+            color,
             position_type{ left_type{ 42 }, top_type{ 24 } },
             dimension_type{ width_type{ 24 }, height_type{ 42 } }
         };
@@ -238,11 +245,12 @@ BOOST_AUTO_TEST_SUITE(note_header)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
+        const color_type color{ 12, 34, 56 };
         note_header_type header1{
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type{ 12, 34, 56 },
+            color,
             position_type{ left_type{ 42 }, top_type{ 24 } },
             dimension_type{ width_type{ 24 }, height_type{ 42 } }
         };
@@ -250,7 +258,7 @@ BOOST_AUTO_TEST_SUITE(note_header)
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type{ 12, 34, 56 },
+            color,
             position_type{ left_type{ 42 }, top_type{ 24 } },
             dimension_type{ width_type{ 24 }, height_type{ 42 } }
         };
@@ -263,11 +271,12 @@ BOOST_AUTO_TEST_SUITE(note_header)
         BOOST_TEST_PASSPOINT();
 
         selection_type selection{};
+        const color_type color{ 12, 34, 56 };
         const note_header_type header{
             selection,
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
-            color_type{ 12, 34, 56 },
+            color,
             position_type{ left_type{ 42 }, top_type{ 24 } },
             dimension_type{ width_type{ 24 }, height_type{ 42 } }
         };

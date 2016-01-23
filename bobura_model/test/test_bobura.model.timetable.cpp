@@ -3351,7 +3351,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         color_type color{ 12, 34, 56 };
         const font_color_type font_color{ std::move(font), std::move(color) };
         const font_color_set_type font_color_set{
-            color, font_color, font_color, font_color, font_color, font_color, font_color, font_color, font
+            font_color, font_color, font_color, font_color, font_color, font_color, font_color, font_color, font_color
         };
         timetable.set_font_color_set(font_color_set);
 

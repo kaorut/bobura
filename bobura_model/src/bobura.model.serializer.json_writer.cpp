@@ -7,6 +7,7 @@
 */
 
 #include <algorithm>
+#include <cassert>
 #include <iomanip>
 #include <iterator>
 #include <locale>
@@ -290,8 +291,8 @@ namespace bobura { namespace model { namespace serializer
             output |=
                 write_font_color_set_element(
                     string_type{ TETENGO2_TEXT("background") },
-                    font_color_set.background(),
-                    font_color_set_type::default_().background(),
+                    *font_color_set.background().diagram_color(),
+                    *font_color_set_type::default_().background().diagram_color(),
                     level + 1,
                     output_stream,
                     !output
@@ -353,8 +354,8 @@ namespace bobura { namespace model { namespace serializer
             output |=
                 write_font_color_set_element(
                     string_type{ TETENGO2_TEXT("train_name") },
-                    font_color_set.train_name(),
-                    font_color_set_type::default_().train_name(),
+                    *font_color_set.train_name().diagram_font(),
+                    *font_color_set_type::default_().train_name().diagram_font(),
                     level + 1,
                     output_stream,
                     !output
@@ -428,10 +429,10 @@ namespace bobura { namespace model { namespace serializer
 
             output_stream << array_begin();
 
-            write_font(font_color.font(), output_stream);
+            assert(font_color.diagram_font() && font_color.diagram_color());
+            write_font(*font_color.diagram_font(), output_stream);
             output_stream << comma() << space();
-
-            output_stream << encoder().encode(quote(to_string(font_color.color())));
+            output_stream << encoder().encode(quote(to_string(*font_color.diagram_color())));
 
             output_stream << array_end();
 

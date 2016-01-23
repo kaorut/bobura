@@ -323,7 +323,7 @@ namespace bobura { namespace model { namespace serializer
             }
             pull_parser.next();
 
-            auto background_color = font_color_set_type::default_().background();
+            auto background_font_color = font_color_set_type::default_().background();
             auto company_line_name_font_color = font_color_set_type::default_().company_line_name();
             auto note_font_color = font_color_set_type::default_().note();
             auto time_line_font_color = font_color_set_type::default_().time_line();
@@ -331,7 +331,7 @@ namespace bobura { namespace model { namespace serializer
             auto principal_station_font_color = font_color_set_type::default_().principal_station();
             auto local_terminal_station_font_color = font_color_set_type::default_().local_terminal_station();
             auto principal_terminal_station_font_color = font_color_set_type::default_().principal_terminal_station();
-            auto train_name_font = font_color_set_type::default_().train_name();
+            auto train_name_font_color = font_color_set_type::default_().train_name();
             for (;;)
             {
                 if (promise.abort_requested())
@@ -351,7 +351,10 @@ namespace bobura { namespace model { namespace serializer
                         error = error_type::corrupted;
                         return boost::none;
                     }
-                    background_color = std::move(boost::get<color_type>(element->second));
+                    background_font_color =
+                        font_color_type{
+                            boost::none, boost::make_optional(std::move(boost::get<color_type>(element->second)))
+                        };
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("company_line_name") })
                 {
@@ -423,7 +426,10 @@ namespace bobura { namespace model { namespace serializer
                         error = error_type::corrupted;
                         return boost::none;
                     }
-                    train_name_font = std::move(boost::get<font_type>(element->second));
+                    train_name_font_color =
+                        font_color_type{
+                            boost::make_optional(std::move(boost::get<font_type>(element->second))), boost::none
+                        };
                 }
                 else
                 {
@@ -442,7 +448,7 @@ namespace bobura { namespace model { namespace serializer
             return
                 boost::make_optional(
                     font_color_set_type{
-                        std::move(background_color),
+                        std::move(background_font_color),
                         std::move(company_line_name_font_color),
                         std::move(note_font_color),
                         std::move(time_line_font_color),
@@ -450,7 +456,7 @@ namespace bobura { namespace model { namespace serializer
                         std::move(principal_station_font_color),
                         std::move(local_terminal_station_font_color),
                         std::move(principal_terminal_station_font_color),
-                        std::move(train_name_font)
+                        std::move(train_name_font_color)
                     }
                 );
         }
@@ -548,7 +554,10 @@ namespace bobura { namespace model { namespace serializer
 
             return
                 boost::make_optional<font_color_set_element_type>(
-                    font_color_type(boost::get<font_type>(std::move(*font)), std::move(*color))
+                    font_color_type{
+                        boost::make_optional(boost::get<font_type>(std::move(*font))),
+                        boost::make_optional(std::move(*color))
+                    }
                 );
 
         }

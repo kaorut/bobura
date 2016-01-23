@@ -326,7 +326,7 @@ namespace bobura
         {
             canvas.set_background(
                 tetengo2::stdalt::make_unique<const solid_background_type>(
-                    m_model.timetable().font_color_set().background()
+                    *m_model.timetable().font_color_set().background().diagram_color()
                 )
             );
             canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, canvas_dimension);

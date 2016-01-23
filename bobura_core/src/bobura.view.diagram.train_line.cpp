@@ -1085,7 +1085,7 @@ namespace bobura { namespace view { namespace diagram
             const message_catalog_type&   message_catalog
         )
         :
-        m_p_font(&model.timetable().font_color_set().train_name()),
+        m_p_font(&*model.timetable().font_color_set().train_name().diagram_font()),
         m_train_lines(
             make_train_lines(
                 model,

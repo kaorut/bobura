@@ -13,6 +13,7 @@
 #include <utility>
 
 #include <boost/iostreams/filtering_stream.hpp>
+#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/range/iterator_range.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
@@ -789,16 +790,20 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             {
                 const auto& font_color_set = p_timetable->font_color_set();
 
-                BOOST_CHECK((font_color_set.background() == color_type{ 0xAB, 0xCD, 0xEF }));
+                BOOST_TEST_REQUIRE(!!font_color_set.background().diagram_color());
+                BOOST_CHECK((*font_color_set.background().diagram_color() == color_type{ 0xAB, 0xCD, 0xEF }));
                 BOOST_CHECK((
                     font_color_set.company_line_name() ==
                     font_color_type{
-                        font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
-                        color_type{ 0xAB, 0xCD, 0xEF }
+                        boost::make_optional(
+                            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true }
+                        ),
+                        boost::make_optional(color_type{ 0xAB, 0xCD, 0xEF })
                     }
                 ));
+                BOOST_TEST_REQUIRE(!!font_color_set.train_name().diagram_font());
                 BOOST_CHECK(
-                    font_color_set.train_name() ==
+                    *font_color_set.train_name().diagram_font() ==
                     font_type(string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true)
                 );
             }
