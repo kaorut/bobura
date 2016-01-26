@@ -299,6 +299,15 @@ namespace bobura { namespace model { namespace serializer
                 );
             output |=
                 write_font_color_set_element(
+                    string_type{ TETENGO2_TEXT("company_name") },
+                    font_color_set.company_name(),
+                    font_color_set_type::default_().company_name(),
+                    level + 1,
+                    output_stream,
+                    !output
+                );
+            output |=
+                write_font_color_set_element(
                     string_type{ TETENGO2_TEXT("company_line_name") },
                     font_color_set.company_line_name(),
                     font_color_set_type::default_().company_line_name(),

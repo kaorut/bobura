@@ -204,6 +204,7 @@ namespace
         "    },\n"
         "    {\n"
         "        \"background\":                 \"ABCDEF\",\n"
+        "        \"company_name\":               [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
         "        \"company_line_name\":          [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
         "        \"note\":                       [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
         "        \"time_line\":                  [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
@@ -793,7 +794,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
                 BOOST_TEST_REQUIRE(!!font_color_set.background().diagram_color());
                 BOOST_CHECK((*font_color_set.background().diagram_color() == color_type{ 0xAB, 0xCD, 0xEF }));
                 BOOST_CHECK((
-                    font_color_set.company_line_name() ==
+                    font_color_set.company_name() ==
                     font_color_type{
                         boost::make_optional(
                             font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true }
