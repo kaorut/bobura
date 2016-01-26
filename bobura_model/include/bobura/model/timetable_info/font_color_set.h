@@ -144,6 +144,7 @@ namespace bobura { namespace model { namespace timetable_info
             \brief Creates a font and color set.
 
             \param background                 A font and color for the background.
+            \param company_name               A font and color for the company name.
             \param company_line_name          A font and color for the company and line names.
             \param note                       A font and color for the note.
             \param time_line                  A font and color for the time line.
@@ -155,6 +156,7 @@ namespace bobura { namespace model { namespace timetable_info
         */
         font_color_set(
             font_color_type background,
+            font_color_type company_name,
             font_color_type company_line_name,
             font_color_type note,
             font_color_type time_line,
@@ -166,6 +168,7 @@ namespace bobura { namespace model { namespace timetable_info
         )
         :
         m_background(std::move(background)),
+        m_company_name(std::move(company_name)),
         m_company_line_name(std::move(company_line_name)),
         m_note(std::move(note)),
         m_time_line(std::move(time_line)),
@@ -192,6 +195,7 @@ namespace bobura { namespace model { namespace timetable_info
         {
             return
                 one.m_background == another.m_background &&
+                one.m_company_name == another.m_company_name &&
                 one.m_company_line_name == another.m_company_line_name &&
                 one.m_note == another.m_note &&
                 one.m_time_line == another.m_time_line &&
@@ -211,6 +215,17 @@ namespace bobura { namespace model { namespace timetable_info
         const
         {
             return m_background;
+        }
+
+        /*!
+            \brief Returns the font and color for the company names.
+
+            \return The font and color for the company names.
+        */
+        const font_color_type& company_name()
+        const
+        {
+            return m_company_name;
         }
 
         /*!
@@ -308,7 +323,7 @@ namespace bobura { namespace model { namespace timetable_info
         static font_color_set make_default()
         {
             auto default_font = font_type::dialog_font();
-            font_type default_line_name_font{
+            font_type default_company_line_name_font{
                 default_font.family(),
                 default_font.size() * 2,
                 default_font.bold(),
@@ -321,8 +336,12 @@ namespace bobura { namespace model { namespace timetable_info
                 boost::none, boost::make_optional(color_type{ 0xF8, 0xFF, 0xF0 })
             };
 
+            font_color_type default_company_name_font_color{
+                boost::make_optional(std::move(default_company_line_name_font)),
+                boost::make_optional(color_type{ 0x40, 0x40, 0x40 })
+            };
             font_color_type default_line_name_font_color{
-                boost::make_optional(std::move(default_line_name_font)),
+                boost::make_optional(std::move(default_company_line_name_font)),
                 boost::make_optional(color_type{ 0x40, 0x40, 0x40 })
             };
             font_color_type default_note_font_color{
@@ -349,6 +368,7 @@ namespace bobura { namespace model { namespace timetable_info
             return
                 font_color_set{
                     std::move(default_back_font_color),
+                    std::move(default_company_name_font_color),
                     std::move(default_line_name_font_color),
                     std::move(default_note_font_color),
                     std::move(default_time_line_font_color),
@@ -364,6 +384,8 @@ namespace bobura { namespace model { namespace timetable_info
         // variables
 
         font_color_type m_background;
+
+        font_color_type m_company_name;
 
         font_color_type m_company_line_name;
 

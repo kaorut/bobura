@@ -81,6 +81,10 @@ namespace bobura { namespace command
             const auto& font_color_set = model.timetable().font_color_set();
             dialog.set_background(*font_color_set.background().diagram_color());
             dialog.set_company_line_name(
+                *font_color_set.company_name().diagram_font(),
+                *font_color_set.company_name().diagram_color()
+            );
+            dialog.set_company_line_name(
                 *font_color_set.company_line_name().diagram_font(),
                 *font_color_set.company_line_name().diagram_color()
             );
@@ -116,6 +120,10 @@ namespace bobura { namespace command
         
             font_color_set_type new_font_color_set{
                 font_color_type{ boost::none, boost::make_optional(dialog.background()) },
+                font_color_type{
+                    boost::make_optional(dialog.company_line_name().first),
+                    boost::make_optional(dialog.company_line_name().second)
+                },
                 font_color_type{
                     boost::make_optional(dialog.company_line_name().first),
                     boost::make_optional(dialog.company_line_name().second)

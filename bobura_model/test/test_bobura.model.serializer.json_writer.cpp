@@ -219,6 +219,7 @@ namespace
             const font_color_set_type font_color_set{
                 font_color,
                 font_color,
+                font_color,
                 font_color_set_type::default_().note(),
                 font_color_set_type::default_().time_line(),
                 font_color_set_type::default_().local_station(),

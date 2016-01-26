@@ -324,6 +324,7 @@ namespace bobura { namespace model { namespace serializer
             pull_parser.next();
 
             auto background_font_color = font_color_set_type::default_().background();
+            auto company_name_font_color = font_color_set_type::default_().company_name();
             auto company_line_name_font_color = font_color_set_type::default_().company_line_name();
             auto note_font_color = font_color_set_type::default_().note();
             auto time_line_font_color = font_color_set_type::default_().time_line();
@@ -355,6 +356,15 @@ namespace bobura { namespace model { namespace serializer
                         font_color_type{
                             boost::none, boost::make_optional(std::move(boost::get<color_type>(element->second)))
                         };
+                }
+                else if (element->first == string_type{ TETENGO2_TEXT("company_name") })
+                {
+                    if (element->second.which() != 0)
+                    {
+                        error = error_type::corrupted;
+                        return boost::none;
+                    }
+                    company_name_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("company_line_name") })
                 {
@@ -449,6 +459,7 @@ namespace bobura { namespace model { namespace serializer
                 boost::make_optional(
                     font_color_set_type{
                         std::move(background_font_color),
+                        std::move(company_name_font_color),
                         std::move(company_line_name_font_color),
                         std::move(note_font_color),
                         std::move(time_line_font_color),
