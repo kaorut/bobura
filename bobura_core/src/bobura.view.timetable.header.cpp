@@ -468,7 +468,7 @@ namespace bobura { namespace view { namespace timetable
         m_dimension(width_type{ 0 }, height_type{ 0 })
         {
             const auto& company_name = model.timetable().company_name();
-            const auto& company_name_font = *model.timetable().font_color_set().company_line_name().diagram_font();
+            const auto& company_name_font = *model.timetable().font_color_set().company_name().diagram_font();
             auto line_name = make_line_name(direction, model, message_catalog);
             const auto& line_name_font = *model.timetable().font_color_set().company_line_name().diagram_font();
             const auto& note = model.timetable().note();
@@ -498,7 +498,7 @@ namespace bobura { namespace view { namespace timetable
                 m_dimension
             );
 
-            const auto& company_name_color = *model.timetable().font_color_set().company_line_name().diagram_color();
+            const auto& company_name_color = *model.timetable().font_color_set().company_name().diagram_color();
             m_p_company_name_header =
                 tetengo2::stdalt::make_unique<company_name_header_type>(
                     std::move(company_name),

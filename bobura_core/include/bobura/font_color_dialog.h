@@ -119,6 +119,24 @@ namespace bobura
         void set_background(const color_type& color);
 
         /*!
+            \brief Returns the font and color of the company  names.
+
+            \return The font and color of the company  names.
+
+            \throw std::logic_error When the font and color have not been set.
+        */
+        font_color_type company_name()
+        const;
+
+        /*!
+            \brief Sets a font and color of the company names.
+
+            \param font  A font.
+            \param color A color.
+        */
+        void set_company_name(const font_type& font, const color_type& color);
+
+        /*!
             \brief Returns the font and color of the company and the line names.
 
             \return The font and color of the company and the line names.
