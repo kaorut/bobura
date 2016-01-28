@@ -115,13 +115,13 @@ namespace bobura
             m_font_color_list[1] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
         }
 
-        font_color_type company_line_name()
+        font_color_type line_name()
         const
         {
             return to_font_color(m_font_color_list[2]);
         }
 
-        void set_company_line_name(const font_type& font, const color_type& color)
+        void set_line_name(const font_type& font, const color_type& color)
         {
             m_font_color_list[2] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
         }
@@ -535,7 +535,7 @@ namespace bobura
             );
             m_p_category_list_box->insert_value(
                 m_p_category_list_box->value_count(),
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Company and Line Names"))
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Line Name"))
             );
             m_p_category_list_box->insert_value(
                 m_p_category_list_box->value_count(),
@@ -728,10 +728,10 @@ namespace bobura
     typename font_color_dialog<
         Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
     >::font_color_type
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::company_line_name()
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::line_name()
     const
     {
-        return m_p_impl->company_line_name();
+        return m_p_impl->line_name();
     }
 
     template <
@@ -746,12 +746,12 @@ namespace bobura
     >
     void font_color_dialog<
         Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
-    >::set_company_line_name(
+    >::set_line_name(
         const font_type&  font,
         const color_type& color
     )
     {
-        m_p_impl->set_company_line_name(font, color);
+        m_p_impl->set_line_name(font, color);
     }
 
     template <

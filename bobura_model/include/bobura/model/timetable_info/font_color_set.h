@@ -145,7 +145,7 @@ namespace bobura { namespace model { namespace timetable_info
 
             \param background                 A font and color for the background.
             \param company_name               A font and color for the company name.
-            \param company_line_name          A font and color for the company and line names.
+            \param line_name                  A font and color for the line name.
             \param note                       A font and color for the note.
             \param time_line                  A font and color for the time line.
             \param local_station              A font and color for the local station.
@@ -157,7 +157,7 @@ namespace bobura { namespace model { namespace timetable_info
         font_color_set(
             font_color_type background,
             font_color_type company_name,
-            font_color_type company_line_name,
+            font_color_type line_name,
             font_color_type note,
             font_color_type time_line,
             font_color_type local_station,
@@ -169,7 +169,7 @@ namespace bobura { namespace model { namespace timetable_info
         :
         m_background(std::move(background)),
         m_company_name(std::move(company_name)),
-        m_company_line_name(std::move(company_line_name)),
+        m_line_name(std::move(line_name)),
         m_note(std::move(note)),
         m_time_line(std::move(time_line)),
         m_local_station(std::move(local_station)),
@@ -196,7 +196,7 @@ namespace bobura { namespace model { namespace timetable_info
             return
                 one.m_background == another.m_background &&
                 one.m_company_name == another.m_company_name &&
-                one.m_company_line_name == another.m_company_line_name &&
+                one.m_line_name == another.m_line_name &&
                 one.m_note == another.m_note &&
                 one.m_time_line == another.m_time_line &&
                 one.m_local_station == another.m_local_station &&
@@ -229,14 +229,14 @@ namespace bobura { namespace model { namespace timetable_info
         }
 
         /*!
-            \brief Returns the font and color for the company and line names.
+            \brief Returns the font and color for the line name.
 
-            \return The font and color for the company and line names.
+            \return The font and color for the line name.
         */
-        const font_color_type& company_line_name()
+        const font_color_type& line_name()
         const
         {
-            return m_company_line_name;
+            return m_line_name;
         }
 
         /*!
@@ -387,7 +387,7 @@ namespace bobura { namespace model { namespace timetable_info
 
         font_color_type m_company_name;
 
-        font_color_type m_company_line_name;
+        font_color_type m_line_name;
 
         font_color_type m_note;
 

@@ -84,9 +84,9 @@ namespace bobura { namespace command
                 *font_color_set.company_name().diagram_font(),
                 *font_color_set.company_name().diagram_color()
             );
-            dialog.set_company_line_name(
-                *font_color_set.company_line_name().diagram_font(),
-                *font_color_set.company_line_name().diagram_color()
+            dialog.set_line_name(
+                *font_color_set.line_name().diagram_font(),
+                *font_color_set.line_name().diagram_color()
             );
             dialog.set_note(
                 *font_color_set.note().diagram_font(),
@@ -125,8 +125,8 @@ namespace bobura { namespace command
                     boost::make_optional(dialog.company_name().second)
                 },
                 font_color_type{
-                    boost::make_optional(dialog.company_line_name().first),
-                    boost::make_optional(dialog.company_line_name().second)
+                    boost::make_optional(dialog.line_name().first),
+                    boost::make_optional(dialog.line_name().second)
                 },
                 font_color_type{
                     boost::make_optional(dialog.note().first),

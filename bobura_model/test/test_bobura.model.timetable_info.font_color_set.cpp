@@ -48,7 +48,7 @@ namespace
             boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true }),
             boost::make_optional(color_type{ 12, 34, 56 })
         };
-        font_color_type company_line_name_font_color{
+        font_color_type line_name_font_color{
             boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true }),
             boost::make_optional(color_type{ 12, 34, 56 })
         };
@@ -85,7 +85,7 @@ namespace
             font_color_set_type{
                 std::move(background_font_color),
                 std::move(company_name_font_color),
-                std::move(company_line_name_font_color),
+                std::move(line_name_font_color),
                 std::move(note_font_color),
                 std::move(time_line_font_color),
                 std::move(local_station_font_color),
@@ -103,7 +103,7 @@ namespace
             boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true }),
             boost::make_optional(color_type{ 12, 34, 56 })
         };
-        font_color_type company_line_name_font_color{
+        font_color_type line_name_font_color{
             boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true }),
             boost::make_optional(color_type{ 12, 34, 56 })
         };
@@ -140,7 +140,7 @@ namespace
             font_color_set_type{
                 std::move(background_font_color),
                 std::move(company_name_font_color),
-                std::move(company_line_name_font_color),
+                std::move(line_name_font_color),
                 std::move(note_font_color),
                 std::move(time_line_font_color),
                 std::move(local_station_font_color),
@@ -158,7 +158,7 @@ namespace
             boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("ABC") }, 42, false, true, false, true }),
             boost::make_optional(color_type{ 12, 34, 56 })
         };
-        font_color_type company_line_name_font_color{
+        font_color_type line_name_font_color{
             boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("DEF") }, 42, false, true, false, true }),
             boost::make_optional(color_type{ 12, 34, 56 })
         };
@@ -195,7 +195,7 @@ namespace
             font_color_set_type{
                 std::move(background_font_color),
                 std::move(company_name_font_color),
-                std::move(company_line_name_font_color),
+                std::move(line_name_font_color),
                 std::move(note_font_color),
                 std::move(time_line_font_color),
                 std::move(local_station_font_color),
@@ -347,14 +347,14 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
         ));
     }
 
-    BOOST_AUTO_TEST_CASE(company_line_name)
+    BOOST_AUTO_TEST_CASE(line_name)
     {
         BOOST_TEST_PASSPOINT();
 
         const font_color_set_type font_color_set = make_font_color_set1();
 
         BOOST_CHECK((
-            font_color_set.company_line_name() ==
+            font_color_set.line_name() ==
             font_color_type{
                 boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true }),
                 boost::make_optional(color_type{ 12, 34, 56 })

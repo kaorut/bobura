@@ -325,7 +325,7 @@ namespace bobura { namespace model { namespace serializer
 
             auto background_font_color = font_color_set_type::default_().background();
             auto company_name_font_color = font_color_set_type::default_().company_name();
-            auto company_line_name_font_color = font_color_set_type::default_().company_line_name();
+            auto line_name_font_color = font_color_set_type::default_().line_name();
             auto note_font_color = font_color_set_type::default_().note();
             auto time_line_font_color = font_color_set_type::default_().time_line();
             auto local_station_font_color = font_color_set_type::default_().local_station();
@@ -366,14 +366,14 @@ namespace bobura { namespace model { namespace serializer
                     }
                     company_name_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
-                else if (element->first == string_type{ TETENGO2_TEXT("company_line_name") })
+                else if (element->first == string_type{ TETENGO2_TEXT("line_name") })
                 {
                     if (element->second.which() != 0)
                     {
                         error = error_type::corrupted;
                         return boost::none;
                     }
-                    company_line_name_font_color = std::move(boost::get<font_color_type>(element->second));
+                    line_name_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("note") })
                 {
@@ -460,7 +460,7 @@ namespace bobura { namespace model { namespace serializer
                     font_color_set_type{
                         std::move(background_font_color),
                         std::move(company_name_font_color),
-                        std::move(company_line_name_font_color),
+                        std::move(line_name_font_color),
                         std::move(note_font_color),
                         std::move(time_line_font_color),
                         std::move(local_station_font_color),

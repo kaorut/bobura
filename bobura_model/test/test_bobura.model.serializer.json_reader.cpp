@@ -205,7 +205,7 @@ namespace
         "    {\n"
         "        \"background\":                 \"ABCDEF\",\n"
         "        \"company_name\":               [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"company_line_name\":          [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
+        "        \"line_name\":                  [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
         "        \"note\":                       [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
         "        \"time_line\":                  [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
         "        \"local_station\":              [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"

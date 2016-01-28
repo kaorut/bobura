@@ -137,22 +137,22 @@ namespace bobura
         void set_company_name(const font_type& font, const color_type& color);
 
         /*!
-            \brief Returns the font and color of the company and the line names.
+            \brief Returns the font and color of the line name.
 
-            \return The font and color of the company and the line names.
+            \return The font and color of the line name.
 
             \throw std::logic_error When the font and color have not been set.
         */
-        font_color_type company_line_name()
+        font_color_type line_name()
         const;
 
         /*!
-            \brief Sets a font and color of the company and the line names.
+            \brief Sets a font and color of the line name.
 
             \param font  A font.
             \param color A color.
         */
-        void set_company_line_name(const font_type& font, const color_type& color);
+        void set_line_name(const font_type& font, const color_type& color);
 
         /*!
             \brief Returns the font and color of the note.

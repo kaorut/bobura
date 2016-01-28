@@ -488,7 +488,7 @@ namespace bobura { namespace view { namespace diagram
             const auto& company_name = model.timetable().company_name();
             const auto& company_name_font = *model.timetable().font_color_set().company_name().diagram_font();
             const auto& line_name = model.timetable().line_name();
-            const auto& line_name_font = *model.timetable().font_color_set().company_line_name().diagram_font();
+            const auto& line_name_font = *model.timetable().font_color_set().line_name().diagram_font();
             const auto& note = model.timetable().note();
             const auto& note_font = *model.timetable().font_color_set().note().diagram_font();
             position_type company_name_position{ left_type{ 0 }, top_type{ 0 } };
@@ -526,7 +526,7 @@ namespace bobura { namespace view { namespace diagram
                     std::move(company_name_position),
                     std::move(company_name_dimension)
                 );
-            const auto& line_name_color = *model.timetable().font_color_set().company_line_name().diagram_color();
+            const auto& line_name_color = *model.timetable().font_color_set().line_name().diagram_color();
             m_p_line_name_header =
                 tetengo2::stdalt::make_unique<line_name_header_type>(
                     selection,
