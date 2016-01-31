@@ -144,7 +144,7 @@ namespace bobura
 
             \return The font and color of the background.
         */
-        font_color_type background()
+        const font_color_type& background()
         const;
 
         /*!
@@ -152,14 +152,14 @@ namespace bobura
 
             \param font_color A font and color.
         */
-        void set_background(const font_color_type& font_color);
+        void set_background(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the company name.
 
             \return The font and color of the company name.
         */
-        font_color_type company_name()
+        const font_color_type& company_name()
         const;
 
         /*!
@@ -167,14 +167,14 @@ namespace bobura
 
             \param font_color A font and color.
         */
-        void set_company_name(const font_color_type& font_color);
+        void set_company_name(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the line name.
 
             \return The font and color of the line name.
         */
-        font_color_type line_name()
+        const font_color_type& line_name()
         const;
 
         /*!
@@ -182,14 +182,14 @@ namespace bobura
 
             \param font_color A font and color.
         */
-        void set_line_name(const font_color_type& font_color);
+        void set_line_name(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the note.
 
             \return The font and color of the note.
         */
-        font_color_type note()
+        const font_color_type& note()
         const;
 
         /*!
@@ -197,14 +197,14 @@ namespace bobura
 
             \param font_color A font and color.
         */
-        void set_note(const font_color_type& font_color);
+        void set_note(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the time lines.
 
             \return The font and color of the time lines.
         */
-        font_color_type time_line()
+        const font_color_type& time_line()
         const;
 
         /*!
@@ -212,14 +212,14 @@ namespace bobura
 
             \param font_color A font and color.
         */
-        void set_time_line(const font_color_type& font_color);
+        void set_time_line(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the local stations.
 
             \return The font and color of the local stations.
         */
-        font_color_type local_station()
+        const font_color_type& local_station()
         const;
 
         /*!
@@ -227,14 +227,14 @@ namespace bobura
 
             \param font_color A font and color.
         */
-        void set_local_station(const font_color_type& font_color);
+        void set_local_station(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the principal stations.
 
             \return The font and color of the principal stations.
         */
-        font_color_type principal_station()
+        const font_color_type& principal_station()
         const;
 
         /*!
@@ -242,14 +242,14 @@ namespace bobura
 
             \param font_color A font and color.
         */
-        void set_principal_station(const font_color_type& font_color);
+        void set_principal_station(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the local terminal stations.
 
             \return The font and color of the local terminal stations.
         */
-        font_color_type local_terminal_station()
+        const font_color_type& local_terminal_station()
         const;
 
         /*!
@@ -257,14 +257,14 @@ namespace bobura
 
             \param font_color A font and color.
         */
-        void set_local_terminal_station(const font_color_type& font_color);
+        void set_local_terminal_station(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the principal terminal stations.
 
             \return The font and color of the principal terminal stations.
         */
-        font_color_type principal_terminal_station()
+        const font_color_type& principal_terminal_station()
         const;
 
         /*!
@@ -272,14 +272,14 @@ namespace bobura
 
             \param font_color A font and color.
         */
-        void set_principal_terminal_station(const font_color_type& font_color);
+        void set_principal_terminal_station(font_color_type font_color);
 
         /*!
             \brief Returns the font of the train names.
 
             \return The font and color of the principal terminal stations.
         */
-        font_color_type train_name()
+        const font_color_type& train_name()
         const;
 
         /*!
@@ -287,7 +287,7 @@ namespace bobura
 
             \param font_color A font and color.
         */
-        void set_train_name(const font_color_type& font_color);
+        void set_train_name(font_color_type font_color);
 
 
     private:
