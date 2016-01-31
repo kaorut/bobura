@@ -94,6 +94,19 @@ namespace
     using station_grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
     
 
+    // functions
+
+    font_color_type make_font_color(const bool has_font, const bool has_color)
+    {
+        const auto font =
+            boost::make_optional(
+                has_font, font_type{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false }
+            );
+        const auto color = boost::make_optional(has_color, color_type{ 12, 34, 56 });
+        return font_color_type{ font, color, font, color };
+    }
+
+
 }
 
 
@@ -116,16 +129,13 @@ BOOST_AUTO_TEST_SUITE(station_line)
         };
         const station_location_type station_location{ std::move(station), 42 };
         selection_type selection{};
-        const font_color_type font_color{
-            boost::make_optional(font_type::dialog_font()), boost::make_optional(color_type{ 12, 34, 56 })
-        };
         station_line_type station_line1{
             station_location,
             selection,
             left_type{ 42 },
             left_type{ 12 },
             top_type{ 24 },
-            font_color
+            make_font_color(true, true)
         };
         const station_line_type station_line2{ std::move(station_line1) };
     }
@@ -143,16 +153,13 @@ BOOST_AUTO_TEST_SUITE(station_line)
         };
         const station_location_type station_location1{ std::move(station1), 42 };
         selection_type selection{};
-        const font_color_type font_color1{
-            boost::make_optional(font_type::dialog_font()), boost::make_optional(color_type{ 12, 34, 56 })
-        };
         station_line_type station_line1{
             station_location1,
             selection,
             left_type{ 42 },
             left_type{ 12 },
             top_type{ 24 },
-            font_color1
+            make_font_color(true, true)
         };
         station_type station2{
             string_type{ TETENGO2_TEXT("name2") },
@@ -162,16 +169,13 @@ BOOST_AUTO_TEST_SUITE(station_line)
             string_type{ TETENGO2_TEXT("note2") }
         };
         const station_location_type station_location2{ std::move(station2), 4242 };
-        const font_color_type font_color2{
-            boost::make_optional(font_type::dialog_font()), boost::make_optional(color_type{ 12, 34, 56 })
-        };
         station_line_type station_line2{
             station_location2,
             selection,
             left_type{ 42 },
             left_type{ 12 },
             top_type{ 24 },
-            font_color2
+            make_font_color(true, true)
         };
         station_line1 = std::move(station_line2);
     }
@@ -199,9 +203,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
         };
         const station_location_type station_location{ std::move(station), 42 };
         selection_type selection{};
-        const font_color_type font_color{
-            boost::make_optional(font_type::dialog_font()), boost::make_optional(color_type{ 12, 34, 56 })
-        };
+        const auto font_color = make_font_color(true, true);
         const station_line_type station_line{
             station_location,
             selection,
@@ -231,16 +233,13 @@ BOOST_AUTO_TEST_SUITE(station_line)
         };
         const station_location_type station_location{ std::move(station), 42 };
         selection_type selection{};
-        const font_color_type font_color{
-            boost::make_optional(font_type::dialog_font()), boost::make_optional(color_type{ 12, 34, 56 })
-        };
         station_line_type station_line{
             station_location,
             selection,
             left_type{ 42 },
             left_type{ 12 },
             top_type{ 24 },
-            font_color
+            make_font_color(true, true)
         };
 
         {
@@ -270,16 +269,13 @@ BOOST_AUTO_TEST_SUITE(station_line)
         };
         const station_location_type station_location{ std::move(station), 42 };
         selection_type selection{};
-        const font_color_type font_color{
-            boost::make_optional(font_type::dialog_font()), boost::make_optional(color_type{ 12, 34, 56 })
-        };
         const station_line_type station_line{
             station_location,
             selection,
             left_type{ 42 },
             left_type{ 12 },
             top_type{ 24 },
-            font_color
+            make_font_color(true, true)
         };
 
         BOOST_TEST(!station_line.selected());
@@ -300,16 +296,13 @@ BOOST_AUTO_TEST_SUITE(station_line)
             };
             const station_location_type station_location{ std::move(station), 42 };
             selection_type selection{};
-            const font_color_type font_color{
-                boost::make_optional(font_type::dialog_font()), boost::make_optional(color_type{ 12, 34, 56 })
-            };
             station_line_type station_line{
                 station_location,
                 selection,
                 left_type{ 42 },
                 left_type{ 12 },
                 top_type{ 24 },
-                font_color
+                make_font_color(true, true)
             };
 
             station_line.select(false);
@@ -326,16 +319,13 @@ BOOST_AUTO_TEST_SUITE(station_line)
             };
             const station_location_type station_location{ std::move(station), 42 };
             selection_type selection{};
-            const font_color_type font_color{
-                boost::make_optional(font_type::dialog_font()), boost::make_optional(color_type{ 12, 34, 56 })
-            };
             station_line_type station_line{
                 station_location,
                 selection,
                 left_type{ 42 },
                 left_type{ 12 },
                 top_type{ 24 },
-                font_color
+                make_font_color(true, true)
             };
 
             station_line.select(true);

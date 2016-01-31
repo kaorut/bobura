@@ -3347,9 +3347,13 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
         timetable_type timetable{};
 
-        font_type font{ string_type{ TETENGO2_TEXT("hoge") }, 42, false, true, false, true };
-        color_type color{ 12, 34, 56 };
-        const font_color_type font_color{ std::move(font), std::move(color) };
+        font_type diagram_font{ string_type{ TETENGO2_TEXT("hoge") }, 42, false, true, false, true };
+        color_type diagram_color{ 12, 34, 56 };
+        font_type timetable_font{ string_type{ TETENGO2_TEXT("hoge") }, 42, false, true, false, true };
+        color_type timetable_color{ 12, 34, 56 };
+        const font_color_type font_color{
+            std::move(diagram_font), std::move(diagram_color), std::move(timetable_font), std::move(timetable_color)
+        };
         const font_color_set_type font_color_set{
             font_color,
             font_color,

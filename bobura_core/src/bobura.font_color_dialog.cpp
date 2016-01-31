@@ -74,7 +74,7 @@ namespace bobura
         impl(base_type& base, const message_catalog_type& message_catalog)
         :
         m_base(base),
-        m_font_color_list(10, internal_font_color_type{ boost::none, boost::none }),
+        m_font_color_list(10, font_color_type{}),
         m_message_catalog(message_catalog),
         m_current_category_index(),
         m_p_category_label(),
@@ -93,114 +93,114 @@ namespace bobura
 
         // functions
 
-        const color_type& background()
+        font_color_type background()
         const
         {
-            return to_color(m_font_color_list[0]);
+            return m_font_color_list[0];
         }
 
-        void set_background(const color_type& color)
+        void set_background(const font_color_type& font_color)
         {
-            m_font_color_list[0] = internal_font_color_type{ boost::none, boost::make_optional(color) };
+            m_font_color_list[0] = font_color;
         }
 
         font_color_type company_name()
         const
         {
-            return to_font_color(m_font_color_list[1]);
+            return m_font_color_list[1];
         }
 
-        void set_company_name(const font_type& font, const color_type& color)
+        void set_company_name(const font_color_type& font_color)
         {
-            m_font_color_list[1] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+            m_font_color_list[1] = font_color;
         }
 
         font_color_type line_name()
         const
         {
-            return to_font_color(m_font_color_list[2]);
+            return m_font_color_list[2];
         }
 
-        void set_line_name(const font_type& font, const color_type& color)
+        void set_line_name(const font_color_type& font_color)
         {
-            m_font_color_list[2] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+            m_font_color_list[2] = font_color;
         }
 
         font_color_type note()
         const
         {
-            return to_font_color(m_font_color_list[3]);
+            return m_font_color_list[3];
         }
 
-        void set_note(const font_type& font, const color_type& color)
+        void set_note(const font_color_type& font_color)
         {
-            m_font_color_list[3] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+            m_font_color_list[3] = font_color;
         }
 
         font_color_type time_line()
         const
         {
-            return to_font_color(m_font_color_list[4]);
+            return m_font_color_list[4];
         }
 
-        void set_time_line(const font_type& font, const color_type& color)
+        void set_time_line(const font_color_type& font_color)
         {
-            m_font_color_list[4] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+            m_font_color_list[4] = font_color;
         }
 
         font_color_type local_station()
         const
         {
-            return to_font_color(m_font_color_list[5]);
+            return m_font_color_list[5];
         }
 
-        void set_local_station(const font_type& font, const color_type& color)
+        void set_local_station(const font_color_type& font_color)
         {
-            m_font_color_list[5] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+            m_font_color_list[5] = font_color;
         }
 
         font_color_type principal_station()
         const
         {
-            return to_font_color(m_font_color_list[6]);
+            return m_font_color_list[6];
         }
 
-        void set_principal_station(const font_type& font, const color_type& color)
+        void set_principal_station(const font_color_type& font_color)
         {
-            m_font_color_list[6] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+            m_font_color_list[6] = font_color;
         }
 
         font_color_type local_terminal_station()
         const
         {
-            return to_font_color(m_font_color_list[7]);
+            return m_font_color_list[7];
         }
 
-        void set_local_terminal_station(const font_type& font, const color_type& color)
+        void set_local_terminal_station(const font_color_type& font_color)
         {
-            m_font_color_list[7] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+            m_font_color_list[7] = font_color;
         }
 
         font_color_type principal_terminal_station()
         const
         {
-            return to_font_color(m_font_color_list[8]);
+            return m_font_color_list[8];
         }
 
-        void set_principal_terminal_station(const font_type& font, const color_type& color)
+        void set_principal_terminal_station(const font_color_type& font_color)
         {
-            m_font_color_list[8] = internal_font_color_type{ boost::make_optional(font), boost::make_optional(color) };
+            m_font_color_list[8] = font_color;
         }
 
-        const font_type& train_name()
+        font_color_type train_name()
         const
         {
-            return to_font(m_font_color_list[9]);
+            return m_font_color_list[9];
         }
 
-        void set_train_name(const font_type& font)
+        void set_train_name(const font_color_type& font_color)
         {
-            m_font_color_list[9] = internal_font_color_type{ boost::make_optional(font), boost::none };
+            m_font_color_list[9] = font_color;
         }
 
         void do_modal_impl()
@@ -240,22 +240,22 @@ namespace bobura
 
         using transparent_background_type = typename traits_type::transparent_background_type;
 
-        using internal_font_color_type = std::pair<boost::optional<font_type>, boost::optional<color_type>>;
-
         using category_list_box_selection_changed_observer_type =
             message::font_color_dialog::category_list_box_selection_changed<size_type, list_box_type>;
 
         using sample_picture_box_paint_observer_type =
-            message::font_color_dialog::sample_picture_box_paint<size_type, canvas_type, message_catalog_type>;
+            message::font_color_dialog::sample_picture_box_paint<
+                size_type, canvas_type, font_color_type, message_catalog_type
+            >;
 
         using font_button_mouse_clicked_observer_type =
             message::font_color_dialog::font_button_mouse_clicked<
-                size_type, base_type, FontDialog, canvas_type, message_catalog_type
+                size_type, base_type, FontDialog, canvas_type, font_color_type, message_catalog_type
             >;
 
         using color_button_mouse_clicked_observer_type =
             message::font_color_dialog::color_button_mouse_clicked<
-                size_type, base_type, ColorDialog, canvas_type, message_catalog_type
+                size_type, base_type, ColorDialog, canvas_type, font_color_type, message_catalog_type
             >;
 
         using ok_button_mouse_clicked_observer_type = message::font_color_dialog::ok_button_mouse_clicked<base_type>;
@@ -264,38 +264,11 @@ namespace bobura
             message::font_color_dialog::cancel_button_mouse_clicked<base_type>;
 
 
-        // static functions
-
-        static const font_type& to_font(const internal_font_color_type& internal_font_color)
-        {
-            if (!internal_font_color.first)
-                BOOST_THROW_EXCEPTION(std::logic_error("The font has not been set."));
-
-            return *internal_font_color.first;
-        }
-
-        static const color_type& to_color(const internal_font_color_type& internal_font_color)
-        {
-            if (!internal_font_color.second)
-                BOOST_THROW_EXCEPTION(std::logic_error("The color has not been set."));
-
-            return *internal_font_color.second;
-        }
-
-        static font_color_type to_font_color(const internal_font_color_type& internal_font_color)
-        {
-            if (!internal_font_color.first || !internal_font_color.second)
-                BOOST_THROW_EXCEPTION(std::logic_error("The font and/or the color have not been set."));
-
-            return font_color_type{ *internal_font_color.first, *internal_font_color.second };
-        }
-
-
         // variables
 
         base_type& m_base;
 
-        std::vector<internal_font_color_type> m_font_color_list;
+        std::vector<font_color_type> m_font_color_list;
 
         const message_catalog_type& m_message_catalog;
 
@@ -585,7 +558,7 @@ namespace bobura
             if (!m_current_category_index)
                 return {};
 
-            const auto& font = m_font_color_list[*m_current_category_index].first;
+            const auto& font = m_font_color_list[*m_current_category_index].m_diagram_font;
             if (!font)
                 return {};
 
@@ -600,7 +573,7 @@ namespace bobura
 
         bool color_enabled()
         {
-            return m_current_category_index && m_font_color_list[*m_current_category_index].second;
+            return m_current_category_index && m_font_color_list[*m_current_category_index].m_diagram_color;
         }
 
 
@@ -650,9 +623,9 @@ namespace bobura
         typename FontDialog,
         typename ColorDialog
     >
-    const typename font_color_dialog<
+    typename font_color_dialog<
         Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
-    >::color_type&
+    >::font_color_type
     font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::background()
     const
     {
@@ -670,10 +643,10 @@ namespace bobura
         typename ColorDialog
     >
     void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_background(
-        const color_type& color
+        const font_color_type& font_color
     )
     {
-        m_p_impl->set_background(color);
+        m_p_impl->set_background(font_color);
     }
 
     template <
@@ -707,12 +680,9 @@ namespace bobura
     >
     void font_color_dialog<
         Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
-    >::set_company_name(
-        const font_type&  font,
-        const color_type& color
-    )
+    >::set_company_name(const font_color_type& font_color)
     {
-        m_p_impl->set_company_name(font, color);
+        m_p_impl->set_company_name(font_color);
     }
 
     template <
@@ -746,12 +716,9 @@ namespace bobura
     >
     void font_color_dialog<
         Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
-    >::set_line_name(
-        const font_type&  font,
-        const color_type& color
-    )
+    >::set_line_name(const font_color_type& font_color)
     {
-        m_p_impl->set_line_name(font, color);
+        m_p_impl->set_line_name(font_color);
     }
 
     template <
@@ -784,11 +751,10 @@ namespace bobura
         typename ColorDialog
     >
     void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_note(
-        const font_type&  font,
-        const color_type& color
+        const font_color_type& font_color
     )
     {
-        m_p_impl->set_note(font, color);
+        m_p_impl->set_note(font_color);
     }
 
     template <
@@ -821,11 +787,10 @@ namespace bobura
         typename ColorDialog
     >
     void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_time_line(
-        const font_type&  font,
-        const color_type& color
+        const font_color_type& font_color
     )
     {
-        m_p_impl->set_time_line(font, color);
+        m_p_impl->set_time_line(font_color);
     }
 
     template <
@@ -860,11 +825,10 @@ namespace bobura
     void font_color_dialog<
         Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
     >::set_local_station(
-        const font_type&  font,
-        const color_type& color
+        const font_color_type& font_color
     )
     {
-        m_p_impl->set_local_station(font, color);
+        m_p_impl->set_local_station(font_color);
     }
 
     template <
@@ -899,11 +863,10 @@ namespace bobura
     void font_color_dialog<
         Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
     >::set_principal_station(
-        const font_type&  font,
-        const color_type& color
+        const font_color_type& font_color
     )
     {
-        m_p_impl->set_principal_station(font, color);
+        m_p_impl->set_principal_station(font_color);
     }
 
     template <
@@ -937,12 +900,13 @@ namespace bobura
         typename FontDialog,
         typename ColorDialog
     >
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_local_terminal_station(
-        const font_type&  font,
-        const color_type& color
+    void font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::set_local_terminal_station(
+        const font_color_type& font_color
     )
     {
-        m_p_impl->set_local_terminal_station(font, color);
+        m_p_impl->set_local_terminal_station(font_color);
     }
 
     template <
@@ -979,11 +943,10 @@ namespace bobura
     void font_color_dialog<
         Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
     >::set_principal_terminal_station(
-        const font_type&  font,
-        const color_type& color
+        const font_color_type& font_color
     )
     {
-        m_p_impl->set_principal_terminal_station(font, color);
+        m_p_impl->set_principal_terminal_station(font_color);
     }
 
     template <
@@ -996,9 +959,9 @@ namespace bobura
         typename FontDialog,
         typename ColorDialog
     >
-    const typename font_color_dialog<
+    typename font_color_dialog<
         Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
-    >::font_type&
+    >::font_color_type
     font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::train_name()
     const
     {
@@ -1016,10 +979,10 @@ namespace bobura
         typename ColorDialog
     >
     void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_train_name(
-        const font_type& font
+        const font_color_type& font_color
     )
     {
-        m_p_impl->set_train_name(font);
+        m_p_impl->set_train_name(font_color);
     }
 
     template <

@@ -799,6 +799,10 @@ BOOST_AUTO_TEST_SUITE(json_reader)
                         boost::make_optional(
                             font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true }
                         ),
+                        boost::make_optional(color_type{ 0xAB, 0xCD, 0xEF }),
+                        boost::make_optional(
+                            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true }
+                        ),
                         boost::make_optional(color_type{ 0xAB, 0xCD, 0xEF })
                     }
                 ));

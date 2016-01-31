@@ -8,6 +8,7 @@
 
 #include <stdexcept>
 
+#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
@@ -56,6 +57,19 @@ namespace
     using font_color_type = font_color_dialog_type::font_color_type;
 
 
+    // functions
+
+    font_color_type make_font_color(const bool has_font, const bool has_color)
+    {
+        const auto font =
+            boost::make_optional(
+                has_font, font_type{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false }
+            );
+        const auto color = boost::make_optional(has_color, color_type{ 12, 34, 56 });
+        return font_color_type{ font, color, font, color };
+    }
+
+
 }
 
 
@@ -85,7 +99,7 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         const font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        BOOST_CHECK_THROW(font_color_dialog.background(), std::logic_error);
+        font_color_dialog.background();
     }
 #endif
 
@@ -97,10 +111,9 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        font_color_dialog.set_background(color_type{ 12, 34, 56 });
+        font_color_dialog.set_background(make_font_color(false, true));
 
-        const color_type expected{ 12, 34, 56 };
-        BOOST_CHECK(font_color_dialog.background() == expected);
+        BOOST_CHECK(font_color_dialog.background() == make_font_color(false, true));
     }
 
 // This test case causes a segmentation fault on Cygwin.
@@ -116,7 +129,7 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         const font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        BOOST_CHECK_THROW(font_color_dialog.company_name(), std::logic_error);
+        font_color_dialog.company_name();
     }
 #endif
 
@@ -128,15 +141,9 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        font_color_dialog.set_company_name(
-            font_type{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false },
-            color_type{ 12, 34, 56 }
-        );
+        font_color_dialog.set_company_name(make_font_color(true, true));
 
-        const font_type expected_font{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
-        const color_type expected_color{ 12, 34, 56 };
-        const font_color_type expected{ expected_font, expected_color };
-        BOOST_CHECK(font_color_dialog.company_name() == expected);
+        BOOST_CHECK(font_color_dialog.company_name() == make_font_color(true, true));
     }
 
 // This test case causes a segmentation fault on Cygwin.
@@ -152,7 +159,7 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         const font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        BOOST_CHECK_THROW(font_color_dialog.line_name(), std::logic_error);
+        font_color_dialog.line_name();
     }
 #endif
 
@@ -164,15 +171,9 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        font_color_dialog.set_line_name(
-            font_type{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false },
-            color_type{ 12, 34, 56 }
-        );
+        font_color_dialog.set_line_name(make_font_color(true, true));
 
-        const font_type expected_font{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
-        const color_type expected_color{ 12, 34, 56 };
-        const font_color_type expected{ expected_font, expected_color };
-        BOOST_CHECK(font_color_dialog.line_name() == expected);
+        BOOST_CHECK(font_color_dialog.line_name() == make_font_color(true, true));
     }
 
 // This test case causes a segmentation fault on Cygwin.
@@ -188,7 +189,7 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         const font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        BOOST_CHECK_THROW(font_color_dialog.note(), std::logic_error);
+        font_color_dialog.note();
     }
 #endif
 
@@ -200,15 +201,9 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        font_color_dialog.set_note(
-            font_type{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false },
-            color_type{ 12, 34, 56 }
-        );
+        font_color_dialog.set_note(make_font_color(true, true));
 
-        const font_type expected_font{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
-        const color_type expected_color{ 12, 34, 56 };
-        const font_color_type expected{ expected_font, expected_color };
-        BOOST_CHECK(font_color_dialog.note() == expected);
+        BOOST_CHECK(font_color_dialog.note() == make_font_color(true, true));
     }
 
 // This test case causes a segmentation fault on Cygwin.
@@ -224,7 +219,7 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         const font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        BOOST_CHECK_THROW(font_color_dialog.time_line(), std::logic_error);
+        font_color_dialog.time_line();
     }
 #endif
 
@@ -236,15 +231,9 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        font_color_dialog.set_time_line(
-            font_type{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false },
-            color_type{ 12, 34, 56 }
-        );
+        font_color_dialog.set_time_line(make_font_color(true, true));
 
-        const font_type expected_font{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
-        const color_type expected_color{ 12, 34, 56 };
-        const font_color_type expected{ expected_font, expected_color };
-        BOOST_CHECK(font_color_dialog.time_line() == expected);
+        BOOST_CHECK(font_color_dialog.time_line() == make_font_color(true, true));
     }
 
 // This test case causes a segmentation fault on Cygwin.
@@ -260,7 +249,7 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         const font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        BOOST_CHECK_THROW(font_color_dialog.local_station(), std::logic_error);
+        font_color_dialog.local_station();
     }
 #endif
 
@@ -272,15 +261,9 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        font_color_dialog.set_local_station(
-            font_type{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false },
-            color_type{ 12, 34, 56 }
-        );
+        font_color_dialog.set_local_station(make_font_color(true, true));
 
-        const font_type expected_font{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
-        const color_type expected_color{ 12, 34, 56 };
-        const font_color_type expected{ expected_font, expected_color };
-        BOOST_CHECK(font_color_dialog.local_station() == expected);
+        BOOST_CHECK(font_color_dialog.local_station() == make_font_color(true, true));
     }
 
 // This test case causes a segmentation fault on Cygwin.
@@ -296,7 +279,7 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         const font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        BOOST_CHECK_THROW(font_color_dialog.principal_station(), std::logic_error);
+        font_color_dialog.principal_station();
     }
 #endif
 
@@ -308,15 +291,9 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        font_color_dialog.set_principal_station(
-            font_type{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false },
-            color_type{ 12, 34, 56 }
-        );
+        font_color_dialog.set_principal_station(make_font_color(true, true));
 
-        const font_type expected_font{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
-        const color_type expected_color{ 12, 34, 56 };
-        const font_color_type expected{ expected_font, expected_color };
-        BOOST_CHECK(font_color_dialog.principal_station() == expected);
+        BOOST_CHECK(font_color_dialog.principal_station() == make_font_color(true, true));
     }
 
 // This test case causes a segmentation fault on Cygwin.
@@ -332,7 +309,7 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         const font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        BOOST_CHECK_THROW(font_color_dialog.local_terminal_station(), std::logic_error);
+        font_color_dialog.local_terminal_station();
     }
 #endif
 
@@ -344,15 +321,9 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        font_color_dialog.set_local_terminal_station(
-            font_type{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false },
-            color_type{ 12, 34, 56 }
-        );
+        font_color_dialog.set_local_terminal_station(make_font_color(true, true));
 
-        const font_type expected_font{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
-        const color_type expected_color{ 12, 34, 56 };
-        const font_color_type expected{ expected_font, expected_color };
-        BOOST_CHECK(font_color_dialog.local_terminal_station() == expected);
+        BOOST_CHECK(font_color_dialog.local_terminal_station() == make_font_color(true, true));
     }
 
 // This test case causes a segmentation fault on Cygwin.
@@ -368,7 +339,7 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         const font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        BOOST_CHECK_THROW(font_color_dialog.principal_terminal_station(), std::logic_error);
+        font_color_dialog.principal_terminal_station();
     }
 #endif
 
@@ -380,15 +351,9 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        font_color_dialog.set_principal_terminal_station(
-            font_type{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false },
-            color_type{ 12, 34, 56 }
-        );
+        font_color_dialog.set_principal_terminal_station(make_font_color(true, true));
 
-        const font_type expected_font{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
-        const color_type expected_color{ 12, 34, 56 };
-        const font_color_type expected{ expected_font, expected_color };
-        BOOST_CHECK(font_color_dialog.principal_terminal_station() == expected);
+        BOOST_CHECK(font_color_dialog.principal_terminal_station() == make_font_color(true, true));
     }
 
 // This test case causes a segmentation fault on Cygwin.
@@ -404,7 +369,7 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         const font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        BOOST_CHECK_THROW(font_color_dialog.train_name(), std::logic_error);
+        font_color_dialog.train_name();
     }
 #endif
 
@@ -416,12 +381,9 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const message_catalog_type message_catalog{};
         font_color_dialog_type font_color_dialog{ parent, message_catalog };
 
-        font_color_dialog.set_train_name(
-            font_type{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false }
-        );
+        font_color_dialog.set_train_name(make_font_color(true, false));
 
-        const font_type expected{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
-        BOOST_CHECK(font_color_dialog.train_name() == expected);
+        BOOST_CHECK(font_color_dialog.train_name() == make_font_color(true, false));
     }
 
 

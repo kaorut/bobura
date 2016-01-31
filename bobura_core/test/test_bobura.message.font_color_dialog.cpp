@@ -35,6 +35,8 @@ namespace
 
     using size_type = common_type_list_type::size_type;
 
+    using string_type = common_type_list_type::string_type;
+
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
     using window_type = ui_type_list_type::window_type;
@@ -69,8 +71,49 @@ namespace
 
     using color_dialog_type = common_dialog_type_list_type::color_type;
 
+    struct font_color_type
+    {
+        boost::optional<font_type>  m_diagram_font;
+        boost::optional<color_type> m_diagram_color;
+        boost::optional<font_type>  m_timetable_font;
+        boost::optional<color_type> m_timetable_color;
+
+        font_color_type()
+        :
+        m_diagram_font(),
+        m_diagram_color(),
+        m_timetable_font(),
+        m_timetable_color()
+        {}
+
+        font_color_type(
+            boost::optional<font_type>  diagram_font,
+            boost::optional<color_type> diagram_color,
+            boost::optional<font_type>  timetable_font,
+            boost::optional<color_type> timetable_color
+        )
+        :
+        m_diagram_font(std::move(diagram_font)),
+        m_diagram_color(std::move(diagram_color)),
+        m_timetable_font(std::move(timetable_font)),
+        m_timetable_color(std::move(timetable_color))
+        {}
+
+    };
+
 
     // functions
+
+    font_color_type make_font_color(const bool has_font, const bool has_color)
+    {
+        const auto font =
+            boost::make_optional(
+                has_font, font_type{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false }
+            );
+        const auto color = boost::make_optional(has_color, color_type{ 12, 34, 56 });
+        return font_color_type{ font, color, font, color };
+    }
+
 
     void update()
     {}
@@ -118,16 +161,10 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
     {
         BOOST_TEST_PASSPOINT();
 
-        const std::vector<std::pair<boost::optional<font_type>, boost::optional<color_type>>> font_color_list(
-            2,
-            std::pair<boost::optional<font_type>, boost::optional<color_type>>(
-                boost::make_optional<font_type>(font_type::dialog_font()),
-                boost::make_optional<color_type>(color_type{ 0x12, 0x34, 0x56 })
-            )
-        );
+        const std::vector<font_color_type> font_color_list{ 2, make_font_color(true, true) };
         const message_catalog_type message_catalog{};
         const bobura::message::font_color_dialog::sample_picture_box_paint<
-            size_type, canvas_type, message_catalog_type
+            size_type, canvas_type, font_color_type, message_catalog_type
         > observer{
             font_color_list,
             boost::make_optional<size_type>(1),
@@ -140,16 +177,10 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
     {
         BOOST_TEST_PASSPOINT();
 
-        const std::vector<std::pair<boost::optional<font_type>, boost::optional<color_type>>> font_color_list(
-            2,
-            std::pair<boost::optional<font_type>, boost::optional<color_type>>(
-                boost::make_optional<font_type>(font_type::dialog_font()),
-                boost::make_optional<color_type>(color_type{ 0x12, 0x34, 0x56 })
-            )
-        );
+        const std::vector<font_color_type> font_color_list{ 2, make_font_color(true, true) };
         const message_catalog_type message_catalog{};
         const bobura::message::font_color_dialog::sample_picture_box_paint<
-            size_type, canvas_type, message_catalog_type
+            size_type, canvas_type, font_color_type, message_catalog_type
         > observer{
             font_color_list,
             boost::make_optional<size_type>(1), 
@@ -173,16 +204,10 @@ BOOST_AUTO_TEST_SUITE(font_button_mouse_clicked)
 
         window_type parent{};
         concrete_dialog dialog{ parent };
-        std::vector<std::pair<boost::optional<font_type>, boost::optional<color_type>>> font_color_list(
-            2,
-            std::pair<boost::optional<font_type>, boost::optional<color_type>>(
-                boost::make_optional<font_type>(font_type::dialog_font()),
-                boost::make_optional<color_type>(color_type{ 0x12, 0x34, 0x56 })
-            )
-        );
+        std::vector<font_color_type> font_color_list{ 2, make_font_color(true, true) };
         const message_catalog_type message_catalog{};
         const bobura::message::font_color_dialog::font_button_mouse_clicked<
-            size_type, dialog_type, font_dialog_type, canvas_type, message_catalog_type
+            size_type, dialog_type, font_dialog_type, canvas_type, font_color_type, message_catalog_type
         > observer{
             dialog,
             font_color_list,
@@ -203,16 +228,10 @@ BOOST_AUTO_TEST_SUITE(font_button_mouse_clicked)
 
         window_type parent{};
         concrete_dialog dialog{ parent };
-        std::vector<std::pair<boost::optional<font_type>, boost::optional<color_type>>> font_color_list(
-            2,
-            std::pair<boost::optional<font_type>, boost::optional<color_type>>(
-                boost::make_optional<font_type>(font_type::dialog_font()),
-                boost::make_optional<color_type>(color_type{ 0x12, 0x34, 0x56 })
-            )
-        );
+        std::vector<font_color_type> font_color_list{ 2, make_font_color(true, true) };
         const message_catalog_type message_catalog{};
-        const bobura::message::font_color_dialog::font_button_mouse_clicked<
-            size_type, dialog_type, font_dialog_type, canvas_type, message_catalog_type
+        bobura::message::font_color_dialog::font_button_mouse_clicked<
+            size_type, dialog_type, font_dialog_type, canvas_type, font_color_type, message_catalog_type
         > observer{
             dialog,
             font_color_list,
@@ -236,16 +255,10 @@ BOOST_AUTO_TEST_SUITE(color_button_mouse_clicked)
 
         window_type parent{};
         concrete_dialog dialog{ parent };
-        std::vector<std::pair<boost::optional<font_type>, boost::optional<color_type>>> font_color_list(
-            2,
-            std::pair<boost::optional<font_type>, boost::optional<color_type>>(
-                boost::make_optional<font_type>(font_type::dialog_font()),
-                boost::make_optional<color_type>(color_type{ 0x12, 0x34, 0x56 })
-            )
-        );
+        std::vector<font_color_type> font_color_list{ 2, make_font_color(true, true) };
         const message_catalog_type message_catalog{};
         const bobura::message::font_color_dialog::color_button_mouse_clicked<
-            size_type, dialog_type, color_dialog_type, canvas_type, message_catalog_type
+            size_type, dialog_type, color_dialog_type, canvas_type, font_color_type, message_catalog_type
         > observer{
             dialog,
             font_color_list,
@@ -261,16 +274,10 @@ BOOST_AUTO_TEST_SUITE(color_button_mouse_clicked)
 
         window_type parent{};
         concrete_dialog dialog{ parent };
-        std::vector<std::pair<boost::optional<font_type>, boost::optional<color_type>>> font_color_list(
-            2,
-            std::pair<boost::optional<font_type>, boost::optional<color_type>>(
-                boost::make_optional<font_type>(font_type::dialog_font()),
-                boost::make_optional<color_type>(color_type{ 0x12, 0x34, 0x56 })
-            )
-        );
+        std::vector<font_color_type> font_color_list{ 2, make_font_color(true, true) };
         const message_catalog_type message_catalog{};
-        const bobura::message::font_color_dialog::color_button_mouse_clicked<
-            size_type, dialog_type, color_dialog_type, canvas_type, message_catalog_type
+        bobura::message::font_color_dialog::color_button_mouse_clicked<
+            size_type, dialog_type, color_dialog_type, canvas_type, font_color_type, message_catalog_type
         > observer{
             dialog,
             font_color_list,

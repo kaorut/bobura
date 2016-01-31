@@ -43,13 +43,22 @@ namespace bobura { namespace model { namespace timetable_info
         /*!
             \brief Creates a font and color.
 
-            \param diagram_font  A font for the diagram.
-            \param diagram_color A color for the diagram.
+            \param diagram_font    A font for the diagram.
+            \param diagram_color   A color for the diagram.
+            \param timetable_font  A font for the timetable.
+            \param timetable_color A color for the timetable.
         */
-        font_color(boost::optional<font_type> diagram_font, boost::optional<color_type> diagram_color)
+        font_color(
+            boost::optional<font_type>  diagram_font,
+            boost::optional<color_type> diagram_color,
+            boost::optional<font_type>  timetable_font,
+            boost::optional<color_type> timetable_color
+        )
         :
         m_diagram_font(std::move(diagram_font)),
-        m_diagram_color(std::move(diagram_color))
+        m_diagram_color(std::move(diagram_color)),
+        m_timetable_font(std::move(timetable_font)),
+        m_timetable_color(std::move(timetable_color))
         {}
 
 
@@ -66,7 +75,11 @@ namespace bobura { namespace model { namespace timetable_info
         */
         friend bool operator==(const font_color& one, const font_color& another)
         {
-            return one.m_diagram_font == another.m_diagram_font && one.m_diagram_color == another.m_diagram_color;
+            return
+                one.m_diagram_font == another.m_diagram_font &&
+                one.m_diagram_color == another.m_diagram_color &&
+                one.m_timetable_font == another.m_timetable_font &&
+                one.m_timetable_color == another.m_timetable_color;
         }
 
         /*!
@@ -91,6 +104,28 @@ namespace bobura { namespace model { namespace timetable_info
             return m_diagram_color;
         }
 
+        /*!
+            \brief Returns the font for the timetable.
+
+            \return The font for the timetable.
+        */
+        const boost::optional<font_type>& timetable_font()
+        const
+        {
+            return m_timetable_font;
+        }
+
+        /*!
+            \brief Returns the color for the timetable.
+
+            \return The color for the timetable.
+        */
+        const boost::optional<color_type>& timetable_color()
+        const
+        {
+            return m_timetable_color;
+        }
+
 
     private:
         // variables
@@ -98,6 +133,10 @@ namespace bobura { namespace model { namespace timetable_info
         boost::optional<font_type> m_diagram_font;
 
         boost::optional<color_type> m_diagram_color;
+
+        boost::optional<font_type> m_timetable_font;
+
+        boost::optional<color_type> m_timetable_color;
 
 
     };
@@ -333,37 +372,68 @@ namespace bobura { namespace model { namespace timetable_info
             };
 
             font_color_type default_back_font_color{
-                boost::none, boost::make_optional(color_type{ 0xF8, 0xFF, 0xF0 })
+                boost::none,
+                boost::make_optional(color_type{ 0xF8, 0xFF, 0xF0 }),
+                boost::none,
+                boost::make_optional(color_type{ 0xF8, 0xFF, 0xF0 })
+
             };
 
             font_color_type default_company_name_font_color{
+                boost::make_optional(std::move(default_company_line_name_font)),
+                boost::make_optional(color_type{ 0x40, 0x40, 0x40 }),
                 boost::make_optional(std::move(default_company_line_name_font)),
                 boost::make_optional(color_type{ 0x40, 0x40, 0x40 })
             };
             font_color_type default_line_name_font_color{
                 boost::make_optional(std::move(default_company_line_name_font)),
+                boost::make_optional(color_type{ 0x40, 0x40, 0x40 }),
+                boost::make_optional(std::move(default_company_line_name_font)),
                 boost::make_optional(color_type{ 0x40, 0x40, 0x40 })
             };
             font_color_type default_note_font_color{
-                boost::make_optional(default_font), boost::make_optional(color_type{ 0x40, 0x40, 0x40 })
+                boost::make_optional(default_font),
+                boost::make_optional(color_type{ 0x40, 0x40, 0x40 }),
+                boost::make_optional(default_font),
+                boost::make_optional(color_type{ 0x40, 0x40, 0x40 })
             };
             font_color_type default_time_line_font_color{
-                boost::make_optional(default_font), boost::make_optional(color_type{ 0x80, 0x80, 0x80 })
+                boost::make_optional(default_font),
+                boost::make_optional(color_type{ 0x80, 0x80, 0x80 }),
+                boost::none,
+                boost::none
             };
             font_color_type default_local_station_font_color{
-                boost::make_optional(default_font), boost::make_optional(color_type{ 0xA0, 0xA0, 0xA0 })
+                boost::make_optional(default_font),
+                boost::make_optional(color_type{ 0xA0, 0xA0, 0xA0 }),
+                boost::make_optional(default_font),
+                boost::make_optional(color_type{ 0xA0, 0xA0, 0xA0 })
             };
             font_color_type default_principal_station_font_color{
-                boost::make_optional(default_font), boost::make_optional(color_type{ 0x40, 0x40, 0xA0 })
+                boost::make_optional(default_font),
+                boost::make_optional(color_type{ 0x40, 0x40, 0xA0 }),
+                boost::make_optional(default_font),
+                boost::make_optional(color_type{ 0x40, 0x40, 0xA0 })
             };
             font_color_type default_local_terminal_station_font_color{
-                boost::make_optional(default_font), boost::make_optional(color_type{ 0xA0, 0x40, 0x40 })
+                boost::make_optional(default_font),
+                boost::make_optional(color_type{ 0xA0, 0x40, 0x40 }),
+                boost::make_optional(default_font),
+                boost::make_optional(color_type{ 0xA0, 0x40, 0x40 })
             };
             font_color_type default_principal_terminal_station_font_color(
-                boost::make_optional(default_font), boost::make_optional(color_type{ 0x00, 0x00, 0x00 })
+                boost::make_optional(default_font),
+                boost::make_optional(color_type{ 0x00, 0x00, 0x00 }),
+                boost::make_optional(default_font),
+                boost::make_optional(color_type{ 0x00, 0x00, 0x00 })
             );
 
-            font_color_type default_train_name_font_color{ boost::make_optional(default_font), boost::none };
+            font_color_type default_train_name_font_color{
+                boost::make_optional(default_font),
+                boost::none,
+                boost::make_optional(default_font),
+                boost::none
+            };
 
             return
                 font_color_set{

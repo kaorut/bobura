@@ -96,9 +96,10 @@ namespace bobura { namespace message { namespace font_color_dialog
 
         \tparam IntSize        A integer size type.
         \tparam Canvas         A canvas type.
+        \tparam FontColor      A font and color type.
         \tparam MessageCatalog A message catalog type.
     */
-    template <typename IntSize, typename Canvas, typename MessageCatalog>
+    template <typename IntSize, typename Canvas, typename FontColor, typename MessageCatalog>
     class sample_picture_box_paint
     {
     public:
@@ -116,8 +117,8 @@ namespace bobura { namespace message { namespace font_color_dialog
         //! The color type.
         using color_type = typename Canvas::color_type;
 
-        //! The internal font and color type.
-        using internal_font_color_type = std::pair<boost::optional<font_type>, boost::optional<color_type>>;
+        //! The font and color type.
+        using font_color_type = FontColor;
 
         //! The dimension type.
         using dimension_type = typename Canvas::dimension_type;
@@ -137,10 +138,10 @@ namespace bobura { namespace message { namespace font_color_dialog
             \param message_catalog        A message catalog.
         */
         sample_picture_box_paint(
-            const std::vector<internal_font_color_type>& font_color_list,
-            const boost::optional<int_size_type>&        current_category_index,
-            const dimension_type&                        canvas_dimension,
-            const message_catalog_type&                  message_catalog
+            const std::vector<font_color_type>&   font_color_list,
+            const boost::optional<int_size_type>& current_category_index,
+            const dimension_type&                 canvas_dimension,
+            const message_catalog_type&           message_catalog
         )
         :
         m_font_color_list(font_color_list),
@@ -160,8 +161,8 @@ namespace bobura { namespace message { namespace font_color_dialog
         void operator()(canvas_type& canvas)
         const
         {
-            assert(m_font_color_list[0].second);
-            auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(*m_font_color_list[0].second);
+            assert(m_font_color_list[0].m_diagram_color);
+            auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(*m_font_color_list[0].m_diagram_color);
             canvas.set_background(std::move(p_background));
             canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, m_canvas_dimension);
 
@@ -174,11 +175,11 @@ namespace bobura { namespace message { namespace font_color_dialog
                 return;
             }
 
-            assert(m_font_color_list[*m_current_category_index].first);
-            canvas.set_font(*m_font_color_list[*m_current_category_index].first);
+            assert(m_font_color_list[*m_current_category_index].m_diagram_font);
+            canvas.set_font(*m_font_color_list[*m_current_category_index].m_diagram_font);
             canvas.set_color(
-                m_font_color_list[*m_current_category_index].second ?
-                *m_font_color_list[*m_current_category_index].second : color_type{ 0x40, 0x40, 0x40 }
+                m_font_color_list[*m_current_category_index].m_diagram_color ?
+                *m_font_color_list[*m_current_category_index].m_diagram_color : color_type{ 0x40, 0x40, 0x40 }
             );
 
             const string_type text{ m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:SAMPLE")) };
@@ -221,7 +222,7 @@ namespace bobura { namespace message { namespace font_color_dialog
 
         // variables
 
-        const std::vector<internal_font_color_type>& m_font_color_list;
+        const std::vector<font_color_type>& m_font_color_list;
 
         const boost::optional<int_size_type>& m_current_category_index;
 
@@ -264,9 +265,17 @@ namespace bobura { namespace message { namespace font_color_dialog
         \tparam Dialog         A dialog type.
         \tparam FontDialog     A font dialog type.
         \tparam Canvas         A canvas type.
+        \tparam FontColor      A font and color type.
         \tparam MessageCatalog A message catalog type.
     */
-    template <typename Size, typename Dialog, typename FontDialog, typename Canvas, typename MessageCatalog>
+    template <
+        typename Size,
+        typename Dialog,
+        typename FontDialog,
+        typename Canvas,
+        typename FontColor,
+        typename MessageCatalog
+    >
     class font_button_mouse_clicked
     {
     public:
@@ -290,8 +299,8 @@ namespace bobura { namespace message { namespace font_color_dialog
         //! The color type.
         using color_type = typename Canvas::color_type;
 
-        //! The internal font and color type.
-        using internal_font_color_type = std::pair<boost::optional<font_type>, boost::optional<color_type>>;
+        //! The font and color type.
+        using font_color_type = FontColor;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
@@ -312,11 +321,11 @@ namespace bobura { namespace message { namespace font_color_dialog
             \param message_catalog        A message catalog.
         */
         font_button_mouse_clicked(
-            dialog_type&                           dialog,
-            std::vector<internal_font_color_type>& font_color_list,
-            const boost::optional<size_type>&      current_category_index,
-            const update_type                      update,
-            const message_catalog_type&            message_catalog
+            dialog_type&                      dialog,
+            std::vector<font_color_type>&     font_color_list,
+            const boost::optional<size_type>& current_category_index,
+            const update_type                 update,
+            const message_catalog_type&       message_catalog
         )
         :
         m_dialog(dialog),
@@ -333,18 +342,17 @@ namespace bobura { namespace message { namespace font_color_dialog
             \brief Called when the font button is clicked.
         */
         void operator()()
-        const
         {
             if (!m_current_category_index)
                 return;
 
-            font_dialog_type font_dialog{ m_font_color_list[*m_current_category_index].first, m_dialog };
+            font_dialog_type font_dialog{ *m_font_color_list[*m_current_category_index].m_diagram_font, m_dialog };
 
             const auto ok = font_dialog.do_modal();
             if (!ok)
                 return;
 
-            m_font_color_list[*m_current_category_index].first = boost::make_optional(font_dialog.result());
+            *m_font_color_list[*m_current_category_index].m_diagram_font = font_dialog.result();
 
             m_update();
         }
@@ -355,7 +363,7 @@ namespace bobura { namespace message { namespace font_color_dialog
 
         dialog_type& m_dialog;
 
-        std::vector<internal_font_color_type>& m_font_color_list;
+        std::vector<font_color_type>& m_font_color_list;
 
         const boost::optional<size_type>& m_current_category_index;
 
@@ -374,9 +382,17 @@ namespace bobura { namespace message { namespace font_color_dialog
         \tparam Dialog         A dialog type.
         \tparam ColorDialog    A color dialog type.
         \tparam Canvas         A canvas type.
+        \tparam FontColor      A font and color type.
         \tparam MessageCatalog A message catalog type.
     */
-    template <typename Size, typename Dialog, typename ColorDialog, typename Canvas, typename MessageCatalog>
+    template <
+        typename Size,
+        typename Dialog,
+        typename ColorDialog,
+        typename Canvas,
+        typename FontColor,
+        typename MessageCatalog
+    >
     class color_button_mouse_clicked
     {
     public:
@@ -400,8 +416,8 @@ namespace bobura { namespace message { namespace font_color_dialog
         //! The color type.
         using color_type = typename Canvas::color_type;
 
-        //! The internal font and color type.
-        using internal_font_color_type = std::pair<boost::optional<font_type>, boost::optional<color_type>>;
+        //! The font and color type.
+        using font_color_type = FontColor;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
@@ -422,11 +438,11 @@ namespace bobura { namespace message { namespace font_color_dialog
             \param message_catalog        A message catalog.
         */
         explicit color_button_mouse_clicked(
-            dialog_type&                           dialog,
-            std::vector<internal_font_color_type>& font_color_list,
-            const boost::optional<size_type>&      current_category_index,
-            const update_type                      update,
-            const message_catalog_type&            message_catalog
+            dialog_type&                      dialog,
+            std::vector<font_color_type>&     font_color_list,
+            const boost::optional<size_type>& current_category_index,
+            const update_type                 update,
+            const message_catalog_type&       message_catalog
         )
         :
         m_dialog(dialog),
@@ -443,18 +459,17 @@ namespace bobura { namespace message { namespace font_color_dialog
             \brief Called when the font button is clicked.
         */
         void operator()()
-        const
         {
             if (!m_current_category_index)
                 return;
 
-            color_dialog_type color_dialog{ m_font_color_list[*m_current_category_index].second, m_dialog };
+            color_dialog_type color_dialog{ m_font_color_list[*m_current_category_index].m_diagram_color, m_dialog };
 
             const auto ok = color_dialog.do_modal();
             if (!ok)
                 return;
 
-            m_font_color_list[*m_current_category_index].second = boost::make_optional(color_dialog.result());
+            m_font_color_list[*m_current_category_index].m_diagram_color = boost::make_optional(color_dialog.result());
 
             m_update();
         }
@@ -465,7 +480,7 @@ namespace bobura { namespace message { namespace font_color_dialog
 
         dialog_type& m_dialog;
 
-        std::vector<internal_font_color_type>& m_font_color_list;
+        std::vector<font_color_type>& m_font_color_list;
 
         const boost::optional<size_type>& m_current_category_index;
 

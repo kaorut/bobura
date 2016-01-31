@@ -41,45 +41,26 @@ namespace
 
     // functions
 
+    font_color_type make_font_color(const string_type& font_name, const bool has_color)
+    {
+        const auto font =
+            boost::make_optional(!font_name.empty(), font_type{ font_name, 42, false, true, false, true });
+        const auto color = boost::make_optional(has_color, color_type{ 12, 34, 56 });
+        return font_color_type{ font, color, font, color };
+    }
+
     font_color_set_type make_font_color_set1()
     {
-        font_color_type background_font_color{ boost::none, boost::make_optional(color_type{ 12, 34, 56 }) };
-        font_color_type company_name_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type line_name_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type note_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type time_line_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type local_station_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type principal_station_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type local_terminal_station_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type principal_terminal_station_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type train_name_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("yza") }, 42, false, true, false, true }),
-            boost::none
-        };
+        auto background_font_color = make_font_color(string_type{}, true);
+        auto company_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("abc") }, true);
+        auto line_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("def") }, true);
+        auto note_font_color = make_font_color(string_type{ TETENGO2_TEXT("ghi") }, true);
+        auto time_line_font_color = make_font_color(string_type{ TETENGO2_TEXT("jkl") }, true);
+        auto local_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("mno") }, true);
+        auto principal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("pqr") }, true);
+        auto local_terminal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("stu") }, true);
+        auto principal_terminal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("vwx") }, true);
+        auto train_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("yza") }, false);
 
         return
             font_color_set_type{
@@ -98,43 +79,16 @@ namespace
 
     font_color_set_type make_font_color_set2()
     {
-        font_color_type background_font_color{ boost::none, boost::make_optional(color_type{ 12, 34, 56 }) };
-        font_color_type company_name_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type line_name_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type note_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type time_line_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type local_station_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type principal_station_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type local_terminal_station_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type principal_terminal_station_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type train_name_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("yza") }, 42, false, true, false, true }),
-            boost::none
-        };
+        auto background_font_color = make_font_color(string_type{}, true);
+        auto company_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("abc") }, true);
+        auto line_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("def") }, true);
+        auto note_font_color = make_font_color(string_type{ TETENGO2_TEXT("ghi") }, true);
+        auto time_line_font_color = make_font_color(string_type{ TETENGO2_TEXT("jkl") }, true);
+        auto local_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("mno") }, true);
+        auto principal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("pqr") }, true);
+        auto local_terminal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("stu") }, true);
+        auto principal_terminal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("vwx") }, true);
+        auto train_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("yza") }, false);
 
         return
             font_color_set_type{
@@ -153,43 +107,16 @@ namespace
 
     font_color_set_type make_font_color_set3()
     {
-        font_color_type background_font_color{ boost::none, boost::make_optional(color_type{ 12, 34, 56 }) };
-        font_color_type company_name_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("ABC") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type line_name_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("DEF") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type note_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("GHI") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type time_line_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("JKL") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type local_station_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("MNO") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type principal_station_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("PQR") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type local_terminal_station_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("STU") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type principal_terminal_station_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("VWX") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
-        font_color_type train_name_font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("YZA") }, 42, false, true, false, true }),
-            boost::none
-        };
+        auto background_font_color = make_font_color(string_type{}, true);
+        auto company_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("ABC") }, true);
+        auto line_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("DEF") }, true);
+        auto note_font_color = make_font_color(string_type{ TETENGO2_TEXT("GHI") }, true);
+        auto time_line_font_color = make_font_color(string_type{ TETENGO2_TEXT("JKL") }, true);
+        auto local_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("MNO") }, true);
+        auto principal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("PQR") }, true);
+        auto local_terminal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("STU") }, true);
+        auto principal_terminal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("VWX") }, true);
+        auto train_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("YZA") }, false);
 
         return
             font_color_set_type{
@@ -220,10 +147,7 @@ BOOST_AUTO_TEST_SUITE(font_color)
     {
         BOOST_TEST_PASSPOINT();
 
-        const font_color_type font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
+        const auto font_color = make_font_color(string_type{ TETENGO2_TEXT("abc") }, true);
     }
 
     BOOST_AUTO_TEST_CASE(operator_equal)
@@ -231,26 +155,14 @@ BOOST_AUTO_TEST_SUITE(font_color)
         BOOST_TEST_PASSPOINT();
 
         {
-            const font_color_type font_color1{
-                boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true }),
-                boost::make_optional(color_type{ 12, 34, 56 })
-            };
-            const font_color_type font_color2{
-                boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true }),
-                boost::make_optional(color_type{ 12, 34, 56 })
-            };
+        const auto font_color1 = make_font_color(string_type{ TETENGO2_TEXT("abc") }, true);
+        const auto font_color2 = make_font_color(string_type{ TETENGO2_TEXT("abc") }, true);
 
             BOOST_CHECK(font_color1 == font_color2);
         }
         {
-            const font_color_type font_color1{
-                boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true }),
-                boost::make_optional(color_type{ 12, 34, 56 })
-            };
-            const font_color_type font_color2{
-                boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("ABC") }, 24, true, true, false, false }),
-                boost::make_optional(color_type{ 21, 43, 65 })
-            };
+        const auto font_color1 = make_font_color(string_type{ TETENGO2_TEXT("abc") }, true);
+        const auto font_color2 = make_font_color(string_type{ TETENGO2_TEXT("ABC") }, true);
 
             BOOST_CHECK(font_color1 != font_color2);
         }
@@ -260,10 +172,7 @@ BOOST_AUTO_TEST_SUITE(font_color)
     {
         BOOST_TEST_PASSPOINT();
 
-        const font_color_type font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
+        const auto font_color = make_font_color(string_type{ TETENGO2_TEXT("abc") }, true);
 
         const auto expected =
             boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true });
@@ -274,10 +183,7 @@ BOOST_AUTO_TEST_SUITE(font_color)
     {
         BOOST_TEST_PASSPOINT();
 
-        const font_color_type font_color{
-            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true }),
-            boost::make_optional(color_type{ 12, 34, 56 })
-        };
+        const auto font_color = make_font_color(string_type{ TETENGO2_TEXT("abc") }, true);
 
         BOOST_CHECK((font_color.diagram_color() == boost::make_optional(color_type{ 12, 34, 56 })));
     }
@@ -326,10 +232,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
 
         const font_color_set_type font_color_set = make_font_color_set1();
 
-        BOOST_CHECK((
-            font_color_set.background() ==
-            font_color_type{ boost::none, boost::make_optional(color_type{ 12, 34, 56 }) }
-        ));
+        BOOST_CHECK(font_color_set.background() == make_font_color(string_type{}, true));
     }
 
     BOOST_AUTO_TEST_CASE(company_name)
@@ -338,13 +241,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
 
         const font_color_set_type font_color_set = make_font_color_set1();
 
-        BOOST_CHECK((
-            font_color_set.company_name() ==
-            font_color_type{
-                boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true }),
-                boost::make_optional(color_type{ 12, 34, 56 })
-            }
-        ));
+        BOOST_CHECK(font_color_set.company_name() == make_font_color(string_type{ TETENGO2_TEXT("abc") }, true));
     }
 
     BOOST_AUTO_TEST_CASE(line_name)
@@ -353,13 +250,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
 
         const font_color_set_type font_color_set = make_font_color_set1();
 
-        BOOST_CHECK((
-            font_color_set.line_name() ==
-            font_color_type{
-                boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("def") }, 42, false, true, false, true }),
-                boost::make_optional(color_type{ 12, 34, 56 })
-            }
-        ));
+        BOOST_CHECK(font_color_set.line_name() ==make_font_color(string_type{ TETENGO2_TEXT("def") }, true));
     }
 
     BOOST_AUTO_TEST_CASE(note)
@@ -368,13 +259,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
 
         const font_color_set_type font_color_set = make_font_color_set1();
 
-        BOOST_CHECK((
-            font_color_set.note() ==
-            font_color_type{
-                boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("ghi") }, 42, false, true, false, true }),
-                boost::make_optional(color_type{ 12, 34, 56 })
-            }
-        ));
+        BOOST_CHECK(font_color_set.note() == make_font_color(string_type{ TETENGO2_TEXT("ghi") }, true));
     }
 
     BOOST_AUTO_TEST_CASE(time_line)
@@ -383,13 +268,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
 
         const font_color_set_type font_color_set = make_font_color_set1();
 
-        BOOST_CHECK((
-            font_color_set.time_line() ==
-            font_color_type{
-                boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("jkl") }, 42, false, true, false, true }),
-                boost::make_optional(color_type{ 12, 34, 56 })
-            }
-        ));
+        BOOST_CHECK(font_color_set.time_line() == make_font_color(string_type{ TETENGO2_TEXT("jkl") }, true));
     }
 
     BOOST_AUTO_TEST_CASE(local_station)
@@ -398,13 +277,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
 
         const font_color_set_type font_color_set = make_font_color_set1();
 
-        BOOST_CHECK((
-            font_color_set.local_station() ==
-            font_color_type{
-                boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("mno") }, 42, false, true, false, true }),
-                boost::make_optional(color_type{ 12, 34, 56 })
-            }
-        ));
+        BOOST_CHECK(font_color_set.local_station() == make_font_color(string_type{ TETENGO2_TEXT("mno") }, true));
     }
 
     BOOST_AUTO_TEST_CASE(principal_station)
@@ -413,13 +286,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
 
         const font_color_set_type font_color_set = make_font_color_set1();
 
-        BOOST_CHECK((
-            font_color_set.principal_station() ==
-            font_color_type{
-                boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("pqr") }, 42, false, true, false, true }),
-                boost::make_optional(color_type{ 12, 34, 56 })
-            }
-        ));
+        BOOST_CHECK(font_color_set.principal_station() == make_font_color(string_type{ TETENGO2_TEXT("pqr") }, true));
     }
 
     BOOST_AUTO_TEST_CASE(local_terminal_station)
@@ -428,13 +295,9 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
 
         const font_color_set_type font_color_set = make_font_color_set1();
 
-        BOOST_CHECK((
-            font_color_set.local_terminal_station() ==
-            font_color_type{
-                boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("stu") }, 42, false, true, false, true }),
-                boost::make_optional(color_type{ 12, 34, 56 })
-            }
-        ));
+        BOOST_CHECK(
+            font_color_set.local_terminal_station() == make_font_color(string_type{ TETENGO2_TEXT("stu") }, true)
+        );
     }
 
     BOOST_AUTO_TEST_CASE(principal_terminal_station)
@@ -443,13 +306,9 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
 
         const font_color_set_type font_color_set = make_font_color_set1();
 
-        BOOST_CHECK((
-            font_color_set.principal_terminal_station() ==
-            font_color_type{
-                boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("vwx") }, 42, false, true, false, true }),
-                boost::make_optional(color_type{ 12, 34, 56 })
-            }
-        ));
+        BOOST_CHECK(
+            font_color_set.principal_terminal_station() == make_font_color(string_type{ TETENGO2_TEXT("vwx") }, true)
+        );
     }
 
     BOOST_AUTO_TEST_CASE(train_name)
@@ -458,13 +317,7 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
 
         const font_color_set_type font_color_set = make_font_color_set1();
 
-        BOOST_CHECK((
-            font_color_set.train_name() ==
-            font_color_type{
-                boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("yza") }, 42, false, true, false, true }),
-                boost::none
-            }
-        ));
+        BOOST_CHECK(font_color_set.train_name() == make_font_color(string_type{ TETENGO2_TEXT("yza") }, false));
     }
 
 

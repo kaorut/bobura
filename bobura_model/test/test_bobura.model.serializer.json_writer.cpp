@@ -12,6 +12,7 @@
 #include <utility>
 
 #include <boost/filesystem.hpp>
+#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
@@ -214,7 +215,12 @@ namespace
         {
             font_type font{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true };
             color_type color{ 0xAB, 0xCD, 0xEF };
-            const font_color_type font_color{ font, color };
+            const font_color_type font_color{
+                boost::make_optional(font),
+                boost::make_optional(color),
+                boost::make_optional(font),
+                boost::make_optional(color)
+            };
 
             const font_color_set_type font_color_set{
                 font_color,

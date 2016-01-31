@@ -79,80 +79,32 @@ namespace bobura { namespace command
             font_color_dialog_type dialog{ parent, m_message_catalog };
 
             const auto& font_color_set = model.timetable().font_color_set();
-            dialog.set_background(*font_color_set.background().diagram_color());
-            dialog.set_company_name(
-                *font_color_set.company_name().diagram_font(),
-                *font_color_set.company_name().diagram_color()
-            );
-            dialog.set_line_name(
-                *font_color_set.line_name().diagram_font(),
-                *font_color_set.line_name().diagram_color()
-            );
-            dialog.set_note(
-                *font_color_set.note().diagram_font(),
-                *font_color_set.note().diagram_color()
-            );
-            dialog.set_time_line(
-                *font_color_set.time_line().diagram_font(),
-                *font_color_set.time_line().diagram_color()
-            );
-            dialog.set_local_station(
-                *font_color_set.local_station().diagram_font(),
-                *font_color_set.local_station().diagram_color()
-            );
-            dialog.set_principal_station(
-                *font_color_set.principal_station().diagram_font(),
-                *font_color_set.principal_station().diagram_color()
-            );
-            dialog.set_local_terminal_station(
-                *font_color_set.local_terminal_station().diagram_font(),
-                *font_color_set.local_terminal_station().diagram_color()
-            );
-            dialog.set_principal_terminal_station(
-                *font_color_set.principal_terminal_station().diagram_font(),
-                *font_color_set.principal_terminal_station().diagram_color()
-            );
-            dialog.set_train_name(*font_color_set.train_name().diagram_font());
+            dialog.set_background(to_dialog_font_color(font_color_set.background()));
+            dialog.set_company_name(to_dialog_font_color(font_color_set.company_name()));
+            dialog.set_line_name(to_dialog_font_color(font_color_set.line_name()));
+            dialog.set_note(to_dialog_font_color(font_color_set.note()));
+            dialog.set_time_line(to_dialog_font_color(font_color_set.time_line()));
+            dialog.set_local_station(to_dialog_font_color(font_color_set.local_station()));
+            dialog.set_principal_station(to_dialog_font_color(font_color_set.principal_station()));
+            dialog.set_local_terminal_station(to_dialog_font_color(font_color_set.local_terminal_station()));
+            dialog.set_principal_terminal_station(to_dialog_font_color(font_color_set.principal_terminal_station()));
+            dialog.set_train_name(to_dialog_font_color(font_color_set.train_name()));
 
             dialog.do_modal();
             if (dialog.result() != dialog_type::result_type::accepted)
                 return;
         
             font_color_set_type new_font_color_set{
-                font_color_type{ boost::none, boost::make_optional(dialog.background()) },
-                font_color_type{
-                    boost::make_optional(dialog.company_name().first),
-                    boost::make_optional(dialog.company_name().second)
-                },
-                font_color_type{
-                    boost::make_optional(dialog.line_name().first),
-                    boost::make_optional(dialog.line_name().second)
-                },
-                font_color_type{
-                    boost::make_optional(dialog.note().first),
-                    boost::make_optional(dialog.note().second)
-                },
-                font_color_type{
-                    boost::make_optional(dialog.time_line().first),
-                    boost::make_optional(dialog.time_line().second)
-                },
-                font_color_type{
-                    boost::make_optional(dialog.local_station().first),
-                    boost::make_optional(dialog.local_station().second)
-                },
-                font_color_type{
-                    boost::make_optional(dialog.principal_station().first),
-                    boost::make_optional(dialog.principal_station().second)
-                },
-                font_color_type{
-                    boost::make_optional(dialog.local_terminal_station().first),
-                    boost::make_optional(dialog.local_terminal_station().second)
-                },
-                font_color_type{
-                    boost::make_optional(dialog.principal_terminal_station().first),
-                    boost::make_optional(dialog.principal_terminal_station().second)
-                },
-                font_color_type{ boost::make_optional(dialog.train_name()), boost::none }
+                to_model_font_color(dialog.background()),
+                to_model_font_color(dialog.company_name()),
+                to_model_font_color(dialog.line_name()),
+                to_model_font_color(dialog.note()),
+                to_model_font_color(dialog.time_line()),
+                to_model_font_color(dialog.local_station()),
+                to_model_font_color(dialog.principal_station()),
+                to_model_font_color(dialog.local_terminal_station()),
+                to_model_font_color(dialog.principal_terminal_station()),
+                to_model_font_color(dialog.train_name())
             };
             model.timetable().set_font_color_set(std::move(new_font_color_set));
         }
@@ -180,6 +132,35 @@ namespace bobura { namespace command
                 font_dialog_type,
                 color_dialog_type
             >;
+
+
+        // static functions
+
+        static typename font_color_dialog_type::font_color_type to_dialog_font_color(
+            const font_color_type& model_font_color
+        )
+        {
+            return
+                typename font_color_dialog_type::font_color_type{
+                    model_font_color.diagram_font(),
+                    model_font_color.diagram_color(),
+                    model_font_color.timetable_font(),
+                    model_font_color.timetable_color()
+                };
+        }
+
+        static font_color_type to_model_font_color(
+            const typename font_color_dialog_type::font_color_type& dialog_font_color
+        )
+        {
+            return
+                font_color_type{
+                    dialog_font_color.m_diagram_font,
+                    dialog_font_color.m_diagram_color,
+                    dialog_font_color.m_timetable_font,
+                    dialog_font_color.m_timetable_color
+                };
+        }
 
 
         // variables

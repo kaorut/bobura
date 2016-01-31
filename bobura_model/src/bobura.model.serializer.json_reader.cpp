@@ -354,7 +354,10 @@ namespace bobura { namespace model { namespace serializer
                     }
                     background_font_color =
                         font_color_type{
-                            boost::none, boost::make_optional(std::move(boost::get<color_type>(element->second)))
+                            boost::none,
+                            boost::make_optional(std::move(boost::get<color_type>(element->second))),
+                            boost::none,
+                            boost::make_optional(std::move(boost::get<color_type>(element->second)))
                         };
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("company_name") })
@@ -438,7 +441,10 @@ namespace bobura { namespace model { namespace serializer
                     }
                     train_name_font_color =
                         font_color_type{
-                            boost::make_optional(std::move(boost::get<font_type>(element->second))), boost::none
+                            boost::make_optional(std::move(boost::get<font_type>(element->second))),
+                            boost::none,
+                            boost::make_optional(std::move(boost::get<font_type>(element->second))),
+                            boost::none
                         };
                 }
                 else
@@ -566,6 +572,8 @@ namespace bobura { namespace model { namespace serializer
             return
                 boost::make_optional<font_color_set_element_type>(
                     font_color_type{
+                        boost::make_optional(boost::get<font_type>(std::move(*font))),
+                        boost::make_optional(std::move(*color)),
                         boost::make_optional(boost::get<font_type>(std::move(*font))),
                         boost::make_optional(std::move(*color))
                     }
