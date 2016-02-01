@@ -80,13 +80,14 @@ namespace bobura
         using color_dialog_type = ColorDialog;
 
         //! The font and color type.
-        struct font_color_type
+        class font_color_type
         {
-            boost::optional<font_type>  m_diagram_font;
-            boost::optional<color_type> m_diagram_color;
-            boost::optional<font_type>  m_timetable_font;
-            boost::optional<color_type> m_timetable_color;
+        public:
+            // constructors and destructors
 
+            /*!
+                \brief Creates a font and color.
+            */
             font_color_type()
             :
             m_diagram_font(),
@@ -95,6 +96,14 @@ namespace bobura
             m_timetable_color()
             {}
 
+            /*!
+                \brief Creates a font and color.
+
+                \param diagram_font    A font for the diagram.
+                \param diagram_color   A color for the diagram.
+                \param timetable_font  A font for the timetable.
+                \param timetable_color A color for the timetable.
+            */
             font_color_type(
                 boost::optional<font_type>  diagram_font,
                 boost::optional<color_type> diagram_color,
@@ -108,6 +117,18 @@ namespace bobura
             m_timetable_color(std::move(timetable_color))
             {}
 
+
+            // functions
+
+            /*!
+                \brief Checks whether one font and color is equal to another.
+
+                \param one     One font and color.
+                \param another Another font and color.
+
+                \retval true  When the one is equal to the other.
+                \retval false Otherwise.
+            */
             friend bool operator==(const font_color_type& one, const font_color_type& another)
             {
                 return
@@ -116,6 +137,103 @@ namespace bobura
                     one.m_timetable_font == another.m_timetable_font &&
                     one.m_timetable_color == another.m_timetable_color;
             }
+
+            /*!
+                \brief Returns the font for the diagram.
+
+                \return The font for the diagram.
+            */
+            const boost::optional<font_type>& diagram_font()
+            const
+            {
+                return m_diagram_font;
+            }
+
+            /*!
+                \brief Sets a font for the diagram.
+
+                \param diagram_font A font for the diagram.
+            */
+            void set_diagram_font(boost::optional<font_type> diagram_font)
+            {
+                m_diagram_font = std::move(diagram_font);
+            }
+
+            /*!
+                \brief Returns the color for the diagram.
+
+                \return The color for the diagram.
+            */
+            const boost::optional<color_type>& diagram_color()
+            const
+            {
+                return m_diagram_color;
+            }
+
+            /*!
+                \brief Sets a color for the diagram.
+
+                \param diagram_color A color for the diagram.
+            */
+            void set_diagram_color(boost::optional<color_type> diagram_color)
+            {
+                m_diagram_color = std::move(diagram_color);
+            }
+
+            /*!
+                \brief Returns the font for the timetable.
+
+                \return The font for the timetable.
+            */
+            const boost::optional<font_type>& timetable_font()
+            const
+            {
+                return m_timetable_font;
+            }
+
+            /*!
+                \brief Sets a font for the timetable.
+
+                \param timetable_font A font for the timetable.
+            */
+            void set_timetable_font(boost::optional<font_type> timetable_font)
+            {
+                m_timetable_font = std::move(timetable_font);
+            }
+
+            /*!
+                \brief Returns the color for the timetable.
+
+                \return The color for the timetable.
+            */
+            const boost::optional<color_type>& timetable_color()
+            const
+            {
+                return m_timetable_color;
+            }
+
+            /*!
+                \brief Sets a color for the timetable.
+
+                \param timetable_color A color for the timetable.
+            */
+            void set_timetable_color(boost::optional<color_type> timetable_color)
+            {
+                m_timetable_color = std::move(timetable_color);
+            }
+
+
+        private:
+            // variables
+
+            boost::optional<font_type>  m_diagram_font;
+
+            boost::optional<color_type> m_diagram_color;
+
+            boost::optional<font_type>  m_timetable_font;
+
+            boost::optional<color_type> m_timetable_color;
+
 
         };
 

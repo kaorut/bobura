@@ -558,7 +558,7 @@ namespace bobura
             if (!m_current_category_index)
                 return {};
 
-            const auto& font = m_font_color_list[*m_current_category_index].m_diagram_font;
+            const auto& font = m_font_color_list[*m_current_category_index].diagram_font();
             if (!font)
                 return {};
 
@@ -573,7 +573,7 @@ namespace bobura
 
         bool color_enabled()
         {
-            return m_current_category_index && m_font_color_list[*m_current_category_index].m_diagram_color;
+            return m_current_category_index && m_font_color_list[*m_current_category_index].diagram_color();
         }
 
 

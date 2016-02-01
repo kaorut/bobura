@@ -65,7 +65,7 @@ namespace bobura { namespace model { namespace timetable_info
         // functions
 
         /*!
-            \brief Checks whether one font and color  is equal to another.
+            \brief Checks whether one font and color is equal to another.
 
             \param one     One font and color.
             \param another Another font and color.

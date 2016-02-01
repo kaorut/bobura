@@ -161,8 +161,8 @@ namespace bobura { namespace message { namespace font_color_dialog
         void operator()(canvas_type& canvas)
         const
         {
-            assert(m_font_color_list[0].m_diagram_color);
-            auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(*m_font_color_list[0].m_diagram_color);
+            assert(m_font_color_list[0].diagram_color());
+            auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(*m_font_color_list[0].diagram_color());
             canvas.set_background(std::move(p_background));
             canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, m_canvas_dimension);
 
@@ -175,11 +175,11 @@ namespace bobura { namespace message { namespace font_color_dialog
                 return;
             }
 
-            assert(m_font_color_list[*m_current_category_index].m_diagram_font);
-            canvas.set_font(*m_font_color_list[*m_current_category_index].m_diagram_font);
+            assert(m_font_color_list[*m_current_category_index].diagram_font());
+            canvas.set_font(*m_font_color_list[*m_current_category_index].diagram_font());
             canvas.set_color(
-                m_font_color_list[*m_current_category_index].m_diagram_color ?
-                *m_font_color_list[*m_current_category_index].m_diagram_color : color_type{ 0x40, 0x40, 0x40 }
+                m_font_color_list[*m_current_category_index].diagram_color() ?
+                *m_font_color_list[*m_current_category_index].diagram_color() : color_type{ 0x40, 0x40, 0x40 }
             );
 
             const string_type text{ m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:SAMPLE")) };
@@ -346,13 +346,13 @@ namespace bobura { namespace message { namespace font_color_dialog
             if (!m_current_category_index)
                 return;
 
-            font_dialog_type font_dialog{ *m_font_color_list[*m_current_category_index].m_diagram_font, m_dialog };
+            font_dialog_type font_dialog{ *m_font_color_list[*m_current_category_index].diagram_font(), m_dialog };
 
             const auto ok = font_dialog.do_modal();
             if (!ok)
                 return;
 
-            *m_font_color_list[*m_current_category_index].m_diagram_font = font_dialog.result();
+            m_font_color_list[*m_current_category_index].set_diagram_font(boost::make_optional(font_dialog.result()));
 
             m_update();
         }
@@ -463,13 +463,13 @@ namespace bobura { namespace message { namespace font_color_dialog
             if (!m_current_category_index)
                 return;
 
-            color_dialog_type color_dialog{ m_font_color_list[*m_current_category_index].m_diagram_color, m_dialog };
+            color_dialog_type color_dialog{ m_font_color_list[*m_current_category_index].diagram_color(), m_dialog };
 
             const auto ok = color_dialog.do_modal();
             if (!ok)
                 return;
 
-            m_font_color_list[*m_current_category_index].m_diagram_color = boost::make_optional(color_dialog.result());
+            m_font_color_list[*m_current_category_index].set_diagram_color(boost::make_optional(color_dialog.result()));
 
             m_update();
         }

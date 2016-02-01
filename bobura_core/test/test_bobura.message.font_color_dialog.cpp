@@ -71,12 +71,10 @@ namespace
 
     using color_dialog_type = common_dialog_type_list_type::color_type;
 
-    struct font_color_type
+    class font_color_type
     {
-        boost::optional<font_type>  m_diagram_font;
-        boost::optional<color_type> m_diagram_color;
-        boost::optional<font_type>  m_timetable_font;
-        boost::optional<color_type> m_timetable_color;
+    public:
+        // constructors and destructors
 
         font_color_type()
         :
@@ -93,11 +91,80 @@ namespace
             boost::optional<color_type> timetable_color
         )
         :
-        m_diagram_font(std::move(diagram_font)),
-        m_diagram_color(std::move(diagram_color)),
-        m_timetable_font(std::move(timetable_font)),
-        m_timetable_color(std::move(timetable_color))
+        m_diagram_font(diagram_font),
+        m_diagram_color(diagram_color),
+        m_timetable_font(timetable_font),
+        m_timetable_color(timetable_color)
         {}
+
+
+        // functions
+
+        friend bool operator==(const font_color_type& one, const font_color_type& another)
+        {
+            return
+                one.m_diagram_font == another.m_diagram_font &&
+                one.m_diagram_color == another.m_diagram_color &&
+                one.m_timetable_font == another.m_timetable_font &&
+                one.m_timetable_color == another.m_timetable_color;
+        }
+
+        const boost::optional<font_type>& diagram_font()
+        const
+        {
+            return m_diagram_font;
+        }
+
+        void set_diagram_font(boost::optional<font_type> diagram_font)
+        {
+            m_diagram_font = std::move(diagram_font);
+        }
+
+        const boost::optional<color_type>& diagram_color()
+        const
+        {
+            return m_diagram_color;
+        }
+
+        void set_diagram_color(boost::optional<color_type> diagram_color)
+        {
+            m_diagram_color = std::move(diagram_color);
+        }
+
+        const boost::optional<font_type>& timetable_font()
+        const
+        {
+            return m_timetable_font;
+        }
+
+        void set_timetable_font(boost::optional<font_type> timetable_font)
+        {
+            m_timetable_font = std::move(timetable_font);
+        }
+
+        const boost::optional<color_type>& timetable_color()
+        const
+        {
+            return m_timetable_color;
+        }
+
+        void set_timetable_color(boost::optional<color_type> timetable_color)
+        {
+            m_timetable_color = std::move(timetable_color);
+        }
+
+
+    private:
+        // variables
+
+        boost::optional<font_type>  m_diagram_font;
+
+        boost::optional<color_type> m_diagram_color;
+
+        boost::optional<font_type>  m_timetable_font;
+
+        boost::optional<color_type> m_timetable_color;
+
 
     };
 

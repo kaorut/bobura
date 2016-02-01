@@ -155,10 +155,10 @@ namespace bobura { namespace command
         {
             return
                 font_color_type{
-                    dialog_font_color.m_diagram_font,
-                    dialog_font_color.m_diagram_color,
-                    dialog_font_color.m_timetable_font,
-                    dialog_font_color.m_timetable_color
+                    dialog_font_color.diagram_font(),
+                    dialog_font_color.diagram_color(),
+                    dialog_font_color.timetable_font(),
+                    dialog_font_color.timetable_color()
                 };
         }
 
