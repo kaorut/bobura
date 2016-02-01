@@ -9,7 +9,6 @@
 #include <algorithm>
 #include <memory>
 #include <sstream>
-#include <stdexcept>
 #include <utility>
 #include <vector>
 
@@ -18,7 +17,6 @@
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/rational.hpp>
-#include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>

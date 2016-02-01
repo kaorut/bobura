@@ -6,8 +6,6 @@
     $Id$
 */
 
-#include <stdexcept>
-
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/test/unit_test.hpp>

@@ -188,6 +188,26 @@ BOOST_AUTO_TEST_SUITE(font_color)
         BOOST_CHECK((font_color.diagram_color() == boost::make_optional(color_type{ 12, 34, 56 })));
     }
 
+    BOOST_AUTO_TEST_CASE(timetable_font)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const auto font_color = make_font_color(string_type{ TETENGO2_TEXT("abc") }, true);
+
+        const auto expected =
+            boost::make_optional(font_type{ string_type{ TETENGO2_TEXT("abc") }, 42, false, true, false, true });
+        BOOST_CHECK(font_color.timetable_font() == expected);
+    }
+
+    BOOST_AUTO_TEST_CASE(timetable_color)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const auto font_color = make_font_color(string_type{ TETENGO2_TEXT("abc") }, true);
+
+        BOOST_CHECK((font_color.timetable_color() == boost::make_optional(color_type{ 12, 34, 56 })));
+    }
+
 
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(font_color_set)
