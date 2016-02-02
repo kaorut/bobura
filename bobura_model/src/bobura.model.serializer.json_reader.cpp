@@ -804,18 +804,31 @@ namespace bobura { namespace model { namespace serializer
                 abbreviation = std::move(member->second);
             }
 
-            color_type diagram_line_color{ 0, 0, 0 };
+            font_type diagram_font = font_type::dialog_font();
+            {
+                auto element = read_font_color_set_element(pull_parser);
+                if (!element)
+                    return boost::none;
+                if (element->first != string_type{ TETENGO2_TEXT("diagram_font") })
+                    return boost::none;
+                if (element->second.which() != 1)
+                    return boost::none;
+
+                diagram_font = std::move(boost::get<font_type>(element->second));
+            }
+
+            color_type diagram_color{ 0, 0, 0 };
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
                     return boost::none;
-                if (member->first != string_type{ TETENGO2_TEXT("diagram_line_color") })
+                if (member->first != string_type{ TETENGO2_TEXT("diagram_color") })
                     return boost::none;
 
                 auto color_ = to_color(std::move(member->second));
                 if (!color_)
                     return boost::none;
-                diagram_line_color = std::move(*color_);
+                diagram_color = std::move(*color_);
             }
 
             auto diagram_line_weight = weight_type::normal;
@@ -846,6 +859,33 @@ namespace bobura { namespace model { namespace serializer
                 diagram_line_style = *line_style_;
             }
 
+            font_type timetable_font = font_type::dialog_font();
+            {
+                auto element = read_font_color_set_element(pull_parser);
+                if (!element)
+                    return boost::none;
+                if (element->first != string_type{ TETENGO2_TEXT("timetable_font") })
+                    return boost::none;
+                if (element->second.which() != 1)
+                    return boost::none;
+
+                timetable_font = std::move(boost::get<font_type>(element->second));
+            }
+
+            color_type timetable_color{ 0, 0, 0 };
+            {
+                auto member = read_string_member(pull_parser);
+                if (!member)
+                    return boost::none;
+                if (member->first != string_type{ TETENGO2_TEXT("timetable_color") })
+                    return boost::none;
+
+                auto color_ = to_color(std::move(member->second));
+                if (!color_)
+                    return boost::none;
+                timetable_color = std::move(*color_);
+            }
+
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
                 return boost::none;
             pull_parser.next();
@@ -855,9 +895,12 @@ namespace bobura { namespace model { namespace serializer
                     train_kind_type(
                         std::move(name),
                         std::move(abbreviation),
-                        std::move(diagram_line_color),
+                        std::move(diagram_font),
+                        std::move(diagram_color),
                         diagram_line_weight,
-                        diagram_line_style
+                        diagram_line_style,
+                        std::move(timetable_font),
+                        std::move(timetable_color)
                     )
                 );
         }

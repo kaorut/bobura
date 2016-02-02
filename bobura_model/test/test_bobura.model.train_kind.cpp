@@ -27,9 +27,11 @@ namespace
 
     using string_type = common_type_list_type::string_type;
 
+    using font_type = ui_type_list_type::font_type;
+
     using color_type = ui_type_list_type::color_type;
 
-    using train_kind_type = bobura::model::train_kind<string_type>;
+    using train_kind_type = bobura::model::train_kind<string_type, font_type>;
 
 
 }
@@ -47,9 +49,12 @@ BOOST_AUTO_TEST_SUITE(train_kind)
         const train_kind_type kind{
             string_type{ TETENGO2_TEXT("hoge") },
             string_type{ TETENGO2_TEXT("fuga") },
+            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
             color_type{ 0, 128, 255 },
             train_kind_type::weight_type::normal,
-            train_kind_type::line_style_type::solid
+            train_kind_type::line_style_type::solid,
+            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+            color_type{ 0, 255, 128 }
         };
     }
 
@@ -61,16 +66,22 @@ BOOST_AUTO_TEST_SUITE(train_kind)
             const train_kind_type kind1{
                 string_type{ TETENGO2_TEXT("hoge") },
                 string_type{ TETENGO2_TEXT("fuga") },
+                font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
                 color_type{ 0, 128, 255 },
                 train_kind_type::weight_type::normal,
-                train_kind_type::line_style_type::solid
+                train_kind_type::line_style_type::solid,
+                font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+                color_type{ 0, 255, 128 }
             };
             const train_kind_type kind2{
                 string_type{ TETENGO2_TEXT("hoge") },
                 string_type{ TETENGO2_TEXT("fuga") },
+                font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
                 color_type{ 0, 128, 255 },
                 train_kind_type::weight_type::normal,
-                train_kind_type::line_style_type::solid
+                train_kind_type::line_style_type::solid,
+                font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+                color_type{ 0, 255, 128 }
             };
 
             BOOST_CHECK(kind1 == kind2);
@@ -79,16 +90,22 @@ BOOST_AUTO_TEST_SUITE(train_kind)
             const train_kind_type kind1{
                 string_type{ TETENGO2_TEXT("hoge") },
                 string_type{ TETENGO2_TEXT("fuga") },
+                font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
                 color_type{ 0, 128, 255 },
                 train_kind_type::weight_type::normal,
-                train_kind_type::line_style_type::solid
+                train_kind_type::line_style_type::solid,
+                font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+                color_type{ 0, 255, 128 }
             };
             const train_kind_type kind2{
                 string_type{ TETENGO2_TEXT("foo") },
                 string_type{ TETENGO2_TEXT("bar") },
+                font_type{ string_type{ TETENGO2_TEXT("foofont") }, 42, false, true, false, true },
                 color_type{ 255, 128, 0 },
                 train_kind_type::weight_type::bold,
-                train_kind_type::line_style_type::dashed
+                train_kind_type::line_style_type::dashed,
+                font_type{ string_type{ TETENGO2_TEXT("barfont") }, 42, false, true, false, true },
+                color_type{ 128, 255, 0 }
             };
 
             BOOST_CHECK(kind1 != kind2);
@@ -102,9 +119,12 @@ BOOST_AUTO_TEST_SUITE(train_kind)
         const train_kind_type kind{
             string_type{ TETENGO2_TEXT("hoge") },
             string_type{ TETENGO2_TEXT("fuga") },
+            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
             color_type{ 0, 128, 255 },
             train_kind_type::weight_type::normal,
-            train_kind_type::line_style_type::solid
+            train_kind_type::line_style_type::solid,
+            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+            color_type{ 0, 255, 128 }
         };
 
         BOOST_CHECK(kind.name() == string_type{ TETENGO2_TEXT("hoge") });
@@ -117,27 +137,53 @@ BOOST_AUTO_TEST_SUITE(train_kind)
         const train_kind_type kind{
             string_type{ TETENGO2_TEXT("hoge") },
             string_type{ TETENGO2_TEXT("fuga") },
+            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
             color_type{ 0, 128, 255 },
             train_kind_type::weight_type::normal,
-            train_kind_type::line_style_type::solid
+            train_kind_type::line_style_type::solid,
+            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+            color_type{ 0, 255, 128 }
         };
 
         BOOST_CHECK(kind.abbreviation() == string_type{ TETENGO2_TEXT("fuga") });
     }
 
-    BOOST_AUTO_TEST_CASE(diagram_line_color)
+    BOOST_AUTO_TEST_CASE(diagram_font)
     {
         BOOST_TEST_PASSPOINT();
 
         const train_kind_type kind{
             string_type{ TETENGO2_TEXT("hoge") },
             string_type{ TETENGO2_TEXT("fuga") },
+            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
             color_type{ 0, 128, 255 },
             train_kind_type::weight_type::normal,
-            train_kind_type::line_style_type::solid
+            train_kind_type::line_style_type::solid,
+            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+            color_type{ 0, 255, 128 }
         };
 
-        BOOST_CHECK((kind.diagram_line_color() == color_type{ 0, 128, 255 }));
+        BOOST_CHECK((
+            kind.diagram_font() == font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true }
+        ));
+    }
+
+    BOOST_AUTO_TEST_CASE(diagram_color)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const train_kind_type kind{
+            string_type{ TETENGO2_TEXT("hoge") },
+            string_type{ TETENGO2_TEXT("fuga") },
+            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
+            color_type{ 0, 128, 255 },
+            train_kind_type::weight_type::normal,
+            train_kind_type::line_style_type::solid,
+            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+            color_type{ 0, 255, 128 }
+        };
+
+        BOOST_CHECK((kind.diagram_color() == color_type{ 0, 128, 255 }));
     }
 
     BOOST_AUTO_TEST_CASE(diagram_line_weight)
@@ -147,9 +193,12 @@ BOOST_AUTO_TEST_SUITE(train_kind)
         const train_kind_type kind{
             string_type{ TETENGO2_TEXT("hoge") },
             string_type{ TETENGO2_TEXT("fuga") },
+            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
             color_type{ 0, 128, 255 },
             train_kind_type::weight_type::normal,
-            train_kind_type::line_style_type::solid
+            train_kind_type::line_style_type::solid,
+            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+            color_type{ 0, 255, 128 }
         };
 
         BOOST_CHECK(kind.diagram_line_weight() == train_kind_type::weight_type::normal);
@@ -162,12 +211,54 @@ BOOST_AUTO_TEST_SUITE(train_kind)
         const train_kind_type kind{
             string_type{ TETENGO2_TEXT("hoge") },
             string_type{ TETENGO2_TEXT("fuga") },
+            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
             color_type{ 0, 128, 255 },
             train_kind_type::weight_type::normal,
-            train_kind_type::line_style_type::solid
+            train_kind_type::line_style_type::solid,
+            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+            color_type{ 0, 255, 128 }
         };
 
         BOOST_CHECK(kind.diagram_line_style() == train_kind_type::line_style_type::solid);
+    }
+
+    BOOST_AUTO_TEST_CASE(timetable_font)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const train_kind_type kind{
+            string_type{ TETENGO2_TEXT("hoge") },
+            string_type{ TETENGO2_TEXT("fuga") },
+            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
+            color_type{ 0, 128, 255 },
+            train_kind_type::weight_type::normal,
+            train_kind_type::line_style_type::solid,
+            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+            color_type{ 0, 255, 128 }
+        };
+
+        BOOST_CHECK((
+            kind.timetable_font() ==
+            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true }
+        ));
+    }
+
+    BOOST_AUTO_TEST_CASE(timetable_color)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const train_kind_type kind{
+            string_type{ TETENGO2_TEXT("hoge") },
+            string_type{ TETENGO2_TEXT("fuga") },
+            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
+            color_type{ 0, 128, 255 },
+            train_kind_type::weight_type::normal,
+            train_kind_type::line_style_type::solid,
+            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+            color_type{ 0, 255, 128 }
+        };
+
+        BOOST_CHECK((kind.timetable_color() == color_type{ 0, 255, 128 }));
     }
 
 

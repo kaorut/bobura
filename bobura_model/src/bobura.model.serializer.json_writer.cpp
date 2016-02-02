@@ -599,10 +599,18 @@ namespace bobura { namespace model { namespace serializer
             write_object_entry(string_type{ TETENGO2_TEXT("abbreviation") }, train_kind.abbreviation(), output_stream);
             output_stream << comma();
 
+            write_font_element(
+                string_type{ TETENGO2_TEXT("diagram_font") },
+                train_kind.diagram_font(),
+                level + 2,
+                output_stream
+            );
+            output_stream << comma();
+
             new_line(level + 2, output_stream);
             write_object_entry(
-                string_type{ TETENGO2_TEXT("diagram_line_color") },
-                to_string(train_kind.diagram_line_color()),
+                string_type{ TETENGO2_TEXT("diagram_color") },
+                to_string(train_kind.diagram_color()),
                 output_stream
             );
             output_stream << comma();
@@ -621,11 +629,39 @@ namespace bobura { namespace model { namespace serializer
                 static_cast<int>(train_kind.diagram_line_style()),
                 output_stream
             );
+            output_stream << comma();
+
+            write_font_element(
+                string_type{ TETENGO2_TEXT("timetable_font") },
+                train_kind.timetable_font(),
+                level + 2,
+                output_stream
+            );
+            output_stream << comma();
+
+            new_line(level + 2, output_stream);
+            write_object_entry(
+                string_type{ TETENGO2_TEXT("timetable_color") },
+                to_string(train_kind.timetable_color()),
+                output_stream
+            );
 
             new_line(level + 1, output_stream);
             output_stream << object_end();
             if (!last)
                 output_stream << comma();
+        }
+
+        static void write_font_element(
+            const string_type&  key,
+            const font_type&    font,
+            const size_type     level,
+            output_stream_type& output_stream
+        )
+        {
+            new_line(level, output_stream);
+            write_object_key(key, output_stream);
+            write_font(font, output_stream);
         }
 
         static string_type to_string(const color_type& color)

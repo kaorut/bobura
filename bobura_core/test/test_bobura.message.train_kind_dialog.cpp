@@ -103,9 +103,12 @@ namespace
             static const train_kind_type singleton{
                 string_type{ TETENGO2_TEXT("name") },
                 string_type{ TETENGO2_TEXT("abbreviation") },
+                font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
                 color_type{ 0x12, 0x34, 0x56 },
                 train_kind_type::weight_type::normal,
-                train_kind_type::line_style_type::solid
+                train_kind_type::line_style_type::solid,
+                font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+                color_type{ 0x78, 0x9A, 0xBC }
             };
             return singleton;
         }
@@ -115,9 +118,12 @@ namespace
             static train_kind_type singleton(
                 string_type{ TETENGO2_TEXT("name") },
                 string_type{ TETENGO2_TEXT("abbreviation") },
+                font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
                 color_type{ 0x12, 0x34, 0x56 },
                 train_kind_type::weight_type::normal,
-                train_kind_type::line_style_type::solid
+                train_kind_type::line_style_type::solid,
+                font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+                color_type{ 0x78, 0x9A, 0xBC }
             );
             return singleton;
         }

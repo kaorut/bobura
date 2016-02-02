@@ -163,9 +163,12 @@ namespace bobura { namespace message { namespace train_kind_dialog
                 train_kind_type{
                     m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:New Kind")),
                     string_type{},
+                    font_type::dialog_font(),
                     color_type{ 0, 0, 0 },
                     train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
+                    train_kind_type::line_style_type::solid,
+                    font_type::dialog_font(),
+                    color_type{ 0, 0, 0 }
                 }
             );
 
@@ -179,6 +182,8 @@ namespace bobura { namespace message { namespace train_kind_dialog
         using train_kind_type = typename info_set_type::train_kind_type;
 
         using string_type = typename train_kind_type::string_type;
+
+        using font_type = typename train_kind_type::font_type;
 
         using color_type = typename train_kind_type::color_type;
 
@@ -764,7 +769,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
             const auto& train_kind = m_info_sets[*m_current_train_kind_index].train_kind();
 
             canvas.set_font(fixed_size_font(m_font));
-            canvas.set_color(train_kind.diagram_line_color());
+            canvas.set_color(train_kind.diagram_color());
 
             const auto& text = train_kind.abbreviation().empty() ? train_kind.name() : train_kind.abbreviation();
             const auto text_and_line_tops = sample_text_and_line_tops(canvas, text);

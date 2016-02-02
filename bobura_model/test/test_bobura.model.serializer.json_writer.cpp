@@ -69,7 +69,7 @@ namespace
 
     using stop_type = bobura::model::train_info::stop<size_type, difference_type, string_type>;
 
-    using train_kind_type = bobura::model::train_kind<string_type>;
+    using train_kind_type = bobura::model::train_kind<string_type, font_type>;
 
     using train_type = bobura::model::train<size_type, difference_type, string_type>;
 
@@ -150,16 +150,22 @@ namespace
         "        {\n"
         "            \"name\": \"nameA\",\n"
         "            \"abbreviation\": \"abbrA\",\n"
-        "            \"diagram_line_color\": \"0080FF\",\n"
+        "            \"diagram_font\": [\"hogefont\", 42, false, true, false, true],\n"
+        "            \"diagram_color\": \"0080FF\",\n"
         "            \"diagram_line_weight\": 0,\n"
-        "            \"diagram_line_style\": 0\n"
+        "            \"diagram_line_style\": 0,\n"
+        "            \"timetable_font\": [\"fugafont\", 42, false, true, false, true],\n"
+        "            \"timetable_color\": \"00FF80\"\n"
         "        },\n"
         "        {\n"
         "            \"name\": \"nameB\",\n"
         "            \"abbreviation\": \"abbrB\",\n"
-        "            \"diagram_line_color\": \"FF8000\",\n"
+        "            \"diagram_font\": [\"foofont\", 42, false, true, false, true],\n"
+        "            \"diagram_color\": \"FF8000\",\n"
         "            \"diagram_line_weight\": 1,\n"
-        "            \"diagram_line_style\": 2\n"
+        "            \"diagram_line_style\": 2,\n"
+        "            \"timetable_font\": [\"barfont\", 42, false, true, false, true],\n"
+        "            \"timetable_color\": \"80FF00\"\n"
         "        }\n"
         "    ],\n"
         "    [\n"
@@ -271,9 +277,12 @@ namespace
                 train_kind_type{
                     string_type{ TETENGO2_TEXT("nameA") },
                     string_type{ TETENGO2_TEXT("abbrA") },
+                    font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
                     color_type{ 0, 128, 255 },
                     train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
+                    train_kind_type::line_style_type::solid,
+                    font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+                    color_type{ 0, 255, 128 }
                 }
             );
             p_timetable->insert_train_kind(
@@ -281,9 +290,12 @@ namespace
                 train_kind_type{
                     string_type{ TETENGO2_TEXT("nameB") },
                     string_type{ TETENGO2_TEXT("abbrB") },
+                    font_type{ string_type{ TETENGO2_TEXT("foofont") }, 42, false, true, false, true },
                     color_type{ 255, 128, 0 },
                     train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::dotted
+                    train_kind_type::line_style_type::dotted,
+                    font_type{ string_type{ TETENGO2_TEXT("barfont") }, 42, false, true, false, true },
+                    color_type{ 128, 255, 0 }
                 }
             );
         }

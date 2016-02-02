@@ -36,6 +36,8 @@ namespace
 
     using string_type = common_type_list_type::string_type;
 
+    using font_type = ui_type_list_type::font_type;
+
     using model_type =
         bobura::timetable_model<
             common_type_list_type::size_type,
@@ -322,9 +324,12 @@ BOOST_AUTO_TEST_SUITE(train_line)
         const train_kind_type train_kind{
             string_type{ TETENGO2_TEXT("name") },
             string_type{ TETENGO2_TEXT("abbrev") },
+            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
             color_type{ 0x12, 0x34, 0x56 },
             train_kind_type::weight_type::normal,
-            train_kind_type::line_style_type::solid
+            train_kind_type::line_style_type::solid,
+            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+            color_type{ 0x78, 0x9A, 0xBC }
         };
         const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
         const message_catalog_type message_catalog{};
@@ -361,9 +366,12 @@ BOOST_AUTO_TEST_SUITE(train_line)
         const train_kind_type train_kind{
             string_type{ TETENGO2_TEXT("name") },
             string_type{ TETENGO2_TEXT("abbrev") },
+            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
             color_type{ 0x12, 0x34, 0x56 },
             train_kind_type::weight_type::normal,
-            train_kind_type::line_style_type::solid
+            train_kind_type::line_style_type::solid,
+            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+            color_type{ 0x78, 0x9A, 0xBC }
         };
         const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
         const message_catalog_type message_catalog{};
@@ -422,9 +430,12 @@ BOOST_AUTO_TEST_SUITE(train_line)
         const train_kind_type train_kind{
             string_type{ TETENGO2_TEXT("name") },
             string_type{ TETENGO2_TEXT("abbrev") },
+            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
             color_type{ 0x12, 0x34, 0x56 },
             train_kind_type::weight_type::normal,
-            train_kind_type::line_style_type::solid
+            train_kind_type::line_style_type::solid,
+            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+            color_type{ 0x78, 0x9A, 0xBC }
         };
         const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
         const message_catalog_type message_catalog{};
@@ -464,9 +475,12 @@ BOOST_AUTO_TEST_SUITE(train_line)
         const train_kind_type train_kind{
             string_type{ TETENGO2_TEXT("name") },
             string_type{ TETENGO2_TEXT("abbrev") },
+            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
             color_type{ 0x12, 0x34, 0x56 },
             train_kind_type::weight_type::normal,
-            train_kind_type::line_style_type::solid
+            train_kind_type::line_style_type::solid,
+            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+            color_type{ 0x78, 0x9A, 0xBC }
         };
         const station_intervals_type station_intervals{ 2, station_interval_calculator_type::default_interval() };
         const message_catalog_type message_catalog{};

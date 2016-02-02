@@ -749,7 +749,7 @@ namespace bobura
                 assert(m_info_sets.size() == m_p_train_kind_list_box->value_count());
                 const auto& train_kind = m_info_sets[*selected_index].train_kind();
 
-                m_current_train_kind_color = train_kind.diagram_line_color();
+                m_current_train_kind_color = train_kind.diagram_color();
                 m_p_name_text_box->set_text(train_kind.name());
                 m_p_abbreviation_text_box->set_text(train_kind.abbreviation());
                 m_p_weight_dropdown_box->select_value(to_weight_dropdown_box_index(train_kind.diagram_line_weight()));
@@ -782,9 +782,12 @@ namespace bobura
                 train_kind_type{
                     m_p_name_text_box->text(),
                     m_p_abbreviation_text_box->text(),
+                    font_type::dialog_font(), // TODO
                     m_current_train_kind_color,
                     to_weight(*m_p_weight_dropdown_box->selected_value_index()),
-                    to_line_style(*m_p_line_style_dropdown_box->selected_value_index())
+                    to_line_style(*m_p_line_style_dropdown_box->selected_value_index()),
+                    font_type::dialog_font(), // TODO
+                    m_current_train_kind_color // TODO
                 };
 
             m_p_train_kind_list_box->set_value(*m_current_train_kind_index, train_kind.name());

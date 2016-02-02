@@ -534,7 +534,7 @@ namespace bobura { namespace view { namespace diagram
         void draw_on_impl(canvas_type& canvas)
         const
         {
-            canvas.set_color(m_p_train_kind->diagram_line_color());
+            canvas.set_color(m_p_train_kind->diagram_color());
             canvas.set_line_width(
                 m_p_train_kind->diagram_line_weight() == train_kind_type::weight_type::bold ?
                 bold_line_width<unit_size_type>() : normal_line_width<unit_size_type>()

@@ -23,15 +23,19 @@ namespace bobura { namespace model
         \brief The class template for a train kind.
 
         \tparam String A string type.
+        \tparam Font   A font type.
     */
-    template <typename String>
-    class train_kind : private boost::equality_comparable<train_kind<String>>
+    template <typename String, typename Font>
+    class train_kind : private boost::equality_comparable<train_kind<String, Font>>
     {
     public:
         // types
 
         //! The string type.
         using string_type = String;
+
+        //! The font type.
+        using font_type = Font;
 
         //! The color type.
         using color_type = tetengo2::gui::drawing::color;
@@ -60,23 +64,32 @@ namespace bobura { namespace model
 
             \param name                 A name.
             \param abbreviation         An abbreviated name.
-            \param diagram_line_color   A diagram line color.
-            \param diagram_line_weight  A diagram line weight.
-            \param diagram_line_style   A diagram line style.
+            \param diagram_font         A font for the diagram.
+            \param diagram_color        A color for the diagram.
+            \param diagram_line_weight  A line weight for the diagram.
+            \param diagram_line_style   A line style for the diagram.
+            \param timetable_font       A font for the timetable.
+            \param timetable_color      A color for the timetable.
         */
         train_kind(
             string_type           name,
             string_type           abbreviation,
-            color_type            diagram_line_color,
+            font_type             diagram_font,
+            color_type            diagram_color,
             const weight_type     diagram_line_weight,
-            const line_style_type diagram_line_style
+            const line_style_type diagram_line_style,
+            font_type             timetable_font,
+            color_type            timetable_color
         )
         :
         m_name(std::move(name)),
         m_abbreviation(std::move(abbreviation)),
-        m_diagram_line_color(std::move(diagram_line_color)),
+        m_diagram_font(std::move(diagram_font)),
+        m_diagram_color(std::move(diagram_color)),
         m_diagram_line_weight(diagram_line_weight),
-        m_diagram_line_style(diagram_line_style)
+        m_diagram_line_style(diagram_line_style),
+        m_timetable_font(std::move(timetable_font)),
+        m_timetable_color(std::move(timetable_color))
         {}
 
 
@@ -96,9 +109,12 @@ namespace bobura { namespace model
             return
                 one.m_name == another.m_name &&
                 one.m_abbreviation == another.m_abbreviation &&
-                one.m_diagram_line_color == another.m_diagram_line_color &&
+                one.m_diagram_font == another.m_diagram_font &&
+                one.m_diagram_color == another.m_diagram_color &&
                 one.m_diagram_line_weight == another.m_diagram_line_weight &&
-                one.m_diagram_line_style == another.m_diagram_line_style;
+                one.m_diagram_line_style == another.m_diagram_line_style &&
+                one.m_timetable_font == another.m_timetable_font &&
+                one.m_timetable_color == another.m_timetable_color;
         }
 
         /*!
@@ -124,20 +140,31 @@ namespace bobura { namespace model
         }
 
         /*!
-            \brief Returns the diagram line color.
+            \brief Returns the font for the diagram.
 
-            \return The diagram line color.
+            \return The font for the diagram.
         */
-        const color_type& diagram_line_color()
+        const font_type& diagram_font()
         const
         {
-            return m_diagram_line_color;
+            return m_diagram_font;
         }
 
         /*!
-            \brief Returns the diagram line weight.
+            \brief Returns the color for the diagram.
 
-            \return The diagram line weight.
+            \return The color for the diagram.
+        */
+        const color_type& diagram_color()
+        const
+        {
+            return m_diagram_color;
+        }
+
+        /*!
+            \brief Returns the line weight for the diagram.
+
+            \return The line weight for the diagram.
         */
         weight_type diagram_line_weight()
         const
@@ -146,14 +173,36 @@ namespace bobura { namespace model
         }
 
         /*!
-            \brief Returns the diagram line style.
+            \brief Returns the line style for the diagram.
 
-            \return The diagram line style.
+            \return The line style for the diagram.
         */
         line_style_type diagram_line_style()
         const
         {
             return m_diagram_line_style;
+        }
+
+        /*!
+            \brief Returns the timetable font for the timetable.
+
+            \return The timetable font for the timetable.
+        */
+        const font_type& timetable_font()
+        const
+        {
+            return m_timetable_font;
+        }
+
+        /*!
+            \brief Returns the timetable color for the timetable.
+
+            \return Thetimetable color for the timetable.
+        */
+        const color_type& timetable_color()
+        const
+        {
+            return m_timetable_color;
         }
 
 
@@ -164,11 +213,17 @@ namespace bobura { namespace model
 
         string_type m_abbreviation;
 
-        color_type m_diagram_line_color;
+        font_type m_diagram_font;
+
+        color_type m_diagram_color;
 
         weight_type m_diagram_line_weight;
 
         line_style_type m_diagram_line_style;
+
+        font_type m_timetable_font;
+
+        color_type m_timetable_color;
 
 
     };

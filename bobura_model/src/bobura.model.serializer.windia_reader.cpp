@@ -400,9 +400,12 @@ namespace bobura { namespace model { namespace serializer
                 train_kind_type new_kind{
                     string_type(name_and_abbreviation[0].begin(), name_and_abbreviation[0].end()),
                     string_type(name_and_abbreviation[1].begin(), name_and_abbreviation[1].end()),
-                    m_timetable.train_kinds()[index].diagram_line_color(),
+                    m_timetable.train_kinds()[index].diagram_font(),
+                    m_timetable.train_kinds()[index].diagram_color(),
                     m_timetable.train_kinds()[index].diagram_line_weight(),
-                    m_timetable.train_kinds()[index].diagram_line_style()
+                    m_timetable.train_kinds()[index].diagram_line_style(),
+                    m_timetable.train_kinds()[index].timetable_font(),
+                    m_timetable.train_kinds()[index].timetable_color()
                 };
 
                 m_timetable.set_train_kind(
@@ -873,9 +876,12 @@ namespace bobura { namespace model { namespace serializer
                     train_kind_type{
                         encoder().decode(kind.name),
                         encoder().decode(kind.abbreviation),
+                        font_type::dialog_font(),
                         color_type{ 0, 0, 0 },
                         kind.weight,
-                        kind.line_style
+                        kind.line_style,
+                        font_type::dialog_font(),
+                        color_type{ 0, 0, 0 }
                     }
                 );
             }
@@ -977,16 +983,19 @@ namespace bobura { namespace model { namespace serializer
         {
             const auto diagram_line_style = to_line_style(prop & 0x03);
             const auto custom_color = (prop & 0x40) != 0;
-            const auto diagram_line_color = 
+            const auto& diagram_font = base ? base->diagram_font() : font_type::dialog_font();
+            const auto diagram_color = 
                 custom_color ?
                 to_color((prop & 0x3C) / 0x04) :
                 (
                     base ?
-                    boost::make_optional(base->diagram_line_color()) : boost::make_optional(color_type{ 0, 0, 0 })
+                    boost::make_optional(base->diagram_color()) : boost::make_optional(color_type{ 0, 0, 0 })
                 );
-            if (!diagram_line_color)
+            if (!diagram_color)
                 return boost::none;
             const auto diagram_line_weight = to_weight((prop & 0x80) != 0);
+            const auto& timetable_font = base ? base->timetable_font() : font_type::dialog_font();
+            const auto timetable_color = base ? base->timetable_color() : color_type{ 0, 0, 0 };
 
             return
                 base ?
@@ -994,17 +1003,24 @@ namespace bobura { namespace model { namespace serializer
                     train_kind_type(
                         base->name(),
                         base->abbreviation(),
-                        std::move(*diagram_line_color),
+                        diagram_font,
+                        std::move(*diagram_color),
                         diagram_line_weight,
-                        diagram_line_style
+                        diagram_line_style,
+                        timetable_font,
+                        timetable_color
                     )
                 ) :
                 boost::make_optional(
                     train_kind_type(
                         string_type{},
                         string_type{},
-                        std::move(*diagram_line_color),
-                        diagram_line_weight, diagram_line_style
+                        diagram_font,
+                        std::move(*diagram_color),
+                        diagram_line_weight,
+                        diagram_line_style,
+                        timetable_font,
+                        timetable_color
                     )
                 );
         }
