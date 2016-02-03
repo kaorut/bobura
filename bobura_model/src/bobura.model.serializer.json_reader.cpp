@@ -782,7 +782,7 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             pull_parser.next();
 
-            string_type name{};
+            auto name = train_kind_type::default_().name();
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
@@ -793,7 +793,7 @@ namespace bobura { namespace model { namespace serializer
                 name = std::move(member->second);
             }
 
-            string_type abbreviation{};
+            auto abbreviation = train_kind_type::default_().abbreviation();
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
@@ -804,7 +804,7 @@ namespace bobura { namespace model { namespace serializer
                 abbreviation = std::move(member->second);
             }
 
-            font_type diagram_font = font_type::dialog_font();
+            auto diagram_font = train_kind_type::default_().diagram_font();
             {
                 auto element = read_font_color_set_element(pull_parser);
                 if (!element)
@@ -817,7 +817,7 @@ namespace bobura { namespace model { namespace serializer
                 diagram_font = std::move(boost::get<font_type>(element->second));
             }
 
-            color_type diagram_color{ 0, 0, 0 };
+            auto diagram_color = train_kind_type::default_().diagram_color();
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
@@ -831,7 +831,7 @@ namespace bobura { namespace model { namespace serializer
                 diagram_color = std::move(*color_);
             }
 
-            auto diagram_line_weight = weight_type::normal;
+            auto diagram_line_weight = train_kind_type::default_().diagram_line_weight();
             {
                 const auto member = read_integer_member<int>(pull_parser);
                 if (!member)
@@ -845,7 +845,7 @@ namespace bobura { namespace model { namespace serializer
                 diagram_line_weight = *weight_;
             }
 
-            auto diagram_line_style = line_style_type::solid;
+            auto diagram_line_style = train_kind_type::default_().diagram_line_style();
             {
                 const auto member = read_integer_member<int>(pull_parser);
                 if (!member)
@@ -859,7 +859,7 @@ namespace bobura { namespace model { namespace serializer
                 diagram_line_style = *line_style_;
             }
 
-            font_type timetable_font = font_type::dialog_font();
+            auto timetable_font = train_kind_type::default_().timetable_font();
             {
                 auto element = read_font_color_set_element(pull_parser);
                 if (!element)
@@ -872,7 +872,7 @@ namespace bobura { namespace model { namespace serializer
                 timetable_font = std::move(boost::get<font_type>(element->second));
             }
 
-            color_type timetable_color{ 0, 0, 0 };
+            auto timetable_color = train_kind_type::default_().timetable_color();
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
@@ -892,7 +892,7 @@ namespace bobura { namespace model { namespace serializer
 
             return
                 boost::make_optional(
-                    train_kind_type(
+                    train_kind_type{
                         std::move(name),
                         std::move(abbreviation),
                         std::move(diagram_font),
@@ -901,7 +901,7 @@ namespace bobura { namespace model { namespace serializer
                         diagram_line_style,
                         std::move(timetable_font),
                         std::move(timetable_color)
-                    )
+                    }
                 );
         }
 

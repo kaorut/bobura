@@ -876,12 +876,12 @@ namespace bobura { namespace model { namespace serializer
                     train_kind_type{
                         encoder().decode(kind.name),
                         encoder().decode(kind.abbreviation),
-                        font_type::dialog_font(),
-                        color_type{ 0, 0, 0 },
+                        train_kind_type::default_().diagram_font(),
+                        train_kind_type::default_().diagram_color(),
                         kind.weight,
                         kind.line_style,
-                        font_type::dialog_font(),
-                        color_type{ 0, 0, 0 }
+                        train_kind_type::default_().timetable_font(),
+                        train_kind_type::default_().timetable_color()
                     }
                 );
             }
@@ -983,19 +983,21 @@ namespace bobura { namespace model { namespace serializer
         {
             const auto diagram_line_style = to_line_style(prop & 0x03);
             const auto custom_color = (prop & 0x40) != 0;
-            const auto& diagram_font = base ? base->diagram_font() : font_type::dialog_font();
+            const auto& diagram_font = base ? base->diagram_font() : train_kind_type::default_().diagram_font();
             const auto diagram_color = 
                 custom_color ?
                 to_color((prop & 0x3C) / 0x04) :
                 (
                     base ?
-                    boost::make_optional(base->diagram_color()) : boost::make_optional(color_type{ 0, 0, 0 })
+                    boost::make_optional(base->diagram_color()) :
+                    boost::make_optional(train_kind_type::default_().diagram_color())
                 );
             if (!diagram_color)
                 return boost::none;
             const auto diagram_line_weight = to_weight((prop & 0x80) != 0);
-            const auto& timetable_font = base ? base->timetable_font() : font_type::dialog_font();
-            const auto timetable_color = base ? base->timetable_color() : color_type{ 0, 0, 0 };
+            const auto& timetable_font = base ? base->timetable_font() : train_kind_type::default_().timetable_font();
+            const auto& timetable_color =
+                base ? base->timetable_color() : train_kind_type::default_().timetable_color();
 
             return
                 base ?
