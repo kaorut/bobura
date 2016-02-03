@@ -57,6 +57,20 @@ namespace bobura { namespace model
         };
 
 
+        // static functions
+
+        /*!
+            \brief Returns the default train kind.
+
+            \return The default train kind.
+        */
+        static const train_kind& default_()
+        {
+            static auto singleton = make_default();
+            return singleton;
+        }
+
+
         // constructors and destructor
 
         /*!
@@ -207,6 +221,25 @@ namespace bobura { namespace model
 
 
     private:
+        // static functions
+
+        static train_kind make_default()
+        {
+            auto default_font = font_type::dialog_font();
+            return
+                train_kind{
+                    string_type{},
+                    string_type{},
+                    default_font,
+                    color_type{ 0x00, 0x00, 0x00 },
+                    weight_type::normal,
+                    line_style_type::solid,
+                    default_font,
+                    color_type{ 0x00, 0x00, 0x00 }
+                };
+        }
+
+
         // variables
 
         string_type m_name;

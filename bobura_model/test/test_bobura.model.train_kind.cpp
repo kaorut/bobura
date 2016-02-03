@@ -42,6 +42,13 @@ BOOST_AUTO_TEST_SUITE(model)
 BOOST_AUTO_TEST_SUITE(train_kind)
     // test cases
 
+    BOOST_AUTO_TEST_CASE(default_)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        train_kind_type::default_();
+    }
+
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
