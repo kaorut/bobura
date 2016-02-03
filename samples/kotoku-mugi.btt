@@ -182,16 +182,22 @@
         {
             "name":                "普通",
             "abbreviation":        "普通",
-            "diagram_line_color":  "0000FF",
+            "diagram_font":        ["ＭＳ Ｐ明朝", 12, false, false, false, false],
+            "diagram_color":       "0000FF",
             "diagram_line_weight": 0,
-            "diagram_line_style":  0
+            "diagram_line_style":  0,
+            "timetable_font":      ["ＭＳ Ｐ明朝", 12, false, false, false, false],
+            "timetable_color":     "0000FF"
         },
         {
             "name":                "特急",
             "abbreviation":        "特急",
-            "diagram_line_color":  "FF0000",
+            "diagram_font":        ["ＭＳ Ｐ明朝", 12, false, false, false, false],
+            "diagram_color":       "FF0000",
             "diagram_line_weight": 1,
-            "diagram_line_style":  0
+            "diagram_line_style":  0,
+            "timetable_font":      ["ＭＳ Ｐ明朝", 12, false, false, false, false],
+            "timetable_color":     "FF0000"
         }
     ],
     [
