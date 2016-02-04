@@ -211,8 +211,7 @@ namespace
         "        \"local_station\":              [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
         "        \"principal_station\":          [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
         "        \"local_terminal_station\":     [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"principal_terminal_station\": [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"train_name\":                 [\"hogefont\", 42, false, true, false, true]\n"
+        "        \"principal_terminal_station\": [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"]\n"
         "    },\n"
         "    [\n"
         "        {\n"
@@ -827,11 +826,6 @@ BOOST_AUTO_TEST_SUITE(json_reader)
                         boost::make_optional(color_type{ 0xAB, 0xCD, 0xEF })
                     }
                 ));
-                BOOST_TEST_REQUIRE(!!font_color_set.train_name().diagram_font());
-                BOOST_CHECK(
-                    *font_color_set.train_name().diagram_font() ==
-                    font_type(string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true)
-                );
             }
 
             BOOST_TEST_REQUIRE(p_timetable->down_trains().size() == 2U);

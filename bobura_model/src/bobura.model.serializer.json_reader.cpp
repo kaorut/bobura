@@ -332,7 +332,6 @@ namespace bobura { namespace model { namespace serializer
             auto principal_station_font_color = font_color_set_type::default_().principal_station();
             auto local_terminal_station_font_color = font_color_set_type::default_().local_terminal_station();
             auto principal_terminal_station_font_color = font_color_set_type::default_().principal_terminal_station();
-            auto train_name_font_color = font_color_set_type::default_().train_name();
             for (;;)
             {
                 if (promise.abort_requested())
@@ -432,21 +431,6 @@ namespace bobura { namespace model { namespace serializer
                     }
                     principal_terminal_station_font_color = std::move(boost::get<font_color_type>(element->second));
                 }
-                else if (element->first == string_type{ TETENGO2_TEXT("train_name") })
-                {
-                    if (element->second.which() != 1)
-                    {
-                        error = error_type::corrupted;
-                        return boost::none;
-                    }
-                    train_name_font_color =
-                        font_color_type{
-                            boost::make_optional(std::move(boost::get<font_type>(element->second))),
-                            boost::none,
-                            boost::make_optional(std::move(boost::get<font_type>(element->second))),
-                            boost::none
-                        };
-                }
                 else
                 {
                     error = error_type::corrupted;
@@ -473,7 +457,7 @@ namespace bobura { namespace model { namespace serializer
                         std::move(principal_station_font_color),
                         std::move(local_terminal_station_font_color),
                         std::move(principal_terminal_station_font_color),
-                        std::move(train_name_font_color)
+                        font_color_set_type::default_().train_name()
                     }
                 );
         }

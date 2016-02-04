@@ -360,15 +360,6 @@ namespace bobura { namespace model { namespace serializer
                     output_stream,
                     !output
                 );
-            output |=
-                write_font_color_set_element(
-                    string_type{ TETENGO2_TEXT("train_name") },
-                    *font_color_set.train_name().diagram_font(),
-                    *font_color_set_type::default_().train_name().diagram_font(),
-                    level + 1,
-                    output_stream,
-                    !output
-                );
 
             if (output)
                 new_line(level, output_stream);
