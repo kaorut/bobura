@@ -1085,7 +1085,7 @@ namespace bobura { namespace view { namespace diagram
             const message_catalog_type&   message_catalog
         )
         :
-        m_p_font(&*model.timetable().font_color_set().train_name().diagram_font()),
+        m_p_font(&*font_color_set_type::default_().train_name().diagram_font()),
         m_train_lines(
             make_train_lines(
                 model,
@@ -1162,6 +1162,8 @@ namespace bobura { namespace view { namespace diagram
         using train_kinds_type = typename timetable_type::train_kinds_type;
 
         using train_kind_type = typename timetable_type::train_kind_type;
+
+        using font_color_set_type = typename timetable_type::font_color_set_type;
 
 
         // static functions

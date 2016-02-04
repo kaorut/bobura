@@ -72,7 +72,7 @@ namespace bobura
         impl(base_type& base, const message_catalog_type& message_catalog)
         :
         m_base(base),
-        m_font_color_list(10, font_color_type{}),
+        m_font_color_list(9, font_color_type{}),
         m_message_catalog(message_catalog),
         m_current_category_index(),
         m_p_category_label(),
@@ -188,17 +188,6 @@ namespace bobura
         void set_principal_terminal_station(font_color_type font_color)
         {
             m_font_color_list[8] = std::move(font_color);
-        }
-
-        const font_color_type& train_name()
-        const
-        {
-            return m_font_color_list[9];
-        }
-
-        void set_train_name(font_color_type font_color)
-        {
-            m_font_color_list[9] = std::move(font_color);
         }
 
         void do_modal_impl()
@@ -945,42 +934,6 @@ namespace bobura
     )
     {
         m_p_impl->set_principal_terminal_station(std::move(font_color));
-    }
-
-    template <
-        typename Traits,
-        typename Size,
-        typename Font,
-        typename PointUnitSize,
-        typename Color,
-        typename Canvas,
-        typename FontDialog,
-        typename ColorDialog
-    >
-    const typename font_color_dialog<
-        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
-    >::font_color_type&
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::train_name()
-    const
-    {
-        return m_p_impl->train_name();
-    }
-
-    template <
-        typename Traits,
-        typename Size,
-        typename Font,
-        typename PointUnitSize,
-        typename Color,
-        typename Canvas,
-        typename FontDialog,
-        typename ColorDialog
-    >
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_train_name(
-        font_color_type font_color
-    )
-    {
-        m_p_impl->set_train_name(std::move(font_color));
     }
 
     template <

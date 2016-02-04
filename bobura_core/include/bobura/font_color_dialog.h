@@ -392,21 +392,6 @@ namespace bobura
         */
         void set_principal_terminal_station(font_color_type font_color);
 
-        /*!
-            \brief Returns the font of the train names.
-
-            \return The font and color of the principal terminal stations.
-        */
-        const font_color_type& train_name()
-        const;
-
-        /*!
-            \brief Sets a font of the train names.
-
-            \param font_color A font and color.
-        */
-        void set_train_name(font_color_type font_color);
-
 
     private:
         // types

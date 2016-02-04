@@ -87,7 +87,6 @@ namespace bobura { namespace command
             dialog.set_principal_station(to_dialog_font_color(font_color_set.principal_station()));
             dialog.set_local_terminal_station(to_dialog_font_color(font_color_set.local_terminal_station()));
             dialog.set_principal_terminal_station(to_dialog_font_color(font_color_set.principal_terminal_station()));
-            dialog.set_train_name(to_dialog_font_color(font_color_set.train_name()));
 
             dialog.do_modal();
             if (dialog.result() != dialog_type::result_type::accepted)
@@ -103,7 +102,7 @@ namespace bobura { namespace command
                 to_model_font_color(dialog.principal_station()),
                 to_model_font_color(dialog.local_terminal_station()),
                 to_model_font_color(dialog.principal_terminal_station()),
-                to_model_font_color(dialog.train_name())
+                font_color_set_type::default_().train_name()
             };
             model.timetable().set_font_color_set(std::move(new_font_color_set));
         }

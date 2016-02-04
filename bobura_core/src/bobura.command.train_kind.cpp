@@ -77,7 +77,7 @@ namespace bobura { namespace command
             const auto& font_color_set = model.timetable().font_color_set();
             train_kind_dialog_type dialog{
                 parent,
-                *font_color_set.train_name().diagram_font(),
+                *font_color_set_type::default_().train_name().diagram_font(),
                 *font_color_set.background().diagram_color(),
                 m_message_catalog
             };
