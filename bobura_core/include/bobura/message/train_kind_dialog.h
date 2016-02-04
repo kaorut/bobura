@@ -156,21 +156,17 @@ namespace bobura { namespace message { namespace train_kind_dialog
                 m_current_train_kind_index ?
                 std::next(m_info_sets.begin(), *m_current_train_kind_index) : m_info_sets.end();
 
-            m_info_sets.emplace(
-                insertion_position,
-                boost::none,
-                false,
-                train_kind_type{
-                    m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:New Kind")),
-                    string_type{},
-                    font_type::dialog_font(),
-                    color_type{ 0, 0, 0 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid,
-                    font_type::dialog_font(),
-                    color_type{ 0, 0, 0 }
-                }
-            );
+            train_kind_type new_kind{
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:New Kind")),
+                train_kind_type::default_().abbreviation(),
+                train_kind_type::default_().diagram_font(),
+                train_kind_type::default_().diagram_color(),
+                train_kind_type::default_().diagram_line_weight(),
+                train_kind_type::default_().diagram_line_style(),
+                train_kind_type::default_().timetable_font(),
+                train_kind_type::default_().timetable_color()
+            };
+            m_info_sets.emplace(insertion_position, boost::none, false, std::move(new_kind));
 
             m_sync();
         }

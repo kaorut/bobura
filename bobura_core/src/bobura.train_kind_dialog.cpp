@@ -782,12 +782,12 @@ namespace bobura
                 train_kind_type{
                     m_p_name_text_box->text(),
                     m_p_abbreviation_text_box->text(),
-                    font_type::dialog_font(), // TODO
+                    train_kind_type::default_().diagram_font(), // TODO
                     m_current_train_kind_color,
                     to_weight(*m_p_weight_dropdown_box->selected_value_index()),
                     to_line_style(*m_p_line_style_dropdown_box->selected_value_index()),
-                    font_type::dialog_font(), // TODO
-                    m_current_train_kind_color // TODO
+                    train_kind_type::default_().timetable_font(), // TODO
+                    train_kind_type::default_().timetable_color() // TODO
                 };
 
             m_p_train_kind_list_box->set_value(*m_current_train_kind_index, train_kind.name());
