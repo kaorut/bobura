@@ -435,7 +435,6 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
         observer(
             std::vector<info_set_type>(),
             boost::none,
-            font_type::dialog_font(),
             color_type{ 0x12, 0x34, 0x56 },
             dimension_type{ width_type{ 42 }, height_type{ 24 } }
         );
@@ -449,7 +448,6 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
         observer(
             std::vector<info_set_type>(),
             boost::none,
-            font_type::dialog_font(),
             color_type{ 0x12, 0x34, 0x56 },
             dimension_type{ width_type{ 42 }, height_type{ 24 } }
         );

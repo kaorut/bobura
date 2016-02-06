@@ -725,21 +725,18 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             \param info_sets                Information sets.
             \param current_train_kind_index A current train kind index.
-            \param font                     A font.
             \param background_color         A background color.
             \param canvas_dimension         A canvas dimension.
         */
         sample_picture_box_paint(
             const std::vector<info_set_type>&     info_sets,
             const boost::optional<int_size_type>& current_train_kind_index,
-            const font_type&                      font,
             const color_type&                     background_color,
             const dimension_type&                 canvas_dimension
         )
         :
         m_info_sets(info_sets),
         m_current_train_kind_index(current_train_kind_index),
-        m_font(font),
         m_background_color(background_color),
         m_canvas_dimension(canvas_dimension)
         {}
@@ -764,7 +761,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             const auto& train_kind = m_info_sets[*m_current_train_kind_index].train_kind();
 
-            canvas.set_font(fixed_size_font(m_font));
+            canvas.set_font(fixed_size_font(train_kind.diagram_font()));
             canvas.set_color(train_kind.diagram_color());
 
             const auto& text = train_kind.abbreviation().empty() ? train_kind.name() : train_kind.abbreviation();
@@ -850,8 +847,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         const std::vector<info_set_type>& m_info_sets;
 
         const boost::optional<int_size_type>& m_current_train_kind_index;
-
-        const font_type& m_font;
 
         const color_type& m_background_color;
 

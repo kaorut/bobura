@@ -75,10 +75,9 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        const font_type font{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
         const color_type background_color{ 12, 34, 56 };
         const message_catalog_type message_catalog{};
-        const train_kind_dialog_type train_kind_dialog{ parent, font, background_color, message_catalog };
+        const train_kind_dialog_type train_kind_dialog{ parent, background_color, message_catalog };
     }
 
     BOOST_AUTO_TEST_CASE(info_sets)
@@ -86,10 +85,9 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        const font_type font{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
         const color_type background_color{ 12, 34, 56 };
         const message_catalog_type message_catalog{};
-        const train_kind_dialog_type train_kind_dialog{ parent, font, background_color, message_catalog };
+        const train_kind_dialog_type train_kind_dialog{ parent, background_color, message_catalog };
 
         BOOST_TEST(train_kind_dialog.info_sets().empty());
     }
@@ -99,10 +97,9 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        const font_type font{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
         const color_type background_color{ 12, 34, 56 };
         const message_catalog_type message_catalog{};
-        train_kind_dialog_type train_kind_dialog{ parent, font, background_color, message_catalog };
+        train_kind_dialog_type train_kind_dialog{ parent, background_color, message_catalog };
 
         std::vector<info_set_type> info_sets{
             info_set_type{

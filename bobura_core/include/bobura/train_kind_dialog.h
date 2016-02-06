@@ -140,13 +140,11 @@ namespace bobura
             \brief Creates a train kind dialog.
 
             \param parent           A parent window.
-            \param font             A font for the sample.
             \param background_color A background color for the sample.
             \param message_catalog  A message catalog.
         */
         train_kind_dialog(
             abstract_window_type&       parent,
-            const font_type&            font,
             const color_type&           background_color,
             const message_catalog_type& message_catalog
         );
