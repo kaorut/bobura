@@ -7,6 +7,7 @@
 */
 
 #include <algorithm>
+#include <cassert>
 #include <memory>
 #include <sstream>
 #include <utility>
@@ -521,10 +522,8 @@ namespace bobura
                 m_p_category_list_box->value_count(),
                 m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Principal Terminal Stations"))
             );
-            m_p_category_list_box->insert_value(
-                m_p_category_list_box->value_count(),
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Train Names"))
-            );
+
+            assert(m_p_category_list_box->value_count() == m_font_color_list.size());
         }
 
         void update()
