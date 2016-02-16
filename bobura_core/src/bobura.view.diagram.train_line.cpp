@@ -534,6 +534,7 @@ namespace bobura { namespace view { namespace diagram
         void draw_on_impl(canvas_type& canvas)
         const
         {
+            canvas.set_font(m_p_train_kind->diagram_font());
             canvas.set_color(m_p_train_kind->diagram_color());
             canvas.set_line_width(
                 m_p_train_kind->diagram_line_weight() == train_kind_type::weight_type::bold ?
@@ -1085,7 +1086,6 @@ namespace bobura { namespace view { namespace diagram
             const message_catalog_type&   message_catalog
         )
         :
-        m_p_font(&*font_color_set_type::default_().train_name().diagram_font()),
         m_train_lines(
             make_train_lines(
                 model,
@@ -1106,7 +1106,6 @@ namespace bobura { namespace view { namespace diagram
 
         impl(impl&& another)
         :
-        m_p_font(another.m_p_font),
         m_train_lines(std::move(another.m_train_lines))
         {}
 
@@ -1118,7 +1117,6 @@ namespace bobura { namespace view { namespace diagram
             if (&another == this)
                 return *this;
 
-            m_p_font = another.m_p_font;
             m_train_lines = std::move(another.m_train_lines);
 
             return *this;
@@ -1127,8 +1125,6 @@ namespace bobura { namespace view { namespace diagram
         void draw_on_impl(canvas_type& canvas)
         const
         {
-            canvas.set_font(*m_p_font);
-
             for (const auto& train_line: m_train_lines)
                 train_line.draw_on(canvas);
         }
@@ -1260,8 +1256,6 @@ namespace bobura { namespace view { namespace diagram
 
 
         // variables
-
-        const font_type* m_p_font;
 
         std::vector<train_line_type> m_train_lines;
 
