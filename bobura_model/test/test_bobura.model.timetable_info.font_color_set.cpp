@@ -60,7 +60,6 @@ namespace
         auto principal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("pqr") }, true);
         auto local_terminal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("stu") }, true);
         auto principal_terminal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("vwx") }, true);
-        auto train_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("yza") }, false);
 
         return
             font_color_set_type{
@@ -72,8 +71,7 @@ namespace
                 std::move(local_station_font_color),
                 std::move(principal_station_font_color),
                 std::move(local_terminal_station_font_color),
-                std::move(principal_terminal_station_font_color),
-                std::move(train_name_font_color)
+                std::move(principal_terminal_station_font_color)
             };
     }
 
@@ -88,7 +86,6 @@ namespace
         auto principal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("pqr") }, true);
         auto local_terminal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("stu") }, true);
         auto principal_terminal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("vwx") }, true);
-        auto train_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("yza") }, false);
 
         return
             font_color_set_type{
@@ -100,8 +97,7 @@ namespace
                 std::move(local_station_font_color),
                 std::move(principal_station_font_color),
                 std::move(local_terminal_station_font_color),
-                std::move(principal_terminal_station_font_color),
-                std::move(train_name_font_color)
+                std::move(principal_terminal_station_font_color)
             };
     }
 
@@ -116,7 +112,6 @@ namespace
         auto principal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("PQR") }, true);
         auto local_terminal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("STU") }, true);
         auto principal_terminal_station_font_color = make_font_color(string_type{ TETENGO2_TEXT("VWX") }, true);
-        auto train_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("YZA") }, false);
 
         return
             font_color_set_type{
@@ -128,8 +123,7 @@ namespace
                 std::move(local_station_font_color),
                 std::move(principal_station_font_color),
                 std::move(local_terminal_station_font_color),
-                std::move(principal_terminal_station_font_color),
-                std::move(train_name_font_color)
+                std::move(principal_terminal_station_font_color)
             };
     }
 
@@ -329,15 +323,6 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
         BOOST_CHECK(
             font_color_set.principal_terminal_station() == make_font_color(string_type{ TETENGO2_TEXT("vwx") }, true)
         );
-    }
-
-    BOOST_AUTO_TEST_CASE(train_name)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const font_color_set_type font_color_set = make_font_color_set1();
-
-        BOOST_CHECK(font_color_set.train_name() == make_font_color(string_type{ TETENGO2_TEXT("yza") }, false));
     }
 
 

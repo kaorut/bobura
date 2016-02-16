@@ -101,8 +101,7 @@ namespace bobura { namespace command
                 to_model_font_color(dialog.local_station()),
                 to_model_font_color(dialog.principal_station()),
                 to_model_font_color(dialog.local_terminal_station()),
-                to_model_font_color(dialog.principal_terminal_station()),
-                font_color_set_type::default_().train_name()
+                to_model_font_color(dialog.principal_terminal_station())
             };
             model.timetable().set_font_color_set(std::move(new_font_color_set));
         }

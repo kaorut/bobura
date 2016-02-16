@@ -236,8 +236,7 @@ namespace
                 font_color_set_type::default_().local_station(),
                 font_color_set_type::default_().principal_station(),
                 font_color_set_type::default_().local_terminal_station(),
-                font_color_set_type::default_().principal_terminal_station(),
-                font_color
+                font_color_set_type::default_().principal_terminal_station()
             };
 
             p_timetable->set_font_color_set(font_color_set);

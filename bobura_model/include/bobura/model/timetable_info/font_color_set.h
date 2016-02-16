@@ -191,7 +191,6 @@ namespace bobura { namespace model { namespace timetable_info
             \param principal_station          A font and color for the principal station.
             \param local_terminal_station     A font and color for the local terminal station.
             \param principal_terminal_station A font and color for the principal terminal station.
-            \param train_name                 A font and color for the train name.
         */
         font_color_set(
             font_color_type background,
@@ -202,8 +201,7 @@ namespace bobura { namespace model { namespace timetable_info
             font_color_type local_station,
             font_color_type principal_station,
             font_color_type local_terminal_station,
-            font_color_type principal_terminal_station,
-            font_color_type train_name
+            font_color_type principal_terminal_station
         )
         :
         m_background(std::move(background)),
@@ -214,8 +212,7 @@ namespace bobura { namespace model { namespace timetable_info
         m_local_station(std::move(local_station)),
         m_principal_station(std::move(principal_station)),
         m_local_terminal_station(std::move(local_terminal_station)),
-        m_principal_terminal_station(std::move(principal_terminal_station)),
-        m_train_name(std::move(train_name))
+        m_principal_terminal_station(std::move(principal_terminal_station))
         {}
 
 
@@ -241,8 +238,7 @@ namespace bobura { namespace model { namespace timetable_info
                 one.m_local_station == another.m_local_station &&
                 one.m_principal_station == another.m_principal_station &&
                 one.m_local_terminal_station == another.m_local_terminal_station &&
-                one.m_principal_terminal_station == another.m_principal_terminal_station &&
-                one.m_train_name == another.m_train_name;
+                one.m_principal_terminal_station == another.m_principal_terminal_station;
         }
 
         /*!
@@ -344,17 +340,6 @@ namespace bobura { namespace model { namespace timetable_info
             return m_principal_terminal_station;
         }
 
-        /*!
-            \brief Returns the font and color for the train name.
-
-            \return The font and color for the train name.
-        */
-        const font_color_type& train_name()
-        const
-        {
-            return m_train_name;
-        }
-
 
     private:
         // static functions
@@ -378,7 +363,6 @@ namespace bobura { namespace model { namespace timetable_info
                 boost::make_optional(color_type{ 0xF8, 0xFF, 0xF0 })
 
             };
-
             font_color_type default_company_name_font_color{
                 boost::make_optional(std::move(default_company_line_name_font)),
                 boost::make_optional(color_type{ 0x40, 0x40, 0x40 }),
@@ -428,13 +412,6 @@ namespace bobura { namespace model { namespace timetable_info
                 boost::make_optional(color_type{ 0x00, 0x00, 0x00 })
             );
 
-            font_color_type default_train_name_font_color{
-                boost::make_optional(default_font),
-                boost::none,
-                boost::make_optional(default_font),
-                boost::none
-            };
-
             return
                 font_color_set{
                     std::move(default_back_font_color),
@@ -445,8 +422,7 @@ namespace bobura { namespace model { namespace timetable_info
                     std::move(default_local_station_font_color),
                     std::move(default_principal_station_font_color),
                     std::move(default_local_terminal_station_font_color),
-                    std::move(default_principal_terminal_station_font_color),
-                    std::move(default_train_name_font_color)
+                    std::move(default_principal_terminal_station_font_color)
                 };
         }
 
@@ -470,8 +446,6 @@ namespace bobura { namespace model { namespace timetable_info
         font_color_type m_local_terminal_station;
 
         font_color_type m_principal_terminal_station;
-
-        font_color_type m_train_name;
 
 
     };

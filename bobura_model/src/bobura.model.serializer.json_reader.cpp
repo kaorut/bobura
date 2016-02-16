@@ -456,8 +456,7 @@ namespace bobura { namespace model { namespace serializer
                         std::move(local_station_font_color),
                         std::move(principal_station_font_color),
                         std::move(local_terminal_station_font_color),
-                        std::move(principal_terminal_station_font_color),
-                        font_color_set_type::default_().train_name()
+                        std::move(principal_terminal_station_font_color)
                     }
                 );
         }
