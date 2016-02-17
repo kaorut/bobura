@@ -78,9 +78,9 @@ namespace bobura
         m_current_category_index(),
         m_p_category_label(),
         m_p_category_list_box(),
-        m_p_font_button(),
-        m_p_font_text_box(),
-        m_p_color_button(),
+        m_p_diagram_font_button(),
+        m_p_diagram_font_text_box(),
+        m_p_diagram_color_button(),
         m_p_sample_label(),
         m_p_sample_picture_box(),
         m_p_ok_button(),
@@ -236,13 +236,13 @@ namespace bobura
                 size_type, canvas_type, font_color_type, message_catalog_type
             >;
 
-        using font_button_mouse_clicked_observer_type =
-            message::font_color_dialog::font_button_mouse_clicked<
+        using diagram_font_button_mouse_clicked_observer_type =
+            message::font_color_dialog::diagram_font_button_mouse_clicked<
                 size_type, base_type, FontDialog, canvas_type, font_color_type, message_catalog_type
             >;
 
-        using color_button_mouse_clicked_observer_type =
-            message::font_color_dialog::color_button_mouse_clicked<
+        using diagram_color_button_mouse_clicked_observer_type =
+            message::font_color_dialog::diagram_color_button_mouse_clicked<
                 size_type, base_type, ColorDialog, canvas_type, font_color_type, message_catalog_type
             >;
 
@@ -266,11 +266,11 @@ namespace bobura
 
         std::unique_ptr<list_box_type> m_p_category_list_box;
 
-        std::unique_ptr<button_type> m_p_font_button;
+        std::unique_ptr<button_type> m_p_diagram_font_button;
 
-        std::unique_ptr<text_box_type> m_p_font_text_box;
+        std::unique_ptr<text_box_type> m_p_diagram_font_text_box;
 
-        std::unique_ptr<button_type> m_p_color_button;
+        std::unique_ptr<button_type> m_p_diagram_color_button;
 
         std::unique_ptr<label_type> m_p_sample_label;
 
@@ -289,9 +289,9 @@ namespace bobura
 
             m_p_category_label = create_category_label();
             m_p_category_list_box = create_category_list_box();
-            m_p_font_button = create_font_button();
-            m_p_font_text_box = create_font_text_box();
-            m_p_color_button = create_color_button();
+            m_p_diagram_font_button = create_diagram_font_button();
+            m_p_diagram_font_text_box = create_diagram_font_text_box();
+            m_p_diagram_color_button = create_diagram_color_button();
             m_p_sample_label = create_sample_label();
             m_p_sample_picture_box = create_sample_picture_box();
             m_p_ok_button = create_ok_button();
@@ -327,13 +327,13 @@ namespace bobura
             return std::move(p_list_box);
         }
 
-        std::unique_ptr<button_type> create_font_button()
+        std::unique_ptr<button_type> create_diagram_font_button()
         {
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::normal);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Font...")));
             p_button->mouse_observer_set().clicked().connect(
-                font_button_mouse_clicked_observer_type{
+                diagram_font_button_mouse_clicked_observer_type{
                     m_base,
                     m_font_color_list,
                     m_current_category_index,
@@ -345,7 +345,7 @@ namespace bobura
             return std::move(p_button);
         }
 
-        std::unique_ptr<text_box_type> create_font_text_box()
+        std::unique_ptr<text_box_type> create_diagram_font_text_box()
         {
             auto p_text_box =
                 tetengo2::stdalt::make_unique<text_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
@@ -355,13 +355,13 @@ namespace bobura
             return std::move(p_text_box);
         }
 
-        std::unique_ptr<button_type> create_color_button()
+        std::unique_ptr<button_type> create_diagram_color_button()
         {
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::normal);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Color...")));
             p_button->mouse_observer_set().clicked().connect(
-                color_button_mouse_clicked_observer_type{
+                diagram_color_button_mouse_clicked_observer_type{
                     m_base,
                     m_font_color_list,
                     m_current_category_index,
@@ -444,16 +444,18 @@ namespace bobura
                 }
             );
 
-            const left_type font_button_left{ 20 };
+            const left_type diagram_font_button_left{ 20 };
             
-            m_p_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-            m_p_font_button->set_position(position_type{ font_button_left, top_type{ 2 } });
+            m_p_diagram_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+            m_p_diagram_font_button->set_position(position_type{ diagram_font_button_left, top_type{ 2 } });
 
-            m_p_font_text_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 2 } });
-            m_p_font_text_box->set_position(position_type{ font_button_left + left_type{ 8 }, top_type{ 2 } });
+            m_p_diagram_font_text_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 2 } });
+            m_p_diagram_font_text_box->set_position(
+                position_type{ diagram_font_button_left + left_type{ 8 }, top_type{ 2 } }
+            );
 
-            m_p_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-            m_p_color_button->set_position(position_type{ font_button_left, top_type{ 5 } });
+            m_p_diagram_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+            m_p_diagram_color_button->set_position(position_type{ diagram_font_button_left, top_type{ 5 } });
 
             m_p_sample_label->fit_to_content();
             m_p_sample_label->set_dimension(
@@ -465,11 +467,11 @@ namespace bobura
                     tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
                 }
             );
-            m_p_sample_label->set_position(position_type{ font_button_left, top_type{ 8 } });
+            m_p_sample_label->set_position(position_type{ diagram_font_button_left, top_type{ 8 } });
 
             m_p_sample_picture_box->set_position(
                 position_type{
-                    font_button_left,
+                    diagram_font_button_left,
                     tetengo2::gui::position<position_type>::top(m_p_sample_label->position()) +
                     top_type::from(
                         tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
@@ -529,11 +531,11 @@ namespace bobura
         void update()
         {
             const auto font_name_and_size_ = font_name_and_size();
-            m_p_font_text_box->set_text(font_name_and_size_);
-            m_p_font_text_box->set_enabled(!font_name_and_size_.empty());
-            m_p_font_button->set_enabled(!font_name_and_size_.empty());
+            m_p_diagram_font_text_box->set_text(font_name_and_size_);
+            m_p_diagram_font_text_box->set_enabled(!font_name_and_size_.empty());
+            m_p_diagram_font_button->set_enabled(!font_name_and_size_.empty());
 
-            m_p_color_button->set_enabled(color_enabled());
+            m_p_diagram_color_button->set_enabled(diagram_color_enabled());
 
             m_p_sample_picture_box->repaint();
         }
@@ -557,7 +559,7 @@ namespace bobura
             return stream.str();
         }
 
-        bool color_enabled()
+        bool diagram_color_enabled()
         {
             return m_current_category_index && m_font_color_list[*m_current_category_index].diagram_color();
         }

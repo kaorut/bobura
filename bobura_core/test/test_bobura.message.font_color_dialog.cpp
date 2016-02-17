@@ -262,7 +262,7 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
 
 
 BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE(font_button_mouse_clicked)
+BOOST_AUTO_TEST_SUITE(diagram_font_button_mouse_clicked)
     // test cases
 
     BOOST_AUTO_TEST_CASE(construction)
@@ -273,7 +273,7 @@ BOOST_AUTO_TEST_SUITE(font_button_mouse_clicked)
         concrete_dialog dialog{ parent };
         std::vector<font_color_type> font_color_list{ 2, make_font_color(true, true) };
         const message_catalog_type message_catalog{};
-        const bobura::message::font_color_dialog::font_button_mouse_clicked<
+        const bobura::message::font_color_dialog::diagram_font_button_mouse_clicked<
             size_type, dialog_type, font_dialog_type, canvas_type, font_color_type, message_catalog_type
         > observer{
             dialog,
@@ -296,7 +296,7 @@ BOOST_AUTO_TEST_SUITE(font_button_mouse_clicked)
         concrete_dialog dialog{ parent };
         std::vector<font_color_type> font_color_list{ 2, make_font_color(true, true) };
         const message_catalog_type message_catalog{};
-        bobura::message::font_color_dialog::font_button_mouse_clicked<
+        bobura::message::font_color_dialog::diagram_font_button_mouse_clicked<
             size_type, dialog_type, font_dialog_type, canvas_type, font_color_type, message_catalog_type
         > observer{
             dialog,
@@ -312,7 +312,7 @@ BOOST_AUTO_TEST_SUITE(font_button_mouse_clicked)
 
 
 BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE(color_button_mouse_clicked)
+BOOST_AUTO_TEST_SUITE(diagram_color_button_mouse_clicked)
     // test cases
 
     BOOST_AUTO_TEST_CASE(construction)
@@ -323,7 +323,7 @@ BOOST_AUTO_TEST_SUITE(color_button_mouse_clicked)
         concrete_dialog dialog{ parent };
         std::vector<font_color_type> font_color_list{ 2, make_font_color(true, true) };
         const message_catalog_type message_catalog{};
-        const bobura::message::font_color_dialog::color_button_mouse_clicked<
+        const bobura::message::font_color_dialog::diagram_color_button_mouse_clicked<
             size_type, dialog_type, color_dialog_type, canvas_type, font_color_type, message_catalog_type
         > observer{
             dialog,
@@ -342,7 +342,7 @@ BOOST_AUTO_TEST_SUITE(color_button_mouse_clicked)
         concrete_dialog dialog{ parent };
         std::vector<font_color_type> font_color_list{ 2, make_font_color(true, true) };
         const message_catalog_type message_catalog{};
-        bobura::message::font_color_dialog::color_button_mouse_clicked<
+        bobura::message::font_color_dialog::diagram_color_button_mouse_clicked<
             size_type, dialog_type, color_dialog_type, canvas_type, font_color_type, message_catalog_type
         > observer{
             dialog,
