@@ -78,9 +78,14 @@ namespace bobura
         m_current_category_index(),
         m_p_category_label(),
         m_p_category_list_box(),
+        m_p_diagram_label(),
         m_p_diagram_font_button(),
         m_p_diagram_font_text_box(),
         m_p_diagram_color_button(),
+        m_p_timetable_label(),
+        m_p_timetable_font_button(),
+        m_p_timetable_font_text_box(),
+        m_p_timetable_color_button(),
         m_p_sample_label(),
         m_p_sample_picture_box(),
         m_p_ok_button(),
@@ -246,6 +251,16 @@ namespace bobura
                 size_type, base_type, ColorDialog, canvas_type, font_color_type, message_catalog_type
             >;
 
+        using timetable_font_button_mouse_clicked_observer_type =
+            message::font_color_dialog::timetable_font_button_mouse_clicked<
+                size_type, base_type, FontDialog, canvas_type, font_color_type, message_catalog_type
+            >;
+
+        using timetable_color_button_mouse_clicked_observer_type =
+            message::font_color_dialog::timetable_color_button_mouse_clicked<
+                size_type, base_type, ColorDialog, canvas_type, font_color_type, message_catalog_type
+            >;
+
         using ok_button_mouse_clicked_observer_type = message::font_color_dialog::ok_button_mouse_clicked<base_type>;
 
         using cancel_button_mouse_clicked_observer_type =
@@ -266,11 +281,21 @@ namespace bobura
 
         std::unique_ptr<list_box_type> m_p_category_list_box;
 
+        std::unique_ptr<label_type> m_p_diagram_label;
+
         std::unique_ptr<button_type> m_p_diagram_font_button;
 
         std::unique_ptr<text_box_type> m_p_diagram_font_text_box;
 
         std::unique_ptr<button_type> m_p_diagram_color_button;
+
+        std::unique_ptr<label_type> m_p_timetable_label;
+
+        std::unique_ptr<button_type> m_p_timetable_font_button;
+
+        std::unique_ptr<text_box_type> m_p_timetable_font_text_box;
+
+        std::unique_ptr<button_type> m_p_timetable_color_button;
 
         std::unique_ptr<label_type> m_p_sample_label;
 
@@ -289,9 +314,14 @@ namespace bobura
 
             m_p_category_label = create_category_label();
             m_p_category_list_box = create_category_list_box();
+            m_p_diagram_label = create_diagram_label();
             m_p_diagram_font_button = create_diagram_font_button();
             m_p_diagram_font_text_box = create_diagram_font_text_box();
             m_p_diagram_color_button = create_diagram_color_button();
+            m_p_timetable_label = create_timetable_label();
+            m_p_timetable_font_button = create_timetable_font_button();
+            m_p_timetable_font_text_box = create_timetable_font_text_box();
+            m_p_timetable_color_button = create_timetable_color_button();
             m_p_sample_label = create_sample_label();
             m_p_sample_picture_box = create_sample_picture_box();
             m_p_ok_button = create_ok_button();
@@ -325,6 +355,17 @@ namespace bobura
             );
 
             return std::move(p_list_box);
+        }
+
+        std::unique_ptr<label_type> create_diagram_label()
+        {
+            auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
+
+            p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Diagram:")));
+            auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
+            p_label->set_background(std::move(p_background));
+
+            return std::move(p_label);
         }
 
         std::unique_ptr<button_type> create_diagram_font_button()
@@ -373,6 +414,63 @@ namespace bobura
             return std::move(p_button);
         }
 
+        std::unique_ptr<label_type> create_timetable_label()
+        {
+            auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
+
+            p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Timetable:")));
+            auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
+            p_label->set_background(std::move(p_background));
+
+            return std::move(p_label);
+        }
+
+        std::unique_ptr<button_type> create_timetable_font_button()
+        {
+            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::normal);
+
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Font...")));
+            p_button->mouse_observer_set().clicked().connect(
+                timetable_font_button_mouse_clicked_observer_type{
+                    m_base,
+                    m_font_color_list,
+                    m_current_category_index,
+                    [this]() { this->update(); },
+                    m_message_catalog
+                }
+            );
+
+            return std::move(p_button);
+        }
+
+        std::unique_ptr<text_box_type> create_timetable_font_text_box()
+        {
+            auto p_text_box =
+                tetengo2::stdalt::make_unique<text_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
+
+            p_text_box->set_read_only(true);
+
+            return std::move(p_text_box);
+        }
+
+        std::unique_ptr<button_type> create_timetable_color_button()
+        {
+            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::normal);
+
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Color...")));
+            p_button->mouse_observer_set().clicked().connect(
+                timetable_color_button_mouse_clicked_observer_type{
+                    m_base,
+                    m_font_color_list,
+                    m_current_category_index,
+                    [this]() { this->update(); },
+                    m_message_catalog
+                }
+            );
+
+            return std::move(p_button);
+        }
+
         std::unique_ptr<label_type> create_sample_label()
         {
             auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
@@ -391,7 +489,7 @@ namespace bobura
                     m_base, list_box_type::scroll_bar_style_type::none
                 );
 
-            p_picture_box->set_dimension(dimension_type{ width_type{ 24 }, height_type{ 8 } });
+            p_picture_box->set_dimension(dimension_type{ width_type{ 25 }, height_type{ 8 } });
             p_picture_box->fast_paint_observer_set().paint().connect(
                 sample_picture_box_paint_observer_type{
                     m_font_color_list,
@@ -426,7 +524,7 @@ namespace bobura
 
         void locate_controls()
         {
-            m_base.set_client_dimension(dimension_type{ width_type{ 46 }, height_type{ 22 } });
+            m_base.set_client_dimension(dimension_type{ width_type{ 47 }, height_type{ 29 } });
 
             const left_type category_label_left{ 2 };
 
@@ -444,18 +542,36 @@ namespace bobura
                 }
             );
 
-            const left_type diagram_font_button_left{ 20 };
+            const left_type diagram_label_left{ 20 };
+            const auto diagram_font_button_left = diagram_label_left + left_type{ 1 };
             
+            m_p_diagram_label->fit_to_content();
+            m_p_diagram_label->set_position(position_type{ diagram_label_left, top_type{ 1 } });
+
             m_p_diagram_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-            m_p_diagram_font_button->set_position(position_type{ diagram_font_button_left, top_type{ 2 } });
+            m_p_diagram_font_button->set_position(position_type{ diagram_font_button_left, top_type{ 3 } });
 
             m_p_diagram_font_text_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 2 } });
             m_p_diagram_font_text_box->set_position(
-                position_type{ diagram_font_button_left + left_type{ 8 }, top_type{ 2 } }
+                position_type{ diagram_font_button_left + left_type{ 8 }, top_type{ 3 } }
             );
 
             m_p_diagram_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
             m_p_diagram_color_button->set_position(position_type{ diagram_font_button_left, top_type{ 5 } });
+
+            m_p_timetable_label->fit_to_content();
+            m_p_timetable_label->set_position(position_type{ diagram_label_left, top_type{ 8 } });
+
+            m_p_timetable_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+            m_p_timetable_font_button->set_position(position_type{ diagram_font_button_left, top_type{ 10 } });
+
+            m_p_timetable_font_text_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 2 } });
+            m_p_timetable_font_text_box->set_position(
+                position_type{ diagram_font_button_left + left_type{ 8 }, top_type{ 10 } }
+            );
+
+            m_p_timetable_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+            m_p_timetable_color_button->set_position(position_type{ diagram_font_button_left, top_type{ 12 } });
 
             m_p_sample_label->fit_to_content();
             m_p_sample_label->set_dimension(
@@ -467,11 +583,11 @@ namespace bobura
                     tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
                 }
             );
-            m_p_sample_label->set_position(position_type{ diagram_font_button_left, top_type{ 8 } });
+            m_p_sample_label->set_position(position_type{ diagram_label_left, top_type{ 15 } });
 
             m_p_sample_picture_box->set_position(
                 position_type{
-                    diagram_font_button_left,
+                    diagram_label_left,
                     tetengo2::gui::position<position_type>::top(m_p_sample_label->position()) +
                     top_type::from(
                         tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
@@ -480,10 +596,10 @@ namespace bobura
             );
 
             m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-            m_p_ok_button->set_position(position_type{ left_type{ 27 }, top_type{ 19 } });
+            m_p_ok_button->set_position(position_type{ left_type{ 27 }, top_type{ 26 } });
 
             m_p_cancel_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-            m_p_cancel_button->set_position(position_type{ left_type{ 36 }, top_type{ 19 } });
+            m_p_cancel_button->set_position(position_type{ left_type{ 36 }, top_type{ 26 } });
         }
 
         void insert_category_list_box_values()
@@ -530,23 +646,47 @@ namespace bobura
 
         void update()
         {
-            const auto font_name_and_size_ = font_name_and_size();
-            m_p_diagram_font_text_box->set_text(font_name_and_size_);
-            m_p_diagram_font_text_box->set_enabled(!font_name_and_size_.empty());
-            m_p_diagram_font_button->set_enabled(!font_name_and_size_.empty());
+            {
+                const auto font_name_and_size_ = diagram_font_name_and_size();
+                m_p_diagram_font_text_box->set_text(font_name_and_size_);
+                m_p_diagram_font_text_box->set_enabled(!font_name_and_size_.empty());
+                m_p_diagram_font_button->set_enabled(!font_name_and_size_.empty());
 
-            m_p_diagram_color_button->set_enabled(diagram_color_enabled());
+                m_p_diagram_color_button->set_enabled(diagram_color_enabled());
+            }
+            {
+                const auto font_name_and_size_ = timetable_font_name_and_size();
+                m_p_timetable_font_text_box->set_text(font_name_and_size_);
+                m_p_timetable_font_text_box->set_enabled(!font_name_and_size_.empty());
+                m_p_timetable_font_button->set_enabled(!font_name_and_size_.empty());
+
+                m_p_timetable_color_button->set_enabled(timetable_color_enabled());
+            }
 
             m_p_sample_picture_box->repaint();
         }
 
-        string_type font_name_and_size()
+        string_type diagram_font_name_and_size()
         const
         {
             if (!m_current_category_index)
                 return {};
 
-            const auto& font = m_font_color_list[*m_current_category_index].diagram_font();
+            return font_name_and_size(m_font_color_list[*m_current_category_index].diagram_font());
+        }
+
+        string_type timetable_font_name_and_size()
+        const
+        {
+            if (!m_current_category_index)
+                return {};
+
+            return font_name_and_size(m_font_color_list[*m_current_category_index].timetable_font());
+        }
+
+        string_type font_name_and_size(const boost::optional<font_type>& font)
+        const
+        {
             if (!font)
                 return {};
 
@@ -560,8 +700,15 @@ namespace bobura
         }
 
         bool diagram_color_enabled()
+        const
         {
             return m_current_category_index && m_font_color_list[*m_current_category_index].diagram_color();
+        }
+
+        bool timetable_color_enabled()
+        const
+        {
+            return m_current_category_index && m_font_color_list[*m_current_category_index].timetable_color();
         }
 
 
