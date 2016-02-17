@@ -162,7 +162,8 @@ namespace bobura { namespace message { namespace font_color_dialog
         const
         {
             assert(m_font_color_list[0].diagram_color());
-            auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(*m_font_color_list[0].diagram_color());
+            auto p_background =
+                tetengo2::stdalt::make_unique<solid_background_type>(*m_font_color_list[0].diagram_color());
             canvas.set_background(std::move(p_background));
             canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, m_canvas_dimension);
 
@@ -470,6 +471,244 @@ namespace bobura { namespace message { namespace font_color_dialog
                 return;
 
             m_font_color_list[*m_current_category_index].set_diagram_color(boost::make_optional(color_dialog.result()));
+
+            m_update();
+        }
+
+
+    private:
+        // variables
+
+        dialog_type& m_dialog;
+
+        std::vector<font_color_type>& m_font_color_list;
+
+        const boost::optional<size_type>& m_current_category_index;
+
+        update_type m_update;
+
+        const message_catalog_type& m_message_catalog;
+
+
+    };
+
+
+    /*!
+        \brief The class template for a mouse click observer of the timetable font button.
+
+        \tparam Size           A size type.
+        \tparam Dialog         A dialog type.
+        \tparam FontDialog     A font dialog type.
+        \tparam Canvas         A canvas type.
+        \tparam FontColor      A font and color type.
+        \tparam MessageCatalog A message catalog type.
+    */
+    template <
+        typename Size,
+        typename Dialog,
+        typename FontDialog,
+        typename Canvas,
+        typename FontColor,
+        typename MessageCatalog
+    >
+    class timetable_font_button_mouse_clicked
+    {
+    public:
+        // types
+
+        //! The size type.
+        using size_type = Size;
+
+        //! The dialog type.
+        using dialog_type = Dialog;
+
+        //! The font dialog type.
+        using font_dialog_type = FontDialog;
+
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! The font type.
+        using font_type = typename Canvas::font_type;
+
+        //! The color type.
+        using color_type = typename Canvas::color_type;
+
+        //! The font and color type.
+        using font_color_type = FontColor;
+
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
+        //! The update type.
+        using update_type = std::function<void ()>;
+
+
+        // constructors and destructor
+
+        /*!
+            \brief Creates a mouse click observer of the timetable font button.
+
+            \param dialog                 A dialog.
+            \param font_color_list        A font and color list.
+            \param current_category_index A current category index.
+            \param update                 An update function.
+            \param message_catalog        A message catalog.
+        */
+        timetable_font_button_mouse_clicked(
+            dialog_type&                      dialog,
+            std::vector<font_color_type>&     font_color_list,
+            const boost::optional<size_type>& current_category_index,
+            const update_type                 update,
+            const message_catalog_type&       message_catalog
+        )
+        :
+        m_dialog(dialog),
+        m_font_color_list(font_color_list),
+        m_current_category_index(current_category_index),
+        m_update(update),
+        m_message_catalog(message_catalog)
+        {}
+
+
+        // functions
+
+        /*!
+            \brief Called when the font button is clicked.
+        */
+        void operator()()
+        {
+            if (!m_current_category_index)
+                return;
+
+            font_dialog_type font_dialog{ *m_font_color_list[*m_current_category_index].timetable_font(), m_dialog };
+
+            const auto ok = font_dialog.do_modal();
+            if (!ok)
+                return;
+
+            m_font_color_list[*m_current_category_index].set_timetable_font(
+                boost::make_optional(font_dialog.result())
+            );
+
+            m_update();
+        }
+
+
+    private:
+        // variables
+
+        dialog_type& m_dialog;
+
+        std::vector<font_color_type>& m_font_color_list;
+
+        const boost::optional<size_type>& m_current_category_index;
+
+        update_type m_update;
+
+        const message_catalog_type& m_message_catalog;
+
+
+    };
+
+
+    /*!
+        \brief The class template for a mouse click observer of the timetable color button.
+
+        \tparam Size           A size type.
+        \tparam Dialog         A dialog type.
+        \tparam ColorDialog    A color dialog type.
+        \tparam Canvas         A canvas type.
+        \tparam FontColor      A font and color type.
+        \tparam MessageCatalog A message catalog type.
+    */
+    template <
+        typename Size,
+        typename Dialog,
+        typename ColorDialog,
+        typename Canvas,
+        typename FontColor,
+        typename MessageCatalog
+    >
+    class timetable_color_button_mouse_clicked
+    {
+    public:
+        // types
+
+        //! The size type.
+        using size_type = Size;
+
+        //! The dialog type.
+        using dialog_type = Dialog;
+
+        //! The color dialog type.
+        using color_dialog_type = ColorDialog;
+
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! The font type.
+        using font_type = typename Canvas::font_type;
+
+        //! The color type.
+        using color_type = typename Canvas::color_type;
+
+        //! The font and color type.
+        using font_color_type = FontColor;
+
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
+        //! The update type.
+        using update_type = std::function<void ()>;
+
+
+        // constructors and destructor
+
+        /*!
+            \brief Creates a mouse click observer of the color button.
+
+            \param dialog                 A dialog.
+            \param font_color_list        A font and color list.
+            \param current_category_index A current category index.
+            \param update                 An update function.
+            \param message_catalog        A message catalog.
+        */
+        explicit timetable_color_button_mouse_clicked(
+            dialog_type&                      dialog,
+            std::vector<font_color_type>&     font_color_list,
+            const boost::optional<size_type>& current_category_index,
+            const update_type                 update,
+            const message_catalog_type&       message_catalog
+        )
+        :
+        m_dialog(dialog),
+        m_font_color_list(font_color_list),
+        m_current_category_index(current_category_index),
+        m_update(update),
+        m_message_catalog(message_catalog)
+        {}
+
+
+        // functions
+
+        /*!
+            \brief Called when the font button is clicked.
+        */
+        void operator()()
+        {
+            if (!m_current_category_index)
+                return;
+
+            color_dialog_type color_dialog{ m_font_color_list[*m_current_category_index].timetable_color(), m_dialog };
+
+            const auto ok = color_dialog.do_modal();
+            if (!ok)
+                return;
+
+            m_font_color_list[*m_current_category_index].set_timetable_color(
+                boost::make_optional(color_dialog.result())
+            );
 
             m_update();
         }

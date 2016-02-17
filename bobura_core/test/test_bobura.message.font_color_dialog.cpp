@@ -357,6 +357,101 @@ BOOST_AUTO_TEST_SUITE(diagram_color_button_mouse_clicked)
 
 
 BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE(timetable_font_button_mouse_clicked)
+    // test cases
+
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type parent{};
+        concrete_dialog dialog{ parent };
+        std::vector<font_color_type> font_color_list{ 2, make_font_color(true, true) };
+        const message_catalog_type message_catalog{};
+        const bobura::message::font_color_dialog::timetable_font_button_mouse_clicked<
+            size_type, dialog_type, font_dialog_type, canvas_type, font_color_type, message_catalog_type
+        > observer{
+            dialog,
+            font_color_list,
+            boost::make_optional<size_type>(1),
+            update,
+            message_catalog
+        };
+    }
+
+// This test case causes a segmentation fault with GCC.
+#if !( \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+)
+    BOOST_AUTO_TEST_CASE(operator_paren)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type parent{};
+        concrete_dialog dialog{ parent };
+        std::vector<font_color_type> font_color_list{ 2, make_font_color(true, true) };
+        const message_catalog_type message_catalog{};
+        bobura::message::font_color_dialog::timetable_font_button_mouse_clicked<
+            size_type, dialog_type, font_dialog_type, canvas_type, font_color_type, message_catalog_type
+        > observer{
+            dialog,
+            font_color_list,
+            boost::make_optional<size_type>(1),
+            update,
+            message_catalog
+        };
+
+        observer();
+    }
+#endif
+
+
+BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE(timetable_color_button_mouse_clicked)
+    // test cases
+
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type parent{};
+        concrete_dialog dialog{ parent };
+        std::vector<font_color_type> font_color_list{ 2, make_font_color(true, true) };
+        const message_catalog_type message_catalog{};
+        const bobura::message::font_color_dialog::timetable_color_button_mouse_clicked<
+            size_type, dialog_type, color_dialog_type, canvas_type, font_color_type, message_catalog_type
+        > observer{
+            dialog,
+            font_color_list,
+            boost::make_optional<size_type>(1),
+            update,
+            message_catalog
+        };
+    }
+
+    BOOST_AUTO_TEST_CASE(operator_paren)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type parent{};
+        concrete_dialog dialog{ parent };
+        std::vector<font_color_type> font_color_list{ 2, make_font_color(true, true) };
+        const message_catalog_type message_catalog{};
+        bobura::message::font_color_dialog::timetable_color_button_mouse_clicked<
+            size_type, dialog_type, color_dialog_type, canvas_type, font_color_type, message_catalog_type
+        > observer{
+            dialog,
+            font_color_list,
+            boost::make_optional<size_type>(1),
+            update,
+            message_catalog
+        };
+
+        observer();
+    }
+
+
+BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(ok_button_mouse_clicked)
     // test cases
 
