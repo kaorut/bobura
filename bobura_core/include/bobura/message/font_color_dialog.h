@@ -161,43 +161,22 @@ namespace bobura { namespace message { namespace font_color_dialog
         void operator()(canvas_type& canvas)
         const
         {
-            assert(m_font_color_list[0].diagram_color());
-            auto p_background =
-                tetengo2::stdalt::make_unique<solid_background_type>(*m_font_color_list[0].diagram_color());
-            canvas.set_background(std::move(p_background));
-            canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, m_canvas_dimension);
+            const position_type diagram_part_position{ left_type{ 0 }, top_type{ 0 } };
+            const dimension_type diagram_part_dimension{
+                tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension) / 2,
+                tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension),
+            };
+            draw_diagram_part(canvas, diagram_part_position, diagram_part_dimension);
 
-            if (
-                !m_current_category_index ||
-                *m_current_category_index == 0 ||
-                *m_current_category_index >= m_font_color_list.size()
-            )
-            {
-                return;
-            }
-
-            assert(m_font_color_list[*m_current_category_index].diagram_font());
-            canvas.set_font(*m_font_color_list[*m_current_category_index].diagram_font());
-            canvas.set_color(
-                m_font_color_list[*m_current_category_index].diagram_color() ?
-                *m_font_color_list[*m_current_category_index].diagram_color() : color_type{ 0x40, 0x40, 0x40 }
-            );
-
-            const string_type text{ m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:SAMPLE")) };
-
-            const auto text_and_line_tops = sample_text_and_line_tops(canvas, text);
-
-            canvas.draw_text(text, position_type{ left_type{ 1 }, text_and_line_tops.first });
-
-            canvas.set_line_width(width_type{ size_type{ 1, 12 } });
-            canvas.set_line_style(canvas_type::line_style_type::solid);
-            canvas.draw_line(
-                position_type{ left_type{ 0 }, text_and_line_tops.second },
-                position_type{
-                    left_type::from(tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension)),
-                    text_and_line_tops.second
-                }
-            );
+            const position_type timetable_part_position{
+                left_type::from(tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension) / 2),
+                top_type{ 0 }
+            };
+            const dimension_type timetable_part_dimension{
+                tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension) / 2,
+                tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension),
+            };
+            draw_timetable_part(canvas, timetable_part_position, timetable_part_dimension);
         }
 
 
@@ -234,22 +213,108 @@ namespace bobura { namespace message { namespace font_color_dialog
 
         // functions
 
-        std::pair<top_type, top_type> sample_text_and_line_tops(const canvas_type& canvas, const string_type& text)
+        void draw_diagram_part(canvas_type& canvas, const position_type& position, const dimension_type& dimension)
         const
         {
-            const auto& canvas_height = tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension);
+            draw_sample(
+                canvas,
+                position,
+                dimension,
+                [](const font_color_type& fc) -> const boost::optional<font_type>& { return fc.diagram_font(); },
+                [](const font_color_type& fc) -> const boost::optional<color_type>& { return fc.diagram_color(); },
+                true
+            );
+        }
+
+        void draw_timetable_part(canvas_type& canvas, const position_type& position, const dimension_type& dimension)
+        const
+        {
+            draw_sample(
+                canvas,
+                position,
+                dimension,
+                [](const font_color_type& fc) -> const boost::optional<font_type>& { return fc.timetable_font(); },
+                [](const font_color_type& fc) -> const boost::optional<color_type>& { return fc.timetable_color(); },
+                false
+            );
+        }
+
+        void draw_sample(
+            canvas_type&                                                                      canvas,
+            const position_type&                                                              position,
+            const dimension_type&                                                             dimension,
+            const std::function<const boost::optional<font_type>& (const font_color_type&)>&  get_font,
+            const std::function<const boost::optional<color_type>& (const font_color_type&)>& get_color,
+            const bool                                                                        draw_underline
+        )
+        const
+        {
+            assert(get_color(m_font_color_list[0]));
+            auto p_background =
+                tetengo2::stdalt::make_unique<solid_background_type>(*get_color(m_font_color_list[0]));
+            canvas.set_background(std::move(p_background));
+            canvas.fill_rectangle(position, dimension);
+
+            if (
+                !m_current_category_index ||
+                *m_current_category_index == 0 ||
+                *m_current_category_index >= m_font_color_list.size()
+            )
+            {
+                return;
+            }
+
+            assert(get_font(m_font_color_list[*m_current_category_index]));
+            canvas.set_font(*get_font(m_font_color_list[*m_current_category_index]));
+            canvas.set_color(
+                get_color(m_font_color_list[*m_current_category_index]) ?
+                *get_color(m_font_color_list[*m_current_category_index]) : color_type{ 0x40, 0x40, 0x40 }
+            );
+
+            const string_type text{ m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:SAMPLE")) };
+
+            const auto& line_left = tetengo2::gui::position<position_type>::left(position);
+            const auto text_left = line_left + left_type{ 1 };
+            const auto text_and_line_tops = sample_text_and_line_tops(canvas, position, dimension, text);
+
+            canvas.draw_text(text, position_type{ text_left, text_and_line_tops.first });
+
+            if (draw_underline)
+            {
+                canvas.set_line_width(width_type{ size_type{ 1, 12 } });
+                canvas.set_line_style(canvas_type::line_style_type::solid);
+                canvas.draw_line(
+                    position_type{ line_left, text_and_line_tops.second },
+                    position_type{
+                        line_left + left_type::from(tetengo2::gui::dimension<dimension_type>::width(dimension)),
+                        text_and_line_tops.second
+                    }
+                );
+            }
+        }
+
+        std::pair<top_type, top_type> sample_text_and_line_tops(
+            const canvas_type&    canvas,
+            const position_type&  base_position,
+            const dimension_type& base_dimension,
+            const string_type&    text
+        )
+        const
+        {
+            const auto& base_top = tetengo2::gui::position<position_type>::top(base_position);
+            const auto& base_height = tetengo2::gui::dimension<dimension_type>::height(base_dimension);
             const auto& text_height =
                 tetengo2::gui::dimension<dimension_type>::height(canvas.calc_text_dimension(text));
 
-            if (canvas_height > text_height)
+            if (base_height > text_height)
             {
-                const auto text_top = top_type::from((canvas_height - text_height) / 2);
+                const auto text_top = base_top + top_type::from((base_height - text_height) / 2);
                 const auto line_top = text_top + top_type::from(text_height);
                 return std::make_pair(text_top, line_top);
             }
             else
             {
-                const auto line_top = top_type::from(canvas_height);
+                const auto line_top = base_top + top_type::from(base_height);
                 const auto text_top = line_top - top_type::from(text_height);
                 return std::make_pair(text_top, line_top);
             }
