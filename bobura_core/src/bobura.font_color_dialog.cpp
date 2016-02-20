@@ -429,7 +429,7 @@ namespace bobura
         {
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::normal);
 
-            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Font...")));
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Fo&nt...")));
             p_button->mouse_observer_set().clicked().connect(
                 timetable_font_button_mouse_clicked_observer_type{
                     m_base,
@@ -457,7 +457,7 @@ namespace bobura
         {
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::normal);
 
-            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Color...")));
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Co&lor...")));
             p_button->mouse_observer_set().clicked().connect(
                 timetable_color_button_mouse_clicked_observer_type{
                     m_base,

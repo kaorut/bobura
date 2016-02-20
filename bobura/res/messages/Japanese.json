@@ -117,7 +117,9 @@
         "Dialog:FontAndColor:Diagram:":                    "ダイヤグラム:",
         "Dialog:FontAndColor:Timetable:":                  "時刻表:",
         "Dialog:FontAndColor:&Font...":                    "フォント(&F)...",
+        "Dialog:FontAndColor:Fo&nt...":                    "フォント(&N)...",
         "Dialog:FontAndColor:&Color...":                   "色(&C)...",
+        "Dialog:FontAndColor:Co&lor...":                   "色(&L)...",
         "Dialog:FontAndColor:Sample:":                     "サンプル:",
         "Dialog:FontAndColor:SAMPLE":                      "みほん",
         
