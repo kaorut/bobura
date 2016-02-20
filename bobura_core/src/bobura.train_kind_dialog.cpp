@@ -81,11 +81,11 @@ namespace bobura
         m_p_name_text_box(),
         m_p_abbreviation_label(),
         m_p_abbreviation_text_box(),
-        m_p_color_button(),
-        m_p_weight_label(),
-        m_p_weight_dropdown_box(),
-        m_p_line_style_label(),
-        m_p_line_style_dropdown_box(),
+        m_p_diagram_color_button(),
+        m_p_diagram_weight_label(),
+        m_p_diagram_weight_dropdown_box(),
+        m_p_diagram_line_style_label(),
+        m_p_diagram_line_style_dropdown_box(),
         m_p_sample_picture_box(),
         m_p_ok_button(),
         m_p_cancel_button()
@@ -287,15 +287,15 @@ namespace bobura
 
         std::unique_ptr<text_box_type> m_p_abbreviation_text_box;
 
-        std::unique_ptr<button_type> m_p_color_button;
+        std::unique_ptr<button_type> m_p_diagram_color_button;
 
-        std::unique_ptr<label_type> m_p_weight_label;
+        std::unique_ptr<label_type> m_p_diagram_weight_label;
 
-        std::unique_ptr<dropdown_box_type> m_p_weight_dropdown_box;
+        std::unique_ptr<dropdown_box_type> m_p_diagram_weight_dropdown_box;
 
-        std::unique_ptr<label_type> m_p_line_style_label;
+        std::unique_ptr<label_type> m_p_diagram_line_style_label;
 
-        std::unique_ptr<dropdown_box_type> m_p_line_style_dropdown_box;
+        std::unique_ptr<dropdown_box_type> m_p_diagram_line_style_dropdown_box;
 
         std::unique_ptr<label_type> m_p_sample_label;
 
@@ -322,11 +322,11 @@ namespace bobura
             m_p_name_text_box = create_name_text_box();
             m_p_abbreviation_label = create_abbreviation_label();
             m_p_abbreviation_text_box = create_abbreviation_text_box();
-            m_p_color_button = create_color_button();
-            m_p_weight_label = create_weight_label();
-            m_p_weight_dropdown_box = create_weight_dropdown_box();
-            m_p_line_style_label = create_line_style_label();
-            m_p_line_style_dropdown_box = create_line_style_dropdown_box();
+            m_p_diagram_color_button = create_diagram_color_button();
+            m_p_diagram_weight_label = create_diagram_weight_label();
+            m_p_diagram_weight_dropdown_box = create_diagram_weight_dropdown_box();
+            m_p_diagram_line_style_label = create_diagram_line_style_label();
+            m_p_diagram_line_style_dropdown_box = create_diagram_line_style_dropdown_box();
             m_p_sample_label = create_sample_label();
             m_p_sample_picture_box = create_sample_picture_box(background_color);
             m_p_ok_button = create_ok_button();
@@ -462,7 +462,7 @@ namespace bobura
             return std::move(p_text_box);
         }
 
-        std::unique_ptr<button_type> create_color_button()
+        std::unique_ptr<button_type> create_diagram_color_button()
         {
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base);
 
@@ -476,7 +476,7 @@ namespace bobura
             return std::move(p_button);
         }
 
-        std::unique_ptr<label_type> create_weight_label()
+        std::unique_ptr<label_type> create_diagram_weight_label()
         {
             auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
 
@@ -487,7 +487,7 @@ namespace bobura
             return std::move(p_label);
         }
 
-        std::unique_ptr<dropdown_box_type> create_weight_dropdown_box()
+        std::unique_ptr<dropdown_box_type> create_diagram_weight_dropdown_box()
         {
             auto p_dropdown_box = tetengo2::stdalt::make_unique<dropdown_box_type>(m_base);
 
@@ -506,7 +506,7 @@ namespace bobura
             return std::move(p_dropdown_box);
         }
 
-        std::unique_ptr<label_type> create_line_style_label()
+        std::unique_ptr<label_type> create_diagram_line_style_label()
         {
             auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
 
@@ -517,7 +517,7 @@ namespace bobura
             return std::move(p_label);
         }
 
-        std::unique_ptr<dropdown_box_type> create_line_style_dropdown_box()
+        std::unique_ptr<dropdown_box_type> create_diagram_line_style_dropdown_box()
         {
             auto p_dropdown_box = tetengo2::stdalt::make_unique<dropdown_box_type>(m_base);
 
@@ -650,20 +650,20 @@ namespace bobura
             m_p_abbreviation_text_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
             m_p_abbreviation_text_box->set_position(position_type{ name_text_box_left, top_type{ 4 } });
 
-            m_p_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-            m_p_color_button->set_position(position_type{ name_text_box_left, top_type{ 7 } });
+            m_p_diagram_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+            m_p_diagram_color_button->set_position(position_type{ name_text_box_left, top_type{ 7 } });
 
-            m_p_weight_label->fit_to_content();
-            m_p_weight_label->set_position(position_type{ name_label_left, top_type{ 10 } });
+            m_p_diagram_weight_label->fit_to_content();
+            m_p_diagram_weight_label->set_position(position_type{ name_label_left, top_type{ 10 } });
 
-            m_p_weight_dropdown_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
-            m_p_weight_dropdown_box->set_position(position_type{ name_text_box_left, top_type{ 10 } });
+            m_p_diagram_weight_dropdown_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
+            m_p_diagram_weight_dropdown_box->set_position(position_type{ name_text_box_left, top_type{ 10 } });
 
-            m_p_line_style_label->fit_to_content();
-            m_p_line_style_label->set_position(position_type{ name_label_left, top_type{ 13 } });
+            m_p_diagram_line_style_label->fit_to_content();
+            m_p_diagram_line_style_label->set_position(position_type{ name_label_left, top_type{ 13 } });
 
-            m_p_line_style_dropdown_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
-            m_p_line_style_dropdown_box->set_position(position_type{ name_text_box_left, top_type{ 13 } });
+            m_p_diagram_line_style_dropdown_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
+            m_p_diagram_line_style_dropdown_box->set_position(position_type{ name_text_box_left, top_type{ 13 } });
 
             m_p_sample_label->fit_to_content();
             m_p_sample_label->set_dimension(
@@ -730,11 +730,11 @@ namespace bobura
             m_p_name_text_box->set_enabled(static_cast<bool>(selected_index));
             m_p_abbreviation_label->set_enabled(static_cast<bool>(selected_index));
             m_p_abbreviation_text_box->set_enabled(static_cast<bool>(selected_index));
-            m_p_color_button->set_enabled(static_cast<bool>(selected_index));
-            m_p_weight_label->set_enabled(static_cast<bool>(selected_index));
-            m_p_weight_dropdown_box->set_enabled(static_cast<bool>(selected_index));
-            m_p_line_style_label->set_enabled(static_cast<bool>(selected_index));
-            m_p_line_style_dropdown_box->set_enabled(static_cast<bool>(selected_index));
+            m_p_diagram_color_button->set_enabled(static_cast<bool>(selected_index));
+            m_p_diagram_weight_label->set_enabled(static_cast<bool>(selected_index));
+            m_p_diagram_weight_dropdown_box->set_enabled(static_cast<bool>(selected_index));
+            m_p_diagram_line_style_label->set_enabled(static_cast<bool>(selected_index));
+            m_p_diagram_line_style_dropdown_box->set_enabled(static_cast<bool>(selected_index));
 
             if (static_cast<bool>(selected_index))
             {
@@ -744,8 +744,10 @@ namespace bobura
                 m_current_train_kind_color = train_kind.diagram_color();
                 m_p_name_text_box->set_text(train_kind.name());
                 m_p_abbreviation_text_box->set_text(train_kind.abbreviation());
-                m_p_weight_dropdown_box->select_value(to_weight_dropdown_box_index(train_kind.diagram_line_weight()));
-                m_p_line_style_dropdown_box->select_value(
+                m_p_diagram_weight_dropdown_box->select_value(
+                    to_weight_dropdown_box_index(train_kind.diagram_line_weight())
+                );
+                m_p_diagram_line_style_dropdown_box->select_value(
                     to_line_style_dropdown_box_index(train_kind.diagram_line_style())
                 );
             }
@@ -754,8 +756,8 @@ namespace bobura
                 m_current_train_kind_color = color_type{ 0, 0, 0 };
                 m_p_name_text_box->set_text(string_type{});
                 m_p_abbreviation_text_box->set_text(string_type{});
-                m_p_weight_dropdown_box->select_value(0);
-                m_p_line_style_dropdown_box->select_value(0);
+                m_p_diagram_weight_dropdown_box->select_value(0);
+                m_p_diagram_line_style_dropdown_box->select_value(0);
             }
 
             m_p_sample_picture_box->repaint();
@@ -768,16 +770,16 @@ namespace bobura
 
             auto& train_kind = m_info_sets[*m_current_train_kind_index].train_kind();
 
-            assert(m_p_weight_dropdown_box->selected_value_index());
-            assert(m_p_weight_dropdown_box->selected_value_index());
+            assert(m_p_diagram_weight_dropdown_box->selected_value_index());
+            assert(m_p_diagram_weight_dropdown_box->selected_value_index());
             train_kind =
                 train_kind_type{
                     m_p_name_text_box->text(),
                     m_p_abbreviation_text_box->text(),
                     train_kind_type::default_().diagram_font(), // TODO
                     m_current_train_kind_color,
-                    to_weight(*m_p_weight_dropdown_box->selected_value_index()),
-                    to_line_style(*m_p_line_style_dropdown_box->selected_value_index()),
+                    to_weight(*m_p_diagram_weight_dropdown_box->selected_value_index()),
+                    to_line_style(*m_p_diagram_line_style_dropdown_box->selected_value_index()),
                     train_kind_type::default_().timetable_font(), // TODO
                     train_kind_type::default_().timetable_color() // TODO
                 };
