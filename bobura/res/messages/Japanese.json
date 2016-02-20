@@ -121,7 +121,8 @@
         "Dialog:FontAndColor:&Color...":                   "色(&C)...",
         "Dialog:FontAndColor:Co&lor...":                   "色(&L)...",
         "Dialog:FontAndColor:Sample:":                     "サンプル:",
-        "Dialog:FontAndColor:SAMPLE":                      "みほん",
+        "Dialog:FontAndColor:Diagram":                     "ダイヤグラム",
+        "Dialog:FontAndColor:Timetable":                   "時刻表",
         
         "Dialog:TrainKind:Train Kinds":    "列車種別",
         "Dialog:TrainKind:Train &Kinds:":  "列車種別(&K):",

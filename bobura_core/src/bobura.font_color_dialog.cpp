@@ -489,7 +489,7 @@ namespace bobura
                     m_base, list_box_type::scroll_bar_style_type::none
                 );
 
-            p_picture_box->set_dimension(dimension_type{ width_type{ 25 }, height_type{ 8 } });
+            p_picture_box->set_dimension(dimension_type{ width_type{ 25 }, height_type{ 6 } });
             p_picture_box->fast_paint_observer_set().paint().connect(
                 sample_picture_box_paint_observer_type{
                     m_font_color_list,
@@ -524,14 +524,14 @@ namespace bobura
 
         void locate_controls()
         {
-            m_base.set_client_dimension(dimension_type{ width_type{ 47 }, height_type{ 29 } });
+            m_base.set_client_dimension(dimension_type{ width_type{ 47 }, height_type{ 27 } });
 
             const left_type category_label_left{ 2 };
             {
                 m_p_category_label->fit_to_content();
                 m_p_category_label->set_position(position_type{ category_label_left, top_type{ 1 } });
 
-                m_p_category_list_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 23 } });
+                m_p_category_list_box->set_dimension(dimension_type{ width_type{ 16 }, height_type{ 21 } });
                 m_p_category_list_box->set_position(
                     position_type{
                         category_label_left,
@@ -619,10 +619,10 @@ namespace bobura
 
             {
                 m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_ok_button->set_position(position_type{ left_type{ 28 }, top_type{ 26 } });
+                m_p_ok_button->set_position(position_type{ left_type{ 28 }, top_type{ 24 } });
 
                 m_p_cancel_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_cancel_button->set_position(position_type{ left_type{ 37 }, top_type{ 26 } });
+                m_p_cancel_button->set_position(position_type{ left_type{ 37 }, top_type{ 24 } });
             }
         }
 

@@ -222,7 +222,7 @@ namespace bobura { namespace message { namespace font_color_dialog
                 dimension,
                 [](const font_color_type& fc) -> const boost::optional<font_type>& { return fc.diagram_font(); },
                 [](const font_color_type& fc) -> const boost::optional<color_type>& { return fc.diagram_color(); },
-                true
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Diagram"))
             );
         }
 
@@ -235,7 +235,7 @@ namespace bobura { namespace message { namespace font_color_dialog
                 dimension,
                 [](const font_color_type& fc) -> const boost::optional<font_type>& { return fc.timetable_font(); },
                 [](const font_color_type& fc) -> const boost::optional<color_type>& { return fc.timetable_color(); },
-                false
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Timetable"))
             );
         }
 
@@ -245,7 +245,7 @@ namespace bobura { namespace message { namespace font_color_dialog
             const dimension_type&                                                             dimension,
             const std::function<const boost::optional<font_type>& (const font_color_type&)>&  get_font,
             const std::function<const boost::optional<color_type>& (const font_color_type&)>& get_color,
-            const bool                                                                        draw_underline
+            const string_type&                                                                text
         )
         const
         {
@@ -271,29 +271,14 @@ namespace bobura { namespace message { namespace font_color_dialog
                 *get_color(m_font_color_list[*m_current_category_index]) : color_type{ 0x40, 0x40, 0x40 }
             );
 
-            const string_type text{ m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:SAMPLE")) };
-
-            const auto& line_left = tetengo2::gui::position<position_type>::left(position);
-            const auto text_left = line_left + left_type{ 1 };
-            const auto text_and_line_tops = sample_text_and_line_tops(canvas, position, dimension, text);
-
-            canvas.draw_text(text, position_type{ text_left, text_and_line_tops.first });
-
-            if (draw_underline)
-            {
-                canvas.set_line_width(width_type{ size_type{ 1, 12 } });
-                canvas.set_line_style(canvas_type::line_style_type::solid);
-                canvas.draw_line(
-                    position_type{ line_left, text_and_line_tops.second },
-                    position_type{
-                        line_left + left_type::from(tetengo2::gui::dimension<dimension_type>::width(dimension)),
-                        text_and_line_tops.second
-                    }
-                );
-            }
+            const position_type text_position{
+                tetengo2::gui::position<position_type>::left(position) + left_type{ 1 },
+                sample_text_top(canvas, position, dimension, text)
+            };
+            canvas.draw_text(text, text_position);
         }
 
-        std::pair<top_type, top_type> sample_text_and_line_tops(
+        top_type sample_text_top(
             const canvas_type&    canvas,
             const position_type&  base_position,
             const dimension_type& base_dimension,
@@ -307,17 +292,9 @@ namespace bobura { namespace message { namespace font_color_dialog
                 tetengo2::gui::dimension<dimension_type>::height(canvas.calc_text_dimension(text));
 
             if (base_height > text_height)
-            {
-                const auto text_top = base_top + top_type::from((base_height - text_height) / 2);
-                const auto line_top = text_top + top_type::from(text_height);
-                return std::make_pair(text_top, line_top);
-            }
+                return base_top + top_type::from((base_height - text_height) / 2);
             else
-            {
-                const auto line_top = base_top + top_type::from(base_height);
-                const auto text_top = line_top - top_type::from(text_height);
-                return std::make_pair(text_top, line_top);
-            }
+                return top_type{ 0 };
         }
 
 
