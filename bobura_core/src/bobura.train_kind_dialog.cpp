@@ -167,14 +167,14 @@ namespace bobura
 
         using abbreviation_text_box_changed_observer_type = message::train_kind_dialog::abbreviation_text_box_changed;
 
-        using color_button_mouse_clicked_observer_type =
-            message::train_kind_dialog::color_button_mouse_clicked<base_type, ColorDialog>;
+        using diagram_color_button_mouse_clicked_observer_type =
+            message::train_kind_dialog::diagram_color_button_mouse_clicked<base_type, ColorDialog>;
 
-        using weight_dropdown_box_selection_changed_observer_type =
-            message::train_kind_dialog::weight_dropdown_box_selection_changed;
+        using diagram_weight_dropdown_box_selection_changed_observer_type =
+            message::train_kind_dialog::diagram_weight_dropdown_box_selection_changed;
 
-        using line_style_dropdown_box_selection_changed_observer_type =
-            message::train_kind_dialog::line_style_dropdown_box_selection_changed;
+        using diagram_line_style_dropdown_box_selection_changed_observer_type =
+            message::train_kind_dialog::diagram_line_style_dropdown_box_selection_changed;
 
         using sample_picture_box_paint_observer_type =
             message::train_kind_dialog::sample_picture_box_paint<info_set_type, size_type, Canvas>;
@@ -501,7 +501,7 @@ namespace bobura
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:&Font...")));
             p_button->mouse_observer_set().clicked().connect(
-                color_button_mouse_clicked_observer_type{
+                diagram_color_button_mouse_clicked_observer_type{
                     m_base, m_current_train_kind_color, [this]() { this->apply(); }
                 }
             );
@@ -515,7 +515,7 @@ namespace bobura
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:&Color...")));
             p_button->mouse_observer_set().clicked().connect(
-                color_button_mouse_clicked_observer_type{
+                diagram_color_button_mouse_clicked_observer_type{
                     m_base, m_current_train_kind_color, [this]() { this->apply(); }
                 }
             );
@@ -547,7 +547,7 @@ namespace bobura
             p_dropdown_box->select_value(0);
 
             p_dropdown_box->list_selection_observer_set().selection_changed().connect(
-                weight_dropdown_box_selection_changed_observer_type{ [this]() { this->apply(); } }
+                diagram_weight_dropdown_box_selection_changed_observer_type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_dropdown_box);
@@ -583,7 +583,7 @@ namespace bobura
             p_dropdown_box->select_value(0);
 
             p_dropdown_box->list_selection_observer_set().selection_changed().connect(
-                line_style_dropdown_box_selection_changed_observer_type{ [this]() { this->apply(); } }
+                diagram_line_style_dropdown_box_selection_changed_observer_type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_dropdown_box);

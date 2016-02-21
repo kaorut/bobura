@@ -520,13 +520,13 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
 
     /*!
-        \brief The class template for a mouse click observer of the color button.
+        \brief The class template for a mouse click observer of the diagram color button.
 
         \tparam Dialog      A dialog type.
         \tparam ColorDialog A color dialog type.
     */
     template <typename Dialog, typename ColorDialog>
-    class color_button_mouse_clicked
+    class diagram_color_button_mouse_clicked
     {
     public:
         // types
@@ -547,13 +547,13 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // constructors and destructor
 
         /*!
-            \brief Creates a mouse click observer of the color button.
+            \brief Creates a mouse click observer of the diagram color button.
 
             \param dialog A dialog,
             \param color  A color.
             \param apply  An apply function.
         */
-        color_button_mouse_clicked(dialog_type& dialog, color_type& color, const apply_type apply)
+        diagram_color_button_mouse_clicked(dialog_type& dialog, color_type& color, const apply_type apply)
         :
         m_dialog(dialog),
         m_color(color),
@@ -595,9 +595,9 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
 
     /*!
-        \brief The class template for a selection change observer of the weight dropdown box.
+        \brief The class template for a selection change observer of the diagram weight dropdown box.
     */
-    class weight_dropdown_box_selection_changed
+    class diagram_weight_dropdown_box_selection_changed
     {
     public:
         // types
@@ -613,7 +613,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             \param apply An apply function
         */
-        explicit weight_dropdown_box_selection_changed(const apply_type apply)
+        explicit diagram_weight_dropdown_box_selection_changed(const apply_type apply)
         :
         m_apply(apply)
         {}
@@ -641,9 +641,9 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
 
     /*!
-        \brief The class template for a selection change observer of the line style dropdown box.
+        \brief The class template for a selection change observer of the diagram line style dropdown box.
     */
-    class line_style_dropdown_box_selection_changed
+    class diagram_line_style_dropdown_box_selection_changed
     {
     public:
         // types
@@ -659,7 +659,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             \param apply An apply function
         */
-        explicit line_style_dropdown_box_selection_changed(const apply_type apply)
+        explicit diagram_line_style_dropdown_box_selection_changed(const apply_type apply)
         :
         m_apply(apply)
         {}
