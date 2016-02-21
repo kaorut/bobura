@@ -520,6 +520,81 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
 
     /*!
+        \brief The class template for a mouse click observer of the diagram font button.
+
+        \tparam Dialog     A dialog type.
+        \tparam FontDialog A font dialog type.
+    */
+    template <typename Dialog, typename FontDialog>
+    class diagram_font_button_mouse_clicked
+    {
+    public:
+        // types
+
+        //! The dialog type.
+        using dialog_type = Dialog;
+
+        //! The font dialog type.
+        using font_dialog_type = FontDialog;
+
+        //! The font type.
+        using font_type = typename font_dialog_type::font_type;
+
+        //! The apply type.
+        using apply_type = std::function<void ()>;
+
+
+        // constructors and destructor
+
+        /*!
+            \brief Creates a mouse click observer of the diagram font button.
+
+            \param dialog A dialog,
+            \param font   A font.
+            \param apply  An apply function.
+        */
+        diagram_font_button_mouse_clicked(dialog_type& dialog, font_type& font, const apply_type apply)
+        :
+        m_dialog(dialog),
+        m_font(font),
+        m_apply(apply)
+        {}
+
+
+        // functions
+
+        /*!
+            \brief Called when the font button is clicked.
+        */
+        void operator()()
+        const
+        {
+            font_dialog_type font_dialog{ m_font, m_dialog };
+
+            const auto ok = font_dialog.do_modal();
+            if (!ok)
+                return;
+
+            m_font = font_dialog.result();
+
+            m_apply();
+        }
+
+
+    private:
+        // variables
+
+        dialog_type& m_dialog;
+
+        font_type& m_font;
+
+        apply_type m_apply;
+
+
+    };
+
+
+    /*!
         \brief The class template for a mouse click observer of the diagram color button.
 
         \tparam Dialog      A dialog type.

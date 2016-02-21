@@ -130,6 +130,7 @@ namespace
 
     };
 
+    using font_dialog_type = common_dialog_type_list_type::font_type;
 
     using color_dialog_type = common_dialog_type_list_type::color_type;
 
@@ -345,6 +346,35 @@ BOOST_AUTO_TEST_SUITE(abbreviation_text_box_changed)
         BOOST_TEST_PASSPOINT();
 
         const bobura::message::train_kind_dialog::abbreviation_text_box_changed observer{ apply_function };
+
+        observer();
+    }
+
+
+BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE(diagram_font_button_mouse_clicked)
+    // test cases
+
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type window{};
+        concrete_dialog dialog{ window };
+        auto font = font_type::dialog_font();
+        const bobura::message::train_kind_dialog::diagram_font_button_mouse_clicked<dialog_type, font_dialog_type>
+        observer(dialog, font, apply_function);
+    }
+
+    BOOST_AUTO_TEST_CASE(operator_paren)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type window{};
+        concrete_dialog dialog{ window };
+        auto font = font_type::dialog_font();
+        const bobura::message::train_kind_dialog::diagram_font_button_mouse_clicked<dialog_type, font_dialog_type>
+        observer(dialog, font, apply_function);
 
         observer();
     }

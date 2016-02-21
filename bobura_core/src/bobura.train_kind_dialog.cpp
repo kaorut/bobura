@@ -35,9 +35,10 @@ namespace bobura
         typename Font,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
-    class train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::impl :
+    class train_kind_dialog<Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog>::impl :
         private boost::noncopyable
     {
     public:
@@ -57,6 +58,8 @@ namespace bobura
 
         using canvas_type = typename train_kind_dialog::canvas_type;
 
+        using font_dialog_type = typename train_kind_dialog::font_dialog_type;
+
         using color_dialog_type = typename train_kind_dialog::color_dialog_type;
 
         using info_set_type = typename train_kind_dialog::info_set_type;
@@ -70,7 +73,8 @@ namespace bobura
         m_message_catalog(message_catalog),
         m_info_sets(),
         m_current_train_kind_index(),
-        m_current_train_kind_color(0, 0, 0),
+        m_current_diagram_font(font_type::dialog_font()),
+        m_current_diagram_color(0, 0, 0),
         m_p_train_kind_label(),
         m_p_train_kind_list_box(),
         m_p_add_button(),
@@ -167,8 +171,11 @@ namespace bobura
 
         using abbreviation_text_box_changed_observer_type = message::train_kind_dialog::abbreviation_text_box_changed;
 
+        using diagram_font_button_mouse_clicked_observer_type =
+            message::train_kind_dialog::diagram_font_button_mouse_clicked<base_type, font_dialog_type>;
+
         using diagram_color_button_mouse_clicked_observer_type =
-            message::train_kind_dialog::diagram_color_button_mouse_clicked<base_type, ColorDialog>;
+            message::train_kind_dialog::diagram_color_button_mouse_clicked<base_type, color_dialog_type>;
 
         using diagram_weight_dropdown_box_selection_changed_observer_type =
             message::train_kind_dialog::diagram_weight_dropdown_box_selection_changed;
@@ -268,7 +275,9 @@ namespace bobura
 
         boost::optional<size_type> m_current_train_kind_index;
 
-        color_type m_current_train_kind_color;
+        font_type m_current_diagram_font;
+
+        color_type m_current_diagram_color;
 
         std::unique_ptr<label_type> m_p_train_kind_label;
 
@@ -501,8 +510,8 @@ namespace bobura
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:&Font...")));
             p_button->mouse_observer_set().clicked().connect(
-                diagram_color_button_mouse_clicked_observer_type{
-                    m_base, m_current_train_kind_color, [this]() { this->apply(); }
+                diagram_font_button_mouse_clicked_observer_type{
+                    m_base, m_current_diagram_font, [this]() { this->apply(); }
                 }
             );
 
@@ -516,7 +525,7 @@ namespace bobura
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:&Color...")));
             p_button->mouse_observer_set().clicked().connect(
                 diagram_color_button_mouse_clicked_observer_type{
-                    m_base, m_current_train_kind_color, [this]() { this->apply(); }
+                    m_base, m_current_diagram_color, [this]() { this->apply(); }
                 }
             );
 
@@ -808,7 +817,8 @@ namespace bobura
                 assert(m_info_sets.size() == m_p_train_kind_list_box->value_count());
                 const auto& train_kind = m_info_sets[*selected_index].train_kind();
 
-                m_current_train_kind_color = train_kind.diagram_color();
+                m_current_diagram_font = train_kind.diagram_font();
+                m_current_diagram_color = train_kind.diagram_color();
                 m_p_name_text_box->set_text(train_kind.name());
                 m_p_abbreviation_text_box->set_text(train_kind.abbreviation());
                 m_p_diagram_weight_dropdown_box->select_value(
@@ -820,7 +830,8 @@ namespace bobura
             }
             else
             {
-                m_current_train_kind_color = color_type{ 0, 0, 0 };
+                m_current_diagram_font = font_type::dialog_font();
+                m_current_diagram_color = color_type{ 0, 0, 0 };
                 m_p_name_text_box->set_text(string_type{});
                 m_p_abbreviation_text_box->set_text(string_type{});
                 m_p_diagram_weight_dropdown_box->select_value(0);
@@ -842,8 +853,8 @@ namespace bobura
                 train_kind_type{
                     m_p_name_text_box->text(),
                     m_p_abbreviation_text_box->text(),
-                    train_kind_type::default_().diagram_font(), // TODO
-                    m_current_train_kind_color,
+                    m_current_diagram_font,
+                    m_current_diagram_color,
                     to_weight(*m_p_diagram_weight_dropdown_box->selected_value_index()),
                     to_line_style(*m_p_diagram_line_style_dropdown_box->selected_value_index()),
                     train_kind_type::default_().timetable_font(), // TODO
@@ -867,9 +878,10 @@ namespace bobura
         typename Font,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
-    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::info_set_type(
+    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog>::info_set_type::info_set_type(
         boost::optional<size_type> original_index,
         const bool                 referred,
         train_kind_type            train_kind
@@ -888,12 +900,15 @@ namespace bobura
         typename Font,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
     const boost::optional<
-        typename train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::size_type
+        typename train_kind_dialog<Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog>::size_type
     >&
-    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::original_index()
+    train_kind_dialog<
+        Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog
+    >::info_set_type::original_index()
     const
     {
         return m_original_index;
@@ -906,9 +921,12 @@ namespace bobura
         typename Font,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
-    bool train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::referred()
+    bool train_kind_dialog<
+        Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog
+    >::info_set_type::referred()
     const
     {
         return m_referred;
@@ -921,12 +939,13 @@ namespace bobura
         typename Font,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
     const typename train_kind_dialog<
-        Traits, Size, String, Font, Color, Canvas, ColorDialog
+        Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::train_kind_type&
-    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::train_kind()
+    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog>::info_set_type::train_kind()
     const
     {
         return m_train_kind;
@@ -939,12 +958,13 @@ namespace bobura
         typename Font,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
     typename train_kind_dialog<
-        Traits, Size, String, Font, Color, Canvas, ColorDialog
+        Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::train_kind_type&
-    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::train_kind()
+    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog>::info_set_type::train_kind()
     {
         return m_train_kind;
     }
@@ -956,9 +976,10 @@ namespace bobura
         typename Font,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
-    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::train_kind_dialog(
+    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog>::train_kind_dialog(
         abstract_window_type&       parent,
         const color_type&           background_color,
         const message_catalog_type& message_catalog
@@ -975,9 +996,10 @@ namespace bobura
         typename Font,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
-    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::~train_kind_dialog()
+    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog>::~train_kind_dialog()
     noexcept
     {}
     
@@ -988,12 +1010,13 @@ namespace bobura
         typename Font,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
     const std::vector<
-        typename train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type
+        typename train_kind_dialog<Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog>::info_set_type
     >
-    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_sets()
+    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog>::info_sets()
     const
     {
         return m_p_impl->info_sets();
@@ -1006,9 +1029,10 @@ namespace bobura
         typename Font,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
-    void train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::set_info_sets(
+    void train_kind_dialog<Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog>::set_info_sets(
         std::vector<info_set_type> info_sets
     )
     {
@@ -1022,9 +1046,10 @@ namespace bobura
         typename Font,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
-    void train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::do_modal_impl()
+    void train_kind_dialog<Traits, Size, String, Font, Color, Canvas, FontDialog, ColorDialog>::do_modal_impl()
     {
         m_p_impl->do_modal_impl();
     }
@@ -1072,6 +1097,7 @@ namespace bobura
         typename application::ui_type_list_type::fast_font_type,
         typename application::ui_type_list_type::color_type,
         typename application::ui_type_list_type::fast_canvas_type,
+        typename application::common_dialog_type_list_type::font_type,
         typename application::common_dialog_type_list_type::color_type
     >;
 #endif
@@ -1083,6 +1109,7 @@ namespace bobura
         typename test::ui_type_list_type::font_type,
         typename test::ui_type_list_type::color_type,
         typename test::ui_type_list_type::fast_canvas_type,
+        typename test::common_dialog_type_list_type::font_type,
         typename test::common_dialog_type_list_type::color_type
     >;
 

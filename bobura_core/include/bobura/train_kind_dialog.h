@@ -30,6 +30,7 @@ namespace bobura
         \tparam Font        A font type.
         \tparam Color       A color type.
         \tparam Canvas      A canvas type.
+        \tparam FontDialog  A font dialog type.
         \tparam ColorDialog A color dialog type.
     */
     template <
@@ -39,6 +40,7 @@ namespace bobura
         typename Font,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
     class train_kind_dialog : public Traits::dialog_type
@@ -72,6 +74,9 @@ namespace bobura
 
         //! The canvas type.
         using canvas_type = Canvas;
+
+        //! The font dialog type.
+        using font_dialog_type = FontDialog;
 
         //! The color dialog type.
         using color_dialog_type = ColorDialog;

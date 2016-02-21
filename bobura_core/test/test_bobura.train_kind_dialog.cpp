@@ -57,6 +57,7 @@ namespace
             font_type,
             color_type,
             ui_type_list_type::fast_canvas_type,
+            common_dialog_type_list_type::font_type,
             common_dialog_type_list_type::color_type
         >;
 

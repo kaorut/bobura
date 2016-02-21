@@ -25,6 +25,7 @@ namespace bobura { namespace command
         \tparam Dialog         A dialog type.
         \tparam Color          A color type.
         \tparam Canvas         A canvas type.
+        \tparam FontDialog     A font dialog type.
         \tparam ColorDialog    A color dialog type.
         \tparam MessageCatalog A message catalog type.
         \tparam DialogTraits   A dialog traits type.
@@ -34,6 +35,7 @@ namespace bobura { namespace command
         typename Dialog,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog,
         typename MessageCatalog,
         typename DialogTraits
@@ -55,7 +57,10 @@ namespace bobura { namespace command
         //! The canvas type.
         using canvas_type = Canvas;
 
-        //! THe color dialog type.
+        //! The font dialog type.
+        using font_dialog_type = FontDialog;
+
+        //! The color dialog type.
         using color_dialog_type = ColorDialog;
 
         //! The message catalog type.
