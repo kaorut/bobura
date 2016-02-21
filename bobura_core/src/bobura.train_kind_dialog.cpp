@@ -81,6 +81,7 @@ namespace bobura
         m_p_name_text_box(),
         m_p_abbreviation_label(),
         m_p_abbreviation_text_box(),
+        m_p_diagram_label(),
         m_p_diagram_font_button(),
         m_p_diagram_font_text_box(),
         m_p_diagram_color_button(),
@@ -289,6 +290,8 @@ namespace bobura
 
         std::unique_ptr<text_box_type> m_p_abbreviation_text_box;
 
+        std::unique_ptr<label_type> m_p_diagram_label;
+
         std::unique_ptr<button_type> m_p_diagram_font_button;
 
         std::unique_ptr<text_box_type> m_p_diagram_font_text_box;
@@ -328,6 +331,7 @@ namespace bobura
             m_p_name_text_box = create_name_text_box();
             m_p_abbreviation_label = create_abbreviation_label();
             m_p_abbreviation_text_box = create_abbreviation_text_box();
+            m_p_diagram_label = create_diagram_label();
             m_p_diagram_font_button = create_diagram_font_button();
             m_p_diagram_color_button = create_diagram_color_button();
             m_p_diagram_weight_label = create_diagram_weight_label();
@@ -467,6 +471,17 @@ namespace bobura
             );
 
             return std::move(p_text_box);
+        }
+
+        std::unique_ptr<label_type> create_diagram_label()
+        {
+            auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
+
+            p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Diagram:")));
+            auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
+            p_label->set_background(std::move(p_background));
+
+            return std::move(p_label);
         }
 
         std::unique_ptr<text_box_type> create_diagram_font_text_box()
