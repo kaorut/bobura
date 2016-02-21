@@ -81,6 +81,8 @@ namespace bobura
         m_p_name_text_box(),
         m_p_abbreviation_label(),
         m_p_abbreviation_text_box(),
+        m_p_diagram_font_button(),
+        m_p_diagram_font_text_box(),
         m_p_diagram_color_button(),
         m_p_diagram_weight_label(),
         m_p_diagram_weight_dropdown_box(),
@@ -287,6 +289,10 @@ namespace bobura
 
         std::unique_ptr<text_box_type> m_p_abbreviation_text_box;
 
+        std::unique_ptr<button_type> m_p_diagram_font_button;
+
+        std::unique_ptr<text_box_type> m_p_diagram_font_text_box;
+
         std::unique_ptr<button_type> m_p_diagram_color_button;
 
         std::unique_ptr<label_type> m_p_diagram_weight_label;
@@ -322,6 +328,7 @@ namespace bobura
             m_p_name_text_box = create_name_text_box();
             m_p_abbreviation_label = create_abbreviation_label();
             m_p_abbreviation_text_box = create_abbreviation_text_box();
+            m_p_diagram_font_button = create_diagram_font_button();
             m_p_diagram_color_button = create_diagram_color_button();
             m_p_diagram_weight_label = create_diagram_weight_label();
             m_p_diagram_weight_dropdown_box = create_diagram_weight_dropdown_box();
@@ -460,6 +467,28 @@ namespace bobura
             );
 
             return std::move(p_text_box);
+        }
+
+        std::unique_ptr<text_box_type> create_diagram_font_text_box()
+        {
+            auto p_text_box =
+                tetengo2::stdalt::make_unique<text_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
+
+            return std::move(p_text_box);
+        }
+
+        std::unique_ptr<button_type> create_diagram_font_button()
+        {
+            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base);
+
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:&Font...")));
+            p_button->mouse_observer_set().clicked().connect(
+                color_button_mouse_clicked_observer_type{
+                    m_base, m_current_train_kind_color, [this]() { this->apply(); }
+                }
+            );
+
+            return std::move(p_button);
         }
 
         std::unique_ptr<button_type> create_diagram_color_button()
@@ -730,6 +759,7 @@ namespace bobura
             m_p_name_text_box->set_enabled(static_cast<bool>(selected_index));
             m_p_abbreviation_label->set_enabled(static_cast<bool>(selected_index));
             m_p_abbreviation_text_box->set_enabled(static_cast<bool>(selected_index));
+            m_p_diagram_font_button->set_enabled(static_cast<bool>(selected_index));
             m_p_diagram_color_button->set_enabled(static_cast<bool>(selected_index));
             m_p_diagram_weight_label->set_enabled(static_cast<bool>(selected_index));
             m_p_diagram_weight_dropdown_box->set_enabled(static_cast<bool>(selected_index));
@@ -770,7 +800,6 @@ namespace bobura
 
             auto& train_kind = m_info_sets[*m_current_train_kind_index].train_kind();
 
-            assert(m_p_diagram_weight_dropdown_box->selected_value_index());
             assert(m_p_diagram_weight_dropdown_box->selected_value_index());
             train_kind =
                 train_kind_type{
