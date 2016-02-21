@@ -513,7 +513,7 @@ namespace bobura
         {
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base);
 
-            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Line &Color...")));
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:&Color...")));
             p_button->mouse_observer_set().clicked().connect(
                 color_button_mouse_clicked_observer_type{
                     m_base, m_current_train_kind_color, [this]() { this->apply(); }
