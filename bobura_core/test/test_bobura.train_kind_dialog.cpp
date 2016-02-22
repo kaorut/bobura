@@ -41,6 +41,8 @@ namespace
 
     using font_type = ui_type_list_type::font_type;
 
+    using point_unit_size_type = ui_type_list_type::point_unit_size_type;
+
     using color_type = ui_type_list_type::color_type;
 
     using window_type = ui_type_list_type::window_type;
@@ -55,6 +57,7 @@ namespace
             size_type,
             string_type,
             font_type,
+            point_unit_size_type,
             color_type,
             ui_type_list_type::fast_canvas_type,
             common_dialog_type_list_type::font_type,

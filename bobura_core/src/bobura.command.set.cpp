@@ -470,6 +470,7 @@ namespace bobura { namespace command
                     command::train_kind<
                         command_traits_type,
                         dialog_type,
+                        point_unit_size_type,
                         color_type,
                         canvas_type,
                         font_dialog_type,
