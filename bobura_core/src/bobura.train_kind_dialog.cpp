@@ -729,7 +729,7 @@ namespace bobura
 
         void locate_controls()
         {
-            m_base.set_client_dimension(dimension_type{ width_type{ 48 }, height_type{ 31 } });
+            m_base.set_client_dimension(dimension_type{ width_type{ 48 }, height_type{ 39 } });
 
             const left_type train_kind_label_left{ 2 };
             {
@@ -737,7 +737,7 @@ namespace bobura
                 m_p_train_kind_label->set_position(position_type{ train_kind_label_left, top_type{ 1 } });
 
                 const width_type list_box_width{ 20 };
-                const height_type list_box_height{ 22 };
+                const height_type list_box_height{ 30 };
                 m_p_train_kind_list_box->set_dimension(dimension_type{ list_box_width, list_box_height });
                 m_p_train_kind_list_box->set_position(
                     position_type{
@@ -822,16 +822,16 @@ namespace bobura
             }
             {
                 m_p_timetable_label->fit_to_content();
-                m_p_timetable_label->set_position(position_type{ name_label_left, top_type{ 7 } });
+                m_p_timetable_label->set_position(position_type{ name_label_left, top_type{ 21 } });
 
                 m_p_timetable_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_timetable_font_button->set_position(position_type{ font_button_left, top_type{ 9 } });
+                m_p_timetable_font_button->set_position(position_type{ font_button_left, top_type{ 23 } });
 
                 m_p_timetable_font_text_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
-                m_p_timetable_font_text_box->set_position(position_type{ font_text_box_left, top_type{ 9 } });
+                m_p_timetable_font_text_box->set_position(position_type{ font_text_box_left, top_type{ 23 } });
 
                 m_p_timetable_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_timetable_color_button->set_position(position_type{ font_button_left, top_type{ 12 } });
+                m_p_timetable_color_button->set_position(position_type{ font_button_left, top_type{ 26 } });
             }
             {
                 m_p_sample_label->fit_to_content();
@@ -844,7 +844,7 @@ namespace bobura
                         tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
                     }
                 );
-                m_p_sample_label->set_position(position_type{ name_label_left, top_type{ 21 } });
+                m_p_sample_label->set_position(position_type{ name_label_left, top_type{ 29 } });
 
                 m_p_sample_picture_box->set_position(
                     position_type{
@@ -858,10 +858,10 @@ namespace bobura
             }
             {
                 m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_ok_button->set_position(position_type{ left_type{ 29 }, top_type{ 28 } });
+                m_p_ok_button->set_position(position_type{ left_type{ 29 }, top_type{ 36 } });
 
                 m_p_cancel_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_cancel_button->set_position(position_type{ left_type{ 38 }, top_type{ 28 } });
+                m_p_cancel_button->set_position(position_type{ left_type{ 38 }, top_type{ 36 } });
             }
         }
 
