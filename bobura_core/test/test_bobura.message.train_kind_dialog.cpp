@@ -458,6 +458,64 @@ BOOST_AUTO_TEST_SUITE(diagram_line_style_dropdown_box_selection_changed)
 
 
 BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE(timetable_font_button_mouse_clicked)
+    // test cases
+
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type window{};
+        concrete_dialog dialog{ window };
+        auto font = font_type::dialog_font();
+        const bobura::message::train_kind_dialog::timetable_font_button_mouse_clicked<dialog_type, font_dialog_type>
+        observer(dialog, font, apply_function);
+    }
+
+    BOOST_AUTO_TEST_CASE(operator_paren)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type window{};
+        concrete_dialog dialog{ window };
+        auto font = font_type::dialog_font();
+        const bobura::message::train_kind_dialog::timetable_font_button_mouse_clicked<dialog_type, font_dialog_type>
+        observer(dialog, font, apply_function);
+
+        observer();
+    }
+
+
+BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE(timetable_color_button_mouse_clicked)
+    // test cases
+
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type window{};
+        concrete_dialog dialog{ window };
+        color_type color{ 0x12, 0x34, 0x56 };
+        const bobura::message::train_kind_dialog::timetable_color_button_mouse_clicked<dialog_type, color_dialog_type>
+        observer(dialog, color, apply_function);
+    }
+
+    BOOST_AUTO_TEST_CASE(operator_paren)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type window{};
+        concrete_dialog dialog{ window };
+        color_type color{ 0x12, 0x34, 0x56 };
+        const bobura::message::train_kind_dialog::timetable_color_button_mouse_clicked<dialog_type, color_dialog_type>
+        observer(dialog, color, apply_function);
+
+        observer();
+    }
+
+
+BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
     // test cases
 

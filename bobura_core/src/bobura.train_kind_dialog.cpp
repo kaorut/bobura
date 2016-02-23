@@ -81,6 +81,8 @@ namespace bobura
         m_current_train_kind_index(),
         m_current_diagram_font(font_type::dialog_font()),
         m_current_diagram_color(0, 0, 0),
+        m_current_timetable_font(font_type::dialog_font()),
+        m_current_timetable_color(0, 0, 0),
         m_p_train_kind_label(),
         m_p_train_kind_list_box(),
         m_p_add_button(),
@@ -99,6 +101,10 @@ namespace bobura
         m_p_diagram_weight_dropdown_box(),
         m_p_diagram_line_style_label(),
         m_p_diagram_line_style_dropdown_box(),
+        m_p_timetable_label(),
+        m_p_timetable_font_button(),
+        m_p_timetable_font_text_box(),
+        m_p_timetable_color_button(),
         m_p_sample_picture_box(),
         m_p_ok_button(),
         m_p_cancel_button()
@@ -188,6 +194,12 @@ namespace bobura
 
         using diagram_line_style_dropdown_box_selection_changed_observer_type =
             message::train_kind_dialog::diagram_line_style_dropdown_box_selection_changed;
+
+        using timetable_font_button_mouse_clicked_observer_type =
+            message::train_kind_dialog::timetable_font_button_mouse_clicked<base_type, font_dialog_type>;
+
+        using timetable_color_button_mouse_clicked_observer_type =
+            message::train_kind_dialog::timetable_color_button_mouse_clicked<base_type, color_dialog_type>;
 
         using sample_picture_box_paint_observer_type =
             message::train_kind_dialog::sample_picture_box_paint<info_set_type, size_type, Canvas>;
@@ -285,6 +297,10 @@ namespace bobura
 
         color_type m_current_diagram_color;
 
+        font_type m_current_timetable_font;
+
+        color_type m_current_timetable_color;
+
         std::unique_ptr<label_type> m_p_train_kind_label;
 
         std::unique_ptr<list_box_type> m_p_train_kind_list_box;
@@ -321,6 +337,14 @@ namespace bobura
 
         std::unique_ptr<dropdown_box_type> m_p_diagram_line_style_dropdown_box;
 
+        std::unique_ptr<label_type> m_p_timetable_label;
+
+        std::unique_ptr<button_type> m_p_timetable_font_button;
+
+        std::unique_ptr<text_box_type> m_p_timetable_font_text_box;
+
+        std::unique_ptr<button_type> m_p_timetable_color_button;
+
         std::unique_ptr<label_type> m_p_sample_label;
 
         std::unique_ptr<picture_box_type> m_p_sample_picture_box;
@@ -354,6 +378,10 @@ namespace bobura
             m_p_diagram_weight_dropdown_box = create_diagram_weight_dropdown_box();
             m_p_diagram_line_style_label = create_diagram_line_style_label();
             m_p_diagram_line_style_dropdown_box = create_diagram_line_style_dropdown_box();
+            m_p_timetable_label = create_timetable_label();
+            m_p_timetable_font_button = create_timetable_font_button();
+            m_p_timetable_font_text_box = create_timetable_font_text_box();
+            m_p_timetable_color_button = create_timetable_color_button();
             m_p_sample_label = create_sample_label();
             m_p_sample_picture_box = create_sample_picture_box(background_color);
             m_p_ok_button = create_ok_button();
@@ -500,16 +528,6 @@ namespace bobura
             return std::move(p_label);
         }
 
-        std::unique_ptr<text_box_type> create_diagram_font_text_box()
-        {
-            auto p_text_box =
-                tetengo2::stdalt::make_unique<text_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
-
-            p_text_box->set_read_only(true);
-
-            return std::move(p_text_box);
-        }
-
         std::unique_ptr<button_type> create_diagram_font_button()
         {
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base);
@@ -522,6 +540,16 @@ namespace bobura
             );
 
             return std::move(p_button);
+        }
+
+        std::unique_ptr<text_box_type> create_diagram_font_text_box()
+        {
+            auto p_text_box =
+                tetengo2::stdalt::make_unique<text_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
+
+            p_text_box->set_read_only(true);
+
+            return std::move(p_text_box);
         }
 
         std::unique_ptr<button_type> create_diagram_color_button()
@@ -602,6 +630,55 @@ namespace bobura
             );
 
             return std::move(p_dropdown_box);
+        }
+
+        std::unique_ptr<label_type> create_timetable_label()
+        {
+            auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
+
+            p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Timetable:")));
+            auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
+            p_label->set_background(std::move(p_background));
+
+            return std::move(p_label);
+        }
+
+        std::unique_ptr<button_type> create_timetable_font_button()
+        {
+            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base);
+
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:&Font...")));
+            p_button->mouse_observer_set().clicked().connect(
+                timetable_font_button_mouse_clicked_observer_type{
+                    m_base, m_current_timetable_font, [this]() { this->apply(); }
+                }
+            );
+
+            return std::move(p_button);
+        }
+
+        std::unique_ptr<text_box_type> create_timetable_font_text_box()
+        {
+            auto p_text_box =
+                tetengo2::stdalt::make_unique<text_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
+
+            p_text_box->set_read_only(true);
+
+            return std::move(p_text_box);
+        }
+
+        std::unique_ptr<button_type> create_timetable_color_button()
+        {
+            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base);
+
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:&Color...")));
+            p_button->mouse_observer_set().clicked().connect(
+                timetable_color_button_mouse_clicked_observer_type{
+                    m_base, m_current_timetable_color, [this]() { this->apply(); }
+                }
+            );
+
+            return std::move(p_button);
         }
 
         std::unique_ptr<label_type> create_sample_label()
@@ -744,6 +821,19 @@ namespace bobura
                 m_p_diagram_line_style_dropdown_box->set_position(position_type{ font_text_box_left, top_type{ 18 } });
             }
             {
+                m_p_timetable_label->fit_to_content();
+                m_p_timetable_label->set_position(position_type{ name_label_left, top_type{ 7 } });
+
+                m_p_timetable_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_timetable_font_button->set_position(position_type{ font_button_left, top_type{ 9 } });
+
+                m_p_timetable_font_text_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
+                m_p_timetable_font_text_box->set_position(position_type{ font_text_box_left, top_type{ 9 } });
+
+                m_p_timetable_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_timetable_color_button->set_position(position_type{ font_button_left, top_type{ 12 } });
+            }
+            {
                 m_p_sample_label->fit_to_content();
                 m_p_sample_label->set_dimension(
                     dimension_type{
@@ -817,6 +907,8 @@ namespace bobura
             m_p_diagram_weight_dropdown_box->set_enabled(static_cast<bool>(selected_index));
             m_p_diagram_line_style_label->set_enabled(static_cast<bool>(selected_index));
             m_p_diagram_line_style_dropdown_box->set_enabled(static_cast<bool>(selected_index));
+            m_p_timetable_font_button->set_enabled(static_cast<bool>(selected_index));
+            m_p_timetable_color_button->set_enabled(static_cast<bool>(selected_index));
 
             if (static_cast<bool>(selected_index))
             {
@@ -825,6 +917,8 @@ namespace bobura
 
                 m_current_diagram_font = train_kind.diagram_font();
                 m_current_diagram_color = train_kind.diagram_color();
+                m_current_timetable_font = train_kind.timetable_font();
+                m_current_timetable_color = train_kind.timetable_color();
                 m_p_name_text_box->set_text(train_kind.name());
                 m_p_abbreviation_text_box->set_text(train_kind.abbreviation());
                 m_p_diagram_font_text_box->set_text(font_name_and_size(m_current_diagram_font));
@@ -834,16 +928,20 @@ namespace bobura
                 m_p_diagram_line_style_dropdown_box->select_value(
                     to_line_style_dropdown_box_index(train_kind.diagram_line_style())
                 );
+                m_p_timetable_font_text_box->set_text(font_name_and_size(m_current_timetable_font));
             }
             else
             {
                 m_current_diagram_font = font_type::dialog_font();
                 m_current_diagram_color = color_type{ 0, 0, 0 };
+                m_current_timetable_font = font_type::dialog_font();
+                m_current_timetable_color = color_type{ 0, 0, 0 };
                 m_p_name_text_box->set_text(string_type{});
                 m_p_abbreviation_text_box->set_text(string_type{});
                 m_p_diagram_font_text_box->set_text(string_type{});
                 m_p_diagram_weight_dropdown_box->select_value(0);
                 m_p_diagram_line_style_dropdown_box->select_value(0);
+                m_p_timetable_font_text_box->set_text(string_type{});
             }
 
             m_p_sample_picture_box->repaint();
@@ -865,14 +963,15 @@ namespace bobura
                     m_current_diagram_color,
                     to_weight(*m_p_diagram_weight_dropdown_box->selected_value_index()),
                     to_line_style(*m_p_diagram_line_style_dropdown_box->selected_value_index()),
-                    train_kind_type::default_().timetable_font(), // TODO
-                    train_kind_type::default_().timetable_color() // TODO
+                    m_current_timetable_font,
+                    m_current_timetable_color
                 };
 
             m_p_train_kind_list_box->set_value(*m_current_train_kind_index, train_kind.name());
             m_p_train_kind_list_box->select_value(*m_current_train_kind_index);
 
             m_p_diagram_font_text_box->set_text(font_name_and_size(m_current_diagram_font));
+            m_p_timetable_font_text_box->set_text(font_name_and_size(m_current_timetable_font));
             m_p_sample_picture_box->repaint();
         }
 
