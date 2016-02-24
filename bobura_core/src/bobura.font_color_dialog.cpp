@@ -563,8 +563,8 @@ namespace bobura
 
                 const auto color_button_top =
                     tetengo2::gui::position<position_type>::top(m_p_diagram_font_button->position()) +
-                    top_type::from(tetengo2::gui::dimension<dimension_type>::height(
-                        m_p_diagram_font_button->dimension())
+                    top_type::from(
+                        tetengo2::gui::dimension<dimension_type>::height(m_p_diagram_font_button->dimension())
                     ) +
                     top_type{ 1 } / 2;
 
@@ -589,8 +589,8 @@ namespace bobura
 
                 const auto color_button_top =
                     tetengo2::gui::position<position_type>::top(m_p_timetable_font_button->position()) +
-                    top_type::from(tetengo2::gui::dimension<dimension_type>::height(
-                        m_p_timetable_font_button->dimension())
+                    top_type::from(
+                        tetengo2::gui::dimension<dimension_type>::height(m_p_timetable_font_button->dimension())
                     ) +
                     top_type{ 1 } / 2;
 

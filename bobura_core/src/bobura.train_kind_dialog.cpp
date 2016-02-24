@@ -729,7 +729,7 @@ namespace bobura
 
         void locate_controls()
         {
-            m_base.set_client_dimension(dimension_type{ width_type{ 48 }, height_type{ 39 } });
+            m_base.set_client_dimension(dimension_type{ width_type{ 48 }, height_type{ 37 } });
 
             const left_type train_kind_label_left{ 2 };
             {
@@ -737,7 +737,7 @@ namespace bobura
                 m_p_train_kind_label->set_position(position_type{ train_kind_label_left, top_type{ 1 } });
 
                 const width_type list_box_width{ 20 };
-                const height_type list_box_height{ 30 };
+                const height_type list_box_height{ 28 };
                 m_p_train_kind_list_box->set_dimension(dimension_type{ list_box_width, list_box_height });
                 m_p_train_kind_list_box->set_position(
                     position_type{
@@ -797,41 +797,79 @@ namespace bobura
                 m_p_diagram_label->fit_to_content();
                 m_p_diagram_label->set_position(position_type{ name_label_left, top_type{ 7 } });
 
+                const auto font_button_top =
+                    tetengo2::gui::position<position_type>::top(m_p_diagram_label->position()) +
+                    top_type::from(tetengo2::gui::dimension<dimension_type>::height(m_p_diagram_label->dimension()));
+
                 m_p_diagram_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_diagram_font_button->set_position(position_type{ font_button_left, top_type{ 9 } });
+                m_p_diagram_font_button->set_position(position_type{ font_button_left, font_button_top });
 
                 m_p_diagram_font_text_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
-                m_p_diagram_font_text_box->set_position(position_type{ font_text_box_left, top_type{ 9 } });
+                m_p_diagram_font_text_box->set_position(position_type{ font_text_box_left, font_button_top });
+
+                const auto color_button_top =
+                    tetengo2::gui::position<position_type>::top(m_p_diagram_font_button->position()) +
+                    top_type::from(
+                        tetengo2::gui::dimension<dimension_type>::height(m_p_diagram_font_button->dimension())
+                    ) +
+                    top_type{ 1 } / 2;
 
                 m_p_diagram_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_diagram_color_button->set_position(position_type{ font_button_left, top_type{ 12 } });
+                m_p_diagram_color_button->set_position(position_type{ font_button_left, color_button_top });
+
+                const auto weight_label_top =
+                    tetengo2::gui::position<position_type>::top(m_p_diagram_color_button->position()) +
+                    top_type::from(
+                        tetengo2::gui::dimension<dimension_type>::height(m_p_diagram_color_button->dimension())
+                    ) +
+                    top_type{ 1 } / 2;
 
                 m_p_diagram_weight_label->fit_to_content();
-                m_p_diagram_weight_label->set_position(position_type{ font_button_left, top_type{ 15 } });
+                m_p_diagram_weight_label->set_position(position_type{ font_button_left, weight_label_top });
 
                 m_p_diagram_weight_dropdown_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
-                m_p_diagram_weight_dropdown_box->set_position(position_type{ font_text_box_left, top_type{ 15 } });
+                m_p_diagram_weight_dropdown_box->set_position(position_type{ font_text_box_left, weight_label_top });
+
+                const auto line_style_label_top =
+                    tetengo2::gui::position<position_type>::top(m_p_diagram_weight_dropdown_box->position()) +
+                    top_type::from(
+                        tetengo2::gui::dimension<dimension_type>::height(m_p_diagram_weight_dropdown_box->dimension())
+                    ) +
+                    top_type{ 1 } / 2;
 
                 m_p_diagram_line_style_label->fit_to_content();
-                m_p_diagram_line_style_label->set_position(position_type{ font_button_left, top_type{ 18 } });
+                m_p_diagram_line_style_label->set_position(position_type{ font_button_left, line_style_label_top });
 
                 m_p_diagram_line_style_dropdown_box->set_dimension(
                     dimension_type{ width_type{ 12 }, height_type{ 2 } }
                 );
-                m_p_diagram_line_style_dropdown_box->set_position(position_type{ font_text_box_left, top_type{ 18 } });
+                m_p_diagram_line_style_dropdown_box->set_position(
+                    position_type{ font_text_box_left, line_style_label_top }
+                );
             }
             {
                 m_p_timetable_label->fit_to_content();
-                m_p_timetable_label->set_position(position_type{ name_label_left, top_type{ 21 } });
+                m_p_timetable_label->set_position(position_type{ name_label_left, top_type{ 20 } });
+
+                const auto font_button_top =
+                    tetengo2::gui::position<position_type>::top(m_p_timetable_label->position()) +
+                    top_type::from(tetengo2::gui::dimension<dimension_type>::height(m_p_timetable_label->dimension()));
 
                 m_p_timetable_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_timetable_font_button->set_position(position_type{ font_button_left, top_type{ 23 } });
+                m_p_timetable_font_button->set_position(position_type{ font_button_left, font_button_top });
 
                 m_p_timetable_font_text_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
-                m_p_timetable_font_text_box->set_position(position_type{ font_text_box_left, top_type{ 23 } });
+                m_p_timetable_font_text_box->set_position(position_type{ font_text_box_left, font_button_top });
+
+                const auto color_button_top =
+                    tetengo2::gui::position<position_type>::top(m_p_timetable_font_button->position()) +
+                    top_type::from(
+                        tetengo2::gui::dimension<dimension_type>::height(m_p_timetable_font_button->dimension())
+                    ) +
+                    top_type{ 1 } / 2;
 
                 m_p_timetable_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_timetable_color_button->set_position(position_type{ font_button_left, top_type{ 26 } });
+                m_p_timetable_color_button->set_position(position_type{ font_button_left, color_button_top });
             }
             {
                 m_p_sample_label->fit_to_content();
@@ -844,7 +882,7 @@ namespace bobura
                         tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
                     }
                 );
-                m_p_sample_label->set_position(position_type{ name_label_left, top_type{ 29 } });
+                m_p_sample_label->set_position(position_type{ name_label_left, top_type{ 27 } });
 
                 m_p_sample_picture_box->set_position(
                     position_type{
@@ -858,10 +896,10 @@ namespace bobura
             }
             {
                 m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_ok_button->set_position(position_type{ left_type{ 29 }, top_type{ 36 } });
+                m_p_ok_button->set_position(position_type{ left_type{ 29 }, top_type{ 34 } });
 
                 m_p_cancel_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_cancel_button->set_position(position_type{ left_type{ 38 }, top_type{ 36 } });
+                m_p_cancel_button->set_position(position_type{ left_type{ 38 }, top_type{ 34 } });
             }
         }
 
