@@ -977,35 +977,18 @@ namespace bobura { namespace message { namespace train_kind_dialog
         void operator()(canvas_type& canvas)
         const
         {
-            auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(m_background_color);
-            canvas.set_background(std::move(p_background));
-            canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, m_canvas_dimension);
+            paint_background(canvas);
 
             if (!m_current_train_kind_index)
                 return;
-
             const auto& train_kind = m_info_sets[*m_current_train_kind_index].train_kind();
 
-            canvas.set_font(fixed_size_font(train_kind.diagram_font()));
-            canvas.set_color(train_kind.diagram_color());
-
-            const auto& text = train_kind.abbreviation().empty() ? train_kind.name() : train_kind.abbreviation();
-            const auto text_and_line_tops = sample_text_and_line_tops(canvas, text);
-            canvas.draw_text(text, position_type{ left_type{ 1 }, text_and_line_tops.first });
-
-            auto line_width =
-                train_kind.diagram_line_weight() == train_kind_type::weight_type::bold ?
-                width_type{ size_type{ 1, 6 } } : width_type{ size_type{ 1, 12 } };
-            canvas.set_line_width(std::move(line_width));
-            
-            canvas.set_line_style(to_canvas_line_style(train_kind.diagram_line_style()));
-            canvas.draw_line(
-                position_type{ left_type{ 0 }, text_and_line_tops.second },
-                position_type{
-                    left_type::from(tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension)),
-                    text_and_line_tops.second
-                }
-            );
+            const position_type diagram_part_position{ left_type{ 0 }, top_type{ 0 } };
+            const dimension_type diagram_part_dimension{
+                tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension) / 2,
+                tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension),
+            };
+            draw_diagram_part(train_kind, canvas, diagram_part_position, diagram_part_dimension);
         }
 
 
@@ -1021,8 +1004,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
         using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-        using size_type = typename width_type::value_type;
 
         using background_type = typename canvas_type::background_type;
 
@@ -1080,7 +1061,55 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
         // functions
 
-        std::pair<top_type, top_type> sample_text_and_line_tops(const canvas_type& canvas, const string_type& text)
+        void paint_background(canvas_type& canvas)
+        const
+        {
+            auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(m_background_color);
+            canvas.set_background(std::move(p_background));
+            canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, m_canvas_dimension);
+        }
+
+        void draw_diagram_part(
+            const train_kind_type& train_kind,
+            canvas_type&           canvas,
+            const position_type&   position,
+            const dimension_type&  dimension
+        )
+        const
+        {
+            canvas.set_font(fixed_size_font(train_kind.diagram_font()));
+            canvas.set_color(train_kind.diagram_color());
+
+            const auto& text = train_kind.abbreviation().empty() ? train_kind.name() : train_kind.abbreviation();
+            const auto text_and_line_tops = diagram_sample_text_and_line_tops(canvas, position, dimension, text);
+            canvas.draw_text(
+                text,
+                position_type{
+                    tetengo2::gui::position<position_type>::left(position) + left_type{ 1 }, text_and_line_tops.first
+                }
+            );
+
+            auto line_width =
+                train_kind.diagram_line_weight() == train_kind_type::weight_type::bold ?
+                width_type{ 1 } / 6 : width_type{ 1 } / 12;
+            canvas.set_line_width(std::move(line_width));
+            canvas.set_line_style(to_canvas_line_style(train_kind.diagram_line_style()));
+            canvas.draw_line(
+                position_type{ tetengo2::gui::position<position_type>::left(position), text_and_line_tops.second },
+                position_type{
+                    tetengo2::gui::position<position_type>::left(position) +
+                    left_type::from(tetengo2::gui::dimension<dimension_type>::width(dimension)),
+                    text_and_line_tops.second
+                }
+            );
+        }
+
+        std::pair<top_type, top_type> diagram_sample_text_and_line_tops(
+            const canvas_type&     canvas,
+            const position_type&   base_position,
+            const dimension_type&  base_dimension,
+            const string_type&     text
+        )
         const
         {
             const auto& canvas_height = tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension);
@@ -1089,13 +1118,17 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             if (canvas_height > text_height)
             {
-                const auto text_top = top_type::from((canvas_height - text_height) / 2);
+                const auto text_top =
+                    tetengo2::gui::position<position_type>::top(base_position) +
+                    top_type::from((canvas_height - text_height) / 2);
                 const auto line_top = text_top + top_type::from(text_height);
                 return std::make_pair(text_top, line_top);
             }
             else
             {
-                const auto line_top = top_type::from(canvas_height);
+                const auto line_top =
+                    tetengo2::gui::position<position_type>::top(base_position) +
+                    top_type::from(canvas_height);
                 const auto text_top = line_top - top_type::from(text_height);
                 return std::make_pair(text_top, line_top);
             }
