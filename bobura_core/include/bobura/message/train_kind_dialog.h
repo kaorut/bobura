@@ -13,6 +13,7 @@
 #include <functional>
 #include <iterator>
 #include <stdexcept>
+#include <tuple>
 #include <utility>
 #include <vector>
 
@@ -989,6 +990,15 @@ namespace bobura { namespace message { namespace train_kind_dialog
                 tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension),
             };
             draw_diagram_part(train_kind, canvas, diagram_part_position, diagram_part_dimension);
+
+            const position_type timetable_part_position{
+                left_type::from(tetengo2::gui::dimension<dimension_type>::width(diagram_part_dimension)), top_type{ 0 }
+            };
+            const dimension_type timetable_part_dimension{
+                tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension) / 2,
+                tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension),
+            };
+            draw_timetable_part(train_kind, canvas, timetable_part_position, timetable_part_dimension);
         }
 
 
@@ -1112,7 +1122,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         )
         const
         {
-            const auto& canvas_height = tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension);
+            const auto& canvas_height = tetengo2::gui::dimension<dimension_type>::height(base_dimension);
             const auto text_dimension = canvas.calc_text_dimension(text);
             const auto& text_height = tetengo2::gui::dimension<dimension_type>::height(text_dimension);
 
@@ -1134,6 +1144,105 @@ namespace bobura { namespace message { namespace train_kind_dialog
             }
         }
 
+        void draw_timetable_part(
+            const train_kind_type& train_kind,
+            canvas_type&           canvas,
+            const position_type&   position,
+            const dimension_type&  dimension
+        )
+        const
+        {
+            canvas.set_font(fixed_size_font(train_kind.timetable_font()));
+            canvas.set_color(train_kind.timetable_color());
+
+            const auto& text = train_kind.abbreviation().empty() ? train_kind.name() : train_kind.abbreviation();
+            const auto text_dimension = canvas.calc_text_dimension(text);
+            const auto text_position = timetable_sample_text_position(canvas, position, dimension, text_dimension);
+            canvas.draw_text(text, text_position);
+
+            canvas.set_line_width(width_type{ 1 } / 12);
+            canvas.set_line_style(canvas_type::line_style_type::solid);
+
+            const auto line_positions =
+                timetable_sample_line_positions(canvas, position, dimension, text_position, text_dimension);
+            const auto& text_left = tetengo2::gui::position<position_type>::left(std::get<0>(line_positions));
+            const auto& text_right = tetengo2::gui::position<position_type>::left(std::get<1>(line_positions));
+            const auto& text_top = tetengo2::gui::position<position_type>::top(std::get<0>(line_positions));
+            const auto& text_bottom = tetengo2::gui::position<position_type>::top(std::get<1>(line_positions));
+            const auto& line_left = tetengo2::gui::position<position_type>::left(std::get<2>(line_positions));
+            const auto& line_right = tetengo2::gui::position<position_type>::left(std::get<3>(line_positions));
+            const auto& line_buttom = tetengo2::gui::position<position_type>::top(std::get<2>(line_positions));
+            canvas.draw_line(position_type{ line_left, text_top }, position_type{ line_right, text_top });
+            canvas.draw_line(position_type{ line_left, text_bottom }, position_type{ line_right, text_bottom });
+            canvas.draw_line(position_type{ text_left, text_top }, position_type{ text_left, line_buttom });
+            canvas.draw_line(position_type{ text_right, text_top }, position_type{ text_right, line_buttom });
+        }
+
+        position_type timetable_sample_text_position(
+            const canvas_type&    canvas,
+            const position_type&  base_position,
+            const dimension_type& base_dimension,
+            const dimension_type& text_dimension
+        )
+        const
+        {
+            const auto& canvas_width = tetengo2::gui::dimension<dimension_type>::width(base_dimension);
+            const auto& canvas_height = tetengo2::gui::dimension<dimension_type>::height(base_dimension);
+            const auto& text_width = tetengo2::gui::dimension<dimension_type>::width(text_dimension);
+            const auto& text_height = tetengo2::gui::dimension<dimension_type>::height(text_dimension);
+
+            auto left = canvas_width > text_width ? left_type::from((canvas_width - text_width) / 2) : left_type{ 0 };
+            auto top = canvas_height > text_height ? top_type::from((canvas_height - text_height) / 2) : top_type{ 0 };
+            return
+                position_type{
+                    tetengo2::gui::position<position_type>::left(base_position) + left,
+                    tetengo2::gui::position<position_type>::top(base_position) + top
+                };
+        }
+
+        std::tuple<position_type, position_type, position_type, position_type> timetable_sample_line_positions(
+            const canvas_type&    canvas,
+            const position_type&  base_position,
+            const dimension_type& base_dimension,
+            const position_type&  text_position,
+            const dimension_type& text_dimension
+        )
+        const
+        {
+            const auto& canvas_left = tetengo2::gui::position<position_type>::left(base_position);
+            const auto& canvas_width = tetengo2::gui::dimension<dimension_type>::width(base_dimension);
+            const auto& canvas_height = tetengo2::gui::dimension<dimension_type>::height(base_dimension);
+            const auto canvas_bottom =
+                tetengo2::gui::position<position_type>::top(base_position) + top_type::from(canvas_height);
+            const auto text_width =
+                tetengo2::gui::dimension<dimension_type>::width(text_dimension) > width_type{ 3 } ?
+                tetengo2::gui::dimension<dimension_type>::width(text_dimension) : width_type{ 3 };
+            const auto text_left =
+                tetengo2::gui::dimension<dimension_type>::width(text_dimension) > width_type{ 3 } ?
+                tetengo2::gui::position<position_type>::left(text_position) :
+                tetengo2::gui::position<position_type>::left(text_position) -
+                    left_type::from(
+                        (width_type{ 3 } - tetengo2::gui::dimension<dimension_type>::width(text_dimension)) / 2
+                    );
+            const auto text_right = text_left + left_type::from(text_width);
+            const auto& text_top = tetengo2::gui::position<position_type>::top(text_position);
+            const auto& text_bottom =
+                text_top + top_type::from(tetengo2::gui::dimension<dimension_type>::height(text_dimension));
+            const auto horizontal_line_left =
+                text_left - canvas_left > left_type{ 1 } / 2 ?
+                text_left - left_type{ 1 } / 2 : canvas_left;
+            const auto horizontal_line_right =
+                text_right + left_type{ 1 } / 2 < canvas_left + left_type::from(canvas_width) ?
+                text_right + left_type{ 1 } / 2 : canvas_left + left_type::from(canvas_width);
+
+            return
+                std::make_tuple(
+                    position_type{ text_left, text_top },
+                    position_type{ text_right, text_bottom },
+                    position_type{ horizontal_line_left, canvas_bottom },
+                    position_type{ horizontal_line_right, canvas_bottom }
+                );
+        }
 
     };
 
