@@ -448,9 +448,12 @@ namespace bobura { namespace model { namespace serializer
                     train_kind_type{
                         std::move(m_syubetsumei),
                         std::move(abbreviation),
+                        train_kind_type::default_().diagram_font(),
                         std::move(*color),
                         to_weight(m_diagram_sen_is_bold),
-                        to_line_style(m_diagram_sen_style)
+                        to_line_style(m_diagram_sen_style),
+                        train_kind_type::default_().timetable_font(),
+                        train_kind_type::default_().timetable_color()
                     }
                 );
 

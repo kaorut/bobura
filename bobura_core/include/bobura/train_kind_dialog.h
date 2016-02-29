@@ -24,21 +24,25 @@ namespace bobura
     /*!
         \brief The class template for the train kind dialog.
 
-        \tparam Traits      A traits type.
-        \tparam Size        A size type.
-        \tparam String      A string type.
-        \tparam Font        A font type.
-        \tparam Color       A color type.
-        \tparam Canvas      A canvas type.
-        \tparam ColorDialog A color dialog type.
+        \tparam Traits        A traits type.
+        \tparam Size          A size type.
+        \tparam String        A string type.
+        \tparam Font          A font type.
+        \tparam PointUnitSize A point unit size type.
+        \tparam Color         A color type.
+        \tparam Canvas        A canvas type.
+        \tparam FontDialog    A font dialog type.
+        \tparam ColorDialog   A color dialog type.
     */
     template <
         typename Traits,
         typename Size,
         typename String,
         typename Font,
+        typename PointUnitSize,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
     class train_kind_dialog : public Traits::dialog_type
@@ -67,11 +71,17 @@ namespace bobura
         //! The font type.
         using font_type = Font;
 
+        //! The point unit size type.
+        using point_unit_size_type = PointUnitSize;
+
         //! The color type.
         using color_type = Color;
 
         //! The canvas type.
         using canvas_type = Canvas;
+
+        //! The font dialog type.
+        using font_dialog_type = FontDialog;
 
         //! The color dialog type.
         using color_dialog_type = ColorDialog;
@@ -81,7 +91,7 @@ namespace bobura
         {
         public:
             //! The train kind type.
-            using train_kind_type = bobura::model::train_kind<string_type>;
+            using train_kind_type = bobura::model::train_kind<string_type, font_type>;
 
             /*!
                 \brief Creates an information set.
@@ -140,13 +150,11 @@ namespace bobura
             \brief Creates a train kind dialog.
 
             \param parent           A parent window.
-            \param font             A font for the sample.
             \param background_color A background color for the sample.
             \param message_catalog  A message catalog.
         */
         train_kind_dialog(
             abstract_window_type&       parent,
-            const font_type&            font,
             const color_type&           background_color,
             const message_catalog_type& message_catalog
         );

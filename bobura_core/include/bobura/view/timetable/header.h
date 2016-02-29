@@ -56,16 +56,16 @@ namespace bobura { namespace view { namespace timetable
         // constructors and destructor
 
         /*!
-            \brief Creates a note header.
+            \brief Creates a company name header.
 
-            \param note      A company and line name.
-            \param font      A font.
-            \param color     A color.
-            \param position  A position.
-            \param dimension A dimension.
+            \param company_name A company name.
+            \param font         A font.
+            \param color        A color.
+            \param position     A position.
+            \param dimension    A dimension.
         */
         company_name_header(
-            string_type       note,
+            string_type       company_name,
             const font_type&  font,
             const color_type& color,
             position_type     position,
@@ -73,14 +73,14 @@ namespace bobura { namespace view { namespace timetable
         );
 
         /*!
-            \brief Moves a note header.
+            \brief Moves a company name header.
 
-            \param another Another note header.
+            \param another Another company name header.
         */
         company_name_header(company_name_header&& another);
 
         /*!
-            \brief Destroys the note header.
+            \brief Destroys the company name header.
         */
         virtual ~company_name_header()
         noexcept;
@@ -89,11 +89,11 @@ namespace bobura { namespace view { namespace timetable
         // functions
 
         /*!
-            \brief Assigns a note header.
+            \brief Assigns a company name header.
 
-            \param another Another note header.
+            \param another Another company name header.
 
-            \return This note header.
+            \return This company name header.
         */
         company_name_header& operator=(company_name_header&& another);
 
@@ -156,16 +156,16 @@ namespace bobura { namespace view { namespace timetable
         // constructors and destructor
 
         /*!
-            \brief Creates a note header.
+            \brief Creates a line name header.
 
-            \param note      A company and line name.
+            \param line_name A line name.
             \param font      A font.
             \param color     A color.
             \param position  A position.
             \param dimension A dimension.
         */
         line_name_header(
-            string_type       note,
+            string_type       line_name,
             const font_type&  font,
             const color_type& color,
             position_type     position,
@@ -173,14 +173,14 @@ namespace bobura { namespace view { namespace timetable
         );
 
         /*!
-            \brief Moves a note header.
+            \brief Moves a line name header.
 
-            \param another Another note header.
+            \param another Another line name header.
         */
         line_name_header(line_name_header&& another);
 
         /*!
-            \brief Destroys the note header.
+            \brief Destroys the line name header.
         */
         virtual ~line_name_header()
         noexcept;
@@ -189,11 +189,11 @@ namespace bobura { namespace view { namespace timetable
         // functions
 
         /*!
-            \brief Assigns a note header.
+            \brief Assigns a line name header.
 
-            \param another Another note header.
+            \param another Another line name header.
 
-            \return This note header.
+            \return This line name header.
         */
         line_name_header& operator=(line_name_header&& another);
 
@@ -258,7 +258,7 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Creates a note header.
 
-            \param note      A company and line name.
+            \param note      A note.
             \param font      A font.
             \param color     A color.
             \param position  A position.

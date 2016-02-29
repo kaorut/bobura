@@ -6,14 +6,14 @@
     },
     {
         "background":                 "F8F8E0",
-        "company_line_name":          [["ＭＳ Ｐゴシック", 24, false, false, false, false], "404040"],
+        "company_name":               [["ＭＳ Ｐゴシック", 24, false, false, false, false], "404040"],
+        "line_name":                  [["ＭＳ Ｐ明朝",     24, false, false, false, false], "404040"],
         "note":                       [["ＭＳ Ｐ明朝",     12, false, false, false, false], "404040"],
         "time_line":                  [["ＭＳ Ｐ明朝",     16, false, false, false, false], "808080"],
         "local_station":              [["ＭＳ Ｐ明朝",     12, false, false, false, false], "A0A0A0"],
         "principal_station":          [["ＭＳ Ｐゴシック", 12, false, false, false, false], "4040A0"],
         "local_terminal_station":     [["ＭＳ Ｐゴシック", 16, false, false, false, false], "A04040"],
-        "principal_terminal_station": [["ＭＳ Ｐゴシック", 16, false, false, false, false], "000000"],
-        "train_name":                 ["ＭＳ Ｐ明朝",     12, false, false, false, false]
+        "principal_terminal_station": [["ＭＳ Ｐゴシック", 16, false, false, false, false], "000000"]
     },
     [
         {
@@ -179,18 +179,24 @@
     ],
     [
         {
-            "name":         "普通",
-            "abbreviation": "普通",
-            "color":        "0000FF",
-            "weight":       0,
-            "line_style":   0
+            "name":                "普通",
+            "abbreviation":        "普通",
+            "diagram_font":        ["ＭＳ Ｐ明朝", 12, false, false, false, false],
+            "diagram_color":       "0000FF",
+            "diagram_line_weight": 0,
+            "diagram_line_style":  0,
+            "timetable_font":      ["ＭＳ Ｐ明朝", 12, false, false, false, false],
+            "timetable_color":     "0000FF"
         },
         {
-            "name":         "特急",
-            "abbreviation": "特急",
-            "color":        "FF0000",
-            "weight":       1,
-            "line_style":   0
+            "name":                "特急",
+            "abbreviation":        "特急",
+            "diagram_font":        ["ＭＳ Ｐ明朝", 12, false, false, false, false],
+            "diagram_color":       "FF0000",
+            "diagram_line_weight": 1,
+            "diagram_line_style":  0,
+            "timetable_font":      ["ＭＳ Ｐ明朝", 12, false, false, false, false],
+            "timetable_color":     "FF0000"
         }
     ],
     [

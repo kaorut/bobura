@@ -10,8 +10,9 @@
 #define BOBURA_FONTCOLORDIALOG_H
 
 #include <memory>
-#include <stdexcept>
 #include <utility>
+
+#include <boost/optional.hpp>
 
 #include <tetengo2.h>
 
@@ -79,7 +80,162 @@ namespace bobura
         using color_dialog_type = ColorDialog;
 
         //! The font and color type.
-        using font_color_type = std::pair<const font_type&, const color_type&>;
+        class font_color_type
+        {
+        public:
+            // constructors and destructors
+
+            /*!
+                \brief Creates a font and color.
+            */
+            font_color_type()
+            :
+            m_diagram_font(),
+            m_diagram_color(),
+            m_timetable_font(),
+            m_timetable_color()
+            {}
+
+            /*!
+                \brief Creates a font and color.
+
+                \param diagram_font    A font for the diagram.
+                \param diagram_color   A color for the diagram.
+                \param timetable_font  A font for the timetable.
+                \param timetable_color A color for the timetable.
+            */
+            font_color_type(
+                boost::optional<font_type>  diagram_font,
+                boost::optional<color_type> diagram_color,
+                boost::optional<font_type>  timetable_font,
+                boost::optional<color_type> timetable_color
+            )
+            :
+            m_diagram_font(std::move(diagram_font)),
+            m_diagram_color(std::move(diagram_color)),
+            m_timetable_font(std::move(timetable_font)),
+            m_timetable_color(std::move(timetable_color))
+            {}
+
+
+            // functions
+
+            /*!
+                \brief Checks whether one font and color is equal to another.
+
+                \param one     One font and color.
+                \param another Another font and color.
+
+                \retval true  When the one is equal to the other.
+                \retval false Otherwise.
+            */
+            friend bool operator==(const font_color_type& one, const font_color_type& another)
+            {
+                return
+                    one.m_diagram_font == another.m_diagram_font &&
+                    one.m_diagram_color == another.m_diagram_color &&
+                    one.m_timetable_font == another.m_timetable_font &&
+                    one.m_timetable_color == another.m_timetable_color;
+            }
+
+            /*!
+                \brief Returns the font for the diagram.
+
+                \return The font for the diagram.
+            */
+            const boost::optional<font_type>& diagram_font()
+            const
+            {
+                return m_diagram_font;
+            }
+
+            /*!
+                \brief Sets a font for the diagram.
+
+                \param diagram_font A font for the diagram.
+            */
+            void set_diagram_font(boost::optional<font_type> diagram_font)
+            {
+                m_diagram_font = std::move(diagram_font);
+            }
+
+            /*!
+                \brief Returns the color for the diagram.
+
+                \return The color for the diagram.
+            */
+            const boost::optional<color_type>& diagram_color()
+            const
+            {
+                return m_diagram_color;
+            }
+
+            /*!
+                \brief Sets a color for the diagram.
+
+                \param diagram_color A color for the diagram.
+            */
+            void set_diagram_color(boost::optional<color_type> diagram_color)
+            {
+                m_diagram_color = std::move(diagram_color);
+            }
+
+            /*!
+                \brief Returns the font for the timetable.
+
+                \return The font for the timetable.
+            */
+            const boost::optional<font_type>& timetable_font()
+            const
+            {
+                return m_timetable_font;
+            }
+
+            /*!
+                \brief Sets a font for the timetable.
+
+                \param timetable_font A font for the timetable.
+            */
+            void set_timetable_font(boost::optional<font_type> timetable_font)
+            {
+                m_timetable_font = std::move(timetable_font);
+            }
+
+            /*!
+                \brief Returns the color for the timetable.
+
+                \return The color for the timetable.
+            */
+            const boost::optional<color_type>& timetable_color()
+            const
+            {
+                return m_timetable_color;
+            }
+
+            /*!
+                \brief Sets a color for the timetable.
+
+                \param timetable_color A color for the timetable.
+            */
+            void set_timetable_color(boost::optional<color_type> timetable_color)
+            {
+                m_timetable_color = std::move(timetable_color);
+            }
+
+
+        private:
+            // variables
+
+            boost::optional<font_type>  m_diagram_font;
+
+            boost::optional<color_type> m_diagram_color;
+
+            boost::optional<font_type>  m_timetable_font;
+
+            boost::optional<color_type> m_timetable_color;
+
+
+        };
 
 
         // constructors and destructor
@@ -104,162 +260,137 @@ namespace bobura
         /*!
             \brief Returns the color of the background.
 
-            \return The color of the background.
-
-            \throw std::logic_error When the color has not been set.
+            \return The font and color of the background.
         */
-        const color_type& background()
+        const font_color_type& background()
         const;
 
         /*!
             \brief Sets a color of the background.
 
-            \param color A color.
+            \param font_color A font and color.
         */
-        void set_background(const color_type& color);
+        void set_background(font_color_type font_color);
 
         /*!
-            \brief Returns the font and color of the company and the line names.
+            \brief Returns the font and color of the company name.
 
-            \return The font and color of the company and the line names.
-
-            \throw std::logic_error When the font and color have not been set.
+            \return The font and color of the company name.
         */
-        font_color_type company_line_name()
+        const font_color_type& company_name()
         const;
 
         /*!
-            \brief Sets a font and color of the company and the line names.
+            \brief Sets a font and color of the company names.
 
-            \param font  A font.
-            \param color A color.
+            \param font_color A font and color.
         */
-        void set_company_line_name(const font_type& font, const color_type& color);
+        void set_company_name(font_color_type font_color);
+
+        /*!
+            \brief Returns the font and color of the line name.
+
+            \return The font and color of the line name.
+        */
+        const font_color_type& line_name()
+        const;
+
+        /*!
+            \brief Sets a font and color of the line name.
+
+            \param font_color A font and color.
+        */
+        void set_line_name(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the note.
 
             \return The font and color of the note.
-
-            \throw std::logic_error When the font and color have not been set.
         */
-        font_color_type note()
+        const font_color_type& note()
         const;
 
         /*!
             \brief Sets a font and color of the note.
 
-            \param font  A font.
-            \param color A color.
+            \param font_color A font and color.
         */
-        void set_note(const font_type& font, const color_type& color);
+        void set_note(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the time lines.
 
             \return The font and color of the time lines.
-
-            \throw std::logic_error When the font and color have not been set.
         */
-        font_color_type time_line()
+        const font_color_type& time_line()
         const;
 
         /*!
             \brief Sets a font and color of the time lines.
 
-            \param font  A font.
-            \param color A color.
+            \param font_color A font and color.
         */
-        void set_time_line(const font_type& font, const color_type& color);
+        void set_time_line(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the local stations.
 
             \return The font and color of the local stations.
-
-            \throw std::logic_error When the font and color have not been set.
         */
-        font_color_type local_station()
+        const font_color_type& local_station()
         const;
 
         /*!
             \brief Sets a font and color of the local stations.
 
-            \param font  A font.
-            \param color A color.
+            \param font_color A font and color.
         */
-        void set_local_station(const font_type& font, const color_type& color);
+        void set_local_station(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the principal stations.
 
             \return The font and color of the principal stations.
-
-            \throw std::logic_error When the font and color have not been set.
         */
-        font_color_type principal_station()
+        const font_color_type& principal_station()
         const;
 
         /*!
             \brief Sets a font and color of the principal stations.
 
-            \param font  A font.
-            \param color A color.
+            \param font_color A font and color.
         */
-        void set_principal_station(const font_type& font, const color_type& color);
+        void set_principal_station(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the local terminal stations.
 
             \return The font and color of the local terminal stations.
-
-            \throw std::logic_error When the font and color have not been set.
         */
-        font_color_type local_terminal_station()
+        const font_color_type& local_terminal_station()
         const;
 
         /*!
             \brief Sets a font and color of the local terminal stations.
 
-            \param font  A font.
-            \param color A color.
+            \param font_color A font and color.
         */
-        void set_local_terminal_station(const font_type& font, const color_type& color);
+        void set_local_terminal_station(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the principal terminal stations.
 
             \return The font and color of the principal terminal stations.
-
-            \throw std::logic_error When the font and color have not been set.
         */
-        font_color_type principal_terminal_station()
+        const font_color_type& principal_terminal_station()
         const;
 
         /*!
             \brief Sets a font and color of the principal terminal stations.
 
-            \param font  A font.
-            \param color A color.
+            \param font_color A font and color.
         */
-        void set_principal_terminal_station(const font_type& font, const color_type& color);
-
-        /*!
-            \brief Returns the font of the train names.
-
-            \return The font of the train names.
-
-            \throw std::logic_error When the font has not been set.
-        */
-        const font_type& train_name()
-        const;
-
-        /*!
-            \brief Sets a font of the train names.
-
-            \param font  A font.
-        */
-        void set_train_name(const font_type& font);
+        void set_principal_terminal_station(font_color_type font_color);
 
 
     private:
