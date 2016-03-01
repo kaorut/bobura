@@ -258,13 +258,14 @@ namespace bobura { namespace message { namespace font_color_dialog
             if (
                 !m_current_category_index ||
                 *m_current_category_index == 0 ||
-                *m_current_category_index >= m_font_color_list.size()
+                *m_current_category_index >= m_font_color_list.size() ||
+                !get_font(m_font_color_list[*m_current_category_index]) ||
+                !get_color(m_font_color_list[*m_current_category_index])
             )
             {
                 return;
             }
 
-            assert(get_font(m_font_color_list[*m_current_category_index]));
             canvas.set_font(*get_font(m_font_color_list[*m_current_category_index]));
             canvas.set_color(
                 get_color(m_font_color_list[*m_current_category_index]) ?

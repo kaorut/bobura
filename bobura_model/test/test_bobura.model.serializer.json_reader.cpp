@@ -203,15 +203,15 @@ namespace
         "        \"note\": \"piyo\"\n"
         "    },\n"
         "    {\n"
-        "        \"background\":                 \"ABCDEF\",\n"
-        "        \"company_name\":               [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"line_name\":                  [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"note\":                       [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"time_line\":                  [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"local_station\":              [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"principal_station\":          [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"local_terminal_station\":     [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"principal_terminal_station\": [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"]\n"
+        "        \"background\":                 [null,                                         \"ABCDEF\", null,                                         \"FEDCBA\"],\n"
+        "        \"company_name\":               [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\", [\"fugafont\", 42, false, true, false, true], \"FEDCBA\"],\n"
+        "        \"line_name\":                  [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\", [\"fugafont\", 42, false, true, false, true], \"FEDCBA\"],\n"
+        "        \"note\":                       [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\", [\"fugafont\", 42, false, true, false, true], \"FEDCBA\"],\n"
+        "        \"time_line\":                  [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\", null,                                         null      ],\n"
+        "        \"local_station\":              [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\", [\"fugafont\", 42, false, true, false, true], \"FEDCBA\"],\n"
+        "        \"principal_station\":          [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\", [\"fugafont\", 42, false, true, false, true], \"FEDCBA\"],\n"
+        "        \"local_terminal_station\":     [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\", [\"fugafont\", 42, false, true, false, true], \"FEDCBA\"],\n"
+        "        \"principal_terminal_station\": [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\", [\"fugafont\", 42, false, true, false, true], \"FEDCBA\"]\n"
         "    },\n"
         "    [\n"
         "        {\n"
@@ -821,9 +821,9 @@ BOOST_AUTO_TEST_SUITE(json_reader)
                         ),
                         boost::make_optional(color_type{ 0xAB, 0xCD, 0xEF }),
                         boost::make_optional(
-                            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true }
+                            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true }
                         ),
-                        boost::make_optional(color_type{ 0xAB, 0xCD, 0xEF })
+                        boost::make_optional(color_type{ 0xFE, 0xDC, 0xBA })
                     }
                 ));
             }
