@@ -1170,8 +1170,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
             canvas.set_line_width(width_type{ 1 } / 12);
             canvas.set_line_style(canvas_type::line_style_type::solid);
 
-            const auto line_positions =
-                timetable_sample_line_positions(position, dimension, text_position, text_dimension);
+            const auto line_positions = timetable_sample_line_positions(position, dimension, text_dimension);
             const auto& box_left = tetengo2::gui::position<position_type>::left(std::get<0>(line_positions));
             const auto& box_top = tetengo2::gui::position<position_type>::top(std::get<0>(line_positions));
             const auto& box_right = tetengo2::gui::position<position_type>::left(std::get<1>(line_positions));
@@ -1209,7 +1208,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         std::tuple<position_type, position_type, position_type, position_type> timetable_sample_line_positions(
             const position_type&  base_position,
             const dimension_type& base_dimension,
-            const position_type&  text_position,
             const dimension_type& text_dimension
         )
         const
