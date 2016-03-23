@@ -9,7 +9,6 @@
 #include <memory>
 #include <utility>
 
-#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -91,11 +90,6 @@ BOOST_AUTO_TEST_SUITE(exec_json_reading_task)
         const exec_json_reading_task_type task{ parent, message_catalog };
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
@@ -126,7 +120,6 @@ BOOST_AUTO_TEST_SUITE(exec_json_reading_task)
             BOOST_CHECK(p_result->line_name() == string_type{ TETENGO2_TEXT("hoge") });
         }
     }
-#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()
