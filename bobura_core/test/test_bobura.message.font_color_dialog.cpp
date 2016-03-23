@@ -286,6 +286,10 @@ BOOST_AUTO_TEST_SUITE(diagram_font_button_mouse_clicked)
 
 // This test case causes a segmentation fault with GCC.
 #if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
+#if !( \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -308,6 +312,7 @@ BOOST_AUTO_TEST_SUITE(diagram_font_button_mouse_clicked)
 
         observer();
     }
+#endif
 #endif
 
 
@@ -381,6 +386,10 @@ BOOST_AUTO_TEST_SUITE(timetable_font_button_mouse_clicked)
 
 // This test case causes a segmentation fault with GCC.
 #if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
+#if !( \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -404,7 +413,7 @@ BOOST_AUTO_TEST_SUITE(timetable_font_button_mouse_clicked)
         observer();
     }
 #endif
-
+#endif
 
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(timetable_color_button_mouse_clicked)
