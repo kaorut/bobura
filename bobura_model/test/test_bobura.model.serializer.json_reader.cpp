@@ -614,6 +614,10 @@ BOOST_AUTO_TEST_SUITE(json_reader)
 #if !( \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -1020,6 +1024,7 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             BOOST_CHECK(error == error_type::corrupted);
         }
     }
+#endif
 #endif
 
 

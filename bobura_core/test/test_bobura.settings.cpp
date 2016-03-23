@@ -51,6 +51,10 @@ namespace
 }
 
 
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(settings)
     // test cases
@@ -371,3 +375,4 @@ BOOST_AUTO_TEST_SUITE(settings)
 
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
+#endif

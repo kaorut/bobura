@@ -15,6 +15,7 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <boost/core/ignore_unused.hpp>
 #include <bobura/message/property_bar.h>
 #include <bobura/property_bar.h>
 #include <bobura/type_list.h>
@@ -83,9 +84,16 @@ namespace bobura
 
         void save_settings(property_bar& self)
         {
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
             m_settings.set_property_bar_width(self.normal_preferred_width());
             m_settings.set_property_bar_minimized(self.minimized());
             m_settings.set_property_bar_splitter_position(m_p_map_box->splitter_position());
+#else
+            boost::ignore_unused(self);
+#endif
         }
 
 
@@ -133,6 +141,10 @@ namespace bobura
 
         void load_settings(property_bar& self)
         {
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
             const auto width = m_settings.property_bar_width();
             if (width)
                 self.set_width(*width);
@@ -152,6 +164,9 @@ namespace bobura
                 m_p_map_box->set_splitter_position(*splitter_position);
             else
                 m_p_map_box->set_splitter_position(left_type{ 16 });
+#else
+            boost::ignore_unused(self);
+#endif
         }
 
 
