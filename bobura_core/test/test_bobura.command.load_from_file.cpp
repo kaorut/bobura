@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/command/load_from_file.h>

@@ -11,6 +11,7 @@
 #include <sstream>
 
 #include <boost/core/ignore_unused.hpp>
+#include <boost/predef.h>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
