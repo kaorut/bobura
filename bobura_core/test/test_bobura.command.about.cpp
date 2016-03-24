@@ -59,6 +59,10 @@ namespace
 
 
 #if !( \
+    BOOST_OS_LINUX && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+)
+#if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
 )
@@ -67,10 +71,6 @@ BOOST_AUTO_TEST_SUITE(command)
 BOOST_AUTO_TEST_SUITE(about)
     // test cases
 
-// This test case causes a segmentation fault with GCC.
-#if !( \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -82,10 +82,10 @@ BOOST_AUTO_TEST_SUITE(about)
         };
         const about_command_type command{ message_catalog, settings };
     }
+
+
+BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE_END()
 #endif
-
-
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
 #endif

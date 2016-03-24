@@ -180,7 +180,6 @@ BOOST_AUTO_TEST_SUITE(station_line)
         station_line1 = std::move(station_line2);
     }
 
-// This test case causes a segmentation fault on Linux.
 #if !( \
     BOOST_OS_LINUX && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
