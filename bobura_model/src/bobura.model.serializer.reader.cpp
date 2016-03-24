@@ -120,6 +120,10 @@ namespace bobura { namespace model { namespace serializer
     >;
 #endif
 
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
     template class reader<
         typename test::common_type_list_type::size_type,
         typename test::common_type_list_type::difference_type,
@@ -129,6 +133,7 @@ namespace bobura { namespace model { namespace serializer
         typename test::common_type_list_type::speed_type,
         typename test::ui_type_list_type::font_type
     >;
+#endif
 
 
 }}}

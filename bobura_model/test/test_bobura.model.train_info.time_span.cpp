@@ -8,7 +8,6 @@
 
 #include <stdexcept>
 
-#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/model/train_info/time_span.h>
@@ -102,11 +101,6 @@ BOOST_AUTO_TEST_SUITE_END()
         BOOST_TEST(time_span_type::seconds_of_whole_day() == 24 * 60 * 60);
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -239,7 +233,6 @@ BOOST_AUTO_TEST_SUITE_END()
             BOOST_CHECK_THROW((time_span_type{ -1, 1, -1 }), std::invalid_argument);
         }
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(operator_plus_assign)
     {

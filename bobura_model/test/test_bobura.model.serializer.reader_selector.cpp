@@ -69,6 +69,10 @@ namespace
 
     using error_type = reader_type::error_type;
 
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
     class concrete_reader : public reader_type
     {
     public:
@@ -105,10 +109,15 @@ namespace
 
 
     };
+#endif
 
 
     // functions
 
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
     std::vector<std::unique_ptr<reader_type>> create_concrete_readers()
     {
         std::vector<std::unique_ptr<reader_type>> readers{};
@@ -118,11 +127,16 @@ namespace
 
         return std::move(readers);
     }
+#endif
 
 
 }
 
 
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(model)
 BOOST_AUTO_TEST_SUITE(serializer)
@@ -137,23 +151,12 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             auto concrete_readers = create_concrete_readers();
             const reader_selector_type reader_selector{ std::move(concrete_readers) };
         }
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
         {
             std::vector<std::unique_ptr<reader_type>> concrete_readers{};
             BOOST_CHECK_THROW(reader_selector_type{ std::move(concrete_readers) }, std::invalid_argument);
         }
-#endif
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(selects)
     {
         BOOST_TEST_PASSPOINT();
@@ -172,7 +175,6 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
             );
         BOOST_CHECK_THROW(reader_selector.selects(first, last), std::logic_error);
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(read)
     {
@@ -242,3 +244,4 @@ BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
+#endif

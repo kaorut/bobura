@@ -7,7 +7,6 @@
 */
 
 #include <boost/optional.hpp>
-#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/font_color_dialog.h>
@@ -84,11 +83,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const font_color_dialog_type font_color_dialog{ parent, message_catalog };
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(background)
     {
         BOOST_TEST_PASSPOINT();
@@ -99,7 +93,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
 
         font_color_dialog.background();
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(set_background)
     {
@@ -114,11 +107,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         BOOST_CHECK(font_color_dialog.background() == make_font_color(false, true));
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(company_name)
     {
         BOOST_TEST_PASSPOINT();
@@ -129,7 +117,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
 
         font_color_dialog.company_name();
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(set_company_name)
     {
@@ -144,11 +131,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         BOOST_CHECK(font_color_dialog.company_name() == make_font_color(true, true));
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(line_name)
     {
         BOOST_TEST_PASSPOINT();
@@ -159,7 +141,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
 
         font_color_dialog.line_name();
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(set_line_name)
     {
@@ -174,11 +155,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         BOOST_CHECK(font_color_dialog.line_name() == make_font_color(true, true));
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(note)
     {
         BOOST_TEST_PASSPOINT();
@@ -189,7 +165,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
 
         font_color_dialog.note();
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(set_note)
     {
@@ -204,11 +179,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         BOOST_CHECK(font_color_dialog.note() == make_font_color(true, true));
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(time_line)
     {
         BOOST_TEST_PASSPOINT();
@@ -219,7 +189,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
 
         font_color_dialog.time_line();
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(set_time_line)
     {
@@ -234,11 +203,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         BOOST_CHECK(font_color_dialog.time_line() == make_font_color(true, true));
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(local_station)
     {
         BOOST_TEST_PASSPOINT();
@@ -249,7 +213,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
 
         font_color_dialog.local_station();
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(set_local_station)
     {
@@ -264,11 +227,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         BOOST_CHECK(font_color_dialog.local_station() == make_font_color(true, true));
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(principal_station)
     {
         BOOST_TEST_PASSPOINT();
@@ -279,7 +237,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
 
         font_color_dialog.principal_station();
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(set_principal_station)
     {
@@ -294,11 +251,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         BOOST_CHECK(font_color_dialog.principal_station() == make_font_color(true, true));
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(local_terminal_station)
     {
         BOOST_TEST_PASSPOINT();
@@ -309,7 +261,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
 
         font_color_dialog.local_terminal_station();
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(set_local_terminal_station)
     {
@@ -324,11 +275,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         BOOST_CHECK(font_color_dialog.local_terminal_station() == make_font_color(true, true));
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(principal_terminal_station)
     {
         BOOST_TEST_PASSPOINT();
@@ -339,7 +285,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
 
         font_color_dialog.principal_terminal_station();
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(set_principal_terminal_station)
     {

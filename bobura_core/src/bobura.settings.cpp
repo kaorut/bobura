@@ -563,12 +563,17 @@ namespace bobura
     >;
 #endif
 
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
     template class settings<
         typename test::common_type_list_type::string_type,
         typename test::ui_type_list_type::position_type,
         typename test::ui_type_list_type::dimension_type,
         typename test::traits_type_list_type::config_type
     >;
+#endif
 
 
 }
