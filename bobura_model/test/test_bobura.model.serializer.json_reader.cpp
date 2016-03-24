@@ -13,6 +13,7 @@
 #include <utility>
 
 #include <boost/iostreams/filtering_stream.hpp>
+#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/range/iterator_range.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
@@ -202,15 +203,60 @@ namespace
         "        \"note\": \"piyo\"\n"
         "    },\n"
         "    {\n"
-        "        \"background\":                 \"ABCDEF\",\n"
-        "        \"company_line_name\":          [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"note\":                       [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"time_line\":                  [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"local_station\":              [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"principal_station\":          [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"local_terminal_station\":     [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"principal_terminal_station\": [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"train_name\":                 [\"hogefont\", 42, false, true, false, true]\n"
+        "        \"background\":                 [\n"
+        "                                            null,\n"
+        "                                            \"ABCDEF\",\n"
+        "                                            null,\n"
+        "                                            \"FEDCBA\"\n"
+        "                                        ],\n"
+        "        \"company_name\":               [\n"
+        "                                            [\"hogefont\", 42, false, true, false, true],\n"
+        "                                            \"ABCDEF\",\n"
+        "                                            [\"fugafont\", 42, false, true, false, true],\n"
+        "                                            \"FEDCBA\"\n"
+        "                                        ],\n"
+        "        \"line_name\":                  [\n"
+        "                                            [\"hogefont\", 42, false, true, false, true],\n"
+        "                                            \"ABCDEF\",\n"
+        "                                            [\"fugafont\", 42, false, true, false, true],\n"
+        "                                            \"FEDCBA\"\n"
+        "                                        ],\n"
+        "        \"note\":                       [\n"
+        "                                            [\"hogefont\", 42, false, true, false, true],\n"
+        "                                            \"ABCDEF\",\n"
+        "                                            [\"fugafont\", 42, false, true, false, true],\n"
+        "                                            \"FEDCBA\"\n"
+        "                                        ],\n"
+        "        \"time_line\":                  [\n"
+        "                                            [\"hogefont\", 42, false, true, false, true],\n"
+        "                                            \"ABCDEF\",\n"
+        "                                            null,\n"
+        "                                            null\n"
+        "                                        ],\n"
+        "        \"local_station\":              [\n"
+        "                                            [\"hogefont\", 42, false, true, false, true],\n"
+        "                                            \"ABCDEF\",\n"
+        "                                            [\"fugafont\", 42, false, true, false, true],\n"
+        "                                            \"FEDCBA\"\n"
+        "                                        ],\n"
+        "        \"principal_station\":          [\n"
+        "                                            [\"hogefont\", 42, false, true, false, true],\n"
+        "                                            \"ABCDEF\",\n"
+        "                                            [\"fugafont\", 42, false, true, false, true],\n"
+        "                                            \"FEDCBA\"\n"
+        "                                        ],\n"
+        "        \"local_terminal_station\":     [\n"
+        "                                            [\"hogefont\", 42, false, true, false, true],\n"
+        "                                            \"ABCDEF\",\n"
+        "                                            [\"fugafont\", 42, false, true, false, true],\n"
+        "                                            \"FEDCBA\"\n"
+        "                                        ],\n"
+        "        \"principal_terminal_station\": [\n"
+        "                                            [\"hogefont\", 42, false, true, false, true],\n"
+        "                                            \"ABCDEF\",\n"
+        "                                            [\"fugafont\", 42, false, true, false, true],\n"
+        "                                            \"FEDCBA\"\n"
+        "                                        ]\n"
         "    },\n"
         "    [\n"
         "        {\n"
@@ -232,18 +278,24 @@ namespace
         "    ],\n"
         "    [\n"
         "        {\n"
-        "            \"name\":         \"nameA\",\n"
-        "            \"abbreviation\": \"abbrA\",\n"
-        "            \"color\":        \"ABCDEF\",\n"
-        "            \"weight\":       0,\n"
-        "            \"line_style\":   1\n"
+        "            \"name\":                \"nameA\",\n"
+        "            \"abbreviation\":        \"abbrA\",\n"
+        "            \"diagram_font\":        [\"hogefont\", 42, false, true, false, true],\n"
+        "            \"diagram_color\":       \"ABCDEF\",\n"
+        "            \"diagram_line_weight\": 0,\n"
+        "            \"diagram_line_style\":  1,\n"
+        "            \"timetable_font\":      [\"fugafont\", 42, false, true, false, true],\n"
+        "            \"timetable_color\":     \"EFABCD\"\n"
         "        },\n"
         "        {\n"
-        "            \"name\":         \"nameB\",\n"
-        "            \"abbreviation\": \"abbrB\",\n"
-        "            \"color\":        \"ABCDEF\",\n"
-        "            \"weight\":       0,\n"
-        "            \"line_style\":   1\n"
+        "            \"name\":                \"nameB\",\n"
+        "            \"abbreviation\":        \"abbrB\",\n"
+        "            \"diagram_font\":        [\"foofont\", 42, false, true, false, true],\n"
+        "            \"diagram_color\":       \"ABCDEF\",\n"
+        "            \"diagram_line_weight\": 0,\n"
+        "            \"diagram_line_style\":  1,\n"
+        "            \"timetable_font\":      [\"barfont\", 42, false, true, false, true],\n"
+        "            \"timetable_color\":     \"EFABCD\"\n"
         "        }\n"
         "    ],\n"
         "    [\n"
@@ -308,11 +360,14 @@ namespace
         "    ],\n"
         "    [\n"
         "        {\n"
-        "            \"name\":         \"nameA\",\n"
-        "            \"abbreviation\": \"abbrA\",\n"
-        "            \"color\":        \"ABCDEF\",\n"
-        "            \"weight\":       0,\n"
-        "            \"line_style\":   1\n"
+        "            \"name\":                \"nameA\",\n"
+        "            \"abbreviation\":        \"abbrA\",\n"
+        "            \"diagram_font\":        [\"hogefont\", 42, false, true, false, true],\n"
+        "            \"diagram_color\":       \"ABCDEF\",\n"
+        "            \"diagram_line_weight\": 0,\n"
+        "            \"diagram_line_style\":  1,\n"
+        "            \"timetable_font\":      [\"fugafont\", 42, false, true, false, true],\n"
+        "            \"timetable_color\":     \"EFABCD\"\n"
         "        }\n"
         "    ],\n"
         "    [\n"
@@ -358,11 +413,14 @@ namespace
         "    ],\n"
         "    [\n"
         "        {\n"
-        "            \"name\":         \"nameA\",\n"
-        "            \"abbreviation\": \"abbrA\",\n"
-        "            \"color\":        \"ABCDEF\",\n"
-        "            \"weight\":       0,\n"
-        "            \"line_style\":   1\n"
+        "            \"name\":                \"nameA\",\n"
+        "            \"abbreviation\":        \"abbrA\",\n"
+        "            \"diagram_font\":        [\"hogefont\", 42, false, true, false, true],\n"
+        "            \"diagram_color\":       \"ABCDEF\",\n"
+        "            \"diagram_line_weight\": 0,\n"
+        "            \"diagram_line_style\":  1,\n"
+        "            \"timetable_font\":      [\"fugafont\", 42, false, true, false, true],\n"
+        "            \"timetable_color\":     \"EFABCD\"\n"
         "        }\n"
         "    ],\n"
         "    [\n"
@@ -417,11 +475,14 @@ namespace
         "    ],\n"
         "    [\n"
         "        {\n"
-        "            \"name\":         \"nameA\",\n"
-        "            \"abbreviation\": \"abbrA\",\n"
-        "            \"color\":        \"ABCDEF\",\n"
-        "            \"weight\":       0,\n"
-        "            \"line_style\":   1\n"
+        "            \"name\":                \"nameA\",\n"
+        "            \"abbreviation\":        \"abbrA\",\n"
+        "            \"diagram_font\":        [\"hogefont\", 42, false, true, false, true],\n"
+        "            \"diagram_color\":       \"ABCDEF\",\n"
+        "            \"diagram_line_weight\": 0,\n"
+        "            \"diagram_line_style\":  1,\n"
+        "            \"timetable_font\":      [\"fugafont\", 42, false, true, false, true],\n"
+        "            \"timetable_color\":     \"EFABCD\"\n"
         "        }\n"
         "    ],\n"
         "    [\n"
@@ -467,11 +528,14 @@ namespace
         "    ],\n"
         "    [\n"
         "        {\n"
-        "            \"name\":         \"nameA\",\n"
-        "            \"abbreviation\": \"abbrA\",\n"
-        "            \"color\":        \"ABCDEF\",\n"
-        "            \"weight\":       0,\n"
-        "            \"line_style\":   1\n"
+        "            \"name\":                \"nameA\",\n"
+        "            \"abbreviation\":        \"abbrA\",\n"
+        "            \"diagram_font\":        [\"hogefont\", 42, false, true, false, true],\n"
+        "            \"diagram_color\":       \"ABCDEF\",\n"
+        "            \"diagram_line_weight\": 0,\n"
+        "            \"diagram_line_style\":  1,\n"
+        "            \"timetable_font\":      [\"fugafont\", 42, false, true, false, true],\n"
+        "            \"timetable_color\":     \"EFABCD\"\n"
         "        }\n"
         "    ],\n"
         "    [\n"
@@ -514,11 +578,14 @@ namespace
         "    ],\n"
         "    [\n"
         "        {\n"
-        "            \"name\":         \"nameA\",\n"
-        "            \"abbreviation\": \"abbrA\",\n"
-        "            \"color\":        \"ABCDEF\",\n"
-        "            \"weight\":       0,\n"
-        "            \"line_style\":   1\n"
+        "            \"name\":                \"nameA\",\n"
+        "            \"abbreviation\":        \"abbrA\",\n"
+        "            \"diagram_font\":        [\"hogefont\", 42, false, true, false, true],\n"
+        "            \"diagram_color\":       \"ABCDEF\",\n"
+        "            \"diagram_line_weight\": 0,\n"
+        "            \"diagram_line_style\":  1,\n"
+        "            \"timetable_font\":      [\"fugafont\", 42, false, true, false, true],\n"
+        "            \"timetable_color\":     \"EFABCD\"\n"
         "        }\n"
         "    ],\n"
         "    [\n"
@@ -537,16 +604,21 @@ namespace
 
 }
 
+
+#if !( \
+    BOOST_OS_LINUX && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+)
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(model)
 BOOST_AUTO_TEST_SUITE(serializer)
 BOOST_AUTO_TEST_SUITE(json_reader)
     // test cases
 
-// This test case causes a segmentation fault with GCC.
-#if !( \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -789,18 +861,21 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             {
                 const auto& font_color_set = p_timetable->font_color_set();
 
-                BOOST_CHECK((font_color_set.background() == color_type{ 0xAB, 0xCD, 0xEF }));
+                BOOST_TEST_REQUIRE(!!font_color_set.background().diagram_color());
+                BOOST_CHECK((*font_color_set.background().diagram_color() == color_type{ 0xAB, 0xCD, 0xEF }));
                 BOOST_CHECK((
-                    font_color_set.company_line_name() ==
+                    font_color_set.company_name() ==
                     font_color_type{
-                        font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
-                        color_type{ 0xAB, 0xCD, 0xEF }
+                        boost::make_optional(
+                            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true }
+                        ),
+                        boost::make_optional(color_type{ 0xAB, 0xCD, 0xEF }),
+                        boost::make_optional(
+                            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true }
+                        ),
+                        boost::make_optional(color_type{ 0xFE, 0xDC, 0xBA })
                     }
                 ));
-                BOOST_CHECK(
-                    font_color_set.train_name() ==
-                    font_type(string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true)
-                );
             }
 
             BOOST_TEST_REQUIRE(p_timetable->down_trains().size() == 2U);
@@ -950,10 +1025,11 @@ BOOST_AUTO_TEST_SUITE(json_reader)
             BOOST_CHECK(error == error_type::corrupted);
         }
     }
+
+
+BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE_END()
 #endif
-
-
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+#endif

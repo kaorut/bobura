@@ -12,7 +12,7 @@
 #include <utility>
 
 #include <boost/filesystem.hpp>
-#include <boost/predef.h>
+#include <boost/optional.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -68,7 +68,7 @@ namespace
 
     using stop_type = bobura::model::train_info::stop<size_type, difference_type, string_type>;
 
-    using train_kind_type = bobura::model::train_kind<string_type>;
+    using train_kind_type = bobura::model::train_kind<string_type, font_type>;
 
     using train_type = bobura::model::train<size_type, difference_type, string_type>;
 
@@ -123,9 +123,8 @@ namespace
         "        \"note\": \"piyo\"\n"
         "    },\n"
         "    {\n"
-        "        \"background\": \"ABCDEF\",\n"
-        "        \"company_line_name\": [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\"],\n"
-        "        \"train_name\": [\"hogefont\", 42, false, true, false, true]\n"
+        "        \"background\": [null, \"ABCDEF\", null, \"FEDCBA\"],\n"
+        "        \"company_name\": [[\"hogefont\", 42, false, true, false, true], \"ABCDEF\", [\"fugafont\", 42, false, true, false, true], \"FEDCBA\"]\n"
         "    },\n"
         "    [\n"
         "        {\n"
@@ -149,16 +148,22 @@ namespace
         "        {\n"
         "            \"name\": \"nameA\",\n"
         "            \"abbreviation\": \"abbrA\",\n"
-        "            \"color\": \"0080FF\",\n"
-        "            \"weight\": 0,\n"
-        "            \"line_style\": 0\n"
+        "            \"diagram_font\": [\"hogefont\", 42, false, true, false, true],\n"
+        "            \"diagram_color\": \"0080FF\",\n"
+        "            \"diagram_line_weight\": 0,\n"
+        "            \"diagram_line_style\": 0,\n"
+        "            \"timetable_font\": [\"fugafont\", 42, false, true, false, true],\n"
+        "            \"timetable_color\": \"00FF80\"\n"
         "        },\n"
         "        {\n"
         "            \"name\": \"nameB\",\n"
         "            \"abbreviation\": \"abbrB\",\n"
-        "            \"color\": \"FF8000\",\n"
-        "            \"weight\": 1,\n"
-        "            \"line_style\": 2\n"
+        "            \"diagram_font\": [\"foofont\", 42, false, true, false, true],\n"
+        "            \"diagram_color\": \"FF8000\",\n"
+        "            \"diagram_line_weight\": 1,\n"
+        "            \"diagram_line_style\": 2,\n"
+        "            \"timetable_font\": [\"barfont\", 42, false, true, false, true],\n"
+        "            \"timetable_color\": \"80FF00\"\n"
         "        }\n"
         "    ],\n"
         "    [\n"
@@ -212,20 +217,40 @@ namespace
         p_timetable->set_line_name(string_type{ TETENGO2_TEXT("fuga") });
         p_timetable->set_note(string_type{ TETENGO2_TEXT("piyo") });
         {
-            font_type font{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true };
-            color_type color{ 0xAB, 0xCD, 0xEF };
-            const font_color_type font_color{ font, color };
+            color_type diagram_background_color{ 0xAB, 0xCD, 0xEF };
+            color_type timetable_background_color{ 0xFE, 0xDC, 0xBA };
+            const font_color_type background_font_color{
+                boost::none,
+                boost::make_optional(diagram_background_color),
+                boost::none,
+                boost::make_optional(timetable_background_color)
+            };
+
+            font_type diagram_company_name_font{
+                string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true
+            };
+            color_type diagram_company_name_color{ 0xAB, 0xCD, 0xEF };
+            font_type timetable_company_name_font{
+                string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true
+            };
+            color_type timetable_company_name_color{ 0xFE, 0xDC, 0xBA };
+            const font_color_type company_name_font_color{
+                boost::make_optional(diagram_company_name_font),
+                boost::make_optional(diagram_company_name_color),
+                boost::make_optional(timetable_company_name_font),
+                boost::make_optional(timetable_company_name_color)
+            };
 
             const font_color_set_type font_color_set{
-                std::move(color),
-                std::move(font_color),
+                background_font_color,
+                company_name_font_color,
+                font_color_set_type::default_().line_name(),
                 font_color_set_type::default_().note(),
                 font_color_set_type::default_().time_line(),
                 font_color_set_type::default_().local_station(),
                 font_color_set_type::default_().principal_station(),
                 font_color_set_type::default_().local_terminal_station(),
-                font_color_set_type::default_().principal_terminal_station(),
-                std::move(font)
+                font_color_set_type::default_().principal_terminal_station()
             };
 
             p_timetable->set_font_color_set(font_color_set);
@@ -264,9 +289,12 @@ namespace
                 train_kind_type{
                     string_type{ TETENGO2_TEXT("nameA") },
                     string_type{ TETENGO2_TEXT("abbrA") },
+                    font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
                     color_type{ 0, 128, 255 },
                     train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
+                    train_kind_type::line_style_type::solid,
+                    font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+                    color_type{ 0, 255, 128 }
                 }
             );
             p_timetable->insert_train_kind(
@@ -274,9 +302,12 @@ namespace
                 train_kind_type{
                     string_type{ TETENGO2_TEXT("nameB") },
                     string_type{ TETENGO2_TEXT("abbrB") },
+                    font_type{ string_type{ TETENGO2_TEXT("foofont") }, 42, false, true, false, true },
                     color_type{ 255, 128, 0 },
                     train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::dotted
+                    train_kind_type::line_style_type::dotted,
+                    font_type{ string_type{ TETENGO2_TEXT("barfont") }, 42, false, true, false, true },
+                    color_type{ 128, 255, 0 }
                 }
             );
         }
@@ -384,11 +415,6 @@ BOOST_AUTO_TEST_SUITE(json_writer)
         BOOST_TEST(!json_writer.selects(boost::filesystem::path{}));
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(write)
     {
         BOOST_TEST_PASSPOINT();
@@ -416,7 +442,6 @@ BOOST_AUTO_TEST_SUITE(json_writer)
             BOOST_CHECK(result == json1);
         }
     }
-#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()

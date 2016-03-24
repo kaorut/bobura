@@ -468,11 +468,11 @@ namespace bobura { namespace view { namespace timetable
         m_dimension(width_type{ 0 }, height_type{ 0 })
         {
             const auto& company_name = model.timetable().company_name();
-            const auto& company_name_font = model.timetable().font_color_set().company_line_name().font();
+            const auto& company_name_font = *model.timetable().font_color_set().company_name().diagram_font();
             auto line_name = make_line_name(direction, model, message_catalog);
-            const auto& line_name_font = model.timetable().font_color_set().company_line_name().font();
+            const auto& line_name_font = *model.timetable().font_color_set().line_name().diagram_font();
             const auto& note = model.timetable().note();
-            const auto& note_font = model.timetable().font_color_set().note().font();
+            const auto& note_font = *model.timetable().font_color_set().note().diagram_font();
             position_type company_name_position{ left_type{ 0 }, top_type{ 0 } };
             dimension_type company_name_dimension{ width_type{ 0 }, height_type{ 0 } };
             position_type line_name_position{ left_type{ 0 }, top_type{ 0 } };
@@ -498,7 +498,7 @@ namespace bobura { namespace view { namespace timetable
                 m_dimension
             );
 
-            const auto& company_name_color = model.timetable().font_color_set().company_line_name().color();
+            const auto& company_name_color = *model.timetable().font_color_set().company_name().diagram_color();
             m_p_company_name_header =
                 tetengo2::stdalt::make_unique<company_name_header_type>(
                     std::move(company_name),
@@ -507,7 +507,7 @@ namespace bobura { namespace view { namespace timetable
                     std::move(company_name_position),
                     std::move(company_name_dimension)
                 );                    
-            const auto& line_name_color = model.timetable().font_color_set().company_line_name().color();
+            const auto& line_name_color = *model.timetable().font_color_set().line_name().diagram_color();
             m_p_line_name_header =
                 tetengo2::stdalt::make_unique<line_name_header_type>(
                     std::move(line_name),
@@ -516,7 +516,7 @@ namespace bobura { namespace view { namespace timetable
                     std::move(line_name_position),
                     std::move(line_name_dimension)
                 );                    
-            const auto& note_color = model.timetable().font_color_set().note().color();
+            const auto& note_color = *model.timetable().font_color_set().note().diagram_color();
             m_p_note_header =
                 tetengo2::stdalt::make_unique<note_header_type>(
                     std::move(note),
@@ -686,7 +686,7 @@ namespace bobura { namespace view { namespace timetable
             position_type company_name_position_{ left_type{ 0 }, top_type{ 0 } };
             position_type line_name_position_{ left_type{ 0 }, top_type{ 0 } };
             const position_type note_position_{ left_padding, top_padding };
-            const auto company_line_name_top =
+            const auto line_name_top =
                 tetengo2::gui::position<position_type>::top(note_position_) + top_type::from(note_height);
             const auto& header_width = canvas_width;
             height_type header_height{ 0 };
@@ -701,20 +701,20 @@ namespace bobura { namespace view { namespace timetable
                 company_name_position_ =
                     position_type{
                         company_name_left,
-                        company_line_name_top + top_type::from(max_element_height - company_name_height) / 2
+                        line_name_top + top_type::from(max_element_height - company_name_height) / 2
                     };
                 line_name_position_ =
                     position_type{
                         company_name_left + left_type::from(company_name_width + company_line_names_spacing),
-                        company_line_name_top + top_type::from(max_element_height - line_name_height) / 2
+                        line_name_top + top_type::from(max_element_height - line_name_height) / 2
                     };
                 header_height = note_height + max_element_height + top_padding * 2;
             }
             else
             {
-                company_name_position_ = position_type{ left_padding, company_line_name_top };
+                company_name_position_ = position_type{ left_padding, line_name_top };
                 line_name_position_ =
-                    position_type{ left_padding, company_line_name_top + top_type::from(company_name_height) };
+                    position_type{ left_padding, line_name_top + top_type::from(company_name_height) };
                 header_height = note_height + company_name_height + line_name_height + top_padding * 2;
             }
 

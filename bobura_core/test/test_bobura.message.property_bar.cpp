@@ -6,7 +6,6 @@
     $Id$
 */
 
-#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.gui.h>
@@ -51,11 +50,6 @@ BOOST_AUTO_TEST_SUITE(property_bar)
 BOOST_AUTO_TEST_SUITE(resized)
     // test cases
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -77,18 +71,12 @@ BOOST_AUTO_TEST_SUITE(resized)
 
         observer();
     }
-#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(mouse_pressed)
     // test cases
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -110,7 +98,6 @@ BOOST_AUTO_TEST_SUITE(mouse_pressed)
 
         observer(mouse_button_type::left, position_type{ left_type{ 42 }, top_type{ 24 } }, false, false, false);
     }
-#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()

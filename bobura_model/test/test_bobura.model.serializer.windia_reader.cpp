@@ -10,6 +10,7 @@
 #include <string>
 
 #include <boost/iostreams/filtering_stream.hpp>
+#include <boost/predef.h>
 #include <boost/range/iterator_range.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
@@ -143,6 +144,10 @@ namespace
 }
 
 
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(model)
 BOOST_AUTO_TEST_SUITE(serializer)
@@ -299,15 +304,15 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
                 const std::string futsuu_in_utf8{ "\xE6\x99\xAE\xE9\x80\x9A" }; // futsuu
                 const string_type futsuu = utf8_encoder.decode(futsuu_in_utf8);
                 BOOST_CHECK(train_kind.name() == utf8_encoder.decode(futsuu_in_utf8));
-                BOOST_CHECK((train_kind.color() == color_type{ 0, 0, 0 }));
-                BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::normal);
+                BOOST_CHECK((train_kind.diagram_color() == color_type{ 0, 0, 0 }));
+                BOOST_CHECK(train_kind.diagram_line_weight() == train_kind_type::weight_type::normal);
             }
             {
                 const auto& train_kind = p_timetable->train_kinds()[3];
 
                 BOOST_CHECK(train_kind.name() == string_type{ TETENGO2_TEXT("express") });
-                BOOST_CHECK((train_kind.color() == color_type{ 255, 0, 0 }));
-                BOOST_CHECK(train_kind.weight() == train_kind_type::weight_type::bold);
+                BOOST_CHECK((train_kind.diagram_color() == color_type{ 255, 0, 0 }));
+                BOOST_CHECK(train_kind.diagram_line_weight() == train_kind_type::weight_type::bold);
             }
 
             BOOST_TEST_REQUIRE(p_timetable->down_trains().size() == 3U);
@@ -435,3 +440,4 @@ BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
+#endif

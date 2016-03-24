@@ -148,6 +148,10 @@ namespace
 }
 
 
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(message)
 BOOST_AUTO_TEST_SUITE(diagram_view)
@@ -238,9 +242,12 @@ BOOST_AUTO_TEST_SUITE(train_selected)
             train_kind_type{
                 string_type{ TETENGO2_TEXT("Express") },
                 string_type{ TETENGO2_TEXT("Exp.") },
+                fast_font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, false, false, true },
                 color_type{ 255, 0, 0 },
                 train_kind_type::weight_type::bold,
-                train_kind_type::line_style_type::solid
+                train_kind_type::line_style_type::solid,
+                fast_font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, false, false, true },
+                color_type{ 255, 0, 0 },
             }
         );
         train_selected_type train_selected{ property_bar, model, message_catalog };
@@ -304,3 +311,4 @@ BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
+#endif

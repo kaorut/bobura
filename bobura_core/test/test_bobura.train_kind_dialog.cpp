@@ -41,13 +41,15 @@ namespace
 
     using font_type = ui_type_list_type::font_type;
 
+    using point_unit_size_type = ui_type_list_type::point_unit_size_type;
+
     using color_type = ui_type_list_type::color_type;
 
     using window_type = ui_type_list_type::window_type;
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
-    using train_kind_type = bobura::model::train_kind<string_type>;
+    using train_kind_type = bobura::model::train_kind<string_type, font_type>;
 
     using train_kind_dialog_type =
         bobura::train_kind_dialog<
@@ -55,8 +57,10 @@ namespace
             size_type,
             string_type,
             font_type,
+            point_unit_size_type,
             color_type,
             ui_type_list_type::fast_canvas_type,
+            common_dialog_type_list_type::font_type,
             common_dialog_type_list_type::color_type
         >;
 
@@ -75,10 +79,9 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        const font_type font{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
         const color_type background_color{ 12, 34, 56 };
         const message_catalog_type message_catalog{};
-        const train_kind_dialog_type train_kind_dialog{ parent, font, background_color, message_catalog };
+        const train_kind_dialog_type train_kind_dialog{ parent, background_color, message_catalog };
     }
 
     BOOST_AUTO_TEST_CASE(info_sets)
@@ -86,10 +89,9 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        const font_type font{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
         const color_type background_color{ 12, 34, 56 };
         const message_catalog_type message_catalog{};
-        const train_kind_dialog_type train_kind_dialog{ parent, font, background_color, message_catalog };
+        const train_kind_dialog_type train_kind_dialog{ parent, background_color, message_catalog };
 
         BOOST_TEST(train_kind_dialog.info_sets().empty());
     }
@@ -99,10 +101,9 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
         BOOST_TEST_PASSPOINT();
 
         window_type parent{};
-        const font_type font{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false };
         const color_type background_color{ 12, 34, 56 };
         const message_catalog_type message_catalog{};
-        train_kind_dialog_type train_kind_dialog{ parent, font, background_color, message_catalog };
+        train_kind_dialog_type train_kind_dialog{ parent, background_color, message_catalog };
 
         std::vector<info_set_type> info_sets{
             info_set_type{
@@ -111,9 +112,12 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
                 train_kind_type{
                     string_type{ TETENGO2_TEXT("name0") },
                     string_type{ TETENGO2_TEXT("abbreviation0") },
+                    font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
                     color_type{ 0, 10, 20 },
                     train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
+                    train_kind_type::line_style_type::solid,
+                    font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+                    color_type{ 30, 40, 50 }
                 }
             },
             info_set_type{
@@ -122,9 +126,12 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
                 train_kind_type{
                     string_type{ TETENGO2_TEXT("name1") },
                     string_type{ TETENGO2_TEXT("abbreviation1") },
+                    font_type{ string_type{ TETENGO2_TEXT("foofont") }, 42, false, true, false, true },
                     color_type{ 1, 11, 21 },
                     train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::dashed
+                    train_kind_type::line_style_type::dashed,
+                    font_type{ string_type{ TETENGO2_TEXT("barfont") }, 42, false, true, false, true },
+                    color_type{ 31, 41, 51 }
                 }
             }
         };
@@ -137,9 +144,12 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
                 train_kind_type{
                     string_type{ TETENGO2_TEXT("name0") },
                     string_type{ TETENGO2_TEXT("abbreviation0") },
+                    font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
                     color_type{ 0, 10, 20 },
                     train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
+                    train_kind_type::line_style_type::solid,
+                    font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+                    color_type{ 30, 40, 50 }
                 }
             },
             info_set_type{
@@ -148,9 +158,12 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
                 train_kind_type{
                     string_type{ TETENGO2_TEXT("name1") },
                     string_type{ TETENGO2_TEXT("abbreviation1") },
+                    font_type{ string_type{ TETENGO2_TEXT("foofont") }, 42, false, true, false, true },
                     color_type{ 1, 11, 21 },
                     train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::dashed
+                    train_kind_type::line_style_type::dashed,
+                    font_type{ string_type{ TETENGO2_TEXT("barfont") }, 42, false, true, false, true },
+                    color_type{ 31, 41, 51 }
                 }
             }
         };

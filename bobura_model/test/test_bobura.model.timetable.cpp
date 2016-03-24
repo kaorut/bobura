@@ -11,7 +11,6 @@
 #include <utility>
 #include <vector>
 
-#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -63,7 +62,7 @@ namespace
 
     using stop_type = bobura::model::train_info::stop<size_type, difference_type, string_type>;
 
-    using train_kind_type = bobura::model::train_kind<string_type>;
+    using train_kind_type = bobura::model::train_kind<string_type, font_type>;
 
     using train_type = bobura::model::train<size_type, difference_type, string_type>;
 
@@ -82,6 +81,68 @@ namespace
 
     using color_type = ui_type_list_type::color_type;
 
+
+    // fucntions
+
+    train_kind_type make_local_train_kind()
+    {
+        return
+            train_kind_type{
+                string_type{ TETENGO2_TEXT("Local") },
+                string_type{ TETENGO2_TEXT("Local") },
+                font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, false, false, true },
+                color_type{ 0, 0, 255 },
+                train_kind_type::weight_type::normal,
+                train_kind_type::line_style_type::solid,
+                font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, false, false, true },
+                color_type{ 0, 0, 0 }
+            };
+    }
+
+    train_kind_type make_rapid_train_kind()
+    {
+        return
+            train_kind_type{
+                string_type{ TETENGO2_TEXT("Rapid") },
+                string_type{ TETENGO2_TEXT("Rapid") },
+                font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, false, false, true },
+                color_type{ 0, 128, 0 },
+                train_kind_type::weight_type::normal,
+                train_kind_type::line_style_type::solid,
+                font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, false, false, true },
+                color_type{ 0, 0, 0 }
+            };
+    }
+
+    train_kind_type make_express_train_kind()
+    {
+        return
+            train_kind_type{
+                string_type{ TETENGO2_TEXT("Express") },
+                string_type{ TETENGO2_TEXT("Exp.") },
+                font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
+                color_type{ 255, 0, 0 },
+                train_kind_type::weight_type::bold,
+                train_kind_type::line_style_type::solid,
+                font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
+                color_type{ 255, 0, 0 }
+            };
+    }
+
+    train_kind_type make_limited_express_train_kind()
+    {
+        return
+            train_kind_type{
+                string_type{ TETENGO2_TEXT("Limited Express") },
+                string_type{ TETENGO2_TEXT("Ltd.Exp.") },
+                font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
+                color_type{ 255, 0, 0 },
+                train_kind_type::weight_type::bold,
+                train_kind_type::line_style_type::solid,
+                font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
+                color_type{ 255, 0, 0 }
+            };
+    }
 
 
 }
@@ -423,11 +484,6 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(insert_station_location)
     {
         BOOST_TEST_PASSPOINT();
@@ -628,16 +684,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -743,16 +790,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
@@ -857,7 +895,6 @@ BOOST_AUTO_TEST_SUITE(timetable)
             BOOST_TEST(timetable.up_trains()[2].stops()[1].platform().empty());
         }
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(erase_station_locations)
     {
@@ -1086,16 +1123,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     2
                 }
             );
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             const train_type::stops_type stops{
                 stop_type{ time_type{ 1 }, time_type{ 2 }, false, string_type{ TETENGO2_TEXT("a") } },
@@ -1150,16 +1178,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     2
                 }
             );
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             const train_type::stops_type stops{
                 stop_type{ time_type{ 1 }, time_type{ 2 }, false, string_type{ TETENGO2_TEXT("a") } },
@@ -1214,16 +1233,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     2
                 }
             );
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             const train_type::stops_type stops{
                 stop_type{ time_type{ 1 }, time_type{ 2 }, false, string_type{ TETENGO2_TEXT("a") } },
@@ -1278,16 +1288,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     2
                 }
             );
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             const train_type::stops_type stops{
                 stop_type{ time_type{ 1 }, time_type{ 2 }, false, string_type{ TETENGO2_TEXT("a") } },
@@ -1339,36 +1340,9 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Local") },
-                    string_type{ TETENGO2_TEXT("Local") },
-                    color_type{ 0, 0, 255 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                }
-            );
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    color_type{ 0, 128, 0 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                }
-            );
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_local_train_kind());
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_rapid_train_kind());
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -1411,36 +1385,9 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Local") },
-                    string_type{ TETENGO2_TEXT("Local") },
-                    color_type{ 0, 0, 255 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                }
-            );
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    color_type{ 0, 128, 0 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                }
-            );
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_local_train_kind());
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_rapid_train_kind());
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -1489,24 +1436,12 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
         timetable_type timetable{};
 
-        const train_kind_type kind0{
-            string_type{ TETENGO2_TEXT("Rapid") },
-            string_type{ TETENGO2_TEXT("Rapid") },
-            color_type{ 0, 128, 0 },
-            train_kind_type::weight_type::normal,
-            train_kind_type::line_style_type::solid
-        };
+        const auto kind0 = make_rapid_train_kind();
         timetable.insert_train_kind(timetable.train_kinds().end(), kind0);
        
         BOOST_TEST(timetable.train_kinds().size() == 1U);
 
-        const train_kind_type kind2{
-            string_type{ TETENGO2_TEXT("Express") },
-            string_type{ TETENGO2_TEXT("Exp.") },
-            color_type{ 255, 0, 0 },
-            train_kind_type::weight_type::bold,
-            train_kind_type::line_style_type::solid
-        };
+        const auto kind2 = make_express_train_kind();
         timetable.insert_train_kind(timetable.train_kinds().end(), kind2);
        
         BOOST_TEST(timetable.train_kinds().size() == 2U);
@@ -1534,13 +1469,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             }
         );
 
-        const train_kind_type kind1{
-            string_type{ TETENGO2_TEXT("Local") },
-            string_type{ TETENGO2_TEXT("Local") },
-            color_type{ 0, 0, 255 },
-            train_kind_type::weight_type::normal,
-            train_kind_type::line_style_type::solid
-        };
+        const auto kind1 = make_local_train_kind();
         timetable.insert_train_kind(std::next(timetable.train_kinds().begin(), 1), kind1);
         
         BOOST_TEST_REQUIRE(timetable.train_kinds().size() == 3U);
@@ -1567,73 +1496,23 @@ BOOST_AUTO_TEST_SUITE(timetable)
         BOOST_TEST_PASSPOINT();
 
         timetable_type timetable{};
-        timetable.insert_train_kind(
-            timetable.train_kinds().end(),
-            train_kind_type{
-                string_type{ TETENGO2_TEXT("Local") },
-                string_type{ TETENGO2_TEXT("Local") },
-                color_type{ 0, 0, 255 },
-                train_kind_type::weight_type::normal,
-                train_kind_type::line_style_type::solid
-            }
-        );
-        timetable.insert_train_kind(
-            timetable.train_kinds().end(),
-            train_kind_type{
-                string_type{ TETENGO2_TEXT("Rapid") },
-                string_type{ TETENGO2_TEXT("Rapid") },
-                color_type{ 0, 128, 0 },
-                train_kind_type::weight_type::normal,
-                train_kind_type::line_style_type::solid
-            }
-        );
+        timetable.insert_train_kind(timetable.train_kinds().end(), make_local_train_kind());
+        timetable.insert_train_kind(timetable.train_kinds().end(), make_rapid_train_kind());
 
-        timetable.set_train_kind(
-            timetable.train_kinds().begin(),
-            train_kind_type{
-                string_type{ TETENGO2_TEXT("Limited Express") },
-                string_type{ TETENGO2_TEXT("Ltd.Exp.") },
-                color_type{ 255, 0, 0 },
-                train_kind_type::weight_type::bold,
-                train_kind_type::line_style_type::solid
-            }
-        );
+        timetable.set_train_kind(timetable.train_kinds().begin(), make_limited_express_train_kind());
 
         BOOST_TEST_REQUIRE(timetable.train_kinds().size() == 2U);
         BOOST_CHECK(timetable.train_kinds()[0].name() == string_type{ TETENGO2_TEXT("Limited Express") });
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(erase_train_kind)
     {
         BOOST_TEST_PASSPOINT();
 
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Local") },
-                    string_type{ TETENGO2_TEXT("Local") },
-                    color_type{ 0, 0, 255 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                }
-            );
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    color_type{ 0, 128, 0 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_local_train_kind());
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_rapid_train_kind());
 
             timetable.erase_train_kind(timetable.train_kinds().begin());
 
@@ -1646,36 +1525,9 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Local") },
-                    string_type{ TETENGO2_TEXT("Local") },
-                    color_type{ 0, 0, 255 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                }
-            );
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    color_type{ 0, 128, 0 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                }
-            );
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Limited Express") },
-                    string_type{ TETENGO2_TEXT("Ltd.Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_local_train_kind());
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_rapid_train_kind());
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_limited_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -1717,16 +1569,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Local") },
-                    string_type{ TETENGO2_TEXT("Local") },
-                    color_type{ 0, 0, 255 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_local_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -1746,13 +1589,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
         }
     }
-#endif
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(assign_train_kinds)
     {
         BOOST_TEST_PASSPOINT();
@@ -1760,22 +1597,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         {
             timetable_type timetable{};
 
-            const train_kinds_type train_kinds{
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Local") },
-                    string_type{ TETENGO2_TEXT("Local") },
-                    color_type{ 0, 0, 255 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                },
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    color_type{ 0, 128, 0 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                },
-            };
+            const train_kinds_type train_kinds{ make_local_train_kind(), make_rapid_train_kind() };
 
             timetable.assign_train_kinds(std::move(train_kinds), std::vector<train_kind_index_type>());
 
@@ -1784,16 +1606,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -1807,22 +1620,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                 }
             );
 
-            const train_kinds_type train_kinds{
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Local") },
-                    string_type{ TETENGO2_TEXT("Local") },
-                    color_type{ 0, 0, 255 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                },
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    color_type{ 0, 128, 0 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                },
-            };
+            const train_kinds_type train_kinds{ make_local_train_kind(), make_rapid_train_kind() };
 
             const std::vector<train_kind_index_type> train_kind_index_map{ 1 };
 
@@ -1835,16 +1633,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -1858,22 +1647,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                 }
             );
 
-            const train_kinds_type train_kinds{
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Local") },
-                    string_type{ TETENGO2_TEXT("Local") },
-                    color_type{ 0, 0, 255 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                },
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    color_type{ 0, 128, 0 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                },
-            };
+            const train_kinds_type train_kinds{ make_local_train_kind(), make_rapid_train_kind() };
 
             std::vector<train_kind_index_type> train_kind_index_map{};
 
@@ -1883,16 +1657,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -1906,22 +1671,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                 }
             );
 
-            const train_kinds_type train_kinds{
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Local") },
-                    string_type{ TETENGO2_TEXT("Local") },
-                    color_type{ 0, 0, 255 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                },
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    string_type{ TETENGO2_TEXT("Rapid") },
-                    color_type{ 0, 128, 0 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                },
-            };
+            const train_kinds_type train_kinds{ make_local_train_kind(), make_rapid_train_kind() };
 
             const std::vector<train_kind_index_type> train_kind_index_map{ 2 };
 
@@ -1930,7 +1680,6 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
         }
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(down_trains)
     {
@@ -1945,16 +1694,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -1976,16 +1716,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -2033,16 +1764,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
@@ -2064,16 +1786,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
@@ -2108,27 +1821,13 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(insert_down_train)
     {
         BOOST_TEST_PASSPOINT();
 
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -2150,16 +1849,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -2194,16 +1884,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -2264,16 +1945,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             BOOST_CHECK_THROW(
                 timetable.insert_down_train(
@@ -2342,16 +2014,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     1
                 }
             );
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             BOOST_CHECK_THROW(
                 timetable.insert_down_train(
@@ -2370,16 +2033,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             const train_type::stops_type stops{
                 stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
@@ -2403,29 +2057,14 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
         }
     }
-#endif
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(insert_up_train)
     {
         BOOST_TEST_PASSPOINT();
 
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
@@ -2447,16 +2086,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
@@ -2491,16 +2121,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
@@ -2561,16 +2182,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             BOOST_CHECK_THROW(
                 timetable.insert_up_train(
@@ -2639,16 +2251,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
                     1
                 }
             );
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
 
             BOOST_CHECK_THROW(
                 timetable.insert_up_train(
@@ -2667,16 +2270,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             const train_type::stops_type stops{
                 stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
@@ -2700,7 +2294,6 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
         }
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(erase_down_trains)
     {
@@ -2708,16 +2301,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -2750,16 +2334,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -2794,16 +2369,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -2840,16 +2406,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_down_train(
                 timetable.down_trains().end(),
@@ -2903,16 +2460,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
@@ -2945,16 +2493,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
@@ -2989,16 +2528,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
@@ -3035,16 +2565,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
         {
             timetable_type timetable{};
-            timetable.insert_train_kind(
-                timetable.train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("Express") },
-                    string_type{ TETENGO2_TEXT("Exp.") },
-                    color_type{ 255, 0, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                }
-            );
+            timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
             timetable.insert_up_train(
                 timetable.up_trains().end(),
@@ -3092,11 +2613,6 @@ BOOST_AUTO_TEST_SUITE(timetable)
         }
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(scheduled_speed)
     {
         BOOST_TEST_PASSPOINT();
@@ -3150,16 +2666,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
         timetable.insert_station_location(timetable.station_locations().end(), station_locations[2]);
         timetable.insert_station_location(timetable.station_locations().end(), station_locations[3]);
 
-        timetable.insert_train_kind(
-            timetable.train_kinds().end(),
-            train_kind_type{
-                string_type{ TETENGO2_TEXT("Express") },
-                string_type{ TETENGO2_TEXT("Exp.") },
-                color_type{ 255, 0, 0 },
-                train_kind_type::weight_type::bold,
-                train_kind_type::line_style_type::solid
-            }
-        );
+        timetable.insert_train_kind(timetable.train_kinds().end(), make_express_train_kind());
             
         {
             train_type train{
@@ -3330,7 +2837,6 @@ BOOST_AUTO_TEST_SUITE(timetable)
             );
         }
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(font_color_set)
     {
@@ -3347,11 +2853,15 @@ BOOST_AUTO_TEST_SUITE(timetable)
 
         timetable_type timetable{};
 
-        font_type font{ string_type{ TETENGO2_TEXT("hoge") }, 42, false, true, false, true };
-        color_type color{ 12, 34, 56 };
-        const font_color_type font_color{ std::move(font), std::move(color) };
+        font_type diagram_font{ string_type{ TETENGO2_TEXT("hoge") }, 42, false, true, false, true };
+        color_type diagram_color{ 12, 34, 56 };
+        font_type timetable_font{ string_type{ TETENGO2_TEXT("hoge") }, 42, false, true, false, true };
+        color_type timetable_color{ 12, 34, 56 };
+        const font_color_type font_color{
+            std::move(diagram_font), std::move(diagram_color), std::move(timetable_font), std::move(timetable_color)
+        };
         const font_color_set_type font_color_set{
-            color, font_color, font_color, font_color, font_color, font_color, font_color, font_color, font
+            font_color, font_color, font_color, font_color, font_color, font_color, font_color, font_color, font_color
         };
         timetable.set_font_color_set(font_color_set);
 

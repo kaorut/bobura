@@ -17,6 +17,7 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/format.hpp>
+#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/rational.hpp>
 
@@ -298,9 +299,18 @@ namespace bobura { namespace model { namespace serializer
                 );
             output |=
                 write_font_color_set_element(
-                    string_type{ TETENGO2_TEXT("company_line_name") },
-                    font_color_set.company_line_name(),
-                    font_color_set_type::default_().company_line_name(),
+                    string_type{ TETENGO2_TEXT("company_name") },
+                    font_color_set.company_name(),
+                    font_color_set_type::default_().company_name(),
+                    level + 1,
+                    output_stream,
+                    !output
+                );
+            output |=
+                write_font_color_set_element(
+                    string_type{ TETENGO2_TEXT("line_name") },
+                    font_color_set.line_name(),
+                    font_color_set_type::default_().line_name(),
                     level + 1,
                     output_stream,
                     !output
@@ -350,62 +360,10 @@ namespace bobura { namespace model { namespace serializer
                     output_stream,
                     !output
                 );
-            output |=
-                write_font_color_set_element(
-                    string_type{ TETENGO2_TEXT("train_name") },
-                    font_color_set.train_name(),
-                    font_color_set_type::default_().train_name(),
-                    level + 1,
-                    output_stream,
-                    !output
-                );
 
             if (output)
                 new_line(level, output_stream);
             output_stream << object_end();
-        }
-
-        static bool write_font_color_set_element(
-            const string_type&  key,
-            const color_type&   color,
-            const color_type&   default_color,
-            const size_type     level,
-            output_stream_type& output_stream,
-            const bool          first_element
-        )
-        {
-            if (color == default_color)
-                return false;
-
-            if (!first_element)
-                output_stream << comma();
-
-            new_line(level, output_stream);
-            write_object_entry(key, to_string(color), output_stream);
-
-            return true;
-        }
-
-        static bool write_font_color_set_element(
-            const string_type&  key,
-            const font_type&    font,
-            const font_type&    default_font,
-            const size_type     level,
-            output_stream_type& output_stream,
-            const bool          first_element
-        )
-        {
-            if (font == default_font)
-                return false;
-
-            if (!first_element)
-                output_stream << comma();
-
-            new_line(level, output_stream);
-            write_object_key(key, output_stream);
-            write_font(font, output_stream);
-
-            return true;
         }
 
         static bool write_font_color_set_element(
@@ -428,38 +386,63 @@ namespace bobura { namespace model { namespace serializer
 
             output_stream << array_begin();
 
-            write_font(font_color.font(), output_stream);
+            write_font(font_color.diagram_font(), output_stream);
             output_stream << comma() << space();
-
-            output_stream << encoder().encode(quote(to_string(font_color.color())));
+            write_color(font_color.diagram_color(), output_stream);
+            output_stream << comma() << space();
+            write_font(font_color.timetable_font(), output_stream);
+            output_stream << comma() << space();
+            write_color(font_color.timetable_color(), output_stream);
 
             output_stream << array_end();
 
             return true;
         }
 
-        static void write_font(const font_type& font, output_stream_type& output_stream)
+        static void write_font(const boost::optional<font_type>& font, output_stream_type& output_stream)
         {
+            if (!font)
+            {
+                write_null(output_stream);
+                return;
+            }
+
             output_stream << array_begin();
 
-            output_stream << encoder().encode(quote(font.family()));
+            output_stream << encoder().encode(quote(font->family()));
             output_stream << comma() << space();
 
-            output_stream << font.size();
+            output_stream << font->size();
             output_stream << comma() << space();
 
-            write_bool(font.bold(), output_stream);
+            write_bool(font->bold(), output_stream);
             output_stream << comma() << space();
 
-            write_bool(font.italic(), output_stream);
+            write_bool(font->italic(), output_stream);
             output_stream << comma() << space();
 
-            write_bool(font.underline(), output_stream);
+            write_bool(font->underline(), output_stream);
             output_stream << comma() << space();
 
-            write_bool(font.strikeout(), output_stream);
+            write_bool(font->strikeout(), output_stream);
 
             output_stream << array_end();
+        }
+
+        static void write_color(const boost::optional<color_type>& color, output_stream_type& output_stream)
+        {
+            if (!color)
+            {
+                write_null(output_stream);
+                return;
+            }
+
+            output_stream << encoder().encode(quote(to_string(*color)));
+        }
+
+        static void write_null(output_stream_type& output_stream)
+        {
+            output_stream << output_string_type{ TETENGO2_TEXT("null") };
         }
 
         static void write_station_locations(
@@ -589,25 +572,69 @@ namespace bobura { namespace model { namespace serializer
             write_object_entry(string_type{ TETENGO2_TEXT("abbreviation") }, train_kind.abbreviation(), output_stream);
             output_stream << comma();
 
-            new_line(level + 2, output_stream);
-            write_object_entry(string_type{ TETENGO2_TEXT("color") }, to_string(train_kind.color()), output_stream);
-            output_stream << comma();
-
-            new_line(level + 2, output_stream);
-            write_object_entry(
-                string_type{ TETENGO2_TEXT("weight") }, static_cast<int>(train_kind.weight()), output_stream
+            write_font_element(
+                string_type{ TETENGO2_TEXT("diagram_font") },
+                train_kind.diagram_font(),
+                level + 2,
+                output_stream
             );
             output_stream << comma();
 
             new_line(level + 2, output_stream);
             write_object_entry(
-                string_type{ TETENGO2_TEXT("line_style") }, static_cast<int>(train_kind.line_style()), output_stream
+                string_type{ TETENGO2_TEXT("diagram_color") },
+                to_string(train_kind.diagram_color()),
+                output_stream
+            );
+            output_stream << comma();
+
+            new_line(level + 2, output_stream);
+            write_object_entry(
+                string_type{ TETENGO2_TEXT("diagram_line_weight") },
+                static_cast<int>(train_kind.diagram_line_weight()),
+                output_stream
+            );
+            output_stream << comma();
+
+            new_line(level + 2, output_stream);
+            write_object_entry(
+                string_type{ TETENGO2_TEXT("diagram_line_style") },
+                static_cast<int>(train_kind.diagram_line_style()),
+                output_stream
+            );
+            output_stream << comma();
+
+            write_font_element(
+                string_type{ TETENGO2_TEXT("timetable_font") },
+                train_kind.timetable_font(),
+                level + 2,
+                output_stream
+            );
+            output_stream << comma();
+
+            new_line(level + 2, output_stream);
+            write_object_entry(
+                string_type{ TETENGO2_TEXT("timetable_color") },
+                to_string(train_kind.timetable_color()),
+                output_stream
             );
 
             new_line(level + 1, output_stream);
             output_stream << object_end();
             if (!last)
                 output_stream << comma();
+        }
+
+        static void write_font_element(
+            const string_type&  key,
+            const font_type&    font,
+            const size_type     level,
+            output_stream_type& output_stream
+        )
+        {
+            new_line(level, output_stream);
+            write_object_key(key, output_stream);
+            write_font(font, output_stream);
         }
 
         static string_type to_string(const color_type& color)

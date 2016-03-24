@@ -51,7 +51,7 @@ namespace bobura { namespace message { namespace font_color_dialog
 
             \param current_category_index A current category index.
             \param list_box               A list box.
-            \param update                 A update function.
+            \param update                 An update function.
         */
         category_list_box_selection_changed(
             boost::optional<size_type>& current_category_index,
@@ -96,9 +96,10 @@ namespace bobura { namespace message { namespace font_color_dialog
 
         \tparam IntSize        A integer size type.
         \tparam Canvas         A canvas type.
+        \tparam FontColor      A font and color type.
         \tparam MessageCatalog A message catalog type.
     */
-    template <typename IntSize, typename Canvas, typename MessageCatalog>
+    template <typename IntSize, typename Canvas, typename FontColor, typename MessageCatalog>
     class sample_picture_box_paint
     {
     public:
@@ -116,8 +117,8 @@ namespace bobura { namespace message { namespace font_color_dialog
         //! The color type.
         using color_type = typename Canvas::color_type;
 
-        //! The internal font and color type.
-        using internal_font_color_type = std::pair<boost::optional<font_type>, boost::optional<color_type>>;
+        //! The font and color type.
+        using font_color_type = FontColor;
 
         //! The dimension type.
         using dimension_type = typename Canvas::dimension_type;
@@ -137,10 +138,10 @@ namespace bobura { namespace message { namespace font_color_dialog
             \param message_catalog        A message catalog.
         */
         sample_picture_box_paint(
-            const std::vector<internal_font_color_type>& font_color_list,
-            const boost::optional<int_size_type>&        current_category_index,
-            const dimension_type&                        canvas_dimension,
-            const message_catalog_type&                  message_catalog
+            const std::vector<font_color_type>&   font_color_list,
+            const boost::optional<int_size_type>& current_category_index,
+            const dimension_type&                 canvas_dimension,
+            const message_catalog_type&           message_catalog
         )
         :
         m_font_color_list(font_color_list),
@@ -160,42 +161,22 @@ namespace bobura { namespace message { namespace font_color_dialog
         void operator()(canvas_type& canvas)
         const
         {
-            assert(m_font_color_list[0].second);
-            auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(*m_font_color_list[0].second);
-            canvas.set_background(std::move(p_background));
-            canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, m_canvas_dimension);
+            const position_type diagram_part_position{ left_type{ 0 }, top_type{ 0 } };
+            const dimension_type diagram_part_dimension{
+                tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension) / 2,
+                tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension),
+            };
+            draw_diagram_part(canvas, diagram_part_position, diagram_part_dimension);
 
-            if (
-                !m_current_category_index ||
-                *m_current_category_index == 0 ||
-                *m_current_category_index >= m_font_color_list.size()
-            )
-            {
-                return;
-            }
-
-            assert(m_font_color_list[*m_current_category_index].first);
-            canvas.set_font(*m_font_color_list[*m_current_category_index].first);
-            canvas.set_color(
-                m_font_color_list[*m_current_category_index].second ?
-                *m_font_color_list[*m_current_category_index].second : color_type{ 0x40, 0x40, 0x40 }
-            );
-
-            const string_type text{ m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:SAMPLE")) };
-
-            const auto text_and_line_tops = sample_text_and_line_tops(canvas, text);
-
-            canvas.draw_text(text, position_type{ left_type{ 1 }, text_and_line_tops.first });
-
-            canvas.set_line_width(width_type{ size_type{ 1, 12 } });
-            canvas.set_line_style(canvas_type::line_style_type::solid);
-            canvas.draw_line(
-                position_type{ left_type{ 0 }, text_and_line_tops.second },
-                position_type{
-                    left_type::from(tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension)),
-                    text_and_line_tops.second
-                }
-            );
+            const position_type timetable_part_position{
+                left_type::from(tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension) / 2),
+                top_type{ 0 }
+            };
+            const dimension_type timetable_part_dimension{
+                tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension) / 2,
+                tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension),
+            };
+            draw_timetable_part(canvas, timetable_part_position, timetable_part_dimension);
         }
 
 
@@ -221,7 +202,7 @@ namespace bobura { namespace message { namespace font_color_dialog
 
         // variables
 
-        const std::vector<internal_font_color_type>& m_font_color_list;
+        const std::vector<font_color_type>& m_font_color_list;
 
         const boost::optional<int_size_type>& m_current_category_index;
 
@@ -232,25 +213,89 @@ namespace bobura { namespace message { namespace font_color_dialog
 
         // functions
 
-        std::pair<top_type, top_type> sample_text_and_line_tops(const canvas_type& canvas, const string_type& text)
+        void draw_diagram_part(canvas_type& canvas, const position_type& position, const dimension_type& dimension)
         const
         {
-            const auto& canvas_height = tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension);
+            draw_sample(
+                canvas,
+                position,
+                dimension,
+                [](const font_color_type& fc) -> const boost::optional<font_type>& { return fc.diagram_font(); },
+                [](const font_color_type& fc) -> const boost::optional<color_type>& { return fc.diagram_color(); },
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Diagram"))
+            );
+        }
+
+        void draw_timetable_part(canvas_type& canvas, const position_type& position, const dimension_type& dimension)
+        const
+        {
+            draw_sample(
+                canvas,
+                position,
+                dimension,
+                [](const font_color_type& fc) -> const boost::optional<font_type>& { return fc.timetable_font(); },
+                [](const font_color_type& fc) -> const boost::optional<color_type>& { return fc.timetable_color(); },
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Timetable"))
+            );
+        }
+
+        void draw_sample(
+            canvas_type&                                                                      canvas,
+            const position_type&                                                              position,
+            const dimension_type&                                                             dimension,
+            const std::function<const boost::optional<font_type>& (const font_color_type&)>&  get_font,
+            const std::function<const boost::optional<color_type>& (const font_color_type&)>& get_color,
+            const string_type&                                                                text
+        )
+        const
+        {
+            assert(get_color(m_font_color_list[0]));
+            auto p_background =
+                tetengo2::stdalt::make_unique<solid_background_type>(*get_color(m_font_color_list[0]));
+            canvas.set_background(std::move(p_background));
+            canvas.fill_rectangle(position, dimension);
+
+            if (
+                !m_current_category_index ||
+                *m_current_category_index == 0 ||
+                *m_current_category_index >= m_font_color_list.size() ||
+                !get_font(m_font_color_list[*m_current_category_index]) ||
+                !get_color(m_font_color_list[*m_current_category_index])
+            )
+            {
+                return;
+            }
+
+            canvas.set_font(*get_font(m_font_color_list[*m_current_category_index]));
+            canvas.set_color(
+                get_color(m_font_color_list[*m_current_category_index]) ?
+                *get_color(m_font_color_list[*m_current_category_index]) : color_type{ 0x40, 0x40, 0x40 }
+            );
+
+            const position_type text_position{
+                tetengo2::gui::position<position_type>::left(position) + left_type{ 1 },
+                sample_text_top(canvas, position, dimension, text)
+            };
+            canvas.draw_text(text, text_position);
+        }
+
+        top_type sample_text_top(
+            const canvas_type&    canvas,
+            const position_type&  base_position,
+            const dimension_type& base_dimension,
+            const string_type&    text
+        )
+        const
+        {
+            const auto& base_top = tetengo2::gui::position<position_type>::top(base_position);
+            const auto& base_height = tetengo2::gui::dimension<dimension_type>::height(base_dimension);
             const auto& text_height =
                 tetengo2::gui::dimension<dimension_type>::height(canvas.calc_text_dimension(text));
 
-            if (canvas_height > text_height)
-            {
-                const auto text_top = top_type::from((canvas_height - text_height) / 2);
-                const auto line_top = text_top + top_type::from(text_height);
-                return std::make_pair(text_top, line_top);
-            }
+            if (base_height > text_height)
+                return base_top + top_type::from((base_height - text_height) / 2);
             else
-            {
-                const auto line_top = top_type::from(canvas_height);
-                const auto text_top = line_top - top_type::from(text_height);
-                return std::make_pair(text_top, line_top);
-            }
+                return top_type{ 0 };
         }
 
 
@@ -258,16 +303,24 @@ namespace bobura { namespace message { namespace font_color_dialog
 
 
     /*!
-        \brief The class template for a mouse click observer of the font button.
+        \brief The class template for a mouse click observer of the diagram font button.
 
         \tparam Size           A size type.
         \tparam Dialog         A dialog type.
         \tparam FontDialog     A font dialog type.
         \tparam Canvas         A canvas type.
+        \tparam FontColor      A font and color type.
         \tparam MessageCatalog A message catalog type.
     */
-    template <typename Size, typename Dialog, typename FontDialog, typename Canvas, typename MessageCatalog>
-    class font_button_mouse_clicked
+    template <
+        typename Size,
+        typename Dialog,
+        typename FontDialog,
+        typename Canvas,
+        typename FontColor,
+        typename MessageCatalog
+    >
+    class diagram_font_button_mouse_clicked
     {
     public:
         // types
@@ -290,8 +343,8 @@ namespace bobura { namespace message { namespace font_color_dialog
         //! The color type.
         using color_type = typename Canvas::color_type;
 
-        //! The internal font and color type.
-        using internal_font_color_type = std::pair<boost::optional<font_type>, boost::optional<color_type>>;
+        //! The font and color type.
+        using font_color_type = FontColor;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
@@ -303,20 +356,20 @@ namespace bobura { namespace message { namespace font_color_dialog
         // constructors and destructor
 
         /*!
-            \brief Creates a mouse click observer of the font button.
+            \brief Creates a mouse click observer of the diagram font button.
 
             \param dialog                 A dialog.
             \param font_color_list        A font and color list.
             \param current_category_index A current category index.
-            \param update                 A update function.
+            \param update                 An update function.
             \param message_catalog        A message catalog.
         */
-        font_button_mouse_clicked(
-            dialog_type&                           dialog,
-            std::vector<internal_font_color_type>& font_color_list,
-            const boost::optional<size_type>&      current_category_index,
-            const update_type                      update,
-            const message_catalog_type&            message_catalog
+        diagram_font_button_mouse_clicked(
+            dialog_type&                      dialog,
+            std::vector<font_color_type>&     font_color_list,
+            const boost::optional<size_type>& current_category_index,
+            const update_type                 update,
+            const message_catalog_type&       message_catalog
         )
         :
         m_dialog(dialog),
@@ -333,18 +386,17 @@ namespace bobura { namespace message { namespace font_color_dialog
             \brief Called when the font button is clicked.
         */
         void operator()()
-        const
         {
             if (!m_current_category_index)
                 return;
 
-            font_dialog_type font_dialog{ m_font_color_list[*m_current_category_index].first, m_dialog };
+            font_dialog_type font_dialog{ *m_font_color_list[*m_current_category_index].diagram_font(), m_dialog };
 
             const auto ok = font_dialog.do_modal();
             if (!ok)
                 return;
 
-            m_font_color_list[*m_current_category_index].first = boost::make_optional(font_dialog.result());
+            m_font_color_list[*m_current_category_index].set_diagram_font(boost::make_optional(font_dialog.result()));
 
             m_update();
         }
@@ -355,7 +407,7 @@ namespace bobura { namespace message { namespace font_color_dialog
 
         dialog_type& m_dialog;
 
-        std::vector<internal_font_color_type>& m_font_color_list;
+        std::vector<font_color_type>& m_font_color_list;
 
         const boost::optional<size_type>& m_current_category_index;
 
@@ -368,16 +420,24 @@ namespace bobura { namespace message { namespace font_color_dialog
 
 
     /*!
-        \brief The class template for a mouse click observer of the color button.
+        \brief The class template for a mouse click observer of the diagram color button.
 
         \tparam Size           A size type.
         \tparam Dialog         A dialog type.
         \tparam ColorDialog    A color dialog type.
         \tparam Canvas         A canvas type.
+        \tparam FontColor      A font and color type.
         \tparam MessageCatalog A message catalog type.
     */
-    template <typename Size, typename Dialog, typename ColorDialog, typename Canvas, typename MessageCatalog>
-    class color_button_mouse_clicked
+    template <
+        typename Size,
+        typename Dialog,
+        typename ColorDialog,
+        typename Canvas,
+        typename FontColor,
+        typename MessageCatalog
+    >
+    class diagram_color_button_mouse_clicked
     {
     public:
         // types
@@ -400,8 +460,8 @@ namespace bobura { namespace message { namespace font_color_dialog
         //! The color type.
         using color_type = typename Canvas::color_type;
 
-        //! The internal font and color type.
-        using internal_font_color_type = std::pair<boost::optional<font_type>, boost::optional<color_type>>;
+        //! The font and color type.
+        using font_color_type = FontColor;
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
@@ -418,15 +478,15 @@ namespace bobura { namespace message { namespace font_color_dialog
             \param dialog                 A dialog.
             \param font_color_list        A font and color list.
             \param current_category_index A current category index.
-            \param update                 A update function.
+            \param update                 An update function.
             \param message_catalog        A message catalog.
         */
-        explicit color_button_mouse_clicked(
-            dialog_type&                           dialog,
-            std::vector<internal_font_color_type>& font_color_list,
-            const boost::optional<size_type>&      current_category_index,
-            const update_type                      update,
-            const message_catalog_type&            message_catalog
+        explicit diagram_color_button_mouse_clicked(
+            dialog_type&                      dialog,
+            std::vector<font_color_type>&     font_color_list,
+            const boost::optional<size_type>& current_category_index,
+            const update_type                 update,
+            const message_catalog_type&       message_catalog
         )
         :
         m_dialog(dialog),
@@ -443,18 +503,17 @@ namespace bobura { namespace message { namespace font_color_dialog
             \brief Called when the font button is clicked.
         */
         void operator()()
-        const
         {
             if (!m_current_category_index)
                 return;
 
-            color_dialog_type color_dialog{ m_font_color_list[*m_current_category_index].second, m_dialog };
+            color_dialog_type color_dialog{ m_font_color_list[*m_current_category_index].diagram_color(), m_dialog };
 
             const auto ok = color_dialog.do_modal();
             if (!ok)
                 return;
 
-            m_font_color_list[*m_current_category_index].second = boost::make_optional(color_dialog.result());
+            m_font_color_list[*m_current_category_index].set_diagram_color(boost::make_optional(color_dialog.result()));
 
             m_update();
         }
@@ -465,7 +524,245 @@ namespace bobura { namespace message { namespace font_color_dialog
 
         dialog_type& m_dialog;
 
-        std::vector<internal_font_color_type>& m_font_color_list;
+        std::vector<font_color_type>& m_font_color_list;
+
+        const boost::optional<size_type>& m_current_category_index;
+
+        update_type m_update;
+
+        const message_catalog_type& m_message_catalog;
+
+
+    };
+
+
+    /*!
+        \brief The class template for a mouse click observer of the timetable font button.
+
+        \tparam Size           A size type.
+        \tparam Dialog         A dialog type.
+        \tparam FontDialog     A font dialog type.
+        \tparam Canvas         A canvas type.
+        \tparam FontColor      A font and color type.
+        \tparam MessageCatalog A message catalog type.
+    */
+    template <
+        typename Size,
+        typename Dialog,
+        typename FontDialog,
+        typename Canvas,
+        typename FontColor,
+        typename MessageCatalog
+    >
+    class timetable_font_button_mouse_clicked
+    {
+    public:
+        // types
+
+        //! The size type.
+        using size_type = Size;
+
+        //! The dialog type.
+        using dialog_type = Dialog;
+
+        //! The font dialog type.
+        using font_dialog_type = FontDialog;
+
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! The font type.
+        using font_type = typename Canvas::font_type;
+
+        //! The color type.
+        using color_type = typename Canvas::color_type;
+
+        //! The font and color type.
+        using font_color_type = FontColor;
+
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
+        //! The update type.
+        using update_type = std::function<void ()>;
+
+
+        // constructors and destructor
+
+        /*!
+            \brief Creates a mouse click observer of the timetable font button.
+
+            \param dialog                 A dialog.
+            \param font_color_list        A font and color list.
+            \param current_category_index A current category index.
+            \param update                 An update function.
+            \param message_catalog        A message catalog.
+        */
+        timetable_font_button_mouse_clicked(
+            dialog_type&                      dialog,
+            std::vector<font_color_type>&     font_color_list,
+            const boost::optional<size_type>& current_category_index,
+            const update_type                 update,
+            const message_catalog_type&       message_catalog
+        )
+        :
+        m_dialog(dialog),
+        m_font_color_list(font_color_list),
+        m_current_category_index(current_category_index),
+        m_update(update),
+        m_message_catalog(message_catalog)
+        {}
+
+
+        // functions
+
+        /*!
+            \brief Called when the font button is clicked.
+        */
+        void operator()()
+        {
+            if (!m_current_category_index)
+                return;
+
+            font_dialog_type font_dialog{ *m_font_color_list[*m_current_category_index].timetable_font(), m_dialog };
+
+            const auto ok = font_dialog.do_modal();
+            if (!ok)
+                return;
+
+            m_font_color_list[*m_current_category_index].set_timetable_font(
+                boost::make_optional(font_dialog.result())
+            );
+
+            m_update();
+        }
+
+
+    private:
+        // variables
+
+        dialog_type& m_dialog;
+
+        std::vector<font_color_type>& m_font_color_list;
+
+        const boost::optional<size_type>& m_current_category_index;
+
+        update_type m_update;
+
+        const message_catalog_type& m_message_catalog;
+
+
+    };
+
+
+    /*!
+        \brief The class template for a mouse click observer of the timetable color button.
+
+        \tparam Size           A size type.
+        \tparam Dialog         A dialog type.
+        \tparam ColorDialog    A color dialog type.
+        \tparam Canvas         A canvas type.
+        \tparam FontColor      A font and color type.
+        \tparam MessageCatalog A message catalog type.
+    */
+    template <
+        typename Size,
+        typename Dialog,
+        typename ColorDialog,
+        typename Canvas,
+        typename FontColor,
+        typename MessageCatalog
+    >
+    class timetable_color_button_mouse_clicked
+    {
+    public:
+        // types
+
+        //! The size type.
+        using size_type = Size;
+
+        //! The dialog type.
+        using dialog_type = Dialog;
+
+        //! The color dialog type.
+        using color_dialog_type = ColorDialog;
+
+        //! The canvas type.
+        using canvas_type = Canvas;
+
+        //! The font type.
+        using font_type = typename Canvas::font_type;
+
+        //! The color type.
+        using color_type = typename Canvas::color_type;
+
+        //! The font and color type.
+        using font_color_type = FontColor;
+
+        //! The message catalog type.
+        using message_catalog_type = MessageCatalog;
+
+        //! The update type.
+        using update_type = std::function<void ()>;
+
+
+        // constructors and destructor
+
+        /*!
+            \brief Creates a mouse click observer of the color button.
+
+            \param dialog                 A dialog.
+            \param font_color_list        A font and color list.
+            \param current_category_index A current category index.
+            \param update                 An update function.
+            \param message_catalog        A message catalog.
+        */
+        explicit timetable_color_button_mouse_clicked(
+            dialog_type&                      dialog,
+            std::vector<font_color_type>&     font_color_list,
+            const boost::optional<size_type>& current_category_index,
+            const update_type                 update,
+            const message_catalog_type&       message_catalog
+        )
+        :
+        m_dialog(dialog),
+        m_font_color_list(font_color_list),
+        m_current_category_index(current_category_index),
+        m_update(update),
+        m_message_catalog(message_catalog)
+        {}
+
+
+        // functions
+
+        /*!
+            \brief Called when the font button is clicked.
+        */
+        void operator()()
+        {
+            if (!m_current_category_index)
+                return;
+
+            color_dialog_type color_dialog{ m_font_color_list[*m_current_category_index].timetable_color(), m_dialog };
+
+            const auto ok = color_dialog.do_modal();
+            if (!ok)
+                return;
+
+            m_font_color_list[*m_current_category_index].set_timetable_color(
+                boost::make_optional(color_dialog.result())
+            );
+
+            m_update();
+        }
+
+
+    private:
+        // variables
+
+        dialog_type& m_dialog;
+
+        std::vector<font_color_type>& m_font_color_list;
 
         const boost::optional<size_type>& m_current_category_index;
 

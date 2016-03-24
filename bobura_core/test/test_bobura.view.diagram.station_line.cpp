@@ -9,6 +9,7 @@
 #include <utility>
 #include <vector>
 
+#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
@@ -93,6 +94,19 @@ namespace
     using station_grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
     
 
+    // functions
+
+    font_color_type make_font_color(const bool has_font, const bool has_color)
+    {
+        const auto font =
+            boost::make_optional(
+                has_font, font_type{ string_type{TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false }
+            );
+        const auto color = boost::make_optional(has_color, color_type{ 12, 34, 56 });
+        return font_color_type{ font, color, font, color };
+    }
+
+
 }
 
 
@@ -121,7 +135,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
             left_type{ 42 },
             left_type{ 12 },
             top_type{ 24 },
-            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+            make_font_color(true, true)
         };
         const station_line_type station_line2{ std::move(station_line1) };
     }
@@ -145,7 +159,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
             left_type{ 42 },
             left_type{ 12 },
             top_type{ 24 },
-            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+            make_font_color(true, true)
         };
         station_type station2{
             string_type{ TETENGO2_TEXT("name2") },
@@ -161,19 +175,13 @@ BOOST_AUTO_TEST_SUITE(station_line)
             left_type{ 42 },
             left_type{ 12 },
             top_type{ 24 },
-            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+            make_font_color(true, true)
         };
         station_line1 = std::move(station_line2);
     }
 
-// This test case causes a segmentation fault on Linux.
 #if !( \
     BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
     BOOST_AUTO_TEST_CASE(draw_on)
@@ -189,20 +197,20 @@ BOOST_AUTO_TEST_SUITE(station_line)
         };
         const station_location_type station_location{ std::move(station), 42 };
         selection_type selection{};
+        const auto font_color = make_font_color(true, true);
         const station_line_type station_line{
             station_location,
             selection,
             left_type{ 42 },
             left_type{ 12 },
             top_type{ 24 },
-            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+            font_color
         };
 
         window_type window{};
         const auto p_canvas = window.create_canvas();
         station_line.draw_on(*p_canvas);
     }
-#endif
 #endif
 
     BOOST_AUTO_TEST_CASE(p_item_by_position)
@@ -224,7 +232,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
             left_type{ 42 },
             left_type{ 12 },
             top_type{ 24 },
-            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+            make_font_color(true, true)
         };
 
         {
@@ -260,7 +268,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
             left_type{ 42 },
             left_type{ 12 },
             top_type{ 24 },
-            font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+            make_font_color(true, true)
         };
 
         BOOST_TEST(!station_line.selected());
@@ -287,7 +295,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
                 left_type{ 42 },
                 left_type{ 12 },
                 top_type{ 24 },
-                font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+                make_font_color(true, true)
             };
 
             station_line.select(false);
@@ -310,7 +318,7 @@ BOOST_AUTO_TEST_SUITE(station_line)
                 left_type{ 42 },
                 left_type{ 12 },
                 top_type{ 24 },
-                font_color_type{ font_type::dialog_font(), color_type{ 12, 34, 56 } }
+                make_font_color(true, true)
             };
 
             station_line.select(true);

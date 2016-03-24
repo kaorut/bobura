@@ -9,13 +9,16 @@
 #include <algorithm>
 #include <cassert>
 #include <memory>
+#include <sstream>
 #include <stdexcept>
 #include <utility>
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
+#include <boost/format.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
+#include <boost/rational.hpp>
 #include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
@@ -33,11 +36,13 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
+        typename PointUnitSize,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
-    class train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::impl :
+    class train_kind_dialog<Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::impl :
         private boost::noncopyable
     {
     public:
@@ -57,6 +62,10 @@ namespace bobura
 
         using canvas_type = typename train_kind_dialog::canvas_type;
 
+        using font_dialog_type = typename train_kind_dialog::font_dialog_type;
+
+        using point_unit_size_type = typename train_kind_dialog::point_unit_size_type;
+
         using color_dialog_type = typename train_kind_dialog::color_dialog_type;
 
         using info_set_type = typename train_kind_dialog::info_set_type;
@@ -64,18 +73,16 @@ namespace bobura
 
         // constructors and destructor
 
-        impl(
-            base_type&                  base,
-            const font_type&            font,
-            const color_type&           background_color,
-            const message_catalog_type& message_catalog
-        )
+        impl(base_type& base, const color_type& background_color, const message_catalog_type& message_catalog)
         :
         m_base(base),
         m_message_catalog(message_catalog),
         m_info_sets(),
         m_current_train_kind_index(),
-        m_current_train_kind_color(0, 0, 0),
+        m_current_diagram_font(font_type::dialog_font()),
+        m_current_diagram_color(0, 0, 0),
+        m_current_timetable_font(font_type::dialog_font()),
+        m_current_timetable_color(0, 0, 0),
         m_p_train_kind_label(),
         m_p_train_kind_list_box(),
         m_p_add_button(),
@@ -86,16 +93,23 @@ namespace bobura
         m_p_name_text_box(),
         m_p_abbreviation_label(),
         m_p_abbreviation_text_box(),
-        m_p_color_button(),
-        m_p_weight_label(),
-        m_p_weight_dropdown_box(),
-        m_p_line_style_label(),
-        m_p_line_style_dropdown_box(),
+        m_p_diagram_label(),
+        m_p_diagram_font_button(),
+        m_p_diagram_font_text_box(),
+        m_p_diagram_color_button(),
+        m_p_diagram_weight_label(),
+        m_p_diagram_weight_dropdown_box(),
+        m_p_diagram_line_style_label(),
+        m_p_diagram_line_style_dropdown_box(),
+        m_p_timetable_label(),
+        m_p_timetable_font_button(),
+        m_p_timetable_font_text_box(),
+        m_p_timetable_color_button(),
         m_p_sample_picture_box(),
         m_p_ok_button(),
         m_p_cancel_button()
         {
-            initialize_dialog(font, background_color);
+            initialize_dialog(background_color);
         }
 
 
@@ -169,14 +183,23 @@ namespace bobura
 
         using abbreviation_text_box_changed_observer_type = message::train_kind_dialog::abbreviation_text_box_changed;
 
-        using color_button_mouse_clicked_observer_type =
-            message::train_kind_dialog::color_button_mouse_clicked<base_type, ColorDialog>;
+        using diagram_font_button_mouse_clicked_observer_type =
+            message::train_kind_dialog::diagram_font_button_mouse_clicked<base_type, font_dialog_type>;
 
-        using weight_dropdown_box_selection_changed_observer_type =
-            message::train_kind_dialog::weight_dropdown_box_selection_changed;
+        using diagram_color_button_mouse_clicked_observer_type =
+            message::train_kind_dialog::diagram_color_button_mouse_clicked<base_type, color_dialog_type>;
 
-        using line_style_dropdown_box_selection_changed_observer_type =
-            message::train_kind_dialog::line_style_dropdown_box_selection_changed;
+        using diagram_weight_dropdown_box_selection_changed_observer_type =
+            message::train_kind_dialog::diagram_weight_dropdown_box_selection_changed;
+
+        using diagram_line_style_dropdown_box_selection_changed_observer_type =
+            message::train_kind_dialog::diagram_line_style_dropdown_box_selection_changed;
+
+        using timetable_font_button_mouse_clicked_observer_type =
+            message::train_kind_dialog::timetable_font_button_mouse_clicked<base_type, font_dialog_type>;
+
+        using timetable_color_button_mouse_clicked_observer_type =
+            message::train_kind_dialog::timetable_color_button_mouse_clicked<base_type, color_dialog_type>;
 
         using sample_picture_box_paint_observer_type =
             message::train_kind_dialog::sample_picture_box_paint<info_set_type, size_type, Canvas>;
@@ -270,7 +293,13 @@ namespace bobura
 
         boost::optional<size_type> m_current_train_kind_index;
 
-        color_type m_current_train_kind_color;
+        font_type m_current_diagram_font;
+
+        color_type m_current_diagram_color;
+
+        font_type m_current_timetable_font;
+
+        color_type m_current_timetable_color;
 
         std::unique_ptr<label_type> m_p_train_kind_label;
 
@@ -292,15 +321,29 @@ namespace bobura
 
         std::unique_ptr<text_box_type> m_p_abbreviation_text_box;
 
-        std::unique_ptr<button_type> m_p_color_button;
+        std::unique_ptr<label_type> m_p_diagram_label;
 
-        std::unique_ptr<label_type> m_p_weight_label;
+        std::unique_ptr<button_type> m_p_diagram_font_button;
 
-        std::unique_ptr<dropdown_box_type> m_p_weight_dropdown_box;
+        std::unique_ptr<text_box_type> m_p_diagram_font_text_box;
 
-        std::unique_ptr<label_type> m_p_line_style_label;
+        std::unique_ptr<button_type> m_p_diagram_color_button;
 
-        std::unique_ptr<dropdown_box_type> m_p_line_style_dropdown_box;
+        std::unique_ptr<label_type> m_p_diagram_weight_label;
+
+        std::unique_ptr<dropdown_box_type> m_p_diagram_weight_dropdown_box;
+
+        std::unique_ptr<label_type> m_p_diagram_line_style_label;
+
+        std::unique_ptr<dropdown_box_type> m_p_diagram_line_style_dropdown_box;
+
+        std::unique_ptr<label_type> m_p_timetable_label;
+
+        std::unique_ptr<button_type> m_p_timetable_font_button;
+
+        std::unique_ptr<text_box_type> m_p_timetable_font_text_box;
+
+        std::unique_ptr<button_type> m_p_timetable_color_button;
 
         std::unique_ptr<label_type> m_p_sample_label;
 
@@ -313,7 +356,7 @@ namespace bobura
 
         // functions
 
-        void initialize_dialog(const font_type& font, const color_type& background_color)
+        void initialize_dialog(const color_type& background_color)
         {
             m_base.set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Train Kinds")));
 
@@ -327,13 +370,20 @@ namespace bobura
             m_p_name_text_box = create_name_text_box();
             m_p_abbreviation_label = create_abbreviation_label();
             m_p_abbreviation_text_box = create_abbreviation_text_box();
-            m_p_color_button = create_color_button();
-            m_p_weight_label = create_weight_label();
-            m_p_weight_dropdown_box = create_weight_dropdown_box();
-            m_p_line_style_label = create_line_style_label();
-            m_p_line_style_dropdown_box = create_line_style_dropdown_box();
+            m_p_diagram_label = create_diagram_label();
+            m_p_diagram_font_button = create_diagram_font_button();
+            m_p_diagram_font_text_box = create_diagram_font_text_box();
+            m_p_diagram_color_button = create_diagram_color_button();
+            m_p_diagram_weight_label = create_diagram_weight_label();
+            m_p_diagram_weight_dropdown_box = create_diagram_weight_dropdown_box();
+            m_p_diagram_line_style_label = create_diagram_line_style_label();
+            m_p_diagram_line_style_dropdown_box = create_diagram_line_style_dropdown_box();
+            m_p_timetable_label = create_timetable_label();
+            m_p_timetable_font_button = create_timetable_font_button();
+            m_p_timetable_font_text_box = create_timetable_font_text_box();
+            m_p_timetable_color_button = create_timetable_color_button();
             m_p_sample_label = create_sample_label();
-            m_p_sample_picture_box = create_sample_picture_box(font, background_color);
+            m_p_sample_picture_box = create_sample_picture_box(background_color);
             m_p_ok_button = create_ok_button();
             m_p_cancel_button = create_cancel_button();
 
@@ -467,21 +517,56 @@ namespace bobura
             return std::move(p_text_box);
         }
 
-        std::unique_ptr<button_type> create_color_button()
+        std::unique_ptr<label_type> create_diagram_label()
+        {
+            auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
+
+            p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Diagram:")));
+            auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
+            p_label->set_background(std::move(p_background));
+
+            return std::move(p_label);
+        }
+
+        std::unique_ptr<button_type> create_diagram_font_button()
         {
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base);
 
-            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Line &Color...")));
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:&Font...")));
             p_button->mouse_observer_set().clicked().connect(
-                color_button_mouse_clicked_observer_type{
-                    m_base, m_current_train_kind_color, [this]() { this->apply(); }
+                diagram_font_button_mouse_clicked_observer_type{
+                    m_base, m_current_diagram_font, [this]() { this->apply(); }
                 }
             );
 
             return std::move(p_button);
         }
 
-        std::unique_ptr<label_type> create_weight_label()
+        std::unique_ptr<text_box_type> create_diagram_font_text_box()
+        {
+            auto p_text_box =
+                tetengo2::stdalt::make_unique<text_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
+
+            p_text_box->set_read_only(true);
+
+            return std::move(p_text_box);
+        }
+
+        std::unique_ptr<button_type> create_diagram_color_button()
+        {
+            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base);
+
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:&Color...")));
+            p_button->mouse_observer_set().clicked().connect(
+                diagram_color_button_mouse_clicked_observer_type{
+                    m_base, m_current_diagram_color, [this]() { this->apply(); }
+                }
+            );
+
+            return std::move(p_button);
+        }
+
+        std::unique_ptr<label_type> create_diagram_weight_label()
         {
             auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
 
@@ -492,7 +577,7 @@ namespace bobura
             return std::move(p_label);
         }
 
-        std::unique_ptr<dropdown_box_type> create_weight_dropdown_box()
+        std::unique_ptr<dropdown_box_type> create_diagram_weight_dropdown_box()
         {
             auto p_dropdown_box = tetengo2::stdalt::make_unique<dropdown_box_type>(m_base);
 
@@ -505,13 +590,13 @@ namespace bobura
             p_dropdown_box->select_value(0);
 
             p_dropdown_box->list_selection_observer_set().selection_changed().connect(
-                weight_dropdown_box_selection_changed_observer_type{ [this]() { this->apply(); } }
+                diagram_weight_dropdown_box_selection_changed_observer_type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_dropdown_box);
         }
 
-        std::unique_ptr<label_type> create_line_style_label()
+        std::unique_ptr<label_type> create_diagram_line_style_label()
         {
             auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
 
@@ -522,7 +607,7 @@ namespace bobura
             return std::move(p_label);
         }
 
-        std::unique_ptr<dropdown_box_type> create_line_style_dropdown_box()
+        std::unique_ptr<dropdown_box_type> create_diagram_line_style_dropdown_box()
         {
             auto p_dropdown_box = tetengo2::stdalt::make_unique<dropdown_box_type>(m_base);
 
@@ -541,10 +626,59 @@ namespace bobura
             p_dropdown_box->select_value(0);
 
             p_dropdown_box->list_selection_observer_set().selection_changed().connect(
-                line_style_dropdown_box_selection_changed_observer_type{ [this]() { this->apply(); } }
+                diagram_line_style_dropdown_box_selection_changed_observer_type{ [this]() { this->apply(); } }
             );
 
             return std::move(p_dropdown_box);
+        }
+
+        std::unique_ptr<label_type> create_timetable_label()
+        {
+            auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
+
+            p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Timetable:")));
+            auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
+            p_label->set_background(std::move(p_background));
+
+            return std::move(p_label);
+        }
+
+        std::unique_ptr<button_type> create_timetable_font_button()
+        {
+            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base);
+
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:F&ont...")));
+            p_button->mouse_observer_set().clicked().connect(
+                timetable_font_button_mouse_clicked_observer_type{
+                    m_base, m_current_timetable_font, [this]() { this->apply(); }
+                }
+            );
+
+            return std::move(p_button);
+        }
+
+        std::unique_ptr<text_box_type> create_timetable_font_text_box()
+        {
+            auto p_text_box =
+                tetengo2::stdalt::make_unique<text_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
+
+            p_text_box->set_read_only(true);
+
+            return std::move(p_text_box);
+        }
+
+        std::unique_ptr<button_type> create_timetable_color_button()
+        {
+            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base);
+
+            p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Co&lor...")));
+            p_button->mouse_observer_set().clicked().connect(
+                timetable_color_button_mouse_clicked_observer_type{
+                    m_base, m_current_timetable_color, [this]() { this->apply(); }
+                }
+            );
+
+            return std::move(p_button);
         }
 
         std::unique_ptr<label_type> create_sample_label()
@@ -558,18 +692,15 @@ namespace bobura
             return std::move(p_label);
         }
 
-        std::unique_ptr<picture_box_type> create_sample_picture_box(
-            const font_type&  font,
-            const color_type& background_color
-        )
+        std::unique_ptr<picture_box_type> create_sample_picture_box(const color_type& background_color)
         {
             auto p_picture_box =
                 tetengo2::stdalt::make_unique<picture_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
 
-            p_picture_box->set_dimension(dimension_type{ width_type{ 20 }, height_type{ 4 } });
+            p_picture_box->set_dimension(dimension_type{ width_type{ 22 }, height_type{ 4 } });
             p_picture_box->fast_paint_observer_set().paint().connect(
                 sample_picture_box_paint_observer_type{
-                    m_info_sets, m_current_train_kind_index, font, background_color, p_picture_box->client_dimension()
+                    m_info_sets, m_current_train_kind_index, background_color, p_picture_box->client_dimension()
                 }
             );
 
@@ -598,108 +729,178 @@ namespace bobura
 
         void locate_controls()
         {
-            m_base.set_client_dimension(dimension_type{ width_type{ 46 }, height_type{ 26 } });
+            m_base.set_client_dimension(dimension_type{ width_type{ 48 }, height_type{ 37 } });
 
             const left_type train_kind_label_left{ 2 };
+            {
+                m_p_train_kind_label->fit_to_content();
+                m_p_train_kind_label->set_position(position_type{ train_kind_label_left, top_type{ 1 } });
 
-            m_p_train_kind_label->fit_to_content();
-            m_p_train_kind_label->set_position(position_type{ train_kind_label_left, top_type{ 1 } });
+                const width_type list_box_width{ 20 };
+                const height_type list_box_height{ 28 };
+                m_p_train_kind_list_box->set_dimension(dimension_type{ list_box_width, list_box_height });
+                m_p_train_kind_list_box->set_position(
+                    position_type{
+                        train_kind_label_left,
+                        tetengo2::gui::position<position_type>::top(m_p_train_kind_label->position()) +
+                            top_type::from(
+                                tetengo2::gui::dimension<dimension_type>::height(m_p_train_kind_label->dimension())
+                            )
+                    }
+                );
 
-            const width_type list_box_width{ 20 };
-            const height_type list_box_height{ 17 };
-            m_p_train_kind_list_box->set_dimension(dimension_type{ list_box_width, list_box_height });
-            m_p_train_kind_list_box->set_position(
-                position_type{
-                    train_kind_label_left,
-                    tetengo2::gui::position<position_type>::top(m_p_train_kind_label->position()) +
-                        top_type::from(
-                            tetengo2::gui::dimension<dimension_type>::height(m_p_train_kind_label->dimension())
-                        )
-                }
-            );
+                const width_type list_box_button_width{ typename width_type::value_type{ 9, 2 } };
+                left_type list_box_button_left{
+                    train_kind_label_left + left_type::from(list_box_width) - left_type::from(list_box_button_width)
+                };
+                const top_type list_box_button_top{
+                    tetengo2::gui::position<position_type>::top(m_p_train_kind_list_box->position()) +
+                        top_type::from(list_box_height)
+                };
+                m_p_down_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
+                m_p_down_button->set_position(position_type{ list_box_button_left, list_box_button_top });
 
-            const width_type list_box_button_width{ typename width_type::value_type{ 9, 2 } };
-            left_type list_box_button_left{
-                train_kind_label_left + left_type::from(list_box_width) - left_type::from(list_box_button_width)
-            };
-            const top_type list_box_button_top{
-                tetengo2::gui::position<position_type>::top(m_p_train_kind_list_box->position()) +
-                    top_type::from(list_box_height)
-            };
-            m_p_down_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
-            m_p_down_button->set_position(position_type{ list_box_button_left, list_box_button_top });
+                list_box_button_left -=
+                    left_type::from(list_box_button_width) + left_type{ typename left_type::value_type{ 1, 4 } };
+                m_p_up_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
+                m_p_up_button->set_position(position_type{ list_box_button_left, list_box_button_top });
 
-            list_box_button_left -=
-                left_type::from(list_box_button_width) + left_type{ typename left_type::value_type{ 1, 4 } };
-            m_p_up_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
-            m_p_up_button->set_position(position_type{ list_box_button_left, list_box_button_top });
+                list_box_button_left -=
+                    left_type::from(list_box_button_width) + left_type{ typename left_type::value_type{ 1, 2 } };
+                m_p_delete_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
+                m_p_delete_button->set_position(position_type{ list_box_button_left, list_box_button_top });
 
-            list_box_button_left -=
-                left_type::from(list_box_button_width) + left_type{ typename left_type::value_type{ 1, 2 } };
-            m_p_delete_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
-            m_p_delete_button->set_position(position_type{ list_box_button_left, list_box_button_top });
-
-            list_box_button_left -=
-                left_type::from(list_box_button_width) + left_type{ typename left_type::value_type{ 1, 4 } };
-            m_p_add_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
-            m_p_add_button->set_position(position_type{ list_box_button_left, list_box_button_top });
+                list_box_button_left -=
+                    left_type::from(list_box_button_width) + left_type{ typename left_type::value_type{ 1, 4 } };
+                m_p_add_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
+                m_p_add_button->set_position(position_type{ list_box_button_left, list_box_button_top });
+            }
 
             const left_type name_label_left{ 24 };
-            m_p_name_label->fit_to_content();
-            m_p_name_label->set_position(position_type{ name_label_left, top_type{ 1 } });
-
+            const left_type font_button_left{ 25 };
             const left_type name_text_box_left{ 32 };
-            m_p_name_text_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
-            m_p_name_text_box->set_position(position_type{ name_text_box_left, top_type{ 1 } });
+            const left_type font_text_box_left{ 34 };
+            {
+                m_p_name_label->fit_to_content();
+                m_p_name_label->set_position(position_type{ name_label_left, top_type{ 1 } });
 
-            m_p_abbreviation_label->fit_to_content();
-            m_p_abbreviation_label->set_position(position_type{ name_label_left, top_type{ 4 } });
+                m_p_name_text_box->set_dimension(dimension_type{ width_type{ 14 }, height_type{ 2 } });
+                m_p_name_text_box->set_position(position_type{ name_text_box_left, top_type{ 1 } });
 
-            m_p_abbreviation_text_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
-            m_p_abbreviation_text_box->set_position(position_type{ name_text_box_left, top_type{ 4 } });
+                m_p_abbreviation_label->fit_to_content();
+                m_p_abbreviation_label->set_position(position_type{ name_label_left, top_type{ 4 } });
 
-            m_p_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-            m_p_color_button->set_position(position_type{ name_text_box_left, top_type{ 7 } });
+                m_p_abbreviation_text_box->set_dimension(dimension_type{ width_type{ 14 }, height_type{ 2 } });
+                m_p_abbreviation_text_box->set_position(position_type{ name_text_box_left, top_type{ 4 } });
+            }
+            {
+                m_p_diagram_label->fit_to_content();
+                m_p_diagram_label->set_position(position_type{ name_label_left, top_type{ 7 } });
 
-            m_p_weight_label->fit_to_content();
-            m_p_weight_label->set_position(position_type{ name_label_left, top_type{ 10 } });
+                const auto font_button_top =
+                    tetengo2::gui::position<position_type>::top(m_p_diagram_label->position()) +
+                    top_type::from(tetengo2::gui::dimension<dimension_type>::height(m_p_diagram_label->dimension()));
 
-            m_p_weight_dropdown_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
-            m_p_weight_dropdown_box->set_position(position_type{ name_text_box_left, top_type{ 10 } });
+                m_p_diagram_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_diagram_font_button->set_position(position_type{ font_button_left, font_button_top });
 
-            m_p_line_style_label->fit_to_content();
-            m_p_line_style_label->set_position(position_type{ name_label_left, top_type{ 13 } });
+                m_p_diagram_font_text_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
+                m_p_diagram_font_text_box->set_position(position_type{ font_text_box_left, font_button_top });
 
-            m_p_line_style_dropdown_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
-            m_p_line_style_dropdown_box->set_position(position_type{ name_text_box_left, top_type{ 13 } });
+                const auto color_button_top =
+                    tetengo2::gui::position<position_type>::top(m_p_diagram_font_button->position()) +
+                    top_type::from(
+                        tetengo2::gui::dimension<dimension_type>::height(m_p_diagram_font_button->dimension())
+                    ) +
+                    top_type{ 1 } / 2;
 
-            m_p_sample_label->fit_to_content();
-            m_p_sample_label->set_dimension(
-                dimension_type{
-                    std::max(
-                        tetengo2::gui::dimension<dimension_type>::width(m_p_sample_label->dimension()),
-                        width_type{ m_p_sample_label->text().length() }
-                    ),
-                    tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
-                }
-            );
-            m_p_sample_label->set_position(position_type{ name_label_left, top_type{ 16 } });
+                m_p_diagram_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_diagram_color_button->set_position(position_type{ font_button_left, color_button_top });
 
-            m_p_sample_picture_box->set_position(
-                position_type{
-                    name_label_left,
-                    tetengo2::gui::position<position_type>::top(m_p_sample_label->position()) +
-                        top_type::from(
-                            tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
-                        )
-                }
-            );
+                const auto weight_label_top =
+                    tetengo2::gui::position<position_type>::top(m_p_diagram_color_button->position()) +
+                    top_type::from(
+                        tetengo2::gui::dimension<dimension_type>::height(m_p_diagram_color_button->dimension())
+                    ) +
+                    top_type{ 1 } / 2;
 
-            m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-            m_p_ok_button->set_position(position_type{ left_type{ 27 }, top_type{ 23 } });
+                m_p_diagram_weight_label->fit_to_content();
+                m_p_diagram_weight_label->set_position(position_type{ font_button_left, weight_label_top });
 
-            m_p_cancel_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-            m_p_cancel_button->set_position(position_type{ left_type{ 36 }, top_type{ 23 } });
+                m_p_diagram_weight_dropdown_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
+                m_p_diagram_weight_dropdown_box->set_position(position_type{ font_text_box_left, weight_label_top });
+
+                const auto line_style_label_top =
+                    tetengo2::gui::position<position_type>::top(m_p_diagram_weight_dropdown_box->position()) +
+                    top_type::from(
+                        tetengo2::gui::dimension<dimension_type>::height(m_p_diagram_weight_dropdown_box->dimension())
+                    ) +
+                    top_type{ 1 } / 2;
+
+                m_p_diagram_line_style_label->fit_to_content();
+                m_p_diagram_line_style_label->set_position(position_type{ font_button_left, line_style_label_top });
+
+                m_p_diagram_line_style_dropdown_box->set_dimension(
+                    dimension_type{ width_type{ 12 }, height_type{ 2 } }
+                );
+                m_p_diagram_line_style_dropdown_box->set_position(
+                    position_type{ font_text_box_left, line_style_label_top }
+                );
+            }
+            {
+                m_p_timetable_label->fit_to_content();
+                m_p_timetable_label->set_position(position_type{ name_label_left, top_type{ 20 } });
+
+                const auto font_button_top =
+                    tetengo2::gui::position<position_type>::top(m_p_timetable_label->position()) +
+                    top_type::from(tetengo2::gui::dimension<dimension_type>::height(m_p_timetable_label->dimension()));
+
+                m_p_timetable_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_timetable_font_button->set_position(position_type{ font_button_left, font_button_top });
+
+                m_p_timetable_font_text_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
+                m_p_timetable_font_text_box->set_position(position_type{ font_text_box_left, font_button_top });
+
+                const auto color_button_top =
+                    tetengo2::gui::position<position_type>::top(m_p_timetable_font_button->position()) +
+                    top_type::from(
+                        tetengo2::gui::dimension<dimension_type>::height(m_p_timetable_font_button->dimension())
+                    ) +
+                    top_type{ 1 } / 2;
+
+                m_p_timetable_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_timetable_color_button->set_position(position_type{ font_button_left, color_button_top });
+            }
+            {
+                m_p_sample_label->fit_to_content();
+                m_p_sample_label->set_dimension(
+                    dimension_type{
+                        std::max(
+                            tetengo2::gui::dimension<dimension_type>::width(m_p_sample_label->dimension()),
+                            width_type{ m_p_sample_label->text().length() }
+                        ),
+                        tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
+                    }
+                );
+                m_p_sample_label->set_position(position_type{ name_label_left, top_type{ 27 } });
+
+                m_p_sample_picture_box->set_position(
+                    position_type{
+                        name_label_left,
+                        tetengo2::gui::position<position_type>::top(m_p_sample_label->position()) +
+                            top_type::from(
+                                tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
+                            )
+                    }
+                );
+            }
+            {
+                m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_ok_button->set_position(position_type{ left_type{ 29 }, top_type{ 34 } });
+
+                m_p_cancel_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_cancel_button->set_position(position_type{ left_type{ 38 }, top_type{ 34 } });
+            }
         }
 
         void sync()
@@ -738,32 +939,47 @@ namespace bobura
             m_p_name_text_box->set_enabled(static_cast<bool>(selected_index));
             m_p_abbreviation_label->set_enabled(static_cast<bool>(selected_index));
             m_p_abbreviation_text_box->set_enabled(static_cast<bool>(selected_index));
-            m_p_color_button->set_enabled(static_cast<bool>(selected_index));
-            m_p_weight_label->set_enabled(static_cast<bool>(selected_index));
-            m_p_weight_dropdown_box->set_enabled(static_cast<bool>(selected_index));
-            m_p_line_style_label->set_enabled(static_cast<bool>(selected_index));
-            m_p_line_style_dropdown_box->set_enabled(static_cast<bool>(selected_index));
+            m_p_diagram_font_button->set_enabled(static_cast<bool>(selected_index));
+            m_p_diagram_color_button->set_enabled(static_cast<bool>(selected_index));
+            m_p_diagram_weight_label->set_enabled(static_cast<bool>(selected_index));
+            m_p_diagram_weight_dropdown_box->set_enabled(static_cast<bool>(selected_index));
+            m_p_diagram_line_style_label->set_enabled(static_cast<bool>(selected_index));
+            m_p_diagram_line_style_dropdown_box->set_enabled(static_cast<bool>(selected_index));
+            m_p_timetable_font_button->set_enabled(static_cast<bool>(selected_index));
+            m_p_timetable_color_button->set_enabled(static_cast<bool>(selected_index));
 
             if (static_cast<bool>(selected_index))
             {
                 assert(m_info_sets.size() == m_p_train_kind_list_box->value_count());
                 const auto& train_kind = m_info_sets[*selected_index].train_kind();
 
-                m_current_train_kind_color = train_kind.color();
+                m_current_diagram_font = train_kind.diagram_font();
+                m_current_diagram_color = train_kind.diagram_color();
+                m_current_timetable_font = train_kind.timetable_font();
+                m_current_timetable_color = train_kind.timetable_color();
                 m_p_name_text_box->set_text(train_kind.name());
                 m_p_abbreviation_text_box->set_text(train_kind.abbreviation());
-                m_p_weight_dropdown_box->select_value(to_weight_dropdown_box_index(train_kind.weight()));
-                m_p_line_style_dropdown_box->select_value(
-                    to_line_style_dropdown_box_index(train_kind.line_style())
+                m_p_diagram_font_text_box->set_text(font_name_and_size(m_current_diagram_font));
+                m_p_diagram_weight_dropdown_box->select_value(
+                    to_weight_dropdown_box_index(train_kind.diagram_line_weight())
                 );
+                m_p_diagram_line_style_dropdown_box->select_value(
+                    to_line_style_dropdown_box_index(train_kind.diagram_line_style())
+                );
+                m_p_timetable_font_text_box->set_text(font_name_and_size(m_current_timetable_font));
             }
             else
             {
-                m_current_train_kind_color = color_type{ 0, 0, 0 };
+                m_current_diagram_font = font_type::dialog_font();
+                m_current_diagram_color = color_type{ 0, 0, 0 };
+                m_current_timetable_font = font_type::dialog_font();
+                m_current_timetable_color = color_type{ 0, 0, 0 };
                 m_p_name_text_box->set_text(string_type{});
                 m_p_abbreviation_text_box->set_text(string_type{});
-                m_p_weight_dropdown_box->select_value(0);
-                m_p_line_style_dropdown_box->select_value(0);
+                m_p_diagram_font_text_box->set_text(string_type{});
+                m_p_diagram_weight_dropdown_box->select_value(0);
+                m_p_diagram_line_style_dropdown_box->select_value(0);
+                m_p_timetable_font_text_box->set_text(string_type{});
             }
 
             m_p_sample_picture_box->repaint();
@@ -776,21 +992,37 @@ namespace bobura
 
             auto& train_kind = m_info_sets[*m_current_train_kind_index].train_kind();
 
-            assert(m_p_weight_dropdown_box->selected_value_index());
-            assert(m_p_weight_dropdown_box->selected_value_index());
+            assert(m_p_diagram_weight_dropdown_box->selected_value_index());
             train_kind =
                 train_kind_type{
                     m_p_name_text_box->text(),
                     m_p_abbreviation_text_box->text(),
-                    m_current_train_kind_color,
-                    to_weight(*m_p_weight_dropdown_box->selected_value_index()),
-                    to_line_style(*m_p_line_style_dropdown_box->selected_value_index())
+                    m_current_diagram_font,
+                    m_current_diagram_color,
+                    to_weight(*m_p_diagram_weight_dropdown_box->selected_value_index()),
+                    to_line_style(*m_p_diagram_line_style_dropdown_box->selected_value_index()),
+                    m_current_timetable_font,
+                    m_current_timetable_color
                 };
 
             m_p_train_kind_list_box->set_value(*m_current_train_kind_index, train_kind.name());
             m_p_train_kind_list_box->select_value(*m_current_train_kind_index);
 
+            m_p_diagram_font_text_box->set_text(font_name_and_size(m_current_diagram_font));
+            m_p_timetable_font_text_box->set_text(font_name_and_size(m_current_timetable_font));
             m_p_sample_picture_box->repaint();
+        }
+
+        string_type font_name_and_size(const font_type& font)
+        const
+        {
+            std::basic_ostringstream<typename string_type::value_type> stream;
+            stream <<
+                boost::basic_format<typename string_type::value_type>(string_type{ TETENGO2_TEXT("%s, %dpt") }) %
+                font.family() %
+                boost::rational_cast<int>(point_unit_size_type::from_pixels(font.size()).value());
+
+            return stream.str();
         }
 
 
@@ -802,11 +1034,15 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
+        typename PointUnitSize,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
-    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::info_set_type(
+    train_kind_dialog<
+        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::info_set_type::info_set_type(
         boost::optional<size_type> original_index,
         const bool                 referred,
         train_kind_type            train_kind
@@ -823,14 +1059,20 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
+        typename PointUnitSize,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
     const boost::optional<
-        typename train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::size_type
+        typename train_kind_dialog<
+            Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        >::size_type
     >&
-    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::original_index()
+    train_kind_dialog<
+        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::info_set_type::original_index()
     const
     {
         return m_original_index;
@@ -841,11 +1083,15 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
+        typename PointUnitSize,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
-    bool train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::referred()
+    bool train_kind_dialog<
+        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::info_set_type::referred()
     const
     {
         return m_referred;
@@ -856,14 +1102,18 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
+        typename PointUnitSize,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
     const typename train_kind_dialog<
-        Traits, Size, String, Font, Color, Canvas, ColorDialog
+        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::train_kind_type&
-    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::train_kind()
+    train_kind_dialog<
+        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::info_set_type::train_kind()
     const
     {
         return m_train_kind;
@@ -874,14 +1124,18 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
+        typename PointUnitSize,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
     typename train_kind_dialog<
-        Traits, Size, String, Font, Color, Canvas, ColorDialog
+        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::train_kind_type&
-    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type::train_kind()
+    train_kind_dialog<
+        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::info_set_type::train_kind()
     {
         return m_train_kind;
     }
@@ -891,19 +1145,22 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
+        typename PointUnitSize,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
-    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::train_kind_dialog(
+    train_kind_dialog<
+        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::train_kind_dialog(
         abstract_window_type&       parent,
-        const font_type&            font,
         const color_type&           background_color,
         const message_catalog_type& message_catalog
     )
     :
     base_type(parent),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, font, background_color, message_catalog))
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, background_color, message_catalog))
     {}
 
     template <
@@ -911,11 +1168,15 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
+        typename PointUnitSize,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
-    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::~train_kind_dialog()
+    train_kind_dialog<
+        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::~train_kind_dialog()
     noexcept
     {}
     
@@ -924,14 +1185,18 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
+        typename PointUnitSize,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
     const std::vector<
-        typename train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_set_type
+        typename train_kind_dialog<
+            Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        >::info_set_type
     >
-    train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::info_sets()
+    train_kind_dialog<Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::info_sets()
     const
     {
         return m_p_impl->info_sets();
@@ -942,11 +1207,15 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
+        typename PointUnitSize,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
-    void train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::set_info_sets(
+    void train_kind_dialog<
+        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::set_info_sets(
         std::vector<info_set_type> info_sets
     )
     {
@@ -958,11 +1227,15 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
+        typename PointUnitSize,
         typename Color,
         typename Canvas,
+        typename FontDialog,
         typename ColorDialog
     >
-    void train_kind_dialog<Traits, Size, String, Font, Color, Canvas, ColorDialog>::do_modal_impl()
+    void train_kind_dialog<
+        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::do_modal_impl()
     {
         m_p_impl->do_modal_impl();
     }
@@ -1008,8 +1281,10 @@ namespace bobura
         typename application::common_type_list_type::size_type,
         typename application::common_type_list_type::string_type,
         typename application::ui_type_list_type::fast_font_type,
+        typename application::ui_type_list_type::point_unit_size_type,
         typename application::ui_type_list_type::color_type,
         typename application::ui_type_list_type::fast_canvas_type,
+        typename application::common_dialog_type_list_type::font_type,
         typename application::common_dialog_type_list_type::color_type
     >;
 #endif
@@ -1019,8 +1294,10 @@ namespace bobura
         typename test::common_type_list_type::size_type,
         typename test::common_type_list_type::string_type,
         typename test::ui_type_list_type::font_type,
+        typename test::ui_type_list_type::point_unit_size_type,
         typename test::ui_type_list_type::color_type,
         typename test::ui_type_list_type::fast_canvas_type,
+        typename test::common_dialog_type_list_type::font_type,
         typename test::common_dialog_type_list_type::color_type
     >;
 

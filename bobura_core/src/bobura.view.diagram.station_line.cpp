@@ -99,8 +99,8 @@ namespace bobura { namespace view { namespace diagram
         void draw_on_impl(const station_line& self, canvas_type& canvas)
         const
         {
-            canvas.set_font(m_p_font_color->font());
-            canvas.set_color(m_p_font_color->color());
+            canvas.set_font(*m_p_font_color->diagram_font());
+            canvas.set_color(*m_p_font_color->diagram_color());
 
             draw_selectable_line(
                 canvas, position_type{ left_type{ 0 }, m_top }, position_type{ m_right, m_top }, self.selected()
