@@ -241,6 +241,10 @@ namespace bobura
             set_window_icon();
             set_title(boost::none, false);
                 
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
             auto dimension = m_settings.main_window_dimension();
             if (dimension)
                 m_base.set_dimension(std::move(*dimension));
@@ -249,6 +253,7 @@ namespace bobura
                 m_base.set_window_state(window_state_type::maximized);
             else
                 m_base.set_window_state(window_state_type::normal);
+#endif
 
             show_diagram_tab();
         }
@@ -275,19 +280,29 @@ namespace bobura
 
         void set_window_icon()
         {
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
             auto p_icon =
                 tetengo2::stdalt::make_unique<icon_type>(
                     m_settings.image_directory_path() / string_type{ TETENGO2_TEXT("bobura_app.ico") }
                 );
             m_base.set_icon(std::move(p_icon));
+#endif
         }
 
         void save_settings()
         {
+#if !( \
+    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+)
             m_settings.set_main_window_dimension(m_base.normal_dimension());
             m_settings.set_main_window_maximized(m_base.window_state() == window_state_type::maximized);
 
             m_p_property_bar->save_settings();
+#endif
         }
 
 

@@ -9,7 +9,6 @@
 #include <stdexcept>
 
 #include <boost/core/ignore_unused.hpp>
-#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/model/train_info/time.h>
@@ -109,11 +108,6 @@ BOOST_AUTO_TEST_SUITE_END()
         boost::ignore_unused(time);
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -188,7 +182,6 @@ BOOST_AUTO_TEST_SUITE_END()
             BOOST_CHECK_THROW((time_type{ 24, 0, 0 }), std::out_of_range);
         }
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(operator_plus_assign)
     {
@@ -314,11 +307,6 @@ BOOST_AUTO_TEST_SUITE_END()
         }
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(operator_minus)
     {
         BOOST_TEST_PASSPOINT();
@@ -369,7 +357,6 @@ BOOST_AUTO_TEST_SUITE_END()
             BOOST_CHECK_THROW(time_type::uninitialized() - time_type::uninitialized(), std::logic_error);
         }
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(operator_equal)
     {
@@ -422,11 +409,6 @@ BOOST_AUTO_TEST_SUITE_END()
         }
     }
 
-// This test case causes a segmentation fault on Cygwin.
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(seconds_from_midnight)
     {
         BOOST_TEST_PASSPOINT();
@@ -484,7 +466,6 @@ BOOST_AUTO_TEST_SUITE_END()
             BOOST_CHECK_THROW(time_type::uninitialized().hours_minutes_seconds(), std::logic_error);
         }
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(initialized)
     {
