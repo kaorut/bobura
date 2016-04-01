@@ -258,25 +258,42 @@ namespace bobura { namespace message { namespace font_color_dialog
             if (
                 !m_current_category_index ||
                 *m_current_category_index == 0 ||
-                *m_current_category_index >= m_font_color_list.size() ||
-                !get_font(m_font_color_list[*m_current_category_index]) ||
-                !get_color(m_font_color_list[*m_current_category_index])
+                *m_current_category_index >= m_font_color_list.size()
             )
             {
                 return;
             }
+            const auto font = get_font(m_font_color_list[*m_current_category_index]);
+            const auto color = get_color(m_font_color_list[*m_current_category_index]);
+            if (!font && !color)
+                return;
 
-            canvas.set_font(*get_font(m_font_color_list[*m_current_category_index]));
-            canvas.set_color(
-                get_color(m_font_color_list[*m_current_category_index]) ?
-                *get_color(m_font_color_list[*m_current_category_index]) : color_type{ 0x40, 0x40, 0x40 }
-            );
+            canvas.set_color(color ? *color : color_type{ 0x40, 0x40, 0x40 });
+            if (font)
+            {
+                canvas.set_font(*font);
 
-            const position_type text_position{
-                tetengo2::gui::position<position_type>::left(position) + left_type{ 1 },
-                sample_text_top(canvas, position, dimension, text)
-            };
-            canvas.draw_text(text, text_position);
+                const position_type text_position{
+                    tetengo2::gui::position<position_type>::left(position) + left_type{ 1 },
+                    sample_text_top(canvas, position, dimension, text)
+                };
+                canvas.draw_text(text, text_position);
+            }
+            else
+            {
+                canvas.set_line_width(width_type{ 1 } / 12);
+
+                const auto line_top =
+                    tetengo2::gui::position<position_type>::top(position) +
+                    top_type::from(tetengo2::gui::dimension<dimension_type>::height(dimension)) / 2;
+                const position_type line_from{ tetengo2::gui::position<position_type>::left(position), line_top };
+                const position_type line_to{
+                    tetengo2::gui::position<position_type>::left(position) +
+                        left_type::from(tetengo2::gui::dimension<dimension_type>::width(dimension)),
+                    line_top
+                };
+                canvas.draw_line(line_from, line_to);
+            }
         }
 
         top_type sample_text_top(
