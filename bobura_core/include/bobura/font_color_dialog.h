@@ -333,6 +333,21 @@ namespace bobura
         void set_time_line(font_color_type font_color);
 
         /*!
+            \brief Returns the font and color of the ruled lines.
+
+            \return The font and color of the ruled lines.
+        */
+        const font_color_type& ruled_line()
+        const;
+
+        /*!
+            \brief Sets a font and color of the ruled lines.
+
+            \param font_color A font and color.
+        */
+        void set_ruled_line(font_color_type font_color);
+
+        /*!
             \brief Returns the font and color of the local stations.
 
             \return The font and color of the local stations.

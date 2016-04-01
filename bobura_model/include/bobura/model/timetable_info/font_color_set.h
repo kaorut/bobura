@@ -187,6 +187,7 @@ namespace bobura { namespace model { namespace timetable_info
             \param line_name                  A font and color for the line name.
             \param note                       A font and color for the note.
             \param time_line                  A font and color for the time line.
+            \param ruled_line                 A font and color for the ruled line.
             \param local_station              A font and color for the local station.
             \param principal_station          A font and color for the principal station.
             \param local_terminal_station     A font and color for the local terminal station.
@@ -198,6 +199,7 @@ namespace bobura { namespace model { namespace timetable_info
             font_color_type line_name,
             font_color_type note,
             font_color_type time_line,
+            font_color_type ruled_line,
             font_color_type local_station,
             font_color_type principal_station,
             font_color_type local_terminal_station,
@@ -209,6 +211,7 @@ namespace bobura { namespace model { namespace timetable_info
         m_line_name(std::move(line_name)),
         m_note(std::move(note)),
         m_time_line(std::move(time_line)),
+        m_ruled_line(std::move(ruled_line)),
         m_local_station(std::move(local_station)),
         m_principal_station(std::move(principal_station)),
         m_local_terminal_station(std::move(local_terminal_station)),
@@ -235,6 +238,7 @@ namespace bobura { namespace model { namespace timetable_info
                 one.m_line_name == another.m_line_name &&
                 one.m_note == another.m_note &&
                 one.m_time_line == another.m_time_line &&
+                one.m_ruled_line == another.m_ruled_line &&
                 one.m_local_station == another.m_local_station &&
                 one.m_principal_station == another.m_principal_station &&
                 one.m_local_terminal_station == another.m_local_terminal_station &&
@@ -294,6 +298,17 @@ namespace bobura { namespace model { namespace timetable_info
         const
         {
             return m_time_line;
+        }
+
+        /*!
+            \brief Returns the font and color for the ruled line.
+
+            \return The font and color for the ruled line.
+        */
+        const font_color_type& ruled_line()
+        const
+        {
+            return m_ruled_line;
         }
 
         /*!
@@ -387,6 +402,12 @@ namespace bobura { namespace model { namespace timetable_info
                 boost::none,
                 boost::none
             };
+            font_color_type default_ruled_line_font_color{
+                boost::none,
+                boost::none,
+                boost::none,
+                boost::make_optional(color_type{ 0x40, 0x40, 0x40 })
+            };
             font_color_type default_local_station_font_color{
                 boost::make_optional(default_font),
                 boost::make_optional(color_type{ 0xA0, 0xA0, 0xA0 }),
@@ -419,6 +440,7 @@ namespace bobura { namespace model { namespace timetable_info
                     std::move(default_line_name_font_color),
                     std::move(default_note_font_color),
                     std::move(default_time_line_font_color),
+                    std::move(default_ruled_line_font_color),
                     std::move(default_local_station_font_color),
                     std::move(default_principal_station_font_color),
                     std::move(default_local_terminal_station_font_color),
@@ -438,6 +460,8 @@ namespace bobura { namespace model { namespace timetable_info
         font_color_type m_note;
 
         font_color_type m_time_line;
+
+        font_color_type m_ruled_line;
 
         font_color_type m_local_station;
 

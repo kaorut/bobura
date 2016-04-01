@@ -203,6 +203,30 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         BOOST_CHECK(font_color_dialog.time_line() == make_font_color(true, true));
     }
 
+    BOOST_AUTO_TEST_CASE(ruled_line)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type parent{};
+        const message_catalog_type message_catalog{};
+        const font_color_dialog_type font_color_dialog{ parent, message_catalog };
+
+        font_color_dialog.ruled_line();
+    }
+
+    BOOST_AUTO_TEST_CASE(set_ruled_line)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type parent{};
+        const message_catalog_type message_catalog{};
+        font_color_dialog_type font_color_dialog{ parent, message_catalog };
+
+        font_color_dialog.set_ruled_line(make_font_color(true, true));
+
+        BOOST_CHECK(font_color_dialog.ruled_line() == make_font_color(true, true));
+    }
+
     BOOST_AUTO_TEST_CASE(local_station)
     {
         BOOST_TEST_PASSPOINT();

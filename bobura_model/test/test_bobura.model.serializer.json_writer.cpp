@@ -247,6 +247,7 @@ namespace
                 font_color_set_type::default_().line_name(),
                 font_color_set_type::default_().note(),
                 font_color_set_type::default_().time_line(),
+                font_color_set_type::default_().ruled_line(),
                 font_color_set_type::default_().local_station(),
                 font_color_set_type::default_().principal_station(),
                 font_color_set_type::default_().local_terminal_station(),

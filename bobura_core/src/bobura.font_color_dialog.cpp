@@ -73,7 +73,7 @@ namespace bobura
         impl(base_type& base, const message_catalog_type& message_catalog)
         :
         m_base(base),
-        m_font_color_list(9, font_color_type{}),
+        m_font_color_list(10, font_color_type{}),
         m_message_catalog(message_catalog),
         m_current_category_index(),
         m_p_category_label(),
@@ -152,48 +152,59 @@ namespace bobura
             m_font_color_list[4] = std::move(font_color);
         }
 
-        const font_color_type& local_station()
+        const font_color_type& ruled_line()
         const
         {
             return m_font_color_list[5];
         }
 
-        void set_local_station(font_color_type font_color)
+        void set_ruled_line(font_color_type font_color)
         {
             m_font_color_list[5] = std::move(font_color);
         }
 
-        const font_color_type& principal_station()
+        const font_color_type& local_station()
         const
         {
             return m_font_color_list[6];
         }
 
-        void set_principal_station(font_color_type font_color)
+        void set_local_station(font_color_type font_color)
         {
             m_font_color_list[6] = std::move(font_color);
         }
 
-        const font_color_type& local_terminal_station()
+        const font_color_type& principal_station()
         const
         {
             return m_font_color_list[7];
         }
 
-        void set_local_terminal_station(font_color_type font_color)
+        void set_principal_station(font_color_type font_color)
         {
             m_font_color_list[7] = std::move(font_color);
         }
 
-        const font_color_type& principal_terminal_station()
+        const font_color_type& local_terminal_station()
         const
         {
             return m_font_color_list[8];
         }
 
-        void set_principal_terminal_station(font_color_type font_color)
+        void set_local_terminal_station(font_color_type font_color)
         {
             m_font_color_list[8] = std::move(font_color);
+        }
+
+        const font_color_type& principal_terminal_station()
+        const
+        {
+            return m_font_color_list[9];
+        }
+
+        void set_principal_terminal_station(font_color_type font_color)
+        {
+            m_font_color_list[9] = std::move(font_color);
         }
 
         void do_modal_impl()
@@ -650,6 +661,10 @@ namespace bobura
             );
             m_p_category_list_box->insert_value(
                 m_p_category_list_box->value_count(),
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Ruled Lines"))
+            );
+            m_p_category_list_box->insert_value(
+                m_p_category_list_box->value_count(),
                 m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Local Stations"))
             );
             m_p_category_list_box->insert_value(
@@ -950,6 +965,42 @@ namespace bobura
     )
     {
         m_p_impl->set_time_line(std::move(font_color));
+    }
+
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    const typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type&
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::ruled_line()
+    const
+    {
+        return m_p_impl->ruled_line();
+    }
+
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_ruled_line(
+        font_color_type font_color
+    )
+    {
+        m_p_impl->set_ruled_line(std::move(font_color));
     }
 
     template <
