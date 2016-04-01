@@ -110,6 +110,7 @@
         "Dialog:FontAndColor:Line Name":                   "路線名",
         "Dialog:FontAndColor:Note":                        "記事",
         "Dialog:FontAndColor:Time Lines":                  "時刻線",
+        "Dialog:FontAndColor:Ruled Lines":                 "罫線",
         "Dialog:FontAndColor:Local Stations":              "一般駅",
         "Dialog:FontAndColor:Principal Stations":          "主要駅",
         "Dialog:FontAndColor:Local Terminal Stations":     "ターミナル駅",
