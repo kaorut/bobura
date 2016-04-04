@@ -151,11 +151,13 @@ namespace bobura
 
             \param parent           A parent window.
             \param background_color A background color for the sample.
+            \param ruled_line_color A ruled line color for the sample.
             \param message_catalog  A message catalog.
         */
         train_kind_dialog(
             abstract_window_type&       parent,
             const color_type&           background_color,
+            const color_type&           ruled_line_color,
             const message_catalog_type& message_catalog
         );
 

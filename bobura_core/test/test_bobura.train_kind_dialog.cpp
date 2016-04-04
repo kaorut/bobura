@@ -80,8 +80,9 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
 
         window_type parent{};
         const color_type background_color{ 12, 34, 56 };
+        const color_type ruled_line_color{ 78, 90, 12 };
         const message_catalog_type message_catalog{};
-        const train_kind_dialog_type train_kind_dialog{ parent, background_color, message_catalog };
+        const train_kind_dialog_type train_kind_dialog{ parent, background_color, ruled_line_color, message_catalog };
     }
 
     BOOST_AUTO_TEST_CASE(info_sets)
@@ -90,8 +91,9 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
 
         window_type parent{};
         const color_type background_color{ 12, 34, 56 };
+        const color_type ruled_line_color{ 78, 90, 12 };
         const message_catalog_type message_catalog{};
-        const train_kind_dialog_type train_kind_dialog{ parent, background_color, message_catalog };
+        const train_kind_dialog_type train_kind_dialog{ parent, background_color, ruled_line_color, message_catalog };
 
         BOOST_TEST(train_kind_dialog.info_sets().empty());
     }
@@ -102,8 +104,9 @@ BOOST_AUTO_TEST_SUITE(train_kind_dialog)
 
         window_type parent{};
         const color_type background_color{ 12, 34, 56 };
+        const color_type ruled_line_color{ 78, 90, 12 };
         const message_catalog_type message_catalog{};
-        train_kind_dialog_type train_kind_dialog{ parent, background_color, message_catalog };
+        train_kind_dialog_type train_kind_dialog{ parent, background_color, ruled_line_color, message_catalog };
 
         std::vector<info_set_type> info_sets{
             info_set_type{

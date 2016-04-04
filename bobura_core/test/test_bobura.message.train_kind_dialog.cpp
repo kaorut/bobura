@@ -528,6 +528,7 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
             std::vector<info_set_type>(),
             boost::none,
             color_type{ 0x12, 0x34, 0x56 },
+            color_type{ 0x78, 0x9A, 0xBC },
             dimension_type{ width_type{ 42 }, height_type{ 24 } }
         );
     }
@@ -541,6 +542,7 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
             std::vector<info_set_type>(),
             boost::none,
             color_type{ 0x12, 0x34, 0x56 },
+            color_type{ 0x78, 0x9A, 0xBC },
             dimension_type{ width_type{ 42 }, height_type{ 24 } }
         );
 
