@@ -684,22 +684,27 @@ namespace bobura { namespace view { namespace timetable
             const auto& note_height =
                 note.empty() ? height_type{ 0 } : tetengo2::gui::dimension<dimension_type>::height(note_dimension_);
 
+            const auto left_margin = left_type{ 1 } / 2;
+            const auto top_margin = top_type{ 1 } / 2;
             const auto left_padding = left_type{ 1 } / 2;
             const auto top_padding = top_type{ 1 } / 2;
             const left_type company_line_names_spacing{ 1 };
 
             position_type company_name_position_{ left_type{ 0 }, top_type{ 0 } };
             position_type line_name_position_{ left_type{ 0 }, top_type{ 0 } };
-            const position_type note_position_{ left_padding, top_padding };
+            const position_type note_position_{ left_margin + left_padding, top_margin + top_padding };
             const auto line_name_top =
                 tetengo2::gui::position<position_type>::top(note_position_) + top_type::from(note_height);
-            const auto& header_width = canvas_width;
+            const auto header_width =
+                canvas_width > width_type::from(left_margin) * 2 ?
+                canvas_width - width_type::from(left_margin) * 2 : width_type{ 0 };
             height_type header_height{ 0 };
-            if (company_name_width + line_name_width + company_line_names_spacing + left_padding * 2 <= canvas_width)
+            if (company_name_width + line_name_width + company_line_names_spacing + left_padding * 2 <= header_width)
             {
                 const auto company_name_left =
+                    left_margin +
                     left_type::from(
-                        (canvas_width - (company_name_width + line_name_width + company_line_names_spacing)) / 2
+                        (header_width - (company_name_width + line_name_width + company_line_names_spacing)) / 2
                     );
 
                 const auto max_element_height = std::max({ company_name_height, line_name_height });
@@ -717,9 +722,9 @@ namespace bobura { namespace view { namespace timetable
             }
             else
             {
-                company_name_position_ = position_type{ left_padding, line_name_top };
+                company_name_position_ = position_type{ left_margin + left_padding, line_name_top };
                 line_name_position_ =
-                    position_type{ left_padding, line_name_top + top_type::from(company_name_height) };
+                    position_type{ left_margin + left_padding, line_name_top + top_type::from(company_name_height) };
                 header_height = note_height + company_name_height + line_name_height + top_padding * 2;
             }
 
@@ -729,7 +734,7 @@ namespace bobura { namespace view { namespace timetable
             line_name_dimension = std::move(line_name_dimension_);
             note_position = std::move(note_position_);
             note_dimension = std::move(note_dimension_);
-            position = position_type{ left_type{ 0 }, top_type{ 0 } };
+            position = position_type{ left_margin, top_margin };
             dimension = dimension_type{ std::move(header_width), std::move(header_height) };
         }
 
