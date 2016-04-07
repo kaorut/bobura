@@ -75,6 +75,7 @@ pkg_headers = \
     view/scale_list.h \
     view/timetable/header.h \
     view/timetable/item.h \
+    view/timetable/train_number_header.h \
     view/timetable/traits.h \
     view/timetable/utility.h \
     view_picture_box.h
