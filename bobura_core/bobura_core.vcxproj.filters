@@ -300,6 +300,12 @@
     <ClInclude Include="include\bobura\view\timetable\train_number_header.h">
       <Filter>headers\bobura\view\timetable</Filter>
     </ClInclude>
+    <ClInclude Include="include\bobura\view\timetable\station_list.h">
+      <Filter>headers\bobura\view\timetable</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bobura\view\timetable\train_list.h">
+      <Filter>headers\bobura\view\timetable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\precompiled\precompiled.cpp">
@@ -462,6 +468,12 @@
       <Filter>sources\bobura\view\timetable</Filter>
     </ClCompile>
     <ClCompile Include="src\bobura.view.timetable.train_number_header.cpp">
+      <Filter>sources\bobura\view\timetable</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.view.timetable.station_list.cpp">
+      <Filter>sources\bobura\view\timetable</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.view.timetable.train_list.cpp">
       <Filter>sources\bobura\view\timetable</Filter>
     </ClCompile>
   </ItemGroup>

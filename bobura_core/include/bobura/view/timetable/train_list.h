@@ -1,13 +1,13 @@
 /*! \file
-    \brief The definition of bobura::view::timetable::train_number_header.
+    \brief The definition of bobura::view::timetable::train_list.
 
     Copyright (C) 2007-2016 kaoru
 
     $Id$
 */
 
-#if !defined(BOBURA_VIEW_TIMETABLE_TRAINNUMBERHEADER_H)
-#define BOBURA_VIEW_TIMETABLE_TRAINNUMBERHEADER_H
+#if !defined(BOBURA_VIEW_TIMETABLE_TRAINLIST_H)
+#define BOBURA_VIEW_TIMETABLE_TRAINLIST_H
 
 #include <memory>
 
@@ -21,12 +21,12 @@
 namespace bobura { namespace view { namespace timetable
 {
     /*!
-        \brief The class template for a train number header in the timetable view.
+        \brief The class template for a train list in the timetable view.
 
         \tparam Traits A traits type.
     */
     template <typename Traits>
-    class train_number_header : public item<Traits>
+    class train_list : public item<Traits>
     {
     public:
         // types
@@ -69,7 +69,7 @@ namespace bobura { namespace view { namespace timetable
         // constructors and destructor
 
         /*!
-            \brief Creates a train number header.
+            \brief Creates a train list.
 
             \param direction        A direction.
             \param model            A model.
@@ -77,7 +77,7 @@ namespace bobura { namespace view { namespace timetable
             \param canvas           A canvas.
             \param canvas_dimension A canvas dimension.
         */
-        train_number_header(
+        train_list(
             direction_type              direction,
             const model_type&           model,
             const message_catalog_type& message_catalog,
@@ -86,29 +86,29 @@ namespace bobura { namespace view { namespace timetable
         );
 
         /*!
-            \brief Moves a train number header.
+            \brief Moves a train list.
 
-            \param another Another train number header
+            \param another Another train list
         */
-        train_number_header(train_number_header&& another);
+        train_list(train_list&& another);
 
         /*!
-            \brief Destroys the train number header.
+            \brief Destroys the train list.
         */
-        virtual ~train_number_header()
+        virtual ~train_list()
         noexcept;
 
 
         // functions
 
         /*!
-            \brief Assigns a train number header.
+            \brief Assigns a train list.
 
-            \param another Another train number header.
+            \param another Another train list.
 
-            \return This train number header.
+            \return This train list.
         */
-        train_number_header& operator=(train_number_header&& another);
+        train_list& operator=(train_list&& another);
 
         /*!
             \brief Returns the dimension.

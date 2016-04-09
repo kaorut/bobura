@@ -67,6 +67,8 @@ sources = \
     test_bobura.view.diagram.zoom.cpp \
     test_bobura.view.timetable.header.cpp \
     test_bobura.view.timetable.item.cpp \
+    test_bobura.view.timetable.station_list.cpp \
+    test_bobura.view.timetable.train_list.cpp \
     test_bobura.view.timetable.train_number_header.cpp \
     test_bobura.view.timetable.utility.cpp \
     test_bobura.view.scale_list.cpp \

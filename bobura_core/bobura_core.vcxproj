@@ -176,6 +176,8 @@
     <ClInclude Include="include\bobura\view\scale_list.h" />
     <ClInclude Include="include\bobura\view\timetable\header.h" />
     <ClInclude Include="include\bobura\view\timetable\item.h" />
+    <ClInclude Include="include\bobura\view\timetable\station_list.h" />
+    <ClInclude Include="include\bobura\view\timetable\train_list.h" />
     <ClInclude Include="include\bobura\view\timetable\train_number_header.h" />
     <ClInclude Include="include\bobura\view\timetable\traits.h" />
     <ClInclude Include="include\bobura\view\timetable\utility.h" />
@@ -236,6 +238,8 @@
     <ClCompile Include="src\bobura.view.scale_list.cpp" />
     <ClCompile Include="src\bobura.view.timetable.header.cpp" />
     <ClCompile Include="src\bobura.view.timetable.item.cpp" />
+    <ClCompile Include="src\bobura.view.timetable.station_list.cpp" />
+    <ClCompile Include="src\bobura.view.timetable.train_list.cpp" />
     <ClCompile Include="src\bobura.view.timetable.train_number_header.cpp" />
     <ClCompile Include="src\bobura.view.timetable.utility.cpp" />
     <ClCompile Include="src\bobura.view_picture_box.cpp" />

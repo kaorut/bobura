@@ -239,6 +239,12 @@
     <ClCompile Include="test\test_bobura.view.timetable.train_number_header.cpp">
       <Filter>sources\test_bobura\view\timetable</Filter>
     </ClCompile>
+    <ClCompile Include="test\test_bobura.view.timetable.station_list.cpp">
+      <Filter>sources\test_bobura\view\timetable</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_bobura.view.timetable.train_list.cpp">
+      <Filter>sources\test_bobura\view\timetable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="res.test\win32\bobura_core.test.exe.manifest">
