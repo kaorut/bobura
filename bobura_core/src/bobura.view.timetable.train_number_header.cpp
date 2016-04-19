@@ -44,15 +44,15 @@ namespace bobura { namespace view { namespace timetable
             const direction_type        /*direction*/,
             const model_type&           model,
             const message_catalog_type& /*message_catalog*/,
-            canvas_type&                /*canvas*/,
-            const dimension_type&       /*canvas_dimension*/
+            canvas_type&                canvas,
+            const dimension_type&       canvas_dimension
         )
         :
         m_p_ruled_line_color(&*model.timetable().font_color_set().ruled_line().timetable_color()),
         m_position(left_type{ 0 }, top_type{ 0 }),
         m_dimension(width_type{ 0 }, height_type{ 0 })
         {
-
+            calculate_positions_and_dimensions(canvas, canvas_dimension, model.timetable().station_locations());
         }
 
         impl(impl&& another)
@@ -107,6 +107,27 @@ namespace bobura { namespace view { namespace timetable
 
         using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
+        using station_locations_type = typename model_type::timetable_type::station_locations_type;
+
+
+        // static functions
+
+        static void calculate_positions_and_dimensions(
+            canvas_type&                  canvas,
+            const dimension_type&         /*canvas_dimension*/,
+            const station_locations_type& station_locations
+        )
+        {
+            const width_type width = max_station_name_width(canvas, station_locations);
+        }
+
+        static width_type max_station_name_width(
+            canvas_type&                  /*canvas*/,
+            const station_locations_type& /*station_locations*/
+        )
+        {
+            return width_type{ 0 };
+        }
 
         // variables
 
