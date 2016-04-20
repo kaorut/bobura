@@ -6,14 +6,18 @@
     $Id$
 */
 
+#include <cassert>
+#include <stdexcept>
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
+#include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/model/station_info/grade.h>
 #include <bobura/type_list.h>
 #include <bobura/view/timetable/train_number_header.h>
 #include <bobura/view/timetable/utility.h>
@@ -52,7 +56,9 @@ namespace bobura { namespace view { namespace timetable
         m_position(left_type{ 0 }, top_type{ 0 }),
         m_dimension(width_type{ 0 }, height_type{ 0 })
         {
-            calculate_positions_and_dimensions(canvas, canvas_dimension, model.timetable().station_locations());
+            calculate_positions_and_dimensions(
+                canvas, canvas_dimension, model.timetable().station_locations(), model.timetable().font_color_set()
+            );
         }
 
         impl(impl&& another)
@@ -109,25 +115,69 @@ namespace bobura { namespace view { namespace timetable
 
         using station_locations_type = typename model_type::timetable_type::station_locations_type;
 
+        using station_grade_type =
+            typename model_type::timetable_type::station_location_type::station_type::grade_type;
+
+        using font_color_set_type = typename model_type::timetable_type::font_color_set_type;
+
+        using font_color_type = typename font_color_set_type::font_color_type;
+
+        using station_grade_type_set_type = model::station_info::grade_type_set<string_type>;
+
 
         // static functions
 
         static void calculate_positions_and_dimensions(
             canvas_type&                  canvas,
             const dimension_type&         /*canvas_dimension*/,
-            const station_locations_type& station_locations
+            const station_locations_type& station_locations,
+            const font_color_set_type&    font_color_set
         )
         {
-            const width_type width = max_station_name_width(canvas, station_locations);
+            const width_type width = max_station_name_width(canvas, station_locations, font_color_set);
         }
 
         static width_type max_station_name_width(
-            canvas_type&                  /*canvas*/,
-            const station_locations_type& /*station_locations*/
+            canvas_type&                  canvas,
+            const station_locations_type& station_locations,
+            const font_color_set_type&    font_color_set
         )
         {
-            return width_type{ 0 };
+            width_type max_width{ 0 };
+            for (const auto& station_location: station_locations)
+            {
+                const auto& station = station_location.get_station();
+
+                const auto& font = select_station_font_color(font_color_set, station.grade()).timetable_font();
+                assert(font);
+                canvas.set_font(*font);
+
+                const auto dimension = canvas.calc_text_dimension(station.name());
+                const auto width = tetengo2::gui::dimension<dimension_type>::width(dimension);
+                if (width > max_width)
+                    max_width = width;
+            }
+            return max_width;
         }
+
+        static const font_color_type& select_station_font_color(
+            const font_color_set_type& font_color_set,
+            const station_grade_type&  grade
+        )
+        {
+            if      (&grade == &station_grade_type_set_type::local_type::instance())
+                return font_color_set.local_station();
+            else if (&grade == &station_grade_type_set_type::principal_type::instance())
+                return font_color_set.principal_station();
+            else if (&grade == &station_grade_type_set_type::local_terminal_type::instance())
+                return font_color_set.local_terminal_station();
+            else if (&grade == &station_grade_type_set_type::principal_terminal_type::instance())
+                return font_color_set.principal_terminal_station();
+
+            assert(false);
+            BOOST_THROW_EXCEPTION(std::invalid_argument("Unknown station grade."));
+        }
+
 
         // variables
 
