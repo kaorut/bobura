@@ -22,6 +22,8 @@ namespace bobura { namespace view
 
         \param font_color_set A font and color set.
         \param grade          A grade.
+
+        \return The station font and color.
     */
     template <typename FontColorSet, typename StationGradeTypeSet>
     const typename FontColorSet::font_color_type& select_station_font_color(

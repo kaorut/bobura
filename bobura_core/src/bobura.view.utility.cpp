@@ -54,6 +54,26 @@ namespace bobura { namespace view
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
         }
+
+        using application_string_type = application::common_type_list_type::string_type;
+
+        using application_model_type =
+            timetable_model<
+                application::common_type_list_type::size_type,
+                application::common_type_list_type::difference_type,
+                application_string_type,
+                application::common_type_list_type::operating_distance_type,
+                application::common_type_list_type::speed_type,
+                application::ui_type_list_type::canvas_type::font_type
+            >;
+
+        using application_font_color_set_type = application_model_type::timetable_type::font_color_set_type;
+
+        using application_font_color_type = application_font_color_set_type::font_color_type;
+
+        using application_grade_type_set_type = model::station_info::grade_type_set<application_string_type>;
+
+        using application_grade_type = application_grade_type_set_type::grade_type;
 #endif
 
         namespace test
@@ -68,69 +88,41 @@ namespace bobura { namespace view
 
         }
 
+        using test_string_type = test::common_type_list_type::string_type;
+
+        using test_model_type =
+            timetable_model<
+                test::common_type_list_type::size_type,
+                test::common_type_list_type::difference_type,
+                test_string_type,
+                test::common_type_list_type::operating_distance_type,
+                test::common_type_list_type::speed_type,
+                test::ui_type_list_type::canvas_type::font_type
+            >;
+
+        using test_font_color_set_type = test_model_type::timetable_type::font_color_set_type;
+
+        using test_font_color_type = test_font_color_set_type::font_color_type;
+
+        using test_grade_type_set_type = model::station_info::grade_type_set<test_string_type>;
+
+        using test_grade_type = test_grade_type_set_type::grade_type;
+
     }
 
 #if BOOST_COMP_MSVC
-    template const timetable_model<
-        application::common_type_list_type::size_type,
-        application::common_type_list_type::difference_type,
-        application::common_type_list_type::string_type,
-        application::common_type_list_type::operating_distance_type,
-        application::common_type_list_type::speed_type,
-        application::ui_type_list_type::canvas_type::font_type
-    >::timetable_type::font_color_set_type::font_color_type&
-    select_station_font_color<
-        timetable_model<
-            application::common_type_list_type::size_type,
-            application::common_type_list_type::difference_type,
-            application::common_type_list_type::string_type,
-            application::common_type_list_type::operating_distance_type,
-            application::common_type_list_type::speed_type,
-            application::ui_type_list_type::canvas_type::font_type
-        >::timetable_type::font_color_set_type,
-        model::station_info::grade_type_set<application::common_type_list_type::string_type>
-    >(
-        const timetable_model<
-            application::common_type_list_type::size_type,
-            application::common_type_list_type::difference_type,
-            application::common_type_list_type::string_type,
-            application::common_type_list_type::operating_distance_type,
-            application::common_type_list_type::speed_type,
-            application::ui_type_list_type::canvas_type::font_type
-        >::timetable_type::font_color_set_type&                                                         font_color_set,
-        const model::station_info::grade_type_set<application::common_type_list_type::string_type>::grade_type& grade
+    template const application_font_color_type&
+    select_station_font_color<application_font_color_set_type, application_grade_type_set_type>(
+        const application_font_color_set_type& font_color_set,
+        const application_grade_type&          grade
     );
 #endif
 
 #if !defined(DOCUMENTATION)
-    template const timetable_model<
-        test::common_type_list_type::size_type,
-        test::common_type_list_type::difference_type,
-        test::common_type_list_type::string_type,
-        test::common_type_list_type::operating_distance_type,
-        test::common_type_list_type::speed_type,
-        test::ui_type_list_type::canvas_type::font_type
-    >::timetable_type::font_color_set_type::font_color_type&
-    select_station_font_color<
-        timetable_model<
-            test::common_type_list_type::size_type,
-            test::common_type_list_type::difference_type,
-            test::common_type_list_type::string_type,
-            test::common_type_list_type::operating_distance_type,
-            test::common_type_list_type::speed_type,
-            test::ui_type_list_type::canvas_type::font_type
-        >::timetable_type::font_color_set_type,
-        model::station_info::grade_type_set<test::common_type_list_type::string_type>
-    >(
-        const timetable_model<
-            test::common_type_list_type::size_type,
-            test::common_type_list_type::difference_type,
-            test::common_type_list_type::string_type,
-            test::common_type_list_type::operating_distance_type,
-            test::common_type_list_type::speed_type,
-            test::ui_type_list_type::canvas_type::font_type
-        >::timetable_type::font_color_set_type&                                                         font_color_set,
-        const model::station_info::grade_type_set<test::common_type_list_type::string_type>::grade_type& grade
+    template const test_font_color_type&
+    select_station_font_color<test_font_color_set_type, test_grade_type_set_type>(
+        const test_font_color_set_type& font_color_set,
+        const test_grade_type&          grade
     );
 #endif
 
