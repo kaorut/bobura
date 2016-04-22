@@ -6,7 +6,6 @@
     $Id$
 */
 
-#include <cassert>
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
@@ -15,11 +14,9 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
-#include <bobura/model/station_info/grade.h>
 #include <bobura/type_list.h>
 #include <bobura/view/timetable/train_number_header.h>
 #include <bobura/view/timetable/utility.h>
-#include <bobura/view/utility.h>
 
 
 namespace bobura { namespace view { namespace timetable
@@ -48,16 +45,15 @@ namespace bobura { namespace view { namespace timetable
             const model_type&           model,
             const message_catalog_type& /*message_catalog*/,
             canvas_type&                canvas,
-            const dimension_type&       canvas_dimension
+            const dimension_type&       canvas_dimension,
+            const width_type&           max_station_name_width
         )
         :
         m_p_ruled_line_color(&*model.timetable().font_color_set().ruled_line().timetable_color()),
         m_position(left_type{ 0 }, top_type{ 0 }),
         m_dimension(width_type{ 0 }, height_type{ 0 })
         {
-            calculate_positions_and_dimensions(
-                canvas, canvas_dimension, model.timetable().station_locations(), model.timetable().font_color_set()
-            );
+            calculate_positions_and_dimensions(canvas, canvas_dimension, max_station_name_width);
         }
 
         impl(impl&& another)
@@ -108,58 +104,18 @@ namespace bobura { namespace view { namespace timetable
 
         using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
         using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
-
-        using station_locations_type = typename model_type::timetable_type::station_locations_type;
-
-        using station_grade_type =
-            typename model_type::timetable_type::station_location_type::station_type::grade_type;
-
-        using font_color_set_type = typename model_type::timetable_type::font_color_set_type;
-
-        using font_color_type = typename font_color_set_type::font_color_type;
-
-        using station_grade_type_set_type = model::station_info::grade_type_set<string_type>;
 
 
         // static functions
 
         static void calculate_positions_and_dimensions(
-            canvas_type&                  canvas,
-            const dimension_type&         /*canvas_dimension*/,
-            const station_locations_type& station_locations,
-            const font_color_set_type&    font_color_set
+            canvas_type&          /*canvas*/,
+            const dimension_type& /*canvas_dimension*/,
+            const width_type      /*max_station_name_width*/
         )
         {
-            const width_type width = max_station_name_width(canvas, station_locations, font_color_set);
-        }
 
-        static width_type max_station_name_width(
-            canvas_type&                  canvas,
-            const station_locations_type& station_locations,
-            const font_color_set_type&    font_color_set
-        )
-        {
-            width_type max_width{ 0 };
-            for (const auto& station_location: station_locations)
-            {
-                const auto& station = station_location.get_station();
-
-                const auto& font =
-                    select_station_font_color<font_color_set_type, station_grade_type_set_type>(
-                        font_color_set, station.grade()
-                    ).timetable_font();
-                assert(font);
-                canvas.set_font(*font);
-
-                const auto dimension = canvas.calc_text_dimension(station.name());
-                const auto width = tetengo2::gui::dimension<dimension_type>::width(dimension);
-                if (width > max_width)
-                    max_width = width;
-            }
-            return max_width;
         }
 
 
@@ -181,11 +137,16 @@ namespace bobura { namespace view { namespace timetable
         const model_type&           model,
         const message_catalog_type& message_catalog,
         canvas_type&                canvas,
-        const dimension_type&       canvas_dimension
+        const dimension_type&       canvas_dimension,
+        const width_type&           max_station_name_width
     )
     :
     base_type(),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog, canvas, canvas_dimension))
+    m_p_impl(
+        tetengo2::stdalt::make_unique<impl>(
+            direction, model, message_catalog, canvas, canvas_dimension, max_station_name_width
+        )
+    )
     {}
 
     template <typename Traits>

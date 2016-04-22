@@ -12,6 +12,7 @@
 #include <memory>
 
 #include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include <bobura/timetable_model.h>
 #include <bobura/view/timetable/item.h>
@@ -55,6 +56,9 @@ namespace bobura { namespace view { namespace timetable
         //! The dimension type.
         using dimension_type = typename canvas_type::dimension_type;
 
+        //! The width type.
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
+
         //! The font type.
         using font_type = typename canvas_type::font_type;
 
@@ -71,18 +75,20 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Creates a train number header.
 
-            \param direction        A direction.
-            \param model            A model.
-            \param message_catalog  A message catalog.
-            \param canvas           A canvas.
-            \param canvas_dimension A canvas dimension.
+            \param direction              A direction.
+            \param model                  A model.
+            \param message_catalog        A message catalog.
+            \param canvas                 A canvas.
+            \param canvas_dimension       A canvas dimension.
+            \param max_station_name_width A max station name width.
         */
         train_number_header(
             direction_type              direction,
             const model_type&           model,
             const message_catalog_type& message_catalog,
             canvas_type&                canvas,
-            const dimension_type&       canvas_dimension
+            const dimension_type&       canvas_dimension,
+            const width_type&           max_station_name_width
         );
 
         /*!
