@@ -45,7 +45,7 @@ namespace bobura { namespace view
 #if BOOST_COMP_MSVC
         namespace application
         {
-            using detail_type_list_type = type_list::detail_for_test;
+            using detail_type_list_type = type_list::detail_for_application;
 
             using common_type_list_type = type_list::common;
 
@@ -64,7 +64,7 @@ namespace bobura { namespace view
                 application_string_type,
                 application::common_type_list_type::operating_distance_type,
                 application::common_type_list_type::speed_type,
-                application::ui_type_list_type::canvas_type::font_type
+                application::ui_type_list_type::fast_font_type
             >;
 
         using application_font_color_set_type = application_model_type::timetable_type::font_color_set_type;
@@ -97,7 +97,7 @@ namespace bobura { namespace view
                 test_string_type,
                 test::common_type_list_type::operating_distance_type,
                 test::common_type_list_type::speed_type,
-                test::ui_type_list_type::canvas_type::font_type
+                test::ui_type_list_type::fast_font_type
             >;
 
         using test_font_color_set_type = test_model_type::timetable_type::font_color_set_type;

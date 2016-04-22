@@ -7,12 +7,10 @@
 */
 
 #include <cassert>
-#include <stdexcept>
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
-#include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
@@ -21,6 +19,7 @@
 #include <bobura/type_list.h>
 #include <bobura/view/timetable/train_number_header.h>
 #include <bobura/view/timetable/utility.h>
+#include <bobura/view/utility.h>
 
 
 namespace bobura { namespace view { namespace timetable
@@ -148,7 +147,10 @@ namespace bobura { namespace view { namespace timetable
             {
                 const auto& station = station_location.get_station();
 
-                const auto& font = select_station_font_color(font_color_set, station.grade()).timetable_font();
+                const auto& font =
+                    select_station_font_color<font_color_set_type, station_grade_type_set_type>(
+                        font_color_set, station.grade()
+                    ).timetable_font();
                 assert(font);
                 canvas.set_font(*font);
 
@@ -158,24 +160,6 @@ namespace bobura { namespace view { namespace timetable
                     max_width = width;
             }
             return max_width;
-        }
-
-        static const font_color_type& select_station_font_color(
-            const font_color_set_type& font_color_set,
-            const station_grade_type&  grade
-        )
-        {
-            if      (&grade == &station_grade_type_set_type::local_type::instance())
-                return font_color_set.local_station();
-            else if (&grade == &station_grade_type_set_type::principal_type::instance())
-                return font_color_set.principal_station();
-            else if (&grade == &station_grade_type_set_type::local_terminal_type::instance())
-                return font_color_set.local_terminal_station();
-            else if (&grade == &station_grade_type_set_type::principal_terminal_type::instance())
-                return font_color_set.principal_terminal_station();
-
-            assert(false);
-            BOOST_THROW_EXCEPTION(std::invalid_argument("Unknown station grade."));
         }
 
 
