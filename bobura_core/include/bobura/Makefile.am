@@ -80,6 +80,7 @@ pkg_headers = \
     view/timetable/train_number_header.h \
     view/timetable/traits.h \
     view/timetable/utility.h \
+    view/utility.h \
     view_picture_box.h
 
 extra_headers = \
