@@ -458,7 +458,8 @@ namespace bobura { namespace view { namespace timetable
             const model_type&           model,
             const message_catalog_type& message_catalog,
             canvas_type&                canvas,
-            const dimension_type&       canvas_dimension
+            const dimension_type&       canvas_dimension,
+            const dimension_type&       margin
         )
         :
         m_p_company_name_header(),
@@ -483,6 +484,7 @@ namespace bobura { namespace view { namespace timetable
             calculate_positions_and_dimensions(
                 canvas,
                 canvas_dimension,
+                margin,
                 company_name,
                 company_name_font,
                 line_name,
@@ -648,6 +650,7 @@ namespace bobura { namespace view { namespace timetable
         static void calculate_positions_and_dimensions(
             canvas_type&          canvas,
             const dimension_type& canvas_dimension,
+            const dimension_type& margin,
             const string_type&    company_name,
             const font_type&      company_name_font,
             const string_type&    line_name,
@@ -685,8 +688,8 @@ namespace bobura { namespace view { namespace timetable
             const auto& note_height =
                 note.empty() ? height_type{ 0 } : tetengo2::gui::dimension<dimension_type>::height(note_dimension_);
 
-            const auto left_margin = left_type{ 1 } / 2;
-            const auto top_margin = top_type{ 1 } / 2;
+            const auto left_margin = left_type::from(tetengo2::gui::dimension<dimension_type>::width(margin));
+            const auto top_margin = top_type::from(tetengo2::gui::dimension<dimension_type>::height(margin));
             const auto left_padding = left_type{ 1 } / 2;
             const auto top_padding = top_type{ 1 } / 2;
             const left_type company_line_names_spacing{ 1 };
@@ -764,11 +767,12 @@ namespace bobura { namespace view { namespace timetable
         const model_type&           model,
         const message_catalog_type& message_catalog,
         canvas_type&                canvas,
-        const dimension_type&       canvas_dimension
+        const dimension_type&       canvas_dimension,
+        const dimension_type&       margin
     )
     :
     base_type(),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog, canvas, canvas_dimension))
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog, canvas, canvas_dimension, margin))
     {}
 
     template <typename Traits>

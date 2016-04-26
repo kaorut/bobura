@@ -46,6 +46,7 @@ namespace bobura { namespace view { namespace timetable
             const message_catalog_type& /*message_catalog*/,
             canvas_type&                canvas,
             const dimension_type&       canvas_dimension,
+            const dimension_type&       margin,
             const width_type&           max_station_name_width
         )
         :
@@ -138,13 +139,14 @@ namespace bobura { namespace view { namespace timetable
         const message_catalog_type& message_catalog,
         canvas_type&                canvas,
         const dimension_type&       canvas_dimension,
+        const dimension_type&       margin,
         const width_type&           max_station_name_width
     )
     :
     base_type(),
     m_p_impl(
         tetengo2::stdalt::make_unique<impl>(
-            direction, model, message_catalog, canvas, canvas_dimension, max_station_name_width
+            direction, model, message_catalog, canvas, canvas_dimension, margin, max_station_name_width
         )
     )
     {}

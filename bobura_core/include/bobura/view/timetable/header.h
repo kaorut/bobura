@@ -376,13 +376,15 @@ namespace bobura { namespace view { namespace timetable
             \param message_catalog  A message catalog.
             \param canvas           A canvas.
             \param canvas_dimension A canvas dimension.
+            \param margin           A margin.
         */
         header(
             direction_type              direction,
             const model_type&           model,
             const message_catalog_type& message_catalog,
             canvas_type&                canvas,
-            const dimension_type&       canvas_dimension
+            const dimension_type&       canvas_dimension,
+            const dimension_type&       margin
         );
 
         /*!

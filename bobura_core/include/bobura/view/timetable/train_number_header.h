@@ -80,6 +80,7 @@ namespace bobura { namespace view { namespace timetable
             \param message_catalog        A message catalog.
             \param canvas                 A canvas.
             \param canvas_dimension       A canvas dimension.
+            \param margin                 A margin.
             \param max_station_name_width A max station name width.
         */
         train_number_header(
@@ -88,6 +89,7 @@ namespace bobura { namespace view { namespace timetable
             const message_catalog_type& message_catalog,
             canvas_type&                canvas,
             const dimension_type&       canvas_dimension,
+            const dimension_type&       margin,
             const width_type&           max_station_name_width
         );
 

@@ -201,6 +201,7 @@ namespace bobura
                 return;
             }
 
+            const dimension_type margin{ width_type{ 1 } / 2, height_type{ 1 } / 2 };
             const auto max_station_name_width_ =
                 max_station_name_width(
                     canvas, m_model.timetable().station_locations(), m_model.timetable().font_color_set()
@@ -208,11 +209,11 @@ namespace bobura
 
             m_p_header =
                 tetengo2::stdalt::make_unique<header_type>(
-                    m_direction, m_model, m_message_catalog, canvas, canvas_dimension
+                    m_direction, m_model, m_message_catalog, canvas, canvas_dimension, margin
                 );
             m_p_train_number_header =
                 tetengo2::stdalt::make_unique<train_number_header_type>(
-                    m_direction, m_model, m_message_catalog, canvas, canvas_dimension, max_station_name_width_
+                    m_direction, m_model, m_message_catalog, canvas, canvas_dimension, margin, max_station_name_width_
                 );
         }
 

@@ -94,15 +94,16 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
         window_type window{};
         const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
         const auto p_canvas = picture_box.create_canvas();
-        train_number_header_type header1{
+        train_number_header_type train_number_header1{
             direction_type::down,
             model,
             message_catalog,
             *p_canvas,
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            dimension_type{ width_type{ 1 }, height_type{ 1 } },
             width_type{ 4 }
         };
-        const train_number_header_type header2{ std::move(header1) };
+        const train_number_header_type train_number_header2{ std::move(train_number_header1) };
     }
 
     BOOST_AUTO_TEST_CASE(operator_assign)
@@ -114,24 +115,26 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
         window_type window{};
         const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
         const auto p_canvas = picture_box.create_canvas();
-        train_number_header_type header1{
+        train_number_header_type train_number_header1{
             direction_type::down,
             model,
             message_catalog,
             *p_canvas,
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            dimension_type{ width_type{ 1 }, height_type{ 1 } },
             width_type{ 4 }
         };
-        train_number_header_type header2{
+        train_number_header_type train_number_header2{
             direction_type::down,
             model,
             message_catalog,
             *p_canvas,
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            dimension_type{ width_type{ 1 }, height_type{ 1 } },
             width_type{ 4 }
         };
 
-        header1 = std::move(header2);
+        train_number_header1 = std::move(train_number_header2);
     }
 
     BOOST_AUTO_TEST_CASE(dimension)
@@ -149,6 +152,7 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
             message_catalog,
             *p_canvas,
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            dimension_type{ width_type{ 1 }, height_type{ 1 } },
             width_type{ 4 }
         };
 
@@ -170,6 +174,7 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
             message_catalog,
             *p_canvas,
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            dimension_type{ width_type{ 1 }, height_type{ 1 } },
             width_type{ 4 }
         };
 
