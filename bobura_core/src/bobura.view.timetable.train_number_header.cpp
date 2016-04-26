@@ -54,7 +54,9 @@ namespace bobura { namespace view { namespace timetable
         m_position(left_type{ 0 }, top_type{ 0 }),
         m_dimension(width_type{ 0 }, height_type{ 0 })
         {
-            calculate_positions_and_dimensions(canvas, canvas_dimension, max_station_name_width);
+            calculate_positions_and_dimensions(
+                canvas, canvas_dimension, margin, max_station_name_width, m_position, m_dimension
+            );
         }
 
         impl(impl&& another)
@@ -85,10 +87,21 @@ namespace bobura { namespace view { namespace timetable
             return m_dimension;
         }
 
-        void draw_on_impl(canvas_type& /*canvas*/)
+        void draw_on_impl(canvas_type& canvas)
         const
         {
+            canvas.set_line_width(normal_line_width<unit_size_type>());
+            canvas.set_line_style(canvas_type::line_style_type::solid);
+            canvas.set_color(*m_p_ruled_line_color);
 
+            const auto& left = tetengo2::gui::position<position_type>::left(m_position);
+            const auto& top = tetengo2::gui::position<position_type>::top(m_position);
+            const auto right = left + left_type::from(tetengo2::gui::dimension<dimension_type>::width(m_dimension));
+            const auto bottom = top + top_type::from(tetengo2::gui::dimension<dimension_type>::height(m_dimension));
+
+            canvas.draw_line(position_type{ left, top }, position_type{ right, top });
+            canvas.draw_line(position_type{ left, top }, position_type{ left, bottom });
+            canvas.draw_line(position_type{ right, top }, position_type{ right, bottom });
         }
 
 
@@ -105,18 +118,42 @@ namespace bobura { namespace view { namespace timetable
 
         using top_type = typename tetengo2::gui::position<position_type>::top_type;
 
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
+
         using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+
+        using unit_size_type = typename canvas_type::unit_size_type;
 
 
         // static functions
 
         static void calculate_positions_and_dimensions(
             canvas_type&          /*canvas*/,
-            const dimension_type& /*canvas_dimension*/,
-            const width_type      /*max_station_name_width*/
+            const dimension_type& canvas_dimension,
+            const dimension_type& margin,
+            const width_type      max_station_name_width,
+            position_type&        position,
+            dimension_type&       dimension
         )
         {
+            const auto& canvas_width = tetengo2::gui::dimension<dimension_type>::width(canvas_dimension);
 
+            const auto left_margin = left_type::from(tetengo2::gui::dimension<dimension_type>::width(margin));
+            const auto top_margin = top_type::from(tetengo2::gui::dimension<dimension_type>::height(margin));
+            const auto left_padding = left_type{ 1 } / 2;
+            const auto top_padding = top_type{ 1 } / 2;
+
+            auto header_width = max_station_name_width;
+            if (canvas_width < header_width + width_type::from(left_margin) * 2)
+            {
+                header_width =
+                    canvas_width > width_type::from(left_margin) * 2 ?
+                    canvas_width - width_type::from(left_margin) * 2 : width_type{ 0 };
+            }
+            height_type header_height{ 5 };
+
+            position = position_type{ left_margin, top_margin };
+            dimension = dimension_type{ std::move(header_width), std::move(header_height) };
         }
 
 
