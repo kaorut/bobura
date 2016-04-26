@@ -211,9 +211,21 @@ namespace bobura
                 tetengo2::stdalt::make_unique<header_type>(
                     m_direction, m_model, m_message_catalog, canvas, canvas_dimension, margin
                 );
+
+            const auto header_bottom =
+                tetengo2::gui::position<position_type>::top(m_p_header->position()) +
+                top_type::from(tetengo2::gui::dimension<dimension_type>::height(m_p_header->dimension()));
+
             m_p_train_number_header =
                 tetengo2::stdalt::make_unique<train_number_header_type>(
-                    m_direction, m_model, m_message_catalog, canvas, canvas_dimension, margin, max_station_name_width_
+                    m_direction,
+                    m_model,
+                    m_message_catalog,
+                    canvas,
+                    canvas_dimension,
+                    margin,
+                    header_bottom,
+                    max_station_name_width_
                 );
         }
 

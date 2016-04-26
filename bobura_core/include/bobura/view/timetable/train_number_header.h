@@ -53,6 +53,12 @@ namespace bobura { namespace view { namespace timetable
         //! The canvas type.
         using canvas_type = typename traits_type::canvas_type;
 
+        //! The position type.
+        using position_type = typename canvas_type::position_type;
+
+        //! The top type.
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+
         //! The dimension type.
         using dimension_type = typename canvas_type::dimension_type;
 
@@ -81,6 +87,7 @@ namespace bobura { namespace view { namespace timetable
             \param canvas                 A canvas.
             \param canvas_dimension       A canvas dimension.
             \param margin                 A margin.
+            \param top                    A top.
             \param max_station_name_width A max station name width.
         */
         train_number_header(
@@ -90,6 +97,7 @@ namespace bobura { namespace view { namespace timetable
             canvas_type&                canvas,
             const dimension_type&       canvas_dimension,
             const dimension_type&       margin,
+            const top_type&             top,
             const width_type&           max_station_name_width
         );
 

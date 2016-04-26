@@ -558,6 +558,12 @@ namespace bobura { namespace view { namespace timetable
             return *this;
         }
 
+        const position_type& position()
+        const
+        {
+            return m_position;
+        }
+
         const dimension_type& dimension()
         const
         {
@@ -605,8 +611,6 @@ namespace bobura { namespace view { namespace timetable
         using font_type = typename canvas_type::font_type;
 
         using color_type = typename canvas_type::color_type;
-
-        using position_type = typename canvas_type::position_type;
 
         using left_type = typename tetengo2::gui::position<position_type>::left_type;
 
@@ -797,6 +801,13 @@ namespace bobura { namespace view { namespace timetable
         base_type::operator=(std::move(another));
 
         return *this;
+    }
+
+    template <typename Traits>
+    const typename header<Traits>::position_type& header<Traits>::position()
+    const
+    {
+        return m_p_impl->position();
     }
 
     template <typename Traits>

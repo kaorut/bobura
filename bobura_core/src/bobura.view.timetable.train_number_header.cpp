@@ -47,6 +47,7 @@ namespace bobura { namespace view { namespace timetable
             canvas_type&                canvas,
             const dimension_type&       canvas_dimension,
             const dimension_type&       margin,
+            const top_type&             top,
             const width_type&           max_station_name_width
         )
         :
@@ -55,7 +56,7 @@ namespace bobura { namespace view { namespace timetable
         m_dimension(width_type{ 0 }, height_type{ 0 })
         {
             calculate_positions_and_dimensions(
-                canvas, canvas_dimension, margin, max_station_name_width, m_position, m_dimension
+                canvas, canvas_dimension, margin, top, max_station_name_width, m_position, m_dimension
             );
         }
 
@@ -131,6 +132,7 @@ namespace bobura { namespace view { namespace timetable
             canvas_type&          /*canvas*/,
             const dimension_type& canvas_dimension,
             const dimension_type& margin,
+            const top_type&       top,
             const width_type      max_station_name_width,
             position_type&        position,
             dimension_type&       dimension
@@ -139,7 +141,6 @@ namespace bobura { namespace view { namespace timetable
             const auto& canvas_width = tetengo2::gui::dimension<dimension_type>::width(canvas_dimension);
 
             const auto left_margin = left_type::from(tetengo2::gui::dimension<dimension_type>::width(margin));
-            const auto top_margin = top_type::from(tetengo2::gui::dimension<dimension_type>::height(margin));
             const auto left_padding = left_type{ 1 } / 2;
             const auto top_padding = top_type{ 1 } / 2;
 
@@ -152,7 +153,7 @@ namespace bobura { namespace view { namespace timetable
             }
             height_type header_height{ 5 };
 
-            position = position_type{ left_margin, top_margin };
+            position = position_type{ left_margin, top };
             dimension = dimension_type{ std::move(header_width), std::move(header_height) };
         }
 
@@ -177,13 +178,14 @@ namespace bobura { namespace view { namespace timetable
         canvas_type&                canvas,
         const dimension_type&       canvas_dimension,
         const dimension_type&       margin,
+        const top_type&             top,
         const width_type&           max_station_name_width
     )
     :
     base_type(),
     m_p_impl(
         tetengo2::stdalt::make_unique<impl>(
-            direction, model, message_catalog, canvas, canvas_dimension, margin, max_station_name_width
+            direction, model, message_catalog, canvas, canvas_dimension, margin, top, max_station_name_width
         )
     )
     {}

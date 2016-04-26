@@ -352,6 +352,9 @@ namespace bobura { namespace view { namespace timetable
         //! The canvas type.
         using canvas_type = typename traits_type::canvas_type;
 
+        //! The position type.
+        using position_type = typename canvas_type::position_type;
+
         //! The dimension type.
         using dimension_type = typename canvas_type::dimension_type;
 
@@ -411,6 +414,14 @@ namespace bobura { namespace view { namespace timetable
             \return This header.
         */
         header& operator=(header&& another);
+
+        /*!
+            \brief Returns the position.
+
+            \return The position.
+        */
+        const position_type& position()
+        const;
 
         /*!
             \brief Returns the dimension.
