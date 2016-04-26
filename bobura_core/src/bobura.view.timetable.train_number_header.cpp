@@ -141,8 +141,8 @@ namespace bobura { namespace view { namespace timetable
             const auto& canvas_width = tetengo2::gui::dimension<dimension_type>::width(canvas_dimension);
 
             const auto left_margin = left_type::from(tetengo2::gui::dimension<dimension_type>::width(margin));
-            const auto left_padding = left_type{ 1 } / 2;
-            const auto top_padding = top_type{ 1 } / 2;
+            //const auto left_padding = left_type{ 1 } / 2;
+            //const auto top_padding = top_type{ 1 } / 2;
 
             auto header_width = max_station_name_width;
             if (canvas_width < header_width + width_type::from(left_margin) * 2)
