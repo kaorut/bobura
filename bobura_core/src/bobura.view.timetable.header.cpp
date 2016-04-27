@@ -110,8 +110,8 @@ namespace bobura { namespace view { namespace timetable
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(company_name), font, color))
     {
-        set_position(std::move(position));
-        set_dimension(std::move(dimension));
+        this->set_position(std::move(position));
+        this->set_dimension(std::move(dimension));
     }
 
     template <typename Traits>
@@ -230,8 +230,8 @@ namespace bobura { namespace view { namespace timetable
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(line_name), font, color))
     {
-        set_position(std::move(position));
-        set_dimension(std::move(dimension));
+        this->set_position(std::move(position));
+        this->set_dimension(std::move(dimension));
     }
 
     template <typename Traits>
@@ -350,8 +350,8 @@ namespace bobura { namespace view { namespace timetable
     :
     m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(note), font, color))
     {
-        set_position(std::move(position));
-        set_dimension(std::move(dimension));
+        this->set_position(std::move(position));
+        this->set_dimension(std::move(dimension));
     }
 
     template <typename Traits>
