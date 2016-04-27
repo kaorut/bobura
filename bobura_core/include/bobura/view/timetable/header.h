@@ -415,22 +415,6 @@ namespace bobura { namespace view { namespace timetable
         */
         header& operator=(header&& another);
 
-        /*!
-            \brief Returns the position.
-
-            \return The position.
-        */
-        const position_type& position()
-        const;
-
-        /*!
-            \brief Returns the dimension.
-
-            \return The dimension.
-        */
-        const dimension_type& dimension()
-        const;
-
 
     private:
         // types

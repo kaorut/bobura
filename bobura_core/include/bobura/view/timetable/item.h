@@ -38,6 +38,9 @@ namespace bobura { namespace view { namespace timetable
         //! The position type.
         using position_type = typename canvas_type::position_type;
 
+        //! The dimension type.
+        using dimension_type = typename canvas_type::dimension_type;
+
 
         // constructors and destructor
 
@@ -65,12 +68,46 @@ namespace bobura { namespace view { namespace timetable
         item& operator=(item&& another);
 
         /*!
+            \brief Returns the position.
+
+            \return The position.
+        */
+        const position_type& position()
+        const;
+
+        /*!
+            \brief Returns the dimension.
+
+            \return The dimension.
+        */
+        const dimension_type& dimension()
+        const;
+
+        /*!
             \brief Draws this item on the canvas.
 
             \param canvas A canvas.
         */
         void draw_on(canvas_type& canvas)
         const;
+
+
+    protected:
+        // functions
+
+        /*!
+            \brief Sets a position.
+
+            \param position.
+        */
+        void set_position(position_type position);
+
+        /*!
+            \brief Sets a dimension.
+
+            \param dimension.
+        */
+        void set_dimension(dimension_type dimension);
 
 
     private:

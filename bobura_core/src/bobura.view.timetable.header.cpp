@@ -48,28 +48,18 @@ namespace bobura { namespace view { namespace timetable
 
         // constructors and destructor
 
-        impl(
-            string_type       company_name,
-            const font_type&  font,
-            const color_type& color,
-            position_type     position,
-            dimension_type    dimension
-        )
+        impl(string_type company_name, const font_type& font, const color_type& color)
         :
         m_company_name(std::move(company_name)),
         m_p_font(&font),
-        m_p_color(&color),
-        m_position(std::move(position)),
-        m_dimension(std::move(dimension))
+        m_p_color(&color)
         {}
 
         impl(impl&& another)
         :
         m_company_name(std::move(another.m_company_name)),
         m_p_font(another.m_p_font),
-        m_p_color(another.m_p_color),
-        m_position(std::move(another.m_position)),
-        m_dimension(std::move(another.m_dimension))
+        m_p_color(another.m_p_color)
         {}
 
 
@@ -83,18 +73,16 @@ namespace bobura { namespace view { namespace timetable
             m_company_name = std::move(another.m_company_name);
             m_p_font = another.m_p_font;
             m_p_color = another.m_p_color;
-            m_position = std::move(another.m_position);
-            m_dimension = std::move(another.m_dimension);
 
             return *this;
         }
 
-        void draw_on_impl(canvas_type& canvas)
+        void draw_on_impl(canvas_type& canvas, const company_name_header& base)
         const
         {
             canvas.set_font(*m_p_font);
             canvas.set_color(*m_p_color);
-            canvas.draw_text(m_company_name, m_position);
+            canvas.draw_text(m_company_name, base.position());
         }
 
 
@@ -106,10 +94,6 @@ namespace bobura { namespace view { namespace timetable
         const font_type* m_p_font;
 
         const color_type* m_p_color;
-
-        position_type m_position;
-
-        dimension_type m_dimension;
 
 
     };
@@ -124,12 +108,11 @@ namespace bobura { namespace view { namespace timetable
         dimension_type    dimension
     )
     :
-    m_p_impl(
-        tetengo2::stdalt::make_unique<impl>(
-            std::move(company_name), font, color, std::move(position), std::move(dimension)
-        )
-    )
-    {}
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(company_name), font, color))
+    {
+        set_position(std::move(position));
+        set_dimension(std::move(dimension));
+    }
 
     template <typename Traits>
     company_name_header<Traits>::company_name_header(company_name_header&& another)
@@ -158,7 +141,7 @@ namespace bobura { namespace view { namespace timetable
     void company_name_header<Traits>::draw_on_impl(canvas_type& canvas)
     const
     {
-        m_p_impl->draw_on_impl(canvas);
+        m_p_impl->draw_on_impl(canvas, *this);
     }
 
         
@@ -185,28 +168,18 @@ namespace bobura { namespace view { namespace timetable
 
         // constructors and destructor
 
-        impl(
-            string_type       line_name,
-            const font_type&  font,
-            const color_type& color,
-            position_type     position,
-            dimension_type    dimension
-        )
+        impl(string_type line_name, const font_type& font, const color_type& color)
         :
         m_line_name(std::move(line_name)),
         m_p_font(&font),
-        m_p_color(&color),
-        m_position(std::move(position)),
-        m_dimension(std::move(dimension))
+        m_p_color(&color)
         {}
 
         impl(impl&& another)
         :
         m_line_name(std::move(another.m_line_name)),
         m_p_font(another.m_p_font),
-        m_p_color(another.m_p_color),
-        m_position(std::move(another.m_position)),
-        m_dimension(std::move(another.m_dimension))
+        m_p_color(another.m_p_color)
         {}
 
 
@@ -220,18 +193,16 @@ namespace bobura { namespace view { namespace timetable
             m_line_name = std::move(another.m_line_name);
             m_p_font = another.m_p_font;
             m_p_color = another.m_p_color;
-            m_position = std::move(another.m_position);
-            m_dimension = std::move(another.m_dimension);
 
             return *this;
         }
 
-        void draw_on_impl(canvas_type& canvas)
+        void draw_on_impl(canvas_type& canvas, const line_name_header& base)
         const
         {
             canvas.set_font(*m_p_font);
             canvas.set_color(*m_p_color);
-            canvas.draw_text(m_line_name, m_position);
+            canvas.draw_text(m_line_name, base.position());
         }
 
 
@@ -243,10 +214,6 @@ namespace bobura { namespace view { namespace timetable
         const font_type* m_p_font;
 
         const color_type* m_p_color;
-
-        position_type m_position;
-
-        dimension_type m_dimension;
 
 
     };
@@ -261,12 +228,11 @@ namespace bobura { namespace view { namespace timetable
         dimension_type    dimension
     )
     :
-    m_p_impl(
-        tetengo2::stdalt::make_unique<impl>(
-            std::move(line_name), font, color, std::move(position), std::move(dimension)
-        )
-    )
-    {}
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(line_name), font, color))
+    {
+        set_position(std::move(position));
+        set_dimension(std::move(dimension));
+    }
 
     template <typename Traits>
     line_name_header<Traits>::line_name_header(line_name_header&& another)
@@ -295,7 +261,7 @@ namespace bobura { namespace view { namespace timetable
     void line_name_header<Traits>::draw_on_impl(canvas_type& canvas)
     const
     {
-        m_p_impl->draw_on_impl(canvas);
+        m_p_impl->draw_on_impl(canvas, *this);
     }
 
 
@@ -322,28 +288,18 @@ namespace bobura { namespace view { namespace timetable
 
         // constructors and destructor
 
-        impl(
-            string_type       note,
-            const font_type&  font,
-            const color_type& color,
-            position_type     position,
-            dimension_type    dimension
-        )
+        impl(string_type note, const font_type& font, const color_type& color)
         :
         m_note(std::move(note)),
         m_p_font(&font),
-        m_p_color(&color),
-        m_position(std::move(position)),
-        m_dimension(std::move(dimension))
+        m_p_color(&color)
         {}
 
         impl(impl&& another)
         :
         m_note(std::move(another.m_note)),
         m_p_font(another.m_p_font),
-        m_p_color(another.m_p_color),
-        m_position(std::move(another.m_position)),
-        m_dimension(std::move(another.m_dimension))
+        m_p_color(another.m_p_color)
         {}
 
 
@@ -357,18 +313,16 @@ namespace bobura { namespace view { namespace timetable
             m_note = std::move(another.m_note);
             m_p_font = another.m_p_font;
             m_p_color = another.m_p_color;
-            m_position = std::move(another.m_position);
-            m_dimension = std::move(another.m_dimension);
 
             return *this;
         }
 
-        void draw_on_impl(canvas_type& canvas)
+        void draw_on_impl(canvas_type& canvas, const note_header& base)
         const
         {
             canvas.set_font(*m_p_font);
             canvas.set_color(*m_p_color);
-            canvas.draw_text(m_note, m_position);
+            canvas.draw_text(m_note, base.position());
         }
 
 
@@ -380,10 +334,6 @@ namespace bobura { namespace view { namespace timetable
         const font_type* m_p_font;
 
         const color_type* m_p_color;
-
-        position_type m_position;
-
-        dimension_type m_dimension;
 
 
     };
@@ -398,10 +348,11 @@ namespace bobura { namespace view { namespace timetable
         dimension_type    dimension
     )
     :
-    m_p_impl(
-        tetengo2::stdalt::make_unique<impl>(std::move(note), font, color, std::move(position), std::move(dimension))
-    )
-    {}
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(note), font, color))
+    {
+        set_position(std::move(position));
+        set_dimension(std::move(dimension));
+    }
 
     template <typename Traits>
     note_header<Traits>::note_header(note_header&& another)
@@ -430,7 +381,7 @@ namespace bobura { namespace view { namespace timetable
     void note_header<Traits>::draw_on_impl(canvas_type& canvas)
     const
     {
-        m_p_impl->draw_on_impl(canvas);
+        m_p_impl->draw_on_impl(canvas, *this);
     }
 
 
@@ -459,15 +410,14 @@ namespace bobura { namespace view { namespace timetable
             const message_catalog_type& message_catalog,
             canvas_type&                canvas,
             const dimension_type&       canvas_dimension,
-            const dimension_type&       margin
+            const dimension_type&       margin,
+            header&                     base
         )
         :
         m_p_company_name_header(),
         m_p_line_name_header(),
         m_p_note_header(),
-        m_p_ruled_line_color(&*model.timetable().font_color_set().ruled_line().timetable_color()),
-        m_position(left_type{ 0 }, top_type{ 0 }),
-        m_dimension(width_type{ 0 }, height_type{ 0 })
+        m_p_ruled_line_color(&*model.timetable().font_color_set().ruled_line().timetable_color())
         {
             const auto& company_name = model.timetable().company_name();
             const auto& company_name_font = *model.timetable().font_color_set().company_name().diagram_font();
@@ -481,6 +431,8 @@ namespace bobura { namespace view { namespace timetable
             dimension_type line_name_dimension{ width_type{ 0 }, height_type{ 0 } };
             position_type note_position{ left_type{ 0 }, top_type{ 0 } };
             dimension_type note_dimension{ width_type{ 0 }, height_type{ 0 } };
+            position_type position{ left_type{ 0 }, top_type{ 0 } };
+            dimension_type dimension{ width_type{ 0 }, height_type{ 0 } };
             calculate_positions_and_dimensions(
                 canvas,
                 canvas_dimension,
@@ -497,9 +449,11 @@ namespace bobura { namespace view { namespace timetable
                 line_name_dimension,
                 note_position,
                 note_dimension,
-                m_position,
-                m_dimension
+                position,
+                dimension
             );
+            base.set_position(std::move(position));
+            base.set_dimension(std::move(dimension));
 
             const auto& company_name_color = *model.timetable().font_color_set().company_name().diagram_color();
             m_p_company_name_header =
@@ -535,9 +489,7 @@ namespace bobura { namespace view { namespace timetable
         m_p_company_name_header(std::move(another.m_p_company_name_header)),
         m_p_line_name_header(std::move(another.m_p_line_name_header)),
         m_p_note_header(std::move(another.m_p_note_header)),
-        m_p_ruled_line_color(another.m_p_ruled_line_color),
-        m_position(std::move(another.m_position)),
-        m_dimension(std::move(another.m_dimension))
+        m_p_ruled_line_color(another.m_p_ruled_line_color)
         {}
 
 
@@ -552,35 +504,23 @@ namespace bobura { namespace view { namespace timetable
             m_p_line_name_header = std::move(another.m_p_line_name_header);
             m_p_note_header = std::move(another.m_p_note_header);
             m_p_ruled_line_color = another.m_p_ruled_line_color;
-            m_position = std::move(another.m_position);
-            m_dimension = std::move(another.m_dimension);
 
             return *this;
         }
 
-        const position_type& position()
-        const
-        {
-            return m_position;
-        }
-
-        const dimension_type& dimension()
-        const
-        {
-            return m_dimension;
-        }
-
-        void draw_on_impl(canvas_type& canvas)
+        void draw_on_impl(canvas_type& canvas, const header& base)
         const
         {
             canvas.set_line_width(normal_line_width<unit_size_type>());
             canvas.set_line_style(canvas_type::line_style_type::solid);
             canvas.set_color(*m_p_ruled_line_color);
 
-            const auto& left = tetengo2::gui::position<position_type>::left(m_position);
-            const auto& top = tetengo2::gui::position<position_type>::top(m_position);
-            const auto right = left + left_type::from(tetengo2::gui::dimension<dimension_type>::width(m_dimension));
-            const auto bottom = top + top_type::from(tetengo2::gui::dimension<dimension_type>::height(m_dimension));
+            const auto& left = tetengo2::gui::position<position_type>::left(base.position());
+            const auto& top = tetengo2::gui::position<position_type>::top(base.position());
+            const auto right =
+                left + left_type::from(tetengo2::gui::dimension<dimension_type>::width(base.dimension()));
+            const auto bottom =
+                top + top_type::from(tetengo2::gui::dimension<dimension_type>::height(base.dimension()));
 
             canvas.draw_line(position_type{ left, top }, position_type{ right, top });
             canvas.draw_line(position_type{ left, top }, position_type{ left, bottom });
@@ -757,10 +697,6 @@ namespace bobura { namespace view { namespace timetable
 
         const color_type* m_p_ruled_line_color;
 
-        position_type m_position;
-
-        dimension_type m_dimension;
-
 
     };
 
@@ -776,7 +712,9 @@ namespace bobura { namespace view { namespace timetable
     )
     :
     base_type(),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog, canvas, canvas_dimension, margin))
+    m_p_impl(
+        tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog, canvas, canvas_dimension, margin, *this)
+    )
     {}
 
     template <typename Traits>
@@ -804,24 +742,10 @@ namespace bobura { namespace view { namespace timetable
     }
 
     template <typename Traits>
-    const typename header<Traits>::position_type& header<Traits>::position()
-    const
-    {
-        return m_p_impl->position();
-    }
-
-    template <typename Traits>
-    const typename header<Traits>::dimension_type& header<Traits>::dimension()
-    const
-    {
-        return m_p_impl->dimension();
-    }
-
-    template <typename Traits>
     void header<Traits>::draw_on_impl(canvas_type& canvas)
     const
     {
-        m_p_impl->draw_on_impl(canvas);
+        m_p_impl->draw_on_impl(canvas, *this);
     }
 
         

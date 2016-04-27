@@ -13,6 +13,7 @@
 #include <boost/predef.h>
 
 #include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include <bobura/type_list.h>
 #include <bobura/view/timetable/item.h>
@@ -32,10 +33,15 @@ namespace bobura { namespace view { namespace timetable
 
         using position_type = typename canvas_type::position_type;
 
+        using dimension_type = typename canvas_type::dimension_type;
+
 
         // constructors and destructor
 
         impl()
+        :
+        m_position(left_type{ 0 }, top_type{ 0 }),
+        m_dimension(width_type{ 0 }, height_type{ 0 })
         {}
 
 
@@ -49,11 +55,52 @@ namespace bobura { namespace view { namespace timetable
             return *this;
         }
 
+        const position_type& position()
+        const
+        {
+            return m_position;
+        }
+
+        const dimension_type& dimension()
+        const
+        {
+            return m_dimension;
+        }
+
         void draw_on_impl(canvas_type& canvas)
         const
         {
             boost::ignore_unused(canvas);
         }
+
+        void set_position(position_type position)
+        {
+            m_position = std::move(position);
+        }
+
+        void set_dimension(dimension_type dimension)
+        {
+            m_dimension = std::move(dimension);
+        }
+
+
+    private:
+        // types
+
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
+
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
+
+        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+
+
+        // variables
+
+        position_type m_position;
+
+        dimension_type m_dimension;
 
 
     };
@@ -82,6 +129,20 @@ namespace bobura { namespace view { namespace timetable
     }
 
     template <typename Traits>
+    const typename item<Traits>::position_type& item<Traits>::position()
+    const
+    {
+        return m_p_impl->position();
+    }
+
+    template <typename Traits>
+    const typename item<Traits>::dimension_type& item<Traits>::dimension()
+    const
+    {
+        return m_p_impl->dimension();
+    }
+
+    template <typename Traits>
     void item<Traits>::draw_on(canvas_type& canvas)
     const
     {
@@ -93,6 +154,18 @@ namespace bobura { namespace view { namespace timetable
     const
     {
         m_p_impl->draw_on_impl(canvas);
+    }
+
+    template <typename Traits>
+    void item<Traits>::set_position(position_type position)
+    {
+        m_p_impl->set_position(std::move(position));
+    }
+
+    template <typename Traits>
+    void item<Traits>::set_dimension(dimension_type dimension)
+    {
+        m_p_impl->set_dimension(std::move(dimension));
     }
 
 

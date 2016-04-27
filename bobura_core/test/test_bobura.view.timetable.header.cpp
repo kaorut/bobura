@@ -314,48 +314,6 @@ BOOST_AUTO_TEST_SUITE(header)
         header1 = std::move(header2);
     }
 
-    BOOST_AUTO_TEST_CASE(position)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const model_type model{};
-        const message_catalog_type message_catalog{};
-        window_type window{};
-        const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
-        const auto p_canvas = picture_box.create_canvas();
-        const header_type header{
-            direction_type::down,
-            model,
-            message_catalog,
-            *p_canvas,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            dimension_type{ width_type{ 1 }, height_type{ 1 } }
-        };
-
-        header.position();
-    }
-
-    BOOST_AUTO_TEST_CASE(dimension)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const model_type model{};
-        const message_catalog_type message_catalog{};
-        window_type window{};
-        const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
-        const auto p_canvas = picture_box.create_canvas();
-        const header_type header{
-            direction_type::down,
-            model,
-            message_catalog,
-            *p_canvas,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            dimension_type{ width_type{ 1 }, height_type{ 1 } }
-        };
-
-        header.dimension();
-    }
-
     BOOST_AUTO_TEST_CASE(draw_on)
     {
         BOOST_TEST_PASSPOINT();

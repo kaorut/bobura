@@ -48,18 +48,14 @@ namespace bobura { namespace view { namespace timetable
             const dimension_type&       /*canvas_dimension*/
         )
         :
-        m_p_ruled_line_color(&*model.timetable().font_color_set().ruled_line().timetable_color()),
-        m_position(left_type{ 0 }, top_type{ 0 }),
-        m_dimension(width_type{ 0 }, height_type{ 0 })
+        m_p_ruled_line_color(&*model.timetable().font_color_set().ruled_line().timetable_color())
         {
 
         }
 
         impl(impl&& another)
         :
-        m_p_ruled_line_color(another.m_p_ruled_line_color),
-        m_position(std::move(another.m_position)),
-        m_dimension(std::move(another.m_dimension))
+        m_p_ruled_line_color(another.m_p_ruled_line_color)
         {}
 
 
@@ -71,16 +67,8 @@ namespace bobura { namespace view { namespace timetable
                 return *this;
 
             m_p_ruled_line_color = another.m_p_ruled_line_color;
-            m_position = std::move(another.m_position);
-            m_dimension = std::move(another.m_dimension);
 
             return *this;
-        }
-
-        const dimension_type& dimension()
-        const
-        {
-            return m_dimension;
         }
 
         void draw_on_impl(canvas_type& /*canvas*/)
@@ -111,10 +99,6 @@ namespace bobura { namespace view { namespace timetable
         // variables
 
         const color_type* m_p_ruled_line_color;
-
-        position_type m_position;
-
-        dimension_type m_dimension;
 
 
     };
@@ -155,13 +139,6 @@ namespace bobura { namespace view { namespace timetable
         base_type::operator=(std::move(another));
 
         return *this;
-    }
-
-    template <typename Traits>
-    const typename train_list<Traits>::dimension_type& train_list<Traits>::dimension()
-    const
-    {
-        return m_p_impl->dimension();
     }
 
     template <typename Traits>

@@ -126,14 +126,6 @@ namespace bobura { namespace view { namespace timetable
         */
         train_number_header& operator=(train_number_header&& another);
 
-        /*!
-            \brief Returns the dimension.
-
-            \return The dimension.
-        */
-        const dimension_type& dimension()
-        const;
-
 
     private:
         // types

@@ -51,12 +51,6 @@ namespace
 
     using picture_box_type = ui_type_list_type::picture_box_type;
 
-    using position_type = picture_box_type::position_type;
-
-    using left_type = tetengo2::gui::position<position_type>::left_type;
-
-    using top_type = tetengo2::gui::position<position_type>::top_type;
-
     using dimension_type = picture_box_type::dimension_type;
 
     using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
@@ -129,26 +123,6 @@ BOOST_AUTO_TEST_SUITE(station_list)
         };
 
         header1 = std::move(header2);
-    }
-
-    BOOST_AUTO_TEST_CASE(dimension)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const model_type model{};
-        const message_catalog_type message_catalog{};
-        window_type window{};
-        const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
-        const auto p_canvas = picture_box.create_canvas();
-        const station_list_type station_list{
-            direction_type::down,
-            model,
-            message_catalog,
-            *p_canvas,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } }
-        };
-
-        station_list.dimension();
     }
 
     BOOST_AUTO_TEST_CASE(draw_on)

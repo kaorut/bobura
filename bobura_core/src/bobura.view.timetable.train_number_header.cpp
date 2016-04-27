@@ -48,23 +48,24 @@ namespace bobura { namespace view { namespace timetable
             const dimension_type&       canvas_dimension,
             const dimension_type&       margin,
             const top_type&             top,
-            const width_type&           max_station_name_width
+            const width_type&           max_station_name_width,
+            train_number_header&        base
         )
         :
-        m_p_ruled_line_color(&*model.timetable().font_color_set().ruled_line().timetable_color()),
-        m_position(left_type{ 0 }, top_type{ 0 }),
-        m_dimension(width_type{ 0 }, height_type{ 0 })
+        m_p_ruled_line_color(&*model.timetable().font_color_set().ruled_line().timetable_color())
         {
+            position_type position{ left_type{ 0 }, top_type{ 0 } };
+            dimension_type dimension{ width_type{ 0 }, height_type{ 0 } };
             calculate_positions_and_dimensions(
-                canvas, canvas_dimension, margin, top, max_station_name_width, m_position, m_dimension
+                canvas, canvas_dimension, margin, top, max_station_name_width, position, dimension
             );
+            base.set_position(std::move(position));
+            base.set_dimension(std::move(dimension));
         }
 
         impl(impl&& another)
         :
-        m_p_ruled_line_color(another.m_p_ruled_line_color),
-        m_position(std::move(another.m_position)),
-        m_dimension(std::move(another.m_dimension))
+        m_p_ruled_line_color(another.m_p_ruled_line_color)
         {}
 
 
@@ -76,29 +77,23 @@ namespace bobura { namespace view { namespace timetable
                 return *this;
 
             m_p_ruled_line_color = another.m_p_ruled_line_color;
-            m_position = std::move(another.m_position);
-            m_dimension = std::move(another.m_dimension);
 
             return *this;
         }
 
-        const dimension_type& dimension()
-        const
-        {
-            return m_dimension;
-        }
-
-        void draw_on_impl(canvas_type& canvas)
+        void draw_on_impl(canvas_type& canvas, const train_number_header& base)
         const
         {
             canvas.set_line_width(normal_line_width<unit_size_type>());
             canvas.set_line_style(canvas_type::line_style_type::solid);
             canvas.set_color(*m_p_ruled_line_color);
 
-            const auto& left = tetengo2::gui::position<position_type>::left(m_position);
-            const auto& top = tetengo2::gui::position<position_type>::top(m_position);
-            const auto right = left + left_type::from(tetengo2::gui::dimension<dimension_type>::width(m_dimension));
-            const auto bottom = top + top_type::from(tetengo2::gui::dimension<dimension_type>::height(m_dimension));
+            const auto& left = tetengo2::gui::position<position_type>::left(base.position());
+            const auto& top = tetengo2::gui::position<position_type>::top(base.position());
+            const auto right =
+                left + left_type::from(tetengo2::gui::dimension<dimension_type>::width(base.dimension()));
+            const auto bottom =
+                top + top_type::from(tetengo2::gui::dimension<dimension_type>::height(base.dimension()));
 
             canvas.draw_line(position_type{ left, top }, position_type{ right, top });
             canvas.draw_line(position_type{ left, top }, position_type{ left, bottom });
@@ -162,10 +157,6 @@ namespace bobura { namespace view { namespace timetable
 
         const color_type* m_p_ruled_line_color;
 
-        position_type m_position;
-
-        dimension_type m_dimension;
-
 
     };
 
@@ -185,7 +176,7 @@ namespace bobura { namespace view { namespace timetable
     base_type(),
     m_p_impl(
         tetengo2::stdalt::make_unique<impl>(
-            direction, model, message_catalog, canvas, canvas_dimension, margin, top, max_station_name_width
+            direction, model, message_catalog, canvas, canvas_dimension, margin, top, max_station_name_width, *this
         )
     )
     {}
@@ -215,17 +206,10 @@ namespace bobura { namespace view { namespace timetable
     }
 
     template <typename Traits>
-    const typename train_number_header<Traits>::dimension_type& train_number_header<Traits>::dimension()
-    const
-    {
-        return m_p_impl->dimension();
-    }
-
-    template <typename Traits>
     void train_number_header<Traits>::draw_on_impl(canvas_type& canvas)
     const
     {
-        m_p_impl->draw_on_impl(canvas);
+        m_p_impl->draw_on_impl(canvas, *this);
     }
 
         
