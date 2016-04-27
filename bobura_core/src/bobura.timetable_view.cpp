@@ -152,11 +152,16 @@ namespace bobura
                 canvas.set_font(*font);
 
                 const auto dimension = canvas.calc_text_dimension(station.name());
-                const auto width = tetengo2::gui::dimension<dimension_type>::width(dimension);
+                const auto width = tetengo2::gui::dimension<dimension_type>::width(dimension) + width_type{ 3 };
                 if (width > max_width)
                     max_width = width;
             }
             return max_width;
+        }
+
+        static height_type train_number_height(canvas_type& /*canvas*/, const font_color_set_type& /*font_color_set*/)
+        {
+            return height_type{ 1 };
         }
 
 
@@ -206,6 +211,8 @@ namespace bobura
                 max_station_name_width(
                     canvas, m_model.timetable().station_locations(), m_model.timetable().font_color_set()
                 );
+            const auto train_number_height_ = train_number_height(canvas, m_model.timetable().font_color_set());
+            const auto train_name_height_ = height_type{ 5 };
 
             m_p_header =
                 tetengo2::stdalt::make_unique<header_type>(
@@ -225,7 +232,9 @@ namespace bobura
                     canvas_dimension,
                     margin,
                     header_bottom,
-                    max_station_name_width_
+                    max_station_name_width_,
+                    train_number_height_,
+                    train_name_height_
                 );
         }
 

@@ -102,7 +102,9 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
             dimension_type{ width_type{ 1 }, height_type{ 1 } },
             top_type{ 2 },
-            width_type{ 4 }
+            width_type{ 4 },
+            height_type{ 1 },
+            height_type{ 5 }
         };
         const train_number_header_type train_number_header2{ std::move(train_number_header1) };
     }
@@ -124,7 +126,9 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
             dimension_type{ width_type{ 1 }, height_type{ 1 } },
             top_type{ 2 },
-            width_type{ 4 }
+            width_type{ 4 },
+            height_type{ 1 },
+            height_type{ 5 }
         };
         train_number_header_type train_number_header2{
             direction_type::down,
@@ -134,7 +138,9 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
             dimension_type{ width_type{ 1 }, height_type{ 1 } },
             top_type{ 2 },
-            width_type{ 4 }
+            width_type{ 4 },
+            height_type{ 1 },
+            height_type{ 5 }
         };
 
         train_number_header1 = std::move(train_number_header2);
@@ -157,7 +163,9 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
             dimension_type{ width_type{ 1 }, height_type{ 1 } },
             top_type{ 2 },
-            width_type{ 4 }
+            width_type{ 4 },
+            height_type{ 1 },
+            height_type{ 5 }
         };
 
         train_number_header.draw_on(*p_canvas);
