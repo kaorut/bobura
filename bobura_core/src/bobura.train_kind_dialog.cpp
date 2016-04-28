@@ -76,7 +76,7 @@ namespace bobura
         impl(
             base_type&                  base,
             const color_type&           background_color,
-            const color_type&           ruled_line_color,
+            const color_type&           timetable_color,
             const message_catalog_type& message_catalog
         )
         :
@@ -114,7 +114,7 @@ namespace bobura
         m_p_ok_button(),
         m_p_cancel_button()
         {
-            initialize_dialog(background_color, ruled_line_color);
+            initialize_dialog(background_color, timetable_color);
         }
 
 
@@ -361,7 +361,7 @@ namespace bobura
 
         // functions
 
-        void initialize_dialog(const color_type& background_color, const color_type& ruled_line_color)
+        void initialize_dialog(const color_type& background_color, const color_type& timetable_color)
         {
             m_base.set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Train Kinds")));
 
@@ -388,7 +388,7 @@ namespace bobura
             m_p_timetable_font_text_box = create_timetable_font_text_box();
             m_p_timetable_color_button = create_timetable_color_button();
             m_p_sample_label = create_sample_label();
-            m_p_sample_picture_box = create_sample_picture_box(background_color, ruled_line_color);
+            m_p_sample_picture_box = create_sample_picture_box(background_color, timetable_color);
             m_p_ok_button = create_ok_button();
             m_p_cancel_button = create_cancel_button();
 
@@ -699,7 +699,7 @@ namespace bobura
 
         std::unique_ptr<picture_box_type> create_sample_picture_box(
             const color_type& background_color,
-            const color_type& ruled_line_color
+            const color_type& timetable_color
         )
         {
             auto p_picture_box =
@@ -711,7 +711,7 @@ namespace bobura
                     m_info_sets,
                     m_current_train_kind_index,
                     background_color,
-                    ruled_line_color,
+                    timetable_color,
                     p_picture_box->client_dimension()
                 }
             );
@@ -1168,12 +1168,12 @@ namespace bobura
     >::train_kind_dialog(
         abstract_window_type&       parent,
         const color_type&           background_color,
-        const color_type&           ruled_line_color,
+        const color_type&           timetable_color,
         const message_catalog_type& message_catalog
     )
     :
     base_type(parent),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, background_color, ruled_line_color, message_catalog))
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, background_color, timetable_color, message_catalog))
     {}
 
     template <

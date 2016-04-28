@@ -48,14 +48,14 @@ namespace bobura { namespace view { namespace timetable
             const dimension_type&       /*canvas_dimension*/
         )
         :
-        m_p_ruled_line_color(&*model.timetable().font_color_set().ruled_line().timetable_color())
+        m_p_timetable_color(&*model.timetable().font_color_set().timetable().timetable_color())
         {
 
         }
 
         impl(impl&& another)
         :
-        m_p_ruled_line_color(another.m_p_ruled_line_color)
+        m_p_timetable_color(another.m_p_timetable_color)
         {}
 
 
@@ -66,7 +66,7 @@ namespace bobura { namespace view { namespace timetable
             if (&another == this)
                 return *this;
 
-            m_p_ruled_line_color = another.m_p_ruled_line_color;
+            m_p_timetable_color = another.m_p_timetable_color;
 
             return *this;
         }
@@ -98,7 +98,7 @@ namespace bobura { namespace view { namespace timetable
 
         // variables
 
-        const color_type* m_p_ruled_line_color;
+        const color_type* m_p_timetable_color;
 
 
     };

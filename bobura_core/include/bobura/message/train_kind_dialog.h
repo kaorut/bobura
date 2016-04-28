@@ -953,21 +953,21 @@ namespace bobura { namespace message { namespace train_kind_dialog
             \param info_sets                Information sets.
             \param current_train_kind_index A current train kind index.
             \param background_color         A background color.
-            \param ruled_line_color         A ruled line color.
+            \param timetable_color          A timetable item color.
             \param canvas_dimension         A canvas dimension.
         */
         sample_picture_box_paint(
             const std::vector<info_set_type>&     info_sets,
             const boost::optional<int_size_type>& current_train_kind_index,
             const color_type&                     background_color,
-            const color_type&                     ruled_line_color,
+            const color_type&                     timetable_color,
             const dimension_type&                 canvas_dimension
         )
         :
         m_info_sets(info_sets),
         m_current_train_kind_index(current_train_kind_index),
         m_background_color(background_color),
-        m_ruled_line_color(ruled_line_color),
+        m_timetable_color(timetable_color),
         m_canvas_dimension(canvas_dimension)
         {}
 
@@ -1072,7 +1072,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
         const color_type& m_background_color;
 
-        const color_type& m_ruled_line_color;
+        const color_type& m_timetable_color;
 
         const dimension_type m_canvas_dimension;
 
@@ -1174,7 +1174,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             canvas.set_line_width(width_type{ 1 } / 12);
             canvas.set_line_style(canvas_type::line_style_type::solid);
-            canvas.set_color(m_ruled_line_color);
+            canvas.set_color(m_timetable_color);
 
             const auto line_positions = timetable_sample_line_positions(position, dimension, text_dimension);
             const auto& box_left = tetengo2::gui::position<position_type>::left(std::get<0>(line_positions));

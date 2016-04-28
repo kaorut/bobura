@@ -417,7 +417,7 @@ namespace bobura { namespace view { namespace timetable
         m_p_company_name_header(),
         m_p_line_name_header(),
         m_p_note_header(),
-        m_p_ruled_line_color(&*model.timetable().font_color_set().ruled_line().timetable_color())
+        m_p_timetable_color(&*model.timetable().font_color_set().timetable().timetable_color())
         {
             const auto& company_name = model.timetable().company_name();
             const auto& company_name_font = *model.timetable().font_color_set().company_name().diagram_font();
@@ -489,7 +489,7 @@ namespace bobura { namespace view { namespace timetable
         m_p_company_name_header(std::move(another.m_p_company_name_header)),
         m_p_line_name_header(std::move(another.m_p_line_name_header)),
         m_p_note_header(std::move(another.m_p_note_header)),
-        m_p_ruled_line_color(another.m_p_ruled_line_color)
+        m_p_timetable_color(another.m_p_timetable_color)
         {}
 
 
@@ -503,7 +503,7 @@ namespace bobura { namespace view { namespace timetable
             m_p_company_name_header = std::move(another.m_p_company_name_header);
             m_p_line_name_header = std::move(another.m_p_line_name_header);
             m_p_note_header = std::move(another.m_p_note_header);
-            m_p_ruled_line_color = another.m_p_ruled_line_color;
+            m_p_timetable_color = another.m_p_timetable_color;
 
             return *this;
         }
@@ -513,7 +513,7 @@ namespace bobura { namespace view { namespace timetable
         {
             canvas.set_line_width(normal_line_width<unit_size_type>());
             canvas.set_line_style(canvas_type::line_style_type::solid);
-            canvas.set_color(*m_p_ruled_line_color);
+            canvas.set_color(*m_p_timetable_color);
 
             const auto& left = tetengo2::gui::position<position_type>::left(base.position());
             const auto& top = tetengo2::gui::position<position_type>::top(base.position());
@@ -695,7 +695,7 @@ namespace bobura { namespace view { namespace timetable
 
         std::unique_ptr<note_header_type> m_p_note_header;
 
-        const color_type* m_p_ruled_line_color;
+        const color_type* m_p_timetable_color;
 
 
     };

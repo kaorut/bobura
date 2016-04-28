@@ -321,12 +321,12 @@ namespace bobura { namespace model { namespace serializer
             }
             pull_parser.next();
 
+            auto diagram_font_color = font_color_set_type::default_().diagram();
+            auto timetable_font_color = font_color_set_type::default_().timetable();
             auto background_font_color = font_color_set_type::default_().background();
             auto company_name_font_color = font_color_set_type::default_().company_name();
             auto line_name_font_color = font_color_set_type::default_().line_name();
             auto note_font_color = font_color_set_type::default_().note();
-            auto time_line_font_color = font_color_set_type::default_().time_line();
-            auto ruled_line_font_color = font_color_set_type::default_().ruled_line();
             auto local_station_font_color = font_color_set_type::default_().local_station();
             auto principal_station_font_color = font_color_set_type::default_().principal_station();
             auto local_terminal_station_font_color = font_color_set_type::default_().local_terminal_station();
@@ -343,7 +343,39 @@ namespace bobura { namespace model { namespace serializer
                 if (!element)
                     break;
 
-                if      (element->first == string_type{ TETENGO2_TEXT("background") })
+                if (element->first == string_type{ TETENGO2_TEXT("diagram") })
+                {
+                    if (
+                        !(
+                            element->second.diagram_font() &&
+                            element->second.diagram_color() &&
+                            !element->second.timetable_font() &&
+                            !element->second.timetable_color()
+                        )
+                    )
+                    {
+                        error = error_type::corrupted;
+                        return boost::none;
+                    }
+                    diagram_font_color = std::move(element->second);
+                }
+                else if (element->first == string_type{ TETENGO2_TEXT("timetable") })
+                {
+                    if (
+                        !(
+                            !element->second.diagram_font() &&
+                            !element->second.diagram_color() &&
+                            !element->second.timetable_font() &&
+                            element->second.timetable_color()
+                        )
+                    )
+                    {
+                        error = error_type::corrupted;
+                        return boost::none;
+                    }
+                    timetable_font_color = std::move(element->second);
+                }
+                else if (element->first == string_type{ TETENGO2_TEXT("background") })
                 {
                     if (
                         !(
@@ -407,39 +439,7 @@ namespace bobura { namespace model { namespace serializer
                     }
                     note_font_color = std::move(element->second);
                 }
-                else if (element->first == string_type{ TETENGO2_TEXT("time_line") })
-                {
-                    if (
-                        !(
-                            element->second.diagram_font() &&
-                            element->second.diagram_color() &&
-                            !element->second.timetable_font() &&
-                            !element->second.timetable_color()
-                        )
-                    )
-                    {
-                        error = error_type::corrupted;
-                        return boost::none;
-                    }
-                    time_line_font_color = std::move(element->second);
-                }
-                 else if (element->first == string_type{ TETENGO2_TEXT("ruled_line") })
-                {
-                    if (
-                        !(
-                            !element->second.diagram_font() &&
-                            !element->second.diagram_color() &&
-                            !element->second.timetable_font() &&
-                            element->second.timetable_color()
-                        )
-                    )
-                    {
-                        error = error_type::corrupted;
-                        return boost::none;
-                    }
-                    ruled_line_font_color = std::move(element->second);
-                }
-               else if (element->first == string_type{ TETENGO2_TEXT("local_station") })
+                else if (element->first == string_type{ TETENGO2_TEXT("local_station") })
                 {
                     if (
                         !(
@@ -520,12 +520,12 @@ namespace bobura { namespace model { namespace serializer
             return
                 boost::make_optional(
                     font_color_set_type{
+                        std::move(diagram_font_color),
+                        std::move(timetable_font_color),
                         std::move(background_font_color),
                         std::move(company_name_font_color),
                         std::move(line_name_font_color),
                         std::move(note_font_color),
-                        std::move(time_line_font_color),
-                        std::move(ruled_line_font_color),
                         std::move(local_station_font_color),
                         std::move(principal_station_font_color),
                         std::move(local_terminal_station_font_color),
