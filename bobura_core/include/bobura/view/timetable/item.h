@@ -98,14 +98,14 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Sets a position.
 
-            \param position.
+            \param position A position.
         */
         void set_position(position_type position);
 
         /*!
             \brief Sets a dimension.
 
-            \param dimension.
+            \param dimension A dimension.
         */
         void set_dimension(dimension_type dimension);
 
