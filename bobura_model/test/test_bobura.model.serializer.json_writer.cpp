@@ -242,9 +242,8 @@ namespace
             };
 
             const font_color_set_type font_color_set{
-                font_color_set_type::default_().diagram(),
-                font_color_set_type::default_().timetable(),
                 background_font_color,
+                font_color_set_type::default_().general(),
                 company_name_font_color,
                 font_color_set_type::default_().line_name(),
                 font_color_set_type::default_().note(),

@@ -51,9 +51,8 @@ namespace
 
     font_color_set_type make_font_color_set1()
     {
-        auto diagram_font_color = make_font_color(string_type{ TETENGO2_TEXT("diagram") }, true);
-        auto timetable_font_color = make_font_color(string_type{ TETENGO2_TEXT("timetable") }, true);
         auto background_font_color = make_font_color(string_type{}, true);
+        auto general_font_color = make_font_color(string_type{ TETENGO2_TEXT("general") }, true);
         auto company_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("company_name") }, true);
         auto line_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("line_name") }, true);
         auto note_font_color = make_font_color(string_type{ TETENGO2_TEXT("note") }, true);
@@ -65,9 +64,8 @@ namespace
 
         return
             font_color_set_type{
-                std::move(diagram_font_color),
-                std::move(timetable_font_color),
                 std::move(background_font_color),
+                std::move(general_font_color),
                 std::move(company_name_font_color),
                 std::move(line_name_font_color),
                 std::move(note_font_color),
@@ -80,9 +78,8 @@ namespace
 
     font_color_set_type make_font_color_set2()
     {
-        auto diagram_font_color = make_font_color(string_type{ TETENGO2_TEXT("diagram") }, true);
-        auto timetable_font_color = make_font_color(string_type{ TETENGO2_TEXT("timetable") }, true);
         auto background_font_color = make_font_color(string_type{}, true);
+        auto general_font_color = make_font_color(string_type{ TETENGO2_TEXT("general") }, true);
         auto company_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("company_name") }, true);
         auto line_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("line_name") }, true);
         auto note_font_color = make_font_color(string_type{ TETENGO2_TEXT("note") }, true);
@@ -94,9 +91,8 @@ namespace
 
         return
             font_color_set_type{
-                std::move(diagram_font_color),
-                std::move(timetable_font_color),
                 std::move(background_font_color),
+                std::move(general_font_color),
                 std::move(company_name_font_color),
                 std::move(line_name_font_color),
                 std::move(note_font_color),
@@ -109,9 +105,8 @@ namespace
 
     font_color_set_type make_font_color_set3()
     {
-        auto diagram_font_color = make_font_color(string_type{ TETENGO2_TEXT("TIME_LINE") }, true);
-        auto timetable_font_color = make_font_color(string_type{ TETENGO2_TEXT("RULED_LINE") }, true);
         auto background_font_color = make_font_color(string_type{}, true);
+        auto general_font_color = make_font_color(string_type{ TETENGO2_TEXT("GENERAL") }, true);
         auto company_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("COMPANY_NAME") }, true);
         auto line_name_font_color = make_font_color(string_type{ TETENGO2_TEXT("LINE_NAME") }, true);
         auto note_font_color = make_font_color(string_type{ TETENGO2_TEXT("NOTE") }, true);
@@ -122,9 +117,8 @@ namespace
             make_font_color(string_type{ TETENGO2_TEXT("PRINCIPAL_TERMINAL") }, true);
         return
             font_color_set_type{
-                std::move(diagram_font_color),
-                std::move(timetable_font_color),
                 std::move(background_font_color),
+                std::move(general_font_color),
                 std::move(company_name_font_color),
                 std::move(line_name_font_color),
                 std::move(note_font_color),
@@ -252,24 +246,6 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
         }
     }
 
-    BOOST_AUTO_TEST_CASE(diagram)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const font_color_set_type font_color_set = make_font_color_set1();
-
-        BOOST_CHECK(font_color_set.diagram() == make_font_color(string_type{ TETENGO2_TEXT("diagram") }, true));
-    }
-
-    BOOST_AUTO_TEST_CASE(timetable)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const font_color_set_type font_color_set = make_font_color_set1();
-
-        BOOST_CHECK(font_color_set.timetable() == make_font_color(string_type{ TETENGO2_TEXT("timetable") }, true));
-    }
-
     BOOST_AUTO_TEST_CASE(background)
     {
         BOOST_TEST_PASSPOINT();
@@ -277,6 +253,15 @@ BOOST_AUTO_TEST_SUITE(font_color_set)
         const font_color_set_type font_color_set = make_font_color_set1();
 
         BOOST_CHECK(font_color_set.background() == make_font_color(string_type{}, true));
+    }
+
+    BOOST_AUTO_TEST_CASE(general)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        const font_color_set_type font_color_set = make_font_color_set1();
+
+        BOOST_CHECK(font_color_set.general() == make_font_color(string_type{ TETENGO2_TEXT("general") }, true));
     }
 
     BOOST_AUTO_TEST_CASE(company_name)

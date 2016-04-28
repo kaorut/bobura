@@ -83,54 +83,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         const font_color_dialog_type font_color_dialog{ parent, message_catalog };
     }
 
-    BOOST_AUTO_TEST_CASE(diagram)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        window_type parent{};
-        const message_catalog_type message_catalog{};
-        const font_color_dialog_type font_color_dialog{ parent, message_catalog };
-
-        font_color_dialog.diagram();
-    }
-
-    BOOST_AUTO_TEST_CASE(set_diagram)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        window_type parent{};
-        const message_catalog_type message_catalog{};
-        font_color_dialog_type font_color_dialog{ parent, message_catalog };
-
-        font_color_dialog.set_diagram(make_font_color(true, true));
-
-        BOOST_CHECK(font_color_dialog.diagram() == make_font_color(true, true));
-    }
-
-    BOOST_AUTO_TEST_CASE(timetable)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        window_type parent{};
-        const message_catalog_type message_catalog{};
-        const font_color_dialog_type font_color_dialog{ parent, message_catalog };
-
-        font_color_dialog.timetable();
-    }
-
-    BOOST_AUTO_TEST_CASE(set_timetable)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        window_type parent{};
-        const message_catalog_type message_catalog{};
-        font_color_dialog_type font_color_dialog{ parent, message_catalog };
-
-        font_color_dialog.set_timetable(make_font_color(true, true));
-
-        BOOST_CHECK(font_color_dialog.timetable() == make_font_color(true, true));
-    }
-
     BOOST_AUTO_TEST_CASE(background)
     {
         BOOST_TEST_PASSPOINT();
@@ -153,6 +105,30 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         font_color_dialog.set_background(make_font_color(false, true));
 
         BOOST_CHECK(font_color_dialog.background() == make_font_color(false, true));
+    }
+
+    BOOST_AUTO_TEST_CASE(general)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type parent{};
+        const message_catalog_type message_catalog{};
+        const font_color_dialog_type font_color_dialog{ parent, message_catalog };
+
+        font_color_dialog.general();
+    }
+
+    BOOST_AUTO_TEST_CASE(set_general)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type parent{};
+        const message_catalog_type message_catalog{};
+        font_color_dialog_type font_color_dialog{ parent, message_catalog };
+
+        font_color_dialog.set_general(make_font_color(true, true));
+
+        BOOST_CHECK(font_color_dialog.general() == make_font_color(true, true));
     }
 
     BOOST_AUTO_TEST_CASE(company_name)

@@ -2869,7 +2869,6 @@ BOOST_AUTO_TEST_SUITE(timetable)
             font_color,
             font_color,
             font_color,
-            font_color,
             font_color
         };
         timetable.set_font_color_set(font_color_set);

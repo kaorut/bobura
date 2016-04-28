@@ -258,36 +258,6 @@ namespace bobura
         // functions
 
         /*!
-            \brief Returns the font and color of the general items in the diagram.
-
-            \return The font and color of the general items in the diagram.
-        */
-        const font_color_type& diagram()
-        const;
-
-        /*!
-            \brief Sets a font and color of the general items in the diagram.
-
-            \param font_color A font and color.
-        */
-        void set_diagram(font_color_type font_color);
-
-        /*!
-            \brief Returns the font and color of the general items in the timetable.
-
-            \return The font and color of the general items in the timetable.
-        */
-        const font_color_type& timetable()
-        const;
-
-        /*!
-            \brief Sets a font and color of the general items in the timetable.
-
-            \param font_color A font and color.
-        */
-        void set_timetable(font_color_type font_color);
-
-        /*!
             \brief Returns the color of the background.
 
             \return The font and color of the background.
@@ -301,6 +271,21 @@ namespace bobura
             \param font_color A font and color.
         */
         void set_background(font_color_type font_color);
+
+        /*!
+            \brief Returns the font and color of the general item.
+
+            \return The font and color of the general item.
+        */
+        const font_color_type& general()
+        const;
+
+        /*!
+            \brief Sets a font and color of the general items in the general.
+
+            \param font_color A font and color.
+        */
+        void set_general(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the company name.

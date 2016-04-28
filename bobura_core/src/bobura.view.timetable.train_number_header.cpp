@@ -58,7 +58,7 @@ namespace bobura { namespace view { namespace timetable
             train_number_header&        base
         )
         :
-        m_p_timetable_color(&*model.timetable().font_color_set().timetable().timetable_color())
+        m_p_general_color(&*model.timetable().font_color_set().general().timetable_color())
         {
             position_type position{ left_type{ 0 }, top_type{ 0 } };
             dimension_type dimension{ width_type{ 0 }, height_type{ 0 } };
@@ -77,7 +77,7 @@ namespace bobura { namespace view { namespace timetable
 
         impl(impl&& another)
         :
-        m_p_timetable_color(another.m_p_timetable_color)
+        m_p_general_color(another.m_p_general_color)
         {}
 
 
@@ -88,7 +88,7 @@ namespace bobura { namespace view { namespace timetable
             if (&another == this)
                 return *this;
 
-            m_p_timetable_color = another.m_p_timetable_color;
+            m_p_general_color = another.m_p_general_color;
 
             return *this;
         }
@@ -98,7 +98,7 @@ namespace bobura { namespace view { namespace timetable
         {
             canvas.set_line_width(normal_line_width<unit_size_type>());
             canvas.set_line_style(canvas_type::line_style_type::solid);
-            canvas.set_color(*m_p_timetable_color);
+            canvas.set_color(*m_p_general_color);
 
             const auto& left = tetengo2::gui::position<position_type>::left(base.position());
             const auto& top = tetengo2::gui::position<position_type>::top(base.position());
@@ -168,7 +168,7 @@ namespace bobura { namespace view { namespace timetable
 
         // variables
 
-        const color_type* m_p_timetable_color;
+        const color_type* m_p_general_color;
 
 
     };

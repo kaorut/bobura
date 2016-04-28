@@ -217,8 +217,8 @@ namespace bobura { namespace view { namespace diagram
             const scale_type&     horizontal_scale
         )
         :
-        m_p_font(&*model.timetable().font_color_set().diagram().diagram_font()),
-        m_p_color(&*model.timetable().font_color_set().diagram().diagram_color()),
+        m_p_font(&*model.timetable().font_color_set().general().diagram_font()),
+        m_p_color(&*model.timetable().font_color_set().general().diagram_color()),
         m_time_lines(
             make_time_lines(
                 time_offset,

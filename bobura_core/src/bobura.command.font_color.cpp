@@ -78,9 +78,8 @@ namespace bobura { namespace command
             font_color_dialog_type dialog{ parent, m_message_catalog };
 
             const auto& font_color_set = model.timetable().font_color_set();
-            dialog.set_diagram(to_dialog_font_color(font_color_set.diagram()));
-            dialog.set_timetable(to_dialog_font_color(font_color_set.timetable()));
             dialog.set_background(to_dialog_font_color(font_color_set.background()));
+            dialog.set_general(to_dialog_font_color(font_color_set.general()));
             dialog.set_company_name(to_dialog_font_color(font_color_set.company_name()));
             dialog.set_line_name(to_dialog_font_color(font_color_set.line_name()));
             dialog.set_note(to_dialog_font_color(font_color_set.note()));
@@ -94,9 +93,8 @@ namespace bobura { namespace command
                 return;
         
             font_color_set_type new_font_color_set{
-                to_model_font_color(dialog.diagram()),
-                to_model_font_color(dialog.timetable()),
                 to_model_font_color(dialog.background()),
+                to_model_font_color(dialog.general()),
                 to_model_font_color(dialog.company_name()),
                 to_model_font_color(dialog.line_name()),
                 to_model_font_color(dialog.note()),

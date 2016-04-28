@@ -86,7 +86,7 @@ namespace bobura { namespace command
             train_kind_dialog_type dialog{
                 parent,
                 *font_color_set.background().diagram_color(),
-                *font_color_set.timetable().timetable_color(),
+                *font_color_set.general().timetable_color(),
                 m_message_catalog
             };
 

@@ -73,7 +73,7 @@ namespace bobura
         impl(base_type& base, const message_catalog_type& message_catalog)
         :
         m_base(base),
-        m_font_color_list(10, font_color_type{}),
+        m_font_color_list(9, font_color_type{}),
         m_message_catalog(message_catalog),
         m_current_category_index(),
         m_p_category_label(),
@@ -97,114 +97,103 @@ namespace bobura
 
         // functions
 
-        const font_color_type& diagram()
+        const font_color_type& background()
         const
         {
             return m_font_color_list[0];
         }
 
-        void set_diagram(font_color_type font_color)
+        void set_background(font_color_type font_color)
         {
             m_font_color_list[0] = std::move(font_color);
         }
 
-        const font_color_type& timetable()
+        const font_color_type& general()
         const
         {
             return m_font_color_list[1];
         }
 
-        void set_timetable(font_color_type font_color)
+        void set_general(font_color_type font_color)
         {
             m_font_color_list[1] = std::move(font_color);
-        }
-
-        const font_color_type& background()
-        const
-        {
-            return m_font_color_list[2];
-        }
-
-        void set_background(font_color_type font_color)
-        {
-            m_font_color_list[2] = std::move(font_color);
         }
 
         const font_color_type& company_name()
         const
         {
-            return m_font_color_list[3];
+            return m_font_color_list[2];
         }
 
         void set_company_name(font_color_type font_color)
         {
-            m_font_color_list[3] = std::move(font_color);
+            m_font_color_list[2] = std::move(font_color);
         }
 
         const font_color_type& line_name()
         const
         {
-            return m_font_color_list[4];
+            return m_font_color_list[3];
         }
 
         void set_line_name(font_color_type font_color)
         {
-            m_font_color_list[4] = std::move(font_color);
+            m_font_color_list[3] = std::move(font_color);
         }
 
         const font_color_type& note()
         const
         {
-            return m_font_color_list[5];
+            return m_font_color_list[4];
         }
 
         void set_note(font_color_type font_color)
         {
-            m_font_color_list[5] = std::move(font_color);
+            m_font_color_list[4] = std::move(font_color);
         }
 
         const font_color_type& local_station()
         const
         {
-            return m_font_color_list[6];
+            return m_font_color_list[5];
         }
 
         void set_local_station(font_color_type font_color)
         {
-            m_font_color_list[6] = std::move(font_color);
+            m_font_color_list[5] = std::move(font_color);
         }
 
         const font_color_type& principal_station()
         const
         {
-            return m_font_color_list[7];
+            return m_font_color_list[6];
         }
 
         void set_principal_station(font_color_type font_color)
         {
-            m_font_color_list[7] = std::move(font_color);
+            m_font_color_list[6] = std::move(font_color);
         }
 
         const font_color_type& local_terminal_station()
         const
         {
-            return m_font_color_list[8];
+            return m_font_color_list[7];
         }
 
         void set_local_terminal_station(font_color_type font_color)
         {
-            m_font_color_list[8] = std::move(font_color);
+            m_font_color_list[7] = std::move(font_color);
         }
 
         const font_color_type& principal_terminal_station()
         const
         {
-            return m_font_color_list[9];
+            return m_font_color_list[8];
         }
 
         void set_principal_terminal_station(font_color_type font_color)
         {
-            m_font_color_list[9] = std::move(font_color);
+            m_font_color_list[8] = std::move(font_color);
         }
 
         void do_modal_impl()
@@ -645,6 +634,10 @@ namespace bobura
             );
             m_p_category_list_box->insert_value(
                 m_p_category_list_box->value_count(),
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:General"))
+            );
+            m_p_category_list_box->insert_value(
+                m_p_category_list_box->value_count(),
                 m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Company Name"))
             );
             m_p_category_list_box->insert_value(
@@ -654,14 +647,6 @@ namespace bobura
             m_p_category_list_box->insert_value(
                 m_p_category_list_box->value_count(),
                 m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Note"))
-            );
-            m_p_category_list_box->insert_value(
-                m_p_category_list_box->value_count(),
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Time Lines"))
-            );
-            m_p_category_list_box->insert_value(
-                m_p_category_list_box->value_count(),
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Ruled Lines"))
             );
             m_p_category_list_box->insert_value(
                 m_p_category_list_box->value_count(),
@@ -764,6 +749,42 @@ namespace bobura
         typename FontDialog,
         typename ColorDialog
     >
+    const typename font_color_dialog<
+        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+    >::font_color_type&
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::background()
+    const
+    {
+        return m_p_impl->background();
+    }
+
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_background(
+        font_color_type font_color
+    )
+    {
+        m_p_impl->set_background(std::move(font_color));
+    }
+
+    template <
+        typename Traits,
+        typename Size,
+        typename Font,
+        typename PointUnitSize,
+        typename Color,
+        typename Canvas,
+        typename FontDialog,
+        typename ColorDialog
+    >
     font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::font_color_dialog(
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog
@@ -800,10 +821,10 @@ namespace bobura
     const typename font_color_dialog<
         Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
     >::font_color_type&
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::diagram()
+    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::general()
     const
     {
-        return m_p_impl->diagram();
+        return m_p_impl->general();
     }
 
     template <
@@ -816,83 +837,11 @@ namespace bobura
         typename FontDialog,
         typename ColorDialog
     >
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_diagram(
+    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_general(
         font_color_type font_color
     )
     {
-        m_p_impl->set_diagram(std::move(font_color));
-    }
-
-    template <
-        typename Traits,
-        typename Size,
-        typename Font,
-        typename PointUnitSize,
-        typename Color,
-        typename Canvas,
-        typename FontDialog,
-        typename ColorDialog
-    >
-    const typename font_color_dialog<
-        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
-    >::font_color_type&
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::timetable()
-    const
-    {
-        return m_p_impl->timetable();
-    }
-
-    template <
-        typename Traits,
-        typename Size,
-        typename Font,
-        typename PointUnitSize,
-        typename Color,
-        typename Canvas,
-        typename FontDialog,
-        typename ColorDialog
-    >
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_timetable(
-        font_color_type font_color
-    )
-    {
-        m_p_impl->set_timetable(std::move(font_color));
-    }
-
-    template <
-        typename Traits,
-        typename Size,
-        typename Font,
-        typename PointUnitSize,
-        typename Color,
-        typename Canvas,
-        typename FontDialog,
-        typename ColorDialog
-    >
-    const typename font_color_dialog<
-        Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
-    >::font_color_type&
-    font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::background()
-    const
-    {
-        return m_p_impl->background();
-    }
-
-    template <
-        typename Traits,
-        typename Size,
-        typename Font,
-        typename PointUnitSize,
-        typename Color,
-        typename Canvas,
-        typename FontDialog,
-        typename ColorDialog
-    >
-    void font_color_dialog<Traits, Size, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::set_background(
-        font_color_type font_color
-    )
-    {
-        m_p_impl->set_background(std::move(font_color));
+        m_p_impl->set_general(std::move(font_color));
     }
 
     template <
