@@ -11,6 +11,12 @@
                                           null,
                                           "F8F8E0"
                                       ],
+        "general":                    [
+                                          ["ＭＳ Ｐ明朝",     16, false, false, false, false],
+                                          "808080",
+                                          null,
+                                          "404040"
+                                      ],
         "company_name":               [
                                           ["ＭＳ Ｐゴシック", 24, false, false, false, false],
                                           "404040",
@@ -28,12 +34,6 @@
                                           "404040",
                                           ["ＭＳ Ｐ明朝",     12, false, false, false, false],
                                           "404040"
-                                      ],
-        "time_line":                  [
-                                          ["ＭＳ Ｐ明朝",     16, false, false, false, false],
-                                          "808080",
-                                          null,
-                                          null
                                       ],
         "local_station":              [
                                           ["ＭＳ Ｐ明朝",     12, false, false, false, false],
