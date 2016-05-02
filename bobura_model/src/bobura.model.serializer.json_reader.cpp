@@ -364,7 +364,7 @@ namespace bobura { namespace model { namespace serializer
                         !(
                             element->second.diagram_font() &&
                             element->second.diagram_color() &&
-                            !element->second.timetable_font() &&
+                            element->second.timetable_font() &&
                             element->second.timetable_color()
                         )
                     )

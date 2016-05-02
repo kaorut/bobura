@@ -366,7 +366,7 @@ namespace bobura { namespace model { namespace timetable_info
             font_color_type default_general_font_color{
                 boost::make_optional(default_font),
                 boost::make_optional(color_type{ 0x80, 0x80, 0x80 }),
-                boost::none,
+                boost::make_optional(default_font),
                 boost::make_optional(color_type{ 0x40, 0x40, 0x40 })
             };
             font_color_type default_company_name_font_color{

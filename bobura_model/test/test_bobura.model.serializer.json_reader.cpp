@@ -212,7 +212,7 @@ namespace
         "        \"general\"  :                  [\n"
         "                                            [\"hogefont\", 42, false, true, false, true],\n"
         "                                            \"ABCDEF\",\n"
-        "                                            null,\n"
+        "                                            [\"fugafont\", 42, false, true, false, true],\n"
         "                                            \"FEDCBA\"\n"
         "                                        ],\n"
         "        \"company_name\":               [\n"
