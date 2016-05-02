@@ -14,7 +14,7 @@
         "general":                    [
                                           ["ＭＳ Ｐ明朝",     16, false, false, false, false],
                                           "808080",
-                                          null,
+                                          ["ＭＳ Ｐ明朝",     16, false, false, false, false],
                                           "404040"
                                       ],
         "company_name":               [
