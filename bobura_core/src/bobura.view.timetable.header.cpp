@@ -108,6 +108,7 @@ namespace bobura { namespace view { namespace timetable
         dimension_type    dimension
     )
     :
+    base_type(),
     m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(company_name), font, color))
     {
         this->set_position(std::move(position));
@@ -117,8 +118,12 @@ namespace bobura { namespace view { namespace timetable
     template <typename Traits>
     company_name_header<Traits>::company_name_header(company_name_header&& another)
     :
+    base_type(),
     m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
-    {}
+    {
+        this->set_position(std::move(another.position()));
+        this->set_dimension(std::move(another.dimension()));
+    }
 
     template <typename Traits>
     company_name_header<Traits>::~company_name_header()
@@ -228,6 +233,7 @@ namespace bobura { namespace view { namespace timetable
         dimension_type    dimension
     )
     :
+    base_type(),
     m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(line_name), font, color))
     {
         this->set_position(std::move(position));
@@ -237,8 +243,12 @@ namespace bobura { namespace view { namespace timetable
     template <typename Traits>
     line_name_header<Traits>::line_name_header(line_name_header&& another)
     :
+    base_type(),
     m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
-    {}
+    {
+        this->set_position(std::move(another.position()));
+        this->set_dimension(std::move(another.dimension()));
+    }
 
     template <typename Traits>
     line_name_header<Traits>::~line_name_header()
@@ -348,6 +358,7 @@ namespace bobura { namespace view { namespace timetable
         dimension_type    dimension
     )
     :
+    base_type(),
     m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(note), font, color))
     {
         this->set_position(std::move(position));
@@ -357,8 +368,12 @@ namespace bobura { namespace view { namespace timetable
     template <typename Traits>
     note_header<Traits>::note_header(note_header&& another)
     :
+    base_type(),
     m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
-    {}
+    {
+        this->set_position(std::move(another.position()));
+        this->set_dimension(std::move(another.dimension()));
+    }
 
     template <typename Traits>
     note_header<Traits>::~note_header()

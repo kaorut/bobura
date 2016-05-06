@@ -22,6 +22,106 @@
 namespace bobura { namespace view { namespace timetable
 {
     /*!
+        \brief The class template for a header of the train number description in the timetable view.
+
+        \tparam Traits A traits type.
+    */
+    template <typename Traits>
+    class train_number_description_header : public item<Traits>
+    {
+    public:
+        // types
+
+        //! The traits type.
+        using traits_type = Traits;
+
+        //! The string type.
+        using string_type = typename traits_type::string_type;
+
+        //! The canvas type.
+        using canvas_type = typename traits_type::canvas_type;
+
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
+        //! The color type.
+        using color_type = typename canvas_type::color_type;
+
+        //! The position type.
+        using position_type = typename canvas_type::position_type;
+
+        //! The dimension type.
+        using dimension_type = typename canvas_type::dimension_type;
+
+
+        // constructors and destructor
+
+        /*!
+            \brief Creates a train number description header.
+
+            \param description A description.
+            \param font        A font.
+            \param color       A color.
+            \param position    A position.
+            \param dimension   A dimension.
+        */
+        train_number_description_header(
+            string_type       description,
+            const font_type&  font,
+            const color_type& color,
+            position_type     position,
+            dimension_type    dimension
+        );
+
+        /*!
+            \brief Moves a train number description header.
+
+            \param another Another train number description header.
+        */
+        train_number_description_header(train_number_description_header&& another);
+
+        /*!
+            \brief Destroys the train_number_description header.
+        */
+        virtual ~train_number_description_header()
+        noexcept;
+
+
+        // functions
+
+        /*!
+            \brief Assigns a train number description header.
+
+            \param another Another train number description header.
+
+            \return This train number description header.
+        */
+        train_number_description_header& operator=(train_number_description_header&& another);
+
+
+    private:
+        // types
+
+        using base_type = item<traits_type>;
+
+        class impl;
+
+
+        // variables
+
+        const std::unique_ptr<impl> m_p_impl;
+
+
+        // virtual functions
+
+        virtual void draw_on_impl(canvas_type& canvas)
+        const override;
+
+
+    };
+
+
+    /*!
         \brief The class template for a train number header in the timetable view.
 
         \tparam Traits A traits type.

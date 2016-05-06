@@ -76,12 +76,26 @@ namespace bobura { namespace view { namespace timetable
         const;
 
         /*!
+            \brief Returns the position.
+
+            \return The position.
+        */
+        position_type& position();
+
+        /*!
             \brief Returns the dimension.
 
             \return The dimension.
         */
         const dimension_type& dimension()
         const;
+
+        /*!
+            \brief Returns the dimension.
+
+            \return The dimension.
+        */
+        dimension_type& dimension();
 
         /*!
             \brief Draws this item on the canvas.

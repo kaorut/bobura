@@ -107,18 +107,32 @@ BOOST_AUTO_TEST_SUITE(item)
     {
         BOOST_TEST_PASSPOINT();
 
-        const concrete_item item{};
+        {
+            const concrete_item item{};
 
-        item.position();
+            item.position();
+        }
+        {
+            concrete_item item{};
+
+            item.position();
+        }
     }
 
     BOOST_AUTO_TEST_CASE(dimension)
     {
         BOOST_TEST_PASSPOINT();
 
-        const concrete_item item{};
+        {
+            const concrete_item item{};
 
-        item.dimension();
+            item.dimension();
+        }
+        {
+            concrete_item item{};
+
+            item.dimension();
+        }
     }
 
     BOOST_AUTO_TEST_CASE(draw_on)

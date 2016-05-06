@@ -61,8 +61,18 @@ namespace bobura { namespace view { namespace timetable
             return m_position;
         }
 
+        position_type& position()
+        {
+            return m_position;
+        }
+
         const dimension_type& dimension()
         const
+        {
+            return m_dimension;
+        }
+
+        dimension_type& dimension()
         {
             return m_dimension;
         }
@@ -136,8 +146,20 @@ namespace bobura { namespace view { namespace timetable
     }
 
     template <typename Traits>
+    typename item<Traits>::position_type& item<Traits>::position()
+    {
+        return m_p_impl->position();
+    }
+
+    template <typename Traits>
     const typename item<Traits>::dimension_type& item<Traits>::dimension()
     const
+    {
+        return m_p_impl->dimension();
+    }
+
+    template <typename Traits>
+    typename item<Traits>::dimension_type& item<Traits>::dimension()
     {
         return m_p_impl->dimension();
     }

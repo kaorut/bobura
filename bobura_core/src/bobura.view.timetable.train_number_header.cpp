@@ -6,6 +6,8 @@
     $Id$
 */
 
+#include <cassert>
+#include <memory>
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
@@ -21,6 +23,131 @@
 
 namespace bobura { namespace view { namespace timetable
 {
+    template <typename Traits>
+    class train_number_description_header<Traits>::impl : private boost::noncopyable
+    {
+    public:
+        // types
+
+        using traits_type = Traits;
+
+        using string_type = typename traits_type::string_type;
+
+        using canvas_type = typename traits_type::canvas_type;
+
+        using font_type = typename canvas_type::font_type;
+
+        using color_type = typename canvas_type::color_type;
+
+        using position_type = typename canvas_type::position_type;
+
+        using dimension_type = typename canvas_type::dimension_type;
+
+
+        // constructors and destructor
+
+        impl(string_type description, const font_type&  font, const color_type& color)
+        :
+        m_description(std::move(description)),
+        m_p_font(&font),
+        m_p_color(&color)
+        {}
+
+        impl(impl&& another)
+        :
+        m_description(std::move(another.m_description)),
+        m_p_font(another.m_p_font),
+        m_p_color(another.m_p_color)
+        {}
+
+
+        // functions
+
+        impl& operator=(impl&& another)
+        {
+            if (&another == this)
+                return *this;
+
+            m_description = std::move(another.m_description);
+            m_p_font = another.m_p_font;
+            m_p_color = another.m_p_color;
+
+            return *this;
+        }
+
+        void draw_on_impl(canvas_type& /*canvas*/)
+        const
+        {
+
+        }
+
+
+    private:
+        // variables
+
+        string_type m_description;
+
+        const font_type* m_p_font;
+
+        const color_type* m_p_color;
+
+
+    };
+
+
+    template <typename Traits>
+    train_number_description_header<Traits>::train_number_description_header(
+        string_type       description,
+        const font_type&  font,
+        const color_type& color,
+        position_type     position,
+        dimension_type    dimension
+    )
+    :
+    base_type(),
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(description), font, color))
+    {
+        this->set_position(std::move(position));
+        this->set_dimension(std::move(dimension));
+    }
+
+    template <typename Traits>
+    train_number_description_header<Traits>::train_number_description_header(train_number_description_header&& another)
+    :
+    base_type(),
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    {
+        this->set_position(std::move(another.position()));
+        this->set_dimension(std::move(another.dimension()));
+    }
+
+    template <typename Traits>
+    train_number_description_header<Traits>::~train_number_description_header()
+    noexcept
+    {}
+
+    template <typename Traits>
+    train_number_description_header<Traits>& train_number_description_header<Traits>::operator=(
+        train_number_description_header&& another
+    )
+    {
+        if (&another == this)
+            return *this;
+
+        *m_p_impl = std::move(*another.m_p_impl);
+        base_type::operator=(std::move(another));
+
+        return *this;
+    }
+
+    template <typename Traits>
+    void train_number_description_header<Traits>::draw_on_impl(canvas_type& canvas)
+    const
+    {
+        m_p_impl->draw_on_impl(canvas);
+    }
+
+
     template <typename Traits>
     class train_number_header<Traits>::impl : private boost::noncopyable
     {
@@ -47,7 +174,7 @@ namespace bobura { namespace view { namespace timetable
         impl(
             const direction_type        /*direction*/,
             const model_type&           model,
-            const message_catalog_type& /*message_catalog*/,
+            const message_catalog_type& message_catalog,
             canvas_type&                /*canvas*/,
             const dimension_type&       canvas_dimension,
             const dimension_type&       margin,
@@ -58,8 +185,11 @@ namespace bobura { namespace view { namespace timetable
             train_number_header&        base
         )
         :
+        m_p_train_number_description_header(),
         m_p_general_color(&*model.timetable().font_color_set().general().timetable_color())
         {
+            position_type train_number_description_position{ left_type{ 0 }, top_type{ 0 } };
+            dimension_type train_number_description_dimension{ width_type{ 0 }, height_type{ 0 } };
             position_type position{ left_type{ 0 }, top_type{ 0 } };
             dimension_type dimension{ width_type{ 0 }, height_type{ 0 } };
             calculate_positions_and_dimensions(
@@ -69,14 +199,29 @@ namespace bobura { namespace view { namespace timetable
                 max_station_name_width,
                 train_number_height,
                 train_name_height,
-                position, dimension
+                train_number_description_position,
+                train_number_description_dimension,
+                position,
+                dimension
             );
             base.set_position(std::move(position));
             base.set_dimension(std::move(dimension));
+
+            auto train_number_description = message_catalog.get(TETENGO2_TEXT("Timetable:Train Number"));
+            m_p_train_number_description_header.reset(
+                new train_number_description_header_type{
+                    std::move(train_number_description),
+                    *model.timetable().font_color_set().general().timetable_font(),
+                    *model.timetable().font_color_set().general().timetable_color(),
+                    std::move(train_number_description_position),
+                    std::move(train_number_description_dimension)
+                }
+            );
         }
 
         impl(impl&& another)
         :
+        m_p_train_number_description_header(std::move(another.m_p_train_number_description_header)),
         m_p_general_color(another.m_p_general_color)
         {}
 
@@ -110,11 +255,16 @@ namespace bobura { namespace view { namespace timetable
             canvas.draw_line(position_type{ left, top }, position_type{ right, top });
             canvas.draw_line(position_type{ left, top }, position_type{ left, bottom });
             canvas.draw_line(position_type{ right, top }, position_type{ right, bottom });
+
+            assert(m_p_train_number_description_header);
+            m_p_train_number_description_header->draw_on(canvas);
         }
 
 
     private:
         // types
+
+        using train_number_description_header_type = train_number_description_header<traits_type>;
 
         using string_type = typename traits_type::string_type;
 
@@ -138,6 +288,8 @@ namespace bobura { namespace view { namespace timetable
             const width_type&     max_station_name_width,
             const height_type&    train_number_height,
             const height_type&    train_name_height,
+            position_type&        train_number_description_position,
+            dimension_type&       train_number_description_dimension,
             position_type&        position,
             dimension_type&       dimension
         )
@@ -155,11 +307,13 @@ namespace bobura { namespace view { namespace timetable
                     canvas_width > width_type::from(left_margin) * 2 ?
                     canvas_width - width_type::from(left_margin) * 2 : width_type{ 0 };
             }
-            auto header_height =
-                train_number_height +
-                height_type::from(top_padding) * 2 +
-                train_name_height +
-                height_type::from(top_padding) * 2;
+            auto train_number_description_height = train_number_height + height_type::from(top_padding) * 2;
+            //auto train_name_description_height = train_name_height + height_type::from(top_padding) * 2;
+            auto header_height = train_number_description_height + train_name_height;
+
+            train_number_description_position = position_type{ left_margin, top };
+            train_number_description_dimension =
+                dimension_type{ header_width, std::move(train_number_description_height) };
 
             position = position_type{ left_margin, top };
             dimension = dimension_type{ std::move(header_width), std::move(header_height) };
@@ -167,6 +321,8 @@ namespace bobura { namespace view { namespace timetable
 
 
         // variables
+
+        std::unique_ptr<train_number_description_header_type> m_p_train_number_description_header;
 
         const color_type* m_p_general_color;
 
@@ -261,8 +417,12 @@ namespace bobura { namespace view { namespace timetable
     }
 
 #if BOOST_COMP_MSVC
+    template class train_number_description_header<typename application::traits_type_list_type::timetable_view_type>;
+
     template class train_number_header<typename application::traits_type_list_type::timetable_view_type>;
 #endif
+
+    template class train_number_description_header<typename test::traits_type_list_type::timetable_view_type>;
 
     template class train_number_header<typename test::traits_type_list_type::timetable_view_type>;
 
