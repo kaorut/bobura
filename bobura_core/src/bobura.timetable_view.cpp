@@ -159,9 +159,13 @@ namespace bobura
             return max_width;
         }
 
-        static height_type train_number_height(canvas_type& /*canvas*/, const font_color_set_type& /*font_color_set*/)
+        static height_type train_number_height(canvas_type& canvas, const font_color_set_type& font_color_set)
         {
-            return height_type{ 1 };
+            assert(font_color_set.general().timetable_font());
+            canvas.set_font(*font_color_set.general().timetable_font());
+
+            const auto dimension = canvas.calc_text_dimension(string_type{ TETENGO2_TEXT("42") });
+            return tetengo2::gui::dimension<dimension_type>::height(dimension);
         }
 
 
