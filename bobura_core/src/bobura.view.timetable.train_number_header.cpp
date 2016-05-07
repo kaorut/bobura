@@ -46,7 +46,7 @@ namespace bobura { namespace view { namespace timetable
 
         // constructors and destructor
 
-        impl(string_type description, const font_type&  font, const color_type& color)
+        impl(string_type description, const font_type& font, const color_type& color)
         :
         m_description(std::move(description)),
         m_p_font(&font),
@@ -75,14 +75,34 @@ namespace bobura { namespace view { namespace timetable
             return *this;
         }
 
-        void draw_on_impl(canvas_type& /*canvas*/)
+        void draw_on_impl(canvas_type& canvas, const train_number_description_header& base)
         const
         {
+            canvas.set_line_width(normal_line_width<unit_size_type>());
+            canvas.set_line_style(canvas_type::line_style_type::solid);
+            canvas.set_color(*m_p_color);
 
+            const auto& left = tetengo2::gui::position<position_type>::left(base.position());
+            const auto& top = tetengo2::gui::position<position_type>::top(base.position());
+            const auto right =
+                left + left_type::from(tetengo2::gui::dimension<dimension_type>::width(base.dimension()));
+            const auto bottom =
+                top + top_type::from(tetengo2::gui::dimension<dimension_type>::height(base.dimension()));
+
+            canvas.draw_line(position_type{ left, bottom }, position_type{ right, bottom });
         }
 
 
     private:
+        // types
+
+        using left_type = typename tetengo2::gui::position<position_type>::left_type;
+
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+
+        using unit_size_type = typename canvas_type::unit_size_type;
+
+
         // variables
 
         string_type m_description;
@@ -144,7 +164,7 @@ namespace bobura { namespace view { namespace timetable
     void train_number_description_header<Traits>::draw_on_impl(canvas_type& canvas)
     const
     {
-        m_p_impl->draw_on_impl(canvas);
+        m_p_impl->draw_on_impl(canvas, *this);
     }
 
 
