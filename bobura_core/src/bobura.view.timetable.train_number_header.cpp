@@ -84,12 +84,22 @@ namespace bobura { namespace view { namespace timetable
 
             const auto& left = tetengo2::gui::position<position_type>::left(base.position());
             const auto& top = tetengo2::gui::position<position_type>::top(base.position());
-            const auto right =
-                left + left_type::from(tetengo2::gui::dimension<dimension_type>::width(base.dimension()));
-            const auto bottom =
-                top + top_type::from(tetengo2::gui::dimension<dimension_type>::height(base.dimension()));
+            const auto& width = tetengo2::gui::dimension<dimension_type>::width(base.dimension());
+            const auto& height = tetengo2::gui::dimension<dimension_type>::height(base.dimension());
+            const auto right = left + left_type::from(width);
+            const auto bottom = top + top_type::from(height);
 
             canvas.draw_line(position_type{ left, bottom }, position_type{ right, bottom });
+
+            const auto text_dimension = canvas.calc_text_dimension(m_description);
+            const auto& text_width = tetengo2::gui::dimension<dimension_type>::width(text_dimension);
+            const auto& text_height = tetengo2::gui::dimension<dimension_type>::height(text_dimension);
+            const auto text_left =
+                left + (width > text_width ? left_type::from((width - text_width) / 2) : left_type{ 0 });
+            const auto text_top =
+                top + (height > text_height ? top_type::from((height - text_height) / 2) : top_type{ 0 });
+
+            canvas.draw_text(m_description, position_type{ text_left, text_top });
         }
 
 
