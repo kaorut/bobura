@@ -240,7 +240,7 @@ namespace bobura { namespace view { namespace timetable
             const auto& width = tetengo2::gui::dimension<dimension_type>::width(base.dimension());
             const auto& height = tetengo2::gui::dimension<dimension_type>::height(base.dimension());
 
-            const auto text_dimension = canvas.calc_text_dimension(m_description);
+            const auto text_dimension = canvas.calc_vertical_text_dimension(m_description);
             const auto& text_width = tetengo2::gui::dimension<dimension_type>::width(text_dimension);
             const auto& text_height = tetengo2::gui::dimension<dimension_type>::height(text_dimension);
             const auto text_left =
@@ -248,7 +248,7 @@ namespace bobura { namespace view { namespace timetable
             const auto text_top =
                 top + (height > text_height ? top_type::from((height - text_height) / 2) : top_type{ 0 });
 
-            canvas.draw_text(m_description, position_type{ text_left, text_top });
+            canvas.draw_vertical_text(m_description, position_type{ text_left, text_top });
         }
 
 
