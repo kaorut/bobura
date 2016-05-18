@@ -23,7 +23,7 @@
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
-#include <boost/utility/string_ref.hpp>
+#include <boost/utility/string_view.hpp>
 
 #include <tetengo2.h>
 
@@ -133,8 +133,8 @@ namespace bobura { namespace model { namespace serializer
 
         using input_string_type = std::basic_string<input_char_type>;
 
-        using string_ref_type =
-            boost::basic_string_ref<
+        using string_view_type =
+            boost::basic_string_view<
                 typename string_type::value_type, std::char_traits<typename string_type::value_type>
             >;
 
@@ -847,34 +847,34 @@ namespace bobura { namespace model { namespace serializer
             if (line.empty() || line[line.length() - 1] != char_type(TETENGO2_TEXT('.')))
                 return std::unique_ptr<state>{};
 
-            const auto name = string_ref_type{ line }.substr(0, line.length() - 1);
+            const auto name = string_view_type{ line }.substr(0, line.length() - 1);
             if (name.empty())
             {
                 return tetengo2::stdalt::make_unique<initial_state>(timetable);
             }
-            else if (name == string_ref_type(TETENGO2_TEXT("Rosen")))
+            else if (name == string_view_type(TETENGO2_TEXT("Rosen")))
             {
                 return tetengo2::stdalt::make_unique<rosen_state>(timetable);
             }
-            else if (name == string_ref_type(TETENGO2_TEXT("Eki")))
+            else if (name == string_view_type(TETENGO2_TEXT("Eki")))
             {
                 return tetengo2::stdalt::make_unique<eki_state>(timetable);
             }
-            else if (name == string_ref_type(TETENGO2_TEXT("Ressyasyubetsu")))
+            else if (name == string_view_type(TETENGO2_TEXT("Ressyasyubetsu")))
             {
                 return tetengo2::stdalt::make_unique<ressyasyubetsu_state>(timetable);
             }
-            else if (name == string_ref_type(TETENGO2_TEXT("Dia")))
+            else if (name == string_view_type(TETENGO2_TEXT("Dia")))
             {
                 return tetengo2::stdalt::make_unique<dia_state>(current_diagram_name);
             }
             else if (!current_diagram_name.empty() && current_diagram_name == selected_diagram_name)
             {
-                if      (name == string_ref_type(TETENGO2_TEXT("Kudari")))
+                if      (name == string_view_type(TETENGO2_TEXT("Kudari")))
                     return tetengo2::stdalt::make_unique<kudari_state>(direction);
-                else if (name == string_ref_type(TETENGO2_TEXT("Nobori")))
+                else if (name == string_view_type(TETENGO2_TEXT("Nobori")))
                     return tetengo2::stdalt::make_unique<nobori_state>(direction);
-                else if (name == string_ref_type(TETENGO2_TEXT("Ressya")))
+                else if (name == string_view_type(TETENGO2_TEXT("Ressya")))
                     return tetengo2::stdalt::make_unique<ressya_state>(timetable, direction);
                 else
                     return tetengo2::stdalt::make_unique<unknown_state>();

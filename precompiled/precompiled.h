@@ -59,7 +59,7 @@
 #include <boost/swap.hpp>
 #include <boost/system/system_error.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/utility/string_ref.hpp>
+#include <boost/utility/string_view.hpp>
 #include <boost/variant.hpp>
 
 

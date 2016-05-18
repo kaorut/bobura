@@ -22,7 +22,7 @@
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
-#include <boost/utility/string_ref.hpp>
+#include <boost/utility/string_view.hpp>
 
 #include <tetengo2.h>
 
@@ -131,7 +131,7 @@ namespace bobura { namespace model { namespace serializer
 
         using char_type = typename string_type::value_type;
 
-        using string_ref_type = boost::basic_string_ref<char_type, std::char_traits<char_type>>;
+        using string_view_type = boost::basic_string_view<char_type, std::char_traits<char_type>>;
 
         using train_kind_type = typename timetable_type::train_kind_type;
 
@@ -214,18 +214,18 @@ namespace bobura { namespace model { namespace serializer
                 if (comma_position == string_type::npos)
                     return false;
 
-                const auto props = string_ref_type{ line }.substr(0, comma_position);
+                const auto props = string_view_type{ line }.substr(0, comma_position);
                 auto name = line.substr(comma_position + 1);
 
                 station_location_type station_location{
                     station_type{
                         std::move(name),
                         to_grade(
-                        props.find(TETENGO2_TEXT('p')) != string_ref_type::npos,
-                        props.find(TETENGO2_TEXT('b')) != string_ref_type::npos
+                        props.find(TETENGO2_TEXT('p')) != string_view_type::npos,
+                        props.find(TETENGO2_TEXT('b')) != string_view_type::npos
                         ),
-                        props.find(TETENGO2_TEXT('d')) != string_ref_type::npos,
-                        props.find(TETENGO2_TEXT('u')) != string_ref_type::npos,
+                        props.find(TETENGO2_TEXT('d')) != string_view_type::npos,
+                        props.find(TETENGO2_TEXT('u')) != string_view_type::npos,
                         string_type{}
                     },
                     m_operating_distance
@@ -286,9 +286,9 @@ namespace bobura { namespace model { namespace serializer
                 if (!split)
                     return false;
 
-                if (split->key == string_ref_type(TETENGO2_TEXT("LINES")))
+                if (split->key == string_view_type(TETENGO2_TEXT("LINES")))
                     return set_line_props(split->values);
-                else if (split->key == string_ref_type(TETENGO2_TEXT("Train")))
+                else if (split->key == string_view_type(TETENGO2_TEXT("Train")))
                     return set_name(split->index, split->values);
                 else
                     return false;
@@ -297,11 +297,11 @@ namespace bobura { namespace model { namespace serializer
         private:
             struct split_type
             {
-                string_ref_type key{};
+                string_view_type key{};
                 std::size_t index;
-                std::vector<string_ref_type> values{};
+                std::vector<string_view_type> values{};
 
-                split_type(string_ref_type key, const std::size_t index, std::vector<string_ref_type> values)
+                split_type(string_view_type key, const std::size_t index, std::vector<string_view_type> values)
                 :
                 key(std::move(key)),
                 index(index),
@@ -316,9 +316,9 @@ namespace bobura { namespace model { namespace serializer
                 if (equal_position == string_type::npos)
                     return boost::none;
 
-                const auto key_and_index = string_ref_type{ line }.substr(0, equal_position);
-                const auto index_position = key_and_index.find_first_of(string_ref_type(TETENGO2_TEXT("0123456789")));
-                auto key = string_ref_type{ key_and_index }.substr(0, index_position);
+                const auto key_and_index = string_view_type{ line }.substr(0, equal_position);
+                const auto index_position = key_and_index.find_first_of(string_view_type(TETENGO2_TEXT("0123456789")));
+                auto key = string_view_type{ key_and_index }.substr(0, index_position);
                 std::size_t index = 0;
                 if (index_position != string_type::npos)
                 {
@@ -332,14 +332,14 @@ namespace bobura { namespace model { namespace serializer
                     }
                 }
 
-                auto values = split_by_comma(string_ref_type{ line }.substr(equal_position + 1));
+                auto values = split_by_comma(string_view_type{ line }.substr(equal_position + 1));
 
                 return boost::make_optional(split_type(std::move(key), index, std::move(values)));
             }
 
             timetable_type& m_timetable;
 
-            bool set_line_props(const std::vector<string_ref_type>& props)
+            bool set_line_props(const std::vector<string_view_type>& props)
             {
                 const auto train_kind_count = m_timetable.train_kinds().size();
                 if (props.size() < train_kind_count)
@@ -390,7 +390,7 @@ namespace bobura { namespace model { namespace serializer
                 return true;
             }
 
-            bool set_name(const std::size_t index, const std::vector<string_ref_type>& name_and_abbreviation)
+            bool set_name(const std::size_t index, const std::vector<string_view_type>& name_and_abbreviation)
             {
                 if (index >= m_timetable.train_kinds().size())
                     return false;
@@ -473,11 +473,11 @@ namespace bobura { namespace model { namespace serializer
 
             using time_type = typename stop_type::time_type;
 
-            static std::pair<string_ref_type, string_ref_type> split_line(const string_ref_type& line)
+            static std::pair<string_view_type, string_view_type> split_line(const string_view_type& line)
             {
                 const auto percent_position = line.find(TETENGO2_TEXT('%'));
-                if (percent_position == string_ref_type::npos)
-                    return std::make_pair(line, string_ref_type{});
+                if (percent_position == string_view_type::npos)
+                    return std::make_pair(line, string_view_type{});
 
                 return std::make_pair(line.substr(0, percent_position), line.substr(percent_position + 1));
             }
@@ -502,7 +502,7 @@ namespace bobura { namespace model { namespace serializer
             virtual void insert_train_impl(train_type train)
             = 0;
 
-            boost::optional<size_type> to_train_kind_index(const string_ref_type& train_kind_string)
+            boost::optional<size_type> to_train_kind_index(const string_view_type& train_kind_string)
             {
                 const auto opening_paren_position = train_kind_string.find(TETENGO2_TEXT('('));
                 if (opening_paren_position == string_type::npos)
@@ -563,7 +563,7 @@ namespace bobura { namespace model { namespace serializer
                 return boost::make_optional<size_type>(m_timetable.train_kinds().size() - 1);
             }
 
-            boost::optional<stop_type> to_stop(string_ref_type time_string)
+            boost::optional<stop_type> to_stop(string_view_type time_string)
             {
                 const auto arrival_and_departure_string = split_time_string(std::move(time_string));
 
@@ -581,18 +581,18 @@ namespace bobura { namespace model { namespace serializer
                 return stop_type(std::move(*arrival), std::move(*departure), operational, string_type{});
             }
 
-            std::pair<string_ref_type, string_ref_type> split_time_string(string_ref_type time_string)
+            std::pair<string_view_type, string_view_type> split_time_string(string_view_type time_string)
             {
                 const auto slash_position = time_string.find(TETENGO2_TEXT('/'));
-                if (slash_position == string_ref_type::npos)
-                    return std::make_pair(string_ref_type{}, std::move(time_string));
+                if (slash_position == string_view_type::npos)
+                    return std::make_pair(string_view_type{}, std::move(time_string));
 
                 return std::make_pair(time_string.substr(0, slash_position), time_string.substr(slash_position + 1));
             }
 
-            boost::optional<time_type> to_time(const string_ref_type& time_string)
+            boost::optional<time_type> to_time(const string_view_type& time_string)
             {
-                if (time_string.empty() || time_string == string_ref_type(TETENGO2_TEXT("-")))
+                if (time_string.empty() || time_string == string_view_type(TETENGO2_TEXT("-")))
                     return boost::make_optional(time_type::uninitialized());
 
                 const auto time_string_length =
@@ -628,7 +628,7 @@ namespace bobura { namespace model { namespace serializer
                 return boost::make_optional(time_type{ hours, minutes, 0 });
             }
 
-            bool is_operational(const string_ref_type& time_string)
+            bool is_operational(const string_view_type& time_string)
             {
                 return !time_string.empty() && time_string[time_string.length() - 1] == char_type(TETENGO2_TEXT('?'));
             }
@@ -959,16 +959,16 @@ namespace bobura { namespace model { namespace serializer
             return character == char_type(TETENGO2_TEXT('\\'));
         }
 
-        static std::vector<string_ref_type> split_by_comma(const string_ref_type& string_ref)
+        static std::vector<string_view_type> split_by_comma(const string_view_type& string_view)
         {
-            std::vector<string_ref_type> values{};
+            std::vector<string_view_type> values{};
 
             std::size_t offset = 0;
             for (;;)
             {
-                const auto value_length = string_ref.substr(offset).find(TETENGO2_TEXT(','));
-                values.push_back(string_ref.substr(offset, value_length));
-                if (value_length == string_ref_type::npos)
+                const auto value_length = string_view.substr(offset).find(TETENGO2_TEXT(','));
+                values.push_back(string_view.substr(offset, value_length));
+                if (value_length == string_view_type::npos)
                     break;
                 offset += value_length + 1;
             }
