@@ -31,7 +31,7 @@ It's tested on the following systems:
 
 - [Windows 10](http://www.microsoft.com/)
 - [Debian GNU/Linux 8](http://www.debian.org/)
-- [Cygwin 2.4 (x64)](http://www.cygwin.com/)
+- [Cygwin 2.5 (x64)](http://www.cygwin.com/)
 
 
 How to Build {#how_to_build}
@@ -42,8 +42,8 @@ Building on Windows
 
 You need the following tools in order to build Bobura:
 
-- [Visual Studio 2015 Update 1](http://www.microsoft.com/) (Express for Desktop is not available. Use Community instead.)
-- [Boost C++ Libraries 1.60.0](http://www.boost.org/)
+- [Visual Studio 2015 Update 2](http://www.microsoft.com/) (Express for Desktop is not available. Use Community instead.)
+- [Boost C++ Libraries 1.61.0](http://www.boost.org/)
 - [bzip2](http://www.bzip.org)
 - [WiX 3.10.2](http://wixtoolset.org/)
 - [Doxygen 1.8.11](http://www.doxygen.org) (to generate API documents)
@@ -101,7 +101,7 @@ You need the following tools in order to build Bobura libraries:
 
 - [GCC 4.9.2 or 4.9.3](http://www.gnu.org/)
 - [GNU Make](http://www.gnu.org/)
-- [Boost C++ Libraries 1.60.0](http://www.boost.org/)
+- [Boost C++ Libraries 1.61.0](http://www.boost.org/)
 - [bzip2](http://www.bzip.org)
 - [libiconv](http://www.gnu.org/) (on Cygwin)
 - [Doxygen 1.8.11](http://www.doxygen.org) (to generate API documents)
