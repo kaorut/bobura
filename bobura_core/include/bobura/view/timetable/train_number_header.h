@@ -1,17 +1,18 @@
 /*! \file
-    \brief The definition of bobura::view::timetable::header.
+    \brief The definition of bobura::view::timetable::train_number_header.
 
     Copyright (C) 2007-2016 kaoru
 
     $Id$
 */
 
-#if !defined(BOBURA_VIEW_TIMETABLE_HEADER_H)
-#define BOBURA_VIEW_TIMETABLE_HEADER_H
+#if !defined(BOBURA_VIEW_TIMETABLE_TRAINNUMBERHEADER_H)
+#define BOBURA_VIEW_TIMETABLE_TRAINNUMBERHEADER_H
 
 #include <memory>
 
 #include <tetengo2.h>
+#include <tetengo2.gui.h>
 
 #include <bobura/timetable_model.h>
 #include <bobura/view/timetable/item.h>
@@ -21,12 +22,12 @@
 namespace bobura { namespace view { namespace timetable
 {
     /*!
-        \brief The class template for a header of the company name in the timetable view.
+        \brief The class template for a header of the train number description in the timetable view.
 
         \tparam Traits A traits type.
     */
     template <typename Traits>
-    class company_name_header : public item<Traits>
+    class train_number_description_header : public item<Traits>
     {
     public:
         // types
@@ -56,16 +57,16 @@ namespace bobura { namespace view { namespace timetable
         // constructors and destructor
 
         /*!
-            \brief Creates a company name header.
+            \brief Creates a train number description header.
 
-            \param company_name A company name.
-            \param font         A font.
-            \param color        A color.
-            \param position     A position.
-            \param dimension    A dimension.
+            \param description A description.
+            \param font        A font.
+            \param color       A color.
+            \param position    A position.
+            \param dimension   A dimension.
         */
-        company_name_header(
-            string_type       company_name,
+        train_number_description_header(
+            string_type       description,
             const font_type&  font,
             const color_type& color,
             position_type     position,
@@ -73,29 +74,29 @@ namespace bobura { namespace view { namespace timetable
         );
 
         /*!
-            \brief Moves a company name header.
+            \brief Moves a train number description header.
 
-            \param another Another company name header.
+            \param another Another train number description header.
         */
-        company_name_header(company_name_header&& another);
+        train_number_description_header(train_number_description_header&& another);
 
         /*!
-            \brief Destroys the company name header.
+            \brief Destroys the train_number_description header.
         */
-        virtual ~company_name_header()
+        virtual ~train_number_description_header()
         noexcept;
 
 
         // functions
 
         /*!
-            \brief Assigns a company name header.
+            \brief Assigns a train number description header.
 
-            \param another Another company name header.
+            \param another Another train number description header.
 
-            \return This company name header.
+            \return This train number description header.
         */
-        company_name_header& operator=(company_name_header&& another);
+        train_number_description_header& operator=(train_number_description_header&& another);
 
 
     private:
@@ -121,12 +122,12 @@ namespace bobura { namespace view { namespace timetable
 
 
     /*!
-        \brief The class template for a header of the line name in the timetable view.
+        \brief The class template for a header of the train name description in the timetable view.
 
         \tparam Traits A traits type.
     */
     template <typename Traits>
-    class line_name_header : public item<Traits>
+    class train_name_description_header : public item<Traits>
     {
     public:
         // types
@@ -156,16 +157,16 @@ namespace bobura { namespace view { namespace timetable
         // constructors and destructor
 
         /*!
-            \brief Creates a line name header.
+            \brief Creates a train name description header.
 
-            \param line_name A line name.
-            \param font      A font.
-            \param color     A color.
-            \param position  A position.
-            \param dimension A dimension.
+            \param description A description.
+            \param font        A font.
+            \param color       A color.
+            \param position    A position.
+            \param dimension   A dimension.
         */
-        line_name_header(
-            string_type       line_name,
+        train_name_description_header(
+            string_type       description,
             const font_type&  font,
             const color_type& color,
             position_type     position,
@@ -173,29 +174,29 @@ namespace bobura { namespace view { namespace timetable
         );
 
         /*!
-            \brief Moves a line name header.
+            \brief Moves a train name description header.
 
-            \param another Another line name header.
+            \param another Another train name description header.
         */
-        line_name_header(line_name_header&& another);
+        train_name_description_header(train_name_description_header&& another);
 
         /*!
-            \brief Destroys the line name header.
+            \brief Destroys the train_number_description header.
         */
-        virtual ~line_name_header()
+        virtual ~train_name_description_header()
         noexcept;
 
 
         // functions
 
         /*!
-            \brief Assigns a line name header.
+            \brief Assigns a train name description header.
 
-            \param another Another line name header.
+            \param another Another train name description header.
 
-            \return This line name header.
+            \return This train name description header.
         */
-        line_name_header& operator=(line_name_header&& another);
+        train_name_description_header& operator=(train_name_description_header&& another);
 
 
     private:
@@ -221,112 +222,12 @@ namespace bobura { namespace view { namespace timetable
 
 
     /*!
-        \brief The class template for a header of the note in the timetable view.
+        \brief The class template for a train number header in the timetable view.
 
         \tparam Traits A traits type.
     */
     template <typename Traits>
-    class note_header : public item<Traits>
-    {
-    public:
-        // types
-
-        //! The traits type.
-        using traits_type = Traits;
-
-        //! The string type.
-        using string_type = typename traits_type::string_type;
-
-        //! The canvas type.
-        using canvas_type = typename traits_type::canvas_type;
-
-        //! The font type.
-        using font_type = typename canvas_type::font_type;
-
-        //! The color type.
-        using color_type = typename canvas_type::color_type;
-
-        //! The position type.
-        using position_type = typename canvas_type::position_type;
-
-        //! The dimension type.
-        using dimension_type = typename canvas_type::dimension_type;
-
-
-        // constructors and destructor
-
-        /*!
-            \brief Creates a note header.
-
-            \param note      A note.
-            \param font      A font.
-            \param color     A color.
-            \param position  A position.
-            \param dimension A dimension.
-        */
-        note_header(
-            string_type       note,
-            const font_type&  font,
-            const color_type& color,
-            position_type     position,
-            dimension_type    dimension
-        );
-
-        /*!
-            \brief Moves a note header.
-
-            \param another Another note header.
-        */
-        note_header(note_header&& another);
-
-        /*!
-            \brief Destroys the note header.
-        */
-        virtual ~note_header()
-        noexcept;
-
-
-        // functions
-
-        /*!
-            \brief Assigns a note header.
-
-            \param another Another note header.
-
-            \return This note header.
-        */
-        note_header& operator=(note_header&& another);
-
-
-    private:
-        // types
-
-        using base_type = item<traits_type>;
-
-        class impl;
-
-
-        // variables
-
-        const std::unique_ptr<impl> m_p_impl;
-
-
-        // virtual functions
-
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
-    };
-
-
-    /*!
-        \brief The class template for a header in the timetable view.
-
-        \tparam Traits A traits type.
-    */
-    template <typename Traits>
-    class header : public item<Traits>
+    class train_number_header : public item<Traits>
     {
     public:
         // types
@@ -355,8 +256,17 @@ namespace bobura { namespace view { namespace timetable
         //! The position type.
         using position_type = typename canvas_type::position_type;
 
+        //! The top type.
+        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+
         //! The dimension type.
         using dimension_type = typename canvas_type::dimension_type;
+
+        //! The width type.
+        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
+
+        //! The height type.
+        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
         //! The font type.
         using font_type = typename canvas_type::font_type;
@@ -372,48 +282,56 @@ namespace bobura { namespace view { namespace timetable
         // constructors and destructor
 
         /*!
-            \brief Creates a header.
+            \brief Creates a train number header.
 
-            \param direction        A direction.
-            \param model            A model.
-            \param message_catalog  A message catalog.
-            \param canvas           A canvas.
-            \param canvas_dimension A canvas dimension.
-            \param margin           A margin.
+            \param direction              A direction.
+            \param model                  A model.
+            \param message_catalog        A message catalog.
+            \param canvas                 A canvas.
+            \param canvas_dimension       A canvas dimension.
+            \param margin                 A margin.
+            \param top                    A top.
+            \param max_station_name_width A max station name width.
+            \param train_number_height    A train number height.
+            \param train_name_height      A train name height.
         */
-        header(
+        train_number_header(
             direction_type              direction,
             const model_type&           model,
             const message_catalog_type& message_catalog,
             canvas_type&                canvas,
             const dimension_type&       canvas_dimension,
-            const dimension_type&       margin
+            const dimension_type&       margin,
+            const top_type&             top,
+            const width_type&           max_station_name_width,
+            const height_type&          train_number_height,
+            const height_type&          train_name_height
         );
 
         /*!
-            \brief Moves a header.
+            \brief Moves a train number header.
 
-            \param another Another header
+            \param another Another train number header
         */
-        header(header&& another);
+        train_number_header(train_number_header&& another);
 
         /*!
-            \brief Destroys the header.
+            \brief Destroys the train number header.
         */
-        virtual ~header()
+        virtual ~train_number_header()
         noexcept;
 
 
         // functions
 
         /*!
-            \brief Assigns a header.
+            \brief Assigns a train number header.
 
-            \param another Another header.
+            \param another Another train number header.
 
-            \return This header.
+            \return This train number header.
         */
-        header& operator=(header&& another);
+        train_number_header& operator=(train_number_header&& another);
 
 
     private:

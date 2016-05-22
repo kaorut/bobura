@@ -58,6 +58,8 @@
         
         "Timetable:(%1% - Down)": "（%1%・下り）",
         "Timetable:(%1% - Up)":   "（%1%・上り）",
+        "Timetable:Train Number": "列車番号",
+        "Timetable:Train Name":   "列車名　1号「Exp42号」ー（𠮟ｶﾞ123号）",
         
         
         "PropertyBar:Properties":                        "プロパティ",
@@ -106,10 +108,10 @@
         "Dialog:FontAndColor:Fonts And Colors":            "フォントと色",
         "Dialog:FontAndColor:C&ategories:":                "カテゴリー(&A):",
         "Dialog:FontAndColor:Background":                  "背景",
+        "Dialog:FontAndColor:General":                     "一般",
         "Dialog:FontAndColor:Company Name":                "会社名",
         "Dialog:FontAndColor:Line Name":                   "路線名",
         "Dialog:FontAndColor:Note":                        "記事",
-        "Dialog:FontAndColor:Time Lines":                  "時刻線",
         "Dialog:FontAndColor:Local Stations":              "一般駅",
         "Dialog:FontAndColor:Principal Stations":          "主要駅",
         "Dialog:FontAndColor:Local Terminal Stations":     "ターミナル駅",

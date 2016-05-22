@@ -83,7 +83,12 @@ namespace bobura { namespace command
         const
         {
             const auto& font_color_set = model.timetable().font_color_set();
-            train_kind_dialog_type dialog{ parent, *font_color_set.background().diagram_color(), m_message_catalog };
+            train_kind_dialog_type dialog{
+                parent,
+                *font_color_set.background().diagram_color(),
+                *font_color_set.general().timetable_color(),
+                m_message_catalog
+            };
 
             auto info_sets = to_info_sets(model.timetable());
             dialog.set_info_sets(std::move(info_sets));

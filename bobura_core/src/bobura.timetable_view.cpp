@@ -16,9 +16,12 @@
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
 
+#include <bobura/model/station_info/grade.h>
 #include <bobura/timetable_view.h>
 #include <bobura/type_list.h>
 #include <bobura/view/timetable/header.h>
+#include <bobura/view/timetable/train_number_header.h>
+#include <bobura/view/utility.h>
 
 
 namespace bobura
@@ -54,7 +57,8 @@ namespace bobura
         m_model(model),
         m_message_catalog(message_catalog),
         m_dimension(width_type{ 0 }, height_type{ 0 }),
-        m_p_header()
+        m_p_header(),
+        m_p_train_number_header()
         {}
 
 
@@ -70,6 +74,7 @@ namespace bobura
         
             ensure_items_created(canvas, canvas_dimension, scroll_bar_position);
             m_p_header->draw_on(canvas);
+            m_p_train_number_header->draw_on(canvas);
         }
 
         const dimension_type& dimension()
@@ -83,6 +88,7 @@ namespace bobura
             m_dimension = dimension_type{ width_type{ 42 }, height_type{ 24 } };
 
             m_p_header.reset();
+            m_p_train_number_header.reset();
         }
 
         dimension_type page_size(const dimension_type& canvas_dimension)
@@ -114,6 +120,54 @@ namespace bobura
 
         using header_type = view::timetable::header<traits_type>;
 
+        using train_number_header_type = view::timetable::train_number_header<traits_type>;
+
+        using station_locations_type = typename model_type::timetable_type::station_locations_type;
+
+        using font_color_set_type = typename model_type::timetable_type::font_color_set_type;
+
+        using station_grade_type_set_type = model::station_info::grade_type_set<string_type>;
+
+        using station_grade_type = typename station_grade_type_set_type::grade_type;
+
+
+        // static functions
+
+        static width_type max_station_name_width(
+            canvas_type&                  canvas,
+            const station_locations_type& station_locations,
+            const font_color_set_type&    font_color_set
+        )
+        {
+            width_type max_width{ 0 };
+            for (const auto& station_location: station_locations)
+            {
+                const auto& station = station_location.get_station();
+
+                const auto& font =
+                    view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
+                        font_color_set, station.grade()
+                    ).timetable_font();
+                assert(font);
+                canvas.set_font(*font);
+
+                const auto dimension = canvas.calc_text_dimension(station.name());
+                const auto width = tetengo2::gui::dimension<dimension_type>::width(dimension) + width_type{ 3 };
+                if (width > max_width)
+                    max_width = width;
+            }
+            return max_width;
+        }
+
+        static height_type train_number_height(canvas_type& canvas, const font_color_set_type& font_color_set)
+        {
+            assert(font_color_set.general().timetable_font());
+            canvas.set_font(*font_color_set.general().timetable_font());
+
+            const auto dimension = canvas.calc_text_dimension(string_type{ TETENGO2_TEXT("42") });
+            return tetengo2::gui::dimension<dimension_type>::height(dimension);
+        }
+
 
         // variables
 
@@ -126,6 +180,8 @@ namespace bobura
         dimension_type m_dimension;
 
         std::unique_ptr<header_type> m_p_header;
+
+        std::unique_ptr<train_number_header_type> m_p_train_number_header;
 
 
         // functions
@@ -150,13 +206,39 @@ namespace bobura
             boost::ignore_unused(scroll_bar_position);
             if (m_p_header)
             {
-                //assert(m_p_time_line_list && m_p_station_line_list && m_p_train_line_list);
+                assert(m_p_train_number_header);
                 return;
             }
 
+            const dimension_type margin{ width_type{ 1 } / 2, height_type{ 1 } / 2 };
+            const auto max_station_name_width_ =
+                max_station_name_width(
+                    canvas, m_model.timetable().station_locations(), m_model.timetable().font_color_set()
+                );
+            const auto train_number_height_ = train_number_height(canvas, m_model.timetable().font_color_set());
+            const auto train_name_height_ = height_type{ 5 };
+
             m_p_header =
                 tetengo2::stdalt::make_unique<header_type>(
-                    m_direction, m_model, m_message_catalog, canvas, canvas_dimension
+                    m_direction, m_model, m_message_catalog, canvas, canvas_dimension, margin
+                );
+
+            const auto header_bottom =
+                tetengo2::gui::position<position_type>::top(m_p_header->position()) +
+                top_type::from(tetengo2::gui::dimension<dimension_type>::height(m_p_header->dimension()));
+
+            m_p_train_number_header =
+                tetengo2::stdalt::make_unique<train_number_header_type>(
+                    m_direction,
+                    m_model,
+                    m_message_catalog,
+                    canvas,
+                    canvas_dimension,
+                    margin,
+                    header_bottom,
+                    max_station_name_width_,
+                    train_number_height_,
+                    train_name_height_
                 );
         }
 

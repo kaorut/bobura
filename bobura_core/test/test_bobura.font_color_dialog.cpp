@@ -107,6 +107,30 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         BOOST_CHECK(font_color_dialog.background() == make_font_color(false, true));
     }
 
+    BOOST_AUTO_TEST_CASE(general)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type parent{};
+        const message_catalog_type message_catalog{};
+        const font_color_dialog_type font_color_dialog{ parent, message_catalog };
+
+        font_color_dialog.general();
+    }
+
+    BOOST_AUTO_TEST_CASE(set_general)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type parent{};
+        const message_catalog_type message_catalog{};
+        font_color_dialog_type font_color_dialog{ parent, message_catalog };
+
+        font_color_dialog.set_general(make_font_color(true, true));
+
+        BOOST_CHECK(font_color_dialog.general() == make_font_color(true, true));
+    }
+
     BOOST_AUTO_TEST_CASE(company_name)
     {
         BOOST_TEST_PASSPOINT();
@@ -177,30 +201,6 @@ BOOST_AUTO_TEST_SUITE(font_color_dialog)
         font_color_dialog.set_note(make_font_color(true, true));
 
         BOOST_CHECK(font_color_dialog.note() == make_font_color(true, true));
-    }
-
-    BOOST_AUTO_TEST_CASE(time_line)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        window_type parent{};
-        const message_catalog_type message_catalog{};
-        const font_color_dialog_type font_color_dialog{ parent, message_catalog };
-
-        font_color_dialog.time_line();
-    }
-
-    BOOST_AUTO_TEST_CASE(set_time_line)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        window_type parent{};
-        const message_catalog_type message_catalog{};
-        font_color_dialog_type font_color_dialog{ parent, message_catalog };
-
-        font_color_dialog.set_time_line(make_font_color(true, true));
-
-        BOOST_CHECK(font_color_dialog.time_line() == make_font_color(true, true));
     }
 
     BOOST_AUTO_TEST_CASE(local_station)

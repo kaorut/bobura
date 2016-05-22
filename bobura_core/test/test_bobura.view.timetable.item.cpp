@@ -10,6 +10,9 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2.h>
+#include <tetengo2.gui.h>
+
 #include <bobura/type_list.h>
 #include <bobura/view/timetable/item.h>
 
@@ -32,6 +35,16 @@ namespace
 
     using position_type = canvas_type::position_type;
 
+    using left_type = typename tetengo2::gui::position<position_type>::left_type;
+
+    using top_type = typename tetengo2::gui::position<position_type>::top_type;
+
+    using dimension_type = canvas_type::dimension_type;
+
+    using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
+
+    using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+
     using traits_type = traits_type_list_type::timetable_view_type;
 
     using item_type = bobura::view::timetable::item<traits_type>;
@@ -48,6 +61,16 @@ namespace
         {
             item_type::operator=(std::move(item));
             return *this;
+        }
+
+        void call_set_position(position_type position)
+        {
+            set_position(std::move(position));
+        }
+
+        void call_set_dimension(dimension_type dimension)
+        {
+            set_dimension(std::move(dimension));
         }
 
 
@@ -80,6 +103,38 @@ BOOST_AUTO_TEST_SUITE(item)
         item1 = std::move(item2);
     }
 
+    BOOST_AUTO_TEST_CASE(position)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        {
+            const concrete_item item{};
+
+            item.position();
+        }
+        {
+            concrete_item item{};
+
+            item.position();
+        }
+    }
+
+    BOOST_AUTO_TEST_CASE(dimension)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        {
+            const concrete_item item{};
+
+            item.dimension();
+        }
+        {
+            concrete_item item{};
+
+            item.dimension();
+        }
+    }
+
     BOOST_AUTO_TEST_CASE(draw_on)
     {
         BOOST_TEST_PASSPOINT();
@@ -90,6 +145,30 @@ BOOST_AUTO_TEST_SUITE(item)
         const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
         const auto p_canvas = picture_box.create_canvas();
         item.draw_on(*p_canvas);
+    }
+
+    BOOST_AUTO_TEST_CASE(set_position)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        concrete_item item{};
+
+        const position_type position{ left_type{ 42 }, top_type{ 24 } };
+        item.call_set_position(position);
+
+        BOOST_CHECK(item.position() == position);
+    }
+
+    BOOST_AUTO_TEST_CASE(set_dimension)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        concrete_item item{};
+
+        const dimension_type dimension{ width_type{ 42 }, height_type{ 24 } };
+        item.call_set_dimension(dimension);
+
+        BOOST_CHECK(item.dimension() == dimension);
     }
 
 

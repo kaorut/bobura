@@ -54,10 +54,14 @@ sources = \
     bobura.view.diagram.train_line.cpp \
     bobura.view.diagram.utility.cpp \
     bobura.view.diagram.zoom.cpp \
+    bobura.view.scale_list.cpp \
     bobura.view.timetable.header.cpp \
     bobura.view.timetable.item.cpp \
+    bobura.view.timetable.station_list.cpp \
+    bobura.view.timetable.train_list.cpp \
+    bobura.view.timetable.train_number_header.cpp \
     bobura.view.timetable.utility.cpp \
-    bobura.view.scale_list.cpp \
+    bobura.view.utility.cpp \
     bobura.view_picture_box.cpp
 
 extra_sources =

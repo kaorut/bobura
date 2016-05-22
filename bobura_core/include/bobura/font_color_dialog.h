@@ -273,6 +273,21 @@ namespace bobura
         void set_background(font_color_type font_color);
 
         /*!
+            \brief Returns the font and color of the general item.
+
+            \return The font and color of the general item.
+        */
+        const font_color_type& general()
+        const;
+
+        /*!
+            \brief Sets a font and color of the general items in the general.
+
+            \param font_color A font and color.
+        */
+        void set_general(font_color_type font_color);
+
+        /*!
             \brief Returns the font and color of the company name.
 
             \return The font and color of the company name.
@@ -316,21 +331,6 @@ namespace bobura
             \param font_color A font and color.
         */
         void set_note(font_color_type font_color);
-
-        /*!
-            \brief Returns the font and color of the time lines.
-
-            \return The font and color of the time lines.
-        */
-        const font_color_type& time_line()
-        const;
-
-        /*!
-            \brief Sets a font and color of the time lines.
-
-            \param font_color A font and color.
-        */
-        void set_time_line(font_color_type font_color);
 
         /*!
             \brief Returns the font and color of the local stations.

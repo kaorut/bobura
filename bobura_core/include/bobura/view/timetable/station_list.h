@@ -1,0 +1,139 @@
+/*! \file
+    \brief The definition of bobura::view::timetable::station_list.
+
+    Copyright (C) 2007-2016 kaoru
+
+    $Id$
+*/
+
+#if !defined(BOBURA_VIEW_TIMETABLE_STATIONLIST_H)
+#define BOBURA_VIEW_TIMETABLE_STATIONLIST_H
+
+#include <memory>
+
+#include <tetengo2.h>
+
+#include <bobura/timetable_model.h>
+#include <bobura/view/timetable/item.h>
+#include <bobura/view/timetable/utility.h>
+
+
+namespace bobura { namespace view { namespace timetable
+{
+    /*!
+        \brief The class template for a station list in the timetable view.
+
+        \tparam Traits A traits type.
+    */
+    template <typename Traits>
+    class station_list : public item<Traits>
+    {
+    public:
+        // types
+
+        //! The traits type.
+        using traits_type = Traits;
+
+        //! The size type.
+        using size_type = typename traits_type::size_type;
+
+        //! The difference type.
+        using difference_type = typename traits_type::difference_type;
+
+        //! The string type.
+        using string_type = typename traits_type::string_type;
+
+        //! The operating distance type.
+        using operating_distance_type = typename traits_type::operating_distance_type;
+
+        //! The speed type.
+        using speed_type = typename traits_type::speed_type;
+
+        //! The canvas type.
+        using canvas_type = typename traits_type::canvas_type;
+
+        //! The dimension type.
+        using dimension_type = typename canvas_type::dimension_type;
+
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
+        //! The message catalog type.
+        using message_catalog_type = typename traits_type::message_catalog_type;
+
+        //! The model type.
+        using model_type =
+            timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+
+
+        // constructors and destructor
+
+        /*!
+            \brief Creates a station list.
+
+            \param direction        A direction.
+            \param model            A model.
+            \param message_catalog  A message catalog.
+            \param canvas           A canvas.
+            \param canvas_dimension A canvas dimension.
+        */
+        station_list(
+            direction_type              direction,
+            const model_type&           model,
+            const message_catalog_type& message_catalog,
+            canvas_type&                canvas,
+            const dimension_type&       canvas_dimension
+        );
+
+        /*!
+            \brief Moves a station list.
+
+            \param another Another station list
+        */
+        station_list(station_list&& another);
+
+        /*!
+            \brief Destroys the station list.
+        */
+        virtual ~station_list()
+        noexcept;
+
+
+        // functions
+
+        /*!
+            \brief Assigns a station list.
+
+            \param another Another station list.
+
+            \return This station list.
+        */
+        station_list& operator=(station_list&& another);
+
+
+    private:
+        // types
+
+        using base_type = item<traits_type>;
+
+        class impl;
+
+
+        // variables
+
+        const std::unique_ptr<impl> m_p_impl;
+
+
+        // virtual functions
+
+        virtual void draw_on_impl(canvas_type& canvas)
+        const override;
+
+
+    };
+
+
+}}}
+
+
+#endif

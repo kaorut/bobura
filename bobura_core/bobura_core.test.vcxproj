@@ -162,7 +162,11 @@
     <ClCompile Include="test\test_bobura.view.scale_list.cpp" />
     <ClCompile Include="test\test_bobura.view.timetable.header.cpp" />
     <ClCompile Include="test\test_bobura.view.timetable.item.cpp" />
+    <ClCompile Include="test\test_bobura.view.timetable.station_list.cpp" />
+    <ClCompile Include="test\test_bobura.view.timetable.train_list.cpp" />
+    <ClCompile Include="test\test_bobura.view.timetable.train_number_header.cpp" />
     <ClCompile Include="test\test_bobura.view.timetable.utility.cpp" />
+    <ClCompile Include="test\test_bobura.view.utility.cpp" />
     <ClCompile Include="test\test_bobura.view_picture_box.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -243,10 +243,10 @@ namespace
 
             const font_color_set_type font_color_set{
                 background_font_color,
+                font_color_set_type::default_().general(),
                 company_name_font_color,
                 font_color_set_type::default_().line_name(),
                 font_color_set_type::default_().note(),
-                font_color_set_type::default_().time_line(),
                 font_color_set_type::default_().local_station(),
                 font_color_set_type::default_().principal_station(),
                 font_color_set_type::default_().local_terminal_station(),

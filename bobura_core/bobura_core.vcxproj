@@ -176,8 +176,12 @@
     <ClInclude Include="include\bobura\view\scale_list.h" />
     <ClInclude Include="include\bobura\view\timetable\header.h" />
     <ClInclude Include="include\bobura\view\timetable\item.h" />
+    <ClInclude Include="include\bobura\view\timetable\station_list.h" />
+    <ClInclude Include="include\bobura\view\timetable\train_list.h" />
+    <ClInclude Include="include\bobura\view\timetable\train_number_header.h" />
     <ClInclude Include="include\bobura\view\timetable\traits.h" />
     <ClInclude Include="include\bobura\view\timetable\utility.h" />
+    <ClInclude Include="include\bobura\view\utility.h" />
     <ClInclude Include="include\bobura\view_picture_box.h" />
   </ItemGroup>
   <ItemGroup>
@@ -235,7 +239,11 @@
     <ClCompile Include="src\bobura.view.scale_list.cpp" />
     <ClCompile Include="src\bobura.view.timetable.header.cpp" />
     <ClCompile Include="src\bobura.view.timetable.item.cpp" />
+    <ClCompile Include="src\bobura.view.timetable.station_list.cpp" />
+    <ClCompile Include="src\bobura.view.timetable.train_list.cpp" />
+    <ClCompile Include="src\bobura.view.timetable.train_number_header.cpp" />
     <ClCompile Include="src\bobura.view.timetable.utility.cpp" />
+    <ClCompile Include="src\bobura.view.utility.cpp" />
     <ClCompile Include="src\bobura.view_picture_box.cpp" />
   </ItemGroup>
   <ItemGroup>
