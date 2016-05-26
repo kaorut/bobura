@@ -140,6 +140,10 @@ namespace bobura
         )
         {
             width_type max_width{ 0 };
+            {
+                const auto dimension = canvas.calc_text_dimension(string_type{ TETENGO2_TEXT("M") });
+                max_width = tetengo2::gui::dimension<dimension_type>::width(dimension) * 4 + width_type{ 3 };
+            }
             for (const auto& station_location: station_locations)
             {
                 const auto& station = station_location.get_station();
