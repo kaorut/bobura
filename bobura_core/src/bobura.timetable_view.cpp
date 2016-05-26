@@ -141,6 +141,13 @@ namespace bobura
         {
             width_type max_width{ 0 };
             {
+                const auto& font =
+                    view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
+                        font_color_set, station_grade_type_set_type::local_type::instance()
+                    ).timetable_font();
+                assert(font);
+                canvas.set_font(*font);
+
                 const auto dimension = canvas.calc_text_dimension(string_type{ TETENGO2_TEXT("M") });
                 max_width = tetengo2::gui::dimension<dimension_type>::width(dimension) * 4 + width_type{ 3 };
             }
