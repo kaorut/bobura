@@ -80,6 +80,7 @@ namespace bobura { namespace view { namespace timetable
         {
             canvas.set_line_width(normal_line_width<unit_size_type>());
             canvas.set_line_style(canvas_type::line_style_type::solid);
+            canvas.set_font(*m_p_font);
             canvas.set_color(*m_p_color);
 
             const auto& left = tetengo2::gui::position<position_type>::left(base.position());
@@ -233,6 +234,7 @@ namespace bobura { namespace view { namespace timetable
         void draw_on_impl(canvas_type& canvas, const train_name_description_header& base)
         const
         {
+            canvas.set_font(*m_p_font);
             canvas.set_color(*m_p_color);
 
             const auto& left = tetengo2::gui::position<position_type>::left(base.position());
