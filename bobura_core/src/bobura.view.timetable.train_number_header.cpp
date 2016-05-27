@@ -90,9 +90,9 @@ namespace bobura { namespace view { namespace timetable
             const auto right = left + left_type::from(width);
             const auto bottom = top + top_type::from(height);
 
-            canvas.draw_line(position_type{ left, bottom }, position_type{ right, bottom });
+            canvas.draw_line(position_type{ right, top }, position_type{ right, bottom });
 
-            const auto text_dimension = canvas.calc_text_dimension(m_description);
+            const auto text_dimension = canvas.calc_vertical_text_dimension(m_description);
             const auto& text_width = tetengo2::gui::dimension<dimension_type>::width(text_dimension);
             const auto& text_height = tetengo2::gui::dimension<dimension_type>::height(text_dimension);
             const auto text_left =
@@ -100,7 +100,7 @@ namespace bobura { namespace view { namespace timetable
             const auto text_top =
                 top + (height > text_height ? top_type::from((height - text_height) / 2) : top_type{ 0 });
 
-            canvas.draw_text(m_description, position_type{ text_left, text_top });
+            canvas.draw_vertical_text(m_description, position_type{ text_left, text_top });
         }
 
 
@@ -522,10 +522,13 @@ namespace bobura { namespace view { namespace timetable
             train_number_header&        base
         )
         :
+        m_p_operating_distance_header(),
         m_p_train_number_description_header(),
         m_p_train_name_description_header(),
         m_p_general_color(&*model.timetable().font_color_set().general().timetable_color())
         {
+            position_type operating_distance_position{ left_type{ 0 }, top_type{ 0 } };
+            dimension_type operating_distance_dimension{ width_type{ 0 }, height_type{ 0 } };
             position_type train_number_description_position{ left_type{ 0 }, top_type{ 0 } };
             dimension_type train_number_description_dimension{ width_type{ 0 }, height_type{ 0 } };
             position_type train_name_description_position{ left_type{ 0 }, top_type{ 0 } };
@@ -548,6 +551,17 @@ namespace bobura { namespace view { namespace timetable
             );
             base.set_position(std::move(position));
             base.set_dimension(std::move(dimension));
+
+            auto operating_distance = message_catalog.get(TETENGO2_TEXT("Timetable:Operating Distance"));
+            m_p_operating_distance_header.reset(
+                new operating_distance_header_type{
+                    std::move(operating_distance),
+                    *model.timetable().font_color_set().general().timetable_font(),
+                    *model.timetable().font_color_set().general().timetable_color(),
+                    std::move(operating_distance_position),
+                    std::move(operating_distance_dimension)
+                }
+            );
 
             auto train_number_description = message_catalog.get(TETENGO2_TEXT("Timetable:Train Number"));
             m_p_train_number_description_header.reset(
@@ -574,7 +588,9 @@ namespace bobura { namespace view { namespace timetable
 
         impl(impl&& another)
         :
+        m_p_operating_distance_header(std::move(another.m_p_operating_distance_header)),
         m_p_train_number_description_header(std::move(another.m_p_train_number_description_header)),
+        m_p_train_name_description_header(std::move(another.m_p_train_name_description_header)),
         m_p_general_color(another.m_p_general_color)
         {}
 
@@ -609,6 +625,9 @@ namespace bobura { namespace view { namespace timetable
             canvas.draw_line(position_type{ left, top }, position_type{ left, bottom });
             canvas.draw_line(position_type{ right, top }, position_type{ right, bottom });
 
+            assert(m_p_operating_distance_header);
+            m_p_operating_distance_header->draw_on(canvas);
+
             assert(m_p_train_number_description_header);
             m_p_train_number_description_header->draw_on(canvas);
 
@@ -619,6 +638,8 @@ namespace bobura { namespace view { namespace timetable
 
     private:
         // types
+
+        using operating_distance_header_type = operating_distance_header<traits_type>;
 
         using train_number_description_header_type = train_number_description_header<traits_type>;
 
@@ -686,6 +707,8 @@ namespace bobura { namespace view { namespace timetable
 
 
         // variables
+
+        std::unique_ptr<operating_distance_header_type> m_p_operating_distance_header;
 
         std::unique_ptr<train_number_description_header_type> m_p_train_number_description_header;
 
