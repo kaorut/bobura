@@ -516,6 +516,7 @@ namespace bobura { namespace view { namespace timetable
             const dimension_type&       canvas_dimension,
             const dimension_type&       margin,
             const top_type&             top,
+            const width_type&           operating_distance_width,
             const width_type&           max_station_name_width,
             const height_type&          train_number_height,
             const height_type&          train_name_height,
@@ -539,9 +540,12 @@ namespace bobura { namespace view { namespace timetable
                 canvas_dimension,
                 margin,
                 top,
+                operating_distance_width,
                 max_station_name_width,
                 train_number_height,
                 train_name_height,
+                operating_distance_position,
+                operating_distance_dimension,
                 train_number_description_position,
                 train_number_description_dimension,
                 train_name_description_position,
@@ -664,9 +668,12 @@ namespace bobura { namespace view { namespace timetable
             const dimension_type& canvas_dimension,
             const dimension_type& margin,
             const top_type&       top,
+            const width_type&     operating_distance_width,
             const width_type&     max_station_name_width,
             const height_type&    train_number_height,
             const height_type&    train_name_height,
+            position_type&        operating_distance_position,
+            dimension_type&       operating_distance_dimension,
             position_type&        train_number_description_position,
             dimension_type&       train_number_description_dimension,
             position_type&        train_name_description_position,
@@ -677,11 +684,12 @@ namespace bobura { namespace view { namespace timetable
         {
             const auto& canvas_width = tetengo2::gui::dimension<dimension_type>::width(canvas_dimension);
 
-            const auto left_margin = left_type::from(tetengo2::gui::dimension<dimension_type>::width(margin));
+            auto left_margin = left_type::from(tetengo2::gui::dimension<dimension_type>::width(margin));
             const auto left_padding = left_type{ 1 } / 2;
             const auto top_padding = top_type{ 1 } / 2;
 
-            auto header_width = max_station_name_width + width_type::from(left_padding) * 2;
+            auto train_number_description_width = max_station_name_width + width_type::from(left_padding) * 2;
+            auto header_width = operating_distance_width + train_number_description_width;
             if (canvas_width < header_width + width_type::from(left_margin) * 2)
             {
                 header_width =
@@ -692,16 +700,26 @@ namespace bobura { namespace view { namespace timetable
             auto train_name_description_height = train_name_height + height_type::from(top_padding) * 2;
             auto header_height = train_number_description_height + train_name_description_height;
 
-            train_number_description_position = position_type{ left_margin, top };
+            operating_distance_position = position_type{ left_margin, top };
+            operating_distance_dimension =
+                dimension_type{
+                    operating_distance_width, train_number_description_height + train_name_description_height
+                };
+
+            train_number_description_position =
+                position_type{ left_margin + left_type::from(operating_distance_width), top };
             train_number_description_dimension =
-                dimension_type{ header_width, std::move(train_number_description_height) };
+                dimension_type{ train_number_description_width, std::move(train_number_description_height) };
 
             train_name_description_position =
-                position_type{ left_margin, top + top_type::from(train_number_description_height) };
+                position_type{
+                    left_margin + left_type::from(operating_distance_width),
+                    top + top_type::from(train_number_description_height)
+                };
             train_name_description_dimension =
-                dimension_type{ header_width, std::move(train_name_description_height) };
+                dimension_type{ std::move(train_number_description_width), std::move(train_name_description_height) };
 
-            position = position_type{ left_margin, top };
+            position = position_type{ std::move(left_margin), top };
             dimension = dimension_type{ std::move(header_width), std::move(header_height) };
         }
 
@@ -729,6 +747,7 @@ namespace bobura { namespace view { namespace timetable
         const dimension_type&       canvas_dimension,
         const dimension_type&       margin,
         const top_type&             top,
+        const width_type&           operating_distance_width,
         const width_type&           max_station_name_width,
         const height_type&          train_number_height,
         const height_type&          train_name_height
@@ -744,6 +763,7 @@ namespace bobura { namespace view { namespace timetable
             canvas_dimension,
             margin,
             top,
+            operating_distance_width,
             max_station_name_width,
             train_number_height,
             train_name_height,

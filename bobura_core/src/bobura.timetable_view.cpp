@@ -222,6 +222,7 @@ namespace bobura
             }
 
             const dimension_type margin{ width_type{ 1 } / 2, height_type{ 1 } / 2 };
+            const auto operating_distance_width_ = width_type{ 5 } / 2;
             const auto max_station_name_width_ =
                 max_station_name_width(
                     canvas, m_model.timetable().station_locations(), m_model.timetable().font_color_set()
@@ -247,6 +248,7 @@ namespace bobura
                     canvas_dimension,
                     margin,
                     header_bottom,
+                    operating_distance_width_,
                     max_station_name_width_,
                     train_number_height_,
                     train_name_height_
