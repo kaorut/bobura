@@ -692,8 +692,7 @@ namespace bobura { namespace view { namespace timetable
             const auto max_train_number_description_width =
                 max_station_name_width + width_type::from(left_padding) * 2;
             width_type train_number_description_width{ 0 };
-            auto header_width = max_operating_distance_width + train_number_description_width;
-            if (canvas_width < max_operating_distance_width + width_type::from(left_margin) * 2)
+            if (canvas_width < max_operating_distance_width * 2 + width_type::from(left_margin) * 2)
             {
                 operating_distance_width = canvas_width > width_type::from(left_margin) * 2 ?
                     (canvas_width - width_type::from(left_margin) * 2) / 2 : width_type{ 0 };
@@ -713,7 +712,7 @@ namespace bobura { namespace view { namespace timetable
                 operating_distance_width = max_operating_distance_width;
                 train_number_description_width = max_train_number_description_width;
             }
-            header_width = operating_distance_width + train_number_description_width;
+            auto header_width = operating_distance_width + train_number_description_width;
             auto train_number_description_height = train_number_height + height_type::from(top_padding) * 2;
             auto train_name_description_height = train_name_height + height_type::from(top_padding) * 2;
             auto header_height = train_number_description_height + train_name_description_height;
@@ -721,17 +720,17 @@ namespace bobura { namespace view { namespace timetable
             operating_distance_position = position_type{ left_margin, top };
             operating_distance_dimension =
                 dimension_type{
-                    max_operating_distance_width, train_number_description_height + train_name_description_height
+                    operating_distance_width, train_number_description_height + train_name_description_height
                 };
 
             train_number_description_position =
-                position_type{ left_margin + left_type::from(max_operating_distance_width), top };
+                position_type{ left_margin + left_type::from(operating_distance_width), top };
             train_number_description_dimension =
                 dimension_type{ train_number_description_width, std::move(train_number_description_height) };
 
             train_name_description_position =
                 position_type{
-                    left_margin + left_type::from(max_operating_distance_width),
+                    left_margin + left_type::from(operating_distance_width),
                     top + top_type::from(train_number_description_height)
                 };
             train_name_description_dimension =
