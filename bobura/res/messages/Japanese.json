@@ -56,10 +56,11 @@
         "Diagram:%1% No. %2%": "%1%%2%号",
         
         
-        "Timetable:(%1% - Down)": "（%1%・下り）",
-        "Timetable:(%1% - Up)":   "（%1%・上り）",
-        "Timetable:Train Number": "列車番号",
-        "Timetable:Train Name":   "列車名",
+        "Timetable:(%1% - Down)":       "（%1%・下り）",
+        "Timetable:(%1% - Up)":         "（%1%・上り）",
+        "Timetable:Operating Distance": "営業キロ",
+        "Timetable:Train Number":       "列車番号",
+        "Timetable:Train Name":         "列車名",
         
         
         "PropertyBar:Properties":                        "プロパティ",

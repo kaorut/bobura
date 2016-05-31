@@ -73,6 +73,8 @@ namespace
 
     using traits_type = traits_type_list_type::timetable_view_type;
 
+    using operating_distance_header_type = bobura::view::timetable::operating_distance_header<traits_type>;
+
     using train_number_description_header_type = bobura::view::timetable::train_number_description_header<traits_type>;
 
     using train_name_description_header_type = bobura::view::timetable::train_name_description_header<traits_type>;
@@ -86,6 +88,69 @@ namespace
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(view)
 BOOST_AUTO_TEST_SUITE(timetable)
+BOOST_AUTO_TEST_SUITE(operating_distance_header)
+    // test cases
+
+    BOOST_AUTO_TEST_CASE(construction)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        operating_distance_header_type header1{
+            string_type{ TETENGO2_TEXT("hoge") },
+            font_type::dialog_font(),
+            color_type{ 0x12, 0x34, 0x56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+
+        };
+        const operating_distance_header_type header2{ std::move(header1) };
+    }
+
+    BOOST_AUTO_TEST_CASE(operator_assign)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        operating_distance_header_type header1{
+            string_type{ TETENGO2_TEXT("hoge") },
+            font_type::dialog_font(),
+            color_type{ 0x12, 0x34, 0x56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+
+        };
+        operating_distance_header_type header2{
+            string_type{ TETENGO2_TEXT("hoge") },
+            font_type::dialog_font(),
+            color_type{ 0x12, 0x34, 0x56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+
+        };
+
+        header2 = std::move(header1);
+    }
+
+    BOOST_AUTO_TEST_CASE(draw_on)
+    {
+        BOOST_TEST_PASSPOINT();
+
+        window_type window{};
+        const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
+        const auto p_canvas = picture_box.create_canvas();
+        operating_distance_header_type header{
+            string_type{ TETENGO2_TEXT("hoge") },
+            font_type::dialog_font(),
+            color_type{ 0x12, 0x34, 0x56 },
+            position_type{ left_type{ 42 }, top_type{ 24 } },
+            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+
+        };
+
+        header.draw_on(*p_canvas);
+    }
+
+
+BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(train_number_description_header)
     // test cases
 
@@ -232,6 +297,7 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
             dimension_type{ width_type{ 1 }, height_type{ 1 } },
             top_type{ 2 },
+            width_type{ 3 },
             width_type{ 4 },
             height_type{ 1 },
             height_type{ 5 }
@@ -256,6 +322,7 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
             dimension_type{ width_type{ 1 }, height_type{ 1 } },
             top_type{ 2 },
+            width_type{ 3 },
             width_type{ 4 },
             height_type{ 1 },
             height_type{ 5 }
@@ -268,6 +335,7 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
             dimension_type{ width_type{ 1 }, height_type{ 1 } },
             top_type{ 2 },
+            width_type{ 3 },
             width_type{ 4 },
             height_type{ 1 },
             height_type{ 5 }
@@ -293,6 +361,7 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
             dimension_type{ width_type{ 42 }, height_type{ 24 } },
             dimension_type{ width_type{ 1 }, height_type{ 1 } },
             top_type{ 2 },
+            width_type{ 3 },
             width_type{ 4 },
             height_type{ 1 },
             height_type{ 5 }

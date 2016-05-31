@@ -22,7 +22,107 @@
 namespace bobura { namespace view { namespace timetable
 {
     /*!
-        \brief The class template for a header of the train number description in the timetable view.
+        \brief The class template for a header of the operating distance in the timetable view.
+
+        \tparam Traits A traits type.
+    */
+    template <typename Traits>
+    class operating_distance_header : public item<Traits>
+    {
+    public:
+        // types
+
+        //! The traits type.
+        using traits_type = Traits;
+
+        //! The string type.
+        using string_type = typename traits_type::string_type;
+
+        //! The canvas type.
+        using canvas_type = typename traits_type::canvas_type;
+
+        //! The font type.
+        using font_type = typename canvas_type::font_type;
+
+        //! The color type.
+        using color_type = typename canvas_type::color_type;
+
+        //! The position type.
+        using position_type = typename canvas_type::position_type;
+
+        //! The dimension type.
+        using dimension_type = typename canvas_type::dimension_type;
+
+
+        // constructors and destructor
+
+        /*!
+            \brief Creates an operating distance header.
+
+            \param description A description.
+            \param font        A font.
+            \param color       A color.
+            \param position    A position.
+            \param dimension   A dimension.
+        */
+        operating_distance_header(
+            string_type       description,
+            const font_type&  font,
+            const color_type& color,
+            position_type     position,
+            dimension_type    dimension
+        );
+
+        /*!
+            \brief Moves an operating distance header.
+
+            \param another Another operating distance header.
+        */
+        operating_distance_header(operating_distance_header&& another);
+
+        /*!
+            \brief Destroys the train number description header.
+        */
+        virtual ~operating_distance_header()
+        noexcept;
+
+
+        // functions
+
+        /*!
+            \brief Assigns an operating distance header.
+
+            \param another Another operating distance header.
+
+            \return This operating distance header.
+        */
+        operating_distance_header& operator=(operating_distance_header&& another);
+
+
+    private:
+        // types
+
+        using base_type = item<traits_type>;
+
+        class impl;
+
+
+        // variables
+
+        const std::unique_ptr<impl> m_p_impl;
+
+
+        // virtual functions
+
+        virtual void draw_on_impl(canvas_type& canvas)
+        const override;
+
+
+    };
+
+
+    /*!
+        \brief The class template for a header of the operating distance in the timetable view.
 
         \tparam Traits A traits type.
     */
@@ -81,7 +181,7 @@ namespace bobura { namespace view { namespace timetable
         train_number_description_header(train_number_description_header&& another);
 
         /*!
-            \brief Destroys the train_number_description header.
+            \brief Destroys the train number description header.
         */
         virtual ~train_number_description_header()
         noexcept;
@@ -181,7 +281,7 @@ namespace bobura { namespace view { namespace timetable
         train_name_description_header(train_name_description_header&& another);
 
         /*!
-            \brief Destroys the train_number_description header.
+            \brief Destroys the train number description header.
         */
         virtual ~train_name_description_header()
         noexcept;
@@ -284,16 +384,17 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Creates a train number header.
 
-            \param direction              A direction.
-            \param model                  A model.
-            \param message_catalog        A message catalog.
-            \param canvas                 A canvas.
-            \param canvas_dimension       A canvas dimension.
-            \param margin                 A margin.
-            \param top                    A top.
-            \param max_station_name_width A max station name width.
-            \param train_number_height    A train number height.
-            \param train_name_height      A train name height.
+            \param direction                    A direction.
+            \param model                        A model.
+            \param message_catalog              A message catalog.
+            \param canvas                       A canvas.
+            \param canvas_dimension             A canvas dimension.
+            \param margin                       A margin.
+            \param top                          A top.
+            \param max_operating_distance_width A operating distance width.
+            \param max_station_name_width       A max station name width.
+            \param train_number_height          A train number height.
+            \param train_name_height            A train name height.
         */
         train_number_header(
             direction_type              direction,
@@ -303,6 +404,7 @@ namespace bobura { namespace view { namespace timetable
             const dimension_type&       canvas_dimension,
             const dimension_type&       margin,
             const top_type&             top,
+            const width_type&           max_operating_distance_width,
             const width_type&           max_station_name_width,
             const height_type&          train_number_height,
             const height_type&          train_name_height
