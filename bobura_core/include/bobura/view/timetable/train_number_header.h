@@ -384,17 +384,17 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Creates a train number header.
 
-            \param direction                    A direction.
-            \param model                        A model.
-            \param message_catalog              A message catalog.
-            \param canvas                       A canvas.
-            \param canvas_dimension             A canvas dimension.
-            \param margin                       A margin.
-            \param top                          A top.
-            \param max_operating_distance_width A operating distance width.
-            \param max_station_name_width       A max station name width.
-            \param train_number_height          A train number height.
-            \param train_name_height            A train name height.
+            \param direction                A direction.
+            \param model                    A model.
+            \param message_catalog          A message catalog.
+            \param canvas                   A canvas.
+            \param canvas_dimension         A canvas dimension.
+            \param margin                   A margin.
+            \param top                      A top.
+            \param operating_distance_width A operating distance width.
+            \param station_name_width       A max station name width.
+            \param train_number_height      A train number height.
+            \param train_name_height        A train name height.
         */
         train_number_header(
             direction_type              direction,
@@ -404,8 +404,8 @@ namespace bobura { namespace view { namespace timetable
             const dimension_type&       canvas_dimension,
             const dimension_type&       margin,
             const top_type&             top,
-            const width_type&           max_operating_distance_width,
-            const width_type&           max_station_name_width,
+            const width_type&           operating_distance_width,
+            const width_type&           station_name_width,
             const height_type&          train_number_height,
             const height_type&          train_name_height
         );
