@@ -83,9 +83,6 @@ namespace bobura
         //! The loading and saving processing traits type.
         using load_save_traits_type = typename traits_type::load_save_traits_type;
 
-        //! The config traits type.
-        using config_traits_type = typename traits_type::config_traits_type;
-
         //! The command set traits type.
         using command_set_traits_type = CommandSetTraits;
 
@@ -101,12 +98,11 @@ namespace bobura
                 abstract_window_type,
                 side_bar_type,
                 map_box_type,
-                message_catalog_type,
-                config_traits_type
+                message_catalog_type
             >;
         
         //! The settings type.
-        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
+        using settings_type = settings<string_type, position_type, dimension_type>;
 
         //! The file save confirmation type.
         using confirm_file_save_type = load_save::confirm_file_save<load_save_traits_type>;

@@ -23,6 +23,7 @@
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
+#include <tetengo2/detail/config.h>
 
 #include <bobura/settings.h>
 #include <bobura/type_list.h>
@@ -30,8 +31,8 @@
 
 namespace bobura
 {
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    class settings<String, Position, Dimension, ConfigTraits>::impl : private boost::noncopyable
+    template <typename String, typename Position, typename Dimension>
+    class settings<String, Position, Dimension>::impl : private boost::noncopyable
     {
     public:
         // types
@@ -201,21 +202,19 @@ namespace bobura
 
         using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
-        using config_traits_type = ConfigTraits;
+        using uint_type = tetengo2::type_list::size_type;
 
-        using uint_type = typename config_traits_type::uint_type;
-
-        using config_base_type = typename config_traits_type::config_base_type;
+        using config_base_type = tetengo2::config::config_base;
 
         using config_value_type = typename config_base_type::value_type;
 
-        using config_list_type = typename config_traits_type::config_list_type;
+        using config_list_type = tetengo2::config::config_list;
 
-        using cached_config_type = typename config_traits_type::cached_config_type;
+        using cached_config_type = tetengo2::config::cached_config;
 
-        using temporary_config_type = typename config_traits_type::temporary_config_type;
+        using temporary_config_type = tetengo2::config::temporary_config;
 
-        using persistent_config_type = typename config_traits_type::persistent_config_type;
+        using persistent_config_type = tetengo2::config::persistent_config;
 
         template <typename T, typename Str>
         struct value_impl;
@@ -321,7 +320,12 @@ namespace bobura
                 }
             }
 
-            return tetengo2::stdalt::make_unique<temporary_config_type>(values.begin(), values.end());
+            auto p_config = tetengo2::stdalt::make_unique<temporary_config_type>();
+            for (auto&& value: values)
+            {
+                p_config->set(value.first, std::move(value.second));
+            }
+            return std::move(p_config);
         }
 
         static boost::optional<std::pair<uint_type, uint_type>> main_window_dimension_in_command_line(
@@ -368,7 +372,9 @@ namespace bobura
         {
             return
                 tetengo2::stdalt::make_unique<cached_config_type>(
-                    tetengo2::stdalt::make_unique<persistent_config_type>(std::move(group_name))
+                    tetengo2::stdalt::make_unique<persistent_config_type>(
+                        std::move(group_name), tetengo2::detail::config::instance()
+                    )
                 );
         }
 
@@ -405,8 +411,8 @@ namespace bobura
     };
 
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    settings<String, Position, Dimension, ConfigTraits>::settings(
+    template <typename String, typename Position, typename Dimension>
+    settings<String, Position, Dimension>::settings(
         const std::vector<string_type>& command_line_arguments,
         string_type                     config_group_name
     )
@@ -414,111 +420,111 @@ namespace bobura
     m_p_impl(tetengo2::stdalt::make_unique<impl>(command_line_arguments, std::move(config_group_name)))
     {}
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    settings<String, Position, Dimension, ConfigTraits>::~settings()
+    template <typename String, typename Position, typename Dimension>
+    settings<String, Position, Dimension>::~settings()
     noexcept
     {}
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    const boost::filesystem::path& settings<String, Position, Dimension, ConfigTraits>::base_path()
+    template <typename String, typename Position, typename Dimension>
+    const boost::filesystem::path& settings<String, Position, Dimension>::base_path()
     const
     {
         return m_p_impl->base_path();
     }
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    const boost::optional<boost::filesystem::path>& settings<String, Position, Dimension, ConfigTraits>::input()
+    template <typename String, typename Position, typename Dimension>
+    const boost::optional<boost::filesystem::path>& settings<String, Position, Dimension>::input()
     const
     {
         return m_p_impl->input();
     }
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    boost::filesystem::path settings<String, Position, Dimension, ConfigTraits>::message_directory_path()
+    template <typename String, typename Position, typename Dimension>
+    boost::filesystem::path settings<String, Position, Dimension>::message_directory_path()
     const
     {
         return m_p_impl->message_directory_path();
     }
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    boost::filesystem::path settings<String, Position, Dimension, ConfigTraits>::image_directory_path()
+    template <typename String, typename Position, typename Dimension>
+    boost::filesystem::path settings<String, Position, Dimension>::image_directory_path()
     const
     {
         return m_p_impl->image_directory_path();
     }
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    boost::optional<typename settings<String, Position, Dimension, ConfigTraits>::dimension_type>
-    settings<String, Position, Dimension, ConfigTraits>::main_window_dimension()
+    template <typename String, typename Position, typename Dimension>
+    boost::optional<typename settings<String, Position, Dimension>::dimension_type>
+    settings<String, Position, Dimension>::main_window_dimension()
     const
     {
         return m_p_impl->main_window_dimension();
     }
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    void settings<String, Position, Dimension, ConfigTraits>::set_main_window_dimension(const dimension_type& dimension)
+    template <typename String, typename Position, typename Dimension>
+    void settings<String, Position, Dimension>::set_main_window_dimension(const dimension_type& dimension)
     {
         m_p_impl->set_main_window_dimension(dimension);
     }
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    boost::optional<bool> settings<String, Position, Dimension, ConfigTraits>::main_window_maximized()
+    template <typename String, typename Position, typename Dimension>
+    boost::optional<bool> settings<String, Position, Dimension>::main_window_maximized()
     const
     {
         return m_p_impl->main_window_maximized();
     }
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    void settings<String, Position, Dimension, ConfigTraits>::set_main_window_maximized(const bool status)
+    template <typename String, typename Position, typename Dimension>
+    void settings<String, Position, Dimension>::set_main_window_maximized(const bool status)
     {
         return m_p_impl->set_main_window_maximized(status);
     }
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    boost::optional<typename settings<String, Position, Dimension, ConfigTraits>::width_type>
-    settings<String, Position, Dimension, ConfigTraits>::property_bar_width()
+    template <typename String, typename Position, typename Dimension>
+    boost::optional<typename settings<String, Position, Dimension>::width_type>
+    settings<String, Position, Dimension>::property_bar_width()
     const
     {
         return m_p_impl->property_bar_width();
     }
         
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    void settings<String, Position, Dimension, ConfigTraits>::set_property_bar_width(const width_type& width)
+    template <typename String, typename Position, typename Dimension>
+    void settings<String, Position, Dimension>::set_property_bar_width(const width_type& width)
     {
         return m_p_impl->set_property_bar_width(width);
     }
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    boost::optional<bool> settings<String, Position, Dimension, ConfigTraits>::property_bar_minimized()
+    template <typename String, typename Position, typename Dimension>
+    boost::optional<bool> settings<String, Position, Dimension>::property_bar_minimized()
     const
     {
         return m_p_impl->property_bar_minimized();
     }
         
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    void settings<String, Position, Dimension, ConfigTraits>::set_property_bar_minimized(const bool status)
+    template <typename String, typename Position, typename Dimension>
+    void settings<String, Position, Dimension>::set_property_bar_minimized(const bool status)
     {
         return m_p_impl->set_property_bar_minimized(status);
     }
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    boost::optional<typename settings<String, Position, Dimension, ConfigTraits>::left_type>
-    settings<String, Position, Dimension, ConfigTraits>::property_bar_splitter_position()
+    template <typename String, typename Position, typename Dimension>
+    boost::optional<typename settings<String, Position, Dimension>::left_type>
+    settings<String, Position, Dimension>::property_bar_splitter_position()
     const
     {
         return m_p_impl->property_bar_splitter_position();
     }
         
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    void settings<String, Position, Dimension, ConfigTraits>::set_property_bar_splitter_position(
+    template <typename String, typename Position, typename Dimension>
+    void settings<String, Position, Dimension>::set_property_bar_splitter_position(
         const left_type& position
     )
     {
         return m_p_impl->set_property_bar_splitter_position(position);
     }
 
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
-    void settings<String, Position, Dimension, ConfigTraits>::clear_config()
+    template <typename String, typename Position, typename Dimension>
+    void settings<String, Position, Dimension>::clear_config()
     {
         return m_p_impl->clear_config();
     }
@@ -558,8 +564,7 @@ namespace bobura
     template class settings<
         typename application::common_type_list_type::string_type,
         typename application::ui_type_list_type::position_type,
-        typename application::ui_type_list_type::dimension_type,
-        typename application::traits_type_list_type::config_type
+        typename application::ui_type_list_type::dimension_type
     >;
 #endif
 
@@ -570,8 +575,7 @@ namespace bobura
     template class settings<
         typename test::common_type_list_type::string_type,
         typename test::ui_type_list_type::position_type,
-        typename test::ui_type_list_type::dimension_type,
-        typename test::traits_type_list_type::config_type
+        typename test::ui_type_list_type::dimension_type
     >;
 #endif
 

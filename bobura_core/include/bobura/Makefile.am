@@ -29,7 +29,6 @@ pkg_headers = \
     command/traits.h \
     command/vertically_zoom_in.h \
     command/vertically_zoom_out.h \
-    config_traits.h \
     detail_type_list.h \
     diagram_view.h \
     dialog_traits.h \

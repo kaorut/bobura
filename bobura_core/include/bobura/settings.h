@@ -25,12 +25,11 @@ namespace bobura
     /*!
         \brief The class template for settings of bobura.
 
-        \tparam String       A string type.
-        \tparam Position     A position type.
-        \tparam Dimension    A dimension type.
-        \tparam ConfigTraits A configuration traits type.
+        \tparam String    A string type.
+        \tparam Position  A position type.
+        \tparam Dimension A dimension type.
     */
-    template <typename String, typename Position, typename Dimension, typename ConfigTraits>
+    template <typename String, typename Position, typename Dimension>
     class settings : private boost::noncopyable
     {
     public:
@@ -50,9 +49,6 @@ namespace bobura
 
         //! The width type.
         using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-        //! The configuration traits type.
-        using config_traits_type = ConfigTraits;
 
 
         // constructors and destructor

@@ -30,8 +30,6 @@ namespace
 
     using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
-    using traits_type_list_type = bobura::type_list::traits<detail_type_list_type>;
-
     using string_type = common_type_list_type::string_type;
 
     using position_type = ui_type_list_type::position_type;
@@ -44,8 +42,7 @@ namespace
 
     using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
 
-    using settings_type =
-        bobura::settings<string_type, position_type, dimension_type, traits_type_list_type::config_type>;
+    using settings_type = bobura::settings<string_type, position_type, dimension_type>;
 
 
 }

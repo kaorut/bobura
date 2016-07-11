@@ -139,7 +139,7 @@ AC_ARG_WITH(
         TETENGO2_LIB="\$(top_srcdir)/lib/tetengo2/tetengo2/src";
     elif test -n "$TETENGO2";
     then
-        TETENGO2_LIB="$TETENGO2/include"
+        TETENGO2_LIB="$TETENGO2/lib"
     fi
 )
 AC_SUBST([TETENGO2_LIB])
@@ -159,6 +159,22 @@ AC_ARG_WITH(
     fi
 )
 AC_SUBST([TETENGO2_DETAIL_INCLUDE])
+AC_ARG_WITH(
+    tetengo2-detail-libdir,
+    AS_HELP_STRING(
+        [--with-tetengo2-detail-includedir=DIR],
+        [Specify the directory for the Tetengo2-detail library files.]
+    ),
+    TETENGO2_DETAIL_LIB=$withval,
+    if test "x$TETENGO2" = "xSUBMODULE";
+    then
+        TETENGO2_DETAIL_LIB="\$(top_srcdir)/lib/tetengo2/tetengo2_detail/src";
+    elif test -n "$TETENGO2";
+    then
+        TETENGO2_DETAIL_LIB="$TETENGO2/lib"
+    fi
+)
+AC_SUBST([TETENGO2_DETAIL_LIB])
 AC_ARG_WITH(
     tetengo2-gui-includedir,
     AS_HELP_STRING(

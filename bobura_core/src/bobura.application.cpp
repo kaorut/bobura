@@ -52,8 +52,6 @@ namespace bobura
 
         using dimension_type = typename application::dimension_type;
 
-        using config_traits_type = typename application::config_traits_type;
-
         using settings_type = typename application::settings_type;
 
 
@@ -162,8 +160,7 @@ namespace bobura
                 abstract_window_type,
                 typename traits_type::side_bar_type,
                 typename traits_type::map_box_type,
-                message_catalog_type,
-                config_traits_type
+                message_catalog_type
             >;
 
         using view_train_selected_observer_type =
@@ -179,8 +176,7 @@ namespace bobura
                 abstract_window_type,
                 typename traits_type::side_bar_type,
                 typename traits_type::map_box_type,
-                message_catalog_type,
-                config_traits_type
+                message_catalog_type
             >;
 
         using view_all_unselected_observer_type =
@@ -191,8 +187,7 @@ namespace bobura
                 abstract_window_type,
                 typename traits_type::side_bar_type,
                 typename traits_type::map_box_type,
-                message_catalog_type,
-                config_traits_type
+                message_catalog_type
             >;
 
         using load_save_traits_type = typename traits_type::load_save_traits_type;

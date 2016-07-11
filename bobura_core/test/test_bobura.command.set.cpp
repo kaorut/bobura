@@ -45,11 +45,9 @@ namespace
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
-    using config_traits_type = traits_type_list_type::config_type;
-
     using settings_type =
         bobura::settings<
-            string_type, ui_type_list_type::position_type, ui_type_list_type::dimension_type, config_traits_type
+            string_type, ui_type_list_type::position_type, ui_type_list_type::dimension_type
         >;
 
     using size_type = common_type_list_type::size_type;

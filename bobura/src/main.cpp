@@ -50,9 +50,7 @@ namespace
 
     using dimension_type = ui_type_list_type::dimension_type;
 
-    using config_traits_type = traits_type_list_type::config_type;
-
-    using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
+    using settings_type = bobura::settings<string_type, position_type, dimension_type>;
 
     using application_type = bobura::application<traits_type_list_type::application_type>;
 

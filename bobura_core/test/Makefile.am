@@ -96,11 +96,13 @@ bobura_core_test_CPPFLAGS = \
 bobura_core_test_LDFLAGS = \
     -L$(top_builddir)/bobura_core/src \
     -L$(top_builddir)/bobura_model/src \
-    -L$(TETENGO2_LIB)
+    -L$(TETENGO2_LIB) \
+    -L$(TETENGO2_DETAIL_LIB)
 bobura_core_test_LDADD = \
     -lbobura_core \
     -lbobura_model \
     -ltetengo2 \
+    -ltetengo2_detail \
     $(UNITTEST_LIBS)
 bobura_core_test_SOURCES = $(headers) $(sources)
 

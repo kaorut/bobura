@@ -12,7 +12,7 @@
       <Path>$(IntDir)\$(MSBuildProjectName).log</Path>
     </BuildLog>
     <Link>
-      <AdditionalDependencies>comctl32.lib;tetengo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;tetengo2.lib;tetengo2_detail.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration).$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>

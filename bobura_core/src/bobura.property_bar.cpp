@@ -30,11 +30,10 @@ namespace bobura
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog,
-        typename ConfigTraits
+        typename MessageCatalog
     >
     class property_bar<
-        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog, ConfigTraits
+        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog
     >::impl :
         private boost::noncopyable
     {
@@ -180,11 +179,10 @@ namespace bobura
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog,
-        typename ConfigTraits
+        typename MessageCatalog
     >
     property_bar<
-        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog, ConfigTraits
+        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog
     >::property_bar(abstract_window_type& parent, settings_type& settings, const message_catalog_type& message_catalog)
     :
     base_type(parent),
@@ -198,11 +196,10 @@ namespace bobura
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog,
-        typename ConfigTraits
+        typename MessageCatalog
     >
     property_bar<
-        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog, ConfigTraits
+        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog
     >::~property_bar()
     noexcept
     {}
@@ -214,13 +211,12 @@ namespace bobura
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog,
-        typename ConfigTraits
+        typename MessageCatalog
     >
     const typename property_bar<
-        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog, ConfigTraits
+        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog
     >::map_box_type&
-    property_bar<String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog, ConfigTraits>::map_box()
+    property_bar<String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog>::map_box()
     const
     {
         return m_p_impl->map_box();
@@ -233,13 +229,12 @@ namespace bobura
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog,
-        typename ConfigTraits
+        typename MessageCatalog
     >
     typename property_bar<
-        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog, ConfigTraits
+        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog
     >::map_box_type&
-    property_bar<String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog, ConfigTraits>::map_box()
+    property_bar<String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog>::map_box()
     {
         return m_p_impl->map_box();
     }
@@ -251,12 +246,11 @@ namespace bobura
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog,
-        typename ConfigTraits
+        typename MessageCatalog
     >
     void
     property_bar<
-        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog, ConfigTraits
+        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog
     >::save_settings()
     {
         m_p_impl->save_settings(*this);
@@ -305,8 +299,7 @@ namespace bobura
         typename application::ui_type_list_type::abstract_window_type,
         typename application::ui_type_list_type::side_bar_type,
         typename application::ui_type_list_type::map_box_type,
-        typename application::locale_type_list_type::message_catalog_type,
-        typename application::traits_type_list_type::config_type
+        typename application::locale_type_list_type::message_catalog_type
     >;
 #endif
 
@@ -317,8 +310,7 @@ namespace bobura
         typename test::ui_type_list_type::abstract_window_type,
         typename test::ui_type_list_type::side_bar_type,
         typename test::ui_type_list_type::map_box_type,
-        typename test::locale_type_list_type::message_catalog_type,
-        typename test::traits_type_list_type::config_type
+        typename test::locale_type_list_type::message_catalog_type
     >;
 
 

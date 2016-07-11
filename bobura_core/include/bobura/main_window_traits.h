@@ -29,7 +29,6 @@ namespace bobura
         \tparam MessageCatalog    A message catalog type.
         \tparam DiagramViewTraits A diagram view traits type.
         \tparam LoadSaveTraits    A loading and saving processing traits type.
-        \tparam ConfigTraits      A configuration traits type.
     */
     template <
         typename String,
@@ -45,8 +44,7 @@ namespace bobura
         typename MouseCapture,
         typename MessageCatalog,
         typename DiagramViewTraits,
-        typename LoadSaveTraits,
-        typename ConfigTraits
+        typename LoadSaveTraits
     >
     class main_window_traits
     {
@@ -94,9 +92,6 @@ namespace bobura
 
         //! The loading and saving processing traits type.
         using load_save_traits_type = LoadSaveTraits;
-
-        //! The config traits type.
-        using config_traits_type = ConfigTraits;
 
 
     };

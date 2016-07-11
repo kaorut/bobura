@@ -99,9 +99,6 @@ namespace bobura { namespace command
         //! The dialog traits type.
         using dialog_traits_type = typename traits_type::dialog_traits_type;
 
-        //! The config traits type.
-        using config_traits_type = typename traits_type::config_traits_type;
-
         //! The file initialization type.
         using new_file_type = load_save::new_file<load_save_traits_type>;
 
@@ -115,7 +112,7 @@ namespace bobura { namespace command
         using diagram_view_type = diagram_view<diagram_view_traits_type>;
 
         //! The settings type.
-        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
+        using settings_type = settings<string_type, position_type, dimension_type>;
 
         //! The command type.
         using command_type = command_base<command_traits_type>;

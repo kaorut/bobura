@@ -38,9 +38,7 @@ namespace
 
     using dimension_type = ui_type_list_type::dimension_type;
 
-    using config_traits_type = traits_type_list_type::config_type;
-
-    using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
+    using settings_type = bobura::settings<string_type, position_type, dimension_type>;
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
@@ -52,8 +50,7 @@ namespace
             ui_type_list_type::abstract_window_type,
             ui_type_list_type::side_bar_type,
             ui_type_list_type::map_box_type,
-            message_catalog_type,
-            config_traits_type
+            message_catalog_type
         >;
 
 

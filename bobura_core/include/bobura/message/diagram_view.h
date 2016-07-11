@@ -74,7 +74,6 @@ namespace bobura { namespace message { namespace diagram_view
         \tparam SideBar           A side bar type.
         \tparam MapBox            A map box type.
         \tparam MessageCatalog    A message catalog type.
-        \tparam ConfigTraits      A configuration traits type.
     */
     template <
         typename Size,
@@ -88,8 +87,7 @@ namespace bobura { namespace message { namespace diagram_view
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog,
-        typename ConfigTraits
+        typename MessageCatalog
     >
     class station_selected
     {
@@ -132,9 +130,6 @@ namespace bobura { namespace message { namespace diagram_view
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
-        //! The config traits type.
-        using config_traits_type = ConfigTraits;
-
         //! The property bar type.
         using property_bar_type =
             bobura::property_bar<
@@ -144,8 +139,7 @@ namespace bobura { namespace message { namespace diagram_view
                 abstract_window_type,
                 side_bar_type,
                 map_box_type,
-                message_catalog_type,
-                config_traits_type
+                message_catalog_type
             >;
 
         //! The model type.
@@ -279,7 +273,6 @@ namespace bobura { namespace message { namespace diagram_view
         \tparam SideBar           A side bar type.
         \tparam MapBox            A map box type.
         \tparam MessageCatalog    A message catalog type.
-        \tparam ConfigTraits      A configuration traits type.
     */
     template <
         typename Size,
@@ -293,8 +286,7 @@ namespace bobura { namespace message { namespace diagram_view
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog,
-        typename ConfigTraits
+        typename MessageCatalog
     >
     class train_selected
     {
@@ -337,9 +329,6 @@ namespace bobura { namespace message { namespace diagram_view
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
-        //! The config traits type.
-        using config_traits_type = ConfigTraits;
-
         //! The property bar type.
         using property_bar_type =
             bobura::property_bar<
@@ -349,8 +338,7 @@ namespace bobura { namespace message { namespace diagram_view
                 abstract_window_type,
                 side_bar_type,
                 map_box_type,
-                message_catalog_type,
-                config_traits_type
+                message_catalog_type
             >;
 
         //! The model type.
@@ -691,7 +679,6 @@ namespace bobura { namespace message { namespace diagram_view
         \tparam SideBar         A side bar type.
         \tparam MapBox          A map box type.
         \tparam MessageCatalog  A message catalog type.
-        \tparam ConfigTraits    A configuration traits type.
     */
     template <
         typename String,
@@ -700,8 +687,7 @@ namespace bobura { namespace message { namespace diagram_view
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog,
-        typename ConfigTraits
+        typename MessageCatalog
     >
     class all_unselected
     {
@@ -729,9 +715,6 @@ namespace bobura { namespace message { namespace diagram_view
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
-        //! The config traits type.
-        using config_traits_type = ConfigTraits;
-
         //! The property bar type.
         using property_bar_type =
             bobura::property_bar<
@@ -741,8 +724,7 @@ namespace bobura { namespace message { namespace diagram_view
                 abstract_window_type,
                 side_bar_type,
                 map_box_type,
-                message_catalog_type,
-                config_traits_type
+                message_catalog_type
             >;
 
 

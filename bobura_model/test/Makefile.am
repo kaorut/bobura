@@ -58,10 +58,12 @@ bobura_model_test_CPPFLAGS = \
     -I$(TETENGO2_GUI_INCLUDE)
 bobura_model_test_LDFLAGS = \
     -L$(top_builddir)/bobura_model/src \
-    -L$(TETENGO2_LIB)
+    -L$(TETENGO2_LIB) \
+    -L$(TETENGO2_DETAIL_LIB)
 bobura_model_test_LDADD = \
     -lbobura_model \
     -ltetengo2 \
+    -ltetengo2_detail \
     $(UNITTEST_LIBS)
 bobura_model_test_SOURCES = $(headers) $(sources)
 

@@ -28,7 +28,6 @@ namespace bobura
         \tparam SideBar         A side bar type.
         \tparam MapBox          A map box type.
         \tparam MessageCatalog  A message catalog type.
-        \tparam ConfigTraits    A configuration traits type.
     */
     template <
         typename String,
@@ -37,8 +36,7 @@ namespace bobura
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog,
-        typename ConfigTraits
+        typename MessageCatalog
     >
     class property_bar : public SideBar
     {
@@ -66,11 +64,8 @@ namespace bobura
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
 
-        //! The config traits type.
-        using config_traits_type = ConfigTraits;
-
         //! The settings type.
-        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
+        using settings_type = settings<string_type, position_type, dimension_type>;
 
 
         // constructors and destructor
