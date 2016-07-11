@@ -24,7 +24,6 @@
 #include <bobura/application_traits.h>
 #include <bobura/command/set_traits.h>
 #include <bobura/command/traits.h>
-#include <bobura/config_traits.h>
 #include <bobura/detail_type_list.h>
 #include <bobura/dialog_traits.h>
 #include <bobura/load_save/traits.h>

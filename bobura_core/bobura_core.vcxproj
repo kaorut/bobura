@@ -127,7 +127,6 @@
     <ClInclude Include="include\bobura\command\traits.h" />
     <ClInclude Include="include\bobura\command\vertically_zoom_in.h" />
     <ClInclude Include="include\bobura\command\vertically_zoom_out.h" />
-    <ClInclude Include="include\bobura\config_traits.h" />
     <ClInclude Include="include\bobura\detail_type_list.h" />
     <ClInclude Include="include\bobura\diagram_view.h" />
     <ClInclude Include="include\bobura\dialog_traits.h" />
