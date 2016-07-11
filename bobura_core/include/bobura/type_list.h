@@ -891,15 +891,6 @@ namespace bobura { namespace type_list
             >;
 
         template <typename DetailTypeList>
-        using config_traits_type =
-            config_traits<
-                string_type,
-                size_type,
-                type_list::detail::locale::config_encoder_type<DetailTypeList>,
-                typename DetailTypeList::config_type
-            >;
-
-        template <typename DetailTypeList>
         using tab_frame_type = type_list::detail::ui::tab_frame_type<DetailTypeList>;
 
         template <typename DetailTypeList>
@@ -936,8 +927,7 @@ namespace bobura { namespace type_list
                 mouse_capture_type<DetailTypeList>,
                 message_catalog_type<DetailTypeList>,
                 diagram_view_traits_type<DetailTypeList>,
-                load_save_traits_type<DetailTypeList>,
-                config_traits_type<DetailTypeList>
+                load_save_traits_type<DetailTypeList>
             >;
 
         template <typename DetailTypeList>
@@ -973,8 +963,7 @@ namespace bobura { namespace type_list
                 main_window_traits_type<DetailTypeList>,
                 diagram_view_traits_type<DetailTypeList>,
                 load_save_traits_type<DetailTypeList>,
-                dialog_traits_type<DetailTypeList>,
-                config_traits_type<DetailTypeList>
+                dialog_traits_type<DetailTypeList>
             >;
 
         template <typename DetailTypeList>
@@ -1043,8 +1032,7 @@ namespace bobura { namespace type_list
                 timetable_view_traits_type<DetailTypeList>,
                 load_save_traits_type<DetailTypeList>,
                 command_set_traits_type<DetailTypeList>,
-                main_window_menu_builder_traits_type<DetailTypeList>,
-                config_traits_type<DetailTypeList>
+                main_window_menu_builder_traits_type<DetailTypeList>
             >;
 
     }}
@@ -1069,9 +1057,6 @@ namespace bobura { namespace type_list
 
         //! The timetable view traits.
         using timetable_view_type = detail::traits::timetable_view_traits_type<DetailTypeList>;
-
-        //! The config traits.
-        using config_type = detail::traits::config_traits_type<DetailTypeList>;
 
         //! The main window traits.
         using main_window_type = detail::traits::main_window_traits_type<DetailTypeList>;

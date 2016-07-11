@@ -44,11 +44,8 @@ namespace bobura
         //! The dimension type.
         using dimension_type = typename traits_type::dimension_type;
 
-        //! The configuration traits type.
-        using config_traits_type = typename traits_type::config_traits_type;
-
         //! The settings type.
-        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
+        using settings_type = settings<string_type, position_type, dimension_type>;
 
 
         // constructors and destructor

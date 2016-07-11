@@ -44,7 +44,6 @@ namespace bobura
         \tparam LoadSaveTraits              A loading and saving processing traits type.
         \tparam CommandSetTraits            A command set traits type.
         \tparam MainWindowMenuBuilderTraits A main window menu builder traits type.
-        \tparam ConfigTraits                A configuration traits type.
     */
     template <
         typename Size,
@@ -75,8 +74,7 @@ namespace bobura
         typename TimetableViewTraits,
         typename LoadSaveTraits,
         typename CommandSetTraits,
-        typename MainWindowMenuBuilderTraits,
-        typename ConfigTraits
+        typename MainWindowMenuBuilderTraits
     >
     class application_traits
     {
@@ -169,9 +167,6 @@ namespace bobura
 
         //! The main window menu builder traits type.
         using main_window_menu_builder_traits_type = MainWindowMenuBuilderTraits;
-
-        //! The configuration traits type.
-        using config_traits_type = ConfigTraits;
 
 
     };

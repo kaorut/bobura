@@ -21,10 +21,9 @@ namespace bobura
     /*!
         \brief The class template for the about dialog.
 
-        \tparam Traits       A traits type.
-        \tparam ConfigTraits A configuration traits type.
+        \tparam Traits A traits type.
     */
-    template <typename Traits, typename ConfigTraits>
+    template <typename Traits>
     class about_dialog : public Traits::dialog_type
     {
     public:
@@ -51,11 +50,8 @@ namespace bobura
         //! The message catalog type.
         using message_catalog_type = typename traits_type::message_catalog_type;
 
-        //! The configuration traits type.
-        using config_traits_type = ConfigTraits;
-
         //! The settings type.
-        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
+        using settings_type = settings<string_type, position_type, dimension_type>;
 
 
         // constructors and destructor

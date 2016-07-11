@@ -22,20 +22,18 @@ namespace bobura { namespace command
     /*!
         \brief The class template for an about command.
 
-        \tparam Traits                A traits type.
-        \tparam Position              A position type.
-        \tparam Dimension             A dimension type.
-        \tparam MessageCatalog        A message catalog type.
-        \tparam DialogTraits          A dialog traits type.
-        \tparam ConfigTraits          A config traits type.
+        \tparam Traits         A traits type.
+        \tparam Position       A position type.
+        \tparam Dimension      A dimension type.
+        \tparam MessageCatalog A message catalog type.
+        \tparam DialogTraits   A dialog traits type.
     */
     template <
         typename Traits,
         typename Position,
         typename Dimension,
         typename MessageCatalog,
-        typename DialogTraits,
-        typename ConfigTraits
+        typename DialogTraits
     >
     class about : public command_base<Traits>
     {
@@ -60,9 +58,6 @@ namespace bobura { namespace command
         //! The dialog traits type.
         using dialog_traits_type = DialogTraits;
 
-        //! The config traits type.
-        using config_traits_type = ConfigTraits;
-
         //! The base type.
         using base_type = command_base<traits_type>;
 
@@ -73,7 +68,7 @@ namespace bobura { namespace command
         using model_type = typename base_type::model_type;
 
         //! The settings type.
-        using settings_type = settings<string_type, position_type, dimension_type, config_traits_type>;
+        using settings_type = settings<string_type, position_type, dimension_type>;
 
 
         // constructors and destructor

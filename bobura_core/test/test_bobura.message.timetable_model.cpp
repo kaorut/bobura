@@ -67,8 +67,7 @@ namespace
         bobura::settings<
             string_type,
             ui_type_list_type::position_type,
-            ui_type_list_type::dimension_type,
-            traits_type_list_type::config_type
+            ui_type_list_type::dimension_type
         >;
 
     using load_save_traits_type = traits_type_list_type::load_save_type;

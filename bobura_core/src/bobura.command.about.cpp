@@ -23,10 +23,9 @@ namespace bobura { namespace command
         typename Position,
         typename Dimension,
         typename MessageCatalog,
-        typename DialogTraits,
-        typename ConfigTraits
+        typename DialogTraits
     >
-    class about<Traits, Position, Dimension, MessageCatalog, DialogTraits, ConfigTraits>::impl
+    class about<Traits, Position, Dimension, MessageCatalog, DialogTraits>::impl
     {
     public:
         // types
@@ -34,8 +33,6 @@ namespace bobura { namespace command
         using message_catalog_type = typename about::message_catalog_type;
 
         using dialog_traits_type = typename about::dialog_traits_type;
-
-        using config_traits_type = typename about::config_traits_type;
 
         using abstract_window_type = typename about::abstract_window_type;
 
@@ -67,7 +64,7 @@ namespace bobura { namespace command
     private:
         // types
 
-        using about_dialog_type = about_dialog<dialog_traits_type, config_traits_type>;
+        using about_dialog_type = about_dialog<dialog_traits_type>;
 
 
         // variables
@@ -85,10 +82,9 @@ namespace bobura { namespace command
         typename Position,
         typename Dimension,
         typename MessageCatalog,
-        typename DialogTraits,
-        typename ConfigTraits
+        typename DialogTraits
     >
-    about<Traits, Position, Dimension, MessageCatalog, DialogTraits, ConfigTraits>::about(
+    about<Traits, Position, Dimension, MessageCatalog, DialogTraits>::about(
         const message_catalog_type& message_catalog,
         const settings_type&        settings
     )
@@ -101,10 +97,9 @@ namespace bobura { namespace command
         typename Position,
         typename Dimension,
         typename MessageCatalog,
-        typename DialogTraits,
-        typename ConfigTraits
+        typename DialogTraits
     >
-    about<Traits, Position, Dimension, MessageCatalog, DialogTraits, ConfigTraits>::~about()
+    about<Traits, Position, Dimension, MessageCatalog, DialogTraits>::~about()
     noexcept
     {}
     
@@ -113,10 +108,9 @@ namespace bobura { namespace command
         typename Position,
         typename Dimension,
         typename MessageCatalog,
-        typename DialogTraits,
-        typename ConfigTraits
+        typename DialogTraits
     >
-    void about<Traits, Position, Dimension, MessageCatalog, DialogTraits, ConfigTraits>::execute_impl(
+    void about<Traits, Position, Dimension, MessageCatalog, DialogTraits>::execute_impl(
         model_type&           model,
         abstract_window_type& parent
     )
@@ -162,8 +156,7 @@ namespace bobura { namespace command
         typename application::ui_type_list_type::position_type,
         typename application::ui_type_list_type::dimension_type,
         typename application::locale_type_list_type::message_catalog_type,
-        typename application::traits_type_list_type::dialog_type,
-        typename application::traits_type_list_type::config_type
+        typename application::traits_type_list_type::dialog_type
     >;
 #endif
 
@@ -172,8 +165,7 @@ namespace bobura { namespace command
         typename test::ui_type_list_type::position_type,
         typename test::ui_type_list_type::dimension_type,
         typename test::locale_type_list_type::message_catalog_type,
-        typename test::traits_type_list_type::dialog_type,
-        typename test::traits_type_list_type::config_type
+        typename test::traits_type_list_type::dialog_type
     >;
 
 

@@ -25,8 +25,8 @@
 
 namespace bobura
 {
-    template <typename Traits, typename ConfigTraits>
-    class about_dialog<Traits, ConfigTraits>::impl : private boost::noncopyable
+    template <typename Traits>
+    class about_dialog<Traits>::impl : private boost::noncopyable
     {
     public:
         // types
@@ -218,8 +218,8 @@ namespace bobura
     };
 
 
-    template <typename Traits, typename ConfigTraits>
-    about_dialog<Traits, ConfigTraits>::about_dialog(
+    template <typename Traits>
+    about_dialog<Traits>::about_dialog(
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog,
         const settings_type&        settings
@@ -229,8 +229,8 @@ namespace bobura
     m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings))
     {}
 
-    template <typename Traits, typename ConfigTraits>
-    about_dialog<Traits, ConfigTraits>::~about_dialog()
+    template <typename Traits>
+    about_dialog<Traits>::~about_dialog()
     noexcept
     {}
 
@@ -259,13 +259,12 @@ namespace bobura
 
 #if BOOST_COMP_MSVC
     template class about_dialog<
-        typename application::traits_type_list_type::dialog_type,
-        typename application::traits_type_list_type::config_type
+        typename application::traits_type_list_type::dialog_type
     >;
 #endif
 
     template class about_dialog<
-        typename test::traits_type_list_type::dialog_type, typename test::traits_type_list_type::config_type
+        typename test::traits_type_list_type::dialog_type
     >;
 
 

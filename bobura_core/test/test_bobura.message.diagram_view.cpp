@@ -59,11 +59,9 @@ namespace
 
     using map_box_type = ui_type_list_type::map_box_type;
 
-    using config_traits_type = traits_type_list_type::config_type;
-
     using window_type = ui_type_list_type::window_type;
 
-    using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
+    using settings_type = bobura::settings<string_type, position_type, dimension_type>;
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
@@ -75,8 +73,7 @@ namespace
             abstract_window_type,
             side_bar_type,
             map_box_type,
-            message_catalog_type,
-            config_traits_type
+            message_catalog_type
         >;
 
     using model_type =
@@ -105,8 +102,7 @@ namespace
             abstract_window_type,
             side_bar_type,
             map_box_type,
-            message_catalog_type,
-            config_traits_type
+            message_catalog_type
         >;
 
     using train_type = model_type::timetable_type::train_type;
@@ -128,8 +124,7 @@ namespace
             abstract_window_type,
             side_bar_type,
             map_box_type,
-            message_catalog_type,
-            config_traits_type
+            message_catalog_type
         >;
 
     using all_unselected_type =
@@ -140,8 +135,7 @@ namespace
             abstract_window_type,
             side_bar_type,
             map_box_type,
-            message_catalog_type,
-            config_traits_type
+            message_catalog_type
         >;
 
 

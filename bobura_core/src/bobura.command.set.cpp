@@ -86,8 +86,6 @@ namespace bobura { namespace command
 
         using dialog_traits_type = typename set::dialog_traits_type;
 
-        using config_traits_type = typename set::config_traits_type;
-
         using new_file_type = typename set::new_file_type;
 
         using load_from_file_type = typename set::load_from_file_type;
@@ -300,8 +298,7 @@ namespace bobura { namespace command
                         position_type,
                         dimension_type,
                         message_catalog_type,
-                        dialog_traits_type,
-                        config_traits_type
+                        dialog_traits_type
                     >
                 >(message_catalog, settings);
         }

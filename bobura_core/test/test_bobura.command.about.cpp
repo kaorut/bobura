@@ -40,9 +40,7 @@ namespace
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
-    using config_traits_type = traits_type_list_type::config_type;
-
-    using settings_type = bobura::settings<string_type, position_type, dimension_type, config_traits_type>;
+    using settings_type = bobura::settings<string_type, position_type, dimension_type>;
 
     using about_command_type =
         bobura::command::about<
@@ -50,8 +48,7 @@ namespace
             position_type,
             dimension_type,
             message_catalog_type,
-            traits_type_list_type::dialog_type,
-            config_traits_type
+            traits_type_list_type::dialog_type
         >;
 
 

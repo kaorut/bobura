@@ -33,7 +33,6 @@ namespace bobura { namespace command
         \tparam DiagramViewTraits A diagram view traits type.
         \tparam LoadSaveTraits    A loading and saving processing traits type.
         \tparam DialogTraits      A dialog traits type.
-        \tparam ConfigTraits      A config traits type.
     */
     template <
         typename Size,
@@ -53,8 +52,7 @@ namespace bobura { namespace command
         typename MainWindowTraits,
         typename DiagramViewTraits,
         typename LoadSaveTraits,
-        typename DialogTraits,
-        typename ConfigTraits
+        typename DialogTraits
     >
     class set_traits
     {
@@ -114,9 +112,6 @@ namespace bobura { namespace command
 
         //! The dialog traits type.
         using dialog_traits_type = DialogTraits;
-
-        //! The config traits type.
-        using config_traits_type = ConfigTraits;
 
 
     };
