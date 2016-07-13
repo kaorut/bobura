@@ -42,7 +42,7 @@ Building on Windows
 
 You need the following tools in order to build Bobura:
 
-- [Visual Studio 2015 Update 2](http://www.microsoft.com/) (Express for Desktop is not available. Use Community instead.)
+- [Visual Studio 2015 Update 3](http://www.microsoft.com/) (Express for Desktop is not available. Use Community instead.)
 - [Boost C++ Libraries 1.61.0](http://www.boost.org/)
 - [bzip2](http://www.bzip.org)
 - [WiX 3.10.3](http://wixtoolset.org/)
@@ -52,7 +52,7 @@ You need the following tools in order to build Bobura:
 You can obtain the source code either by downloading an archive or by cloning the Git repository.
 
 ### Downloading the Source Code Archive
-
+f
 The latest archives can be downloaded from [the web site](http://www.tetengo.org/).
 
 Deploy the Tetengo2 libraries as a submodule. Get the Tetengo2 archive in [the web site](http://www.tetengo.org/),
