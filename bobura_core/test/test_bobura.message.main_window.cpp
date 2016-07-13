@@ -213,10 +213,6 @@ BOOST_AUTO_TEST_SUITE_END()
     BOOST_OS_LINUX && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
-)
 BOOST_AUTO_TEST_SUITE(window_resized)
     // test cases
 
@@ -287,7 +283,6 @@ BOOST_AUTO_TEST_SUITE(window_resized)
     }
 
 BOOST_AUTO_TEST_SUITE_END()
-#endif
 #endif
 BOOST_AUTO_TEST_SUITE(window_closing)
     // test cases

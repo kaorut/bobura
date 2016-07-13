@@ -290,7 +290,7 @@ BOOST_AUTO_TEST_SUITE(diagram_font_button_mouse_clicked)
 )
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 4, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 5, 0)) \
 )
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
@@ -390,7 +390,7 @@ BOOST_AUTO_TEST_SUITE(timetable_font_button_mouse_clicked)
 )
 #if !( \
     __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 4, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 5, 0)) \
 )
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
