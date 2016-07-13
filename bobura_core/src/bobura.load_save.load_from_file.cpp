@@ -387,12 +387,7 @@ namespace bobura { namespace load_save
     template class load_from_file<application::traits_type_list_type::load_save_type>;
 #endif
 
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 4, 0)) \
-)
     template class load_from_file<test::traits_type_list_type::load_save_type>;
-#endif
 
 
 }}
