@@ -50,7 +50,7 @@ namespace bobura { namespace type_list
         using io_string_type = std::string;
 
         using input_stream_iterator_type =
-            tetengo2::observable_forward_iterator<
+            tetengo2::iterator::observable_forward_iterator<
                 boost::spirit::multi_pass<std::istreambuf_iterator<io_string_type::value_type>>
             >;
 

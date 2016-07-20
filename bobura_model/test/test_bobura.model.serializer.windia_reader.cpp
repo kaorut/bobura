@@ -165,11 +165,11 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data0) };
             const auto first =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
             const auto last =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
             BOOST_TEST(!reader.selects(first, last));
@@ -179,11 +179,11 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data1) };
             const auto first =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
             const auto last =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
             BOOST_TEST(reader.selects(first, last));
@@ -193,11 +193,11 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data3) };
             const auto first =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
             const auto last =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
             BOOST_TEST(!reader.selects(first, last));
@@ -213,11 +213,11 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data0) };
             const auto first =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
             const auto last =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
             auto error = error_type::none;
@@ -231,11 +231,11 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data1) };
             const auto first =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
             const auto last =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
             auto error = error_type::none;
@@ -254,11 +254,11 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data2) };
             const auto first =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
             const auto last =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
             auto error = error_type::none;
@@ -415,11 +415,11 @@ BOOST_AUTO_TEST_SUITE(windia_reader)
 
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data3) };
             const auto first =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
             const auto last =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
             auto error = error_type::none;

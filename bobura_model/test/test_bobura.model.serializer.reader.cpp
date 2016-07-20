@@ -115,11 +115,11 @@ BOOST_AUTO_TEST_SUITE(reader)
         {
             std::istringstream input_stream{ "hoge" };
             const auto first =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
             const auto last =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
             BOOST_TEST(reader.selects(first, last));
@@ -127,11 +127,11 @@ BOOST_AUTO_TEST_SUITE(reader)
         {
             std::istringstream input_stream{ "fuga" };
             const auto first =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
             const auto last =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
             BOOST_TEST(!reader.selects(first, last));
@@ -145,11 +145,11 @@ BOOST_AUTO_TEST_SUITE(reader)
         concrete_reader reader{};
         std::istringstream input_stream{ "hoge" };
         const auto first =
-            tetengo2::make_observable_forward_iterator(
+            tetengo2::iterator::make_observable_forward_iterator(
                 boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
             );
         const auto last =
-            tetengo2::make_observable_forward_iterator(
+            tetengo2::iterator::make_observable_forward_iterator(
                 boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
             );
         auto error = error_type::none;

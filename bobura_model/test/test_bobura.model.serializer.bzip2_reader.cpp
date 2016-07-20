@@ -121,11 +121,11 @@ BOOST_AUTO_TEST_SUITE(bzip2_reader)
 
             std::istringstream input_stream{ "BZ" };
             const auto first =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
             const auto last =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
             BOOST_TEST(bzip2_reader.selects(first, last));
@@ -136,11 +136,11 @@ BOOST_AUTO_TEST_SUITE(bzip2_reader)
 
             std::istringstream input_stream{ "AZ" };
             const auto first =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
             const auto last =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
             BOOST_TEST(!bzip2_reader.selects(first, last));
@@ -156,11 +156,11 @@ BOOST_AUTO_TEST_SUITE(bzip2_reader)
 
         std::istringstream input_stream{ "BZ" };
         const auto first =
-            tetengo2::make_observable_forward_iterator(
+            tetengo2::iterator::make_observable_forward_iterator(
                 boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
             );
         const auto last =
-            tetengo2::make_observable_forward_iterator(
+            tetengo2::iterator::make_observable_forward_iterator(
                 boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
             );
         auto error = error_type::none;

@@ -151,11 +151,11 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
 
         std::istringstream input_stream{ "hoge" };
         const auto first =
-            tetengo2::make_observable_forward_iterator(
+            tetengo2::iterator::make_observable_forward_iterator(
                 boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
             );
         const auto last =
-            tetengo2::make_observable_forward_iterator(
+            tetengo2::iterator::make_observable_forward_iterator(
                 boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
             );
         BOOST_CHECK_THROW(reader_selector.selects(first, last), std::logic_error);
@@ -171,11 +171,11 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
 
             std::istringstream input_stream{ "hoge" };
             const auto first =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
             const auto last =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
             auto error = error_type::none;
@@ -190,11 +190,11 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
 
             std::istringstream input_stream{ "fuga" };
             const auto first =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
             const auto last =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
             auto error = error_type::none;
@@ -209,11 +209,11 @@ BOOST_AUTO_TEST_SUITE(reader_selector)
 
             std::istringstream input_stream{ "piyo" };
             const auto first =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
                 );
             const auto last =
-                tetengo2::make_observable_forward_iterator(
+                tetengo2::iterator::make_observable_forward_iterator(
                     boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
                 );
             auto error = error_type::none;
