@@ -76,13 +76,13 @@ namespace bobura { namespace model { namespace serializer
             try
             {
                 const auto observable_first =
-                    tetengo2::make_observable_forward_iterator(
+                    tetengo2::iterator::make_observable_forward_iterator(
                         boost::spirit::make_default_multi_pass(
                             std::istreambuf_iterator<typename iterator::value_type>{ filtering_input_stream }
                         )
                     );
                 const auto observable_last =
-                    tetengo2::make_observable_forward_iterator(
+                    tetengo2::iterator::make_observable_forward_iterator(
                         boost::spirit::make_default_multi_pass(
                             std::istreambuf_iterator<typename iterator::value_type>{}
                         )
@@ -110,13 +110,13 @@ namespace bobura { namespace model { namespace serializer
             try
             {
                 const auto observable_first =
-                    tetengo2::make_observable_forward_iterator(
+                    tetengo2::iterator::make_observable_forward_iterator(
                         boost::spirit::make_default_multi_pass(
                             std::istreambuf_iterator<typename iterator::value_type>{ filtering_input_stream }
                         )
                     );
                 const auto observable_last =
-                    tetengo2::make_observable_forward_iterator(
+                    tetengo2::iterator::make_observable_forward_iterator(
                         boost::spirit::make_default_multi_pass(
                             std::istreambuf_iterator<typename iterator::value_type>{}
                         )
