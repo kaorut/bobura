@@ -1,7 +1,7 @@
 /*! \file
     \brief Test of class bobura::command::show_timetable_up.
 
-    Copyright (C) 2007-2016 kaoru
+    Copyright (C) 2007-2017 kaoru
 
     $Id$
 */
