@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::about_dialog.
 
-    Copyright (C) 2007-2016 kaoru
+    Copyright (C) 2007-2017 kaoru
 
     $Id$
 */
@@ -162,7 +162,7 @@ namespace bobura
         {
             auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
 
-            p_label->set_text(string_type{ TETENGO2_TEXT("Copyright (C) 2007-2016 kaoru") });
+            p_label->set_text(string_type{ TETENGO2_TEXT("Copyright (C) 2007-2017 kaoru") });
             auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
             p_label->set_background(std::move(p_background));
 
