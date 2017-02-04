@@ -41,7 +41,11 @@ $(top_srcdir)/lib/tetengo2/tools/check_type_list_type_duplication.sh:
 
 .PHONY: doc
 doc:
-	$(DOXYGEN) $(top_srcdir)/Doxyfile
+	pushd $(top_srcdir)
+	$(DOXYGEN) Doxyfile
+	-rm -rf $(top_builddir)/doc
+	cp -r doc $(top_builddir)
+	popd
 
 .PHONY: clean-doc
 clean-doc:
