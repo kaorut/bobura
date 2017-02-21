@@ -31,7 +31,6 @@ It's tested on the following systems:
 
 - [Windows 10](http://www.microsoft.com/)
 - [Debian GNU/Linux 8](http://www.debian.org/)
-- [Cygwin 2.6 (x64)](http://www.cygwin.com/)
 
 
 How to Build {#how_to_build}
@@ -103,7 +102,6 @@ You need the following tools in order to build Bobura libraries:
 - [GNU Make](http://www.gnu.org/)
 - [Boost C++ Libraries 1.63.0](http://www.boost.org/)
 - [bzip2](http://www.bzip.org)
-- [libiconv](http://www.gnu.org/) (on Cygwin)
 - [Doxygen 1.8.13](http://www.doxygen.org) (to generate API documents)
 - [Graphviz](http://www.graphviz.org) (to generate API documents)
 
