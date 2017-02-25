@@ -180,10 +180,6 @@ BOOST_AUTO_TEST_SUITE(station_line)
         station_line1 = std::move(station_line2);
     }
 
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(draw_on)
     {
         BOOST_TEST_PASSPOINT();
@@ -211,7 +207,6 @@ BOOST_AUTO_TEST_SUITE(station_line)
         const auto p_canvas = window.create_canvas();
         station_line.draw_on(*p_canvas);
     }
-#endif
 
     BOOST_AUTO_TEST_CASE(p_item_by_position)
     {
