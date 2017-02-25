@@ -209,10 +209,6 @@ BOOST_AUTO_TEST_SUITE(file_dropped)
 
 
 BOOST_AUTO_TEST_SUITE_END()
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
 BOOST_AUTO_TEST_SUITE(window_resized)
     // test cases
 
@@ -283,7 +279,6 @@ BOOST_AUTO_TEST_SUITE(window_resized)
     }
 
 BOOST_AUTO_TEST_SUITE_END()
-#endif
 BOOST_AUTO_TEST_SUITE(window_closing)
     // test cases
 
