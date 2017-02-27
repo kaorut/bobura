@@ -9,7 +9,6 @@
 #include <utility>
 #include <vector>
 
-#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
