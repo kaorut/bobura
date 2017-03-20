@@ -100,15 +100,6 @@ namespace
 
         // functions
 
-        friend bool operator==(const font_color_type& one, const font_color_type& another)
-        {
-            return
-                one.m_diagram_font == another.m_diagram_font &&
-                one.m_diagram_color == another.m_diagram_color &&
-                one.m_timetable_font == another.m_timetable_font &&
-                one.m_timetable_color == another.m_timetable_color;
-        }
-
         const boost::optional<font_type>& diagram_font()
         const
         {

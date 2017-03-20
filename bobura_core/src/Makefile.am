@@ -79,7 +79,7 @@ libbobura_core_a_CPPFLAGS = \
     -I$(TETENGO2_GUI_INCLUDE)
 libbobura_core_a_SOURCES = $(headers) $(sources)
 
-$(top_builddir)/precompiled/precompiled.h.gch: $(top_srcdir)/precompiled/precompiled.h
+$(top_builddir)/precompiled/precompiled.h.$(PRECOMPILE_EXT): $(top_srcdir)/precompiled/precompiled.h
 	pushd $(top_builddir)/precompiled; \
 	$(MAKE) all; \
 	popd

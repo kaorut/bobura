@@ -99,22 +99,6 @@ namespace
             };
     }
 
-    stop_type make_stop(
-        const size_type arrival_hours,
-        const size_type arrival_minutes,
-        const size_type departure_hours,
-        const size_type departure_minutes
-    )
-    {
-        return
-            stop_type{
-                time_type{ arrival_hours, arrival_minutes, 0 },
-                time_type{ departure_hours, departure_minutes, 0 },
-                false,
-                string_type{}
-            };
-    }
-
     stop_type make_stop(const bool arrival, const size_type hours, const size_type minutes)
     {
         time_type time{ hours, minutes, 0 };
