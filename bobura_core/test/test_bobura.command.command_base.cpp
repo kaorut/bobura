@@ -45,6 +45,9 @@ namespace
     class concrete_parameter_type : public parameter_base_type
     {
     public:
+        concrete_parameter_type()
+        {}
+
         virtual ~concrete_parameter_type()
         noexcept
         {}
@@ -80,7 +83,7 @@ BOOST_AUTO_TEST_SUITE(parameter_base)
     {
         BOOST_TEST_PASSPOINT();
 
-        const concrete_parameter_type parameter;
+        const concrete_parameter_type parameter{};
     }
 
     BOOST_AUTO_TEST_CASE(as)
@@ -88,13 +91,13 @@ BOOST_AUTO_TEST_SUITE(parameter_base)
         BOOST_TEST_PASSPOINT();
 
         {
-            const concrete_parameter_type parameter;
+            const concrete_parameter_type parameter{};
             const parameter_base_type& parameter_base = parameter;
 
             BOOST_TEST(&parameter_base.as<concrete_parameter_type>() == &parameter);
         }
         {
-            concrete_parameter_type parameter;
+            concrete_parameter_type parameter{};
             parameter_base_type& parameter_base = parameter;
 
             BOOST_TEST(&parameter_base.as<concrete_parameter_type>() == &parameter);
@@ -138,7 +141,7 @@ BOOST_AUTO_TEST_SUITE(command_base)
         {
             model_type model{};
             window_type parent{};
-            const concrete_parameter_type parameter;
+            const concrete_parameter_type parameter{};
             command.execute(model, parent, parameter);
         }
     }
