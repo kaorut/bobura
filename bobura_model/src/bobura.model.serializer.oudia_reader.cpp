@@ -357,7 +357,7 @@ namespace bobura { namespace model { namespace serializer
                             string_type{}
                         },
                         m_timetable.station_locations().empty() ?
-                        0 : m_timetable.station_locations().back().operating_distance() + 1
+                        0 : m_timetable.station_locations().back().operating_distance() + 1U
                     }
                 );
 

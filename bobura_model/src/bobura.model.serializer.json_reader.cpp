@@ -791,7 +791,7 @@ namespace bobura { namespace model { namespace serializer
                 if (member->first != string_type{ TETENGO2_TEXT("operating_distance") })
                     return boost::none;
 
-                operating_distance = operating_distance_type{ member->second } / 10;
+                operating_distance = operating_distance_type{ member->second } / 10U;
             }
             
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
