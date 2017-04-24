@@ -13,6 +13,9 @@
 #define BOBURACONFIG_H
 
 
+// Set the Visual C++ Redistributable version.
+#define VC_REDIST_VERSION "140"
+
 // Set the Boost version.
 #define BOOST_VERSION "1_64"
 
