@@ -42,7 +42,7 @@ Building on Windows
 You need the following tools in order to build Bobura:
 
 - [Visual Studio 2017](http://www.microsoft.com/) (Express for Desktop is not available. Use Community instead.)
-- [Boost C++ Libraries 1.63.0](http://www.boost.org/)
+- [Boost C++ Libraries 1.64.0](http://www.boost.org/)
 - [bzip2](http://www.bzip.org)
 - [WiX 3.10.3](http://wixtoolset.org/)
 - [Doxygen 1.8.13](http://www.doxygen.org) (to generate API documents)
@@ -100,7 +100,7 @@ You need the following tools in order to build Bobura libraries:
 
 - [GCC 4.9.2 or 5.4.0](http://www.gnu.org/)
 - [GNU Make](http://www.gnu.org/)
-- [Boost C++ Libraries 1.63.0](http://www.boost.org/)
+- [Boost C++ Libraries 1.64.0](http://www.boost.org/)
 - [bzip2](http://www.bzip.org)
 - [Doxygen 1.8.13](http://www.doxygen.org) (to generate API documents)
 - [Graphviz](http://www.graphviz.org) (to generate API documents)
