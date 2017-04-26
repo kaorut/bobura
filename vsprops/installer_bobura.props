@@ -13,12 +13,14 @@ nmake CONFIGURATION=$(Configuration) PLATFORM=$(Platform) ARCH=$(PlatformTarget)
 </NMakeBuildCommandLine>
     <NMakeReBuildCommandLine>call "$(SolutionDir)lib\tetengo2\tools\get_solution_config.bat" "$(SolutionDir)bobura_config.h" "EMBEDTRANSFORM_DIR"
 set PATH=$(Path);$(WIX)\bin;%SOLUTION_CONFIG%
+call "$(SolutionDir)lib\tetengo2\tools\get_solution_config.bat" "$(SolutionDir)bobura_config.h" "BOOST_VERSION"
 set BOOST_VERSION=%SOLUTION_CONFIG%
 call "$(SolutionDir)lib\tetengo2\tools\get_solution_config.bat" "$(SolutionDir)bobura_config.h" "VC_REDIST_VERSION"
 set VC_REDIST_VERSION=%SOLUTION_CONFIG%
 nmake CONFIGURATION=$(Configuration) PLATFORM=$(Platform) ARCH=$(PlatformTarget) VC_VERSION=$(PlatformToolsetVersion) VC_REDIST_VERSION="%VC_REDIST_VERSION%" BOOST_VERSION="%BOOST_VERSION%" /nologo /f Makefile.nmake clean all
 </NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>set BOOST_VERSION=%SOLUTION_CONFIG%
+    <NMakeCleanCommandLine>call "$(SolutionDir)lib\tetengo2\tools\get_solution_config.bat" "$(SolutionDir)bobura_config.h" "BOOST_VERSION"
+set BOOST_VERSION=%SOLUTION_CONFIG%
 call "$(SolutionDir)lib\tetengo2\tools\get_solution_config.bat" "$(SolutionDir)bobura_config.h" "VC_REDIST_VERSION"
 set VC_REDIST_VERSION=%SOLUTION_CONFIG%
 nmake CONFIGURATION=$(Configuration) PLATFORM=$(Platform) ARCH=$(PlatformTarget) VC_VERSION=$(PlatformToolsetVersion) VC_REDIST_VERSION="%VC_REDIST_VERSION%" BOOST_VERSION="%BOOST_VERSION%" /nologo /f Makefile.nmake clean
