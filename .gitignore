@@ -9,6 +9,7 @@
 *.o
 *.opendb
 *.opensdf
+*.pch
 *.sdf
 *.suo
 *.trs

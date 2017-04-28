@@ -4,7 +4,7 @@
     Copy this file to the solution directory with the name "bobura_config.h"
     and edit it to build bobura.
 
-    Copyright (C) 2007-2016 kaoru
+    Copyright (C) 2007-2017 kaoru
 
     $Id$
 */
@@ -13,14 +13,17 @@
 #define BOBURACONFIG_H
 
 
+// Set the Visual C++ Redistributable version.
+#define VC_REDIST_VERSION "140"
+
 // Set the Boost version.
-#define BOOST_VERSION "1_61"
+#define BOOST_VERSION "1_64"
 
 // Set the path where the 32-bit (Win32) version of Boost DLLs exist.
-#define BOOST_LIB_Win32 "X:\\path\\to\\boost\\lib-msvc140-Win32"
+#define BOOST_LIB_Win32 "X:\\path\\to\\boost\\lib-msvc141-Win32"
 
 // Set the path where the 64-bit (x64) version of Boost DLLs exist.
-#define BOOST_LIB_x64 "X:\\path\\to\\boost\\lib-msvc140-x64"
+#define BOOST_LIB_x64 "X:\\path\\to\\boost\\lib-msvc141-x64"
 
 // Set the EmbedTransform tool directory.
 #define EMBEDTRANSFORM_DIR "X:\\path\\to\\EmbedTransform"

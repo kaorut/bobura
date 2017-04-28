@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::message::view_picture_box::diagram.
 
-    Copyright (C) 2007-2016 kaoru
+    Copyright (C) 2007-2017 kaoru
 
     $Id$
 */

@@ -1,7 +1,7 @@
 /*! \file
     \brief Test of class bobura::model::serializer::json_reader.
 
-    Copyright (C) 2007-2016 kaoru
+    Copyright (C) 2007-2017 kaoru
 
     $Id$
 */
@@ -14,7 +14,6 @@
 
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/optional.hpp>
-#include <boost/predef.h>
 #include <boost/range/iterator_range.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
@@ -605,10 +604,6 @@ namespace
 }
 
 
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(model)
 BOOST_AUTO_TEST_SUITE(serializer)
@@ -1027,4 +1022,3 @@ BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
-#endif

@@ -1,14 +1,13 @@
 /*! \file
     \brief Test of class bobura::property_bar.
 
-    Copyright (C) 2007-2016 kaoru
+    Copyright (C) 2007-2017 kaoru
 
     $Id$
 */
 
 #include <vector>
 
-#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/property_bar.h>
@@ -57,10 +56,6 @@ namespace
 }
 
 
-#if !( \
-    BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
 BOOST_AUTO_TEST_SUITE(test_bobura)
 BOOST_AUTO_TEST_SUITE(property_bar)
     // test cases
@@ -124,4 +119,3 @@ BOOST_AUTO_TEST_SUITE(property_bar)
 
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
-#endif

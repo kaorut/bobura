@@ -1,7 +1,7 @@
 /*! \file
     \brief Test of class bobura::message::font_color_dialog.
 
-    Copyright (C) 2007-2016 kaoru
+    Copyright (C) 2007-2017 kaoru
 
     $Id$
 */
@@ -99,15 +99,6 @@ namespace
 
 
         // functions
-
-        friend bool operator==(const font_color_type& one, const font_color_type& another)
-        {
-            return
-                one.m_diagram_font == another.m_diagram_font &&
-                one.m_diagram_color == another.m_diagram_color &&
-                one.m_timetable_font == another.m_timetable_font &&
-                one.m_timetable_color == another.m_timetable_color;
-        }
 
         const boost::optional<font_type>& diagram_font()
         const
@@ -288,10 +279,6 @@ BOOST_AUTO_TEST_SUITE(diagram_font_button_mouse_clicked)
     BOOST_OS_LINUX && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 4, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 5, 0)) \
-)
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
@@ -312,7 +299,6 @@ BOOST_AUTO_TEST_SUITE(diagram_font_button_mouse_clicked)
 
         observer();
     }
-#endif
 #endif
 
 
@@ -388,10 +374,6 @@ BOOST_AUTO_TEST_SUITE(timetable_font_button_mouse_clicked)
     BOOST_OS_LINUX && \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
 )
-#if !( \
-    __CYGWIN__ /*BOOST_OS_CYGWIN*/ && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(5, 4, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 5, 0)) \
-)
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
         BOOST_TEST_PASSPOINT();
@@ -412,7 +394,6 @@ BOOST_AUTO_TEST_SUITE(timetable_font_button_mouse_clicked)
 
         observer();
     }
-#endif
 #endif
 
 

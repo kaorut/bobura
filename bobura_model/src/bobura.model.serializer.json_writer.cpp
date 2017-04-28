@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::model::serializer::json_writer.
 
-    Copyright (C) 2007-2016 kaoru
+    Copyright (C) 2007-2017 kaoru
 
     $Id$
 */
@@ -527,7 +527,7 @@ namespace bobura { namespace model { namespace serializer
             new_line(level + 2, output_stream);
             write_object_entry(
                 string_type{ TETENGO2_TEXT("operating_distance") },
-                station_location.operating_distance() * 10,
+                station_location.operating_distance() * 10U,
                 output_stream
             );
 

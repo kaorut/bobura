@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::diagram_view.
 
-    Copyright (C) 2007-2016 kaoru
+    Copyright (C) 2007-2017 kaoru
 
     $Id$
 */
@@ -126,7 +126,7 @@ namespace bobura
 
         void update_dimension()
         {
-            const width_type width{ 20 * 24 * m_horizontal_scale };
+            const width_type width{ 20U * 24U * m_horizontal_scale };
 
             m_station_intervals = m_model.timetable().station_intervals();
             if (m_station_intervals.empty())

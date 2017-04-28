@@ -1,7 +1,7 @@
 /*! \file
     \brief Test of class bobura::model::timetable_info::station_interval_calculator.
 
-    Copyright (C) 2007-2016 kaoru
+    Copyright (C) 2007-2017 kaoru
 
     $Id$
 */
@@ -96,22 +96,6 @@ namespace
                 train_type::string_type{},
                 stop_first,
                 stop_last
-            };
-    }
-
-    stop_type make_stop(
-        const size_type arrival_hours,
-        const size_type arrival_minutes,
-        const size_type departure_hours,
-        const size_type departure_minutes
-    )
-    {
-        return
-            stop_type{
-                time_type{ arrival_hours, arrival_minutes, 0 },
-                time_type{ departure_hours, departure_minutes, 0 },
-                false,
-                string_type{}
             };
     }
 

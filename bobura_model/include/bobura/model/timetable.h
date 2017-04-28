@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::model::timetable.
 
-    Copyright (C) 2007-2016 kaoru
+    Copyright (C) 2007-2017 kaoru
 
     $Id$
 */
@@ -623,7 +623,7 @@ namespace bobura { namespace model
 
             const auto time_span = time_span_between(i_departure, i_arrival);
 
-            return (distance * 60 * 60) / time_span.seconds();
+            return (distance * 60U * 60U) / static_cast<operating_distance_type>(time_span.seconds());
         }
 
         /*!

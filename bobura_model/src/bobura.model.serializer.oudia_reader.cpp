@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::model::serializer::oudia_reader.
 
-    Copyright (C) 2007-2016 kaoru
+    Copyright (C) 2007-2017 kaoru
 
     $Id$
 */
@@ -357,7 +357,7 @@ namespace bobura { namespace model { namespace serializer
                             string_type{}
                         },
                         m_timetable.station_locations().empty() ?
-                        0 : m_timetable.station_locations().back().operating_distance() + 1
+                        0 : m_timetable.station_locations().back().operating_distance() + 1U
                     }
                 );
 

@@ -1,7 +1,7 @@
 /*! \file
     \brief Test of class bobura::message::diagram_view.
 
-    Copyright (C) 2007-2016 kaoru
+    Copyright (C) 2007-2017 kaoru
 
     $Id$
 */
@@ -10,7 +10,6 @@
 #include <vector>
 
 #include <boost/optional.hpp>
-#include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
@@ -148,10 +147,6 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
 BOOST_AUTO_TEST_SUITE(station_selected)
     // test cases
 
-// This test case causes a segmentation fault with GCC.
-#if !( \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -191,17 +186,12 @@ BOOST_AUTO_TEST_SUITE(station_selected)
 
         settings.clear_config();
     }
-#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(train_selected)
     // test cases
 
-// This test case causes a segmentation fault with GCC.
-#if !( \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -254,17 +244,12 @@ BOOST_AUTO_TEST_SUITE(train_selected)
 
         settings.clear_config();
     }
-#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(all_unselected)
     // test cases
 
-// This test case causes a segmentation fault with GCC.
-#if !( \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 8, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
-)
     BOOST_AUTO_TEST_CASE(construction)
     {
         BOOST_TEST_PASSPOINT();
@@ -294,7 +279,6 @@ BOOST_AUTO_TEST_SUITE(all_unselected)
 
         settings.clear_config();
     }
-#endif
 
 
 BOOST_AUTO_TEST_SUITE_END()

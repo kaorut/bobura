@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::model::serializer::json_reader.
 
-    Copyright (C) 2007-2016 kaoru
+    Copyright (C) 2007-2017 kaoru
 
     $Id$
 */
@@ -791,7 +791,7 @@ namespace bobura { namespace model { namespace serializer
                 if (member->first != string_type{ TETENGO2_TEXT("operating_distance") })
                     return boost::none;
 
-                operating_distance = operating_distance_type{ member->second } / 10;
+                operating_distance = operating_distance_type{ member->second } / 10U;
             }
             
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
