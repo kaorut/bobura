@@ -9,22 +9,22 @@
 #include <string>
 
 #include <tetengo2.h>
-#include <tetengo2/detail/windows/encoding.h>
 
 #include <setup/encode.h>
+
+#include <tetengo2.detail.base.encoding.cpp>
+#include <tetengo2.detail.windows.encoding.cpp>
+#include <tetengo2.text.encoding.ascii.cpp>
+#include <tetengo2.text.encoding.encoding.cpp>
+#include <tetengo2.text.encoding.locale.cpp>
 
 
 namespace setup
 {
     namespace
     {
-        using encoding_details_type = tetengo2::detail::windows::encoding;
-
         using encoder_type =
-            tetengo2::text::encoder<
-                tetengo2::text::encoding::ascii<encoding_details_type>,
-                tetengo2::text::encoding::locale<std::wstring, encoding_details_type>
-            >;
+            tetengo2::text::encoder<tetengo2::text::encoding::ascii, tetengo2::text::encoding::locale<std::wstring>>;
 
         const encoder_type& encoder()
         {

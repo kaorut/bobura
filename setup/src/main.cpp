@@ -21,8 +21,6 @@
 #include <Windows.h>
 #include <CommCtrl.h>
 
-#include <tetengo2.h>
-
 #include <setup/encode.h>
 
 

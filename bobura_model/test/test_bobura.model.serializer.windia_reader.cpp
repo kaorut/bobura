@@ -81,10 +81,7 @@ namespace
     using error_type = reader_type::error_type;
 
     using utf8_encoder_type =
-        tetengo2::text::encoder<
-            windia_file_encoder_type::internal_encoding_type,
-            tetengo2::text::encoding::utf8<detail_type_list_type::encoding_type>
-        >;
+        tetengo2::text::encoder<windia_file_encoder_type::internal_encoding_type, tetengo2::text::encoding::utf8>;
 
 
     // variables
