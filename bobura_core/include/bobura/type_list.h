@@ -106,88 +106,59 @@ namespace bobura { namespace type_list
 
         using string_type = type_list::detail::common::string_type;
 
-        template <typename DetailTypeList>
-        using encoding_details_type = typename DetailTypeList::encoding_type;
+        using internal_encoding_type = tetengo2::text::encoding::locale<string_type>;
 
-        template <typename DetailTypeList>
-        using internal_encoding_type =
-            tetengo2::text::encoding::locale<string_type, encoding_details_type<DetailTypeList>>;
+        using utf8_encoding_type = tetengo2::text::encoding::utf8;
 
-        template <typename DetailTypeList>
-        using utf8_encoding_type = tetengo2::text::encoding::utf8<encoding_details_type<DetailTypeList>>;
+        using cp932_encoding_type = tetengo2::text::encoding::cp932;
 
-        template <typename DetailTypeList>
-        using cp932_encoding_type = tetengo2::text::encoding::cp932<encoding_details_type<DetailTypeList>>;
+        using exception_encoding_type = utf8_encoding_type;
 
-        template <typename DetailTypeList>
-        using exception_encoding_type = utf8_encoding_type<DetailTypeList>;
-
-        template <typename DetailTypeList>
         using exception_encoder_type =
-            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, exception_encoding_type<DetailTypeList>>;
+            tetengo2::text::encoder<internal_encoding_type, exception_encoding_type>;
 
         template <typename DetailTypeList>
         using ui_encoding_type =
-            tetengo2::text::encoding::locale<
-                typename DetailTypeList::widget_type::string_type, encoding_details_type<DetailTypeList>
-            >;
+            tetengo2::text::encoding::locale<typename DetailTypeList::widget_type::string_type>;
 
         template <typename DetailTypeList>
         using ui_encoder_type =
-            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, ui_encoding_type<DetailTypeList>>;
+            tetengo2::text::encoder<internal_encoding_type, ui_encoding_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using config_encoding_type =
-            tetengo2::text::encoding::locale<
-                typename DetailTypeList::config_type::string_type, encoding_details_type<DetailTypeList>
-            >;
+            tetengo2::text::encoding::locale<typename DetailTypeList::config_type::string_type>;
 
         template <typename DetailTypeList>
         using config_encoder_type =
-            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, config_encoding_type<DetailTypeList>>;
+            tetengo2::text::encoder<internal_encoding_type, config_encoding_type<DetailTypeList>>;
 
-        template <typename DetailTypeList>
-        using message_catalog_encoding_type = utf8_encoding_type<DetailTypeList>;
+        using message_catalog_encoding_type = utf8_encoding_type;
 
-        template <typename DetailTypeList>
         using message_catalog_encoder_type =
-            tetengo2::text::encoder<
-                internal_encoding_type<DetailTypeList>, message_catalog_encoding_type<DetailTypeList>
-            >;
+            tetengo2::text::encoder<internal_encoding_type, message_catalog_encoding_type>;
 
-        template <typename DetailTypeList>
-        using locale_name_encoding_type =
-            tetengo2::text::encoding::locale<std::string, encoding_details_type<DetailTypeList>>;
+        using locale_name_encoding_type = tetengo2::text::encoding::locale<std::string>;
 
-        template <typename DetailTypeList>
-        using locale_name_encoder_type =
-            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, locale_name_encoding_type<DetailTypeList>>;
+        using locale_name_encoder_type = tetengo2::text::encoder<internal_encoding_type, locale_name_encoding_type>;
 
-        template <typename DetailTypeList>
         using message_catalog_type =
             tetengo2::message::message_catalog<
                 type_list::detail::common::input_stream_iterator_type,
                 string_type,
                 size_type,
-                message_catalog_encoder_type<DetailTypeList>,
-                locale_name_encoder_type<DetailTypeList>
+                message_catalog_encoder_type,
+                locale_name_encoder_type
             >;
 
-        template <typename DetailTypeList>
-        using timetable_file_encoding_type = utf8_encoding_type<DetailTypeList>;
+        using timetable_file_encoding_type = utf8_encoding_type;
 
-        template <typename DetailTypeList>
         using timetable_file_encoder_type =
-            tetengo2::text::encoder<
-                internal_encoding_type<DetailTypeList>, timetable_file_encoding_type<DetailTypeList>
-            >;
+            tetengo2::text::encoder<internal_encoding_type, timetable_file_encoding_type>;
 
-        template <typename DetailTypeList>
-        using windia_file_encoding_type = cp932_encoding_type<DetailTypeList>;
+        using windia_file_encoding_type = cp932_encoding_type;
 
-        template <typename DetailTypeList>
-        using windia_file_encoder_type =
-            tetengo2::text::encoder<internal_encoding_type<DetailTypeList>, windia_file_encoding_type<DetailTypeList>>;
+        using windia_file_encoder_type = tetengo2::text::encoder<internal_encoding_type, windia_file_encoding_type>;
 
     }}
 #endif
@@ -201,7 +172,7 @@ namespace bobura { namespace type_list
     struct locale
     {
         //! The encoder type for exceptions.
-        using exception_encoder_type = detail::locale::exception_encoder_type<DetailTypeList>;
+        using exception_encoder_type = detail::locale::exception_encoder_type;
 
         //! The encoder type for the user interface.
         using ui_encoder_type = detail::locale::ui_encoder_type<DetailTypeList>;
@@ -210,19 +181,19 @@ namespace bobura { namespace type_list
         using config_encoder_type = detail::locale::config_encoder_type<DetailTypeList>;
 
         //! The message catalog encoder type.
-        using message_catalog_encoder_type = detail::locale::message_catalog_encoder_type<DetailTypeList>;
+        using message_catalog_encoder_type = detail::locale::message_catalog_encoder_type;
 
         //! The locale name encoder type.
-        using locale_name_encoder_type = detail::locale::locale_name_encoder_type<DetailTypeList>;
+        using locale_name_encoder_type = detail::locale::locale_name_encoder_type;
 
         //! The message catalog type.
-        using message_catalog_type = detail::locale::message_catalog_type<DetailTypeList>;
+        using message_catalog_type = detail::locale::message_catalog_type;
 
         //! The encoder type for the timetable file.
-        using timetable_file_encoder_type = detail::locale::timetable_file_encoder_type<DetailTypeList>;
+        using timetable_file_encoder_type = detail::locale::timetable_file_encoder_type;
 
         //! The encoder type for the WinDIA file.
-        using windia_file_encoder_type = detail::locale::windia_file_encoder_type<DetailTypeList>;
+        using windia_file_encoder_type = detail::locale::windia_file_encoder_type;
 
     };
 
@@ -238,8 +209,7 @@ namespace bobura { namespace type_list
 
         using string_type = type_list::detail::common::string_type;
 
-        template <typename DetailTypeList>
-        using exception_encoder_type = type_list::detail::locale::exception_encoder_type<DetailTypeList>;
+        using exception_encoder_type = type_list::detail::locale::exception_encoder_type;
 
         template <typename DetailTypeList>
         using ui_encoder_type = type_list::detail::locale::ui_encoder_type<DetailTypeList>;
@@ -251,7 +221,7 @@ namespace bobura { namespace type_list
         using alert_type =
             tetengo2::gui::alert<
                 ui_encoder_type<DetailTypeList>,
-                exception_encoder_type<DetailTypeList>,
+                exception_encoder_type,
                 alert_details_type<DetailTypeList>
             >;
 
@@ -352,7 +322,7 @@ namespace bobura { namespace type_list
                 position_type<DetailTypeList>,
                 dimension_type<DetailTypeList>,
                 ui_encoder_type<DetailTypeList>,
-                exception_encoder_type<DetailTypeList>
+                exception_encoder_type
             >;
 
         template <typename DetailTypeList>
@@ -815,8 +785,7 @@ namespace bobura { namespace type_list
         template <typename DetailTypeList>
         using mouse_capture_type = type_list::detail::ui::mouse_capture_type<DetailTypeList>;
 
-        template <typename DetailTypeList>
-        using message_catalog_type = type_list::detail::locale::message_catalog_type<DetailTypeList>;
+        using message_catalog_type = type_list::detail::locale::message_catalog_type;
 
         template <typename DetailTypeList>
         using dialog_traits_type =
@@ -835,7 +804,7 @@ namespace bobura { namespace type_list
                 type_list::detail::ui::dropdown_box_type<DetailTypeList>,
                 picture_box_type<DetailTypeList>,
                 type_list::detail::ui::transparent_background_type<DetailTypeList>,
-                message_catalog_type<DetailTypeList>
+                message_catalog_type
             >;
 
         template <typename DetailTypeList>
@@ -857,9 +826,9 @@ namespace bobura { namespace type_list
                 type_list::detail::ui::timer_type<DetailTypeList>,
                 type_list::detail::ui::system_color_set_type<DetailTypeList>,
                 model::serializer::oudia_diagram_dialog<dialog_traits_type<DetailTypeList>, size_type>,
-                message_catalog_type<DetailTypeList>,
-                type_list::detail::locale::timetable_file_encoder_type<DetailTypeList>,
-                type_list::detail::locale::windia_file_encoder_type<DetailTypeList>
+                message_catalog_type,
+                type_list::detail::locale::timetable_file_encoder_type,
+                type_list::detail::locale::windia_file_encoder_type
             >;
 
         template <typename DetailTypeList>
@@ -873,7 +842,7 @@ namespace bobura { namespace type_list
                 scale_type,
                 fast_canvas_type<DetailTypeList>,
                 type_list::detail::ui::fast_solid_background_type<DetailTypeList>,
-                message_catalog_type<DetailTypeList>
+                message_catalog_type
             >;
 
         template <typename DetailTypeList>
@@ -886,7 +855,7 @@ namespace bobura { namespace type_list
                 speed_type,
                 fast_canvas_type<DetailTypeList>,
                 type_list::detail::ui::fast_solid_background_type<DetailTypeList>,
-                message_catalog_type<DetailTypeList>
+                message_catalog_type
             >;
 
         template <typename DetailTypeList>
@@ -924,7 +893,7 @@ namespace bobura { namespace type_list
                 tetengo2::gui::message::message_loop_break<message_loop_details_type<DetailTypeList>>,
                 fast_font_type<DetailTypeList>,
                 mouse_capture_type<DetailTypeList>,
-                message_catalog_type<DetailTypeList>,
+                message_catalog_type,
                 diagram_view_traits_type<DetailTypeList>,
                 load_save_traits_type<DetailTypeList>
             >;
@@ -957,7 +926,7 @@ namespace bobura { namespace type_list
                 type_list::detail::ui::shell_type<DetailTypeList>,
                 type_list::detail::common_dialog::font_type<DetailTypeList>,
                 type_list::detail::common_dialog::color_type<DetailTypeList>,
-                message_catalog_type<DetailTypeList>,
+                message_catalog_type,
                 command_traits_type<DetailTypeList>,
                 main_window_traits_type<DetailTypeList>,
                 diagram_view_traits_type<DetailTypeList>,
@@ -982,7 +951,7 @@ namespace bobura { namespace type_list
                 popup_menu_type<DetailTypeList>,
                 menu_command_type<DetailTypeList>,
                 menu_separator_type<DetailTypeList>,
-                message_catalog_type<DetailTypeList>,
+                message_catalog_type,
                 command_set_traits_type<DetailTypeList>,
                 main_window_traits_type<DetailTypeList>,
                 diagram_view_traits_type<DetailTypeList>
@@ -1025,7 +994,7 @@ namespace bobura { namespace type_list
                 message_loop_type<DetailTypeList>,
                 mouse_capture_type<DetailTypeList>,
                 timer_type<DetailTypeList>,
-                message_catalog_type<DetailTypeList>,
+                message_catalog_type,
                 main_window_traits_type<DetailTypeList>,
                 diagram_view_traits_type<DetailTypeList>,
                 timetable_view_traits_type<DetailTypeList>,

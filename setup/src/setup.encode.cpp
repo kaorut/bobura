@@ -9,7 +9,6 @@
 #include <string>
 
 #include <tetengo2.h>
-#include <tetengo2/detail/windows/encoding.h>
 
 #include <setup/encode.h>
 
@@ -18,13 +17,8 @@ namespace setup
 {
     namespace
     {
-        using encoding_details_type = tetengo2::detail::windows::encoding;
-
         using encoder_type =
-            tetengo2::text::encoder<
-                tetengo2::text::encoding::ascii<encoding_details_type>,
-                tetengo2::text::encoding::locale<std::wstring, encoding_details_type>
-            >;
+            tetengo2::text::encoder<tetengo2::text::encoding::ascii, tetengo2::text::encoding::locale<std::wstring>>;
 
         const encoder_type& encoder()
         {
