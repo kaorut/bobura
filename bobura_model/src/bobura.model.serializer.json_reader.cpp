@@ -133,8 +133,7 @@ namespace bobura { namespace model { namespace serializer
 
         using grammar_type = tetengo2::text::grammar::json<iterator>;
 
-        using pull_parser_type =
-            tetengo2::text::pull_parser<iterator, grammar_type, integer_type, float_type, size_type>;
+        using pull_parser_type = tetengo2::text::pull_parser<iterator>;
 
         using push_parser_type = typename pull_parser_type::push_parser_type;
 
