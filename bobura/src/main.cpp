@@ -38,8 +38,6 @@ namespace
 
     using common_type_list_type = bobura::type_list::common;
 
-    using locale_type_list_type = bobura::type_list::locale<detail_type_list_type>;
-
     using ui_type_list_type = bobura::type_list::ui<detail_type_list_type>;
 
     using traits_type_list_type = bobura::type_list::traits<detail_type_list_type>;
@@ -79,16 +77,8 @@ namespace
 
     void set_locale(const boost::filesystem::path& message_directory_path)
     {
-        using messages_facet_type =
-            tetengo2::message::messages<
-                common_type_list_type::input_stream_iterator_type,
-                string_type,
-                common_type_list_type::size_type,
-                locale_type_list_type::message_catalog_encoder_type,
-                locale_type_list_type::locale_name_encoder_type
-            >;
         auto p_messages_facet =
-            tetengo2::stdalt::make_unique<messages_facet_type>(
+            tetengo2::stdalt::make_unique<tetengo2::message::messages>(
                 message_directory_path, std::locale(ui_locale_name().c_str())
             );
         const std::locale global_locale{ std::locale(""), p_messages_facet.release() };
