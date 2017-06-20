@@ -102,8 +102,6 @@ namespace bobura { namespace type_list
 #if !defined(DOCUMENTATION)
     namespace detail { namespace locale
     {
-        using size_type = type_list::detail::common::size_type;
-
         using string_type = type_list::detail::common::string_type;
 
         using internal_encoding_type = tetengo2::text::encoding::locale<string_type>;
@@ -125,31 +123,12 @@ namespace bobura { namespace type_list
         using ui_encoder_type =
             tetengo2::text::encoder<internal_encoding_type, ui_encoding_type<DetailTypeList>>;
 
-        template <typename DetailTypeList>
-        using config_encoding_type =
-            tetengo2::text::encoding::locale<typename DetailTypeList::config_type::string_type>;
-
-        template <typename DetailTypeList>
-        using config_encoder_type =
-            tetengo2::text::encoder<internal_encoding_type, config_encoding_type<DetailTypeList>>;
-
         using message_catalog_encoding_type = utf8_encoding_type;
 
         using message_catalog_encoder_type =
             tetengo2::text::encoder<internal_encoding_type, message_catalog_encoding_type>;
 
-        using locale_name_encoding_type = tetengo2::text::encoding::locale<std::string>;
-
-        using locale_name_encoder_type = tetengo2::text::encoder<internal_encoding_type, locale_name_encoding_type>;
-
-        using message_catalog_type =
-            tetengo2::message::message_catalog<
-                type_list::detail::common::input_stream_iterator_type,
-                string_type,
-                size_type,
-                message_catalog_encoder_type,
-                locale_name_encoder_type
-            >;
+        using message_catalog_type = tetengo2::message::message_catalog;
 
         using timetable_file_encoding_type = utf8_encoding_type;
 
@@ -176,15 +155,6 @@ namespace bobura { namespace type_list
 
         //! The encoder type for the user interface.
         using ui_encoder_type = detail::locale::ui_encoder_type<DetailTypeList>;
-
-        //! The encoder type for the user interface.
-        using config_encoder_type = detail::locale::config_encoder_type<DetailTypeList>;
-
-        //! The message catalog encoder type.
-        using message_catalog_encoder_type = detail::locale::message_catalog_encoder_type;
-
-        //! The locale name encoder type.
-        using locale_name_encoder_type = detail::locale::locale_name_encoder_type;
 
         //! The message catalog type.
         using message_catalog_type = detail::locale::message_catalog_type;
