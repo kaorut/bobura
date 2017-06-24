@@ -110,11 +110,6 @@ namespace bobura { namespace type_list
 
         using cp932_encoding_type = tetengo2::text::encoding::cp932;
 
-        using exception_encoding_type = utf8_encoding_type;
-
-        using exception_encoder_type =
-            tetengo2::text::encoder<internal_encoding_type, exception_encoding_type>;
-
         template <typename DetailTypeList>
         using ui_encoding_type =
             tetengo2::text::encoding::locale<typename DetailTypeList::widget_type::string_type>;
@@ -150,9 +145,6 @@ namespace bobura { namespace type_list
     template <typename DetailTypeList>
     struct locale
     {
-        //! The encoder type for exceptions.
-        using exception_encoder_type = detail::locale::exception_encoder_type;
-
         //! The encoder type for the user interface.
         using ui_encoder_type = detail::locale::ui_encoder_type<DetailTypeList>;
 
@@ -179,21 +171,10 @@ namespace bobura { namespace type_list
 
         using string_type = type_list::detail::common::string_type;
 
-        using exception_encoder_type = type_list::detail::locale::exception_encoder_type;
-
         template <typename DetailTypeList>
         using ui_encoder_type = type_list::detail::locale::ui_encoder_type<DetailTypeList>;
 
-        template <typename DetailTypeList>
-        using alert_details_type = typename DetailTypeList::alert_type;
-
-        template <typename DetailTypeList>
-        using alert_type =
-            tetengo2::gui::alert<
-                ui_encoder_type<DetailTypeList>,
-                exception_encoder_type,
-                alert_details_type<DetailTypeList>
-            >;
+        using alert_type = tetengo2::gui::alert;
 
         template <typename DetailTypeList>
         using unit_details_type = typename DetailTypeList::unit_type;
@@ -291,8 +272,7 @@ namespace bobura { namespace type_list
                 string_type,
                 position_type<DetailTypeList>,
                 dimension_type<DetailTypeList>,
-                ui_encoder_type<DetailTypeList>,
-                exception_encoder_type
+                ui_encoder_type<DetailTypeList>
             >;
 
         template <typename DetailTypeList>
@@ -301,7 +281,6 @@ namespace bobura { namespace type_list
                 typename DetailTypeList::widget_type,
                 drawing_details_type<DetailTypeList>,
                 icon_details_type<DetailTypeList>,
-                alert_details_type<DetailTypeList>,
                 typename DetailTypeList::cursor_type,
                 typename DetailTypeList::scroll_type,
                 typename DetailTypeList::message_handler_type,
@@ -508,7 +487,7 @@ namespace bobura { namespace type_list
         using abstract_window_type = detail::ui::abstract_window_type<DetailTypeList>;
 
         //! The alert type.
-        using alert_type = detail::ui::alert_type<DetailTypeList>;
+        using alert_type = detail::ui::alert_type;
 
         //! The button type.
         using button_type = detail::ui::button_type<DetailTypeList>;

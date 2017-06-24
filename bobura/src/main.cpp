@@ -23,6 +23,7 @@
 #include <Windows.h>
 
 #include <tetengo2.h>
+#include <tetengo2.detail.h>
 #include <tetengo2.gui.h>
 
 #include <bobura/application.h>
@@ -129,17 +130,17 @@ noexcept
     }
     catch (const boost::exception& e)
     {
-        alert_type{}(e);
+        alert_type{ tetengo2::detail::alert::instance() }(e);
         return 1;
     }
     catch (const std::exception& e)
     {
-        alert_type{}(e);
+        alert_type{ tetengo2::detail::alert::instance() }(e);
         return 1;
     }
     catch (...)
     {
-        alert_type{}();
+        alert_type{ tetengo2::detail::alert::instance() }();
         return 2;
     }
 }

@@ -20,7 +20,7 @@ echo Skipping the unit test...
     </PostBuildEvent>
     <Link>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>comctl32.lib;gdiplus.lib;d2d1.lib;dwrite.lib;bobura_core.lib;bobura_model.lib;tetengo2.lib;tetengo2_detail.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;gdiplus.lib;d2d1.lib;dwrite.lib;bobura_core.lib;bobura_model.lib;tetengo2.lib;tetengo2_detail.lib;tetengo2_gui.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>$(ProjectDir)res.test\win32\$(TargetFileName).manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
