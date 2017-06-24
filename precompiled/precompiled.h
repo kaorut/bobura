@@ -100,6 +100,7 @@
 // Tetengo2 headers
 
 #include <tetengo2.h>
+#include <tetengo2.detail.h>
 #include <tetengo2.gui.h>
 
 

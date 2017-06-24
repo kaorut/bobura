@@ -372,9 +372,7 @@ namespace bobura
         {
             return
                 tetengo2::stdalt::make_unique<cached_config_type>(
-                    tetengo2::stdalt::make_unique<persistent_config_type>(
-                        std::move(group_name), tetengo2::detail::config::instance()
-                    )
+                    tetengo2::stdalt::make_unique<persistent_config_type>(std::move(group_name))
                 );
         }
 
