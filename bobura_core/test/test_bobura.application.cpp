@@ -11,6 +11,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
+#include <tetengo2/detail/stub/cursor.h>
 
 #include <bobura/application.h>
 #include <bobura/settings.h>
@@ -38,6 +39,8 @@ namespace
 
     using application_type = bobura::application<traits_type_list_type::application_type>;
 
+    using cursor_details_type = tetengo2::detail::stub::cursor;
+
 
 }
 
@@ -54,7 +57,7 @@ BOOST_AUTO_TEST_SUITE(application)
             std::vector<string_type>{1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
             string_type{ TETENGO2_TEXT("test_bobura") }
         };
-        const application_type application{ settings };
+        const application_type application{ settings, cursor_details_type::instance() };
     }
 
     BOOST_AUTO_TEST_CASE(run)
@@ -65,7 +68,7 @@ BOOST_AUTO_TEST_SUITE(application)
             std::vector<string_type>{1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
             string_type{ TETENGO2_TEXT("test_bobura") }
         };
-        application_type application{ settings };
+        application_type application{ settings, cursor_details_type::instance() };
 
         application.run();
     }

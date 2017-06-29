@@ -10,6 +10,8 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/detail/stub/cursor.h>
+
 #include <bobura/command/set.h>
 #include <bobura/diagram_view.h>
 #include <bobura/load_save/confirm_file_save.h>
@@ -76,6 +78,8 @@ namespace
     using main_window_menu_builder_type =
         bobura::main_window_menu_builder<traits_type_list_type::main_window_menu_builder_type>;
 
+    using cursor_details_type = tetengo2::detail::stub::cursor;
+
 
 }
 
@@ -109,9 +113,10 @@ BOOST_AUTO_TEST_SUITE(main_window_menu_builder)
             ask_file_path_and_save_to_file,
             diagram_view,
             settings,
-            message_catalog
+            message_catalog,
+            cursor_details_type::instance()
         };
-        main_window_type main_window{ message_catalog, settings, confirm_file_save };
+        main_window_type main_window{ message_catalog, settings, confirm_file_save, cursor_details_type::instance() };
         const main_window_menu_builder_type main_window_menu_builder{ command_set, model, main_window, message_catalog };
     }
 
@@ -140,9 +145,10 @@ BOOST_AUTO_TEST_SUITE(main_window_menu_builder)
             ask_file_path_and_save_to_file,
             diagram_view,
             settings,
-            message_catalog
+            message_catalog,
+            cursor_details_type::instance()
         };
-        main_window_type main_window{ message_catalog, settings, confirm_file_save };
+        main_window_type main_window{ message_catalog, settings, confirm_file_save, cursor_details_type::instance() };
         const main_window_menu_builder_type main_window_menu_builder{ command_set, model, main_window, message_catalog };
 
         BOOST_TEST(main_window_menu_builder.build().get());

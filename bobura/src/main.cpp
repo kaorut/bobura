@@ -89,7 +89,7 @@ namespace
 
     int run_application(settings_type& settings)
     {
-        return application_type(settings).run();
+        return application_type(settings, tetengo2::detail::windows::cursor::instance()).run();
     }
 
 

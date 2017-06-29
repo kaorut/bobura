@@ -13,6 +13,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
+#include <tetengo2/detail/stub/cursor.h>
 
 #include <bobura/message/diagram_view.h>
 #include <bobura/model/station_info/grade.h>
@@ -74,6 +75,8 @@ namespace
             map_box_type,
             message_catalog_type
         >;
+
+    using cursor_details_type = tetengo2::detail::stub::cursor;
 
     using model_type =
         bobura::timetable_model<
@@ -155,7 +158,7 @@ BOOST_AUTO_TEST_SUITE(station_selected)
         const message_catalog_type message_catalog{};
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-        property_bar_type property_bar{ window, settings, message_catalog };
+        property_bar_type property_bar{ window, settings, message_catalog, cursor_details_type::instance() };
         const model_type model{};
         const station_selected_type station_selected{ property_bar, model, message_catalog };
 
@@ -170,7 +173,7 @@ BOOST_AUTO_TEST_SUITE(station_selected)
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const message_catalog_type message_catalog{};
-        property_bar_type property_bar{ window, settings, message_catalog };
+        property_bar_type property_bar{ window, settings, message_catalog, cursor_details_type::instance() };
         const model_type model{};
         station_selected_type station_selected{ property_bar, model, message_catalog };
 
@@ -200,7 +203,7 @@ BOOST_AUTO_TEST_SUITE(train_selected)
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const message_catalog_type message_catalog{};
-        property_bar_type property_bar{ window, settings, message_catalog };
+        property_bar_type property_bar{ window, settings, message_catalog, cursor_details_type::instance() };
         const model_type model{};
         const train_selected_type train_selected{ property_bar, model, message_catalog };
 
@@ -215,7 +218,7 @@ BOOST_AUTO_TEST_SUITE(train_selected)
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const message_catalog_type message_catalog{};
-        property_bar_type property_bar{ window, settings, message_catalog };
+        property_bar_type property_bar{ window, settings, message_catalog, cursor_details_type::instance() };
         model_type model{};
         model.timetable().insert_train_kind(
             model.timetable().train_kinds().end(),
@@ -258,7 +261,7 @@ BOOST_AUTO_TEST_SUITE(all_unselected)
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const message_catalog_type message_catalog{};
-        property_bar_type property_bar{ window, settings, message_catalog };
+        property_bar_type property_bar{ window, settings, message_catalog, cursor_details_type::instance() };
         const all_unselected_type all_unselected{ property_bar };
 
         settings.clear_config();
@@ -272,7 +275,7 @@ BOOST_AUTO_TEST_SUITE(all_unselected)
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const message_catalog_type message_catalog{};
-        property_bar_type property_bar{ window, settings, message_catalog };
+        property_bar_type property_bar{ window, settings, message_catalog, cursor_details_type::instance() };
         all_unselected_type all_unselected{ property_bar };
 
         all_unselected();

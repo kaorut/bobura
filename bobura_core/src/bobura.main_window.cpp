@@ -56,6 +56,8 @@ namespace bobura
 
         using confirm_file_save_type = typename main_window::confirm_file_save_type;
 
+        using cursor_details_type = typename main_window::cursor_details_type;
+
 
         // constructors and destructor
 
@@ -63,7 +65,8 @@ namespace bobura
             base_type&                    base,
             const message_catalog_type&   message_catalog,
             settings_type&                settings,
-            const confirm_file_save_type& confirm_file_save
+            const confirm_file_save_type& confirm_file_save,
+            const cursor_details_type&    cursor_details
         )
         :
         m_base(base),
@@ -76,7 +79,7 @@ namespace bobura
         m_settings(settings),
         m_confirm_file_save(confirm_file_save)
         {
-            initialize_window();
+            initialize_window(cursor_details);
         }
 
 
@@ -221,7 +224,7 @@ namespace bobura
 
         // functions
 
-        void initialize_window()
+        void initialize_window(const cursor_details_type& cursor_details)
         {
             m_p_tab_frame = tetengo2::stdalt::make_unique<tab_frame_type>(m_base);
 
@@ -231,10 +234,14 @@ namespace bobura
             m_p_timetable_down_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
             m_p_tab_frame->tab_at(1).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Timetable (Down)")));
 
-            m_p_timetable_up_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
+            m_p_timetable_up_view_picture_box =
+                tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
             m_p_tab_frame->tab_at(2).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Timetable (Up)")));
 
-            m_p_property_bar = tetengo2::stdalt::make_unique<property_bar_type>(m_base, m_settings, m_message_catalog);
+            m_p_property_bar =
+                tetengo2::stdalt::make_unique<property_bar_type>(
+                    m_base, m_settings, m_message_catalog, cursor_details
+                );
 
             set_message_observers();
 
@@ -298,11 +305,12 @@ namespace bobura
     main_window<Traits, CommandSetTraits>::main_window(
         const message_catalog_type&   message_catalog,
         settings_type&                settings,
-        const confirm_file_save_type& confirm_file_save
+        const confirm_file_save_type& confirm_file_save,
+        const cursor_details_type&    cursor_details
     )
     :
     base_type(base_type::scroll_bar_style_type::none, true),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, confirm_file_save))
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, confirm_file_save, cursor_details))
     {}
 
     template <typename Traits, typename CommandSetTraits>

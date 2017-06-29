@@ -12,6 +12,7 @@
 #include <memory>
 
 #include <tetengo2.h>
+#include <tetengo2.detail.h>
 
 #include <bobura/settings.h>
 
@@ -67,6 +68,9 @@ namespace bobura
         //! The settings type.
         using settings_type = settings<string_type, position_type, dimension_type>;
 
+        //! The cursor details type.
+        using cursor_details_type = tetengo2::detail::base::cursor;
+
 
         // constructors and destructor
 
@@ -76,11 +80,13 @@ namespace bobura
             \param parent          A parent.
             \param settings        Settings.
             \param message_catalog A message catalog.
+            \param cursor_details  A cursor detail implementation.
         */
         property_bar(
             abstract_window_type&       parent,
             settings_type&              settings,
-            const message_catalog_type& message_catalog
+            const message_catalog_type& message_catalog,
+            const cursor_details_type&  cursor_details
         );
 
         /*!

@@ -47,6 +47,8 @@ namespace bobura
 
         using settings_type = typename property_bar::settings_type;
 
+        using cursor_details_type = typename property_bar::cursor_details_type;
+
 
         // constructors and destructor
 
@@ -54,14 +56,15 @@ namespace bobura
             property_bar&               self,
             abstract_window_type&,
             settings_type&              settings,
-            const message_catalog_type& message_catalog
+            const message_catalog_type& message_catalog,
+            const cursor_details_type&  cursor_details
         )
         :
         m_settings(settings),
         m_message_catalog(message_catalog),
         m_p_map_box()
         {
-            initialize_property_bar(self);
+            initialize_property_bar(self, cursor_details);
         }
 
 
@@ -117,11 +120,11 @@ namespace bobura
 
         // functions
 
-        void initialize_property_bar(property_bar& self)
+        void initialize_property_bar(property_bar& self, const cursor_details_type& cursor_details)
         {
             self.set_text(m_message_catalog.get(TETENGO2_TEXT("PropertyBar:Properties")));
 
-            m_p_map_box = tetengo2::stdalt::make_unique<map_box_type>(self);
+            m_p_map_box = tetengo2::stdalt::make_unique<map_box_type>(self, cursor_details);
 
             self.size_observer_set().resized().connect(resized_observer_type{ self, *m_p_map_box });
 
@@ -168,10 +171,15 @@ namespace bobura
     >
     property_bar<
         String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog
-    >::property_bar(abstract_window_type& parent, settings_type& settings, const message_catalog_type& message_catalog)
+    >::property_bar(
+        abstract_window_type&       parent,
+        settings_type&              settings,
+        const message_catalog_type& message_catalog,
+        const cursor_details_type&  cursor_details
+    )
     :
-    base_type(parent),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, parent, settings, message_catalog))
+    base_type(parent, cursor_details),
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, parent, settings, message_catalog, cursor_details))
     {}
 
     template <
