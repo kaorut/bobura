@@ -53,15 +53,17 @@ bobura_model_test_DEPENDENCIES = \
 bobura_model_test_CPPFLAGS = \
     -I$(top_srcdir)/bobura_core/include \
     -I$(top_srcdir)/bobura_model/include \
+    -I$(TETENGO2_GUI_INCLUDE) \
     -I$(TETENGO2_INCLUDE) \
-    -I$(TETENGO2_DETAIL_INCLUDE) \
-    -I$(TETENGO2_GUI_INCLUDE)
+    -I$(TETENGO2_DETAIL_INCLUDE)
 bobura_model_test_LDFLAGS = \
     -L$(top_builddir)/bobura_model/src \
+    -L$(TETENGO2_GUI_LIB) \
     -L$(TETENGO2_LIB) \
     -L$(TETENGO2_DETAIL_LIB)
 bobura_model_test_LDADD = \
     -lbobura_model \
+    -ltetengo2_gui \
     -ltetengo2 \
     -ltetengo2_detail \
     $(UNITTEST_LIBS)
