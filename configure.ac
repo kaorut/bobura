@@ -169,7 +169,7 @@ AC_SUBST([TETENGO2_DETAIL_INCLUDE])
 AC_ARG_WITH(
     tetengo2-detail-libdir,
     AS_HELP_STRING(
-        [--with-tetengo2-detail-includedir=DIR],
+        [--with-tetengo2-detail-libdir=DIR],
         [Specify the directory for the Tetengo2-detail library files.]
     ),
     TETENGO2_DETAIL_LIB=$withval,
@@ -198,6 +198,22 @@ AC_ARG_WITH(
     fi
 )
 AC_SUBST([TETENGO2_GUI_INCLUDE])
+AC_ARG_WITH(
+    tetengo2-gui-libdir,
+    AS_HELP_STRING(
+        [--with-tetengo2-gui-libdir=DIR],
+        [Specify the directory for the Tetengo2-gui library files.]
+    ),
+    TETENGO2_GUI_LIB=$withval,
+    if test "x$TETENGO2" = "xSUBMODULE";
+    then
+        TETENGO2_GUI_LIB="\$(top_srcdir)/lib/tetengo2/tetengo2_gui/src";
+    elif test -n "$TETENGO2";
+    then
+        TETENGO2_GUI_LIB="$TETENGO2/lib"
+    fi
+)
+AC_SUBST([TETENGO2_GUI_LIB])
 
 #### Checks for header files ####
 AC_CXX_HAVE_STD
