@@ -45,10 +45,17 @@ namespace bobura
 
         using settings_type = typename about_dialog::settings_type;
 
+        using cursor_details_type = typename about_dialog::cursor_details_type;
+
 
         // constructors and destructor
 
-        impl(base_type& base, const message_catalog_type& message_catalog, const settings_type& settings)
+        impl(
+            base_type&                  base,
+            const message_catalog_type& message_catalog,
+            const settings_type&        settings,
+            const cursor_details_type&  cursor_details
+        )
         :
         m_base(base),
         m_message_catalog(message_catalog),
@@ -59,7 +66,7 @@ namespace bobura
         m_p_link_label(),
         m_p_ok_button()
         {
-            initialize_dialog();
+            initialize_dialog(cursor_details);
         }
 
 
@@ -112,14 +119,14 @@ namespace bobura
 
         // functions
 
-        void initialize_dialog()
+        void initialize_dialog(const cursor_details_type&  cursor_details)
         {
             m_base.set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:About:About")));
 
             m_p_application_image = create_application_image();
             m_p_title_label = create_title_label();
             m_p_copyright_label = create_copyright_label();
-            m_p_link_label = create_link_label();
+            m_p_link_label = create_link_label(cursor_details);
             m_p_ok_button = create_ok_button();
 
             locate_controls();
@@ -169,9 +176,9 @@ namespace bobura
             return std::move(p_label);
         }
 
-        std::unique_ptr<link_label_type> create_link_label()
+        std::unique_ptr<link_label_type> create_link_label(const cursor_details_type& cursor_details)
         {
-            auto p_label =tetengo2::stdalt::make_unique<link_label_type>(m_base);
+            auto p_label =tetengo2::stdalt::make_unique<link_label_type>(m_base, cursor_details);
 
             p_label->set_text(string_type{ TETENGO2_TEXT("http://www.tetengo.org/") });
             p_label->set_target(p_label->text());
@@ -220,13 +227,14 @@ namespace bobura
 
     template <typename Traits>
     about_dialog<Traits>::about_dialog(
-        abstract_window_type&       parent,
-        const message_catalog_type& message_catalog,
-        const settings_type&        settings
+        abstract_window_type&        parent,
+        const message_catalog_type&  message_catalog,
+        const settings_type&         settings,
+        const cursor_details_type&  cursor_details
     )
     :
     base_type(parent),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings))
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, cursor_details))
     {}
 
     template <typename Traits>

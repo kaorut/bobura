@@ -12,6 +12,7 @@
 #include <memory>
 
 #include <tetengo2.h>
+#include <tetengo2.detail.h>
 
 #include <bobura/command/command_base.h>
 #include <bobura/settings.h>
@@ -70,6 +71,9 @@ namespace bobura { namespace command
         //! The settings type.
         using settings_type = settings<string_type, position_type, dimension_type>;
 
+        //! The cursor details type.
+        using cursor_details_type = tetengo2::detail::base::cursor;
+
 
         // constructors and destructor
 
@@ -79,7 +83,11 @@ namespace bobura { namespace command
             \param message_catalog A message catalog.
             \param settings        Settings type.
         */
-        about(const message_catalog_type& message_catalog, const settings_type& settings);
+        about(
+            const message_catalog_type& message_catalog,
+            const settings_type&        settings,
+            const cursor_details_type&  cursor_details
+        );
 
         /*!
             \brief Destroys the about command.

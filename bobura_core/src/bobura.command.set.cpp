@@ -100,6 +100,8 @@ namespace bobura { namespace command
 
         using parameter_type = typename set::parameter_type;
 
+        using cursor_details_type = typename set::cursor_details_type;
+
 
         // constructors and destructor
 
@@ -111,10 +113,11 @@ namespace bobura { namespace command
             const save_to_file_type&      ask_file_path_and_save_to_file,
             diagram_view_type&            diagram_view,
             const settings_type&          settings,
-            const message_catalog_type&   message_catalog
+            const message_catalog_type&   message_catalog,
+            const cursor_details_type&    cursor_details
         )
         :
-        m_p_about(create_about(message_catalog, settings)),
+        m_p_about(create_about(message_catalog, settings, cursor_details)),
         m_p_ask_file_path_and_save_to_file(create_save_to_file(ask_file_path_and_save_to_file)),
         m_p_exit(create_exit()),
         m_p_file_property(create_file_property(message_catalog)),
@@ -288,7 +291,8 @@ namespace bobura { namespace command
 
         static command_ptr_type create_about(
             const message_catalog_type& message_catalog,
-            const settings_type&        settings
+            const settings_type&        settings,
+            const cursor_details_type&  cursor_details
         )
         {
             return
@@ -300,7 +304,7 @@ namespace bobura { namespace command
                         message_catalog_type,
                         dialog_traits_type
                     >
-                >(message_catalog, settings);
+                >(message_catalog, settings, cursor_details);
         }
 
         static command_ptr_type create_exit()
@@ -556,7 +560,8 @@ namespace bobura { namespace command
         const save_to_file_type&      ask_file_path_and_save_to_file,
         diagram_view_type&            diagram_view,
         const settings_type&          settings,
-        const message_catalog_type&   message_catalog
+        const message_catalog_type&   message_catalog,
+        const cursor_details_type&    cursor_details
     )
     :
     m_p_impl(
@@ -568,7 +573,8 @@ namespace bobura { namespace command
             ask_file_path_and_save_to_file,
             diagram_view,
             settings,
-            message_catalog
+            message_catalog,
+            cursor_details
         )
     )
     {}

@@ -281,7 +281,6 @@ namespace bobura { namespace type_list
                 typename DetailTypeList::widget_type,
                 drawing_details_type<DetailTypeList>,
                 icon_details_type<DetailTypeList>,
-                typename DetailTypeList::cursor_type,
                 typename DetailTypeList::scroll_type,
                 typename DetailTypeList::message_handler_type,
                 virtual_key_details_type<DetailTypeList>

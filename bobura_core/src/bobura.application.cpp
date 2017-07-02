@@ -54,15 +54,18 @@ namespace bobura
 
         using settings_type = typename application::settings_type;
 
+        using cursor_details_type = typename application::cursor_details_type;
+
 
         // constructors and destructor
 
-        explicit impl(settings_type& settings)
+        impl(settings_type& settings, const cursor_details_type& cursor_details)
         :
         m_gui_fixture(),
         m_settings(settings),
         m_model(),
-        m_p_input_file_load_timer()
+        m_p_input_file_load_timer(),
+        m_cursor_details(cursor_details)
         {}
 
 
@@ -78,9 +81,13 @@ namespace bobura
             timetable_view_type timetable_up_view{
                 view::timetable::direction_type::up, m_model, message_catalog
             };
-            const command_set_holder_type command_set_holder{ m_settings, m_model, diagram_view, message_catalog };
+            const command_set_holder_type command_set_holder{
+                m_settings, m_model, diagram_view, message_catalog, m_cursor_details
+            };
 
-            main_window_type main_window(message_catalog, m_settings, command_set_holder.confirm_file_save()); 
+            main_window_type main_window(
+                message_catalog, m_settings, command_set_holder.confirm_file_save(), m_cursor_details
+            ); 
             set_message_observers(
                 command_set_holder.command_set(),
                 diagram_view,
@@ -292,7 +299,8 @@ namespace bobura
                 settings_type&              settings,
                 model_type&                 model,
                 diagram_view_type&          diagram_view,
-                const message_catalog_type& message_catalog
+                const message_catalog_type& message_catalog,
+                const cursor_details_type&  cursor_details
             )
             :
             m_save_to_file(false, message_catalog),
@@ -309,7 +317,8 @@ namespace bobura
                 m_ask_file_path_and_save_to_file,
                 diagram_view,
                 settings,
-                message_catalog
+                message_catalog,
+                cursor_details
             )
             {}
 
@@ -352,6 +361,8 @@ namespace bobura
         model_type m_model;
 
         std::unique_ptr<timer_type> m_p_input_file_load_timer;
+
+        const cursor_details_type& m_cursor_details;
 
 
         // functions
@@ -436,7 +447,7 @@ namespace bobura
                 }
             );
             picture_box.mouse_observer_set().moved().connect(
-                diagram_view_picture_box_mouse_moved_observer_type{ picture_box, view }
+                diagram_view_picture_box_mouse_moved_observer_type{ picture_box, view, m_cursor_details }
             );
             picture_box.mouse_observer_set().wheeled().connect(
                 diagram_view_picture_box_mouse_wheeled_observer_type{ picture_box, view }
@@ -540,9 +551,9 @@ namespace bobura
 
 
     template <typename Traits>
-    application<Traits>::application(settings_type& settings)
+    application<Traits>::application(settings_type& settings, const cursor_details_type& cursor_details)
     :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(settings))
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(settings, cursor_details))
     {}
 
     template <typename Traits>

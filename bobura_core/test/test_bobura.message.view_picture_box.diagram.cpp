@@ -10,6 +10,7 @@
 
 #include <tetengo2.h>
 #include <tetengo2.gui.h>
+#include <tetengo2/detail/stub/cursor.h>
 
 #include <bobura/diagram_view.h>
 #include <bobura/message/view_picture_box/diagram.h>
@@ -78,6 +79,8 @@ namespace
         bobura::message::view_picture_box::diagram::mouse_wheeled<
             picture_box_type, view_zoom_type, diagram_view_traits_type
         >;
+
+    using cursor_details_type = tetengo2::detail::stub::cursor;
 
     using virtual_key_type = picture_box_type::keyboard_observer_set_type::virtual_key_type;
 
@@ -178,7 +181,7 @@ BOOST_AUTO_TEST_SUITE(mouse_moved)
         const model_type model{};
         const message_catalog_type message_catalog{};
         const diagram_view_type diagram_view{ model, message_catalog };
-        const mouse_moved_type mouse_moved{ picture_box, diagram_view };
+        const mouse_moved_type mouse_moved{ picture_box, diagram_view, cursor_details_type::instance() };
     }
 
     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -190,7 +193,7 @@ BOOST_AUTO_TEST_SUITE(mouse_moved)
         const model_type model{};
         const message_catalog_type message_catalog{};
         const diagram_view_type diagram_view{ model, message_catalog };
-        const mouse_moved_type mouse_moved{ picture_box, diagram_view };
+        const mouse_moved_type mouse_moved{ picture_box, diagram_view, cursor_details_type::instance() };
 
         mouse_moved(position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
     }

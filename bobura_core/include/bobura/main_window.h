@@ -14,6 +14,7 @@
 #include <boost/optional.hpp>
 
 #include <tetengo2.h>
+#include <tetengo2.detail.h>
 
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/property_bar.h>
@@ -107,6 +108,9 @@ namespace bobura
         //! The file save confirmation type.
         using confirm_file_save_type = load_save::confirm_file_save<load_save_traits_type>;
 
+        //! The cursor details type.
+        using cursor_details_type = tetengo2::detail::base::cursor;
+
 
         // constructors and destructor
 
@@ -116,11 +120,13 @@ namespace bobura
             \param message_catalog   A message catalog.
             \param settings          Settings.
             \param confirm_file_save A file save confirmation.
+            \param cursor_details    A cursor detail implementation.
         */
         main_window(
             const message_catalog_type&   message_catalog,
             settings_type&                settings,
-            const confirm_file_save_type& confirm_file_save
+            const confirm_file_save_type& confirm_file_save,
+            const cursor_details_type&    cursor_details
         );
 
         /*!

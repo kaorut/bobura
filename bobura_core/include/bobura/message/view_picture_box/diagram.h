@@ -17,6 +17,7 @@
 #include <boost/rational.hpp>
 
 #include <tetengo2.h>
+#include <tetengo2.detail.h>
 #include <tetengo2.gui.h>
 
 #include <bobura/diagram_view.h>
@@ -235,19 +236,24 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;
 
+        //! The cursor details type.
+        using cursor_details_type = tetengo2::detail::base::cursor;
+
 
         // constructors and destructor
 
         /*!
             \brief Creates a mouse moved observer of the picture box.
 
-            \param picture_box A picture box.
-            \param view        A view.
+            \param picture_box    A picture box.
+            \param view           A view.
+            \param cursor_details A cursor detail implementation.
         */
-        explicit mouse_moved(picture_box_type& picture_box, const view_type& view)
+        mouse_moved(picture_box_type& picture_box, const view_type& view, const cursor_details_type& cursor_details)
         :
         m_picture_box(picture_box),
-        m_view(view)
+        m_view(view),
+        m_cursor_details(cursor_details)
         {}
 
 
@@ -275,7 +281,9 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
                 if (!p_system_cursor || p_system_cursor->style() != system_cursor_type::style_type::hand)
                 {
                     m_picture_box.set_cursor(
-                        tetengo2::stdalt::make_unique<system_cursor_type>(system_cursor_type::style_type::hand)
+                        tetengo2::stdalt::make_unique<system_cursor_type>(
+                            system_cursor_type::style_type::hand, m_cursor_details
+                        )
                     );
                 }
             }
@@ -302,6 +310,8 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
         picture_box_type& m_picture_box;
 
         const view_type& m_view;
+
+        const cursor_details_type& m_cursor_details;
 
 
     };

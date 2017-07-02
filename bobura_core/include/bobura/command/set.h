@@ -15,6 +15,7 @@
 #include <boost/filesystem.hpp>
 
 #include <tetengo2.h>
+#include <tetengo2.detail.h>
 
 #include <bobura/diagram_view.h>
 #include <bobura/load_save/load_from_file.h>
@@ -120,6 +121,9 @@ namespace bobura { namespace command
         //! The parameter type.
         using parameter_type = parameter_base;
 
+        //! The cursor details type.
+        using cursor_details_type = tetengo2::detail::base::cursor;
+
 
         // constructors
 
@@ -134,6 +138,7 @@ namespace bobura { namespace command
             \param diagram_view                   A diagram view.
             \param settings                       Settings.
             \param message_catalog                A message catalog.
+            \param cursor_details                 A cursor detail implementation.
         */
         set(
             const new_file_type&        new_file,
@@ -143,7 +148,8 @@ namespace bobura { namespace command
             const save_to_file_type&    ask_file_path_and_save_to_file,
             diagram_view_type&          diagram_view,
             const settings_type&        settings,
-            const message_catalog_type& message_catalog
+            const message_catalog_type& message_catalog,
+            const cursor_details_type&  cursor_details
         );
 
         /*!
