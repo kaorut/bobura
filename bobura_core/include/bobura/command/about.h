@@ -82,6 +82,7 @@ namespace bobura { namespace command
 
             \param message_catalog A message catalog.
             \param settings        Settings type.
+            \param cursor_details  A cursor detail implementation.
         */
         about(
             const message_catalog_type& message_catalog,
