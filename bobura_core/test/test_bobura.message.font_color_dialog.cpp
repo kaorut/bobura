@@ -277,7 +277,7 @@ BOOST_AUTO_TEST_SUITE(diagram_font_button_mouse_clicked)
 
 #if !( \
     BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(6, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(6, 4, 0)) \
 )
     BOOST_AUTO_TEST_CASE(operator_paren)
     {
@@ -372,7 +372,7 @@ BOOST_AUTO_TEST_SUITE(timetable_font_button_mouse_clicked)
 
 #if !( \
     BOOST_OS_LINUX && \
-    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(4, 9, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(5, 0, 0)) \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(6, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(6, 4, 0)) \
 )
     BOOST_AUTO_TEST_CASE(operator_paren)
     {

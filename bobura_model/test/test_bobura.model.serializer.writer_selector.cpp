@@ -115,7 +115,7 @@ namespace
             tetengo2::stdalt::make_unique<concrete_writer>(boost::filesystem::path{ TETENGO2_TEXT(".fuga") })
         );
 
-        return std::move(writers);
+        return writers;
     }
 
 

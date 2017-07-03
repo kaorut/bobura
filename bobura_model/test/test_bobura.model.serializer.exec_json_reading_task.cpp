@@ -7,7 +7,6 @@
 */
 
 #include <memory>
-#include <utility>
 
 #include <boost/test/unit_test.hpp>
 
@@ -113,7 +112,7 @@ BOOST_AUTO_TEST_SUITE(exec_json_reading_task)
                     {
                         auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
                         p_timetable->set_line_name(string_type{ TETENGO2_TEXT("hoge") });
-                        return std::move(p_timetable);
+                        return p_timetable;
                     }
                 );
             BOOST_TEST_REQUIRE(p_result.get());
