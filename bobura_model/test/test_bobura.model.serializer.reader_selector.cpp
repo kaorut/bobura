@@ -99,7 +99,7 @@ namespace
 
             p_timetable->set_line_name(m_line_name);
 
-            return std::move(p_timetable);
+            return p_timetable;
         }
 
 
@@ -115,7 +115,7 @@ namespace
         readers.push_back(tetengo2::stdalt::make_unique<concrete_reader>(string_type{ TETENGO2_TEXT("hoge") }));
         readers.push_back(tetengo2::stdalt::make_unique<concrete_reader>(string_type{ TETENGO2_TEXT("fuga") }));
 
-        return std::move(readers);
+        return readers;
     }
 
 
