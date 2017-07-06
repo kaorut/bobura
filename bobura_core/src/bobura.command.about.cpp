@@ -10,7 +10,6 @@
 #include <boost/predef.h>
 
 #include <tetengo2.h>
-#include <tetengo2.detail.h>
 
 #include <bobura/about_dialog.h>
 #include <bobura/command/about.h>
@@ -41,7 +40,7 @@ namespace bobura { namespace command
 
         using settings_type = typename about::settings_type;
 
-        using cursor_details_type = typename about::cursor_details_type;
+        using detail_impl_set_type = typename about::detail_impl_set_type;
 
 
         // constructors and destructor
@@ -49,12 +48,12 @@ namespace bobura { namespace command
         impl(
             const message_catalog_type& message_catalog,
             const settings_type&        settings,
-            const cursor_details_type&  cursor_details
+            const detail_impl_set_type& detail_impl_set
         )
         :
         m_message_catalog(message_catalog),
         m_settings(settings),
-        m_cursor_details(cursor_details)
+        m_detail_impl_set(detail_impl_set)
         {}
 
 
@@ -65,7 +64,7 @@ namespace bobura { namespace command
         {
             boost::ignore_unused(model);
 
-            about_dialog_type{ parent, m_message_catalog, m_settings, m_cursor_details }.do_modal();
+            about_dialog_type{ parent, m_message_catalog, m_settings, m_detail_impl_set }.do_modal();
         }
 
 
@@ -81,7 +80,7 @@ namespace bobura { namespace command
 
         const settings_type& m_settings;
 
-        const cursor_details_type& m_cursor_details;
+        const detail_impl_set_type& m_detail_impl_set;
 
 
     };
@@ -97,10 +96,10 @@ namespace bobura { namespace command
     about<Traits, Position, Dimension, MessageCatalog, DialogTraits>::about(
         const message_catalog_type& message_catalog,
         const settings_type&        settings,
-        const cursor_details_type&  cursor_details
+        const detail_impl_set_type& detail_impl_set
     )
     :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog, settings, cursor_details))
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog, settings, detail_impl_set))
     {}
 
     template <

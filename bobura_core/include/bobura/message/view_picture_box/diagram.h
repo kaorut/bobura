@@ -236,8 +236,8 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;
 
-        //! The cursor details type.
-        using cursor_details_type = tetengo2::detail::base::cursor;
+        //! The detail implementation set type.
+        using detail_impl_set_type = tetengo2::detail::base::impl_set;
 
 
         // constructors and destructor
@@ -245,15 +245,15 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
         /*!
             \brief Creates a mouse moved observer of the picture box.
 
-            \param picture_box    A picture box.
-            \param view           A view.
-            \param cursor_details A cursor detail implementation.
+            \param picture_box     A picture box.
+            \param view            A view.
+            \param detail_impl_set A detail implementation set.
         */
-        mouse_moved(picture_box_type& picture_box, const view_type& view, const cursor_details_type& cursor_details)
+        mouse_moved(picture_box_type& picture_box, const view_type& view, const detail_impl_set_type& detail_impl_set)
         :
         m_picture_box(picture_box),
         m_view(view),
-        m_cursor_details(cursor_details)
+        m_detail_impl_set(detail_impl_set)
         {}
 
 
@@ -282,7 +282,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
                 {
                     m_picture_box.set_cursor(
                         tetengo2::stdalt::make_unique<system_cursor_type>(
-                            system_cursor_type::style_type::hand, m_cursor_details
+                            system_cursor_type::style_type::hand, m_detail_impl_set.cursor_()
                         )
                     );
                 }
@@ -311,7 +311,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
 
         const view_type& m_view;
 
-        const cursor_details_type& m_cursor_details;
+        const detail_impl_set_type& m_detail_impl_set;
 
 
     };

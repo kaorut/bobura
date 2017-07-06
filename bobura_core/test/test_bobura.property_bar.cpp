@@ -10,7 +10,8 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/cursor.h>
+#include <tetengo2.h>
+#include <tetengo2.detail.h>
 
 #include <bobura/property_bar.h>
 #include <bobura/settings.h>
@@ -54,7 +55,7 @@ namespace
             message_catalog_type
         >;
 
-    using cursor_details_type = tetengo2::detail::stub::cursor;
+    using detail_impl_set_type = tetengo2::detail::stub::impl_set;
 
 
 }
@@ -72,7 +73,7 @@ BOOST_AUTO_TEST_SUITE(property_bar)
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const message_catalog_type message_catalog{};
-        const property_bar_type property_bar{ window, settings, message_catalog, cursor_details_type::instance() };
+        const property_bar_type property_bar{ window, settings, message_catalog, detail_impl_set_type::instance() };
 
         settings.clear_config();
     }
@@ -86,7 +87,7 @@ BOOST_AUTO_TEST_SUITE(property_bar)
             const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
             settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
             const message_catalog_type message_catalog{};
-            const property_bar_type property_bar{ window, settings, message_catalog, cursor_details_type::instance() };
+            const property_bar_type property_bar{ window, settings, message_catalog, detail_impl_set_type::instance() };
 
             property_bar.map_box();
 
@@ -97,7 +98,7 @@ BOOST_AUTO_TEST_SUITE(property_bar)
             const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
             settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
             const message_catalog_type message_catalog{};
-            property_bar_type property_bar{ window, settings, message_catalog, cursor_details_type::instance() };
+            property_bar_type property_bar{ window, settings, message_catalog, detail_impl_set_type::instance() };
 
             property_bar.map_box();
 
@@ -113,7 +114,7 @@ BOOST_AUTO_TEST_SUITE(property_bar)
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
         const message_catalog_type message_catalog{};
-        property_bar_type property_bar{ window, settings, message_catalog, cursor_details_type::instance() };
+        property_bar_type property_bar{ window, settings, message_catalog, detail_impl_set_type::instance() };
 
         property_bar.save_settings();
 

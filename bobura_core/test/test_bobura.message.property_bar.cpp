@@ -9,7 +9,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.gui.h>
-#include <tetengo2/detail/stub/cursor.h>
+#include <tetengo2.detail.h>
 
 #include <bobura/message/property_bar.h>
 #include <bobura/type_list.h>
@@ -27,7 +27,7 @@ namespace
 
     using side_bar_type = ui_type_list_type::side_bar_type;
 
-    using cursor_details_type = tetengo2::detail::stub::cursor;
+    using detail_impl_set_type = tetengo2::detail::stub::impl_set;
 
     using map_box_type = ui_type_list_type::map_box_type;
 
@@ -58,8 +58,8 @@ BOOST_AUTO_TEST_SUITE(resized)
         BOOST_TEST_PASSPOINT();
 
         window_type window{};
-        side_bar_type side_bar{ window, cursor_details_type::instance() };
-        map_box_type map_box{ side_bar, cursor_details_type::instance() };
+        side_bar_type side_bar{ window, detail_impl_set_type::instance().cursor_() };
+        map_box_type map_box{ side_bar, detail_impl_set_type::instance().cursor_() };
         const resized_type observer(side_bar, map_box);
     }
 
@@ -68,8 +68,8 @@ BOOST_AUTO_TEST_SUITE(resized)
         BOOST_TEST_PASSPOINT();
 
         window_type window{};
-        side_bar_type side_bar{ window, cursor_details_type::instance() };
-        map_box_type map_box{ side_bar, cursor_details_type::instance() };
+        side_bar_type side_bar{ window, detail_impl_set_type::instance().cursor_() };
+        map_box_type map_box{ side_bar, detail_impl_set_type::instance().cursor_() };
         const resized_type observer(side_bar, map_box);
 
         observer();
@@ -85,8 +85,8 @@ BOOST_AUTO_TEST_SUITE(mouse_pressed)
         BOOST_TEST_PASSPOINT();
 
         window_type window{};
-        side_bar_type side_bar{ window, cursor_details_type::instance() };
-        map_box_type map_box{ side_bar, cursor_details_type::instance() };
+        side_bar_type side_bar{ window, detail_impl_set_type::instance().cursor_() };
+        map_box_type map_box{ side_bar, detail_impl_set_type::instance().cursor_() };
         const mouse_pressed_type observer{ map_box };
     }
 
@@ -95,8 +95,8 @@ BOOST_AUTO_TEST_SUITE(mouse_pressed)
         BOOST_TEST_PASSPOINT();
 
         window_type window{};
-        side_bar_type side_bar{ window, cursor_details_type::instance() };
-        map_box_type map_box{ side_bar, cursor_details_type::instance() };
+        side_bar_type side_bar{ window, detail_impl_set_type::instance().cursor_() };
+        map_box_type map_box{ side_bar, detail_impl_set_type::instance().cursor_() };
         const mouse_pressed_type observer{ map_box };
 
         observer(mouse_button_type::left, position_type{ left_type{ 42 }, top_type{ 24 } }, false, false, false);

@@ -11,7 +11,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2/detail/stub/cursor.h>
+#include <tetengo2.detail.h>
 
 #include <bobura/command/about.h>
 #include <bobura/settings.h>
@@ -51,7 +51,7 @@ namespace
             traits_type_list_type::dialog_type
         >;
 
-    using cursor_details_type = tetengo2::detail::stub::cursor;
+    using detail_impl_set_type = tetengo2::detail::stub::impl_set;
 
 
 }
@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_SUITE(about)
             std::vector<string_type>{1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
             string_type{ TETENGO2_TEXT("test_bobura") }
         };
-        const about_command_type command{ message_catalog, settings, cursor_details_type::instance() };
+        const about_command_type command{ message_catalog, settings, detail_impl_set_type::instance() };
     }
 
 
