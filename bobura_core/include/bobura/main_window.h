@@ -108,8 +108,8 @@ namespace bobura
         //! The file save confirmation type.
         using confirm_file_save_type = load_save::confirm_file_save<load_save_traits_type>;
 
-        //! The cursor details type.
-        using cursor_details_type = tetengo2::detail::base::cursor;
+        //! The detail implementation set type.
+        using detail_impl_set_type = tetengo2::detail::base::impl_set;
 
 
         // constructors and destructor
@@ -117,16 +117,16 @@ namespace bobura
         /*!
             \brief Creates a main window.
 
-            \param message_catalog   A message catalog.
-            \param settings          Settings.
-            \param confirm_file_save A file save confirmation.
-            \param cursor_details    A cursor detail implementation.
+            \param message_catalog      A message catalog.
+            \param settings             Settings.
+            \param confirm_file_save    A file save confirmation.
+            \param detail_impl_set_type A detail implementation set.
         */
         main_window(
             const message_catalog_type&   message_catalog,
             settings_type&                settings,
             const confirm_file_save_type& confirm_file_save,
-            const cursor_details_type&    cursor_details
+            const detail_impl_set_type&   detail_impl_set
         );
 
         /*!

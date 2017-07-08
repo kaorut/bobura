@@ -56,7 +56,7 @@ namespace bobura
 
         using confirm_file_save_type = typename main_window::confirm_file_save_type;
 
-        using cursor_details_type = typename main_window::cursor_details_type;
+        using detail_impl_set_type = typename main_window::detail_impl_set_type;
 
 
         // constructors and destructor
@@ -66,7 +66,7 @@ namespace bobura
             const message_catalog_type&   message_catalog,
             settings_type&                settings,
             const confirm_file_save_type& confirm_file_save,
-            const cursor_details_type&    cursor_details
+            const detail_impl_set_type&   detail_impl_set
         )
         :
         m_base(base),
@@ -79,7 +79,7 @@ namespace bobura
         m_settings(settings),
         m_confirm_file_save(confirm_file_save)
         {
-            initialize_window(cursor_details);
+            initialize_window(detail_impl_set);
         }
 
 
@@ -224,7 +224,7 @@ namespace bobura
 
         // functions
 
-        void initialize_window(const cursor_details_type& cursor_details)
+        void initialize_window(const detail_impl_set_type& detail_impl_set)
         {
             m_p_tab_frame = tetengo2::stdalt::make_unique<tab_frame_type>(m_base);
 
@@ -240,7 +240,7 @@ namespace bobura
 
             m_p_property_bar =
                 tetengo2::stdalt::make_unique<property_bar_type>(
-                    m_base, m_settings, m_message_catalog, cursor_details
+                    m_base, m_settings, m_message_catalog, detail_impl_set
                 );
 
             set_message_observers();
@@ -306,11 +306,11 @@ namespace bobura
         const message_catalog_type&   message_catalog,
         settings_type&                settings,
         const confirm_file_save_type& confirm_file_save,
-        const cursor_details_type&    cursor_details
+        const detail_impl_set_type&   detail_impl_set
     )
     :
     base_type(base_type::scroll_bar_style_type::none, true),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, confirm_file_save, cursor_details))
+    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, confirm_file_save, detail_impl_set))
     {}
 
     template <typename Traits, typename CommandSetTraits>

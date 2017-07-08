@@ -89,7 +89,7 @@ namespace
 
     int run_application(settings_type& settings)
     {
-        return application_type(settings, tetengo2::detail::windows::cursor::instance()).run();
+        return application_type(settings, tetengo2::detail::impl_set::instance()).run();
     }
 
 
@@ -130,17 +130,17 @@ noexcept
     }
     catch (const boost::exception& e)
     {
-        alert_type{ tetengo2::detail::alert::instance() }(e);
+        alert_type{ tetengo2::detail::impl_set::instance().alert_() }(e);
         return 1;
     }
     catch (const std::exception& e)
     {
-        alert_type{ tetengo2::detail::alert::instance() }(e);
+        alert_type{ tetengo2::detail::impl_set::instance().alert_() }(e);
         return 1;
     }
     catch (...)
     {
-        alert_type{ tetengo2::detail::alert::instance() }();
+        alert_type{ tetengo2::detail::impl_set::instance().alert_() }();
         return 2;
     }
 }

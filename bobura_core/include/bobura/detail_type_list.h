@@ -13,7 +13,6 @@
 
 #include <tetengo2/detail/stub/alert.h>
 #include <tetengo2/detail/stub/common_dialog.h>
-#include <tetengo2/detail/stub/cursor.h>
 #include <tetengo2/detail/stub/drawing.h>
 #include <tetengo2/detail/stub/gui_fixture.h>
 #include <tetengo2/detail/stub/icon.h>
@@ -32,7 +31,6 @@
 #   include <tetengo2/detail/windows/alert.h>
 #   include <tetengo2/detail/windows/common_dialog.h>
 #   include <tetengo2/detail/windows/config.h>
-#   include <tetengo2/detail/windows/cursor.h>
 #   include <tetengo2/detail/windows/direct2d/drawing.h>
 #   include <tetengo2/detail/windows/encoding.h>
 #   include <tetengo2/detail/windows/gdiplus/drawing.h>
@@ -71,8 +69,6 @@ namespace bobura { namespace type_list
             using common_dialog_type = tetengo2::detail::windows::common_dialog;
 
             using config_type = tetengo2::detail::windows::config;
-
-            using cursor_type = tetengo2::detail::windows::cursor;
 
             using drawing_type = tetengo2::detail::windows::gdiplus::drawing;
 
@@ -124,8 +120,6 @@ namespace bobura { namespace type_list
 #else
             using config_type = tetengo2::detail::unixos::config;
 #endif
-
-            using cursor_type = tetengo2::detail::stub::cursor;
 
             using drawing_type = tetengo2::detail::stub::drawing;
 
@@ -185,9 +179,6 @@ namespace bobura { namespace type_list
 
         //! The detail implementation type of the configuration.
         using config_type = detail::detail::application::config_type;
-
-        //! The detail implementation type of the cursor.
-        using cursor_type = detail::detail::application::cursor_type;
 
         //! The detail implementation type of the drawing.
         using drawing_type = detail::detail::application::drawing_type;
@@ -253,9 +244,6 @@ namespace bobura { namespace type_list
 
         //! The detail implementation type of the configuration.
         using config_type = detail::detail::test::config_type;
-
-        //! The detail implementation type of the cursor.
-        using cursor_type = detail::detail::test::cursor_type;
 
         //! The detail implementation type of the drawing.
         using drawing_type = detail::detail::test::drawing_type;

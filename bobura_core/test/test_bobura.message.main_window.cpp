@@ -12,7 +12,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2/detail/stub/cursor.h>
+#include <tetengo2.detail.h>
 
 #include <bobura/command/nop.h>
 #include <bobura/diagram_view.h>
@@ -105,7 +105,7 @@ namespace
             message_catalog_type
         >;
 
-    using cursor_details_type = tetengo2::detail::stub::cursor;
+    using detail_impl_set_type = tetengo2::detail::stub::impl_set;
 
     using popup_menu_selected_type =
         bobura::message::main_window::popup_menu_selected<popup_menu_type, command_type, model_type>;
@@ -230,7 +230,7 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         view_picture_box_type timetable_up_view_picture_box{ tab_frame };
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-        property_bar_type property_bar{ window, settings, message_catalog, cursor_details_type::instance() };
+        property_bar_type property_bar{ window, settings, message_catalog, detail_impl_set_type::instance() };
         const window_resized_type observer{
             diagram_view,
             timetable_down_view,
@@ -262,7 +262,7 @@ BOOST_AUTO_TEST_SUITE(window_resized)
         view_picture_box_type timetable_up_view_picture_box{ tab_frame };
         const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-        property_bar_type property_bar{ window, settings, message_catalog, cursor_details_type::instance() };
+        property_bar_type property_bar{ window, settings, message_catalog, detail_impl_set_type::instance() };
         const window_resized_type observer{
             diagram_view,
             timetable_down_view,

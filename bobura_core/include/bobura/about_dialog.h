@@ -54,8 +54,8 @@ namespace bobura
         //! The settings type.
         using settings_type = settings<string_type, position_type, dimension_type>;
 
-        //! The corsor details type.
-        using cursor_details_type = tetengo2::detail::base::cursor;
+        //! The detail implementation set type.
+        using detail_impl_set_type = tetengo2::detail::base::impl_set;
 
 
         // constructors and destructor
@@ -66,13 +66,13 @@ namespace bobura
             \param parent          A parent window.
             \param message_catalog A message catalog.
             \param settings        Settings.
-            \param cursor_details  A cursor detail implementation.
+            \param detail_impl_set A detail implementation set.
         */
         about_dialog(
             abstract_window_type&       parent,
             const message_catalog_type& message_catalog,
             const settings_type&        settings,
-            const cursor_details_type&  cursor_details
+            const detail_impl_set_type& detail_impl_set
         );
 
         /*!

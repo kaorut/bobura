@@ -71,8 +71,8 @@ namespace bobura { namespace command
         //! The settings type.
         using settings_type = settings<string_type, position_type, dimension_type>;
 
-        //! The cursor details type.
-        using cursor_details_type = tetengo2::detail::base::cursor;
+        //! The detail implementation set type.
+        using detail_impl_set_type = tetengo2::detail::base::impl_set;
 
 
         // constructors and destructor
@@ -82,12 +82,12 @@ namespace bobura { namespace command
 
             \param message_catalog A message catalog.
             \param settings        Settings type.
-            \param cursor_details  A cursor detail implementation.
+            \param detail_impl_set A detail implementation set.
         */
         about(
             const message_catalog_type& message_catalog,
             const settings_type&        settings,
-            const cursor_details_type&  cursor_details
+            const detail_impl_set_type& detail_impl_set
         );
 
         /*!

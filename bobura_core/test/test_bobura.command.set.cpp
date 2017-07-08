@@ -12,7 +12,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2/detail/stub/cursor.h>
+#include <tetengo2.detail.h>
 
 #include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
@@ -78,7 +78,7 @@ namespace
 
     using command_set_type = bobura::command::set<traits_type_list_type::command_set_type>;
 
-    using cursor_details_type = tetengo2::detail::stub::cursor;
+    using detail_impl_set_type = tetengo2::detail::stub::impl_set;
 
 
 }
@@ -115,7 +115,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
     }
 
@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.about();
@@ -177,7 +177,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.ask_file_path_and_save_to_file();
@@ -209,7 +209,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.exit();
@@ -241,7 +241,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.file_property();
@@ -273,7 +273,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.font_color();
@@ -305,7 +305,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.horizontally_zoom_in();
@@ -337,7 +337,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.horizontally_zoom_out();
@@ -369,7 +369,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.load_from_file();
@@ -401,7 +401,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         const boost::filesystem::path path{ string_type{ TETENGO2_TEXT("hoge.txt") } };
@@ -434,7 +434,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.new_file();
@@ -466,7 +466,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.nop();
@@ -498,7 +498,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.open_www_tetengo_org();
@@ -530,7 +530,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.reload();
@@ -562,7 +562,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.save_to_file();
@@ -594,7 +594,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         const scale_list_type scale_list{};
@@ -628,7 +628,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         const scale_list_type scale_list{};
@@ -662,7 +662,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.show_diagram();
@@ -694,7 +694,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.show_timetable_down();
@@ -726,7 +726,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.show_timetable_up();
@@ -758,7 +758,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.train_kind();
@@ -790,7 +790,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.vertically_zoom_in();
@@ -822,7 +822,7 @@ BOOST_AUTO_TEST_SUITE(set)
             diagram_view,
             settings,
             message_catalog,
-            cursor_details_type::instance()
+            detail_impl_set_type::instance()
         };
 
         command_set.vertically_zoom_out();
