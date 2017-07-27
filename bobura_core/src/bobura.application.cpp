@@ -61,7 +61,7 @@ namespace bobura
 
         impl(settings_type& settings, const detail_impl_set_type& detail_impl_set)
         :
-        m_gui_fixture(),
+        m_gui_fixture(detail_impl_set.create_gui_fixture()),
         m_settings(settings),
         m_model(),
         m_p_input_file_load_timer(),
