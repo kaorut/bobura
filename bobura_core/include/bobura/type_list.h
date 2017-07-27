@@ -905,8 +905,7 @@ namespace bobura { namespace type_list
                 diagram_view_traits_type<DetailTypeList>
             >;
 
-        template <typename DetailTypeList>
-        using gui_fixture_type = tetengo2::gui::fixture<typename DetailTypeList::gui_fixture_type>;
+        using gui_fixture_type = tetengo2::gui::fixture;
 
         template <typename DetailTypeList>
         using message_loop_type =
@@ -928,7 +927,7 @@ namespace bobura { namespace type_list
                 operating_distance_type,
                 speed_type,
                 scale_type,
-                gui_fixture_type<DetailTypeList>,
+                gui_fixture_type,
                 fast_font_type<DetailTypeList>,
                 abstract_window_type<DetailTypeList>,
                 picture_box_type<DetailTypeList>,
