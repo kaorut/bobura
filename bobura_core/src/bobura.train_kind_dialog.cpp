@@ -36,14 +36,15 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
-    class train_kind_dialog<Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::impl :
-        private boost::noncopyable
+    class train_kind_dialog<
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
+    >::impl : private boost::noncopyable
     {
     public:
         // types
@@ -64,7 +65,7 @@ namespace bobura
 
         using font_dialog_type = typename train_kind_dialog::font_dialog_type;
 
-        using point_unit_size_type = typename train_kind_dialog::point_unit_size_type;
+        using point_dimension_unit_type = typename train_kind_dialog::point_dimension_unit_type;
 
         using color_dialog_type = typename train_kind_dialog::color_dialog_type;
 
@@ -1032,7 +1033,7 @@ namespace bobura
             stream <<
                 boost::basic_format<typename string_type::value_type>(string_type{ TETENGO2_TEXT("%s, %dpt") }) %
                 font.family() %
-                boost::rational_cast<int>(point_unit_size_type::from_pixels(font.size()).value());
+                boost::rational_cast<int>(point_dimension_unit_type::from_pixels(font.size()).value());
 
             return stream.str();
         }
@@ -1046,14 +1047,14 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::info_set_type(
         boost::optional<size_type> original_index,
         const bool                 referred,
@@ -1071,7 +1072,7 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
@@ -1079,11 +1080,11 @@ namespace bobura
     >
     const boost::optional<
         typename train_kind_dialog<
-            Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+            Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
         >::size_type
     >&
     train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::original_index()
     const
     {
@@ -1095,14 +1096,14 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     bool train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::referred()
     const
     {
@@ -1114,17 +1115,17 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     const typename train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::train_kind_type&
     train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::train_kind()
     const
     {
@@ -1136,17 +1137,17 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     typename train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::train_kind_type&
     train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::train_kind()
     {
         return m_train_kind;
@@ -1157,14 +1158,14 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::train_kind_dialog(
         abstract_window_type&       parent,
         const color_type&           background_color,
@@ -1181,14 +1182,14 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::~train_kind_dialog()
     noexcept
     {}
@@ -1198,7 +1199,7 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
@@ -1206,10 +1207,10 @@ namespace bobura
     >
     const std::vector<
         typename train_kind_dialog<
-            Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+            Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
         >::info_set_type
     >
-    train_kind_dialog<Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::info_sets()
+    train_kind_dialog<Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::info_sets()
     const
     {
         return m_p_impl->info_sets();
@@ -1220,14 +1221,14 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     void train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::set_info_sets(
         std::vector<info_set_type> info_sets
     )
@@ -1240,14 +1241,14 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     void train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::do_modal_impl()
     {
         m_p_impl->do_modal_impl();
@@ -1294,7 +1295,7 @@ namespace bobura
         typename application::common_type_list_type::size_type,
         typename application::common_type_list_type::string_type,
         typename application::ui_type_list_type::fast_font_type,
-        typename application::ui_type_list_type::point_unit_size_type,
+        typename application::ui_type_list_type::point_dimension_unit_type,
         typename application::ui_type_list_type::color_type,
         typename application::ui_type_list_type::fast_canvas_type,
         typename application::common_dialog_type_list_type::font_type,
@@ -1307,7 +1308,7 @@ namespace bobura
         typename test::common_type_list_type::size_type,
         typename test::common_type_list_type::string_type,
         typename test::ui_type_list_type::font_type,
-        typename test::ui_type_list_type::point_unit_size_type,
+        typename test::ui_type_list_type::point_dimension_unit_type,
         typename test::ui_type_list_type::color_type,
         typename test::ui_type_list_type::fast_canvas_type,
         typename test::common_dialog_type_list_type::font_type,

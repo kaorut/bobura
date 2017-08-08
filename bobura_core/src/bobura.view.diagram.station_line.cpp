@@ -322,7 +322,7 @@ namespace bobura { namespace view { namespace diagram
         void draw_on_impl(canvas_type& canvas)
         const
         {
-            canvas.set_line_width(normal_line_width<unit_size_type>());
+            canvas.set_line_width(normal_line_width<dimension_unit_type>());
             canvas.set_line_style(canvas_type::line_style_type::solid);
 
             for (const auto& station_line: m_station_lines)
@@ -363,7 +363,7 @@ namespace bobura { namespace view { namespace diagram
 
         using station_grade_type = typename station_type::grade_type;
 
-        using unit_size_type = typename canvas_type::unit_size_type;
+        using dimension_unit_type = typename canvas_type::dimension_unit_type;
 
         using station_grade_type_set_type = model::station_info::grade_type_set<string_type>;
 

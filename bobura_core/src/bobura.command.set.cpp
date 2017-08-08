@@ -62,7 +62,7 @@ namespace bobura { namespace command
 
         using color_type = typename set::color_type;
 
-        using point_unit_size_type = typename set::point_unit_size_type;
+        using point_dimension_unit_type = typename set::point_dimension_unit_type;
 
         using canvas_type = typename set::canvas_type;
 
@@ -327,7 +327,7 @@ namespace bobura { namespace command
                     command::font_color<
                         command_traits_type,
                         dialog_type,
-                        point_unit_size_type,
+                        point_dimension_unit_type,
                         color_type,
                         canvas_type,
                         font_dialog_type,
@@ -471,7 +471,7 @@ namespace bobura { namespace command
                     command::train_kind<
                         command_traits_type,
                         dialog_type,
-                        point_unit_size_type,
+                        point_dimension_unit_type,
                         color_type,
                         canvas_type,
                         font_dialog_type,

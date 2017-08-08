@@ -43,8 +43,8 @@ namespace bobura { namespace view { namespace diagram
         //! The canvas type.
         using canvas_type = typename traits_type::canvas_type;
 
-        //! The size type.
-        using unit_size_type = typename canvas_type::unit_size_type;
+        //! The dimension unit type.
+        using dimension_unit_type = typename canvas_type::dimension_unit_type;
 
         //! The position type.
         using position_type = typename canvas_type::position_type;
@@ -73,7 +73,7 @@ namespace bobura { namespace view { namespace diagram
             position_unit_type         left,
             const position_unit_type&  top,
             const position_unit_type&  bottom,
-            unit_size_type             width,
+            dimension_unit_type        width,
             boost::optional<size_type> hours
         );
 

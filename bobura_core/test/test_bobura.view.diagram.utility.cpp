@@ -49,7 +49,7 @@ namespace
 
     using time_type = bobura::model::train_info::time<size_type, difference_type>;
 
-    using unit_size_type = canvas_type::unit_size_type;
+    using dimension_unit_type = canvas_type::dimension_unit_type;
 
 
 }
@@ -89,21 +89,21 @@ BOOST_AUTO_TEST_SUITE(diagram)
     {
         BOOST_TEST_PASSPOINT();
 
-        bobura::view::diagram::normal_line_width<unit_size_type>();
+        bobura::view::diagram::normal_line_width<dimension_unit_type>();
     }
 
     BOOST_AUTO_TEST_CASE(bold_line_width)
     {
         BOOST_TEST_PASSPOINT();
 
-        bobura::view::diagram::bold_line_width<unit_size_type>();
+        bobura::view::diagram::bold_line_width<dimension_unit_type>();
     }
 
     BOOST_AUTO_TEST_CASE(selected_line_margin)
     {
         BOOST_TEST_PASSPOINT();
 
-        bobura::view::diagram::selected_line_margin<unit_size_type>();
+        bobura::view::diagram::selected_line_margin<dimension_unit_type>();
     }
 
     BOOST_AUTO_TEST_CASE(draw_selectable_line)

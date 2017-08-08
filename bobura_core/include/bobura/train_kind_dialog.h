@@ -24,22 +24,22 @@ namespace bobura
     /*!
         \brief The class template for the train kind dialog.
 
-        \tparam Traits        A traits type.
-        \tparam Size          A size type.
-        \tparam String        A string type.
-        \tparam Font          A font type.
-        \tparam PointUnitSize A point unit size type.
-        \tparam Color         A color type.
-        \tparam Canvas        A canvas type.
-        \tparam FontDialog    A font dialog type.
-        \tparam ColorDialog   A color dialog type.
+        \tparam Traits             A traits type.
+        \tparam Size               A size type.
+        \tparam String             A string type.
+        \tparam Font               A font type.
+        \tparam PointDimensionUnit A point dimension unit type.
+        \tparam Color              A color type.
+        \tparam Canvas             A canvas type.
+        \tparam FontDialog         A font dialog type.
+        \tparam ColorDialog        A color dialog type.
     */
     template <
         typename Traits,
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
@@ -71,8 +71,8 @@ namespace bobura
         //! The font type.
         using font_type = Font;
 
-        //! The point unit size type.
-        using point_unit_size_type = PointUnitSize;
+        //! The point dimension unit type.
+        using point_dimension_unit_type = PointDimensionUnit;
 
         //! The color type.
         using color_type = Color;

@@ -115,7 +115,7 @@ namespace bobura { namespace view { namespace diagram
         base_type* p_item_by_position_impl(train_line_fragment& self, const position_type& position)
         {
             return
-                calculate_distance(position, m_departure, m_arrival) <= selected_line_margin<unit_size_type>() ?
+                calculate_distance(position, m_departure, m_arrival) <= selected_line_margin<dimension_unit_type>() ?
                 &self : nullptr;
         }
 
@@ -161,7 +161,7 @@ namespace bobura { namespace view { namespace diagram
 
         using dimension_unit_type = typename dimension_type::unit_type;
 
-        using unit_size_type = typename canvas_type::unit_size_type;
+        using dimension_unit_type = typename canvas_type::dimension_unit_type;
 
         using geo_vector_type = std::pair<double, double>;
 
@@ -224,7 +224,8 @@ namespace bobura { namespace view { namespace diagram
                     const auto left =
                         departure.left() +
                         typename position_unit_type::value_type{
-                            static_cast<typename position_unit_type::value_type::int_type>(left_diff * 0x10000), 0x10000
+                            static_cast<typename position_unit_type::value_type::int_type>(left_diff * 0x10000),
+                            0x10000
                         };
 
                     return { left, departure.top() };
@@ -250,7 +251,7 @@ namespace bobura { namespace view { namespace diagram
             }
         }
 
-        static unit_size_type calculate_distance(
+        static dimension_unit_type calculate_distance(
             const position_type& point,
             const position_type& line_segment_begin,
             const position_type& line_segment_end
@@ -280,12 +281,12 @@ namespace bobura { namespace view { namespace diagram
                 };
         }
 
-        static unit_size_type to_size(const double value)
+        static dimension_unit_type to_size(const double value)
         {
             return
-                unit_size_type{
-                    typename unit_size_type::value_type{
-                        static_cast<typename unit_size_type::value_type::int_type>(value * 256.0), 256
+                dimension_unit_type{
+                    typename dimension_unit_type::value_type{
+                        static_cast<typename dimension_unit_type::value_type::int_type>(value * 256.0), 256
                     }
                 };
         }
@@ -523,7 +524,7 @@ namespace bobura { namespace view { namespace diagram
             canvas.set_color(m_p_train_kind->diagram_color());
             canvas.set_line_width(
                 m_p_train_kind->diagram_line_weight() == train_kind_type::weight_type::bold ?
-                bold_line_width<unit_size_type>() : normal_line_width<unit_size_type>()
+                bold_line_width<dimension_unit_type>() : normal_line_width<dimension_unit_type>()
             );
             canvas.set_line_style(translate_line_style(m_p_train_kind->diagram_line_style()));
 
@@ -555,7 +556,7 @@ namespace bobura { namespace view { namespace diagram
 
         using direction_type = typename train_type::direction_type;
 
-        using unit_size_type = typename canvas_type::unit_size_type;
+        using dimension_unit_type = typename canvas_type::dimension_unit_type;
 
         using stop_type = typename train_type::stop_type;
 

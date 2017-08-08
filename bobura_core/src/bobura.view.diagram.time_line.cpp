@@ -37,7 +37,7 @@ namespace bobura { namespace view { namespace diagram
 
         using canvas_type = typename traits_type::canvas_type;
 
-        using unit_size_type = typename time_line::unit_size_type;
+        using dimension_unit_type = typename time_line::dimension_unit_type;
 
         using position_type = typename time_line::position_type;
 
@@ -53,7 +53,7 @@ namespace bobura { namespace view { namespace diagram
             position_unit_type         left,
             const position_unit_type&  top,
             const position_unit_type&  bottom,
-            unit_size_type             width,
+            dimension_unit_type             width,
             boost::optional<size_type> hours
         )
         :
@@ -116,7 +116,7 @@ namespace bobura { namespace view { namespace diagram
 
         position_unit_type m_bottom;
 
-        unit_size_type m_width;
+        dimension_unit_type m_width;
 
         boost::optional<size_type> m_hours;
 
@@ -130,7 +130,7 @@ namespace bobura { namespace view { namespace diagram
         position_unit_type         left,
         const position_unit_type&  top,
         const position_unit_type&  bottom,
-        unit_size_type             width,
+        dimension_unit_type             width,
         boost::optional<size_type> hours
     )
     :
@@ -277,7 +277,7 @@ namespace bobura { namespace view { namespace diagram
 
         using time_line_type = time_line<traits_type>;
 
-        using unit_size_type = typename canvas_type::unit_size_type;
+        using dimension_unit_type = typename canvas_type::dimension_unit_type;
 
 
         // static functions
@@ -351,7 +351,7 @@ namespace bobura { namespace view { namespace diagram
                         std::move(position),
                         header_bottom,
                         line_bottom,
-                        normal_line_width<unit_size_type>(),
+                        normal_line_width<dimension_unit_type>(),
                         boost::make_optional(hours)
                     );
                 }
@@ -364,7 +364,7 @@ namespace bobura { namespace view { namespace diagram
                             std::move(position),
                             canvas_top,
                             line_bottom,
-                            normal_line_width<unit_size_type>() / 2,
+                            normal_line_width<dimension_unit_type>() / 2,
                             boost::none
                         );
                     }
@@ -378,7 +378,7 @@ namespace bobura { namespace view { namespace diagram
                             std::move(position),
                             canvas_top,
                             line_bottom,
-                            normal_line_width<unit_size_type>() / 4,
+                            normal_line_width<dimension_unit_type>() / 4,
                             boost::none
                         );
                     }
@@ -392,7 +392,7 @@ namespace bobura { namespace view { namespace diagram
                             std::move(position),
                             canvas_top,
                             line_bottom,
-                            normal_line_width<unit_size_type>() / 4,
+                            normal_line_width<dimension_unit_type>() / 4,
                             boost::none
                         );
                     }

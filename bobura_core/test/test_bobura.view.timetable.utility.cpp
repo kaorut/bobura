@@ -22,7 +22,7 @@ namespace
 
     using canvas_type = ui_type_list_type::canvas_type;
 
-    using unit_size_type = canvas_type::unit_size_type;
+    using dimension_unit_type = canvas_type::dimension_unit_type;
 
 
 }
@@ -36,7 +36,7 @@ BOOST_AUTO_TEST_SUITE(timetable)
     {
         BOOST_TEST_PASSPOINT();
 
-        bobura::view::timetable::normal_line_width<unit_size_type>();
+        bobura::view::timetable::normal_line_width<dimension_unit_type>();
     }
 
 

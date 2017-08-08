@@ -82,7 +82,7 @@ namespace bobura { namespace view { namespace diagram
         {
             using color_type = typename Canvas::color_type;
             using line_style_type = typename Canvas::line_style_type;
-            using unit_size_type = typename Canvas::unit_size_type;
+            using dimension_unit_type = typename Canvas::dimension_unit_type;
 
             auto original_color = canvas.get_color();
             const auto original_line_style = canvas.line_style();
@@ -93,10 +93,10 @@ namespace bobura { namespace view { namespace diagram
             );
             canvas.set_line_style(line_style_type::solid);
 
-            canvas.set_line_width(original_line_width + selected_line_margin<unit_size_type>() * 2);
+            canvas.set_line_width(original_line_width + selected_line_margin<dimension_unit_type>() * 2);
             canvas.draw_line(from, to);
 
-            canvas.set_line_width(original_line_width + selected_line_margin<unit_size_type>());
+            canvas.set_line_width(original_line_width + selected_line_margin<dimension_unit_type>());
             canvas.draw_line(from, to);
 
             canvas.set_color(std::move(original_color));
@@ -127,7 +127,7 @@ namespace bobura { namespace view { namespace diagram
 
             using canvas_type = application::traits_type_list_type::diagram_view_type::canvas_type;
 
-            using unit_size_type = canvas_type::unit_size_type;
+            using dimension_unit_type = canvas_type::dimension_unit_type;
 
         }
 #endif
@@ -148,7 +148,7 @@ namespace bobura { namespace view { namespace diagram
 
             using canvas_type = test::traits_type_list_type::diagram_view_type::canvas_type;
 
-            using unit_size_type = canvas_type::unit_size_type;
+            using dimension_unit_type = canvas_type::dimension_unit_type;
 
         }
 
@@ -172,13 +172,13 @@ namespace bobura { namespace view { namespace diagram
         const application::position_unit_type&
     );
 
-    template application::unit_size_type normal_line_width();
+    template application::dimension_unit_type normal_line_width();
 
-    template application::unit_size_type bold_line_width();
+    template application::dimension_unit_type bold_line_width();
 
     template application::position_unit_type selected_line_margin();
 
-    template application::unit_size_type selected_line_margin();
+    template application::dimension_unit_type selected_line_margin();
 
     template void draw_selectable_line(
         application::canvas_type&,
@@ -206,13 +206,13 @@ namespace bobura { namespace view { namespace diagram
         const test::position_unit_type&
     );
 
-    template test::unit_size_type normal_line_width();
+    template test::dimension_unit_type normal_line_width();
 
-    template test::unit_size_type bold_line_width();
+    template test::dimension_unit_type bold_line_width();
 
     template test::position_unit_type selected_line_margin();
 
-    template test::unit_size_type selected_line_margin();
+    template test::dimension_unit_type selected_line_margin();
 
     template void draw_selectable_line(
         test::canvas_type&,

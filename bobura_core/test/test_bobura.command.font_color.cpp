@@ -34,7 +34,7 @@ namespace
         bobura::command::font_color<
             traits_type_list_type::command_type,
             ui_type_list_type::dialog_type,
-            ui_type_list_type::point_unit_size_type,
+            ui_type_list_type::point_dimension_unit_type,
             ui_type_list_type::color_type,
             ui_type_list_type::fast_canvas_type,
             common_dialog_type_list_type::font_type,

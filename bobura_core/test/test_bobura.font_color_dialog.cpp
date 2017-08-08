@@ -44,7 +44,7 @@ namespace
             traits_type_list_type::dialog_type,
             common_type_list_type::size_type,
             font_type,
-            ui_type_list_type::point_unit_size_type,
+            ui_type_list_type::point_dimension_unit_type,
             color_type,
             ui_type_list_type::canvas_type,
             common_dialog_type_list_type::font_type,

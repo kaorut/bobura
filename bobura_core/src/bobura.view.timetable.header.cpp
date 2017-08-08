@@ -525,7 +525,7 @@ namespace bobura { namespace view { namespace timetable
         void draw_on_impl(canvas_type& canvas, const header& base)
         const
         {
-            canvas.set_line_width(normal_line_width<unit_size_type>());
+            canvas.set_line_width(normal_line_width<dimension_unit_type>());
             canvas.set_line_style(canvas_type::line_style_type::solid);
             canvas.set_color(*m_p_general_color);
 
@@ -568,7 +568,7 @@ namespace bobura { namespace view { namespace timetable
 
         using dimension_unit_type = typename dimension_type::unit_type;
 
-        using unit_size_type = typename canvas_type::unit_size_type;
+        using dimension_unit_type = typename canvas_type::dimension_unit_type;
 
 
         // static functions

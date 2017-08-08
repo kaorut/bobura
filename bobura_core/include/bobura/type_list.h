@@ -547,7 +547,7 @@ namespace bobura { namespace type_list
         //! The picture box type.
         using picture_box_type = detail::ui::picture_box_type<DetailTypeList>;
 
-        //! The point unit size type.
+        //! The point dimension unit type.
         using point_dimension_unit_type = detail::ui::point_dimension_unit_type<DetailTypeList>;
 
         //! The popup menu type.
