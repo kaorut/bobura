@@ -15,7 +15,6 @@
 #include <bobura/model/train_info/time_span.h>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/utility.h>
@@ -120,9 +119,7 @@ namespace bobura { namespace view { namespace diagram
 
             using position_type = application::traits_type_list_type::diagram_view_type::canvas_type::position_type;
 
-            using left_type = tetengo2::gui::position<position_type>::left_type;
-
-            using top_type = tetengo2::gui::position<position_type>::left_type;
+            using position_unit_type = position_type::unit_type;
 
             using size_type = application::traits_type_list_type::diagram_view_type::size_type;
 
@@ -143,9 +140,7 @@ namespace bobura { namespace view { namespace diagram
 
             using position_type = test::traits_type_list_type::diagram_view_type::canvas_type::position_type;
 
-            using left_type = tetengo2::gui::position<position_type>::left_type;
-
-            using top_type = tetengo2::gui::position<position_type>::top_type;
+            using position_unit_type = position_type::unit_type;
 
             using size_type = test::traits_type_list_type::diagram_view_type::size_type;
 
@@ -160,28 +155,28 @@ namespace bobura { namespace view { namespace diagram
     }
 
 #if BOOST_COMP_MSVC
-    template application::left_type time_to_left(
+    template application::position_unit_type time_to_left(
         const model::train_info::time<application::size_type, application::difference_type>&,
         const model::train_info::time_span<application::difference_type>&,
         int,
-        const application::left_type&,
-        const application::left_type&,
-        const application::left_type&
+        const application::position_unit_type&,
+        const application::position_unit_type&,
+        const application::position_unit_type&
     );
 
-    template application::top_type station_index_to_top(
-        const std::vector<application::top_type>&,
+    template application::position_unit_type station_index_to_top(
+        const std::vector<application::position_unit_type>&,
         application::size_type,
-        const application::top_type&,
-        const application::top_type&,
-        const application::top_type&
+        const application::position_unit_type&,
+        const application::position_unit_type&,
+        const application::position_unit_type&
     );
 
     template application::unit_size_type normal_line_width();
 
     template application::unit_size_type bold_line_width();
 
-    template application::top_type selected_line_margin();
+    template application::position_unit_type selected_line_margin();
 
     template application::unit_size_type selected_line_margin();
 
@@ -194,28 +189,28 @@ namespace bobura { namespace view { namespace diagram
 #endif
 
 #if !defined(DOCUMENTATION)
-    template test::left_type time_to_left(
+    template test::position_unit_type time_to_left(
         const model::train_info::time<test::size_type, test::difference_type>&,
         const model::train_info::time_span<test::difference_type>&,
         int,
-        const test::left_type&,
-        const test::left_type&,
-        const test::left_type&
+        const test::position_unit_type&,
+        const test::position_unit_type&,
+        const test::position_unit_type&
     );
 
-    template test::top_type station_index_to_top(
-        const std::vector<test::top_type>&,
+    template test::position_unit_type station_index_to_top(
+        const std::vector<test::position_unit_type>&,
         test::size_type,
-        const test::top_type&,
-        const test::top_type&,
-        const test::top_type&
+        const test::position_unit_type&,
+        const test::position_unit_type&,
+        const test::position_unit_type&
     );
 
     template test::unit_size_type normal_line_width();
 
     template test::unit_size_type bold_line_width();
 
-    template test::top_type selected_line_margin();
+    template test::position_unit_type selected_line_margin();
 
     template test::unit_size_type selected_line_margin();
 

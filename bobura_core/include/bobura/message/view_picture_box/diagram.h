@@ -742,9 +742,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
 
         using position_type = typename picture_box_type::position_type;
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
-
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+        using position_unit_type = typename position_type::unit_type;
 
         using scroll_bar_size_type = typename picture_box_type::scroll_bar_type::size_type;
 
@@ -753,7 +751,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
 
         static position_type to_position(const scroll_bar_size_type left, const scroll_bar_size_type top)
         {
-            return { static_cast<left_type>(left), static_cast<top_type>(top) };
+            return { static_cast<position_unit_type>(left), static_cast<position_unit_type>(top) };
         }
 
 

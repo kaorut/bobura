@@ -16,7 +16,6 @@
 #include <boost/predef.h>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/type_list.h>
 #include <bobura/view/timetable/header.h>
@@ -440,14 +439,14 @@ namespace bobura { namespace view { namespace timetable
             const auto& line_name_font = *model.timetable().font_color_set().line_name().diagram_font();
             const auto& note = model.timetable().note();
             const auto& note_font = *model.timetable().font_color_set().note().diagram_font();
-            position_type company_name_position{ left_type{ 0 }, top_type{ 0 } };
-            dimension_type company_name_dimension{ width_type{ 0 }, height_type{ 0 } };
-            position_type line_name_position{ left_type{ 0 }, top_type{ 0 } };
-            dimension_type line_name_dimension{ width_type{ 0 }, height_type{ 0 } };
-            position_type note_position{ left_type{ 0 }, top_type{ 0 } };
-            dimension_type note_dimension{ width_type{ 0 }, height_type{ 0 } };
-            position_type position{ left_type{ 0 }, top_type{ 0 } };
-            dimension_type dimension{ width_type{ 0 }, height_type{ 0 } };
+            position_type company_name_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            dimension_type company_name_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
+            position_type line_name_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            dimension_type line_name_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
+            position_type note_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            dimension_type note_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
+            position_type position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            dimension_type dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
             calculate_positions_and_dimensions(
                 canvas,
                 canvas_dimension,
@@ -530,12 +529,10 @@ namespace bobura { namespace view { namespace timetable
             canvas.set_line_style(canvas_type::line_style_type::solid);
             canvas.set_color(*m_p_general_color);
 
-            const auto& left = tetengo2::gui::position<position_type>::left(base.position());
-            const auto& top = tetengo2::gui::position<position_type>::top(base.position());
-            const auto right =
-                left + left_type::from(tetengo2::gui::dimension<dimension_type>::width(base.dimension()));
-            const auto bottom =
-                top + top_type::from(tetengo2::gui::dimension<dimension_type>::height(base.dimension()));
+            const auto& left = base.position().left();
+            const auto& top = base.position().top();
+            const auto right = left + position_unit_type::from(base.dimension().width());
+            const auto bottom = top + position_unit_type::from(base.dimension().height());
 
             canvas.draw_line(position_type{ left, top }, position_type{ right, top });
             canvas.draw_line(position_type{ left, top }, position_type{ left, bottom });
@@ -567,13 +564,9 @@ namespace bobura { namespace view { namespace timetable
 
         using color_type = typename canvas_type::color_type;
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
+        using position_unit_type = typename position_type::unit_type;
 
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
-
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+        using dimension_unit_type = typename dimension_type::unit_type;
 
         using unit_size_type = typename canvas_type::unit_size_type;
 
@@ -626,47 +619,43 @@ namespace bobura { namespace view { namespace timetable
             dimension_type&       dimension
         )
         {
-            const auto& canvas_width = tetengo2::gui::dimension<dimension_type>::width(canvas_dimension);
+            const auto& canvas_width = canvas_dimension.width();
 
             canvas.set_font(company_name_font);
             auto company_name_dimension_ = canvas.calc_text_dimension(company_name);
-            const auto& company_name_width = tetengo2::gui::dimension<dimension_type>::width(company_name_dimension_);
+            const auto& company_name_width = company_name_dimension_.width();
             const auto& company_name_height =
-                company_name.empty() ?
-                height_type{ 0 } : tetengo2::gui::dimension<dimension_type>::height(company_name_dimension_);
+                company_name.empty() ? dimension_unit_type{ 0 } : company_name_dimension_.height();
 
             canvas.set_font(line_name_font);
             auto line_name_dimension_ = canvas.calc_text_dimension(line_name);
-            const auto& line_name_width = tetengo2::gui::dimension<dimension_type>::width(line_name_dimension_);
+            const auto& line_name_width = line_name_dimension_.width();
             const auto& line_name_height =
-                line_name.empty() ?
-                height_type{ 0 } : tetengo2::gui::dimension<dimension_type>::height(line_name_dimension_);
+                line_name.empty() ? dimension_unit_type{ 0 } : line_name_dimension_.height();
 
             canvas.set_font(note_font);
             const auto note_dimension_ = canvas.calc_text_dimension(note);
-            const auto& note_height =
-                note.empty() ? height_type{ 0 } : tetengo2::gui::dimension<dimension_type>::height(note_dimension_);
+            const auto& note_height = note.empty() ? dimension_unit_type{ 0 } : note_dimension_.height();
 
-            const auto left_margin = left_type::from(tetengo2::gui::dimension<dimension_type>::width(margin));
-            const auto top_margin = top_type::from(tetengo2::gui::dimension<dimension_type>::height(margin));
-            const auto left_padding = left_type{ 1 } / 2;
-            const auto top_padding = top_type{ 1 } / 2;
-            const left_type company_line_names_spacing{ 1 };
+            const auto left_margin = position_unit_type::from(margin.width());
+            const auto top_margin = position_unit_type::from(margin.height());
+            const auto left_padding = position_unit_type{ 1 } / 2;
+            const auto top_padding = position_unit_type{ 1 } / 2;
+            const position_unit_type company_line_names_spacing{ 1 };
 
-            position_type company_name_position_{ left_type{ 0 }, top_type{ 0 } };
-            position_type line_name_position_{ left_type{ 0 }, top_type{ 0 } };
+            position_type company_name_position_{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            position_type line_name_position_{ position_unit_type{ 0 }, position_unit_type{ 0 } };
             const position_type note_position_{ left_margin + left_padding, top_margin + top_padding };
-            const auto line_name_top =
-                tetengo2::gui::position<position_type>::top(note_position_) + top_type::from(note_height);
+            const auto line_name_top = note_position_.top() + position_unit_type::from(note_height);
             const auto header_width =
-                canvas_width > width_type::from(left_margin) * 2 ?
-                canvas_width - width_type::from(left_margin) * 2 : width_type{ 0 };
-            height_type header_height{ 0 };
+                canvas_width > dimension_unit_type::from(left_margin) * 2 ?
+                canvas_width - dimension_unit_type::from(left_margin) * 2 : dimension_unit_type{ 0 };
+            dimension_unit_type header_height{ 0 };
             if (company_name_width + line_name_width + company_line_names_spacing + left_padding * 2 <= header_width)
             {
                 const auto company_name_left =
                     left_margin +
-                    left_type::from(
+                    position_unit_type::from(
                         (header_width - (company_name_width + line_name_width + company_line_names_spacing)) / 2
                     );
 
@@ -674,12 +663,12 @@ namespace bobura { namespace view { namespace timetable
                 company_name_position_ =
                     position_type{
                         company_name_left,
-                        line_name_top + top_type::from(max_element_height - company_name_height) / 2
+                        line_name_top + position_unit_type::from(max_element_height - company_name_height) / 2
                     };
                 line_name_position_ =
                     position_type{
-                        company_name_left + left_type::from(company_name_width + company_line_names_spacing),
-                        line_name_top + top_type::from(max_element_height - line_name_height) / 2
+                        company_name_left + position_unit_type::from(company_name_width + company_line_names_spacing),
+                        line_name_top + position_unit_type::from(max_element_height - line_name_height) / 2
                     };
                 header_height = note_height + max_element_height + top_padding * 2;
             }
@@ -687,7 +676,7 @@ namespace bobura { namespace view { namespace timetable
             {
                 company_name_position_ = position_type{ left_margin + left_padding, line_name_top };
                 line_name_position_ =
-                    position_type{ left_margin + left_padding, line_name_top + top_type::from(company_name_height) };
+                    position_type{ left_margin + left_padding, line_name_top + position_unit_type::from(company_name_height) };
                 header_height = note_height + company_name_height + line_name_height + top_padding * 2;
             }
 

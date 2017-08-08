@@ -41,14 +41,14 @@ namespace bobura
         //! The position type.
         using position_type = Position;
 
-        //! The left type.
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
+        //! The position unit type.
+        using position_unit_type = typename position_type::unit_type;
 
         //! The dimension type.
         using dimension_type = Dimension;
 
-        //! The width type.
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
+        //! The dimension unit type.
+        using dimension_unit_type = typename dimension_type::unit_type;
 
 
         // constructors and destructor
@@ -137,7 +137,7 @@ namespace bobura
 
             \return The property bar width.
         */
-        boost::optional<width_type> property_bar_width()
+        boost::optional<dimension_unit_type> property_bar_width()
         const;
         
         /*!
@@ -145,7 +145,7 @@ namespace bobura
 
             \param width A width.
         */
-        void set_property_bar_width(const width_type& width);
+        void set_property_bar_width(const dimension_unit_type& width);
 
         /*!
             \brief Returns the minimized status of the property bar.
@@ -167,7 +167,7 @@ namespace bobura
 
             \return The splitter bar position.
         */
-        boost::optional<left_type> property_bar_splitter_position()
+        boost::optional<position_unit_type> property_bar_splitter_position()
         const;
         
         /*!
@@ -175,7 +175,7 @@ namespace bobura
 
             \param position A position.
         */
-        void set_property_bar_splitter_position(const left_type& position);
+        void set_property_bar_splitter_position(const position_unit_type& position);
 
         /*!
             \brief Clears the configuration.

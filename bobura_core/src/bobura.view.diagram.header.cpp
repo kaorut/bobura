@@ -482,8 +482,8 @@ namespace bobura { namespace view { namespace diagram
         m_p_company_name_header(),
         m_p_line_name_header(),
         m_p_note_header(),
-        m_position(left_type{ 0 }, top_type{ 0 }),
-        m_dimension(width_type{ 0 }, height_type{ 0 })
+        m_position(position_unit_type{ 0 }, position_unit_type{ 0 }),
+        m_dimension(dimension_unit_type{ 0 }, dimension_unit_type{ 0 })
         {
             const auto& company_name = model.timetable().company_name();
             const auto& company_name_font = *model.timetable().font_color_set().company_name().diagram_font();
@@ -491,12 +491,12 @@ namespace bobura { namespace view { namespace diagram
             const auto& line_name_font = *model.timetable().font_color_set().line_name().diagram_font();
             const auto& note = model.timetable().note();
             const auto& note_font = *model.timetable().font_color_set().note().diagram_font();
-            position_type company_name_position{ left_type{ 0 }, top_type{ 0 } };
-            dimension_type company_name_dimension{ width_type{ 0 }, height_type{ 0 } };
-            position_type line_name_position{ left_type{ 0 }, top_type{ 0 } };
-            dimension_type line_name_dimension{ width_type{ 0 }, height_type{ 0 } };
-            position_type note_position{ left_type{ 0 }, top_type{ 0 } };
-            dimension_type note_dimension{ width_type{ 0 }, height_type{ 0 } };
+            position_type company_name_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            dimension_type company_name_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
+            position_type line_name_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            dimension_type line_name_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
+            position_type note_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            dimension_type note_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
             calculate_positions_and_dimensions(
                 canvas,
                 canvas_dimension,
@@ -609,13 +609,9 @@ namespace bobura { namespace view { namespace diagram
 
         using position_type = typename canvas_type::position_type;
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
+        using position_unit_type = typename position_type::unit_type;
 
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
-
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+        using dimension_unit_type = typename dimension_type::unit_type;
 
 
         // static functions
@@ -639,49 +635,48 @@ namespace bobura { namespace view { namespace diagram
             dimension_type&       dimension
         )
         {
-            const auto& canvas_width = tetengo2::gui::dimension<dimension_type>::width(canvas_dimension);
+            const auto& canvas_width = canvas_dimension.width();
 
             canvas.set_font(company_name_font);
             auto company_name_dimension_ = canvas.calc_text_dimension(company_name);
-            const auto& company_name_width = tetengo2::gui::dimension<dimension_type>::width(company_name_dimension_);
+            const auto& company_name_width = company_name_dimension_.width();
             const auto& company_name_height =
-                company_name.empty() ?
-                height_type{ 0 } : tetengo2::gui::dimension<dimension_type>::height(company_name_dimension_);
+                company_name.empty() ? dimension_unit_type{ 0 } : company_name_dimension_.height();
 
             canvas.set_font(line_name_font);
             auto line_name_dimension_ = canvas.calc_text_dimension(line_name);
-            const auto& line_name_width = tetengo2::gui::dimension<dimension_type>::width(line_name_dimension_);
+            const auto& line_name_width = line_name_dimension_.width();
             const auto& line_name_height =
-                line_name.empty() ?
-                height_type{ 0 } : tetengo2::gui::dimension<dimension_type>::height(line_name_dimension_);
+                line_name.empty() ? dimension_unit_type{ 0 } : line_name_dimension_.height();
 
             canvas.set_font(note_font);
             const auto note_dimension_ = canvas.calc_text_dimension(note);
-            const auto& note_width = tetengo2::gui::dimension<dimension_type>::width(note_dimension_);
-            const auto& note_height =
-                note.empty() ? height_type{ 0 } : tetengo2::gui::dimension<dimension_type>::height(note_dimension_);
+            const auto& note_width = note_dimension_.width();
+            const auto& note_height = note.empty() ? dimension_unit_type{ 0 } : note_dimension_.height();
 
-            const left_type line_names_spacing{ 1 };
+            const position_unit_type line_names_spacing{ 1 };
 
-            position_type company_name_position_{ left_type{ 0 }, top_type{ 0 } };
-            position_type line_name_position_{ left_type{ 0 }, top_type{ 0 } };
-            position_type note_position_{ left_type{ 0 }, top_type{ 0 } };
+            position_type company_name_position_{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            position_type line_name_position_{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            position_type note_position_{ position_unit_type{ 0 }, position_unit_type{ 0 } };
             const auto& header_width = canvas_width;
-            height_type header_height{ 0 };
+            dimension_unit_type header_height{ 0 };
             if (company_name_width + line_name_width + note_width + line_names_spacing <= canvas_width)
             {
                 const auto max_element_height = std::max({ company_name_height, line_name_height, note_height });
                 company_name_position_ =
-                    position_type{ left_type{ 0 }, top_type::from(max_element_height - company_name_height) / 2 };
+                    position_type{
+                        position_unit_type{ 0 }, position_unit_type::from(max_element_height - company_name_height) / 2
+                    };
                 line_name_position_ =
                     position_type{
-                        left_type::from(company_name_width) + line_names_spacing,
-                        top_type::from(max_element_height - line_name_height) / 2
+                        position_unit_type::from(company_name_width) + line_names_spacing,
+                        position_unit_type::from(max_element_height - line_name_height) / 2
                     };
                 note_position_ =
                     position_type{
-                        left_type::from(canvas_width - note_width),
-                        top_type::from(max_element_height - note_height) / 2
+                        position_unit_type::from(canvas_width - note_width),
+                        position_unit_type::from(max_element_height - note_height) / 2
                     };
                 header_height = max_element_height;
             }
@@ -689,21 +684,27 @@ namespace bobura { namespace view { namespace diagram
             {
                 const auto max_element_height = std::max({ company_name_height, line_name_height });
                 company_name_position_ =
-                    position_type{ left_type{ 0 }, top_type::from(max_element_height - company_name_height) / 2 };
+                    position_type{
+                        position_unit_type{ 0 }, position_unit_type::from(max_element_height - company_name_height) / 2
+                    };
                 line_name_position_ =
                     position_type{
-                        left_type::from(company_name_width) + line_names_spacing,
-                        top_type::from(max_element_height - line_name_height) / 2
+                        position_unit_type::from(company_name_width) + line_names_spacing,
+                        position_unit_type::from(max_element_height - line_name_height) / 2
                     };
-                note_position_ = position_type{ left_type{ 0 }, top_type::from(max_element_height) };
+                note_position_ =
+                    position_type{ position_unit_type{ 0 }, position_unit_type::from(max_element_height) };
                 header_height = max_element_height + note_height;
             }
             else
             {
-                company_name_position_ = position_type{ left_type{ 0 }, top_type{ 0 } };
-                line_name_position_ = position_type{ left_type{ 0 }, top_type::from(company_name_height) };
+                company_name_position_ = position_type{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+                line_name_position_ =
+                    position_type{ position_unit_type{ 0 }, position_unit_type::from(company_name_height) };
                 note_position_ =
-                    position_type{ left_type{ 0 }, top_type::from(company_name_height + line_name_height) };
+                    position_type{
+                        position_unit_type{ 0 }, position_unit_type::from(company_name_height + line_name_height)
+                    };
                 header_height = company_name_height + line_name_height + note_height;
             }
 
@@ -713,7 +714,7 @@ namespace bobura { namespace view { namespace diagram
             line_name_dimension = std::move(line_name_dimension_);
             note_position = std::move(note_position_);
             note_dimension = std::move(note_dimension_);
-            position = position_type{ left_type{ 0 }, top_type{ 0 } };
+            position = position_type{ position_unit_type{ 0 }, position_unit_type{ 0 } };
             dimension = dimension_type{ std::move(header_width), std::move(header_height) };
         }
 

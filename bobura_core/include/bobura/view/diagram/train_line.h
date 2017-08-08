@@ -192,17 +192,14 @@ namespace bobura { namespace view { namespace diagram
         //! The position type.
         using position_type = typename canvas_type::position_type;
 
-        //! The left type.
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
-
-        //! The top type.
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+        //! The position unit type.
+        using position_unit_type = typename position_type::unit_type;
 
         //! The dimension type.
         using dimension_type = typename canvas_type::dimension_type;
 
-        //! The height type.
-        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+        //! The dimension unit type.
+        using dimension_unit_type = typename dimension_type::unit_type;
 
         //! The font type.
         using font_type = typename canvas_type::font_type;
@@ -253,19 +250,19 @@ namespace bobura { namespace view { namespace diagram
             \param message_catalog      A mesage catalog.
         */
         train_line(
-            const train_type&             train,
-            const train_kind_type&        train_kind,
-            const time_span_type&         time_offset,
-            selection_type&               selection,
-            const dimension_type&         canvas_dimension,
-            const position_type&          scroll_bar_position,
-            const left_type&              station_header_right,
-            const top_type&               header_bottom,
-            const height_type&            time_header_height,
-            const scale_type&             horizontal_scale,
-            const station_intervals_type& station_intervals,
-            const std::vector<top_type>&  station_positions,
-            const message_catalog_type&   message_catalog
+            const train_type&                      train,
+            const train_kind_type&                 train_kind,
+            const time_span_type&                  time_offset,
+            selection_type&                        selection,
+            const dimension_type&                  canvas_dimension,
+            const position_type&                   scroll_bar_position,
+            const position_unit_type&              station_header_right,
+            const position_unit_type&              header_bottom,
+            const dimension_unit_type&             time_header_height,
+            const scale_type&                      horizontal_scale,
+            const station_intervals_type&          station_intervals,
+            const std::vector<position_unit_type>& station_positions,
+            const message_catalog_type&            message_catalog
         );
 
         /*!
@@ -357,17 +354,14 @@ namespace bobura { namespace view { namespace diagram
         //! The position type.
         using position_type = typename canvas_type::position_type;
 
-        //! The left type.
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
-
-        //! The top type.
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+        //! The position unit type.
+        using position_unit_type = typename position_type::unit_type;
 
         //! The dimension type.
         using dimension_type = typename canvas_type::dimension_type;
 
-        //! The height type.
-        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+        //! The dimension unit type.
+        using dimension_unit_type = typename dimension_type::unit_type;
 
         //! The font type.
         using font_type = typename canvas_type::font_type;
@@ -411,18 +405,18 @@ namespace bobura { namespace view { namespace diagram
             \param message_catalog      A message catalog.
         */
         train_line_list(
-            const model_type&             model,
-            const time_span_type&         time_offset,
-            selection_type&               selection,
-            const dimension_type&         canvas_dimension,
-            const position_type&          scroll_bar_position,
-            const left_type&              station_header_right,
-            const top_type&               header_bottom,
-            const height_type&            time_header_height,
-            const scale_type&             horizontal_scale,
-            const station_intervals_type& station_intervals,
-            const std::vector<top_type>&  station_positions,
-            const message_catalog_type&   message_catalog
+            const model_type&                      model,
+            const time_span_type&                  time_offset,
+            selection_type&                        selection,
+            const dimension_type&                  canvas_dimension,
+            const position_type&                   scroll_bar_position,
+            const position_unit_type&              station_header_right,
+            const position_unit_type&              header_bottom,
+            const dimension_unit_type&             time_header_height,
+            const scale_type&                      horizontal_scale,
+            const station_intervals_type&          station_intervals,
+            const std::vector<position_unit_type>& station_positions,
+            const message_catalog_type&            message_catalog
         );
 
         /*!

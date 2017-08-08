@@ -16,7 +16,6 @@
 #include <boost/range/adaptors.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/model/station_info/grade.h>
 #include <bobura/type_list.h>
@@ -37,9 +36,7 @@ namespace bobura { namespace view { namespace diagram
 
         using canvas_type = typename traits_type::canvas_type;
 
-        using left_type = typename station_line::left_type;
-
-        using top_type = typename station_line::top_type;
+        using position_unit_type = typename station_line::position_unit_type;
 
         using base_type = item<traits_type>;
 
@@ -55,9 +52,9 @@ namespace bobura { namespace view { namespace diagram
         impl(
             const station_location_type& station_location,
             selection_type&,
-            const left_type&             right,
-            const left_type&             station_header_right,
-            top_type                     top,
+            const position_unit_type&    right,
+            const position_unit_type&    station_header_right,
+            position_unit_type           top,
             const font_color_type&       font_color
         )
         :
@@ -101,27 +98,30 @@ namespace bobura { namespace view { namespace diagram
             canvas.set_color(*m_p_font_color->diagram_color());
 
             draw_selectable_line(
-                canvas, position_type{ left_type{ 0 }, m_top }, position_type{ m_right, m_top }, self.selected()
+                canvas,
+                position_type{ position_unit_type{ 0 }, m_top },
+                position_type{ m_right, m_top },
+                self.selected()
             );
 
             const auto& name = m_p_station_location->get_station().name();
             const auto name_dimension = canvas.calc_text_dimension(name);
             canvas.draw_text(
                 name,
-                position_type{
-                    left_type{ 0 },
-                    m_top - top_type::from(tetengo2::gui::dimension<dimension_type>::height(name_dimension))
-                }
+                position_type{ position_unit_type{ 0 }, m_top - position_unit_type::from(name_dimension.height()) }
             );
         }
 
         base_type* p_item_by_position_impl(station_line& self, const position_type& position)
         {
-            const auto& x = tetengo2::gui::position<position_type>::left(position);
-            const auto& y = tetengo2::gui::position<position_type>::top(position);
+            const auto& x = position.left();
+            const auto& y = position.top();
             if (
-                (left_type{ 0 } <= x && x <= m_station_header_right) &&
-                (m_top - selected_line_margin<top_type>() <= y && y <= m_top + selected_line_margin<top_type>())
+                (position_unit_type{ 0 } <= x && x <= m_station_header_right) &&
+                (
+                    m_top - selected_line_margin<position_unit_type>() <= y &&
+                    y <= m_top + selected_line_margin<position_unit_type>()
+                )
             )
             {
                 return &self;
@@ -158,11 +158,11 @@ namespace bobura { namespace view { namespace diagram
 
         const station_location_type* m_p_station_location;
 
-        left_type m_right;
+        position_unit_type m_right;
 
-        left_type m_station_header_right;
+        position_unit_type m_station_header_right;
 
-        top_type m_top;
+        position_unit_type m_top;
 
         const font_color_type* m_p_font_color;
 
@@ -174,9 +174,9 @@ namespace bobura { namespace view { namespace diagram
     station_line<Traits>::station_line(
         const station_location_type& station_location,
         selection_type&              selection,
-        const left_type&             right,
-        const left_type&             station_header_right,
-        top_type                     top,
+        const position_unit_type&    right,
+        const position_unit_type&    station_header_right,
+        position_unit_type           top,
         const font_color_type&       font_color
     )
     :
@@ -255,13 +255,11 @@ namespace bobura { namespace view { namespace diagram
 
         using position_type = typename station_line_list::position_type;
 
-        using left_type = typename station_line_list::left_type;
-
-        using top_type = typename station_line_list::top_type;
+        using position_unit_type = typename station_line_list::position_unit_type;
 
         using dimension_type = typename station_line_list::dimension_type;
 
-        using height_type = typename station_line_list::height_type;
+        using dimension_unit_type = typename station_line_list::dimension_unit_type;
 
         using base_type = typename station_line_list::base_type;
 
@@ -275,16 +273,16 @@ namespace bobura { namespace view { namespace diagram
         // constructors and destructor
 
         impl(
-            const model_type&            model,
-            const time_span_type&        time_offset,
-            selection_type&              selection,
-            const dimension_type&        canvas_dimension,
-            const position_type&         scroll_bar_position,
-            const left_type&             station_header_right,
-            const top_type&              header_bottom,
-            const height_type&           time_header_height,
-            const scale_type&            horizontal_scale,
-            const std::vector<top_type>& station_positions
+            const model_type&                      model,
+            const time_span_type&                  time_offset,
+            selection_type&                        selection,
+            const dimension_type&                  canvas_dimension,
+            const position_type&                   scroll_bar_position,
+            const position_unit_type&              station_header_right,
+            const position_unit_type&              header_bottom,
+            const dimension_unit_type&             time_header_height,
+            const scale_type&                      horizontal_scale,
+            const std::vector<position_unit_type>& station_positions
         )
         :
         m_station_lines(
@@ -349,8 +347,6 @@ namespace bobura { namespace view { namespace diagram
 
         using string_type = typename traits_type::string_type;
 
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
         using time_type = typename station_line_list::time_type;
 
         using station_line_type = station_line<traits_type>;
@@ -375,43 +371,40 @@ namespace bobura { namespace view { namespace diagram
         // static functions
 
         static std::vector<station_line_type> make_station_lines(
-            const model_type&            model,
-            const time_span_type&        time_offset,
-            selection_type&              selection,
-            const dimension_type&        canvas_dimension,
-            const position_type&         scroll_bar_position,
-            const left_type&             station_header_right,
-            const top_type&              header_bottom,
-            const height_type&           time_header_height,
-            const scale_type&            horizontal_scale,
-            const std::vector<top_type>& station_positions
+            const model_type&                      model,
+            const time_span_type&                  time_offset,
+            selection_type&                        selection,
+            const dimension_type&                  canvas_dimension,
+            const position_type&                   scroll_bar_position,
+            const position_unit_type&              station_header_right,
+            const position_unit_type&              header_bottom,
+            const dimension_unit_type&             time_header_height,
+            const scale_type&                      horizontal_scale,
+            const std::vector<position_unit_type>& station_positions
         )
         {
-            const auto canvas_right =
-                left_type::from(tetengo2::gui::dimension<dimension_type>::width(canvas_dimension));
-            const auto horizontal_scale_left = left_type::from(width_type{ horizontal_scale });
+            const auto canvas_right = position_unit_type::from(canvas_dimension.width());
+            const auto horizontal_scale_left = position_unit_type::from(dimension_unit_type{ horizontal_scale });
             const auto last_time_position =
                 time_to_left(
                     time_type{ static_cast<typename time_type::size_type>(24 * 60 * 60 + time_offset.seconds()) },
                     time_offset,
                     1,
-                    tetengo2::gui::position<position_type>::left(scroll_bar_position),
+                    scroll_bar_position.left(),
                     station_header_right,
                     horizontal_scale_left
                 );
             const auto line_right = std::min(canvas_right, last_time_position);
 
-            const auto canvas_top = header_bottom + top_type::from(time_header_height);
-            const auto canvas_bottom =
-                top_type::from(tetengo2::gui::dimension<dimension_type>::height(canvas_dimension));
+            const auto canvas_top = header_bottom + position_unit_type::from(time_header_height);
+            const auto canvas_bottom = position_unit_type::from(canvas_dimension.height());
 
             std::vector<station_line_type> station_lines{};
             station_lines.reserve(station_positions.size());
             for (decltype(station_positions.size()) i = 0; i < station_positions.size(); ++i)
             {
                 const auto& position = station_positions[i];
-                auto line_position =
-                    position + canvas_top - tetengo2::gui::position<position_type>::top(scroll_bar_position);
+                auto line_position = position + canvas_top - scroll_bar_position.top();
                 if (line_position < canvas_top)
                     continue;
                 if (line_position > canvas_bottom)
@@ -445,16 +438,16 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     station_line_list<Traits>::station_line_list(
-        const model_type&            model,
-        const time_span_type&        time_offset,
-        selection_type&              selection,
-        const dimension_type&        canvas_dimension,
-        const position_type&         scroll_bar_position,
-        const left_type&             station_header_right,
-        const top_type&              header_bottom,
-        const height_type&           time_header_height,
-        const scale_type&            horizontal_scale,
-        const std::vector<top_type>& station_positions
+        const model_type&                      model,
+        const time_span_type&                  time_offset,
+        selection_type&                        selection,
+        const dimension_type&                  canvas_dimension,
+        const position_type&                   scroll_bar_position,
+        const position_unit_type&              station_header_right,
+        const position_unit_type&              header_bottom,
+        const dimension_unit_type&             time_header_height,
+        const scale_type&                      horizontal_scale,
+        const std::vector<position_unit_type>& station_positions
     )
     :
     base_type(selection),

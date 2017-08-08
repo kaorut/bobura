@@ -40,8 +40,8 @@ namespace bobura { namespace view { namespace timetable
 
         impl()
         :
-        m_position(left_type{ 0 }, top_type{ 0 }),
-        m_dimension(width_type{ 0 }, height_type{ 0 })
+        m_position(position_unit_type{ 0 }, position_unit_type{ 0 }),
+        m_dimension(dimension_unit_type{ 0 }, dimension_unit_type{ 0 })
         {}
 
 
@@ -97,13 +97,9 @@ namespace bobura { namespace view { namespace timetable
     private:
         // types
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
+        using position_unit_type = typename position_type::unit_type;
 
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
-
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+        using dimension_unit_type = typename dimension_type::unit_type;
 
 
         // variables

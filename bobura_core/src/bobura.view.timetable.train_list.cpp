@@ -12,7 +12,6 @@
 #include <boost/predef.h>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/type_list.h>
 #include <bobura/view/timetable/train_list.h>
@@ -81,19 +80,7 @@ namespace bobura { namespace view { namespace timetable
     private:
         // types
 
-        using string_type = typename traits_type::string_type;
-
         using color_type = typename canvas_type::color_type;
-
-        using position_type = typename canvas_type::position_type;
-
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
-
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
-
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
 
         // variables

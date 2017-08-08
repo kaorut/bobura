@@ -146,17 +146,13 @@ namespace bobura { namespace message { namespace timetable_model
             assert(picture_box.has_vertical_scroll_bar());
             reset_scroll_bar(
                 picture_box.vertical_scroll_bar(),
-                boost::rational_cast<scroll_bar_size_type>(
-                    tetengo2::gui::dimension<dimension_type>::height(view.dimension()).value()
-                )
+                boost::rational_cast<scroll_bar_size_type>(view.dimension().height().value())
             );
 
             assert(picture_box.has_horizontal_scroll_bar());
             reset_scroll_bar(
                 picture_box.horizontal_scroll_bar(),
-                boost::rational_cast<scroll_bar_size_type>(
-                    tetengo2::gui::dimension<dimension_type>::width(view.dimension()).value()
-                )
+                boost::rational_cast<scroll_bar_size_type>(view.dimension().width().value())
             );
 
             picture_box.update_scroll_bars(view.dimension(), view.page_size(picture_box.client_dimension()));
@@ -167,17 +163,13 @@ namespace bobura { namespace message { namespace timetable_model
             assert(picture_box.has_vertical_scroll_bar());
             reset_scroll_bar(
                 picture_box.vertical_scroll_bar(),
-                boost::rational_cast<scroll_bar_size_type>(
-                    tetengo2::gui::dimension<dimension_type>::height(view.dimension()).value()
-                )
+                boost::rational_cast<scroll_bar_size_type>(view.dimension().height().value())
             );
 
             assert(picture_box.has_horizontal_scroll_bar());
             reset_scroll_bar(
                 picture_box.horizontal_scroll_bar(),
-                boost::rational_cast<scroll_bar_size_type>(
-                    tetengo2::gui::dimension<dimension_type>::width(view.dimension()).value()
-                )
+                boost::rational_cast<scroll_bar_size_type>(view.dimension().width().value())
             );
 
             picture_box.update_scroll_bars(view.dimension(), view.page_size(picture_box.client_dimension()));

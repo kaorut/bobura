@@ -369,12 +369,13 @@ namespace bobura { namespace message { namespace main_window
                 return;
 
             const auto window_dimension = m_window.client_dimension();
-            const auto& window_width = tetengo2::gui::dimension<dimension_type>::width(window_dimension);
-            const auto& window_height = tetengo2::gui::dimension<dimension_type>::height(window_dimension);
+            const auto& window_width = window_dimension.width();
+            const auto& window_height = window_dimension.height();
             const auto& property_bar_width = m_property_bar.preferred_width();
             {
                 const position_type position{
-                    left_type::from(window_width) - left_type::from(property_bar_width), top_type{ 0 }
+                    position_unit_type::from(window_width) - position_unit_type::from(property_bar_width),
+                    position_unit_type{ 0 }
                 };
                 const dimension_type dimension{ property_bar_width, window_height };
                 m_property_bar.set_position_and_dimension(position, dimension);
@@ -382,9 +383,9 @@ namespace bobura { namespace message { namespace main_window
                 m_property_bar.size_observer_set().resized()();
             }
             {
-                const position_type position{ left_type{ 0 }, top_type{ 0 } };
+                const position_type position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
                 const dimension_type dimension{
-                    window_width > property_bar_width ? window_width - property_bar_width : width_type{ 0 },
+                    window_width > property_bar_width ? window_width - property_bar_width : dimension_unit_type{ 0 },
                     window_height
                 };
                 m_tab_frame.set_position_and_dimension(position, dimension);
@@ -422,13 +423,11 @@ namespace bobura { namespace message { namespace main_window
 
         using position_type = typename control_type::position_type;
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
-
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+        using position_unit_type = typename position_type::unit_type;
 
         using dimension_type = typename control_type::dimension_type;
 
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
+        using dimension_unit_type = typename dimension_type::unit_type;
 
 
         // variables

@@ -356,17 +356,14 @@ namespace bobura { namespace view { namespace timetable
         //! The position type.
         using position_type = typename canvas_type::position_type;
 
-        //! The top type.
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+        //! The position unit type.
+        using position_unit_type = typename position_type::unit_type;
 
         //! The dimension type.
         using dimension_type = typename canvas_type::dimension_type;
 
-        //! The width type.
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-        //! The height type.
-        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+        //! The dimension unit type.
+        using dimension_unit_type = typename dimension_type::unit_type;
 
         //! The font type.
         using font_type = typename canvas_type::font_type;
@@ -403,11 +400,11 @@ namespace bobura { namespace view { namespace timetable
             canvas_type&                canvas,
             const dimension_type&       canvas_dimension,
             const dimension_type&       margin,
-            const top_type&             top,
-            const width_type&           operating_distance_width,
-            const width_type&           station_name_width,
-            const height_type&          train_number_height,
-            const height_type&          train_name_height
+            const position_unit_type&   top,
+            const dimension_unit_type&  operating_distance_width,
+            const dimension_unit_type&  station_name_width,
+            const dimension_unit_type&  train_number_height,
+            const dimension_unit_type&  train_name_height
         );
 
         /*!

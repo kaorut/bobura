@@ -17,7 +17,6 @@
 #include <boost/predef.h>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/time_line.h>
@@ -42,9 +41,7 @@ namespace bobura { namespace view { namespace diagram
 
         using position_type = typename time_line::position_type;
 
-        using left_type = typename time_line::left_type;
-
-        using top_type = typename time_line::top_type;
+        using position_unit_type = typename time_line::position_unit_type;
 
         using selection_type = typename time_line::selection_type;
 
@@ -53,9 +50,9 @@ namespace bobura { namespace view { namespace diagram
 
         impl(
             selection_type&,
-            left_type                  left,
-            const top_type&            top,
-            const top_type&            bottom,
+            position_unit_type         left,
+            const position_unit_type&  top,
+            const position_unit_type&  bottom,
             unit_size_type             width,
             boost::optional<size_type> hours
         )
@@ -113,11 +110,11 @@ namespace bobura { namespace view { namespace diagram
 
         // variables
 
-        left_type m_left;
+        position_unit_type m_left;
 
-        top_type m_top;
+        position_unit_type m_top;
 
-        top_type m_bottom;
+        position_unit_type m_bottom;
 
         unit_size_type m_width;
 
@@ -130,9 +127,9 @@ namespace bobura { namespace view { namespace diagram
     template <typename Traits>
     time_line<Traits>::time_line(
         selection_type&            selection,
-        left_type                  left,
-        const top_type&            top,
-        const top_type&            bottom,
+        position_unit_type         left,
+        const position_unit_type&  top,
+        const position_unit_type&  bottom,
         unit_size_type             width,
         boost::optional<size_type> hours
     )
@@ -187,13 +184,13 @@ namespace bobura { namespace view { namespace diagram
 
         using position_type = typename time_line_list::position_type;
 
-        using left_type = typename time_line_list::left_type;
+        using position_unit_type = typename time_line_list::position_unit_type;
 
-        using top_type = typename time_line_list::top_type;
+        using position_unit_type = typename time_line_list::position_unit_type;
 
         using dimension_type = typename time_line_list::dimension_type;
 
-        using height_type = typename time_line_list::height_type;
+        using dimension_unit_type = typename time_line_list::dimension_unit_type;
 
         using selection_type = typename time_line_list::selection_type;
 
@@ -205,16 +202,16 @@ namespace bobura { namespace view { namespace diagram
         // constructors and destructor
 
         impl(
-            const model_type&     model,
-            const time_span_type& time_offset,
-            selection_type&       selection,
-            const dimension_type& canvas_dimension,
-            const dimension_type& timetable_dimension,
-            const position_type&  scroll_bar_position,
-            const left_type&      station_header_right,
-            const top_type&       header_bottom,
-            const height_type&    time_header_height,
-            const scale_type&     horizontal_scale
+            const model_type&          model,
+            const time_span_type&      time_offset,
+            selection_type&            selection,
+            const dimension_type&      canvas_dimension,
+            const dimension_type&      timetable_dimension,
+            const position_type&       scroll_bar_position,
+            const position_unit_type&  station_header_right,
+            const position_unit_type&  header_bottom,
+            const dimension_unit_type& time_header_height,
+            const scale_type&          horizontal_scale
         )
         :
         m_p_font(&*model.timetable().font_color_set().general().diagram_font()),
@@ -272,8 +269,6 @@ namespace bobura { namespace view { namespace diagram
 
         using size_type = typename traits_type::size_type;
 
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
         using font_type = typename time_line_list::font_type;
 
         using color_type = typename canvas_type::color_type;
@@ -288,37 +283,41 @@ namespace bobura { namespace view { namespace diagram
         // static functions
 
         std::vector<time_line_type> make_time_lines(
-            const time_span_type& time_offset,
-            selection_type&       selection,
-            const dimension_type& canvas_dimension,
-            const dimension_type& timetable_dimension,
-            const position_type&  scroll_bar_position,
-            const left_type&      station_header_right,
-            const top_type&       header_bottom,
-            const height_type&    time_header_height,
-            const scale_type&     horizontal_scale
+            const time_span_type&      time_offset,
+            selection_type&            selection,
+            const dimension_type&      canvas_dimension,
+            const dimension_type&      timetable_dimension,
+            const position_type&       scroll_bar_position,
+            const position_unit_type&  station_header_right,
+            const position_unit_type&  header_bottom,
+            const dimension_unit_type& time_header_height,
+            const scale_type&          horizontal_scale
         )
         {
             const auto canvas_left = station_header_right;
-            const auto canvas_right =
-                left_type::from(tetengo2::gui::dimension<dimension_type>::width(canvas_dimension));
+            const auto canvas_right = position_unit_type::from(canvas_dimension.width());
 
-            const auto canvas_top = header_bottom + top_type::from(time_header_height);
-            const auto canvas_bottom =
-                top_type::from(tetengo2::gui::dimension<dimension_type>::height(canvas_dimension));
+            const auto canvas_top = header_bottom + position_unit_type::from(time_header_height);
+            const auto canvas_bottom = position_unit_type::from(canvas_dimension.height());
             const auto station_position_bottom =
-                top_type::from(tetengo2::gui::dimension<dimension_type>::height(timetable_dimension)) +
-                canvas_top -
-                tetengo2::gui::position<position_type>::top(scroll_bar_position);
+                position_unit_type::from(timetable_dimension.height()) + canvas_top - scroll_bar_position.top();
             const auto line_bottom = std::min(canvas_bottom, station_position_bottom);
 
-            const auto horizontal_scale_left = left_type::from(width_type{ horizontal_scale });
+            const auto horizontal_scale_left = position_unit_type::from(dimension_unit_type{ horizontal_scale });
             const auto minute_interval =
                 time_to_left(
-                    time_type{ 60 }, time_offset, 0, left_type{ 0 }, station_header_right, horizontal_scale_left
+                    time_type{ 60 },
+                    time_offset, 0,
+                    position_unit_type{ 0 },
+                    station_header_right,
+                    horizontal_scale_left
                 ) -
                 time_to_left(
-                    time_type{ 0 }, time_offset, 0, left_type{ 0 }, station_header_right, horizontal_scale_left
+                    time_type{ 0 },
+                    time_offset, 0,
+                    position_unit_type{ 0 },
+                    station_header_right,
+                    horizontal_scale_left
                 );
 
             std::vector<time_line_type> time_lines{};
@@ -336,7 +335,7 @@ namespace bobura { namespace view { namespace diagram
                         time,
                         time_offset,
                         i == 24 * 60,
-                        tetengo2::gui::position<position_type>::left(scroll_bar_position),
+                        scroll_bar_position.left(),
                         station_header_right,
                         horizontal_scale_left
                     );
@@ -358,7 +357,7 @@ namespace bobura { namespace view { namespace diagram
                 }
                 else if (minutes % 10 == 0)
                 {
-                    if (minute_interval >= typename left_type::value_type{ 4, 12 * 10 })
+                    if (minute_interval >= typename position_unit_type::value_type{ 4, 12 * 10 })
                     {
                         time_lines.emplace_back(
                             selection,
@@ -372,7 +371,7 @@ namespace bobura { namespace view { namespace diagram
                 }
                 else if (minutes % 2 == 0)
                 {
-                    if (minute_interval >= typename left_type::value_type{ 4, 12 * 2 })
+                    if (minute_interval >= typename position_unit_type::value_type{ 4, 12 * 2 })
                     {
                         time_lines.emplace_back(
                             selection,
@@ -386,7 +385,7 @@ namespace bobura { namespace view { namespace diagram
                 }
                 else
                 {
-                    if (minute_interval >= typename left_type::value_type{ 4, 12 })
+                    if (minute_interval >= typename position_unit_type::value_type{ 4, 12 })
                     {
                         time_lines.emplace_back(
                             selection,
@@ -419,16 +418,16 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     time_line_list<Traits>::time_line_list(
-        const model_type&     model,
-        const time_span_type& time_offset,
-        selection_type&       selection,
-        const dimension_type& canvas_dimension,
-        const dimension_type& timetable_dimension,
-        const position_type&  scroll_bar_position,
-        const left_type&      station_header_right,
-        const top_type&       header_bottom,
-        const height_type&    time_header_height,
-        const scale_type&     horizontal_scale
+        const model_type&          model,
+        const time_span_type&      time_offset,
+        selection_type&            selection,
+        const dimension_type&      canvas_dimension,
+        const dimension_type&      timetable_dimension,
+        const position_type&       scroll_bar_position,
+        const position_unit_type&  station_header_right,
+        const position_unit_type&  header_bottom,
+        const dimension_unit_type& time_header_height,
+        const scale_type&          horizontal_scale
     )
     :
     base_type(selection),
