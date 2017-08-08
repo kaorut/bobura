@@ -208,14 +208,14 @@ namespace bobura { namespace type_list
             tetengo2::gui::unit::em<boost::rational<difference_type>, unit_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using position_type = std::pair<unit_difference_type<DetailTypeList>, unit_difference_type<DetailTypeList>>;
+        using position_type = tetengo2::gui::position<unit_difference_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using unit_size_type =
             tetengo2::gui::unit::em<boost::rational<size_type>, unit_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using dimension_type = std::pair<unit_size_type<DetailTypeList>, unit_size_type<DetailTypeList>>;
+        using dimension_type = tetengo2::gui::dimension<unit_size_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using fast_solid_background_type =
