@@ -39,6 +39,12 @@ namespace bobura
     public:
         // types
 
+        using string_type = String;
+
+        using position_type = Position;
+
+        using dimension_type = Dimension;
+
         using abstract_window_type = AbstractWindow;
 
         using map_box_type = MapBox;
@@ -94,13 +100,9 @@ namespace bobura
     private:
         // types
 
-        using position_type = Position;
+        using position_unit_type = typename position_type::unit_type;
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
-
-        using dimension_type = Dimension;
-
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
+        using dimension_unit_type = typename dimension_type::unit_type;
 
         using base_type = SideBar;
 
@@ -139,7 +141,7 @@ namespace bobura
             if (width)
                 self.set_width(*width);
             else
-                self.set_width(width_type{ 32 });
+                self.set_width(dimension_unit_type{ 32 });
 
             self.size_observer_set().resized()();
 
@@ -153,7 +155,7 @@ namespace bobura
             if (splitter_position)
                 m_p_map_box->set_splitter_position(*splitter_position);
             else
-                m_p_map_box->set_splitter_position(left_type{ 16 });
+                m_p_map_box->set_splitter_position(position_unit_type{ 16 });
         }
 
 

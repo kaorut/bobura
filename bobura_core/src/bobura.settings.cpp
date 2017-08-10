@@ -40,11 +40,11 @@ namespace bobura
 
         using position_type = Position;
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
+        using position_unit_type = typename position_type::unit_type;
 
         using dimension_type = Dimension;
 
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
+        using dimension_unit_type = typename dimension_type::unit_type;
 
 
         // constructors and destructor
@@ -98,21 +98,21 @@ namespace bobura
             return
                 boost::make_optional(
                     dimension_type{
-                        width_type::from_pixels(boost::get<uint_type>(*width)),
-                        height_type::from_pixels(boost::get<uint_type>(*height))
+                        dimension_unit_type::from_pixels(boost::get<uint_type>(*width)),
+                        dimension_unit_type::from_pixels(boost::get<uint_type>(*height))
                     }
                 );
         }
 
         void set_main_window_dimension(const dimension_type& dimension)
         {
-            const auto& width = tetengo2::gui::dimension<dimension_type>::width(dimension);
+            const auto& width = dimension.width();
             m_p_config->set(
                 string_type{ TETENGO2_TEXT("MainWindow/Width") },
                 config_value_type(width.template to_pixels<uint_type>())
             );
 
-            const auto& height = tetengo2::gui::dimension<dimension_type>::height(dimension);
+            const auto& height = dimension.height();
             m_p_config->set(
                 string_type{ TETENGO2_TEXT("MainWindow/Height") },
                 config_value_type(height.template to_pixels<uint_type>())
@@ -134,17 +134,17 @@ namespace bobura
             m_p_config->set(string_type{ TETENGO2_TEXT("MainWindow/Maximized") }, config_value_type{ status ? 1 : 0 });
         }
 
-        boost::optional<width_type> property_bar_width()
+        boost::optional<dimension_unit_type> property_bar_width()
         const
         {
             const auto width = m_p_config->get(string_type{ TETENGO2_TEXT("MainWindow/PropertyBarWidth") });
             if (!width || width->which() != 1)
                 return boost::none;
 
-            return boost::make_optional(width_type::from_pixels(boost::get<uint_type>(*width)));
+            return boost::make_optional(dimension_unit_type::from_pixels(boost::get<uint_type>(*width)));
         }
         
-        void set_property_bar_width(const width_type& width)
+        void set_property_bar_width(const dimension_unit_type& width)
         {
             m_p_config->set(
                 string_type{ TETENGO2_TEXT("MainWindow/PropertyBarWidth") },
@@ -169,7 +169,7 @@ namespace bobura
             );
         }
 
-        boost::optional<left_type> property_bar_splitter_position()
+        boost::optional<position_unit_type> property_bar_splitter_position()
         const
         {
             const auto position =
@@ -177,10 +177,10 @@ namespace bobura
             if (!position || position->which() != 1)
                 return boost::none;
 
-            return boost::make_optional(left_type::from_pixels(boost::get<uint_type>(*position)));
+            return boost::make_optional(position_unit_type::from_pixels(boost::get<uint_type>(*position)));
         }
         
-        void set_property_bar_splitter_position(const left_type& position)
+        void set_property_bar_splitter_position(const position_unit_type& position)
         {
             m_p_config->set(
                 string_type{ TETENGO2_TEXT("MainWindow/PropertyBarSplitterPosition") },
@@ -198,8 +198,6 @@ namespace bobura
         // types
 
         using path_string_type = typename boost::filesystem::path::string_type;
-
-        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
 
         using uint_type = tetengo2::type_list::size_type;
 
@@ -478,7 +476,7 @@ namespace bobura
     }
 
     template <typename String, typename Position, typename Dimension>
-    boost::optional<typename settings<String, Position, Dimension>::width_type>
+    boost::optional<typename settings<String, Position, Dimension>::dimension_unit_type>
     settings<String, Position, Dimension>::property_bar_width()
     const
     {
@@ -486,7 +484,7 @@ namespace bobura
     }
         
     template <typename String, typename Position, typename Dimension>
-    void settings<String, Position, Dimension>::set_property_bar_width(const width_type& width)
+    void settings<String, Position, Dimension>::set_property_bar_width(const dimension_unit_type& width)
     {
         return m_p_impl->set_property_bar_width(width);
     }
@@ -505,7 +503,7 @@ namespace bobura
     }
 
     template <typename String, typename Position, typename Dimension>
-    boost::optional<typename settings<String, Position, Dimension>::left_type>
+    boost::optional<typename settings<String, Position, Dimension>::position_unit_type>
     settings<String, Position, Dimension>::property_bar_splitter_position()
     const
     {
@@ -514,7 +512,7 @@ namespace bobura
         
     template <typename String, typename Position, typename Dimension>
     void settings<String, Position, Dimension>::set_property_bar_splitter_position(
-        const left_type& position
+        const position_unit_type& position
     )
     {
         return m_p_impl->set_property_bar_splitter_position(position);

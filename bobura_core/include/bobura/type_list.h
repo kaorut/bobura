@@ -235,7 +235,6 @@ namespace bobura { namespace type_list
         using canvas_traits_type =
             tetengo2::gui::drawing::canvas_traits<
                 size_type,
-                dimension_unit_type<DetailTypeList>,
                 string_type,
                 position_type<DetailTypeList>,
                 dimension_type<DetailTypeList>,
@@ -266,7 +265,6 @@ namespace bobura { namespace type_list
         using widget_traits_type =
             tetengo2::gui::widget::widget_traits<
                 size_type,
-                dimension_unit_type<DetailTypeList>,
                 difference_type,
                 string_type,
                 position_type<DetailTypeList>,

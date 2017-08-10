@@ -76,17 +76,13 @@ namespace bobura
             
             update_scroll_bar(
                 self.vertical_scroll_bar(),
-                tetengo2::gui::dimension<dimension_type>::height(view_dimension),
-                boost::rational_cast<scroll_bar_size_type>(
-                    tetengo2::gui::dimension<dimension_type>::height(page_dimension).value()
-                )
+                view_dimension.height(),
+                boost::rational_cast<scroll_bar_size_type>(page_dimension.height().value())
             );
             update_scroll_bar(
                 self.horizontal_scroll_bar(),
-                tetengo2::gui::dimension<dimension_type>::width(view_dimension),
-                boost::rational_cast<scroll_bar_size_type>(
-                    tetengo2::gui::dimension<dimension_type>::width(page_dimension).value()
-                )
+                view_dimension.width(),
+                boost::rational_cast<scroll_bar_size_type>(page_dimension.width().value())
             );
         }
 
