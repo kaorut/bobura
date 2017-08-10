@@ -17,7 +17,6 @@
 #include <boost/rational.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/timetable_view.h>
 

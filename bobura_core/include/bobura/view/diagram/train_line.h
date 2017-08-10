@@ -12,9 +12,6 @@
 #include <memory>
 #include <vector>
 
-#include <tetengo2.h>
-#include <tetengo2.gui.h>
-
 #include <bobura/timetable_model.h>
 #include <bobura/view/diagram/item.h>
 #include <bobura/view/diagram/selection.h>

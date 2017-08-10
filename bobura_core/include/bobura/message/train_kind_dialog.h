@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 
 namespace bobura { namespace message { namespace train_kind_dialog

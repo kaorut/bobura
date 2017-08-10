@@ -12,7 +12,6 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/item.h>

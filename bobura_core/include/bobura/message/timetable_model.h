@@ -15,8 +15,6 @@
 #include <boost/optional.hpp>
 #include <boost/rational.hpp>
 
-#include <tetengo2.gui.h>
-
 
 namespace bobura { namespace message { namespace timetable_model
 {

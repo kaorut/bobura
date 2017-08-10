@@ -11,7 +11,6 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/model/train_info/time.h>
 #include <bobura/model/train_info/time_span.h>

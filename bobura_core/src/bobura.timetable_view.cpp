@@ -14,7 +14,6 @@
 #include <boost/predef.h>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/model/station_info/grade.h>
 #include <bobura/timetable_view.h>

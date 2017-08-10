@@ -20,7 +20,6 @@
 #include <boost/rational.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/font_color_dialog.h>
 #include <bobura/message/font_color_dialog.h>

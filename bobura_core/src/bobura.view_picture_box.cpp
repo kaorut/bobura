@@ -15,7 +15,6 @@
 #include <boost/rational.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/type_list.h>
 #include <bobura/view_picture_box.h>

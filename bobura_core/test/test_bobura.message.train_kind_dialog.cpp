@@ -13,7 +13,6 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/message/train_kind_dialog.h>
 #include <bobura/timetable_model.h>

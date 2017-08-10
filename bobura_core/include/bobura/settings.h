@@ -16,9 +16,6 @@
 #include <boost/filesystem.hpp>
 #include <boost/optional.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.gui.h>
-
 
 namespace bobura
 {

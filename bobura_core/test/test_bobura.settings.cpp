@@ -13,7 +13,6 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/settings.h>
 #include <bobura/type_list.h>
