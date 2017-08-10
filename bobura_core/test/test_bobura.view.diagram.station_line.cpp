@@ -62,15 +62,11 @@ namespace
 
     using position_type = picture_box_type::position_type;
 
-    using left_type = tetengo2::gui::position<position_type>::left_type;
-
-    using top_type = tetengo2::gui::position<position_type>::top_type;
+    using position_unit_type = position_type::unit_type;
 
     using dimension_type = picture_box_type::dimension_type;
 
-    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
-
-    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
+    using dimension_unit_type = dimension_type::unit_type;
 
     using scale_type = common_type_list_type::scale_type;
 
@@ -131,9 +127,9 @@ BOOST_AUTO_TEST_SUITE(station_line)
         station_line_type station_line1{
             station_location,
             selection,
-            left_type{ 42 },
-            left_type{ 12 },
-            top_type{ 24 },
+            position_unit_type{ 42 },
+            position_unit_type{ 12 },
+            position_unit_type{ 24 },
             make_font_color(true, true)
         };
         const station_line_type station_line2{ std::move(station_line1) };
@@ -155,9 +151,9 @@ BOOST_AUTO_TEST_SUITE(station_line)
         station_line_type station_line1{
             station_location1,
             selection,
-            left_type{ 42 },
-            left_type{ 12 },
-            top_type{ 24 },
+            position_unit_type{ 42 },
+            position_unit_type{ 12 },
+            position_unit_type{ 24 },
             make_font_color(true, true)
         };
         station_type station2{
@@ -171,9 +167,9 @@ BOOST_AUTO_TEST_SUITE(station_line)
         station_line_type station_line2{
             station_location2,
             selection,
-            left_type{ 42 },
-            left_type{ 12 },
-            top_type{ 24 },
+            position_unit_type{ 42 },
+            position_unit_type{ 12 },
+            position_unit_type{ 24 },
             make_font_color(true, true)
         };
         station_line1 = std::move(station_line2);
@@ -196,9 +192,9 @@ BOOST_AUTO_TEST_SUITE(station_line)
         const station_line_type station_line{
             station_location,
             selection,
-            left_type{ 42 },
-            left_type{ 12 },
-            top_type{ 24 },
+            position_unit_type{ 42 },
+            position_unit_type{ 12 },
+            position_unit_type{ 24 },
             font_color
         };
 
@@ -223,22 +219,22 @@ BOOST_AUTO_TEST_SUITE(station_line)
         station_line_type station_line{
             station_location,
             selection,
-            left_type{ 42 },
-            left_type{ 12 },
-            top_type{ 24 },
+            position_unit_type{ 42 },
+            position_unit_type{ 12 },
+            position_unit_type{ 24 },
             make_font_color(true, true)
         };
 
         {
-            const position_type position{ left_type{ 6 }, top_type{ 24 } };
+            const position_type position{ position_unit_type{ 6 }, position_unit_type{ 24 } };
             BOOST_TEST(station_line.p_item_by_position(position) == &station_line);
         }
         {
-            const position_type position{ left_type{ 24 }, top_type{ 24 } };
+            const position_type position{ position_unit_type{ 24 }, position_unit_type{ 24 } };
             BOOST_TEST(!station_line.p_item_by_position(position));
         }
         {
-            const position_type position{ left_type{ 6 }, top_type{ 48 } };
+            const position_type position{ position_unit_type{ 6 }, position_unit_type{ 48 } };
             BOOST_TEST(!station_line.p_item_by_position(position));
         }
     }
@@ -259,9 +255,9 @@ BOOST_AUTO_TEST_SUITE(station_line)
         const station_line_type station_line{
             station_location,
             selection,
-            left_type{ 42 },
-            left_type{ 12 },
-            top_type{ 24 },
+            position_unit_type{ 42 },
+            position_unit_type{ 12 },
+            position_unit_type{ 24 },
             make_font_color(true, true)
         };
 
@@ -286,9 +282,9 @@ BOOST_AUTO_TEST_SUITE(station_line)
             station_line_type station_line{
                 station_location,
                 selection,
-                left_type{ 42 },
-                left_type{ 12 },
-                top_type{ 24 },
+                position_unit_type{ 42 },
+                position_unit_type{ 12 },
+                position_unit_type{ 24 },
                 make_font_color(true, true)
             };
 
@@ -309,9 +305,9 @@ BOOST_AUTO_TEST_SUITE(station_line)
             station_line_type station_line{
                 station_location,
                 selection,
-                left_type{ 42 },
-                left_type{ 12 },
-                top_type{ 24 },
+                position_unit_type{ 42 },
+                position_unit_type{ 12 },
+                position_unit_type{ 24 },
                 make_font_color(true, true)
             };
 
@@ -336,13 +332,13 @@ BOOST_AUTO_TEST_SUITE(station_line_list)
             model,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
-            std::vector<top_type>(2, top_type{ 42 })
+            std::vector<position_unit_type>(2, position_unit_type{ 42 })
         };
         const station_line_list_type station_line_list2{ std::move(station_line_list1) };
     }
@@ -357,25 +353,25 @@ BOOST_AUTO_TEST_SUITE(station_line_list)
             model,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
-            std::vector<top_type>(2, top_type{ 42 })
+            std::vector<position_unit_type>(2, position_unit_type{ 42 })
         };
         station_line_list_type station_line_list2{
             model,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
-            std::vector<top_type>(2, top_type{ 42 })
+            std::vector<position_unit_type>(2, position_unit_type{ 42 })
         };
 
         station_line_list1 = std::move(station_line_list2);
@@ -391,13 +387,13 @@ BOOST_AUTO_TEST_SUITE(station_line_list)
             model,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
-            std::vector<top_type>(2, top_type{ 42 })
+            std::vector<position_unit_type>(2, position_unit_type{ 42 })
         };
 
         window_type window{};
@@ -415,16 +411,16 @@ BOOST_AUTO_TEST_SUITE(station_line_list)
             model,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
-            std::vector<top_type>(2, top_type{ 42 })
+            std::vector<position_unit_type>(2, position_unit_type{ 42 })
         };
 
-        const position_type position{ left_type{ 24 }, top_type{ 42 } };
+        const position_type position{ position_unit_type{ 24 }, position_unit_type{ 42 } };
         BOOST_TEST(!station_line_list.p_item_by_position(position));
     }
 

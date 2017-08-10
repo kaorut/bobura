@@ -54,9 +54,7 @@ namespace
 
     using color_type = canvas_type::color_type;
 
-    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
-
-    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
+    using dimension_unit_type = dimension_type::unit_type;
 
     struct info_set_type
     {
@@ -529,7 +527,7 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
             boost::none,
             color_type{ 0x12, 0x34, 0x56 },
             color_type{ 0x78, 0x9A, 0xBC },
-            dimension_type{ width_type{ 42 }, height_type{ 24 } }
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } }
         );
     }
 
@@ -543,7 +541,7 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
             boost::none,
             color_type{ 0x12, 0x34, 0x56 },
             color_type{ 0x78, 0x9A, 0xBC },
-            dimension_type{ width_type{ 42 }, height_type{ 24 } }
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } }
         );
 
         window_type window{};

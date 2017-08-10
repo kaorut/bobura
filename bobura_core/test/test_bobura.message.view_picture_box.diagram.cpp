@@ -57,9 +57,7 @@ namespace
 
     using position_type = ui_type_list_type::position_type;
 
-    using left_type = tetengo2::gui::position<position_type>::left_type;
-
-    using top_type = tetengo2::gui::position<position_type>::top_type;
+    using position_unit_type = position_type::unit_type;
 
     using window_type = ui_type_list_type::window_type;
 
@@ -137,7 +135,13 @@ BOOST_AUTO_TEST_SUITE(mouse_pressed)
         diagram_view_type diagram_view{ model, message_catalog };
         const mouse_pressed_type mouse_pressed{ picture_box, set_mouse_capture, diagram_view };
 
-        mouse_pressed(mouse_button_type::left, position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
+        mouse_pressed(
+            mouse_button_type::left,
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            false,
+            false,
+            false
+        );
     }
 
 
@@ -164,7 +168,13 @@ BOOST_AUTO_TEST_SUITE(mouse_released)
         diagram_view_type diagram_view{ model, message_catalog };
         const mouse_released_type mouse_released{ release_mouse_capture, diagram_view };
 
-        mouse_released(mouse_button_type::left, position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
+        mouse_released(
+            mouse_button_type::left,
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            false,
+            false,
+            false
+        );
     }
 
 
@@ -195,7 +205,7 @@ BOOST_AUTO_TEST_SUITE(mouse_moved)
         const diagram_view_type diagram_view{ model, message_catalog };
         const mouse_moved_type mouse_moved{ picture_box, diagram_view, detail_impl_set_type::instance() };
 
-        mouse_moved(position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
+        mouse_moved(position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } }, false, false, false);
     }
 
 

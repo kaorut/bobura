@@ -39,9 +39,7 @@ namespace
 
     using position_type = picture_box_type::position_type;
 
-    using left_type = tetengo2::gui::position<position_type>::left_type;
-
-    using top_type = tetengo2::gui::position<position_type>::top_type;
+    using position_unit_type = position_type::unit_type;
 
     using canvas_type = ui_type_list_type::canvas_type;
 
@@ -65,21 +63,30 @@ BOOST_AUTO_TEST_SUITE(diagram)
 
         const auto result =
             bobura::view::diagram::time_to_left(
-                time_type{ 1 }, time_span_type{ 2 }, 0, left_type{ 3 }, left_type{ 4 }, left_type{ 5 }
+                time_type{ 1 },
+                time_span_type{ 2 },
+                0,
+                position_unit_type{ 3 },
+                position_unit_type{ 4 },
+                position_unit_type{ 5 }
             );
 
-        BOOST_TEST(result.value() == (left_type::value_type{ 86435, 36 }));
+        BOOST_TEST(result.value() == (position_unit_type::value_type{ 86435, 36 }));
     }
 
     BOOST_AUTO_TEST_CASE(station_index_to_top)
     {
         BOOST_TEST_PASSPOINT();
 
-        const std::vector<top_type> station_positions{ top_type{ 0 }, top_type{ 42 } };
+        const std::vector<position_unit_type> station_positions{ position_unit_type{ 0 }, position_unit_type{ 42 } };
 
         const auto result =
             bobura::view::diagram::station_index_to_top(
-                station_positions, size_type{ 1 }, top_type{ 2 }, top_type{ 3 }, top_type{ 4 }
+                station_positions,
+                size_type{ 1 },
+                position_unit_type{ 2 },
+                position_unit_type{ 3 },
+                position_unit_type{ 4 }
             );
 
         BOOST_TEST(result.value() == 47);
@@ -116,8 +123,8 @@ BOOST_AUTO_TEST_SUITE(diagram)
 
         bobura::view::diagram::draw_selectable_line(
             *p_canvas,
-            position_type{ left_type{ 24 }, top_type{ 24 } },
-            position_type{ left_type{ 42 }, top_type{ 42 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 24 } },
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 42 } },
             false
         );
     }

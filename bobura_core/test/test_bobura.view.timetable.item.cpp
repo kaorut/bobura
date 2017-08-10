@@ -35,15 +35,11 @@ namespace
 
     using position_type = canvas_type::position_type;
 
-    using left_type = typename tetengo2::gui::position<position_type>::left_type;
-
-    using top_type = typename tetengo2::gui::position<position_type>::top_type;
+    using position_unit_type = position_type::unit_type;
 
     using dimension_type = canvas_type::dimension_type;
 
-    using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-    using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+    using dimension_unit_type = dimension_type::unit_type;
 
     using traits_type = traits_type_list_type::timetable_view_type;
 
@@ -153,7 +149,7 @@ BOOST_AUTO_TEST_SUITE(item)
 
         concrete_item item{};
 
-        const position_type position{ left_type{ 42 }, top_type{ 24 } };
+        const position_type position{ position_unit_type{ 42 }, position_unit_type{ 24 } };
         item.call_set_position(position);
 
         BOOST_CHECK(item.position() == position);
@@ -165,7 +161,7 @@ BOOST_AUTO_TEST_SUITE(item)
 
         concrete_item item{};
 
-        const dimension_type dimension{ width_type{ 42 }, height_type{ 24 } };
+        const dimension_type dimension{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } };
         item.call_set_dimension(dimension);
 
         BOOST_CHECK(item.dimension() == dimension);

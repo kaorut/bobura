@@ -47,15 +47,11 @@ namespace
 
     using position_type = picture_box_type::position_type;
 
-    using left_type = tetengo2::gui::position<position_type>::left_type;
-
-    using top_type = tetengo2::gui::position<position_type>::top_type;
+    using position_unit_type = position_type::unit_type;
 
     using dimension_type = picture_box_type::dimension_type;
 
-    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
-
-    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
+    using dimension_unit_type = dimension_type::unit_type;
 
     using direction_type = bobura::view::timetable::direction_type;
 
@@ -95,8 +91,8 @@ BOOST_AUTO_TEST_SUITE(timetable_view)
         const auto p_canvas = picture_box.create_canvas();
         timetable_view.draw_on(
             *p_canvas,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 2 }, top_type{ 3 } }
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 2 }, position_unit_type{ 3 } }
         );
     }
 
@@ -130,7 +126,7 @@ BOOST_AUTO_TEST_SUITE(timetable_view)
         const message_catalog_type message_catalog{};
         const timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
 
-        timetable_view.page_size(dimension_type{ width_type{ 42 }, height_type{ 24 } });
+        timetable_view.page_size(dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } });
     }
 
     BOOST_AUTO_TEST_CASE(unselect_all_items)

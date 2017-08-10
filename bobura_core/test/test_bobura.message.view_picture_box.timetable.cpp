@@ -58,9 +58,7 @@ namespace
 
     using position_type = ui_type_list_type::position_type;
 
-    using left_type = tetengo2::gui::position<position_type>::left_type;
-
-    using top_type = tetengo2::gui::position<position_type>::top_type;
+    using position_unit_type = position_type::unit_type;
 
     using window_type = ui_type_list_type::window_type;
 
@@ -128,7 +126,13 @@ BOOST_AUTO_TEST_SUITE(mouse_pressed)
         timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         const mouse_pressed_type mouse_pressed{ picture_box, set_mouse_capture, timetable_view };
 
-        mouse_pressed(mouse_button_type::left, position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
+        mouse_pressed(
+            mouse_button_type::left,
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            false,
+            false,
+            false
+        );
     }
 
 
@@ -155,7 +159,13 @@ BOOST_AUTO_TEST_SUITE(mouse_released)
         timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         const mouse_released_type mouse_released{ release_mouse_capture, timetable_view };
 
-        mouse_released(mouse_button_type::left, position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
+        mouse_released(
+            mouse_button_type::left,
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            false,
+            false,
+            false
+        );
     }
 
 
@@ -186,7 +196,7 @@ BOOST_AUTO_TEST_SUITE(mouse_moved)
         const timetable_view_type timetable_view{ direction_type::down, model, message_catalog };
         const mouse_moved_type mouse_moved{ picture_box, timetable_view };
 
-        mouse_moved(position_type{ left_type{ 24 }, top_type{ 42 } }, false, false, false);
+        mouse_moved(position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } }, false, false, false);
     }
 
 

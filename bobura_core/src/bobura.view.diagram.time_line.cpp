@@ -186,8 +186,6 @@ namespace bobura { namespace view { namespace diagram
 
         using position_unit_type = typename time_line_list::position_unit_type;
 
-        using position_unit_type = typename time_line_list::position_unit_type;
-
         using dimension_type = typename time_line_list::dimension_type;
 
         using dimension_unit_type = typename time_line_list::dimension_unit_type;
