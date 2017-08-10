@@ -568,8 +568,6 @@ namespace bobura { namespace view { namespace timetable
 
         using dimension_unit_type = typename dimension_type::unit_type;
 
-        using dimension_unit_type = typename canvas_type::dimension_unit_type;
-
 
         // static functions
 

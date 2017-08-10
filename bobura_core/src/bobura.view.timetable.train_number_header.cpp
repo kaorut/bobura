@@ -504,6 +504,10 @@ namespace bobura { namespace view { namespace timetable
 
         using canvas_type = typename traits_type::canvas_type;
 
+        using position_type = typename canvas_type::position_type;
+
+        using position_unit_type = typename position_type::unit_type;
+
         using dimension_type = typename canvas_type::dimension_type;
 
         using dimension_unit_type = typename dimension_type::unit_type;
@@ -678,12 +682,6 @@ namespace bobura { namespace view { namespace timetable
         using string_type = typename traits_type::string_type;
 
         using color_type = typename canvas_type::color_type;
-
-        using position_type = typename canvas_type::position_type;
-
-        using position_unit_type = typename position_type::unit_type;
-
-        using dimension_unit_type = typename canvas_type::dimension_unit_type;
 
 
         // static functions

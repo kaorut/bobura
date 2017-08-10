@@ -161,8 +161,6 @@ namespace bobura { namespace view { namespace diagram
 
         using dimension_unit_type = typename dimension_type::unit_type;
 
-        using dimension_unit_type = typename canvas_type::dimension_unit_type;
-
         using geo_vector_type = std::pair<double, double>;
 
 
@@ -555,8 +553,6 @@ namespace bobura { namespace view { namespace diagram
         using train_line_fragment_type = train_line_fragment<traits_type>;
 
         using direction_type = typename train_type::direction_type;
-
-        using dimension_unit_type = typename canvas_type::dimension_unit_type;
 
         using stop_type = typename train_type::stop_type;
 

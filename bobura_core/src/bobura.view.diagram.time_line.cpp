@@ -277,8 +277,6 @@ namespace bobura { namespace view { namespace diagram
 
         using time_line_type = time_line<traits_type>;
 
-        using dimension_unit_type = typename canvas_type::dimension_unit_type;
-
 
         // static functions
 

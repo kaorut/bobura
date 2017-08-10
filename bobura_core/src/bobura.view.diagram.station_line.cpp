@@ -363,8 +363,6 @@ namespace bobura { namespace view { namespace diagram
 
         using station_grade_type = typename station_type::grade_type;
 
-        using dimension_unit_type = typename canvas_type::dimension_unit_type;
-
         using station_grade_type_set_type = model::station_info::grade_type_set<string_type>;
 
 
