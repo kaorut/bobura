@@ -11,8 +11,6 @@
 #include <boost/filesystem.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
-
 #include <bobura/model/serializer/writer.h>
 #include <bobura/type_list.h>
 

@@ -20,8 +20,6 @@
 #include <boost/filesystem.hpp>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/command/command_base.h>
 
 

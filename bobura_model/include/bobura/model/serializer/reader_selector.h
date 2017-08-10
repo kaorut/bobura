@@ -13,8 +13,6 @@
 #include <stdexcept>
 #include <vector>
 
-#include <tetengo2.h>
-
 #include <bobura/model/serializer/reader.h>
 
 

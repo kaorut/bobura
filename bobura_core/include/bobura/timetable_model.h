@@ -15,8 +15,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/message/timetable_model_observer_set.h>
 #include <bobura/model/timetable.h>
 

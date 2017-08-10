@@ -13,6 +13,8 @@
 #include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2.h>
+
 #include <bobura/message/font_color_dialog.h>
 #include <bobura/type_list.h>
 

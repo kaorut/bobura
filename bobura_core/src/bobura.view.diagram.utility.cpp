@@ -14,8 +14,6 @@
 #include <bobura/model/train_info/time.h>
 #include <bobura/model/train_info/time_span.h>
 
-#include <tetengo2.h>
-
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/utility.h>
 

@@ -15,8 +15,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/optional.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/message/diagram_selection_observer_set.h>
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>

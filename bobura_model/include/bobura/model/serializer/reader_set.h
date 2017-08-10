@@ -14,8 +14,6 @@
 
 #include <boost/core/noncopyable.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/serializer/reader.h>
 
 

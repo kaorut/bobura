@@ -8,8 +8,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/timetable_view.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>

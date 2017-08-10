@@ -10,8 +10,6 @@
 
 #include <boost/predef.h>
 
-#include <tetengo2.h>
-
 #include <bobura/model/serializer/reader.h>
 #include <bobura/type_list.h>
 
