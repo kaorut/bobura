@@ -8,8 +8,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/command/command_base.h>
 #include <bobura/type_list.h>
 

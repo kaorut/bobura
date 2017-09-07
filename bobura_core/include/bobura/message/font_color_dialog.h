@@ -17,7 +17,6 @@
 #include <boost/optional.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 
 namespace bobura { namespace message { namespace font_color_dialog
@@ -161,20 +160,16 @@ namespace bobura { namespace message { namespace font_color_dialog
         void operator()(canvas_type& canvas)
         const
         {
-            const position_type diagram_part_position{ left_type{ 0 }, top_type{ 0 } };
-            const dimension_type diagram_part_dimension{
-                tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension) / 2,
-                tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension),
-            };
+            const position_type diagram_part_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            const dimension_type diagram_part_dimension{ m_canvas_dimension.width() / 2, m_canvas_dimension.height() };
             draw_diagram_part(canvas, diagram_part_position, diagram_part_dimension);
 
             const position_type timetable_part_position{
-                left_type::from(tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension) / 2),
-                top_type{ 0 }
+                position_unit_type::from(m_canvas_dimension.width() / 2),
+                position_unit_type{ 0 }
             };
             const dimension_type timetable_part_dimension{
-                tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension) / 2,
-                tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension),
+                m_canvas_dimension.width() / 2, m_canvas_dimension.height()
             };
             draw_timetable_part(canvas, timetable_part_position, timetable_part_dimension);
         }
@@ -187,13 +182,11 @@ namespace bobura { namespace message { namespace font_color_dialog
 
         using position_type = typename canvas_type::position_type;
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
+        using position_unit_type = typename position_type::unit_type;
 
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+        using dimension_unit_type = typename dimension_type::unit_type;
 
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-        using size_type = typename width_type::value_type;
+        using size_type = typename dimension_unit_type::value_type;
 
         using background_type = typename canvas_type::background_type;
 
@@ -274,29 +267,22 @@ namespace bobura { namespace message { namespace font_color_dialog
                 canvas.set_font(*font);
 
                 const position_type text_position{
-                    tetengo2::gui::position<position_type>::left(position) + left_type{ 1 },
-                    sample_text_top(canvas, position, dimension, text)
+                    position.left() + position_unit_type{ 1 }, sample_text_top(canvas, position, dimension, text)
                 };
                 canvas.draw_text(text, text_position);
             }
             else
             {
-                canvas.set_line_width(width_type{ 1 } / 12);
+                canvas.set_line_width(dimension_unit_type{ 1 } / 12);
 
-                const auto line_top =
-                    tetengo2::gui::position<position_type>::top(position) +
-                    top_type::from(tetengo2::gui::dimension<dimension_type>::height(dimension)) / 2;
-                const position_type line_from{ tetengo2::gui::position<position_type>::left(position), line_top };
-                const position_type line_to{
-                    tetengo2::gui::position<position_type>::left(position) +
-                        left_type::from(tetengo2::gui::dimension<dimension_type>::width(dimension)),
-                    line_top
-                };
+                const auto line_top = position.top() + position_unit_type::from(dimension.height()) / 2;
+                const position_type line_from{ position.left(), line_top };
+                const position_type line_to{ position.left() + position_unit_type::from(dimension.width()), line_top };
                 canvas.draw_line(line_from, line_to);
             }
         }
 
-        top_type sample_text_top(
+        position_unit_type sample_text_top(
             const canvas_type&    canvas,
             const position_type&  base_position,
             const dimension_type& base_dimension,
@@ -304,15 +290,14 @@ namespace bobura { namespace message { namespace font_color_dialog
         )
         const
         {
-            const auto& base_top = tetengo2::gui::position<position_type>::top(base_position);
-            const auto& base_height = tetengo2::gui::dimension<dimension_type>::height(base_dimension);
-            const auto& text_height =
-                tetengo2::gui::dimension<dimension_type>::height(canvas.calc_text_dimension(text));
+            const auto& base_top = base_position.top();
+            const auto& base_height = base_dimension.height();
+            const auto& text_height = canvas.calc_text_dimension(text).height();
 
             if (base_height > text_height)
-                return base_top + top_type::from((base_height - text_height) / 2);
+                return base_top + position_unit_type::from((base_height - text_height) / 2);
             else
-                return top_type{ 0 };
+                return position_unit_type{ 0 };
         }
 
 

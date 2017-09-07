@@ -11,9 +11,6 @@
 #include <boost/core/ignore_unused.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.gui.h>
-
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/item.h>
 #include <bobura/view/diagram/selection.h>
@@ -37,9 +34,7 @@ namespace
 
     using position_type = canvas_type::position_type;
 
-    using left_type = tetengo2::gui::position<position_type>::left_type;
-
-    using top_type = tetengo2::gui::position<position_type>::top_type;
+    using position_unit_type = position_type::unit_type;
 
     using traits_type = traits_type_list_type::diagram_view_type;
 
@@ -133,13 +128,13 @@ BOOST_AUTO_TEST_SUITE(item)
             selection_type selection{};
             const concrete_item item{ selection };
 
-            item.p_item_by_position(position_type{ left_type{ 42 }, top_type{ 24 } });
+            item.p_item_by_position(position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } });
         }
         {
             selection_type selection{};
             concrete_item item{ selection };
 
-            item.p_item_by_position(position_type{ left_type{ 42 }, top_type{ 24 } });
+            item.p_item_by_position(position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } });
         }
     }
 

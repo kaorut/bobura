@@ -15,7 +15,6 @@
 #include <boost/predef.h>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/command/command_base.h>
 #include <bobura/command/set.h>

@@ -15,8 +15,6 @@
 
 #include <boost/optional.hpp>
 
-#include <tetengo2.h>
-
 
 namespace bobura { namespace model { namespace serializer
 {

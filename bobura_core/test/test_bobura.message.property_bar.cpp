@@ -8,7 +8,7 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.gui.h>
+#include <tetengo2.h>
 #include <tetengo2.detail.h>
 
 #include <bobura/message/property_bar.h>
@@ -37,9 +37,7 @@ namespace
 
     using position_type = mouse_pressed_type::position_type;
 
-    using left_type = tetengo2::gui::position<position_type>::left_type;
-
-    using top_type = tetengo2::gui::position<position_type>::top_type;
+    using position_unit_type = position_type::unit_type;
 
     using mouse_button_type = mouse_pressed_type::mouse_button_type;
 
@@ -99,7 +97,13 @@ BOOST_AUTO_TEST_SUITE(mouse_pressed)
         map_box_type map_box{ side_bar, detail_impl_set_type::instance().cursor_() };
         const mouse_pressed_type observer{ map_box };
 
-        observer(mouse_button_type::left, position_type{ left_type{ 42 }, top_type{ 24 } }, false, false, false);
+        observer(
+            mouse_button_type::left,
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
+            false,
+            false,
+            false
+        );
     }
 
 

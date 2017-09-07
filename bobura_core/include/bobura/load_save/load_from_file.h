@@ -15,8 +15,6 @@
 #include <boost/filesystem.hpp>
 #include <boost/optional.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/timetable_model.h>
 

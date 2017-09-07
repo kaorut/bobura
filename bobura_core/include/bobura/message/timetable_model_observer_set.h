@@ -6,15 +6,13 @@
     $Id$
 */
 
-#if !defined(TETENGO2_MESSAGE_TIMETABLEMODELOBSERVERSET_H)
-#define TETENGO2_MESSAGE_TIMETABLEMODELOBSERVERSET_H
+#if !defined(BOBURA_MESSAGE_TIMETABLEMODELOBSERVERSET_H)
+#define BOBURA_MESSAGE_TIMETABLEMODELOBSERVERSET_H
 
 #include <memory>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/signals2.hpp>
-
-#include <tetengo2.h>
 
 
 namespace bobura { namespace message

@@ -13,8 +13,6 @@
 
 #include <boost/core/noncopyable.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/view/diagram/item.h>
 #include <bobura/view/diagram/selection.h>
 #include <bobura/timetable_model.h>

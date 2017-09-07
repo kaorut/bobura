@@ -14,7 +14,6 @@
 #include <boost/predef.h>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/model/station_info/grade.h>
 #include <bobura/timetable_view.h>
@@ -56,7 +55,7 @@ namespace bobura
         m_direction(direction),
         m_model(model),
         m_message_catalog(message_catalog),
-        m_dimension(width_type{ 0 }, height_type{ 0 }),
+        m_dimension(dimension_unit_type{ 0 }, dimension_unit_type{ 0 }),
         m_p_header(),
         m_p_train_number_header()
         {}
@@ -85,7 +84,7 @@ namespace bobura
 
         void update_dimension()
         {
-            m_dimension = dimension_type{ width_type{ 42 }, height_type{ 24 } };
+            m_dimension = dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } };
 
             m_p_header.reset();
             m_p_train_number_header.reset();
@@ -94,8 +93,8 @@ namespace bobura
         dimension_type page_size(const dimension_type& canvas_dimension)
         const
         {
-            const auto& page_width = tetengo2::gui::dimension<dimension_type>::width(canvas_dimension);
-            const auto& page_height = tetengo2::gui::dimension<dimension_type>::height(canvas_dimension);
+            const auto& page_width = canvas_dimension.width();
+            const auto& page_height = canvas_dimension.height();
             return { page_width, page_height };
         }
 
@@ -108,13 +107,9 @@ namespace bobura
     private:
         // types
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
+        using position_unit_type = typename position_type::unit_type;
 
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
-
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+        using dimension_unit_type = typename dimension_type::unit_type;
 
         using solid_background_type = typename traits_type::solid_background_type;
 
@@ -133,13 +128,13 @@ namespace bobura
 
         // static functions
 
-        static width_type max_station_name_width(
+        static dimension_unit_type max_station_name_width(
             canvas_type&                  canvas,
             const station_locations_type& station_locations,
             const font_color_set_type&    font_color_set
         )
         {
-            width_type max_width{ 0 };
+            dimension_unit_type max_width{ 0 };
             {
                 const auto& font =
                     view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
@@ -149,7 +144,7 @@ namespace bobura
                 canvas.set_font(*font);
 
                 const auto dimension = canvas.calc_text_dimension(string_type{ TETENGO2_TEXT("M") });
-                max_width = tetengo2::gui::dimension<dimension_type>::width(dimension) * 4 + width_type{ 3 };
+                max_width = dimension.width() * 4 + dimension_unit_type{ 3 };
             }
             for (const auto& station_location: station_locations)
             {
@@ -163,20 +158,20 @@ namespace bobura
                 canvas.set_font(*font);
 
                 const auto dimension = canvas.calc_text_dimension(station.name());
-                const auto width = tetengo2::gui::dimension<dimension_type>::width(dimension) + width_type{ 3 };
+                const auto width = dimension.width() + dimension_unit_type{ 3 };
                 if (width > max_width)
                     max_width = width;
             }
             return max_width;
         }
 
-        static height_type train_number_height(canvas_type& canvas, const font_color_set_type& font_color_set)
+        static dimension_unit_type train_number_height(canvas_type& canvas, const font_color_set_type& font_color_set)
         {
             assert(font_color_set.general().timetable_font());
             canvas.set_font(*font_color_set.general().timetable_font());
 
             const auto dimension = canvas.calc_text_dimension(string_type{ TETENGO2_TEXT("42") });
-            return tetengo2::gui::dimension<dimension_type>::height(dimension);
+            return dimension.height();
         }
 
 
@@ -205,7 +200,7 @@ namespace bobura
                     *m_model.timetable().font_color_set().background().diagram_color()
                 )
             );
-            canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, canvas_dimension);
+            canvas.fill_rectangle(position_type{ position_unit_type{ 0 }, position_unit_type{ 0 } }, canvas_dimension);
         }
 
         void ensure_items_created(
@@ -221,14 +216,14 @@ namespace bobura
                 return;
             }
 
-            const dimension_type margin{ width_type{ 1 } / 2, height_type{ 1 } / 2 };
-            const auto operating_distance_width_ = width_type{ 5 } / 2;
+            const dimension_type margin{ dimension_unit_type{ 1 } / 2, dimension_unit_type{ 1 } / 2 };
+            const auto operating_distance_width_ = dimension_unit_type{ 5 } / 2;
             const auto max_station_name_width_ =
                 max_station_name_width(
                     canvas, m_model.timetable().station_locations(), m_model.timetable().font_color_set()
                 );
             const auto train_number_height_ = train_number_height(canvas, m_model.timetable().font_color_set());
-            const auto train_name_height_ = height_type{ 5 };
+            const auto train_name_height_ = dimension_unit_type{ 5 };
 
             m_p_header =
                 tetengo2::stdalt::make_unique<header_type>(
@@ -236,8 +231,7 @@ namespace bobura
                 );
 
             const auto header_bottom =
-                tetengo2::gui::position<position_type>::top(m_p_header->position()) +
-                top_type::from(tetengo2::gui::dimension<dimension_type>::height(m_p_header->dimension()));
+                m_p_header->position().top() + position_unit_type::from(m_p_header->dimension().height());
 
             m_p_train_number_header =
                 tetengo2::stdalt::make_unique<train_number_header_type>(

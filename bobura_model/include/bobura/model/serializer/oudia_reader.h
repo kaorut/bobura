@@ -12,8 +12,6 @@
 #include <memory>
 #include <stdexcept>
 
-#include <tetengo2.h>
-
 #include <bobura/model/serializer/reader.h>
 
 

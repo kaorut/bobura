@@ -11,8 +11,6 @@
 
 #include <memory>
 
-#include <tetengo2.h>
-
 #include <bobura/command/command_base.h>
 
 
@@ -21,20 +19,20 @@ namespace bobura { namespace command
     /*!
         \brief The class template for a font and color command.
 
-        \tparam Traits         A traits type.
-        \tparam Dialog         A dialog type.
-        \tparam PointUnitSize  A point unit size type.
-        \tparam Color          A color type.
-        \tparam Canvas         A canvas type.
-        \tparam FontDialog     A font dialog type.
-        \tparam ColorDialog    A color dialog type.
-        \tparam MessageCatalog A message catalog type.
-        \tparam DialogTraits   A dialog traits type.
+        \tparam Traits             A traits type.
+        \tparam Dialog             A dialog type.
+        \tparam PointDimensionUnit A point dimension unit type.
+        \tparam Color              A color type.
+        \tparam Canvas             A canvas type.
+        \tparam FontDialog         A font dialog type.
+        \tparam ColorDialog        A color dialog type.
+        \tparam MessageCatalog     A message catalog type.
+        \tparam DialogTraits       A dialog traits type.
     */
     template <
         typename Traits,
         typename Dialog,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
@@ -53,8 +51,8 @@ namespace bobura { namespace command
         //! The dialog type.
         using dialog_type = Dialog;
 
-        //! The point unit size type.
-        using point_unit_size_type = PointUnitSize;
+        //! The point dimension unit type.
+        using point_dimension_unit_type = PointDimensionUnit;
 
         //! The color type.
         using color_type = Color;

@@ -6,16 +6,14 @@
     $Id$
 */
 
-#if !defined(TETENGO2_MESSAGE_DIAGRAMSELECTIONOBSERVERSET_H)
-#define TETENGO2_MESSAGE_DIAGRAMSELECTIONOBSERVERSET_H
+#if !defined(BOBURA_MESSAGE_DIAGRAMSELECTIONOBSERVERSET_H)
+#define BOBURA_MESSAGE_DIAGRAMSELECTIONOBSERVERSET_H
 
 #include <memory>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/optional.hpp>
 #include <boost/signals2.hpp>
-
-#include <tetengo2.h>
 
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>

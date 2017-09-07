@@ -27,7 +27,7 @@ namespace bobura { namespace command
     template <
         typename Traits,
         typename Dialog,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
@@ -36,7 +36,7 @@ namespace bobura { namespace command
         typename DialogTraits
     >
     class train_kind<
-        Traits, Dialog, PointUnitSize, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
+        Traits, Dialog, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
     >::impl
     {
     public:
@@ -50,7 +50,7 @@ namespace bobura { namespace command
 
         using dialog_type = typename train_kind::dialog_type;
 
-        using point_unit_size_type = typename train_kind::point_unit_size_type;
+        using point_dimension_unit_type = typename train_kind::point_dimension_unit_type;
 
         using color_type = typename train_kind::color_type;
 
@@ -113,7 +113,7 @@ namespace bobura { namespace command
                 size_type,
                 string_type,
                 font_type,
-                point_unit_size_type,
+                point_dimension_unit_type,
                 color_type,
                 canvas_type,
                 font_dialog_type,
@@ -195,7 +195,7 @@ namespace bobura { namespace command
     template <
         typename Traits,
         typename Dialog,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
@@ -204,7 +204,7 @@ namespace bobura { namespace command
         typename DialogTraits
     >
     train_kind<
-        Traits, Dialog, PointUnitSize, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
+        Traits, Dialog, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
     >::train_kind(
         const message_catalog_type& message_catalog
     )
@@ -215,7 +215,7 @@ namespace bobura { namespace command
     template <
         typename Traits,
         typename Dialog,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
@@ -224,7 +224,7 @@ namespace bobura { namespace command
         typename DialogTraits
     >
     train_kind<
-        Traits, Dialog, PointUnitSize, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
+        Traits, Dialog, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
     >::~train_kind()
     noexcept
     {}
@@ -232,7 +232,7 @@ namespace bobura { namespace command
     template <
         typename Traits,
         typename Dialog,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
@@ -241,7 +241,7 @@ namespace bobura { namespace command
         typename DialogTraits
     >
     void train_kind<
-        Traits, Dialog, PointUnitSize, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
+        Traits, Dialog, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
     >::execute_impl(
         model_type&           model,
         abstract_window_type& parent
@@ -290,7 +290,7 @@ namespace bobura { namespace command
     template class train_kind<
         typename application::traits_type_list_type::command_type,
         typename application::ui_type_list_type::dialog_type,
-        typename application::ui_type_list_type::point_unit_size_type,
+        typename application::ui_type_list_type::point_dimension_unit_type,
         typename application::ui_type_list_type::color_type,
         typename application::ui_type_list_type::fast_canvas_type,
         typename application::common_dialog_type_list_type::font_type,
@@ -303,7 +303,7 @@ namespace bobura { namespace command
     template class train_kind<
         typename test::traits_type_list_type::command_type,
         typename test::ui_type_list_type::dialog_type,
-        typename test::ui_type_list_type::point_unit_size_type,
+        typename test::ui_type_list_type::point_dimension_unit_type,
         typename test::ui_type_list_type::color_type,
         typename test::ui_type_list_type::fast_canvas_type,
         typename test::common_dialog_type_list_type::font_type,

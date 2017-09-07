@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/message/train_kind_dialog.h>
 #include <bobura/train_kind_dialog.h>
@@ -36,14 +35,15 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
-    class train_kind_dialog<Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::impl :
-        private boost::noncopyable
+    class train_kind_dialog<
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
+    >::impl : private boost::noncopyable
     {
     public:
         // types
@@ -64,7 +64,7 @@ namespace bobura
 
         using font_dialog_type = typename train_kind_dialog::font_dialog_type;
 
-        using point_unit_size_type = typename train_kind_dialog::point_unit_size_type;
+        using point_dimension_unit_type = typename train_kind_dialog::point_dimension_unit_type;
 
         using color_dialog_type = typename train_kind_dialog::color_dialog_type;
 
@@ -145,15 +145,11 @@ namespace bobura
 
         using position_type = typename traits_type::position_type;
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
-
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+        using position_unit_type = typename position_type::unit_type;
 
         using dimension_type = typename traits_type::dimension_type;
 
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+        using dimension_unit_type = typename dimension_type::unit_type;
 
         using label_type = typename traits_type::label_type;
 
@@ -705,7 +701,7 @@ namespace bobura
             auto p_picture_box =
                 tetengo2::stdalt::make_unique<picture_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
 
-            p_picture_box->set_dimension(dimension_type{ width_type{ 22 }, height_type{ 4 } });
+            p_picture_box->set_dimension(dimension_type{ dimension_unit_type{ 22 }, dimension_unit_type{ 4 } });
             p_picture_box->fast_paint_observer_set().paint().connect(
                 sample_picture_box_paint_observer_type{
                     m_info_sets,
@@ -741,119 +737,129 @@ namespace bobura
 
         void locate_controls()
         {
-            m_base.set_client_dimension(dimension_type{ width_type{ 48 }, height_type{ 37 } });
+            m_base.set_client_dimension(dimension_type{ dimension_unit_type{ 48 }, dimension_unit_type{ 37 } });
 
-            const left_type train_kind_label_left{ 2 };
+            const position_unit_type train_kind_label_left{ 2 };
             {
                 m_p_train_kind_label->fit_to_content();
-                m_p_train_kind_label->set_position(position_type{ train_kind_label_left, top_type{ 1 } });
+                m_p_train_kind_label->set_position(position_type{ train_kind_label_left, position_unit_type{ 1 } });
 
-                const width_type list_box_width{ 20 };
-                const height_type list_box_height{ 28 };
+                const dimension_unit_type list_box_width{ 20 };
+                const dimension_unit_type list_box_height{ 28 };
                 m_p_train_kind_list_box->set_dimension(dimension_type{ list_box_width, list_box_height });
                 m_p_train_kind_list_box->set_position(
                     position_type{
                         train_kind_label_left,
-                        tetengo2::gui::position<position_type>::top(m_p_train_kind_label->position()) +
-                            top_type::from(
-                                tetengo2::gui::dimension<dimension_type>::height(m_p_train_kind_label->dimension())
-                            )
+                        m_p_train_kind_label->position().top() +
+                            position_unit_type::from(m_p_train_kind_label->dimension().height())
                     }
                 );
 
-                const width_type list_box_button_width{ typename width_type::value_type{ 9, 2 } };
-                left_type list_box_button_left{
-                    train_kind_label_left + left_type::from(list_box_width) - left_type::from(list_box_button_width)
+                const dimension_unit_type list_box_button_width{ typename dimension_unit_type::value_type{ 9, 2 } };
+                position_unit_type list_box_button_left{
+                    train_kind_label_left +
+                        position_unit_type::from(list_box_width) -
+                        position_unit_type::from(list_box_button_width)
                 };
-                const top_type list_box_button_top{
-                    tetengo2::gui::position<position_type>::top(m_p_train_kind_list_box->position()) +
-                        top_type::from(list_box_height)
+                const position_unit_type list_box_button_top{
+                    m_p_train_kind_list_box->position().top() + position_unit_type::from(list_box_height)
                 };
-                m_p_down_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
+                m_p_down_button->set_dimension(dimension_type{ list_box_button_width, dimension_unit_type{ 2 } });
                 m_p_down_button->set_position(position_type{ list_box_button_left, list_box_button_top });
 
                 list_box_button_left -=
-                    left_type::from(list_box_button_width) + left_type{ typename left_type::value_type{ 1, 4 } };
-                m_p_up_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
+                    position_unit_type::from(list_box_button_width) +
+                    position_unit_type{ typename position_unit_type::value_type{ 1, 4 } };
+                m_p_up_button->set_dimension(dimension_type{ list_box_button_width, dimension_unit_type{ 2 } });
                 m_p_up_button->set_position(position_type{ list_box_button_left, list_box_button_top });
 
                 list_box_button_left -=
-                    left_type::from(list_box_button_width) + left_type{ typename left_type::value_type{ 1, 2 } };
-                m_p_delete_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
+                    position_unit_type::from(list_box_button_width) +
+                    position_unit_type{ typename position_unit_type::value_type{ 1, 2 } };
+                m_p_delete_button->set_dimension(dimension_type{ list_box_button_width, dimension_unit_type{ 2 } });
                 m_p_delete_button->set_position(position_type{ list_box_button_left, list_box_button_top });
 
                 list_box_button_left -=
-                    left_type::from(list_box_button_width) + left_type{ typename left_type::value_type{ 1, 4 } };
-                m_p_add_button->set_dimension(dimension_type{ list_box_button_width, height_type{ 2 } });
+                    position_unit_type::from(list_box_button_width) +
+                    position_unit_type{ typename position_unit_type::value_type{ 1, 4 } };
+                m_p_add_button->set_dimension(dimension_type{ list_box_button_width, dimension_unit_type{ 2 } });
                 m_p_add_button->set_position(position_type{ list_box_button_left, list_box_button_top });
             }
 
-            const left_type name_label_left{ 24 };
-            const left_type font_button_left{ 25 };
-            const left_type name_text_box_left{ 32 };
-            const left_type font_text_box_left{ 34 };
+            const position_unit_type name_label_left{ 24 };
+            const position_unit_type font_button_left{ 25 };
+            const position_unit_type name_text_box_left{ 32 };
+            const position_unit_type font_text_box_left{ 34 };
             {
                 m_p_name_label->fit_to_content();
-                m_p_name_label->set_position(position_type{ name_label_left, top_type{ 1 } });
+                m_p_name_label->set_position(position_type{ name_label_left, position_unit_type{ 1 } });
 
-                m_p_name_text_box->set_dimension(dimension_type{ width_type{ 14 }, height_type{ 2 } });
-                m_p_name_text_box->set_position(position_type{ name_text_box_left, top_type{ 1 } });
+                m_p_name_text_box->set_dimension(
+                    dimension_type{ dimension_unit_type{ 14 }, dimension_unit_type{ 2 } }
+                );
+                m_p_name_text_box->set_position(position_type{ name_text_box_left, position_unit_type{ 1 } });
 
                 m_p_abbreviation_label->fit_to_content();
-                m_p_abbreviation_label->set_position(position_type{ name_label_left, top_type{ 4 } });
+                m_p_abbreviation_label->set_position(position_type{ name_label_left, position_unit_type{ 4 } });
 
-                m_p_abbreviation_text_box->set_dimension(dimension_type{ width_type{ 14 }, height_type{ 2 } });
-                m_p_abbreviation_text_box->set_position(position_type{ name_text_box_left, top_type{ 4 } });
+                m_p_abbreviation_text_box->set_dimension(
+                    dimension_type{ dimension_unit_type{ 14 }, dimension_unit_type{ 2 } }
+                );
+                m_p_abbreviation_text_box->set_position(position_type{ name_text_box_left, position_unit_type{ 4 } });
             }
             {
                 m_p_diagram_label->fit_to_content();
-                m_p_diagram_label->set_position(position_type{ name_label_left, top_type{ 7 } });
+                m_p_diagram_label->set_position(position_type{ name_label_left, position_unit_type{ 7 } });
 
                 const auto font_button_top =
-                    tetengo2::gui::position<position_type>::top(m_p_diagram_label->position()) +
-                    top_type::from(tetengo2::gui::dimension<dimension_type>::height(m_p_diagram_label->dimension()));
+                    m_p_diagram_label->position().top() +
+                    position_unit_type::from(m_p_diagram_label->dimension().height());
 
-                m_p_diagram_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_diagram_font_button->set_dimension(
+                    dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } }
+                );
                 m_p_diagram_font_button->set_position(position_type{ font_button_left, font_button_top });
 
-                m_p_diagram_font_text_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
+                m_p_diagram_font_text_box->set_dimension(
+                    dimension_type{ dimension_unit_type{ 12 }, dimension_unit_type{ 2 } }
+                );
                 m_p_diagram_font_text_box->set_position(position_type{ font_text_box_left, font_button_top });
 
                 const auto color_button_top =
-                    tetengo2::gui::position<position_type>::top(m_p_diagram_font_button->position()) +
-                    top_type::from(
-                        tetengo2::gui::dimension<dimension_type>::height(m_p_diagram_font_button->dimension())
-                    ) +
-                    top_type{ 1 } / 2;
+                    m_p_diagram_font_button->position().top() +
+                    position_unit_type::from(m_p_diagram_font_button->dimension().height()) +
+                    position_unit_type{ 1 } / 2;
 
-                m_p_diagram_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_diagram_color_button->set_dimension(
+                    dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } }
+                );
                 m_p_diagram_color_button->set_position(position_type{ font_button_left, color_button_top });
 
                 const auto weight_label_top =
-                    tetengo2::gui::position<position_type>::top(m_p_diagram_color_button->position()) +
-                    top_type::from(
-                        tetengo2::gui::dimension<dimension_type>::height(m_p_diagram_color_button->dimension())
-                    ) +
-                    top_type{ 1 } / 2;
+                    m_p_diagram_color_button->position().top() +
+                    position_unit_type::from(m_p_diagram_color_button->dimension().height()) +
+                    position_unit_type{ 1 } / 2;
 
                 m_p_diagram_weight_label->fit_to_content();
                 m_p_diagram_weight_label->set_position(position_type{ font_button_left, weight_label_top });
 
-                m_p_diagram_weight_dropdown_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
+                m_p_diagram_weight_dropdown_box->set_dimension(
+                    dimension_type{ dimension_unit_type{ 12 }, dimension_unit_type{ 2 } }
+                );
                 m_p_diagram_weight_dropdown_box->set_position(position_type{ font_text_box_left, weight_label_top });
 
                 const auto line_style_label_top =
-                    tetengo2::gui::position<position_type>::top(m_p_diagram_weight_dropdown_box->position()) +
-                    top_type::from(
-                        tetengo2::gui::dimension<dimension_type>::height(m_p_diagram_weight_dropdown_box->dimension())
+                    m_p_diagram_weight_dropdown_box->position().top() +
+                    position_unit_type::from(
+                        m_p_diagram_weight_dropdown_box->dimension().height()
                     ) +
-                    top_type{ 1 } / 2;
+                    position_unit_type{ 1 } / 2;
 
                 m_p_diagram_line_style_label->fit_to_content();
                 m_p_diagram_line_style_label->set_position(position_type{ font_button_left, line_style_label_top });
 
                 m_p_diagram_line_style_dropdown_box->set_dimension(
-                    dimension_type{ width_type{ 12 }, height_type{ 2 } }
+                    dimension_type{ dimension_unit_type{ 12 }, dimension_unit_type{ 2 } }
                 );
                 m_p_diagram_line_style_dropdown_box->set_position(
                     position_type{ font_text_box_left, line_style_label_top }
@@ -861,26 +867,32 @@ namespace bobura
             }
             {
                 m_p_timetable_label->fit_to_content();
-                m_p_timetable_label->set_position(position_type{ name_label_left, top_type{ 20 } });
+                m_p_timetable_label->set_position(position_type{ name_label_left, position_unit_type{ 20 } });
 
                 const auto font_button_top =
-                    tetengo2::gui::position<position_type>::top(m_p_timetable_label->position()) +
-                    top_type::from(tetengo2::gui::dimension<dimension_type>::height(m_p_timetable_label->dimension()));
+                    m_p_timetable_label->position().top() +
+                    position_unit_type::from(m_p_timetable_label->dimension().height());
 
-                m_p_timetable_font_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_timetable_font_button->set_dimension(
+                    dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } }
+                );
                 m_p_timetable_font_button->set_position(position_type{ font_button_left, font_button_top });
 
-                m_p_timetable_font_text_box->set_dimension(dimension_type{ width_type{ 12 }, height_type{ 2 } });
+                m_p_timetable_font_text_box->set_dimension(
+                    dimension_type{ dimension_unit_type{ 12 }, dimension_unit_type{ 2 } }
+                );
                 m_p_timetable_font_text_box->set_position(position_type{ font_text_box_left, font_button_top });
 
                 const auto color_button_top =
-                    tetengo2::gui::position<position_type>::top(m_p_timetable_font_button->position()) +
-                    top_type::from(
-                        tetengo2::gui::dimension<dimension_type>::height(m_p_timetable_font_button->dimension())
+                    m_p_timetable_font_button->position().top() +
+                    position_unit_type::from(
+                        m_p_timetable_font_button->dimension().height()
                     ) +
-                    top_type{ 1 } / 2;
+                    position_unit_type{ 1 } / 2;
 
-                m_p_timetable_color_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
+                m_p_timetable_color_button->set_dimension(
+                    dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } }
+                );
                 m_p_timetable_color_button->set_position(position_type{ font_button_left, color_button_top });
             }
             {
@@ -888,30 +900,28 @@ namespace bobura
                 m_p_sample_label->set_dimension(
                     dimension_type{
                         std::max(
-                            tetengo2::gui::dimension<dimension_type>::width(m_p_sample_label->dimension()),
-                            width_type{ m_p_sample_label->text().length() }
+                            m_p_sample_label->dimension().width(),
+                            dimension_unit_type{ m_p_sample_label->text().length() }
                         ),
-                        tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
+                        m_p_sample_label->dimension().height()
                     }
                 );
-                m_p_sample_label->set_position(position_type{ name_label_left, top_type{ 27 } });
+                m_p_sample_label->set_position(position_type{ name_label_left, position_unit_type{ 27 } });
 
                 m_p_sample_picture_box->set_position(
                     position_type{
                         name_label_left,
-                        tetengo2::gui::position<position_type>::top(m_p_sample_label->position()) +
-                            top_type::from(
-                                tetengo2::gui::dimension<dimension_type>::height(m_p_sample_label->dimension())
-                            )
+                        m_p_sample_label->position().top() +
+                            position_unit_type::from(m_p_sample_label->dimension().height())
                     }
                 );
             }
             {
-                m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_ok_button->set_position(position_type{ left_type{ 29 }, top_type{ 34 } });
+                m_p_ok_button->set_dimension(dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } });
+                m_p_ok_button->set_position(position_type{ position_unit_type{ 29 }, position_unit_type{ 34 } });
 
-                m_p_cancel_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-                m_p_cancel_button->set_position(position_type{ left_type{ 38 }, top_type{ 34 } });
+                m_p_cancel_button->set_dimension(dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } });
+                m_p_cancel_button->set_position(position_type{ position_unit_type{ 38 }, position_unit_type{ 34 } });
             }
         }
 
@@ -1032,7 +1042,7 @@ namespace bobura
             stream <<
                 boost::basic_format<typename string_type::value_type>(string_type{ TETENGO2_TEXT("%s, %dpt") }) %
                 font.family() %
-                boost::rational_cast<int>(point_unit_size_type::from_pixels(font.size()).value());
+                boost::rational_cast<int>(point_dimension_unit_type::from_pixels(font.size()).value());
 
             return stream.str();
         }
@@ -1046,14 +1056,14 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::info_set_type(
         boost::optional<size_type> original_index,
         const bool                 referred,
@@ -1071,7 +1081,7 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
@@ -1079,11 +1089,11 @@ namespace bobura
     >
     const boost::optional<
         typename train_kind_dialog<
-            Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+            Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
         >::size_type
     >&
     train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::original_index()
     const
     {
@@ -1095,14 +1105,14 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     bool train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::referred()
     const
     {
@@ -1114,17 +1124,17 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     const typename train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::train_kind_type&
     train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::train_kind()
     const
     {
@@ -1136,17 +1146,17 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     typename train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::train_kind_type&
     train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::info_set_type::train_kind()
     {
         return m_train_kind;
@@ -1157,14 +1167,14 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::train_kind_dialog(
         abstract_window_type&       parent,
         const color_type&           background_color,
@@ -1181,14 +1191,14 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::~train_kind_dialog()
     noexcept
     {}
@@ -1198,7 +1208,7 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
@@ -1206,10 +1216,10 @@ namespace bobura
     >
     const std::vector<
         typename train_kind_dialog<
-            Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+            Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
         >::info_set_type
     >
-    train_kind_dialog<Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog>::info_sets()
+    train_kind_dialog<Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::info_sets()
     const
     {
         return m_p_impl->info_sets();
@@ -1220,14 +1230,14 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     void train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::set_info_sets(
         std::vector<info_set_type> info_sets
     )
@@ -1240,14 +1250,14 @@ namespace bobura
         typename Size,
         typename String,
         typename Font,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Color,
         typename Canvas,
         typename FontDialog,
         typename ColorDialog
     >
     void train_kind_dialog<
-        Traits, Size, String, Font, PointUnitSize, Color, Canvas, FontDialog, ColorDialog
+        Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
     >::do_modal_impl()
     {
         m_p_impl->do_modal_impl();
@@ -1294,7 +1304,7 @@ namespace bobura
         typename application::common_type_list_type::size_type,
         typename application::common_type_list_type::string_type,
         typename application::ui_type_list_type::fast_font_type,
-        typename application::ui_type_list_type::point_unit_size_type,
+        typename application::ui_type_list_type::point_dimension_unit_type,
         typename application::ui_type_list_type::color_type,
         typename application::ui_type_list_type::fast_canvas_type,
         typename application::common_dialog_type_list_type::font_type,
@@ -1307,7 +1317,7 @@ namespace bobura
         typename test::common_type_list_type::size_type,
         typename test::common_type_list_type::string_type,
         typename test::ui_type_list_type::font_type,
-        typename test::ui_type_list_type::point_unit_size_type,
+        typename test::ui_type_list_type::point_dimension_unit_type,
         typename test::ui_type_list_type::color_type,
         typename test::ui_type_list_type::fast_canvas_type,
         typename test::common_dialog_type_list_type::font_type,

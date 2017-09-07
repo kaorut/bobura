@@ -13,7 +13,6 @@
 #include <boost/predef.h>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/zoom.h>
@@ -104,9 +103,7 @@ namespace bobura { namespace view { namespace diagram
 
         using position_type = typename picture_box_type::position_type;
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
-
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+        using position_unit_type = typename position_type::unit_type;
 
         using scroll_bar_size_type = typename picture_box_type::scroll_bar_type::size_type;
 
@@ -149,8 +146,8 @@ namespace bobura { namespace view { namespace diagram
         {
             return
                 position_type{
-                    left_type{ static_cast<typename left_type::value_type>(left) },
-                    top_type{ static_cast<typename top_type::value_type>(top) }
+                    position_unit_type{ static_cast<typename position_unit_type::value_type>(left) },
+                    position_unit_type{ static_cast<typename position_unit_type::value_type>(top) }
                 };
         }
 

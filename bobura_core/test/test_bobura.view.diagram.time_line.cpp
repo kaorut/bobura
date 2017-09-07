@@ -11,9 +11,6 @@
 #include <boost/optional.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.gui.h>
-
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/selection.h>
@@ -52,15 +49,11 @@ namespace
 
     using position_type = picture_box_type::position_type;
 
-    using left_type = tetengo2::gui::position<position_type>::left_type;
-
-    using top_type = tetengo2::gui::position<position_type>::top_type;
+    using position_unit_type = position_type::unit_type;
 
     using dimension_type = picture_box_type::dimension_type;
 
-    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
-
-    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
+    using dimension_unit_type = dimension_type::unit_type;
 
     using scale_type = common_type_list_type::scale_type;
 
@@ -68,7 +61,7 @@ namespace
 
     using canvas_type = ui_type_list_type::canvas_type;
 
-    using unit_size_type = canvas_type::unit_size_type;
+    using dimension_unit_type = canvas_type::dimension_unit_type;
 
     using traits_type = traits_type_list_type::diagram_view_type;
 
@@ -95,10 +88,10 @@ BOOST_AUTO_TEST_SUITE(time_line)
         selection_type selection{};
         time_line_type time_line1{
             selection,
-            left_type{ 42 },
-            top_type{ 24 },
-            top_type{ 42 },
-            unit_size_type{ unit_size_type::value_type{ 1, 2 } },
+            position_unit_type{ 42 },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ dimension_unit_type::value_type{ 1, 2 } },
             boost::make_optional<time_type::size_type>(12)
         };
         const time_line_type time_line2{ std::move(time_line1) };
@@ -111,18 +104,18 @@ BOOST_AUTO_TEST_SUITE(time_line)
         selection_type selection{};
         time_line_type time_line1{
             selection,
-            left_type{ 42 },
-            top_type{ 24 },
-            top_type{ 42 },
-            unit_size_type{ unit_size_type::value_type{ 1, 2 } },
+            position_unit_type{ 42 },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ dimension_unit_type::value_type{ 1, 2 } },
             boost::make_optional<time_type::size_type>(12)
         };
         time_line_type time_line2{
             selection,
-            left_type{ 42 },
-            top_type{ 24 },
-            top_type{ 42 },
-            unit_size_type{ unit_size_type::value_type{ 1, 2 } },
+            position_unit_type{ 42 },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ dimension_unit_type::value_type{ 1, 2 } },
             boost::make_optional<time_type::size_type>(12)
         };
 
@@ -136,10 +129,10 @@ BOOST_AUTO_TEST_SUITE(time_line)
         selection_type selection{};
         const time_line_type time_line{
             selection,
-            left_type{ 42 },
-            top_type{ 24 },
-            top_type{ 42 },
-            unit_size_type{ unit_size_type::value_type{ 1, 2 } },
+            position_unit_type{ 42 },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ dimension_unit_type::value_type{ 1, 2 } },
             boost::make_optional<time_type::size_type>(12)
         };
 
@@ -163,12 +156,12 @@ BOOST_AUTO_TEST_SUITE(time_line_list)
             model,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 }
         };
         const time_line_list_type time_line_list2{ std::move(time_line_list1) };
@@ -184,24 +177,24 @@ BOOST_AUTO_TEST_SUITE(time_line_list)
             model,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 }
         };
         time_line_list_type time_line_list2{
             model,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 }
         };
 
@@ -218,12 +211,12 @@ BOOST_AUTO_TEST_SUITE(time_line_list)
             model,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 }
         };
 

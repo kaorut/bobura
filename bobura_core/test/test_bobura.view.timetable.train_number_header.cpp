@@ -11,7 +11,6 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
@@ -53,15 +52,11 @@ namespace
 
     using position_type = picture_box_type::position_type;
 
-    using left_type = tetengo2::gui::position<position_type>::left_type;
-
-    using top_type = tetengo2::gui::position<position_type>::top_type;
+    using position_unit_type = position_type::unit_type;
 
     using dimension_type = picture_box_type::dimension_type;
 
-    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
-
-    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
+    using dimension_unit_type = dimension_type::unit_type;
 
     using canvas_type = ui_type_list_type::canvas_type;
 
@@ -99,8 +94,8 @@ BOOST_AUTO_TEST_SUITE(operating_distance_header)
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type{ 0x12, 0x34, 0x56 },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
-            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
 
         };
         const operating_distance_header_type header2{ std::move(header1) };
@@ -114,16 +109,16 @@ BOOST_AUTO_TEST_SUITE(operating_distance_header)
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type{ 0x12, 0x34, 0x56 },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
-            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
 
         };
         operating_distance_header_type header2{
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type{ 0x12, 0x34, 0x56 },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
-            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
 
         };
 
@@ -141,8 +136,8 @@ BOOST_AUTO_TEST_SUITE(operating_distance_header)
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type{ 0x12, 0x34, 0x56 },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
-            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
 
         };
 
@@ -162,8 +157,8 @@ BOOST_AUTO_TEST_SUITE(train_number_description_header)
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type{ 0x12, 0x34, 0x56 },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
-            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
 
         };
         const train_number_description_header_type header2{ std::move(header1) };
@@ -177,16 +172,16 @@ BOOST_AUTO_TEST_SUITE(train_number_description_header)
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type{ 0x12, 0x34, 0x56 },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
-            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
 
         };
         train_number_description_header_type header2{
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type{ 0x12, 0x34, 0x56 },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
-            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
 
         };
 
@@ -204,8 +199,8 @@ BOOST_AUTO_TEST_SUITE(train_number_description_header)
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type{ 0x12, 0x34, 0x56 },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
-            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
 
         };
 
@@ -225,8 +220,8 @@ BOOST_AUTO_TEST_SUITE(train_name_description_header)
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type{ 0x12, 0x34, 0x56 },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
-            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
 
         };
         const train_name_description_header_type header2{ std::move(header1) };
@@ -240,16 +235,16 @@ BOOST_AUTO_TEST_SUITE(train_name_description_header)
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type{ 0x12, 0x34, 0x56 },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
-            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
 
         };
         train_name_description_header_type header2{
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type{ 0x12, 0x34, 0x56 },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
-            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
 
         };
 
@@ -267,8 +262,8 @@ BOOST_AUTO_TEST_SUITE(train_name_description_header)
             string_type{ TETENGO2_TEXT("hoge") },
             font_type::dialog_font(),
             color_type{ 0x12, 0x34, 0x56 },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
-            dimension_type{ width_type{ 24 }, height_type{ 42 } }
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
 
         };
 
@@ -294,13 +289,13 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
             model,
             message_catalog,
             *p_canvas,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            dimension_type{ width_type{ 1 }, height_type{ 1 } },
-            top_type{ 2 },
-            width_type{ 3 },
-            width_type{ 4 },
-            height_type{ 1 },
-            height_type{ 5 }
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 1 }, dimension_unit_type{ 1 } },
+            position_unit_type{ 2 },
+            dimension_unit_type{ 3 },
+            dimension_unit_type{ 4 },
+            dimension_unit_type{ 1 },
+            dimension_unit_type{ 5 }
         };
         const train_number_header_type train_number_header2{ std::move(train_number_header1) };
     }
@@ -319,26 +314,26 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
             model,
             message_catalog,
             *p_canvas,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            dimension_type{ width_type{ 1 }, height_type{ 1 } },
-            top_type{ 2 },
-            width_type{ 3 },
-            width_type{ 4 },
-            height_type{ 1 },
-            height_type{ 5 }
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 1 }, dimension_unit_type{ 1 } },
+            position_unit_type{ 2 },
+            dimension_unit_type{ 3 },
+            dimension_unit_type{ 4 },
+            dimension_unit_type{ 1 },
+            dimension_unit_type{ 5 }
         };
         train_number_header_type train_number_header2{
             direction_type::down,
             model,
             message_catalog,
             *p_canvas,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            dimension_type{ width_type{ 1 }, height_type{ 1 } },
-            top_type{ 2 },
-            width_type{ 3 },
-            width_type{ 4 },
-            height_type{ 1 },
-            height_type{ 5 }
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 1 }, dimension_unit_type{ 1 } },
+            position_unit_type{ 2 },
+            dimension_unit_type{ 3 },
+            dimension_unit_type{ 4 },
+            dimension_unit_type{ 1 },
+            dimension_unit_type{ 5 }
         };
 
         train_number_header1 = std::move(train_number_header2);
@@ -358,13 +353,13 @@ BOOST_AUTO_TEST_SUITE(train_number_header)
             model,
             message_catalog,
             *p_canvas,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            dimension_type{ width_type{ 1 }, height_type{ 1 } },
-            top_type{ 2 },
-            width_type{ 3 },
-            width_type{ 4 },
-            height_type{ 1 },
-            height_type{ 5 }
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 1 }, dimension_unit_type{ 1 } },
+            position_unit_type{ 2 },
+            dimension_unit_type{ 3 },
+            dimension_unit_type{ 4 },
+            dimension_unit_type{ 1 },
+            dimension_unit_type{ 5 }
         };
 
         train_number_header.draw_on(*p_canvas);

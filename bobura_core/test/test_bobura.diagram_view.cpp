@@ -8,9 +8,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.gui.h>
-
 #include <bobura/diagram_view.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
@@ -50,15 +47,11 @@ namespace
 
     using position_type = picture_box_type::position_type;
 
-    using left_type = tetengo2::gui::position<position_type>::left_type;
-
-    using top_type = tetengo2::gui::position<position_type>::top_type;
+    using position_unit_type = position_type::unit_type;
 
     using dimension_type = picture_box_type::dimension_type;
 
-    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
-
-    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
+    using dimension_unit_type = dimension_type::unit_type;
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
@@ -96,8 +89,8 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
         const auto p_canvas = picture_box.create_canvas();
         diagram_view.draw_on(
             *p_canvas,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 2 }, top_type{ 3 } }
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 2 }, position_unit_type{ 3 } }
         );
     }
 
@@ -187,7 +180,7 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
         const message_catalog_type message_catalog{};
         const diagram_view_type diagram_view{ model, message_catalog };
 
-        diagram_view.page_size(dimension_type{ width_type{ 42 }, height_type{ 24 } });
+        diagram_view.page_size(dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } });
     }
 
     BOOST_AUTO_TEST_CASE(p_item_by_position)
@@ -199,14 +192,14 @@ BOOST_AUTO_TEST_SUITE(diagram_view)
             const message_catalog_type message_catalog{};
             const diagram_view_type diagram_view{ model, message_catalog };
 
-            diagram_view.p_item_by_position(position_type{ left_type{ 42 }, top_type{ 24 } });
+            diagram_view.p_item_by_position(position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } });
         }
         {
             const model_type model{};
             const message_catalog_type message_catalog{};
             diagram_view_type diagram_view{ model, message_catalog };
 
-            diagram_view.p_item_by_position(position_type{ left_type{ 42 }, top_type{ 24 } });
+            diagram_view.p_item_by_position(position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } });
         }
     }
 

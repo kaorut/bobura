@@ -18,7 +18,6 @@
 #include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>

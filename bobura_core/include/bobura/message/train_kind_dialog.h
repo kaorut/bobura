@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 
 namespace bobura { namespace message { namespace train_kind_dialog
@@ -988,19 +987,15 @@ namespace bobura { namespace message { namespace train_kind_dialog
                 return;
             const auto& train_kind = m_info_sets[*m_current_train_kind_index].train_kind();
 
-            const position_type diagram_part_position{ left_type{ 0 }, top_type{ 0 } };
-            const dimension_type diagram_part_dimension{
-                tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension) / 2,
-                tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension),
-            };
+            const position_type diagram_part_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            const dimension_type diagram_part_dimension{ m_canvas_dimension.width() / 2, m_canvas_dimension.height() };
             draw_diagram_part(train_kind, canvas, diagram_part_position, diagram_part_dimension);
 
             const position_type timetable_part_position{
-                left_type::from(tetengo2::gui::dimension<dimension_type>::width(diagram_part_dimension)), top_type{ 0 }
+                position_unit_type::from(diagram_part_dimension.width()), position_unit_type{ 0 }
             };
             const dimension_type timetable_part_dimension{
-                tetengo2::gui::dimension<dimension_type>::width(m_canvas_dimension) / 2,
-                tetengo2::gui::dimension<dimension_type>::height(m_canvas_dimension),
+                m_canvas_dimension.width() / 2, m_canvas_dimension.height()
             };
             draw_timetable_part(train_kind, canvas, timetable_part_position, timetable_part_dimension);
         }
@@ -1013,13 +1008,9 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
         using position_type = typename canvas_type::position_type;
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
+        using position_unit_type = typename position_type::unit_type;
 
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
-
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
+        using dimension_unit_type = typename dimension_type::unit_type;
 
         using background_type = typename canvas_type::background_type;
 
@@ -1084,7 +1075,9 @@ namespace bobura { namespace message { namespace train_kind_dialog
         {
             auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(m_background_color);
             canvas.set_background(std::move(p_background));
-            canvas.fill_rectangle(position_type{ left_type{ 0 }, top_type{ 0 } }, m_canvas_dimension);
+            canvas.fill_rectangle(
+                position_type{ position_unit_type{ 0 }, position_unit_type{ 0 } }, m_canvas_dimension
+            );
         }
 
         void draw_diagram_part(
@@ -1101,28 +1094,23 @@ namespace bobura { namespace message { namespace train_kind_dialog
             const auto& text = train_kind.abbreviation().empty() ? train_kind.name() : train_kind.abbreviation();
             const auto text_and_line_tops = diagram_sample_text_and_line_tops(canvas, position, dimension, text);
             canvas.draw_text(
-                text,
-                position_type{
-                    tetengo2::gui::position<position_type>::left(position) + left_type{ 1 }, text_and_line_tops.first
-                }
+                text, position_type{ position.left()+ position_unit_type{ 1 }, text_and_line_tops.first }
             );
 
             auto line_width =
                 train_kind.diagram_line_weight() == train_kind_type::weight_type::bold ?
-                width_type{ 1 } / 6 : width_type{ 1 } / 12;
+                dimension_unit_type{ 1 } / 6 : dimension_unit_type{ 1 } / 12;
             canvas.set_line_width(std::move(line_width));
             canvas.set_line_style(to_canvas_line_style(train_kind.diagram_line_style()));
             canvas.draw_line(
-                position_type{ tetengo2::gui::position<position_type>::left(position), text_and_line_tops.second },
+                position_type{ position.left(), text_and_line_tops.second },
                 position_type{
-                    tetengo2::gui::position<position_type>::left(position) +
-                    left_type::from(tetengo2::gui::dimension<dimension_type>::width(dimension)),
-                    text_and_line_tops.second
+                    position.left()+ position_unit_type::from(dimension.width()), text_and_line_tops.second
                 }
             );
         }
 
-        std::pair<top_type, top_type> diagram_sample_text_and_line_tops(
+        std::pair<position_unit_type, position_unit_type> diagram_sample_text_and_line_tops(
             const canvas_type&     canvas,
             const position_type&   base_position,
             const dimension_type&  base_dimension,
@@ -1130,24 +1118,21 @@ namespace bobura { namespace message { namespace train_kind_dialog
         )
         const
         {
-            const auto& canvas_height = tetengo2::gui::dimension<dimension_type>::height(base_dimension);
+            const auto& canvas_height = base_dimension.height();
             const auto text_dimension = canvas.calc_text_dimension(text);
-            const auto& text_height = tetengo2::gui::dimension<dimension_type>::height(text_dimension);
+            const auto& text_height = text_dimension.height();
 
             if (canvas_height > text_height)
             {
                 const auto text_top =
-                    tetengo2::gui::position<position_type>::top(base_position) +
-                    top_type::from((canvas_height - text_height) / 2);
-                const auto line_top = text_top + top_type::from(text_height);
+                    base_position.top() + position_unit_type::from((canvas_height - text_height) / 2);
+                const auto line_top = text_top + position_unit_type::from(text_height);
                 return std::make_pair(text_top, line_top);
             }
             else
             {
-                const auto line_top =
-                    tetengo2::gui::position<position_type>::top(base_position) +
-                    top_type::from(canvas_height);
-                const auto text_top = line_top - top_type::from(text_height);
+                const auto line_top = base_position.top() + position_unit_type::from(canvas_height);
+                const auto text_top = line_top - position_unit_type::from(text_height);
                 return std::make_pair(text_top, line_top);
             }
         }
@@ -1172,22 +1157,22 @@ namespace bobura { namespace message { namespace train_kind_dialog
             const auto text_position = timetable_sample_text_position(position, dimension, text_dimension);
             canvas.draw_text(text, text_position);
 
-            canvas.set_line_width(width_type{ 1 } / 12);
+            canvas.set_line_width(dimension_unit_type{ 1 } / 12);
             canvas.set_line_style(canvas_type::line_style_type::solid);
             canvas.set_color(m_timetable_color);
 
             const auto line_positions = timetable_sample_line_positions(position, dimension, text_dimension);
-            const auto& box_left = tetengo2::gui::position<position_type>::left(std::get<0>(line_positions));
-            const auto& box_top = tetengo2::gui::position<position_type>::top(std::get<0>(line_positions));
-            const auto& box_right = tetengo2::gui::position<position_type>::left(std::get<1>(line_positions));
-            const auto& box_bottom = tetengo2::gui::position<position_type>::top(std::get<1>(line_positions));
-            const auto& line_left = tetengo2::gui::position<position_type>::left(std::get<2>(line_positions));
-            const auto& line_buttom = tetengo2::gui::position<position_type>::top(std::get<2>(line_positions));
-            const auto& line_right = tetengo2::gui::position<position_type>::left(std::get<3>(line_positions));
+            const auto& box_left = std::get<0>(line_positions).left();
+            const auto& box_top = std::get<0>(line_positions).top();
+            const auto& box_right = std::get<1>(line_positions).left();
+            const auto& box_bottom = std::get<1>(line_positions).top();
+            const auto& line_left = std::get<2>(line_positions).left();
+            const auto& line_bottom = std::get<2>(line_positions).top();
+            const auto& line_right = std::get<3>(line_positions).left();
             canvas.draw_line(position_type{ line_left, box_top }, position_type{ line_right, box_top });
             canvas.draw_line(position_type{ line_left, box_bottom }, position_type{ line_right, box_bottom });
-            canvas.draw_line(position_type{ box_left, box_top }, position_type{ box_left, line_buttom });
-            canvas.draw_line(position_type{ box_right, box_top }, position_type{ box_right, line_buttom });
+            canvas.draw_line(position_type{ box_left, box_top }, position_type{ box_left, line_bottom });
+            canvas.draw_line(position_type{ box_right, box_top }, position_type{ box_right, line_bottom });
         }
 
         position_type timetable_sample_text_position(
@@ -1197,18 +1182,18 @@ namespace bobura { namespace message { namespace train_kind_dialog
         )
         const
         {
-            const auto& canvas_width = tetengo2::gui::dimension<dimension_type>::width(base_dimension);
-            const auto& canvas_height = tetengo2::gui::dimension<dimension_type>::height(base_dimension);
-            const auto& text_width = tetengo2::gui::dimension<dimension_type>::width(text_dimension);
-            const auto& text_height = tetengo2::gui::dimension<dimension_type>::height(text_dimension);
+            const auto& canvas_width = base_dimension.width();
+            const auto& canvas_height = base_dimension.height();
+            const auto& text_width = text_dimension.width();
+            const auto& text_height = text_dimension.height();
 
-            auto left = canvas_width > text_width ? left_type::from((canvas_width - text_width) / 2) : left_type{ 0 };
-            auto top = canvas_height > text_height ? top_type::from((canvas_height - text_height) / 2) : top_type{ 0 };
-            return
-                position_type{
-                    tetengo2::gui::position<position_type>::left(base_position) + left,
-                    tetengo2::gui::position<position_type>::top(base_position) + top
-                };
+            auto left =
+                canvas_width > text_width ?
+                position_unit_type::from((canvas_width - text_width) / 2) : position_unit_type{ 0 };
+            auto top =
+                canvas_height > text_height ?
+                position_unit_type::from((canvas_height - text_height) / 2) : position_unit_type{ 0 };
+            return position_type{ base_position.left() + left, base_position.top() + top };
         }
 
         std::tuple<position_type, position_type, position_type, position_type> timetable_sample_line_positions(
@@ -1218,28 +1203,32 @@ namespace bobura { namespace message { namespace train_kind_dialog
         )
         const
         {
-            const auto& canvas_left = tetengo2::gui::position<position_type>::left(base_position);
-            const auto& canvas_top = tetengo2::gui::position<position_type>::top(base_position);
-            const auto& canvas_width = tetengo2::gui::dimension<dimension_type>::width(base_dimension);
-            const auto& canvas_height = tetengo2::gui::dimension<dimension_type>::height(base_dimension);
+            const auto& canvas_left = base_position.left();
+            const auto& canvas_top = base_position.top();
+            const auto& canvas_width = base_dimension.width();
+            const auto& canvas_height = base_dimension.height();
 
-            const auto& text_width = tetengo2::gui::dimension<dimension_type>::width(text_dimension);
-            const auto& text_height = tetengo2::gui::dimension<dimension_type>::height(text_dimension);
+            const auto& text_width = text_dimension.width();
+            const auto& text_height = text_dimension.height();
 
-            const auto box_width = std::max(text_width + width_type{ 1 } / 2, width_type{ 5 } / 2);
-            const auto box_height = std::max(text_height + height_type{ 1 } / 2, height_type{ 3 } / 2);
+            const auto box_width = std::max(text_width + dimension_unit_type{ 1 } / 2, dimension_unit_type{ 5 } / 2);
+            const auto box_height = std::max(text_height + dimension_unit_type{ 1 } / 2, dimension_unit_type{ 3 } / 2);
             const auto box_left =
-                canvas_width > box_width ? left_type::from((canvas_width - box_width) / 2) : left_type{ 0 };
-            const auto box_right = box_left + left_type::from(box_width);
+                canvas_width > box_width ?
+                position_unit_type::from((canvas_width - box_width) / 2) : position_unit_type{ 0 };
+            const auto box_right = box_left + position_unit_type::from(box_width);
             const auto box_top =
-                canvas_height > box_height ? top_type::from((canvas_height - box_height) / 2) : top_type{ 0 };
-            const auto box_bottom = box_top + top_type::from(box_height);
+                canvas_height > box_height ?
+                position_unit_type::from((canvas_height - box_height) / 2) : position_unit_type{ 0 };
+            const auto box_bottom = box_top + position_unit_type::from(box_height);
 
-            const auto line_left = box_left > left_type{ 1 } / 2 ? box_left - left_type{ 1 } / 2 : left_type{ 0 };
+            const auto line_left =
+                box_left > position_unit_type{ 1 } / 2 ?
+                box_left - position_unit_type{ 1 } / 2 : position_unit_type{ 0 };
             const auto line_right =
-                box_right + left_type{ 1 } / 2 < left_type::from(canvas_width) ?
-                box_right + left_type{ 1 } / 2 : left_type::from(canvas_width);
-            const auto line_bottom = canvas_top + top_type::from(canvas_height);
+                box_right + position_unit_type{ 1 } / 2 < position_unit_type::from(canvas_width) ?
+                box_right + position_unit_type{ 1 } / 2 : position_unit_type::from(canvas_width);
+            const auto line_bottom = canvas_top + position_unit_type::from(canvas_height);
 
             return
                 std::make_tuple(

@@ -13,8 +13,6 @@
 
 #include <boost/filesystem.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/command/command_base.h>
 #include <bobura/load_save/load_from_file.h>
 

@@ -32,7 +32,7 @@ namespace bobura { namespace view { namespace timetable
 
             using canvas_type = application::traits_type_list_type::timetable_view_type::canvas_type;
 
-            using unit_size_type = canvas_type::unit_size_type;
+            using dimension_unit_type = canvas_type::dimension_unit_type;
 
         }
 #endif
@@ -45,18 +45,18 @@ namespace bobura { namespace view { namespace timetable
 
             using canvas_type = test::traits_type_list_type::timetable_view_type::canvas_type;
 
-            using unit_size_type = canvas_type::unit_size_type;
+            using dimension_unit_type = canvas_type::dimension_unit_type;
 
         }
 
     }
 
 #if BOOST_COMP_MSVC
-    template application::unit_size_type normal_line_width();
+    template application::dimension_unit_type normal_line_width();
 #endif
 
 #if !defined(DOCUMENTATION)
-    template test::unit_size_type normal_line_width();
+    template test::dimension_unit_type normal_line_width();
 #endif
 
 

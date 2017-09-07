@@ -12,7 +12,6 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
@@ -64,15 +63,11 @@ namespace
 
     using position_type = picture_box_type::position_type;
 
-    using left_type = tetengo2::gui::position<position_type>::left_type;
-
-    using top_type = tetengo2::gui::position<position_type>::top_type;
+    using position_unit_type = position_type::unit_type;
 
     using dimension_type = picture_box_type::dimension_type;
 
-    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
-
-    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
+    using dimension_unit_type = dimension_type::unit_type;
 
     using scale_type = common_type_list_type::scale_type;
 
@@ -122,8 +117,8 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             train,
             42,
             selection,
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
             true,
             message_catalog
         };
@@ -148,8 +143,8 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             train,
             42,
             selection,
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
             false,
             message_catalog
         };
@@ -157,8 +152,8 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             train,
             42,
             selection,
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
             true,
             message_catalog
         };
@@ -183,8 +178,8 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             train,
             42,
             selection,
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
             true,
             message_catalog
         };
@@ -212,18 +207,18 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             train,
             42,
             selection,
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
             true,
             message_catalog
         };
 
         {
-            const position_type position{ left_type{ 24 }, top_type{ 42 } };
+            const position_type position{ position_unit_type{ 24 }, position_unit_type{ 42 } };
             BOOST_TEST(train_line_fragment.p_item_by_position(position) == &train_line_fragment);
         }
         {
-            const position_type position{ left_type{ 42 }, top_type{ 42 } };
+            const position_type position{ position_unit_type{ 42 }, position_unit_type{ 42 } };
             BOOST_TEST(!train_line_fragment.p_item_by_position(position));
         }
     }
@@ -246,8 +241,8 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
             train,
             42,
             selection,
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            position_type{ left_type{ 42 }, top_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
             true,
             message_catalog
         };
@@ -274,8 +269,8 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
                 train,
                 42,
                 selection,
-                position_type{ left_type{ 24 }, top_type{ 42 } },
-                position_type{ left_type{ 42 }, top_type{ 24 } },
+                position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+                position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
                 true,
                 message_catalog
             };
@@ -299,8 +294,8 @@ BOOST_AUTO_TEST_SUITE(train_line_fragment)
                 train,
                 42,
                 selection,
-                position_type{ left_type{ 24 }, top_type{ 42 } },
-                position_type{ left_type{ 42 }, top_type{ 24 } },
+                position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+                position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
                 true,
                 message_catalog
             };
@@ -345,14 +340,14 @@ BOOST_AUTO_TEST_SUITE(train_line)
             train_kind,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
             message_catalog
         };
         const train_line_type train_line2{ std::move(train_line1) };
@@ -387,14 +382,14 @@ BOOST_AUTO_TEST_SUITE(train_line)
             train_kind,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
             message_catalog
         };
         train_line_type train_line2{
@@ -409,14 +404,14 @@ BOOST_AUTO_TEST_SUITE(train_line)
             train_kind,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
             message_catalog
         };
         train_line1 = std::move(train_line2);
@@ -451,14 +446,14 @@ BOOST_AUTO_TEST_SUITE(train_line)
             train_kind,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
             message_catalog
         };
 
@@ -496,18 +491,18 @@ BOOST_AUTO_TEST_SUITE(train_line)
             train_kind,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
             message_catalog
         };
 
-        const position_type position{ left_type{ 24 }, top_type{ 42 } };
+        const position_type position{ position_unit_type{ 24 }, position_unit_type{ 42 } };
         BOOST_TEST(!train_line.p_item_by_position(position));
     }
 
@@ -528,14 +523,14 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             model,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
             message_catalog
         };
         const train_line_list_type train_line_list2{ std::move(train_line_list1) };
@@ -553,28 +548,28 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             model,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
             message_catalog
         };
         train_line_list_type train_line_list2{
             model,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
             message_catalog
         };
 
@@ -593,14 +588,14 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             model,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
             message_catalog
         };
 
@@ -621,18 +616,18 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             model,
             time_span_type{ 42 * 60 },
             selection,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
-            position_type{ left_type{ 24 }, top_type{ 42 } },
-            left_type{ 24 },
-            top_type{ 42 },
-            height_type{ 24 },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+            position_unit_type{ 24 },
+            position_unit_type{ 42 },
+            dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<top_type>(2, top_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
             message_catalog
         };
 
-        const position_type position{ left_type{ 24 }, top_type{ 42 } };
+        const position_type position{ position_unit_type{ 24 }, position_unit_type{ 42 } };
         BOOST_TEST(!train_line_list.p_item_by_position(position));
     }
 

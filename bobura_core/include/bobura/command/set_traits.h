@@ -15,24 +15,24 @@ namespace bobura { namespace command
     /*!
         \brief The class template for the command set traits.
 
-        \tparam Size              A size type.
-        \tparam String            A string type.
-        \tparam Position          A position type.
-        \tparam Dimension         A dimension type.
-        \tparam Dialog            A dialog type.
-        \tparam Color             A color type.
-        \tparam PointUnitSize     A point unit size type.
-        \tparam Canvas            A canvas type.
-        \tparam Scale             A scale type.
-        \tparam Shell             A shell type.
-        \tparam FontDialog        A font dialog type.
-        \tparam ColorDialog       A color dialog type.
-        \tparam MessageCatalog    A message catalog type.
-        \tparam CommandTraits     A command traits type.
-        \tparam MainWindowTraits  A main window traits type.
-        \tparam DiagramViewTraits A diagram view traits type.
-        \tparam LoadSaveTraits    A loading and saving processing traits type.
-        \tparam DialogTraits      A dialog traits type.
+        \tparam Size               A size type.
+        \tparam String             A string type.
+        \tparam Position           A position type.
+        \tparam Dimension          A dimension type.
+        \tparam Dialog             A dialog type.
+        \tparam Color              A color type.
+        \tparam PointDimensionUnit A point dimension unit type.
+        \tparam Canvas             A canvas type.
+        \tparam Scale              A scale type.
+        \tparam Shell              A shell type.
+        \tparam FontDialog         A font dialog type.
+        \tparam ColorDialog        A color dialog type.
+        \tparam MessageCatalog     A message catalog type.
+        \tparam CommandTraits      A command traits type.
+        \tparam MainWindowTraits   A main window traits type.
+        \tparam DiagramViewTraits  A diagram view traits type.
+        \tparam LoadSaveTraits     A loading and saving processing traits type.
+        \tparam DialogTraits       A dialog traits type.
     */
     template <
         typename Size,
@@ -41,7 +41,7 @@ namespace bobura { namespace command
         typename Dimension,
         typename Dialog,
         typename Color,
-        typename PointUnitSize,
+        typename PointDimensionUnit,
         typename Canvas,
         typename Scale,
         typename Shell,
@@ -77,8 +77,8 @@ namespace bobura { namespace command
         //! The color type.
         using color_type = Color;
 
-        //! The point unit size type.
-        using point_unit_size_type = PointUnitSize;
+        //! The point dimension unit type.
+        using point_dimension_unit_type = PointDimensionUnit;
 
         //! The canvas type.
         using canvas_type = Canvas;

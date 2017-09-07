@@ -11,8 +11,6 @@
 
 #include <memory>
 
-#include <tetengo2.h>
-
 #include <bobura/timetable_model.h>
 #include <bobura/view/timetable/item.h>
 #include <bobura/view/timetable/utility.h>

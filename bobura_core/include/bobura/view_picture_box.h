@@ -11,8 +11,6 @@
 
 #include <memory>
 
-#include <tetengo2.h>
-
 
 namespace bobura
 {

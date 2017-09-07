@@ -10,9 +10,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.gui.h>
-
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 #include <bobura/view/timetable/train_list.h>
@@ -53,9 +50,7 @@ namespace
 
     using dimension_type = picture_box_type::dimension_type;
 
-    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
-
-    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
+    using dimension_unit_type = dimension_type::unit_type;
 
     using canvas_type = ui_type_list_type::canvas_type;
 
@@ -93,7 +88,7 @@ BOOST_AUTO_TEST_SUITE(train_list)
             model,
             message_catalog,
             *p_canvas,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } }
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } }
         };
         const train_list_type header2{ std::move(header1) };
     }
@@ -112,14 +107,14 @@ BOOST_AUTO_TEST_SUITE(train_list)
             model,
             message_catalog,
             *p_canvas,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } }
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } }
         };
         train_list_type header2{
             direction_type::down,
             model,
             message_catalog,
             *p_canvas,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } }
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } }
         };
 
         header1 = std::move(header2);
@@ -139,7 +134,7 @@ BOOST_AUTO_TEST_SUITE(train_list)
             model,
             message_catalog,
             *p_canvas,
-            dimension_type{ width_type{ 42 }, height_type{ 24 } }
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } }
         };
 
         train_list.draw_on(*p_canvas);

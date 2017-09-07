@@ -13,7 +13,6 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/settings.h>
 #include <bobura/type_list.h>
@@ -33,13 +32,11 @@ namespace
 
     using position_type = ui_type_list_type::position_type;
 
-    using left_type = tetengo2::gui::position<position_type>::left_type;
+    using position_unit_type = position_type::unit_type;
 
     using dimension_type = ui_type_list_type::dimension_type;
 
-    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
-
-    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
+    using dimension_unit_type = dimension_type::unit_type;
 
     using settings_type = bobura::settings<string_type, position_type, dimension_type>;
 
@@ -149,12 +146,8 @@ BOOST_AUTO_TEST_SUITE(settings)
             const auto dimension = settings.main_window_dimension();
 
             BOOST_TEST_REQUIRE(dimension.is_initialized());
-            BOOST_TEST(
-                tetengo2::gui::dimension<dimension_type>::width(*dimension).to_pixels<std::size_t>() == 240U
-            );
-            BOOST_TEST(
-                tetengo2::gui::dimension<dimension_type>::height(*dimension).to_pixels<std::size_t>() == 120U
-            );
+            BOOST_TEST(dimension->width().to_pixels<std::size_t>() == 240U);
+            BOOST_TEST(dimension->height().to_pixels<std::size_t>() == 120U);
 
             settings.clear_config();
         }
@@ -169,12 +162,8 @@ BOOST_AUTO_TEST_SUITE(settings)
             const auto dimension = settings.main_window_dimension();
 
             BOOST_TEST_REQUIRE(dimension.is_initialized());
-            BOOST_TEST(
-                tetengo2::gui::dimension<dimension_type>::width(*dimension).to_pixels<std::size_t>() == 240U
-            );
-            BOOST_TEST(
-                tetengo2::gui::dimension<dimension_type>::height(*dimension).to_pixels<std::size_t>() == 120U
-            );
+            BOOST_TEST(dimension->width().to_pixels<std::size_t>() == 240U);
+            BOOST_TEST(dimension->height().to_pixels<std::size_t>() == 120U);
 
             settings.clear_config();
         }
@@ -187,13 +176,13 @@ BOOST_AUTO_TEST_SUITE(settings)
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
-        settings.set_main_window_dimension(dimension_type{ width_type{ 42 }, height_type{ 24 } });
+        settings.set_main_window_dimension(dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } });
 
         const auto dimension = settings.main_window_dimension();
 
         BOOST_TEST_REQUIRE(dimension.is_initialized());
-        BOOST_CHECK(tetengo2::gui::dimension<dimension_type>::width(*dimension) == width_type{ 42 });
-        BOOST_CHECK(tetengo2::gui::dimension<dimension_type>::height(*dimension) == height_type{ 24 });
+        BOOST_CHECK(dimension->width() == dimension_unit_type{ 42 });
+        BOOST_CHECK(dimension->height() == dimension_unit_type{ 24 });
 
         settings.clear_config();
     }
@@ -261,12 +250,12 @@ BOOST_AUTO_TEST_SUITE(settings)
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
-        settings.set_property_bar_width(width_type{ 42 });
+        settings.set_property_bar_width(dimension_unit_type{ 42 });
 
         const auto width = settings.property_bar_width();
 
         BOOST_TEST_REQUIRE(width.is_initialized());
-        BOOST_CHECK(*width == width_type{ 42 });
+        BOOST_CHECK(*width == dimension_unit_type{ 42 });
 
         settings.clear_config();
     }
@@ -334,12 +323,12 @@ BOOST_AUTO_TEST_SUITE(settings)
         const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
         settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
-        settings.set_property_bar_splitter_position(left_type{ 42 });
+        settings.set_property_bar_splitter_position(position_unit_type{ 42 });
 
         const auto position = settings.property_bar_splitter_position();
 
         BOOST_TEST_REQUIRE(position.is_initialized());
-        BOOST_CHECK(*position == left_type{ 42 });
+        BOOST_CHECK(*position == position_unit_type{ 42 });
 
         settings.clear_config();
     }

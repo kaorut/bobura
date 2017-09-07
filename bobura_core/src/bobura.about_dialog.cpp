@@ -15,7 +15,6 @@
 #include <boost/predef.h>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/about_dialog.h>
 #include <bobura/dialog_traits.h>
@@ -73,13 +72,9 @@ namespace bobura
     private:
         // types
 
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
+        using position_unit_type = typename position_type::unit_type;
 
-        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
-
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
-
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+        using dimension_unit_type = typename dimension_type::unit_type;
 
         using label_type = typename traits_type::label_type;
 
@@ -139,7 +134,7 @@ namespace bobura
             auto p_icon =
                 tetengo2::stdalt::make_unique<icon_type>(
                     m_settings.image_directory_path() / string_type{ TETENGO2_TEXT("bobura_app.ico") },
-                    dimension_type{ width_type{ 4 }, height_type{ 4 } }
+                    dimension_type{ dimension_unit_type{ 4 }, dimension_unit_type{ 4 } }
                 );
             p_image->set_icon(std::move(p_icon));
 
@@ -198,27 +193,25 @@ namespace bobura
 
         void locate_controls()
         {
-            m_base.set_client_dimension(dimension_type{ width_type{ 36 }, height_type{ 10 } });
+            m_base.set_client_dimension(dimension_type{ dimension_unit_type{ 36 }, dimension_unit_type{ 10 } });
 
             m_p_application_image->fit_to_content();
-            m_p_application_image->set_position(position_type{ left_type{ 2 }, top_type{ 1 } });
+            m_p_application_image->set_position(position_type{ position_unit_type{ 2 }, position_unit_type{ 1 } });
             
             const auto label_left =
-                left_type{ 2 } +
-                tetengo2::gui::dimension<dimension_type>::width(m_p_application_image->dimension()) +
-                left_type{ 1 };
+                position_unit_type{ 2 } + m_p_application_image->dimension().width() + position_unit_type{ 1 };
 
             m_p_title_label->fit_to_content();
-            m_p_title_label->set_position(position_type{ label_left, top_type{ 1 } });
+            m_p_title_label->set_position(position_type{ label_left, position_unit_type{ 1 } });
 
             m_p_copyright_label->fit_to_content();
-            m_p_copyright_label->set_position(position_type{ label_left, top_type{ 3 } });
+            m_p_copyright_label->set_position(position_type{ label_left, position_unit_type{ 3 } });
 
             m_p_link_label->fit_to_content();
-            m_p_link_label->set_position(position_type{ label_left, top_type{ 5 } });
+            m_p_link_label->set_position(position_type{ label_left, position_unit_type{ 5 } });
 
-            m_p_ok_button->set_dimension(dimension_type{ width_type{ 8 }, height_type{ 2 } });
-            m_p_ok_button->set_position(position_type{ left_type{ 26 }, top_type{ 7 } });
+            m_p_ok_button->set_dimension(dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } });
+            m_p_ok_button->set_position(position_type{ position_unit_type{ 26 }, position_unit_type{ 7 } });
         }
 
 

@@ -64,8 +64,8 @@ namespace bobura { namespace command
         //! The color type.
         using color_type = typename traits_type::color_type;
 
-        //! The point unit size type.
-        using point_unit_size_type = typename traits_type::point_unit_size_type;
+        //! The point dimension unit type.
+        using point_dimension_unit_type = typename traits_type::point_dimension_unit_type;
 
         //! The canvas type.
         using canvas_type = typename traits_type::canvas_type;

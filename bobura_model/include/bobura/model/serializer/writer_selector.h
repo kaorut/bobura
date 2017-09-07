@@ -15,8 +15,6 @@
 
 #include <boost/filesystem.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/serializer/writer.h>
 #include <bobura/model/timetable.h>
 

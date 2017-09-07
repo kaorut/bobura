@@ -13,7 +13,7 @@
 #include <boost/predef.h>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.gui.h>
+#include <tetengo2.h>
 
 #include <bobura/message/font_color_dialog.h>
 #include <bobura/type_list.h>
@@ -57,9 +57,7 @@ namespace
 
     using dimension_type = window_type::dimension_type;
 
-    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
-
-    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
+    using dimension_unit_type = dimension_type::unit_type;
 
     using canvas_type = ui_type_list_type::canvas_type;
 
@@ -226,7 +224,7 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
         > observer{
             font_color_list,
             boost::make_optional<size_type>(1),
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
             message_catalog
         };
     }
@@ -242,7 +240,7 @@ BOOST_AUTO_TEST_SUITE(sample_picture_box_paint)
         > observer{
             font_color_list,
             boost::make_optional<size_type>(1), 
-            dimension_type{ width_type{ 42 }, height_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
             message_catalog
         };
 

@@ -13,8 +13,6 @@
 
 #include <boost/core/noncopyable.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/view/diagram/selection.h>
 
 

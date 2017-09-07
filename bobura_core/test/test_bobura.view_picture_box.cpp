@@ -8,8 +8,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.gui.h>
-
 #include <bobura/type_list.h>
 #include <bobura/view_picture_box.h>
 
@@ -34,9 +32,7 @@ namespace
 
     using dimension_type = view_picture_box_type::dimension_type;
 
-    using width_type = tetengo2::gui::dimension<dimension_type>::width_type;
-
-    using height_type = tetengo2::gui::dimension<dimension_type>::height_type;
+    using dimension_unit_type = dimension_type::unit_type;
 
     using mouse_button_type = view_picture_box_type::mouse_button_type;
 
@@ -98,7 +94,8 @@ BOOST_AUTO_TEST_SUITE(view_picture_box)
         view_picture_box_type picture_box{ window };
 
         picture_box.update_scroll_bars(
-            dimension_type{ width_type{ 24 }, height_type{ 24 } }, dimension_type{ width_type{ 42 }, width_type{ 42 } }
+            dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 24 } },
+            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 42 } }
         );
     }
 

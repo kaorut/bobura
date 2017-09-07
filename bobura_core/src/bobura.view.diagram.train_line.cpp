@@ -25,7 +25,6 @@
 #include <boost/throw_exception.hpp>
 
 #include <tetengo2.h>
-#include <tetengo2.gui.h>
 
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/train_line.h>
@@ -116,7 +115,7 @@ namespace bobura { namespace view { namespace diagram
         base_type* p_item_by_position_impl(train_line_fragment& self, const position_type& position)
         {
             return
-                calculate_distance(position, m_departure, m_arrival) <= selected_line_margin<unit_size_type>() ?
+                calculate_distance(position, m_departure, m_arrival) <= selected_line_margin<dimension_unit_type>() ?
                 &self : nullptr;
         }
 
@@ -156,17 +155,11 @@ namespace bobura { namespace view { namespace diagram
 
         using direction_type = typename train_type::direction_type;
 
-        using left_type = typename tetengo2::gui::position<position_type>::left_type;
-
-        using top_type = typename tetengo2::gui::position<position_type>::top_type;
+        using position_unit_type = typename position_type::unit_type;
 
         using dimension_type = typename canvas_type::dimension_type;
 
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
-        using height_type = typename tetengo2::gui::dimension<dimension_type>::height_type;
-
-        using unit_size_type = typename canvas_type::unit_size_type;
+        using dimension_unit_type = typename dimension_type::unit_type;
 
         using geo_vector_type = std::pair<double, double>;
 
@@ -196,12 +189,8 @@ namespace bobura { namespace view { namespace diagram
 
         static double calculate_train_name_angle(const position_type& departure, const position_type& arrival)
         {
-            const auto height =
-                tetengo2::gui::position<position_type>::top(arrival) -
-                tetengo2::gui::position<position_type>::top(departure);
-            const auto width =
-                tetengo2::gui::position<position_type>::left(arrival) -
-                tetengo2::gui::position<position_type>::left(departure);
+            const auto height = arrival.top() - departure.top();
+            const auto width = arrival.left() - departure.left();
 
             return
                 std::atan2(boost::rational_cast<double>(height.value()), boost::rational_cast<double>(width.value()));
@@ -216,7 +205,7 @@ namespace bobura { namespace view { namespace diagram
         )
         {
             const auto text_dimension = canvas.calc_text_dimension(train_name);
-            const auto& text_height = tetengo2::gui::dimension<dimension_type>::height(text_dimension);
+            const auto& text_height = text_dimension.height();
 
             if (direction == direction_type::down)
             {
@@ -225,45 +214,42 @@ namespace bobura { namespace view { namespace diagram
                     angle < boost::math::constants::pi<double>() / 8
                 )
                 {
-                    return
-                        {
-                            tetengo2::gui::position<position_type>::left(departure),
-                            tetengo2::gui::position<position_type>::top(departure) - text_height
-                        };
+                    return { departure.left(), departure.top() - text_height };
                 }
                 else
                 {
                     const auto left_diff = boost::rational_cast<double>(text_height.value()) / std::sin(angle);
                     const auto left =
-                        tetengo2::gui::position<position_type>::left(departure) +
-                        typename left_type::value_type{
-                            static_cast<typename left_type::value_type::int_type>(left_diff * 0x10000), 0x10000
+                        departure.left() +
+                        typename position_unit_type::value_type{
+                            static_cast<typename position_unit_type::value_type::int_type>(left_diff * 0x10000),
+                            0x10000
                         };
 
-                    return { left, tetengo2::gui::position<position_type>::top(departure) };
+                    return { left, departure.top() };
                 }
             }
             else
             {
                 const auto left_diff = boost::rational_cast<double>(text_height.value()) * std::sin(angle);
                 const auto left =
-                    tetengo2::gui::position<position_type>::left(departure) +
-                    typename left_type::value_type{
-                        static_cast<typename left_type::value_type::int_type>(left_diff * 0x10000), 0x10000
+                    departure.left() +
+                    typename position_unit_type::value_type{
+                        static_cast<typename position_unit_type::value_type::int_type>(left_diff * 0x10000), 0x10000
                     };
 
                 const auto top_diff = boost::rational_cast<double>(text_height.value()) * std::cos(angle);
                 const auto top =
-                    tetengo2::gui::position<position_type>::top(departure) -
-                    typename top_type::value_type{
-                        static_cast<typename top_type::value_type::int_type>(top_diff * 0x10000), 0x10000
+                    departure.top() -
+                    typename position_unit_type::value_type{
+                        static_cast<typename position_unit_type::value_type::int_type>(top_diff * 0x10000), 0x10000
                     };
 
                 return { left, top };
             }
         }
 
-        static unit_size_type calculate_distance(
+        static dimension_unit_type calculate_distance(
             const position_type& point,
             const position_type& line_segment_begin,
             const position_type& line_segment_end
@@ -288,17 +274,17 @@ namespace bobura { namespace view { namespace diagram
         {
             return
                 {
-                    boost::rational_cast<double>(tetengo2::gui::position<position_type>::left(position).value()),
-                    boost::rational_cast<double>(tetengo2::gui::position<position_type>::top(position).value())
+                    boost::rational_cast<double>(position.left().value()),
+                    boost::rational_cast<double>(position.top().value())
                 };
         }
 
-        static unit_size_type to_size(const double value)
+        static dimension_unit_type to_size(const double value)
         {
             return
-                unit_size_type{
-                    typename unit_size_type::value_type{
-                        static_cast<typename unit_size_type::value_type::int_type>(value * 256.0), 256
+                dimension_unit_type{
+                    typename dimension_unit_type::value_type{
+                        static_cast<typename dimension_unit_type::value_type::int_type>(value * 256.0), 256
                     }
                 };
         }
@@ -451,13 +437,11 @@ namespace bobura { namespace view { namespace diagram
 
         using position_type = typename train_line::position_type;
 
-        using left_type = typename train_line::left_type;
-
-        using top_type = typename train_line::top_type;
+        using position_unit_type = typename train_line::position_unit_type;
 
         using dimension_type = typename train_line::dimension_type;
 
-        using height_type = typename train_line::height_type;
+        using dimension_unit_type = typename train_line::dimension_unit_type;
 
         using message_catalog_type = typename traits_type::message_catalog_type;
 
@@ -477,19 +461,19 @@ namespace bobura { namespace view { namespace diagram
         // constructors and destructor
 
         impl(
-            const train_type&             train,
-            const train_kind_type&        train_kind,
-            const time_span_type&         time_offset,
-            selection_type&               selection,
-            const dimension_type&         canvas_dimension,
-            const position_type&          scroll_bar_position,
-            const left_type&              station_header_right,
-            const top_type&               header_bottom,
-            const height_type&            time_header_height,
-            const scale_type&             horizontal_scale,
-            const station_intervals_type& station_intervals,
-            const std::vector<top_type>&  station_positions,
-            const message_catalog_type&   message_catalog
+            const train_type&                      train,
+            const train_kind_type&                 train_kind,
+            const time_span_type&                  time_offset,
+            selection_type&                        selection,
+            const dimension_type&                  canvas_dimension,
+            const position_type&                   scroll_bar_position,
+            const position_unit_type&              station_header_right,
+            const position_unit_type&              header_bottom,
+            const dimension_unit_type&             time_header_height,
+            const scale_type&                      horizontal_scale,
+            const station_intervals_type&          station_intervals,
+            const std::vector<position_unit_type>& station_positions,
+            const message_catalog_type&            message_catalog
         )
         :
         m_p_train_kind(&train_kind),
@@ -538,7 +522,7 @@ namespace bobura { namespace view { namespace diagram
             canvas.set_color(m_p_train_kind->diagram_color());
             canvas.set_line_width(
                 m_p_train_kind->diagram_line_weight() == train_kind_type::weight_type::bold ?
-                bold_line_width<unit_size_type>() : normal_line_width<unit_size_type>()
+                bold_line_width<dimension_unit_type>() : normal_line_width<dimension_unit_type>()
             );
             canvas.set_line_style(translate_line_style(m_p_train_kind->diagram_line_style()));
 
@@ -564,15 +548,11 @@ namespace bobura { namespace view { namespace diagram
 
         using size_type = typename traits_type::size_type;
 
-        using width_type = typename tetengo2::gui::dimension<dimension_type>::width_type;
-
         using time_type = typename train_line::time_type;
 
         using train_line_fragment_type = train_line_fragment<traits_type>;
 
         using direction_type = typename train_type::direction_type;
-
-        using unit_size_type = typename canvas_type::unit_size_type;
 
         using stop_type = typename train_type::stop_type;
 
@@ -580,18 +560,18 @@ namespace bobura { namespace view { namespace diagram
         // static functions
 
         static std::vector<train_line_fragment_type> make_fragments(
-            const train_type&             train,
-            const time_span_type&         time_offset,
-            selection_type&               selection,
-            const dimension_type&         canvas_dimension,
-            const position_type&          scroll_bar_position,
-            const left_type&              station_header_right,
-            const top_type&               header_bottom,
-            const height_type&            time_header_height,
-            const scale_type&             horizontal_scale,
-            const station_intervals_type& station_intervals,
-            const std::vector<top_type>&  station_positions,
-            const message_catalog_type&   message_catalog
+            const train_type&                      train,
+            const time_span_type&                  time_offset,
+            selection_type&                        selection,
+            const dimension_type&                  canvas_dimension,
+            const position_type&                   scroll_bar_position,
+            const position_unit_type&              station_header_right,
+            const position_unit_type&              header_bottom,
+            const dimension_unit_type&             time_header_height,
+            const scale_type&                      horizontal_scale,
+            const station_intervals_type&          station_intervals,
+            const std::vector<position_unit_type>& station_positions,
+            const message_catalog_type&            message_catalog
         )
         {
             std::vector<train_line_fragment_type> fragments{};
@@ -754,11 +734,11 @@ namespace bobura { namespace view { namespace diagram
             selection_type&                        selection,
             const dimension_type&                  canvas_dimension,
             const position_type&                   scroll_bar_position,
-            const left_type&                       station_header_right,
-            const top_type&                        header_bottom,
-            const height_type&                     time_header_height,
+            const position_unit_type&              station_header_right,
+            const position_unit_type&              header_bottom,
+            const dimension_unit_type&             time_header_height,
             const scale_type&                      horizontal_scale,
-            const std::vector<top_type>&           station_positions,
+            const std::vector<position_unit_type>& station_positions,
             const message_catalog_type&            message_catalog,
             std::vector<train_line_fragment_type>& fragments
         )
@@ -847,22 +827,20 @@ namespace bobura { namespace view { namespace diagram
             selection_type&                        selection,
             const dimension_type&                  canvas_dimension,
             const position_type&                   scroll_bar_position,
-            const left_type&                       station_header_right,
-            const top_type&                        header_bottom,
-            const height_type&                     time_header_height,
+            const position_unit_type&              station_header_right,
+            const position_unit_type&              header_bottom,
+            const dimension_unit_type&             time_header_height,
             const scale_type&                      horizontal_scale,
-            const std::vector<top_type>&           station_positions,
+            const std::vector<position_unit_type>& station_positions,
             const message_catalog_type&            message_catalog,
             std::vector<train_line_fragment_type>& fragments
         )
         {
-            const auto horizontal_scroll_bar_position =
-                tetengo2::gui::position<position_type>::left(scroll_bar_position);
-            const auto vertical_scroll_bar_position =
-                tetengo2::gui::position<position_type>::top(scroll_bar_position);
+            const auto& horizontal_scroll_bar_position = scroll_bar_position.left();
+            const auto& vertical_scroll_bar_position = scroll_bar_position.top();
 
-            const auto horizontal_scale_left = left_type::from(width_type{ horizontal_scale });
-            const auto time_header_bottom = top_type::from(time_header_height);
+            const auto horizontal_scale_left = position_unit_type::from(dimension_unit_type{ horizontal_scale });
+            const auto time_header_bottom = position_unit_type::from(time_header_height);
             position_type departure{
                 time_to_left(
                     departure_time,
@@ -889,7 +867,7 @@ namespace bobura { namespace view { namespace diagram
                     station_header_right,
                     horizontal_scale_left
                 ),
-                    station_index_to_top(
+                station_index_to_top(
                     station_positions,
                     arrival_stop_index,
                     vertical_scroll_bar_position,
@@ -898,22 +876,16 @@ namespace bobura { namespace view { namespace diagram
                 )
             };
             
-            const auto left_bound = tetengo2::gui::position<position_type>::left(departure);
-            if (left_bound > left_type::from(tetengo2::gui::dimension<dimension_type>::width(canvas_dimension)))
+            const auto& left_bound = departure.left();
+            if (left_bound > position_unit_type::from(canvas_dimension.width()))
                 return;
-            const auto right_bound = tetengo2::gui::position<position_type>::left(arrival);
+            const auto& right_bound = arrival.left();
             if (right_bound < station_header_right)
                 return;
-            const auto upper_bound =
-                departure_stop_index < arrival_stop_index ? 
-                tetengo2::gui::position<position_type>::top(departure) :
-                tetengo2::gui::position<position_type>::top(arrival);
-            if (upper_bound > top_type::from(tetengo2::gui::dimension<dimension_type>::height(canvas_dimension)))
+            const auto& upper_bound = departure_stop_index < arrival_stop_index ? departure.top() : arrival.top();
+            if (upper_bound > position_unit_type::from(canvas_dimension.height()))
                 return;
-            const auto lower_bound =
-                departure_stop_index < arrival_stop_index ? 
-                tetengo2::gui::position<position_type>::top(arrival) :
-                tetengo2::gui::position<position_type>::top(departure);
+            const auto& lower_bound = departure_stop_index < arrival_stop_index ? arrival.top() : departure.top();
             if (lower_bound < header_bottom + time_header_bottom)
                 return;
 
@@ -961,19 +933,19 @@ namespace bobura { namespace view { namespace diagram
 
     template <typename Traits>
     train_line<Traits>::train_line(
-        const train_type&             train,
-        const train_kind_type&        train_kind,
-        const time_span_type&         time_offset,
-        selection_type&               selection,
-        const dimension_type&         canvas_dimension,
-        const position_type&          scroll_bar_position,
-        const left_type&              station_header_right,
-        const top_type&               header_bottom,
-        const height_type&            time_header_height,
-        const scale_type&             horizontal_scale,
-        const station_intervals_type& station_intervals,
-        const std::vector<top_type>&  station_positions,
-        const message_catalog_type&   message_catalog
+        const train_type&                      train,
+        const train_kind_type&                 train_kind,
+        const time_span_type&                  time_offset,
+        selection_type&                        selection,
+        const dimension_type&                  canvas_dimension,
+        const position_type&                   scroll_bar_position,
+        const position_unit_type&              station_header_right,
+        const position_unit_type&              header_bottom,
+        const dimension_unit_type&             time_header_height,
+        const scale_type&                      horizontal_scale,
+        const station_intervals_type&          station_intervals,
+        const std::vector<position_unit_type>& station_positions,
+        const message_catalog_type&            message_catalog
     )
     :
     base_type(selection),
@@ -1048,13 +1020,11 @@ namespace bobura { namespace view { namespace diagram
 
         using position_type = typename train_line_list::position_type;
 
-        using left_type = typename train_line_list::left_type;
-
-        using top_type = typename train_line_list::top_type;
+        using position_unit_type = typename train_line_list::position_unit_type;
 
         using dimension_type = typename train_line_list::dimension_type;
 
-        using height_type = typename train_line_list::height_type;
+        using dimension_unit_type = typename train_line_list::dimension_unit_type;
 
         using message_catalog_type = typename traits_type::message_catalog_type;
 
@@ -1072,18 +1042,18 @@ namespace bobura { namespace view { namespace diagram
         // constructors and destructor
 
         impl(
-            const model_type&             model,
-            const time_span_type&         time_offset,
-            selection_type&               selection,
-            const dimension_type&         canvas_dimension,
-            const position_type&          scroll_bar_position,
-            const left_type&              station_header_right,
-            const top_type&               header_bottom,
-            const height_type&            time_header_height,
-            const scale_type&             horizontal_scale,
-            const station_intervals_type& station_intervals,
-            const std::vector<top_type>&  station_positions,
-            const message_catalog_type&   message_catalog
+            const model_type&                      model,
+            const time_span_type&                  time_offset,
+            selection_type&                        selection,
+            const dimension_type&                  canvas_dimension,
+            const position_type&                   scroll_bar_position,
+            const position_unit_type&              station_header_right,
+            const position_unit_type&              header_bottom,
+            const dimension_unit_type&             time_header_height,
+            const scale_type&                      horizontal_scale,
+            const station_intervals_type&          station_intervals,
+            const std::vector<position_unit_type>& station_positions,
+            const message_catalog_type&            message_catalog
         )
         :
         m_train_lines(
@@ -1165,18 +1135,18 @@ namespace bobura { namespace view { namespace diagram
         // static functions
 
         std::vector<train_line_type> make_train_lines(
-            const model_type&             model,
-            const time_span_type&         time_offset,
-            selection_type&               selection,
-            const dimension_type&         canvas_dimension,
-            const position_type&          scroll_bar_position,
-            const left_type&              station_header_right,
-            const top_type&               header_bottom,
-            const height_type&            time_header_height,
-            const scale_type&             horizontal_scale,
-            const station_intervals_type& station_intervals,
-            const std::vector<top_type>&  station_positions,
-            const message_catalog_type&   message_catalog
+            const model_type&                       model,
+            const time_span_type&                   time_offset,
+            selection_type&                         selection,
+            const dimension_type&                   canvas_dimension,
+            const position_type&                    scroll_bar_position,
+            const position_unit_type&               station_header_right,
+            const position_unit_type&               header_bottom,
+            const dimension_unit_type&              time_header_height,
+            const scale_type&                       horizontal_scale,
+            const station_intervals_type&           station_intervals,
+            const std::vector<position_unit_type>&  station_positions,
+            const message_catalog_type&             message_catalog
         )
         {
             std::vector<train_line_type> train_lines{};
@@ -1218,20 +1188,20 @@ namespace bobura { namespace view { namespace diagram
         }
 
         void make_train_lines_impl(
-            const trains_type&            trains,
-            const train_kinds_type&       train_kinds,
-            const time_span_type&         time_offset,
-            selection_type&               selection,
-            const dimension_type&         canvas_dimension,
-            const position_type&          scroll_bar_position,
-            const left_type&              station_header_right,
-            const top_type&               header_bottom,
-            const height_type&            time_header_height,
-            const scale_type&             horizontal_scale,
-            const station_intervals_type& station_intervals,
-            const std::vector<top_type>&  station_positions,
-            const message_catalog_type&   message_catalog,
-            std::vector<train_line_type>& train_lines
+            const trains_type&                     trains,
+            const train_kinds_type&                train_kinds,
+            const time_span_type&                  time_offset,
+            selection_type&                        selection,
+            const dimension_type&                  canvas_dimension,
+            const position_type&                   scroll_bar_position,
+            const position_unit_type&              station_header_right,
+            const position_unit_type&              header_bottom,
+            const dimension_unit_type&             time_header_height,
+            const scale_type&                      horizontal_scale,
+            const station_intervals_type&          station_intervals,
+            const std::vector<position_unit_type>& station_positions,
+            const message_catalog_type&            message_catalog,
+            std::vector<train_line_type>&          train_lines
         )
         {
             for (const auto& train: trains)
@@ -1270,12 +1240,12 @@ namespace bobura { namespace view { namespace diagram
         selection_type&               selection,
         const dimension_type&         canvas_dimension,
         const position_type&          scroll_bar_position,
-        const left_type&              station_header_right,
-        const top_type&               header_bottom,
-        const height_type&            time_header_height,
+        const position_unit_type&              station_header_right,
+        const position_unit_type&               header_bottom,
+        const dimension_unit_type&            time_header_height,
         const scale_type&             horizontal_scale,
         const station_intervals_type& station_intervals,
-        const std::vector<top_type>&  station_positions,
+        const std::vector<position_unit_type>&  station_positions,
         const message_catalog_type&   message_catalog
     )
     :
