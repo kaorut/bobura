@@ -202,19 +202,15 @@ namespace bobura { namespace type_list
         template <typename DetailTypeList>
         using mouse_capture_details_type = typename DetailTypeList::mouse_capture_type;
 
-        template <typename DetailTypeList>
-        using position_unit_type =
-            tetengo2::gui::unit::em<boost::rational<difference_type>, unit_details_type<DetailTypeList>>;
+        using position_unit_type = tetengo2::gui::unit::em<boost::rational<difference_type>>;
 
         template <typename DetailTypeList>
-        using position_type = tetengo2::gui::position<position_unit_type<DetailTypeList>>;
+        using position_type = tetengo2::gui::position<position_unit_type>;
+
+        using dimension_unit_type = tetengo2::gui::unit::em<boost::rational<size_type>>;
 
         template <typename DetailTypeList>
-        using dimension_unit_type =
-            tetengo2::gui::unit::em<boost::rational<size_type>, unit_details_type<DetailTypeList>>;
-
-        template <typename DetailTypeList>
-        using dimension_type = tetengo2::gui::dimension<dimension_unit_type<DetailTypeList>>;
+        using dimension_type = tetengo2::gui::dimension<dimension_unit_type>;
 
         template <typename DetailTypeList>
         using fast_solid_background_type =
@@ -246,7 +242,8 @@ namespace bobura { namespace type_list
             tetengo2::gui::drawing::canvas<
                 canvas_traits_type<DetailTypeList>,
                 drawing_details_type<DetailTypeList>,
-                icon_details_type<DetailTypeList>
+                icon_details_type<DetailTypeList>,
+                unit_details_type<DetailTypeList>
             >;
 
         template <typename DetailTypeList>
@@ -254,7 +251,8 @@ namespace bobura { namespace type_list
             tetengo2::gui::drawing::canvas<
                 canvas_traits_type<DetailTypeList>,
                 fast_drawing_details_type<DetailTypeList>,
-                icon_details_type<DetailTypeList>
+                icon_details_type<DetailTypeList>,
+                unit_details_type<DetailTypeList>
             >;
 
         template <typename DetailTypeList>
@@ -278,6 +276,7 @@ namespace bobura { namespace type_list
                 typename DetailTypeList::widget_type,
                 drawing_details_type<DetailTypeList>,
                 icon_details_type<DetailTypeList>,
+                unit_details_type<DetailTypeList>,
                 typename DetailTypeList::scroll_type,
                 typename DetailTypeList::message_handler_type,
                 virtual_key_details_type<DetailTypeList>
@@ -413,9 +412,7 @@ namespace bobura { namespace type_list
                 fast_drawing_details_type<DetailTypeList>
             >;
 
-        template <typename DetailTypeList>
-        using point_dimension_unit_type =
-            tetengo2::gui::unit::point<boost::rational<size_type>, unit_details_type<DetailTypeList>>;
+        using point_dimension_unit_type = tetengo2::gui::unit::point<boost::rational<size_type>>;
 
         template <typename DetailTypeList>
         using popup_menu_type =
@@ -546,7 +543,7 @@ namespace bobura { namespace type_list
         using picture_box_type = detail::ui::picture_box_type<DetailTypeList>;
 
         //! The point dimension unit type.
-        using point_dimension_unit_type = detail::ui::point_dimension_unit_type<DetailTypeList>;
+        using point_dimension_unit_type = detail::ui::point_dimension_unit_type;
 
         //! The popup menu type.
         using popup_menu_type = detail::ui::popup_menu_type<DetailTypeList>;
@@ -865,7 +862,7 @@ namespace bobura { namespace type_list
                 dimension_type<DetailTypeList>,
                 dialog_type<DetailTypeList>,
                 type_list::detail::ui::color_type,
-                type_list::detail::ui::point_dimension_unit_type<DetailTypeList>,
+                type_list::detail::ui::point_dimension_unit_type,
                 fast_canvas_type<DetailTypeList>,
                 scale_type,
                 type_list::detail::ui::shell_type<DetailTypeList>,
