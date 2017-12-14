@@ -24,7 +24,6 @@
 #include <tetengo2/detail/stub/shell.h>
 #include <tetengo2/detail/stub/system_color.h>
 #include <tetengo2/detail/stub/timer.h>
-#include <tetengo2/detail/stub/unit.h>
 #include <tetengo2/detail/stub/virtual_key.h>
 #include <tetengo2/detail/stub/widget.h>
 #if BOOST_COMP_MSVC
@@ -45,7 +44,6 @@
 #   include <tetengo2/detail/windows/shell.h>
 #   include <tetengo2/detail/windows/system_color.h>
 #   include <tetengo2/detail/windows/timer.h>
-#   include <tetengo2/detail/windows/unit.h>
 #   include <tetengo2/detail/windows/virtual_key.h>
 #   include <tetengo2/detail/windows/widget.h>
 #else
@@ -100,8 +98,6 @@ namespace bobura { namespace type_list
 
             using timer_type = tetengo2::detail::windows::timer;
 
-            using unit_type = tetengo2::detail::windows::unit;
-
             using virtual_key_type = tetengo2::detail::windows::virtual_key;
 
             using widget_type = tetengo2::detail::windows::widget;
@@ -153,8 +149,6 @@ namespace bobura { namespace type_list
             using system_color_type = tetengo2::detail::stub::system_color;
 
             using timer_type = tetengo2::detail::stub::timer;
-
-            using unit_type = tetengo2::detail::stub::unit;
 
             using virtual_key_type = tetengo2::detail::stub::virtual_key;
 
@@ -219,9 +213,6 @@ namespace bobura { namespace type_list
         //! The detail implementation type of the timer.
         using timer_type = detail::detail::application::timer_type; 
 
-        //! The detail implementation type of the unit.
-        using unit_type = detail::detail::application::unit_type;
-
         //! The detail implementation type of the virtual key.
         using virtual_key_type = detail::detail::application::virtual_key_type;
 
@@ -283,9 +274,6 @@ namespace bobura { namespace type_list
 
         //! The detail implementation type of the timer.
         using timer_type = detail::detail::test::timer_type; 
-
-        //! The detail implementation type of the unit.
-        using unit_type = detail::detail::test::unit_type;
 
         //! The detail implementation type of the virtual key.
         using virtual_key_type = detail::detail::test::virtual_key_type;

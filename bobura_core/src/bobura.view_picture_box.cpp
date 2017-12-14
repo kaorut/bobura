@@ -65,7 +65,7 @@ namespace bobura
         }
 
         void update_scroll_bars(
-            view_picture_box&  self,
+            view_picture_box&     self,
             const dimension_type& view_dimension,
             const dimension_type& page_dimension
         )
@@ -117,7 +117,7 @@ namespace bobura
                 view_size.value() > 0 ? boost::rational_cast<scroll_bar_size_type>(view_size.value()) - 1 : 0;
             const auto previous_size = scroll_bar.range().second;
 
-            if (view_size > 0 && 0 < page_size && page_size <= size)
+            if (view_size > 0U && 0U < page_size && page_size <= size)
             {
                 scroll_bar.set_enabled(true);
                 scroll_bar.set_range(std::make_pair(0U, size));
