@@ -14,7 +14,7 @@
     <WixVariable Id="WixUILicenseRtf" Value="gplv3.rtf" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Merge Id="VcRedist" SourceFile="$(var.common_files_path)\Merge Modules\Microsoft_VC$(var.vc_redist_version)_CRT_$(var.arch).msm" DiskId="1" Language="0" />
+      <Merge Id="VcRedist" SourceFile="$(var.vc_redist_path)\Microsoft_VC$(var.vc_version)_CRT_$(var.arch).msm" DiskId="1" Language="0" />
       <Directory Id="$(var.program_files_folder)" Name="PFiles">
         <Directory Id="Tetengo" Name="$(var.brand_name)">
           <Directory Id="INSTALLDIR" Name="$(var.product_name)" />

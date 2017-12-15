@@ -17,7 +17,7 @@
   <?define arch="$(env.ARCH)"?>
 
   <?define vc_version="$(env.VC_VERSION)"?>
-  <?define vc_redist_version="$(env.VC_REDIST_VERSION)"?>
+  <?define vc_redist_path="$(env.VC_REDIST_PATH)"?>
   <?define boost_version="$(env.BOOST_VERSION)"?>
 
   <?define product_name="bobura"?>
