@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_SUITE(diagram)
     {
         BOOST_TEST_PASSPOINT();
 
-        const std::vector<position_unit_type> station_positions{ position_unit_type{ 0 }, position_unit_type{ 42 } };
+        const std::vector<position_unit_type> station_positions{ position_unit_type{}, position_unit_type{ 42 } };
 
         const auto result =
             bobura::view::diagram::station_index_to_top(

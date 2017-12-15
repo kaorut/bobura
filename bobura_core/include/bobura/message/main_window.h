@@ -372,7 +372,7 @@ namespace bobura { namespace message { namespace main_window
             {
                 const position_type position{
                     position_unit_type::from(window_width) - position_unit_type::from(property_bar_width),
-                    position_unit_type{ 0 }
+                    position_unit_type{}
                 };
                 const dimension_type dimension{ property_bar_width, window_height };
                 m_property_bar.set_position_and_dimension(position, dimension);
@@ -380,9 +380,9 @@ namespace bobura { namespace message { namespace main_window
                 m_property_bar.size_observer_set().resized()();
             }
             {
-                const position_type position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+                const position_type position{};
                 const dimension_type dimension{
-                    window_width > property_bar_width ? window_width - property_bar_width : dimension_unit_type{ 0 },
+                    window_width > property_bar_width ? window_width - property_bar_width : dimension_unit_type{},
                     window_height
                 };
                 m_tab_frame.set_position_and_dimension(position, dimension);

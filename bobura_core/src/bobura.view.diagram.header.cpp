@@ -481,8 +481,8 @@ namespace bobura { namespace view { namespace diagram
         m_p_company_name_header(),
         m_p_line_name_header(),
         m_p_note_header(),
-        m_position(position_unit_type{ 0 }, position_unit_type{ 0 }),
-        m_dimension(dimension_unit_type{ 0 }, dimension_unit_type{ 0 })
+        m_position(),
+        m_dimension()
         {
             const auto& company_name = model.timetable().company_name();
             const auto& company_name_font = *model.timetable().font_color_set().company_name().diagram_font();
@@ -490,12 +490,12 @@ namespace bobura { namespace view { namespace diagram
             const auto& line_name_font = *model.timetable().font_color_set().line_name().diagram_font();
             const auto& note = model.timetable().note();
             const auto& note_font = *model.timetable().font_color_set().note().diagram_font();
-            position_type company_name_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
-            dimension_type company_name_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
-            position_type line_name_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
-            dimension_type line_name_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
-            position_type note_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
-            dimension_type note_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
+            position_type company_name_position{};
+            dimension_type company_name_dimension{};
+            position_type line_name_position{};
+            dimension_type line_name_dimension{};
+            position_type note_position{};
+            dimension_type note_dimension{};
             calculate_positions_and_dimensions(
                 canvas,
                 canvas_dimension,
@@ -640,32 +640,31 @@ namespace bobura { namespace view { namespace diagram
             auto company_name_dimension_ = canvas.calc_text_dimension(company_name);
             const auto& company_name_width = company_name_dimension_.width();
             const auto& company_name_height =
-                company_name.empty() ? dimension_unit_type{ 0 } : company_name_dimension_.height();
+                company_name.empty() ? dimension_unit_type{} : company_name_dimension_.height();
 
             canvas.set_font(line_name_font);
             auto line_name_dimension_ = canvas.calc_text_dimension(line_name);
             const auto& line_name_width = line_name_dimension_.width();
-            const auto& line_name_height =
-                line_name.empty() ? dimension_unit_type{ 0 } : line_name_dimension_.height();
+            const auto& line_name_height = line_name.empty() ? dimension_unit_type{} : line_name_dimension_.height();
 
             canvas.set_font(note_font);
             const auto note_dimension_ = canvas.calc_text_dimension(note);
             const auto& note_width = note_dimension_.width();
-            const auto& note_height = note.empty() ? dimension_unit_type{ 0 } : note_dimension_.height();
+            const auto& note_height = note.empty() ? dimension_unit_type{} : note_dimension_.height();
 
             const position_unit_type line_names_spacing{ 1 };
 
-            position_type company_name_position_{ position_unit_type{ 0 }, position_unit_type{ 0 } };
-            position_type line_name_position_{ position_unit_type{ 0 }, position_unit_type{ 0 } };
-            position_type note_position_{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            position_type company_name_position_{};
+            position_type line_name_position_{};
+            position_type note_position_{};
             const auto& header_width = canvas_width;
-            dimension_unit_type header_height{ 0 };
+            dimension_unit_type header_height{};
             if (company_name_width + line_name_width + note_width + line_names_spacing <= canvas_width)
             {
                 const auto max_element_height = std::max({ company_name_height, line_name_height, note_height });
                 company_name_position_ =
                     position_type{
-                        position_unit_type{ 0 }, position_unit_type::from(max_element_height - company_name_height) / 2
+                        position_unit_type{}, position_unit_type::from(max_element_height - company_name_height) / 2
                     };
                 line_name_position_ =
                     position_type{
@@ -684,7 +683,7 @@ namespace bobura { namespace view { namespace diagram
                 const auto max_element_height = std::max({ company_name_height, line_name_height });
                 company_name_position_ =
                     position_type{
-                        position_unit_type{ 0 }, position_unit_type::from(max_element_height - company_name_height) / 2
+                        position_unit_type{}, position_unit_type::from(max_element_height - company_name_height) / 2
                     };
                 line_name_position_ =
                     position_type{
@@ -692,17 +691,17 @@ namespace bobura { namespace view { namespace diagram
                         position_unit_type::from(max_element_height - line_name_height) / 2
                     };
                 note_position_ =
-                    position_type{ position_unit_type{ 0 }, position_unit_type::from(max_element_height) };
+                    position_type{ position_unit_type{}, position_unit_type::from(max_element_height) };
                 header_height = max_element_height + note_height;
             }
             else
             {
-                company_name_position_ = position_type{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+                company_name_position_ = position_type{};
                 line_name_position_ =
-                    position_type{ position_unit_type{ 0 }, position_unit_type::from(company_name_height) };
+                    position_type{ position_unit_type{}, position_unit_type::from(company_name_height) };
                 note_position_ =
                     position_type{
-                        position_unit_type{ 0 }, position_unit_type::from(company_name_height + line_name_height)
+                        position_unit_type{}, position_unit_type::from(company_name_height + line_name_height)
                     };
                 header_height = company_name_height + line_name_height + note_height;
             }
@@ -713,7 +712,7 @@ namespace bobura { namespace view { namespace diagram
             line_name_dimension = std::move(line_name_dimension_);
             note_position = std::move(note_position_);
             note_dimension = std::move(note_dimension_);
-            position = position_type{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            position = position_type{};
             dimension = dimension_type{ std::move(header_width), std::move(header_height) };
         }
 

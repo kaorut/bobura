@@ -304,14 +304,14 @@ namespace bobura { namespace view { namespace diagram
                 time_to_left(
                     time_type{ 60 },
                     time_offset, 0,
-                    position_unit_type{ 0 },
+                    position_unit_type{},
                     station_header_right,
                     horizontal_scale_left
                 ) -
                 time_to_left(
                     time_type{ 0 },
                     time_offset, 0,
-                    position_unit_type{ 0 },
+                    position_unit_type{},
                     station_header_right,
                     horizontal_scale_left
                 );

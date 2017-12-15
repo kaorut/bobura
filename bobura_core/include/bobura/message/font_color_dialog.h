@@ -160,13 +160,13 @@ namespace bobura { namespace message { namespace font_color_dialog
         void operator()(canvas_type& canvas)
         const
         {
-            const position_type diagram_part_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            const position_type diagram_part_position{};
             const dimension_type diagram_part_dimension{ m_canvas_dimension.width() / 2, m_canvas_dimension.height() };
             draw_diagram_part(canvas, diagram_part_position, diagram_part_dimension);
 
             const position_type timetable_part_position{
                 position_unit_type::from(m_canvas_dimension.width() / 2),
-                position_unit_type{ 0 }
+                position_unit_type{}
             };
             const dimension_type timetable_part_dimension{
                 m_canvas_dimension.width() / 2, m_canvas_dimension.height()
@@ -297,7 +297,7 @@ namespace bobura { namespace message { namespace font_color_dialog
             if (base_height > text_height)
                 return base_top + position_unit_type::from((base_height - text_height) / 2);
             else
-                return position_unit_type{ 0 };
+                return position_unit_type{};
         }
 
 

@@ -39,8 +39,8 @@ namespace bobura { namespace view { namespace timetable
 
         impl()
         :
-        m_position(position_unit_type{ 0 }, position_unit_type{ 0 }),
-        m_dimension(dimension_unit_type{ 0 }, dimension_unit_type{ 0 })
+        m_position(),
+        m_dimension()
         {}
 
 

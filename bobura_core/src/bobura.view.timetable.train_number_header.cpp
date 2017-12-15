@@ -97,12 +97,12 @@ namespace bobura { namespace view { namespace timetable
             const auto& text_height = text_dimension.height();
             const auto text_left =
                 left +
-                (width > text_width ? position_unit_type::from((width - text_width) / 2) : position_unit_type{ 0 });
+                (width > text_width ? position_unit_type::from((width - text_width) / 2) : position_unit_type{});
             const auto text_top =
                 top +
                 (
                     height > text_height ?
-                    position_unit_type::from((height - text_height) / 2) : position_unit_type{ 0 }
+                    position_unit_type::from((height - text_height) / 2) : position_unit_type{}
                 );
 
             canvas.draw_vertical_text(m_description, position_type{ text_left, text_top });
@@ -256,12 +256,12 @@ namespace bobura { namespace view { namespace timetable
             const auto& text_height = text_dimension.height();
             const auto text_left =
                 left +
-                (width > text_width ? position_unit_type::from((width - text_width) / 2) : position_unit_type{ 0 });
+                (width > text_width ? position_unit_type::from((width - text_width) / 2) : position_unit_type{});
             const auto text_top =
                 top +
                 (
                     height > text_height ?
-                    position_unit_type::from((height - text_height) / 2) : position_unit_type{ 0 }
+                    position_unit_type::from((height - text_height) / 2) : position_unit_type{}
                 );
 
             canvas.draw_text(m_description, position_type{ text_left, text_top });
@@ -409,12 +409,12 @@ namespace bobura { namespace view { namespace timetable
             const auto& text_height = text_dimension.height();
             const auto text_left =
                 left +
-                (width > text_width ? position_unit_type::from((width - text_width) / 2) : position_unit_type{ 0 });
+                (width > text_width ? position_unit_type::from((width - text_width) / 2) : position_unit_type{});
             const auto text_top =
                 top +
                 (
                     height > text_height ?
-                    position_unit_type::from((height - text_height) / 2) : position_unit_type{ 0 }
+                    position_unit_type::from((height - text_height) / 2) : position_unit_type{}
                 );
 
             canvas.draw_vertical_text(m_description, position_type{ text_left, text_top });
@@ -563,14 +563,14 @@ namespace bobura { namespace view { namespace timetable
                 );
             const auto adjusted_train_name_height = std::max(train_name_height, train_name_label_dimension.height());
 
-            position_type operating_distance_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
-            dimension_type operating_distance_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
-            position_type train_number_description_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
-            dimension_type train_number_description_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
-            position_type train_name_description_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
-            dimension_type train_name_description_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
-            position_type position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
-            dimension_type dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
+            position_type operating_distance_position{};
+            dimension_type operating_distance_dimension{};
+            position_type train_number_description_position{};
+            dimension_type train_number_description_dimension{};
+            position_type train_name_description_position{};
+            dimension_type train_name_description_dimension{};
+            position_type position{};
+            dimension_type dimension{};
             calculate_positions_and_dimensions(
                 margin,
                 top,

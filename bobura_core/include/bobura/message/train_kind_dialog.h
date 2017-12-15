@@ -987,12 +987,12 @@ namespace bobura { namespace message { namespace train_kind_dialog
                 return;
             const auto& train_kind = m_info_sets[*m_current_train_kind_index].train_kind();
 
-            const position_type diagram_part_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            const position_type diagram_part_position{};
             const dimension_type diagram_part_dimension{ m_canvas_dimension.width() / 2, m_canvas_dimension.height() };
             draw_diagram_part(train_kind, canvas, diagram_part_position, diagram_part_dimension);
 
             const position_type timetable_part_position{
-                position_unit_type::from(diagram_part_dimension.width()), position_unit_type{ 0 }
+                position_unit_type::from(diagram_part_dimension.width()), position_unit_type{}
             };
             const dimension_type timetable_part_dimension{
                 m_canvas_dimension.width() / 2, m_canvas_dimension.height()
@@ -1075,9 +1075,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         {
             auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(m_background_color);
             canvas.set_background(std::move(p_background));
-            canvas.fill_rectangle(
-                position_type{ position_unit_type{ 0 }, position_unit_type{ 0 } }, m_canvas_dimension
-            );
+            canvas.fill_rectangle(position_type{}, m_canvas_dimension);
         }
 
         void draw_diagram_part(
@@ -1189,10 +1187,10 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             auto left =
                 canvas_width > text_width ?
-                position_unit_type::from((canvas_width - text_width) / 2) : position_unit_type{ 0 };
+                position_unit_type::from((canvas_width - text_width) / 2) : position_unit_type{};
             auto top =
                 canvas_height > text_height ?
-                position_unit_type::from((canvas_height - text_height) / 2) : position_unit_type{ 0 };
+                position_unit_type::from((canvas_height - text_height) / 2) : position_unit_type{};
             return position_type{ base_position.left() + left, base_position.top() + top };
         }
 
@@ -1215,16 +1213,15 @@ namespace bobura { namespace message { namespace train_kind_dialog
             const auto box_height = std::max(text_height + dimension_unit_type{ 1 } / 2, dimension_unit_type{ 3 } / 2);
             const auto box_left =
                 canvas_width > box_width ?
-                position_unit_type::from((canvas_width - box_width) / 2) : position_unit_type{ 0 };
+                position_unit_type::from((canvas_width - box_width) / 2) : position_unit_type{};
             const auto box_right = box_left + position_unit_type::from(box_width);
             const auto box_top =
                 canvas_height > box_height ?
-                position_unit_type::from((canvas_height - box_height) / 2) : position_unit_type{ 0 };
+                position_unit_type::from((canvas_height - box_height) / 2) : position_unit_type{};
             const auto box_bottom = box_top + position_unit_type::from(box_height);
 
             const auto line_left =
-                box_left > position_unit_type{ 1 } / 2 ?
-                box_left - position_unit_type{ 1 } / 2 : position_unit_type{ 0 };
+                box_left > position_unit_type{ 1 } / 2 ? box_left - position_unit_type{ 1 } / 2 : position_unit_type{};
             const auto line_right =
                 box_right + position_unit_type{ 1 } / 2 < position_unit_type::from(canvas_width) ?
                 box_right + position_unit_type{ 1 } / 2 : position_unit_type::from(canvas_width);
