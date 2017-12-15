@@ -439,14 +439,14 @@ namespace bobura { namespace view { namespace timetable
             const auto& line_name_font = *model.timetable().font_color_set().line_name().diagram_font();
             const auto& note = model.timetable().note();
             const auto& note_font = *model.timetable().font_color_set().note().diagram_font();
-            position_type company_name_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
-            dimension_type company_name_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
-            position_type line_name_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
-            dimension_type line_name_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
-            position_type note_position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
-            dimension_type note_dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
-            position_type position{ position_unit_type{ 0 }, position_unit_type{ 0 } };
-            dimension_type dimension{ dimension_unit_type{ 0 }, dimension_unit_type{ 0 } };
+            position_type company_name_position{};
+            dimension_type company_name_dimension{};
+            position_type line_name_position{};
+            dimension_type line_name_dimension{};
+            position_type note_position{};
+            dimension_type note_dimension{};
+            position_type position{};
+            dimension_type dimension{};
             calculate_positions_and_dimensions(
                 canvas,
                 canvas_dimension,
@@ -623,17 +623,16 @@ namespace bobura { namespace view { namespace timetable
             auto company_name_dimension_ = canvas.calc_text_dimension(company_name);
             const auto& company_name_width = company_name_dimension_.width();
             const auto& company_name_height =
-                company_name.empty() ? dimension_unit_type{ 0 } : company_name_dimension_.height();
+                company_name.empty() ? dimension_unit_type{} : company_name_dimension_.height();
 
             canvas.set_font(line_name_font);
             auto line_name_dimension_ = canvas.calc_text_dimension(line_name);
             const auto& line_name_width = line_name_dimension_.width();
-            const auto& line_name_height =
-                line_name.empty() ? dimension_unit_type{ 0 } : line_name_dimension_.height();
+            const auto& line_name_height = line_name.empty() ? dimension_unit_type{} : line_name_dimension_.height();
 
             canvas.set_font(note_font);
             const auto note_dimension_ = canvas.calc_text_dimension(note);
-            const auto& note_height = note.empty() ? dimension_unit_type{ 0 } : note_dimension_.height();
+            const auto& note_height = note.empty() ? dimension_unit_type{} : note_dimension_.height();
 
             const auto left_margin = position_unit_type::from(margin.width());
             const auto top_margin = position_unit_type::from(margin.height());
@@ -641,14 +640,14 @@ namespace bobura { namespace view { namespace timetable
             const auto top_padding = position_unit_type{ 1 } / 2;
             const position_unit_type company_line_names_spacing{ 1 };
 
-            position_type company_name_position_{ position_unit_type{ 0 }, position_unit_type{ 0 } };
-            position_type line_name_position_{ position_unit_type{ 0 }, position_unit_type{ 0 } };
+            position_type company_name_position_{};
+            position_type line_name_position_{};
             const position_type note_position_{ left_margin + left_padding, top_margin + top_padding };
             const auto line_name_top = note_position_.top() + position_unit_type::from(note_height);
             const auto header_width =
                 canvas_width > dimension_unit_type::from(left_margin) * 2 ?
-                canvas_width - dimension_unit_type::from(left_margin) * 2 : dimension_unit_type{ 0 };
-            dimension_unit_type header_height{ 0 };
+                canvas_width - dimension_unit_type::from(left_margin) * 2 : dimension_unit_type{};
+            dimension_unit_type header_height{};
             if (company_name_width + line_name_width + company_line_names_spacing + left_padding * 2 <= header_width)
             {
                 const auto company_name_left =

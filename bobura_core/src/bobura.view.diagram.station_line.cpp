@@ -99,7 +99,7 @@ namespace bobura { namespace view { namespace diagram
 
             draw_selectable_line(
                 canvas,
-                position_type{ position_unit_type{ 0 }, m_top },
+                position_type{ position_unit_type{}, m_top },
                 position_type{ m_right, m_top },
                 self.selected()
             );
@@ -108,7 +108,7 @@ namespace bobura { namespace view { namespace diagram
             const auto name_dimension = canvas.calc_text_dimension(name);
             canvas.draw_text(
                 name,
-                position_type{ position_unit_type{ 0 }, m_top - position_unit_type::from(name_dimension.height()) }
+                position_type{ position_unit_type{}, m_top - position_unit_type::from(name_dimension.height()) }
             );
         }
 
@@ -117,7 +117,7 @@ namespace bobura { namespace view { namespace diagram
             const auto& x = position.left();
             const auto& y = position.top();
             if (
-                (position_unit_type{ 0 } <= x && x <= m_station_header_right) &&
+                (position_unit_type{} <= x && x <= m_station_header_right) &&
                 (
                     m_top - selected_line_margin<position_unit_type>() <= y &&
                     y <= m_top + selected_line_margin<position_unit_type>()

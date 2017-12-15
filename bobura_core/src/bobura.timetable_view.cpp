@@ -55,7 +55,7 @@ namespace bobura
         m_direction(direction),
         m_model(model),
         m_message_catalog(message_catalog),
-        m_dimension(dimension_unit_type{ 0 }, dimension_unit_type{ 0 }),
+        m_dimension(),
         m_p_header(),
         m_p_train_number_header()
         {}
@@ -134,7 +134,7 @@ namespace bobura
             const font_color_set_type&    font_color_set
         )
         {
-            dimension_unit_type max_width{ 0 };
+            dimension_unit_type max_width{};
             {
                 const auto& font =
                     view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
@@ -200,7 +200,7 @@ namespace bobura
                     *m_model.timetable().font_color_set().background().diagram_color()
                 )
             );
-            canvas.fill_rectangle(position_type{ position_unit_type{ 0 }, position_unit_type{ 0 } }, canvas_dimension);
+            canvas.fill_rectangle(position_type{}, canvas_dimension);
         }
 
         void ensure_items_created(

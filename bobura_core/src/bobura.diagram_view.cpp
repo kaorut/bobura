@@ -62,7 +62,7 @@ namespace bobura
         m_selection(),
         m_horizontal_scale(1),
         m_vertical_scale(1),
-        m_dimension(dimension_unit_type{ 0 }, dimension_unit_type{ 0 }),
+        m_dimension(),
         m_header_height(0),
         m_time_header_height(3),
         m_station_header_width(8),
@@ -131,7 +131,7 @@ namespace bobura
             if (m_station_intervals.empty())
             {
                 m_station_positions.clear();
-                m_dimension = dimension_type{ width, dimension_unit_type{ 0 } };
+                m_dimension = dimension_type{ width, dimension_unit_type{} };
 
                 m_p_header.reset();
                 m_p_time_line_list.reset();
@@ -164,12 +164,12 @@ namespace bobura
         {
             const auto& canvas_width = canvas_dimension.width();
             const auto& header_width = m_station_header_width;
-            auto page_width = canvas_width > header_width ? canvas_width - header_width : dimension_unit_type{ 0 };
+            auto page_width = canvas_width > header_width ? canvas_width - header_width : dimension_unit_type{};
 
             const auto& canvas_height = canvas_dimension.height();
             const auto header_height = m_header_height + m_time_header_height;
             auto page_height =
-                canvas_height > header_height ? canvas_height - header_height : dimension_unit_type{ 0 };
+                canvas_height > header_height ? canvas_height - header_height : dimension_unit_type{};
 
             return { std::move(page_width), std::move(page_height) };
         }
@@ -325,7 +325,7 @@ namespace bobura
                     *m_model.timetable().font_color_set().background().diagram_color()
                 )
             );
-            canvas.fill_rectangle(position_type{ position_unit_type{ 0 }, position_unit_type{ 0 } }, canvas_dimension);
+            canvas.fill_rectangle(position_type{}, canvas_dimension);
         }
 
         void ensure_items_created(

@@ -347,7 +347,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{}),
             message_catalog
         };
         const train_line_type train_line2{ std::move(train_line1) };
@@ -389,7 +389,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{}),
             message_catalog
         };
         train_line_type train_line2{
@@ -411,7 +411,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{}),
             message_catalog
         };
         train_line1 = std::move(train_line2);
@@ -453,7 +453,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{}),
             message_catalog
         };
 
@@ -498,7 +498,7 @@ BOOST_AUTO_TEST_SUITE(train_line)
             dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{}),
             message_catalog
         };
 
@@ -530,7 +530,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{}),
             message_catalog
         };
         const train_line_list_type train_line_list2{ std::move(train_line_list1) };
@@ -555,7 +555,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{}),
             message_catalog
         };
         train_line_list_type train_line_list2{
@@ -569,7 +569,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{}),
             message_catalog
         };
 
@@ -595,7 +595,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{}),
             message_catalog
         };
 
@@ -623,7 +623,7 @@ BOOST_AUTO_TEST_SUITE(train_line_list)
             dimension_unit_type{ 24 },
             scale_type{ 42 },
             station_intervals,
-            std::vector<position_unit_type>(2, position_unit_type{ 0 }),
+            std::vector<position_unit_type>(2, position_unit_type{}),
             message_catalog
         };
 
