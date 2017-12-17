@@ -41,7 +41,7 @@ Building on Windows
 
 You need the following tools in order to build Bobura:
 
-- [Visual Studio 2017](http://www.microsoft.com/) (Express for Desktop is not available. Use Community instead.)
+- [Visual Studio 2017](http://www.microsoft.com/)
 - [Boost C++ Libraries 1.65.1](http://www.boost.org/)
 - [bzip2](http://www.bzip.org)
 - [WiX 3.11.0](http://wixtoolset.org/)
