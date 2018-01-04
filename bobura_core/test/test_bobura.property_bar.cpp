@@ -10,6 +10,8 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/detail/stub/impl_set.h>
+
 #include <bobura/property_bar.h>
 #include <bobura/settings.h>
 #include <bobura/type_list.h>

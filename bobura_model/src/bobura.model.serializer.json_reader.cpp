@@ -21,6 +21,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/variant.hpp>
 
+#include <tetengo2/text/grammar/json.h>
+#include <tetengo2/text/pull_parser.h>
+
 #include <bobura/model/serializer/exec_json_reading_task.h>
 #include <bobura/model/serializer/json_reader.h>
 #include <bobura/model/station_info/grade.h>

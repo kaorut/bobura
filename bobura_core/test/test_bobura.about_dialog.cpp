@@ -10,6 +10,8 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/detail/stub/impl_set.h>
+
 #include <bobura/about_dialog.h>
 #include <bobura/settings.h>
 #include <bobura/type_list.h>
@@ -42,7 +44,7 @@ namespace
 
     using about_dialog_type = bobura::about_dialog<traits_type_list_type::dialog_type>;
 
-    using detail_impl_set_type = tetengo2::detail::stub::impl_set;
+    using detail_detail_impl_set_type = tetengo2::detail::stub::impl_set;
 
 
 }
@@ -62,7 +64,7 @@ BOOST_AUTO_TEST_SUITE(about_dialog)
             std::vector<string_type>{1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
             string_type{ TETENGO2_TEXT("test_bobura") }
         };
-        const about_dialog_type about_dialog{ parent, message_catalog, settings, detail_impl_set_type::instance() };
+        const about_dialog_type about_dialog{ parent, message_catalog, settings, detail_detail_impl_set_type::instance() };
     }
 
 

@@ -10,6 +10,8 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/detail/stub/impl_set.h>
+
 #include <bobura/diagram_view.h>
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/load_save/save_to_file.h>

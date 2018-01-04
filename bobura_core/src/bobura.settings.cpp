@@ -21,6 +21,12 @@
 #include <boost/program_options.hpp>
 #include <boost/variant.hpp>
 
+#include <tetengo2/config/cached_config.h>
+#include <tetengo2/config/config_base.h>
+#include <tetengo2/config/config_list.h>
+#include <tetengo2/config/persistent_config.h>
+#include <tetengo2/config/temporary_config.h>
+
 #include <bobura/settings.h>
 #include <bobura/type_list.h>
 

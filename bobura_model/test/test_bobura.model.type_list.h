@@ -12,6 +12,9 @@
 #include <cstddef>
 #include <string>
 
+#include <tetengo2/gui/drawing/color.h>
+#include <tetengo2/gui/drawing/font.h>
+
 #include "test_bobura.model.detail_type_list.h"
 
 
