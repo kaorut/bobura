@@ -79,6 +79,15 @@ libbobura_core_a_CPPFLAGS = \
     -I$(TETENGO2_DETAIL_INCLUDE)
 libbobura_core_a_SOURCES = $(headers) $(sources)
 
+IWYU_OPTS += -Xiwyu --mapping_file=$(top_srcdir)/$(IWYU_IMP_PATH)
+
+lint-iwyu:
+	for f in $(headers) $(sources); \
+	do \
+	    echo "iwyu: "$$f; \
+	    $(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(libbobura_core_a_CPPFLAGS) $(CXXFLAGS) $$f || test $$? -eq 2; \
+	done
+
 $(top_builddir)/precompiled/precompiled.h.$(PRECOMPILE_EXT): $(top_srcdir)/precompiled/precompiled.h
 	pushd $(top_builddir)/precompiled; \
 	$(MAKE) all; \
