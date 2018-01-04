@@ -12,9 +12,6 @@
 #include <cstddef>
 #include <string>
 
-#include <tetengo2.h>
-#include <tetengo2.gui.h>
-
 #include "test_bobura.model.detail_type_list.h"
 
 

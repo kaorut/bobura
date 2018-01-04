@@ -14,9 +14,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.detail.h>
-
 #include <bobura/diagram_view.h>
 #include <bobura/load_save/load_from_file.h>
 #include <bobura/load_save/new_file.h>

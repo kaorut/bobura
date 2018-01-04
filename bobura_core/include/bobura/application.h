@@ -13,9 +13,6 @@
 
 #include <boost/core/noncopyable.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.detail.h>
-
 #include <bobura/settings.h>
 
 

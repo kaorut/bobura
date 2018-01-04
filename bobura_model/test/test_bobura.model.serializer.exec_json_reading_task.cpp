@@ -10,8 +10,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/serializer/exec_json_reading_task.h>
 #include <bobura/model/timetable.h>
 #include <bobura/type_list.h>

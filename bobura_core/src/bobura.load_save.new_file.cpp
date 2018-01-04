@@ -9,8 +9,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
-
 #include <bobura/load_save/new_file.h>
 #include <bobura/type_list.h>
 

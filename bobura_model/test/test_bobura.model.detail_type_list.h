@@ -9,7 +9,6 @@
 #if !defined(TESTBOBURA_MODEL_DETAILTYPELIST_H)
 #define TESTBOBURA_MODEL_DETAILTYPELIST_H
 
-#include <tetengo2.h>
 #include <tetengo2/detail/stub/drawing.h>
 
 

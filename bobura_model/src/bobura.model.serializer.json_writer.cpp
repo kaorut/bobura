@@ -21,8 +21,6 @@
 #include <boost/predef.h>
 #include <boost/rational.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/serializer/json_writer.h>
 #include <bobura/type_list.h>
 

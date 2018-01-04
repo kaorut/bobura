@@ -21,8 +21,6 @@
 #include <boost/rational.hpp>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/message/train_kind_dialog.h>
 #include <bobura/train_kind_dialog.h>
 #include <bobura/type_list.h>

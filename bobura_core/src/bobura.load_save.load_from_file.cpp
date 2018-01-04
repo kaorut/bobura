@@ -21,8 +21,6 @@
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/load_save/load_from_file.h>
 #include <bobura/model/serializer/exec_json_reading_task.h>
 #include <bobura/model/serializer/reader_selector.h>

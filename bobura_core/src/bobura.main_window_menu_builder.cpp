@@ -13,8 +13,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
-
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/main_window.h>
 #include <bobura/type_list.h>

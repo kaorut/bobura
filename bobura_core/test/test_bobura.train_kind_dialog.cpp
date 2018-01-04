@@ -12,8 +12,6 @@
 #include <boost/optional.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/train_kind.h>
 #include <bobura/train_kind_dialog.h>
 #include <bobura/type_list.h>

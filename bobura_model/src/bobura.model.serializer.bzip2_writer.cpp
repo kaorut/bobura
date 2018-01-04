@@ -15,8 +15,6 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
-
 #include <bobura/model/serializer/bzip2_writer.h>
 #include <bobura/type_list.h>
 

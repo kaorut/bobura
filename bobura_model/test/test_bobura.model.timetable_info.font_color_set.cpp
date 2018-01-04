@@ -11,8 +11,6 @@
 #include <boost/optional.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/timetable_info/font_color_set.h>
 
 #include "test_bobura.model.type_list.h"

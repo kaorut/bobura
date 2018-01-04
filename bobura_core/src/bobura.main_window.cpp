@@ -14,8 +14,6 @@
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
-
 #include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
 #include <bobura/main_window.h>

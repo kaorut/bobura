@@ -12,8 +12,6 @@
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
-
 #include <bobura/command/load_from_file.h>
 #include <bobura/type_list.h>
 

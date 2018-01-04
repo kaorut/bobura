@@ -8,8 +8,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/train_info/stop.h>
 #include <bobura/model/train_info/time.h>
 

@@ -22,8 +22,6 @@
 #include <boost/rational.hpp>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/station_info/grade.h>
 #include <bobura/property_bar.h>
 #include <bobura/timetable_model.h>

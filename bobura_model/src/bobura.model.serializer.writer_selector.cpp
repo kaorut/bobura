@@ -17,8 +17,6 @@
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/serializer/writer_selector.h>
 #include <bobura/type_list.h>
 

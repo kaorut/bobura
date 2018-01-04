@@ -8,8 +8,6 @@
 
 #include <string>
 
-#include <tetengo2.h>
-
 #include <setup/encode.h>
 
 #include <tetengo2.detail.base.encoding.cpp>

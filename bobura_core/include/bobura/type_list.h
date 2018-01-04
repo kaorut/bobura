@@ -17,9 +17,6 @@
 #include <boost/rational.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.gui.h>
-
 #include <bobura/application_traits.h>
 #include <bobura/command/set_traits.h>
 #include <bobura/command/traits.h>

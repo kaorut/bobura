@@ -16,8 +16,6 @@
 #include <boost/predef.h>
 #include <boost/system/system_error.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/load_save/save_to_file.h>
 #include <bobura/model/serializer/writer_selector.h>
 #include <bobura/model/serializer/writer_set.h>

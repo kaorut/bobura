@@ -10,8 +10,6 @@
 #include <boost/optional.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/load_save/save_to_file.h>
 #include <bobura/load_save/load_from_file.h>

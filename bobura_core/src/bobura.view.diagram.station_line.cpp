@@ -15,8 +15,6 @@
 #include <boost/predef.h>
 #include <boost/range/adaptors.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/station_info/grade.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/station_line.h>

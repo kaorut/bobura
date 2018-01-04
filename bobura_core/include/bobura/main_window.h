@@ -13,9 +13,6 @@
 
 #include <boost/optional.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.detail.h>
-
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/property_bar.h>
 #include <bobura/settings.h>

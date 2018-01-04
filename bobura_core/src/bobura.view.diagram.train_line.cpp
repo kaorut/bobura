@@ -24,8 +24,6 @@
 #include <boost/rational.hpp>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/train_line.h>
 #include <bobura/view/diagram/utility.h>

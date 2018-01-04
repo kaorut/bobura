@@ -18,8 +18,6 @@
 #include <boost/range/iterator_range.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/serializer/bzip2_reader.h>
 #include <bobura/type_list.h>
 

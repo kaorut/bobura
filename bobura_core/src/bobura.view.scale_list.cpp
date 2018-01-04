@@ -16,8 +16,6 @@
 #include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/type_list.h>
 #include <bobura/view/scale_list.h>
 

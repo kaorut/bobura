@@ -13,8 +13,6 @@
 #include <boost/filesystem.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/serializer/bzip2_writer.h>
 #include <bobura/model/timetable.h>
 #include <bobura/type_list.h>

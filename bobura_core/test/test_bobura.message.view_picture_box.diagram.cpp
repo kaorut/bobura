@@ -8,9 +8,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.detail.h>
-
 #include <bobura/diagram_view.h>
 #include <bobura/message/view_picture_box/diagram.h>
 #include <bobura/timetable_model.h>

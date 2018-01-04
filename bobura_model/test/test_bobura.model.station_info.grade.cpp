@@ -8,8 +8,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/station_info/grade.h>
 
 #include "test_bobura.model.type_list.h"

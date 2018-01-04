@@ -11,9 +11,6 @@
 #include <boost/filesystem.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.detail.h>
-
 #include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
 #include <bobura/diagram_view.h>

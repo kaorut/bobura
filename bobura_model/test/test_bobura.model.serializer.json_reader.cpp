@@ -18,8 +18,6 @@
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/serializer/exec_json_reading_task.h>
 #include <bobura/model/serializer/json_reader.h>
 #include <bobura/model/timetable.h>

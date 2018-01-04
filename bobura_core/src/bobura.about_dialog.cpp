@@ -14,8 +14,6 @@
 #include <boost/format.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
-
 #include <bobura/about_dialog.h>
 #include <bobura/dialog_traits.h>
 #include <bobura/message/about_dialog.h>

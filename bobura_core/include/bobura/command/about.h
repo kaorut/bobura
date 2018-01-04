@@ -11,9 +11,6 @@
 
 #include <memory>
 
-#include <tetengo2.h>
-#include <tetengo2.detail.h>
-
 #include <bobura/command/command_base.h>
 #include <bobura/settings.h>
 

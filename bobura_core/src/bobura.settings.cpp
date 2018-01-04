@@ -21,8 +21,6 @@
 #include <boost/program_options.hpp>
 #include <boost/variant.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/settings.h>
 #include <bobura/type_list.h>
 

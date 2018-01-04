@@ -8,8 +8,6 @@
 
 #include <boost/predef.h>
 
-#include <tetengo2.h>
-
 #include <bobura/command/new_file.h>
 #include <bobura/type_list.h>
 

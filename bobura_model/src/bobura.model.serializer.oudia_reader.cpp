@@ -25,8 +25,6 @@
 #include <boost/throw_exception.hpp>
 #include <boost/utility/string_view.hpp>
 
-#include <tetengo2.h>
-
 #include <bobura/model/serializer/oudia_reader.h>
 #include <bobura/model/serializer/select_oudia_diagram.h>
 #include <bobura/type_list.h>

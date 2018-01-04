@@ -12,9 +12,6 @@
 #include <boost/optional.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.detail.h>
-
 #include <bobura/message/diagram_view.h>
 #include <bobura/model/station_info/grade.h>
 #include <bobura/property_bar.h>
