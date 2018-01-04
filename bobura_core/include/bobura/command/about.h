@@ -14,6 +14,8 @@
 #include <bobura/command/command_base.h>
 #include <bobura/settings.h>
 
+#include <tetengo2/detail/base/impl_set.h>
+
 
 namespace bobura { namespace command
 {

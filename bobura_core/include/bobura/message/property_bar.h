@@ -11,6 +11,8 @@
 
 #include <boost/core/ignore_unused.hpp>
 
+#include <tetengo2/detail/base/impl_set.h>
+
 
 namespace bobura { namespace message { namespace property_bar
 {

@@ -13,6 +13,8 @@
 
 #include <boost/operators.hpp>
 
+#include <tetengo2/gui/drawing/color.h>
+
 
 namespace bobura { namespace model
 {

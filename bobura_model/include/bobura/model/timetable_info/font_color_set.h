@@ -14,6 +14,8 @@
 #include <boost/operators.hpp>
 #include <boost/optional.hpp>
 
+#include <tetengo2/gui/drawing/color.h>
+
 
 namespace bobura { namespace model { namespace timetable_info
 {

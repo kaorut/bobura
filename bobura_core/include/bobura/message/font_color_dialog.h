@@ -16,6 +16,9 @@
 
 #include <boost/optional.hpp>
 
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
 
 namespace bobura { namespace message { namespace font_color_dialog
 {
