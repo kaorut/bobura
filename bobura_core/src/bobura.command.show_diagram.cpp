@@ -12,7 +12,10 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/command/show_diagram.h>
+#include <bobura/detail_type_list.h>
 #include <bobura/main_window.h>
 #include <bobura/type_list.h>
 

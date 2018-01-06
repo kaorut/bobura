@@ -9,11 +9,19 @@
 #include <utility>
 
 #include <boost/filesystem.hpp>
+#include <boost/none.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/command/load_from_file.h>
+#include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
+
+namespace bobura { namespace command {
+    class parameter_base;
+}}
 
 
 namespace bobura { namespace command
