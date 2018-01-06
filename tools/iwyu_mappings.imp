@@ -1,3 +1,5 @@
 [
-  { ref: "../lib/tetengo2/tools/iwyu_mappings.imp" }
+  { ref: "../lib/tetengo2/tools/iwyu_mappings.imp" },
+
+  { include: ["@<boost/format/.+>", "private", "<boost/format.hpp>", "public"] }
 ]

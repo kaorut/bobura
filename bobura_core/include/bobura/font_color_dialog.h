@@ -10,7 +10,6 @@
 #define BOBURA_FONTCOLORDIALOG_H
 
 #include <memory>
-#include <utility>
 
 #include <boost/optional.hpp>
 

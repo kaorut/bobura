@@ -17,10 +17,14 @@
 #include <utility>
 #include <vector>
 
-#include <boost/filesystem.hpp>
 #include <boost/throw_exception.hpp>
 
-#include <bobura/command/command_base.h>
+#include <bobura/command/command_base.h> // IWYU pragma: keep
+
+namespace boost { namespace filesystem
+{
+    class path;
+}}
 
 
 namespace bobura { namespace message { namespace main_window

@@ -11,7 +11,6 @@
 
 #include <cassert>
 #include <functional>
-#include <utility>
 #include <vector>
 
 #include <boost/optional.hpp>

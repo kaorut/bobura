@@ -12,11 +12,19 @@
 #include <memory>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/filesystem.hpp>
-#include <boost/optional.hpp>
 
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/timetable_model.h>
+
+namespace boost { namespace filesystem
+{
+    class path;
+}}
+namespace boost
+{
+    template <typename T>
+    class optional;
+}
 
 
 namespace bobura { namespace load_save

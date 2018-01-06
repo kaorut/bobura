@@ -11,10 +11,8 @@
 
 #include <cassert>
 #include <functional>
-#include <memory>
 
 #include <boost/core/ignore_unused.hpp>
-#include <boost/rational.hpp>
 
 #include <bobura/timetable_view.h>
 

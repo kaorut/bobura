@@ -10,7 +10,6 @@
 #define BOBURA_TIMETABLEMODEL_H
 
 #include <memory>
-#include <stdexcept>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>

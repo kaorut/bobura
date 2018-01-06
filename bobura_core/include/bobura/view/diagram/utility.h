@@ -11,8 +11,14 @@
 
 #include <vector>
 
-#include <bobura/model/train_info/time.h>
-#include <bobura/model/train_info/time_span.h>
+namespace bobura { namespace model { namespace train_info
+{
+    template <typename Difference>
+    class time_span;
+
+    template <typename Size, typename Difference>
+    class time;
+}}}
 
 
 namespace bobura { namespace view { namespace diagram

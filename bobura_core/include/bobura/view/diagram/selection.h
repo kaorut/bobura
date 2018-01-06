@@ -9,15 +9,18 @@
 #if !defined(BOBURA_VIEW_DIAGRAM_SELECTION_H)
 #define BOBURA_VIEW_DIAGRAM_SELECTION_H
 
-#include <limits>
 #include <memory>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/optional.hpp>
 
 #include <bobura/message/diagram_selection_observer_set.h>
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
+
+namespace boost
+{
+    template <class T> class optional;
+}
 
 
 namespace bobura { namespace view { namespace diagram
