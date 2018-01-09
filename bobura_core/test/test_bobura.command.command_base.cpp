@@ -6,9 +6,12 @@
     $Id$
 */
 
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/command/command_base.h>
+#include <bobura/detail_type_list.h>
+#include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 
 

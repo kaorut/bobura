@@ -6,9 +6,11 @@
     $Id$
 */
 
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/command/vertically_zoom_out.h>
+#include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>

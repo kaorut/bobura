@@ -9,12 +9,14 @@
 #include <vector>
 
 #include <boost/filesystem.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2/detail/stub/impl_set.h>
+#include <tetengo2/text.h>
 
-#include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
+#include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/load_save/load_from_file.h>
