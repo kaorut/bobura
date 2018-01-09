@@ -6,8 +6,12 @@
     $Id$
 */
 
+#include <memory>
+
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/timetable_view.h>
 #include <bobura/message/view_picture_box/timetable.h>
 #include <bobura/timetable_model.h>
