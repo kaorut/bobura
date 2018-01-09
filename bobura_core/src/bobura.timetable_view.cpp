@@ -13,11 +13,16 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/model/station_info/grade.h>
 #include <bobura/timetable_view.h>
 #include <bobura/type_list.h>
 #include <bobura/view/timetable/header.h>
 #include <bobura/view/timetable/train_number_header.h>
+#include <bobura/view/timetable/utility.h>
 #include <bobura/view/utility.h>
 
 

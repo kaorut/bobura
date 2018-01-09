@@ -9,12 +9,15 @@
 #include <algorithm>
 #include <cassert>
 #include <memory>
-#include <utility>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/format.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 #include <bobura/view/timetable/header.h>
 #include <bobura/view/timetable/utility.h>

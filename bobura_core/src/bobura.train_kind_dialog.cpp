@@ -11,7 +11,6 @@
 #include <memory>
 #include <sstream>
 #include <stdexcept>
-#include <utility>
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
@@ -21,6 +20,10 @@
 #include <boost/rational.hpp>
 #include <boost/throw_exception.hpp>
 
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/message/train_kind_dialog.h>
 #include <bobura/train_kind_dialog.h>
 #include <bobura/type_list.h>

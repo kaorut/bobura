@@ -6,16 +6,15 @@
     $Id$
 */
 
-#include <utility>
 #include <vector>
 
 #include <boost/predef.h>
 
-#include <bobura/model/train_info/time.h>
+#include <bobura/model/train_info/time.h> // IWYU pragma: keep
 #include <bobura/model/train_info/time_span.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
-#include <bobura/view/diagram/utility.h>
 
 
 namespace bobura { namespace view { namespace diagram
