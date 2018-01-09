@@ -7,8 +7,10 @@
 */
 
 #include <boost/filesystem.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/load_save/save_to_file.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
