@@ -6,11 +6,14 @@
     $Id$
 */
 
+#include <memory>
 #include <utility>
 
 #include <boost/core/ignore_unused.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/item.h>
 #include <bobura/view/diagram/selection.h>

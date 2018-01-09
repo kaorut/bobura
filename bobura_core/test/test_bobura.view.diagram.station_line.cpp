@@ -6,13 +6,23 @@
     $Id$
 */
 
+#include <memory>
 #include <utility>
 #include <vector>
 
 #include <boost/optional.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/gui/drawing/color.h>
+#include <tetengo2/gui/drawing/font.h>
+#include <tetengo2/gui/unit/em.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/model/station_info/grade.h>
+#include <bobura/model/timetable_info/font_color_set.h>
+#include <bobura/model/timetable_info/station_location.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/selection.h>

@@ -8,11 +8,18 @@
 
 #include <memory>
 #include <stdexcept>
+#include <string>
 #include <utility>
 
 #include <boost/filesystem.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
+#include <bobura/model/timetable.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 

@@ -10,8 +10,16 @@
 #include <vector>
 
 #include <boost/filesystem.hpp>
+#include <boost/optional.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/gui/dimension.h>
+#include <tetengo2/gui/unit/em.h>
+#include <tetengo2/gui/unit/unit.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/settings.h>
 #include <bobura/type_list.h>
 
