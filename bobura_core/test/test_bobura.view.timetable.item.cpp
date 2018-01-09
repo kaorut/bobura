@@ -6,10 +6,17 @@
     $Id$
 */
 
+#include <memory>
 #include <utility>
 
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/gui/dimension.h>
+#include <tetengo2/gui/position.h>
+#include <tetengo2/gui/unit/em.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 #include <bobura/view/timetable/item.h>
 
