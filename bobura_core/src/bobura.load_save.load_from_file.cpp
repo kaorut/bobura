@@ -8,19 +8,22 @@
 
 #include <cassert>
 #include <ios>
-#include <iterator>
 #include <memory>
 #include <stdexcept>
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/filesystem/fstream.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/throw_exception.hpp>
 
+#include <tetengo2/iterator/observable_forward_iterator.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/load_save/load_from_file.h>
 #include <bobura/model/serializer/exec_json_reading_task.h>
 #include <bobura/model/serializer/reader_selector.h>

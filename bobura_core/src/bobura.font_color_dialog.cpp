@@ -10,7 +10,6 @@
 #include <cassert>
 #include <memory>
 #include <sstream>
-#include <utility>
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
@@ -19,6 +18,10 @@
 #include <boost/predef.h>
 #include <boost/rational.hpp>
 
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/font_color_dialog.h>
 #include <bobura/message/font_color_dialog.h>
 #include <bobura/type_list.h>

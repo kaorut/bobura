@@ -11,11 +11,15 @@
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/filesystem/fstream.hpp>
+#include <boost/none.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
-#include <boost/system/system_error.hpp>
+#include <boost/system/error_code.hpp>
 
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/load_save/save_to_file.h>
 #include <bobura/model/serializer/writer_selector.h>
 #include <bobura/model/serializer/writer_set.h>
