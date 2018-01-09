@@ -7,12 +7,17 @@
 */
 
 #include <memory>
+#include <string>
 #include <utility>
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/main_window_menu_builder.h>
 #include <bobura/message/main_window.h>
 #include <bobura/type_list.h>

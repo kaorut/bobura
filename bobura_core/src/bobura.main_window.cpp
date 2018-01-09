@@ -11,14 +11,22 @@
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/optional.hpp>
+#include <boost/none.hpp>
 #include <boost/predef.h>
 
-#include <bobura/command/command_base.h>
-#include <bobura/command/set.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/main_window.h>
 #include <bobura/message/main_window.h>
 #include <bobura/type_list.h>
+
+namespace boost
+{
+    template <typename T>
+    class optional;
+}
 
 
 namespace bobura
