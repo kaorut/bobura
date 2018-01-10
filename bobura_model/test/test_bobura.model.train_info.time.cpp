@@ -9,6 +9,8 @@
 #include <stdexcept>
 
 #include <boost/core/ignore_unused.hpp>
+#include <boost/operators.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/model/train_info/time.h>

@@ -10,6 +10,7 @@
 
 #include <boost/predef.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/reader.h>
 #include <bobura/type_list.h>
 

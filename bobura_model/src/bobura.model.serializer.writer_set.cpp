@@ -13,6 +13,9 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/bzip2_writer.h>
 #include <bobura/model/serializer/json_writer.h>
 #include <bobura/model/serializer/writer_set.h>

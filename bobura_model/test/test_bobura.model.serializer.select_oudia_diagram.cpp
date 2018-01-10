@@ -10,8 +10,12 @@
 #include <utility>
 #include <vector>
 
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/oudia_diagram_dialog.h>
 #include <bobura/model/serializer/select_oudia_diagram.h>
 #include <bobura/type_list.h>

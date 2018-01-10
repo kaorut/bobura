@@ -7,10 +7,12 @@
 */
 
 #include <iterator>
+#include <string>
 
 #include <boost/filesystem.hpp>
 #include <boost/predef.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/writer.h>
 #include <bobura/type_list.h>
 

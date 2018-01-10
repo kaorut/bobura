@@ -6,7 +6,13 @@
     $Id$
 */
 
+#include <string>
+
+#include <boost/operators.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
+
+#include <tetengo2/text.h>
 
 #include <bobura/model/station.h>
 #include <bobura/model/station_info/grade.h>

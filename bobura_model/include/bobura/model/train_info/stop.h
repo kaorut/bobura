@@ -9,8 +9,6 @@
 #if !defined(BOBURA_MODEL_TRAININFO_STOP_H)
 #define BOBURA_MODEL_TRAININFO_STOP_H
 
-#include <utility>
-
 #include <boost/operators.hpp>
 
 #include <bobura/model/train_info/time.h>

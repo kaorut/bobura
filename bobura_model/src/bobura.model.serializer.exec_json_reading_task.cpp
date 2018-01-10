@@ -13,6 +13,10 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/exec_json_reading_task.h>
 #include <bobura/type_list.h>
 

@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <ios>
 #include <iterator>
 #include <memory>
 #include <string>
@@ -14,10 +15,17 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/iostreams/filter/bzip2.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
+#include <boost/iostreams/traits.hpp>
+#include <boost/iterator/iterator_facade.hpp>
 #include <boost/predef.h>
 #include <boost/range/iterator_range.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 
+#include <tetengo2/iterator/observable_forward_iterator.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/bzip2_reader.h>
 #include <bobura/type_list.h>
 

@@ -6,17 +6,25 @@
     $Id$
 */
 
-#include <iterator>
 #include <memory>
 #include <sstream>
 #include <stdexcept>
+#include <string>
 #include <utility>
 #include <vector>
 
 #include <boost/core/ignore_unused.hpp>
+#include <boost/iterator/iterator_facade.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/iterator/observable_forward_iterator.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
+#include <bobura/model/serializer/reader.h>
 #include <bobura/model/serializer/reader_selector.h>
 #include <bobura/model/timetable.h>
 #include <bobura/type_list.h>

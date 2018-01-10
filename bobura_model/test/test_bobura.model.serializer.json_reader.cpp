@@ -6,21 +6,41 @@
     $Id$
 */
 
-#include <iterator>
+#include <ios>
 #include <memory>
 #include <stdexcept>
 #include <string>
 #include <utility>
+#include <vector>
 
 #include <boost/iostreams/filtering_stream.hpp>
+#include <boost/iostreams/traits.hpp>
 #include <boost/optional.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/range/iterator_range.hpp>
+#include <boost/shared_ptr.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/gui/drawing/color.h>
+#include <tetengo2/gui/drawing/font.h>
+#include <tetengo2/gui/menu/abstract_popup.h>
+#include <tetengo2/gui/menu/menu_bar.h>
+#include <tetengo2/gui/widget/dialog.h>
+#include <tetengo2/iterator/observable_forward_iterator.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/exec_json_reading_task.h>
 #include <bobura/model/serializer/json_reader.h>
+#include <bobura/model/station.h>
+#include <bobura/model/station_info/grade.h>
 #include <bobura/model/timetable.h>
+#include <bobura/model/timetable_info/font_color_set.h>
+#include <bobura/model/timetable_info/station_location.h>
+#include <bobura/model/train.h>
+#include <bobura/model/train_info/stop.h>
 #include <bobura/model/train_info/time.h>
 #include <bobura/type_list.h>
 

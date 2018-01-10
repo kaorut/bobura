@@ -9,7 +9,6 @@
 #include <algorithm>
 #include <memory>
 #include <stdexcept>
-#include <utility>
 #include <vector>
 
 #include <boost/core/ignore_unused.hpp>
@@ -17,6 +16,9 @@
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
+#include <tetengo2/stdalt.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/reader_selector.h>
 #include <bobura/type_list.h>
 

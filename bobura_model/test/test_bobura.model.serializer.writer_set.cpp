@@ -6,8 +6,13 @@
     $Id$
 */
 
+#include <memory>
+#include <vector>
+
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/writer_set.h>
 #include <bobura/type_list.h>
 

@@ -6,10 +6,19 @@
     $Id$
 */
 
+#include <string>
+
+#include <boost/operators.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
+
+#include <tetengo2/gui/drawing/color.h>
+#include <tetengo2/gui/drawing/font.h>
+#include <tetengo2/text.h>
 
 #include <bobura/model/train_kind.h>
 
+#include "test_bobura.model.detail_type_list.h"
 #include "test_bobura.model.type_list.h"
 
 

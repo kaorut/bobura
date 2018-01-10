@@ -17,7 +17,6 @@
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/core/swap.hpp>
 #include <boost/format.hpp>
 #include <boost/math/constants/constants.hpp>
 #include <boost/none.hpp>

@@ -7,9 +7,19 @@
 */
 
 #include <memory>
+#include <string>
 
+#include <boost/preprocessor.hpp>
+#include <boost/shared_ptr.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/gui/menu/abstract_popup.h>
+#include <tetengo2/gui/menu/menu_bar.h>
+#include <tetengo2/gui/widget/dialog.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/exec_json_reading_task.h>
 #include <bobura/model/timetable.h>
 #include <bobura/type_list.h>

@@ -6,24 +6,30 @@
     $Id$
 */
 
-#include <cstddef>
-#include <ios>
 #include <memory>
 #include <sstream>
 #include <stdexcept>
+#include <string>
 #include <unordered_map>
 #include <utility>
 #include <vector>
 
+#include <boost/container/container_fwd.hpp>
 #include <boost/core/noncopyable.hpp>
+#include <boost/none.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
+#include <boost/shared_ptr.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/variant.hpp>
 
+#include <tetengo2/gui/widget/dialog.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
 #include <tetengo2/text/grammar/json.h>
 #include <tetengo2/text/pull_parser.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/exec_json_reading_task.h>
 #include <bobura/model/serializer/json_reader.h>
 #include <bobura/model/station_info/grade.h>

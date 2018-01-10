@@ -6,14 +6,22 @@
     $Id$
 */
 
+#include <memory>
 #include <sstream>
+#include <string>
 #include <utility>
 
 #include <boost/core/ignore_unused.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/bzip2_writer.h>
+#include <bobura/model/serializer/writer.h>
 #include <bobura/model/timetable.h>
 #include <bobura/type_list.h>
 

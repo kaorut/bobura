@@ -10,7 +10,6 @@
 #define BOBURA_MODEL_TRAIN_H
 
 #include <iterator>
-#include <utility>
 #include <vector>
 
 #include <boost/operators.hpp>

@@ -12,7 +12,6 @@
 #include <memory>
 
 #include <bobura/model/serializer/reader.h>
-#include <bobura/model/timetable.h>
 
 
 namespace bobura { namespace model { namespace serializer

@@ -18,12 +18,18 @@
 
 #include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
+#include <boost/iterator/iterator_facade.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/none.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 #include <boost/utility/string_view.hpp>
 
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/windia_reader.h>
 #include <bobura/model/station_info/grade.h>
 #include <bobura/type_list.h>
