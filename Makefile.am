@@ -21,18 +21,7 @@ SUBDIRS = \
 EXTRA_DIST = bobura.sln bobura_config.h-original TODO Doxyfile
 
 .PHONY: lint
-lint: lint-iwyu lint-test-cases lint-type-list-type-duplication
-
-lint-iwyu: $(top_srcdir)/$(IWYU_IMP_PATH)
-	for d in $(SOURCE_SUBDIRS); do (cd $$d && $(MAKE) lint-iwyu); done
-
-.PHONY: lint-iwyu-extra
-lint-iwyu-extra: $(top_srcdir)/$(IWYU_IMP_PATH)
-	for d in $(SOURCE_SUBDIRS); do (cd $$d && $(MAKE) lint-iwyu-extra); done
-
- $(top_srcdir)/$(IWYU_IMP_PATH):
-	git submodule update --init
-	git submodule foreach 'git checkout -f master && git pull -p'
+lint: lint-test-cases lint-type-list-type-duplication lint-iwyu
 
 lint-test-cases: $(top_srcdir)/lib/tetengo2/tools/check_test_cases.sh
 	$< $(top_srcdir) silent
@@ -45,6 +34,17 @@ lint-type-list-type-duplication: $(top_srcdir)/lib/tetengo2/tools/check_type_lis
 	$< $(top_srcdir)
 
 $(top_srcdir)/lib/tetengo2/tools/check_type_list_type_duplication.sh:
+	git submodule update --init
+	git submodule foreach 'git checkout -f master && git pull -p'
+
+lint-iwyu: $(top_srcdir)/$(IWYU_IMP_PATH)
+	for d in $(SOURCE_SUBDIRS); do (cd $$d && $(MAKE) lint-iwyu); done
+
+.PHONY: lint-iwyu-extra
+lint-iwyu-extra: $(top_srcdir)/$(IWYU_IMP_PATH)
+	for d in $(SOURCE_SUBDIRS); do (cd $$d && $(MAKE) lint-iwyu-extra); done
+
+$(top_srcdir)/$(IWYU_IMP_PATH):
 	git submodule update --init
 	git submodule foreach 'git checkout -f master && git pull -p'
 
