@@ -9,8 +9,6 @@
 #if !defined(BOBURA_MODEL_STATION_H)
 #define BOBURA_MODEL_STATION_H
 
-#include <utility>
-
 #include <boost/operators.hpp>
 
 #include <bobura/model/station_info/grade.h>

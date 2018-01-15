@@ -11,8 +11,8 @@
 
 #include <stdexcept>
 
+#include <boost/core/swap.hpp>
 #include <boost/operators.hpp>
-#include <boost/swap.hpp>
 #include <boost/throw_exception.hpp>
 
 

@@ -13,29 +13,30 @@
 #include <boost/filesystem.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
 
-#include <bobura/command/about.h>
-#include <bobura/command/command_base.h>
-#include <bobura/command/exit.h>
-#include <bobura/command/file_property.h>
-#include <bobura/command/font_color.h>
-#include <bobura/command/horizontally_zoom_in.h>
-#include <bobura/command/horizontally_zoom_out.h>
-#include <bobura/command/load_from_file.h>
-#include <bobura/command/new_file.h>
-#include <bobura/command/nop.h>
-#include <bobura/command/open_www_tetengo_org.h>
-#include <bobura/command/save_to_file.h>
+#include <bobura/command/about.h> // IWYU pragma: keep
+#include <bobura/command/command_base.h> // IWYU pragma: keep
+#include <bobura/command/exit.h> // IWYU pragma: keep
+#include <bobura/command/file_property.h> // IWYU pragma: keep
+#include <bobura/command/font_color.h> // IWYU pragma: keep
+#include <bobura/command/horizontally_zoom_in.h> // IWYU pragma: keep
+#include <bobura/command/horizontally_zoom_out.h> // IWYU pragma: keep
+#include <bobura/command/load_from_file.h> // IWYU pragma: keep
+#include <bobura/command/new_file.h> // IWYU pragma: keep
+#include <bobura/command/nop.h> // IWYU pragma: keep
+#include <bobura/command/open_www_tetengo_org.h> // IWYU pragma: keep
+#include <bobura/command/save_to_file.h> // IWYU pragma: keep
 #include <bobura/command/set.h>
-#include <bobura/command/set_horizontal_scale.h>
-#include <bobura/command/set_vertical_scale.h>
-#include <bobura/command/show_diagram.h>
-#include <bobura/command/show_timetable_down.h>
-#include <bobura/command/show_timetable_up.h>
-#include <bobura/command/train_kind.h>
-#include <bobura/command/vertically_zoom_in.h>
-#include <bobura/command/vertically_zoom_out.h>
+#include <bobura/command/set_horizontal_scale.h> // IWYU pragma: keep
+#include <bobura/command/set_vertical_scale.h> // IWYU pragma: keep
+#include <bobura/command/show_diagram.h> // IWYU pragma: keep
+#include <bobura/command/show_timetable_down.h> // IWYU pragma: keep
+#include <bobura/command/show_timetable_up.h> // IWYU pragma: keep
+#include <bobura/command/train_kind.h> // IWYU pragma: keep
+#include <bobura/command/vertically_zoom_in.h> // IWYU pragma: keep
+#include <bobura/command/vertically_zoom_out.h> // IWYU pragma: keep
+#include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 #include <bobura/view/scale_list.h>
 

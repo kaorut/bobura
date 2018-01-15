@@ -18,15 +18,20 @@
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/optional.hpp>
 #include <boost/rational.hpp>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/text.h>
 
 #include <bobura/model/station_info/grade.h>
 #include <bobura/property_bar.h>
 #include <bobura/timetable_model.h>
+
+namespace boost
+{
+    template <typename T>
+    class optional;
+}
 
 
 namespace bobura { namespace message { namespace diagram_view

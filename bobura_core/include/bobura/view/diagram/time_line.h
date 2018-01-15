@@ -11,11 +11,14 @@
 
 #include <memory>
 
-#include <boost/optional.hpp>
-
 #include <bobura/timetable_model.h>
 #include <bobura/view/diagram/item.h>
 #include <bobura/view/diagram/selection.h>
+
+namespace boost
+{
+    template <class T> class optional;
+}
 
 
 namespace bobura { namespace view { namespace diagram

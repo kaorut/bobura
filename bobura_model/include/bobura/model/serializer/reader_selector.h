@@ -10,7 +10,6 @@
 #define BOBURA_MODEL_SERIALIZER_READERSELECTOR_H
 
 #include <memory>
-#include <stdexcept>
 #include <vector>
 
 #include <bobura/model/serializer/reader.h>

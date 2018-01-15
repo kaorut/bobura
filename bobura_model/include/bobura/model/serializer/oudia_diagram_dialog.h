@@ -10,10 +10,13 @@
 #define BOBURA_OUDIADIAGRAMDIALOG_H
 
 #include <memory>
-#include <stdexcept>
 #include <vector>
 
-#include <boost/optional.hpp>
+namespace boost
+{
+    template <typename T>
+    class optional;
+}
 
 
 namespace bobura { namespace model { namespace serializer

@@ -11,9 +11,10 @@
 #include <boost/core/ignore_unused.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/command/set_horizontal_scale.h>
+#include <bobura/detail_type_list.h>
 #include <bobura/main_window.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/zoom.h>

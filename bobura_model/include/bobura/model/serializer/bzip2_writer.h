@@ -14,7 +14,6 @@
 #include <boost/filesystem.hpp>
 
 #include <bobura/model/serializer/writer.h>
-#include <bobura/model/timetable.h>
 
 
 namespace bobura { namespace model { namespace serializer

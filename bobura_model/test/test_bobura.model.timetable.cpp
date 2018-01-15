@@ -7,23 +7,31 @@
 */
 
 #include <iterator>
+#include <memory>
 #include <stdexcept>
+#include <string>
 #include <utility>
 #include <vector>
 
+#include <boost/operators.hpp>
+#include <boost/optional.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/gui/drawing/font.h>
+#include <tetengo2/text.h>
 
 #include <bobura/model/station.h>
 #include <bobura/model/station_info/grade.h>
 #include <bobura/model/timetable.h>
+#include <bobura/model/timetable_info/font_color_set.h>
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
 #include <bobura/model/train_info/stop.h>
 #include <bobura/model/train_info/time.h>
 #include <bobura/model/train_kind.h>
 
+#include "test_bobura.model.detail_type_list.h"
 #include "test_bobura.model.type_list.h"
 
 

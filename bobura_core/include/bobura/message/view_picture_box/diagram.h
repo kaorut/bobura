@@ -16,8 +16,8 @@
 #include <boost/core/ignore_unused.hpp>
 #include <boost/rational.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.detail.h>
+#include <tetengo2/detail/base/impl_set.h>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/diagram_view.h>
 

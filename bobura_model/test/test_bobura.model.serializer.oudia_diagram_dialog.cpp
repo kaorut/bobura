@@ -7,13 +7,18 @@
 */
 
 #include <stdexcept>
+#include <string>
 #include <utility>
 #include <vector>
 
+#include <boost/optional.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/text.h>
 
+#include <bobura/detail_type_list.h>
+#include <bobura/dialog_traits.h>
 #include <bobura/model/serializer/oudia_diagram_dialog.h>
 #include <bobura/type_list.h>
 

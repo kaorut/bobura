@@ -6,12 +6,16 @@
     $Id$
 */
 
+#include <memory>
 #include <utility>
+#include <vector>
 
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/text.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/exec_json_reading_task.h>
 #include <bobura/model/serializer/oudia_diagram_dialog.h>
 #include <bobura/model/serializer/reader_set.h>

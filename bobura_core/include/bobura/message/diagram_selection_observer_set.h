@@ -12,11 +12,16 @@
 #include <memory>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/optional.hpp>
 #include <boost/signals2.hpp>
 
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
+
+namespace boost
+{
+    template <typename T>
+    class optional;
+}
 
 
 namespace bobura { namespace message

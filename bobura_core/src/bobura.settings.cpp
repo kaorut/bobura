@@ -7,22 +7,33 @@
 */
 
 #include <cassert>
+#include <map>
 #include <memory>
 #include <string>
 #include <utility>
 #include <vector>
 
 #include <boost/algorithm/string.hpp>
+#include <boost/container/container_fwd.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/none.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/program_options.hpp>
 #include <boost/variant.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/config/cached_config.h>
+#include <tetengo2/config/config_base.h>
+#include <tetengo2/config/config_list.h>
+#include <tetengo2/config/persistent_config.h>
+#include <tetengo2/config/temporary_config.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
+#include <tetengo2/type_list.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/settings.h>
 #include <bobura/type_list.h>
 

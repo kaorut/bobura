@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/message/timetable_model_observer_set.h>

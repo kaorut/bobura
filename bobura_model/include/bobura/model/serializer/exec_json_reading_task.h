@@ -14,8 +14,7 @@
 
 #include <boost/core/noncopyable.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.gui.h>
+#include <tetengo2/gui/widget/progress_dialog.h>
 
 #include <bobura/model/timetable.h>
 

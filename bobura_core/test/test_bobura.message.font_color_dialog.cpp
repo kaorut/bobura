@@ -6,15 +6,23 @@
     $Id$
 */
 
+#include <memory>
 #include <utility>
 #include <vector>
 
+#include <boost/operators.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/gui/drawing/color.h>
+#include <tetengo2/gui/drawing/font.h>
+#include <tetengo2/gui/unit/em.h>
+#include <tetengo2/gui/unit/unit.h>
+#include <tetengo2/text.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/message/font_color_dialog.h>
 #include <bobura/type_list.h>
 

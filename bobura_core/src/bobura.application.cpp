@@ -13,11 +13,11 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/application.h>
-#include <bobura/command/command_base.h>
 #include <bobura/command/set.h>
+#include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/load_save/load_from_file.h>
@@ -33,7 +33,7 @@
 #include <bobura/timetable_model.h>
 #include <bobura/timetable_view.h>
 #include <bobura/type_list.h>
-#include <bobura/view/diagram/zoom.h>
+#include <bobura/view/diagram/zoom.h> // IWYU pragma: keep
 #include <bobura/view/timetable/utility.h>
 #include <bobura/view_picture_box.h>
 

@@ -6,17 +6,22 @@
     $Id$
 */
 
+#include <ios>
 #include <memory>
+#include <string>
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/iostreams/filter/bzip2.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
+#include <boost/iostreams/traits.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/bzip2_writer.h>
 #include <bobura/type_list.h>
 

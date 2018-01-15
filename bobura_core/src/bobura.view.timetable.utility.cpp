@@ -8,8 +8,8 @@
 
 #include <boost/predef.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
-#include <bobura/view/timetable/utility.h>
 
 
 namespace bobura { namespace view { namespace timetable

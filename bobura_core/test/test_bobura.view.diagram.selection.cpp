@@ -8,12 +8,19 @@
 
 #include <utility>
 
+#include <boost/none.hpp>
 #include <boost/optional.hpp>
+#include <boost/preprocessor.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/signals2.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/text.h>
 
+#include <bobura/detail_type_list.h>
+#include <bobura/message/diagram_selection_observer_set.h>
 #include <bobura/model/station_info/grade.h>
+#include <bobura/model/timetable_info/station_location.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/selection.h>

@@ -6,9 +6,11 @@
     $Id$
 */
 
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/command/open_www_tetengo_org.h>
+#include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 
 

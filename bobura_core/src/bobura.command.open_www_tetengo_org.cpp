@@ -9,9 +9,11 @@
 #include <boost/core/ignore_unused.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
 
 #include <bobura/command/open_www_tetengo_org.h>
+#include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 
 

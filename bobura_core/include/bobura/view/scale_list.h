@@ -10,7 +10,6 @@
 #define BOBURA_VIEW_SCALELIST_H
 
 #include <memory>
-#include <stdexcept>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/optional.hpp>

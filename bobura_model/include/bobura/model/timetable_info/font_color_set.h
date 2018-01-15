@@ -11,11 +11,11 @@
 
 #include <utility>
 
+#include <boost/none.hpp>
 #include <boost/operators.hpp>
 #include <boost/optional.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.gui.h>
+#include <tetengo2/gui/drawing/color.h>
 
 
 namespace bobura { namespace model { namespace timetable_info

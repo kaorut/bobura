@@ -6,12 +6,13 @@
     $Id$
 */
 
+#include <memory>
+
 #include <boost/core/noncopyable.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/message/timetable_model_observer_set.h>
-#include <bobura/type_list.h>
 
 
 namespace bobura { namespace message

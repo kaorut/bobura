@@ -10,14 +10,14 @@
 #include <cassert>
 #include <iterator>
 #include <memory>
-#include <utility>
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/header.h>

@@ -16,8 +16,10 @@
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/model/message/oudia_diagram_dialog.h>
 #include <bobura/model/serializer/oudia_diagram_dialog.h>
 #include <bobura/type_list.h>

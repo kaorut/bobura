@@ -11,15 +11,18 @@
 
 #include <memory>
 
-#include <boost/optional.hpp>
-
-#include <tetengo2.h>
-#include <tetengo2.detail.h>
+#include <tetengo2/detail/base/impl_set.h>
 
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/property_bar.h>
 #include <bobura/settings.h>
 #include <bobura/view_picture_box.h>
+
+namespace boost
+{
+    template <typename T>
+    class optional;
+}
 
 
 namespace bobura

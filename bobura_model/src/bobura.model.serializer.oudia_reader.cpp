@@ -7,7 +7,6 @@
 */
 
 #include <algorithm>
-#include <ios>
 #include <iterator>
 #include <memory>
 #include <sstream>
@@ -19,16 +18,23 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
+#include <boost/iterator/iterator_facade.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/none.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 #include <boost/utility/string_view.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
 
+#include <bobura/detail_type_list.h>
+#include <bobura/model/serializer/oudia_diagram_dialog.h>
 #include <bobura/model/serializer/oudia_reader.h>
+#include <bobura/model/serializer/reader.h>
 #include <bobura/model/serializer/select_oudia_diagram.h>
+#include <bobura/model/station_info/grade.h>
 #include <bobura/type_list.h>
 
 

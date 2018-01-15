@@ -15,7 +15,6 @@
 #include <boost/core/noncopyable.hpp>
 
 #include <bobura/model/serializer/writer.h>
-#include <bobura/model/serializer/writer_selector.h>
 
 
 namespace bobura { namespace model { namespace serializer

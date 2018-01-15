@@ -2,26 +2,35 @@
 # Copyright (C) 2007-2017 kaoru
 # $Id$
 
+SOURCE_SUBDIRS = \
+    bobura_model \
+    bobura_core \
+    bobura \
+    setup
+
 SUBDIRS = \
-     bobura_model bobura_core bobura \
-     docsrc \
-     iconsrc \
-     installer_bobura \
-     precompiled \
-     samples \
-     setup \
-     tools \
-     vsprops
+    $(SOURCE_SUBDIRS) \
+    docsrc \
+    iconsrc \
+    installer_bobura \
+    precompiled \
+    samples \
+    tools \
+    vsprops
 
 EXTRA_DIST = bobura.sln bobura_config.h-original TODO Doxyfile
 
 .PHONY: lint
-lint: lint-includes lint-test-cases lint-type-list-type-duplication
+lint: lint-iwyu lint-test-cases lint-type-list-type-duplication
 
-lint-includes: $(top_srcdir)/lib/tetengo2/tools/check_includes.sh
-	$< $(top_srcdir)
+lint-iwyu: $(top_srcdir)/$(IWYU_IMP_PATH)
+	for d in $(SOURCE_SUBDIRS); do (cd $$d && $(MAKE) lint-iwyu); done
 
-$(top_srcdir)/lib/tetengo2/tools/check_includes.sh:
+.PHONY: lint-iwyu-extra
+lint-iwyu-extra: $(top_srcdir)/$(IWYU_IMP_PATH)
+	for d in $(SOURCE_SUBDIRS); do (cd $$d && $(MAKE) lint-iwyu-extra); done
+
+ $(top_srcdir)/$(IWYU_IMP_PATH):
 	git submodule update --init
 	git submodule foreach 'git checkout -f master && git pull -p'
 

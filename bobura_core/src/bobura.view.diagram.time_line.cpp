@@ -8,16 +8,17 @@
 
 #include <algorithm>
 #include <cassert>
-#include <utility>
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/none.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/time_line.h>
 #include <bobura/view/diagram/utility.h>

@@ -6,24 +6,23 @@
     $Id$
 */
 
-#include <exception>
+#include <exception> // IWYU pragma: keep
 #include <locale>
-#include <stdexcept>
+#include <stdexcept> // IWYU pragma: keep
 #include <string>
-#include <vector>
+#include <vector> // IWYU pragma: keep
 
-#include <boost/core/ignore_unused.hpp>
-#include <boost/exception/all.hpp>
+#include <boost/core/ignore_unused.hpp> // IWYU pragma: keep
+#include <boost/exception/all.hpp> // IWYU pragma: keep
 #include <boost/filesystem.hpp>
-#include <boost/program_options.hpp>
+#include <boost/program_options.hpp> // IWYU pragma: keep
 #include <boost/throw_exception.hpp>
 
 #define NOMINMAX
 #define OEMRESOURCE
 #include <Windows.h>
 
-#include <tetengo2.h>
-#include <tetengo2.detail.h>
+#include <tetengo2/detail/windows/impl_set.h>
 
 #include <bobura/application.h>
 #include <bobura/settings.h>
@@ -51,6 +50,8 @@ namespace
     using settings_type = bobura::settings<string_type, position_type, dimension_type>;
 
     using application_type = bobura::application<traits_type_list_type::application_type>;
+
+    using detail_impl_set_type = tetengo2::detail::windows::impl_set;
 
 
     // functions
@@ -88,7 +89,7 @@ namespace
 
     int run_application(settings_type& settings)
     {
-        return application_type(settings, tetengo2::detail::impl_set::instance()).run();
+        return application_type(settings, detail_impl_set_type::instance()).run();
     }
 
 
@@ -129,17 +130,17 @@ noexcept
     }
     catch (const boost::exception& e)
     {
-        alert_type{ tetengo2::detail::impl_set::instance().alert_() }(e);
+        alert_type{ detail_impl_set_type::instance().alert_() }(e);
         return 1;
     }
     catch (const std::exception& e)
     {
-        alert_type{ tetengo2::detail::impl_set::instance().alert_() }(e);
+        alert_type{ detail_impl_set_type::instance().alert_() }(e);
         return 1;
     }
     catch (...)
     {
-        alert_type{ tetengo2::detail::impl_set::instance().alert_() }();
+        alert_type{ detail_impl_set_type::instance().alert_() }();
         return 2;
     }
 }

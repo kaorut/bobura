@@ -15,22 +15,84 @@
 #include <string>
 
 #include <boost/rational.hpp>
+#include <boost/shared_ptr.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.gui.h>
+#include <tetengo2/gui/alert.h>
+#include <tetengo2/gui/common_dialog/color.h>
+#include <tetengo2/gui/common_dialog/file_open.h>
+#include <tetengo2/gui/common_dialog/file_save.h>
+#include <tetengo2/gui/common_dialog/font.h>
+#include <tetengo2/gui/common_dialog/message_box.h>
+#include <tetengo2/gui/dimension.h>
+#include <tetengo2/gui/drawing/canvas.h>
+#include <tetengo2/gui/drawing/canvas_traits.h>
+#include <tetengo2/gui/drawing/color.h>
+#include <tetengo2/gui/drawing/font.h>
+#include <tetengo2/gui/drawing/solid_background.h>
+#include <tetengo2/gui/drawing/system_color_set.h>
+#include <tetengo2/gui/drawing/transparent_background.h>
+#include <tetengo2/gui/fixture.h>
+#include <tetengo2/gui/menu/command.h>
+#include <tetengo2/gui/menu/popup.h>
+#include <tetengo2/gui/menu/separator.h>
+#include <tetengo2/gui/menu/menu_bar.h>
+#include <tetengo2/gui/message/message_loop.h>
+#include <tetengo2/gui/message/mouse_observer_set.h>
+#include <tetengo2/gui/mouse_capture.h>
+#include <tetengo2/gui/position.h>
+#include <tetengo2/gui/shell.h>
+#include <tetengo2/gui/timer.h>
+#include <tetengo2/gui/unit/em.h>
+#include <tetengo2/gui/unit/point.h>
+#include <tetengo2/gui/widget/abstract_window.h>
+#include <tetengo2/gui/widget/dialog.h>
+#include <tetengo2/gui/widget/button.h>
+#include <tetengo2/gui/widget/dropdown_box.h>
+#include <tetengo2/gui/widget/image.h>
+#include <tetengo2/gui/widget/label.h>
+#include <tetengo2/gui/widget/link_label.h>
+#include <tetengo2/gui/widget/list_box.h>
+#include <tetengo2/gui/widget/map_box.h>
+#include <tetengo2/gui/widget/picture_box.h>
+#include <tetengo2/gui/widget/side_bar.h>
+#include <tetengo2/gui/widget/tab_frame.h>
+#include <tetengo2/gui/widget/text_box.h>
+#include <tetengo2/gui/widget/widget.h>
+#include <tetengo2/gui/widget/widget_details_traits.h>
+#include <tetengo2/gui/widget/widget_traits.h>
+#include <tetengo2/gui/widget/window.h>
+#include <tetengo2/iterator/observable_forward_iterator.h>
+#include <tetengo2/message/message_catalog.h>
+#include <tetengo2/text/encoder.h>
+#include <tetengo2/text/encoding/cp932.h>
+#include <tetengo2/text/encoding/locale.h>
+#include <tetengo2/text/encoding/utf8.h>
 
 #include <bobura/application_traits.h>
 #include <bobura/command/set_traits.h>
 #include <bobura/command/traits.h>
-#include <bobura/detail_type_list.h>
+#include <bobura/detail_type_list.h> // IWYU pragma: keep
 #include <bobura/dialog_traits.h>
 #include <bobura/load_save/traits.h>
 #include <bobura/main_window_traits.h>
 #include <bobura/main_window_menu_builder_traits.h>
-#include <bobura/model/serializer/oudia_diagram_dialog.h>
+#include <bobura/model/serializer/oudia_diagram_dialog.h> // IWYU pragma: keep
 #include <bobura/view/diagram/traits.h>
 #include <bobura/view/timetable/traits.h>
+
+namespace tetengo2 { namespace gui
+{
+    namespace menu
+    {
+        template <typename String, typename Encoder, typename MenuDetails, typename VirtualKeyDetails>
+        class shortcut_key_table;
+    }
+    namespace message {
+        template <typename MessageLoopDetails>
+        class message_loop_break;
+    }
+}}
 
 
 namespace bobura { namespace type_list

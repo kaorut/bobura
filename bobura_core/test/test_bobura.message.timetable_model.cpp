@@ -8,11 +8,14 @@
 
 #include <vector>
 
+#include <boost/preprocessor.hpp>
+#include <boost/signals2.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.detail.h>
+#include <tetengo2/detail/stub/impl_set.h>
+#include <tetengo2/text.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/load_save/save_to_file.h>

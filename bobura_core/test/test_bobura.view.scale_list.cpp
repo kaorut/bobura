@@ -6,9 +6,13 @@
     $Id$
 */
 
+#include <string>
+
+#include <boost/optional.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/text.h>
 
 #include <bobura/type_list.h>
 #include <bobura/view/scale_list.h>

@@ -14,10 +14,11 @@
 #include <boost/format.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
 
 #include <bobura/about_dialog.h>
-#include <bobura/dialog_traits.h>
+#include <bobura/detail_type_list.h>
 #include <bobura/message/about_dialog.h>
 #include <bobura/type_list.h>
 

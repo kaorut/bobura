@@ -14,9 +14,9 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.detail.h>
+#include <tetengo2/detail/base/impl_set.h>
 
+#include <bobura/command/command_base.h> // IWYU pragma: keep
 #include <bobura/diagram_view.h>
 #include <bobura/load_save/load_from_file.h>
 #include <bobura/load_save/new_file.h>
@@ -26,12 +26,6 @@
 
 namespace bobura { namespace command
 {
-    template <typename Traits>
-    class command_base;
-
-    class parameter_base;
-
-
     /*!
         \brief The class template for a command set.
 

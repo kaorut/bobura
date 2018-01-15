@@ -11,10 +11,10 @@
 
 #include <algorithm>
 #include <cassert>
-#include <utility>
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
+#include <boost/none.hpp>
 #include <boost/optional.hpp>
 
 #include <bobura/model/timetable_info/station_location.h>

@@ -9,14 +9,15 @@
 #include <algorithm>
 #include <cassert>
 #include <iterator>
-#include <utility>
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
 
+#include <bobura/detail_type_list.h>
+#include <bobura/model/serializer/oudia_diagram_dialog.h>
 #include <bobura/model/serializer/select_oudia_diagram.h>
 #include <bobura/type_list.h>
 

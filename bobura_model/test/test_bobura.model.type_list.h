@@ -12,10 +12,8 @@
 #include <cstddef>
 #include <string>
 
-#include <tetengo2.h>
-#include <tetengo2.gui.h>
-
-#include "test_bobura.model.detail_type_list.h"
+#include <tetengo2/gui/drawing/color.h>
+#include <tetengo2/gui/drawing/font.h>
 
 
 namespace test_bobura { namespace model { namespace type_list

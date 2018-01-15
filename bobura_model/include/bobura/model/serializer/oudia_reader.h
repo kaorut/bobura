@@ -10,9 +10,9 @@
 #define BOBURA_MODEL_SERIALIZER_OUDIAREADER_H
 
 #include <memory>
-#include <stdexcept>
 
 #include <bobura/model/serializer/reader.h>
+#include <bobura/model/station_info/grade.h>
 
 
 namespace bobura { namespace model { namespace serializer

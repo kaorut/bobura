@@ -1,0 +1,9 @@
+[
+  { ref: "../lib/tetengo2/tools/iwyu_mappings.imp" },
+
+  { include: ["<boost/container/detail/std_fwd.hpp>", "private", "<boost/container/container_fwd.hpp>", "public"] },
+  { include: ["@<boost/format/.+>",                   "private", "<boost/format.hpp>",                  "public"] },
+  { include: ["@<boost/program_options/.+>",          "private", "<boost/program_options.hpp>",         "public"] },
+  { include: ["@<boost/range/adaptor/.+>",            "private", "<boost/range/adaptors.hpp>",          "public"] },
+  { include: ["@<boost/type_index/.+>",               "private", "<boost/type_index.hpp>",              "public"] }
+]

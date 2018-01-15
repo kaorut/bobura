@@ -12,8 +12,10 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/message/property_bar.h>
 #include <bobura/property_bar.h>
 #include <bobura/type_list.h>

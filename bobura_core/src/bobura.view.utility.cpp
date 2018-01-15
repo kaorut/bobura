@@ -12,10 +12,10 @@
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/model/station_info/grade.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
-#include <bobura/view/utility.h>
 
 
 namespace bobura { namespace view

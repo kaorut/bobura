@@ -9,14 +9,18 @@
 #include <utility>
 #include <vector>
 
-#include <boost/optional.hpp>
+#include <boost/none.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
-#include <tetengo2.detail.h>
+#include <tetengo2/detail/stub/impl_set.h>
+#include <tetengo2/text.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/message/diagram_view.h>
 #include <bobura/model/station_info/grade.h>
+#include <bobura/model/timetable.h>
+#include <bobura/model/timetable_info/station_location.h>
 #include <bobura/property_bar.h>
 #include <bobura/settings.h>
 #include <bobura/timetable_model.h>

@@ -7,24 +7,31 @@
 */
 
 #include <algorithm>
-#include <iomanip>
 #include <iterator>
-#include <locale>
 #include <sstream>
 #include <string>
 #include <type_traits>
+#include <vector>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/format.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/rational.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/json_writer.h>
+#include <bobura/model/serializer/writer.h>
 #include <bobura/type_list.h>
+
+namespace boost
+{
+    template <typename T>
+    class optional;
+}
 
 
 namespace bobura { namespace model { namespace serializer

@@ -7,7 +7,6 @@
 */
 
 #include <algorithm>
-#include <utility>
 #include <vector>
 
 #include <boost/core/ignore_unused.hpp>
@@ -15,10 +14,13 @@
 #include <boost/predef.h>
 #include <boost/range/adaptors.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/model/station_info/grade.h>
 #include <bobura/type_list.h>
+#include <bobura/view/diagram/item.h>
+#include <bobura/view/diagram/selection.h>
 #include <bobura/view/diagram/station_line.h>
 #include <bobura/view/diagram/utility.h>
 #include <bobura/view/utility.h>

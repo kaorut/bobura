@@ -9,8 +9,6 @@
 #if !defined(BOBURA_MODEL_TIMETABLEINFO_STATIONLOCATION_H)
 #define BOBURA_MODEL_TIMETABLEINFO_STATIONLOCATION_H
 
-#include <utility>
-
 #include <boost/operators.hpp>
 
 #include <bobura/model/station.h>

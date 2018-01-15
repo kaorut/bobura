@@ -13,12 +13,14 @@
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/none.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/stdalt.h>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
 

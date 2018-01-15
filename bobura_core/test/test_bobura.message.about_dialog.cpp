@@ -6,8 +6,10 @@
     $Id$
 */
 
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <bobura/detail_type_list.h>
 #include <bobura/message/about_dialog.h>
 #include <bobura/type_list.h>
 

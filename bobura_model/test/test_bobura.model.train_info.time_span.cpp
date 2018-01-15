@@ -8,6 +8,8 @@
 
 #include <stdexcept>
 
+#include <boost/operators.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <bobura/model/train_info/time_span.h>

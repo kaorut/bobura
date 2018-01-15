@@ -14,7 +14,6 @@
 #include <cstddef>
 #include <iterator>
 #include <stdexcept>
-#include <utility>
 #include <vector>
 
 #include <boost/operators.hpp>

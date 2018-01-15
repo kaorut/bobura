@@ -7,11 +7,16 @@
 */
 
 #include <iterator>
+#include <memory>
+#include <string>
 #include <utility>
+#include <vector>
 
+#include <boost/operators.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2.h>
+#include <tetengo2/text.h>
 
 #include <bobura/model/train.h>
 #include <bobura/model/train_info/stop.h>

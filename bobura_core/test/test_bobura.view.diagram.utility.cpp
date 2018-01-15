@@ -6,10 +6,16 @@
     $Id$
 */
 
+#include <memory>
 #include <vector>
 
+#include <boost/preprocessor.hpp>
+#include <boost/rational.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/gui/unit/em.h>
+
+#include <bobura/detail_type_list.h>
 #include <bobura/model/train_info/time.h>
 #include <bobura/model/train_info/time_span.h>
 #include <bobura/type_list.h>

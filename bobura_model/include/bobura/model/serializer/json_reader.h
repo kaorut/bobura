@@ -10,7 +10,6 @@
 #define BOBURA_MODEL_SERIALIZER_JSONREADER_H
 
 #include <memory>
-#include <stdexcept>
 
 #include <bobura/model/serializer/reader.h>
 
