@@ -48,6 +48,10 @@ $(top_srcdir)/lib/tetengo2/tools/check_type_list_type_duplication.sh:
 lint-iwyu:
 	for d in $(SOURCE_SUBDIRS); do (cd $$d && $(MAKE) lint-iwyu); done
 
+.PHONY: lint-iwyu-extra
+lint-iwyu-extra:
+	for d in $(SOURCE_SUBDIRS); do (cd $$d && $(MAKE) lint-iwyu-extra); done
+
 .PHONY: doc
 doc:
 	cd $(top_srcdir) && $(DOXYGEN) Doxyfile

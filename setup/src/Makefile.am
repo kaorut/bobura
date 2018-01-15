@@ -22,3 +22,10 @@ lint-iwyu:
 	    echo "iwyu: "$$f; \
 	    $(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(CXXFLAGS) $$f || test $$? -eq 2; \
 	done
+
+lint-iwyu-extra:
+	for f in $(extra_headers) $(extra_sources); \
+	do \
+	    echo "iwyu: "$$f; \
+	    $(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(CXXFLAGS) $$f || test $$? -eq 2; \
+	done

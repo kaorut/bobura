@@ -2,6 +2,8 @@
 # Copyright (C) 2007-2017 kaoru
 # $Id$
 
+SUBDIRS =
+
 headers =
 
 include_HEADERS = $(headers)
@@ -16,3 +18,6 @@ lint-iwyu:
 	    $(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(iwyu_CPPFLAGS) $(CXXFLAGS) $$f || test $$? -eq 2; \
 	done; \
 	for d in $(SUBDIRS); do (cd $$d && $(MAKE) lint-iwyu); done
+
+lint-iwyu-extra:
+	for d in $(SUBDIRS); do (cd $$d && $(MAKE) lint-iwyu-extra); done
