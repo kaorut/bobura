@@ -6,14 +6,14 @@
     $Id$
 */
 
-#include <cstdint>
-#include <exception>
-#include <locale>
-#include <stdexcept>
+#include <cstdint> // IWYU pragma: keep
+#include <exception> // IWYU pragma: keep
+#include <locale> // IWYU pragma: keep
+#include <stdexcept> // IWYU pragma: keep
 #include <string>
-#include <vector>
+#include <vector> // IWYU pragma: keep
 
-#include <boost/core/ignore_unused.hpp>
+#include <boost/core/ignore_unused.hpp> // IWYU pragma: keep
 #include <boost/filesystem.hpp>
 
 #define NOMINMAX
