@@ -19,13 +19,13 @@ IWYU_OPTS += -Xiwyu --mapping_file=$(top_srcdir)/$(IWYU_IMP_PATH)
 lint-iwyu:
 	for f in $(headers) $(sources); \
 	do \
-	    echo "iwyu: "$$f; \
-	    $(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(CXXFLAGS) $$f || test $$? -eq 2; \
+	    echo "iwyu: "$(srcdir)/$$f; \
+	    $(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(CXXFLAGS) $(srcdir)/$$f || test $$? -eq 2; \
 	done
 
 lint-iwyu-extra:
 	for f in $(extra_headers) $(extra_sources); \
 	do \
-	    echo "iwyu: "$$f; \
-	    $(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(CXXFLAGS) $$f || test $$? -eq 2; \
+	    echo "iwyu: "$(srcdir)/$$f; \
+	    $(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(CXXFLAGS) $(srcdir)/$$f || test $$? -eq 2; \
 	done
