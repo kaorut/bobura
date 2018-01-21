@@ -8,6 +8,7 @@
 
 #include <cassert>
 #include <cmath>
+#include <cstdlib>
 #include <limits>
 #include <numeric>
 #include <sstream>
