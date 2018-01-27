@@ -1,7 +1,7 @@
 /*! \file
     The Doxygen document for the main page.
 
-    Copyright (C) 2007-2017 kaoru
+    Copyright (C) 2007-2018 kaoru
 
     $Id$
 */
@@ -178,7 +178,7 @@ $ make doc
 
 ------------------------------------------------------------------------------
 
-Copyright (C) 2007-2017 kaoru
+Copyright (C) 2007-2018 kaoru
 
 <http://www.tetengo.org/>
 

@@ -1,7 +1,7 @@
 /*! \file
     \brief Test of class bobura::view::timetable::train_number_header.
 
-    Copyright (C) 2007-2017 kaoru
+    Copyright (C) 2007-2018 kaoru
 
     $Id$
 */
