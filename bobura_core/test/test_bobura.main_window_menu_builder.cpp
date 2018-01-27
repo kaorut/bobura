@@ -1,7 +1,7 @@
 /*! \file
     \brief Test of class bobura::main_window_menu_builder.
 
-    Copyright (C) 2007-2017 kaoru
+    Copyright (C) 2007-2018 kaoru
 
     $Id$
 */

@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::view::diagram::zoom.
 
-    Copyright (C) 2007-2017 kaoru
+    Copyright (C) 2007-2018 kaoru
 
     $Id$
 */

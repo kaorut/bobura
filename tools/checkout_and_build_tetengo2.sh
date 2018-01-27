@@ -1,6 +1,6 @@
 #!/bin/sh
 # Checks out and build tetengo2.
-# Copyright (C) 2007-2017 kaoru
+# Copyright (C) 2007-2018 kaoru
 # $Id$
 
 SOLUTION_DIR="$1"
