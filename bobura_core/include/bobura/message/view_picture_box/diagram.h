@@ -272,9 +272,9 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
             boost::ignore_unused(shift, control, meta);
 
             const auto* const p_item = m_view.p_item_by_position(position);
-            const auto cursor = m_picture_box.cursor();
+            const auto p_cursor = m_picture_box.p_cursor();
             const auto* const p_system_cursor =
-                cursor ? dynamic_cast<const system_cursor_type*>(&*cursor) : nullptr;
+                p_cursor ? dynamic_cast<const system_cursor_type*>(p_cursor) : nullptr;
             if (p_item)
             {
                 if (!p_system_cursor || p_system_cursor->style() != system_cursor_type::style_type::hand)
