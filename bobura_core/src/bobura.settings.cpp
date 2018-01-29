@@ -406,7 +406,7 @@ namespace bobura
             {
                 const auto& input_values = options["input"].template as<std::vector<string_type>>();
                 if (!input_values.empty())
-                    m_input = boost::make_optional<string_type>(input_values[0]);
+                    m_input = boost::optional<string_type>{ input_values[0] };
             }
 
             m_p_config = create_config(options, std::move(config_group_name));
