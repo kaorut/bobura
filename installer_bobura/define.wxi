@@ -2,17 +2,19 @@
 <Include xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <?define configuration="$(env.CONFIGURATION)"?>
   <?if $(var.configuration) = "Debug"?>
-  <?define boost_debug="-gd"?>
+    <?define boost_debug="-gd"?>
   <?else ?>
-  <?define boost_debug=""?>
+    <?define boost_debug=""?>
   <?endif ?>
   <?define platform="$(env.PLATFORM)"?>
   <?if $(var.platform) = "Win32"?>
-  <?define program_files_folder="ProgramFilesFolder"?>
-  <?define common_files_path="$(env.CommonProgramFiles)"?>
+    <?define platform_arch="x32"?>
+    <?define program_files_folder="ProgramFilesFolder"?>
+    <?define common_files_path="$(env.CommonProgramFiles)"?>
   <?elseif $(var.platform) = "x64"?>
-  <?define program_files_folder="ProgramFiles64Folder"?>
-  <?define common_files_path="$(env.CommonProgramFiles(x86))"?>
+    <?define platform_arch="x64"?>
+    <?define program_files_folder="ProgramFiles64Folder"?>
+    <?define common_files_path="$(env.CommonProgramFiles(x86))"?>
   <?endif ?>
   <?define arch="$(env.ARCH)"?>
 
