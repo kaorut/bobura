@@ -362,10 +362,7 @@ namespace bobura { namespace model { namespace serializer
                         return false;
                     }
 
-                    auto new_train_kind =
-                        make_train_kind(
-                            boost::make_optional<const train_kind_type&>(m_timetable.train_kinds()[i]), prop
-                        );
+                    auto new_train_kind = make_train_kind(&m_timetable.train_kinds()[i], prop);
                     if (!new_train_kind)
                         return false;
                     m_timetable.set_train_kind(
@@ -385,7 +382,7 @@ namespace bobura { namespace model { namespace serializer
                         return false;
                     }
 
-                    auto new_train_kind = make_train_kind(boost::none, prop);
+                    auto new_train_kind = make_train_kind(nullptr, prop);
                     if (!new_train_kind)
                         return false;
                     m_timetable.insert_train_kind(m_timetable.train_kinds().end(), std::move(*new_train_kind));
@@ -556,10 +553,7 @@ namespace bobura { namespace model { namespace serializer
                     return boost::none;
                 }
 
-                auto new_train_kind =
-                    make_train_kind(
-                        boost::make_optional<const train_kind_type&>(m_timetable.train_kinds()[base_index]), prop
-                    );
+                auto new_train_kind = make_train_kind(&m_timetable.train_kinds()[base_index], prop);
                 if (!new_train_kind)
                     return boost::none;
                 m_timetable.insert_train_kind(m_timetable.train_kinds().end(), std::move(*new_train_kind));
@@ -980,35 +974,33 @@ namespace bobura { namespace model { namespace serializer
             return values;
         }
 
-        static boost::optional<train_kind_type> make_train_kind(
-            const boost::optional<const train_kind_type&>& base,
-            const unsigned int                             prop
-        )
+        static boost::optional<train_kind_type> make_train_kind(const train_kind_type* p_base, const unsigned int prop)
         {
             const auto diagram_line_style = to_line_style(prop & 0x03);
             const auto custom_color = (prop & 0x40) != 0;
-            const auto& diagram_font = base ? base->diagram_font() : train_kind_type::default_().diagram_font();
+            const auto& diagram_font = p_base ? p_base->diagram_font() : train_kind_type::default_().diagram_font();
             const auto diagram_color = 
                 custom_color ?
                 to_color((prop & 0x3C) / 0x04) :
                 (
-                    base ?
-                    boost::make_optional(base->diagram_color()) :
+                    p_base ?
+                    boost::make_optional(p_base->diagram_color()) :
                     boost::make_optional(train_kind_type::default_().diagram_color())
                 );
             if (!diagram_color)
                 return boost::none;
             const auto diagram_line_weight = to_weight((prop & 0x80) != 0);
-            const auto& timetable_font = base ? base->timetable_font() : train_kind_type::default_().timetable_font();
+            const auto& timetable_font =
+                p_base ? p_base->timetable_font() : train_kind_type::default_().timetable_font();
             const auto& timetable_color =
-                base ? base->timetable_color() : train_kind_type::default_().timetable_color();
+                p_base ? p_base->timetable_color() : train_kind_type::default_().timetable_color();
 
             return
-                base ?
+                p_base ?
                 boost::make_optional(
                     train_kind_type(
-                        base->name(),
-                        base->abbreviation(),
+                        p_base->name(),
+                        p_base->abbreviation(),
                         diagram_font,
                         std::move(*diagram_color),
                         diagram_line_weight,

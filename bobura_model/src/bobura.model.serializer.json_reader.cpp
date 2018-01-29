@@ -1356,9 +1356,9 @@ namespace bobura { namespace model { namespace serializer
             const auto& value = boost::get<value_type>(element);
             if (value.which() != 2)
                 return boost::none;
-            const auto integer = boost::get<integer_type>(value);
+            auto integer = boost::get<integer_type>(value);
             pull_parser.next();
-            return boost::make_optional<Int>(integer);
+            return boost::make_optional<Int>(std::move(integer));
         }
 
         static boost::optional<std::pair<string_type, bool>> read_boolean_member(pull_parser_type& pull_parser)
