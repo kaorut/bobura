@@ -21,5 +21,5 @@ lint-iwyu-extra:
 	mv $(addsuffix .tmp, $@) $@
 
 clean-local:
-	-rm -f "*.iwyuout.tmp"
-	-rm -f "*.iwyuout"
+	-rm -f *.iwyuout.tmp
+	-rm -f *.iwyuout

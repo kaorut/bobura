@@ -24,5 +24,5 @@ lint-iwyu-extra: $(addsuffix .iwyuout, $(extra_headers) $(extra_sources))
 	mv $(addsuffix .tmp, $@) $@
 
 clean-local:
-	-rm -f "*.iwyuout.tmp"
-	-rm -f "*.iwyuout"
+	-rm -f *.iwyuout.tmp
+	-rm -f *.iwyuout
