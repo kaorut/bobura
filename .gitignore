@@ -3,6 +3,7 @@
 *.aps
 *.db
 *.gch
+*.iwyuout*
 *.log
 *.msi
 *.mst
