@@ -2,6 +2,8 @@
 # Copyright (C) 2007-2018 kaoru
 # $Id$
 
+pkg_headers =
+
 extra_headers = \
     0namespace.dox \
     encode.h
@@ -9,18 +11,16 @@ extra_headers = \
 EXTRA_DIST = $(extra_headers)
 
 IWYU_OPTS += -Xiwyu --mapping_file=$(top_srcdir)/$(IWYU_IMP_PATH)
-iwyu_CPPFLAGS =
 
-lint-iwyu:
-	for f in $(pkg_headers); \
-	do \
-	    echo "iwyu: "$(srcdir)/$$f; \
-	    $(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(iwyu_CPPFLAGS) $(CXXFLAGS) $(srcdir)/$$f || test $$? -eq 2; \
-	done
+lint-iwyu: $(addsuffix .iwyuout, $(pkg_headers))
 
-lint-iwyu-extra:
-	for f in $(extra_headers); \
-	do \
-	    echo "iwyu: "$(srcdir)/$$f; \
-	    $(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(iwyu_CPPFLAGS) $(CXXFLAGS) $(srcdir)/$$f || test $$? -eq 2; \
-	done
+lint-iwyu-extra: $(addsuffix .iwyuout, $(extra_headers))
+
+%.iwyuout: %
+	mkdir -p $(dir $@)
+	$(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(CXXFLAGS) $< 2> $(addsuffix .tmp, $@) || test $$? -eq 2
+	mv $(addsuffix .tmp, $@) $@
+
+clean-local:
+	-find -name "*.iwyuout.tmp" | xargs rm -f
+	-find -name "*.iwyuout" | xargs rm -f

@@ -16,16 +16,14 @@ EXTRA_DIST = $(extra_sources)
 
 IWYU_OPTS += -Xiwyu --mapping_file=$(top_srcdir)/$(IWYU_IMP_PATH)
 
-lint-iwyu:
-	for f in $(headers) $(sources); \
-	do \
-	    echo "iwyu: "$(srcdir)/$$f; \
-	    $(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(CXXFLAGS) $(srcdir)/$$f || test $$? -eq 2; \
-	done
+lint-iwyu: $(addsuffix .iwyuout, $(headers) $(sources))
 
-lint-iwyu-extra:
-	for f in $(extra_headers) $(extra_sources); \
-	do \
-	    echo "iwyu: "$(srcdir)/$$f; \
-	    $(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(CXXFLAGS) $(srcdir)/$$f || test $$? -eq 2; \
-	done
+lint-iwyu-extra: $(addsuffix .iwyuout, $(extra_headers) $(extra_sources))
+
+%.iwyuout: %
+	$(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(CXXFLAGS) $< 2> $(addsuffix .tmp, $@) || test $$? -eq 2
+	mv $(addsuffix .tmp, $@) $@
+
+clean-local:
+	-rm -f *.iwyuout.tmp
+	-rm -f *.iwyuout
