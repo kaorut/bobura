@@ -43,8 +43,8 @@ namespace bobura { namespace view { namespace diagram
         //! The canvas type.
         using canvas_type = typename traits_type::canvas_type;
 
-        //! The dimension unit type.
-        using dimension_unit_type = typename canvas_type::dimension_unit_type;
+        //! The color type.
+        using color_type = typename canvas_type::color_type;
 
         //! The position type.
         using position_type = typename canvas_type::position_type;
@@ -65,15 +65,15 @@ namespace bobura { namespace view { namespace diagram
             \param left      A left position.
             \param top       A top position.
             \param bottom    A bottom position.
-            \param width     A width.
+            \param color     A color.
             \param hours     Hours.
         */
         time_line(
             selection_type&            selection,
             position_unit_type         left,
-            const position_unit_type&  top,
-            const position_unit_type&  bottom,
-            dimension_unit_type        width,
+            position_unit_type         top,
+            position_unit_type         bottom,
+            color_type                 color,
             boost::optional<size_type> hours
         );
 
