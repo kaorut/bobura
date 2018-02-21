@@ -38,7 +38,7 @@ namespace bobura { namespace view { namespace diagram
 
         using canvas_type = typename traits_type::canvas_type;
 
-        using dimension_unit_type = typename time_line::dimension_unit_type;
+        using color_type = typename time_line::color_type;
 
         using position_type = typename time_line::position_type;
 
@@ -52,16 +52,16 @@ namespace bobura { namespace view { namespace diagram
         impl(
             selection_type&,
             position_unit_type         left,
-            const position_unit_type&  top,
-            const position_unit_type&  bottom,
-            dimension_unit_type             width,
+            position_unit_type         top,
+            position_unit_type         bottom,
+            color_type                 color,
             boost::optional<size_type> hours
         )
         :
         m_left(std::move(left)),
-        m_top(top),
-        m_bottom(bottom),
-        m_width(std::move(width)),
+        m_top(std::move(top)),
+        m_bottom(std::move(bottom)),
+        m_color(std::move(color)),
         m_hours(std::move(hours))
         {}
 
@@ -70,8 +70,8 @@ namespace bobura { namespace view { namespace diagram
         m_left(std::move(another.m_left)),
         m_top(std::move(another.m_top)),
         m_bottom(std::move(another.m_bottom)),
-        m_width(std::move(another.m_width)),
-        m_hours(another.m_hours)
+        m_color(std::move(another.m_color)),
+        m_hours(std::move(another.m_hours))
         {}
 
 
@@ -85,8 +85,8 @@ namespace bobura { namespace view { namespace diagram
             m_left = std::move(another.m_left);
             m_top = std::move(another.m_top);
             m_bottom = std::move(another.m_bottom);
-            m_width = std::move(another.m_width);
-            m_hours = another.m_hours;
+            m_color = std::move(another.m_color);
+            m_hours = std::move(another.m_hours);
 
             return *this;
         }
@@ -94,11 +94,12 @@ namespace bobura { namespace view { namespace diagram
         void draw_on_impl(canvas_type& canvas)
         const
         {
+            canvas.set_color(m_color);
+
             if (m_hours)
                 canvas.draw_text(boost::lexical_cast<string_type>(*m_hours), position_type{ m_left, m_top });
 
             canvas.set_line_style(canvas_type::line_style_type::solid);
-            canvas.set_line_width(m_width);
             canvas.draw_line(position_type{ m_left, m_top }, position_type{ m_left, m_bottom });
         }
 
@@ -117,7 +118,7 @@ namespace bobura { namespace view { namespace diagram
 
         position_unit_type m_bottom;
 
-        dimension_unit_type m_width;
+        color_type m_color;
 
         boost::optional<size_type> m_hours;
 
@@ -129,14 +130,18 @@ namespace bobura { namespace view { namespace diagram
     time_line<Traits>::time_line(
         selection_type&            selection,
         position_unit_type         left,
-        const position_unit_type&  top,
-        const position_unit_type&  bottom,
-        dimension_unit_type             width,
+        position_unit_type         top,
+        position_unit_type         bottom,
+        color_type                 color,
         boost::optional<size_type> hours
     )
     :
     base_type(selection),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(selection, left, top, bottom, width, hours))
+    m_p_impl(
+        tetengo2::stdalt::make_unique<impl>(
+            selection, std::move(left), std::move(top), std::move(bottom), std::move(color), std::move(hours)
+        )
+    )
     {}
 
     template <typename Traits>
@@ -215,6 +220,7 @@ namespace bobura { namespace view { namespace diagram
         :
         m_p_font(&*model.timetable().font_color_set().general().diagram_font()),
         m_p_color(&*model.timetable().font_color_set().general().diagram_color()),
+        m_p_background_color(&*model.timetable().font_color_set().background().diagram_color()),
         m_time_lines(
             make_time_lines(
                 time_offset,
@@ -234,6 +240,7 @@ namespace bobura { namespace view { namespace diagram
         :
         m_p_font(another.m_p_font),
         m_p_color(another.m_p_color),
+        m_p_background_color(another.m_p_background_color),
         m_time_lines(std::move(another.m_time_lines))
         {}
 
@@ -247,6 +254,7 @@ namespace bobura { namespace view { namespace diagram
 
             m_p_font = another.m_p_font;
             m_p_color = another.m_p_color;
+            m_p_background_color = another.m_p_background_color;
             m_time_lines = std::move(another.m_time_lines);
 
             return *this;
@@ -256,7 +264,7 @@ namespace bobura { namespace view { namespace diagram
         const
         {
             canvas.set_font(*m_p_font);
-            canvas.set_color(*m_p_color);
+            canvas.set_line_width(normal_line_width<dimension_unit_type>());
 
             for (const auto& time_line: m_time_lines)
                 time_line.draw_on(canvas);
@@ -348,7 +356,7 @@ namespace bobura { namespace view { namespace diagram
                         std::move(position),
                         header_bottom,
                         line_bottom,
-                        normal_line_width<dimension_unit_type>(),
+                        *m_p_color,
                         boost::make_optional(hours)
                     );
                 }
@@ -361,7 +369,7 @@ namespace bobura { namespace view { namespace diagram
                             std::move(position),
                             canvas_top,
                             line_bottom,
-                            normal_line_width<dimension_unit_type>() / 2,
+                            m_p_color->mix(*m_p_background_color, 0.5),
                             boost::none
                         );
                     }
@@ -375,7 +383,7 @@ namespace bobura { namespace view { namespace diagram
                             std::move(position),
                             canvas_top,
                             line_bottom,
-                            normal_line_width<dimension_unit_type>() / 4,
+                            m_p_color->mix(*m_p_background_color, 0.75),
                             boost::none
                         );
                     }
@@ -389,7 +397,7 @@ namespace bobura { namespace view { namespace diagram
                             std::move(position),
                             canvas_top,
                             line_bottom,
-                            normal_line_width<dimension_unit_type>() / 4,
+                            m_p_color->mix(*m_p_background_color, 0.75),
                             boost::none
                         );
                     }
@@ -406,6 +414,8 @@ namespace bobura { namespace view { namespace diagram
         const font_type* m_p_font;
 
         const color_type* m_p_color;
+
+        const color_type* m_p_background_color;
 
         std::vector<time_line_type> m_time_lines;
 

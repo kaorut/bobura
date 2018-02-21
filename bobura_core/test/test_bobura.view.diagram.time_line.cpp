@@ -67,6 +67,8 @@ namespace
 
     using canvas_type = ui_type_list_type::canvas_type;
 
+    using color_type = canvas_type::color_type;
+
     using dimension_unit_type = canvas_type::dimension_unit_type;
 
     using traits_type = traits_type_list_type::diagram_view_type;
@@ -97,7 +99,7 @@ BOOST_AUTO_TEST_SUITE(time_line)
             position_unit_type{ 42 },
             position_unit_type{ 24 },
             position_unit_type{ 42 },
-            dimension_unit_type{ dimension_unit_type::value_type{ 1, 2 } },
+            color_type{ 0x12, 0x34, 0x56, 0x78 },
             boost::make_optional<time_type::size_type>(12)
         };
         const time_line_type time_line2{ std::move(time_line1) };
@@ -113,7 +115,7 @@ BOOST_AUTO_TEST_SUITE(time_line)
             position_unit_type{ 42 },
             position_unit_type{ 24 },
             position_unit_type{ 42 },
-            dimension_unit_type{ dimension_unit_type::value_type{ 1, 2 } },
+            color_type{ 0x12, 0x34, 0x56, 0x78 },
             boost::make_optional<time_type::size_type>(12)
         };
         time_line_type time_line2{
@@ -121,7 +123,7 @@ BOOST_AUTO_TEST_SUITE(time_line)
             position_unit_type{ 42 },
             position_unit_type{ 24 },
             position_unit_type{ 42 },
-            dimension_unit_type{ dimension_unit_type::value_type{ 1, 2 } },
+            color_type{ 0x12, 0x34, 0x56, 0x78 },
             boost::make_optional<time_type::size_type>(12)
         };
 
@@ -138,7 +140,7 @@ BOOST_AUTO_TEST_SUITE(time_line)
             position_unit_type{ 42 },
             position_unit_type{ 24 },
             position_unit_type{ 42 },
-            dimension_unit_type{ dimension_unit_type::value_type{ 1, 2 } },
+            color_type{ 0x12, 0x34, 0x56, 0x78 },
             boost::make_optional<time_type::size_type>(12)
         };
 
