@@ -16,8 +16,7 @@
 #include <bobura/type_list.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -41,74 +40,71 @@ namespace
     using position_unit_type = position_type::unit_type;
 
     using mouse_button_type = mouse_pressed_type::mouse_button_type;
-
-
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(message)
-BOOST_AUTO_TEST_SUITE(property_bar)
-BOOST_AUTO_TEST_SUITE(resized)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(message)
+        BOOST_AUTO_TEST_SUITE(property_bar)
+            BOOST_AUTO_TEST_SUITE(resized)
+                // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        window_type window{};
-        side_bar_type side_bar{ window, detail_impl_set_type::instance().cursor_() };
-        map_box_type map_box{ side_bar, detail_impl_set_type::instance().cursor_() };
-        const resized_type observer(side_bar, map_box);
-    }
+                    window_type        window{};
+                    side_bar_type      side_bar{ window, detail_impl_set_type::instance().cursor_() };
+                    map_box_type       map_box{ side_bar, detail_impl_set_type::instance().cursor_() };
+                    const resized_type observer(side_bar, map_box);
+                }
 
-    BOOST_AUTO_TEST_CASE(operator_paren)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(operator_paren)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        window_type window{};
-        side_bar_type side_bar{ window, detail_impl_set_type::instance().cursor_() };
-        map_box_type map_box{ side_bar, detail_impl_set_type::instance().cursor_() };
-        const resized_type observer(side_bar, map_box);
+                    window_type        window{};
+                    side_bar_type      side_bar{ window, detail_impl_set_type::instance().cursor_() };
+                    map_box_type       map_box{ side_bar, detail_impl_set_type::instance().cursor_() };
+                    const resized_type observer(side_bar, map_box);
 
-        observer();
-    }
-
-
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE(mouse_pressed)
-    // test cases
-
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        window_type window{};
-        side_bar_type side_bar{ window, detail_impl_set_type::instance().cursor_() };
-        map_box_type map_box{ side_bar, detail_impl_set_type::instance().cursor_() };
-        const mouse_pressed_type observer{ map_box };
-    }
-
-    BOOST_AUTO_TEST_CASE(operator_paren)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        window_type window{};
-        side_bar_type side_bar{ window, detail_impl_set_type::instance().cursor_() };
-        map_box_type map_box{ side_bar, detail_impl_set_type::instance().cursor_() };
-        const mouse_pressed_type observer{ map_box };
-
-        observer(
-            mouse_button_type::left,
-            position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
-            false,
-            false,
-            false
-        );
-    }
+                    observer();
+                }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE(mouse_pressed)
+                // test cases
+
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
+
+                    window_type              window{};
+                    side_bar_type            side_bar{ window, detail_impl_set_type::instance().cursor_() };
+                    map_box_type             map_box{ side_bar, detail_impl_set_type::instance().cursor_() };
+                    const mouse_pressed_type observer{ map_box };
+                }
+
+                BOOST_AUTO_TEST_CASE(operator_paren)
+                {
+                    BOOST_TEST_PASSPOINT();
+
+                    window_type              window{};
+                    side_bar_type            side_bar{ window, detail_impl_set_type::instance().cursor_() };
+                    map_box_type             map_box{ side_bar, detail_impl_set_type::instance().cursor_() };
+                    const mouse_pressed_type observer{ map_box };
+
+                    observer(
+                        mouse_button_type::left,
+                        position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
+                        false,
+                        false,
+                        false);
+                }
+
+
+            BOOST_AUTO_TEST_SUITE_END()
+        BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

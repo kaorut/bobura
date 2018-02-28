@@ -24,8 +24,7 @@
 #include <bobura/type_list.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -56,134 +55,122 @@ namespace
 
     using train_kind_type = bobura::model::train_kind<string_type, font_type>;
 
-    using train_kind_dialog_type =
-        bobura::train_kind_dialog<
-            traits_type_list_type::dialog_type,
-            size_type,
-            string_type,
-            font_type,
-            point_dimension_unit_type,
-            color_type,
-            ui_type_list_type::fast_canvas_type,
-            common_dialog_type_list_type::font_type,
-            common_dialog_type_list_type::color_type
-        >;
+    using train_kind_dialog_type = bobura::train_kind_dialog<
+        traits_type_list_type::dialog_type,
+        size_type,
+        string_type,
+        font_type,
+        point_dimension_unit_type,
+        color_type,
+        ui_type_list_type::fast_canvas_type,
+        common_dialog_type_list_type::font_type,
+        common_dialog_type_list_type::color_type>;
 
     using info_set_type = train_kind_dialog_type::info_set_type;
-
-
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(train_kind_dialog)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(train_kind_dialog)
+        // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+        BOOST_AUTO_TEST_CASE(construction)
+        {
+            BOOST_TEST_PASSPOINT();
 
-        window_type parent{};
-        const color_type background_color{ 12, 34, 56 };
-        const color_type timetable_color{ 78, 90, 12 };
-        const message_catalog_type message_catalog{};
-        const train_kind_dialog_type train_kind_dialog{ parent, background_color, timetable_color, message_catalog };
-    }
+            window_type                  parent{};
+            const color_type             background_color{ 12, 34, 56 };
+            const color_type             timetable_color{ 78, 90, 12 };
+            const message_catalog_type   message_catalog{};
+            const train_kind_dialog_type train_kind_dialog{
+                parent, background_color, timetable_color, message_catalog
+            };
+        }
 
-    BOOST_AUTO_TEST_CASE(info_sets)
-    {
-        BOOST_TEST_PASSPOINT();
+        BOOST_AUTO_TEST_CASE(info_sets)
+        {
+            BOOST_TEST_PASSPOINT();
 
-        window_type parent{};
-        const color_type background_color{ 12, 34, 56 };
-        const color_type timetable_color{ 78, 90, 12 };
-        const message_catalog_type message_catalog{};
-        const train_kind_dialog_type train_kind_dialog{ parent, background_color, timetable_color, message_catalog };
+            window_type                  parent{};
+            const color_type             background_color{ 12, 34, 56 };
+            const color_type             timetable_color{ 78, 90, 12 };
+            const message_catalog_type   message_catalog{};
+            const train_kind_dialog_type train_kind_dialog{
+                parent, background_color, timetable_color, message_catalog
+            };
 
-        BOOST_TEST(train_kind_dialog.info_sets().empty());
-    }
+            BOOST_TEST(train_kind_dialog.info_sets().empty());
+        }
 
-    BOOST_AUTO_TEST_CASE(set_info_sets)
-    {
-        BOOST_TEST_PASSPOINT();
+        BOOST_AUTO_TEST_CASE(set_info_sets)
+        {
+            BOOST_TEST_PASSPOINT();
 
-        window_type parent{};
-        const color_type background_color{ 12, 34, 56 };
-        const color_type timetable_color{ 78, 90, 12 };
-        const message_catalog_type message_catalog{};
-        train_kind_dialog_type train_kind_dialog{ parent, background_color, timetable_color, message_catalog };
+            window_type                parent{};
+            const color_type           background_color{ 12, 34, 56 };
+            const color_type           timetable_color{ 78, 90, 12 };
+            const message_catalog_type message_catalog{};
+            train_kind_dialog_type     train_kind_dialog{ parent, background_color, timetable_color, message_catalog };
 
-        std::vector<info_set_type> info_sets{
-            info_set_type{
-                boost::make_optional<size_type>(0),
-                false,
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("name0") },
-                    string_type{ TETENGO2_TEXT("abbreviation0") },
-                    font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
-                    color_type{ 0, 10, 20 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid,
-                    font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
-                    color_type{ 30, 40, 50 }
-                }
-            },
-            info_set_type{
-                boost::make_optional<size_type>(1),
-                true,
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("name1") },
-                    string_type{ TETENGO2_TEXT("abbreviation1") },
-                    font_type{ string_type{ TETENGO2_TEXT("foofont") }, 42, false, true, false, true },
-                    color_type{ 1, 11, 21 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::dashed,
-                    font_type{ string_type{ TETENGO2_TEXT("barfont") }, 42, false, true, false, true },
-                    color_type{ 31, 41, 51 }
-                }
-            }
-        };
-        train_kind_dialog.set_info_sets(std::move(info_sets));
+            std::vector<info_set_type> info_sets{
+                info_set_type{ boost::make_optional<size_type>(0),
+                               false,
+                               train_kind_type{
+                                   string_type{ TETENGO2_TEXT("name0") },
+                                   string_type{ TETENGO2_TEXT("abbreviation0") },
+                                   font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
+                                   color_type{ 0, 10, 20 },
+                                   train_kind_type::weight_type::normal,
+                                   train_kind_type::line_style_type::solid,
+                                   font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+                                   color_type{ 30, 40, 50 } } },
+                info_set_type{
+                    boost::make_optional<size_type>(1),
+                    true,
+                    train_kind_type{ string_type{ TETENGO2_TEXT("name1") },
+                                     string_type{ TETENGO2_TEXT("abbreviation1") },
+                                     font_type{ string_type{ TETENGO2_TEXT("foofont") }, 42, false, true, false, true },
+                                     color_type{ 1, 11, 21 },
+                                     train_kind_type::weight_type::bold,
+                                     train_kind_type::line_style_type::dashed,
+                                     font_type{ string_type{ TETENGO2_TEXT("barfont") }, 42, false, true, false, true },
+                                     color_type{ 31, 41, 51 } } }
+            };
+            train_kind_dialog.set_info_sets(std::move(info_sets));
 
-        const std::vector<info_set_type> expected{
-            info_set_type{
-                boost::make_optional<size_type>(0),
-                false,
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("name0") },
-                    string_type{ TETENGO2_TEXT("abbreviation0") },
-                    font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
-                    color_type{ 0, 10, 20 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid,
-                    font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
-                    color_type{ 30, 40, 50 }
-                }
-            },
-            info_set_type{
-                boost::make_optional<size_type>(1),
-                true,
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("name1") },
-                    string_type{ TETENGO2_TEXT("abbreviation1") },
-                    font_type{ string_type{ TETENGO2_TEXT("foofont") }, 42, false, true, false, true },
-                    color_type{ 1, 11, 21 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::dashed,
-                    font_type{ string_type{ TETENGO2_TEXT("barfont") }, 42, false, true, false, true },
-                    color_type{ 31, 41, 51 }
-                }
-            }
-        };
-        BOOST_TEST(train_kind_dialog.info_sets().size() == expected.size());
-        BOOST_CHECK(train_kind_dialog.info_sets()[0].original_index() == expected[0].original_index());
-        BOOST_TEST(train_kind_dialog.info_sets()[0].referred() == expected[0].referred());
-        BOOST_CHECK(train_kind_dialog.info_sets()[0].train_kind() == expected[0].train_kind());
-        BOOST_CHECK(train_kind_dialog.info_sets()[1].original_index() == expected[1].original_index());
-        BOOST_TEST(train_kind_dialog.info_sets()[1].referred() == expected[1].referred());
-        BOOST_CHECK(train_kind_dialog.info_sets()[1].train_kind() == expected[1].train_kind());
-    }
+            const std::vector<info_set_type> expected{
+                info_set_type{ boost::make_optional<size_type>(0),
+                               false,
+                               train_kind_type{
+                                   string_type{ TETENGO2_TEXT("name0") },
+                                   string_type{ TETENGO2_TEXT("abbreviation0") },
+                                   font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
+                                   color_type{ 0, 10, 20 },
+                                   train_kind_type::weight_type::normal,
+                                   train_kind_type::line_style_type::solid,
+                                   font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+                                   color_type{ 30, 40, 50 } } },
+                info_set_type{
+                    boost::make_optional<size_type>(1),
+                    true,
+                    train_kind_type{ string_type{ TETENGO2_TEXT("name1") },
+                                     string_type{ TETENGO2_TEXT("abbreviation1") },
+                                     font_type{ string_type{ TETENGO2_TEXT("foofont") }, 42, false, true, false, true },
+                                     color_type{ 1, 11, 21 },
+                                     train_kind_type::weight_type::bold,
+                                     train_kind_type::line_style_type::dashed,
+                                     font_type{ string_type{ TETENGO2_TEXT("barfont") }, 42, false, true, false, true },
+                                     color_type{ 31, 41, 51 } } }
+            };
+            BOOST_TEST(train_kind_dialog.info_sets().size() == expected.size());
+            BOOST_CHECK(train_kind_dialog.info_sets()[0].original_index() == expected[0].original_index());
+            BOOST_TEST(train_kind_dialog.info_sets()[0].referred() == expected[0].referred());
+            BOOST_CHECK(train_kind_dialog.info_sets()[0].train_kind() == expected[0].train_kind());
+            BOOST_CHECK(train_kind_dialog.info_sets()[1].original_index() == expected[1].original_index());
+            BOOST_TEST(train_kind_dialog.info_sets()[1].referred() == expected[1].referred());
+            BOOST_CHECK(train_kind_dialog.info_sets()[1].train_kind() == expected[1].train_kind());
+        }
 
 
-BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

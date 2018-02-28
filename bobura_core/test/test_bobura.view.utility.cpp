@@ -17,8 +17,7 @@
 #include <bobura/view/utility.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -43,10 +42,8 @@ namespace
 
     using font_type = canvas_type::font_type;
 
-    using model_type =
-        bobura::timetable_model<
-            size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
-        >;
+    using model_type = bobura::
+        timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
     using font_color_set_type = model_type::timetable_type::font_color_set_type;
 
@@ -55,54 +52,48 @@ namespace
     using station_grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
 
     using grade_type = station_grade_type_set_type::grade_type;
-
-
 }
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(view)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(view)
+        // test cases
 
-    BOOST_AUTO_TEST_CASE(select_station_font_color)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const auto& font_color_set = font_color_set_type::default_();
-
+        BOOST_AUTO_TEST_CASE(select_station_font_color)
         {
-            const auto& font_color =
-                bobura::view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
-                    font_color_set, station_grade_type_set_type::local_type::instance()
-                );
+            BOOST_TEST_PASSPOINT();
 
-            BOOST_TEST(&font_color == &font_color_set.local_station());
+            const auto& font_color_set = font_color_set_type::default_();
+
+            {
+                const auto& font_color =
+                    bobura::view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
+                        font_color_set, station_grade_type_set_type::local_type::instance());
+
+                BOOST_TEST(&font_color == &font_color_set.local_station());
+            }
+            {
+                const auto& font_color =
+                    bobura::view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
+                        font_color_set, station_grade_type_set_type::principal_type::instance());
+
+                BOOST_TEST(&font_color == &font_color_set.principal_station());
+            }
+            {
+                const auto& font_color =
+                    bobura::view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
+                        font_color_set, station_grade_type_set_type::local_terminal_type::instance());
+
+                BOOST_TEST(&font_color == &font_color_set.local_terminal_station());
+            }
+            {
+                const auto& font_color =
+                    bobura::view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
+                        font_color_set, station_grade_type_set_type::principal_terminal_type::instance());
+
+                BOOST_TEST(&font_color == &font_color_set.principal_terminal_station());
+            }
         }
-        {
-            const auto& font_color =
-                bobura::view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
-                    font_color_set, station_grade_type_set_type::principal_type::instance()
-                );
-
-            BOOST_TEST(&font_color == &font_color_set.principal_station());
-        }
-        {
-            const auto& font_color =
-                bobura::view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
-                    font_color_set, station_grade_type_set_type::local_terminal_type::instance()
-                );
-
-            BOOST_TEST(&font_color == &font_color_set.local_terminal_station());
-        }
-        {
-            const auto& font_color =
-                bobura::view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
-                    font_color_set, station_grade_type_set_type::principal_terminal_type::instance()
-                );
-
-            BOOST_TEST(&font_color == &font_color_set.principal_terminal_station());
-        }
-    }
 
 
-BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

@@ -38,8 +38,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     template <
         typename Size,
         typename Difference,
@@ -49,12 +48,17 @@ namespace bobura { namespace model { namespace serializer
         typename Speed,
         typename SelectDiagram,
         typename Font,
-        typename Encoder
-    >
+        typename Encoder>
     class oudia_reader<
-        Size, Difference, String, ForwardIterator, OperatingDistance, Speed, SelectDiagram, Font, Encoder
-    >::impl :
-        private boost::noncopyable
+        Size,
+        Difference,
+        String,
+        ForwardIterator,
+        OperatingDistance,
+        Speed,
+        SelectDiagram,
+        Font,
+        Encoder>::impl : private boost::noncopyable
     {
     public:
         // types
@@ -90,8 +94,7 @@ namespace bobura { namespace model { namespace serializer
         // constructors and destructor
 
         explicit impl(std::unique_ptr<select_diagram_type> p_select_diagram)
-        :
-        m_p_select_diagram(std::move(p_select_diagram))
+        : m_p_select_diagram(std::move(p_select_diagram))
         {
             if (!m_p_select_diagram)
                 BOOST_THROW_EXCEPTION(std::invalid_argument("Diagram selector is nullptr."));
@@ -102,15 +105,13 @@ namespace bobura { namespace model { namespace serializer
 
         bool selects_impl(const iterator first, const iterator last)
         {
-            auto mutable_first = first;
+            auto       mutable_first = first;
             const auto key_value = parse_line(next_line(mutable_first, last));
             const auto file_type_ = parse_file_type(key_value.second);
 
-            return
-                key_value.first == string_type{ TETENGO2_TEXT("FileType") } &&
-                file_type_.m_name == string_type{ TETENGO2_TEXT("OuDia") } &&
-                file_type_.m_major_version == 1 &&
-                (1 <= file_type_.m_minor_version && file_type_.m_minor_version <= 2);
+            return key_value.first == string_type{ TETENGO2_TEXT("FileType") } &&
+                   file_type_.m_name == string_type{ TETENGO2_TEXT("OuDia") } && file_type_.m_major_version == 1 &&
+                   (1 <= file_type_.m_minor_version && file_type_.m_minor_version <= 2);
         }
 
         std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
@@ -120,7 +121,7 @@ namespace bobura { namespace model { namespace serializer
                 error = error_type::corrupted;
                 return std::unique_ptr<timetable_type>{};
             }
-            
+
             const auto selected_diagram_name = select_diagram(first, last);
             if (!selected_diagram_name)
             {
@@ -139,10 +140,8 @@ namespace bobura { namespace model { namespace serializer
 
         using input_string_type = std::basic_string<input_char_type>;
 
-        using string_view_type =
-            boost::basic_string_view<
-                typename string_type::value_type, std::char_traits<typename string_type::value_type>
-            >;
+        using string_view_type = boost::
+            basic_string_view<typename string_type::value_type, std::char_traits<typename string_type::value_type>>;
 
         using char_type = typename string_type::value_type;
 
@@ -167,19 +166,14 @@ namespace bobura { namespace model { namespace serializer
             int         m_minor_version;
 
             file_type(string_type name, int major_version, int minor_version)
-            :
-            m_name(std::move(name)),
-            m_major_version(major_version),
-            m_minor_version(minor_version)
+            : m_name(std::move(name)), m_major_version(major_version), m_minor_version(minor_version)
             {}
-
         };
 
         class state
         {
         public:
-            virtual ~state()
-            = default;
+            virtual ~state() = default;
 
             bool parse(const string_type& line)
             {
@@ -217,86 +211,64 @@ namespace bobura { namespace model { namespace serializer
             {
                 return true;
             }
-
         };
 
         class unknown_state : public state
         {
         public:
-            virtual ~unknown_state()
-            = default;
-
+            virtual ~unknown_state() = default;
         };
 
         class initial_state : public state
         {
         public:
-            explicit initial_state(timetable_type& timetable)
-            :
-            m_timetable(timetable)
-            {}
+            explicit initial_state(timetable_type& timetable) : m_timetable(timetable) {}
 
-            virtual ~initial_state()
-            = default;
+            virtual ~initial_state() = default;
 
         private:
             timetable_type& m_timetable;
 
-            virtual bool parse_impl(const string_type& key, string_type value)
-            override
+            virtual bool parse_impl(const string_type& key, string_type value) override
             {
                 if (key == string_type{ TETENGO2_TEXT("Comment") })
                     m_timetable.set_note(std::move(value));
 
                 return true;
             }
-
         };
 
         class rosen_state : public state
         {
         public:
-            explicit rosen_state(timetable_type& timetable)
-            :
-            m_timetable(timetable)
-            {}
+            explicit rosen_state(timetable_type& timetable) : m_timetable(timetable) {}
 
-            virtual ~rosen_state()
-            = default;
+            virtual ~rosen_state() = default;
 
         private:
             timetable_type& m_timetable;
 
-            virtual bool parse_impl(const string_type& key, string_type value)
-            override
+            virtual bool parse_impl(const string_type& key, string_type value) override
             {
                 if (key == string_type{ TETENGO2_TEXT("Rosenmei") })
                     m_timetable.set_line_name(std::move(value));
 
                 return true;
             }
-
         };
 
         class eki_state : public state
         {
         public:
             explicit eki_state(timetable_type& timetable)
-            :
-            m_timetable(timetable),
-            m_ekimei(),
-            m_ekijikokukeisiki(),
-            m_ekikibo()
+            : m_timetable(timetable), m_ekimei(), m_ekijikokukeisiki(), m_ekikibo()
             {}
 
-            virtual ~eki_state()
-            = default;
+            virtual ~eki_state() = default;
 
         private:
-            static const station_grade_type& to_station_grade(
-                const string_type& ekijikokukeisiki,
-                const string_type& ekikibo
-            )
+            static const station_grade_type&
+            to_station_grade(const string_type& ekijikokukeisiki, const string_type& ekikibo)
             {
                 const auto both_arrival_and_departure =
                     ekijikokukeisiki == string_type{ TETENGO2_TEXT("Jikokukeisiki_Hatsuchaku") };
@@ -336,8 +308,7 @@ namespace bobura { namespace model { namespace serializer
 
             string_type m_ekikibo;
 
-            virtual bool parse_impl(const string_type& key, string_type value)
-            override
+            virtual bool parse_impl(const string_type& key, string_type value) override
             {
                 if (key == string_type{ TETENGO2_TEXT("Ekimei") })
                     m_ekimei = std::move(value);
@@ -349,44 +320,32 @@ namespace bobura { namespace model { namespace serializer
                 return true;
             }
 
-            virtual bool leaving_impl()
-            override
+            virtual bool leaving_impl() override
             {
                 m_timetable.insert_station_location(
                     m_timetable.station_locations().end(),
-                    station_location_type{
-                        station_type{
-                            std::move(m_ekimei),
-                            to_station_grade(m_ekijikokukeisiki, m_ekikibo),
-                            shows_down_arrival_times(m_ekijikokukeisiki),
-                            shows_up_arrival_times(m_ekijikokukeisiki),
-                            string_type{}
-                        },
-                        m_timetable.station_locations().empty() ?
-                        0 : m_timetable.station_locations().back().operating_distance() + 1U
-                    }
-                );
+                    station_location_type{ station_type{ std::move(m_ekimei),
+                                                         to_station_grade(m_ekijikokukeisiki, m_ekikibo),
+                                                         shows_down_arrival_times(m_ekijikokukeisiki),
+                                                         shows_up_arrival_times(m_ekijikokukeisiki),
+                                                         string_type{} },
+                                           m_timetable.station_locations().empty() ?
+                                               0 :
+                                               m_timetable.station_locations().back().operating_distance() + 1U });
 
                 return true;
             }
-
         };
 
         class ressyasyubetsu_state : public state
         {
         public:
             explicit ressyasyubetsu_state(timetable_type& timetable)
-            :
-            m_timetable(timetable),
-            m_syubetsumei(),
-            m_ryakusyou(),
-            m_diagram_sen_color(),
-            m_diagram_sen_style(),
-            m_diagram_sen_is_bold()
+            : m_timetable(timetable), m_syubetsumei(), m_ryakusyou(), m_diagram_sen_color(), m_diagram_sen_style(),
+              m_diagram_sen_is_bold()
             {}
 
-            virtual ~ressyasyubetsu_state()
-            = default;
+            virtual ~ressyasyubetsu_state() = default;
 
         private:
             using weight_type = typename train_kind_type::weight_type;
@@ -403,7 +362,7 @@ namespace bobura { namespace model { namespace serializer
 
             static line_style_type to_line_style(const string_type& line_style_string)
             {
-                if      (line_style_string == string_type{ TETENGO2_TEXT("SenStyle_Hasen") })
+                if (line_style_string == string_type{ TETENGO2_TEXT("SenStyle_Hasen") })
                     return line_style_type::dashed;
                 else if (line_style_string == string_type{ TETENGO2_TEXT("SenStyle_Tensen") })
                     return line_style_type::dotted;
@@ -425,8 +384,7 @@ namespace bobura { namespace model { namespace serializer
 
             string_type m_diagram_sen_is_bold;
 
-            virtual bool parse_impl(const string_type& key, string_type value)
-            override
+            virtual bool parse_impl(const string_type& key, string_type value) override
             {
                 if (key == string_type{ TETENGO2_TEXT("Syubetsumei") })
                     m_syubetsumei = std::move(value);
@@ -442,8 +400,7 @@ namespace bobura { namespace model { namespace serializer
                 return true;
             }
 
-            virtual bool leaving_impl()
-            override
+            virtual bool leaving_impl() override
             {
                 auto abbreviation = m_ryakusyou.empty() ? m_syubetsumei : std::move(m_ryakusyou);
                 auto color = to_color(m_diagram_sen_color);
@@ -451,110 +408,81 @@ namespace bobura { namespace model { namespace serializer
                     return false;
                 m_timetable.insert_train_kind(
                     m_timetable.train_kinds().end(),
-                    train_kind_type{
-                        std::move(m_syubetsumei),
-                        std::move(abbreviation),
-                        train_kind_type::default_().diagram_font(),
-                        std::move(*color),
-                        to_weight(m_diagram_sen_is_bold),
-                        to_line_style(m_diagram_sen_style),
-                        train_kind_type::default_().timetable_font(),
-                        train_kind_type::default_().timetable_color()
-                    }
-                );
+                    train_kind_type{ std::move(m_syubetsumei),
+                                     std::move(abbreviation),
+                                     train_kind_type::default_().diagram_font(),
+                                     std::move(*color),
+                                     to_weight(m_diagram_sen_is_bold),
+                                     to_line_style(m_diagram_sen_style),
+                                     train_kind_type::default_().timetable_font(),
+                                     train_kind_type::default_().timetable_color() });
 
                 return true;
             }
-
         };
 
         class dia_state : public state
         {
         public:
-            explicit dia_state(string_type& current_diagram_name)
-            :
-            m_current_diagram_name(current_diagram_name)
-            {}
+            explicit dia_state(string_type& current_diagram_name) : m_current_diagram_name(current_diagram_name) {}
 
-            virtual ~dia_state()
-            = default;
+            virtual ~dia_state() = default;
 
         private:
             string_type& m_current_diagram_name;
 
-            virtual bool parse_impl(const string_type& key, string_type value)
-            override
+            virtual bool parse_impl(const string_type& key, string_type value) override
             {
                 if (key == string_type{ TETENGO2_TEXT("DiaName") })
                     m_current_diagram_name = std::move(value);
 
                 return true;
             }
-
         };
 
         class kudari_state : public state
         {
         public:
-            explicit kudari_state(direction_type& direction)
-            :
-            m_direction(direction)
-            {}
+            explicit kudari_state(direction_type& direction) : m_direction(direction) {}
 
-            virtual ~kudari_state()
-            = default;
+            virtual ~kudari_state() = default;
 
         private:
             direction_type& m_direction;
 
-            virtual bool entered_impl()
-            override
+            virtual bool entered_impl() override
             {
                 m_direction = direction_type::down;
                 return true;
             }
-
         };
 
         class nobori_state : public state
         {
         public:
-            explicit nobori_state(direction_type& direction)
-            :
-            m_direction(direction)
-            {}
+            explicit nobori_state(direction_type& direction) : m_direction(direction) {}
 
-            virtual ~nobori_state()
-            = default;
+            virtual ~nobori_state() = default;
 
         private:
             direction_type& m_direction;
 
-            virtual bool entered_impl()
-            override
+            virtual bool entered_impl() override
             {
                 m_direction = direction_type::up;
                 return true;
             }
-
         };
 
         class ressya_state : public state
         {
         public:
             explicit ressya_state(timetable_type& timetable, const direction_type direction)
-            :
-            m_timetable(timetable),
-            m_direction(direction),
-            m_syubetsu(),
-            m_ressyabangou(),
-            m_ressyamei(),
-            m_gousuu(),
-            m_eki_jikoku()
+            : m_timetable(timetable), m_direction(direction), m_syubetsu(), m_ressyabangou(), m_ressyamei(), m_gousuu(),
+              m_eki_jikoku()
             {}
 
-            virtual ~ressya_state()
-            = default;
+            virtual ~ressya_state() = default;
 
         private:
             using stop_type = typename train_type::stop_type;
@@ -565,29 +493,24 @@ namespace bobura { namespace model { namespace serializer
             {
                 train_type& m_train;
 
-                explicit insert_stop(train_type& train)
-                :
-                m_train(train)
-                {}
+                explicit insert_stop(train_type& train) : m_train(train) {}
 
                 void operator()(stop_type& stop)
                 {
                     m_train.insert_stop(m_train.stops().end(), std::move(stop));
                 }
-
             };
 
             static boost::optional<std::vector<stop_type>> parse_stops(
                 const string_type&                               stops_string,
                 const typename std::vector<stop_type>::size_type station_location_count,
-                const bool                                       direction_down
-            )
+                const bool                                       direction_down)
             {
                 const auto stop_strings = split(stops_string, char_type(TETENGO2_TEXT(',')));
 
                 std::vector<stop_type> stops{};
                 stops.reserve(stop_strings.size());
-                for (const auto& stop_string: stop_strings)
+                for (const auto& stop_string : stop_strings)
                 {
                     auto stop = parse_stop(stop_string);
                     if (!stop)
@@ -600,9 +523,8 @@ namespace bobura { namespace model { namespace serializer
                 std::fill_n(
                     std::back_inserter(stops),
                     station_location_count - stops.size(),
-                    stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{})
-                );
-                
+                    stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{}));
+
                 if (!direction_down)
                     std::reverse(stops.begin(), stops.end());
 
@@ -642,10 +564,8 @@ namespace bobura { namespace model { namespace serializer
                         return boost::none;
                 }
 
-                return
-                    boost::make_optional(
-                        stop_type(std::move(*arrival), std::move(*departure), operational, string_type{})
-                    );
+                return boost::make_optional(
+                    stop_type(std::move(*arrival), std::move(*departure), operational, string_type{}));
             }
 
             static boost::optional<time_type> parse_time(const string_type& time_string)
@@ -655,16 +575,14 @@ namespace bobura { namespace model { namespace serializer
                 if (time_string.size() > 4)
                     return boost::none;
 
-                const auto hours =
-                    time_string.length() > 2 ?
-                    to_number<unsigned int>(time_string.substr(0, time_string.length() - 2)) :
-                    boost::make_optional<unsigned int>(0);
+                const auto hours = time_string.length() > 2 ?
+                                       to_number<unsigned int>(time_string.substr(0, time_string.length() - 2)) :
+                                       boost::make_optional<unsigned int>(0);
                 if (!hours || *hours >= 24)
                     return boost::none;
-                const auto minutes =
-                    time_string.length() > 2 ?
-                    to_number<unsigned int>(time_string.substr(time_string.length() - 2)) :
-                    to_number<unsigned int>(time_string);
+                const auto minutes = time_string.length() > 2 ?
+                                         to_number<unsigned int>(time_string.substr(time_string.length() - 2)) :
+                                         to_number<unsigned int>(time_string);
                 if (!minutes || *minutes >= 60)
                     return boost::none;
 
@@ -689,10 +607,9 @@ namespace bobura { namespace model { namespace serializer
 
             string_type m_bikou;
 
-            virtual bool parse_impl(const string_type& key, string_type value)
-            override
+            virtual bool parse_impl(const string_type& key, string_type value) override
             {
-                if      (key == string_type{ TETENGO2_TEXT("Houkou") })
+                if (key == string_type{ TETENGO2_TEXT("Houkou") })
                     m_houkou = std::move(value);
                 else if (key == string_type{ TETENGO2_TEXT("Syubetsu") })
                     m_syubetsu = std::move(value);
@@ -710,8 +627,7 @@ namespace bobura { namespace model { namespace serializer
                 return true;
             }
 
-            virtual bool leaving_impl()
-            override
+            virtual bool leaving_impl() override
             {
                 if (m_houkou.empty() || m_syubetsu.empty())
                     return true;
@@ -722,12 +638,10 @@ namespace bobura { namespace model { namespace serializer
 
                 train_type train{ m_direction, m_ressyabangou, *train_kind_index, m_ressyamei, m_gousuu, m_bikou };
 
-                auto stops =
-                    parse_stops(
-                        m_eki_jikoku,
-                        m_timetable.station_locations().size(),
-                        m_houkou == string_type{ TETENGO2_TEXT("Kudari") }
-                    );
+                auto stops = parse_stops(
+                    m_eki_jikoku,
+                    m_timetable.station_locations().size(),
+                    m_houkou == string_type{ TETENGO2_TEXT("Kudari") });
                 if (!stops || stops->size() != m_timetable.station_locations().size())
                     return false;
                 std::for_each(stops->begin(), stops->end(), insert_stop(train));
@@ -739,7 +653,6 @@ namespace bobura { namespace model { namespace serializer
 
                 return true;
             }
-
         };
 
 
@@ -778,7 +691,7 @@ namespace bobura { namespace model { namespace serializer
         {
             skip_line_breaks(first, last);
             const auto next_line_break = std::find_if(first, last, line_break);
-            auto line = encoder().decode(input_string_type{ first, next_line_break });
+            auto       line = encoder().decode(input_string_type{ first, next_line_break });
             first = next_line_break;
             return line;
         }
@@ -791,9 +704,8 @@ namespace bobura { namespace model { namespace serializer
 
         static bool line_break(const input_char_type character)
         {
-            return
-                character == input_char_type(TETENGO2_TEXT('\r')) ||
-                character == input_char_type(TETENGO2_TEXT('\n'));
+            return character == input_char_type(TETENGO2_TEXT('\r')) ||
+                   character == input_char_type(TETENGO2_TEXT('\n'));
         }
 
         template <typename T>
@@ -823,21 +735,16 @@ namespace bobura { namespace model { namespace serializer
             const auto blue = from_hex_string<unsigned int>(color_string.substr(6, 2));
             if (!blue)
                 return boost::none;
-            return
-                boost::make_optional(
-                    color_type{
-                        static_cast<unsigned char>(*red),
-                        static_cast<unsigned char>(*green),
-                        static_cast<unsigned char>(*blue)
-                    }
-                );
+            return boost::make_optional(color_type{ static_cast<unsigned char>(*red),
+                                                    static_cast<unsigned char>(*green),
+                                                    static_cast<unsigned char>(*blue) });
         }
 
         template <typename T>
         static boost::optional<T> from_hex_string(const string_type& hex_string)
         {
             std::basic_istringstream<char_type> stream{ hex_string };
-            T result = 0;
+            T                                   result = 0;
             stream >> std::hex >> result;
             return boost::make_optional(stream.eof() || stream.good(), std::move(result));
         }
@@ -847,8 +754,7 @@ namespace bobura { namespace model { namespace serializer
             timetable_type&    timetable,
             const string_type& selected_diagram_name,
             string_type&       current_diagram_name,
-            direction_type&    direction
-        )
+            direction_type&    direction)
         {
             if (line.empty() || line[line.length() - 1] != char_type(TETENGO2_TEXT('.')))
                 return std::unique_ptr<state>{};
@@ -876,7 +782,7 @@ namespace bobura { namespace model { namespace serializer
             }
             else if (!current_diagram_name.empty() && current_diagram_name == selected_diagram_name)
             {
-                if      (name == string_view_type(TETENGO2_TEXT("Kudari")))
+                if (name == string_view_type(TETENGO2_TEXT("Kudari")))
                     return tetengo2::stdalt::make_unique<kudari_state>(direction);
                 else if (name == string_view_type(TETENGO2_TEXT("Nobori")))
                     return tetengo2::stdalt::make_unique<nobori_state>(direction);
@@ -920,8 +826,8 @@ namespace bobura { namespace model { namespace serializer
 
         static file_type parse_file_type(const string_type& file_type_string)
         {
-            auto splitted = split(file_type_string, char_type(TETENGO2_TEXT('.')));
-            auto name = splitted.size() >= 1 ? std::move(splitted[0]) : string_type{};
+            auto       splitted = split(file_type_string, char_type(TETENGO2_TEXT('.')));
+            auto       name = splitted.size() >= 1 ? std::move(splitted[0]) : string_type{};
             const auto major_version = splitted.size() >= 2 ? to_number<int>(splitted[1]) : boost::none;
             const auto minor_version = splitted.size() >= 3 ? to_number<int>(splitted[2]) : boost::none;
             return file_type(std::move(name), major_version ? *major_version : 0, minor_version ? *minor_version : 0);
@@ -952,15 +858,14 @@ namespace bobura { namespace model { namespace serializer
             const iterator     first,
             const iterator     last,
             error_type&        error,
-            const string_type& selected_diagram_name
-        )
+            const string_type& selected_diagram_name)
         {
-            auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
+            auto        p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
             string_type current_diagram_name{};
-            auto direction = direction_type::down;
+            auto        direction = direction_type::down;
 
             std::unique_ptr<state> p_state = tetengo2::stdalt::make_unique<initial_state>(*p_timetable);
-            auto next_line_first = first;
+            auto                   next_line_first = first;
             for (;;)
             {
                 const auto input_line = next_line(next_line_first, last);
@@ -1001,8 +906,6 @@ namespace bobura { namespace model { namespace serializer
 
             return std::move(p_timetable);
         }
-
-
     };
 
 
@@ -1015,14 +918,10 @@ namespace bobura { namespace model { namespace serializer
         typename Speed,
         typename SelectDiagram,
         typename Font,
-        typename Encoder
-    >
-    oudia_reader<
-        Size, Difference, String, ForwardIterator, OperatingDistance, Speed, SelectDiagram, Font, Encoder
-    >::oudia_reader(std::unique_ptr<select_diagram_type> p_select_diagram)
-    :
-    base_type(),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(p_select_diagram)))
+        typename Encoder>
+    oudia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, SelectDiagram, Font, Encoder>::
+        oudia_reader(std::unique_ptr<select_diagram_type> p_select_diagram)
+    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(p_select_diagram)))
     {}
 
     template <
@@ -1034,12 +933,9 @@ namespace bobura { namespace model { namespace serializer
         typename Speed,
         typename SelectDiagram,
         typename Font,
-        typename Encoder
-    >
-    oudia_reader<
-        Size, Difference, String, ForwardIterator, OperatingDistance, Speed, SelectDiagram, Font, Encoder
-    >::~oudia_reader()
-    noexcept
+        typename Encoder>
+    oudia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, SelectDiagram, Font, Encoder>::
+        ~oudia_reader() noexcept
     {}
 
     template <
@@ -1051,12 +947,10 @@ namespace bobura { namespace model { namespace serializer
         typename Speed,
         typename SelectDiagram,
         typename Font,
-        typename Encoder
-    >
+        typename Encoder>
     bool
-    oudia_reader<
-        Size, Difference, String, ForwardIterator, OperatingDistance, Speed, SelectDiagram, Font, Encoder
-    >::selects_impl(const iterator first, const iterator last)
+    oudia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, SelectDiagram, Font, Encoder>::
+        selects_impl(const iterator first, const iterator last)
     {
         return m_p_impl->selects_impl(first, last);
     }
@@ -1070,24 +964,27 @@ namespace bobura { namespace model { namespace serializer
         typename Speed,
         typename SelectDiagram,
         typename Font,
-        typename Encoder
-    >
+        typename Encoder>
     std::unique_ptr<typename oudia_reader<
-        Size, Difference, String, ForwardIterator, OperatingDistance, Speed, SelectDiagram, Font, Encoder
-    >::timetable_type>
-    oudia_reader<
-        Size, Difference, String, ForwardIterator, OperatingDistance, Speed, SelectDiagram, Font, Encoder
-    >::read_impl(const iterator first, const iterator last, error_type& error)
+        Size,
+        Difference,
+        String,
+        ForwardIterator,
+        OperatingDistance,
+        Speed,
+        SelectDiagram,
+        Font,
+        Encoder>::timetable_type>
+    oudia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, SelectDiagram, Font, Encoder>::
+        read_impl(const iterator first, const iterator last, error_type& error)
     {
         return m_p_impl->read_impl(first, last, error);
     }
 
 
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using common_type_list_type = type_list::common;
@@ -1098,19 +995,13 @@ namespace bobura { namespace model { namespace serializer
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
-            using select_oudia_diagram_type =
-                select_oudia_diagram<
-                    oudia_diagram_dialog<
-                        typename type_list::traits<detail_type_list_type>::dialog_type,
-                        typename type_list::common::size_type
-                    >
-                >;
-
+            using select_oudia_diagram_type = select_oudia_diagram<oudia_diagram_dialog<
+                typename type_list::traits<detail_type_list_type>::dialog_type,
+                typename type_list::common::size_type>>;
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using common_type_list_type = type_list::common;
@@ -1121,19 +1012,13 @@ namespace bobura { namespace model { namespace serializer
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
 
-            using select_oudia_diagram_type =
-                select_oudia_diagram<
-                    oudia_diagram_dialog<
-                        typename type_list::traits<detail_type_list_type>::dialog_type,
-                        typename type_list::common::size_type
-                    >
-                >;
+            using select_oudia_diagram_type = select_oudia_diagram<oudia_diagram_dialog<
+                typename type_list::traits<detail_type_list_type>::dialog_type,
+                typename type_list::common::size_type>>;
 
             using select_oudia_diagram_for_test_type =
                 select_oudia_diagram_for_test<typename type_list::common::string_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -1146,8 +1031,7 @@ namespace bobura { namespace model { namespace serializer
         typename application::common_type_list_type::speed_type,
         application::select_oudia_diagram_type,
         typename application::ui_type_list_type::fast_font_type,
-        typename application::locale_type_list_type::windia_file_encoder_type
-    >;
+        typename application::locale_type_list_type::windia_file_encoder_type>;
 #endif
 
     template class oudia_reader<
@@ -1159,8 +1043,7 @@ namespace bobura { namespace model { namespace serializer
         typename test::common_type_list_type::speed_type,
         test::select_oudia_diagram_type,
         typename test::ui_type_list_type::font_type,
-        typename test::locale_type_list_type::windia_file_encoder_type
-    >;
+        typename test::locale_type_list_type::windia_file_encoder_type>;
 
     template class oudia_reader<
         typename test::common_type_list_type::size_type,
@@ -1171,8 +1054,7 @@ namespace bobura { namespace model { namespace serializer
         typename test::common_type_list_type::speed_type,
         test::select_oudia_diagram_for_test_type,
         typename test::ui_type_list_type::font_type,
-        typename test::locale_type_list_type::windia_file_encoder_type
-    >;
+        typename test::locale_type_list_type::windia_file_encoder_type>;
 
 
 }}}

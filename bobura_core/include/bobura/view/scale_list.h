@@ -15,8 +15,7 @@
 #include <boost/optional.hpp>
 
 
-namespace bobura { namespace view
-{
+namespace bobura { namespace view {
     /*!
         \brief The class template for a view scale list.
 
@@ -60,8 +59,7 @@ namespace bobura { namespace view
 
             \return The scale count.
         */
-        size_type size()
-        const;
+        size_type size() const;
 
         /*!
             \brief Returns the scale at the specified index.
@@ -72,8 +70,7 @@ namespace bobura { namespace view
 
             \throw std::out_of_range When index is out of range.
         */
-        const scale_type& at(size_type index)
-        const;
+        const scale_type& at(size_type index) const;
 
         /*!
             \brief Returns the scale label at the specified index.
@@ -84,8 +81,7 @@ namespace bobura { namespace view
 
             \throw std::out_of_range When index is out of range.
         */
-        const string_type& label_at(size_type index)
-        const;
+        const string_type& label_at(size_type index) const;
 
         /*!
             \brief Returns the same scale index.
@@ -94,28 +90,25 @@ namespace bobura { namespace view
 
             \return The same scale index.
         */
-        boost::optional<size_type> index_of(const scale_type& scale)
-        const;
+        boost::optional<size_type> index_of(const scale_type& scale) const;
 
         /*!
             \brief Returns the nearest larger scale.
-        
+
             \param scale A scale.
 
             \return The nearest larger scale.
         */
-        const scale_type& larger(const scale_type& scale)
-        const;
+        const scale_type& larger(const scale_type& scale) const;
 
         /*!
             \brief Returns the nearest smaller scale.
-        
+
             \param scale A scale.
 
             \return The nearest smaller scale.
         */
-        const scale_type& smaller(const scale_type& scale)
-        const;
+        const scale_type& smaller(const scale_type& scale) const;
 
 
     private:
@@ -127,8 +120,6 @@ namespace bobura { namespace view
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
 
 

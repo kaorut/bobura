@@ -26,8 +26,7 @@
 #include <bobura/view/diagram/train_line.h>
 
 
-namespace bobura
-{
+namespace bobura {
     template <typename Traits>
     class diagram_view<Traits>::impl : private boost::noncopyable
     {
@@ -56,33 +55,17 @@ namespace bobura
         // constructors and destructor
 
         impl(const model_type& model, const message_catalog_type& message_catalog)
-        :
-        m_model(model),
-        m_message_catalog(message_catalog),
-        m_selection(),
-        m_horizontal_scale(1),
-        m_vertical_scale(1),
-        m_dimension(),
-        m_header_height(0),
-        m_time_header_height(3),
-        m_station_header_width(8),
-        m_time_offset(time_span_type{ 3, 0, 0 }),
-        m_station_intervals(),
-        m_station_positions(),
-        m_p_header(),
-        m_p_time_line_list(),
-        m_p_station_line_list(),
-        m_p_train_line_list()
+        : m_model(model), m_message_catalog(message_catalog), m_selection(), m_horizontal_scale(1), m_vertical_scale(1),
+          m_dimension(), m_header_height(0), m_time_header_height(3), m_station_header_width(8),
+          m_time_offset(time_span_type{ 3, 0, 0 }), m_station_intervals(), m_station_positions(), m_p_header(),
+          m_p_time_line_list(), m_p_station_line_list(), m_p_train_line_list()
         {}
 
 
         // functions
 
-        void draw_on(
-            canvas_type&          canvas,
-            const dimension_type& canvas_dimension,
-            const position_type&  scroll_bar_position
-        )
+        void
+        draw_on(canvas_type& canvas, const dimension_type& canvas_dimension, const position_type& scroll_bar_position)
         {
             clear_background(canvas, canvas_dimension);
 
@@ -93,8 +76,7 @@ namespace bobura
             m_p_train_line_list->draw_on(canvas);
         }
 
-        const scale_type& horizontal_scale()
-        const
+        const scale_type& horizontal_scale() const
         {
             return m_horizontal_scale;
         }
@@ -105,8 +87,7 @@ namespace bobura
             update_dimension();
         }
 
-        const scale_type& vertical_scale()
-        const
+        const scale_type& vertical_scale() const
         {
             return m_vertical_scale;
         }
@@ -117,8 +98,7 @@ namespace bobura
             update_dimension();
         }
 
-        const dimension_type& dimension()
-        const
+        const dimension_type& dimension() const
         {
             return m_dimension;
         }
@@ -140,15 +120,14 @@ namespace bobura
 
                 return;
             }
-            
+
             std::vector<position_unit_type> positions{};
             positions.reserve(m_station_intervals.size());
             std::transform(
                 m_station_intervals.begin(),
                 m_station_intervals.end(),
                 std::back_inserter(positions),
-                to_station_position(m_vertical_scale)
-            );
+                to_station_position(m_vertical_scale));
 
             m_station_positions = std::move(positions);
             m_dimension = dimension_type{ width, dimension_unit_type::from(m_station_positions.back()) };
@@ -159,23 +138,20 @@ namespace bobura
             m_p_train_line_list.reset();
         }
 
-        dimension_type page_size(const dimension_type& canvas_dimension)
-        const
+        dimension_type page_size(const dimension_type& canvas_dimension) const
         {
             const auto& canvas_width = canvas_dimension.width();
             const auto& header_width = m_station_header_width;
-            auto page_width = canvas_width > header_width ? canvas_width - header_width : dimension_unit_type{};
+            auto        page_width = canvas_width > header_width ? canvas_width - header_width : dimension_unit_type{};
 
             const auto& canvas_height = canvas_dimension.height();
-            const auto header_height = m_header_height + m_time_header_height;
-            auto page_height =
-                canvas_height > header_height ? canvas_height - header_height : dimension_unit_type{};
+            const auto  header_height = m_header_height + m_time_header_height;
+            auto page_height = canvas_height > header_height ? canvas_height - header_height : dimension_unit_type{};
 
             return { std::move(page_width), std::move(page_height) };
         }
 
-        const item_type* p_item_by_position(const diagram_view& self, const position_type& position)
-        const
+        const item_type* p_item_by_position(const diagram_view& self, const position_type& position) const
         {
             return const_cast<diagram_view*>(&self)->p_item_by_position(position);
         }
@@ -200,7 +176,7 @@ namespace bobura
             if (m_p_train_line_list)
             {
                 if (auto* const p_item = m_p_train_line_list->p_item_by_position(position))
-                return p_item;
+                    return p_item;
             }
 
             return nullptr;
@@ -211,8 +187,7 @@ namespace bobura
             m_selection.unselect_all();
         }
 
-        const selection_observer_set_type& selection_observer_set()
-        const
+        const selection_observer_set_type& selection_observer_set() const
         {
             return m_selection.selection_observer_set();
         }
@@ -257,26 +232,21 @@ namespace bobura
         class to_station_position
         {
         public:
-            explicit to_station_position(const scale_type& vertical_scale)
-            :
-            m_vertical_scale(vertical_scale),
-            m_sum(0)
+            explicit to_station_position(const scale_type& vertical_scale) : m_vertical_scale(vertical_scale), m_sum(0)
             {}
 
             position_unit_type operator()(const time_span_type& interval)
             {
                 const auto position = m_sum;
                 m_sum += interval;
-                return
-                    position_unit_type{ typename position_unit_type::value_type{ position.seconds(), 60 } } *
-                    position_unit_type::from(dimension_unit_type{ m_vertical_scale }).value();
+                return position_unit_type{ typename position_unit_type::value_type{ position.seconds(), 60 } } *
+                       position_unit_type::from(dimension_unit_type{ m_vertical_scale }).value();
             }
 
         private:
             const scale_type& m_vertical_scale;
 
             time_span_type m_sum;
-
         };
 
 
@@ -317,22 +287,17 @@ namespace bobura
 
         // functions
 
-        void clear_background(canvas_type& canvas, const dimension_type& canvas_dimension)
-        const
+        void clear_background(canvas_type& canvas, const dimension_type& canvas_dimension) const
         {
-            canvas.set_background(
-                tetengo2::stdalt::make_unique<const solid_background_type>(
-                    *m_model.timetable().font_color_set().background().diagram_color()
-                )
-            );
+            canvas.set_background(tetengo2::stdalt::make_unique<const solid_background_type>(
+                *m_model.timetable().font_color_set().background().diagram_color()));
             canvas.fill_rectangle(position_type{}, canvas_dimension);
         }
 
         void ensure_items_created(
             canvas_type&          canvas,
             const dimension_type& canvas_dimension,
-            const position_type&  scroll_bar_position
-        )
+            const position_type&  scroll_bar_position)
         {
             if (m_p_header)
             {
@@ -342,77 +307,65 @@ namespace bobura
 
             m_p_header = tetengo2::stdalt::make_unique<header_type>(m_model, m_selection, canvas, canvas_dimension);
             m_header_height = m_p_header->dimension().height();
-            m_p_time_line_list =
-                tetengo2::stdalt::make_unique<time_line_list_type>(
-                    m_model,
-                    m_time_offset,
-                    m_selection,
-                    canvas_dimension,
-                    m_dimension,
-                    scroll_bar_position,
-                    position_unit_type::from(m_station_header_width),
-                    position_unit_type::from(m_header_height),
-                    m_time_header_height,
-                    m_horizontal_scale
-                );
-            m_p_station_line_list =
-                tetengo2::stdalt::make_unique<station_line_list_type>(
-                    m_model,
-                    m_time_offset,
-                    m_selection,
-                    canvas_dimension,
-                    scroll_bar_position,
-                    position_unit_type::from(m_station_header_width),
-                    position_unit_type::from(m_header_height),
-                    m_time_header_height,
-                    m_horizontal_scale,
-                    m_station_positions
-                );
-            m_p_train_line_list =
-                tetengo2::stdalt::make_unique<train_line_list_type>(
-                    m_model,
-                    m_time_offset,
-                    m_selection,
-                    canvas_dimension,
-                    scroll_bar_position,
-                    position_unit_type::from(m_station_header_width),
-                    position_unit_type::from(m_header_height),
-                    m_time_header_height,
-                    m_horizontal_scale,
-                    m_station_intervals,
-                    m_station_positions,
-                    m_message_catalog
-                );
+            m_p_time_line_list = tetengo2::stdalt::make_unique<time_line_list_type>(
+                m_model,
+                m_time_offset,
+                m_selection,
+                canvas_dimension,
+                m_dimension,
+                scroll_bar_position,
+                position_unit_type::from(m_station_header_width),
+                position_unit_type::from(m_header_height),
+                m_time_header_height,
+                m_horizontal_scale);
+            m_p_station_line_list = tetengo2::stdalt::make_unique<station_line_list_type>(
+                m_model,
+                m_time_offset,
+                m_selection,
+                canvas_dimension,
+                scroll_bar_position,
+                position_unit_type::from(m_station_header_width),
+                position_unit_type::from(m_header_height),
+                m_time_header_height,
+                m_horizontal_scale,
+                m_station_positions);
+            m_p_train_line_list = tetengo2::stdalt::make_unique<train_line_list_type>(
+                m_model,
+                m_time_offset,
+                m_selection,
+                canvas_dimension,
+                scroll_bar_position,
+                position_unit_type::from(m_station_header_width),
+                position_unit_type::from(m_header_height),
+                m_time_header_height,
+                m_horizontal_scale,
+                m_station_intervals,
+                m_station_positions,
+                m_message_catalog);
         }
-
-
     };
 
 
     template <typename Traits>
     diagram_view<Traits>::diagram_view(const model_type& model, const message_catalog_type& message_catalog)
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(model, message_catalog))
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(model, message_catalog))
     {}
 
     template <typename Traits>
-    diagram_view<Traits>::~diagram_view()
-    noexcept
+    diagram_view<Traits>::~diagram_view() noexcept
     {}
 
     template <typename Traits>
     void diagram_view<Traits>::draw_on(
         canvas_type&          canvas,
         const dimension_type& canvas_dimension,
-        const position_type&  scroll_bar_position
-    )
+        const position_type&  scroll_bar_position)
     {
         m_p_impl->draw_on(canvas, canvas_dimension, scroll_bar_position);
     }
 
     template <typename Traits>
-    const typename diagram_view<Traits>::scale_type& diagram_view<Traits>::horizontal_scale()
-    const
+    const typename diagram_view<Traits>::scale_type& diagram_view<Traits>::horizontal_scale() const
     {
         return m_p_impl->horizontal_scale();
     }
@@ -424,8 +377,7 @@ namespace bobura
     }
 
     template <typename Traits>
-    const typename diagram_view<Traits>::scale_type& diagram_view<Traits>::vertical_scale()
-    const
+    const typename diagram_view<Traits>::scale_type& diagram_view<Traits>::vertical_scale() const
     {
         return m_p_impl->vertical_scale();
     }
@@ -437,8 +389,7 @@ namespace bobura
     }
 
     template <typename Traits>
-    const typename diagram_view<Traits>::dimension_type& diagram_view<Traits>::dimension()
-    const
+    const typename diagram_view<Traits>::dimension_type& diagram_view<Traits>::dimension() const
     {
         return m_p_impl->dimension();
     }
@@ -450,19 +401,15 @@ namespace bobura
     }
 
     template <typename Traits>
-    typename diagram_view<Traits>::dimension_type diagram_view<Traits>::page_size(
-        const dimension_type& canvas_dimension
-    )
-    const
+    typename diagram_view<Traits>::dimension_type
+    diagram_view<Traits>::page_size(const dimension_type& canvas_dimension) const
     {
         return m_p_impl->page_size(canvas_dimension);
     }
 
     template <typename Traits>
-    const typename diagram_view<Traits>::item_type* diagram_view<Traits>::p_item_by_position(
-        const position_type& position
-    )
-    const
+    const typename diagram_view<Traits>::item_type*
+    diagram_view<Traits>::p_item_by_position(const position_type& position) const
     {
         return m_p_impl->p_item_by_position(*this, position);
     }
@@ -480,8 +427,8 @@ namespace bobura
     }
 
     template <typename Traits>
-    const typename diagram_view<Traits>::selection_observer_set_type& diagram_view<Traits>::selection_observer_set()
-    const
+    const typename diagram_view<Traits>::selection_observer_set_type&
+    diagram_view<Traits>::selection_observer_set() const
     {
         return m_p_impl->selection_observer_set();
     }
@@ -492,27 +439,21 @@ namespace bobura
         return m_p_impl->selection_observer_set();
     }
 
-        
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -520,6 +461,4 @@ namespace bobura
 #endif
 
     template class diagram_view<typename test::traits_type_list_type::diagram_view_type>;
-
-
 }

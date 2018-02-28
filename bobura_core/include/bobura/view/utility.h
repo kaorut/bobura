@@ -10,8 +10,7 @@
 #define BOBURA_VIEW_UTILITY_H
 
 
-namespace bobura { namespace view
-{
+namespace bobura { namespace view {
     // types
 
     /*!
@@ -28,8 +27,7 @@ namespace bobura { namespace view
     template <typename FontColorSet, typename StationGradeTypeSet>
     const typename FontColorSet::font_color_type& select_station_font_color(
         const FontColorSet&                             font_color_set,
-        const typename StationGradeTypeSet::grade_type& grade
-    );
+        const typename StationGradeTypeSet::grade_type& grade);
 
 
 }}

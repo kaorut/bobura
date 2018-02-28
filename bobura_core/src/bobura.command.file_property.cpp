@@ -16,8 +16,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     template <typename Traits, typename Dialog, typename MessageCatalog, typename DialogTraits>
     class file_property<Traits, Dialog, MessageCatalog, DialogTraits>::impl
     {
@@ -39,16 +38,12 @@ namespace bobura { namespace command
 
         // constructors and destructor
 
-        explicit impl(const message_catalog_type& message_catalog)
-        :
-        m_message_catalog(message_catalog)
-        {}
+        explicit impl(const message_catalog_type& message_catalog) : m_message_catalog(message_catalog) {}
 
 
         // functions
 
-        void execute(model_type& model, abstract_window_type& parent)
-        const
+        void execute(model_type& model, abstract_window_type& parent) const
         {
             file_property_dialog_type dialog{ parent, m_message_catalog };
 
@@ -77,63 +72,50 @@ namespace bobura { namespace command
         // variables
 
         const message_catalog_type& m_message_catalog;
-
-
     };
 
 
     template <typename Traits, typename Dialog, typename MessageCatalog, typename DialogTraits>
     file_property<Traits, Dialog, MessageCatalog, DialogTraits>::file_property(
-        const message_catalog_type& message_catalog
-    )
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
+        const message_catalog_type& message_catalog)
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
     {}
 
     template <typename Traits, typename Dialog, typename MessageCatalog, typename DialogTraits>
-    file_property<Traits, Dialog, MessageCatalog, DialogTraits>::~file_property()
-    noexcept
+    file_property<Traits, Dialog, MessageCatalog, DialogTraits>::~file_property() noexcept
     {}
-    
+
     template <typename Traits, typename Dialog, typename MessageCatalog, typename DialogTraits>
     void file_property<Traits, Dialog, MessageCatalog, DialogTraits>::execute_impl(
         model_type&           model,
-        abstract_window_type& parent
-    )
-    const
+        abstract_window_type& parent) const
     {
         m_p_impl->execute(model, parent);
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using locale_type_list_type = type_list::locale<detail_type_list_type>;
-    
+
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using locale_type_list_type = type_list::locale<detail_type_list_type>;
-    
+
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -141,16 +123,14 @@ namespace bobura { namespace command
         typename application::traits_type_list_type::command_type,
         typename application::ui_type_list_type::dialog_type,
         typename application::locale_type_list_type::message_catalog_type,
-        typename application::traits_type_list_type::dialog_type
-    >;
+        typename application::traits_type_list_type::dialog_type>;
 #endif
 
     template class file_property<
         typename test::traits_type_list_type::command_type,
         typename test::ui_type_list_type::dialog_type,
         typename test::locale_type_list_type::message_catalog_type,
-        typename test::traits_type_list_type::dialog_type
-    >;
+        typename test::traits_type_list_type::dialog_type>;
 
 
 }}

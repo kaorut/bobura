@@ -18,26 +18,24 @@
 #include <bobura/model/timetable.h>
 
 
-namespace bobura
-{
-   /*!
-        \brief The class template for a model.
+namespace bobura {
+    /*!
+         \brief The class template for a model.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Font              A font type.
-    */
+         \tparam Size              A size type.
+         \tparam Difference        A difference type.
+         \tparam String            A string type.
+         \tparam OperatingDistance An operating distance type.
+         \tparam Speed             A speed type.
+         \tparam Font              A font type.
+     */
     template <
         typename Size,
         typename Difference,
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     class timetable_model : private boost::noncopyable
     {
     public:
@@ -79,8 +77,7 @@ namespace bobura
         /*!
             \brief Destroys the model.
         */
-        ~timetable_model()
-        noexcept;
+        ~timetable_model() noexcept;
 
 
         // functions
@@ -90,8 +87,7 @@ namespace bobura
 
             \return The timetable.
         */
-        const timetable_type& timetable()
-        const;
+        const timetable_type& timetable() const;
 
         /*!
             \brief Returns the timetable.
@@ -130,8 +126,7 @@ namespace bobura
             \retval true  When the model has a path.
             \retval false Otherwise.
         */
-        bool has_path()
-        const;
+        bool has_path() const;
 
         /*!
             \brief Returns the path.
@@ -140,8 +135,7 @@ namespace bobura
 
             \throw std::logic_error When the model does not have a path.
         */
-        const boost::filesystem::path& path()
-        const;
+        const boost::filesystem::path& path() const;
 
         /*!
             \brief Sets a path.
@@ -156,8 +150,7 @@ namespace bobura
             \retval true  When the model is changed.
             \retval false Otherwise.
         */
-        bool changed()
-        const;
+        bool changed() const;
 
         /*!
             \brief Sets a changed status.
@@ -171,8 +164,7 @@ namespace bobura
 
             \return The observer set.
         */
-        const observer_set_type& observer_set()
-        const;
+        const observer_set_type& observer_set() const;
 
         /*!
             \brief Returns the observer set.
@@ -191,11 +183,7 @@ namespace bobura
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
-
-
 }
 
 #endif

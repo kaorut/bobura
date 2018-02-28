@@ -14,8 +14,7 @@
 #include <bobura/model/serializer/reader.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     /*!
         \brief The class template for a bzip2 reader.
 
@@ -34,10 +33,8 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
-    class bzip2_reader :
-        public reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>
+        typename Font>
+    class bzip2_reader : public reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>
     {
     public:
         // types
@@ -86,8 +83,7 @@ namespace bobura { namespace model { namespace serializer
         /*!
             \brief Destroys the bzip2_reader.
         */
-        virtual ~bzip2_reader()
-        noexcept;
+        virtual ~bzip2_reader() noexcept;
 
 
     private:
@@ -103,13 +99,9 @@ namespace bobura { namespace model { namespace serializer
 
         // virtual functions
 
-        virtual bool selects_impl(iterator first, iterator last)
-        override;
+        virtual bool selects_impl(iterator first, iterator last) override;
 
-        virtual std::unique_ptr<timetable_type> read_impl(iterator first, iterator last, error_type& error)
-        override;
-
-
+        virtual std::unique_ptr<timetable_type> read_impl(iterator first, iterator last, error_type& error) override;
     };
 
 

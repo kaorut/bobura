@@ -16,8 +16,7 @@
 #include <bobura/settings.h>
 
 
-namespace bobura
-{
+namespace bobura {
     /*!
         \brief The class template for the about dialog.
 
@@ -71,14 +70,12 @@ namespace bobura
             abstract_window_type&       parent,
             const message_catalog_type& message_catalog,
             const settings_type&        settings,
-            const detail_impl_set_type& detail_impl_set
-        );
+            const detail_impl_set_type& detail_impl_set);
 
         /*!
             \brief Destroys the about dialog.
         */
-        virtual ~about_dialog()
-        noexcept;
+        virtual ~about_dialog() noexcept;
 
 
     private:
@@ -90,11 +87,7 @@ namespace bobura
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
-
-
 }
 
 #endif

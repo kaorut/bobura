@@ -17,8 +17,7 @@
 #include <bobura/model/train_info/stop.h>
 
 
-namespace bobura { namespace model
-{
+namespace bobura { namespace model {
     /*!
         \brief The class template for a train.
 
@@ -51,7 +50,7 @@ namespace bobura { namespace model
         enum class direction_type
         {
             down, //!< Down.
-            up,   //!< Up.
+            up, //!< Up.
         };
 
 
@@ -73,16 +72,9 @@ namespace bobura { namespace model
             const size_type      kind_index,
             string_type          name,
             string_type          name_number,
-            string_type          note
-        )
-        :
-        m_direction(direction),
-        m_number(std::move(number)),
-        m_kind_index(kind_index),
-        m_name(std::move(name)),
-        m_name_number(std::move(name_number)),
-        m_note(std::move(note)),
-        m_stops()
+            string_type          note)
+        : m_direction(direction), m_number(std::move(number)), m_kind_index(kind_index), m_name(std::move(name)),
+          m_name_number(std::move(name_number)), m_note(std::move(note)), m_stops()
         {}
 
         /*!
@@ -105,16 +97,9 @@ namespace bobura { namespace model
             string_type          name,
             string_type          name_number,
             string_type          note,
-            stops_type           stops
-        )
-        :
-        m_direction(direction),
-        m_number(std::move(number)),
-        m_kind_index(kind_index),
-        m_name(std::move(name)),
-        m_name_number(std::move(name_number)),
-        m_note(std::move(note)),
-        m_stops(std::move(stops))
+            stops_type           stops)
+        : m_direction(direction), m_number(std::move(number)), m_kind_index(kind_index), m_name(std::move(name)),
+          m_name_number(std::move(name_number)), m_note(std::move(note)), m_stops(std::move(stops))
         {}
 
         /*!
@@ -140,16 +125,9 @@ namespace bobura { namespace model
             string_type          name_number,
             string_type          note,
             const InputIterator  stop_first,
-            const InputIterator  stop_last
-        )
-        :
-        m_direction(direction),
-        m_number(std::move(number)),
-        m_kind_index(kind_index),
-        m_name(std::move(name)),
-        m_name_number(std::move(name_number)),
-        m_note(std::move(note)),
-        m_stops(stop_first, stop_last)
+            const InputIterator  stop_last)
+        : m_direction(direction), m_number(std::move(number)), m_kind_index(kind_index), m_name(std::move(name)),
+          m_name_number(std::move(name_number)), m_note(std::move(note)), m_stops(stop_first, stop_last)
         {}
 
 
@@ -166,14 +144,10 @@ namespace bobura { namespace model
         */
         friend bool operator==(const train& one, const train& another)
         {
-            return
-                one.m_direction == another.m_direction &&
-                one.m_number == another.m_number &&
-                one.m_kind_index == another.m_kind_index &&
-                one.m_name == another.m_name &&
-                one.m_name_number == another.m_name_number &&
-                one.m_note == another.m_note &&
-                one.m_stops == another.m_stops;
+            return one.m_direction == another.m_direction && one.m_number == another.m_number &&
+                   one.m_kind_index == another.m_kind_index && one.m_name == another.m_name &&
+                   one.m_name_number == another.m_name_number && one.m_note == another.m_note &&
+                   one.m_stops == another.m_stops;
         }
 
         /*!
@@ -181,8 +155,7 @@ namespace bobura { namespace model
 
             \return The direction.
         */
-        direction_type direction()
-        const
+        direction_type direction() const
         {
             return m_direction;
         }
@@ -192,8 +165,7 @@ namespace bobura { namespace model
 
             \return The number.
         */
-        const string_type& number()
-        const
+        const string_type& number() const
         {
             return m_number;
         }
@@ -203,8 +175,7 @@ namespace bobura { namespace model
 
             \return The kind index.
         */
-        size_type kind_index()
-        const
+        size_type kind_index() const
         {
             return m_kind_index;
         }
@@ -224,8 +195,7 @@ namespace bobura { namespace model
 
             \return The name.
         */
-        const string_type& name()
-        const
+        const string_type& name() const
         {
             return m_name;
         }
@@ -235,8 +205,7 @@ namespace bobura { namespace model
 
             \return The name number.
         */
-        const string_type& name_number()
-        const
+        const string_type& name_number() const
         {
             return m_name_number;
         }
@@ -246,8 +215,7 @@ namespace bobura { namespace model
 
             \return The note.
         */
-        const string_type& note()
-        const
+        const string_type& note() const
         {
             return m_note;
         }
@@ -257,8 +225,7 @@ namespace bobura { namespace model
 
             \return The stops.
         */
-        const stops_type& stops()
-        const
+        const stops_type& stops() const
         {
             return m_stops;
         }
@@ -280,10 +247,8 @@ namespace bobura { namespace model
             \param first A first iterator among the erased stops.
             \param last  A last iterator among the erased stops.
         */
-        void erase_stops(
-            const typename stops_type::const_iterator first,
-            const typename stops_type::const_iterator last
-        )
+        void
+        erase_stops(const typename stops_type::const_iterator first, const typename stops_type::const_iterator last)
         {
             m_stops.erase(first, last);
         }
@@ -297,8 +262,7 @@ namespace bobura { namespace model
 
             \return The iterator to the stop previous to the specified stop.
         */
-        typename stops_type::const_iterator previous_stop(const typename stops_type::const_iterator i_stop)
-        const
+        typename stops_type::const_iterator previous_stop(const typename stops_type::const_iterator i_stop) const
         {
             return m_direction == direction_type::down ? rfind_real_stop(i_stop, true) : find_real_stop(i_stop, true);
         }
@@ -312,8 +276,7 @@ namespace bobura { namespace model
 
             \return The iterator to the stop next to the specified stop.
         */
-        typename stops_type::const_iterator next_stop(const typename stops_type::const_iterator i_stop)
-        const
+        typename stops_type::const_iterator next_stop(const typename stops_type::const_iterator i_stop) const
         {
             return m_direction == direction_type::down ? find_real_stop(i_stop, true) : rfind_real_stop(i_stop, true);
         }
@@ -325,12 +288,10 @@ namespace bobura { namespace model
 
             \return The iterator to the origin stop.
         */
-        typename stops_type::const_iterator origin_stop()
-        const
+        typename stops_type::const_iterator origin_stop() const
         {
-            return
-                m_direction == direction_type::down ?
-                find_real_stop(m_stops.begin(), false) : rfind_real_stop(m_stops.end(), false);
+            return m_direction == direction_type::down ? find_real_stop(m_stops.begin(), false) :
+                                                         rfind_real_stop(m_stops.end(), false);
         }
 
         /*!
@@ -340,12 +301,10 @@ namespace bobura { namespace model
 
             \return The iterator to the destination stop.
         */
-        typename stops_type::const_iterator destination_stop()
-        const
+        typename stops_type::const_iterator destination_stop() const
         {
-            return
-                m_direction == direction_type::down ?
-                rfind_real_stop(m_stops.end(), false) : find_real_stop(m_stops.begin(), false);
+            return m_direction == direction_type::down ? rfind_real_stop(m_stops.end(), false) :
+                                                         find_real_stop(m_stops.begin(), false);
         }
 
 
@@ -369,11 +328,8 @@ namespace bobura { namespace model
 
         // functions
 
-        typename stops_type::const_iterator find_real_stop(
-            typename stops_type::const_iterator i_stop,
-            const bool                          skip_start
-        )
-        const
+        typename stops_type::const_iterator
+        find_real_stop(typename stops_type::const_iterator i_stop, const bool skip_start) const
         {
             if (skip_start && i_stop != m_stops.end())
                 std::advance(i_stop, 1);
@@ -387,16 +343,13 @@ namespace bobura { namespace model
             return m_stops.end();
         }
 
-        typename stops_type::const_iterator rfind_real_stop(
-            typename stops_type::const_iterator i_stop,
-            const bool                          skip_start
-        )
-        const
+        typename stops_type::const_iterator
+        rfind_real_stop(typename stops_type::const_iterator i_stop, const bool skip_start) const
         {
             if (skip_start && i_stop != m_stops.begin())
                 std::advance(i_stop, -1);
 
-            for (auto i = i_stop; ; --i)
+            for (auto i = i_stop;; --i)
             {
                 if (i == m_stops.end())
                 {
@@ -413,8 +366,6 @@ namespace bobura { namespace model
 
             return m_stops.end();
         }
-
-
     };
 
 

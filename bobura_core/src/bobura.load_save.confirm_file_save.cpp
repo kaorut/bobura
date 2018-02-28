@@ -19,8 +19,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace load_save
-{
+namespace bobura { namespace load_save {
     template <typename Traits>
     class confirm_file_save<Traits>::impl : private boost::noncopyable
     {
@@ -40,22 +39,14 @@ namespace bobura { namespace load_save
 
         // constructors and destructor
 
-        impl(
-            model_type&                 model,
-            const save_to_file_type&    save_to_file,
-            const message_catalog_type& message_catalog
-        )
-        :
-        m_model(model),
-        m_save_to_file(save_to_file),
-        m_message_catalog(message_catalog)
+        impl(model_type& model, const save_to_file_type& save_to_file, const message_catalog_type& message_catalog)
+        : m_model(model), m_save_to_file(save_to_file), m_message_catalog(message_catalog)
         {}
 
 
         // functions
 
-        bool operator()(abstract_window_type& parent)
-        const
+        bool operator()(abstract_window_type& parent) const
         {
             if (!m_model.changed())
                 return true;
@@ -92,32 +83,23 @@ namespace bobura { namespace load_save
 
         // functions
 
-        std::unique_ptr<message_box_type> create_message_box(abstract_window_type& parent)
-        const
+        std::unique_ptr<message_box_type> create_message_box(abstract_window_type& parent) const
         {
-            const auto file_path =
-                m_model.has_path() ?
-                m_model.path().template string<string_type>() :
-                m_message_catalog.get(TETENGO2_TEXT("Common:Untitled"));
+            const auto file_path = m_model.has_path() ? m_model.path().template string<string_type>() :
+                                                        m_message_catalog.get(TETENGO2_TEXT("Common:Untitled"));
 
-            return
-                tetengo2::stdalt::make_unique<message_box_type>(
-                    parent,
-                    m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
-                    m_message_catalog.get(
-                        TETENGO2_TEXT("Message:File:The file has been changed. Do you want to save the changes?")
-                    ),
-                    file_path,
-                    message_box_type::button_style_type::yes_no(
-                        true,
-                        m_message_catalog.get(TETENGO2_TEXT("Message:File:&Save")),
-                        m_message_catalog.get(TETENGO2_TEXT("Message:File:&Don't save"))
-                    ),
-                    message_box_type::icon_style_type::warning
-                );
+            return tetengo2::stdalt::make_unique<message_box_type>(
+                parent,
+                m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
+                m_message_catalog.get(
+                    TETENGO2_TEXT("Message:File:The file has been changed. Do you want to save the changes?")),
+                file_path,
+                message_box_type::button_style_type::yes_no(
+                    true,
+                    m_message_catalog.get(TETENGO2_TEXT("Message:File:&Save")),
+                    m_message_catalog.get(TETENGO2_TEXT("Message:File:&Don't save"))),
+                message_box_type::icon_style_type::warning);
         }
-
-
     };
 
 
@@ -125,45 +107,35 @@ namespace bobura { namespace load_save
     confirm_file_save<Traits>::confirm_file_save(
         model_type&                 model,
         const save_to_file_type&    save_to_file,
-        const message_catalog_type& message_catalog
-    )
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(model, save_to_file, message_catalog))
+        const message_catalog_type& message_catalog)
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(model, save_to_file, message_catalog))
     {}
 
     template <typename Traits>
-    confirm_file_save<Traits>::~confirm_file_save()
-    noexcept
+    confirm_file_save<Traits>::~confirm_file_save() noexcept
     {}
 
     template <typename Traits>
-    bool confirm_file_save<Traits>::operator()(abstract_window_type& parent)
-    const
+    bool confirm_file_save<Traits>::operator()(abstract_window_type& parent) const
     {
         return (*m_p_impl)(parent);
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC

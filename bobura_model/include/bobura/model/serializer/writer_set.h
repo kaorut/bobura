@@ -17,8 +17,7 @@
 #include <bobura/model/serializer/writer.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     /*!
         \brief The class template for a writer set.
 
@@ -39,8 +38,7 @@ namespace bobura { namespace model { namespace serializer
         typename OperatingDistance,
         typename Speed,
         typename Font,
-        typename Encoder
-    >
+        typename Encoder>
     class writer_set : private boost::noncopyable
     {
     public:
@@ -71,16 +69,14 @@ namespace bobura { namespace model { namespace serializer
         using encoder_type = Encoder;
 
         //! The writer type.
-        using writer_type =
-            writer<
-                size_type,
-                difference_type,
-                string_type,
-                output_stream_type,
-                operating_distance_type,
-                speed_type,
-                font_type
-            >;
+        using writer_type = writer<
+            size_type,
+            difference_type,
+            string_type,
+            output_stream_type,
+            operating_distance_type,
+            speed_type,
+            font_type>;
 
 
         // static functions
@@ -101,10 +97,7 @@ namespace bobura { namespace model { namespace serializer
 
         // forbidden operations
 
-        writer_set()
-        = delete;
-
-
+        writer_set() = delete;
     };
 
 

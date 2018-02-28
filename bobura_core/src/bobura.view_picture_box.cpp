@@ -21,8 +21,7 @@
 #include <bobura/view_picture_box.h>
 
 
-namespace bobura
-{
+namespace bobura {
     template <typename PictureBox, typename MouseCapture>
     class view_picture_box<PictureBox, MouseCapture>::impl : private boost::noncopyable
     {
@@ -38,10 +37,7 @@ namespace bobura
 
         // constructors and destructor
 
-        explicit impl(widget_type&)
-        :
-        m_p_mouse_capture()
-        {}
+        explicit impl(widget_type&) : m_p_mouse_capture() {}
 
 
         // functions
@@ -68,22 +64,19 @@ namespace bobura
         void update_scroll_bars(
             view_picture_box&     self,
             const dimension_type& view_dimension,
-            const dimension_type& page_dimension
-        )
+            const dimension_type& page_dimension)
         {
             assert(self.has_vertical_scroll_bar());
             assert(self.has_horizontal_scroll_bar());
-            
+
             update_scroll_bar(
                 self.vertical_scroll_bar(),
                 view_dimension.height(),
-                boost::rational_cast<scroll_bar_size_type>(page_dimension.height().value())
-            );
+                boost::rational_cast<scroll_bar_size_type>(page_dimension.height().value()));
             update_scroll_bar(
                 self.horizontal_scroll_bar(),
                 view_dimension.width(),
-                boost::rational_cast<scroll_bar_size_type>(page_dimension.width().value())
-            );
+                boost::rational_cast<scroll_bar_size_type>(page_dimension.width().value()));
         }
 
 
@@ -93,7 +86,7 @@ namespace bobura
         using base_type = PictureBox;
 
         using mouse_capture_type = MouseCapture;
-        
+
         using scroll_bar_type = typename base_type::scroll_bar_type;
 
         using scroll_bar_size_type = typename scroll_bar_type::size_type;
@@ -132,10 +125,8 @@ namespace bobura
                 }
                 else if (previous_size > 0 && previous_size != view_size.value())
                 {
-                    const auto new_position =
-                        calculate_scroll_bar_position(
-                            scroll_bar, view_size, previous_size, page_size, size - page_size + 1
-                        );
+                    const auto new_position = calculate_scroll_bar_position(
+                        scroll_bar, view_size, previous_size, page_size, size - page_size + 1);
                     if (new_position != scroll_bar.position())
                     {
                         scroll_bar.set_position(new_position);
@@ -165,9 +156,7 @@ namespace bobura
             const ViewSize&            view_size,
             const scroll_bar_size_type previous_size,
             const scroll_bar_size_type page_size,
-            const scroll_bar_size_type max
-        )
-        const
+            const scroll_bar_size_type max) const
         {
             const boost::rational<scroll_bar_size_type> change_rate{ view_size.value() / previous_size };
             const boost::rational<scroll_bar_size_type> half_page_size{ page_size, 2 };
@@ -180,21 +169,16 @@ namespace bobura
                 return max;
             return boost::rational_cast<scroll_bar_size_type>(new_position);
         }
-
-
     };
 
 
     template <typename PictureBox, typename MouseCapture>
     view_picture_box<PictureBox, MouseCapture>::view_picture_box(widget_type& parent)
-    :
-    base_type(parent, base_type::scroll_bar_style_type::both),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(parent))
+    : base_type(parent, base_type::scroll_bar_style_type::both), m_p_impl(tetengo2::stdalt::make_unique<impl>(parent))
     {}
 
     template <typename PictureBox, typename MouseCapture>
-    view_picture_box<PictureBox, MouseCapture>::~view_picture_box()
-    noexcept
+    view_picture_box<PictureBox, MouseCapture>::~view_picture_box() noexcept
     {}
 
     template <typename PictureBox, typename MouseCapture>
@@ -212,46 +196,35 @@ namespace bobura
     template <typename PictureBox, typename MouseCapture>
     void view_picture_box<PictureBox, MouseCapture>::update_scroll_bars(
         const dimension_type& view_dimension,
-        const dimension_type& page_dimension
-    )
+        const dimension_type& page_dimension)
     {
         m_p_impl->update_scroll_bars(*this, view_dimension, page_dimension);
     }
 
 
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
     template class view_picture_box<
         typename application::ui_type_list_type::picture_box_type,
-        typename application::ui_type_list_type::mouse_capture_type
-    >;
+        typename application::ui_type_list_type::mouse_capture_type>;
 #endif
 
     template class view_picture_box<
         typename test::ui_type_list_type::picture_box_type,
-        typename test::ui_type_list_type::mouse_capture_type
-    >;
-
-
+        typename test::ui_type_list_type::mouse_capture_type>;
 }

@@ -12,8 +12,7 @@
 #include <boost/core/ignore_unused.hpp>
 
 
-namespace bobura { namespace message { namespace property_bar
-{
+namespace bobura { namespace message { namespace property_bar {
     /*!
         \brief The class template for a resized observer of the property bar.
 
@@ -42,9 +41,7 @@ namespace bobura { namespace message { namespace property_bar
             \param map_box      A map box.
         */
         resized(const side_bar_type& property_bar, map_box_type& map_box)
-        :
-        m_property_bar(property_bar),
-        m_map_box(map_box)
+        : m_property_bar(property_bar), m_map_box(map_box)
         {}
 
 
@@ -53,8 +50,7 @@ namespace bobura { namespace message { namespace property_bar
         /*!
             \brief Called when the main window is resized.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             if (m_property_bar.minimized())
             {
@@ -63,8 +59,7 @@ namespace bobura { namespace message { namespace property_bar
             else
             {
                 m_map_box.set_position_and_dimension(
-                    m_property_bar.child_control_area_position(), m_property_bar.child_control_area_dimension()
-                );
+                    m_property_bar.child_control_area_position(), m_property_bar.child_control_area_dimension());
                 m_map_box.size_observer_set().resized()();
                 m_map_box.set_visible(true);
             }
@@ -77,8 +72,6 @@ namespace bobura { namespace message { namespace property_bar
         const side_bar_type& m_property_bar;
 
         map_box_type& m_map_box;
-
-
     };
 
 
@@ -110,10 +103,7 @@ namespace bobura { namespace message { namespace property_bar
 
             \param map_box A map box.
         */
-        explicit mouse_pressed(map_box_type& map_box)
-        :
-        m_map_box(map_box)
-        {}
+        explicit mouse_pressed(map_box_type& map_box) : m_map_box(map_box) {}
 
 
         // functions
@@ -132,9 +122,7 @@ namespace bobura { namespace message { namespace property_bar
             const position_type&    position,
             const bool              shift,
             const bool              control,
-            const bool              meta
-        )
-        const
+            const bool              meta) const
         {
             boost::ignore_unused(button, position, shift, control, meta);
 
@@ -146,8 +134,6 @@ namespace bobura { namespace message { namespace property_bar
         // variables
 
         map_box_type& m_map_box;
-
-
     };
 
 

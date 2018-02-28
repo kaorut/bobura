@@ -17,8 +17,7 @@
 #include <bobura/timetable_view.h>
 
 
-namespace bobura { namespace message { namespace view_picture_box { namespace timetable
-{
+namespace bobura { namespace message { namespace view_picture_box { namespace timetable {
     /*!
         \brief The class template for a mouse pressed observer of the picture box.
 
@@ -47,7 +46,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
         using view_type = bobura::timetable_view<view_traits_type>;
 
         //! The set-mouse-capture function type.
-        using set_mouse_capture_type = std::function<void (mouse_button_type)>;
+        using set_mouse_capture_type = std::function<void(mouse_button_type)>;
 
 
         // constructors and destructor
@@ -59,15 +58,8 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
             \param set_mouse_capture A set-mouse-capture function.
             \param view              A view.
         */
-        mouse_pressed(
-            picture_box_type&             picture_box,
-            const set_mouse_capture_type& set_mouse_capture,
-            view_type&                    view
-        )
-        :
-        m_picture_box(picture_box),
-        m_set_mouse_capture(set_mouse_capture),
-        m_view(view)
+        mouse_pressed(picture_box_type& picture_box, const set_mouse_capture_type& set_mouse_capture, view_type& view)
+        : m_picture_box(picture_box), m_set_mouse_capture(set_mouse_capture), m_view(view)
         {}
 
 
@@ -87,23 +79,21 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
             const position_type&    position,
             const bool              shift,
             const bool              control,
-            const bool              meta
-        )
-        const
+            const bool              meta) const
         {
             boost::ignore_unused(button, position, shift, control, meta);
 
-            //m_picture_box.set_focus();
+            // m_picture_box.set_focus();
 
-            //m_set_mouse_capture(button);
+            // m_set_mouse_capture(button);
 
-            //auto* const p_item = m_view.p_item_by_position(position);
-            //if (p_item)
+            // auto* const p_item = m_view.p_item_by_position(position);
+            // if (p_item)
             //    p_item->select(button != mouse_button_type::right);
-            //else
+            // else
             //    m_view.unselect_all_items();
 
-            //m_picture_box.repaint();
+            // m_picture_box.repaint();
         }
 
 
@@ -115,8 +105,6 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
         set_mouse_capture_type m_set_mouse_capture;
 
         view_type& m_view;
-
-
     };
 
 
@@ -148,7 +136,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
         using view_type = bobura::timetable_view<view_traits_type>;
 
         //! The release-mouse-capture function type.
-        using release_mouse_capture_type = std::function<bool (mouse_button_type)>;
+        using release_mouse_capture_type = std::function<bool(mouse_button_type)>;
 
 
         // constructors and destructor
@@ -160,9 +148,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
             \param view                  A view.
         */
         mouse_released(const release_mouse_capture_type& release_mouse_capture, view_type& view)
-        :
-        m_release_mouse_capture(release_mouse_capture),
-        m_view(view)
+        : m_release_mouse_capture(release_mouse_capture), m_view(view)
         {}
 
 
@@ -182,13 +168,11 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
             const position_type&    position,
             const bool              shift,
             const bool              control,
-            const bool              meta
-        )
-        const
+            const bool              meta) const
         {
             boost::ignore_unused(button, position, shift, control, meta);
 
-            //m_release_mouse_capture(button);
+            // m_release_mouse_capture(button);
         }
 
 
@@ -198,8 +182,6 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
         release_mouse_capture_type m_release_mouse_capture;
 
         view_type& m_view;
-
-
     };
 
 
@@ -240,9 +222,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
             \param view        A view.
         */
         explicit mouse_moved(picture_box_type& picture_box, const view_type& view)
-        :
-        m_picture_box(picture_box),
-        m_view(view)
+        : m_picture_box(picture_box), m_view(view)
         {}
 
 
@@ -256,16 +236,15 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
             \param control  True when control key is pressed.
             \param meta     True when meta key is pressed.
         */
-        void operator()(const position_type& position, const bool shift, const bool control, const bool meta)
-        const
+        void operator()(const position_type& position, const bool shift, const bool control, const bool meta) const
         {
             boost::ignore_unused(position, shift, control, meta);
 
-            //const auto* const p_item = m_view.p_item_by_position(position);
-            //const auto cursor = m_picture_box.cursor();
-            //const auto* const p_system_cursor =
+            // const auto* const p_item = m_view.p_item_by_position(position);
+            // const auto cursor = m_picture_box.cursor();
+            // const auto* const p_system_cursor =
             //    cursor ? dynamic_cast<const system_cursor_type*>(&*cursor) : nullptr;
-            //if (p_item)
+            // if (p_item)
             //{
             //    if (!p_system_cursor || p_system_cursor->style() != system_cursor_type::style_type::hand)
             //    {
@@ -274,7 +253,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
             //        );
             //    }
             //}
-            //else
+            // else
             //{
             //    if (p_system_cursor)
             //    {
@@ -297,8 +276,6 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
         picture_box_type& m_picture_box;
 
         const view_type& m_view;
-
-
     };
 
 
@@ -345,11 +322,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
             \param picture_box A picture box.
             \param view        A view.
         */
-        mouse_wheeled(picture_box_type& picture_box, view_type& view)
-        :
-        m_picture_box(picture_box),
-        m_view(view)
-        {}
+        mouse_wheeled(picture_box_type& picture_box, view_type& view) : m_picture_box(picture_box), m_view(view) {}
 
 
         // functions
@@ -368,18 +341,16 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
             const direction_type direction,
             const bool           shift,
             const bool           control,
-            const bool           meta
-        )
-        const
+            const bool           meta) const
         {
             boost::ignore_unused(delta, direction, shift, control, meta);
 
-            //const auto adjusted_delta =
+            // const auto adjusted_delta =
             //    direction == picture_box_type::mouse_observer_set_type::direction_type::horizontal ? delta : -delta;
 
-            //if (!control && !meta)
+            // if (!control && !meta)
             //    scroll(adjusted_delta, is_vertical(direction, shift));
-            //else if (control && !meta)
+            // else if (control && !meta)
             //    zoom(adjusted_delta, is_vertical(direction, shift));
         }
 
@@ -399,16 +370,16 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
 
         // functions
 
-        //bool is_vertical(const direction_type direction, const bool shift)
-        //const
+        // bool is_vertical(const direction_type direction, const bool shift)
+        // const
         //{
         //    return
         //        (!shift && direction == picture_box_type::mouse_observer_set_type::direction_type::vertical) ||
         //        (shift && direction == picture_box_type::mouse_observer_set_type::direction_type::horizontal);
         //}
 
-        //void scroll(const delta_type& delta, const bool vertical)
-        //const
+        // void scroll(const delta_type& delta, const bool vertical)
+        // const
         //{
         //    if (vertical)
         //    {
@@ -432,11 +403,11 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
         //    }
         //}
 
-        //scroll_bar_size_type calculate_new_position(
+        // scroll_bar_size_type calculate_new_position(
         //    const typename picture_box_type::scroll_bar_type& scroll_bar,
         //    const delta_type&                                 delta
         //)
-        //const
+        // const
         //{
         //    using delta_int_type = typename delta_type::int_type;
         //    auto int_delta = boost::rational_cast<delta_int_type>(delta * 3);
@@ -457,8 +428,8 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
         //    return new_position;
         //}
 
-        //void zoom(const delta_type delta, const bool vertical)
-        //const
+        // void zoom(const delta_type delta, const bool vertical)
+        // const
         //{
         //    view_zoom_type zoom{ m_picture_box, m_view };
 
@@ -477,8 +448,6 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
         //            zoom.horizontally_zoom_out(false);
         //    }
         //}
-
-
     };
 
 
@@ -507,10 +476,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
 
             \param picture_box A picture box.
         */
-        explicit keyboard_key_down(picture_box_type& picture_box)
-        :
-        m_picture_box(picture_box)
-        {}
+        explicit keyboard_key_down(picture_box_type& picture_box) : m_picture_box(picture_box) {}
 
 
         // functions
@@ -523,12 +489,12 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
             \param control     True when control key is pressed.
             \param meta        True when meta key is pressed.
         */
-        void operator()(const virtual_key_type& virtual_key, const bool shift, const bool control, const bool meta)
-        const
+        void
+        operator()(const virtual_key_type& virtual_key, const bool shift, const bool control, const bool meta) const
         {
             boost::ignore_unused(virtual_key, shift, control, meta);
 
-            //if (
+            // if (
             //    virtual_key == virtual_key_type::left() ||
             //    virtual_key == virtual_key_type::right() ||
             //    virtual_key == virtual_key_type::up() ||
@@ -558,8 +524,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
 
         // functions
 
-        void scroll(const virtual_key_type& virtual_key, const bool shift)
-        const
+        void scroll(const virtual_key_type& virtual_key, const bool shift) const
         {
             const auto vertical = is_vertical(virtual_key, shift);
             if (vertical)
@@ -584,17 +549,14 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
             }
         }
 
-        bool is_vertical(const virtual_key_type& virtual_key, const bool shift)
-        const
+        bool is_vertical(const virtual_key_type& virtual_key, const bool shift) const
         {
             if (virtual_key == virtual_key_type::up() || virtual_key == virtual_key_type::down())
             {
                 return true;
             }
             else if (
-                !shift &&
-                (virtual_key == virtual_key_type::page_up() || virtual_key == virtual_key_type::page_down())
-            )
+                !shift && (virtual_key == virtual_key_type::page_up() || virtual_key == virtual_key_type::page_down()))
             {
                 return true;
             }
@@ -610,14 +572,12 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
 
         scroll_bar_size_type calculate_new_position(
             const typename picture_box_type::scroll_bar_type& scroll_bar,
-            const virtual_key_type&                           virtual_key
-        )
-        const
+            const virtual_key_type&                           virtual_key) const
         {
             const auto min_position = scroll_bar.range().first;
             const auto max_position = scroll_bar.range().second - scroll_bar.page_size() + 1;
 
-            if      (virtual_key == virtual_key_type::home())
+            if (virtual_key == virtual_key_type::home())
             {
                 return min_position;
             }
@@ -627,15 +587,15 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
             }
             else if (virtual_key == virtual_key_type::page_up())
             {
-                return
-                    scroll_bar.position() > min_position + scroll_bar.page_size() ?
-                    scroll_bar.position() - scroll_bar.page_size() : min_position;
+                return scroll_bar.position() > min_position + scroll_bar.page_size() ?
+                           scroll_bar.position() - scroll_bar.page_size() :
+                           min_position;
             }
             else if (virtual_key == virtual_key_type::page_down())
             {
-                return
-                    scroll_bar.position() + scroll_bar.page_size() < max_position ?
-                    scroll_bar.position() + scroll_bar.page_size() : max_position;
+                return scroll_bar.position() + scroll_bar.page_size() < max_position ?
+                           scroll_bar.position() + scroll_bar.page_size() :
+                           max_position;
             }
             else if (virtual_key == virtual_key_type::up() || virtual_key == virtual_key_type::left())
             {
@@ -648,8 +608,6 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
                 return scroll_bar.position() + 1 < max_position ? scroll_bar.position() + 1 : max_position;
             }
         }
-
-
     };
 
 
@@ -686,11 +644,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
             \param picture_box A picture box.
             \param view        A view.
         */
-        paint_paint(const picture_box_type& picture_box, view_type& view)
-        :
-        m_picture_box(picture_box),
-        m_view(view)
-        {}
+        paint_paint(const picture_box_type& picture_box, view_type& view) : m_picture_box(picture_box), m_view(view) {}
 
 
         // functions
@@ -700,8 +654,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
 
             \param canvas A canvas.
         */
-        void operator()(canvas_type& canvas)
-        const
+        void operator()(canvas_type& canvas) const
         {
             boost::ignore_unused(canvas);
 
@@ -717,9 +670,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
                 client_dimension,
                 to_position(
                     m_picture_box.horizontal_scroll_bar().tracking_position(),
-                    m_picture_box.vertical_scroll_bar().tracking_position()
-                )
-            );
+                    m_picture_box.vertical_scroll_bar().tracking_position()));
 
             canvas.end_transaction();
         }
@@ -748,8 +699,6 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
         const picture_box_type& m_picture_box;
 
         view_type& m_view;
-
-
     };
 
 
@@ -787,9 +736,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
             \param view        A view.
         */
         scroll_bar_scrolled(const picture_box_type& picture_box, view_type& view)
-        :
-        m_picture_box(picture_box),
-        m_view(view)
+        : m_picture_box(picture_box), m_view(view)
         {}
 
 
@@ -800,13 +747,12 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
 
             \param new_position A new position.
         */
-        void operator()(const size_type new_position)
-        const
+        void operator()(const size_type new_position) const
         {
             boost::ignore_unused(new_position);
 
-            //m_view.update_dimension();
-            //m_picture_box.repaint();
+            // m_view.update_dimension();
+            // m_picture_box.repaint();
         }
 
 
@@ -816,8 +762,6 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
         const picture_box_type& m_picture_box;
 
         view_type& m_view;
-
-
     };
 
 

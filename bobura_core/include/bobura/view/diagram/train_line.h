@@ -17,13 +17,12 @@
 #include <bobura/view/diagram/selection.h>
 
 
-namespace bobura { namespace view { namespace diagram
-{
-     /*!
-        \brief The class template for a train line fragment in the diagram view.
+namespace bobura { namespace view { namespace diagram {
+    /*!
+       \brief The class template for a train line fragment in the diagram view.
 
-        \tparam Traits A traits type.
-    */
+       \tparam Traits A traits type.
+   */
     template <typename Traits>
     class train_line_fragment : public item<Traits>
     {
@@ -91,8 +90,7 @@ namespace bobura { namespace view { namespace diagram
             position_type               departure,
             position_type               arrival,
             bool                        draw_train_name,
-            const message_catalog_type& message_catalog
-        );
+            const message_catalog_type& message_catalog);
 
         /*!
             \brief Moves a train line fragment.
@@ -104,8 +102,7 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys the train line fragment.
         */
-        virtual ~train_line_fragment()
-        noexcept;
+        virtual ~train_line_fragment() noexcept;
 
 
         // functions
@@ -135,27 +132,21 @@ namespace bobura { namespace view { namespace diagram
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
+        virtual void draw_on_impl(canvas_type& canvas) const override;
 
-        virtual base_type* p_item_by_position_impl(const position_type& position)
-        override;
+        virtual base_type* p_item_by_position_impl(const position_type& position) override;
 
-        virtual bool selected_impl()
-        const override;
+        virtual bool selected_impl() const override;
 
-        virtual void select_impl(bool switch_selection_style)
-        override;
-
-
+        virtual void select_impl(bool switch_selection_style) override;
     };
 
 
-     /*!
-        \brief The class template for a train line in the diagram view.
+    /*!
+       \brief The class template for a train line in the diagram view.
 
-        \tparam Traits A traits type.
-    */
+       \tparam Traits A traits type.
+   */
     template <typename Traits>
     class train_line : public item<Traits>
     {
@@ -259,8 +250,7 @@ namespace bobura { namespace view { namespace diagram
             const scale_type&                      horizontal_scale,
             const station_intervals_type&          station_intervals,
             const std::vector<position_unit_type>& station_positions,
-            const message_catalog_type&            message_catalog
-        );
+            const message_catalog_type&            message_catalog);
 
         /*!
             \brief Moves a train line.
@@ -272,8 +262,7 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys the train line.
         */
-        virtual ~train_line()
-        noexcept;
+        virtual ~train_line() noexcept;
 
 
         // functions
@@ -303,21 +292,17 @@ namespace bobura { namespace view { namespace diagram
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
+        virtual void draw_on_impl(canvas_type& canvas) const override;
 
-        virtual base_type* p_item_by_position_impl(const position_type& position)
-        override;
-
-
+        virtual base_type* p_item_by_position_impl(const position_type& position) override;
     };
 
 
-     /*!
-        \brief The class template for a train line list in the diagram view.
+    /*!
+       \brief The class template for a train line list in the diagram view.
 
-        \tparam Traits A traits type.
-    */
+       \tparam Traits A traits type.
+   */
     template <typename Traits>
     class train_line_list : public item<Traits>
     {
@@ -413,8 +398,7 @@ namespace bobura { namespace view { namespace diagram
             const scale_type&                      horizontal_scale,
             const station_intervals_type&          station_intervals,
             const std::vector<position_unit_type>& station_positions,
-            const message_catalog_type&            message_catalog
-        );
+            const message_catalog_type&            message_catalog);
 
         /*!
             \brief Moves a train line list.
@@ -426,8 +410,7 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys the train line list.
         */
-        virtual ~train_line_list()
-        noexcept;
+        virtual ~train_line_list() noexcept;
 
 
         // functions
@@ -457,13 +440,9 @@ namespace bobura { namespace view { namespace diagram
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
+        virtual void draw_on_impl(canvas_type& canvas) const override;
 
-        virtual base_type* p_item_by_position_impl(const position_type& position)
-        override;
-
-
+        virtual base_type* p_item_by_position_impl(const position_type& position) override;
     };
 
 

@@ -14,8 +14,7 @@
 #include <bobura/command/command_base.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     /*!
         \brief The class template for a file property command.
 
@@ -64,8 +63,7 @@ namespace bobura { namespace command
         /*!
             \brief Destroys the file property command.
         */
-        virtual ~file_property()
-        noexcept;
+        virtual ~file_property() noexcept;
 
 
     private:
@@ -81,10 +79,7 @@ namespace bobura { namespace command
 
         // virtual functions
 
-        virtual void execute_impl(model_type& model, abstract_window_type& parent)
-        const override;
-
-
+        virtual void execute_impl(model_type& model, abstract_window_type& parent) const override;
     };
 
 

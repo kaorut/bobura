@@ -10,20 +10,19 @@
 #define BOBURA_VIEW_TIMETABLE_TRAITS_H
 
 
-namespace bobura { namespace view { namespace timetable
-{
-     /*!
-        \brief The class template for the timetable view traits.
+namespace bobura { namespace view { namespace timetable {
+    /*!
+       \brief The class template for the timetable view traits.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Canvas            A canvas type.
-        \tparam SolidBackground   A solid background type.
-        \tparam MessageCatalog    A message catalog type.
-    */
+       \tparam Size              A size type.
+       \tparam Difference        A difference type.
+       \tparam String            A string type.
+       \tparam OperatingDistance An operating distance type.
+       \tparam Speed             A speed type.
+       \tparam Canvas            A canvas type.
+       \tparam SolidBackground   A solid background type.
+       \tparam MessageCatalog    A message catalog type.
+   */
     template <
         typename Size,
         typename Difference,
@@ -32,8 +31,7 @@ namespace bobura { namespace view { namespace timetable
         typename Speed,
         typename Canvas,
         typename SolidBackground,
-        typename MessageCatalog
-    >
+        typename MessageCatalog>
     class traits
     {
     public:
@@ -62,8 +60,6 @@ namespace bobura { namespace view { namespace timetable
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
-
-
     };
 
 

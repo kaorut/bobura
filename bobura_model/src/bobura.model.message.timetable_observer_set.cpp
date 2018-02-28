@@ -15,8 +15,7 @@
 #include <bobura/model/message/timetable_observer_set.h>
 
 
-namespace bobura { namespace model { namespace message
-{
+namespace bobura { namespace model { namespace message {
     class timetable_observer_set::impl : private boost::noncopyable
     {
     public:
@@ -29,8 +28,7 @@ namespace bobura { namespace model { namespace message
 
         // functions
 
-        const changed_signal_type& changed()
-        const
+        const changed_signal_type& changed() const
         {
             return m_changed;
         }
@@ -45,22 +43,14 @@ namespace bobura { namespace model { namespace message
         // variables
 
         changed_signal_type m_changed;
-
-
     };
 
 
-    timetable_observer_set::timetable_observer_set()
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>())
-    {}
+    timetable_observer_set::timetable_observer_set() : m_p_impl(tetengo2::stdalt::make_unique<impl>()) {}
 
-    timetable_observer_set::~timetable_observer_set()
-    noexcept
-    {}
+    timetable_observer_set::~timetable_observer_set() noexcept {}
 
-    const timetable_observer_set::changed_signal_type& timetable_observer_set::changed()
-    const
+    const timetable_observer_set::changed_signal_type& timetable_observer_set::changed() const
     {
         return m_p_impl->changed();
     }

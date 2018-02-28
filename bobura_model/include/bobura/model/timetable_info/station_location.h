@@ -14,8 +14,7 @@
 #include <bobura/model/station.h>
 
 
-namespace bobura { namespace model { namespace timetable_info
-{
+namespace bobura { namespace model { namespace timetable_info {
     /*!
         \brief The class template for a station location.
 
@@ -47,9 +46,7 @@ namespace bobura { namespace model { namespace timetable_info
             \param operating_distance An operating distance.
         */
         station_location(station_type station, operating_distance_type operating_distance)
-        :
-        m_station(std::move(station)),
-        m_operating_distance(std::move(operating_distance))
+        : m_station(std::move(station)), m_operating_distance(std::move(operating_distance))
         {}
 
 
@@ -74,8 +71,7 @@ namespace bobura { namespace model { namespace timetable_info
 
             \return The station.
         */
-        const station_type& get_station()
-        const
+        const station_type& get_station() const
         {
             return m_station;
         }
@@ -85,8 +81,7 @@ namespace bobura { namespace model { namespace timetable_info
 
             \return The operating distance.
         */
-        const operating_distance_type& operating_distance()
-        const
+        const operating_distance_type& operating_distance() const
         {
             return m_operating_distance;
         }
@@ -99,8 +94,7 @@ namespace bobura { namespace model { namespace timetable_info
             \retval true  When operating_distance() < another.operating_distance().
             \retval false Otherwise.
         */
-        bool before(const station_location& another)
-        const
+        bool before(const station_location& another) const
         {
             return m_operating_distance < another.m_operating_distance;
         }
@@ -112,8 +106,6 @@ namespace bobura { namespace model { namespace timetable_info
         station_type m_station;
 
         operating_distance_type m_operating_distance;
-
-
     };
 
 

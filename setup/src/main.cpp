@@ -18,14 +18,13 @@
 
 #define NOMINMAX
 #define OEMRESOURCE
-#include <Windows.h>
 #include <CommCtrl.h>
+#include <Windows.h>
 
 #include <setup/encode.h>
 
 
-namespace
-{
+namespace {
     const std::wstring& application_name()
     {
         static const std::wstring singleton{ L"Bobura" };
@@ -70,7 +69,7 @@ namespace
 
     std::string ui_locale_name()
     {
-        const auto language_id = ::GetUserDefaultLangID();
+        const auto   language_id = ::GetUserDefaultLangID();
         const ::LCID locale_id = MAKELCID(language_id, SORT_DEFAULT);
 
         return locale_info(locale_id, LOCALE_SENGLANGUAGE) + "_" + locale_info(locale_id, LOCALE_SENGCOUNTRY);
@@ -104,13 +103,12 @@ namespace
     std::wstring build_parameters(
         const std::wstring&            language,
         const std::wstring&            platform,
-        const boost::filesystem::path& base_path_
-    )
+        const boost::filesystem::path& base_path_)
     {
         std::wstring parameters{};
 
         parameters += L"/i ";
-        parameters += std::wstring{ L"\"" } +msi_path(base_path_, platform).c_str() + L"\" ";
+        parameters += std::wstring{ L"\"" } + msi_path(base_path_, platform).c_str() + L"\" ";
         if (!language.empty())
             parameters += L"TRANSFORMS=\":" + language + L".mst\"";
 
@@ -120,12 +118,12 @@ namespace
     boost::filesystem::path base_path()
     {
         std::vector<wchar_t> path_buffer(MAX_PATH, 0);
-        const ::DWORD path_length = ::GetModuleFileNameW(nullptr, path_buffer.data(), path_buffer.size());
+        const ::DWORD        path_length = ::GetModuleFileNameW(nullptr, path_buffer.data(), path_buffer.size());
         if (path_length == 0)
             throw std::runtime_error("Cannot get the path where the installer exists.");
 
         boost::filesystem::path path(path_buffer.begin(), path_buffer.begin() + path_length);
-        
+
         return path.parent_path();
     }
 
@@ -133,8 +131,8 @@ namespace
     {
         if (platform.empty())
         {
-            throw
-                std::runtime_error(std::string{ "Cannot install " } +application_name_narrow() + " to this platform.");
+            throw std::runtime_error(
+                std::string{ "Cannot install " } + application_name_narrow() + " to this platform.");
         }
 
         const boost::filesystem::path base_path_ = base_path();
@@ -147,8 +145,7 @@ namespace
             throw std::runtime_error("Cannot launch the msi file.");
     }
 
-    void show_error_message(const ::HINSTANCE instance_handle, const std::string& message = {})
-    noexcept
+    void show_error_message(const ::HINSTANCE instance_handle, const std::string& message = {}) noexcept
     {
         try
         {
@@ -160,13 +157,12 @@ namespace
                 nullptr,
                 TDCBF_CLOSE_BUTTON,
                 nullptr,
-                nullptr
-            );
+                nullptr);
         }
-        catch (...){}
+        catch (...)
+        {
+        }
     }
-
-
 }
 
 
@@ -184,9 +180,7 @@ int WINAPI wWinMain(
     const ::HINSTANCE hInstance,
     const ::HINSTANCE hPrevInstance,
     const ::LPWSTR    lpCmdLine,
-    const int         nCmdShow
-)
-noexcept
+    const int         nCmdShow) noexcept
 {
     boost::ignore_unused(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
     try

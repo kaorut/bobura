@@ -21,14 +21,12 @@
 
 #include <bobura/command/command_base.h> // IWYU pragma: keep
 
-namespace boost { namespace filesystem
-{
+namespace boost { namespace filesystem {
     class path;
 }}
 
 
-namespace bobura { namespace message { namespace main_window
-{
+namespace bobura { namespace message { namespace main_window {
     /*!
         \brief The class template for a popup menu selection observer of the main window.
 
@@ -64,16 +62,11 @@ namespace bobura { namespace message { namespace main_window
         popup_menu_selected(
             popup_menu_type&                   popup_menu,
             std::vector<const command_type*>&& commands,
-            const model_type&                  model
-        )
-        :
-        m_popup_menu(popup_menu),
-        m_commands(commands),
-        m_model(model)
+            const model_type&                  model)
+        : m_popup_menu(popup_menu), m_commands(commands), m_model(model)
         {
             assert(
-                static_cast<std::size_t>(std::distance(m_popup_menu.begin(), m_popup_menu.end())) == m_commands.size()
-            );
+                static_cast<std::size_t>(std::distance(m_popup_menu.begin(), m_popup_menu.end())) == m_commands.size());
         }
 
 
@@ -82,11 +75,10 @@ namespace bobura { namespace message { namespace main_window
         /*!
             \brief Called when the menu is selected.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             std::size_t i = 0;
-            for (auto& menu_item: m_popup_menu)
+            for (auto& menu_item : m_popup_menu)
             {
                 assert(i < m_commands.size());
                 const auto* const p_command = m_commands[i];
@@ -136,8 +128,6 @@ namespace bobura { namespace message { namespace main_window
         std::vector<const command_type*> m_commands;
 
         const model_type& m_model;
-
-
     };
 
 
@@ -174,10 +164,7 @@ namespace bobura { namespace message { namespace main_window
             \param parent  A parent window.
         */
         menu_command_selected(const command_type& command, model_type& model, abstract_window_type& parent)
-        :
-        m_command(command),
-        m_model(model),
-        m_parent(parent)
+        : m_command(command), m_model(model), m_parent(parent)
         {}
 
 
@@ -186,8 +173,7 @@ namespace bobura { namespace message { namespace main_window
         /*!
             \brief Called when the menu is selected.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             m_command.execute(m_model, m_parent);
         }
@@ -201,8 +187,6 @@ namespace bobura { namespace message { namespace main_window
         model_type& m_model;
 
         abstract_window_type& m_parent;
-
-
     };
 
 
@@ -239,10 +223,7 @@ namespace bobura { namespace message { namespace main_window
             \param parent      A parent window.
         */
         file_dropped(const command_set_type& command_set, model_type& model, abstract_window_type& parent)
-        :
-        m_command_set(command_set),
-        m_model(model),
-        m_parent(parent)
+        : m_command_set(command_set), m_model(model), m_parent(parent)
         {}
 
 
@@ -253,8 +234,7 @@ namespace bobura { namespace message { namespace main_window
 
             \param paths Paths.
         */
-        void operator()(const std::vector<boost::filesystem::path>& paths)
-        const
+        void operator()(const std::vector<boost::filesystem::path>& paths) const
         {
             if (paths.empty())
                 return;
@@ -272,8 +252,6 @@ namespace bobura { namespace message { namespace main_window
         model_type& m_model;
 
         abstract_window_type& m_parent;
-
-
     };
 
 
@@ -293,8 +271,7 @@ namespace bobura { namespace message { namespace main_window
         typename AbstractWindow,
         typename TabFrame,
         typename ViewPictureBox,
-        typename PropertyBar
-    >
+        typename PropertyBar>
     class window_resized
     {
     public:
@@ -343,18 +320,12 @@ namespace bobura { namespace message { namespace main_window
             view_picture_box_type& diagram_view_picture_box,
             view_picture_box_type& timetable_down_view_picture_box,
             view_picture_box_type& timetable_up_view_picture_box,
-            property_bar_type&     property_bar
-        )
-        :
-        m_diagram_view(diagram_view),
-        m_timetable_down_view(timetable_down_view),
-        m_timetable_up_view(timetable_up_view),
-        m_window(window),
-        m_tab_frame(tab_frame),
-        m_diagram_view_picture_box(diagram_view_picture_box),
-        m_timetable_down_view_picture_box(timetable_down_view_picture_box),
-        m_timetable_up_view_picture_box(timetable_up_view_picture_box),
-        m_property_bar(property_bar)
+            property_bar_type&     property_bar)
+        : m_diagram_view(diagram_view), m_timetable_down_view(timetable_down_view),
+          m_timetable_up_view(timetable_up_view), m_window(window), m_tab_frame(tab_frame),
+          m_diagram_view_picture_box(diagram_view_picture_box),
+          m_timetable_down_view_picture_box(timetable_down_view_picture_box),
+          m_timetable_up_view_picture_box(timetable_up_view_picture_box), m_property_bar(property_bar)
         {}
 
 
@@ -363,53 +334,48 @@ namespace bobura { namespace message { namespace main_window
         /*!
             \brief Called when the main window is resized.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             if (m_window.window_state() == window_state_type::minimized)
                 return;
 
-            const auto window_dimension = m_window.client_dimension();
+            const auto  window_dimension = m_window.client_dimension();
             const auto& window_width = window_dimension.width();
             const auto& window_height = window_dimension.height();
             const auto& property_bar_width = m_property_bar.preferred_width();
             {
-                const position_type position{
-                    position_unit_type::from(window_width) - position_unit_type::from(property_bar_width),
-                    position_unit_type{}
-                };
+                const position_type  position{ position_unit_type::from(window_width) -
+                                                  position_unit_type::from(property_bar_width),
+                                              position_unit_type{} };
                 const dimension_type dimension{ property_bar_width, window_height };
                 m_property_bar.set_position_and_dimension(position, dimension);
                 m_property_bar.repaint();
                 m_property_bar.size_observer_set().resized()();
             }
             {
-                const position_type position{};
-                const dimension_type dimension{
-                    window_width > property_bar_width ? window_width - property_bar_width : dimension_unit_type{},
-                    window_height
-                };
+                const position_type  position{};
+                const dimension_type dimension{ window_width > property_bar_width ? window_width - property_bar_width :
+                                                                                    dimension_unit_type{},
+                                                window_height };
                 m_tab_frame.set_position_and_dimension(position, dimension);
                 m_tab_frame.repaint();
 
                 m_diagram_view.update_dimension();
                 m_diagram_view_picture_box.update_scroll_bars(
-                    m_diagram_view.dimension(), m_diagram_view.page_size(m_diagram_view_picture_box.client_dimension())
-                );
+                    m_diagram_view.dimension(),
+                    m_diagram_view.page_size(m_diagram_view_picture_box.client_dimension()));
                 m_diagram_view_picture_box.repaint();
 
                 m_timetable_down_view.update_dimension();
                 m_timetable_down_view_picture_box.update_scroll_bars(
                     m_timetable_down_view.dimension(),
-                    m_timetable_down_view.page_size(m_timetable_down_view_picture_box.client_dimension())
-                );
+                    m_timetable_down_view.page_size(m_timetable_down_view_picture_box.client_dimension()));
                 m_timetable_down_view_picture_box.repaint();
 
                 m_timetable_up_view.update_dimension();
                 m_timetable_up_view_picture_box.update_scroll_bars(
                     m_timetable_up_view.dimension(),
-                    m_timetable_up_view.page_size(m_timetable_up_view_picture_box.client_dimension())
-                );
+                    m_timetable_up_view.page_size(m_timetable_up_view_picture_box.client_dimension()));
                 m_timetable_up_view_picture_box.repaint();
             }
         }
@@ -450,8 +416,6 @@ namespace bobura { namespace message { namespace main_window
         view_picture_box_type& m_timetable_up_view_picture_box;
 
         property_bar_type& m_property_bar;
-
-
     };
 
 
@@ -474,7 +438,7 @@ namespace bobura { namespace message { namespace main_window
         using confirm_file_save_type = ConfirmFileSave;
 
         //! The setting saver type.
-        using save_settings_type = std::function<void ()>;
+        using save_settings_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -489,12 +453,8 @@ namespace bobura { namespace message { namespace main_window
         window_closing(
             abstract_window_type&         window,
             const confirm_file_save_type& confirm_file_save,
-            save_settings_type            save_settings
-        )
-        :
-        m_window(window),
-        m_confirm_file_save(confirm_file_save),
-        m_save_settings(std::move(save_settings))
+            save_settings_type            save_settings)
+        : m_window(window), m_confirm_file_save(confirm_file_save), m_save_settings(std::move(save_settings))
         {}
 
 
@@ -505,8 +465,7 @@ namespace bobura { namespace message { namespace main_window
 
             \param cancel Set true to cancel the window closing.
         */
-        void operator()(bool& cancel)
-        const
+        void operator()(bool& cancel) const
         {
             cancel = !m_confirm_file_save(m_window);
             if (cancel)
@@ -524,8 +483,6 @@ namespace bobura { namespace message { namespace main_window
         const confirm_file_save_type& m_confirm_file_save;
 
         const save_settings_type m_save_settings;
-
-
     };
 
 

@@ -10,8 +10,7 @@
 #define BOBURA_COMMAND_TRAITS_H
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     /*!
         \brief The class template for the command traits.
 
@@ -32,8 +31,7 @@ namespace bobura { namespace command
         typename Speed,
         typename Font,
         typename AbstractWindow,
-        typename MouseCapture
-    >
+        typename MouseCapture>
     class traits
     {
     public:
@@ -62,8 +60,6 @@ namespace bobura { namespace command
 
         //! The mouse capture type.
         using mouse_capture_type = MouseCapture;
-
-
     };
 
 

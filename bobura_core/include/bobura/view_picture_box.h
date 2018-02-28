@@ -12,8 +12,7 @@
 #include <memory>
 
 
-namespace bobura
-{
+namespace bobura {
     /*!
         \brief The class template for the view picture box.
 
@@ -37,7 +36,7 @@ namespace bobura
 
         //! The mouse capture type.
         using mouse_capture_type = MouseCapture;
-        
+
         //! The mouse button type.
         using mouse_button_type = typename mouse_capture_type::mouse_button_type;
 
@@ -54,8 +53,7 @@ namespace bobura
         /*!
             \brief Destroys the view picture box.
         */
-        virtual ~view_picture_box()
-        noexcept;
+        virtual ~view_picture_box() noexcept;
 
 
         // functions
@@ -95,11 +93,7 @@ namespace bobura
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
-
-
 }
 
 

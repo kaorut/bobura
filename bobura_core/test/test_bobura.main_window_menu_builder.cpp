@@ -30,8 +30,7 @@
 #include <bobura/type_list.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -49,19 +48,15 @@ namespace
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
     using settings_type =
-        bobura::settings<
-            string_type, ui_type_list_type::position_type, ui_type_list_type::dimension_type
-        >;
+        bobura::settings<string_type, ui_type_list_type::position_type, ui_type_list_type::dimension_type>;
 
-    using model_type =
-        bobura::timetable_model<
-            common_type_list_type::size_type,
-            common_type_list_type::difference_type,
-            string_type,
-            common_type_list_type::operating_distance_type,
-            common_type_list_type::speed_type,
-            ui_type_list_type::fast_font_type
-        >;
+    using model_type = bobura::timetable_model<
+        common_type_list_type::size_type,
+        common_type_list_type::difference_type,
+        string_type,
+        common_type_list_type::operating_distance_type,
+        common_type_list_type::speed_type,
+        ui_type_list_type::fast_font_type>;
 
     using load_save_traits_type = traits_type_list_type::load_save_type;
 
@@ -84,85 +79,79 @@ namespace
         bobura::main_window_menu_builder<traits_type_list_type::main_window_menu_builder_type>;
 
     using detail_impl_set_type = tetengo2::detail::stub::impl_set;
-
-
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(main_window_menu_builder)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(main_window_menu_builder)
+        // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+        BOOST_AUTO_TEST_CASE(construction)
+        {
+            BOOST_TEST_PASSPOINT();
 
-        const message_catalog_type message_catalog{};
-        settings_type settings{
-            std::vector<string_type>{1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
-            string_type{ TETENGO2_TEXT("test_bobura") }
-        };
-        model_type model{};
-        const save_to_file_type save_to_file{ false, message_catalog };
-        const save_to_file_type ask_file_path_and_save_to_file{ true, message_catalog };
-        const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-        const new_file_type new_file{ confirm_file_save };
-        const load_from_file_type load_from_file{ true, confirm_file_save, message_catalog };
-        const load_from_file_type reload{ false, confirm_file_save, message_catalog };
-        diagram_view_type diagram_view{ model, message_catalog };
-        const command_set_type command_set{
-            new_file,
-            load_from_file,
-            reload,
-            save_to_file,
-            ask_file_path_and_save_to_file,
-            diagram_view,
-            settings,
-            message_catalog,
-            detail_impl_set_type::instance()
-        };
-        main_window_type main_window{ message_catalog, settings, confirm_file_save, detail_impl_set_type::instance() };
-        const main_window_menu_builder_type main_window_menu_builder{
-            command_set, model, main_window, message_catalog
-        };
-    }
+            const message_catalog_type message_catalog{};
+            settings_type settings{ std::vector<string_type>{ 1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
+                                    string_type{ TETENGO2_TEXT("test_bobura") } };
+            model_type    model{};
+            const save_to_file_type      save_to_file{ false, message_catalog };
+            const save_to_file_type      ask_file_path_and_save_to_file{ true, message_catalog };
+            const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
+            const new_file_type          new_file{ confirm_file_save };
+            const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
+            const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
+            diagram_view_type            diagram_view{ model, message_catalog };
+            const command_set_type       command_set{ new_file,
+                                                load_from_file,
+                                                reload,
+                                                save_to_file,
+                                                ask_file_path_and_save_to_file,
+                                                diagram_view,
+                                                settings,
+                                                message_catalog,
+                                                detail_impl_set_type::instance() };
+            main_window_type             main_window{
+                message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
+            };
+            const main_window_menu_builder_type main_window_menu_builder{
+                command_set, model, main_window, message_catalog
+            };
+        }
 
-    BOOST_AUTO_TEST_CASE(build)
-    {
-        BOOST_TEST_PASSPOINT();
+        BOOST_AUTO_TEST_CASE(build)
+        {
+            BOOST_TEST_PASSPOINT();
 
-        const message_catalog_type message_catalog{};
-        settings_type settings{
-            std::vector<string_type>{1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
-            string_type{ TETENGO2_TEXT("test_bobura") }
-        };
-        model_type model{};
-        const save_to_file_type save_to_file{ false, message_catalog };
-        const save_to_file_type ask_file_path_and_save_to_file{ true, message_catalog };
-        const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-        const new_file_type new_file{ confirm_file_save };
-        const load_from_file_type load_from_file{ true, confirm_file_save, message_catalog };
-        const load_from_file_type reload{ false, confirm_file_save, message_catalog };
-        diagram_view_type diagram_view{ model, message_catalog };
-        const command_set_type command_set{
-            new_file,
-            load_from_file,
-            reload,
-            save_to_file,
-            ask_file_path_and_save_to_file,
-            diagram_view,
-            settings,
-            message_catalog,
-            detail_impl_set_type::instance()
-        };
-        main_window_type main_window{ message_catalog, settings, confirm_file_save, detail_impl_set_type::instance() };
-        const main_window_menu_builder_type main_window_menu_builder{
-            command_set, model, main_window, message_catalog
-        };
+            const message_catalog_type message_catalog{};
+            settings_type settings{ std::vector<string_type>{ 1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
+                                    string_type{ TETENGO2_TEXT("test_bobura") } };
+            model_type    model{};
+            const save_to_file_type      save_to_file{ false, message_catalog };
+            const save_to_file_type      ask_file_path_and_save_to_file{ true, message_catalog };
+            const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
+            const new_file_type          new_file{ confirm_file_save };
+            const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
+            const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
+            diagram_view_type            diagram_view{ model, message_catalog };
+            const command_set_type       command_set{ new_file,
+                                                load_from_file,
+                                                reload,
+                                                save_to_file,
+                                                ask_file_path_and_save_to_file,
+                                                diagram_view,
+                                                settings,
+                                                message_catalog,
+                                                detail_impl_set_type::instance() };
+            main_window_type             main_window{
+                message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
+            };
+            const main_window_menu_builder_type main_window_menu_builder{
+                command_set, model, main_window, message_catalog
+            };
 
-        BOOST_TEST(main_window_menu_builder.build().get());
-    }
+            BOOST_TEST(main_window_menu_builder.build().get());
+        }
 
 
-BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

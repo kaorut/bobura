@@ -12,15 +12,13 @@
 #include <memory>
 #include <vector>
 
-namespace boost
-{
+namespace boost {
     template <typename T>
     class optional;
 }
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     /*!
         \brief The class template for the OuDia diagram dialog.
 
@@ -65,8 +63,7 @@ namespace bobura { namespace model { namespace serializer
         /*!
             \brief Destroys the OuDia diagram dialog.
         */
-        virtual ~oudia_diagram_dialog()
-        noexcept;
+        virtual ~oudia_diagram_dialog() noexcept;
 
 
         // functions
@@ -76,8 +73,7 @@ namespace bobura { namespace model { namespace serializer
 
             \return The file name.
         */
-        const string_type& file_name()
-        const;
+        const string_type& file_name() const;
 
         /*!
             \brief Sets a file name.
@@ -91,8 +87,7 @@ namespace bobura { namespace model { namespace serializer
 
             \return The names.
         */
-        const std::vector<string_type>& names()
-        const;
+        const std::vector<string_type>& names() const;
 
         /*!
             \brief Sets names.
@@ -106,8 +101,7 @@ namespace bobura { namespace model { namespace serializer
 
             \return The selected index.
         */
-        const boost::optional<size_type>& selected_index()
-        const;
+        const boost::optional<size_type>& selected_index() const;
 
         /*!
             \brief Sets a selected index.
@@ -132,10 +126,7 @@ namespace bobura { namespace model { namespace serializer
 
         // virtual functions
 
-        virtual void set_result_impl()
-        override;
-
-
+        virtual void set_result_impl() override;
     };
 
 

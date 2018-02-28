@@ -16,19 +16,16 @@
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/timetable_model.h>
 
-namespace boost { namespace filesystem
-{
+namespace boost { namespace filesystem {
     class path;
 }}
-namespace boost
-{
+namespace boost {
     template <typename T>
     class optional;
 }
 
 
-namespace bobura { namespace load_save
-{
+namespace bobura { namespace load_save {
     /*!
         \brief The class template for a file loading.
 
@@ -87,14 +84,12 @@ namespace bobura { namespace load_save
         load_from_file(
             bool                          ask_file_path,
             const confirm_file_save_type& confirm_file_save,
-            const message_catalog_type&   message_catalog
-        );
+            const message_catalog_type&   message_catalog);
 
         /*!
             \brief Destroys the file loading.
         */
-        ~load_from_file()
-        noexcept;
+        ~load_from_file() noexcept;
 
 
         // functions
@@ -108,8 +103,7 @@ namespace bobura { namespace load_save
             \retval true  When the model is reloadable.
             \retval false Otherwise.
         */
-        bool reloadable(const model_type& model, const boost::optional<boost::filesystem::path>& given_path)
-        const;
+        bool reloadable(const model_type& model, const boost::optional<boost::filesystem::path>& given_path) const;
 
         /*!
             \brief Executes the load_save.
@@ -121,9 +115,7 @@ namespace bobura { namespace load_save
         void operator()(
             model_type&                                     model,
             const boost::optional<boost::filesystem::path>& given_path,
-            abstract_window_type&                           parent
-        )
-        const;
+            abstract_window_type&                           parent) const;
 
 
     private:
@@ -135,8 +127,6 @@ namespace bobura { namespace load_save
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
 
 

@@ -24,8 +24,7 @@
 #include <bobura/type_list.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -45,315 +44,307 @@ namespace
     using dimension_unit_type = dimension_type::unit_type;
 
     using settings_type = bobura::settings<string_type, position_type, dimension_type>;
-
-
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(settings)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(settings)
+        // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-
-        settings.clear_config();
-    }
-
-    BOOST_AUTO_TEST_CASE(base_path)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-
-        BOOST_CHECK(settings.base_path() == boost::filesystem::path{ string_type{ TETENGO2_TEXT("path/to") } });
-
-        settings.clear_config();
-    }
-
-    BOOST_AUTO_TEST_CASE(input)
-    {
-        BOOST_TEST_PASSPOINT();
-
+        BOOST_AUTO_TEST_CASE(construction)
         {
+            BOOST_TEST_PASSPOINT();
+
             const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-            settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-
-            BOOST_TEST(!settings.input().is_initialized());
+            settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
             settings.clear_config();
         }
+
+        BOOST_AUTO_TEST_CASE(base_path)
         {
-            const std::vector<string_type> arguments{
-                string_type{ TETENGO2_TEXT("path/to/exe") }, string_type{ TETENGO2_TEXT("input_file") }
-            };
-            settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+            BOOST_TEST_PASSPOINT();
 
-            BOOST_TEST_REQUIRE(settings.input().is_initialized());
-            BOOST_CHECK(*settings.input() == boost::filesystem::path{ string_type{ TETENGO2_TEXT("input_file") } });
-
-            settings.clear_config();
-        }
-    }
-
-    BOOST_AUTO_TEST_CASE(message_directory_path)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-
-        BOOST_CHECK(
-            settings.message_directory_path() ==
-            boost::filesystem::path{ string_type{ TETENGO2_TEXT("path/to/messages") } }
-        );
-
-        settings.clear_config();
-    }
-
-    BOOST_AUTO_TEST_CASE(image_directory_path)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-
-        BOOST_CHECK(
-            settings.image_directory_path() ==
-            boost::filesystem::path{ string_type{ TETENGO2_TEXT("path/to/images") } }
-        );
-
-        settings.clear_config();
-    }
-
-    BOOST_AUTO_TEST_CASE(main_window_dimension)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        {
             const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-            settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+            settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
-            settings.main_window_dimension();
+            BOOST_CHECK(settings.base_path() == boost::filesystem::path{ string_type{ TETENGO2_TEXT("path/to") } });
 
             settings.clear_config();
         }
+
+        BOOST_AUTO_TEST_CASE(input)
         {
-            const std::vector<string_type> arguments{
-                string_type{ TETENGO2_TEXT("path/to/exe") }, string_type{ TETENGO2_TEXT("--dimension=240x120") }
-            };
-            settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+            BOOST_TEST_PASSPOINT();
+
+            {
+                const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+                settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+                BOOST_TEST(!settings.input().is_initialized());
+
+                settings.clear_config();
+            }
+            {
+                const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") },
+                                                          string_type{ TETENGO2_TEXT("input_file") } };
+                settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+                BOOST_TEST_REQUIRE(settings.input().is_initialized());
+                BOOST_CHECK(*settings.input() == boost::filesystem::path{ string_type{ TETENGO2_TEXT("input_file") } });
+
+                settings.clear_config();
+            }
+        }
+
+        BOOST_AUTO_TEST_CASE(message_directory_path)
+        {
+            BOOST_TEST_PASSPOINT();
+
+            const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+            settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+            BOOST_CHECK(
+                settings.message_directory_path() ==
+                boost::filesystem::path{ string_type{ TETENGO2_TEXT("path/to/messages") } });
+
+            settings.clear_config();
+        }
+
+        BOOST_AUTO_TEST_CASE(image_directory_path)
+        {
+            BOOST_TEST_PASSPOINT();
+
+            const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+            settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+            BOOST_CHECK(
+                settings.image_directory_path() ==
+                boost::filesystem::path{ string_type{ TETENGO2_TEXT("path/to/images") } });
+
+            settings.clear_config();
+        }
+
+        BOOST_AUTO_TEST_CASE(main_window_dimension)
+        {
+            BOOST_TEST_PASSPOINT();
+
+            {
+                const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+                settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+                settings.main_window_dimension();
+
+                settings.clear_config();
+            }
+            {
+                const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") },
+                                                          string_type{ TETENGO2_TEXT("--dimension=240x120") } };
+                settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+                const auto dimension = settings.main_window_dimension();
+
+                BOOST_TEST_REQUIRE(dimension.is_initialized());
+                BOOST_TEST(dimension->width().to_pixels<std::size_t>() == 240U);
+                BOOST_TEST(dimension->height().to_pixels<std::size_t>() == 120U);
+
+                settings.clear_config();
+            }
+            {
+                const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") },
+                                                          string_type{ TETENGO2_TEXT("-d") },
+                                                          string_type{ TETENGO2_TEXT("240x120") } };
+                settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+                const auto dimension = settings.main_window_dimension();
+
+                BOOST_TEST_REQUIRE(dimension.is_initialized());
+                BOOST_TEST(dimension->width().to_pixels<std::size_t>() == 240U);
+                BOOST_TEST(dimension->height().to_pixels<std::size_t>() == 120U);
+
+                settings.clear_config();
+            }
+        }
+
+        BOOST_AUTO_TEST_CASE(set_main_window_dimension)
+        {
+            BOOST_TEST_PASSPOINT();
+
+            const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+            settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+            settings.set_main_window_dimension(dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } });
 
             const auto dimension = settings.main_window_dimension();
 
             BOOST_TEST_REQUIRE(dimension.is_initialized());
-            BOOST_TEST(dimension->width().to_pixels<std::size_t>() == 240U);
-            BOOST_TEST(dimension->height().to_pixels<std::size_t>() == 120U);
+            BOOST_CHECK(dimension->width() == dimension_unit_type{ 42 });
+            BOOST_CHECK(dimension->height() == dimension_unit_type{ 24 });
 
             settings.clear_config();
         }
+
+        BOOST_AUTO_TEST_CASE(main_window_maximized)
         {
-            const std::vector<string_type> arguments{
-                string_type{ TETENGO2_TEXT("path/to/exe") },
-                string_type{ TETENGO2_TEXT("-d") },
-                string_type{ TETENGO2_TEXT("240x120") }
-            };
-            settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+            BOOST_TEST_PASSPOINT();
 
-            const auto dimension = settings.main_window_dimension();
-
-            BOOST_TEST_REQUIRE(dimension.is_initialized());
-            BOOST_TEST(dimension->width().to_pixels<std::size_t>() == 240U);
-            BOOST_TEST(dimension->height().to_pixels<std::size_t>() == 120U);
-
-            settings.clear_config();
-        }
-    }
-
-    BOOST_AUTO_TEST_CASE(set_main_window_dimension)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-
-        settings.set_main_window_dimension(dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } });
-
-        const auto dimension = settings.main_window_dimension();
-
-        BOOST_TEST_REQUIRE(dimension.is_initialized());
-        BOOST_CHECK(dimension->width() == dimension_unit_type{ 42 });
-        BOOST_CHECK(dimension->height() == dimension_unit_type{ 24 });
-
-        settings.clear_config();
-    }
-
-    BOOST_AUTO_TEST_CASE(main_window_maximized)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-
-        settings.main_window_maximized();
-
-        settings.clear_config();
-    }
-
-    BOOST_AUTO_TEST_CASE(set_main_window_maximized)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        {
             const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-            settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+            settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
-            settings.set_main_window_maximized(false);
-
-            const auto maximized = settings.main_window_maximized();
-
-            BOOST_TEST_REQUIRE(maximized.is_initialized());
-            BOOST_TEST(!*maximized);
+            settings.main_window_maximized();
 
             settings.clear_config();
         }
-        {
-            const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-            settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
+        BOOST_AUTO_TEST_CASE(set_main_window_maximized)
+        {
+            BOOST_TEST_PASSPOINT();
+
+            {
+                const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+                settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+                settings.set_main_window_maximized(false);
+
+                const auto maximized = settings.main_window_maximized();
+
+                BOOST_TEST_REQUIRE(maximized.is_initialized());
+                BOOST_TEST(!*maximized);
+
+                settings.clear_config();
+            }
+            {
+                const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+                settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+                settings.set_main_window_maximized(true);
+
+                const auto maximized = settings.main_window_maximized();
+
+                BOOST_TEST_REQUIRE(maximized.is_initialized());
+                BOOST_TEST(*maximized);
+
+                settings.clear_config();
+            }
+        }
+
+        BOOST_AUTO_TEST_CASE(property_bar_width)
+        {
+            BOOST_TEST_PASSPOINT();
+
+            const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+            settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+            settings.property_bar_width();
+
+            settings.clear_config();
+        }
+
+        BOOST_AUTO_TEST_CASE(set_property_bar_width)
+        {
+            BOOST_TEST_PASSPOINT();
+
+            const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+            settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+            settings.set_property_bar_width(dimension_unit_type{ 42 });
+
+            const auto width = settings.property_bar_width();
+
+            BOOST_TEST_REQUIRE(width.is_initialized());
+            BOOST_CHECK(*width == dimension_unit_type{ 42 });
+
+            settings.clear_config();
+        }
+
+        BOOST_AUTO_TEST_CASE(property_bar_minimized)
+        {
+            BOOST_TEST_PASSPOINT();
+
+            const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+            settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+            settings.property_bar_minimized();
+
+            settings.clear_config();
+        }
+
+        BOOST_AUTO_TEST_CASE(set_property_bar_minimized)
+        {
+            BOOST_TEST_PASSPOINT();
+
+            {
+                const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+                settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+                settings.set_property_bar_minimized(false);
+
+                const auto minimized = settings.property_bar_minimized();
+
+                BOOST_TEST_REQUIRE(minimized.is_initialized());
+                BOOST_TEST(!*minimized);
+
+                settings.clear_config();
+            }
+            {
+                const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+                settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+                settings.set_property_bar_minimized(true);
+
+                const auto minimized = settings.property_bar_minimized();
+
+                BOOST_TEST_REQUIRE(minimized.is_initialized());
+                BOOST_TEST(*minimized);
+
+                settings.clear_config();
+            }
+        }
+
+        BOOST_AUTO_TEST_CASE(property_bar_splitter_position)
+        {
+            BOOST_TEST_PASSPOINT();
+
+            const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+            settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+            settings.property_bar_splitter_position();
+
+            settings.clear_config();
+        }
+
+        BOOST_AUTO_TEST_CASE(set_property_bar_splitter_position)
+        {
+            BOOST_TEST_PASSPOINT();
+
+            const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+            settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+
+            settings.set_property_bar_splitter_position(position_unit_type{ 42 });
+
+            const auto position = settings.property_bar_splitter_position();
+
+            BOOST_TEST_REQUIRE(position.is_initialized());
+            BOOST_CHECK(*position == position_unit_type{ 42 });
+
+            settings.clear_config();
+        }
+
+        BOOST_AUTO_TEST_CASE(clear_config)
+        {
+            BOOST_TEST_PASSPOINT();
+
+            const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+            settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
             settings.set_main_window_maximized(true);
 
-            const auto maximized = settings.main_window_maximized();
+            settings.clear_config();
 
-            BOOST_TEST_REQUIRE(maximized.is_initialized());
-            BOOST_TEST(*maximized);
+            BOOST_TEST(!settings.main_window_maximized());
 
             settings.clear_config();
         }
-    }
-
-    BOOST_AUTO_TEST_CASE(property_bar_width)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-
-        settings.property_bar_width();
-
-        settings.clear_config();
-    }
-
-    BOOST_AUTO_TEST_CASE(set_property_bar_width)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-
-        settings.set_property_bar_width(dimension_unit_type{ 42 });
-
-        const auto width = settings.property_bar_width();
-
-        BOOST_TEST_REQUIRE(width.is_initialized());
-        BOOST_CHECK(*width == dimension_unit_type{ 42 });
-
-        settings.clear_config();
-    }
-
-    BOOST_AUTO_TEST_CASE(property_bar_minimized)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-
-        settings.property_bar_minimized();
-
-        settings.clear_config();
-    }
-
-    BOOST_AUTO_TEST_CASE(set_property_bar_minimized)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        {
-            const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-            settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-
-            settings.set_property_bar_minimized(false);
-
-            const auto minimized = settings.property_bar_minimized();
-
-            BOOST_TEST_REQUIRE(minimized.is_initialized());
-            BOOST_TEST(!*minimized);
-
-            settings.clear_config();
-        }
-        {
-            const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-            settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-
-            settings.set_property_bar_minimized(true);
-
-            const auto minimized = settings.property_bar_minimized();
-
-            BOOST_TEST_REQUIRE(minimized.is_initialized());
-            BOOST_TEST(*minimized);
-
-            settings.clear_config();
-        }
-    }
-
-    BOOST_AUTO_TEST_CASE(property_bar_splitter_position)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-
-        settings.property_bar_splitter_position();
-
-        settings.clear_config();
-    }
-
-    BOOST_AUTO_TEST_CASE(set_property_bar_splitter_position)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-
-        settings.set_property_bar_splitter_position(position_unit_type{ 42 });
-
-        const auto position = settings.property_bar_splitter_position();
-
-        BOOST_TEST_REQUIRE(position.is_initialized());
-        BOOST_CHECK(*position == position_unit_type{ 42 });
-
-        settings.clear_config();
-    }
-
-    BOOST_AUTO_TEST_CASE(clear_config)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-        settings.set_main_window_maximized(true);
-
-        settings.clear_config();
-
-        BOOST_TEST(!settings.main_window_maximized());
-
-        settings.clear_config();
-    }
 
 
-BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

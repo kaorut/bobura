@@ -20,8 +20,7 @@
 #include <bobura/view_picture_box.h>
 
 
-namespace bobura { namespace view { namespace diagram
-{
+namespace bobura { namespace view { namespace diagram {
     template <typename Traits, typename PictureBox, typename MouseCapture>
     class zoom<Traits, PictureBox, MouseCapture>::impl : private boost::noncopyable
     {
@@ -44,9 +43,7 @@ namespace bobura { namespace view { namespace diagram
         // constructors and destructor
 
         impl(picture_box_type& picture_box, diagram_view_type& diagram_view)
-        :
-        m_p_diagram_view_picture_box(dynamic_cast<view_picture_box_type*>(&picture_box)),
-        m_diagram_view(diagram_view)
+        : m_p_diagram_view_picture_box(dynamic_cast<view_picture_box_type*>(&picture_box)), m_diagram_view(diagram_view)
         {
             assert(m_p_diagram_view_picture_box);
         }
@@ -58,8 +55,7 @@ namespace bobura { namespace view { namespace diagram
         {
             m_diagram_view.set_horizontal_scale(std::move(scale));
             m_p_diagram_view_picture_box->update_scroll_bars(
-                m_diagram_view.dimension(), m_diagram_view.page_size(m_p_diagram_view_picture_box->client_dimension())
-            );
+                m_diagram_view.dimension(), m_diagram_view.page_size(m_p_diagram_view_picture_box->client_dimension()));
             m_p_diagram_view_picture_box->repaint();
         }
 
@@ -79,8 +75,7 @@ namespace bobura { namespace view { namespace diagram
         {
             m_diagram_view.set_vertical_scale(std::move(scale));
             m_p_diagram_view_picture_box->update_scroll_bars(
-                m_diagram_view.dimension(), m_diagram_view.page_size(m_p_diagram_view_picture_box->client_dimension())
-            );
+                m_diagram_view.dimension(), m_diagram_view.page_size(m_p_diagram_view_picture_box->client_dimension()));
             m_p_diagram_view_picture_box->repaint();
         }
 
@@ -111,11 +106,8 @@ namespace bobura { namespace view { namespace diagram
 
         // static functions
 
-        static scale_type larger(
-            const scale_type&      scale,
-            const scale_list_type& scale_list,
-            const bool             snap_to_scale_list
-        )
+        static scale_type
+        larger(const scale_type& scale, const scale_list_type& scale_list, const bool snap_to_scale_list)
         {
             if (snap_to_scale_list)
                 return scale_list.larger(scale);
@@ -127,11 +119,8 @@ namespace bobura { namespace view { namespace diagram
             return larger_scale;
         }
 
-        static scale_type smaller(
-            const scale_type&      scale,
-            const scale_list_type& scale_list,
-            const bool             snap_to_scale_list
-        )
+        static scale_type
+        smaller(const scale_type& scale, const scale_list_type& scale_list, const bool snap_to_scale_list)
         {
             if (snap_to_scale_list)
                 return scale_list.smaller(scale);
@@ -145,13 +134,9 @@ namespace bobura { namespace view { namespace diagram
 
         static position_type to_position(const scroll_bar_size_type left, const scroll_bar_size_type top)
         {
-            return
-                position_type{
-                    position_unit_type{ static_cast<typename position_unit_type::value_type>(left) },
-                    position_unit_type{ static_cast<typename position_unit_type::value_type>(top) }
-                };
+            return position_type{ position_unit_type{ static_cast<typename position_unit_type::value_type>(left) },
+                                  position_unit_type{ static_cast<typename position_unit_type::value_type>(top) } };
         }
-
 
 
         // variables
@@ -159,29 +144,22 @@ namespace bobura { namespace view { namespace diagram
         view_picture_box_type* const m_p_diagram_view_picture_box;
 
         diagram_view_type& m_diagram_view;
-
-
     };
 
 
     template <typename Traits, typename PictureBox, typename MouseCapture>
-    zoom<Traits, PictureBox, MouseCapture>::zoom(
-        picture_box_type&  picture_box,
-        diagram_view_type& diagram_view
-    )
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(picture_box, diagram_view))
+    zoom<Traits, PictureBox, MouseCapture>::zoom(picture_box_type& picture_box, diagram_view_type& diagram_view)
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(picture_box, diagram_view))
     {}
 
     template <typename Traits, typename PictureBox, typename MouseCapture>
-    zoom<Traits, PictureBox, MouseCapture>::~zoom()
-    noexcept
+    zoom<Traits, PictureBox, MouseCapture>::~zoom() noexcept
     {}
 
     template <typename Traits, typename PictureBox, typename MouseCapture>
     void zoom<Traits, PictureBox, MouseCapture>::set_horizontal_scale(scale_type scale)
     {
-        m_p_impl->set_horizontal_scale(std::move(scale));   
+        m_p_impl->set_horizontal_scale(std::move(scale));
     }
 
     template <typename Traits, typename PictureBox, typename MouseCapture>
@@ -215,45 +193,37 @@ namespace bobura { namespace view { namespace diagram
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
     template class zoom<
         typename application::traits_type_list_type::diagram_view_type,
         typename application::ui_type_list_type::picture_box_type,
-        typename application::ui_type_list_type::mouse_capture_type
-    >;
+        typename application::ui_type_list_type::mouse_capture_type>;
 #endif
 
     template class zoom<
         typename test::traits_type_list_type::diagram_view_type,
         typename test::ui_type_list_type::picture_box_type,
-        typename test::ui_type_list_type::mouse_capture_type
-    >;
+        typename test::ui_type_list_type::mouse_capture_type>;
 
 
 }}}

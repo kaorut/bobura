@@ -14,8 +14,7 @@
 #include <bobura/model/serializer/reader.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     /*!
         \brief The class template for a WinDIA reader.
 
@@ -36,8 +35,7 @@ namespace bobura { namespace model { namespace serializer
         typename OperatingDistance,
         typename Speed,
         typename Font,
-        typename Encoder
-    >
+        typename Encoder>
     class windia_reader : public reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>
     {
     public:
@@ -88,8 +86,7 @@ namespace bobura { namespace model { namespace serializer
         /*!
             \brief Destroys the WubDIA reader.
         */
-        virtual ~windia_reader()
-        noexcept;
+        virtual ~windia_reader() noexcept;
 
 
     private:
@@ -105,13 +102,9 @@ namespace bobura { namespace model { namespace serializer
 
         // virtual functions
 
-        virtual bool selects_impl(iterator first, iterator last)
-        override;
+        virtual bool selects_impl(iterator first, iterator last) override;
 
-        virtual std::unique_ptr<timetable_type> read_impl(iterator first, iterator last, error_type& error)
-        override;
-
-
+        virtual std::unique_ptr<timetable_type> read_impl(iterator first, iterator last, error_type& error) override;
     };
 
 

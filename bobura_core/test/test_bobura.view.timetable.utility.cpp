@@ -14,8 +14,7 @@
 #include <bobura/view/timetable/utility.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -25,23 +24,21 @@ namespace
     using canvas_type = ui_type_list_type::canvas_type;
 
     using dimension_unit_type = canvas_type::dimension_unit_type;
-
-
 }
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(view)
-BOOST_AUTO_TEST_SUITE(timetable)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(view)
+        BOOST_AUTO_TEST_SUITE(timetable)
+            // test cases
 
-    BOOST_AUTO_TEST_CASE(normal_line_width)
-    {
-        BOOST_TEST_PASSPOINT();
+            BOOST_AUTO_TEST_CASE(normal_line_width)
+            {
+                BOOST_TEST_PASSPOINT();
 
-        bobura::view::timetable::normal_line_width<dimension_unit_type>();
-    }
+                bobura::view::timetable::normal_line_width<dimension_unit_type>();
+            }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+        BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

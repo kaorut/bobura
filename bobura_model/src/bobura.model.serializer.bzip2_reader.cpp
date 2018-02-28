@@ -30,8 +30,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     template <
         typename Size,
         typename Difference,
@@ -39,10 +38,9 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
-    class bzip2_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::impl :
-        private boost::noncopyable
+        typename Font>
+    class bzip2_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::impl
+    : private boost::noncopyable
     {
     public:
         // types
@@ -58,10 +56,7 @@ namespace bobura { namespace model { namespace serializer
 
         // constructors and destructor
 
-        explicit impl(std::unique_ptr<base_type> p_reader)
-        :
-        m_p_reader(std::move(p_reader))
-        {}
+        explicit impl(std::unique_ptr<base_type> p_reader) : m_p_reader(std::move(p_reader)) {}
 
 
         // functions
@@ -73,7 +68,7 @@ namespace bobura { namespace model { namespace serializer
             if (input_string_type{ first, std::next(first, 2) } != input_string_type(TETENGO2_TEXT("BZ")))
                 return false;
 
-            const input_string_type input_string{ first, last };
+            const input_string_type             input_string{ first, last };
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(input_string) };
             boost::iostreams::filtering_istream filtering_input_stream{};
             filtering_input_stream.push(boost::iostreams::bzip2_decompressor());
@@ -82,17 +77,10 @@ namespace bobura { namespace model { namespace serializer
             try
             {
                 const auto observable_first =
-                    tetengo2::iterator::make_observable_forward_iterator(
-                        boost::spirit::make_default_multi_pass(
-                            std::istreambuf_iterator<typename iterator::value_type>{ filtering_input_stream }
-                        )
-                    );
-                const auto observable_last =
-                    tetengo2::iterator::make_observable_forward_iterator(
-                        boost::spirit::make_default_multi_pass(
-                            std::istreambuf_iterator<typename iterator::value_type>{}
-                        )
-                    );
+                    tetengo2::iterator::make_observable_forward_iterator(boost::spirit::make_default_multi_pass(
+                        std::istreambuf_iterator<typename iterator::value_type>{ filtering_input_stream }));
+                const auto observable_last = tetengo2::iterator::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<typename iterator::value_type>{}));
                 return m_p_reader->selects(observable_first, observable_last);
             }
             catch (const boost::iostreams::bzip2_error&)
@@ -107,7 +95,7 @@ namespace bobura { namespace model { namespace serializer
 
         std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
         {
-            const input_string_type input_string{ first, last };
+            const input_string_type             input_string{ first, last };
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(input_string) };
             boost::iostreams::filtering_istream filtering_input_stream{};
             filtering_input_stream.push(boost::iostreams::bzip2_decompressor());
@@ -116,17 +104,10 @@ namespace bobura { namespace model { namespace serializer
             try
             {
                 const auto observable_first =
-                    tetengo2::iterator::make_observable_forward_iterator(
-                        boost::spirit::make_default_multi_pass(
-                            std::istreambuf_iterator<typename iterator::value_type>{ filtering_input_stream }
-                        )
-                    );
-                const auto observable_last =
-                    tetengo2::iterator::make_observable_forward_iterator(
-                        boost::spirit::make_default_multi_pass(
-                            std::istreambuf_iterator<typename iterator::value_type>{}
-                        )
-                    );
+                    tetengo2::iterator::make_observable_forward_iterator(boost::spirit::make_default_multi_pass(
+                        std::istreambuf_iterator<typename iterator::value_type>{ filtering_input_stream }));
+                const auto observable_last = tetengo2::iterator::make_observable_forward_iterator(
+                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<typename iterator::value_type>{}));
                 return m_p_reader->read(observable_first, observable_last, error);
             }
             catch (const boost::iostreams::bzip2_error&)
@@ -150,8 +131,6 @@ namespace bobura { namespace model { namespace serializer
         // variables
 
         const std::unique_ptr<base_type> m_p_reader;
-
-
     };
 
 
@@ -162,14 +141,10 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     bzip2_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::bzip2_reader(
-        std::unique_ptr<base_type> p_reader
-    )
-    :
-    base_type(),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(p_reader)))
+        std::unique_ptr<base_type> p_reader)
+    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(p_reader)))
     {}
 
     template <
@@ -179,10 +154,8 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
-    bzip2_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::~bzip2_reader()
-    noexcept
+        typename Font>
+    bzip2_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::~bzip2_reader() noexcept
     {}
 
     template <
@@ -192,12 +165,10 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     bool bzip2_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::selects_impl(
         const iterator first,
-        const iterator last
-    )
+        const iterator last)
     {
         return m_p_impl->selects_impl(first, last);
     }
@@ -209,47 +180,36 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
-    std::unique_ptr<
-        typename bzip2_reader<
-            Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font
-        >::timetable_type
-    >
+        typename Font>
+    std::unique_ptr<typename bzip2_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::
+                        timetable_type>
     bzip2_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::read_impl(
         const iterator first,
         const iterator last,
-        error_type&    error
-    )
+        error_type&    error)
     {
         return m_p_impl->read_impl(first, last, error);
     }
 
 
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using common_type_list_type = type_list::common;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using common_type_list_type = type_list::common;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -260,8 +220,7 @@ namespace bobura { namespace model { namespace serializer
         typename application::common_type_list_type::input_stream_iterator_type,
         typename application::common_type_list_type::operating_distance_type,
         typename application::common_type_list_type::speed_type,
-        typename application::ui_type_list_type::fast_font_type
-    >;
+        typename application::ui_type_list_type::fast_font_type>;
 #endif
 
     template class bzip2_reader<
@@ -271,8 +230,7 @@ namespace bobura { namespace model { namespace serializer
         typename test::common_type_list_type::input_stream_iterator_type,
         typename test::common_type_list_type::operating_distance_type,
         typename test::common_type_list_type::speed_type,
-        typename test::ui_type_list_type::font_type
-    >;
+        typename test::ui_type_list_type::font_type>;
 
 
 }}}

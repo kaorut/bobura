@@ -16,8 +16,7 @@
 #include <bobura/view/timetable/utility.h>
 
 
-namespace bobura { namespace view { namespace timetable
-{
+namespace bobura { namespace view { namespace timetable {
     /*!
         \brief The class template for a station list in the timetable view.
 
@@ -80,8 +79,7 @@ namespace bobura { namespace view { namespace timetable
             const model_type&           model,
             const message_catalog_type& message_catalog,
             canvas_type&                canvas,
-            const dimension_type&       canvas_dimension
-        );
+            const dimension_type&       canvas_dimension);
 
         /*!
             \brief Moves a station list.
@@ -93,8 +91,7 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Destroys the station list.
         */
-        virtual ~station_list()
-        noexcept;
+        virtual ~station_list() noexcept;
 
 
         // functions
@@ -124,10 +121,7 @@ namespace bobura { namespace view { namespace timetable
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 

@@ -14,11 +14,9 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace message
-{
+namespace bobura { namespace message {
     template <typename Size, typename Difference, typename String, typename OperatingDistance>
-    class diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::impl :
-        private boost::noncopyable
+    class diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::impl : private boost::noncopyable
     {
     public:
         // types
@@ -31,15 +29,14 @@ namespace bobura { namespace message
 
         using train_selected_signal_type = typename diagram_selection_observer_set::train_selected_signal_type;
 
-        using all_unselected_type =typename diagram_selection_observer_set::all_unselected_type;
+        using all_unselected_type = typename diagram_selection_observer_set::all_unselected_type;
 
         using all_unselected_signal_type = typename diagram_selection_observer_set::all_unselected_signal_type;
 
 
         // functions
 
-        const station_selected_signal_type& station_selected()
-        const
+        const station_selected_signal_type& station_selected() const
         {
             return m_station_selected;
         }
@@ -49,8 +46,7 @@ namespace bobura { namespace message
             return m_station_selected;
         }
 
-        const train_selected_signal_type& train_selected()
-        const
+        const train_selected_signal_type& train_selected() const
         {
             return m_train_selected;
         }
@@ -60,8 +56,7 @@ namespace bobura { namespace message
             return m_train_selected;
         }
 
-        const all_unselected_signal_type& all_unselected()
-        const
+        const all_unselected_signal_type& all_unselected() const
         {
             return m_all_unselected;
         }
@@ -80,28 +75,23 @@ namespace bobura { namespace message
         train_selected_signal_type m_train_selected;
 
         all_unselected_signal_type m_all_unselected;
-
-
     };
 
 
     template <typename Size, typename Difference, typename String, typename OperatingDistance>
     diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::diagram_selection_observer_set()
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>())
     {}
 
     template <typename Size, typename Difference, typename String, typename OperatingDistance>
-    diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::~diagram_selection_observer_set()
-    noexcept
+    diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::
+        ~diagram_selection_observer_set() noexcept
     {}
 
     template <typename Size, typename Difference, typename String, typename OperatingDistance>
-    const typename diagram_selection_observer_set<
-        Size, Difference, String, OperatingDistance
-    >::station_selected_signal_type&
-    diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::station_selected()
-    const
+    const typename diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::
+        station_selected_signal_type&
+        diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::station_selected() const
     {
         return m_p_impl->station_selected();
     }
@@ -114,11 +104,9 @@ namespace bobura { namespace message
     }
 
     template <typename Size, typename Difference, typename String, typename OperatingDistance>
-    const typename diagram_selection_observer_set<
-        Size, Difference, String, OperatingDistance
-    >::train_selected_signal_type&
-    diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::train_selected()
-    const
+    const typename diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::
+        train_selected_signal_type&
+        diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::train_selected() const
     {
         return m_p_impl->train_selected();
     }
@@ -131,11 +119,9 @@ namespace bobura { namespace message
     }
 
     template <typename Size, typename Difference, typename String, typename OperatingDistance>
-    const typename diagram_selection_observer_set<
-        Size, Difference, String, OperatingDistance
-    >::all_unselected_signal_type&
-    diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::all_unselected()
-    const
+    const typename diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::
+        all_unselected_signal_type&
+        diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::all_unselected() const
     {
         return m_p_impl->all_unselected();
     }
@@ -147,19 +133,16 @@ namespace bobura { namespace message
         return m_p_impl->all_unselected();
     }
 
-        
-    namespace
-    {
-        using common_type_list_type = type_list::common;
 
+    namespace {
+        using common_type_list_type = type_list::common;
     }
 
     template class diagram_selection_observer_set<
         typename common_type_list_type::size_type,
         typename common_type_list_type::difference_type,
         typename common_type_list_type::string_type,
-        typename common_type_list_type::operating_distance_type
-    >;
+        typename common_type_list_type::operating_distance_type>;
 
 
 }}

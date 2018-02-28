@@ -19,8 +19,7 @@
 #include <bobura/model/timetable.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     /*!
         \brief The class template for a JSON reading task execution.
 
@@ -45,8 +44,7 @@ namespace bobura { namespace model { namespace serializer
         typename Dialog,
         typename Timer,
         typename SystemColorSet,
-        typename MessageCatalog
-    >
+        typename MessageCatalog>
     class exec_json_reading_task : private boost::noncopyable
     {
     public:
@@ -90,23 +88,21 @@ namespace bobura { namespace model { namespace serializer
         using message_catalog_type = MessageCatalog;
 
         //! The progress dialog type.
-        using progress_dialog_type =
-            tetengo2::gui::widget::progress_dialog<
-                typename dialog_type::traits_type,
-                std::unique_ptr<timetable_type>,
-                message_catalog_type,
-                typename dialog_type::details_traits_type,
-                typename dialog_type::menu_details_type,
-                typename dialog_type::message_loop_details_type,
-                typename timer_type::timer_details_type,
-                typename system_color_set_type::system_color_details_type
-            >;
+        using progress_dialog_type = tetengo2::gui::widget::progress_dialog<
+            typename dialog_type::traits_type,
+            std::unique_ptr<timetable_type>,
+            message_catalog_type,
+            typename dialog_type::details_traits_type,
+            typename dialog_type::menu_details_type,
+            typename dialog_type::message_loop_details_type,
+            typename timer_type::timer_details_type,
+            typename system_color_set_type::system_color_details_type>;
 
         //! The promise type.
         using promise_type = typename progress_dialog_type::promise_type;
 
         //! The timetable reading type.
-        using read_timetable_type = std::function<std::unique_ptr<timetable_type> (promise_type& promise)>;
+        using read_timetable_type = std::function<std::unique_ptr<timetable_type>(promise_type& promise)>;
 
 
         // constructors and destructor
@@ -122,8 +118,7 @@ namespace bobura { namespace model { namespace serializer
         /*!
             \brief Destroys the JSON reading task execution.
         */
-        ~exec_json_reading_task()
-        noexcept;
+        ~exec_json_reading_task() noexcept;
 
 
         // functions
@@ -135,8 +130,7 @@ namespace bobura { namespace model { namespace serializer
 
             \return A unique pointer to a timetable.
         */
-        std::unique_ptr<timetable_type> operator()(read_timetable_type read_timetable)
-        const;
+        std::unique_ptr<timetable_type> operator()(read_timetable_type read_timetable) const;
 
 
     private:
@@ -148,8 +142,6 @@ namespace bobura { namespace model { namespace serializer
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
 
 

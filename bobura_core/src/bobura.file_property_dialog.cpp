@@ -21,8 +21,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura
-{
+namespace bobura {
     template <typename Traits>
     class file_property_dialog<Traits>::impl : private boost::noncopyable
     {
@@ -43,23 +42,10 @@ namespace bobura
         // constructors and destructor
 
         impl(base_type& base, const message_catalog_type& message_catalog)
-        :
-        m_base(base),
-        m_message_catalog(message_catalog),
-        m_company_name(),
-        m_line_name(),
-        m_note(),
-        m_file_name(),
-        m_p_company_name_label(),
-        m_p_company_name_text_box(),
-        m_p_line_name_label(),
-        m_p_line_name_text_box(),
-        m_p_note_label(),
-        m_p_note_text_box(),
-        m_p_file_name_label(),
-        m_p_file_name_text_box(),
-        m_p_ok_button(),
-        m_p_cancel_button()
+        : m_base(base), m_message_catalog(message_catalog), m_company_name(), m_line_name(), m_note(), m_file_name(),
+          m_p_company_name_label(), m_p_company_name_text_box(), m_p_line_name_label(), m_p_line_name_text_box(),
+          m_p_note_label(), m_p_note_text_box(), m_p_file_name_label(), m_p_file_name_text_box(), m_p_ok_button(),
+          m_p_cancel_button()
         {
             initialize_dialog();
         }
@@ -67,8 +53,7 @@ namespace bobura
 
         // functions
 
-        const string_type& company_name()
-        const
+        const string_type& company_name() const
         {
             return m_company_name;
         }
@@ -80,8 +65,7 @@ namespace bobura
                 m_p_company_name_text_box->set_text(m_company_name);
         }
 
-        const string_type& line_name()
-        const
+        const string_type& line_name() const
         {
             return m_line_name;
         }
@@ -93,8 +77,7 @@ namespace bobura
                 m_p_line_name_text_box->set_text(m_line_name);
         }
 
-        const string_type& note()
-        const
+        const string_type& note() const
         {
             return m_note;
         }
@@ -106,8 +89,7 @@ namespace bobura
                 m_p_note_text_box->set_text(m_note);
         }
 
-        const string_type& file_name()
-        const
+        const string_type& file_name() const
         {
             return m_file_name;
         }
@@ -146,8 +128,7 @@ namespace bobura
 
         using transparent_background_type = typename traits_type::transparent_background_type;
 
-        using ok_button_mouse_clicked_observer_type =
-            message::file_property_dialog::ok_button_mouse_clicked<base_type>;
+        using ok_button_mouse_clicked_observer_type = message::file_property_dialog::ok_button_mouse_clicked<base_type>;
 
         using cancel_button_mouse_clicked_observer_type =
             message::file_property_dialog::cancel_button_mouse_clicked<base_type>;
@@ -316,55 +297,39 @@ namespace bobura
             m_p_company_name_label->set_position(position_type{ label_left, position_unit_type{ 1 } });
 
             m_p_company_name_text_box->set_dimension(
-                dimension_type{ dimension_unit_type{ 32 }, dimension_unit_type{ 2 } }
-            );
+                dimension_type{ dimension_unit_type{ 32 }, dimension_unit_type{ 2 } });
             m_p_company_name_text_box->set_position(
-                position_type{
-                    label_left,
-                    m_p_company_name_label->position().top() +
-                        position_unit_type::from(m_p_company_name_label->dimension().height())
-                }
-            );
+                position_type{ label_left,
+                               m_p_company_name_label->position().top() +
+                                   position_unit_type::from(m_p_company_name_label->dimension().height()) });
 
             m_p_line_name_label->fit_to_content();
             m_p_line_name_label->set_position(position_type{ label_left, position_unit_type{ 5 } });
 
             m_p_line_name_text_box->set_dimension(
-                dimension_type{ dimension_unit_type{ 32 }, dimension_unit_type{ 2 } }
-            );
+                dimension_type{ dimension_unit_type{ 32 }, dimension_unit_type{ 2 } });
             m_p_line_name_text_box->set_position(
-                position_type{
-                    label_left,
-                    m_p_line_name_label->position().top() +
-                        position_unit_type::from(m_p_line_name_label->dimension().height())
-                }
-            );
+                position_type{ label_left,
+                               m_p_line_name_label->position().top() +
+                                   position_unit_type::from(m_p_line_name_label->dimension().height()) });
 
             m_p_note_label->fit_to_content();
             m_p_note_label->set_position(position_type{ label_left, position_unit_type{ 9 } });
 
             m_p_note_text_box->set_dimension(dimension_type{ dimension_unit_type{ 32 }, dimension_unit_type{ 2 } });
-            m_p_note_text_box->set_position(
-                position_type{
-                    label_left,
-                    m_p_note_label->position().top() +
-                        position_unit_type::from(m_p_note_label->dimension().height())
-            }
-            );
+            m_p_note_text_box->set_position(position_type{
+                label_left,
+                m_p_note_label->position().top() + position_unit_type::from(m_p_note_label->dimension().height()) });
 
             m_p_file_name_label->fit_to_content();
             m_p_file_name_label->set_position(position_type{ label_left, position_unit_type{ 13 } });
 
             m_p_file_name_text_box->set_dimension(
-                dimension_type{ dimension_unit_type{ 32 }, dimension_unit_type{ 2 } }
-            );
+                dimension_type{ dimension_unit_type{ 32 }, dimension_unit_type{ 2 } });
             m_p_file_name_text_box->set_position(
-                position_type{
-                    label_left,
-                    m_p_file_name_label->position().top() +
-                        position_unit_type::from(m_p_file_name_label->dimension().height())
-                }
-            );
+                position_type{ label_left,
+                               m_p_file_name_label->position().top() +
+                                   position_unit_type::from(m_p_file_name_label->dimension().height()) });
 
             m_p_ok_button->set_dimension(dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } });
             m_p_ok_button->set_position(position_type{ position_unit_type{ 17 }, position_unit_type{ 18 } });
@@ -372,30 +337,22 @@ namespace bobura
             m_p_cancel_button->set_dimension(dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } });
             m_p_cancel_button->set_position(position_type{ position_unit_type{ 26 }, position_unit_type{ 18 } });
         }
-
-
     };
 
 
     template <typename Traits>
     file_property_dialog<Traits>::file_property_dialog(
         abstract_window_type&       parent,
-        const message_catalog_type& message_catalog
-    )
-    :
-    base_type(parent),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog))
+        const message_catalog_type& message_catalog)
+    : base_type(parent), m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog))
     {}
 
     template <typename Traits>
-    file_property_dialog<Traits>::~file_property_dialog()
-    noexcept
+    file_property_dialog<Traits>::~file_property_dialog() noexcept
     {}
 
     template <typename Traits>
-    const typename file_property_dialog<Traits>::string_type&
-    file_property_dialog<Traits>::company_name()
-    const
+    const typename file_property_dialog<Traits>::string_type& file_property_dialog<Traits>::company_name() const
     {
         return m_p_impl->company_name();
     }
@@ -407,9 +364,7 @@ namespace bobura
     }
 
     template <typename Traits>
-    const typename file_property_dialog<Traits>::string_type&
-    file_property_dialog<Traits>::line_name()
-    const
+    const typename file_property_dialog<Traits>::string_type& file_property_dialog<Traits>::line_name() const
     {
         return m_p_impl->line_name();
     }
@@ -421,9 +376,7 @@ namespace bobura
     }
 
     template <typename Traits>
-    const typename file_property_dialog<Traits>::string_type&
-    file_property_dialog<Traits>::note()
-    const
+    const typename file_property_dialog<Traits>::string_type& file_property_dialog<Traits>::note() const
     {
         return m_p_impl->note();
     }
@@ -435,9 +388,7 @@ namespace bobura
     }
 
     template <typename Traits>
-    const typename file_property_dialog<Traits>::string_type&
-    file_property_dialog<Traits>::file_name()
-    const
+    const typename file_property_dialog<Traits>::string_type& file_property_dialog<Traits>::file_name() const
     {
         return m_p_impl->file_name();
     }
@@ -455,26 +406,20 @@ namespace bobura
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -482,6 +427,4 @@ namespace bobura
 #endif
 
     template class file_property_dialog<typename test::traits_type_list_type::dialog_type>;
-
-
 }

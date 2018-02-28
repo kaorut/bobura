@@ -17,8 +17,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     template <typename Traits, typename Shell>
     class open_www_tetengo_org<Traits, Shell>::impl
     {
@@ -34,8 +33,7 @@ namespace bobura { namespace command
 
         // functions
 
-        void execute(model_type& model, abstract_window_type& parent)
-        const
+        void execute(model_type& model, abstract_window_type& parent) const
         {
             boost::ignore_unused(model, parent);
 
@@ -47,65 +45,53 @@ namespace bobura { namespace command
         // types
 
         using string_type = typename shell_type::string_type;
-
-
     };
 
 
     template <typename Traits, typename Shell>
-    open_www_tetengo_org<Traits, Shell>::open_www_tetengo_org()
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    open_www_tetengo_org<Traits, Shell>::open_www_tetengo_org() : m_p_impl(tetengo2::stdalt::make_unique<impl>())
     {}
 
     template <typename Traits, typename Shell>
-    open_www_tetengo_org<Traits, Shell>::~open_www_tetengo_org()
-    noexcept
+    open_www_tetengo_org<Traits, Shell>::~open_www_tetengo_org() noexcept
     {}
-    
+
     template <typename Traits, typename Shell>
-    void open_www_tetengo_org<Traits, Shell>::execute_impl(model_type& model, abstract_window_type& parent)
-    const
+    void open_www_tetengo_org<Traits, Shell>::execute_impl(model_type& model, abstract_window_type& parent) const
     {
         m_p_impl->execute(model, parent);
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
     template class open_www_tetengo_org<
-        typename application::traits_type_list_type::command_type, typename application::ui_type_list_type::shell_type
-    >;
+        typename application::traits_type_list_type::command_type,
+        typename application::ui_type_list_type::shell_type>;
 #endif
 
     template class open_www_tetengo_org<
-        typename test::traits_type_list_type::command_type, typename test::ui_type_list_type::shell_type
-    >;
+        typename test::traits_type_list_type::command_type,
+        typename test::ui_type_list_type::shell_type>;
 
 
 }}

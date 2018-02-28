@@ -15,8 +15,7 @@
 #include <bobura/message/timetable_model_observer_set.h>
 
 
-namespace bobura { namespace message
-{
+namespace bobura { namespace message {
     class timetable_model_observer_set::impl : private boost::noncopyable
     {
     public:
@@ -33,8 +32,7 @@ namespace bobura { namespace message
 
         // functions
 
-        const reset_signal_type& reset()
-        const
+        const reset_signal_type& reset() const
         {
             return m_reset;
         }
@@ -44,8 +42,7 @@ namespace bobura { namespace message
             return m_reset;
         }
 
-        const changed_signal_type& changed()
-        const
+        const changed_signal_type& changed() const
         {
             return m_changed;
         }
@@ -62,22 +59,14 @@ namespace bobura { namespace message
         reset_signal_type m_reset;
 
         changed_signal_type m_changed;
-
-
     };
 
 
-    timetable_model_observer_set::timetable_model_observer_set()
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>())
-    {}
+    timetable_model_observer_set::timetable_model_observer_set() : m_p_impl(tetengo2::stdalt::make_unique<impl>()) {}
 
-    timetable_model_observer_set::~timetable_model_observer_set()
-    noexcept
-    {}
+    timetable_model_observer_set::~timetable_model_observer_set() noexcept {}
 
-    const timetable_model_observer_set::reset_signal_type& timetable_model_observer_set::reset()
-    const
+    const timetable_model_observer_set::reset_signal_type& timetable_model_observer_set::reset() const
     {
         return m_p_impl->reset();
     }
@@ -87,8 +76,7 @@ namespace bobura { namespace message
         return m_p_impl->reset();
     }
 
-    const timetable_model_observer_set::changed_signal_type& timetable_model_observer_set::changed()
-    const
+    const timetable_model_observer_set::changed_signal_type& timetable_model_observer_set::changed() const
     {
         return m_p_impl->changed();
     }

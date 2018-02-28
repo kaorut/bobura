@@ -17,8 +17,7 @@
 #include <bobura/type_list.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -35,26 +34,24 @@ namespace
 
     using save_to_file_command_type =
         bobura::command::save_to_file<traits_type_list_type::command_type, load_save_traits_type>;
-
-
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(command)
-BOOST_AUTO_TEST_SUITE(save_to_file)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(command)
+        BOOST_AUTO_TEST_SUITE(save_to_file)
+            // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+            BOOST_AUTO_TEST_CASE(construction)
+            {
+                BOOST_TEST_PASSPOINT();
 
-        const message_catalog_type message_catalog{};
-        const save_to_file_type save_to_file{ false, message_catalog };
-        const save_to_file_command_type command{ save_to_file };
-    }
+                const message_catalog_type      message_catalog{};
+                const save_to_file_type         save_to_file{ false, message_catalog };
+                const save_to_file_command_type command{ save_to_file };
+            }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+        BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

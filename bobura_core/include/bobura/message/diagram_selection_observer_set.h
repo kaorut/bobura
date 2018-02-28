@@ -17,15 +17,13 @@
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
 
-namespace boost
-{
+namespace boost {
     template <typename T>
     class optional;
 }
 
 
-namespace bobura { namespace message
-{
+namespace bobura { namespace message {
     /*!
         \brief The class template for a diagram selection observer set.
 
@@ -63,7 +61,7 @@ namespace bobura { namespace message
 
             \param station_location A station location.
         */
-        using station_selected_type = void (const station_location_type& station_location);
+        using station_selected_type = void(const station_location_type& station_location);
 
         //! The signal type of station selection.
         using station_selected_signal_type = boost::signals2::signal<station_selected_type>;
@@ -75,10 +73,7 @@ namespace bobura { namespace message
             \param departure_stop_index A departure stop index. Or boost::none when a whole train is selected.
         */
         using train_selected_type =
-            void (
-                const train_type&                 train,
-                const boost::optional<size_type>& departure_stop_index
-            );
+            void(const train_type& train, const boost::optional<size_type>& departure_stop_index);
 
         //! The signal type of train selection.
         using train_selected_signal_type = boost::signals2::signal<train_selected_type>;
@@ -86,7 +81,7 @@ namespace bobura { namespace message
         /*!
             \brief The observer type of unselection.
         */
-        using all_unselected_type = void ();
+        using all_unselected_type = void();
 
         //! The signal type of unselection.
         using all_unselected_signal_type = boost::signals2::signal<all_unselected_type>;
@@ -102,8 +97,7 @@ namespace bobura { namespace message
         /*!
             \brief Destroys the diagram selection observer set.
         */
-        ~diagram_selection_observer_set()
-        noexcept;
+        ~diagram_selection_observer_set() noexcept;
 
 
         // functions
@@ -113,8 +107,7 @@ namespace bobura { namespace message
 
             \return The observer called when a station is selected.
         */
-        const station_selected_signal_type& station_selected()
-        const;
+        const station_selected_signal_type& station_selected() const;
 
         /*!
             \brief Returns the observer called when station is selected.
@@ -128,8 +121,7 @@ namespace bobura { namespace message
 
             \return The observer called when a train is selected.
         */
-        const train_selected_signal_type& train_selected()
-        const;
+        const train_selected_signal_type& train_selected() const;
 
         /*!
             \brief Returns the observer called when a train is selected.
@@ -143,8 +135,7 @@ namespace bobura { namespace message
 
             \return The observer called when all the items are unselected.
         */
-        const all_unselected_signal_type& all_unselected()
-        const;
+        const all_unselected_signal_type& all_unselected() const;
 
         /*!
             \brief Returns the observer called when all the items are unselected.
@@ -163,8 +154,6 @@ namespace bobura { namespace message
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
 
 

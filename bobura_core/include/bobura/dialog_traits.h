@@ -10,27 +10,26 @@
 #define BOBURA_DIALOGTRAITS_H
 
 
-namespace bobura
-{
-     /*!
-        \brief The class template for the dialog traits.
+namespace bobura {
+    /*!
+       \brief The class template for the dialog traits.
 
-        \tparam String                A string type.
-        \tparam Position              A position type.
-        \tparam Dimension             A dimension type.
-        \tparam Dialog                A dialog type.
-        \tparam AbstractWindow        An abstract window type.
-        \tparam Label                 A label type.
-        \tparam LinkLabel             A link label type.
-        \tparam Image                 An image type.
-        \tparam Button                A button type.
-        \tparam TextBox               A text box type.
-        \tparam ListBox               A list box type.
-        \tparam DropdownBox           A dropdown box type.
-        \tparam PictureBox            A picture box type.
-        \tparam TransparentBackground A transparent background type.
-        \tparam MessageCatalog        A message catalog type.
-    */
+       \tparam String                A string type.
+       \tparam Position              A position type.
+       \tparam Dimension             A dimension type.
+       \tparam Dialog                A dialog type.
+       \tparam AbstractWindow        An abstract window type.
+       \tparam Label                 A label type.
+       \tparam LinkLabel             A link label type.
+       \tparam Image                 An image type.
+       \tparam Button                A button type.
+       \tparam TextBox               A text box type.
+       \tparam ListBox               A list box type.
+       \tparam DropdownBox           A dropdown box type.
+       \tparam PictureBox            A picture box type.
+       \tparam TransparentBackground A transparent background type.
+       \tparam MessageCatalog        A message catalog type.
+   */
     template <
         typename String,
         typename Position,
@@ -46,8 +45,7 @@ namespace bobura
         typename DropdownBox,
         typename PictureBox,
         typename TransparentBackground,
-        typename MessageCatalog
-    >
+        typename MessageCatalog>
     class dialog_traits
     {
     public:
@@ -97,11 +95,7 @@ namespace bobura
 
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
-
-
     };
-
-
 }
 
 

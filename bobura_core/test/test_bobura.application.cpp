@@ -20,8 +20,7 @@
 #include <bobura/type_list.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -35,46 +34,38 @@ namespace
     using string_type = common_type_list_type::string_type;
 
     using settings_type =
-        bobura::settings<
-            string_type, ui_type_list_type::position_type, ui_type_list_type::dimension_type
-        >;
+        bobura::settings<string_type, ui_type_list_type::position_type, ui_type_list_type::dimension_type>;
 
     using application_type = bobura::application<traits_type_list_type::application_type>;
 
     using detail_impl_set_type = tetengo2::detail::stub::impl_set;
-
-
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(application)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(application)
+        // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+        BOOST_AUTO_TEST_CASE(construction)
+        {
+            BOOST_TEST_PASSPOINT();
 
-        settings_type settings{
-            std::vector<string_type>{1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
-            string_type{ TETENGO2_TEXT("test_bobura") }
-        };
-        const application_type application{ settings, detail_impl_set_type::instance() };
-    }
+            settings_type settings{ std::vector<string_type>{ 1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
+                                    string_type{ TETENGO2_TEXT("test_bobura") } };
+            const application_type application{ settings, detail_impl_set_type::instance() };
+        }
 
-    BOOST_AUTO_TEST_CASE(run)
-    {
-        BOOST_TEST_PASSPOINT();
+        BOOST_AUTO_TEST_CASE(run)
+        {
+            BOOST_TEST_PASSPOINT();
 
-        settings_type settings{
-            std::vector<string_type>{1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
-            string_type{ TETENGO2_TEXT("test_bobura") }
-        };
-        application_type application{ settings, detail_impl_set_type::instance() };
+            settings_type settings{ std::vector<string_type>{ 1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
+                                    string_type{ TETENGO2_TEXT("test_bobura") } };
+            application_type application{ settings, detail_impl_set_type::instance() };
 
-        application.run();
-    }
+            application.run();
+        }
 
 
-BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

@@ -17,8 +17,7 @@
 #include <bobura/model/serializer/reader.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     /*!
         \brief The class template for a reader set.
 
@@ -45,8 +44,7 @@ namespace bobura { namespace model { namespace serializer
         typename SelectOuDiaDiagram,
         typename Font,
         typename Utf8Encoder,
-        typename Cp932Encoder
-    >
+        typename Cp932Encoder>
     class reader_set : private boost::noncopyable
     {
     public:
@@ -110,8 +108,7 @@ namespace bobura { namespace model { namespace serializer
         static std::vector<std::unique_ptr<reader_type>> create_readers(
             abstract_window_type&       parent,
             string_type                 file_name,
-            const message_catalog_type& message_catalog
-        );
+            const message_catalog_type& message_catalog);
 
 
     private:
@@ -122,10 +119,7 @@ namespace bobura { namespace model { namespace serializer
 
         // forbidden operations
 
-        reader_set()
-        = delete;
-
-
+        reader_set() = delete;
     };
 
 

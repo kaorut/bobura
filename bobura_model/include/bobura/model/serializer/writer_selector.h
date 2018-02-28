@@ -17,8 +17,7 @@
 #include <bobura/model/serializer/writer.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     /*!
         \brief The class template for a writer selector.
 
@@ -37,8 +36,7 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     class writer_selector : public writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>
     {
     public:
@@ -66,16 +64,14 @@ namespace bobura { namespace model { namespace serializer
         using font_type = Font;
 
         //! The base type.
-        using base_type =
-            writer<
-                size_type,
-                difference_type,
-                string_type,
-                output_stream_type,
-                operating_distance_type,
-                speed_type,
-                font_type
-            >;
+        using base_type = writer<
+            size_type,
+            difference_type,
+            string_type,
+            output_stream_type,
+            operating_distance_type,
+            speed_type,
+            font_type>;
 
         //! The timetable type.
         using timetable_type = typename base_type::timetable_type;
@@ -100,8 +96,7 @@ namespace bobura { namespace model { namespace serializer
         /*!
             \brief Destroys the writer_selector.
         */
-        virtual ~writer_selector()
-        noexcept;
+        virtual ~writer_selector() noexcept;
 
 
     private:
@@ -117,16 +112,11 @@ namespace bobura { namespace model { namespace serializer
 
         // virtual functions
 
-        virtual bool selects_impl(const boost::filesystem::path& path)
-        const override;
+        virtual bool selects_impl(const boost::filesystem::path& path) const override;
 
-        virtual boost::filesystem::path extension_impl()
-        const override;
+        virtual boost::filesystem::path extension_impl() const override;
 
-        virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream)
-        override;
-
-
+        virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream) override;
     };
 
 

@@ -20,8 +20,7 @@
 #include <bobura/type_list.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -46,83 +45,81 @@ namespace
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
-    using property_bar_type =
-        bobura::property_bar<
-            string_type,
-            position_type,
-            dimension_type,
-            ui_type_list_type::abstract_window_type,
-            ui_type_list_type::side_bar_type,
-            ui_type_list_type::map_box_type,
-            message_catalog_type
-        >;
+    using property_bar_type = bobura::property_bar<
+        string_type,
+        position_type,
+        dimension_type,
+        ui_type_list_type::abstract_window_type,
+        ui_type_list_type::side_bar_type,
+        ui_type_list_type::map_box_type,
+        message_catalog_type>;
 
     using detail_impl_set_type = tetengo2::detail::stub::impl_set;
-
-
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(property_bar)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(property_bar)
+        // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        window_type window{};
-        const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-        const message_catalog_type message_catalog{};
-        const property_bar_type property_bar{ window, settings, message_catalog, detail_impl_set_type::instance() };
-
-        settings.clear_config();
-    }
-
-    BOOST_AUTO_TEST_CASE(map_box)
-    {
-        BOOST_TEST_PASSPOINT();
-
+        BOOST_AUTO_TEST_CASE(construction)
         {
-            window_type window{};
+            BOOST_TEST_PASSPOINT();
+
+            window_type                    window{};
             const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-            settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-            const message_catalog_type message_catalog{};
+            settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+            const message_catalog_type     message_catalog{};
             const property_bar_type property_bar{ window, settings, message_catalog, detail_impl_set_type::instance() };
 
-            property_bar.map_box();
-
             settings.clear_config();
         }
+
+        BOOST_AUTO_TEST_CASE(map_box)
         {
-            window_type window{};
+            BOOST_TEST_PASSPOINT();
+
+            {
+                window_type                    window{};
+                const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+                settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+                const message_catalog_type     message_catalog{};
+                const property_bar_type        property_bar{
+                    window, settings, message_catalog, detail_impl_set_type::instance()
+                };
+
+                property_bar.map_box();
+
+                settings.clear_config();
+            }
+            {
+                window_type                    window{};
+                const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+                settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+                const message_catalog_type     message_catalog{};
+                property_bar_type property_bar{ window, settings, message_catalog, detail_impl_set_type::instance() };
+
+                property_bar.map_box();
+
+                settings.clear_config();
+            }
+        }
+
+        BOOST_AUTO_TEST_CASE(save_settings)
+        {
+            BOOST_TEST_PASSPOINT();
+
+            window_type                    window{};
             const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-            settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-            const message_catalog_type message_catalog{};
+            settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+            const message_catalog_type     message_catalog{};
             property_bar_type property_bar{ window, settings, message_catalog, detail_impl_set_type::instance() };
 
-            property_bar.map_box();
+            property_bar.save_settings();
 
             settings.clear_config();
         }
-    }
-
-    BOOST_AUTO_TEST_CASE(save_settings)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        window_type window{};
-        const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-        const message_catalog_type message_catalog{};
-        property_bar_type property_bar{ window, settings, message_catalog, detail_impl_set_type::instance() };
-
-        property_bar.save_settings();
-
-        settings.clear_config();
-    }
 
 
-BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

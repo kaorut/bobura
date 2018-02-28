@@ -17,19 +17,18 @@
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
 
-namespace boost
-{
-    template <class T> class optional;
+namespace boost {
+    template <class T>
+    class optional;
 }
 
 
-namespace bobura { namespace view { namespace diagram
-{
-     /*!
-        \brief The class template for the diagram view selection.
+namespace bobura { namespace view { namespace diagram {
+    /*!
+       \brief The class template for the diagram view selection.
 
-        \tparam Traits A traits type.
-    */
+       \tparam Traits A traits type.
+   */
     template <typename Traits>
     class selection : private boost::noncopyable
     {
@@ -79,8 +78,7 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys the selection.
         */
-        ~selection()
-        noexcept;
+        ~selection() noexcept;
 
 
         // functions
@@ -93,8 +91,7 @@ namespace bobura { namespace view { namespace diagram
             \retval true  When the station location is selected.
             \retval false Otherwise.
         */
-        bool selected(const station_location_type& station_location)
-        const;
+        bool selected(const station_location_type& station_location) const;
 
         /*!
             \brief Checks whether the train is selected.
@@ -107,8 +104,7 @@ namespace bobura { namespace view { namespace diagram
             \retval true  When the train is selected.
             \retval false Otherwise.
         */
-        bool selected(const train_type& train, const boost::optional<size_type>& departure_stop_index)
-        const;
+        bool selected(const train_type& train, const boost::optional<size_type>& departure_stop_index) const;
 
         /*!
             \brief Selects a station location.
@@ -123,10 +119,7 @@ namespace bobura { namespace view { namespace diagram
             \param train                A train.
             \param departure_stop_index A departure stop index. Or specify boost::none when a whole train is selected.
         */
-        void select(
-            const train_type&                 train,
-            const boost::optional<size_type>& departure_stop_index
-        );
+        void select(const train_type& train, const boost::optional<size_type>& departure_stop_index);
 
         /*!
             \brief Unselects all the items.
@@ -138,8 +131,7 @@ namespace bobura { namespace view { namespace diagram
 
             \return The selection observer set.
         */
-        const selection_observer_set_type& selection_observer_set()
-        const;
+        const selection_observer_set_type& selection_observer_set() const;
 
         /*!
             \brief Returns the selection observer set.
@@ -158,8 +150,6 @@ namespace bobura { namespace view { namespace diagram
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
 
 

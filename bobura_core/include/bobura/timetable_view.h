@@ -17,13 +17,12 @@
 #include <bobura/view/timetable/utility.h>
 
 
-namespace bobura
-{
-   /*!
-        \brief The class template for a timetable view.
+namespace bobura {
+    /*!
+         \brief The class template for a timetable view.
 
-        \tparam Traits A traits type.
-    */
+         \tparam Traits A traits type.
+     */
     template <typename Traits>
     class timetable_view : private boost::noncopyable
     {
@@ -80,14 +79,12 @@ namespace bobura
         timetable_view(
             view::timetable::direction_type direction,
             const model_type&               model,
-            const message_catalog_type&     message_catalog
-        );
+            const message_catalog_type&     message_catalog);
 
         /*!
             \brief Destroys the timetable view.
         */
-        ~timetable_view()
-        noexcept;
+        ~timetable_view() noexcept;
 
 
         // functions
@@ -99,19 +96,15 @@ namespace bobura
             \param canvas_dimension    A canvas dimension.
             \param scroll_bar_position A scroll bar position.
         */
-        void draw_on(
-            canvas_type&          canvas,
-            const dimension_type& canvas_dimension,
-            const position_type&  scroll_bar_position
-        );
+        void
+        draw_on(canvas_type& canvas, const dimension_type& canvas_dimension, const position_type& scroll_bar_position);
 
         /*!
             \brief Returns the dimension.
 
             \return The dimension.
         */
-        const dimension_type& dimension()
-        const;
+        const dimension_type& dimension() const;
 
         /*!
             \brief Update the dimension.
@@ -125,8 +118,7 @@ namespace bobura
 
             \return The page size.
         */
-        dimension_type page_size(const dimension_type& canvas_dimension)
-        const;
+        dimension_type page_size(const dimension_type& canvas_dimension) const;
 
         /*!
             \brief Unselects all items.
@@ -143,11 +135,7 @@ namespace bobura
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
-
-
 }
 
 

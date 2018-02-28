@@ -17,8 +17,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     template <
         typename Size,
         typename Difference,
@@ -26,10 +25,8 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
-    writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::~writer()
-    noexcept
+        typename Font>
+    writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::~writer() noexcept
     {}
 
     template <
@@ -39,10 +36,9 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
-    boost::filesystem::path writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::extension()
-    const
+        typename Font>
+    boost::filesystem::path
+    writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::extension() const
     {
         return extension_impl();
     }
@@ -54,12 +50,9 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     bool writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::selects(
-        const boost::filesystem::path& path
-    )
-    const
+        const boost::filesystem::path& path) const
     {
         return selects_impl(path);
     }
@@ -71,12 +64,10 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     void writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::write(
         const timetable_type& timetable,
-        output_stream_type&   output_stream
-    )
+        output_stream_type&   output_stream)
     {
         write_impl(timetable, output_stream);
     }
@@ -88,8 +79,7 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::writer()
     {}
 
@@ -100,12 +90,9 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     bool writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::selects_impl(
-        const boost::filesystem::path& path
-    )
-    const
+        const boost::filesystem::path& path) const
     {
         using path_string_type = typename boost::filesystem::path::string_type;
 
@@ -113,39 +100,32 @@ namespace bobura { namespace model { namespace serializer
         const auto extension_string = extension_impl().native();
         if (path_string.length() < extension_string.length())
             return false;
-            
-        const path_string_type path_extension_string{
-            std::prev(path_string.end(), extension_string.length()), path_string.end()
-        };
+
+        const path_string_type path_extension_string{ std::prev(path_string.end(), extension_string.length()),
+                                                      path_string.end() };
 
         return path_extension_string == extension_string;
     }
 
 
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using common_type_list_type = type_list::common;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using common_type_list_type = type_list::common;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -156,8 +136,7 @@ namespace bobura { namespace model { namespace serializer
         typename application::common_type_list_type::output_stream_type,
         typename application::common_type_list_type::operating_distance_type,
         typename application::common_type_list_type::speed_type,
-        typename application::ui_type_list_type::fast_font_type
-    >;
+        typename application::ui_type_list_type::fast_font_type>;
 #endif
 
     template class writer<
@@ -167,8 +146,7 @@ namespace bobura { namespace model { namespace serializer
         typename test::common_type_list_type::output_stream_type,
         typename test::common_type_list_type::operating_distance_type,
         typename test::common_type_list_type::speed_type,
-        typename test::ui_type_list_type::font_type
-    >;
+        typename test::ui_type_list_type::font_type>;
 
 
 }}}

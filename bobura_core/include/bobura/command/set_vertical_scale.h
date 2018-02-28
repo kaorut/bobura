@@ -15,8 +15,7 @@
 #include <bobura/diagram_view.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     /*!
         \brief The class template for a set-vertical-scale command.
 
@@ -31,8 +30,7 @@ namespace bobura { namespace command
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename DiagramViewTraits
-    >
+        typename DiagramViewTraits>
     class set_vertical_scale : public command_base<Traits>
     {
     public:
@@ -82,8 +80,7 @@ namespace bobura { namespace command
         /*!
             \brief Destroys the set-vertical-scale command.
         */
-        virtual ~set_vertical_scale()
-        noexcept;
+        virtual ~set_vertical_scale() noexcept;
 
 
     private:
@@ -99,13 +96,9 @@ namespace bobura { namespace command
 
         // virtual functions
 
-        virtual state_type state_impl()
-        const override;
+        virtual state_type state_impl() const override;
 
-        virtual void execute_impl(model_type& model, abstract_window_type& parent)
-        const override;
-
-
+        virtual void execute_impl(model_type& model, abstract_window_type& parent) const override;
     };
 
 

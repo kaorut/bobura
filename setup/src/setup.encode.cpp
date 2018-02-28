@@ -22,10 +22,8 @@
 #include <tetengo2.text.encoding.locale.cpp>
 
 
-namespace setup
-{
-    namespace
-    {
+namespace setup {
+    namespace {
         using encoder_type =
             tetengo2::text::encoder<tetengo2::text::encoding::ascii, tetengo2::text::encoding::locale<std::wstring>>;
 
@@ -34,7 +32,6 @@ namespace setup
             static const encoder_type singleton{};
             return singleton;
         }
-
     }
 
 
@@ -42,6 +39,4 @@ namespace setup
     {
         return encoder().encode(string);
     }
-
-
 }

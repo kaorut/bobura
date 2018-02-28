@@ -14,13 +14,12 @@
 #include <boost/core/noncopyable.hpp>
 
 
-namespace bobura { namespace view { namespace timetable
-{
-     /*!
-        \brief The class template for the timetable view item.
+namespace bobura { namespace view { namespace timetable {
+    /*!
+       \brief The class template for the timetable view item.
 
-        \tparam Traits A traits type.
-    */
+       \tparam Traits A traits type.
+   */
     template <typename Traits>
     class item : private boost::noncopyable
     {
@@ -50,8 +49,7 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Destroys the item.
         */
-        virtual ~item()
-        noexcept;
+        virtual ~item() noexcept;
 
 
         // functions
@@ -70,8 +68,7 @@ namespace bobura { namespace view { namespace timetable
 
             \return The position.
         */
-        const position_type& position()
-        const;
+        const position_type& position() const;
 
         /*!
             \brief Returns the position.
@@ -85,8 +82,7 @@ namespace bobura { namespace view { namespace timetable
 
             \return The dimension.
         */
-        const dimension_type& dimension()
-        const;
+        const dimension_type& dimension() const;
 
         /*!
             \brief Returns the dimension.
@@ -100,8 +96,7 @@ namespace bobura { namespace view { namespace timetable
 
             \param canvas A canvas.
         */
-        void draw_on(canvas_type& canvas)
-        const;
+        void draw_on(canvas_type& canvas) const;
 
 
     protected:
@@ -135,10 +130,7 @@ namespace bobura { namespace view { namespace timetable
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const;
     };
 
 

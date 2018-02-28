@@ -21,8 +21,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     template <
         typename Size,
         typename Difference,
@@ -33,12 +32,18 @@ namespace bobura { namespace model { namespace serializer
         typename Dialog,
         typename Timer,
         typename SystemColorSet,
-        typename MessageCatalog
-    >
+        typename MessageCatalog>
     class exec_json_reading_task<
-        Size, Difference, String, OperatingDistance, Speed, Font, Dialog, Timer, SystemColorSet, MessageCatalog
-    >::impl :
-        private boost::noncopyable
+        Size,
+        Difference,
+        String,
+        OperatingDistance,
+        Speed,
+        Font,
+        Dialog,
+        Timer,
+        SystemColorSet,
+        MessageCatalog>::impl : private boost::noncopyable
     {
     public:
         // types
@@ -57,44 +62,33 @@ namespace bobura { namespace model { namespace serializer
         // constructors and destructor
 
         impl(abstract_window_type& parent, const message_catalog_type& message_catalog)
-        :
-        m_parent(parent),
-        m_message_catalog(message_catalog)
+        : m_parent(parent), m_message_catalog(message_catalog)
         {}
 
 
         // functions
 
-        std::unique_ptr<timetable_type> operator()(read_timetable_type read_timetable)
-        const
+        std::unique_ptr<timetable_type> operator()(read_timetable_type read_timetable) const
         {
             string_type title{ m_message_catalog.get(TETENGO2_TEXT("App:Bobura")) };
-            string_type waiting_message{
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:JsonReading:Opening the timetable file..."))
-            };
-            string_type canceling_message{
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:JsonReading:Canceling opening the timetable file..."))
-            };
-            auto task =
-                [&read_timetable](promise_type& promise)
+            string_type waiting_message{ m_message_catalog.get(
+                TETENGO2_TEXT("Dialog:JsonReading:Opening the timetable file...")) };
+            string_type canceling_message{ m_message_catalog.get(
+                TETENGO2_TEXT("Dialog:JsonReading:Canceling opening the timetable file...")) };
+            auto        task = [&read_timetable](promise_type& promise) {
+                try
                 {
-                    try
-                    {
-                        auto p_timetable = read_timetable(promise);
-                        promise.set_value(std::move(p_timetable));
-                    }
-                    catch (std::exception& e)
-                    {
-                        promise.set_exception(std::make_exception_ptr(e));
-                    }
-                };
+                    auto p_timetable = read_timetable(promise);
+                    promise.set_value(std::move(p_timetable));
+                }
+                catch (std::exception& e)
+                {
+                    promise.set_exception(std::make_exception_ptr(e));
+                }
+            };
             progress_dialog_type dialog{
-                m_parent,
-                std::move(title),
-                std::move(waiting_message),
-                std::move(canceling_message),
-                std::move(task),
-                m_message_catalog
+                m_parent,        std::move(title), std::move(waiting_message), std::move(canceling_message),
+                std::move(task), m_message_catalog
             };
             dialog.do_modal();
 
@@ -117,8 +111,6 @@ namespace bobura { namespace model { namespace serializer
         abstract_window_type& m_parent;
 
         const message_catalog_type& m_message_catalog;
-
-
     };
 
 
@@ -132,13 +124,20 @@ namespace bobura { namespace model { namespace serializer
         typename Dialog,
         typename Timer,
         typename SystemColorSet,
-        typename MessageCatalog
-    >
+        typename MessageCatalog>
     exec_json_reading_task<
-        Size, Difference, String, OperatingDistance, Speed, Font, Dialog, Timer, SystemColorSet, MessageCatalog
-    >::exec_json_reading_task(abstract_window_type& parent, const message_catalog_type& message_catalog)
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(parent, message_catalog))
+        Size,
+        Difference,
+        String,
+        OperatingDistance,
+        Speed,
+        Font,
+        Dialog,
+        Timer,
+        SystemColorSet,
+        MessageCatalog>::
+        exec_json_reading_task(abstract_window_type& parent, const message_catalog_type& message_catalog)
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(parent, message_catalog))
     {}
 
     template <
@@ -151,12 +150,18 @@ namespace bobura { namespace model { namespace serializer
         typename Dialog,
         typename Timer,
         typename SystemColorSet,
-        typename MessageCatalog
-    >
+        typename MessageCatalog>
     exec_json_reading_task<
-        Size, Difference, String, OperatingDistance, Speed, Font, Dialog, Timer, SystemColorSet, MessageCatalog
-    >::~exec_json_reading_task()
-    noexcept
+        Size,
+        Difference,
+        String,
+        OperatingDistance,
+        Speed,
+        Font,
+        Dialog,
+        Timer,
+        SystemColorSet,
+        MessageCatalog>::~exec_json_reading_task() noexcept
     {}
 
     template <
@@ -169,27 +174,37 @@ namespace bobura { namespace model { namespace serializer
         typename Dialog,
         typename Timer,
         typename SystemColorSet,
-        typename MessageCatalog
-    >
-    std::unique_ptr<
-        typename exec_json_reading_task<
-            Size, Difference, String, OperatingDistance, Speed, Font, Dialog, Timer, SystemColorSet, MessageCatalog
-        >::timetable_type
-    >
-    exec_json_reading_task<
-        Size, Difference, String, OperatingDistance, Speed, Font, Dialog, Timer, SystemColorSet, MessageCatalog
-    >::operator()(read_timetable_type read_timetable)
-    const
+        typename MessageCatalog>
+    std::unique_ptr<typename exec_json_reading_task<
+        Size,
+        Difference,
+        String,
+        OperatingDistance,
+        Speed,
+        Font,
+        Dialog,
+        Timer,
+        SystemColorSet,
+        MessageCatalog>::timetable_type>
+                         exec_json_reading_task<
+                             Size,
+                             Difference,
+                             String,
+                             OperatingDistance,
+                             Speed,
+                             Font,
+                             Dialog,
+                             Timer,
+                             SystemColorSet,
+                             MessageCatalog>::operator()(read_timetable_type read_timetable) const
     {
         return (*m_p_impl)(std::move(read_timetable));
     }
 
 
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using common_type_list_type = type_list::common;
@@ -197,12 +212,10 @@ namespace bobura { namespace model { namespace serializer
             using locale_type_list_type = type_list::locale<detail_type_list_type>;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using common_type_list_type = type_list::common;
@@ -210,9 +223,7 @@ namespace bobura { namespace model { namespace serializer
             using locale_type_list_type = type_list::locale<detail_type_list_type>;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -226,8 +237,7 @@ namespace bobura { namespace model { namespace serializer
         typename application::ui_type_list_type::dialog_type,
         typename application::ui_type_list_type::timer_type,
         typename application::ui_type_list_type::system_color_set_type,
-        typename application::locale_type_list_type::message_catalog_type
-    >;
+        typename application::locale_type_list_type::message_catalog_type>;
 #endif
 
     template class exec_json_reading_task<
@@ -240,8 +250,7 @@ namespace bobura { namespace model { namespace serializer
         typename test::ui_type_list_type::dialog_type,
         typename test::ui_type_list_type::timer_type,
         typename test::ui_type_list_type::system_color_set_type,
-        typename test::locale_type_list_type::message_catalog_type
-    >;
+        typename test::locale_type_list_type::message_catalog_type>;
 
 
 }}}

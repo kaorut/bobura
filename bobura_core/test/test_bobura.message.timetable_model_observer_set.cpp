@@ -15,50 +15,50 @@
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(message)
-BOOST_AUTO_TEST_SUITE(timetable_model_observer_set)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(message)
+        BOOST_AUTO_TEST_SUITE(timetable_model_observer_set)
+            // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+            BOOST_AUTO_TEST_CASE(construction)
+            {
+                BOOST_TEST_PASSPOINT();
 
-        const bobura::message::timetable_model_observer_set observer_set{};
-    }
+                const bobura::message::timetable_model_observer_set observer_set{};
+            }
 
-    BOOST_AUTO_TEST_CASE(reset)
-    {
-        BOOST_TEST_PASSPOINT();
+            BOOST_AUTO_TEST_CASE(reset)
+            {
+                BOOST_TEST_PASSPOINT();
 
-        {
-            const bobura::message::timetable_model_observer_set observer_set{};
+                {
+                    const bobura::message::timetable_model_observer_set observer_set{};
 
-            observer_set.reset();
-        }
-        {
-            bobura::message::timetable_model_observer_set observer_set{};
+                    observer_set.reset();
+                }
+                {
+                    bobura::message::timetable_model_observer_set observer_set{};
 
-            observer_set.reset();
-        }
-    }
+                    observer_set.reset();
+                }
+            }
 
-    BOOST_AUTO_TEST_CASE(changed)
-    {
-        BOOST_TEST_PASSPOINT();
+            BOOST_AUTO_TEST_CASE(changed)
+            {
+                BOOST_TEST_PASSPOINT();
 
-        {
-            const bobura::message::timetable_model_observer_set observer_set{};
+                {
+                    const bobura::message::timetable_model_observer_set observer_set{};
 
-            observer_set.changed();
-        }
-        {
-            bobura::message::timetable_model_observer_set observer_set{};
+                    observer_set.changed();
+                }
+                {
+                    bobura::message::timetable_model_observer_set observer_set{};
 
-            observer_set.changed();
-        }
-    }
+                    observer_set.changed();
+                }
+            }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+        BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

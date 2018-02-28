@@ -24,8 +24,7 @@
 #include <bobura/view/diagram/utility.h>
 
 
-namespace bobura { namespace view { namespace diagram
-{
+namespace bobura { namespace view { namespace diagram {
     template <typename Traits>
     class time_line<Traits>::impl : private boost::noncopyable
     {
@@ -55,23 +54,14 @@ namespace bobura { namespace view { namespace diagram
             position_unit_type         top,
             position_unit_type         bottom,
             color_type                 color,
-            boost::optional<size_type> hours
-        )
-        :
-        m_left(std::move(left)),
-        m_top(std::move(top)),
-        m_bottom(std::move(bottom)),
-        m_color(std::move(color)),
-        m_hours(std::move(hours))
+            boost::optional<size_type> hours)
+        : m_left(std::move(left)), m_top(std::move(top)), m_bottom(std::move(bottom)), m_color(std::move(color)),
+          m_hours(std::move(hours))
         {}
 
         impl(impl&& another)
-        :
-        m_left(std::move(another.m_left)),
-        m_top(std::move(another.m_top)),
-        m_bottom(std::move(another.m_bottom)),
-        m_color(std::move(another.m_color)),
-        m_hours(std::move(another.m_hours))
+        : m_left(std::move(another.m_left)), m_top(std::move(another.m_top)), m_bottom(std::move(another.m_bottom)),
+          m_color(std::move(another.m_color)), m_hours(std::move(another.m_hours))
         {}
 
 
@@ -91,8 +81,7 @@ namespace bobura { namespace view { namespace diagram
             return *this;
         }
 
-        void draw_on_impl(canvas_type& canvas)
-        const
+        void draw_on_impl(canvas_type& canvas) const
         {
             canvas.set_color(m_color);
 
@@ -121,8 +110,6 @@ namespace bobura { namespace view { namespace diagram
         color_type m_color;
 
         boost::optional<size_type> m_hours;
-
-
     };
 
 
@@ -133,27 +120,23 @@ namespace bobura { namespace view { namespace diagram
         position_unit_type         top,
         position_unit_type         bottom,
         color_type                 color,
-        boost::optional<size_type> hours
-    )
-    :
-    base_type(selection),
-    m_p_impl(
-        tetengo2::stdalt::make_unique<impl>(
-            selection, std::move(left), std::move(top), std::move(bottom), std::move(color), std::move(hours)
-        )
-    )
+        boost::optional<size_type> hours)
+    : base_type(selection), m_p_impl(tetengo2::stdalt::make_unique<impl>(
+                                selection,
+                                std::move(left),
+                                std::move(top),
+                                std::move(bottom),
+                                std::move(color),
+                                std::move(hours)))
     {}
 
     template <typename Traits>
     time_line<Traits>::time_line(time_line&& another)
-    :
-    base_type(another.get_selection()),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type(another.get_selection()), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
     {}
 
     template <typename Traits>
-    time_line<Traits>::~time_line()
-    noexcept
+    time_line<Traits>::~time_line() noexcept
     {}
 
     template <typename Traits>
@@ -169,8 +152,7 @@ namespace bobura { namespace view { namespace diagram
     }
 
     template <typename Traits>
-    void time_line<Traits>::draw_on_impl(canvas_type& canvas)
-    const
+    void time_line<Traits>::draw_on_impl(canvas_type& canvas) const
     {
         m_p_impl->draw_on_impl(canvas);
     }
@@ -215,33 +197,25 @@ namespace bobura { namespace view { namespace diagram
             const position_unit_type&  station_header_right,
             const position_unit_type&  header_bottom,
             const dimension_unit_type& time_header_height,
-            const scale_type&          horizontal_scale
-        )
-        :
-        m_p_font(&*model.timetable().font_color_set().general().diagram_font()),
-        m_p_color(&*model.timetable().font_color_set().general().diagram_color()),
-        m_p_background_color(&*model.timetable().font_color_set().background().diagram_color()),
-        m_time_lines(
-            make_time_lines(
-                time_offset,
-                selection,
-                canvas_dimension,
-                timetable_dimension,
-                scroll_bar_position,
-                station_header_right,
-                header_bottom,
-                time_header_height,
-                horizontal_scale
-            )
-        )
+            const scale_type&          horizontal_scale)
+        : m_p_font(&*model.timetable().font_color_set().general().diagram_font()),
+          m_p_color(&*model.timetable().font_color_set().general().diagram_color()),
+          m_p_background_color(&*model.timetable().font_color_set().background().diagram_color()),
+          m_time_lines(make_time_lines(
+              time_offset,
+              selection,
+              canvas_dimension,
+              timetable_dimension,
+              scroll_bar_position,
+              station_header_right,
+              header_bottom,
+              time_header_height,
+              horizontal_scale))
         {}
 
         impl(impl&& another)
-        :
-        m_p_font(another.m_p_font),
-        m_p_color(another.m_p_color),
-        m_p_background_color(another.m_p_background_color),
-        m_time_lines(std::move(another.m_time_lines))
+        : m_p_font(another.m_p_font), m_p_color(another.m_p_color), m_p_background_color(another.m_p_background_color),
+          m_time_lines(std::move(another.m_time_lines))
         {}
 
 
@@ -260,13 +234,12 @@ namespace bobura { namespace view { namespace diagram
             return *this;
         }
 
-        void draw_on_impl(canvas_type& canvas)
-        const
+        void draw_on_impl(canvas_type& canvas) const
         {
             canvas.set_font(*m_p_font);
             canvas.set_line_width(normal_line_width<dimension_unit_type>());
 
-            for (const auto& time_line: m_time_lines)
+            for (const auto& time_line : m_time_lines)
                 time_line.draw_on(canvas);
         }
 
@@ -296,8 +269,7 @@ namespace bobura { namespace view { namespace diagram
             const position_unit_type&  station_header_right,
             const position_unit_type&  header_bottom,
             const dimension_unit_type& time_header_height,
-            const scale_type&          horizontal_scale
-        )
+            const scale_type&          horizontal_scale)
         {
             const auto canvas_left = station_header_right;
             const auto canvas_right = position_unit_type::from(canvas_dimension.width());
@@ -312,38 +284,31 @@ namespace bobura { namespace view { namespace diagram
             const auto minute_interval =
                 time_to_left(
                     time_type{ 60 },
-                    time_offset, 0,
+                    time_offset,
+                    0,
                     position_unit_type{},
                     station_header_right,
-                    horizontal_scale_left
-                ) -
+                    horizontal_scale_left) -
                 time_to_left(
-                    time_type{ 0 },
-                    time_offset, 0,
-                    position_unit_type{},
-                    station_header_right,
-                    horizontal_scale_left
-                );
+                    time_type{ 0 }, time_offset, 0, position_unit_type{}, station_header_right, horizontal_scale_left);
 
             std::vector<time_line_type> time_lines{};
             time_lines.reserve(24 * 60);
             for (size_type i = 0; i <= 24 * 60; ++i)
             {
                 const time_type time{ i * 60 + time_offset.seconds() };
-                const auto hours_minutes_seconds = time.hours_minutes_seconds();
-                const auto hours = hours_minutes_seconds.hours();
-                const auto minutes = hours_minutes_seconds.minutes();
+                const auto      hours_minutes_seconds = time.hours_minutes_seconds();
+                const auto      hours = hours_minutes_seconds.hours();
+                const auto      minutes = hours_minutes_seconds.minutes();
                 assert(hours_minutes_seconds.seconds() == 0);
 
-                auto position =
-                    time_to_left(
-                        time,
-                        time_offset,
-                        i == 24 * 60,
-                        scroll_bar_position.left(),
-                        station_header_right,
-                        horizontal_scale_left
-                    );
+                auto position = time_to_left(
+                    time,
+                    time_offset,
+                    i == 24 * 60,
+                    scroll_bar_position.left(),
+                    station_header_right,
+                    horizontal_scale_left);
                 if (position < canvas_left)
                     continue;
                 if (position > canvas_right)
@@ -357,8 +322,7 @@ namespace bobura { namespace view { namespace diagram
                         header_bottom,
                         line_bottom,
                         *m_p_color,
-                        boost::make_optional(hours)
-                    );
+                        boost::make_optional(hours));
                 }
                 else if (minutes % 10 == 0)
                 {
@@ -370,8 +334,7 @@ namespace bobura { namespace view { namespace diagram
                             canvas_top,
                             line_bottom,
                             m_p_color->mix(*m_p_background_color, 0.5),
-                            boost::none
-                        );
+                            boost::none);
                     }
                 }
                 else if (minutes % 2 == 0)
@@ -384,8 +347,7 @@ namespace bobura { namespace view { namespace diagram
                             canvas_top,
                             line_bottom,
                             m_p_color->mix(*m_p_background_color, 0.75),
-                            boost::none
-                        );
+                            boost::none);
                     }
                 }
                 else
@@ -398,8 +360,7 @@ namespace bobura { namespace view { namespace diagram
                             canvas_top,
                             line_bottom,
                             m_p_color->mix(*m_p_background_color, 0.75),
-                            boost::none
-                        );
+                            boost::none);
                     }
                 }
             }
@@ -418,8 +379,6 @@ namespace bobura { namespace view { namespace diagram
         const color_type* m_p_background_color;
 
         std::vector<time_line_type> m_time_lines;
-
-
     };
 
 
@@ -434,36 +393,27 @@ namespace bobura { namespace view { namespace diagram
         const position_unit_type&  station_header_right,
         const position_unit_type&  header_bottom,
         const dimension_unit_type& time_header_height,
-        const scale_type&          horizontal_scale
-    )
-    :
-    base_type(selection),
-    m_p_impl(
-        tetengo2::stdalt::make_unique<impl>(
-            model,
-            time_offset,
-            selection,
-            canvas_dimension,
-            timetable_dimension,
-            scroll_bar_position,
-            station_header_right,
-            header_bottom,
-            time_header_height,
-            horizontal_scale
-        )
-    )
+        const scale_type&          horizontal_scale)
+    : base_type(selection), m_p_impl(tetengo2::stdalt::make_unique<impl>(
+                                model,
+                                time_offset,
+                                selection,
+                                canvas_dimension,
+                                timetable_dimension,
+                                scroll_bar_position,
+                                station_header_right,
+                                header_bottom,
+                                time_header_height,
+                                horizontal_scale))
     {}
 
     template <typename Traits>
     time_line_list<Traits>::time_line_list(time_line_list&& another)
-    :
-    base_type(another.get_selection()),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type(another.get_selection()), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
     {}
 
     template <typename Traits>
-    time_line_list<Traits>::~time_line_list()
-    noexcept
+    time_line_list<Traits>::~time_line_list() noexcept
     {}
 
     template <typename Traits>
@@ -479,33 +429,26 @@ namespace bobura { namespace view { namespace diagram
     }
 
     template <typename Traits>
-    void time_line_list<Traits>::draw_on_impl(canvas_type& canvas)
-    const
+    void time_line_list<Traits>::draw_on_impl(canvas_type& canvas) const
     {
         m_p_impl->draw_on_impl(canvas);
     }
 
-        
-    namespace
-    {
+
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC

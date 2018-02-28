@@ -17,8 +17,7 @@
 #include <boost/optional.hpp>
 
 
-namespace bobura
-{
+namespace bobura {
     /*!
         \brief The class template for settings of bobura.
 
@@ -61,8 +60,7 @@ namespace bobura
         /*!
             \brief Destroys the settings.
         */
-        ~settings()
-        noexcept;
+        ~settings() noexcept;
 
 
         // functions
@@ -72,40 +70,35 @@ namespace bobura
 
             \return The base path.
         */
-        const boost::filesystem::path& base_path()
-        const;
+        const boost::filesystem::path& base_path() const;
 
         /*!
             \brief Returns the input.
 
             \return The input.
         */
-        const boost::optional<boost::filesystem::path>& input()
-        const;
+        const boost::optional<boost::filesystem::path>& input() const;
 
         /*!
             \brief Returns the message directory path.
 
             \return The message directory path.
         */
-        boost::filesystem::path message_directory_path()
-        const;
+        boost::filesystem::path message_directory_path() const;
 
         /*!
             \brief Returns the image directory path.
 
             \return The image directory path.
         */
-        boost::filesystem::path image_directory_path()
-        const;
+        boost::filesystem::path image_directory_path() const;
 
         /*!
             \brief Returns the main window dimension.
 
             \return The main window dimension.
         */
-        boost::optional<dimension_type> main_window_dimension()
-        const;
+        boost::optional<dimension_type> main_window_dimension() const;
 
         /*!
             \brief Sets a main window dimension.
@@ -119,8 +112,7 @@ namespace bobura
 
             \return The maximized status.
         */
-        boost::optional<bool> main_window_maximized()
-        const;
+        boost::optional<bool> main_window_maximized() const;
 
         /*!
             \brief Sets a maximized status of the main window.
@@ -134,9 +126,8 @@ namespace bobura
 
             \return The property bar width.
         */
-        boost::optional<dimension_unit_type> property_bar_width()
-        const;
-        
+        boost::optional<dimension_unit_type> property_bar_width() const;
+
         /*!
             \brief Sets a property bar width.
 
@@ -149,9 +140,8 @@ namespace bobura
 
             \return The minimized status.
         */
-        boost::optional<bool> property_bar_minimized()
-        const;
-        
+        boost::optional<bool> property_bar_minimized() const;
+
         /*!
             \brief Sets a minimized status of the property bar.
 
@@ -164,9 +154,8 @@ namespace bobura
 
             \return The splitter bar position.
         */
-        boost::optional<position_unit_type> property_bar_splitter_position()
-        const;
-        
+        boost::optional<position_unit_type> property_bar_splitter_position() const;
+
         /*!
             \brief Sets a splitter bar position in the property bar.
 
@@ -189,11 +178,7 @@ namespace bobura
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
-
-
 }
 
 

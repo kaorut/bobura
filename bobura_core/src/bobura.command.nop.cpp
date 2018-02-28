@@ -17,8 +17,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     template <typename Traits>
     class nop<Traits>::impl : private boost::noncopyable
     {
@@ -32,55 +31,42 @@ namespace bobura { namespace command
 
         // functions
 
-        void execute(model_type& model, abstract_window_type& parent)
-        const
+        void execute(model_type& model, abstract_window_type& parent) const
         {
             boost::ignore_unused(model, parent);
         }
-
-
     };
 
 
     template <typename Traits>
-    nop<Traits>::nop()
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    nop<Traits>::nop() : m_p_impl(tetengo2::stdalt::make_unique<impl>())
     {}
 
     template <typename Traits>
-    nop<Traits>::~nop()
-    noexcept
+    nop<Traits>::~nop() noexcept
     {}
-    
+
     template <typename Traits>
-    void nop<Traits>::execute_impl(model_type& model, abstract_window_type& parent)
-    const
+    void nop<Traits>::execute_impl(model_type& model, abstract_window_type& parent) const
     {
         m_p_impl->execute(model, parent);
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC

@@ -18,8 +18,7 @@
 #include <bobura/timetable_model.h>
 
 
-namespace bobura
-{
+namespace bobura {
     /*!
         \brief The class template for the main window menu builder.
 
@@ -89,14 +88,12 @@ namespace bobura
             const command_set_type&     command_set,
             model_type&                 model,
             main_window_type&           main_window,
-            const message_catalog_type& message_catalog
-        );
+            const message_catalog_type& message_catalog);
 
         /*!
             \brief Destroys the main window menu builder.
         */
-        ~main_window_menu_builder()
-        noexcept;
+        ~main_window_menu_builder() noexcept;
 
 
         // functions
@@ -106,8 +103,7 @@ namespace bobura
 
             \return A main window menu bar.
         */
-        std::unique_ptr<menu_bar_type> build()
-        const;
+        std::unique_ptr<menu_bar_type> build() const;
 
 
     private:
@@ -119,11 +115,7 @@ namespace bobura
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
-
-
 }
 
 

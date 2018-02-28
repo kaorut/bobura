@@ -12,8 +12,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace view { namespace timetable
-{
+namespace bobura { namespace view { namespace timetable {
     template <typename Size>
     Size normal_line_width()
     {
@@ -21,11 +20,9 @@ namespace bobura { namespace view { namespace timetable
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
@@ -33,12 +30,10 @@ namespace bobura { namespace view { namespace timetable
             using canvas_type = application::traits_type_list_type::timetable_view_type::canvas_type;
 
             using dimension_unit_type = canvas_type::dimension_unit_type;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
@@ -46,9 +41,7 @@ namespace bobura { namespace view { namespace timetable
             using canvas_type = test::traits_type_list_type::timetable_view_type::canvas_type;
 
             using dimension_unit_type = canvas_type::dimension_unit_type;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC

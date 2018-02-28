@@ -14,8 +14,7 @@
 #include <boost/optional.hpp>
 
 
-namespace bobura
-{
+namespace bobura {
     /*!
         \brief The class template for the font and color dialog.
 
@@ -36,8 +35,7 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
+        typename ColorDialog>
     class font_color_dialog : public Traits::dialog_type
     {
     public:
@@ -85,13 +83,7 @@ namespace bobura
             /*!
                 \brief Creates a font and color.
             */
-            font_color_type()
-            :
-            m_diagram_font(),
-            m_diagram_color(),
-            m_timetable_font(),
-            m_timetable_color()
-            {}
+            font_color_type() : m_diagram_font(), m_diagram_color(), m_timetable_font(), m_timetable_color() {}
 
             /*!
                 \brief Creates a font and color.
@@ -105,13 +97,9 @@ namespace bobura
                 boost::optional<font_type>  diagram_font,
                 boost::optional<color_type> diagram_color,
                 boost::optional<font_type>  timetable_font,
-                boost::optional<color_type> timetable_color
-            )
-            :
-            m_diagram_font(std::move(diagram_font)),
-            m_diagram_color(std::move(diagram_color)),
-            m_timetable_font(std::move(timetable_font)),
-            m_timetable_color(std::move(timetable_color))
+                boost::optional<color_type> timetable_color)
+            : m_diagram_font(std::move(diagram_font)), m_diagram_color(std::move(diagram_color)),
+              m_timetable_font(std::move(timetable_font)), m_timetable_color(std::move(timetable_color))
             {}
 
 
@@ -128,11 +116,9 @@ namespace bobura
             */
             friend bool operator==(const font_color_type& one, const font_color_type& another)
             {
-                return
-                    one.m_diagram_font == another.m_diagram_font &&
-                    one.m_diagram_color == another.m_diagram_color &&
-                    one.m_timetable_font == another.m_timetable_font &&
-                    one.m_timetable_color == another.m_timetable_color;
+                return one.m_diagram_font == another.m_diagram_font && one.m_diagram_color == another.m_diagram_color &&
+                       one.m_timetable_font == another.m_timetable_font &&
+                       one.m_timetable_color == another.m_timetable_color;
             }
 
             /*!
@@ -140,8 +126,7 @@ namespace bobura
 
                 \return The font for the diagram.
             */
-            const boost::optional<font_type>& diagram_font()
-            const
+            const boost::optional<font_type>& diagram_font() const
             {
                 return m_diagram_font;
             }
@@ -161,8 +146,7 @@ namespace bobura
 
                 \return The color for the diagram.
             */
-            const boost::optional<color_type>& diagram_color()
-            const
+            const boost::optional<color_type>& diagram_color() const
             {
                 return m_diagram_color;
             }
@@ -182,8 +166,7 @@ namespace bobura
 
                 \return The font for the timetable.
             */
-            const boost::optional<font_type>& timetable_font()
-            const
+            const boost::optional<font_type>& timetable_font() const
             {
                 return m_timetable_font;
             }
@@ -203,8 +186,7 @@ namespace bobura
 
                 \return The color for the timetable.
             */
-            const boost::optional<color_type>& timetable_color()
-            const
+            const boost::optional<color_type>& timetable_color() const
             {
                 return m_timetable_color;
             }
@@ -223,15 +205,13 @@ namespace bobura
         private:
             // variables
 
-            boost::optional<font_type>  m_diagram_font;
+            boost::optional<font_type> m_diagram_font;
 
             boost::optional<color_type> m_diagram_color;
 
-            boost::optional<font_type>  m_timetable_font;
+            boost::optional<font_type> m_timetable_font;
 
             boost::optional<color_type> m_timetable_color;
-
-
         };
 
 
@@ -248,8 +228,7 @@ namespace bobura
         /*!
             \brief Destroys the font and color dialog.
         */
-        virtual ~font_color_dialog()
-        noexcept;
+        virtual ~font_color_dialog() noexcept;
 
 
         // functions
@@ -259,8 +238,7 @@ namespace bobura
 
             \return The font and color of the background.
         */
-        const font_color_type& background()
-        const;
+        const font_color_type& background() const;
 
         /*!
             \brief Sets a color of the background.
@@ -274,8 +252,7 @@ namespace bobura
 
             \return The font and color of the general item.
         */
-        const font_color_type& general()
-        const;
+        const font_color_type& general() const;
 
         /*!
             \brief Sets a font and color of the general items in the general.
@@ -289,8 +266,7 @@ namespace bobura
 
             \return The font and color of the company name.
         */
-        const font_color_type& company_name()
-        const;
+        const font_color_type& company_name() const;
 
         /*!
             \brief Sets a font and color of the company names.
@@ -304,8 +280,7 @@ namespace bobura
 
             \return The font and color of the line name.
         */
-        const font_color_type& line_name()
-        const;
+        const font_color_type& line_name() const;
 
         /*!
             \brief Sets a font and color of the line name.
@@ -319,8 +294,7 @@ namespace bobura
 
             \return The font and color of the note.
         */
-        const font_color_type& note()
-        const;
+        const font_color_type& note() const;
 
         /*!
             \brief Sets a font and color of the note.
@@ -334,8 +308,7 @@ namespace bobura
 
             \return The font and color of the local stations.
         */
-        const font_color_type& local_station()
-        const;
+        const font_color_type& local_station() const;
 
         /*!
             \brief Sets a font and color of the local stations.
@@ -349,8 +322,7 @@ namespace bobura
 
             \return The font and color of the principal stations.
         */
-        const font_color_type& principal_station()
-        const;
+        const font_color_type& principal_station() const;
 
         /*!
             \brief Sets a font and color of the principal stations.
@@ -364,8 +336,7 @@ namespace bobura
 
             \return The font and color of the local terminal stations.
         */
-        const font_color_type& local_terminal_station()
-        const;
+        const font_color_type& local_terminal_station() const;
 
         /*!
             \brief Sets a font and color of the local terminal stations.
@@ -379,8 +350,7 @@ namespace bobura
 
             \return The font and color of the principal terminal stations.
         */
-        const font_color_type& principal_terminal_station()
-        const;
+        const font_color_type& principal_terminal_station() const;
 
         /*!
             \brief Sets a font and color of the principal terminal stations.
@@ -403,13 +373,8 @@ namespace bobura
 
         // virtual functions
 
-        virtual void do_modal_impl()
-        override;
-
-
+        virtual void do_modal_impl() override;
     };
-
-
 }
 
 

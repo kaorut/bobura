@@ -27,8 +27,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura
-{
+namespace bobura {
     template <
         typename Traits,
         typename Size,
@@ -37,10 +36,9 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    class font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::impl :
-        private boost::noncopyable
+        typename ColorDialog>
+    class font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::impl
+    : private boost::noncopyable
     {
     public:
         // types
@@ -71,25 +69,11 @@ namespace bobura
         // constructors and destructor
 
         impl(base_type& base, const message_catalog_type& message_catalog)
-        :
-        m_base(base),
-        m_font_color_list(9, font_color_type{}),
-        m_message_catalog(message_catalog),
-        m_current_category_index(),
-        m_p_category_label(),
-        m_p_category_list_box(),
-        m_p_diagram_label(),
-        m_p_diagram_font_button(),
-        m_p_diagram_font_text_box(),
-        m_p_diagram_color_button(),
-        m_p_timetable_label(),
-        m_p_timetable_font_button(),
-        m_p_timetable_font_text_box(),
-        m_p_timetable_color_button(),
-        m_p_sample_label(),
-        m_p_sample_picture_box(),
-        m_p_ok_button(),
-        m_p_cancel_button()
+        : m_base(base), m_font_color_list(9, font_color_type{}), m_message_catalog(message_catalog),
+          m_current_category_index(), m_p_category_label(), m_p_category_list_box(), m_p_diagram_label(),
+          m_p_diagram_font_button(), m_p_diagram_font_text_box(), m_p_diagram_color_button(), m_p_timetable_label(),
+          m_p_timetable_font_button(), m_p_timetable_font_text_box(), m_p_timetable_color_button(), m_p_sample_label(),
+          m_p_sample_picture_box(), m_p_ok_button(), m_p_cancel_button()
         {
             initialize_dialog();
         }
@@ -97,8 +81,7 @@ namespace bobura
 
         // functions
 
-        const font_color_type& background()
-        const
+        const font_color_type& background() const
         {
             return m_font_color_list[0];
         }
@@ -108,8 +91,7 @@ namespace bobura
             m_font_color_list[0] = std::move(font_color);
         }
 
-        const font_color_type& general()
-        const
+        const font_color_type& general() const
         {
             return m_font_color_list[1];
         }
@@ -119,8 +101,7 @@ namespace bobura
             m_font_color_list[1] = std::move(font_color);
         }
 
-        const font_color_type& company_name()
-        const
+        const font_color_type& company_name() const
         {
             return m_font_color_list[2];
         }
@@ -130,8 +111,7 @@ namespace bobura
             m_font_color_list[2] = std::move(font_color);
         }
 
-        const font_color_type& line_name()
-        const
+        const font_color_type& line_name() const
         {
             return m_font_color_list[3];
         }
@@ -141,8 +121,7 @@ namespace bobura
             m_font_color_list[3] = std::move(font_color);
         }
 
-        const font_color_type& note()
-        const
+        const font_color_type& note() const
         {
             return m_font_color_list[4];
         }
@@ -152,8 +131,7 @@ namespace bobura
             m_font_color_list[4] = std::move(font_color);
         }
 
-        const font_color_type& local_station()
-        const
+        const font_color_type& local_station() const
         {
             return m_font_color_list[5];
         }
@@ -163,8 +141,7 @@ namespace bobura
             m_font_color_list[5] = std::move(font_color);
         }
 
-        const font_color_type& principal_station()
-        const
+        const font_color_type& principal_station() const
         {
             return m_font_color_list[6];
         }
@@ -174,8 +151,7 @@ namespace bobura
             m_font_color_list[6] = std::move(font_color);
         }
 
-        const font_color_type& local_terminal_station()
-        const
+        const font_color_type& local_terminal_station() const
         {
             return m_font_color_list[7];
         }
@@ -185,8 +161,7 @@ namespace bobura
             m_font_color_list[7] = std::move(font_color);
         }
 
-        const font_color_type& principal_terminal_station()
-        const
+        const font_color_type& principal_terminal_station() const
         {
             return m_font_color_list[8];
         }
@@ -232,30 +207,44 @@ namespace bobura
         using category_list_box_selection_changed_observer_type =
             message::font_color_dialog::category_list_box_selection_changed<size_type, list_box_type>;
 
-        using sample_picture_box_paint_observer_type =
-            message::font_color_dialog::sample_picture_box_paint<
-                size_type, canvas_type, font_color_type, message_catalog_type
-            >;
+        using sample_picture_box_paint_observer_type = message::font_color_dialog::
+            sample_picture_box_paint<size_type, canvas_type, font_color_type, message_catalog_type>;
 
         using diagram_font_button_mouse_clicked_observer_type =
             message::font_color_dialog::diagram_font_button_mouse_clicked<
-                size_type, base_type, FontDialog, canvas_type, font_color_type, message_catalog_type
-            >;
+                size_type,
+                base_type,
+                FontDialog,
+                canvas_type,
+                font_color_type,
+                message_catalog_type>;
 
         using diagram_color_button_mouse_clicked_observer_type =
             message::font_color_dialog::diagram_color_button_mouse_clicked<
-                size_type, base_type, ColorDialog, canvas_type, font_color_type, message_catalog_type
-            >;
+                size_type,
+                base_type,
+                ColorDialog,
+                canvas_type,
+                font_color_type,
+                message_catalog_type>;
 
         using timetable_font_button_mouse_clicked_observer_type =
             message::font_color_dialog::timetable_font_button_mouse_clicked<
-                size_type, base_type, FontDialog, canvas_type, font_color_type, message_catalog_type
-            >;
+                size_type,
+                base_type,
+                FontDialog,
+                canvas_type,
+                font_color_type,
+                message_catalog_type>;
 
         using timetable_color_button_mouse_clicked_observer_type =
             message::font_color_dialog::timetable_color_button_mouse_clicked<
-                size_type, base_type, ColorDialog, canvas_type, font_color_type, message_catalog_type
-            >;
+                size_type,
+                base_type,
+                ColorDialog,
+                canvas_type,
+                font_color_type,
+                message_catalog_type>;
 
         using ok_button_mouse_clicked_observer_type = message::font_color_dialog::ok_button_mouse_clicked<base_type>;
 
@@ -346,9 +335,7 @@ namespace bobura
 
             p_list_box->list_selection_observer_set().selection_changed().connect(
                 category_list_box_selection_changed_observer_type{
-                    m_current_category_index, *p_list_box, [this]() { this->update(); }
-                }
-            );
+                    m_current_category_index, *p_list_box, [this]() { this->update(); } });
 
             return std::move(p_list_box);
         }
@@ -369,15 +356,8 @@ namespace bobura
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::normal);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Font...")));
-            p_button->mouse_observer_set().clicked().connect(
-                diagram_font_button_mouse_clicked_observer_type{
-                    m_base,
-                    m_font_color_list,
-                    m_current_category_index,
-                    [this]() { this->update(); },
-                    m_message_catalog
-                }
-            );
+            p_button->mouse_observer_set().clicked().connect(diagram_font_button_mouse_clicked_observer_type{
+                m_base, m_font_color_list, m_current_category_index, [this]() { this->update(); }, m_message_catalog });
 
             return std::move(p_button);
         }
@@ -397,15 +377,8 @@ namespace bobura
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::normal);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:&Color...")));
-            p_button->mouse_observer_set().clicked().connect(
-                diagram_color_button_mouse_clicked_observer_type{
-                    m_base,
-                    m_font_color_list,
-                    m_current_category_index,
-                    [this]() { this->update(); },
-                    m_message_catalog
-                }
-            );
+            p_button->mouse_observer_set().clicked().connect(diagram_color_button_mouse_clicked_observer_type{
+                m_base, m_font_color_list, m_current_category_index, [this]() { this->update(); }, m_message_catalog });
 
             return std::move(p_button);
         }
@@ -426,15 +399,8 @@ namespace bobura
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::normal);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Fo&nt...")));
-            p_button->mouse_observer_set().clicked().connect(
-                timetable_font_button_mouse_clicked_observer_type{
-                    m_base,
-                    m_font_color_list,
-                    m_current_category_index,
-                    [this]() { this->update(); },
-                    m_message_catalog
-                }
-            );
+            p_button->mouse_observer_set().clicked().connect(timetable_font_button_mouse_clicked_observer_type{
+                m_base, m_font_color_list, m_current_category_index, [this]() { this->update(); }, m_message_catalog });
 
             return std::move(p_button);
         }
@@ -454,15 +420,8 @@ namespace bobura
             auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::normal);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Co&lor...")));
-            p_button->mouse_observer_set().clicked().connect(
-                timetable_color_button_mouse_clicked_observer_type{
-                    m_base,
-                    m_font_color_list,
-                    m_current_category_index,
-                    [this]() { this->update(); },
-                    m_message_catalog
-                }
-            );
+            p_button->mouse_observer_set().clicked().connect(timetable_color_button_mouse_clicked_observer_type{
+                m_base, m_font_color_list, m_current_category_index, [this]() { this->update(); }, m_message_catalog });
 
             return std::move(p_button);
         }
@@ -481,19 +440,11 @@ namespace bobura
         std::unique_ptr<picture_box_type> create_sample_picture_box()
         {
             auto p_picture_box =
-                tetengo2::stdalt::make_unique<picture_box_type>(
-                    m_base, list_box_type::scroll_bar_style_type::none
-                );
+                tetengo2::stdalt::make_unique<picture_box_type>(m_base, list_box_type::scroll_bar_style_type::none);
 
             p_picture_box->set_dimension(dimension_type{ dimension_unit_type{ 25 }, dimension_unit_type{ 6 } });
-            p_picture_box->fast_paint_observer_set().paint().connect(
-                sample_picture_box_paint_observer_type{
-                    m_font_color_list,
-                    m_current_category_index,
-                    p_picture_box->client_dimension(),
-                    m_message_catalog
-                }
-            );
+            p_picture_box->fast_paint_observer_set().paint().connect(sample_picture_box_paint_observer_type{
+                m_font_color_list, m_current_category_index, p_picture_box->client_dimension(), m_message_catalog });
 
             return std::move(p_picture_box);
         }
@@ -527,98 +478,76 @@ namespace bobura
                 m_p_category_label->fit_to_content();
                 m_p_category_label->set_position(position_type{ category_label_left, position_unit_type{ 1 } });
 
-                m_p_category_list_box->set_dimension(dimension_type{ dimension_unit_type{ 16 }, dimension_unit_type{ 21 } });
+                m_p_category_list_box->set_dimension(
+                    dimension_type{ dimension_unit_type{ 16 }, dimension_unit_type{ 21 } });
                 m_p_category_list_box->set_position(
-                    position_type{
-                        category_label_left,
-                        m_p_category_label->position().top() +
-                            position_unit_type::from(m_p_category_label->dimension().height())
-                    }
-                );
+                    position_type{ category_label_left,
+                                   m_p_category_label->position().top() +
+                                       position_unit_type::from(m_p_category_label->dimension().height()) });
             }
 
             const position_unit_type diagram_label_left{ 20 };
-            const auto diagram_font_button_left = diagram_label_left + position_unit_type{ 1 };
+            const auto               diagram_font_button_left = diagram_label_left + position_unit_type{ 1 };
             {
                 m_p_diagram_label->fit_to_content();
                 m_p_diagram_label->set_position(position_type{ diagram_label_left, position_unit_type{ 1 } });
 
-                const auto font_button_top =
-                    m_p_diagram_label->position().top() +
-                    position_unit_type::from(m_p_diagram_label->dimension().height());
+                const auto font_button_top = m_p_diagram_label->position().top() +
+                                             position_unit_type::from(m_p_diagram_label->dimension().height());
 
                 m_p_diagram_font_button->set_dimension(
-                    dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } }
-                );
+                    dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } });
                 m_p_diagram_font_button->set_position(position_type{ diagram_font_button_left, font_button_top });
 
                 m_p_diagram_font_text_box->set_dimension(
-                    dimension_type{ dimension_unit_type{ 16 }, dimension_unit_type{ 2 } }
-                );
+                    dimension_type{ dimension_unit_type{ 16 }, dimension_unit_type{ 2 } });
                 m_p_diagram_font_text_box->set_position(
-                    position_type{ diagram_font_button_left + position_unit_type{ 8 }, font_button_top }
-                );
+                    position_type{ diagram_font_button_left + position_unit_type{ 8 }, font_button_top });
 
-                const auto color_button_top =
-                    m_p_diagram_font_button->position().top() +
-                    position_unit_type::from(
-                        m_p_diagram_font_button->dimension().height()
-                    ) +
-                    position_unit_type{ 1 } / 2;
+                const auto color_button_top = m_p_diagram_font_button->position().top() +
+                                              position_unit_type::from(m_p_diagram_font_button->dimension().height()) +
+                                              position_unit_type{ 1 } / 2;
 
                 m_p_diagram_color_button->set_dimension(
-                    dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } }
-                );
+                    dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } });
                 m_p_diagram_color_button->set_position(position_type{ diagram_font_button_left, color_button_top });
             }
             {
                 m_p_timetable_label->fit_to_content();
                 m_p_timetable_label->set_position(position_type{ diagram_label_left, position_unit_type{ 8 } });
 
-                const auto font_button_top =
-                    m_p_timetable_label->position().top() +
-                    position_unit_type::from(m_p_timetable_label->dimension().height());
+                const auto font_button_top = m_p_timetable_label->position().top() +
+                                             position_unit_type::from(m_p_timetable_label->dimension().height());
 
                 m_p_timetable_font_button->set_dimension(
-                    dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } }
-                );
+                    dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } });
                 m_p_timetable_font_button->set_position(position_type{ diagram_font_button_left, font_button_top });
 
                 m_p_timetable_font_text_box->set_dimension(
-                    dimension_type{ dimension_unit_type{ 16 }, dimension_unit_type{ 2 } }
-                );
+                    dimension_type{ dimension_unit_type{ 16 }, dimension_unit_type{ 2 } });
                 m_p_timetable_font_text_box->set_position(
-                    position_type{ diagram_font_button_left + position_unit_type{ 8 }, font_button_top }
-                );
+                    position_type{ diagram_font_button_left + position_unit_type{ 8 }, font_button_top });
 
                 const auto color_button_top =
                     m_p_timetable_font_button->position().top() +
-                    position_unit_type::from(
-                        m_p_timetable_font_button->dimension().height()
-                    ) +
+                    position_unit_type::from(m_p_timetable_font_button->dimension().height()) +
                     position_unit_type{ 1 } / 2;
 
                 m_p_timetable_color_button->set_dimension(
-                    dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } }
-                );
+                    dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } });
                 m_p_timetable_color_button->set_position(position_type{ diagram_font_button_left, color_button_top });
             }
             {
                 m_p_sample_label->fit_to_content();
                 m_p_sample_label->set_dimension(
-                    dimension_type{
-                        std::max(
-                            m_p_sample_label->dimension().width(),
-                            dimension_unit_type{ m_p_sample_label->text().length() }
-                        ),
-                        m_p_sample_label->dimension().height()
-                    }
-                );
+                    dimension_type{ std::max(
+                                        m_p_sample_label->dimension().width(),
+                                        dimension_unit_type{ m_p_sample_label->text().length() }),
+                                    m_p_sample_label->dimension().height() });
                 m_p_sample_label->set_position(position_type{ diagram_label_left, position_unit_type{ 15 } });
 
-                const auto picuture_box_top =
-                    m_p_sample_label->position().top() +
-                    position_unit_type::from(m_p_sample_label->dimension().height());
+                const auto picuture_box_top = m_p_sample_label->position().top() +
+                                              position_unit_type::from(m_p_sample_label->dimension().height());
 
                 m_p_sample_picture_box->set_position(position_type{ diagram_label_left, picuture_box_top });
             }
@@ -636,40 +565,30 @@ namespace bobura
         {
             m_p_category_list_box->insert_value(
                 m_p_category_list_box->value_count(),
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Background"))
-            );
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Background")));
             m_p_category_list_box->insert_value(
                 m_p_category_list_box->value_count(),
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:General"))
-            );
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:General")));
             m_p_category_list_box->insert_value(
                 m_p_category_list_box->value_count(),
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Company Name"))
-            );
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Company Name")));
             m_p_category_list_box->insert_value(
                 m_p_category_list_box->value_count(),
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Line Name"))
-            );
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Line Name")));
+            m_p_category_list_box->insert_value(
+                m_p_category_list_box->value_count(), m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Note")));
             m_p_category_list_box->insert_value(
                 m_p_category_list_box->value_count(),
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Note"))
-            );
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Local Stations")));
             m_p_category_list_box->insert_value(
                 m_p_category_list_box->value_count(),
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Local Stations"))
-            );
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Principal Stations")));
             m_p_category_list_box->insert_value(
                 m_p_category_list_box->value_count(),
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Principal Stations"))
-            );
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Local Terminal Stations")));
             m_p_category_list_box->insert_value(
                 m_p_category_list_box->value_count(),
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Local Terminal Stations"))
-            );
-            m_p_category_list_box->insert_value(
-                m_p_category_list_box->value_count(),
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Principal Terminal Stations"))
-            );
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Principal Terminal Stations")));
 
             assert(m_p_category_list_box->value_count() == m_font_color_list.size());
         }
@@ -696,8 +615,7 @@ namespace bobura
             m_p_sample_picture_box->repaint();
         }
 
-        string_type diagram_font_name_and_size()
-        const
+        string_type diagram_font_name_and_size() const
         {
             if (!m_current_category_index)
                 return {};
@@ -705,8 +623,7 @@ namespace bobura
             return font_name_and_size(m_font_color_list[*m_current_category_index].diagram_font());
         }
 
-        string_type timetable_font_name_and_size()
-        const
+        string_type timetable_font_name_and_size() const
         {
             if (!m_current_category_index)
                 return {};
@@ -714,34 +631,28 @@ namespace bobura
             return font_name_and_size(m_font_color_list[*m_current_category_index].timetable_font());
         }
 
-        string_type font_name_and_size(const boost::optional<font_type>& font)
-        const
+        string_type font_name_and_size(const boost::optional<font_type>& font) const
         {
             if (!font)
                 return {};
 
             std::basic_ostringstream<typename string_type::value_type> stream;
-            stream <<
-                boost::basic_format<typename string_type::value_type>(string_type{ TETENGO2_TEXT("%s, %dpt") }) %
-                font->family() %
-                boost::rational_cast<int>(point_dimension_unit_type::from_pixels(font->size()).value());
+            stream << boost::basic_format<typename string_type::value_type>(string_type{ TETENGO2_TEXT("%s, %dpt") }) %
+                          font->family() %
+                          boost::rational_cast<int>(point_dimension_unit_type::from_pixels(font->size()).value());
 
             return stream.str();
         }
 
-        bool diagram_color_enabled()
-        const
+        bool diagram_color_enabled() const
         {
             return m_current_category_index && m_font_color_list[*m_current_category_index].diagram_color();
         }
 
-        bool timetable_color_enabled()
-        const
+        bool timetable_color_enabled() const
         {
             return m_current_category_index && m_font_color_list[*m_current_category_index].timetable_color();
         }
-
-
     };
 
 
@@ -753,13 +664,11 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    const typename font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::font_color_type&
-    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::background()
-    const
+        typename ColorDialog>
+    const typename font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        font_color_type&
+        font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::background()
+            const
     {
         return m_p_impl->background();
     }
@@ -772,11 +681,10 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    void font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::set_background(
-        font_color_type font_color
-    )
+        typename ColorDialog>
+    void
+    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::set_background(
+        font_color_type font_color)
     {
         m_p_impl->set_background(std::move(font_color));
     }
@@ -789,15 +697,10 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::font_color_dialog(
-        abstract_window_type&       parent,
-        const message_catalog_type& message_catalog
-    )
-    :
-    base_type(parent),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog))
+        typename ColorDialog>
+    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        font_color_dialog(abstract_window_type& parent, const message_catalog_type& message_catalog)
+    : base_type(parent), m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog))
     {}
 
     template <
@@ -808,10 +711,9 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::~font_color_dialog()
-    noexcept
+        typename ColorDialog>
+    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        ~font_color_dialog() noexcept
     {}
 
     template <
@@ -822,13 +724,11 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    const typename font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::font_color_type&
-    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::general()
-    const
+        typename ColorDialog>
+    const typename font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        font_color_type&
+        font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::general()
+            const
     {
         return m_p_impl->general();
     }
@@ -841,11 +741,9 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
+        typename ColorDialog>
     void font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::set_general(
-        font_color_type font_color
-    )
+        font_color_type font_color)
     {
         m_p_impl->set_general(std::move(font_color));
     }
@@ -858,13 +756,11 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    const typename font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::font_color_type&
-    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::company_name()
-    const
+        typename ColorDialog>
+    const typename font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        font_color_type&
+        font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+            company_name() const
     {
         return m_p_impl->company_name();
     }
@@ -877,11 +773,10 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    void font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::set_company_name(font_color_type font_color)
+        typename ColorDialog>
+    void
+    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::set_company_name(
+        font_color_type font_color)
     {
         m_p_impl->set_company_name(std::move(font_color));
     }
@@ -894,13 +789,11 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    const typename font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::font_color_type&
-    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::line_name()
-    const
+        typename ColorDialog>
+    const typename font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        font_color_type&
+        font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::line_name()
+            const
     {
         return m_p_impl->line_name();
     }
@@ -913,11 +806,10 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    void font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::set_line_name(font_color_type font_color)
+        typename ColorDialog>
+    void
+    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::set_line_name(
+        font_color_type font_color)
     {
         m_p_impl->set_line_name(std::move(font_color));
     }
@@ -930,13 +822,10 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    const typename font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::font_color_type&
-    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::note()
-    const
+        typename ColorDialog>
+    const typename font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        font_color_type&
+        font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::note() const
     {
         return m_p_impl->note();
     }
@@ -949,11 +838,9 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
+        typename ColorDialog>
     void font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::set_note(
-        font_color_type font_color
-    )
+        font_color_type font_color)
     {
         m_p_impl->set_note(std::move(font_color));
     }
@@ -966,13 +853,11 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    const typename font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::font_color_type&
-    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::local_station()
-    const
+        typename ColorDialog>
+    const typename font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        font_color_type&
+        font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+            local_station() const
     {
         return m_p_impl->local_station();
     }
@@ -985,13 +870,9 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    void font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::set_local_station(
-        font_color_type font_color
-    )
+        typename ColorDialog>
+    void font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        set_local_station(font_color_type font_color)
     {
         m_p_impl->set_local_station(std::move(font_color));
     }
@@ -1004,13 +885,11 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    const typename font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::font_color_type&
-    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::principal_station()
-    const
+        typename ColorDialog>
+    const typename font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        font_color_type&
+        font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+            principal_station() const
     {
         return m_p_impl->principal_station();
     }
@@ -1023,13 +902,9 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    void font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::set_principal_station(
-        font_color_type font_color
-    )
+        typename ColorDialog>
+    void font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        set_principal_station(font_color_type font_color)
     {
         m_p_impl->set_principal_station(std::move(font_color));
     }
@@ -1042,15 +917,11 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    const typename font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::font_color_type&
-    font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::local_terminal_station()
-    const
+        typename ColorDialog>
+    const typename font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        font_color_type&
+        font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+            local_terminal_station() const
     {
         return m_p_impl->local_terminal_station();
     }
@@ -1063,13 +934,9 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    void font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::set_local_terminal_station(
-        font_color_type font_color
-    )
+        typename ColorDialog>
+    void font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        set_local_terminal_station(font_color_type font_color)
     {
         m_p_impl->set_local_terminal_station(std::move(font_color));
     }
@@ -1082,15 +949,11 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    const typename font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::font_color_type&
-    font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::principal_terminal_station()
-    const
+        typename ColorDialog>
+    const typename font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        font_color_type&
+        font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+            principal_terminal_station() const
     {
         return m_p_impl->principal_terminal_station();
     }
@@ -1103,13 +966,9 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    void font_color_dialog<
-        Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog
-    >::set_principal_terminal_station(
-        font_color_type font_color
-    )
+        typename ColorDialog>
+    void font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
+        set_principal_terminal_station(font_color_type font_color)
     {
         m_p_impl->set_principal_terminal_station(std::move(font_color));
     }
@@ -1122,19 +981,17 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
-    void font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::do_modal_impl()
+        typename ColorDialog>
+    void
+    font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::do_modal_impl()
     {
         m_p_impl->do_modal_impl();
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using common_type_list_type = type_list::common;
@@ -1144,12 +1001,10 @@ namespace bobura
             using common_dialog_type_list_type = type_list::common_dialog<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using common_type_list_type = type_list::common;
@@ -1159,9 +1014,7 @@ namespace bobura
             using common_dialog_type_list_type = type_list::common_dialog<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -1173,8 +1026,7 @@ namespace bobura
         typename application::ui_type_list_type::color_type,
         typename application::ui_type_list_type::fast_canvas_type,
         typename application::common_dialog_type_list_type::font_type,
-        typename application::common_dialog_type_list_type::color_type
-    >;
+        typename application::common_dialog_type_list_type::color_type>;
 #endif
 
     template class font_color_dialog<
@@ -1185,8 +1037,5 @@ namespace bobura
         typename test::ui_type_list_type::color_type,
         typename test::ui_type_list_type::fast_canvas_type,
         typename test::common_dialog_type_list_type::font_type,
-        typename test::common_dialog_type_list_type::color_type
-    >;
-
-
+        typename test::common_dialog_type_list_type::color_type>;
 }

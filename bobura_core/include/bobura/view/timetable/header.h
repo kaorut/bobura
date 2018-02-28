@@ -16,8 +16,7 @@
 #include <bobura/view/timetable/utility.h>
 
 
-namespace bobura { namespace view { namespace timetable
-{
+namespace bobura { namespace view { namespace timetable {
     /*!
         \brief The class template for a header of the company name in the timetable view.
 
@@ -67,8 +66,7 @@ namespace bobura { namespace view { namespace timetable
             const font_type&  font,
             const color_type& color,
             position_type     position,
-            dimension_type    dimension
-        );
+            dimension_type    dimension);
 
         /*!
             \brief Moves a company name header.
@@ -80,8 +78,7 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Destroys the company name header.
         */
-        virtual ~company_name_header()
-        noexcept;
+        virtual ~company_name_header() noexcept;
 
 
         // functions
@@ -111,10 +108,7 @@ namespace bobura { namespace view { namespace timetable
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 
@@ -167,8 +161,7 @@ namespace bobura { namespace view { namespace timetable
             const font_type&  font,
             const color_type& color,
             position_type     position,
-            dimension_type    dimension
-        );
+            dimension_type    dimension);
 
         /*!
             \brief Moves a line name header.
@@ -180,8 +173,7 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Destroys the line name header.
         */
-        virtual ~line_name_header()
-        noexcept;
+        virtual ~line_name_header() noexcept;
 
 
         // functions
@@ -211,10 +203,7 @@ namespace bobura { namespace view { namespace timetable
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 
@@ -267,8 +256,7 @@ namespace bobura { namespace view { namespace timetable
             const font_type&  font,
             const color_type& color,
             position_type     position,
-            dimension_type    dimension
-        );
+            dimension_type    dimension);
 
         /*!
             \brief Moves a note header.
@@ -280,8 +268,7 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Destroys the note header.
         */
-        virtual ~note_header()
-        noexcept;
+        virtual ~note_header() noexcept;
 
 
         // functions
@@ -311,10 +298,7 @@ namespace bobura { namespace view { namespace timetable
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 
@@ -385,8 +369,7 @@ namespace bobura { namespace view { namespace timetable
             const message_catalog_type& message_catalog,
             canvas_type&                canvas,
             const dimension_type&       canvas_dimension,
-            const dimension_type&       margin
-        );
+            const dimension_type&       margin);
 
         /*!
             \brief Moves a header.
@@ -398,8 +381,7 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Destroys the header.
         */
-        virtual ~header()
-        noexcept;
+        virtual ~header() noexcept;
 
 
         // functions
@@ -429,10 +411,7 @@ namespace bobura { namespace view { namespace timetable
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 

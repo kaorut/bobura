@@ -25,16 +25,14 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura
-{
+namespace bobura {
     template <
         typename Size,
         typename Difference,
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     class timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::impl : private boost::noncopyable
     {
     public:
@@ -48,11 +46,7 @@ namespace bobura
         // constructors and destructor
 
         impl()
-        :
-        m_p_timetable(tetengo2::stdalt::make_unique<timetable_type>()),
-        m_path(),
-        m_changed(false),
-        m_observer_set()
+        : m_p_timetable(tetengo2::stdalt::make_unique<timetable_type>()), m_path(), m_changed(false), m_observer_set()
         {
             set_timetable_observer_set();
         }
@@ -60,8 +54,7 @@ namespace bobura
 
         // functions
 
-        const timetable_type& timetable()
-        const
+        const timetable_type& timetable() const
         {
             assert(m_p_timetable);
             return *m_p_timetable;
@@ -88,14 +81,12 @@ namespace bobura
             reset_timetable_impl(std::move(p_timetable), boost::make_optional(std::move(path)));
         }
 
-        bool has_path()
-        const
+        bool has_path() const
         {
             return static_cast<bool>(m_path);
         }
 
-        const boost::filesystem::path& path()
-        const
+        const boost::filesystem::path& path() const
         {
             if (!has_path())
                 BOOST_THROW_EXCEPTION(std::logic_error("This model does not have a path."));
@@ -111,8 +102,7 @@ namespace bobura
             m_observer_set.reset()();
         }
 
-        bool changed()
-        const
+        bool changed() const
         {
             return m_changed;
         }
@@ -124,8 +114,7 @@ namespace bobura
             m_observer_set.changed()();
         }
 
-        const observer_set_type& observer_set()
-        const
+        const observer_set_type& observer_set() const
         {
             return m_observer_set;
         }
@@ -152,8 +141,7 @@ namespace bobura
 
         void reset_timetable_impl(
             std::unique_ptr<timetable_type>            p_timetable,
-            boost::optional<boost::filesystem::path>&& path
-        )
+            boost::optional<boost::filesystem::path>&& path)
         {
             if (!p_timetable)
                 BOOST_THROW_EXCEPTION(std::invalid_argument("Timetable is nullptr."));
@@ -171,8 +159,6 @@ namespace bobura
         {
             m_p_timetable->observer_set().changed().connect([this]() { this->set_changed(true); });
         }
-
-
     };
 
 
@@ -182,11 +168,9 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::timetable_model()
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>())
     {}
 
     template <
@@ -195,10 +179,8 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
-    timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::~timetable_model()
-    noexcept
+        typename Font>
+    timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::~timetable_model() noexcept
     {}
 
     template <
@@ -207,11 +189,9 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     const typename timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::timetable_type&
-    timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::timetable()
-    const
+    timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::timetable() const
     {
         return m_p_impl->timetable();
     }
@@ -222,8 +202,7 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     typename timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::timetable_type&
     timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::timetable()
     {
@@ -236,8 +215,7 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     void timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::reset_timetable()
     {
         m_p_impl->reset_timetable();
@@ -249,11 +227,9 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     void timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::reset_timetable(
-        std::unique_ptr<timetable_type> p_timetable
-    )
+        std::unique_ptr<timetable_type> p_timetable)
     {
         m_p_impl->reset_timetable(std::move(p_timetable));
     }
@@ -264,12 +240,10 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     void timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::reset_timetable(
         std::unique_ptr<timetable_type> p_timetable,
-        boost::filesystem::path         path
-    )
+        boost::filesystem::path         path)
     {
         m_p_impl->reset_timetable(std::move(p_timetable), std::move(path));
     }
@@ -280,10 +254,8 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
-    bool timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::has_path()
-    const
+        typename Font>
+    bool timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::has_path() const
     {
         return m_p_impl->has_path();
     }
@@ -294,10 +266,9 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
-    const boost::filesystem::path& timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::path()
-    const
+        typename Font>
+    const boost::filesystem::path&
+    timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::path() const
     {
         return m_p_impl->path();
     }
@@ -308,11 +279,9 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
-    void timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::set_path(
-        boost::filesystem::path path
-    )
+        typename Font>
+    void
+    timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::set_path(boost::filesystem::path path)
     {
         m_p_impl->set_path(std::move(path));
     }
@@ -323,10 +292,8 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
-    bool timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::changed()
-    const
+        typename Font>
+    bool timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::changed() const
     {
         return m_p_impl->changed();
     }
@@ -337,8 +304,7 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     void timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::set_changed(const bool changed)
     {
         m_p_impl->set_changed(changed);
@@ -350,11 +316,9 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     const typename timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::observer_set_type&
-    timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::observer_set()
-    const
+    timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::observer_set() const
     {
         return m_p_impl->observer_set();
     }
@@ -365,8 +329,7 @@ namespace bobura
         typename String,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     typename timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::observer_set_type&
     timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::observer_set()
     {
@@ -374,11 +337,9 @@ namespace bobura
     }
 
 
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using common_type_list_type = type_list::common;
@@ -386,20 +347,16 @@ namespace bobura
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using common_type_list_type = type_list::common;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -409,8 +366,7 @@ namespace bobura
         typename application::common_type_list_type::string_type,
         typename application::common_type_list_type::operating_distance_type,
         typename application::common_type_list_type::speed_type,
-        typename application::ui_type_list_type::fast_font_type
-    >;
+        typename application::ui_type_list_type::fast_font_type>;
 #endif
 
     template class timetable_model<
@@ -419,8 +375,5 @@ namespace bobura
         typename test::common_type_list_type::string_type,
         typename test::common_type_list_type::operating_distance_type,
         typename test::common_type_list_type::speed_type,
-        typename test::ui_type_list_type::font_type
-    >;
-
-
+        typename test::ui_type_list_type::font_type>;
 }

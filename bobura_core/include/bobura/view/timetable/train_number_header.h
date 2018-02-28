@@ -16,8 +16,7 @@
 #include <bobura/view/timetable/utility.h>
 
 
-namespace bobura { namespace view { namespace timetable
-{
+namespace bobura { namespace view { namespace timetable {
     /*!
         \brief The class template for a header of the operating distance in the timetable view.
 
@@ -67,8 +66,7 @@ namespace bobura { namespace view { namespace timetable
             const font_type&  font,
             const color_type& color,
             position_type     position,
-            dimension_type    dimension
-        );
+            dimension_type    dimension);
 
         /*!
             \brief Moves an operating distance header.
@@ -80,8 +78,7 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Destroys the train number description header.
         */
-        virtual ~operating_distance_header()
-        noexcept;
+        virtual ~operating_distance_header() noexcept;
 
 
         // functions
@@ -111,10 +108,7 @@ namespace bobura { namespace view { namespace timetable
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 
@@ -167,8 +161,7 @@ namespace bobura { namespace view { namespace timetable
             const font_type&  font,
             const color_type& color,
             position_type     position,
-            dimension_type    dimension
-        );
+            dimension_type    dimension);
 
         /*!
             \brief Moves a train number description header.
@@ -180,8 +173,7 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Destroys the train number description header.
         */
-        virtual ~train_number_description_header()
-        noexcept;
+        virtual ~train_number_description_header() noexcept;
 
 
         // functions
@@ -211,10 +203,7 @@ namespace bobura { namespace view { namespace timetable
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 
@@ -267,8 +256,7 @@ namespace bobura { namespace view { namespace timetable
             const font_type&  font,
             const color_type& color,
             position_type     position,
-            dimension_type    dimension
-        );
+            dimension_type    dimension);
 
         /*!
             \brief Moves a train name description header.
@@ -280,8 +268,7 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Destroys the train number description header.
         */
-        virtual ~train_name_description_header()
-        noexcept;
+        virtual ~train_name_description_header() noexcept;
 
 
         // functions
@@ -311,10 +298,7 @@ namespace bobura { namespace view { namespace timetable
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 
@@ -401,8 +385,7 @@ namespace bobura { namespace view { namespace timetable
             const dimension_unit_type&  operating_distance_width,
             const dimension_unit_type&  station_name_width,
             const dimension_unit_type&  train_number_height,
-            const dimension_unit_type&  train_name_height
-        );
+            const dimension_unit_type&  train_name_height);
 
         /*!
             \brief Moves a train number header.
@@ -414,8 +397,7 @@ namespace bobura { namespace view { namespace timetable
         /*!
             \brief Destroys the train number header.
         */
-        virtual ~train_number_header()
-        noexcept;
+        virtual ~train_number_header() noexcept;
 
 
         // functions
@@ -445,10 +427,7 @@ namespace bobura { namespace view { namespace timetable
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 

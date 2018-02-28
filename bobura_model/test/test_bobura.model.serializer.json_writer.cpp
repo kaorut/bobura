@@ -37,8 +37,7 @@
 #include <bobura/type_list.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -69,8 +68,7 @@ namespace
 
     using principal_type = grade_type_set_type::principal_type;
 
-    using station_location_type =
-        bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
+    using station_location_type = bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
 
     using time_type = bobura::model::train_info::time<size_type, difference_type>;
 
@@ -80,10 +78,8 @@ namespace
 
     using train_type = bobura::model::train<size_type, difference_type, string_type>;
 
-    using timetable_type =
-        bobura::model::timetable<
-            size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
-        >;
+    using timetable_type = bobura::model::
+        timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
     using font_color_set_type = timetable_type::font_color_set_type;
 
@@ -93,17 +89,15 @@ namespace
 
     using output_stream_type = common_type_list_type::output_stream_type;
 
-    using writer_type =
-        bobura::model::serializer::json_writer<
-            size_type,
-            difference_type,
-            string_type,
-            output_stream_type,
-            operating_distance_type,
-            speed_type,
-            font_type,
-            locale_type_list_type::timetable_file_encoder_type
-        >;
+    using writer_type = bobura::model::serializer::json_writer<
+        size_type,
+        difference_type,
+        string_type,
+        output_stream_type,
+        operating_distance_type,
+        speed_type,
+        font_type,
+        locale_type_list_type::timetable_file_encoder_type>;
 
 
     // variables
@@ -225,234 +219,187 @@ namespace
         p_timetable->set_line_name(string_type{ TETENGO2_TEXT("fuga") });
         p_timetable->set_note(string_type{ TETENGO2_TEXT("piyo") });
         {
-            color_type diagram_background_color{ 0xAB, 0xCD, 0xEF };
-            color_type timetable_background_color{ 0xFE, 0xDC, 0xBA };
-            const font_color_type background_font_color{
-                boost::none,
-                boost::make_optional(diagram_background_color),
-                boost::none,
-                boost::make_optional(timetable_background_color)
-            };
+            color_type            diagram_background_color{ 0xAB, 0xCD, 0xEF };
+            color_type            timetable_background_color{ 0xFE, 0xDC, 0xBA };
+            const font_color_type background_font_color{ boost::none,
+                                                         boost::make_optional(diagram_background_color),
+                                                         boost::none,
+                                                         boost::make_optional(timetable_background_color) };
 
             font_type diagram_company_name_font{
                 string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true
             };
             color_type diagram_company_name_color{ 0xAB, 0xCD, 0xEF };
-            font_type timetable_company_name_font{
+            font_type  timetable_company_name_font{
                 string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true
             };
-            color_type timetable_company_name_color{ 0xFE, 0xDC, 0xBA };
-            const font_color_type company_name_font_color{
-                boost::make_optional(diagram_company_name_font),
-                boost::make_optional(diagram_company_name_color),
-                boost::make_optional(timetable_company_name_font),
-                boost::make_optional(timetable_company_name_color)
-            };
+            color_type            timetable_company_name_color{ 0xFE, 0xDC, 0xBA };
+            const font_color_type company_name_font_color{ boost::make_optional(diagram_company_name_font),
+                                                           boost::make_optional(diagram_company_name_color),
+                                                           boost::make_optional(timetable_company_name_font),
+                                                           boost::make_optional(timetable_company_name_color) };
 
-            const font_color_set_type font_color_set{
-                background_font_color,
-                font_color_set_type::default_().general(),
-                company_name_font_color,
-                font_color_set_type::default_().line_name(),
-                font_color_set_type::default_().note(),
-                font_color_set_type::default_().local_station(),
-                font_color_set_type::default_().principal_station(),
-                font_color_set_type::default_().local_terminal_station(),
-                font_color_set_type::default_().principal_terminal_station()
-            };
+            const font_color_set_type font_color_set{ background_font_color,
+                                                      font_color_set_type::default_().general(),
+                                                      company_name_font_color,
+                                                      font_color_set_type::default_().line_name(),
+                                                      font_color_set_type::default_().note(),
+                                                      font_color_set_type::default_().local_station(),
+                                                      font_color_set_type::default_().principal_station(),
+                                                      font_color_set_type::default_().local_terminal_station(),
+                                                      font_color_set_type::default_().principal_terminal_station() };
 
             p_timetable->set_font_color_set(font_color_set);
         }
         {
             p_timetable->insert_station_location(
                 p_timetable->station_locations().end(),
-                station_location_type{
-                    station_type{
-                        string_type{ TETENGO2_TEXT("stationA") },
-                        local_type::instance(),
-                        false,
-                        true,
-                        string_type{ TETENGO2_TEXT("noteA") }
-                    },
-                    42
-                }
-            );
+                station_location_type{ station_type{ string_type{ TETENGO2_TEXT("stationA") },
+                                                     local_type::instance(),
+                                                     false,
+                                                     true,
+                                                     string_type{ TETENGO2_TEXT("noteA") } },
+                                       42 });
             p_timetable->insert_station_location(
                 p_timetable->station_locations().end(),
-                station_location_type{
-                    station_type{
-                        string_type{ TETENGO2_TEXT("stationB") },
-                        principal_type::instance(),
-                        true,
-                        false,
-                        string_type{ TETENGO2_TEXT("noteB") }
-                    },
-                    4242
-                }
-            );
+                station_location_type{ station_type{ string_type{ TETENGO2_TEXT("stationB") },
+                                                     principal_type::instance(),
+                                                     true,
+                                                     false,
+                                                     string_type{ TETENGO2_TEXT("noteB") } },
+                                       4242 });
         }
         {
             p_timetable->insert_train_kind(
                 p_timetable->train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("nameA") },
-                    string_type{ TETENGO2_TEXT("abbrA") },
-                    font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
-                    color_type{ 0, 128, 255 },
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid,
-                    font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
-                    color_type{ 0, 255, 128 }
-                }
-            );
+                train_kind_type{ string_type{ TETENGO2_TEXT("nameA") },
+                                 string_type{ TETENGO2_TEXT("abbrA") },
+                                 font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true },
+                                 color_type{ 0, 128, 255 },
+                                 train_kind_type::weight_type::normal,
+                                 train_kind_type::line_style_type::solid,
+                                 font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
+                                 color_type{ 0, 255, 128 } });
             p_timetable->insert_train_kind(
                 p_timetable->train_kinds().end(),
-                train_kind_type{
-                    string_type{ TETENGO2_TEXT("nameB") },
-                    string_type{ TETENGO2_TEXT("abbrB") },
-                    font_type{ string_type{ TETENGO2_TEXT("foofont") }, 42, false, true, false, true },
-                    color_type{ 255, 128, 0 },
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::dotted,
-                    font_type{ string_type{ TETENGO2_TEXT("barfont") }, 42, false, true, false, true },
-                    color_type{ 128, 255, 0 }
-                }
-            );
+                train_kind_type{ string_type{ TETENGO2_TEXT("nameB") },
+                                 string_type{ TETENGO2_TEXT("abbrB") },
+                                 font_type{ string_type{ TETENGO2_TEXT("foofont") }, 42, false, true, false, true },
+                                 color_type{ 255, 128, 0 },
+                                 train_kind_type::weight_type::bold,
+                                 train_kind_type::line_style_type::dotted,
+                                 font_type{ string_type{ TETENGO2_TEXT("barfont") }, 42, false, true, false, true },
+                                 color_type{ 128, 255, 0 } });
         }
-        {
-            {
-                train_type train{
-                    train_type::direction_type::down,
-                    string_type{ TETENGO2_TEXT("101D") },
-                    0,
-                    string_type{ TETENGO2_TEXT("foo") },
-                    string_type{ TETENGO2_TEXT("bar") },
-                    string_type{ TETENGO2_TEXT("fuga") }
-                };
-                train.insert_stop(
-                    train.stops().end(),
-                    stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{})
-                );
-                train.insert_stop(
-                    train.stops().end(),
-                    stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{})
-                );
-                p_timetable->insert_down_train(p_timetable->down_trains().end(), train);
-            }
-            {
-                train_type train{
-                    train_type::direction_type::down,
-                    string_type{ TETENGO2_TEXT("123D") },
-                    1,
-                    string_type{ TETENGO2_TEXT("baz") },
-                    string_type{ TETENGO2_TEXT("bazz") },
-                    string_type{}
-                };
-                train.insert_stop(
-                    train.stops().end(),
-                    stop_type{
-                        time_type::uninitialized(), time_type{ 6, 0, 30 }, true, string_type{ TETENGO2_TEXT("1") }
-                    }
-                );
-                train.insert_stop(
-                    train.stops().end(),
-                    stop_type(time_type{ 10, 5, 45 }, time_type::uninitialized(), false, string_type{})
-                );
-                p_timetable->insert_down_train(p_timetable->down_trains().end(), train);
-            }
-        }
-        {
-            {
-                train_type train{
-                    train_type::direction_type::up,
-                    string_type{ TETENGO2_TEXT("9324M") },
-                    0,
-                    string_type{ TETENGO2_TEXT("abc") },
-                    string_type{ TETENGO2_TEXT("def") },
-                    string_type{ TETENGO2_TEXT("piyo") }
-                };
-                train.insert_stop(
-                    train.stops().end(),
-                    stop_type{
-                        time_type::uninitialized(), time_type{ 6, 20, 0 }, false, string_type{ TETENGO2_TEXT("0A") }
-                    }
-                );
-                train.insert_stop(
-                    train.stops().end(),
-                    stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{})
-                );
-                p_timetable->insert_up_train(p_timetable->up_trains().end(), train);
-            }
-        }
-        return std::move(p_timetable);
+        { { train_type train{ train_type::direction_type::down,
+                              string_type{ TETENGO2_TEXT("101D") },
+                              0,
+                              string_type{ TETENGO2_TEXT("foo") },
+                              string_type{ TETENGO2_TEXT("bar") },
+                              string_type{ TETENGO2_TEXT("fuga") } };
+        train.insert_stop(
+            train.stops().end(),
+            stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{}));
+        train.insert_stop(
+            train.stops().end(),
+            stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{}));
+        p_timetable->insert_down_train(p_timetable->down_trains().end(), train);
     }
-
-
+    {
+        train_type train{ train_type::direction_type::down,    string_type{ TETENGO2_TEXT("123D") }, 1,
+                          string_type{ TETENGO2_TEXT("baz") }, string_type{ TETENGO2_TEXT("bazz") }, string_type{} };
+        train.insert_stop(
+            train.stops().end(),
+            stop_type{ time_type::uninitialized(), time_type{ 6, 0, 30 }, true, string_type{ TETENGO2_TEXT("1") } });
+        train.insert_stop(
+            train.stops().end(), stop_type(time_type{ 10, 5, 45 }, time_type::uninitialized(), false, string_type{}));
+        p_timetable->insert_down_train(p_timetable->down_trains().end(), train);
+    }
+}
+{
+    {
+        train_type train{ train_type::direction_type::up,
+                          string_type{ TETENGO2_TEXT("9324M") },
+                          0,
+                          string_type{ TETENGO2_TEXT("abc") },
+                          string_type{ TETENGO2_TEXT("def") },
+                          string_type{ TETENGO2_TEXT("piyo") } };
+        train.insert_stop(
+            train.stops().end(),
+            stop_type{ time_type::uninitialized(), time_type{ 6, 20, 0 }, false, string_type{ TETENGO2_TEXT("0A") } });
+        train.insert_stop(
+            train.stops().end(),
+            stop_type(time_type::uninitialized(), time_type::uninitialized(), false, string_type{}));
+        p_timetable->insert_up_train(p_timetable->up_trains().end(), train);
+    }
+}
+return std::move(p_timetable);
+}
 }
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(model)
-BOOST_AUTO_TEST_SUITE(serializer)
-BOOST_AUTO_TEST_SUITE(json_writer)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(model)
+        BOOST_AUTO_TEST_SUITE(serializer)
+            BOOST_AUTO_TEST_SUITE(json_writer)
+                // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        const writer_type json_writer{};
-    }
+                    const writer_type json_writer{};
+                }
 
-    BOOST_AUTO_TEST_CASE(extension)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(extension)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        const writer_type json_writer{};
+                    const writer_type json_writer{};
 
-        BOOST_CHECK(json_writer.extension() == boost::filesystem::path{ TETENGO2_TEXT(".btt") });
-    }
+                    BOOST_CHECK(json_writer.extension() == boost::filesystem::path{ TETENGO2_TEXT(".btt") });
+                }
 
-    BOOST_AUTO_TEST_CASE(selects)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(selects)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        const writer_type json_writer{};
+                    const writer_type json_writer{};
 
-        BOOST_TEST(json_writer.selects(boost::filesystem::path{ TETENGO2_TEXT(".btt") }));
-        BOOST_TEST(!json_writer.selects(boost::filesystem::path{ TETENGO2_TEXT(".hoge") }));
-        BOOST_TEST(!json_writer.selects(boost::filesystem::path{}));
-    }
+                    BOOST_TEST(json_writer.selects(boost::filesystem::path{ TETENGO2_TEXT(".btt") }));
+                    BOOST_TEST(!json_writer.selects(boost::filesystem::path{ TETENGO2_TEXT(".hoge") }));
+                    BOOST_TEST(!json_writer.selects(boost::filesystem::path{}));
+                }
 
-    BOOST_AUTO_TEST_CASE(write)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(write)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        {
-            writer_type json_writer{};
+                    {
+                        writer_type json_writer{};
 
-            const timetable_type timetable{};
-            std::ostringstream stream{};
+                        const timetable_type timetable{};
+                        std::ostringstream   stream{};
 
-            json_writer.write(timetable, stream);
+                        json_writer.write(timetable, stream);
 
-            const auto result = stream.str();
-            BOOST_CHECK(result == json0);
-        }
-        {
-            writer_type json_writer{};
+                        const auto result = stream.str();
+                        BOOST_CHECK(result == json0);
+                    }
+                    {
+                        writer_type json_writer{};
 
-            const auto p_timetable = create_timetable1();
-            std::ostringstream stream{};
+                        const auto         p_timetable = create_timetable1();
+                        std::ostringstream stream{};
 
-            json_writer.write(*p_timetable, stream);
+                        json_writer.write(*p_timetable, stream);
 
-            const auto result = stream.str();
-            BOOST_CHECK(result == json1);
-        }
-    }
+                        const auto result = stream.str();
+                        BOOST_CHECK(result == json1);
+                    }
+                }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE_END()
+        BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

@@ -10,26 +10,25 @@
 #define BOBURA_MAINWINDOWTRAITS_H
 
 
-namespace bobura
-{
-     /*!
-        \brief The class template for the main window traits.
+namespace bobura {
+    /*!
+       \brief The class template for the main window traits.
 
-        \tparam String            A string type.
-        \tparam Position          A position type.
-        \tparam Dimension         A dimension type.
-        \tparam Window            A window type.
-        \tparam PictureBox        A picture box type.
-        \tparam TabFrame          A tab frame type.
-        \tparam MapBox            A map box type.
-        \tparam SideBar           A side bar type.
-        \tparam MessageLoopBreak  A message loop break type.
-        \tparam Font              A font type.
-        \tparam MouseCapture      A mouse capture type.
-        \tparam MessageCatalog    A message catalog type.
-        \tparam DiagramViewTraits A diagram view traits type.
-        \tparam LoadSaveTraits    A loading and saving processing traits type.
-    */
+       \tparam String            A string type.
+       \tparam Position          A position type.
+       \tparam Dimension         A dimension type.
+       \tparam Window            A window type.
+       \tparam PictureBox        A picture box type.
+       \tparam TabFrame          A tab frame type.
+       \tparam MapBox            A map box type.
+       \tparam SideBar           A side bar type.
+       \tparam MessageLoopBreak  A message loop break type.
+       \tparam Font              A font type.
+       \tparam MouseCapture      A mouse capture type.
+       \tparam MessageCatalog    A message catalog type.
+       \tparam DiagramViewTraits A diagram view traits type.
+       \tparam LoadSaveTraits    A loading and saving processing traits type.
+   */
     template <
         typename String,
         typename Position,
@@ -44,8 +43,7 @@ namespace bobura
         typename MouseCapture,
         typename MessageCatalog,
         typename DiagramViewTraits,
-        typename LoadSaveTraits
-    >
+        typename LoadSaveTraits>
     class main_window_traits
     {
     public:
@@ -92,11 +90,7 @@ namespace bobura
 
         //! The loading and saving processing traits type.
         using load_save_traits_type = LoadSaveTraits;
-
-
     };
-
-
 }
 
 

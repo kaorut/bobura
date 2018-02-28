@@ -16,17 +16,15 @@
 #include <boost/throw_exception.hpp>
 
 
-namespace bobura { namespace model { namespace train_info
-{
+namespace bobura { namespace model { namespace train_info {
     /*!
         \brief The class template for a time span.
 
         \tparam Difference A difference type.
     */
     template <typename Difference>
-    class time_span :
-        private boost::totally_ordered<time_span<Difference>>,
-        private boost::additive<time_span<Difference>>
+    class time_span : private boost::totally_ordered<time_span<Difference>>,
+                      private boost::additive<time_span<Difference>>
     {
     public:
         // types
@@ -48,12 +46,8 @@ namespace bobura { namespace model { namespace train_info
             hours_minutes_seconds_type(
                 const difference_type hours,
                 const difference_type minutes,
-                const difference_type seconds
-            )
-            :
-            m_hours(hours),
-            m_minutes(minutes),
-            m_seconds(seconds)
+                const difference_type seconds)
+            : m_hours(hours), m_minutes(minutes), m_seconds(seconds)
             {}
 
             /*!
@@ -67,10 +61,8 @@ namespace bobura { namespace model { namespace train_info
             */
             friend bool operator==(const hours_minutes_seconds_type& one, const hours_minutes_seconds_type& another)
             {
-                return
-                    one.m_hours == another.m_hours &&
-                    one.m_minutes == another.m_minutes &&
-                    one.m_seconds == another.m_seconds;
+                return one.m_hours == another.m_hours && one.m_minutes == another.m_minutes &&
+                       one.m_seconds == another.m_seconds;
             }
 
             /*!
@@ -78,8 +70,7 @@ namespace bobura { namespace model { namespace train_info
 
                 \return Hours.
             */
-            difference_type hours()
-            const
+            difference_type hours() const
             {
                 return m_hours;
             }
@@ -89,8 +80,7 @@ namespace bobura { namespace model { namespace train_info
 
                 \return Minutes.
             */
-            difference_type minutes()
-            const
+            difference_type minutes() const
             {
                 return m_minutes;
             }
@@ -100,8 +90,7 @@ namespace bobura { namespace model { namespace train_info
 
                 \return Seconds.
             */
-            difference_type seconds()
-            const
+            difference_type seconds() const
             {
                 return m_seconds;
             }
@@ -113,7 +102,6 @@ namespace bobura { namespace model { namespace train_info
             difference_type m_minutes;
 
             difference_type m_seconds;
-
         };
 
 
@@ -139,10 +127,7 @@ namespace bobura { namespace model { namespace train_info
 
             \param seconds A second span.
         */
-        explicit time_span(const difference_type seconds)
-        :
-        m_seconds(seconds)
-        {}
+        explicit time_span(const difference_type seconds) : m_seconds(seconds) {}
 
         /*!
             \brief Creates a time span.
@@ -158,8 +143,7 @@ namespace bobura { namespace model { namespace train_info
             \throw std::invalid_argument When the signs of the hours and the minutes and the seconds are different.
         */
         time_span(const difference_type hours, const difference_type minutes, const difference_type seconds)
-        :
-        m_seconds(calculate_seconds(hours, minutes, seconds))
+        : m_seconds(calculate_seconds(hours, minutes, seconds))
         {}
 
 
@@ -232,8 +216,7 @@ namespace bobura { namespace model { namespace train_info
 
             \return The seconds.
         */
-        difference_type seconds()
-        const
+        difference_type seconds() const
         {
             return m_seconds;
         }
@@ -243,8 +226,7 @@ namespace bobura { namespace model { namespace train_info
 
             \return The hours, minutes and seconds.
         */
-        const hours_minutes_seconds_type hours_minutes_seconds()
-        const
+        const hours_minutes_seconds_type hours_minutes_seconds() const
         {
             const difference_type hours = m_seconds / (60 * 60);
             const difference_type minutes = m_seconds / 60 - hours * 60;
@@ -257,17 +239,13 @@ namespace bobura { namespace model { namespace train_info
     private:
         // static functions
 
-        static difference_type calculate_seconds(
-            const difference_type hours,
-            const difference_type minutes,
-            const difference_type seconds
-        )
+        static difference_type
+        calculate_seconds(const difference_type hours, const difference_type minutes, const difference_type seconds)
         {
             if (!(hours >= 0 && minutes >= 0 && seconds >= 0) && !(hours <= 0 && minutes <= 0 && seconds <= 0))
             {
                 BOOST_THROW_EXCEPTION(
-                    std::invalid_argument("The signs of the hours, the minutes and the seconds are different.")
-                );
+                    std::invalid_argument("The signs of the hours, the minutes and the seconds are different."));
             }
             else if (minutes > 59)
             {
@@ -293,8 +271,6 @@ namespace bobura { namespace model { namespace train_info
         // variables
 
         difference_type m_seconds;
-
-
     };
 
 

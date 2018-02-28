@@ -15,8 +15,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     template <typename Traits, typename LoadSaveTraits>
     class new_file<Traits, LoadSaveTraits>::impl
     {
@@ -32,16 +31,12 @@ namespace bobura { namespace command
 
         // constructors and destructor
 
-        explicit impl(const new_file_type& new_file)
-        :
-        m_new_file(new_file)
-        {}
+        explicit impl(const new_file_type& new_file) : m_new_file(new_file) {}
 
 
         // functions
 
-        void execute(model_type& model, abstract_window_type& parent)
-        const
+        void execute(model_type& model, abstract_window_type& parent) const
         {
             m_new_file(model, parent);
         }
@@ -51,62 +46,50 @@ namespace bobura { namespace command
         // variables
 
         const new_file_type& m_new_file;
-
-
     };
 
 
     template <typename Traits, typename LoadSaveTraits>
     new_file<Traits, LoadSaveTraits>::new_file(const new_file_type& new_file)
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(new_file))
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(new_file))
     {}
 
     template <typename Traits, typename LoadSaveTraits>
-    new_file<Traits, LoadSaveTraits>::~new_file()
-    noexcept
+    new_file<Traits, LoadSaveTraits>::~new_file() noexcept
     {}
-    
+
     template <typename Traits, typename LoadSaveTraits>
-    void new_file<Traits, LoadSaveTraits>::execute_impl(model_type& model, abstract_window_type& parent)
-    const
+    void new_file<Traits, LoadSaveTraits>::execute_impl(model_type& model, abstract_window_type& parent) const
     {
         m_p_impl->execute(model, parent);
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
     template class new_file<
         typename application::traits_type_list_type::command_type,
-        typename application::traits_type_list_type::load_save_type
-    >;
+        typename application::traits_type_list_type::load_save_type>;
 #endif
 
     template class new_file<
-        typename test::traits_type_list_type::command_type, typename test::traits_type_list_type::load_save_type
-    >;
+        typename test::traits_type_list_type::command_type,
+        typename test::traits_type_list_type::load_save_type>;
 
 
 }}
