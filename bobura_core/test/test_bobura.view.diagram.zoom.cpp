@@ -17,8 +17,7 @@
 #include <bobura/view_picture_box.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -55,132 +54,127 @@ namespace
 
     using font_type = ui_type_list_type::fast_font_type;
 
-    using timetable_model_type =
-        bobura::timetable_model<
-            size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
-        >;
+    using timetable_model_type = bobura::
+        timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
     using diagram_view_type = bobura::diagram_view<diagram_view_traits_type>;
 
-    using zoom_type =
-        bobura::view::diagram::zoom<diagram_view_traits_type, picture_box_type, mouse_capture_type>;
+    using zoom_type = bobura::view::diagram::zoom<diagram_view_traits_type, picture_box_type, mouse_capture_type>;
 
     using scale_type = zoom_type::scale_type;
-
-
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(view)
-BOOST_AUTO_TEST_SUITE(diagram)
-BOOST_AUTO_TEST_SUITE(zoom)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(view)
+        BOOST_AUTO_TEST_SUITE(diagram)
+            BOOST_AUTO_TEST_SUITE(zoom)
+                // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        window_type parent{};
-        view_picture_box_type picture_box{ parent };
-        const timetable_model_type model{};
-        const message_catalog_type message_catalog{};
-        diagram_view_type view{ model, message_catalog };
-        const zoom_type zoom{ picture_box, view };
-    }
+                    window_type                parent{};
+                    view_picture_box_type      picture_box{ parent };
+                    const timetable_model_type model{};
+                    const message_catalog_type message_catalog{};
+                    diagram_view_type          view{ model, message_catalog };
+                    const zoom_type            zoom{ picture_box, view };
+                }
 
-    BOOST_AUTO_TEST_CASE(set_horizontal_scale)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(set_horizontal_scale)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        window_type parent{};
-        view_picture_box_type picture_box{ parent };
-        const timetable_model_type model{};
-        const message_catalog_type message_catalog{};
-        diagram_view_type view{ model, message_catalog };
-        zoom_type zoom{ picture_box, view };
+                    window_type                parent{};
+                    view_picture_box_type      picture_box{ parent };
+                    const timetable_model_type model{};
+                    const message_catalog_type message_catalog{};
+                    diagram_view_type          view{ model, message_catalog };
+                    zoom_type                  zoom{ picture_box, view };
 
-        zoom.set_horizontal_scale(scale_type{ 42 });
-    }
+                    zoom.set_horizontal_scale(scale_type{ 42 });
+                }
 
-    BOOST_AUTO_TEST_CASE(horizontally_zoom_in)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(horizontally_zoom_in)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        window_type parent{};
-        view_picture_box_type picture_box{ parent };
-        const timetable_model_type model{};
-        const message_catalog_type message_catalog{};
-        diagram_view_type view{ model, message_catalog };
-        zoom_type zoom{ picture_box, view };
+                    window_type                parent{};
+                    view_picture_box_type      picture_box{ parent };
+                    const timetable_model_type model{};
+                    const message_catalog_type message_catalog{};
+                    diagram_view_type          view{ model, message_catalog };
+                    zoom_type                  zoom{ picture_box, view };
 
-        zoom.horizontally_zoom_in(false);
-        zoom.horizontally_zoom_in(true);
-    }
+                    zoom.horizontally_zoom_in(false);
+                    zoom.horizontally_zoom_in(true);
+                }
 
-    BOOST_AUTO_TEST_CASE(horizontally_zoom_out)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(horizontally_zoom_out)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        window_type parent{};
-        view_picture_box_type picture_box{ parent };
-        const timetable_model_type model{};
-        const message_catalog_type message_catalog{};
-        diagram_view_type view{ model, message_catalog };
-        zoom_type zoom{ picture_box, view };
+                    window_type                parent{};
+                    view_picture_box_type      picture_box{ parent };
+                    const timetable_model_type model{};
+                    const message_catalog_type message_catalog{};
+                    diagram_view_type          view{ model, message_catalog };
+                    zoom_type                  zoom{ picture_box, view };
 
-        zoom.horizontally_zoom_out(false);
-        zoom.horizontally_zoom_out(true);
-    }
+                    zoom.horizontally_zoom_out(false);
+                    zoom.horizontally_zoom_out(true);
+                }
 
-    BOOST_AUTO_TEST_CASE(set_vertical_scale)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(set_vertical_scale)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        window_type parent{};
-        view_picture_box_type picture_box{ parent };
-        const timetable_model_type model{};
-        const message_catalog_type message_catalog{};
-        diagram_view_type view{ model, message_catalog };
-        zoom_type zoom{ picture_box, view };
+                    window_type                parent{};
+                    view_picture_box_type      picture_box{ parent };
+                    const timetable_model_type model{};
+                    const message_catalog_type message_catalog{};
+                    diagram_view_type          view{ model, message_catalog };
+                    zoom_type                  zoom{ picture_box, view };
 
-        zoom.set_vertical_scale(scale_type{ 42 });
-    }
+                    zoom.set_vertical_scale(scale_type{ 42 });
+                }
 
-    BOOST_AUTO_TEST_CASE(vertically_zoom_in)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(vertically_zoom_in)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        window_type parent{};
-        view_picture_box_type picture_box{ parent };
-        const timetable_model_type model{};
-        const message_catalog_type message_catalog{};
-        diagram_view_type view{ model, message_catalog };
-        zoom_type zoom{ picture_box, view };
+                    window_type                parent{};
+                    view_picture_box_type      picture_box{ parent };
+                    const timetable_model_type model{};
+                    const message_catalog_type message_catalog{};
+                    diagram_view_type          view{ model, message_catalog };
+                    zoom_type                  zoom{ picture_box, view };
 
-        zoom.vertically_zoom_in(false);
-        zoom.vertically_zoom_in(true);
-    }
+                    zoom.vertically_zoom_in(false);
+                    zoom.vertically_zoom_in(true);
+                }
 
-    BOOST_AUTO_TEST_CASE(vertically_zoom_out)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(vertically_zoom_out)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        window_type parent{};
-        view_picture_box_type picture_box{ parent };
-        const timetable_model_type model{};
-        const message_catalog_type message_catalog{};
-        diagram_view_type view{ model, message_catalog };
-        zoom_type zoom{ picture_box, view };
+                    window_type                parent{};
+                    view_picture_box_type      picture_box{ parent };
+                    const timetable_model_type model{};
+                    const message_catalog_type message_catalog{};
+                    diagram_view_type          view{ model, message_catalog };
+                    zoom_type                  zoom{ picture_box, view };
 
-        zoom.vertically_zoom_out(false);
-        zoom.vertically_zoom_out(true);
-    }
+                    zoom.vertically_zoom_out(false);
+                    zoom.vertically_zoom_out(true);
+                }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE_END()
+        BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

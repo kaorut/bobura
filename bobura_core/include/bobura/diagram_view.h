@@ -13,18 +13,17 @@
 
 #include <boost/core/noncopyable.hpp>
 
+#include <bobura/timetable_model.h>
 #include <bobura/view/diagram/item.h>
 #include <bobura/view/diagram/selection.h>
-#include <bobura/timetable_model.h>
 
 
-namespace bobura
-{
-   /*!
-        \brief The class template for a diagram view.
+namespace bobura {
+    /*!
+         \brief The class template for a diagram view.
 
-        \tparam Traits A traits type.
-    */
+         \tparam Traits A traits type.
+     */
     template <typename Traits>
     class diagram_view : private boost::noncopyable
     {
@@ -94,8 +93,7 @@ namespace bobura
         /*!
             \brief Destroys the diagram view.
         */
-        ~diagram_view()
-        noexcept;
+        ~diagram_view() noexcept;
 
 
         // functions
@@ -107,19 +105,15 @@ namespace bobura
             \param canvas_dimension    A canvas dimension.
             \param scroll_bar_position A scroll bar position.
         */
-        void draw_on(
-            canvas_type&          canvas,
-            const dimension_type& canvas_dimension,
-            const position_type&  scroll_bar_position
-        );
+        void
+        draw_on(canvas_type& canvas, const dimension_type& canvas_dimension, const position_type& scroll_bar_position);
 
         /*!
             \brief Returns the horizontal scale.
 
             \return The horizontal scale.
         */
-        const scale_type& horizontal_scale()
-        const;
+        const scale_type& horizontal_scale() const;
 
         /*!
             \brief Sets a horizontal scale.
@@ -133,8 +127,7 @@ namespace bobura
 
             \return The vertical scale.
         */
-        const scale_type& vertical_scale()
-        const;
+        const scale_type& vertical_scale() const;
 
         /*!
             \brief Sets a vertical scale.
@@ -148,8 +141,7 @@ namespace bobura
 
             \return The dimension.
         */
-        const dimension_type& dimension()
-        const;
+        const dimension_type& dimension() const;
 
         /*!
             \brief Update the dimension.
@@ -163,8 +155,7 @@ namespace bobura
 
             \return The page size.
         */
-        dimension_type page_size(const dimension_type& canvas_dimension)
-        const;
+        dimension_type page_size(const dimension_type& canvas_dimension) const;
 
         /*!
             \brief Returns a ponter to the item by the position.
@@ -176,8 +167,7 @@ namespace bobura
 
             \return A pointer to the item.
         */
-        const item_type* p_item_by_position(const position_type& position)
-        const;
+        const item_type* p_item_by_position(const position_type& position) const;
 
         /*!
             \brief Returns a ponter to the item by the position.
@@ -201,8 +191,7 @@ namespace bobura
 
             \return The selection observer set.
         */
-        const selection_observer_set_type& selection_observer_set()
-        const;
+        const selection_observer_set_type& selection_observer_set() const;
 
         /*!
             \brief Returns the selection observer set.
@@ -221,11 +210,7 @@ namespace bobura
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
-
-
 }
 
 

@@ -29,8 +29,7 @@
 #include <bobura/type_list.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_application;
@@ -70,7 +69,7 @@ namespace
 
     std::string ui_locale_name()
     {
-        const auto language_id = ::GetUserDefaultLangID();
+        const auto   language_id = ::GetUserDefaultLangID();
         const ::LCID locale_id = MAKELCID(language_id, SORT_DEFAULT);
 
         return locale_info(locale_id, LOCALE_SENGLANGUAGE) + "_" + locale_info(locale_id, LOCALE_SENGCOUNTRY);
@@ -78,10 +77,8 @@ namespace
 
     void set_locale(const boost::filesystem::path& message_directory_path)
     {
-        auto p_messages_facet =
-            tetengo2::stdalt::make_unique<tetengo2::message::messages>(
-                message_directory_path, std::locale(ui_locale_name().c_str())
-            );
+        auto p_messages_facet = tetengo2::stdalt::make_unique<tetengo2::message::messages>(
+            message_directory_path, std::locale(ui_locale_name().c_str()));
         const std::locale global_locale{ std::locale(""), p_messages_facet.release() };
 
         std::locale::global(global_locale);
@@ -91,8 +88,6 @@ namespace
     {
         return application_type(settings, detail_impl_set_type::instance()).run();
     }
-
-
 }
 
 
@@ -110,9 +105,7 @@ int WINAPI wWinMain(
     const ::HINSTANCE hInstance,
     const ::HINSTANCE hPrevInstance,
     const ::LPWSTR    lpCmdLine,
-    const int         nCmdShow
-)
-noexcept
+    const int         nCmdShow) noexcept
 {
     boost::ignore_unused(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 
@@ -120,9 +113,8 @@ noexcept
 
     try
     {
-        settings_type settings{
-            boost::program_options::split_winmain(::GetCommandLineW()), string_type{ TETENGO2_TEXT("bobura") }
-        };
+        settings_type settings{ boost::program_options::split_winmain(::GetCommandLineW()),
+                                string_type{ TETENGO2_TEXT("bobura") } };
 
         set_locale(settings.message_directory_path());
 

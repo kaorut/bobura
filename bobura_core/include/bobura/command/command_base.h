@@ -14,8 +14,7 @@
 #include <bobura/timetable_model.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     /*!
         \brief The command parameter base type.
     */
@@ -27,9 +26,7 @@ namespace bobura { namespace command
         /*!
             \brief Destroys the command parameter base.
         */
-        virtual ~parameter_base()
-        noexcept
-        = 0;
+        virtual ~parameter_base() noexcept = 0;
 
 
         // functions
@@ -42,8 +39,7 @@ namespace bobura { namespace command
             \return The derived instance.
         */
         template <typename D>
-        const D& as()
-        const
+        const D& as() const
         {
             return dynamic_cast<const D&>(*this);
         }
@@ -69,8 +65,6 @@ namespace bobura { namespace command
             \brief Creates a command parameter base.
         */
         parameter_base();
-
-
     };
 
 
@@ -120,7 +114,7 @@ namespace bobura { namespace command
         enum class state_type
         {
             default_, //!< Default state.
-            checked,  //!< Checked state.
+            checked, //!< Checked state.
             selected, //!< Selected state.
         };
 
@@ -130,8 +124,7 @@ namespace bobura { namespace command
         /*!
             \brief Destroys the command base.
         */
-        virtual ~command_base()
-        noexcept;
+        virtual ~command_base() noexcept;
 
 
         // functions
@@ -144,16 +137,14 @@ namespace bobura { namespace command
             \retval true  When the command is enabled.
             \retval false Otherwise.
         */
-        bool enabled(const model_type& model)
-        const;
+        bool enabled(const model_type& model) const;
 
         /*!
             \brief Returns the state.
 
             \return The state.
         */
-        state_type state()
-        const;
+        state_type state() const;
 
         /*!
             \brief Executes the command.
@@ -161,8 +152,7 @@ namespace bobura { namespace command
             \param model  A model.
             \param parent A parent window.
         */
-        void execute(model_type& model, abstract_window_type& parent)
-        const;
+        void execute(model_type& model, abstract_window_type& parent) const;
 
         /*!
             \brief Executes the command.
@@ -171,26 +161,20 @@ namespace bobura { namespace command
             \param parent    A parent window.
             \param parameter A parameter.
         */
-        void execute(model_type& model, abstract_window_type& parent, const parameter_base& parameter)
-        const;
+        void execute(model_type& model, abstract_window_type& parent, const parameter_base& parameter) const;
 
 
     private:
         // virtual functions
 
-        virtual bool enabled_impl(const model_type& model)
-        const;
+        virtual bool enabled_impl(const model_type& model) const;
 
-        virtual state_type state_impl()
-        const;
+        virtual state_type state_impl() const;
 
-        virtual void execute_impl(model_type& model, abstract_window_type& parent)
-        const = 0;
+        virtual void execute_impl(model_type& model, abstract_window_type& parent) const = 0;
 
-        virtual void execute_impl(model_type& model, abstract_window_type& parent, const parameter_base& parameter)
-        const;
-
-
+        virtual void
+        execute_impl(model_type& model, abstract_window_type& parent, const parameter_base& parameter) const;
     };
 
 

@@ -20,15 +20,13 @@
 #include <bobura/view/diagram/zoom.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     template <
         typename Traits,
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename DiagramViewTraits
-    >
+        typename DiagramViewTraits>
     class set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::impl
     {
     public:
@@ -55,23 +53,17 @@ namespace bobura { namespace command
 
         // constructors and destructor
 
-        impl(diagram_view_type& diagram_view, const scale_type& scale)
-        :
-        m_diagram_view(diagram_view),
-        m_scale(scale)
-        {}
+        impl(diagram_view_type& diagram_view, const scale_type& scale) : m_diagram_view(diagram_view), m_scale(scale) {}
 
 
         // functions
 
-        state_type state()
-        const
+        state_type state() const
         {
             return m_scale == m_diagram_view.vertical_scale() ? state_type::selected : state_type::default_;
         }
 
-        void execute(model_type& model, abstract_window_type& parent)
-        const
+        void execute(model_type& model, abstract_window_type& parent) const
         {
             boost::ignore_unused(model);
 
@@ -88,10 +80,8 @@ namespace bobura { namespace command
 
         using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
 
-        using zoom_type =
-            view::diagram::zoom<
-                diagram_view_traits_type, typename main_window_traits_type::picture_box_type, mouse_capture_type
-            >;
+        using zoom_type = view::diagram::
+            zoom<diagram_view_traits_type, typename main_window_traits_type::picture_box_type, mouse_capture_type>;
 
 
         // variables
@@ -99,8 +89,6 @@ namespace bobura { namespace command
         diagram_view_type& m_diagram_view;
 
         scale_type m_scale;
-
-
     };
 
 
@@ -109,14 +97,11 @@ namespace bobura { namespace command
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename DiagramViewTraits
-    >
+        typename DiagramViewTraits>
     set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::set_vertical_scale(
         diagram_view_type& diagram_view,
-        const scale_type&  scale
-    )
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(diagram_view, scale))
+        const scale_type&  scale)
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(diagram_view, scale))
     {}
 
     template <
@@ -124,22 +109,19 @@ namespace bobura { namespace command
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename DiagramViewTraits
-    >
-    set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::~set_vertical_scale()
-    noexcept
+        typename DiagramViewTraits>
+    set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::
+        ~set_vertical_scale() noexcept
     {}
-    
+
     template <
         typename Traits,
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename DiagramViewTraits
-    >
+        typename DiagramViewTraits>
     typename set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::state_type
-    set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::state_impl()
-    const
+    set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::state_impl() const
     {
         return m_p_impl->state();
     }
@@ -149,42 +131,33 @@ namespace bobura { namespace command
         typename Scale,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename DiagramViewTraits
-    >
+        typename DiagramViewTraits>
     void set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::execute_impl(
         model_type&           model,
-        abstract_window_type& parent
-    )
-    const
+        abstract_window_type& parent) const
     {
         m_p_impl->execute(model, parent);
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using common_type_list_type = type_list::common;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using common_type_list_type = type_list::common;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -193,8 +166,7 @@ namespace bobura { namespace command
         typename application::common_type_list_type::scale_type,
         typename application::traits_type_list_type::command_set_type,
         typename application::traits_type_list_type::main_window_type,
-        typename application::traits_type_list_type::diagram_view_type
-    >;
+        typename application::traits_type_list_type::diagram_view_type>;
 #endif
 
     template class set_vertical_scale<
@@ -202,8 +174,7 @@ namespace bobura { namespace command
         typename test::common_type_list_type::scale_type,
         typename test::traits_type_list_type::command_set_type,
         typename test::traits_type_list_type::main_window_type,
-        typename test::traits_type_list_type::diagram_view_type
-    >;
+        typename test::traits_type_list_type::diagram_view_type>;
 
 
 }}

@@ -17,8 +17,7 @@
 #include <bobura/timetable_model.h>
 
 
-namespace bobura { namespace load_save
-{
+namespace bobura { namespace load_save {
     /*!
         \brief The class template for the file save confirmation.
 
@@ -77,14 +76,12 @@ namespace bobura { namespace load_save
         confirm_file_save(
             model_type&                 model,
             const save_to_file_type&    save_to_file,
-            const message_catalog_type& message_catalog
-        );
+            const message_catalog_type& message_catalog);
 
         /*!
             \brief Destroys the file save confirmation.
         */
-        ~confirm_file_save()
-        noexcept;
+        ~confirm_file_save() noexcept;
 
 
         // functions
@@ -97,8 +94,7 @@ namespace bobura { namespace load_save
             \retval true  When the model is saved or there is no need to save it.
             \retval false Otherwise.
         */
-        bool operator()(abstract_window_type& parent)
-        const;
+        bool operator()(abstract_window_type& parent) const;
 
 
     private:
@@ -110,8 +106,6 @@ namespace bobura { namespace load_save
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
 
 

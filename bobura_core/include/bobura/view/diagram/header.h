@@ -16,8 +16,7 @@
 #include <bobura/view/diagram/selection.h>
 
 
-namespace bobura { namespace view { namespace diagram
-{
+namespace bobura { namespace view { namespace diagram {
     /*!
         \brief The class template for a header of the company name in the diagram view.
 
@@ -72,8 +71,7 @@ namespace bobura { namespace view { namespace diagram
             const font_type&  font,
             const color_type& color,
             position_type     position,
-            dimension_type    dimension
-        );
+            dimension_type    dimension);
 
         /*!
             \brief Moves a company name header.
@@ -85,8 +83,7 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys the company name header.
         */
-        virtual ~company_name_header()
-        noexcept;
+        virtual ~company_name_header() noexcept;
 
 
         // functions
@@ -116,10 +113,7 @@ namespace bobura { namespace view { namespace diagram
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 
@@ -177,8 +171,7 @@ namespace bobura { namespace view { namespace diagram
             const font_type&  font,
             const color_type& color,
             position_type     position,
-            dimension_type    dimension
-        );
+            dimension_type    dimension);
 
         /*!
             \brief Moves a line name header.
@@ -190,8 +183,7 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys the line name header.
         */
-        virtual ~line_name_header()
-        noexcept;
+        virtual ~line_name_header() noexcept;
 
 
         // functions
@@ -221,10 +213,7 @@ namespace bobura { namespace view { namespace diagram
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 
@@ -282,8 +271,7 @@ namespace bobura { namespace view { namespace diagram
             const font_type&  font,
             const color_type& color,
             position_type     position,
-            dimension_type    dimension
-        );
+            dimension_type    dimension);
 
         /*!
             \brief Moves a note header.
@@ -295,8 +283,7 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys the note header.
         */
-        virtual ~note_header()
-        noexcept;
+        virtual ~note_header() noexcept;
 
 
         // functions
@@ -326,10 +313,7 @@ namespace bobura { namespace view { namespace diagram
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 
@@ -393,8 +377,7 @@ namespace bobura { namespace view { namespace diagram
             const model_type&     model,
             selection_type&       selection,
             canvas_type&          canvas,
-            const dimension_type& canvas_dimension
-        );
+            const dimension_type& canvas_dimension);
 
         /*!
             \brief Moves a header.
@@ -406,8 +389,7 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys the header.
         */
-        virtual ~header()
-        noexcept;
+        virtual ~header() noexcept;
 
 
         // functions
@@ -426,8 +408,7 @@ namespace bobura { namespace view { namespace diagram
 
             \return The dimension.
         */
-        const dimension_type& dimension()
-        const;
+        const dimension_type& dimension() const;
 
 
     private:
@@ -445,10 +426,7 @@ namespace bobura { namespace view { namespace diagram
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 

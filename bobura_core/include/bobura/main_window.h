@@ -18,15 +18,13 @@
 #include <bobura/settings.h>
 #include <bobura/view_picture_box.h>
 
-namespace boost
-{
+namespace boost {
     template <typename T>
     class optional;
 }
 
 
-namespace bobura
-{
+namespace bobura {
     /*!
         \brief The class template for the main window.
 
@@ -94,17 +92,15 @@ namespace bobura
         using view_picture_box_type = view_picture_box<picture_box_type, mouse_capture_type>;
 
         //! The property bar type.
-        using property_bar_type =
-            property_bar<
-                string_type,
-                position_type,
-                dimension_type,
-                abstract_window_type,
-                side_bar_type,
-                map_box_type,
-                message_catalog_type
-            >;
-        
+        using property_bar_type = property_bar<
+            string_type,
+            position_type,
+            dimension_type,
+            abstract_window_type,
+            side_bar_type,
+            map_box_type,
+            message_catalog_type>;
+
         //! The settings type.
         using settings_type = settings<string_type, position_type, dimension_type>;
 
@@ -129,14 +125,12 @@ namespace bobura
             const message_catalog_type&   message_catalog,
             settings_type&                settings,
             const confirm_file_save_type& confirm_file_save,
-            const detail_impl_set_type&   detail_impl_set
-        );
+            const detail_impl_set_type&   detail_impl_set);
 
         /*!
             \brief Destroys the main window.
         */
-        virtual ~main_window()
-        noexcept;
+        virtual ~main_window() noexcept;
 
 
         // functions
@@ -154,8 +148,7 @@ namespace bobura
 
             \return The tab frame.
         */
-        const tab_frame_type& get_tab_frame()
-        const;
+        const tab_frame_type& get_tab_frame() const;
 
         /*!
             \brief Returns the tab frame.
@@ -169,8 +162,7 @@ namespace bobura
 
             \return The diagram view picture box.
         */
-        const view_picture_box_type& get_diagram_view_picture_box()
-        const;
+        const view_picture_box_type& get_diagram_view_picture_box() const;
 
         /*!
             \brief Shows the diagram tab.
@@ -199,8 +191,7 @@ namespace bobura
 
             \return The timetable down view picture box.
         */
-        const view_picture_box_type& get_timetable_down_view_picture_box()
-        const;
+        const view_picture_box_type& get_timetable_down_view_picture_box() const;
 
         /*!
             \brief Returns the timetable down view picture box.
@@ -214,8 +205,7 @@ namespace bobura
 
             \return The timetable up view picture box.
         */
-        const view_picture_box_type& get_timetable_up_view_picture_box()
-        const;
+        const view_picture_box_type& get_timetable_up_view_picture_box() const;
 
         /*!
             \brief Returns the timetable up view picture box.
@@ -229,8 +219,7 @@ namespace bobura
 
             \return The property bar.
         */
-        const property_bar_type& get_property_bar()
-        const;
+        const property_bar_type& get_property_bar() const;
 
         /*!
             \brief Returns the property bar.
@@ -249,11 +238,7 @@ namespace bobura
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
-
-
 }
 
 #endif

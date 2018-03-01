@@ -26,8 +26,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     template <
         typename Size,
         typename Difference,
@@ -35,10 +34,9 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
-    class bzip2_writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::impl :
-        private boost::noncopyable
+        typename Font>
+    class bzip2_writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::impl
+    : private boost::noncopyable
     {
     public:
         // types
@@ -52,19 +50,15 @@ namespace bobura { namespace model { namespace serializer
 
         // constructors and destructor
 
-        explicit impl(std::unique_ptr<base_type> p_writer)
-        :
-        m_p_writer(std::move(p_writer)) 
-        {}
+        explicit impl(std::unique_ptr<base_type> p_writer) : m_p_writer(std::move(p_writer)) {}
 
 
         // functions
 
-        boost::filesystem::path extension_impl()
-        const
+        boost::filesystem::path extension_impl() const
         {
-            return
-                boost::filesystem::path(m_p_writer->extension().native() +
+            return boost::filesystem::path(
+                m_p_writer->extension().native() +
                 typename boost::filesystem::path::string_type{ TETENGO2_TEXT("_bz2") });
         }
 
@@ -82,8 +76,6 @@ namespace bobura { namespace model { namespace serializer
         // variables
 
         const std::unique_ptr<base_type> m_p_writer;
-
-
     };
 
 
@@ -94,14 +86,10 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     bzip2_writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::bzip2_writer(
-        std::unique_ptr<base_type> p_writer
-    )
-    :
-    base_type(),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(p_writer))) 
+        std::unique_ptr<base_type> p_writer)
+    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(p_writer)))
     {}
 
     template <
@@ -111,10 +99,8 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
-    bzip2_writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::~bzip2_writer()
-    noexcept
+        typename Font>
+    bzip2_writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::~bzip2_writer() noexcept
     {}
 
     template <
@@ -124,11 +110,9 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     boost::filesystem::path
-    bzip2_writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::extension_impl()
-    const
+    bzip2_writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::extension_impl() const
     {
         return m_p_impl->extension_impl();
     }
@@ -140,41 +124,33 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     void bzip2_writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::write_impl(
         const timetable_type& timetable,
-        output_stream_type&   output_stream
-    )
+        output_stream_type&   output_stream)
     {
         m_p_impl->write_impl(timetable, output_stream);
     }
 
 
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using common_type_list_type = type_list::common;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using common_type_list_type = type_list::common;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -185,8 +161,7 @@ namespace bobura { namespace model { namespace serializer
         typename application::common_type_list_type::output_stream_type,
         typename application::common_type_list_type::operating_distance_type,
         typename application::common_type_list_type::speed_type,
-        typename application::ui_type_list_type::fast_font_type
-    >;
+        typename application::ui_type_list_type::fast_font_type>;
 #endif
 
     template class bzip2_writer<
@@ -196,8 +171,7 @@ namespace bobura { namespace model { namespace serializer
         typename test::common_type_list_type::output_stream_type,
         typename test::common_type_list_type::operating_distance_type,
         typename test::common_type_list_type::speed_type,
-        typename test::ui_type_list_type::font_type
-    >;
+        typename test::ui_type_list_type::font_type>;
 
 
 }}}

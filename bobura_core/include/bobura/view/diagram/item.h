@@ -16,13 +16,12 @@
 #include <bobura/view/diagram/selection.h>
 
 
-namespace bobura { namespace view { namespace diagram
-{
-     /*!
-        \brief The class template for the diagram view item.
+namespace bobura { namespace view { namespace diagram {
+    /*!
+       \brief The class template for the diagram view item.
 
-        \tparam Traits A traits type.
-    */
+       \tparam Traits A traits type.
+   */
     template <typename Traits>
     class item : private boost::noncopyable
     {
@@ -54,8 +53,7 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys the item.
         */
-        virtual ~item()
-        noexcept;
+        virtual ~item() noexcept;
 
 
         // functions
@@ -74,8 +72,7 @@ namespace bobura { namespace view { namespace diagram
 
             \param canvas A canvas.
         */
-        void draw_on(canvas_type& canvas)
-        const;
+        void draw_on(canvas_type& canvas) const;
 
         /*!
             \brief Returns a ponter to the item by the position.
@@ -99,16 +96,14 @@ namespace bobura { namespace view { namespace diagram
 
             \return A pointer to the item.
         */
-        const item* p_item_by_position(const position_type& position)
-        const;
+        const item* p_item_by_position(const position_type& position) const;
 
         /*!
             \brief Returns the selection.
 
             \return The selection.
         */
-        const selection_type& get_selection()
-        const;
+        const selection_type& get_selection() const;
 
         /*!
             \brief Returns the selection.
@@ -122,8 +117,7 @@ namespace bobura { namespace view { namespace diagram
 
             \return The selected status.
         */
-        bool selected()
-        const;
+        bool selected() const;
 
         /*!
             \brief Selects this item.
@@ -146,17 +140,13 @@ namespace bobura { namespace view { namespace diagram
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const;
+        virtual void draw_on_impl(canvas_type& canvas) const;
 
         virtual item* p_item_by_position_impl(const position_type& position);
 
-        virtual bool selected_impl()
-        const;
+        virtual bool selected_impl() const;
 
         virtual void select_impl(bool switch_selection_style);
-
-
     };
 
 

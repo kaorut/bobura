@@ -16,8 +16,7 @@
 #include <bobura/model/timetable.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     /*!
         \brief The class template for a reader.
 
@@ -36,8 +35,7 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     class reader : private boost::noncopyable
     {
     public:
@@ -71,9 +69,9 @@ namespace bobura { namespace model { namespace serializer
         //! The error type.
         enum class error_type
         {
-            none,        //!< No error.
-            canceled,    //!< Canceled.
-            corrupted,   //!< Corrupted data.
+            none, //!< No error.
+            canceled, //!< Canceled.
+            corrupted, //!< Corrupted data.
             unsupported, //!< Unsupported format.
         };
 
@@ -83,8 +81,7 @@ namespace bobura { namespace model { namespace serializer
         /*!
             \brief Destroys the reader.
         */
-        virtual ~reader()
-        noexcept;
+        virtual ~reader() noexcept;
 
 
         // functions
@@ -126,13 +123,9 @@ namespace bobura { namespace model { namespace serializer
     private:
         // virtual functions
 
-        virtual bool selects_impl(iterator first, iterator last)
-        = 0;
+        virtual bool selects_impl(iterator first, iterator last) = 0;
 
-        virtual std::unique_ptr<timetable_type> read_impl(iterator first, iterator last, error_type& error)
-        = 0;
-
-
+        virtual std::unique_ptr<timetable_type> read_impl(iterator first, iterator last, error_type& error) = 0;
     };
 
 

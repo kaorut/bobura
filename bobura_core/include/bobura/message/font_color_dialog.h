@@ -19,8 +19,7 @@
 #include <tetengo2/text.h>
 
 
-namespace bobura { namespace message { namespace font_color_dialog
-{
+namespace bobura { namespace message { namespace font_color_dialog {
     /*!
         \brief The class template for a selection change observer of the category list box.
 
@@ -40,7 +39,7 @@ namespace bobura { namespace message { namespace font_color_dialog
         using list_box_type = ListBox;
 
         //! The update type.
-        using update_type = std::function<void ()>;
+        using update_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -55,12 +54,8 @@ namespace bobura { namespace message { namespace font_color_dialog
         category_list_box_selection_changed(
             boost::optional<size_type>& current_category_index,
             const list_box_type&        list_box,
-            const update_type           update
-        )
-        :
-        m_current_category_index(current_category_index),
-        m_list_box(list_box),
-        m_update(update)
+            const update_type           update)
+        : m_current_category_index(current_category_index), m_list_box(list_box), m_update(update)
         {}
 
 
@@ -69,8 +64,7 @@ namespace bobura { namespace message { namespace font_color_dialog
         /*!
             \brief Called when the selection of the category list box is changed.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             m_current_category_index = m_list_box.selected_value_index();
             m_update();
@@ -85,8 +79,6 @@ namespace bobura { namespace message { namespace font_color_dialog
         const list_box_type& m_list_box;
 
         update_type m_update;
-
-
     };
 
 
@@ -140,13 +132,9 @@ namespace bobura { namespace message { namespace font_color_dialog
             const std::vector<font_color_type>&   font_color_list,
             const boost::optional<int_size_type>& current_category_index,
             const dimension_type&                 canvas_dimension,
-            const message_catalog_type&           message_catalog
-        )
-        :
-        m_font_color_list(font_color_list),
-        m_current_category_index(current_category_index),
-        m_canvas_dimension(canvas_dimension),
-        m_message_catalog(message_catalog)
+            const message_catalog_type&           message_catalog)
+        : m_font_color_list(font_color_list), m_current_category_index(current_category_index),
+          m_canvas_dimension(canvas_dimension), m_message_catalog(message_catalog)
         {}
 
 
@@ -157,20 +145,16 @@ namespace bobura { namespace message { namespace font_color_dialog
 
             \param canvas A canvas.
         */
-        void operator()(canvas_type& canvas)
-        const
+        void operator()(canvas_type& canvas) const
         {
-            const position_type diagram_part_position{};
+            const position_type  diagram_part_position{};
             const dimension_type diagram_part_dimension{ m_canvas_dimension.width() / 2, m_canvas_dimension.height() };
             draw_diagram_part(canvas, diagram_part_position, diagram_part_dimension);
 
-            const position_type timetable_part_position{
-                position_unit_type::from(m_canvas_dimension.width() / 2),
-                position_unit_type{}
-            };
-            const dimension_type timetable_part_dimension{
-                m_canvas_dimension.width() / 2, m_canvas_dimension.height()
-            };
+            const position_type  timetable_part_position{ position_unit_type::from(m_canvas_dimension.width() / 2),
+                                                         position_unit_type{} };
+            const dimension_type timetable_part_dimension{ m_canvas_dimension.width() / 2,
+                                                           m_canvas_dimension.height() };
             draw_timetable_part(canvas, timetable_part_position, timetable_part_dimension);
         }
 
@@ -206,8 +190,8 @@ namespace bobura { namespace message { namespace font_color_dialog
 
         // functions
 
-        void draw_diagram_part(canvas_type& canvas, const position_type& position, const dimension_type& dimension)
-        const
+        void
+        draw_diagram_part(canvas_type& canvas, const position_type& position, const dimension_type& dimension) const
         {
             draw_sample(
                 canvas,
@@ -215,12 +199,11 @@ namespace bobura { namespace message { namespace font_color_dialog
                 dimension,
                 [](const font_color_type& fc) -> const boost::optional<font_type>& { return fc.diagram_font(); },
                 [](const font_color_type& fc) -> const boost::optional<color_type>& { return fc.diagram_color(); },
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Diagram"))
-            );
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Diagram")));
         }
 
-        void draw_timetable_part(canvas_type& canvas, const position_type& position, const dimension_type& dimension)
-        const
+        void
+        draw_timetable_part(canvas_type& canvas, const position_type& position, const dimension_type& dimension) const
         {
             draw_sample(
                 canvas,
@@ -228,31 +211,24 @@ namespace bobura { namespace message { namespace font_color_dialog
                 dimension,
                 [](const font_color_type& fc) -> const boost::optional<font_type>& { return fc.timetable_font(); },
                 [](const font_color_type& fc) -> const boost::optional<color_type>& { return fc.timetable_color(); },
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Timetable"))
-            );
+                m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Timetable")));
         }
 
         void draw_sample(
-            canvas_type&                                                                      canvas,
-            const position_type&                                                              position,
-            const dimension_type&                                                             dimension,
-            const std::function<const boost::optional<font_type>& (const font_color_type&)>&  get_font,
-            const std::function<const boost::optional<color_type>& (const font_color_type&)>& get_color,
-            const string_type&                                                                text
-        )
-        const
+            canvas_type&                                                                     canvas,
+            const position_type&                                                             position,
+            const dimension_type&                                                            dimension,
+            const std::function<const boost::optional<font_type>&(const font_color_type&)>&  get_font,
+            const std::function<const boost::optional<color_type>&(const font_color_type&)>& get_color,
+            const string_type&                                                               text) const
         {
             assert(get_color(m_font_color_list[0]));
-            auto p_background =
-                tetengo2::stdalt::make_unique<solid_background_type>(*get_color(m_font_color_list[0]));
+            auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(*get_color(m_font_color_list[0]));
             canvas.set_background(std::move(p_background));
             canvas.fill_rectangle(position, dimension);
 
-            if (
-                !m_current_category_index ||
-                *m_current_category_index == 0 ||
-                *m_current_category_index >= m_font_color_list.size()
-            )
+            if (!m_current_category_index || *m_current_category_index == 0 ||
+                *m_current_category_index >= m_font_color_list.size())
             {
                 return;
             }
@@ -266,16 +242,15 @@ namespace bobura { namespace message { namespace font_color_dialog
             {
                 canvas.set_font(*font);
 
-                const position_type text_position{
-                    position.left() + position_unit_type{ 1 }, sample_text_top(canvas, position, dimension, text)
-                };
+                const position_type text_position{ position.left() + position_unit_type{ 1 },
+                                                   sample_text_top(canvas, position, dimension, text) };
                 canvas.draw_text(text, text_position);
             }
             else
             {
                 canvas.set_line_width(dimension_unit_type{ 1 } / 12);
 
-                const auto line_top = position.top() + position_unit_type::from(dimension.height()) / 2;
+                const auto          line_top = position.top() + position_unit_type::from(dimension.height()) / 2;
                 const position_type line_from{ position.left(), line_top };
                 const position_type line_to{ position.left() + position_unit_type::from(dimension.width()), line_top };
                 canvas.draw_line(line_from, line_to);
@@ -286,9 +261,7 @@ namespace bobura { namespace message { namespace font_color_dialog
             const canvas_type&    canvas,
             const position_type&  base_position,
             const dimension_type& base_dimension,
-            const string_type&    text
-        )
-        const
+            const string_type&    text) const
         {
             const auto& base_top = base_position.top();
             const auto& base_height = base_dimension.height();
@@ -299,8 +272,6 @@ namespace bobura { namespace message { namespace font_color_dialog
             else
                 return position_unit_type{};
         }
-
-
     };
 
 
@@ -320,8 +291,7 @@ namespace bobura { namespace message { namespace font_color_dialog
         typename FontDialog,
         typename Canvas,
         typename FontColor,
-        typename MessageCatalog
-    >
+        typename MessageCatalog>
     class diagram_font_button_mouse_clicked
     {
     public:
@@ -352,7 +322,7 @@ namespace bobura { namespace message { namespace font_color_dialog
         using message_catalog_type = MessageCatalog;
 
         //! The update type.
-        using update_type = std::function<void ()>;
+        using update_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -371,14 +341,9 @@ namespace bobura { namespace message { namespace font_color_dialog
             std::vector<font_color_type>&     font_color_list,
             const boost::optional<size_type>& current_category_index,
             const update_type                 update,
-            const message_catalog_type&       message_catalog
-        )
-        :
-        m_dialog(dialog),
-        m_font_color_list(font_color_list),
-        m_current_category_index(current_category_index),
-        m_update(update),
-        m_message_catalog(message_catalog)
+            const message_catalog_type&       message_catalog)
+        : m_dialog(dialog), m_font_color_list(font_color_list), m_current_category_index(current_category_index),
+          m_update(update), m_message_catalog(message_catalog)
         {}
 
 
@@ -416,8 +381,6 @@ namespace bobura { namespace message { namespace font_color_dialog
         update_type m_update;
 
         const message_catalog_type& m_message_catalog;
-
-
     };
 
 
@@ -437,8 +400,7 @@ namespace bobura { namespace message { namespace font_color_dialog
         typename ColorDialog,
         typename Canvas,
         typename FontColor,
-        typename MessageCatalog
-    >
+        typename MessageCatalog>
     class diagram_color_button_mouse_clicked
     {
     public:
@@ -469,7 +431,7 @@ namespace bobura { namespace message { namespace font_color_dialog
         using message_catalog_type = MessageCatalog;
 
         //! The update type.
-        using update_type = std::function<void ()>;
+        using update_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -488,14 +450,9 @@ namespace bobura { namespace message { namespace font_color_dialog
             std::vector<font_color_type>&     font_color_list,
             const boost::optional<size_type>& current_category_index,
             const update_type                 update,
-            const message_catalog_type&       message_catalog
-        )
-        :
-        m_dialog(dialog),
-        m_font_color_list(font_color_list),
-        m_current_category_index(current_category_index),
-        m_update(update),
-        m_message_catalog(message_catalog)
+            const message_catalog_type&       message_catalog)
+        : m_dialog(dialog), m_font_color_list(font_color_list), m_current_category_index(current_category_index),
+          m_update(update), m_message_catalog(message_catalog)
         {}
 
 
@@ -533,8 +490,6 @@ namespace bobura { namespace message { namespace font_color_dialog
         update_type m_update;
 
         const message_catalog_type& m_message_catalog;
-
-
     };
 
 
@@ -554,8 +509,7 @@ namespace bobura { namespace message { namespace font_color_dialog
         typename FontDialog,
         typename Canvas,
         typename FontColor,
-        typename MessageCatalog
-    >
+        typename MessageCatalog>
     class timetable_font_button_mouse_clicked
     {
     public:
@@ -586,7 +540,7 @@ namespace bobura { namespace message { namespace font_color_dialog
         using message_catalog_type = MessageCatalog;
 
         //! The update type.
-        using update_type = std::function<void ()>;
+        using update_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -605,14 +559,9 @@ namespace bobura { namespace message { namespace font_color_dialog
             std::vector<font_color_type>&     font_color_list,
             const boost::optional<size_type>& current_category_index,
             const update_type                 update,
-            const message_catalog_type&       message_catalog
-        )
-        :
-        m_dialog(dialog),
-        m_font_color_list(font_color_list),
-        m_current_category_index(current_category_index),
-        m_update(update),
-        m_message_catalog(message_catalog)
+            const message_catalog_type&       message_catalog)
+        : m_dialog(dialog), m_font_color_list(font_color_list), m_current_category_index(current_category_index),
+          m_update(update), m_message_catalog(message_catalog)
         {}
 
 
@@ -632,9 +581,7 @@ namespace bobura { namespace message { namespace font_color_dialog
             if (!ok)
                 return;
 
-            m_font_color_list[*m_current_category_index].set_timetable_font(
-                boost::make_optional(font_dialog.result())
-            );
+            m_font_color_list[*m_current_category_index].set_timetable_font(boost::make_optional(font_dialog.result()));
 
             m_update();
         }
@@ -652,8 +599,6 @@ namespace bobura { namespace message { namespace font_color_dialog
         update_type m_update;
 
         const message_catalog_type& m_message_catalog;
-
-
     };
 
 
@@ -673,8 +618,7 @@ namespace bobura { namespace message { namespace font_color_dialog
         typename ColorDialog,
         typename Canvas,
         typename FontColor,
-        typename MessageCatalog
-    >
+        typename MessageCatalog>
     class timetable_color_button_mouse_clicked
     {
     public:
@@ -705,7 +649,7 @@ namespace bobura { namespace message { namespace font_color_dialog
         using message_catalog_type = MessageCatalog;
 
         //! The update type.
-        using update_type = std::function<void ()>;
+        using update_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -724,14 +668,9 @@ namespace bobura { namespace message { namespace font_color_dialog
             std::vector<font_color_type>&     font_color_list,
             const boost::optional<size_type>& current_category_index,
             const update_type                 update,
-            const message_catalog_type&       message_catalog
-        )
-        :
-        m_dialog(dialog),
-        m_font_color_list(font_color_list),
-        m_current_category_index(current_category_index),
-        m_update(update),
-        m_message_catalog(message_catalog)
+            const message_catalog_type&       message_catalog)
+        : m_dialog(dialog), m_font_color_list(font_color_list), m_current_category_index(current_category_index),
+          m_update(update), m_message_catalog(message_catalog)
         {}
 
 
@@ -752,8 +691,7 @@ namespace bobura { namespace message { namespace font_color_dialog
                 return;
 
             m_font_color_list[*m_current_category_index].set_timetable_color(
-                boost::make_optional(color_dialog.result())
-            );
+                boost::make_optional(color_dialog.result()));
 
             m_update();
         }
@@ -771,8 +709,6 @@ namespace bobura { namespace message { namespace font_color_dialog
         update_type m_update;
 
         const message_catalog_type& m_message_catalog;
-
-
     };
 
 
@@ -798,10 +734,7 @@ namespace bobura { namespace message { namespace font_color_dialog
 
             \param dialog A dialog.
         */
-        explicit ok_button_mouse_clicked(dialog_type& dialog)
-        :
-        m_dialog(dialog)
-        {}
+        explicit ok_button_mouse_clicked(dialog_type& dialog) : m_dialog(dialog) {}
 
 
         // functions
@@ -809,8 +742,7 @@ namespace bobura { namespace message { namespace font_color_dialog
         /*!
             \brief Called when the OK button is clicked.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             m_dialog.set_result(dialog_type::result_type::accepted);
             m_dialog.close();
@@ -821,8 +753,6 @@ namespace bobura { namespace message { namespace font_color_dialog
         // variables
 
         dialog_type& m_dialog;
-
-
     };
 
 
@@ -848,10 +778,7 @@ namespace bobura { namespace message { namespace font_color_dialog
 
             \param dialog A dialog.
         */
-        explicit cancel_button_mouse_clicked(dialog_type& dialog)
-        :
-        m_dialog(dialog)
-        {}
+        explicit cancel_button_mouse_clicked(dialog_type& dialog) : m_dialog(dialog) {}
 
 
         // functions
@@ -859,8 +786,7 @@ namespace bobura { namespace message { namespace font_color_dialog
         /*!
             \brief Called when the cancel button is clicked.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             m_dialog.set_result(dialog_type::result_type::canceled);
             m_dialog.close();
@@ -871,8 +797,6 @@ namespace bobura { namespace message { namespace font_color_dialog
         // variables
 
         dialog_type& m_dialog;
-
-
     };
 
 

@@ -24,6 +24,9 @@ lint-iwyu-extra: $(addsuffix .iwyuout, $(extra_headers) $(extra_sources))
 	$(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(CXXFLAGS) $< 2> $(addsuffix .tmp, $@) || test $$? -eq 2
 	mv $(addsuffix .tmp, $@) $@
 
+format:
+	$(top_srcdir)/lib/tetengo2/tools/call_clang-format.sh $(UNIX2DOS) $(CLANGFORMAT) $(srcdir) $(headers) $(sources) $(extra_headers) $(extra_sources)
+
 clean-local:
 	-rm -f *.iwyuout.tmp
 	-rm -f *.iwyuout

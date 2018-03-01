@@ -16,8 +16,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace load_save
-{
+namespace bobura { namespace load_save {
     template <typename Traits>
     class new_file<Traits>::impl : private boost::noncopyable
     {
@@ -35,16 +34,12 @@ namespace bobura { namespace load_save
 
         // constructors and destructor
 
-        explicit impl(const confirm_file_save_type& confirm_file_save)
-        :
-        m_confirm_file_save(confirm_file_save)
-        {}
+        explicit impl(const confirm_file_save_type& confirm_file_save) : m_confirm_file_save(confirm_file_save) {}
 
 
         // functions
 
-        void operator()(model_type& model, abstract_window_type& parent)
-        const
+        void operator()(model_type& model, abstract_window_type& parent) const
         {
             if (!m_confirm_file_save(parent))
                 return;
@@ -62,50 +57,39 @@ namespace bobura { namespace load_save
         // variables
 
         const confirm_file_save_type& m_confirm_file_save;
-
-
     };
 
 
     template <typename Traits>
     new_file<Traits>::new_file(const confirm_file_save_type& confirm_file_save)
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(confirm_file_save))
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(confirm_file_save))
     {}
 
     template <typename Traits>
-    new_file<Traits>::~new_file()
-    noexcept
+    new_file<Traits>::~new_file() noexcept
     {}
 
     template <typename Traits>
-    void new_file<Traits>::operator()(model_type& model, abstract_window_type& parent)
-    const
+    void new_file<Traits>::operator()(model_type& model, abstract_window_type& parent) const
     {
         (*m_p_impl)(model, parent);
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC

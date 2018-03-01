@@ -10,8 +10,7 @@
 #define BOBURA_VIEW_TIMETABLE_UTILITY_H
 
 
-namespace bobura { namespace view { namespace timetable
-{
+namespace bobura { namespace view { namespace timetable {
     // types
 
     /*!
@@ -20,7 +19,7 @@ namespace bobura { namespace view { namespace timetable
     enum class direction_type
     {
         down, //!< Down.
-        up,   //!< Up.
+        up, //!< Up.
     };
 
 

@@ -17,8 +17,7 @@
 #include <tetengo2/detail/base/impl_set.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     /*!
         \brief The class template for an about command.
 
@@ -28,13 +27,7 @@ namespace bobura { namespace command
         \tparam MessageCatalog A message catalog type.
         \tparam DialogTraits   A dialog traits type.
     */
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename MessageCatalog,
-        typename DialogTraits
-    >
+    template <typename Traits, typename Position, typename Dimension, typename MessageCatalog, typename DialogTraits>
     class about : public command_base<Traits>
     {
     public:
@@ -86,14 +79,12 @@ namespace bobura { namespace command
         about(
             const message_catalog_type& message_catalog,
             const settings_type&        settings,
-            const detail_impl_set_type& detail_impl_set
-        );
+            const detail_impl_set_type& detail_impl_set);
 
         /*!
             \brief Destroys the about command.
         */
-        virtual ~about()
-        noexcept;
+        virtual ~about() noexcept;
 
 
     private:
@@ -109,10 +100,7 @@ namespace bobura { namespace command
 
         // virtual functions
 
-        virtual void execute_impl(model_type& model, abstract_window_type& parent)
-        const override;
-
-
+        virtual void execute_impl(model_type& model, abstract_window_type& parent) const override;
     };
 
 

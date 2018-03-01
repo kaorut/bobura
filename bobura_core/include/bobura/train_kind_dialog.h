@@ -17,8 +17,7 @@
 #include <bobura/model/train_kind.h>
 
 
-namespace bobura
-{
+namespace bobura {
     /*!
         \brief The class template for the train kind dialog.
 
@@ -41,8 +40,7 @@ namespace bobura
         typename Color,
         typename Canvas,
         typename FontDialog,
-        typename ColorDialog
-    >
+        typename ColorDialog>
     class train_kind_dialog : public Traits::dialog_type
     {
     public:
@@ -106,24 +104,21 @@ namespace bobura
 
                 \return The original index.
             */
-            const boost::optional<size_type>& original_index()
-            const;
+            const boost::optional<size_type>& original_index() const;
 
             /*!
                 \brief Returns the referred status.
 
                 \return The referred status.
             */
-            bool referred()
-            const;
+            bool referred() const;
 
             /*!
                 \brief Returns the train kind.
 
                 \return The train kind.
             */
-            const train_kind_type& train_kind()
-            const;
+            const train_kind_type& train_kind() const;
 
             /*!
                 \brief Returns the train kind.
@@ -138,7 +133,6 @@ namespace bobura
             bool m_referred;
 
             train_kind_type m_train_kind;
-
         };
 
 
@@ -156,14 +150,12 @@ namespace bobura
             abstract_window_type&       parent,
             const color_type&           background_color,
             const color_type&           timetable_color,
-            const message_catalog_type& message_catalog
-        );
+            const message_catalog_type& message_catalog);
 
         /*!
             \brief Destroys the train kind dialog.
         */
-        virtual ~train_kind_dialog()
-        noexcept;
+        virtual ~train_kind_dialog() noexcept;
 
 
         // functions
@@ -173,8 +165,7 @@ namespace bobura
 
             \return The information sets.
         */
-        const std::vector<info_set_type> info_sets()
-        const;
+        const std::vector<info_set_type> info_sets() const;
 
         /*!
             \brief Sets information sets.
@@ -197,13 +188,8 @@ namespace bobura
 
         // virtual functions
 
-        virtual void do_modal_impl()
-        override;
-
-
+        virtual void do_modal_impl() override;
     };
-
-
 }
 
 #endif

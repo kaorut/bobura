@@ -10,13 +10,12 @@
 #define BOBURA_MESSAGE_OUDIADIAGRAMDIALOG_H
 
 
-namespace bobura { namespace model { namespace message { namespace oudia_diagram_dialog
-{
-     /*!
-        \brief The class template for a mouse click observer of the OK button.
+namespace bobura { namespace model { namespace message { namespace oudia_diagram_dialog {
+    /*!
+       \brief The class template for a mouse click observer of the OK button.
 
-        \tparam Dialog A dialog type.
-    */
+       \tparam Dialog A dialog type.
+   */
     template <typename Dialog>
     class ok_button_mouse_clicked
     {
@@ -34,10 +33,7 @@ namespace bobura { namespace model { namespace message { namespace oudia_diagram
 
             \param dialog A dialog.
         */
-        explicit ok_button_mouse_clicked(dialog_type& dialog)
-        :
-        m_dialog(dialog)
-        {}
+        explicit ok_button_mouse_clicked(dialog_type& dialog) : m_dialog(dialog) {}
 
 
         // functions
@@ -45,8 +41,7 @@ namespace bobura { namespace model { namespace message { namespace oudia_diagram
         /*!
             \brief Called when the OK button is clicked.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             m_dialog.set_result(dialog_type::result_type::accepted);
             m_dialog.close();
@@ -57,8 +52,6 @@ namespace bobura { namespace model { namespace message { namespace oudia_diagram
         // variables
 
         dialog_type& m_dialog;
-
-
     };
 
 
@@ -84,10 +77,7 @@ namespace bobura { namespace model { namespace message { namespace oudia_diagram
 
             \param dialog A dialog.
         */
-        explicit cancel_button_mouse_clicked(dialog_type& dialog)
-        :
-        m_dialog(dialog)
-        {}
+        explicit cancel_button_mouse_clicked(dialog_type& dialog) : m_dialog(dialog) {}
 
 
         // functions
@@ -95,8 +85,7 @@ namespace bobura { namespace model { namespace message { namespace oudia_diagram
         /*!
             \brief Called when the cancel button is clicked.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             m_dialog.set_result(dialog_type::result_type::canceled);
             m_dialog.close();
@@ -107,8 +96,6 @@ namespace bobura { namespace model { namespace message { namespace oudia_diagram
         // variables
 
         dialog_type& m_dialog;
-
-
     };
 
 

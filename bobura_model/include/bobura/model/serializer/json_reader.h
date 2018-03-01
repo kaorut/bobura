@@ -14,8 +14,7 @@
 #include <bobura/model/serializer/reader.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     /*!
         \brief The class template for a JSON reader.
 
@@ -42,8 +41,7 @@ namespace bobura { namespace model { namespace serializer
         typename Speed,
         typename ExecJsonReadingTask,
         typename Font,
-        typename Encoder
-    >
+        typename Encoder>
     class json_reader : public reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>
     {
     public:
@@ -104,8 +102,7 @@ namespace bobura { namespace model { namespace serializer
         /*!
             \brief Destroys the JSON reader.
         */
-        virtual ~json_reader()
-        noexcept;
+        virtual ~json_reader() noexcept;
 
 
     private:
@@ -121,13 +118,9 @@ namespace bobura { namespace model { namespace serializer
 
         // virtual functions
 
-        virtual bool selects_impl(iterator first, iterator last)
-        override;
+        virtual bool selects_impl(iterator first, iterator last) override;
 
-        virtual std::unique_ptr<timetable_type> read_impl(iterator first, iterator last, error_type& error)
-        override;
-
-
+        virtual std::unique_ptr<timetable_type> read_impl(iterator first, iterator last, error_type& error) override;
     };
 
 

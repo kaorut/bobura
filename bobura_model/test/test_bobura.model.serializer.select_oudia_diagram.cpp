@@ -21,8 +21,7 @@
 #include <bobura/type_list.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -51,72 +50,73 @@ namespace
     using select_oudia_diagram_type = bobura::model::serializer::select_oudia_diagram<oudia_diagram_dialog_type>;
 
     using select_oudia_diagram_for_test_type = bobura::model::serializer::select_oudia_diagram_for_test<string_type>;
-
-
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(model)
-BOOST_AUTO_TEST_SUITE(serializer)
-BOOST_AUTO_TEST_SUITE(select_oudia_diagram)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(model)
+        BOOST_AUTO_TEST_SUITE(serializer)
+            BOOST_AUTO_TEST_SUITE(select_oudia_diagram)
+                // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        window_type parent{};
-        string_type file_name{ TETENGO2_TEXT("hoge") };
-        const message_catalog_type_ message_catalog{};
-        const select_oudia_diagram_type select_oudia_diagram{ parent, std::move(file_name), message_catalog };
-    }
+                    window_type                     parent{};
+                    string_type                     file_name{ TETENGO2_TEXT("hoge") };
+                    const message_catalog_type_     message_catalog{};
+                    const select_oudia_diagram_type select_oudia_diagram{ parent,
+                                                                          std::move(file_name),
+                                                                          message_catalog };
+                }
 
-    BOOST_AUTO_TEST_CASE(operator_paren)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(operator_paren)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        window_type parent{};
-        string_type file_name{ TETENGO2_TEXT("hoge") };
-        const message_catalog_type_ message_catalog{};
-        const select_oudia_diagram_type select_oudia_diagram{ parent, std::move(file_name), message_catalog };
+                    window_type                     parent{};
+                    string_type                     file_name{ TETENGO2_TEXT("hoge") };
+                    const message_catalog_type_     message_catalog{};
+                    const select_oudia_diagram_type select_oudia_diagram{ parent,
+                                                                          std::move(file_name),
+                                                                          message_catalog };
 
-        std::vector<string_type> diagram_names{};
-        const auto selected = select_oudia_diagram(diagram_names.begin(), diagram_names.end());
+                    std::vector<string_type> diagram_names{};
+                    const auto selected = select_oudia_diagram(diagram_names.begin(), diagram_names.end());
 
-        BOOST_CHECK(selected == diagram_names.end());
-    }
-
-
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE(select_oudia_diagram_for_test)
-    // test cases
-
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        string_type name{ TETENGO2_TEXT("hoge") };
-        const select_oudia_diagram_for_test_type select_oudia_diagram_for_test{ std::move(name) };
-    }
-
-    BOOST_AUTO_TEST_CASE(operator_paren)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        string_type name{ TETENGO2_TEXT("hoge") };
-        const select_oudia_diagram_for_test_type select_oudia_diagram_for_test{ std::move(name) };
-
-        std::vector<string_type> diagram_names{
-            string_type{ TETENGO2_TEXT("fuga") }, string_type{ TETENGO2_TEXT("hoge") }
-        };
-        const auto selected = select_oudia_diagram_for_test(diagram_names.begin(), diagram_names.end());
-
-        BOOST_CHECK(selected == std::next(diagram_names.begin()));
-    }
+                    BOOST_CHECK(selected == diagram_names.end());
+                }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE(select_oudia_diagram_for_test)
+                // test cases
+
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
+
+                    string_type                              name{ TETENGO2_TEXT("hoge") };
+                    const select_oudia_diagram_for_test_type select_oudia_diagram_for_test{ std::move(name) };
+                }
+
+                BOOST_AUTO_TEST_CASE(operator_paren)
+                {
+                    BOOST_TEST_PASSPOINT();
+
+                    string_type                              name{ TETENGO2_TEXT("hoge") };
+                    const select_oudia_diagram_for_test_type select_oudia_diagram_for_test{ std::move(name) };
+
+                    std::vector<string_type> diagram_names{ string_type{ TETENGO2_TEXT("fuga") },
+                                                            string_type{ TETENGO2_TEXT("hoge") } };
+                    const auto selected = select_oudia_diagram_for_test(diagram_names.begin(), diagram_names.end());
+
+                    BOOST_CHECK(selected == std::next(diagram_names.begin()));
+                }
+
+
+            BOOST_AUTO_TEST_SUITE_END()
+        BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

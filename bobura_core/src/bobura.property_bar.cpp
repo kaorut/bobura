@@ -21,8 +21,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura
-{
+namespace bobura {
     template <
         typename String,
         typename Position,
@@ -30,12 +29,9 @@ namespace bobura
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog
-    >
-    class property_bar<
-        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog
-    >::impl :
-        private boost::noncopyable
+        typename MessageCatalog>
+    class property_bar<String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog>::impl
+    : private boost::noncopyable
     {
     public:
         // types
@@ -60,16 +56,12 @@ namespace bobura
         // constructors and destructor
 
         impl(
-            property_bar&               self,
+            property_bar& self,
             abstract_window_type&,
             settings_type&              settings,
             const message_catalog_type& message_catalog,
-            const detail_impl_set_type& detail_impl_set
-        )
-        :
-        m_settings(settings),
-        m_message_catalog(message_catalog),
-        m_p_map_box()
+            const detail_impl_set_type& detail_impl_set)
+        : m_settings(settings), m_message_catalog(message_catalog), m_p_map_box()
         {
             initialize_property_bar(self, detail_impl_set);
         }
@@ -77,8 +69,7 @@ namespace bobura
 
         // functions
 
-        const map_box_type& map_box()
-        const
+        const map_box_type& map_box() const
         {
             assert(m_p_map_box);
             return *m_p_map_box;
@@ -158,8 +149,6 @@ namespace bobura
             else
                 m_p_map_box->set_splitter_position(position_unit_type{ 16 });
         }
-
-
     };
 
 
@@ -170,19 +159,14 @@ namespace bobura
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog
-    >
-    property_bar<
-        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog
-    >::property_bar(
+        typename MessageCatalog>
+    property_bar<String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog>::property_bar(
         abstract_window_type&       parent,
         settings_type&              settings,
         const message_catalog_type& message_catalog,
-        const detail_impl_set_type& detail_impl_set
-    )
-    :
-    base_type(parent, detail_impl_set.cursor_()),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, parent, settings, message_catalog, detail_impl_set))
+        const detail_impl_set_type& detail_impl_set)
+    : base_type(parent, detail_impl_set.cursor_()),
+      m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, parent, settings, message_catalog, detail_impl_set))
     {}
 
     template <
@@ -192,12 +176,8 @@ namespace bobura
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog
-    >
-    property_bar<
-        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog
-    >::~property_bar()
-    noexcept
+        typename MessageCatalog>
+    property_bar<String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog>::~property_bar() noexcept
     {}
 
     template <
@@ -207,13 +187,10 @@ namespace bobura
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog
-    >
-    const typename property_bar<
-        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog
-    >::map_box_type&
-    property_bar<String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog>::map_box()
-    const
+        typename MessageCatalog>
+    const typename property_bar<String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog>::
+        map_box_type&
+        property_bar<String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog>::map_box() const
     {
         return m_p_impl->map_box();
     }
@@ -225,11 +202,8 @@ namespace bobura
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog
-    >
-    typename property_bar<
-        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog
-    >::map_box_type&
+        typename MessageCatalog>
+    typename property_bar<String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog>::map_box_type&
     property_bar<String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog>::map_box()
     {
         return m_p_impl->map_box();
@@ -242,22 +216,16 @@ namespace bobura
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog
-    >
-    void
-    property_bar<
-        String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog
-    >::save_settings()
+        typename MessageCatalog>
+    void property_bar<String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog>::save_settings()
     {
         m_p_impl->save_settings(*this);
     }
 
-        
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using common_type_list_type = type_list::common;
@@ -267,12 +235,10 @@ namespace bobura
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using common_type_list_type = type_list::common;
@@ -282,9 +248,7 @@ namespace bobura
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -295,8 +259,7 @@ namespace bobura
         typename application::ui_type_list_type::abstract_window_type,
         typename application::ui_type_list_type::side_bar_type,
         typename application::ui_type_list_type::map_box_type,
-        typename application::locale_type_list_type::message_catalog_type
-    >;
+        typename application::locale_type_list_type::message_catalog_type>;
 #endif
 
     template class property_bar<
@@ -306,8 +269,5 @@ namespace bobura
         typename test::ui_type_list_type::abstract_window_type,
         typename test::ui_type_list_type::side_bar_type,
         typename test::ui_type_list_type::map_box_type,
-        typename test::locale_type_list_type::message_catalog_type
-    >;
-
-
+        typename test::locale_type_list_type::message_catalog_type>;
 }

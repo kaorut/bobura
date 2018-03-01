@@ -23,8 +23,7 @@
 #include <bobura/view/diagram/time_line.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -37,15 +36,13 @@ namespace
 
     using size_type = common_type_list_type::size_type;
 
-    using model_type =
-        bobura::timetable_model<
-            size_type,
-            common_type_list_type::difference_type,
-            common_type_list_type::string_type,
-            common_type_list_type::operating_distance_type,
-            common_type_list_type::speed_type,
-            ui_type_list_type::fast_font_type
-        >;
+    using model_type = bobura::timetable_model<
+        size_type,
+        common_type_list_type::difference_type,
+        common_type_list_type::string_type,
+        common_type_list_type::operating_distance_type,
+        common_type_list_type::speed_type,
+        ui_type_list_type::fast_font_type>;
 
     using time_type = model_type::timetable_type::train_type::stop_type::time_type;
 
@@ -78,163 +75,153 @@ namespace
     using time_line_type = bobura::view::diagram::time_line<traits_type>;
 
     using time_line_list_type = bobura::view::diagram::time_line_list<traits_type>;
-
-
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(view)
-BOOST_AUTO_TEST_SUITE(diagram)
-BOOST_AUTO_TEST_SUITE(time_line)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(view)
+        BOOST_AUTO_TEST_SUITE(diagram)
+            BOOST_AUTO_TEST_SUITE(time_line)
+                // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        selection_type selection{};
-        time_line_type time_line1{
-            selection,
-            position_unit_type{ 42 },
-            position_unit_type{ 24 },
-            position_unit_type{ 42 },
-            color_type{ 0x12, 0x34, 0x56, 0x78 },
-            boost::make_optional<time_type::size_type>(12)
-        };
-        const time_line_type time_line2{ std::move(time_line1) };
-    }
+                    selection_type       selection{};
+                    time_line_type       time_line1{ selection,
+                                               position_unit_type{ 42 },
+                                               position_unit_type{ 24 },
+                                               position_unit_type{ 42 },
+                                               color_type{ 0x12, 0x34, 0x56, 0x78 },
+                                               boost::make_optional<time_type::size_type>(12) };
+                    const time_line_type time_line2{ std::move(time_line1) };
+                }
 
-    BOOST_AUTO_TEST_CASE(operator_assign)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(operator_assign)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        selection_type selection{};
-        time_line_type time_line1{
-            selection,
-            position_unit_type{ 42 },
-            position_unit_type{ 24 },
-            position_unit_type{ 42 },
-            color_type{ 0x12, 0x34, 0x56, 0x78 },
-            boost::make_optional<time_type::size_type>(12)
-        };
-        time_line_type time_line2{
-            selection,
-            position_unit_type{ 42 },
-            position_unit_type{ 24 },
-            position_unit_type{ 42 },
-            color_type{ 0x12, 0x34, 0x56, 0x78 },
-            boost::make_optional<time_type::size_type>(12)
-        };
+                    selection_type selection{};
+                    time_line_type time_line1{ selection,
+                                               position_unit_type{ 42 },
+                                               position_unit_type{ 24 },
+                                               position_unit_type{ 42 },
+                                               color_type{ 0x12, 0x34, 0x56, 0x78 },
+                                               boost::make_optional<time_type::size_type>(12) };
+                    time_line_type time_line2{ selection,
+                                               position_unit_type{ 42 },
+                                               position_unit_type{ 24 },
+                                               position_unit_type{ 42 },
+                                               color_type{ 0x12, 0x34, 0x56, 0x78 },
+                                               boost::make_optional<time_type::size_type>(12) };
 
-        time_line1 = std::move(time_line2);
-    }
+                    time_line1 = std::move(time_line2);
+                }
 
-    BOOST_AUTO_TEST_CASE(draw_on)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(draw_on)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        selection_type selection{};
-        const time_line_type time_line{
-            selection,
-            position_unit_type{ 42 },
-            position_unit_type{ 24 },
-            position_unit_type{ 42 },
-            color_type{ 0x12, 0x34, 0x56, 0x78 },
-            boost::make_optional<time_type::size_type>(12)
-        };
+                    selection_type       selection{};
+                    const time_line_type time_line{ selection,
+                                                    position_unit_type{ 42 },
+                                                    position_unit_type{ 24 },
+                                                    position_unit_type{ 42 },
+                                                    color_type{ 0x12, 0x34, 0x56, 0x78 },
+                                                    boost::make_optional<time_type::size_type>(12) };
 
-        window_type window{};
-        const auto p_canvas = window.create_canvas();
-        time_line.draw_on(*p_canvas);
-    }
+                    window_type window{};
+                    const auto  p_canvas = window.create_canvas();
+                    time_line.draw_on(*p_canvas);
+                }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE(time_line_list)
-    // test cases
+            BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE(time_line_list)
+                // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        const model_type model{};
-        selection_type selection{};
-        time_line_list_type time_line_list1{
-            model,
-            time_span_type{ 42 * 60 },
-            selection,
-            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
-            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
-            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
-            position_unit_type{ 24 },
-            position_unit_type{ 42 },
-            dimension_unit_type{ 24 },
-            scale_type{ 42 }
-        };
-        const time_line_list_type time_line_list2{ std::move(time_line_list1) };
-    }
+                    const model_type    model{};
+                    selection_type      selection{};
+                    time_line_list_type time_line_list1{
+                        model,
+                        time_span_type{ 42 * 60 },
+                        selection,
+                        dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+                        dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+                        position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+                        position_unit_type{ 24 },
+                        position_unit_type{ 42 },
+                        dimension_unit_type{ 24 },
+                        scale_type{ 42 }
+                    };
+                    const time_line_list_type time_line_list2{ std::move(time_line_list1) };
+                }
 
-    BOOST_AUTO_TEST_CASE(operator_assign)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(operator_assign)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        const model_type model{};
-        selection_type selection{};
-        time_line_list_type time_line_list1{
-            model,
-            time_span_type{ 42 * 60 },
-            selection,
-            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
-            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
-            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
-            position_unit_type{ 24 },
-            position_unit_type{ 42 },
-            dimension_unit_type{ 24 },
-            scale_type{ 42 }
-        };
-        time_line_list_type time_line_list2{
-            model,
-            time_span_type{ 42 * 60 },
-            selection,
-            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
-            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
-            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
-            position_unit_type{ 24 },
-            position_unit_type{ 42 },
-            dimension_unit_type{ 24 },
-            scale_type{ 42 }
-        };
+                    const model_type    model{};
+                    selection_type      selection{};
+                    time_line_list_type time_line_list1{
+                        model,
+                        time_span_type{ 42 * 60 },
+                        selection,
+                        dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+                        dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+                        position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+                        position_unit_type{ 24 },
+                        position_unit_type{ 42 },
+                        dimension_unit_type{ 24 },
+                        scale_type{ 42 }
+                    };
+                    time_line_list_type time_line_list2{
+                        model,
+                        time_span_type{ 42 * 60 },
+                        selection,
+                        dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+                        dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+                        position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+                        position_unit_type{ 24 },
+                        position_unit_type{ 42 },
+                        dimension_unit_type{ 24 },
+                        scale_type{ 42 }
+                    };
 
-        time_line_list1 = std::move(time_line_list2);
-    }
+                    time_line_list1 = std::move(time_line_list2);
+                }
 
-    BOOST_AUTO_TEST_CASE(draw_on)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(draw_on)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        const model_type model{};
-        selection_type selection{};
-        const time_line_list_type time_line_list{
-            model,
-            time_span_type{ 42 * 60 },
-            selection,
-            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
-            dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
-            position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
-            position_unit_type{ 24 },
-            position_unit_type{ 42 },
-            dimension_unit_type{ 24 },
-            scale_type{ 42 }
-        };
+                    const model_type          model{};
+                    selection_type            selection{};
+                    const time_line_list_type time_line_list{
+                        model,
+                        time_span_type{ 42 * 60 },
+                        selection,
+                        dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+                        dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
+                        position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } },
+                        position_unit_type{ 24 },
+                        position_unit_type{ 42 },
+                        dimension_unit_type{ 24 },
+                        scale_type{ 42 }
+                    };
 
-        window_type window{};
-        const auto p_canvas = window.create_canvas();
-        time_line_list.draw_on(*p_canvas);
-    }
+                    window_type window{};
+                    const auto  p_canvas = window.create_canvas();
+                    time_line_list.draw_on(*p_canvas);
+                }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE_END()
+        BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

@@ -23,8 +23,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura
-{
+namespace bobura {
     template <typename Traits>
     class about_dialog<Traits>::impl : private boost::noncopyable
     {
@@ -54,17 +53,9 @@ namespace bobura
             base_type&                  base,
             const message_catalog_type& message_catalog,
             const settings_type&        settings,
-            const detail_impl_set_type& detail_impl_set
-        )
-        :
-        m_base(base),
-        m_message_catalog(message_catalog),
-        m_settings(settings),
-        m_p_application_image(),
-        m_p_title_label(),
-        m_p_copyright_label(),
-        m_p_link_label(),
-        m_p_ok_button()
+            const detail_impl_set_type& detail_impl_set)
+        : m_base(base), m_message_catalog(message_catalog), m_settings(settings), m_p_application_image(),
+          m_p_title_label(), m_p_copyright_label(), m_p_link_label(), m_p_ok_button()
         {
             initialize_dialog(detail_impl_set);
         }
@@ -115,7 +106,7 @@ namespace bobura
 
         // functions
 
-        void initialize_dialog(const detail_impl_set_type&  detail_impl_set)
+        void initialize_dialog(const detail_impl_set_type& detail_impl_set)
         {
             m_base.set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:About:About")));
 
@@ -132,11 +123,9 @@ namespace bobura
         {
             auto p_image = tetengo2::stdalt::make_unique<image_type>(m_base);
 
-            auto p_icon =
-                tetengo2::stdalt::make_unique<icon_type>(
-                    m_settings.image_directory_path() / string_type{ TETENGO2_TEXT("bobura_app.ico") },
-                    dimension_type{ dimension_unit_type{ 4 }, dimension_unit_type{ 4 } }
-                );
+            auto p_icon = tetengo2::stdalt::make_unique<icon_type>(
+                m_settings.image_directory_path() / string_type{ TETENGO2_TEXT("bobura_app.ico") },
+                dimension_type{ dimension_unit_type{ 4 }, dimension_unit_type{ 4 } });
             p_image->set_icon(std::move(p_icon));
 
             return std::move(p_image);
@@ -146,11 +135,10 @@ namespace bobura
         {
             using char_type = typename string_type::value_type;
             std::basic_ostringstream<char_type> title{};
-            title <<
-                boost::basic_format<char_type>(TETENGO2_TEXT("%s  %s %s")) %
-                m_message_catalog.get(TETENGO2_TEXT("App:Bobura")) %
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:About:version")) %
-                string_type{ TETENGO2_TEXT("0.0.0") };
+            title << boost::basic_format<char_type>(TETENGO2_TEXT("%s  %s %s")) %
+                         m_message_catalog.get(TETENGO2_TEXT("App:Bobura")) %
+                         m_message_catalog.get(TETENGO2_TEXT("Dialog:About:version")) %
+                         string_type{ TETENGO2_TEXT("0.0.0") };
 
             auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
 
@@ -198,7 +186,7 @@ namespace bobura
 
             m_p_application_image->fit_to_content();
             m_p_application_image->set_position(position_type{ position_unit_type{ 2 }, position_unit_type{ 1 } });
-            
+
             const auto label_left =
                 position_unit_type{ 2 } + m_p_application_image->dimension().width() + position_unit_type{ 1 };
 
@@ -214,8 +202,6 @@ namespace bobura
             m_p_ok_button->set_dimension(dimension_type{ dimension_unit_type{ 8 }, dimension_unit_type{ 2 } });
             m_p_ok_button->set_position(position_type{ position_unit_type{ 26 }, position_unit_type{ 7 } });
         }
-
-
     };
 
 
@@ -224,50 +210,35 @@ namespace bobura
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog,
         const settings_type&        settings,
-        const detail_impl_set_type& detail_impl_set
-    )
-    :
-    base_type(parent),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, detail_impl_set))
+        const detail_impl_set_type& detail_impl_set)
+    : base_type(parent),
+      m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, detail_impl_set))
     {}
 
     template <typename Traits>
-    about_dialog<Traits>::~about_dialog()
-    noexcept
+    about_dialog<Traits>::~about_dialog() noexcept
     {}
 
 
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
-    template class about_dialog<
-        typename application::traits_type_list_type::dialog_type
-    >;
+    template class about_dialog<typename application::traits_type_list_type::dialog_type>;
 #endif
 
-    template class about_dialog<
-        typename test::traits_type_list_type::dialog_type
-    >;
-
-
+    template class about_dialog<typename test::traits_type_list_type::dialog_type>;
 }

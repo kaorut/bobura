@@ -26,8 +26,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace load_save
-{
+namespace bobura { namespace load_save {
     template <typename Traits>
     class save_to_file<Traits>::impl : private boost::noncopyable
     {
@@ -46,27 +45,22 @@ namespace bobura { namespace load_save
         // constructors and destructor
 
         impl(const bool ask_file_path, const message_catalog_type& message_catalog)
-        :
-        m_ask_file_path(ask_file_path),
-        m_message_catalog(message_catalog)
+        : m_ask_file_path(ask_file_path), m_message_catalog(message_catalog)
         {}
 
 
         // functions
 
-        bool operator()(model_type& model, abstract_window_type& parent)
-        const
+        bool operator()(model_type& model, abstract_window_type& parent) const
         {
             boost::filesystem::path path{};
             if (!model.has_path() || m_ask_file_path)
             {
-                file_save_dialog_type dialog{
-                    m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:SaveAs")),
-                    model.has_path() ? boost::make_optional(model.path()) : boost::none,
-                    make_file_filters(),
-                    parent
-                };
-                const auto ok = dialog.do_modal();
+                file_save_dialog_type dialog{ m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:SaveAs")),
+                                              model.has_path() ? boost::make_optional(model.path()) : boost::none,
+                                              make_file_filters(),
+                                              parent };
+                const auto            ok = dialog.do_modal();
                 if (!ok)
                     return false;
 
@@ -140,28 +134,24 @@ namespace bobura { namespace load_save
 
         using timetable_file_encoder_type = typename traits_type::timetable_file_encoder_type;
 
-        using writer_selector_type =
-            model::serializer::writer_selector<
-                size_type,
-                difference_type,
-                string_type,
-                output_stream_type,
-                operating_distance_type,
-                speed_type,
-                font_type
-            >;
+        using writer_selector_type = model::serializer::writer_selector<
+            size_type,
+            difference_type,
+            string_type,
+            output_stream_type,
+            operating_distance_type,
+            speed_type,
+            font_type>;
 
-        using writer_set_type =
-            model::serializer::writer_set<
-                size_type,
-                difference_type,
-                string_type,
-                output_stream_type,
-                operating_distance_type,
-                speed_type,
-                font_type,
-                timetable_file_encoder_type
-            >;
+        using writer_set_type = model::serializer::writer_set<
+            size_type,
+            difference_type,
+            string_type,
+            output_stream_type,
+            operating_distance_type,
+            speed_type,
+            font_type,
+            timetable_file_encoder_type>;
 
 
         // variables
@@ -175,104 +165,74 @@ namespace bobura { namespace load_save
 
         std::unique_ptr<message_box_type> create_cant_create_temporary_file_message_box(
             const boost::filesystem::path& path,
-            abstract_window_type&          parent
-        )
-        const
+            abstract_window_type&          parent) const
         {
-            return
-                tetengo2::stdalt::make_unique<message_box_type>(
-                    parent,
-                    m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
-                    m_message_catalog.get(TETENGO2_TEXT("Message:File:Can't create a temporary file.")),
-                    path.template string<string_type>(),
-                    message_box_type::button_style_type::ok(false),
-                    message_box_type::icon_style_type::error
-                );
+            return tetengo2::stdalt::make_unique<message_box_type>(
+                parent,
+                m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
+                m_message_catalog.get(TETENGO2_TEXT("Message:File:Can't create a temporary file.")),
+                path.template string<string_type>(),
+                message_box_type::button_style_type::ok(false),
+                message_box_type::icon_style_type::error);
         }
 
-        std::unique_ptr<message_box_type> create_cant_write_to_file_message_box(
-            const boost::filesystem::path& path,
-            abstract_window_type&          parent
-        )
-        const
+        std::unique_ptr<message_box_type>
+        create_cant_write_to_file_message_box(const boost::filesystem::path& path, abstract_window_type& parent) const
         {
-            return
-                tetengo2::stdalt::make_unique<message_box_type>(
-                    parent,
-                    m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
-                    m_message_catalog.get(TETENGO2_TEXT("Message:File:Can't write to the file.")),
-                    path.template string<string_type>(),
-                    message_box_type::button_style_type::ok(false),
-                    message_box_type::icon_style_type::error
-                );
+            return tetengo2::stdalt::make_unique<message_box_type>(
+                parent,
+                m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
+                m_message_catalog.get(TETENGO2_TEXT("Message:File:Can't write to the file.")),
+                path.template string<string_type>(),
+                message_box_type::button_style_type::ok(false),
+                message_box_type::icon_style_type::error);
         }
 
-        typename file_save_dialog_type::file_filters_type make_file_filters()
-        const
+        typename file_save_dialog_type::file_filters_type make_file_filters() const
         {
-            return
-                {
-                    {
-                        m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Timetable Files")),
-                        string_type{ TETENGO2_TEXT("btt") }
-                    },
-                    {
-                        m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Timetable Files (Compressed)")),
-                        string_type{ TETENGO2_TEXT("btt_bz2") }
-                    },
-                    {
-                        m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:All Files")),
-                        string_type{ TETENGO2_TEXT("*") }
-                    }
-                };
+            return { { m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Timetable Files")),
+                       string_type{ TETENGO2_TEXT("btt") } },
+                     { m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:Timetable Files (Compressed)")),
+                       string_type{ TETENGO2_TEXT("btt_bz2") } },
+                     { m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:All Files")),
+                       string_type{ TETENGO2_TEXT("*") } } };
         }
-
-
     };
 
 
     template <typename Traits>
     save_to_file<Traits>::save_to_file(const bool ask_file_path, const message_catalog_type& message_catalog)
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(ask_file_path, message_catalog))
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(ask_file_path, message_catalog))
     {}
 
     /*!
         \brief Destroys the file saving.
     */
     template <typename Traits>
-    save_to_file<Traits>::~save_to_file()
-    noexcept
+    save_to_file<Traits>::~save_to_file() noexcept
     {}
 
     template <typename Traits>
-    bool save_to_file<Traits>::operator()(model_type& model, abstract_window_type& parent)
-    const
+    bool save_to_file<Traits>::operator()(model_type& model, abstract_window_type& parent) const
     {
         return (*m_p_impl)(model, parent);
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC

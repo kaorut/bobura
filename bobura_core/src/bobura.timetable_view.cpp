@@ -26,8 +26,7 @@
 #include <bobura/view/utility.h>
 
 
-namespace bobura
-{
+namespace bobura {
     template <typename Traits>
     class timetable_view<Traits>::impl : private boost::noncopyable
     {
@@ -52,35 +51,25 @@ namespace bobura
         impl(
             const view::timetable::direction_type direction,
             const model_type&                     model,
-            const message_catalog_type&           message_catalog
-        )
-        :
-        m_direction(direction),
-        m_model(model),
-        m_message_catalog(message_catalog),
-        m_dimension(),
-        m_p_header(),
-        m_p_train_number_header()
+            const message_catalog_type&           message_catalog)
+        : m_direction(direction), m_model(model), m_message_catalog(message_catalog), m_dimension(), m_p_header(),
+          m_p_train_number_header()
         {}
 
 
         // functions
 
-        void draw_on(
-            canvas_type&          canvas,
-            const dimension_type& canvas_dimension,
-            const position_type&  scroll_bar_position
-        )
+        void
+        draw_on(canvas_type& canvas, const dimension_type& canvas_dimension, const position_type& scroll_bar_position)
         {
             clear_background(canvas, canvas_dimension);
-        
+
             ensure_items_created(canvas, canvas_dimension, scroll_bar_position);
             m_p_header->draw_on(canvas);
             m_p_train_number_header->draw_on(canvas);
         }
 
-        const dimension_type& dimension()
-        const
+        const dimension_type& dimension() const
         {
             return m_dimension;
         }
@@ -93,18 +82,14 @@ namespace bobura
             m_p_train_number_header.reset();
         }
 
-        dimension_type page_size(const dimension_type& canvas_dimension)
-        const
+        dimension_type page_size(const dimension_type& canvas_dimension) const
         {
             const auto& page_width = canvas_dimension.width();
             const auto& page_height = canvas_dimension.height();
             return { page_width, page_height };
         }
 
-        void unselect_all_items()
-        {
-
-        }
+        void unselect_all_items() {}
 
 
     private:
@@ -134,29 +119,26 @@ namespace bobura
         static dimension_unit_type max_station_name_width(
             canvas_type&                  canvas,
             const station_locations_type& station_locations,
-            const font_color_set_type&    font_color_set
-        )
+            const font_color_set_type&    font_color_set)
         {
             dimension_unit_type max_width{};
             {
-                const auto& font =
-                    view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
-                        font_color_set, station_grade_type_set_type::local_type::instance()
-                    ).timetable_font();
+                const auto& font = view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
+                                       font_color_set, station_grade_type_set_type::local_type::instance())
+                                       .timetable_font();
                 assert(font);
                 canvas.set_font(*font);
 
                 const auto dimension = canvas.calc_text_dimension(string_type{ TETENGO2_TEXT("M") });
                 max_width = dimension.width() * 4 + dimension_unit_type{ 3 };
             }
-            for (const auto& station_location: station_locations)
+            for (const auto& station_location : station_locations)
             {
                 const auto& station = station_location.get_station();
 
-                const auto& font =
-                    view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
-                        font_color_set, station.grade()
-                    ).timetable_font();
+                const auto& font = view::select_station_font_color<font_color_set_type, station_grade_type_set_type>(
+                                       font_color_set, station.grade())
+                                       .timetable_font();
                 assert(font);
                 canvas.set_font(*font);
 
@@ -195,22 +177,17 @@ namespace bobura
 
         // functions
 
-        void clear_background(canvas_type& canvas, const dimension_type& canvas_dimension)
-        const
+        void clear_background(canvas_type& canvas, const dimension_type& canvas_dimension) const
         {
-            canvas.set_background(
-                tetengo2::stdalt::make_unique<const solid_background_type>(
-                    *m_model.timetable().font_color_set().background().diagram_color()
-                )
-            );
+            canvas.set_background(tetengo2::stdalt::make_unique<const solid_background_type>(
+                *m_model.timetable().font_color_set().background().diagram_color()));
             canvas.fill_rectangle(position_type{}, canvas_dimension);
         }
 
         void ensure_items_created(
             canvas_type&          canvas,
             const dimension_type& canvas_dimension,
-            const position_type&  scroll_bar_position
-        )
+            const position_type&  scroll_bar_position)
         {
             boost::ignore_unused(scroll_bar_position);
             if (m_p_header)
@@ -220,70 +197,57 @@ namespace bobura
             }
 
             const dimension_type margin{ dimension_unit_type{ 1 } / 2, dimension_unit_type{ 1 } / 2 };
-            const auto operating_distance_width_ = dimension_unit_type{ 5 } / 2;
-            const auto max_station_name_width_ =
-                max_station_name_width(
-                    canvas, m_model.timetable().station_locations(), m_model.timetable().font_color_set()
-                );
+            const auto           operating_distance_width_ = dimension_unit_type{ 5 } / 2;
+            const auto           max_station_name_width_ = max_station_name_width(
+                canvas, m_model.timetable().station_locations(), m_model.timetable().font_color_set());
             const auto train_number_height_ = train_number_height(canvas, m_model.timetable().font_color_set());
             const auto train_name_height_ = dimension_unit_type{ 5 };
 
-            m_p_header =
-                tetengo2::stdalt::make_unique<header_type>(
-                    m_direction, m_model, m_message_catalog, canvas, canvas_dimension, margin
-                );
+            m_p_header = tetengo2::stdalt::make_unique<header_type>(
+                m_direction, m_model, m_message_catalog, canvas, canvas_dimension, margin);
 
             const auto header_bottom =
                 m_p_header->position().top() + position_unit_type::from(m_p_header->dimension().height());
 
-            m_p_train_number_header =
-                tetengo2::stdalt::make_unique<train_number_header_type>(
-                    m_direction,
-                    m_model,
-                    m_message_catalog,
-                    canvas,
-                    canvas_dimension,
-                    margin,
-                    header_bottom,
-                    operating_distance_width_,
-                    max_station_name_width_,
-                    train_number_height_,
-                    train_name_height_
-                );
+            m_p_train_number_header = tetengo2::stdalt::make_unique<train_number_header_type>(
+                m_direction,
+                m_model,
+                m_message_catalog,
+                canvas,
+                canvas_dimension,
+                margin,
+                header_bottom,
+                operating_distance_width_,
+                max_station_name_width_,
+                train_number_height_,
+                train_name_height_);
         }
-
-
     };
 
 
     template <typename Traits>
     timetable_view<Traits>::timetable_view(
-        const view::timetable::direction_type        direction,
-        const model_type&                            model,
-        const message_catalog_type&                  message_catalog
-    )
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog))
+        const view::timetable::direction_type direction,
+        const model_type&                     model,
+        const message_catalog_type&           message_catalog)
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog))
     {}
 
     template <typename Traits>
-    timetable_view<Traits>::~timetable_view()
-    noexcept
+    timetable_view<Traits>::~timetable_view() noexcept
     {}
 
     template <typename Traits>
     void timetable_view<Traits>::draw_on(
         canvas_type&          canvas,
         const dimension_type& canvas_dimension,
-        const position_type&  scroll_bar_position
-    )
+        const position_type&  scroll_bar_position)
     {
         m_p_impl->draw_on(canvas, canvas_dimension, scroll_bar_position);
     }
 
     template <typename Traits>
-    const typename timetable_view<Traits>::dimension_type& timetable_view<Traits>::dimension()
-    const
+    const typename timetable_view<Traits>::dimension_type& timetable_view<Traits>::dimension() const
     {
         return m_p_impl->dimension();
     }
@@ -295,10 +259,8 @@ namespace bobura
     }
 
     template <typename Traits>
-    typename timetable_view<Traits>::dimension_type timetable_view<Traits>::page_size(
-        const dimension_type& canvas_dimension
-    )
-    const
+    typename timetable_view<Traits>::dimension_type
+    timetable_view<Traits>::page_size(const dimension_type& canvas_dimension) const
     {
         return m_p_impl->page_size(canvas_dimension);
     }
@@ -309,27 +271,21 @@ namespace bobura
         m_p_impl->unselect_all_items();
     }
 
-        
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -337,6 +293,4 @@ namespace bobura
 #endif
 
     template class timetable_view<typename test::traits_type_list_type::timetable_view_type>;
-
-
 }

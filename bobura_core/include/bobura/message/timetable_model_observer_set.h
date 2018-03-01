@@ -15,8 +15,7 @@
 #include <boost/signals2.hpp>
 
 
-namespace bobura { namespace message
-{
+namespace bobura { namespace message {
     /*!
         \brief The class for a timetable model observer set.
     */
@@ -28,7 +27,7 @@ namespace bobura { namespace message
         /*!
             \brief The observer type of reset.
         */
-        using reset_type = void ();
+        using reset_type = void();
 
         //! The signal type of reset.
         using reset_signal_type = boost::signals2::signal<reset_type>;
@@ -36,7 +35,7 @@ namespace bobura { namespace message
         /*!
             \brief The observer type of changed.
         */
-        using changed_type = void ();
+        using changed_type = void();
 
         //! The signal type of changed.
         using changed_signal_type = boost::signals2::signal<changed_type>;
@@ -52,8 +51,7 @@ namespace bobura { namespace message
         /*!
             \brief Destroys the timetable model observer set.
         */
-        ~timetable_model_observer_set()
-        noexcept;
+        ~timetable_model_observer_set() noexcept;
 
 
         // functions
@@ -63,8 +61,7 @@ namespace bobura { namespace message
 
             \return The observer called when a timetable model is reset.
         */
-        const reset_signal_type& reset()
-        const;
+        const reset_signal_type& reset() const;
 
         /*!
             \brief Returns the observer called when a timetable model is reset.
@@ -79,8 +76,7 @@ namespace bobura { namespace message
 
             \return The observer called when a timetable model is changed.
         */
-        const changed_signal_type& changed()
-        const;
+        const changed_signal_type& changed() const;
 
         /*!
             \brief Returns the observer called when a timetable model is changed.
@@ -99,8 +95,6 @@ namespace bobura { namespace message
         // variables
 
         std::unique_ptr<impl> m_p_impl;
-
-
     };
 
 

@@ -14,8 +14,7 @@
 #include <bobura/command/command_base.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     /*!
         \brief The class template for a show-timetable-down command.
 
@@ -56,8 +55,7 @@ namespace bobura { namespace command
         /*!
             \brief Destroys the show-timetable-down command.
         */
-        virtual ~show_timetable_down()
-        noexcept;
+        virtual ~show_timetable_down() noexcept;
 
 
     private:
@@ -73,10 +71,7 @@ namespace bobura { namespace command
 
         // virtual functions
 
-        virtual void execute_impl(model_type& model, abstract_window_type& parent)
-        const override;
-
-
+        virtual void execute_impl(model_type& model, abstract_window_type& parent) const override;
     };
 
 

@@ -15,19 +15,18 @@
 #include <bobura/view/diagram/item.h>
 #include <bobura/view/diagram/selection.h>
 
-namespace boost
-{
-    template <class T> class optional;
+namespace boost {
+    template <class T>
+    class optional;
 }
 
 
-namespace bobura { namespace view { namespace diagram
-{
-     /*!
-        \brief The class template for a time line in the diagram view.
+namespace bobura { namespace view { namespace diagram {
+    /*!
+       \brief The class template for a time line in the diagram view.
 
-        \tparam Traits A traits type.
-    */
+       \tparam Traits A traits type.
+   */
     template <typename Traits>
     class time_line : public item<Traits>
     {
@@ -74,8 +73,7 @@ namespace bobura { namespace view { namespace diagram
             position_unit_type         top,
             position_unit_type         bottom,
             color_type                 color,
-            boost::optional<size_type> hours
-        );
+            boost::optional<size_type> hours);
 
         /*!
             \brief Moves a time line.
@@ -87,8 +85,7 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys the time line.
         */
-        virtual ~time_line()
-        noexcept;
+        virtual ~time_line() noexcept;
 
 
         // functions
@@ -118,18 +115,15 @@ namespace bobura { namespace view { namespace diagram
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 
-     /*!
-        \brief The class template for a time line list in the diagram view.
+    /*!
+       \brief The class template for a time line list in the diagram view.
 
-        \tparam Traits A traits type.
-    */
+       \tparam Traits A traits type.
+   */
     template <typename Traits>
     class time_line_list : public item<Traits>
     {
@@ -215,8 +209,7 @@ namespace bobura { namespace view { namespace diagram
             const position_unit_type&  station_header_right,
             const position_unit_type&  header_bottom,
             const dimension_unit_type& time_header_height,
-            const scale_type&          horizontal_scale
-        );
+            const scale_type&          horizontal_scale);
 
         /*!
             \brief Moves a time line list.
@@ -228,8 +221,7 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys the time line list.
         */
-        virtual ~time_line_list()
-        noexcept;
+        virtual ~time_line_list() noexcept;
 
 
         // functions
@@ -251,7 +243,7 @@ namespace bobura { namespace view { namespace diagram
 
         class impl;
 
-        
+
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
@@ -259,10 +251,7 @@ namespace bobura { namespace view { namespace diagram
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
-
-
+        virtual void draw_on_impl(canvas_type& canvas) const override;
     };
 
 

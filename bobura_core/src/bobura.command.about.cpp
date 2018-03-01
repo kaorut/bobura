@@ -17,15 +17,8 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace command
-{
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename MessageCatalog,
-        typename DialogTraits
-    >
+namespace bobura { namespace command {
+    template <typename Traits, typename Position, typename Dimension, typename MessageCatalog, typename DialogTraits>
     class about<Traits, Position, Dimension, MessageCatalog, DialogTraits>::impl
     {
     public:
@@ -49,19 +42,14 @@ namespace bobura { namespace command
         impl(
             const message_catalog_type& message_catalog,
             const settings_type&        settings,
-            const detail_impl_set_type& detail_impl_set
-        )
-        :
-        m_message_catalog(message_catalog),
-        m_settings(settings),
-        m_detail_impl_set(detail_impl_set)
+            const detail_impl_set_type& detail_impl_set)
+        : m_message_catalog(message_catalog), m_settings(settings), m_detail_impl_set(detail_impl_set)
         {}
 
 
         // functions
 
-        void execute(model_type& model, abstract_window_type& parent)
-        const
+        void execute(model_type& model, abstract_window_type& parent) const
         {
             boost::ignore_unused(model);
 
@@ -82,83 +70,52 @@ namespace bobura { namespace command
         const settings_type& m_settings;
 
         const detail_impl_set_type& m_detail_impl_set;
-
-
     };
 
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename MessageCatalog,
-        typename DialogTraits
-    >
+    template <typename Traits, typename Position, typename Dimension, typename MessageCatalog, typename DialogTraits>
     about<Traits, Position, Dimension, MessageCatalog, DialogTraits>::about(
         const message_catalog_type& message_catalog,
         const settings_type&        settings,
-        const detail_impl_set_type& detail_impl_set
-    )
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog, settings, detail_impl_set))
+        const detail_impl_set_type& detail_impl_set)
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog, settings, detail_impl_set))
     {}
 
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename MessageCatalog,
-        typename DialogTraits
-    >
-    about<Traits, Position, Dimension, MessageCatalog, DialogTraits>::~about()
-    noexcept
+    template <typename Traits, typename Position, typename Dimension, typename MessageCatalog, typename DialogTraits>
+    about<Traits, Position, Dimension, MessageCatalog, DialogTraits>::~about() noexcept
     {}
-    
-    template <
-        typename Traits,
-        typename Position,
-        typename Dimension,
-        typename MessageCatalog,
-        typename DialogTraits
-    >
+
+    template <typename Traits, typename Position, typename Dimension, typename MessageCatalog, typename DialogTraits>
     void about<Traits, Position, Dimension, MessageCatalog, DialogTraits>::execute_impl(
         model_type&           model,
-        abstract_window_type& parent
-    )
-    const
+        abstract_window_type& parent) const
     {
         m_p_impl->execute(model, parent);
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using locale_type_list_type = type_list::locale<detail_type_list_type>;
-    
+
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using locale_type_list_type = type_list::locale<detail_type_list_type>;
-    
+
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -167,8 +124,7 @@ namespace bobura { namespace command
         typename application::ui_type_list_type::position_type,
         typename application::ui_type_list_type::dimension_type,
         typename application::locale_type_list_type::message_catalog_type,
-        typename application::traits_type_list_type::dialog_type
-    >;
+        typename application::traits_type_list_type::dialog_type>;
 #endif
 
     template class about<
@@ -176,8 +132,7 @@ namespace bobura { namespace command
         typename test::ui_type_list_type::position_type,
         typename test::ui_type_list_type::dimension_type,
         typename test::locale_type_list_type::message_catalog_type,
-        typename test::traits_type_list_type::dialog_type
-    >;
+        typename test::traits_type_list_type::dialog_type>;
 
 
 }}

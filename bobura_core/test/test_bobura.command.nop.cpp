@@ -16,8 +16,7 @@
 #include <bobura/type_list.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -25,24 +24,22 @@ namespace
     using traits_type_list_type = bobura::type_list::traits<detail_type_list_type>;
 
     using nop_command_type = bobura::command::nop<traits_type_list_type::command_type>;
-
-
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(command)
-BOOST_AUTO_TEST_SUITE(nop)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(command)
+        BOOST_AUTO_TEST_SUITE(nop)
+            // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+            BOOST_AUTO_TEST_CASE(construction)
+            {
+                BOOST_TEST_PASSPOINT();
 
-        const nop_command_type command{};
-    }
+                const nop_command_type command{};
+            }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+        BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

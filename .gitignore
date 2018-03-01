@@ -17,6 +17,7 @@
 *.wixobj
 *.wixpdb
 *.vcxproj.user
+.clang-format
 .deps
 .vs/
 aclocal.m4

@@ -14,8 +14,7 @@
 #include <tetengo2/text.h>
 
 
-namespace bobura { namespace model { namespace station_info
-{
+namespace bobura { namespace model { namespace station_info {
     /*!
         \brief The class template for a station grade.
 
@@ -38,8 +37,7 @@ namespace bobura { namespace model { namespace station_info
 
             \return The name.
         */
-        const string_type& name()
-        const
+        const string_type& name() const
         {
             return name_impl();
         }
@@ -51,17 +49,13 @@ namespace bobura { namespace model { namespace station_info
         /*!
             \brief Destroys the grade.
         */
-        virtual ~grade()
-        = default;
+        virtual ~grade() = default;
 
 
     private:
         // virtual functions
 
-        virtual const string_type& name_impl()
-        const = 0;
-
-
+        virtual const string_type& name_impl() const = 0;
     };
 
 
@@ -98,20 +92,16 @@ namespace bobura { namespace model { namespace station_info
     private:
         // constructors and destructor
 
-        virtual ~local()
-        = default;
+        virtual ~local() = default;
 
 
         // virtual functions
 
-        virtual const typename local::string_type& name_impl()
-        const override
+        virtual const typename local::string_type& name_impl() const override
         {
             static const typename local::string_type singleton{ TETENGO2_TEXT("local") };
             return singleton;
         }
-
-
     };
 
     /*!
@@ -147,20 +137,16 @@ namespace bobura { namespace model { namespace station_info
     private:
         // constructors and destructor
 
-        virtual ~principal()
-        = default;
+        virtual ~principal() = default;
 
 
         // virtual functions
 
-        virtual const typename principal::string_type& name_impl()
-        const override
+        virtual const typename principal::string_type& name_impl() const override
         {
             static const typename principal::string_type singleton{ TETENGO2_TEXT("principal") };
             return singleton;
         }
-
-
     };
 
     /*!
@@ -196,21 +182,17 @@ namespace bobura { namespace model { namespace station_info
     private:
         // constructors and destructor
 
-        virtual ~local_terminal()
-        = default;
+        virtual ~local_terminal() = default;
 
 
         // virtual functions
 
-        virtual const typename local_terminal::string_type& name_impl()
-        const override
+        virtual const typename local_terminal::string_type& name_impl() const override
         {
             static const typename local_terminal::string_type singleton{ TETENGO2_TEXT("local terminal") };
             return singleton;
         }
-
-
-   };
+    };
 
     /*!
         \brief The class template for a principal terminal station grade.
@@ -245,20 +227,16 @@ namespace bobura { namespace model { namespace station_info
     private:
         // constructors and destructor
 
-        virtual ~principal_terminal()
-        = default;
+        virtual ~principal_terminal() = default;
 
 
         // virtual functions
 
-        virtual const typename principal_terminal::string_type& name_impl()
-        const override
+        virtual const typename principal_terminal::string_type& name_impl() const override
         {
             static const typename principal_terminal::string_type singleton{ TETENGO2_TEXT("principal terminal") };
             return singleton;
         }
-
-
     };
 
 
@@ -292,10 +270,7 @@ namespace bobura { namespace model { namespace station_info
     private:
         // forbidden operations
 
-        grade_type_set()
-        = delete;
-
-
+        grade_type_set() = delete;
     };
 
 

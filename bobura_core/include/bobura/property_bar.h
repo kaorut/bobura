@@ -16,8 +16,7 @@
 #include <bobura/settings.h>
 
 
-namespace bobura
-{
+namespace bobura {
     /*!
         \brief The class template for the property bar.
 
@@ -36,8 +35,7 @@ namespace bobura
         typename AbstractWindow,
         typename SideBar,
         typename MapBox,
-        typename MessageCatalog
-    >
+        typename MessageCatalog>
     class property_bar : public SideBar
     {
     public:
@@ -85,14 +83,12 @@ namespace bobura
             abstract_window_type&       parent,
             settings_type&              settings,
             const message_catalog_type& message_catalog,
-            const detail_impl_set_type& detail_impl_set
-        );
+            const detail_impl_set_type& detail_impl_set);
 
         /*!
             \brief Destroys the property bar.
         */
-        virtual ~property_bar()
-        noexcept;
+        virtual ~property_bar() noexcept;
 
 
         // functions
@@ -102,8 +98,7 @@ namespace bobura
 
             \return The map box.
         */
-        const map_box_type& map_box()
-        const;
+        const map_box_type& map_box() const;
 
         /*!
             \brief Returns the map box.
@@ -127,11 +122,7 @@ namespace bobura
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
-
-
 }
 
 #endif

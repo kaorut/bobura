@@ -14,8 +14,7 @@
 #include <bobura/command/command_base.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     /*!
         \brief The class template for a font and color command.
 
@@ -38,8 +37,7 @@ namespace bobura { namespace command
         typename FontDialog,
         typename ColorDialog,
         typename MessageCatalog,
-        typename DialogTraits
-    >
+        typename DialogTraits>
     class font_color : public command_base<Traits>
     {
     public:
@@ -94,8 +92,7 @@ namespace bobura { namespace command
         /*!
             \brief Destroys the font and color command.
         */
-        virtual ~font_color()
-        noexcept;
+        virtual ~font_color() noexcept;
 
 
     private:
@@ -111,10 +108,7 @@ namespace bobura { namespace command
 
         // virtual functions
 
-        virtual void execute_impl(model_type& model, abstract_window_type& parent)
-        const override;
-
-
+        virtual void execute_impl(model_type& model, abstract_window_type& parent) const override;
     };
 
 

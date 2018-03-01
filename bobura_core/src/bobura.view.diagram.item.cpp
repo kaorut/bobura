@@ -17,8 +17,7 @@
 #include <bobura/view/diagram/item.h>
 
 
-namespace bobura { namespace view { namespace diagram
-{
+namespace bobura { namespace view { namespace diagram {
     template <typename Traits>
     class item<Traits>::impl : private boost::noncopyable
     {
@@ -36,10 +35,7 @@ namespace bobura { namespace view { namespace diagram
 
         // constructors and destructor
 
-        explicit impl(selection_type& selection)
-        :
-        m_p_selection(&selection)
-        {}
+        explicit impl(selection_type& selection) : m_p_selection(&selection) {}
 
 
         // functions
@@ -54,8 +50,7 @@ namespace bobura { namespace view { namespace diagram
             return *this;
         }
 
-        const selection_type& get_selection()
-        const
+        const selection_type& get_selection() const
         {
             return *m_p_selection;
         }
@@ -65,8 +60,7 @@ namespace bobura { namespace view { namespace diagram
             return *m_p_selection;
         }
 
-        void draw_on_impl(canvas_type& canvas)
-        const
+        void draw_on_impl(canvas_type& canvas) const
         {
             boost::ignore_unused(canvas);
         }
@@ -78,8 +72,7 @@ namespace bobura { namespace view { namespace diagram
             return nullptr;
         }
 
-        bool selected_impl()
-        const
+        bool selected_impl() const
         {
             return false;
         }
@@ -94,20 +87,15 @@ namespace bobura { namespace view { namespace diagram
         // variables
 
         selection_type* m_p_selection;
-
-
     };
 
 
     template <typename Traits>
-    item<Traits>::item(selection_type& selection)
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(selection))
+    item<Traits>::item(selection_type& selection) : m_p_impl(tetengo2::stdalt::make_unique<impl>(selection))
     {}
 
     template <typename Traits>
-    item<Traits>::~item()
-    noexcept
+    item<Traits>::~item() noexcept
     {}
 
     template <typename Traits>
@@ -122,8 +110,7 @@ namespace bobura { namespace view { namespace diagram
     }
 
     template <typename Traits>
-    void item<Traits>::draw_on(canvas_type& canvas)
-    const
+    void item<Traits>::draw_on(canvas_type& canvas) const
     {
         draw_on_impl(canvas);
     }
@@ -135,15 +122,13 @@ namespace bobura { namespace view { namespace diagram
     }
 
     template <typename Traits>
-    const item<Traits>* item<Traits>::p_item_by_position(const position_type& position)
-    const
+    const item<Traits>* item<Traits>::p_item_by_position(const position_type& position) const
     {
         return const_cast<item*>(this)->p_item_by_position_impl(position);
     }
 
     template <typename Traits>
-    const typename item<Traits>::selection_type& item<Traits>::get_selection()
-    const
+    const typename item<Traits>::selection_type& item<Traits>::get_selection() const
     {
         return m_p_impl->get_selection();
     }
@@ -155,8 +140,7 @@ namespace bobura { namespace view { namespace diagram
     }
 
     template <typename Traits>
-    bool item<Traits>::selected()
-    const
+    bool item<Traits>::selected() const
     {
         return selected_impl();
     }
@@ -168,8 +152,7 @@ namespace bobura { namespace view { namespace diagram
     }
 
     template <typename Traits>
-    void item<Traits>::draw_on_impl(canvas_type& canvas)
-    const
+    void item<Traits>::draw_on_impl(canvas_type& canvas) const
     {
         m_p_impl->draw_on_impl(canvas);
     }
@@ -181,8 +164,7 @@ namespace bobura { namespace view { namespace diagram
     }
 
     template <typename Traits>
-    bool item<Traits>::selected_impl()
-    const
+    bool item<Traits>::selected_impl() const
     {
         return m_p_impl->selected_impl();
     }
@@ -194,26 +176,20 @@ namespace bobura { namespace view { namespace diagram
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC

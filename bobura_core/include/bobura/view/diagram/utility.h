@@ -11,8 +11,7 @@
 
 #include <vector>
 
-namespace bobura { namespace model { namespace train_info
-{
+namespace bobura { namespace model { namespace train_info {
     template <typename Difference>
     class time_span;
 
@@ -21,8 +20,7 @@ namespace bobura { namespace model { namespace train_info
 }}}
 
 
-namespace bobura { namespace view { namespace diagram
-{
+namespace bobura { namespace view { namespace diagram {
     /*!
         \brief Calculates a horizontal position by a time.
 
@@ -46,8 +44,7 @@ namespace bobura { namespace view { namespace diagram
         int                                              previous_or_next_day,
         const Left&                                      horizontal_scroll_bar_position,
         const Left&                                      station_header_right,
-        const Left&                                      horizontal_scale
-    );
+        const Left&                                      horizontal_scale);
 
     /*!
         \brief Calculates a vertical position by a station index.
@@ -69,8 +66,7 @@ namespace bobura { namespace view { namespace diagram
         Size                    station_index,
         const Top&              vertical_scroll_bar_position,
         const Top&              header_bottom,
-        const Top&              time_header_bottom
-    );
+        const Top&              time_header_bottom);
 
     /*!
         \brief Returns the normal line width.

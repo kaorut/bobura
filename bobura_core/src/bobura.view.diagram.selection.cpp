@@ -23,8 +23,7 @@
 #include <bobura/view/diagram/selection.h>
 
 
-namespace bobura { namespace view { namespace diagram
-{
+namespace bobura { namespace view { namespace diagram {
     template <typename Traits>
     class selection<Traits>::impl : private boost::noncopyable
     {
@@ -45,24 +44,20 @@ namespace bobura { namespace view { namespace diagram
         // constructors and destructor
 
         impl()
-        :
-        m_p_selected_station_location(nullptr),
-        m_p_selected_train(nullptr),
-        m_p_selection_observer_set(tetengo2::stdalt::make_unique<selection_observer_set_type>())
+        : m_p_selected_station_location(nullptr), m_p_selected_train(nullptr),
+          m_p_selection_observer_set(tetengo2::stdalt::make_unique<selection_observer_set_type>())
         {}
 
         impl(impl&& another)
-        :
-        m_p_selected_station_location(another.m_p_selected_station_location),
-        m_p_selected_train(another.m_p_selected_train),
-        m_p_selection_observer_set(std::move(another.m_p_selection_observer_set))
+        : m_p_selected_station_location(another.m_p_selected_station_location),
+          m_p_selected_train(another.m_p_selected_train),
+          m_p_selection_observer_set(std::move(another.m_p_selection_observer_set))
         {}
 
 
         // functions
 
-        bool selected(const station_location_type& station_location)
-        const
+        bool selected(const station_location_type& station_location) const
         {
             if (!m_p_selected_station_location)
                 return false;
@@ -70,8 +65,7 @@ namespace bobura { namespace view { namespace diagram
             return &station_location == m_p_selected_station_location;
         }
 
-        bool selected(const train_type& train, const boost::optional<size_type>& departure_stop_index)
-        const
+        bool selected(const train_type& train, const boost::optional<size_type>& departure_stop_index) const
         {
             if (!m_p_selected_train)
                 return false;
@@ -82,12 +76,8 @@ namespace bobura { namespace view { namespace diagram
                 assert(!m_departure_stop_index);
                 return &train == m_p_selected_train;
             }
-            return
-                &train == m_p_selected_train &&
-                (
-                    *departure_stop_index == std::numeric_limits<size_type>::max() ||
-                    *departure_stop_index == *m_departure_stop_index
-                );
+            return &train == m_p_selected_train && (*departure_stop_index == std::numeric_limits<size_type>::max() ||
+                                                    *departure_stop_index == *m_departure_stop_index);
         }
 
         void select(const station_location_type& station_location)
@@ -99,10 +89,7 @@ namespace bobura { namespace view { namespace diagram
             m_p_selection_observer_set->station_selected()(station_location);
         }
 
-        void select(
-            const train_type&                 train,
-            const boost::optional<size_type>& departure_stop_index
-        )
+        void select(const train_type& train, const boost::optional<size_type>& departure_stop_index)
         {
             unselect_all();
 
@@ -121,8 +108,7 @@ namespace bobura { namespace view { namespace diagram
             m_p_selection_observer_set->all_unselected()();
         }
 
-        const selection_observer_set_type& selection_observer_set()
-        const
+        const selection_observer_set_type& selection_observer_set() const
         {
             return *m_p_selection_observer_set;
         }
@@ -143,38 +129,31 @@ namespace bobura { namespace view { namespace diagram
         boost::optional<size_type> m_departure_stop_index;
 
         std::unique_ptr<selection_observer_set_type> m_p_selection_observer_set;
-
-
     };
 
 
     template <typename Traits>
-    selection<Traits>::selection()
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    selection<Traits>::selection() : m_p_impl(tetengo2::stdalt::make_unique<impl>())
     {}
 
     template <typename Traits>
     selection<Traits>::selection(selection&& another)
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
     {}
 
     template <typename Traits>
-    selection<Traits>::~selection()
-    noexcept
+    selection<Traits>::~selection() noexcept
     {}
 
     template <typename Traits>
-    bool selection<Traits>::selected(const station_location_type& station_location)
-    const
+    bool selection<Traits>::selected(const station_location_type& station_location) const
     {
         return m_p_impl->selected(station_location);
     }
 
     template <typename Traits>
-    bool selection<Traits>::selected(const train_type& train, const boost::optional<size_type>& departure_stop_index)
-    const
+    bool
+    selection<Traits>::selected(const train_type& train, const boost::optional<size_type>& departure_stop_index) const
     {
         return m_p_impl->selected(train, departure_stop_index);
     }
@@ -198,8 +177,7 @@ namespace bobura { namespace view { namespace diagram
     }
 
     template <typename Traits>
-    const typename selection<Traits>::selection_observer_set_type& selection<Traits>::selection_observer_set()
-    const
+    const typename selection<Traits>::selection_observer_set_type& selection<Traits>::selection_observer_set() const
     {
         return m_p_impl->selection_observer_set();
     }
@@ -210,27 +188,21 @@ namespace bobura { namespace view { namespace diagram
         return m_p_impl->selection_observer_set();
     }
 
-        
-    namespace
-    {
+
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC

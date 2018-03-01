@@ -17,8 +17,7 @@
 #include <bobura/load_save/load_from_file.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     /*!
         \brief The class template for a load-from-file command.
 
@@ -63,20 +62,17 @@ namespace bobura { namespace command
             /*!
                 \brief Destroys the parameter.
             */
-            virtual ~parameter_type()
-            noexcept;
+            virtual ~parameter_type() noexcept;
 
             /*!
                 \brief Returns the path.
 
                 \return The path.
             */
-            const boost::filesystem::path& path()
-            const;
+            const boost::filesystem::path& path() const;
 
         private:
             boost::filesystem::path m_path;
-
         };
 
 
@@ -92,8 +88,7 @@ namespace bobura { namespace command
         /*!
             \brief Destroys the load-from-file command.
         */
-        virtual ~load_from_file()
-        noexcept;
+        virtual ~load_from_file() noexcept;
 
 
     private:
@@ -109,16 +104,12 @@ namespace bobura { namespace command
 
         // virtual functions
 
-        virtual bool enabled_impl(const model_type& model)
-        const override;
+        virtual bool enabled_impl(const model_type& model) const override;
 
-        virtual void execute_impl(model_type& model, abstract_window_type& parent)
-        const override;
+        virtual void execute_impl(model_type& model, abstract_window_type& parent) const override;
 
-        virtual void execute_impl(model_type& model, abstract_window_type& parent, const parameter_base& parameter)
-        const override;
-
-
+        virtual void
+        execute_impl(model_type& model, abstract_window_type& parent, const parameter_base& parameter) const override;
     };
 
 

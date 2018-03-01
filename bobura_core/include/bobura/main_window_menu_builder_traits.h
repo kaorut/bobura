@@ -10,27 +10,26 @@
 #define BOBURA_MAINWINDOWMENUBUILDERTRAITS_H
 
 
-namespace bobura
-{
-     /*!
-        \brief The class template for the main window menu builder traits.
+namespace bobura {
+    /*!
+       \brief The class template for the main window menu builder traits.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
-        \tparam Speed             A speed type.
-        \tparam Scale             A scale type.
-        \tparam Font              A font type.
-        \tparam MenuBar           A menu bar type.
-        \tparam PopupMenu         A popup menu type.
-        \tparam MenuCommand       A menu command type.
-        \tparam MenuSeparator     A menu separator type.
-        \tparam MessageCatalog    A message catalog type.
-        \tparam CommandSetTraits  A command set traits.
-        \tparam MainWindowTraits  A main window traits type.
-        \tparam DiagramViewTraits A diagram view traits type.
-    */
+       \tparam Size              A size type.
+       \tparam Difference        A difference type.
+       \tparam String            A string type.
+       \tparam OperatingDistance An operating distance type.
+       \tparam Speed             A speed type.
+       \tparam Scale             A scale type.
+       \tparam Font              A font type.
+       \tparam MenuBar           A menu bar type.
+       \tparam PopupMenu         A popup menu type.
+       \tparam MenuCommand       A menu command type.
+       \tparam MenuSeparator     A menu separator type.
+       \tparam MessageCatalog    A message catalog type.
+       \tparam CommandSetTraits  A command set traits.
+       \tparam MainWindowTraits  A main window traits type.
+       \tparam DiagramViewTraits A diagram view traits type.
+   */
     template <
         typename Size,
         typename Difference,
@@ -46,8 +45,7 @@ namespace bobura
         typename MessageCatalog,
         typename CommandSetTraits,
         typename MainWindowTraits,
-        typename DiagramViewTraits
-    >
+        typename DiagramViewTraits>
     class main_window_menu_builder_traits
     {
     public:
@@ -97,11 +95,7 @@ namespace bobura
 
         //! The diagram view traits type.
         using diagram_view_traits_type = DiagramViewTraits;
-
-
     };
-
-
 }
 
 

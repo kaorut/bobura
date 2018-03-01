@@ -3,9 +3,9 @@
 # $Id$
 
 SOURCE_SUBDIRS = \
-    bobura_model \
-    bobura_core \
     bobura \
+    bobura_core \
+    bobura_model \
     setup
 
 SUBDIRS = \
@@ -47,6 +47,13 @@ lint-iwyu-extra: $(top_srcdir)/$(IWYU_IMP_PATH)
 $(top_srcdir)/$(IWYU_IMP_PATH):
 	git submodule update --init
 	git submodule foreach 'git checkout -f master && git pull -p'
+
+.PHONY: format
+format: $(top_srcdir)/.clang-format
+	for d in $(SOURCE_SUBDIRS); do (cd $$d && $(MAKE) format); done
+
+$(top_srcdir)/.clang-format: $(top_srcdir)/lib/tetengo2/tools/clang-format
+	cp -f $(top_srcdir)/lib/tetengo2/tools/clang-format $(top_srcdir)/.clang-format
 
 .PHONY: doc
 doc:

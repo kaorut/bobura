@@ -10,41 +10,40 @@
 #define BOBURA_APPLICATIONTRAITS_H
 
 
-namespace bobura
-{
-   /*!
-        \brief The class template for an application traits.
+namespace bobura {
+    /*!
+         \brief The class template for an application traits.
 
-        \tparam Size                        A size type.
-        \tparam Difference                  A difference type.
-        \tparam String                      A string type.
-        \tparam Position                    A position type.
-        \tparam Dimension                   A dimension type.
-        \tparam OperatingDistance           A string type.
-        \tparam Spped                       A string type.
-        \tparam Scale                       A scale type.
-        \tparam GuiFixture                  A GUI fixture type.
-        \tparam Font                        A font type.
-        \tparam AbstractWindow              An abstract window type.
-        \tparam PictureBox                  A picture box type.
-        \tparam TabFrame                    A tab frame type.
-        \tparam MapBox                      A map box type.
-        \tparam SideBar                     A side bar type.
-        \tparam MenuBar                     A menu bar type.
-        \tparam PopupMenu                   A popup menu type.
-        \tparam MenuCommand                 A menu command type.
-        \tparam MenuSeparator               A menu separator type.
-        \tparam MessageLoop                 A message loop type.
-        \tparam MouseCapture                A mouse capture_type.
-        \tparam Timer                       A timer type.
-        \tparam MessageCatalog              A message catalog type.
-        \tparam MainWindowTraits            A main window traits type.
-        \tparam DiagramViewTraits           A diagram view traits type.
-        \tparam TimetableViewTraits         A timetable view traits type.
-        \tparam LoadSaveTraits              A loading and saving processing traits type.
-        \tparam CommandSetTraits            A command set traits type.
-        \tparam MainWindowMenuBuilderTraits A main window menu builder traits type.
-    */
+         \tparam Size                        A size type.
+         \tparam Difference                  A difference type.
+         \tparam String                      A string type.
+         \tparam Position                    A position type.
+         \tparam Dimension                   A dimension type.
+         \tparam OperatingDistance           A string type.
+         \tparam Spped                       A string type.
+         \tparam Scale                       A scale type.
+         \tparam GuiFixture                  A GUI fixture type.
+         \tparam Font                        A font type.
+         \tparam AbstractWindow              An abstract window type.
+         \tparam PictureBox                  A picture box type.
+         \tparam TabFrame                    A tab frame type.
+         \tparam MapBox                      A map box type.
+         \tparam SideBar                     A side bar type.
+         \tparam MenuBar                     A menu bar type.
+         \tparam PopupMenu                   A popup menu type.
+         \tparam MenuCommand                 A menu command type.
+         \tparam MenuSeparator               A menu separator type.
+         \tparam MessageLoop                 A message loop type.
+         \tparam MouseCapture                A mouse capture_type.
+         \tparam Timer                       A timer type.
+         \tparam MessageCatalog              A message catalog type.
+         \tparam MainWindowTraits            A main window traits type.
+         \tparam DiagramViewTraits           A diagram view traits type.
+         \tparam TimetableViewTraits         A timetable view traits type.
+         \tparam LoadSaveTraits              A loading and saving processing traits type.
+         \tparam CommandSetTraits            A command set traits type.
+         \tparam MainWindowMenuBuilderTraits A main window menu builder traits type.
+     */
     template <
         typename Size,
         typename Difference,
@@ -74,8 +73,7 @@ namespace bobura
         typename TimetableViewTraits,
         typename LoadSaveTraits,
         typename CommandSetTraits,
-        typename MainWindowMenuBuilderTraits
-    >
+        typename MainWindowMenuBuilderTraits>
     class application_traits
     {
     public:
@@ -83,7 +81,7 @@ namespace bobura
 
         //! The size type.
         using size_type = Size;
-        
+
         //! The difference type.
         using difference_type = Difference;
 
@@ -167,11 +165,7 @@ namespace bobura
 
         //! The main window menu builder traits type.
         using main_window_menu_builder_traits_type = MainWindowMenuBuilderTraits;
-
-
     };
-
-
 }
 
 

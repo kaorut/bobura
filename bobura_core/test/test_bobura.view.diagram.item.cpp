@@ -19,8 +19,7 @@
 #include <bobura/view/diagram/selection.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -48,11 +47,7 @@ namespace
     class concrete_item : public item_type
     {
     public:
-        explicit concrete_item(selection_type& selection)
-        :
-        item_type(selection),
-        m_selected(false)
-        {}
+        explicit concrete_item(selection_type& selection) : item_type(selection), m_selected(false) {}
 
         concrete_item& operator=(concrete_item&& item)
         {
@@ -64,125 +59,120 @@ namespace
     private:
         bool m_selected;
 
-        virtual bool selected_impl()
-        const override
+        virtual bool selected_impl() const override
         {
             return m_selected;
         }
 
-        virtual void select_impl(const bool switch_selection_style)
-        override
+        virtual void select_impl(const bool switch_selection_style) override
         {
             boost::ignore_unused(switch_selection_style);
 
             m_selected = true;
         }
-
     };
-
-
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(view)
-BOOST_AUTO_TEST_SUITE(diagram)
-BOOST_AUTO_TEST_SUITE(item)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(view)
+        BOOST_AUTO_TEST_SUITE(diagram)
+            BOOST_AUTO_TEST_SUITE(item)
+                // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        selection_type selection{};
-        const concrete_item item{ selection };
-    }
+                    selection_type      selection{};
+                    const concrete_item item{ selection };
+                }
 
-    BOOST_AUTO_TEST_CASE(operator_assign)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(operator_assign)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        selection_type selection1{};
-        concrete_item item1{ selection1 };
-        selection_type selection2{};
-        concrete_item item2{ selection2 };
+                    selection_type selection1{};
+                    concrete_item  item1{ selection1 };
+                    selection_type selection2{};
+                    concrete_item  item2{ selection2 };
 
-        item1 = std::move(item2);
-    }
+                    item1 = std::move(item2);
+                }
 
-    BOOST_AUTO_TEST_CASE(draw_on)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(draw_on)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        selection_type selection{};
-        const concrete_item item{ selection };
+                    selection_type      selection{};
+                    const concrete_item item{ selection };
 
-        window_type window{};
-        const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
-        const auto p_canvas = picture_box.create_canvas();
-        item.draw_on(*p_canvas);
-    }
+                    window_type            window{};
+                    const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
+                    const auto             p_canvas = picture_box.create_canvas();
+                    item.draw_on(*p_canvas);
+                }
 
-    BOOST_AUTO_TEST_CASE(p_item_by_position)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(p_item_by_position)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        {
-            selection_type selection{};
-            const concrete_item item{ selection };
+                    {
+                        selection_type      selection{};
+                        const concrete_item item{ selection };
 
-            item.p_item_by_position(position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } });
-        }
-        {
-            selection_type selection{};
-            concrete_item item{ selection };
+                        item.p_item_by_position(position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } });
+                    }
+                    {
+                        selection_type selection{};
+                        concrete_item  item{ selection };
 
-            item.p_item_by_position(position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } });
-        }
-    }
+                        item.p_item_by_position(position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } });
+                    }
+                }
 
-    BOOST_AUTO_TEST_CASE(get_selection)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(get_selection)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        {
-            selection_type selection{};
-            const concrete_item item{ selection };
+                    {
+                        selection_type      selection{};
+                        const concrete_item item{ selection };
 
-            BOOST_TEST(&item.get_selection() == &selection);
-        }
-        {
-            selection_type selection{};
-            concrete_item item{ selection };
+                        BOOST_TEST(&item.get_selection() == &selection);
+                    }
+                    {
+                        selection_type selection{};
+                        concrete_item  item{ selection };
 
-            BOOST_TEST(&item.get_selection() == &selection);
-        }
-    }
+                        BOOST_TEST(&item.get_selection() == &selection);
+                    }
+                }
 
-    BOOST_AUTO_TEST_CASE(selected)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(selected)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        selection_type selection{};
-        const concrete_item item{ selection };
+                    selection_type      selection{};
+                    const concrete_item item{ selection };
 
-        BOOST_TEST(!item.selected());
-    }
+                    BOOST_TEST(!item.selected());
+                }
 
-    BOOST_AUTO_TEST_CASE(select)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(select)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        selection_type selection{};
-        concrete_item item{ selection };
+                    selection_type selection{};
+                    concrete_item  item{ selection };
 
-        item.select(false);
+                    item.select(false);
 
-        BOOST_TEST(item.selected());
-    }
+                    BOOST_TEST(item.selected());
+                }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE_END()
+        BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

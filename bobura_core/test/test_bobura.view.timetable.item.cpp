@@ -21,8 +21,7 @@
 #include <bobura/view/timetable/item.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -52,10 +51,7 @@ namespace
     class concrete_item : public item_type
     {
     public:
-        concrete_item()
-        :
-        item_type()
-        {}
+        concrete_item() : item_type() {}
 
         concrete_item& operator=(concrete_item&& item)
         {
@@ -72,107 +68,103 @@ namespace
         {
             set_dimension(std::move(dimension));
         }
-
-
     };
-
-
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(view)
-BOOST_AUTO_TEST_SUITE(timetable)
-BOOST_AUTO_TEST_SUITE(item)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(view)
+        BOOST_AUTO_TEST_SUITE(timetable)
+            BOOST_AUTO_TEST_SUITE(item)
+                // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        const concrete_item item{};
-    }
+                    const concrete_item item{};
+                }
 
-    BOOST_AUTO_TEST_CASE(operator_assign)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(operator_assign)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        concrete_item item1{};
-        concrete_item item2{};
+                    concrete_item item1{};
+                    concrete_item item2{};
 
-        item1 = std::move(item2);
-    }
+                    item1 = std::move(item2);
+                }
 
-    BOOST_AUTO_TEST_CASE(position)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(position)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        {
-            const concrete_item item{};
+                    {
+                        const concrete_item item{};
 
-            item.position();
-        }
-        {
-            concrete_item item{};
+                        item.position();
+                    }
+                    {
+                        concrete_item item{};
 
-            item.position();
-        }
-    }
+                        item.position();
+                    }
+                }
 
-    BOOST_AUTO_TEST_CASE(dimension)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(dimension)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        {
-            const concrete_item item{};
+                    {
+                        const concrete_item item{};
 
-            item.dimension();
-        }
-        {
-            concrete_item item{};
+                        item.dimension();
+                    }
+                    {
+                        concrete_item item{};
 
-            item.dimension();
-        }
-    }
+                        item.dimension();
+                    }
+                }
 
-    BOOST_AUTO_TEST_CASE(draw_on)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(draw_on)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        const concrete_item item{};
+                    const concrete_item item{};
 
-        window_type window{};
-        const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
-        const auto p_canvas = picture_box.create_canvas();
-        item.draw_on(*p_canvas);
-    }
+                    window_type            window{};
+                    const picture_box_type picture_box{ window, picture_box_type::scroll_bar_style_type::both };
+                    const auto             p_canvas = picture_box.create_canvas();
+                    item.draw_on(*p_canvas);
+                }
 
-    BOOST_AUTO_TEST_CASE(set_position)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(set_position)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        concrete_item item{};
+                    concrete_item item{};
 
-        const position_type position{ position_unit_type{ 42 }, position_unit_type{ 24 } };
-        item.call_set_position(position);
+                    const position_type position{ position_unit_type{ 42 }, position_unit_type{ 24 } };
+                    item.call_set_position(position);
 
-        BOOST_CHECK(item.position() == position);
-    }
+                    BOOST_CHECK(item.position() == position);
+                }
 
-    BOOST_AUTO_TEST_CASE(set_dimension)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(set_dimension)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        concrete_item item{};
+                    concrete_item item{};
 
-        const dimension_type dimension{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } };
-        item.call_set_dimension(dimension);
+                    const dimension_type dimension{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } };
+                    item.call_set_dimension(dimension);
 
-        BOOST_CHECK(item.dimension() == dimension);
-    }
+                    BOOST_CHECK(item.dimension() == dimension);
+                }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE_END()
+        BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

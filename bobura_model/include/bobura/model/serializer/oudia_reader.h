@@ -15,8 +15,7 @@
 #include <bobura/model/station_info/grade.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     /*!
         \brief The class template for an OuDia reader.
 
@@ -39,8 +38,7 @@ namespace bobura { namespace model { namespace serializer
         typename Speed,
         typename SelectDiagram,
         typename Font,
-        typename Encoder
-    >
+        typename Encoder>
     class oudia_reader : public reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>
     {
     public:
@@ -101,8 +99,7 @@ namespace bobura { namespace model { namespace serializer
         /*!
             \brief Destroys the oudia_reader.
         */
-        virtual ~oudia_reader()
-        noexcept;
+        virtual ~oudia_reader() noexcept;
 
 
     private:
@@ -118,13 +115,9 @@ namespace bobura { namespace model { namespace serializer
 
         // virtual functions
 
-        virtual bool selects_impl(iterator first, iterator last)
-        override;
+        virtual bool selects_impl(iterator first, iterator last) override;
 
-        virtual std::unique_ptr<timetable_type> read_impl(iterator first, iterator last, error_type& error)
-        override;
-
-
+        virtual std::unique_ptr<timetable_type> read_impl(iterator first, iterator last, error_type& error) override;
     };
 
 

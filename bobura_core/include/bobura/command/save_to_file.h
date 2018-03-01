@@ -15,8 +15,7 @@
 #include <bobura/load_save/save_to_file.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     /*!
         \brief The class template for a save-to-file command.
 
@@ -60,8 +59,7 @@ namespace bobura { namespace command
         /*!
             \brief Destroys the save-to-file command.
         */
-        virtual ~save_to_file()
-        noexcept;
+        virtual ~save_to_file() noexcept;
 
 
     private:
@@ -77,10 +75,7 @@ namespace bobura { namespace command
 
         // virtual functions
 
-        virtual void execute_impl(model_type& model, abstract_window_type& parent)
-        const override;
-
-
+        virtual void execute_impl(model_type& model, abstract_window_type& parent) const override;
     };
 
 

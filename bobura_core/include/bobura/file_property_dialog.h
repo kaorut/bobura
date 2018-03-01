@@ -12,8 +12,7 @@
 #include <memory>
 
 
-namespace bobura
-{
+namespace bobura {
     /*!
         \brief The class template for the file property dialog.
 
@@ -54,8 +53,7 @@ namespace bobura
         /*!
             \brief Destroys the file property dialog.
         */
-        virtual ~file_property_dialog()
-        noexcept;
+        virtual ~file_property_dialog() noexcept;
 
 
         // functions
@@ -65,8 +63,7 @@ namespace bobura
 
             \return The company name.
         */
-        const string_type& company_name()
-        const;
+        const string_type& company_name() const;
 
         /*!
             \brief Sets a company name.
@@ -80,8 +77,7 @@ namespace bobura
 
             \return The line name.
         */
-        const string_type& line_name()
-        const;
+        const string_type& line_name() const;
 
         /*!
             \brief Sets a line name.
@@ -95,8 +91,7 @@ namespace bobura
 
             \return The note.
         */
-        const string_type& note()
-        const;
+        const string_type& note() const;
 
         /*!
             \brief Sets a note.
@@ -110,8 +105,7 @@ namespace bobura
 
             \return The file name.
         */
-        const string_type& file_name()
-        const;
+        const string_type& file_name() const;
 
         /*!
             \brief Sets a file name.
@@ -134,13 +128,8 @@ namespace bobura
 
         // virtual functions
 
-        virtual void set_result_impl()
-        override;
-
-
+        virtual void set_result_impl() override;
     };
-
-
 }
 
 #endif

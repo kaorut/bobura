@@ -15,8 +15,7 @@
 #include <bobura/diagram_view.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     /*!
         \brief The class template for a vertical zoom-in command.
 
@@ -68,8 +67,7 @@ namespace bobura { namespace command
         /*!
             \brief Destroys the vertical zoom-in command.
         */
-        virtual ~vertically_zoom_in()
-        noexcept;
+        virtual ~vertically_zoom_in() noexcept;
 
 
     private:
@@ -85,10 +83,7 @@ namespace bobura { namespace command
 
         // virtual functions
 
-        virtual void execute_impl(model_type& model, abstract_window_type& parent)
-        const override;
-
-
+        virtual void execute_impl(model_type& model, abstract_window_type& parent) const override;
     };
 
 

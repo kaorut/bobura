@@ -15,8 +15,7 @@
 #include <bobura/model/timetable.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     /*!
         \brief The class template for a writer.
 
@@ -35,8 +34,7 @@ namespace bobura { namespace model { namespace serializer
         typename OutputStream,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     class writer : private boost::noncopyable
     {
     public:
@@ -73,8 +71,7 @@ namespace bobura { namespace model { namespace serializer
         /*!
             \brief Destroys the writer.
         */
-        virtual ~writer()
-        noexcept;
+        virtual ~writer() noexcept;
 
 
         // functions
@@ -86,8 +83,7 @@ namespace bobura { namespace model { namespace serializer
 
             \return The extension.
         */
-        boost::filesystem::path extension()
-        const;
+        boost::filesystem::path extension() const;
 
         /*!
             \brief Checks whether this writer selects a file type.
@@ -97,8 +93,7 @@ namespace bobura { namespace model { namespace serializer
             \retval true  When this writer selects the file type.
             \retval false Otherwise.
         */
-        bool selects(const boost::filesystem::path& path)
-        const;
+        bool selects(const boost::filesystem::path& path) const;
 
         /*!
             \brief Writes a timetable.
@@ -121,16 +116,11 @@ namespace bobura { namespace model { namespace serializer
     private:
         // virtual functions
 
-        virtual bool selects_impl(const boost::filesystem::path& path)
-        const;
+        virtual bool selects_impl(const boost::filesystem::path& path) const;
 
-        virtual boost::filesystem::path extension_impl()
-        const = 0;
+        virtual boost::filesystem::path extension_impl() const = 0;
 
-        virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream)
-        = 0;
-
-
+        virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream) = 0;
     };
 
 

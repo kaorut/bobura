@@ -45,8 +45,7 @@
 #include <bobura/type_list.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -71,13 +70,11 @@ namespace
 
     using time_type = bobura::model::train_info::time<size_type, difference_type>;
 
-    using timetable_type =
-        bobura::model::timetable<
-            size_type, difference_type, string_type, operating_distance_type, speed_type, font_type
-        >;
+    using timetable_type = bobura::model::
+        timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
     using font_color_set_type = timetable_type::font_color_set_type;
-    
+
     using font_color_type = font_color_set_type::font_color_type;
 
     using color_type = ui_type_list_type::color_type;
@@ -92,34 +89,30 @@ namespace
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
-    using exec_json_reading_task_type =
-        bobura::model::serializer::exec_json_reading_task<
-            size_type,
-            difference_type,
-            string_type,
-            operating_distance_type,
-            speed_type,
-            font_type,
-            dialog_type,
-            timer_type,
-            system_color_set_type,
-            message_catalog_type
-        >;
+    using exec_json_reading_task_type = bobura::model::serializer::exec_json_reading_task<
+        size_type,
+        difference_type,
+        string_type,
+        operating_distance_type,
+        speed_type,
+        font_type,
+        dialog_type,
+        timer_type,
+        system_color_set_type,
+        message_catalog_type>;
 
-    using reader_type =
-        bobura::model::serializer::json_reader<
-            size_type,
-            difference_type,
-            string_type,
-            input_stream_iterator_type,
-            int,
-            double,
-            operating_distance_type,
-            speed_type,
-            exec_json_reading_task_type,
-            font_type,
-            locale_type_list_type::timetable_file_encoder_type
-        >;
+    using reader_type = bobura::model::serializer::json_reader<
+        size_type,
+        difference_type,
+        string_type,
+        input_stream_iterator_type,
+        int,
+        double,
+        operating_distance_type,
+        speed_type,
+        exec_json_reading_task_type,
+        font_type,
+        locale_type_list_type::timetable_file_encoder_type>;
 
     using error_type = reader_type::error_type;
 
@@ -130,9 +123,7 @@ namespace
 
     const std::string json_empty0{};
 
-    const std::string json_empty1{
-        "[]"
-    };
+    const std::string json_empty1{ "[]" };
 
     const std::string json_empty2{
         "[\n"
@@ -458,13 +449,9 @@ namespace
         "]\n"
     };
 
-    const std::string json_white_space_before_start_element{
-        "    \t    \n    []\n"
-    };
+    const std::string json_white_space_before_start_element{ "    \t    \n    []\n" };
 
-    const std::string json_not_json{
-        "hoge\n"
-    };
+    const std::string json_not_json{ "hoge\n" };
 
     const std::string json_invalid_time_format{
         "[\n"
@@ -618,425 +605,362 @@ namespace
         "    []\n"
         "]\n"
     };
-
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(model)
-BOOST_AUTO_TEST_SUITE(serializer)
-BOOST_AUTO_TEST_SUITE(json_reader)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(model)
+        BOOST_AUTO_TEST_SUITE(serializer)
+            BOOST_AUTO_TEST_SUITE(json_reader)
+                // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        {
-            window_type window;
-            const message_catalog_type message_catalog;
-            auto p_exec_json_reading_task =
-                tetengo2::stdalt::make_unique<exec_json_reading_task_type>(window, message_catalog);
-            reader_type json_reader{ std::move(p_exec_json_reading_task) };
-        }
-        {
-            std::unique_ptr<exec_json_reading_task_type> p_exec_json_reading_task{};
-            BOOST_CHECK_THROW(reader_type json_reader{ std::move(p_exec_json_reading_task) }, std::invalid_argument);
-        }
-    }
-
-    BOOST_AUTO_TEST_CASE(selects)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        window_type window;
-        const message_catalog_type message_catalog;
-        auto p_exec_json_reading_task =
-            tetengo2::stdalt::make_unique<exec_json_reading_task_type>(window, message_catalog);
-        reader_type json_reader{ std::move(p_exec_json_reading_task) };
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty0) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            BOOST_TEST(!json_reader.selects(first, last));
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty1) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            BOOST_TEST(json_reader.selects(first, last));
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty2) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            BOOST_TEST(json_reader.selects(first, last));
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{
-                boost::make_iterator_range(json_white_space_before_start_element)
-            };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            BOOST_TEST(json_reader.selects(first, last));
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_not_json) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            BOOST_TEST(!json_reader.selects(first, last));
-        }
-    }
-
-    BOOST_AUTO_TEST_CASE(read)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        window_type window;
-        const message_catalog_type message_catalog;
-        auto p_exec_json_reading_task =
-            tetengo2::stdalt::make_unique<exec_json_reading_task_type>(window, message_catalog);
-        reader_type json_reader{ std::move(p_exec_json_reading_task) };
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_not_json) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            auto error = error_type::none;
-            const auto p_timetable = json_reader.read(first, last, error);
-
-            BOOST_TEST_REQUIRE(!p_timetable);
-            BOOST_CHECK(error == error_type::corrupted);
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty1) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            auto error = error_type::none;
-            const auto p_timetable = json_reader.read(first, last, error);
-
-            BOOST_TEST_REQUIRE(!p_timetable);
-            BOOST_CHECK(error == error_type::corrupted);
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty2) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            auto error = error_type::none;
-            const auto p_timetable = json_reader.read(first, last, error);
-
-            BOOST_TEST_REQUIRE(p_timetable.get());
-            BOOST_CHECK(error == error_type::none);
-            BOOST_TEST(p_timetable->line_name().empty());
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_line_name_only) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            auto error = error_type::none;
-            const auto p_timetable = json_reader.read(first, last, error);
-
-            BOOST_TEST_REQUIRE(p_timetable.get());
-            BOOST_CHECK(error == error_type::none);
-            BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("hoge") });
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_station_only) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            auto error = error_type::none;
-            const auto p_timetable = json_reader.read(first, last, error);
-
-            BOOST_TEST_REQUIRE(p_timetable.get());
-            BOOST_CHECK(error == error_type::none);
-            BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("hoge") });
-            BOOST_TEST_REQUIRE(p_timetable->station_locations().size() == 2U);
-            {
-                const auto& station_location = p_timetable->station_locations()[0];
-                const auto& station = station_location.get_station();
-                BOOST_CHECK(station.name() == string_type{ TETENGO2_TEXT("stationA") });
-                BOOST_CHECK(station.grade().name() == string_type{ TETENGO2_TEXT("local") });
-                BOOST_TEST(!station.shows_down_arrival_times());
-                BOOST_TEST(station.shows_up_arrival_times());
-                BOOST_CHECK(station.note() == string_type{ TETENGO2_TEXT("noteA") });
-                BOOST_TEST(station_location.operating_distance() == 42U);
-            }
-            {
-                const auto& station_location = p_timetable->station_locations()[1];
-                const auto& station = station_location.get_station();
-                BOOST_CHECK(station.name() == string_type{ TETENGO2_TEXT("stationB") });
-                BOOST_CHECK(station.grade().name() == string_type{ TETENGO2_TEXT("principal") });
-                BOOST_TEST(station.shows_down_arrival_times());
-                BOOST_TEST(!station.shows_up_arrival_times());
-                BOOST_CHECK(station.note() == string_type{ TETENGO2_TEXT("noteB") });
-                BOOST_TEST(station_location.operating_distance() == 4242U);
-            }
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_invalid_station_grade) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            auto error = error_type::none;
-            const auto p_timetable = json_reader.read(first, last, error);
-
-            BOOST_TEST_REQUIRE(!p_timetable);
-            BOOST_CHECK(error == error_type::corrupted);
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_full_content) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            auto error = error_type::none;
-            const auto p_timetable = json_reader.read(first, last, error);
-
-            BOOST_TEST_REQUIRE(p_timetable.get());
-            BOOST_CHECK(error == error_type::none);
-
-            BOOST_CHECK(p_timetable->company_name() == string_type{ TETENGO2_TEXT("hoge") });
-            BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("fuga") });
-            BOOST_CHECK(p_timetable->note() == string_type{ TETENGO2_TEXT("piyo") });
-
-            {
-                const auto& font_color_set = p_timetable->font_color_set();
-
-                BOOST_TEST_REQUIRE(!!font_color_set.background().diagram_color());
-                BOOST_CHECK((*font_color_set.background().diagram_color() == color_type{ 0xAB, 0xCD, 0xEF }));
-                BOOST_CHECK((
-                    font_color_set.company_name() ==
-                    font_color_type{
-                        boost::make_optional(
-                            font_type{ string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true }
-                        ),
-                        boost::make_optional(color_type{ 0xAB, 0xCD, 0xEF }),
-                        boost::make_optional(
-                            font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true }
-                        ),
-                        boost::make_optional(color_type{ 0xFE, 0xDC, 0xBA })
+                    {
+                        window_type                window;
+                        const message_catalog_type message_catalog;
+                        auto                       p_exec_json_reading_task =
+                            tetengo2::stdalt::make_unique<exec_json_reading_task_type>(window, message_catalog);
+                        reader_type json_reader{ std::move(p_exec_json_reading_task) };
                     }
-                ));
-            }
-
-            BOOST_TEST_REQUIRE(p_timetable->down_trains().size() == 2U);
-            {
-                const auto& train = p_timetable->down_trains()[0];
-                BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("101D") });
-                BOOST_CHECK(train.note() == string_type{ TETENGO2_TEXT("fuga") });
-                const auto& stops = train.stops();
-                BOOST_TEST_REQUIRE(train.stops().size() == 2U);
-                {
-                    const auto& stop = stops[0];
-                    BOOST_TEST(!stop.arrival().initialized());
-                    BOOST_TEST(!stop.departure().initialized());
-                    BOOST_TEST(!stop.operational());
-                    BOOST_TEST(stop.platform().empty());
+                    {
+                        std::unique_ptr<exec_json_reading_task_type> p_exec_json_reading_task{};
+                        BOOST_CHECK_THROW(
+                            reader_type json_reader{ std::move(p_exec_json_reading_task) }, std::invalid_argument);
+                    }
                 }
+
+                BOOST_AUTO_TEST_CASE(selects)
                 {
-                    const auto& stop = stops[1];
-                    BOOST_TEST(!stop.arrival().initialized());
-                    BOOST_TEST(!stop.departure().initialized());
-                    BOOST_TEST(!stop.operational());
-                    BOOST_TEST(stop.platform().empty());
+                    BOOST_TEST_PASSPOINT();
+
+                    window_type                window;
+                    const message_catalog_type message_catalog;
+                    auto                       p_exec_json_reading_task =
+                        tetengo2::stdalt::make_unique<exec_json_reading_task_type>(window, message_catalog);
+                    reader_type json_reader{ std::move(p_exec_json_reading_task) };
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty0) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        BOOST_TEST(!json_reader.selects(first, last));
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty1) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        BOOST_TEST(json_reader.selects(first, last));
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty2) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        BOOST_TEST(json_reader.selects(first, last));
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(
+                            json_white_space_before_start_element) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        BOOST_TEST(json_reader.selects(first, last));
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_not_json) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        BOOST_TEST(!json_reader.selects(first, last));
+                    }
                 }
-            }
-            {
-                const auto& train = p_timetable->down_trains()[1];
-                BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("123D") });
-                BOOST_TEST(train.note().empty());
-                const auto& stops = train.stops();
-                BOOST_TEST_REQUIRE(train.stops().size() == 2U);
+
+                BOOST_AUTO_TEST_CASE(read)
                 {
-                    const auto& stop = stops[0];
-                    BOOST_TEST(!stop.arrival().initialized());
-                    BOOST_CHECK((stop.departure() == time_type{ 6, 0, 30 }));
-                    BOOST_TEST(stop.operational());
-                    BOOST_CHECK(stop.platform() == string_type{ TETENGO2_TEXT("1") });
+                    BOOST_TEST_PASSPOINT();
+
+                    window_type                window;
+                    const message_catalog_type message_catalog;
+                    auto                       p_exec_json_reading_task =
+                        tetengo2::stdalt::make_unique<exec_json_reading_task_type>(window, message_catalog);
+                    reader_type json_reader{ std::move(p_exec_json_reading_task) };
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_not_json) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        auto       error = error_type::none;
+                        const auto p_timetable = json_reader.read(first, last, error);
+
+                        BOOST_TEST_REQUIRE(!p_timetable);
+                        BOOST_CHECK(error == error_type::corrupted);
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty1) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        auto       error = error_type::none;
+                        const auto p_timetable = json_reader.read(first, last, error);
+
+                        BOOST_TEST_REQUIRE(!p_timetable);
+                        BOOST_CHECK(error == error_type::corrupted);
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty2) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        auto       error = error_type::none;
+                        const auto p_timetable = json_reader.read(first, last, error);
+
+                        BOOST_TEST_REQUIRE(p_timetable.get());
+                        BOOST_CHECK(error == error_type::none);
+                        BOOST_TEST(p_timetable->line_name().empty());
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(
+                            json_line_name_only) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        auto       error = error_type::none;
+                        const auto p_timetable = json_reader.read(first, last, error);
+
+                        BOOST_TEST_REQUIRE(p_timetable.get());
+                        BOOST_CHECK(error == error_type::none);
+                        BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("hoge") });
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(
+                            json_station_only) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        auto       error = error_type::none;
+                        const auto p_timetable = json_reader.read(first, last, error);
+
+                        BOOST_TEST_REQUIRE(p_timetable.get());
+                        BOOST_CHECK(error == error_type::none);
+                        BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("hoge") });
+                        BOOST_TEST_REQUIRE(p_timetable->station_locations().size() == 2U);
+                        {
+                            const auto& station_location = p_timetable->station_locations()[0];
+                            const auto& station = station_location.get_station();
+                            BOOST_CHECK(station.name() == string_type{ TETENGO2_TEXT("stationA") });
+                            BOOST_CHECK(station.grade().name() == string_type{ TETENGO2_TEXT("local") });
+                            BOOST_TEST(!station.shows_down_arrival_times());
+                            BOOST_TEST(station.shows_up_arrival_times());
+                            BOOST_CHECK(station.note() == string_type{ TETENGO2_TEXT("noteA") });
+                            BOOST_TEST(station_location.operating_distance() == 42U);
+                        }
+                        {
+                            const auto& station_location = p_timetable->station_locations()[1];
+                            const auto& station = station_location.get_station();
+                            BOOST_CHECK(station.name() == string_type{ TETENGO2_TEXT("stationB") });
+                            BOOST_CHECK(station.grade().name() == string_type{ TETENGO2_TEXT("principal") });
+                            BOOST_TEST(station.shows_down_arrival_times());
+                            BOOST_TEST(!station.shows_up_arrival_times());
+                            BOOST_CHECK(station.note() == string_type{ TETENGO2_TEXT("noteB") });
+                            BOOST_TEST(station_location.operating_distance() == 4242U);
+                        }
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(
+                            json_invalid_station_grade) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        auto       error = error_type::none;
+                        const auto p_timetable = json_reader.read(first, last, error);
+
+                        BOOST_TEST_REQUIRE(!p_timetable);
+                        BOOST_CHECK(error == error_type::corrupted);
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(
+                            json_full_content) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        auto       error = error_type::none;
+                        const auto p_timetable = json_reader.read(first, last, error);
+
+                        BOOST_TEST_REQUIRE(p_timetable.get());
+                        BOOST_CHECK(error == error_type::none);
+
+                        BOOST_CHECK(p_timetable->company_name() == string_type{ TETENGO2_TEXT("hoge") });
+                        BOOST_CHECK(p_timetable->line_name() == string_type{ TETENGO2_TEXT("fuga") });
+                        BOOST_CHECK(p_timetable->note() == string_type{ TETENGO2_TEXT("piyo") });
+
+                        {
+                            const auto& font_color_set = p_timetable->font_color_set();
+
+                            BOOST_TEST_REQUIRE(!!font_color_set.background().diagram_color());
+                            BOOST_CHECK(
+                                (*font_color_set.background().diagram_color() == color_type{ 0xAB, 0xCD, 0xEF }));
+                            BOOST_CHECK(
+                                (font_color_set.company_name() ==
+                                 font_color_type{
+                                     boost::make_optional(font_type{
+                                         string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true }),
+                                     boost::make_optional(color_type{ 0xAB, 0xCD, 0xEF }),
+                                     boost::make_optional(font_type{
+                                         string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true }),
+                                     boost::make_optional(color_type{ 0xFE, 0xDC, 0xBA }) }));
+                        }
+
+                        BOOST_TEST_REQUIRE(p_timetable->down_trains().size() == 2U);
+                        {
+                            const auto& train = p_timetable->down_trains()[0];
+                            BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("101D") });
+                            BOOST_CHECK(train.note() == string_type{ TETENGO2_TEXT("fuga") });
+                            const auto& stops = train.stops();
+                            BOOST_TEST_REQUIRE(train.stops().size() == 2U);
+                            {
+                                const auto& stop = stops[0];
+                                BOOST_TEST(!stop.arrival().initialized());
+                                BOOST_TEST(!stop.departure().initialized());
+                                BOOST_TEST(!stop.operational());
+                                BOOST_TEST(stop.platform().empty());
+                            }
+                            {
+                                const auto& stop = stops[1];
+                                BOOST_TEST(!stop.arrival().initialized());
+                                BOOST_TEST(!stop.departure().initialized());
+                                BOOST_TEST(!stop.operational());
+                                BOOST_TEST(stop.platform().empty());
+                            }
+                        }
+                        {
+                            const auto& train = p_timetable->down_trains()[1];
+                            BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("123D") });
+                            BOOST_TEST(train.note().empty());
+                            const auto& stops = train.stops();
+                            BOOST_TEST_REQUIRE(train.stops().size() == 2U);
+                            {
+                                const auto& stop = stops[0];
+                                BOOST_TEST(!stop.arrival().initialized());
+                                BOOST_CHECK((stop.departure() == time_type{ 6, 0, 30 }));
+                                BOOST_TEST(stop.operational());
+                                BOOST_CHECK(stop.platform() == string_type{ TETENGO2_TEXT("1") });
+                            }
+                            {
+                                const auto& stop = stops[1];
+                                BOOST_CHECK((stop.arrival() == time_type{ 6, 5, 45 }));
+                                BOOST_TEST(!stop.departure().initialized());
+                                BOOST_TEST(!stop.operational());
+                                BOOST_TEST(stop.platform().empty());
+                            }
+                        }
+                        BOOST_TEST_REQUIRE(p_timetable->up_trains().size() == 1U);
+                        {
+                            const auto& train = p_timetable->up_trains()[0];
+                            BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("9324M") });
+                            BOOST_CHECK(train.note() == string_type{ TETENGO2_TEXT("piyo") });
+                            const auto& stops = train.stops();
+                            BOOST_TEST_REQUIRE(train.stops().size() == 2U);
+                            {
+                                const auto& stop = stops[0];
+                                BOOST_TEST(!stop.arrival().initialized());
+                                BOOST_CHECK((stop.departure() == time_type{ 6, 20, 0 }));
+                                BOOST_TEST(!stop.operational());
+                                BOOST_CHECK(stop.platform() == string_type{ TETENGO2_TEXT("0A") });
+                            }
+                            {
+                                const auto& stop = stops[1];
+                                BOOST_TEST(!stop.arrival().initialized());
+                                BOOST_TEST(!stop.departure().initialized());
+                                BOOST_TEST(!stop.operational());
+                                BOOST_TEST(stop.platform().empty());
+                            }
+                        }
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(
+                            json_invalid_stop_time) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        auto       error = error_type::none;
+                        const auto p_timetable = json_reader.read(first, last, error);
+
+                        BOOST_TEST_REQUIRE(!p_timetable);
+                        BOOST_CHECK(error == error_type::corrupted);
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(
+                            json_too_many_stops) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        auto       error = error_type::none;
+                        const auto p_timetable = json_reader.read(first, last, error);
+
+                        BOOST_TEST_REQUIRE(!p_timetable);
+                        BOOST_CHECK(error == error_type::corrupted);
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(
+                            json_invalid_time_format) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        auto       error = error_type::none;
+                        const auto p_timetable = json_reader.read(first, last, error);
+
+                        BOOST_TEST_REQUIRE(!p_timetable);
+                        BOOST_CHECK(error == error_type::corrupted);
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(
+                            json_train_with_no_stop) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        auto       error = error_type::none;
+                        const auto p_timetable = json_reader.read(first, last, error);
+
+                        BOOST_TEST_REQUIRE(!p_timetable);
+                        BOOST_CHECK(error == error_type::corrupted);
+                    }
+                    {
+                        boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(
+                            json_invalid_kind_index) };
+                        const auto first = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream)));
+                        const auto last = tetengo2::iterator::make_observable_forward_iterator(
+                            boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>()));
+                        auto       error = error_type::none;
+                        const auto p_timetable = json_reader.read(first, last, error);
+
+                        BOOST_TEST_REQUIRE(!p_timetable);
+                        BOOST_CHECK(error == error_type::corrupted);
+                    }
                 }
-                {
-                    const auto& stop = stops[1];
-                    BOOST_CHECK((stop.arrival() == time_type{ 6, 5, 45 }));
-                    BOOST_TEST(!stop.departure().initialized());
-                    BOOST_TEST(!stop.operational());
-                    BOOST_TEST(stop.platform().empty());
-                }
-            }
-            BOOST_TEST_REQUIRE(p_timetable->up_trains().size() == 1U);
-            {
-                const auto& train = p_timetable->up_trains()[0];
-                BOOST_CHECK(train.number() == string_type{ TETENGO2_TEXT("9324M") });
-                BOOST_CHECK(train.note() == string_type{ TETENGO2_TEXT("piyo") });
-                const auto& stops = train.stops();
-                BOOST_TEST_REQUIRE(train.stops().size() == 2U);
-                {
-                    const auto& stop = stops[0];
-                    BOOST_TEST(!stop.arrival().initialized());
-                    BOOST_CHECK((stop.departure() == time_type{ 6, 20, 0 }));
-                    BOOST_TEST(!stop.operational());
-                    BOOST_CHECK(stop.platform() == string_type{ TETENGO2_TEXT("0A") });
-                }
-                {
-                    const auto& stop = stops[1];
-                    BOOST_TEST(!stop.arrival().initialized());
-                    BOOST_TEST(!stop.departure().initialized());
-                    BOOST_TEST(!stop.operational());
-                    BOOST_TEST(stop.platform().empty());
-                }
-            }
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_invalid_stop_time) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            auto error = error_type::none;
-            const auto p_timetable = json_reader.read(first, last, error);
-
-            BOOST_TEST_REQUIRE(!p_timetable);
-            BOOST_CHECK(error == error_type::corrupted);
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_too_many_stops) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            auto error = error_type::none;
-            const auto p_timetable = json_reader.read(first, last, error);
-
-            BOOST_TEST_REQUIRE(!p_timetable);
-            BOOST_CHECK(error == error_type::corrupted);
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_invalid_time_format) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            auto error = error_type::none;
-            const auto p_timetable = json_reader.read(first, last, error);
-
-            BOOST_TEST_REQUIRE(!p_timetable);
-            BOOST_CHECK(error == error_type::corrupted);
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_train_with_no_stop) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            auto error = error_type::none;
-            const auto p_timetable = json_reader.read(first, last, error);
-
-            BOOST_TEST_REQUIRE(!p_timetable);
-            BOOST_CHECK(error == error_type::corrupted);
-        }
-        {
-            boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_invalid_kind_index) };
-            const auto first =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>(input_stream))
-                );
-            const auto last =
-                tetengo2::iterator::make_observable_forward_iterator(
-                    boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>())
-                );
-            auto error = error_type::none;
-            const auto p_timetable = json_reader.read(first, last, error);
-
-            BOOST_TEST_REQUIRE(!p_timetable);
-            BOOST_CHECK(error == error_type::corrupted);
-        }
-    }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE_END()
+        BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

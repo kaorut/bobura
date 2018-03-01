@@ -14,8 +14,7 @@
 #include <bobura/model/train_info/time.h>
 
 
-namespace bobura { namespace model { namespace train_info
-{
+namespace bobura { namespace model { namespace train_info {
     /*!
         \brief The class template for a train stop.
 
@@ -53,11 +52,8 @@ namespace bobura { namespace model { namespace train_info
             \param platform    A platform.
         */
         stop(time_type arrival, time_type departure, const bool operational, string_type platform)
-        :
-        m_arrival(std::move(arrival)),
-        m_departure(std::move(departure)),
-        m_operational(operational),
-        m_platform(std::move(platform))
+        : m_arrival(std::move(arrival)), m_departure(std::move(departure)), m_operational(operational),
+          m_platform(std::move(platform))
         {}
 
 
@@ -74,11 +70,8 @@ namespace bobura { namespace model { namespace train_info
         */
         friend bool operator==(const stop& one, const stop& another)
         {
-            return
-                one.m_arrival == another.m_arrival &&
-                one.m_departure == another.m_departure &&
-                one.m_operational == another.m_operational &&
-                one.m_platform == another.m_platform;
+            return one.m_arrival == another.m_arrival && one.m_departure == another.m_departure &&
+                   one.m_operational == another.m_operational && one.m_platform == another.m_platform;
         }
 
         /*!
@@ -86,8 +79,7 @@ namespace bobura { namespace model { namespace train_info
 
             \return The arrival time.
         */
-        const time_type& arrival()
-        const
+        const time_type& arrival() const
         {
             return m_arrival;
         }
@@ -97,8 +89,7 @@ namespace bobura { namespace model { namespace train_info
 
             \return The departure time.
         */
-        const time_type& departure()
-        const
+        const time_type& departure() const
         {
             return m_departure;
         }
@@ -109,8 +100,7 @@ namespace bobura { namespace model { namespace train_info
             \retval true  When the stop is passing.
             \retval false Otherwise.
         */
-        bool passing()
-        const
+        bool passing() const
         {
             return !m_arrival.initialized() && !m_departure.initialized();
         }
@@ -121,8 +111,7 @@ namespace bobura { namespace model { namespace train_info
             \retval true  When the stop is operational.
             \retval false Otherwise.
         */
-        bool operational()
-        const
+        bool operational() const
         {
             return m_operational;
         }
@@ -132,8 +121,7 @@ namespace bobura { namespace model { namespace train_info
 
             \return The platform.
         */
-        const string_type& platform()
-        const
+        const string_type& platform() const
         {
             return m_platform;
         }
@@ -149,8 +137,6 @@ namespace bobura { namespace model { namespace train_info
         bool m_operational;
 
         string_type m_platform;
-
-
     };
 
 

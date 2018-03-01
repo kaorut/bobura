@@ -14,8 +14,7 @@
 #include <bobura/command/command_base.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     /*!
         \brief The class template for an open-www.tetengo.org command.
 
@@ -54,8 +53,7 @@ namespace bobura { namespace command
         /*!
             \brief Destroys the open-www.tetengo.org command.
         */
-        virtual ~open_www_tetengo_org()
-        noexcept;
+        virtual ~open_www_tetengo_org() noexcept;
 
 
     private:
@@ -71,10 +69,7 @@ namespace bobura { namespace command
 
         // virtual functions
 
-        virtual void execute_impl(model_type& model, abstract_window_type& parent)
-        const override;
-
-
+        virtual void execute_impl(model_type& model, abstract_window_type& parent) const override;
     };
 
 

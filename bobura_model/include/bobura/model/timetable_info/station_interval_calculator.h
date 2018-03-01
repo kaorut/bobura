@@ -21,8 +21,7 @@
 #include <bobura/model/train.h>
 
 
-namespace bobura { namespace model { namespace timetable_info
-{
+namespace bobura { namespace model { namespace timetable_info {
     /*!
         \brief The class template for a station interval calculator.
 
@@ -75,7 +74,7 @@ namespace bobura { namespace model { namespace timetable_info
 
 
         // static functions
-        
+
         /*!
             \brief Returns the default interval.
 
@@ -100,12 +99,8 @@ namespace bobura { namespace model { namespace timetable_info
         station_interval_calculator(
             const station_locations_type& station_locations,
             const trains_type&            down_trains,
-            const trains_type&            up_trains
-        )
-        :
-        m_station_locations(station_locations),
-        m_down_trains(down_trains),
-        m_up_trains(up_trains)
+            const trains_type&            up_trains)
+        : m_station_locations(station_locations), m_down_trains(down_trains), m_up_trains(up_trains)
         {}
 
 
@@ -116,29 +111,26 @@ namespace bobura { namespace model { namespace timetable_info
 
             \return Station intervals.
         */
-        station_intervals_type calculate()
-        const
+        station_intervals_type calculate() const
         {
             if (m_station_locations.empty())
                 return station_intervals_type(m_station_locations.size(), default_interval());
 
             station_intervals_type intervals{ m_station_locations.size(), default_interval() + whole_day2() };
 
-            for (const auto& train: m_down_trains)
+            for (const auto& train : m_down_trains)
             {
                 const auto intervals_by_train = calculate_by_train(train, true);
                 assert(intervals.size() == intervals_by_train.size());
                 std::transform(
-                    intervals.begin(), intervals.end(), intervals_by_train.begin(), intervals.begin(), select
-                );
+                    intervals.begin(), intervals.end(), intervals_by_train.begin(), intervals.begin(), select);
             }
-            for (const auto& train: m_up_trains)
+            for (const auto& train : m_up_trains)
             {
                 const auto intervals_by_train = calculate_by_train(train, false);
                 assert(intervals.size() == intervals_by_train.size());
                 std::transform(
-                    intervals.begin(), intervals.end(), intervals_by_train.begin(), intervals.begin(), select
-                );
+                    intervals.begin(), intervals.end(), intervals_by_train.begin(), intervals.begin(), select);
             }
 
             std::for_each(intervals.begin(), intervals.end(), normalize);
@@ -168,11 +160,11 @@ namespace bobura { namespace model { namespace timetable_info
 
         static void normalize(time_span_type& interval)
         {
-            if      (interval >= whole_day2())
+            if (interval >= whole_day2())
                 interval -= whole_day2();
             else if (interval >= whole_day())
                 interval -= whole_day();
-            
+
             if (interval <= time_span_type{ 0 })
                 interval = default_interval();
         }
@@ -194,12 +186,11 @@ namespace bobura { namespace model { namespace timetable_info
 
         // functions
 
-        station_intervals_type calculate_by_train(const train_type& train, const bool down)
-        const
+        station_intervals_type calculate_by_train(const train_type& train, const bool down) const
         {
             station_intervals_type intervals{ train.stops().size(), default_interval() + whole_day2() };
 
-            for (stop_index_type from = 0; from < train.stops().size() - 1; )
+            for (stop_index_type from = 0; from < train.stops().size() - 1;)
             {
                 if (!calculate_travel_time(train, from, from))
                 {
@@ -215,9 +206,8 @@ namespace bobura { namespace model { namespace timetable_info
                     const auto travel_time = calculate_travel_time(train, departure, arrival);
                     if (travel_time)
                     {
-                        time_span_type interval{
-                            static_cast<typename time_span_type::difference_type>(travel_time->seconds() / (to - from))
-                        };
+                        time_span_type interval{ static_cast<typename time_span_type::difference_type>(
+                            travel_time->seconds() / (to - from)) };
                         if (to - from > 1)
                             interval += whole_day();
                         for (stop_index_type i = from; i < to; ++i)
@@ -232,27 +222,21 @@ namespace bobura { namespace model { namespace timetable_info
             return intervals;
         }
 
-        boost::optional<time_span_type> calculate_travel_time(
-            const train_type&     train, 
-            const stop_index_type from,
-            const stop_index_type to
-        )
-        const
+        boost::optional<time_span_type>
+        calculate_travel_time(const train_type& train, const stop_index_type from, const stop_index_type to) const
         {
             const auto& from_stop = train.stops()[from];
-            const auto from_time = from_stop.departure().initialized() ? from_stop.departure() : from_stop.arrival();
+            const auto  from_time = from_stop.departure().initialized() ? from_stop.departure() : from_stop.arrival();
             if (!from_time.initialized())
                 return boost::none;
 
             const auto& to_stop = train.stops()[to];
-            const auto to_time = to_stop.arrival().initialized() ? to_stop.arrival() : to_stop.departure();
+            const auto  to_time = to_stop.arrival().initialized() ? to_stop.arrival() : to_stop.departure();
             if (!to_time.initialized())
                 return boost::none;
 
             return boost::make_optional(to_time - from_time);
         }
-
-
     };
 
 

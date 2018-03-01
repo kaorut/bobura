@@ -15,8 +15,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     template <
         typename Size,
         typename Difference,
@@ -24,10 +23,8 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
-    reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::~reader()
-    noexcept
+        typename Font>
+    reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::~reader() noexcept
     {}
 
     template <
@@ -37,12 +34,10 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     bool reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::selects(
         const iterator first,
-        const iterator last
-    )
+        const iterator last)
     {
         return selects_impl(first, last);
     }
@@ -54,16 +49,13 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     std::unique_ptr<
-        typename reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::timetable_type
-    >
+        typename reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::timetable_type>
     reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::read(
         const iterator first,
         const iterator last,
-        error_type&    error
-    )
+        error_type&    error)
     {
         return read_impl(first, last, error);
     }
@@ -75,36 +67,29 @@ namespace bobura { namespace model { namespace serializer
         typename ForwardIterator,
         typename OperatingDistance,
         typename Speed,
-        typename Font
-    >
+        typename Font>
     reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::reader()
     {}
 
 
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using common_type_list_type = type_list::common;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using common_type_list_type = type_list::common;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -115,8 +100,7 @@ namespace bobura { namespace model { namespace serializer
         typename application::common_type_list_type::input_stream_iterator_type,
         typename application::common_type_list_type::operating_distance_type,
         typename application::common_type_list_type::speed_type,
-        typename application::ui_type_list_type::fast_font_type
-    >;
+        typename application::ui_type_list_type::fast_font_type>;
 #endif
 
     template class reader<
@@ -126,8 +110,7 @@ namespace bobura { namespace model { namespace serializer
         typename test::common_type_list_type::input_stream_iterator_type,
         typename test::common_type_list_type::operating_distance_type,
         typename test::common_type_list_type::speed_type,
-        typename test::ui_type_list_type::font_type
-    >;
+        typename test::ui_type_list_type::font_type>;
 
 
 }}}

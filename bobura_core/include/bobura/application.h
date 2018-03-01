@@ -18,13 +18,12 @@
 #include <bobura/settings.h>
 
 
-namespace bobura
-{
-   /*!
-        \brief The class template for a bobura application.
+namespace bobura {
+    /*!
+         \brief The class template for a bobura application.
 
-        \tparam Traits A traits type.
-    */
+         \tparam Traits A traits type.
+     */
     template <typename Traits>
     class application : private boost::noncopyable
     {
@@ -64,8 +63,7 @@ namespace bobura
         /*!
             \brief Destroys the bobura application.
         */
-        ~application()
-        noexcept;
+        ~application() noexcept;
 
 
         // functions
@@ -87,11 +85,7 @@ namespace bobura
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
-
-
 }
 
 #endif

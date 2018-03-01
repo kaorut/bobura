@@ -17,8 +17,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace view { namespace diagram
-{
+namespace bobura { namespace view { namespace diagram {
     template <typename Size, typename Difference, typename Left>
     Left time_to_left(
         const model::train_info::time<Size, Difference>& time,
@@ -26,8 +25,7 @@ namespace bobura { namespace view { namespace diagram
         const int                                        previous_or_next_day,
         const Left&                                      horizontal_scroll_bar_position,
         const Left&                                      station_header_right,
-        const Left&                                      horizontal_scale
-    )
+        const Left&                                      horizontal_scale)
     {
         using time_span_type = model::train_info::time_span<Difference>;
 
@@ -47,8 +45,7 @@ namespace bobura { namespace view { namespace diagram
         const Size              station_index,
         const Top&              vertical_scroll_bar_position,
         const Top&              header_bottom,
-        const Top&              time_header_bottom
-    )
+        const Top&              time_header_bottom)
     {
         const auto canvas_top = header_bottom + time_header_bottom;
         return station_positions[station_index] + canvas_top - vertical_scroll_bar_position;
@@ -81,13 +78,11 @@ namespace bobura { namespace view { namespace diagram
             using line_style_type = typename Canvas::line_style_type;
             using dimension_unit_type = typename Canvas::dimension_unit_type;
 
-            auto original_color = canvas.get_color();
+            auto       original_color = canvas.get_color();
             const auto original_line_style = canvas.line_style();
-            auto original_line_width = canvas.line_width();
+            auto       original_line_width = canvas.line_width();
 
-            canvas.set_color(
-                color_type{ original_color.red(), original_color.green(), original_color.blue(), 0x30 }
-            );
+            canvas.set_color(color_type{ original_color.red(), original_color.green(), original_color.blue(), 0x30 });
             canvas.set_line_style(line_style_type::solid);
 
             canvas.set_line_width(original_line_width + selected_line_margin<dimension_unit_type>() * 2);
@@ -105,11 +100,9 @@ namespace bobura { namespace view { namespace diagram
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
@@ -125,12 +118,10 @@ namespace bobura { namespace view { namespace diagram
             using canvas_type = application::traits_type_list_type::diagram_view_type::canvas_type;
 
             using dimension_unit_type = canvas_type::dimension_unit_type;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
@@ -146,9 +137,7 @@ namespace bobura { namespace view { namespace diagram
             using canvas_type = test::traits_type_list_type::diagram_view_type::canvas_type;
 
             using dimension_unit_type = canvas_type::dimension_unit_type;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -158,16 +147,14 @@ namespace bobura { namespace view { namespace diagram
         int,
         const application::position_unit_type&,
         const application::position_unit_type&,
-        const application::position_unit_type&
-    );
+        const application::position_unit_type&);
 
     template application::position_unit_type station_index_to_top(
         const std::vector<application::position_unit_type>&,
         application::size_type,
         const application::position_unit_type&,
         const application::position_unit_type&,
-        const application::position_unit_type&
-    );
+        const application::position_unit_type&);
 
     template application::dimension_unit_type normal_line_width();
 
@@ -181,8 +168,7 @@ namespace bobura { namespace view { namespace diagram
         application::canvas_type&,
         const application::position_type&,
         const application::position_type&,
-        bool
-    );
+        bool);
 #endif
 
 #if !defined(DOCUMENTATION)
@@ -192,16 +178,14 @@ namespace bobura { namespace view { namespace diagram
         int,
         const test::position_unit_type&,
         const test::position_unit_type&,
-        const test::position_unit_type&
-    );
+        const test::position_unit_type&);
 
     template test::position_unit_type station_index_to_top(
         const std::vector<test::position_unit_type>&,
         test::size_type,
         const test::position_unit_type&,
         const test::position_unit_type&,
-        const test::position_unit_type&
-    );
+        const test::position_unit_type&);
 
     template test::dimension_unit_type normal_line_width();
 
@@ -211,12 +195,8 @@ namespace bobura { namespace view { namespace diagram
 
     template test::dimension_unit_type selected_line_margin();
 
-    template void draw_selectable_line(
-        test::canvas_type&,
-        const test::position_type&,
-        const test::position_type&,
-        bool
-    );
+    template void
+    draw_selectable_line(test::canvas_type&, const test::position_type&, const test::position_type&, bool);
 #endif
 
 

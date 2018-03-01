@@ -15,8 +15,7 @@
 #include <boost/core/noncopyable.hpp>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     /*!
         \brief The class template for an OuDia diagram selecting.
 
@@ -56,14 +55,12 @@ namespace bobura { namespace model { namespace serializer
         select_oudia_diagram(
             abstract_window_type&       parent,
             string_type                 file_name,
-            const message_catalog_type& message_catalog
-        );
+            const message_catalog_type& message_catalog);
 
         /*!
             \brief Destroys the OuDia diagram selecting.
         */
-        ~select_oudia_diagram()
-        noexcept;
+        ~select_oudia_diagram() noexcept;
 
 
         // functions
@@ -76,8 +73,7 @@ namespace bobura { namespace model { namespace serializer
 
             \return The selected position.
         */
-        iterator operator()(iterator first, iterator last)
-        const;
+        iterator operator()(iterator first, iterator last) const;
 
 
     private:
@@ -89,8 +85,6 @@ namespace bobura { namespace model { namespace serializer
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
 
 
@@ -124,8 +118,7 @@ namespace bobura { namespace model { namespace serializer
         /*!
             \brief Destroys the OuDia diagram selecting for testing.
         */
-        ~select_oudia_diagram_for_test()
-        noexcept;
+        ~select_oudia_diagram_for_test() noexcept;
 
 
         // functions
@@ -138,8 +131,7 @@ namespace bobura { namespace model { namespace serializer
 
             \return Always first.
         */
-        iterator operator()(iterator first, iterator last)
-        const;
+        iterator operator()(iterator first, iterator last) const;
 
 
     private:
@@ -151,8 +143,6 @@ namespace bobura { namespace model { namespace serializer
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
 
 

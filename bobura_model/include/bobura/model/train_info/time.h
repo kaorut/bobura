@@ -20,8 +20,7 @@
 #include <bobura/model/train_info/time_span.h>
 
 
-namespace bobura { namespace model { namespace train_info
-{
+namespace bobura { namespace model { namespace train_info {
     /*!
         \brief The class template for a time.
 
@@ -29,9 +28,8 @@ namespace bobura { namespace model { namespace train_info
         \tparam Difference A difference type.
     */
     template <typename Size, typename Difference>
-    class time :
-        private boost::totally_ordered<time<Size, Difference>>,
-        private boost::additive<time<Size, Difference>, time_span<Difference>>
+    class time : private boost::totally_ordered<time<Size, Difference>>,
+                 private boost::additive<time<Size, Difference>, time_span<Difference>>
     {
     public:
         // types
@@ -57,10 +55,7 @@ namespace bobura { namespace model { namespace train_info
                 \param seconds Seconds.
             */
             hours_minutes_seconds_type(const size_type hours, const size_type minutes, const size_type seconds)
-            :
-            m_hours(hours),
-            m_minutes(minutes),
-            m_seconds(seconds)
+            : m_hours(hours), m_minutes(minutes), m_seconds(seconds)
             {}
 
             /*!
@@ -74,10 +69,8 @@ namespace bobura { namespace model { namespace train_info
             */
             friend bool operator==(const hours_minutes_seconds_type& one, const hours_minutes_seconds_type& another)
             {
-                return
-                    one.m_hours == another.m_hours &&
-                    one.m_minutes == another.m_minutes &&
-                    one.m_seconds == another.m_seconds;
+                return one.m_hours == another.m_hours && one.m_minutes == another.m_minutes &&
+                       one.m_seconds == another.m_seconds;
             }
 
             /*!
@@ -85,8 +78,7 @@ namespace bobura { namespace model { namespace train_info
 
                 \return Hours.
             */
-            size_type hours()
-            const
+            size_type hours() const
             {
                 return m_hours;
             }
@@ -96,8 +88,7 @@ namespace bobura { namespace model { namespace train_info
 
                 \return Minutes.
             */
-            size_type minutes()
-            const
+            size_type minutes() const
             {
                 return m_minutes;
             }
@@ -107,8 +98,7 @@ namespace bobura { namespace model { namespace train_info
 
                 \return Seconds.
             */
-            size_type seconds()
-            const
+            size_type seconds() const
             {
                 return m_seconds;
             }
@@ -120,7 +110,6 @@ namespace bobura { namespace model { namespace train_info
             size_type m_minutes;
 
             size_type m_seconds;
-
         };
 
 
@@ -154,8 +143,7 @@ namespace bobura { namespace model { namespace train_info
             \param seconds_from_midnight Seconds from the midnight.
         */
         explicit time(const size_type seconds_from_midnight)
-        :
-        m_seconds_from_midnight(seconds_from_midnight % time_span_type::seconds_of_whole_day())
+        : m_seconds_from_midnight(seconds_from_midnight % time_span_type::seconds_of_whole_day())
         {}
 
         /*!
@@ -168,8 +156,7 @@ namespace bobura { namespace model { namespace train_info
             \throw std::out_of_range When hours, minutes and/or seconds are invalid.
         */
         time(const size_type hours, const size_type minutes, const size_type seconds)
-        :
-        m_seconds_from_midnight(calculate_seconds_from_midnight(hours, minutes, seconds))
+        : m_seconds_from_midnight(calculate_seconds_from_midnight(hours, minutes, seconds))
         {}
 
 
@@ -190,7 +177,8 @@ namespace bobura { namespace model { namespace train_info
         */
         time& operator+=(const time_span_type& time_span)
         {
-            if (*this == uninitialized()) return *this;
+            if (*this == uninitialized())
+                return *this;
 
             typename time_span_type::difference_type seconds = m_seconds_from_midnight;
             while (seconds < -time_span.seconds())
@@ -219,7 +207,8 @@ namespace bobura { namespace model { namespace train_info
         */
         time& operator-=(const time_span_type& time_span)
         {
-            if (*this == uninitialized()) return *this;
+            if (*this == uninitialized())
+                return *this;
 
             typename time_span_type::difference_type seconds = m_seconds_from_midnight;
             while (seconds < time_span.seconds())
@@ -293,8 +282,7 @@ namespace bobura { namespace model { namespace train_info
 
             \throw std::logic_error When this is uninitialized.
         */
-        size_type seconds_from_midnight()
-        const
+        size_type seconds_from_midnight() const
         {
             if (*this == uninitialized())
                 BOOST_THROW_EXCEPTION(std::logic_error("The time object is uninitialized."));
@@ -309,8 +297,7 @@ namespace bobura { namespace model { namespace train_info
 
             \throw std::logic_error When this is uninitialized.
         */
-        const hours_minutes_seconds_type hours_minutes_seconds()
-        const
+        const hours_minutes_seconds_type hours_minutes_seconds() const
         {
             if (*this == uninitialized())
                 BOOST_THROW_EXCEPTION(std::logic_error("The time object is uninitialized."));
@@ -328,8 +315,7 @@ namespace bobura { namespace model { namespace train_info
             \retval true  When this time is initialized.
             \retval false Otherwise.
         */
-        bool initialized()
-        const
+        bool initialized() const
         {
             return *this != uninitialized();
         }
@@ -338,11 +324,8 @@ namespace bobura { namespace model { namespace train_info
     private:
         // static functions
 
-        static size_type calculate_seconds_from_midnight(
-            const size_type hours,
-            const size_type minutes,
-            const size_type seconds
-        )
+        static size_type
+        calculate_seconds_from_midnight(const size_type hours, const size_type minutes, const size_type seconds)
         {
             if (hours > 23)
                 BOOST_THROW_EXCEPTION(std::out_of_range("24 or greater is specified for the hours."));
@@ -360,17 +343,12 @@ namespace bobura { namespace model { namespace train_info
 
         // constructors and destructor
 
-        time()
-        :
-        m_seconds_from_midnight(std::numeric_limits<size_type>::max())
-        {}
+        time() : m_seconds_from_midnight(std::numeric_limits<size_type>::max()) {}
 
 
         // variables
 
         size_type m_seconds_from_midnight;
-
-
     };
 
 

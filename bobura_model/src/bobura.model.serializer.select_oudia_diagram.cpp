@@ -22,8 +22,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     template <typename OuDiaDiagramDialog>
     class select_oudia_diagram<OuDiaDiagramDialog>::impl : private boost::noncopyable
     {
@@ -44,17 +43,13 @@ namespace bobura { namespace model { namespace serializer
         // constructors and destructor
 
         impl(abstract_window_type& parent, string_type file_name, const message_catalog_type& message_catalog)
-        :
-        m_parent(parent),
-        m_file_name(std::move(file_name)),
-        m_message_catalog(message_catalog)
+        : m_parent(parent), m_file_name(std::move(file_name)), m_message_catalog(message_catalog)
         {}
 
 
         // functions
 
-        iterator operator()(const iterator first, const iterator last)
-        const
+        iterator operator()(const iterator first, const iterator last) const
         {
             if (std::distance(first, last) < 2)
                 return first;
@@ -95,8 +90,6 @@ namespace bobura { namespace model { namespace serializer
         const string_type m_file_name;
 
         const message_catalog_type& m_message_catalog;
-
-
     };
 
 
@@ -104,23 +97,17 @@ namespace bobura { namespace model { namespace serializer
     select_oudia_diagram<OuDiaDiagramDialog>::select_oudia_diagram(
         abstract_window_type&       parent,
         string_type                 file_name,
-        const message_catalog_type& message_catalog
-    )
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(parent, std::move(file_name), message_catalog))
+        const message_catalog_type& message_catalog)
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(parent, std::move(file_name), message_catalog))
     {}
 
     template <typename OuDiaDiagramDialog>
-    select_oudia_diagram<OuDiaDiagramDialog>::~select_oudia_diagram()
-    noexcept
+    select_oudia_diagram<OuDiaDiagramDialog>::~select_oudia_diagram() noexcept
     {}
 
     template <typename OuDiaDiagramDialog>
-    typename select_oudia_diagram<OuDiaDiagramDialog>::iterator select_oudia_diagram<OuDiaDiagramDialog>::operator()(
-        const iterator first,
-        const iterator last
-    )
-    const
+    typename select_oudia_diagram<OuDiaDiagramDialog>::iterator select_oudia_diagram<OuDiaDiagramDialog>::
+                                                                operator()(const iterator first, const iterator last) const
     {
         return (*m_p_impl)(first, last);
     }
@@ -139,16 +126,12 @@ namespace bobura { namespace model { namespace serializer
 
         // constructors and destructor
 
-        explicit impl(string_type name)
-        :
-        m_name(std::move(name))
-        {}
+        explicit impl(string_type name) : m_name(std::move(name)) {}
 
 
         // functions
 
-        iterator operator()(const iterator first, const iterator last)
-        const
+        iterator operator()(const iterator first, const iterator last) const
         {
             return std::find(first, last, m_name);
         }
@@ -158,65 +141,48 @@ namespace bobura { namespace model { namespace serializer
         // variables
 
         const string_type m_name;
-
-
     };
 
 
     template <typename String>
     select_oudia_diagram_for_test<String>::select_oudia_diagram_for_test(string_type name)
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(name)))
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(name)))
     {}
 
     template <typename String>
-    select_oudia_diagram_for_test<String>::~select_oudia_diagram_for_test()
-    noexcept
+    select_oudia_diagram_for_test<String>::~select_oudia_diagram_for_test() noexcept
     {}
 
     template <typename String>
-    typename select_oudia_diagram_for_test<String>::iterator select_oudia_diagram_for_test<String>::operator()(
-        const iterator first,
-        const iterator last
-    )
-    const
+    typename select_oudia_diagram_for_test<String>::iterator select_oudia_diagram_for_test<String>::
+                                                             operator()(const iterator first, const iterator last) const
     {
         return (*m_p_impl)(first, last);
     }
 
 
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using common_type_list_type = type_list::common;
 
-            using oudia_diagram_dialog_type =
-                oudia_diagram_dialog<
-                    typename type_list::traits<detail_type_list_type>::dialog_type,
-                    typename type_list::common::size_type
-                >;
-
+            using oudia_diagram_dialog_type = oudia_diagram_dialog<
+                typename type_list::traits<detail_type_list_type>::dialog_type,
+                typename type_list::common::size_type>;
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using common_type_list_type = type_list::common;
 
-            using oudia_diagram_dialog_type =
-                oudia_diagram_dialog<
-                    typename type_list::traits<detail_type_list_type>::dialog_type,
-                    typename type_list::common::size_type
-                >;
-
+            using oudia_diagram_dialog_type = oudia_diagram_dialog<
+                typename type_list::traits<detail_type_list_type>::dialog_type,
+                typename type_list::common::size_type>;
         }
-
     }
 
 #if BOOST_COMP_MSVC

@@ -17,13 +17,12 @@
 #include <bobura/view/diagram/selection.h>
 
 
-namespace bobura { namespace view { namespace diagram
-{
-     /*!
-        \brief The class template for a station line in the diagram view.
+namespace bobura { namespace view { namespace diagram {
+    /*!
+       \brief The class template for a station line in the diagram view.
 
-        \tparam Traits A traits type.
-    */
+       \tparam Traits A traits type.
+   */
     template <typename Traits>
     class station_line : public item<Traits>
     {
@@ -89,11 +88,10 @@ namespace bobura { namespace view { namespace diagram
         station_line(
             const station_location_type& station_location,
             selection_type&              selection,
-            const position_unit_type&             right,
-            const position_unit_type&             station_header_right,
-            position_unit_type                     top,
-            const font_color_type&       font_color
-        );
+            const position_unit_type&    right,
+            const position_unit_type&    station_header_right,
+            position_unit_type           top,
+            const font_color_type&       font_color);
 
         /*!
             \brief Moves a station line.
@@ -105,8 +103,7 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys the station line.
         */
-        virtual ~station_line()
-        noexcept;
+        virtual ~station_line() noexcept;
 
 
         // functions
@@ -136,27 +133,21 @@ namespace bobura { namespace view { namespace diagram
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
+        virtual void draw_on_impl(canvas_type& canvas) const override;
 
-        virtual base_type* p_item_by_position_impl(const position_type& position)
-        override;
+        virtual base_type* p_item_by_position_impl(const position_type& position) override;
 
-        virtual bool selected_impl()
-        const override;
+        virtual bool selected_impl() const override;
 
-        virtual void select_impl(bool switch_selection_style)
-        override;
-
-
+        virtual void select_impl(bool switch_selection_style) override;
     };
 
 
-     /*!
-        \brief The class template for a station line list in the diagram view.
+    /*!
+       \brief The class template for a station line list in the diagram view.
 
-        \tparam Traits A traits type.
-    */
+       \tparam Traits A traits type.
+   */
     template <typename Traits>
     class station_line_list : public item<Traits>
     {
@@ -242,8 +233,7 @@ namespace bobura { namespace view { namespace diagram
             const position_unit_type&              header_bottom,
             const dimension_unit_type&             time_header_height,
             const scale_type&                      horizontal_scale,
-            const std::vector<position_unit_type>& station_positions
-        );
+            const std::vector<position_unit_type>& station_positions);
 
         /*!
             \brief Moves a station line list.
@@ -255,8 +245,7 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys the station line list.
         */
-        virtual ~station_line_list()
-        noexcept;
+        virtual ~station_line_list() noexcept;
 
 
         // functions
@@ -286,13 +275,9 @@ namespace bobura { namespace view { namespace diagram
 
         // virtual functions
 
-        virtual void draw_on_impl(canvas_type& canvas)
-        const override;
+        virtual void draw_on_impl(canvas_type& canvas) const override;
 
-        virtual base_type* p_item_by_position_impl(const position_type& position)
-        override;
-
-
+        virtual base_type* p_item_by_position_impl(const position_type& position) override;
     };
 
 

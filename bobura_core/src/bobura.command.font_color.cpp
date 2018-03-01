@@ -19,8 +19,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     template <
         typename Traits,
         typename Dialog,
@@ -30,12 +29,17 @@ namespace bobura { namespace command
         typename FontDialog,
         typename ColorDialog,
         typename MessageCatalog,
-        typename DialogTraits
-    >
+        typename DialogTraits>
     class font_color<
-        Traits, Dialog, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
-    >::impl :
-        private boost::noncopyable
+        Traits,
+        Dialog,
+        PointDimensionUnit,
+        Color,
+        Canvas,
+        FontDialog,
+        ColorDialog,
+        MessageCatalog,
+        DialogTraits>::impl : private boost::noncopyable
     {
     public:
         // types
@@ -65,16 +69,12 @@ namespace bobura { namespace command
 
         // constructors and destructor
 
-        explicit impl(const message_catalog_type& message_catalog)
-        :
-        m_message_catalog(message_catalog)
-        {}
+        explicit impl(const message_catalog_type& message_catalog) : m_message_catalog(message_catalog) {}
 
 
         // functions
 
-        void execute(model_type& model, abstract_window_type& parent)
-        const
+        void execute(model_type& model, abstract_window_type& parent) const
         {
             font_color_dialog_type dialog{ parent, m_message_catalog };
 
@@ -92,18 +92,16 @@ namespace bobura { namespace command
             dialog.do_modal();
             if (dialog.result() != dialog_type::result_type::accepted)
                 return;
-        
-            font_color_set_type new_font_color_set{
-                to_model_font_color(dialog.background()),
-                to_model_font_color(dialog.general()),
-                to_model_font_color(dialog.company_name()),
-                to_model_font_color(dialog.line_name()),
-                to_model_font_color(dialog.note()),
-                to_model_font_color(dialog.local_station()),
-                to_model_font_color(dialog.principal_station()),
-                to_model_font_color(dialog.local_terminal_station()),
-                to_model_font_color(dialog.principal_terminal_station())
-            };
+
+            font_color_set_type new_font_color_set{ to_model_font_color(dialog.background()),
+                                                    to_model_font_color(dialog.general()),
+                                                    to_model_font_color(dialog.company_name()),
+                                                    to_model_font_color(dialog.line_name()),
+                                                    to_model_font_color(dialog.note()),
+                                                    to_model_font_color(dialog.local_station()),
+                                                    to_model_font_color(dialog.principal_station()),
+                                                    to_model_font_color(dialog.local_terminal_station()),
+                                                    to_model_font_color(dialog.principal_terminal_station()) };
             model.timetable().set_font_color_set(std::move(new_font_color_set));
         }
 
@@ -119,53 +117,41 @@ namespace bobura { namespace command
 
         using font_color_type = typename font_color_set_type::font_color_type;
 
-        using font_color_dialog_type =
-            font_color_dialog<
-                dialog_traits_type,
-                size_type,
-                font_type,
-                point_dimension_unit_type,
-                color_type,
-                canvas_type,
-                font_dialog_type,
-                color_dialog_type
-            >;
+        using font_color_dialog_type = font_color_dialog<
+            dialog_traits_type,
+            size_type,
+            font_type,
+            point_dimension_unit_type,
+            color_type,
+            canvas_type,
+            font_dialog_type,
+            color_dialog_type>;
 
 
         // static functions
 
-        static typename font_color_dialog_type::font_color_type to_dialog_font_color(
-            const font_color_type& model_font_color
-        )
+        static typename font_color_dialog_type::font_color_type
+        to_dialog_font_color(const font_color_type& model_font_color)
         {
-            return
-                typename font_color_dialog_type::font_color_type{
-                    model_font_color.diagram_font(),
-                    model_font_color.diagram_color(),
-                    model_font_color.timetable_font(),
-                    model_font_color.timetable_color()
-                };
+            return typename font_color_dialog_type::font_color_type{ model_font_color.diagram_font(),
+                                                                     model_font_color.diagram_color(),
+                                                                     model_font_color.timetable_font(),
+                                                                     model_font_color.timetable_color() };
         }
 
-        static font_color_type to_model_font_color(
-            const typename font_color_dialog_type::font_color_type& dialog_font_color
-        )
+        static font_color_type
+        to_model_font_color(const typename font_color_dialog_type::font_color_type& dialog_font_color)
         {
-            return
-                font_color_type{
-                    dialog_font_color.diagram_font(),
-                    dialog_font_color.diagram_color(),
-                    dialog_font_color.timetable_font(),
-                    dialog_font_color.timetable_color()
-                };
+            return font_color_type{ dialog_font_color.diagram_font(),
+                                    dialog_font_color.diagram_color(),
+                                    dialog_font_color.timetable_font(),
+                                    dialog_font_color.timetable_color() };
         }
 
 
         // variables
 
         const message_catalog_type& m_message_catalog;
-
-
     };
 
 
@@ -178,15 +164,18 @@ namespace bobura { namespace command
         typename FontDialog,
         typename ColorDialog,
         typename MessageCatalog,
-        typename DialogTraits
-    >
+        typename DialogTraits>
     font_color<
-        Traits, Dialog, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
-    >::font_color(
-        const message_catalog_type& message_catalog
-    )
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
+        Traits,
+        Dialog,
+        PointDimensionUnit,
+        Color,
+        Canvas,
+        FontDialog,
+        ColorDialog,
+        MessageCatalog,
+        DialogTraits>::font_color(const message_catalog_type& message_catalog)
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
     {}
 
     template <
@@ -198,14 +187,19 @@ namespace bobura { namespace command
         typename FontDialog,
         typename ColorDialog,
         typename MessageCatalog,
-        typename DialogTraits
-    >
+        typename DialogTraits>
     font_color<
-        Traits, Dialog, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
-    >::~font_color()
-    noexcept
+        Traits,
+        Dialog,
+        PointDimensionUnit,
+        Color,
+        Canvas,
+        FontDialog,
+        ColorDialog,
+        MessageCatalog,
+        DialogTraits>::~font_color() noexcept
     {}
-    
+
     template <
         typename Traits,
         typename Dialog,
@@ -215,52 +209,48 @@ namespace bobura { namespace command
         typename FontDialog,
         typename ColorDialog,
         typename MessageCatalog,
-        typename DialogTraits
-    >
+        typename DialogTraits>
     void font_color<
-        Traits, Dialog, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
-    >::execute_impl(
-        model_type&           model,
-        abstract_window_type& parent
-    )
-    const
+        Traits,
+        Dialog,
+        PointDimensionUnit,
+        Color,
+        Canvas,
+        FontDialog,
+        ColorDialog,
+        MessageCatalog,
+        DialogTraits>::execute_impl(model_type& model, abstract_window_type& parent) const
     {
         m_p_impl->execute(model, parent);
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using locale_type_list_type = type_list::locale<detail_type_list_type>;
-    
+
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using common_dialog_type_list_type = type_list::common_dialog<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using locale_type_list_type = type_list::locale<detail_type_list_type>;
-    
+
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using common_dialog_type_list_type = type_list::common_dialog<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -273,8 +263,7 @@ namespace bobura { namespace command
         typename application::common_dialog_type_list_type::font_type,
         typename application::common_dialog_type_list_type::color_type,
         typename application::locale_type_list_type::message_catalog_type,
-        typename application::traits_type_list_type::dialog_type
-    >;
+        typename application::traits_type_list_type::dialog_type>;
 #endif
 
     template class font_color<
@@ -286,8 +275,7 @@ namespace bobura { namespace command
         typename test::common_dialog_type_list_type::font_type,
         typename test::common_dialog_type_list_type::color_type,
         typename test::locale_type_list_type::message_catalog_type,
-        typename test::traits_type_list_type::dialog_type
-    >;
+        typename test::traits_type_list_type::dialog_type>;
 
 
 }}

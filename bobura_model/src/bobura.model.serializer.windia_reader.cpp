@@ -35,8 +35,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     template <
         typename Size,
         typename Difference,
@@ -45,10 +44,9 @@ namespace bobura { namespace model { namespace serializer
         typename OperatingDistance,
         typename Speed,
         typename Font,
-        typename Encoder
-    >
-    class windia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font, Encoder>::impl :
-        private boost::noncopyable
+        typename Encoder>
+    class windia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font, Encoder>::impl
+    : private boost::noncopyable
     {
     public:
         // types
@@ -68,8 +66,7 @@ namespace bobura { namespace model { namespace serializer
 
         // constructors and destructor
 
-        impl()
-        {}
+        impl() {}
 
 
         // functions
@@ -87,14 +84,14 @@ namespace bobura { namespace model { namespace serializer
             insert_preset_train_kinds(*p_timetable);
 
             std::unique_ptr<state> p_state = tetengo2::stdalt::make_unique<initial_state>();
-            auto next_line_first = first;
+            auto                   next_line_first = first;
             for (;;)
             {
                 const auto input_line = next_line(next_line_first, last);
                 if (next_line_first == last)
                     break;
 
-                if      (input_line == windia_section_label())
+                if (input_line == windia_section_label())
                     p_state = tetengo2::stdalt::make_unique<windia_state>(*p_timetable);
                 else if (input_line == station_section_label())
                     p_state = tetengo2::stdalt::make_unique<station_state>(*p_timetable);
@@ -152,43 +149,32 @@ namespace bobura { namespace model { namespace serializer
         class state : private boost::noncopyable
         {
         public:
-            virtual ~state()
-            = default;
+            virtual ~state() = default;
 
-            virtual bool parse(const string_type& line)
-            = 0;
-
+            virtual bool parse(const string_type& line) = 0;
         };
 
         class initial_state : public state
         {
         public:
-            virtual ~initial_state()
-            = default;
+            virtual ~initial_state() = default;
 
-            virtual bool parse(const string_type& line)
-            override
+            virtual bool parse(const string_type& line) override
             {
                 boost::ignore_unused(line);
 
                 return false;
             }
-
         };
 
         class windia_state : public state
         {
         public:
-            explicit windia_state(timetable_type& timetable)
-            :
-            m_timetable(timetable)
-            {}
+            explicit windia_state(timetable_type& timetable) : m_timetable(timetable) {}
 
-            virtual ~windia_state()
-            = default;
+            virtual ~windia_state() = default;
 
-            virtual bool parse(const string_type& line)
-            override
+            virtual bool parse(const string_type& line) override
             {
                 m_timetable.set_line_name(line);
                 return true;
@@ -196,47 +182,35 @@ namespace bobura { namespace model { namespace serializer
 
         private:
             timetable_type& m_timetable;
-
         };
 
         class station_state : public state
         {
         public:
-            explicit station_state(timetable_type& timetable)
-            :
-            m_timetable(timetable),
-            m_operating_distance()
-            {}
+            explicit station_state(timetable_type& timetable) : m_timetable(timetable), m_operating_distance() {}
 
-            virtual ~station_state()
-            = default;
+            virtual ~station_state() = default;
 
-            virtual bool parse(const string_type& line)
-            override
+            virtual bool parse(const string_type& line) override
             {
                 const auto comma_position = line.find(TETENGO2_TEXT(','));
                 if (comma_position == string_type::npos)
                     return false;
 
                 const auto props = string_view_type{ line }.substr(0, comma_position);
-                auto name = line.substr(comma_position + 1);
+                auto       name = line.substr(comma_position + 1);
 
                 station_location_type station_location{
-                    station_type{
-                        std::move(name),
-                        to_grade(
-                        props.find(TETENGO2_TEXT('p')) != string_view_type::npos,
-                        props.find(TETENGO2_TEXT('b')) != string_view_type::npos
-                        ),
-                        props.find(TETENGO2_TEXT('d')) != string_view_type::npos,
-                        props.find(TETENGO2_TEXT('u')) != string_view_type::npos,
-                        string_type{}
-                    },
+                    station_type{ std::move(name),
+                                  to_grade(
+                                      props.find(TETENGO2_TEXT('p')) != string_view_type::npos,
+                                      props.find(TETENGO2_TEXT('b')) != string_view_type::npos),
+                                  props.find(TETENGO2_TEXT('d')) != string_view_type::npos,
+                                  props.find(TETENGO2_TEXT('u')) != string_view_type::npos,
+                                  string_type{} },
                     m_operating_distance
                 };
-                m_timetable.insert_station_location(
-                    m_timetable.station_locations().end(), std::move(station_location)
-                );
+                m_timetable.insert_station_location(m_timetable.station_locations().end(), std::move(station_location));
 
                 m_operating_distance += operating_distance_type{ 1 };
 
@@ -256,7 +230,7 @@ namespace bobura { namespace model { namespace serializer
 
             static const grade_type& to_grade(const bool principal, const bool show_arrival_and_departure_time)
             {
-                if      (principal && show_arrival_and_departure_time)
+                if (principal && show_arrival_and_departure_time)
                     return station_grade_type_set_type::principal_terminal_type::instance();
                 else if (show_arrival_and_departure_time)
                     return station_grade_type_set_type::local_terminal_type::instance();
@@ -269,22 +243,16 @@ namespace bobura { namespace model { namespace serializer
             timetable_type& m_timetable;
 
             operating_distance_type m_operating_distance;
-
         };
 
         class line_kind_state : public state
         {
         public:
-            explicit line_kind_state(timetable_type& timetable)
-            :
-            m_timetable(timetable)
-            {}
+            explicit line_kind_state(timetable_type& timetable) : m_timetable(timetable) {}
 
-            virtual ~line_kind_state()
-            = default;
+            virtual ~line_kind_state() = default;
 
-            virtual bool parse(const string_type& line)
-            override
+            virtual bool parse(const string_type& line) override
             {
                 const auto split = split_line(line);
                 if (!split)
@@ -301,17 +269,13 @@ namespace bobura { namespace model { namespace serializer
         private:
             struct split_type
             {
-                string_view_type key{};
-                std::size_t index;
+                string_view_type              key{};
+                std::size_t                   index;
                 std::vector<string_view_type> values{};
 
                 split_type(string_view_type key, const std::size_t index, std::vector<string_view_type> values)
-                :
-                key(std::move(key)),
-                index(index),
-                values(std::move(values))
+                : key(std::move(key)), index(index), values(std::move(values))
                 {}
-
             };
 
             static boost::optional<split_type> split_line(const string_type& line)
@@ -320,9 +284,9 @@ namespace bobura { namespace model { namespace serializer
                 if (equal_position == string_type::npos)
                     return boost::none;
 
-                const auto key_and_index = string_view_type{ line }.substr(0, equal_position);
-                const auto index_position = key_and_index.find_first_of(string_view_type(TETENGO2_TEXT("0123456789")));
-                auto key = string_view_type{ key_and_index }.substr(0, index_position);
+                const auto  key_and_index = string_view_type{ line }.substr(0, equal_position);
+                const auto  index_position = key_and_index.find_first_of(string_view_type(TETENGO2_TEXT("0123456789")));
+                auto        key = string_view_type{ key_and_index }.substr(0, index_position);
                 std::size_t index = 0;
                 if (index_position != string_type::npos)
                 {
@@ -366,8 +330,7 @@ namespace bobura { namespace model { namespace serializer
                     if (!new_train_kind)
                         return false;
                     m_timetable.set_train_kind(
-                        std::next(m_timetable.train_kinds().begin(), i), std::move(*new_train_kind)
-                    );
+                        std::next(m_timetable.train_kinds().begin(), i), std::move(*new_train_kind));
                 }
                 for (std::size_t i = train_kind_count; i < props.size(); ++i)
                 {
@@ -398,39 +361,29 @@ namespace bobura { namespace model { namespace serializer
                 if (name_and_abbreviation.size() < 2)
                     return false;
 
-                train_kind_type new_kind{
-                    string_type(name_and_abbreviation[0].begin(), name_and_abbreviation[0].end()),
-                    string_type(name_and_abbreviation[1].begin(), name_and_abbreviation[1].end()),
-                    m_timetable.train_kinds()[index].diagram_font(),
-                    m_timetable.train_kinds()[index].diagram_color(),
-                    m_timetable.train_kinds()[index].diagram_line_weight(),
-                    m_timetable.train_kinds()[index].diagram_line_style(),
-                    m_timetable.train_kinds()[index].timetable_font(),
-                    m_timetable.train_kinds()[index].timetable_color()
-                };
+                train_kind_type new_kind{ string_type(name_and_abbreviation[0].begin(), name_and_abbreviation[0].end()),
+                                          string_type(name_and_abbreviation[1].begin(), name_and_abbreviation[1].end()),
+                                          m_timetable.train_kinds()[index].diagram_font(),
+                                          m_timetable.train_kinds()[index].diagram_color(),
+                                          m_timetable.train_kinds()[index].diagram_line_weight(),
+                                          m_timetable.train_kinds()[index].diagram_line_style(),
+                                          m_timetable.train_kinds()[index].timetable_font(),
+                                          m_timetable.train_kinds()[index].timetable_color() };
 
-                m_timetable.set_train_kind(
-                    std::next(m_timetable.train_kinds().begin(), index), std::move(new_kind)
-                );
+                m_timetable.set_train_kind(std::next(m_timetable.train_kinds().begin(), index), std::move(new_kind));
 
                 return true;
             }
-
         };
 
         class train_state : public state
         {
         public:
-            explicit train_state(timetable_type& timetable)
-            :
-            m_timetable(timetable)
-            {}
+            explicit train_state(timetable_type& timetable) : m_timetable(timetable) {}
 
-            virtual ~train_state()
-            = default;
+            virtual ~train_state() = default;
 
-            virtual bool parse(const string_type& line)
-            override
+            virtual bool parse(const string_type& line) override
             {
                 auto others_and_note = split_line(line);
                 auto split = split_by_comma(others_and_note.first);
@@ -443,14 +396,12 @@ namespace bobura { namespace model { namespace serializer
                 if (*train_kind_index >= m_timetable.train_kinds().size())
                     return false;
 
-                train_type train{
-                    direction(),
-                    string_type(split[1].begin(), split[1].end()),
-                    *train_kind_index,
-                    string_type(split[2].begin(), split[2].end()),
-                    string_type(split[3].begin(), split[3].end()),
-                    string_type(others_and_note.second.begin(), others_and_note.second.end())
-                };
+                train_type train{ direction(),
+                                  string_type(split[1].begin(), split[1].end()),
+                                  *train_kind_index,
+                                  string_type(split[2].begin(), split[2].end()),
+                                  string_type(split[3].begin(), split[3].end()),
+                                  string_type(others_and_note.second.begin(), others_and_note.second.end()) };
                 for (std::size_t i = 0; i < m_timetable.station_locations().size(); ++i)
                 {
                     auto stop = to_stop(std::move(split[4 + i]));
@@ -483,14 +434,12 @@ namespace bobura { namespace model { namespace serializer
                 return std::make_pair(line.substr(0, percent_position), line.substr(percent_position + 1));
             }
 
-            direction_type direction()
-            const
+            direction_type direction() const
             {
                 return direction_impl();
             }
 
-            virtual direction_type direction_impl()
-            const = 0;
+            virtual direction_type direction_impl() const = 0;
 
             void insert_train(train_type train)
             {
@@ -500,8 +449,7 @@ namespace bobura { namespace model { namespace serializer
                 insert_train_impl(std::move(train));
             }
 
-            virtual void insert_train_impl(train_type train)
-            = 0;
+            virtual void insert_train_impl(train_type train) = 0;
 
             boost::optional<size_type> to_train_kind_index(const string_view_type& train_kind_string)
             {
@@ -510,10 +458,9 @@ namespace bobura { namespace model { namespace serializer
                 {
                     try
                     {
-                        return
-                            train_kind_string.empty() ?
-                            boost::make_optional(static_cast<size_type>(0)) :
-                            boost::make_optional(boost::lexical_cast<size_type>(train_kind_string));
+                        return train_kind_string.empty() ?
+                                   boost::make_optional(static_cast<size_type>(0)) :
+                                   boost::make_optional(boost::lexical_cast<size_type>(train_kind_string));
                     }
                     catch (const boost::bad_lexical_cast&)
                     {
@@ -541,12 +488,8 @@ namespace bobura { namespace model { namespace serializer
                 unsigned int prop = 0;
                 try
                 {
-                    prop =
-                        boost::lexical_cast<unsigned int>(
-                            train_kind_string.substr(
-                                opening_paren_position + 1, closing_paren_position - opening_paren_position - 1
-                            )
-                        );
+                    prop = boost::lexical_cast<unsigned int>(train_kind_string.substr(
+                        opening_paren_position + 1, closing_paren_position - opening_paren_position - 1));
                 }
                 catch (const boost::bad_lexical_cast&)
                 {
@@ -572,9 +515,8 @@ namespace bobura { namespace model { namespace serializer
                 if (!departure)
                     return boost::none;
 
-                const auto operational =
-                    is_operational(arrival_and_departure_string.first) ||
-                    is_operational(arrival_and_departure_string.second);
+                const auto operational = is_operational(arrival_and_departure_string.first) ||
+                                         is_operational(arrival_and_departure_string.second);
 
                 return stop_type(std::move(*arrival), std::move(*departure), operational, string_type{});
             }
@@ -593,9 +535,9 @@ namespace bobura { namespace model { namespace serializer
                 if (time_string.empty() || time_string == string_view_type(TETENGO2_TEXT("-")))
                     return boost::make_optional(time_type::uninitialized());
 
-                const auto time_string_length =
-                    time_string[time_string.length() - 1] == char_type(TETENGO2_TEXT('?')) ?
-                    time_string.length() - 1 : time_string.length();
+                const auto time_string_length = time_string[time_string.length() - 1] == char_type(TETENGO2_TEXT('?')) ?
+                                                    time_string.length() - 1 :
+                                                    time_string.length();
                 if (time_string_length < 3 && 4 < time_string_length)
                     return boost::none;
                 const std::size_t minute_position = time_string_length == 3 ? 1 : 2;
@@ -630,85 +572,61 @@ namespace bobura { namespace model { namespace serializer
             {
                 return !time_string.empty() && time_string[time_string.length() - 1] == char_type(TETENGO2_TEXT('?'));
             }
-
         };
 
         class down_train_state : public train_state
         {
         public:
-            explicit down_train_state(timetable_type& timetable)
-            :
-            train_state(timetable)
-            {}
+            explicit down_train_state(timetable_type& timetable) : train_state(timetable) {}
 
-            virtual ~down_train_state()
-            = default;
+            virtual ~down_train_state() = default;
 
         private:
-            virtual direction_type direction_impl()
-            const override
+            virtual direction_type direction_impl() const override
             {
                 return direction_type::down;
             }
 
-            virtual void insert_train_impl(train_type train)
-            override
+            virtual void insert_train_impl(train_type train) override
             {
                 train_state::m_timetable.insert_down_train(
-                    train_state::m_timetable.down_trains().end(), std::move(train)
-                );
+                    train_state::m_timetable.down_trains().end(), std::move(train));
             }
-
         };
 
         class up_train_state : public train_state
         {
         public:
-            explicit up_train_state(timetable_type& timetable)
-            :
-            train_state(timetable)
-            {}
+            explicit up_train_state(timetable_type& timetable) : train_state(timetable) {}
 
-            virtual ~up_train_state()
-            = default;
+            virtual ~up_train_state() = default;
 
         private:
-            virtual direction_type direction_impl()
-            const override
+            virtual direction_type direction_impl() const override
             {
                 return direction_type::up;
             }
 
-            virtual void insert_train_impl(train_type train)
-            override
+            virtual void insert_train_impl(train_type train) override
             {
-                train_state::m_timetable.insert_up_train(
-                    train_state::m_timetable.up_trains().end(), std::move(train)
-                );
+                train_state::m_timetable.insert_up_train(train_state::m_timetable.up_trains().end(), std::move(train));
             }
-
         };
 
         struct preset_train_kind_type
         {
             input_string_type name{};
             input_string_type abbreviation{};
-            weight_type weight{};
-            line_style_type line_style{};
+            weight_type       weight{};
+            line_style_type   line_style{};
 
             preset_train_kind_type(
                 input_string_type     name,
                 input_string_type     abbreviation,
                 const weight_type     weight,
-                const line_style_type line_style
-            )
-            :
-            name(std::move(name)),
-            abbreviation(std::move(abbreviation)),
-            weight(weight),
-            line_style(line_style)
+                const line_style_type line_style)
+            : name(std::move(name)), abbreviation(std::move(abbreviation)), weight(weight), line_style(line_style)
             {}
-
         };
 
 
@@ -722,166 +640,123 @@ namespace bobura { namespace model { namespace serializer
 
         static const string_type& windia_section_label()
         {
-            static const string_type singleton{
-                encoder().decode(input_string_type{ TETENGO2_TEXT("[WinDIA]") })
-            };
+            static const string_type singleton{ encoder().decode(input_string_type{ TETENGO2_TEXT("[WinDIA]") }) };
             return singleton;
         }
 
         static const string_type& station_section_label()
         {
-            static const string_type singleton{
-                encoder().decode(input_string_type{ TETENGO2_TEXT("[\x89\x77]") })
-            }; // "eki"
+            static const string_type singleton{ encoder().decode(
+                input_string_type{ TETENGO2_TEXT("[\x89\x77]") }) }; // "eki"
             return singleton;
         }
 
         static const string_type& line_kind_section_label()
         {
-            static const string_type singleton{
-                encoder().decode(input_string_type{ TETENGO2_TEXT("[\x90\xFC\x8E\xED]") })
-            }; // "senshu"
+            static const string_type singleton{ encoder().decode(
+                input_string_type{ TETENGO2_TEXT("[\x90\xFC\x8E\xED]") }) }; // "senshu"
             return singleton;
         }
 
         static const string_type& down_train_section_label()
         {
-            static const string_type singleton{
-                encoder().decode(input_string_type{ TETENGO2_TEXT("[\x89\xBA\x82\xE8]") })
-            }; // "kudari"
+            static const string_type singleton{ encoder().decode(
+                input_string_type{ TETENGO2_TEXT("[\x89\xBA\x82\xE8]") }) }; // "kudari"
             return singleton;
         }
 
         static const string_type& up_train_section_label()
         {
-            static const string_type singleton{
-                encoder().decode(input_string_type{ TETENGO2_TEXT("[\x8F\xE3\x82\xE8]") })
-            }; // "nobori"
+            static const string_type singleton{ encoder().decode(
+                input_string_type{ TETENGO2_TEXT("[\x8F\xE3\x82\xE8]") }) }; // "nobori"
             return singleton;
         }
 
         static void insert_preset_train_kinds(timetable_type& timetable)
         {
             const std::vector<preset_train_kind_type> kinds{
-                {
-                    input_string_type{ TETENGO2_TEXT("\x95\x81\x92\xCA") }, // "futsuu"
-                    input_string_type{ TETENGO2_TEXT("\x95\x81\x92\xCA") }, // "futsuu"
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x89\xF5\x91\xAC") }, // "kaosoku"
-                    input_string_type{ TETENGO2_TEXT("\x89\xF5\x91\xAC") }, // "kaosoku"
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x93\xC1\x95\xCA\x89\xF5\x91\xAC") }, // "tokubetsukaisoku"
-                    input_string_type{ TETENGO2_TEXT("\x93\xC1\x89\xF5") }, // "tokkai"
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x90\x56\x89\xF5\x91\xAC") }, // "shinkaisoku"
-                    input_string_type{ TETENGO2_TEXT("\x90\x56\x89\xF5") }, // "shinkai"
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x92\xCA\x8B\xCE\x89\xF5\x91\xAC") }, // "tsuukinkaisoku"
-                    input_string_type{ TETENGO2_TEXT("\x92\xCA\x89\xF5") }, // "tsuukai"
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x8F\x80\x8B\x7D") }, // "junkyuu"
-                    input_string_type{ TETENGO2_TEXT("\x8F\x80\x8B\x7D") }, // "junkyuu"
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x8B\x7D\x8D\x73") }, // "kyuukou"
-                    input_string_type{ TETENGO2_TEXT("\x8B\x7D\x8D\x73") }, // "kyuukou"
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x89\xF5\x91\xAC\x8B\x7D\x8D\x73") }, // "kaisokukyuukou"
-                    input_string_type{ TETENGO2_TEXT("\x89\xF5\x8B\x7D") }, // "kaikyuu"
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x93\xC1\x8B\x7D") }, // "tokkyuu"
-                    input_string_type{ TETENGO2_TEXT("\x93\xC1\x8B\x7D") }, // "tokkyuu"
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x89\xF5\x91\xAC\x93\xC1\x8B\x7D") }, // "kaisokutokkyuu"
-                    input_string_type{ TETENGO2_TEXT("\x89\xF5\x93\xC1") }, // "kaitoku"
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x92\xCA\x8B\xCE\x8F\x80\x8B\x7D") }, // "tsuukinjunkyuu"
-                    input_string_type{ TETENGO2_TEXT("\x92\xCA\x8F\x80") }, // "tsuujun"
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x92\xCA\x8B\xCE\x8B\x7D\x8D\x73") }, // "tsuukinkyuukou"
-                    input_string_type{ TETENGO2_TEXT("\x92\xCA\x8B\x7D") }, // "tsuukyuu"
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x8B\xE6\x8A\xD4\x89\xF5\x91\xAC") }, // "kukankaisoku"
-                    input_string_type{ TETENGO2_TEXT("\x8B\xE6\x89\xF5") }, // "kukai"
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::solid
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x8B\xE6\x8A\xD4\x8B\x7D\x8D\x73") }, // "kukankyuukou"
-                    input_string_type{ TETENGO2_TEXT("\x8B\xE6\x8B\x7D") }, // "kukyuu"
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::solid
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x89\xF1\x91\x97") }, // "kaisou"
-                    input_string_type{ TETENGO2_TEXT("\x89\xF1\x91\x97") }, // "kaisou"
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::dot_dashed
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x89\xDD\x95\xA8") }, // "kamotsu"
-                    input_string_type{ TETENGO2_TEXT("\x89\xDD\x95\xA8") }, // "kamotsu"
-                    train_kind_type::weight_type::normal,
-                    train_kind_type::line_style_type::dashed
-                },
-                {
-                    input_string_type{ TETENGO2_TEXT("\x8B\x7D\x8D\x73\x89\xDD\x95\xA8") }, // "kyuukoukamotsu"
-                    input_string_type{ TETENGO2_TEXT("\x8B\x7D\x89\xDD") }, // "kyuuka"
-                    train_kind_type::weight_type::bold,
-                    train_kind_type::line_style_type::dashed
-                },
+                { input_string_type{ TETENGO2_TEXT("\x95\x81\x92\xCA") }, // "futsuu"
+                  input_string_type{ TETENGO2_TEXT("\x95\x81\x92\xCA") }, // "futsuu"
+                  train_kind_type::weight_type::normal,
+                  train_kind_type::line_style_type::solid },
+                { input_string_type{ TETENGO2_TEXT("\x89\xF5\x91\xAC") }, // "kaosoku"
+                  input_string_type{ TETENGO2_TEXT("\x89\xF5\x91\xAC") }, // "kaosoku"
+                  train_kind_type::weight_type::normal,
+                  train_kind_type::line_style_type::solid },
+                { input_string_type{ TETENGO2_TEXT("\x93\xC1\x95\xCA\x89\xF5\x91\xAC") }, // "tokubetsukaisoku"
+                  input_string_type{ TETENGO2_TEXT("\x93\xC1\x89\xF5") }, // "tokkai"
+                  train_kind_type::weight_type::normal,
+                  train_kind_type::line_style_type::solid },
+                { input_string_type{ TETENGO2_TEXT("\x90\x56\x89\xF5\x91\xAC") }, // "shinkaisoku"
+                  input_string_type{ TETENGO2_TEXT("\x90\x56\x89\xF5") }, // "shinkai"
+                  train_kind_type::weight_type::normal,
+                  train_kind_type::line_style_type::solid },
+                { input_string_type{ TETENGO2_TEXT("\x92\xCA\x8B\xCE\x89\xF5\x91\xAC") }, // "tsuukinkaisoku"
+                  input_string_type{ TETENGO2_TEXT("\x92\xCA\x89\xF5") }, // "tsuukai"
+                  train_kind_type::weight_type::normal,
+                  train_kind_type::line_style_type::solid },
+                { input_string_type{ TETENGO2_TEXT("\x8F\x80\x8B\x7D") }, // "junkyuu"
+                  input_string_type{ TETENGO2_TEXT("\x8F\x80\x8B\x7D") }, // "junkyuu"
+                  train_kind_type::weight_type::bold,
+                  train_kind_type::line_style_type::solid },
+                { input_string_type{ TETENGO2_TEXT("\x8B\x7D\x8D\x73") }, // "kyuukou"
+                  input_string_type{ TETENGO2_TEXT("\x8B\x7D\x8D\x73") }, // "kyuukou"
+                  train_kind_type::weight_type::bold,
+                  train_kind_type::line_style_type::solid },
+                { input_string_type{ TETENGO2_TEXT("\x89\xF5\x91\xAC\x8B\x7D\x8D\x73") }, // "kaisokukyuukou"
+                  input_string_type{ TETENGO2_TEXT("\x89\xF5\x8B\x7D") }, // "kaikyuu"
+                  train_kind_type::weight_type::bold,
+                  train_kind_type::line_style_type::solid },
+                { input_string_type{ TETENGO2_TEXT("\x93\xC1\x8B\x7D") }, // "tokkyuu"
+                  input_string_type{ TETENGO2_TEXT("\x93\xC1\x8B\x7D") }, // "tokkyuu"
+                  train_kind_type::weight_type::bold,
+                  train_kind_type::line_style_type::solid },
+                { input_string_type{ TETENGO2_TEXT("\x89\xF5\x91\xAC\x93\xC1\x8B\x7D") }, // "kaisokutokkyuu"
+                  input_string_type{ TETENGO2_TEXT("\x89\xF5\x93\xC1") }, // "kaitoku"
+                  train_kind_type::weight_type::bold,
+                  train_kind_type::line_style_type::solid },
+                { input_string_type{ TETENGO2_TEXT("\x92\xCA\x8B\xCE\x8F\x80\x8B\x7D") }, // "tsuukinjunkyuu"
+                  input_string_type{ TETENGO2_TEXT("\x92\xCA\x8F\x80") }, // "tsuujun"
+                  train_kind_type::weight_type::bold,
+                  train_kind_type::line_style_type::solid },
+                { input_string_type{ TETENGO2_TEXT("\x92\xCA\x8B\xCE\x8B\x7D\x8D\x73") }, // "tsuukinkyuukou"
+                  input_string_type{ TETENGO2_TEXT("\x92\xCA\x8B\x7D") }, // "tsuukyuu"
+                  train_kind_type::weight_type::bold,
+                  train_kind_type::line_style_type::solid },
+                { input_string_type{ TETENGO2_TEXT("\x8B\xE6\x8A\xD4\x89\xF5\x91\xAC") }, // "kukankaisoku"
+                  input_string_type{ TETENGO2_TEXT("\x8B\xE6\x89\xF5") }, // "kukai"
+                  train_kind_type::weight_type::normal,
+                  train_kind_type::line_style_type::solid },
+                { input_string_type{ TETENGO2_TEXT("\x8B\xE6\x8A\xD4\x8B\x7D\x8D\x73") }, // "kukankyuukou"
+                  input_string_type{ TETENGO2_TEXT("\x8B\xE6\x8B\x7D") }, // "kukyuu"
+                  train_kind_type::weight_type::bold,
+                  train_kind_type::line_style_type::solid },
+                { input_string_type{ TETENGO2_TEXT("\x89\xF1\x91\x97") }, // "kaisou"
+                  input_string_type{ TETENGO2_TEXT("\x89\xF1\x91\x97") }, // "kaisou"
+                  train_kind_type::weight_type::normal,
+                  train_kind_type::line_style_type::dot_dashed },
+                { input_string_type{ TETENGO2_TEXT("\x89\xDD\x95\xA8") }, // "kamotsu"
+                  input_string_type{ TETENGO2_TEXT("\x89\xDD\x95\xA8") }, // "kamotsu"
+                  train_kind_type::weight_type::normal,
+                  train_kind_type::line_style_type::dashed },
+                { input_string_type{ TETENGO2_TEXT("\x8B\x7D\x8D\x73\x89\xDD\x95\xA8") }, // "kyuukoukamotsu"
+                  input_string_type{ TETENGO2_TEXT("\x8B\x7D\x89\xDD") }, // "kyuuka"
+                  train_kind_type::weight_type::bold,
+                  train_kind_type::line_style_type::dashed },
             };
 
-            for (const auto& kind: kinds)
+            for (const auto& kind : kinds)
             {
                 timetable.insert_train_kind(
                     timetable.train_kinds().end(),
-                    train_kind_type{
-                        encoder().decode(kind.name),
-                        encoder().decode(kind.abbreviation),
-                        train_kind_type::default_().diagram_font(),
-                        train_kind_type::default_().diagram_color(),
-                        kind.weight,
-                        kind.line_style,
-                        train_kind_type::default_().timetable_font(),
-                        train_kind_type::default_().timetable_color()
-                    }
-                );
+                    train_kind_type{ encoder().decode(kind.name),
+                                     encoder().decode(kind.abbreviation),
+                                     train_kind_type::default_().diagram_font(),
+                                     train_kind_type::default_().diagram_color(),
+                                     kind.weight,
+                                     kind.line_style,
+                                     train_kind_type::default_().timetable_font(),
+                                     train_kind_type::default_().timetable_color() });
             }
         }
 
@@ -893,25 +768,12 @@ namespace bobura { namespace model { namespace serializer
 
         static std::vector<color_type> make_preset_palette()
         {
-            return
-                {
-                    { 0, 0, 255 },
-                    { 0, 255, 0 },
-                    { 0, 0, 128 },
-                    { 0, 128, 0 },
-                    { 0, 255, 255 },
-                    { 255, 0, 0 },
-                    { 0, 128, 128 },
-                    { 128, 0, 0 },
-                    { 255, 0, 255 },
-                    { 255, 255, 0 },
-                    { 128, 0, 128 },
-                    { 128, 128, 0 },
-                    { 0, 0, 0 },
-                    { 128, 128, 128 },
-                    { 192, 192, 192 },
-                    { 255, 255, 255 },
-                };
+            return {
+                { 0, 0, 255 },   { 0, 255, 0 },     { 0, 0, 128 },     { 0, 128, 0 },
+                { 0, 255, 255 }, { 255, 0, 0 },     { 0, 128, 128 },   { 128, 0, 0 },
+                { 255, 0, 255 }, { 255, 255, 0 },   { 128, 0, 128 },   { 128, 128, 0 },
+                { 0, 0, 0 },     { 128, 128, 128 }, { 192, 192, 192 }, { 255, 255, 255 },
+            };
         }
 
         static string_type next_line(iterator& first, const iterator last)
@@ -941,15 +803,13 @@ namespace bobura { namespace model { namespace serializer
 
         static bool line_break(const input_char_type character)
         {
-            return
-                character == input_char_type(TETENGO2_TEXT('\r')) ||
-                character == input_char_type(TETENGO2_TEXT('\n'));
+            return character == input_char_type(TETENGO2_TEXT('\r')) ||
+                   character == input_char_type(TETENGO2_TEXT('\n'));
         }
 
         static bool tab(const input_char_type character)
         {
-            return
-                character == input_char_type(TETENGO2_TEXT('\t'));
+            return character == input_char_type(TETENGO2_TEXT('\t'));
         }
 
         static bool line_contination(const char_type character)
@@ -976,51 +836,39 @@ namespace bobura { namespace model { namespace serializer
 
         static boost::optional<train_kind_type> make_train_kind(const train_kind_type* p_base, const unsigned int prop)
         {
-            const auto diagram_line_style = to_line_style(prop & 0x03);
-            const auto custom_color = (prop & 0x40) != 0;
+            const auto  diagram_line_style = to_line_style(prop & 0x03);
+            const auto  custom_color = (prop & 0x40) != 0;
             const auto& diagram_font = p_base ? p_base->diagram_font() : train_kind_type::default_().diagram_font();
-            const auto diagram_color = 
-                custom_color ?
-                to_color((prop & 0x3C) / 0x04) :
-                (
-                    p_base ?
-                    boost::make_optional(p_base->diagram_color()) :
-                    boost::make_optional(train_kind_type::default_().diagram_color())
-                );
+            const auto  diagram_color = custom_color ?
+                                           to_color((prop & 0x3C) / 0x04) :
+                                           (p_base ? boost::make_optional(p_base->diagram_color()) :
+                                                     boost::make_optional(train_kind_type::default_().diagram_color()));
             if (!diagram_color)
                 return boost::none;
-            const auto diagram_line_weight = to_weight((prop & 0x80) != 0);
+            const auto  diagram_line_weight = to_weight((prop & 0x80) != 0);
             const auto& timetable_font =
                 p_base ? p_base->timetable_font() : train_kind_type::default_().timetable_font();
             const auto& timetable_color =
                 p_base ? p_base->timetable_color() : train_kind_type::default_().timetable_color();
 
-            return
-                p_base ?
-                boost::make_optional(
-                    train_kind_type(
-                        p_base->name(),
-                        p_base->abbreviation(),
-                        diagram_font,
-                        std::move(*diagram_color),
-                        diagram_line_weight,
-                        diagram_line_style,
-                        timetable_font,
-                        timetable_color
-                    )
-                ) :
-                boost::make_optional(
-                    train_kind_type(
-                        string_type{},
-                        string_type{},
-                        diagram_font,
-                        std::move(*diagram_color),
-                        diagram_line_weight,
-                        diagram_line_style,
-                        timetable_font,
-                        timetable_color
-                    )
-                );
+            return p_base ? boost::make_optional(train_kind_type(
+                                p_base->name(),
+                                p_base->abbreviation(),
+                                diagram_font,
+                                std::move(*diagram_color),
+                                diagram_line_weight,
+                                diagram_line_style,
+                                timetable_font,
+                                timetable_color)) :
+                            boost::make_optional(train_kind_type(
+                                string_type{},
+                                string_type{},
+                                diagram_font,
+                                std::move(*diagram_color),
+                                diagram_line_weight,
+                                diagram_line_style,
+                                timetable_font,
+                                timetable_color));
         }
 
         static boost::optional<color_type> to_color(const std::size_t index)
@@ -1073,8 +921,6 @@ namespace bobura { namespace model { namespace serializer
                 timetable.erase_train_kind(found);
             }
         }
-
-
     };
 
 
@@ -1086,12 +932,9 @@ namespace bobura { namespace model { namespace serializer
         typename OperatingDistance,
         typename Speed,
         typename Font,
-        typename Encoder
-    >
+        typename Encoder>
     windia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font, Encoder>::windia_reader()
-    :
-    base_type(),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>())
     {}
 
     template <
@@ -1102,10 +945,9 @@ namespace bobura { namespace model { namespace serializer
         typename OperatingDistance,
         typename Speed,
         typename Font,
-        typename Encoder
-    >
-    windia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font, Encoder>::~windia_reader()
-    noexcept
+        typename Encoder>
+    windia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font, Encoder>::
+        ~windia_reader() noexcept
     {}
 
     template <
@@ -1116,14 +958,11 @@ namespace bobura { namespace model { namespace serializer
         typename OperatingDistance,
         typename Speed,
         typename Font,
-        typename Encoder
-    >
-    bool windia_reader<
-        Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font, Encoder
-    >::selects_impl(
+        typename Encoder>
+    bool
+    windia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font, Encoder>::selects_impl(
         const iterator first,
-        const iterator last
-    )
+        const iterator last)
     {
         return m_p_impl->selects_impl(first, last);
     }
@@ -1136,28 +975,22 @@ namespace bobura { namespace model { namespace serializer
         typename OperatingDistance,
         typename Speed,
         typename Font,
-        typename Encoder
-    >
+        typename Encoder>
     std::unique_ptr<
-        typename windia_reader<
-            Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font, Encoder
-        >::timetable_type
-    >
+        typename windia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font, Encoder>::
+            timetable_type>
     windia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font, Encoder>::read_impl(
         const iterator first,
         const iterator last,
-        error_type&    error
-    )
+        error_type&    error)
     {
         return m_p_impl->read_impl(first, last, error);
     }
 
 
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using common_type_list_type = type_list::common;
@@ -1165,12 +998,10 @@ namespace bobura { namespace model { namespace serializer
             using locale_type_list_type = type_list::locale<detail_type_list_type>;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using common_type_list_type = type_list::common;
@@ -1178,9 +1009,7 @@ namespace bobura { namespace model { namespace serializer
             using locale_type_list_type = type_list::locale<detail_type_list_type>;
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -1192,8 +1021,7 @@ namespace bobura { namespace model { namespace serializer
         typename application::common_type_list_type::operating_distance_type,
         typename application::common_type_list_type::speed_type,
         typename application::ui_type_list_type::fast_font_type,
-        typename application::locale_type_list_type::windia_file_encoder_type
-    >;
+        typename application::locale_type_list_type::windia_file_encoder_type>;
 #endif
 
     template class windia_reader<
@@ -1204,8 +1032,7 @@ namespace bobura { namespace model { namespace serializer
         typename test::common_type_list_type::operating_distance_type,
         typename test::common_type_list_type::speed_type,
         typename test::ui_type_list_type::font_type,
-        typename test::locale_type_list_type::windia_file_encoder_type
-    >;
+        typename test::locale_type_list_type::windia_file_encoder_type>;
 
 
 }}}

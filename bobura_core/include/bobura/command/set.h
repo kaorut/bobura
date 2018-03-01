@@ -24,8 +24,7 @@
 #include <bobura/settings.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     /*!
         \brief The class template for a command set.
 
@@ -134,8 +133,7 @@ namespace bobura { namespace command
             \param message_catalog                A message catalog.
             \param detail_impl_set                A detail implementation set.
         */
-        set(
-            const new_file_type&        new_file,
+        set(const new_file_type&        new_file,
             const load_from_file_type&  load_from_file,
             const load_from_file_type&  reload,
             const save_to_file_type&    save_to_file,
@@ -143,14 +141,12 @@ namespace bobura { namespace command
             diagram_view_type&          diagram_view,
             const settings_type&        settings,
             const message_catalog_type& message_catalog,
-            const detail_impl_set_type& detail_impl_set
-        );
+            const detail_impl_set_type& detail_impl_set);
 
         /*!
             \brief Destroys the command set.
         */
-        virtual ~set()
-        noexcept;
+        virtual ~set() noexcept;
 
 
         // functions
@@ -160,8 +156,7 @@ namespace bobura { namespace command
 
             \return The command.
         */
-        const command_type& about()
-        const;
+        const command_type& about() const;
 
         /*!
             \brief Returns the command save-to-file, in which a file selection
@@ -169,57 +164,50 @@ namespace bobura { namespace command
 
             \return The command.
         */
-        const command_type& ask_file_path_and_save_to_file()
-        const;
+        const command_type& ask_file_path_and_save_to_file() const;
 
         /*!
             \brief Returns the command exit.
 
             \return The command.
         */
-        const command_type& exit()
-        const;
+        const command_type& exit() const;
 
         /*!
             \brief Returns the command file property.
 
             \return The command.
         */
-        const command_type& file_property()
-        const;
+        const command_type& file_property() const;
 
         /*!
             \brief Returns the command font and color.
 
             \return The command.
         */
-        const command_type& font_color()
-        const;
+        const command_type& font_color() const;
 
         /*!
             \brief Returns the command horizontal zoom-in.
 
             \return The command.
         */
-        const command_type& horizontally_zoom_in()
-        const;
+        const command_type& horizontally_zoom_in() const;
 
         /*!
             \brief Returns the command horizontal zoom-out.
 
             \return The command.
         */
-        const command_type& horizontally_zoom_out()
-        const;
+        const command_type& horizontally_zoom_out() const;
 
         /*!
             \brief Returns the command load-from-file.
 
             \return The command.
         */
-        const command_type& load_from_file()
-        const;
-        
+        const command_type& load_from_file() const;
+
         /*!
             \brief Creates a parameter for the command load-from-file.
 
@@ -227,48 +215,42 @@ namespace bobura { namespace command
 
             \return A unique pointer to a parameter for the command load-from-file.
         */
-        std::unique_ptr<parameter_type> create_load_from_file_parameter(const boost::filesystem::path& path)
-        const;
+        std::unique_ptr<parameter_type> create_load_from_file_parameter(const boost::filesystem::path& path) const;
 
         /*!
             \brief Returns the command new-file.
 
             \return The command.
         */
-        const command_type& new_file()
-        const;
+        const command_type& new_file() const;
 
         /*!
             \brief Returns the command nop.
 
             \return The command.
         */
-        const command_type& nop()
-        const;
+        const command_type& nop() const;
 
         /*!
             \brief Returns the command open-www.tetengo.org.
 
             \return The command.
         */
-        const command_type& open_www_tetengo_org()
-        const;
+        const command_type& open_www_tetengo_org() const;
 
         /*!
             \brief Returns the command reload.
 
             \return The command.
         */
-        const command_type& reload()
-        const;
+        const command_type& reload() const;
 
         /*!
             \brief Returns the command save-to-file.
 
             \return The command.
         */
-        const command_type& save_to_file()
-        const;
+        const command_type& save_to_file() const;
 
         /*!
             \brief Returns the command set-horizontal-scale.
@@ -277,8 +259,7 @@ namespace bobura { namespace command
 
             \return The command.
         */
-        const command_type& set_horizontal_scale(size_type index)
-        const;
+        const command_type& set_horizontal_scale(size_type index) const;
 
         /*!
             \brief Returns the command set-vertical-scale.
@@ -287,56 +268,49 @@ namespace bobura { namespace command
 
             \return The command.
         */
-        const command_type& set_vertical_scale(size_type index)
-        const;
+        const command_type& set_vertical_scale(size_type index) const;
 
         /*!
             \brief Returns the command show-diagram.
 
             \return The command.
         */
-        const command_type& show_diagram()
-        const;
+        const command_type& show_diagram() const;
 
         /*!
             \brief Returns the command show-timetable-down.
 
             \return The command.
         */
-        const command_type& show_timetable_down()
-        const;
+        const command_type& show_timetable_down() const;
 
         /*!
             \brief Returns the command show-timetable-up.
 
             \return The command.
         */
-        const command_type& show_timetable_up()
-        const;
+        const command_type& show_timetable_up() const;
 
         /*!
             \brief Returns the command train-kind.
 
             \return The command.
         */
-        const command_type& train_kind()
-        const;
+        const command_type& train_kind() const;
 
         /*!
             \brief Returns the command vertical zoom-in.
 
             \return The command.
         */
-        const command_type& vertically_zoom_in()
-        const;
+        const command_type& vertically_zoom_in() const;
 
         /*!
             \brief Returns the command vertical zoom-out.
 
             \return The command.
         */
-        const command_type& vertically_zoom_out()
-        const;
+        const command_type& vertically_zoom_out() const;
 
 
     private:
@@ -348,8 +322,6 @@ namespace bobura { namespace command
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
 
 

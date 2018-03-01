@@ -31,8 +31,7 @@
 #include <bobura/view_picture_box.h>
 
 
-namespace
-{
+namespace {
     // types
 
     using detail_type_list_type = bobura::type_list::detail_for_test;
@@ -47,15 +46,13 @@ namespace
 
     using string_type = common_type_list_type::string_type;
 
-    using model_type =
-        bobura::timetable_model<
-            common_type_list_type::size_type,
-            common_type_list_type::difference_type,
-            string_type,
-            common_type_list_type::operating_distance_type,
-            common_type_list_type::speed_type,
-            ui_type_list_type::fast_font_type
-        >;
+    using model_type = bobura::timetable_model<
+        common_type_list_type::size_type,
+        common_type_list_type::difference_type,
+        string_type,
+        common_type_list_type::operating_distance_type,
+        common_type_list_type::speed_type,
+        ui_type_list_type::fast_font_type>;
 
     using popup_menu_type = ui_type_list_type::popup_menu_type;
 
@@ -97,16 +94,14 @@ namespace
 
     using view_picture_box_type = bobura::view_picture_box<picture_box_type, mouse_capture_type>;
 
-    using property_bar_type =
-        bobura::property_bar<
-            string_type,
-            position_type,
-            dimension_type,
-            abstract_window_type,
-            ui_type_list_type::side_bar_type,
-            ui_type_list_type::map_box_type,
-            message_catalog_type
-        >;
+    using property_bar_type = bobura::property_bar<
+        string_type,
+        position_type,
+        dimension_type,
+        abstract_window_type,
+        ui_type_list_type::side_bar_type,
+        ui_type_list_type::map_box_type,
+        message_catalog_type>;
 
     using detail_impl_set_type = tetengo2::detail::stub::impl_set;
 
@@ -116,213 +111,209 @@ namespace
     using menu_command_selected_type =
         bobura::message::main_window::menu_command_selected<command_type, model_type, abstract_window_type>;
 
-    using window_resized_type =
-        bobura::message::main_window::window_resized<
-            diagram_view_type,
-            timetable_view_type,
-            abstract_window_type,
-            tab_frame_type,
-            view_picture_box_type,
-            property_bar_type
-        >;
-
-
+    using window_resized_type = bobura::message::main_window::window_resized<
+        diagram_view_type,
+        timetable_view_type,
+        abstract_window_type,
+        tab_frame_type,
+        view_picture_box_type,
+        property_bar_type>;
 }
 
 
 BOOST_AUTO_TEST_SUITE(test_bobura)
-BOOST_AUTO_TEST_SUITE(message)
-BOOST_AUTO_TEST_SUITE(main_window)
-BOOST_AUTO_TEST_SUITE(popup_menu_selected)
-    // test cases
+    BOOST_AUTO_TEST_SUITE(message)
+        BOOST_AUTO_TEST_SUITE(main_window)
+            BOOST_AUTO_TEST_SUITE(popup_menu_selected)
+                // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        popup_menu_type popup_menu{ string_type{ TETENGO2_TEXT("popup") } };
-        std::vector<const command_type*> commands;
-        const model_type model{};
-        const popup_menu_selected_type observer{ popup_menu, std::move(commands), model };
-    }
+                    popup_menu_type                  popup_menu{ string_type{ TETENGO2_TEXT("popup") } };
+                    std::vector<const command_type*> commands;
+                    const model_type                 model{};
+                    const popup_menu_selected_type   observer{ popup_menu, std::move(commands), model };
+                }
 
-    BOOST_AUTO_TEST_CASE(operator_paren)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(operator_paren)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        popup_menu_type popup_menu{ string_type{ TETENGO2_TEXT("popup") } };
-        std::vector<const command_type*> commands;
-        const model_type model{};
-        const popup_menu_selected_type observer{ popup_menu, std::move(commands), model };
+                    popup_menu_type                  popup_menu{ string_type{ TETENGO2_TEXT("popup") } };
+                    std::vector<const command_type*> commands;
+                    const model_type                 model{};
+                    const popup_menu_selected_type   observer{ popup_menu, std::move(commands), model };
 
-        observer();
-    }
-
-
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE(menu_command_selected)
-    // test cases
-
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const command_type command{};
-        model_type model{};
-        window_type window{};
-        const menu_command_selected_type menu{ command, model, window };
-    }
-
-    BOOST_AUTO_TEST_CASE(operator_paren)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const command_type command{};
-        model_type model{};
-        window_type window{};
-        const menu_command_selected_type observer{ command, model, window };
-
-        observer();
-    }
+                    observer();
+                }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE(file_dropped)
-    // test cases
+            BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE(menu_command_selected)
+                // test cases
 
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        const command_type command{};
-        model_type model{};
-        window_type window{};
-        const menu_command_selected_type menu{ command, model, window };
-    }
+                    const command_type               command{};
+                    model_type                       model{};
+                    window_type                      window{};
+                    const menu_command_selected_type menu{ command, model, window };
+                }
 
-    BOOST_AUTO_TEST_CASE(operator_paren)
-    {
-        BOOST_TEST_PASSPOINT();
+                BOOST_AUTO_TEST_CASE(operator_paren)
+                {
+                    BOOST_TEST_PASSPOINT();
 
-        const command_type command{};
-        model_type model{};
-        window_type window{};
-        const menu_command_selected_type observer{ command, model, window };
+                    const command_type               command{};
+                    model_type                       model{};
+                    window_type                      window{};
+                    const menu_command_selected_type observer{ command, model, window };
 
-        observer();
-    }
-
-
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE(window_resized)
-    // test cases
-
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const model_type model{};
-        const message_catalog_type message_catalog{};
-        diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_down_view{ direction_type::down, model, message_catalog };
-        timetable_view_type timetable_up_view{ direction_type::up, model, message_catalog };
-        window_type window{};
-        tab_frame_type tab_frame{ window };
-        view_picture_box_type diagram_view_picture_box{ tab_frame };
-        view_picture_box_type timetable_down_view_picture_box{ tab_frame };
-        view_picture_box_type timetable_up_view_picture_box{ tab_frame };
-        const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-        property_bar_type property_bar{ window, settings, message_catalog, detail_impl_set_type::instance() };
-        const window_resized_type observer{
-            diagram_view,
-            timetable_down_view,
-            timetable_up_view,
-            window,
-            tab_frame,
-            diagram_view_picture_box,
-            timetable_down_view_picture_box,
-            timetable_up_view_picture_box,
-            property_bar
-        };
-
-        settings.clear_config();
-    }
-
-    BOOST_AUTO_TEST_CASE(operator_paren)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        const model_type model{};
-        const message_catalog_type message_catalog{};
-        diagram_view_type diagram_view{ model, message_catalog };
-        timetable_view_type timetable_down_view{ direction_type::down, model, message_catalog };
-        timetable_view_type timetable_up_view{ direction_type::up, model, message_catalog };
-        window_type window{};
-        tab_frame_type tab_frame{ window };
-        view_picture_box_type diagram_view_picture_box{ tab_frame };
-        view_picture_box_type timetable_down_view_picture_box{ tab_frame };
-        view_picture_box_type timetable_up_view_picture_box{ tab_frame };
-        const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
-        settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-        property_bar_type property_bar{ window, settings, message_catalog, detail_impl_set_type::instance() };
-        const window_resized_type observer{
-            diagram_view,
-            timetable_down_view,
-            timetable_up_view,
-            window,
-            tab_frame,
-            diagram_view_picture_box,
-            timetable_down_view_picture_box,
-            timetable_up_view_picture_box,
-            property_bar
-        };
-
-        observer();
-
-        settings.clear_config();
-    }
-
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE(window_closing)
-    // test cases
-
-    BOOST_AUTO_TEST_CASE(construction)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        window_type parent{};
-        model_type model{};
-        const message_catalog_type message_catalog{};
-        const save_to_file_type save_to_file{ false, message_catalog };
-        const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-        const std::vector<string_type> command_line_arguments{ 1, string_type{ TETENGO2_TEXT("path/to/exe") } };
-        const bobura::message::main_window::window_closing<abstract_window_type, confirm_file_save_type> observer(
-            parent, confirm_file_save, []() {}
-        );
-    }
-
-    BOOST_AUTO_TEST_CASE(operator_paren)
-    {
-        BOOST_TEST_PASSPOINT();
-
-        window_type parent{};
-        model_type model{};
-        const message_catalog_type message_catalog{};
-        const save_to_file_type save_to_file{ false, message_catalog };
-        const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-        const bobura::message::main_window::window_closing<abstract_window_type, confirm_file_save_type> observer(
-            parent, confirm_file_save, []() {}
-        );
-
-        auto cancel = false;
-        observer(cancel);
-
-        BOOST_TEST(!cancel);
-    }
+                    observer();
+                }
 
 
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
-BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE(file_dropped)
+                // test cases
+
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
+
+                    const command_type               command{};
+                    model_type                       model{};
+                    window_type                      window{};
+                    const menu_command_selected_type menu{ command, model, window };
+                }
+
+                BOOST_AUTO_TEST_CASE(operator_paren)
+                {
+                    BOOST_TEST_PASSPOINT();
+
+                    const command_type               command{};
+                    model_type                       model{};
+                    window_type                      window{};
+                    const menu_command_selected_type observer{ command, model, window };
+
+                    observer();
+                }
+
+
+            BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE(window_resized)
+                // test cases
+
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
+
+                    const model_type               model{};
+                    const message_catalog_type     message_catalog{};
+                    diagram_view_type              diagram_view{ model, message_catalog };
+                    timetable_view_type            timetable_down_view{ direction_type::down, model, message_catalog };
+                    timetable_view_type            timetable_up_view{ direction_type::up, model, message_catalog };
+                    window_type                    window{};
+                    tab_frame_type                 tab_frame{ window };
+                    view_picture_box_type          diagram_view_picture_box{ tab_frame };
+                    view_picture_box_type          timetable_down_view_picture_box{ tab_frame };
+                    view_picture_box_type          timetable_up_view_picture_box{ tab_frame };
+                    const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+                    settings_type     settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+                    property_bar_type property_bar{
+                        window, settings, message_catalog, detail_impl_set_type::instance()
+                    };
+                    const window_resized_type observer{ diagram_view,
+                                                        timetable_down_view,
+                                                        timetable_up_view,
+                                                        window,
+                                                        tab_frame,
+                                                        diagram_view_picture_box,
+                                                        timetable_down_view_picture_box,
+                                                        timetable_up_view_picture_box,
+                                                        property_bar };
+
+                    settings.clear_config();
+                }
+
+                BOOST_AUTO_TEST_CASE(operator_paren)
+                {
+                    BOOST_TEST_PASSPOINT();
+
+                    const model_type               model{};
+                    const message_catalog_type     message_catalog{};
+                    diagram_view_type              diagram_view{ model, message_catalog };
+                    timetable_view_type            timetable_down_view{ direction_type::down, model, message_catalog };
+                    timetable_view_type            timetable_up_view{ direction_type::up, model, message_catalog };
+                    window_type                    window{};
+                    tab_frame_type                 tab_frame{ window };
+                    view_picture_box_type          diagram_view_picture_box{ tab_frame };
+                    view_picture_box_type          timetable_down_view_picture_box{ tab_frame };
+                    view_picture_box_type          timetable_up_view_picture_box{ tab_frame };
+                    const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
+                    settings_type     settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
+                    property_bar_type property_bar{
+                        window, settings, message_catalog, detail_impl_set_type::instance()
+                    };
+                    const window_resized_type observer{ diagram_view,
+                                                        timetable_down_view,
+                                                        timetable_up_view,
+                                                        window,
+                                                        tab_frame,
+                                                        diagram_view_picture_box,
+                                                        timetable_down_view_picture_box,
+                                                        timetable_up_view_picture_box,
+                                                        property_bar };
+
+                    observer();
+
+                    settings.clear_config();
+                }
+
+            BOOST_AUTO_TEST_SUITE_END()
+            BOOST_AUTO_TEST_SUITE(window_closing)
+                // test cases
+
+                BOOST_AUTO_TEST_CASE(construction)
+                {
+                    BOOST_TEST_PASSPOINT();
+
+                    window_type                    parent{};
+                    model_type                     model{};
+                    const message_catalog_type     message_catalog{};
+                    const save_to_file_type        save_to_file{ false, message_catalog };
+                    const confirm_file_save_type   confirm_file_save{ model, save_to_file, message_catalog };
+                    const std::vector<string_type> command_line_arguments{
+                        1, string_type{ TETENGO2_TEXT("path/to/exe") }
+                    };
+                    const bobura::message::main_window::window_closing<abstract_window_type, confirm_file_save_type>
+                        observer(parent, confirm_file_save, []() {});
+                }
+
+                BOOST_AUTO_TEST_CASE(operator_paren)
+                {
+                    BOOST_TEST_PASSPOINT();
+
+                    window_type                  parent{};
+                    model_type                   model{};
+                    const message_catalog_type   message_catalog{};
+                    const save_to_file_type      save_to_file{ false, message_catalog };
+                    const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
+                    const bobura::message::main_window::window_closing<abstract_window_type, confirm_file_save_type>
+                        observer(parent, confirm_file_save, []() {});
+
+                    auto cancel = false;
+                    observer(cancel);
+
+                    BOOST_TEST(!cancel);
+                }
+
+
+            BOOST_AUTO_TEST_SUITE_END()
+        BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

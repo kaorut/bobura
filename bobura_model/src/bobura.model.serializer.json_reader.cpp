@@ -36,8 +36,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace model { namespace serializer
-{
+namespace bobura { namespace model { namespace serializer {
     template <
         typename Size,
         typename Difference,
@@ -49,8 +48,7 @@ namespace bobura { namespace model { namespace serializer
         typename Speed,
         typename ExecJsonReadingTask,
         typename Font,
-        typename Encoder
-    >
+        typename Encoder>
     class json_reader<
         Size,
         Difference,
@@ -62,9 +60,7 @@ namespace bobura { namespace model { namespace serializer
         Speed,
         ExecJsonReadingTask,
         Font,
-        Encoder
-    >::impl :
-        private boost::noncopyable
+        Encoder>::impl : private boost::noncopyable
     {
     public:
         // types
@@ -85,8 +81,7 @@ namespace bobura { namespace model { namespace serializer
         // constructors and destructor
 
         explicit impl(std::unique_ptr<exec_json_reading_task_type> p_exec_json_reading_task)
-        :
-        m_p_exec_json_reading_task(std::move(p_exec_json_reading_task))
+        : m_p_exec_json_reading_task(std::move(p_exec_json_reading_task))
         {
             if (!m_p_exec_json_reading_task)
                 BOOST_THROW_EXCEPTION(std::invalid_argument("JSON reading task execution is nullptr."));
@@ -97,29 +92,22 @@ namespace bobura { namespace model { namespace serializer
 
         bool selects_impl(const iterator first, const iterator last)
         {
-            auto p_push_parser =
-                tetengo2::stdalt::make_unique<push_parser_type>(
-                    first, last, tetengo2::stdalt::make_unique<grammar_type>()
-                );
+            auto p_push_parser = tetengo2::stdalt::make_unique<push_parser_type>(
+                first, last, tetengo2::stdalt::make_unique<grammar_type>());
             pull_parser_type pull_parser{ std::move(p_push_parser), 5 };
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return false;
             pull_parser.next();
-            return
-                next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }) ||
-                next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") });
+            return next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }) ||
+                   next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") });
         }
 
         std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
         {
-            return
-                (*m_p_exec_json_reading_task)(
-                    [this, first, last, &error](promise_type& promise)
-                    {
-                        return read_impl_impl(first, last, error, promise);
-                    }
-                );
+            return (*m_p_exec_json_reading_task)([this, first, last, &error](promise_type& promise) {
+                return read_impl_impl(first, last, error, promise);
+            });
         }
 
 
@@ -199,11 +187,8 @@ namespace bobura { namespace model { namespace serializer
             return singleton;
         }
 
-        static std::unique_ptr<timetable_type> read_timetable(
-            pull_parser_type& pull_parser,
-            error_type&       error,
-            promise_type&     promise
-        )
+        static std::unique_ptr<timetable_type>
+        read_timetable(pull_parser_type& pull_parser, error_type& error, promise_type& promise)
         {
             auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
 
@@ -241,27 +226,27 @@ namespace bobura { namespace model { namespace serializer
             auto stations = read_stations(pull_parser, error, promise);
             if (!stations)
                 return std::unique_ptr<timetable_type>{};
-            for (auto& station: *stations)
+            for (auto& station : *stations)
                 p_timetable->insert_station_location(p_timetable->station_locations().end(), std::move(station));
 
             auto train_kinds = read_train_kinds(pull_parser, error, promise);
             if (!train_kinds)
                 return std::unique_ptr<timetable_type>{};
-            for (auto& train_kind: *train_kinds)
+            for (auto& train_kind : *train_kinds)
                 p_timetable->insert_train_kind(p_timetable->train_kinds().end(), std::move(train_kind));
 
             auto down_trains =
                 read_trains(pull_parser, error, promise, direction_type::down, stations->size(), train_kinds->size());
             if (!down_trains)
                 return std::unique_ptr<timetable_type>{};
-            for (auto& train: *down_trains)
+            for (auto& train : *down_trains)
                 p_timetable->insert_down_train(p_timetable->down_trains().end(), std::move(train));
 
             auto up_trains =
                 read_trains(pull_parser, error, promise, direction_type::up, stations->size(), train_kinds->size());
             if (!up_trains)
                 return std::unique_ptr<timetable_type>{};
-            for (auto& train: *up_trains)
+            for (auto& train : *up_trains)
                 p_timetable->insert_up_train(p_timetable->up_trains().end(), std::move(train));
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
@@ -274,11 +259,8 @@ namespace bobura { namespace model { namespace serializer
             return std::move(p_timetable);
         }
 
-        static boost::optional<header_type> read_header(
-            pull_parser_type& pull_parser,
-            error_type&       error,
-            promise_type&     promise
-        )
+        static boost::optional<header_type>
+        read_header(pull_parser_type& pull_parser, error_type& error, promise_type& promise)
         {
             header_type header{};
 
@@ -314,11 +296,8 @@ namespace bobura { namespace model { namespace serializer
             return boost::make_optional(std::move(header));
         }
 
-        static boost::optional<font_color_set_type> read_font_color_set(
-            pull_parser_type& pull_parser,
-            error_type&       error,
-            promise_type&     promise
-        )
+        static boost::optional<font_color_set_type>
+        read_font_color_set(pull_parser_type& pull_parser, error_type& error, promise_type& promise)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
             {
@@ -350,14 +329,8 @@ namespace bobura { namespace model { namespace serializer
 
                 if (element->first == string_type{ TETENGO2_TEXT("background") })
                 {
-                    if (
-                        !(
-                            !element->second.diagram_font() &&
-                            element->second.diagram_color() &&
-                            !element->second.timetable_font() &&
-                            element->second.timetable_color()
-                        )
-                    )
+                    if (!(!element->second.diagram_font() && element->second.diagram_color() &&
+                          !element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
                         return boost::none;
@@ -366,14 +339,8 @@ namespace bobura { namespace model { namespace serializer
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("general") })
                 {
-                    if (
-                        !(
-                            element->second.diagram_font() &&
-                            element->second.diagram_color() &&
-                            element->second.timetable_font() &&
-                            element->second.timetable_color()
-                        )
-                    )
+                    if (!(element->second.diagram_font() && element->second.diagram_color() &&
+                          element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
                         return boost::none;
@@ -382,14 +349,8 @@ namespace bobura { namespace model { namespace serializer
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("company_name") })
                 {
-                    if (
-                        !(
-                            element->second.diagram_font() &&
-                            element->second.diagram_color() &&
-                            element->second.timetable_font() &&
-                            element->second.timetable_color()
-                        )
-                    )
+                    if (!(element->second.diagram_font() && element->second.diagram_color() &&
+                          element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
                         return boost::none;
@@ -398,14 +359,8 @@ namespace bobura { namespace model { namespace serializer
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("line_name") })
                 {
-                    if (
-                        !(
-                            element->second.diagram_font() &&
-                            element->second.diagram_color() &&
-                            element->second.timetable_font() &&
-                            element->second.timetable_color()
-                        )
-                    )
+                    if (!(element->second.diagram_font() && element->second.diagram_color() &&
+                          element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
                         return boost::none;
@@ -414,14 +369,8 @@ namespace bobura { namespace model { namespace serializer
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("note") })
                 {
-                    if (
-                        !(
-                            element->second.diagram_font() &&
-                            element->second.diagram_color() &&
-                            element->second.timetable_font() &&
-                            element->second.timetable_color()
-                        )
-                    )
+                    if (!(element->second.diagram_font() && element->second.diagram_color() &&
+                          element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
                         return boost::none;
@@ -430,14 +379,8 @@ namespace bobura { namespace model { namespace serializer
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("local_station") })
                 {
-                    if (
-                        !(
-                            element->second.diagram_font() &&
-                            element->second.diagram_color() &&
-                            element->second.timetable_font() &&
-                            element->second.timetable_color()
-                        )
-                    )
+                    if (!(element->second.diagram_font() && element->second.diagram_color() &&
+                          element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
                         return boost::none;
@@ -446,14 +389,8 @@ namespace bobura { namespace model { namespace serializer
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("principal_station") })
                 {
-                    if (
-                        !(
-                            element->second.diagram_font() &&
-                            element->second.diagram_color() &&
-                            element->second.timetable_font() &&
-                            element->second.timetable_color()
-                        )
-                    )
+                    if (!(element->second.diagram_font() && element->second.diagram_color() &&
+                          element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
                         return boost::none;
@@ -462,14 +399,8 @@ namespace bobura { namespace model { namespace serializer
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("local_terminal_station") })
                 {
-                    if (
-                        !(
-                            element->second.diagram_font() &&
-                            element->second.diagram_color() &&
-                            element->second.timetable_font() &&
-                            element->second.timetable_color()
-                        )
-                    )
+                    if (!(element->second.diagram_font() && element->second.diagram_color() &&
+                          element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
                         return boost::none;
@@ -478,14 +409,8 @@ namespace bobura { namespace model { namespace serializer
                 }
                 else if (element->first == string_type{ TETENGO2_TEXT("principal_terminal_station") })
                 {
-                    if (
-                        !(
-                            element->second.diagram_font() &&
-                            element->second.diagram_color() &&
-                            element->second.timetable_font() &&
-                            element->second.timetable_color()
-                        )
-                    )
+                    if (!(element->second.diagram_font() && element->second.diagram_color() &&
+                          element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
                         return boost::none;
@@ -506,25 +431,19 @@ namespace bobura { namespace model { namespace serializer
             }
             pull_parser.next();
 
-            return
-                boost::make_optional(
-                    font_color_set_type{
-                        std::move(background_font_color),
-                        std::move(general_font_color),
-                        std::move(company_name_font_color),
-                        std::move(line_name_font_color),
-                        std::move(note_font_color),
-                        std::move(local_station_font_color),
-                        std::move(principal_station_font_color),
-                        std::move(local_terminal_station_font_color),
-                        std::move(principal_terminal_station_font_color)
-                    }
-                );
+            return boost::make_optional(font_color_set_type{ std::move(background_font_color),
+                                                             std::move(general_font_color),
+                                                             std::move(company_name_font_color),
+                                                             std::move(line_name_font_color),
+                                                             std::move(note_font_color),
+                                                             std::move(local_station_font_color),
+                                                             std::move(principal_station_font_color),
+                                                             std::move(local_terminal_station_font_color),
+                                                             std::move(principal_terminal_station_font_color) });
         }
 
-        static boost::optional<std::pair<string_type, font_color_type>> read_font_color_element(
-            pull_parser_type& pull_parser
-        )
+        static boost::optional<std::pair<string_type, font_color_type>>
+        read_font_color_element(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return boost::none;
@@ -544,9 +463,7 @@ namespace bobura { namespace model { namespace serializer
             return boost::make_optional(std::make_pair(encoder().decode(std::move(key)), std::move(*value)));
         }
 
-        static boost::optional<font_color_type> read_font_color_element_value(
-            pull_parser_type& pull_parser
-        )
+        static boost::optional<font_color_type> read_font_color_element_value(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
                 return boost::none;
@@ -563,11 +480,8 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             pull_parser.next();
 
-            return
-                boost::make_optional<font_color_type>(
-                    font_color_type{ diagram_font, diagram_color, timetable_font, timetable_color }
-                );
-
+            return boost::make_optional<font_color_type>(
+                font_color_type{ diagram_font, diagram_color, timetable_font, timetable_color });
         }
 
         static boost::optional<std::pair<string_type, font_type>> read_font_element(pull_parser_type& pull_parser)
@@ -623,17 +537,12 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             pull_parser.next();
 
-            return
-                boost::make_optional<font_type>(
-                    font_type{
-                        encoder().decode(std::move(*font_name)),
-                        std::move(*font_size),
-                        std::move(*font_bold),
-                        std::move(*font_italic),
-                        std::move(*font_underline),
-                        std::move(*font_strikeout)
-                    }
-                );
+            return boost::make_optional<font_type>(font_type{ encoder().decode(std::move(*font_name)),
+                                                              std::move(*font_size),
+                                                              std::move(*font_bold),
+                                                              std::move(*font_italic),
+                                                              std::move(*font_underline),
+                                                              std::move(*font_strikeout) });
         }
 
         static boost::optional<std::pair<string_type, color_type>> read_color_element(pull_parser_type& pull_parser)
@@ -676,21 +585,13 @@ namespace bobura { namespace model { namespace serializer
 
             const auto color_value = to_color_value(std::move(color_string));
 
-            return
-                boost::make_optional(
-                    color_type{
-                        static_cast<unsigned char>((color_value / 0x010000) & 0x0000FF),
-                        static_cast<unsigned char>((color_value / 0x000100) & 0x0000FF),
-                        static_cast<unsigned char>(color_value & 0x0000FF)
-                    }
-                );
+            return boost::make_optional(color_type{ static_cast<unsigned char>((color_value / 0x010000) & 0x0000FF),
+                                                    static_cast<unsigned char>((color_value / 0x000100) & 0x0000FF),
+                                                    static_cast<unsigned char>(color_value & 0x0000FF) });
         }
 
-        static boost::optional<std::vector<station_location_type>> read_stations(
-            pull_parser_type& pull_parser,
-            error_type&       error,
-            promise_type&     promise
-        )
+        static boost::optional<std::vector<station_location_type>>
+        read_stations(pull_parser_type& pull_parser, error_type& error, promise_type& promise)
         {
             std::vector<station_location_type> stations{};
 
@@ -799,29 +700,20 @@ namespace bobura { namespace model { namespace serializer
 
                 operating_distance = operating_distance_type{ member->second } / 10U;
             }
-            
+
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
                 return boost::none;
             pull_parser.next();
 
-            return
-                boost::make_optional(
-                    station_location_type{
-                        station_type{
-                            std::move(name),
-                            *p_grade,
-                            show_down_arrival_times,
-                            show_up_arrival_times,
-                            std::move(note)
-                        },
-                        std::move(operating_distance)
-                    }
-                );
+            return boost::make_optional(station_location_type{
+                station_type{
+                    std::move(name), *p_grade, show_down_arrival_times, show_up_arrival_times, std::move(note) },
+                std::move(operating_distance) });
         }
 
         static const station_grade_type* to_station_grade(const string_type& name)
         {
-            if      (name == station_grade_type_set_type::local_type::instance().name())
+            if (name == station_grade_type_set_type::local_type::instance().name())
                 return &station_grade_type_set_type::local_type::instance();
             else if (name == station_grade_type_set_type::principal_type::instance().name())
                 return &station_grade_type_set_type::principal_type::instance();
@@ -833,11 +725,8 @@ namespace bobura { namespace model { namespace serializer
                 return nullptr;
         }
 
-        static boost::optional<std::vector<train_kind_type>> read_train_kinds(
-            pull_parser_type& pull_parser,
-            error_type&       error,
-            promise_type&     promise
-        )
+        static boost::optional<std::vector<train_kind_type>>
+        read_train_kinds(pull_parser_type& pull_parser, error_type& error, promise_type& promise)
         {
             std::vector<train_kind_type> train_kinds{};
 
@@ -977,19 +866,14 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             pull_parser.next();
 
-            return
-                boost::make_optional(
-                    train_kind_type{
-                        std::move(name),
-                        std::move(abbreviation),
-                        std::move(diagram_font),
-                        std::move(diagram_color),
-                        diagram_line_weight,
-                        diagram_line_style,
-                        std::move(timetable_font),
-                        std::move(timetable_color)
-                    }
-                );
+            return boost::make_optional(train_kind_type{ std::move(name),
+                                                         std::move(abbreviation),
+                                                         std::move(diagram_font),
+                                                         std::move(diagram_color),
+                                                         diagram_line_weight,
+                                                         diagram_line_style,
+                                                         std::move(timetable_font),
+                                                         std::move(timetable_color) });
         }
 
         static unsigned int to_color_value(string_type color_string)
@@ -1038,8 +922,7 @@ namespace bobura { namespace model { namespace serializer
             promise_type&        promise,
             const direction_type direction,
             const std::size_t    station_count,
-            const std::size_t    kind_count
-        )
+            const std::size_t    kind_count)
         {
             std::vector<train_type> trains{};
 
@@ -1086,8 +969,7 @@ namespace bobura { namespace model { namespace serializer
             promise_type&        promise,
             const direction_type direction,
             const std::size_t    station_count,
-            const std::size_t    kind_count
-        )
+            const std::size_t    kind_count)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
                 return boost::none;
@@ -1150,16 +1032,15 @@ namespace bobura { namespace model { namespace serializer
                 note = std::move(member->second);
             }
 
-            train_type train{
-                direction, std::move(number), kind_index, std::move(name), std::move(name_number), std::move(note)
-            };
+            train_type train{ direction,       std::move(number),      kind_index,
+                              std::move(name), std::move(name_number), std::move(note) };
 
             auto stops = read_stops(pull_parser, error, promise);
             if (!stops)
                 return boost::none;
             if (stops->size() > station_count)
                 return boost::none;
-            for (auto& stop: *stops)
+            for (auto& stop : *stops)
                 train.insert_stop(train.stops().end(), std::move(stop));
             for (std::size_t i = stops->size(); i < station_count; ++i)
                 train.insert_stop(train.stops().end(), empty_stop());
@@ -1176,11 +1057,8 @@ namespace bobura { namespace model { namespace serializer
             return stop_type{ time_type::uninitialized(), time_type::uninitialized(), false, string_type{} };
         }
 
-        static boost::optional<std::vector<stop_type>> read_stops(
-            pull_parser_type& pull_parser,
-            error_type&       error,
-            promise_type&     promise
-        )
+        static boost::optional<std::vector<stop_type>>
+        read_stops(pull_parser_type& pull_parser, error_type& error, promise_type& promise)
         {
             std::vector<stop_type> stops{};
 
@@ -1255,15 +1133,10 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             pull_parser.next();
 
-            return
-                boost::make_optional(
-                    stop_type{
-                        std::move(*arrival_time),
-                        std::move(*departure_time),
-                        *operational,
-                        encoder().decode(std::move(*platform))
-                    }
-                );
+            return boost::make_optional(stop_type{ std::move(*arrival_time),
+                                                   std::move(*departure_time),
+                                                   *operational,
+                                                   encoder().decode(std::move(*platform)) });
         }
 
         static boost::optional<time_type> to_time(const std::ptrdiff_t input)
@@ -1303,10 +1176,8 @@ namespace bobura { namespace model { namespace serializer
                 return boost::none;
             pull_parser.next();
 
-            return
-                boost::make_optional(
-                    std::make_pair(encoder().decode(std::move(key)), encoder().decode(std::move(*value)))
-                );
+            return boost::make_optional(
+                std::make_pair(encoder().decode(std::move(key)), encoder().decode(std::move(*value))));
         }
 
         static boost::optional<input_string_type> read_string(pull_parser_type& pull_parser)
@@ -1454,7 +1325,7 @@ namespace bobura { namespace model { namespace serializer
                 return input_string_type{};
             if (found->second.which() != 4)
                 return input_string_type{};
-            
+
             return boost::get<input_string_type>(found->second);
         }
 
@@ -1466,38 +1337,28 @@ namespace bobura { namespace model { namespace serializer
 
         // functions
 
-        std::unique_ptr<timetable_type> read_impl_impl(
-            const iterator first,
-            const iterator last,
-            error_type&    error,
-            promise_type&  promise
-        )
+        std::unique_ptr<timetable_type>
+        read_impl_impl(const iterator first, const iterator last, error_type& error, promise_type& promise)
         {
-            auto observing_first = first;
-            const auto content_size = static_cast<std::size_t>(first.distance_to(last));
+            auto        observing_first = first;
+            const auto  content_size = static_cast<std::size_t>(first.distance_to(last));
             std::size_t skip = 0;
             observing_first.set_increment_observer(
-                [&skip, observing_first, content_size, &promise](const iterator current)
-                {
+                [&skip, observing_first, content_size, &promise](const iterator current) {
                     ++skip;
                     if (skip % 16384 == 0)
                     {
                         const auto progress = static_cast<std::size_t>(observing_first.distance_to(current));
                         promise.set_progress({ progress, content_size });
                     }
-                }
-            );
+                });
 
-            auto p_push_parser =
-                tetengo2::stdalt::make_unique<push_parser_type>(
-                    observing_first, last, tetengo2::stdalt::make_unique<grammar_type>()
-                );
+            auto p_push_parser = tetengo2::stdalt::make_unique<push_parser_type>(
+                observing_first, last, tetengo2::stdalt::make_unique<grammar_type>());
             pull_parser_type pull_parser{ std::move(p_push_parser), 5 };
 
             return read_timetable(pull_parser, error, promise);
         }
-
-
     };
 
 
@@ -1512,8 +1373,7 @@ namespace bobura { namespace model { namespace serializer
         typename Speed,
         typename ExecJsonReadingTask,
         typename Font,
-        typename Encoder
-    >
+        typename Encoder>
     json_reader<
         Size,
         Difference,
@@ -1525,11 +1385,8 @@ namespace bobura { namespace model { namespace serializer
         Speed,
         ExecJsonReadingTask,
         Font,
-        Encoder
-    >::json_reader(std::unique_ptr<exec_json_reading_task_type> p_exec_json_reading_task)
-    :
-    base_type(),
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(p_exec_json_reading_task)))
+        Encoder>::json_reader(std::unique_ptr<exec_json_reading_task_type> p_exec_json_reading_task)
+    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(p_exec_json_reading_task)))
     {}
 
     template <
@@ -1543,8 +1400,7 @@ namespace bobura { namespace model { namespace serializer
         typename Speed,
         typename ExecJsonReadingTask,
         typename Font,
-        typename Encoder
-    >
+        typename Encoder>
     json_reader<
         Size,
         Difference,
@@ -1556,9 +1412,7 @@ namespace bobura { namespace model { namespace serializer
         Speed,
         ExecJsonReadingTask,
         Font,
-        Encoder
-    >::~json_reader()
-    noexcept
+        Encoder>::~json_reader() noexcept
     {}
 
     template <
@@ -1572,10 +1426,8 @@ namespace bobura { namespace model { namespace serializer
         typename Speed,
         typename ExecJsonReadingTask,
         typename Font,
-        typename Encoder
-    >
-    bool
-    json_reader<
+        typename Encoder>
+    bool json_reader<
         Size,
         Difference,
         String,
@@ -1586,8 +1438,7 @@ namespace bobura { namespace model { namespace serializer
         Speed,
         ExecJsonReadingTask,
         Font,
-        Encoder
-    >::selects_impl(const iterator first, const iterator last)
+        Encoder>::selects_impl(const iterator first, const iterator last)
     {
         return m_p_impl->selects_impl(first, last);
     }
@@ -1603,23 +1454,19 @@ namespace bobura { namespace model { namespace serializer
         typename Speed,
         typename ExecJsonReadingTask,
         typename Font,
-        typename Encoder
-    >
-    std::unique_ptr<
-        typename json_reader<
-            Size,
-            Difference,
-            String,
-            ForwardIterator,
-            Integer,
-            Float,
-            OperatingDistance,
-            Speed,
-            ExecJsonReadingTask,
-            Font,
-            Encoder
-        >::timetable_type
-    > 
+        typename Encoder>
+    std::unique_ptr<typename json_reader<
+        Size,
+        Difference,
+        String,
+        ForwardIterator,
+        Integer,
+        Float,
+        OperatingDistance,
+        Speed,
+        ExecJsonReadingTask,
+        Font,
+        Encoder>::timetable_type>
     json_reader<
         Size,
         Difference,
@@ -1631,18 +1478,15 @@ namespace bobura { namespace model { namespace serializer
         Speed,
         ExecJsonReadingTask,
         Font,
-        Encoder
-    >::read_impl(const iterator first, const iterator last, error_type& error)
+        Encoder>::read_impl(const iterator first, const iterator last, error_type& error)
     {
         return m_p_impl->read_impl(first, last, error);
     }
 
 
-    namespace
-    {
- #if BOOST_COMP_MSVC
-       namespace application
-        {
+    namespace {
+#if BOOST_COMP_MSVC
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using common_type_list_type = type_list::common;
@@ -1651,25 +1495,21 @@ namespace bobura { namespace model { namespace serializer
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
-            using exec_json_reading_task_type =
-                exec_json_reading_task<
-                    typename application::common_type_list_type::size_type,
-                    typename application::common_type_list_type::difference_type,
-                    typename application::common_type_list_type::string_type,
-                    typename application::common_type_list_type::operating_distance_type,
-                    typename application::common_type_list_type::speed_type,
-                    typename application::ui_type_list_type::fast_font_type,
-                    typename application::ui_type_list_type::dialog_type,
-                    typename application::ui_type_list_type::timer_type,
-                    typename application::ui_type_list_type::system_color_set_type,
-                    typename application::locale_type_list_type::message_catalog_type
-                >;
-
+            using exec_json_reading_task_type = exec_json_reading_task<
+                typename application::common_type_list_type::size_type,
+                typename application::common_type_list_type::difference_type,
+                typename application::common_type_list_type::string_type,
+                typename application::common_type_list_type::operating_distance_type,
+                typename application::common_type_list_type::speed_type,
+                typename application::ui_type_list_type::fast_font_type,
+                typename application::ui_type_list_type::dialog_type,
+                typename application::ui_type_list_type::timer_type,
+                typename application::ui_type_list_type::system_color_set_type,
+                typename application::locale_type_list_type::message_catalog_type>;
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using common_type_list_type = type_list::common;
@@ -1678,22 +1518,18 @@ namespace bobura { namespace model { namespace serializer
 
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
-            using exec_json_reading_task_type =
-                exec_json_reading_task<
-                    typename test::common_type_list_type::size_type,
-                    typename test::common_type_list_type::difference_type,
-                    typename test::common_type_list_type::string_type,
-                    typename test::common_type_list_type::operating_distance_type,
-                    typename test::common_type_list_type::speed_type,
-                    typename test::ui_type_list_type::font_type,
-                    typename test::ui_type_list_type::dialog_type,
-                    typename test::ui_type_list_type::timer_type,
-                    typename test::ui_type_list_type::system_color_set_type,
-                    typename test::locale_type_list_type::message_catalog_type
-                >;
-
+            using exec_json_reading_task_type = exec_json_reading_task<
+                typename test::common_type_list_type::size_type,
+                typename test::common_type_list_type::difference_type,
+                typename test::common_type_list_type::string_type,
+                typename test::common_type_list_type::operating_distance_type,
+                typename test::common_type_list_type::speed_type,
+                typename test::ui_type_list_type::font_type,
+                typename test::ui_type_list_type::dialog_type,
+                typename test::ui_type_list_type::timer_type,
+                typename test::ui_type_list_type::system_color_set_type,
+                typename test::locale_type_list_type::message_catalog_type>;
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -1708,8 +1544,7 @@ namespace bobura { namespace model { namespace serializer
         typename application::common_type_list_type::speed_type,
         application::exec_json_reading_task_type,
         typename application::ui_type_list_type::fast_font_type,
-        typename application::locale_type_list_type::timetable_file_encoder_type
-    >;
+        typename application::locale_type_list_type::timetable_file_encoder_type>;
 #endif
 
     template class json_reader<
@@ -1723,8 +1558,7 @@ namespace bobura { namespace model { namespace serializer
         typename test::common_type_list_type::speed_type,
         test::exec_json_reading_task_type,
         typename test::ui_type_list_type::font_type,
-        typename test::locale_type_list_type::timetable_file_encoder_type
-    >;
+        typename test::locale_type_list_type::timetable_file_encoder_type>;
 
 
 }}}

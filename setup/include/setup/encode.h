@@ -12,8 +12,7 @@
 #include <string>
 
 
-namespace setup
-{
+namespace setup {
     /*!
         \brief Converts a string encoding.
 
@@ -22,8 +21,6 @@ namespace setup
         \return An encoded string.
     */
     std::wstring encode(const std::string& string);
-
-
 }
 
 

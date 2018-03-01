@@ -25,8 +25,7 @@
 #include <tetengo2/text.h>
 
 
-namespace bobura { namespace message { namespace train_kind_dialog
-{
+namespace bobura { namespace message { namespace train_kind_dialog {
     /*!
         \brief The class template for a selection change observer of the train kind list box.
 
@@ -46,7 +45,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         using list_box_type = ListBox;
 
         //! The update type.
-        using update_type = std::function<void ()>;
+        using update_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -61,12 +60,8 @@ namespace bobura { namespace message { namespace train_kind_dialog
         train_kind_list_box_selection_changed(
             boost::optional<size_type>& current_train_kind_index,
             const list_box_type&        list_box,
-            const update_type           update
-        )
-        :
-        m_current_train_kind_index(current_train_kind_index),
-        m_list_box(list_box),
-        m_update(update)
+            const update_type           update)
+        : m_current_train_kind_index(current_train_kind_index), m_list_box(list_box), m_update(update)
         {}
 
 
@@ -75,8 +70,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the selection of the train kind list box is changed.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             m_current_train_kind_index = m_list_box.selected_value_index();
             m_update();
@@ -91,8 +85,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         const list_box_type& m_list_box;
 
         update_type m_update;
-
-
     };
 
 
@@ -119,7 +111,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         using message_catalog_type = MessageCatalog;
 
         //! The sync type.
-        using sync_type = std::function<void ()>;
+        using sync_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -136,13 +128,9 @@ namespace bobura { namespace message { namespace train_kind_dialog
             std::vector<info_set_type>&       info_sets,
             const boost::optional<size_type>& current_train_kind_index,
             const sync_type                   sync,
-            const message_catalog_type&       message_catalog
-        )
-        :
-        m_info_sets(info_sets),
-        m_current_train_kind_index(current_train_kind_index),
-        m_sync(sync),
-        m_message_catalog(message_catalog)
+            const message_catalog_type&       message_catalog)
+        : m_info_sets(info_sets), m_current_train_kind_index(current_train_kind_index), m_sync(sync),
+          m_message_catalog(message_catalog)
         {}
 
 
@@ -151,23 +139,20 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the add button is clicked.
         */
-        void operator()()
-        const
+        void operator()() const
         {
-            const auto insertion_position =
-                m_current_train_kind_index ?
-                std::next(m_info_sets.begin(), *m_current_train_kind_index) : m_info_sets.end();
+            const auto insertion_position = m_current_train_kind_index ?
+                                                std::next(m_info_sets.begin(), *m_current_train_kind_index) :
+                                                m_info_sets.end();
 
-            train_kind_type new_kind{
-                m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:New Kind")),
-                train_kind_type::default_().abbreviation(),
-                train_kind_type::default_().diagram_font(),
-                train_kind_type::default_().diagram_color(),
-                train_kind_type::default_().diagram_line_weight(),
-                train_kind_type::default_().diagram_line_style(),
-                train_kind_type::default_().timetable_font(),
-                train_kind_type::default_().timetable_color()
-            };
+            train_kind_type new_kind{ m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:New Kind")),
+                                      train_kind_type::default_().abbreviation(),
+                                      train_kind_type::default_().diagram_font(),
+                                      train_kind_type::default_().diagram_color(),
+                                      train_kind_type::default_().diagram_line_weight(),
+                                      train_kind_type::default_().diagram_line_style(),
+                                      train_kind_type::default_().timetable_font(),
+                                      train_kind_type::default_().timetable_color() };
             m_info_sets.emplace(insertion_position, boost::none, false, std::move(new_kind));
 
             m_sync();
@@ -195,8 +180,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         sync_type m_sync;
 
         const message_catalog_type& m_message_catalog;
-
-
     };
 
 
@@ -219,7 +202,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         using size_type = Size;
 
         //! The sync type.
-        using sync_type = std::function<void ()>;
+        using sync_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -234,12 +217,8 @@ namespace bobura { namespace message { namespace train_kind_dialog
         delete_button_mouse_clicked(
             std::vector<info_set_type>& info_sets,
             boost::optional<size_type>& current_train_kind_index,
-            const sync_type             sync
-        )
-        :
-        m_info_sets(info_sets),
-        m_current_train_kind_index(current_train_kind_index),
-        m_sync(sync)
+            const sync_type             sync)
+        : m_info_sets(info_sets), m_current_train_kind_index(current_train_kind_index), m_sync(sync)
         {}
 
 
@@ -248,8 +227,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the delete button is clicked.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             assert(m_current_train_kind_index);
             assert(*m_current_train_kind_index < m_info_sets.size());
@@ -276,8 +254,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         boost::optional<size_type>& m_current_train_kind_index;
 
         sync_type m_sync;
-
-
     };
 
 
@@ -300,7 +276,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         using size_type = Size;
 
         //! The sync type.
-        using sync_type = std::function<void ()>;
+        using sync_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -315,12 +291,8 @@ namespace bobura { namespace message { namespace train_kind_dialog
         up_button_mouse_clicked(
             std::vector<info_set_type>& info_sets,
             boost::optional<size_type>& current_train_kind_index,
-            const sync_type             sync
-        )
-        :
-        m_info_sets(info_sets),
-        m_current_train_kind_index(current_train_kind_index),
-        m_sync(sync)
+            const sync_type             sync)
+        : m_info_sets(info_sets), m_current_train_kind_index(current_train_kind_index), m_sync(sync)
         {}
 
 
@@ -329,8 +301,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the up button is clicked.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             assert(m_current_train_kind_index);
             assert(1 <= *m_current_train_kind_index && *m_current_train_kind_index < m_info_sets.size());
@@ -350,8 +321,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         boost::optional<size_type>& m_current_train_kind_index;
 
         sync_type m_sync;
-
-
     };
 
 
@@ -374,7 +343,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         using size_type = Size;
 
         //! The sync type.
-        using sync_type = std::function<void ()>;
+        using sync_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -389,12 +358,8 @@ namespace bobura { namespace message { namespace train_kind_dialog
         down_button_mouse_clicked(
             std::vector<info_set_type>& info_sets,
             boost::optional<size_type>& current_train_kind_index,
-            const sync_type             sync
-        )
-        :
-        m_info_sets(info_sets),
-        m_current_train_kind_index(current_train_kind_index),
-        m_sync(sync)
+            const sync_type             sync)
+        : m_info_sets(info_sets), m_current_train_kind_index(current_train_kind_index), m_sync(sync)
         {}
 
 
@@ -403,8 +368,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the down button is clicked.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             assert(m_current_train_kind_index);
             assert(*m_current_train_kind_index + 1 < m_info_sets.size());
@@ -424,8 +388,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         boost::optional<size_type>& m_current_train_kind_index;
 
         sync_type m_sync;
-
-
     };
 
 
@@ -438,7 +400,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The apply type.
-        using apply_type = std::function<void ()>;
+        using apply_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -448,10 +410,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             \param apply An apply function
         */
-        explicit name_text_box_changed(const apply_type apply)
-        :
-        m_apply(apply)
-        {}
+        explicit name_text_box_changed(const apply_type apply) : m_apply(apply) {}
 
 
         // functions
@@ -459,8 +418,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the name text box is changed.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             m_apply();
         }
@@ -470,8 +428,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // variables
 
         apply_type m_apply;
-
-
     };
 
 
@@ -484,7 +440,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The apply type.
-        using apply_type = std::function<void ()>;
+        using apply_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -494,10 +450,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             \param apply An apply function
         */
-        explicit abbreviation_text_box_changed(const apply_type apply)
-        :
-        m_apply(apply)
-        {}
+        explicit abbreviation_text_box_changed(const apply_type apply) : m_apply(apply) {}
 
 
         // functions
@@ -505,8 +458,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the abbreviation text box is changed.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             m_apply();
         }
@@ -516,8 +468,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // variables
 
         apply_type m_apply;
-
-
     };
 
 
@@ -543,7 +493,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         using font_type = typename font_dialog_type::font_type;
 
         //! The apply type.
-        using apply_type = std::function<void ()>;
+        using apply_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -556,10 +506,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
             \param apply  An apply function.
         */
         diagram_font_button_mouse_clicked(dialog_type& dialog, font_type& font, const apply_type apply)
-        :
-        m_dialog(dialog),
-        m_font(font),
-        m_apply(apply)
+        : m_dialog(dialog), m_font(font), m_apply(apply)
         {}
 
 
@@ -568,8 +515,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the font button is clicked.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             font_dialog_type font_dialog{ m_font, m_dialog };
 
@@ -591,8 +537,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         font_type& m_font;
 
         apply_type m_apply;
-
-
     };
 
 
@@ -618,7 +562,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         using color_type = typename color_dialog_type::color_type;
 
         //! The apply type.
-        using apply_type = std::function<void ()>;
+        using apply_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -631,10 +575,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
             \param apply  An apply function.
         */
         diagram_color_button_mouse_clicked(dialog_type& dialog, color_type& color, const apply_type apply)
-        :
-        m_dialog(dialog),
-        m_color(color),
-        m_apply(apply)
+        : m_dialog(dialog), m_color(color), m_apply(apply)
         {}
 
 
@@ -643,8 +584,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the font button is clicked.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             color_dialog_type color_dialog{ m_color, m_dialog };
 
@@ -666,8 +606,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         color_type& m_color;
 
         apply_type m_apply;
-
-
     };
 
 
@@ -680,7 +618,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The apply type.
-        using apply_type = std::function<void ()>;
+        using apply_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -690,10 +628,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             \param apply An apply function
         */
-        explicit diagram_weight_dropdown_box_selection_changed(const apply_type apply)
-        :
-        m_apply(apply)
-        {}
+        explicit diagram_weight_dropdown_box_selection_changed(const apply_type apply) : m_apply(apply) {}
 
 
         // functions
@@ -701,8 +636,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the selection of the weight dropdown box is changed.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             m_apply();
         }
@@ -712,8 +646,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // variables
 
         apply_type m_apply;
-
-
     };
 
 
@@ -726,7 +658,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // types
 
         //! The apply type.
-        using apply_type = std::function<void ()>;
+        using apply_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -736,10 +668,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             \param apply An apply function
         */
-        explicit diagram_line_style_dropdown_box_selection_changed(const apply_type apply)
-        :
-        m_apply(apply)
-        {}
+        explicit diagram_line_style_dropdown_box_selection_changed(const apply_type apply) : m_apply(apply) {}
 
 
         // functions
@@ -747,8 +676,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the selection of the line style dropdown box is changed.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             m_apply();
         }
@@ -758,8 +686,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // variables
 
         apply_type m_apply;
-
-
     };
 
 
@@ -785,7 +711,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         using font_type = typename font_dialog_type::font_type;
 
         //! The apply type.
-        using apply_type = std::function<void ()>;
+        using apply_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -798,10 +724,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
             \param apply  An apply function.
         */
         timetable_font_button_mouse_clicked(dialog_type& dialog, font_type& font, const apply_type apply)
-        :
-        m_dialog(dialog),
-        m_font(font),
-        m_apply(apply)
+        : m_dialog(dialog), m_font(font), m_apply(apply)
         {}
 
 
@@ -810,8 +733,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the font button is clicked.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             font_dialog_type font_dialog{ m_font, m_dialog };
 
@@ -833,8 +755,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         font_type& m_font;
 
         apply_type m_apply;
-
-
     };
 
 
@@ -860,7 +780,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         using color_type = typename color_dialog_type::color_type;
 
         //! The apply type.
-        using apply_type = std::function<void ()>;
+        using apply_type = std::function<void()>;
 
 
         // constructors and destructor
@@ -873,10 +793,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
             \param apply  An apply function.
         */
         timetable_color_button_mouse_clicked(dialog_type& dialog, color_type& color, const apply_type apply)
-        :
-        m_dialog(dialog),
-        m_color(color),
-        m_apply(apply)
+        : m_dialog(dialog), m_color(color), m_apply(apply)
         {}
 
 
@@ -885,8 +802,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the font button is clicked.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             color_dialog_type color_dialog{ m_color, m_dialog };
 
@@ -908,8 +824,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         color_type& m_color;
 
         apply_type m_apply;
-
-
     };
 
 
@@ -961,14 +875,9 @@ namespace bobura { namespace message { namespace train_kind_dialog
             const boost::optional<int_size_type>& current_train_kind_index,
             const color_type&                     background_color,
             const color_type&                     timetable_color,
-            const dimension_type&                 canvas_dimension
-        )
-        :
-        m_info_sets(info_sets),
-        m_current_train_kind_index(current_train_kind_index),
-        m_background_color(background_color),
-        m_timetable_color(timetable_color),
-        m_canvas_dimension(canvas_dimension)
+            const dimension_type&                 canvas_dimension)
+        : m_info_sets(info_sets), m_current_train_kind_index(current_train_kind_index),
+          m_background_color(background_color), m_timetable_color(timetable_color), m_canvas_dimension(canvas_dimension)
         {}
 
 
@@ -979,8 +888,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             \param canvas A canvas.
         */
-        void operator()(canvas_type& canvas)
-        const
+        void operator()(canvas_type& canvas) const
         {
             paint_background(canvas);
 
@@ -988,16 +896,14 @@ namespace bobura { namespace message { namespace train_kind_dialog
                 return;
             const auto& train_kind = m_info_sets[*m_current_train_kind_index].train_kind();
 
-            const position_type diagram_part_position{};
+            const position_type  diagram_part_position{};
             const dimension_type diagram_part_dimension{ m_canvas_dimension.width() / 2, m_canvas_dimension.height() };
             draw_diagram_part(train_kind, canvas, diagram_part_position, diagram_part_dimension);
 
-            const position_type timetable_part_position{
-                position_unit_type::from(diagram_part_dimension.width()), position_unit_type{}
-            };
-            const dimension_type timetable_part_dimension{
-                m_canvas_dimension.width() / 2, m_canvas_dimension.height()
-            };
+            const position_type  timetable_part_position{ position_unit_type::from(diagram_part_dimension.width()),
+                                                         position_unit_type{} };
+            const dimension_type timetable_part_dimension{ m_canvas_dimension.width() / 2,
+                                                           m_canvas_dimension.height() };
             draw_timetable_part(train_kind, canvas, timetable_part_position, timetable_part_dimension);
         }
 
@@ -1024,20 +930,13 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
         static font_type fixed_size_font(const font_type& base)
         {
-            return
-                font_type{
-                    base.family(),
-                    font_type::dialog_font().size(),
-                    base.bold(),
-                    base.italic(),
-                    base.underline(),
-                    base.strikeout()
-                };
+            return font_type{ base.family(),    font_type::dialog_font().size(),
+                              base.bold(),      base.italic(),
+                              base.underline(), base.strikeout() };
         }
 
-        static typename canvas_type::line_style_type to_canvas_line_style(
-            const typename train_kind_type::line_style_type line_style
-        )
+        static typename canvas_type::line_style_type
+        to_canvas_line_style(const typename train_kind_type::line_style_type line_style)
         {
             switch (line_style)
             {
@@ -1071,8 +970,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
         // functions
 
-        void paint_background(canvas_type& canvas)
-        const
+        void paint_background(canvas_type& canvas) const
         {
             auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(m_background_color);
             canvas.set_background(std::move(p_background));
@@ -1083,48 +981,40 @@ namespace bobura { namespace message { namespace train_kind_dialog
             const train_kind_type& train_kind,
             canvas_type&           canvas,
             const position_type&   position,
-            const dimension_type&  dimension
-        )
-        const
+            const dimension_type&  dimension) const
         {
             canvas.set_font(fixed_size_font(train_kind.diagram_font()));
             canvas.set_color(train_kind.diagram_color());
 
             const auto& text = train_kind.abbreviation().empty() ? train_kind.name() : train_kind.abbreviation();
-            const auto text_and_line_tops = diagram_sample_text_and_line_tops(canvas, position, dimension, text);
+            const auto  text_and_line_tops = diagram_sample_text_and_line_tops(canvas, position, dimension, text);
             canvas.draw_text(
-                text, position_type{ position.left()+ position_unit_type{ 1 }, text_and_line_tops.first }
-            );
+                text, position_type{ position.left() + position_unit_type{ 1 }, text_and_line_tops.first });
 
-            auto line_width =
-                train_kind.diagram_line_weight() == train_kind_type::weight_type::bold ?
-                dimension_unit_type{ 1 } / 6 : dimension_unit_type{ 1 } / 12;
+            auto line_width = train_kind.diagram_line_weight() == train_kind_type::weight_type::bold ?
+                                  dimension_unit_type{ 1 } / 6 :
+                                  dimension_unit_type{ 1 } / 12;
             canvas.set_line_width(std::move(line_width));
             canvas.set_line_style(to_canvas_line_style(train_kind.diagram_line_style()));
             canvas.draw_line(
                 position_type{ position.left(), text_and_line_tops.second },
-                position_type{
-                    position.left()+ position_unit_type::from(dimension.width()), text_and_line_tops.second
-                }
-            );
+                position_type{ position.left() + position_unit_type::from(dimension.width()),
+                               text_and_line_tops.second });
         }
 
         std::pair<position_unit_type, position_unit_type> diagram_sample_text_and_line_tops(
-            const canvas_type&     canvas,
-            const position_type&   base_position,
-            const dimension_type&  base_dimension,
-            const string_type&     text
-        )
-        const
+            const canvas_type&    canvas,
+            const position_type&  base_position,
+            const dimension_type& base_dimension,
+            const string_type&    text) const
         {
             const auto& canvas_height = base_dimension.height();
-            const auto text_dimension = canvas.calc_text_dimension(text);
+            const auto  text_dimension = canvas.calc_text_dimension(text);
             const auto& text_height = text_dimension.height();
 
             if (canvas_height > text_height)
             {
-                const auto text_top =
-                    base_position.top() + position_unit_type::from((canvas_height - text_height) / 2);
+                const auto text_top = base_position.top() + position_unit_type::from((canvas_height - text_height) / 2);
                 const auto line_top = text_top + position_unit_type::from(text_height);
                 return std::make_pair(text_top, line_top);
             }
@@ -1140,9 +1030,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
             const train_kind_type& train_kind,
             canvas_type&           canvas,
             const position_type&   position,
-            const dimension_type&  dimension
-        )
-        const
+            const dimension_type&  dimension) const
         {
             auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(m_background_color);
             canvas.set_background(std::move(p_background));
@@ -1152,15 +1040,15 @@ namespace bobura { namespace message { namespace train_kind_dialog
             canvas.set_color(train_kind.timetable_color());
 
             const auto& text = train_kind.abbreviation().empty() ? train_kind.name() : train_kind.abbreviation();
-            const auto text_dimension = canvas.calc_text_dimension(text);
-            const auto text_position = timetable_sample_text_position(position, dimension, text_dimension);
+            const auto  text_dimension = canvas.calc_text_dimension(text);
+            const auto  text_position = timetable_sample_text_position(position, dimension, text_dimension);
             canvas.draw_text(text, text_position);
 
             canvas.set_line_width(dimension_unit_type{ 1 } / 12);
             canvas.set_line_style(canvas_type::line_style_type::solid);
             canvas.set_color(m_timetable_color);
 
-            const auto line_positions = timetable_sample_line_positions(position, dimension, text_dimension);
+            const auto  line_positions = timetable_sample_line_positions(position, dimension, text_dimension);
             const auto& box_left = std::get<0>(line_positions).left();
             const auto& box_top = std::get<0>(line_positions).top();
             const auto& box_right = std::get<1>(line_positions).left();
@@ -1177,30 +1065,24 @@ namespace bobura { namespace message { namespace train_kind_dialog
         position_type timetable_sample_text_position(
             const position_type&  base_position,
             const dimension_type& base_dimension,
-            const dimension_type& text_dimension
-        )
-        const
+            const dimension_type& text_dimension) const
         {
             const auto& canvas_width = base_dimension.width();
             const auto& canvas_height = base_dimension.height();
             const auto& text_width = text_dimension.width();
             const auto& text_height = text_dimension.height();
 
-            auto left =
-                canvas_width > text_width ?
-                position_unit_type::from((canvas_width - text_width) / 2) : position_unit_type{};
-            auto top =
-                canvas_height > text_height ?
-                position_unit_type::from((canvas_height - text_height) / 2) : position_unit_type{};
+            auto left = canvas_width > text_width ? position_unit_type::from((canvas_width - text_width) / 2) :
+                                                    position_unit_type{};
+            auto top = canvas_height > text_height ? position_unit_type::from((canvas_height - text_height) / 2) :
+                                                     position_unit_type{};
             return position_type{ base_position.left() + left, base_position.top() + top };
         }
 
         std::tuple<position_type, position_type, position_type, position_type> timetable_sample_line_positions(
             const position_type&  base_position,
             const dimension_type& base_dimension,
-            const dimension_type& text_dimension
-        )
-        const
+            const dimension_type& text_dimension) const
         {
             const auto& canvas_left = base_position.left();
             const auto& canvas_top = base_position.top();
@@ -1212,31 +1094,27 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             const auto box_width = std::max(text_width + dimension_unit_type{ 1 } / 2, dimension_unit_type{ 5 } / 2);
             const auto box_height = std::max(text_height + dimension_unit_type{ 1 } / 2, dimension_unit_type{ 3 } / 2);
-            const auto box_left =
-                canvas_width > box_width ?
-                position_unit_type::from((canvas_width - box_width) / 2) : position_unit_type{};
+            const auto box_left = canvas_width > box_width ? position_unit_type::from((canvas_width - box_width) / 2) :
+                                                             position_unit_type{};
             const auto box_right = box_left + position_unit_type::from(box_width);
-            const auto box_top =
-                canvas_height > box_height ?
-                position_unit_type::from((canvas_height - box_height) / 2) : position_unit_type{};
+            const auto box_top = canvas_height > box_height ?
+                                     position_unit_type::from((canvas_height - box_height) / 2) :
+                                     position_unit_type{};
             const auto box_bottom = box_top + position_unit_type::from(box_height);
 
             const auto line_left =
                 box_left > position_unit_type{ 1 } / 2 ? box_left - position_unit_type{ 1 } / 2 : position_unit_type{};
-            const auto line_right =
-                box_right + position_unit_type{ 1 } / 2 < position_unit_type::from(canvas_width) ?
-                box_right + position_unit_type{ 1 } / 2 : position_unit_type::from(canvas_width);
+            const auto line_right = box_right + position_unit_type{ 1 } / 2 < position_unit_type::from(canvas_width) ?
+                                        box_right + position_unit_type{ 1 } / 2 :
+                                        position_unit_type::from(canvas_width);
             const auto line_bottom = canvas_top + position_unit_type::from(canvas_height);
 
-            return
-                std::make_tuple(
-                    position_type{ canvas_left + box_left, canvas_top + box_top },
-                    position_type{ canvas_left + box_right, canvas_top + box_bottom },
-                    position_type{ canvas_left + line_left, canvas_top + line_bottom },
-                    position_type{ canvas_left + line_right, canvas_top + line_bottom }
-                );
+            return std::make_tuple(
+                position_type{ canvas_left + box_left, canvas_top + box_top },
+                position_type{ canvas_left + box_right, canvas_top + box_bottom },
+                position_type{ canvas_left + line_left, canvas_top + line_bottom },
+                position_type{ canvas_left + line_right, canvas_top + line_bottom });
         }
-
     };
 
 
@@ -1262,10 +1140,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             \param dialog A dialog.
         */
-        explicit ok_button_mouse_clicked(dialog_type& dialog)
-        :
-        m_dialog(dialog)
-        {}
+        explicit ok_button_mouse_clicked(dialog_type& dialog) : m_dialog(dialog) {}
 
 
         // functions
@@ -1273,8 +1148,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the OK button is clicked.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             m_dialog.set_result(dialog_type::result_type::accepted);
             m_dialog.close();
@@ -1285,8 +1159,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // variables
 
         dialog_type& m_dialog;
-
-
     };
 
 
@@ -1312,10 +1184,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
 
             \param dialog A dialog.
         */
-        explicit cancel_button_mouse_clicked(dialog_type& dialog)
-        :
-        m_dialog(dialog)
-        {}
+        explicit cancel_button_mouse_clicked(dialog_type& dialog) : m_dialog(dialog) {}
 
 
         // functions
@@ -1323,8 +1192,7 @@ namespace bobura { namespace message { namespace train_kind_dialog
         /*!
             \brief Called when the cancel button is clicked.
         */
-        void operator()()
-        const
+        void operator()() const
         {
             m_dialog.set_result(dialog_type::result_type::canceled);
             m_dialog.close();
@@ -1335,8 +1203,6 @@ namespace bobura { namespace message { namespace train_kind_dialog
         // variables
 
         dialog_type& m_dialog;
-
-
     };
 
 

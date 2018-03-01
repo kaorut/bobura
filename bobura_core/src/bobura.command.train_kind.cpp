@@ -18,12 +18,11 @@
 
 #include <bobura/command/train_kind.h>
 #include <bobura/detail_type_list.h>
-#include <bobura/type_list.h>
 #include <bobura/train_kind_dialog.h>
+#include <bobura/type_list.h>
 
 
-namespace bobura { namespace command
-{
+namespace bobura { namespace command {
     template <
         typename Traits,
         typename Dialog,
@@ -33,11 +32,17 @@ namespace bobura { namespace command
         typename FontDialog,
         typename ColorDialog,
         typename MessageCatalog,
-        typename DialogTraits
-    >
+        typename DialogTraits>
     class train_kind<
-        Traits, Dialog, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
-    >::impl
+        Traits,
+        Dialog,
+        PointDimensionUnit,
+        Color,
+        Canvas,
+        FontDialog,
+        ColorDialog,
+        MessageCatalog,
+        DialogTraits>::impl
     {
     public:
         // types
@@ -71,24 +76,18 @@ namespace bobura { namespace command
 
         // constructors and destructor
 
-        explicit impl(const message_catalog_type& message_catalog)
-        :
-        m_message_catalog(message_catalog)
-        {}
+        explicit impl(const message_catalog_type& message_catalog) : m_message_catalog(message_catalog) {}
 
 
         // functions
 
-        void execute(model_type& model, abstract_window_type& parent)
-        const
+        void execute(model_type& model, abstract_window_type& parent) const
         {
-            const auto& font_color_set = model.timetable().font_color_set();
-            train_kind_dialog_type dialog{
-                parent,
-                *font_color_set.background().diagram_color(),
-                *font_color_set.general().timetable_color(),
-                m_message_catalog
-            };
+            const auto&            font_color_set = model.timetable().font_color_set();
+            train_kind_dialog_type dialog{ parent,
+                                           *font_color_set.background().diagram_color(),
+                                           *font_color_set.general().timetable_color(),
+                                           m_message_catalog };
 
             auto info_sets = to_info_sets(model.timetable());
             dialog.set_info_sets(std::move(info_sets));
@@ -96,29 +95,26 @@ namespace bobura { namespace command
             dialog.do_modal();
             if (dialog.result() != dialog_type::result_type::accepted)
                 return;
-        
+
             model.timetable().assign_train_kinds(
                 to_train_kinds(dialog.info_sets()),
-                to_train_kind_index_map(dialog.info_sets(), model.timetable().train_kinds().size())
-            );
+                to_train_kind_index_map(dialog.info_sets(), model.timetable().train_kinds().size()));
         }
 
 
     private:
         // types
 
-        using train_kind_dialog_type =
-            train_kind_dialog<
-                dialog_traits_type,
-                size_type,
-                string_type,
-                font_type,
-                point_dimension_unit_type,
-                color_type,
-                canvas_type,
-                font_dialog_type,
-                color_dialog_type
-            >;
+        using train_kind_dialog_type = train_kind_dialog<
+            dialog_traits_type,
+            size_type,
+            string_type,
+            font_type,
+            point_dimension_unit_type,
+            color_type,
+            canvas_type,
+            font_dialog_type,
+            color_dialog_type>;
 
         using info_set_type = typename train_kind_dialog_type::info_set_type;
 
@@ -155,19 +151,16 @@ namespace bobura { namespace command
             train_kinds.reserve(info_sets.size());
 
             std::transform(
-                info_sets.begin(),
-                info_sets.end(),
-                std::back_inserter(train_kinds),
-                [](const info_set_type& info_set) { return info_set.train_kind(); }
-            );
+                info_sets.begin(), info_sets.end(), std::back_inserter(train_kinds), [](const info_set_type& info_set) {
+                    return info_set.train_kind();
+                });
 
             return train_kinds;
         }
 
         static std::vector<train_kind_index_type> to_train_kind_index_map(
             const std::vector<info_set_type>& info_sets,
-            const train_kind_index_type       original_train_kind_count
-        )
+            const train_kind_index_type       original_train_kind_count)
         {
             std::vector<train_kind_index_type> map(original_train_kind_count, 0);
 
@@ -187,8 +180,6 @@ namespace bobura { namespace command
         // variables
 
         const message_catalog_type& m_message_catalog;
-
-
     };
 
 
@@ -201,15 +192,18 @@ namespace bobura { namespace command
         typename FontDialog,
         typename ColorDialog,
         typename MessageCatalog,
-        typename DialogTraits
-    >
+        typename DialogTraits>
     train_kind<
-        Traits, Dialog, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
-    >::train_kind(
-        const message_catalog_type& message_catalog
-    )
-    :
-    m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
+        Traits,
+        Dialog,
+        PointDimensionUnit,
+        Color,
+        Canvas,
+        FontDialog,
+        ColorDialog,
+        MessageCatalog,
+        DialogTraits>::train_kind(const message_catalog_type& message_catalog)
+    : m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
     {}
 
     template <
@@ -221,14 +215,19 @@ namespace bobura { namespace command
         typename FontDialog,
         typename ColorDialog,
         typename MessageCatalog,
-        typename DialogTraits
-    >
+        typename DialogTraits>
     train_kind<
-        Traits, Dialog, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
-    >::~train_kind()
-    noexcept
+        Traits,
+        Dialog,
+        PointDimensionUnit,
+        Color,
+        Canvas,
+        FontDialog,
+        ColorDialog,
+        MessageCatalog,
+        DialogTraits>::~train_kind() noexcept
     {}
-    
+
     template <
         typename Traits,
         typename Dialog,
@@ -238,52 +237,48 @@ namespace bobura { namespace command
         typename FontDialog,
         typename ColorDialog,
         typename MessageCatalog,
-        typename DialogTraits
-    >
+        typename DialogTraits>
     void train_kind<
-        Traits, Dialog, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog, MessageCatalog, DialogTraits
-    >::execute_impl(
-        model_type&           model,
-        abstract_window_type& parent
-    )
-    const
+        Traits,
+        Dialog,
+        PointDimensionUnit,
+        Color,
+        Canvas,
+        FontDialog,
+        ColorDialog,
+        MessageCatalog,
+        DialogTraits>::execute_impl(model_type& model, abstract_window_type& parent) const
     {
         m_p_impl->execute(model, parent);
     }
 
 
-    namespace
-    {
+    namespace {
 #if BOOST_COMP_MSVC
-        namespace application
-        {
+        namespace application {
             using detail_type_list_type = type_list::detail_for_application;
 
             using locale_type_list_type = type_list::locale<detail_type_list_type>;
-    
+
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using common_dialog_type_list_type = type_list::common_dialog<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
 #endif
 
-        namespace test
-        {
+        namespace test {
             using detail_type_list_type = type_list::detail_for_test;
 
             using locale_type_list_type = type_list::locale<detail_type_list_type>;
-    
+
             using ui_type_list_type = type_list::ui<detail_type_list_type>;
 
             using common_dialog_type_list_type = type_list::common_dialog<detail_type_list_type>;
 
             using traits_type_list_type = type_list::traits<detail_type_list_type>;
-
         }
-
     }
 
 #if BOOST_COMP_MSVC
@@ -296,8 +291,7 @@ namespace bobura { namespace command
         typename application::common_dialog_type_list_type::font_type,
         typename application::common_dialog_type_list_type::color_type,
         typename application::locale_type_list_type::message_catalog_type,
-        typename application::traits_type_list_type::dialog_type
-    >;
+        typename application::traits_type_list_type::dialog_type>;
 #endif
 
     template class train_kind<
@@ -309,8 +303,7 @@ namespace bobura { namespace command
         typename test::common_dialog_type_list_type::font_type,
         typename test::common_dialog_type_list_type::color_type,
         typename test::locale_type_list_type::message_catalog_type,
-        typename test::traits_type_list_type::dialog_type
-    >;
+        typename test::traits_type_list_type::dialog_type>;
 
 
 }}

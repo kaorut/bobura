@@ -17,8 +17,7 @@
 #include <bobura/view/scale_list.h>
 
 
-namespace bobura { namespace view { namespace diagram
-{
+namespace bobura { namespace view { namespace diagram {
     /*!
         \brief The class template for a zoom of a view.
 
@@ -88,8 +87,7 @@ namespace bobura { namespace view { namespace diagram
         /*!
             \brief Destroys the zoom of a view.
         */
-        ~zoom()
-        noexcept;
+        ~zoom() noexcept;
 
 
         // functions
@@ -146,8 +144,6 @@ namespace bobura { namespace view { namespace diagram
         // variables
 
         const std::unique_ptr<impl> m_p_impl;
-
-
     };
 
 
