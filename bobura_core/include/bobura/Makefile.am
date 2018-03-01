@@ -113,7 +113,7 @@ lint-iwyu-extra: $(addsuffix .iwyuout, $(extra_headers))
 	mv $(addsuffix .tmp, $@) $@
 
 format:
-	$(top_srcdir)/lib/tetengo2/tools/call_clang-format.sh $(UNIX2DOS) $(CLANGFORMAT) $(pkg_headers) $(extra_headers)
+	$(top_srcdir)/lib/tetengo2/tools/call_clang-format.sh $(UNIX2DOS) $(CLANGFORMAT) $(srcdir) $(pkg_headers) $(extra_headers)
 
 clean-local:
 	-find -name "*.iwyuout.tmp" | xargs rm -f

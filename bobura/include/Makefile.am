@@ -22,7 +22,7 @@ lint-iwyu-extra:
 	mv $(addsuffix .tmp, $@) $@
 
 format:
-	$(top_srcdir)/lib/tetengo2/tools/call_clang-format.sh $(UNIX2DOS) $(CLANGFORMAT) $(headers)
+	$(top_srcdir)/lib/tetengo2/tools/call_clang-format.sh $(UNIX2DOS) $(CLANGFORMAT) $(srcdir) $(headers)
 	for d in $(SUBDIRS); do (cd $$d && $(MAKE) format); done
 
 clean-local:
