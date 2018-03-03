@@ -131,11 +131,11 @@ $(top_builddir)/precompiled/precompiled.h.$(PRECOMPILE_EXT): $(top_srcdir)/preco
 	popd
 
 $(top_builddir)/bobura_core/src/libbobura_core.a:
-	pushd $(top_builddir)/libbobura_core/src; \
+	pushd $(top_builddir)/bobura_core/src; \
 	$(MAKE) all; \
 	popd
 
 $(top_builddir)/bobura_model/src/libbobura_model.a:
-	pushd $(top_builddir)/libbobura_model/src; \
+	pushd $(top_builddir)/bobura_model/src; \
 	$(MAKE) all; \
 	popd
