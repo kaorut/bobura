@@ -57,8 +57,7 @@ namespace test_bobura { namespace model {
         };
 
 
-        /**** User Interface
-         * *********************************************************************************************/
+        /**** User Interface *****************************************************************************************/
 
 #if !defined(DOCUMENTATION)
         namespace detail { namespace ui {
