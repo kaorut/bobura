@@ -90,3 +90,8 @@ $(top_builddir)/precompiled/precompiled.h.$(PRECOMPILE_EXT): $(top_srcdir)/preco
 	pushd $(top_builddir)/precompiled; \
 	$(MAKE) all; \
 	popd
+
+$(top_builddir)/bobura_core/src/libbobura_model.a:
+	pushd $(top_builddir)/libbobura_model/src; \
+	$(MAKE) all; \
+	popd
