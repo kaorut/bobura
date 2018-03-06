@@ -241,6 +241,22 @@ AC_ARG_WITH(
     fi
 )
 AC_SUBST([TETENGO2_GUI_LIB])
+AC_ARG_WITH(
+    tetengo2-toolsdir,
+    AS_HELP_STRING(
+        [--with-tetengo2-toolsdir=DIR],
+        [Specify the directory for the Tetengo2 tools.]
+    ),
+    TETENGO2_TOOLS=$withval,
+    if test "x$TETENGO2" = "xSUBMODULE";
+    then
+        TETENGO2_TOOLS="\$(top_srcdir)/lib/tetengo2/tools";
+    elif test -n "$TETENGO2";
+    then
+        TETENGO2_TOOLS="$TETENGO2/tools"
+    fi
+)
+AC_SUBST([TETENGO2_TOOLS])
 
 #### Checks for header files ####
 AC_CXX_HAVE_STD
