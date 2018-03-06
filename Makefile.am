@@ -23,17 +23,17 @@ EXTRA_DIST = bobura.sln bobura_config.h-original TODO Doxyfile
 .PHONY: lint
 lint: lint-test-cases lint-type-list-type-duplication lint-iwyu
 
-lint-test-cases: $(top_srcdir)/lib/tetengo2/tools/check_test_cases.sh
+lint-test-cases: $(TETENGO2_TOOLS)/check_test_cases.sh
 	$< $(top_srcdir) silent
 
-$(top_srcdir)/lib/tetengo2/tools/check_test_cases.sh:
+$(TETENGO2_TOOLS)/check_test_cases.sh:
 	git submodule update --init
 	git submodule foreach 'git checkout -f master && git pull -p'
 
-lint-type-list-type-duplication: $(top_srcdir)/lib/tetengo2/tools/check_type_list_type_duplication.sh
+lint-type-list-type-duplication: $(TETENGO2_TOOLS)/check_type_list_type_duplication.sh
 	$< $(top_srcdir)
 
-$(top_srcdir)/lib/tetengo2/tools/check_type_list_type_duplication.sh:
+$(TETENGO2_TOOLS)/check_type_list_type_duplication.sh:
 	git submodule update --init
 	git submodule foreach 'git checkout -f master && git pull -p'
 
@@ -52,8 +52,8 @@ $(top_srcdir)/$(IWYU_IMP_PATH):
 format: $(top_srcdir)/.clang-format
 	for d in $(SOURCE_SUBDIRS); do (cd $$d && $(MAKE) format); done
 
-$(top_srcdir)/.clang-format: $(top_srcdir)/lib/tetengo2/tools/clang-format
-	cp -f $(top_srcdir)/lib/tetengo2/tools/clang-format $(top_srcdir)/.clang-format
+$(top_srcdir)/.clang-format: $(TETENGO2_TOOLS)/clang-format
+	cp -f $(TETENGO2_TOOLS)/clang-format $(top_srcdir)/.clang-format
 
 .PHONY: doc
 doc:
