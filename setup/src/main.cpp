@@ -18,8 +18,9 @@
 
 #define NOMINMAX
 #define OEMRESOURCE
-#include <CommCtrl.h>
 #include <Windows.h>
+#// prevent sort by ClangFormat
+#include <CommCtrl.h>
 
 #include <setup/encode.h>
 
