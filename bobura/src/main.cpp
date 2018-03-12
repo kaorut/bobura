@@ -105,7 +105,7 @@ int WINAPI wWinMain(
     const ::HINSTANCE hInstance,
     const ::HINSTANCE hPrevInstance,
     const ::LPWSTR    lpCmdLine,
-    const int         nCmdShow) noexcept
+    const int         nCmdShow)
 {
     boost::ignore_unused(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 
