@@ -379,12 +379,10 @@ namespace bobura {
 
             picture_box.mouse_observer_set().pressed().connect(diagram_view_picture_box_mouse_pressed_observer_type{
                 picture_box,
-                [&main_window, &picture_box](const mouse_button_type mouse_button) {
-                    picture_box.set_mouse_capture(mouse_button);
-                },
+                [&picture_box](const mouse_button_type mouse_button) { picture_box.set_mouse_capture(mouse_button); },
                 view });
             picture_box.mouse_observer_set().released().connect(diagram_view_picture_box_mouse_released_observer_type{
-                [&main_window, &picture_box](const mouse_button_type mouse_button) {
+                [&picture_box](const mouse_button_type mouse_button) {
                     return picture_box.release_mouse_capture(mouse_button);
                 },
                 view });
