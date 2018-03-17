@@ -55,8 +55,8 @@ namespace bobura { namespace view { namespace diagram {
             position_unit_type         bottom,
             color_type                 color,
             boost::optional<size_type> hours)
-        : m_left{ std::move(left) }, m_top{ td::move(top) }, m_bottom{ std::move(bottom) }, m_color{ std::move(color) },
-          m_hours{ std::move(hours) }
+        : m_left{ std::move(left) }, m_top{ std::move(top) }, m_bottom{ std::move(bottom) },
+          m_color{ std::move(color) }, m_hours{ std::move(hours) }
         {}
 
         impl(impl&& another)
