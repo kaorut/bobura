@@ -62,7 +62,7 @@ namespace bobura { namespace message {
     };
 
 
-    timetable_model_observer_set::timetable_model_observer_set() : m_p_impl(tetengo2::stdalt::make_unique<impl>()) {}
+    timetable_model_observer_set::timetable_model_observer_set() : m_p_impl{ tetengo2::stdalt::make_unique<impl>() } {}
 
     timetable_model_observer_set::~timetable_model_observer_set() noexcept {}
 

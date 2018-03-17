@@ -45,7 +45,7 @@ namespace bobura { namespace load_save {
         // constructors and destructor
 
         impl(const bool ask_file_path, const message_catalog_type& message_catalog)
-        : m_ask_file_path(ask_file_path), m_message_catalog(message_catalog)
+        : m_ask_file_path{ ask_file_path }, m_message_catalog{ message_catalog }
         {}
 
 
@@ -202,7 +202,7 @@ namespace bobura { namespace load_save {
 
     template <typename Traits>
     save_to_file<Traits>::save_to_file(const bool ask_file_path, const message_catalog_type& message_catalog)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(ask_file_path, message_catalog))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(ask_file_path, message_catalog) }
     {}
 
     /*!
