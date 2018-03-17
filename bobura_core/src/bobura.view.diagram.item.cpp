@@ -35,7 +35,7 @@ namespace bobura { namespace view { namespace diagram {
 
         // constructors and destructor
 
-        explicit impl(selection_type& selection) : m_p_selection(&selection) {}
+        explicit impl(selection_type& selection) : m_p_selection{ &selection } {}
 
 
         // functions
@@ -91,7 +91,7 @@ namespace bobura { namespace view { namespace diagram {
 
 
     template <typename Traits>
-    item<Traits>::item(selection_type& selection) : m_p_impl(tetengo2::stdalt::make_unique<impl>(selection))
+    item<Traits>::item(selection_type& selection) : m_p_impl{ tetengo2::stdalt::make_unique<impl>(selection) }
     {}
 
     template <typename Traits>

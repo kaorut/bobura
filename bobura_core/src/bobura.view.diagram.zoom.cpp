@@ -43,7 +43,9 @@ namespace bobura { namespace view { namespace diagram {
         // constructors and destructor
 
         impl(picture_box_type& picture_box, diagram_view_type& diagram_view)
-        : m_p_diagram_view_picture_box(dynamic_cast<view_picture_box_type*>(&picture_box)), m_diagram_view(diagram_view)
+        : m_p_diagram_view_picture_box{ dynamic_cast<view_picture_box_type*>(&picture_box) }, m_diagram_view{
+              diagram_view
+          }
         {
             assert(m_p_diagram_view_picture_box);
         }
@@ -149,7 +151,7 @@ namespace bobura { namespace view { namespace diagram {
 
     template <typename Traits, typename PictureBox, typename MouseCapture>
     zoom<Traits, PictureBox, MouseCapture>::zoom(picture_box_type& picture_box, diagram_view_type& diagram_view)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(picture_box, diagram_view))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(picture_box, diagram_view) }
     {}
 
     template <typename Traits, typename PictureBox, typename MouseCapture>

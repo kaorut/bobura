@@ -36,300 +36,311 @@
 #include <bobura/view/diagram/utility.h>
 
 
-namespace bobura { namespace view { namespace diagram {
-    template <typename Traits>
-    class train_line_fragment<Traits>::impl : private boost::noncopyable
+namespace bobura {
+    namespace view {
+        namespace diagram {
+            template <typename Traits>
+            class train_line_fragment<Traits>::impl : private boost::noncopyable
+            {
+            public:
+                // types
+
+                using traits_type = Traits;
+
+                using size_type = typename traits_type::size_type;
+
+                using canvas_type = typename traits_type::canvas_type;
+
+                using position_type = typename train_line_fragment::position_type;
+
+                using message_catalog_type = typename traits_type::message_catalog_type;
+
+                using base_type = typename train_line_fragment::base_type;
+
+                using selection_type = typename train_line_fragment::selection_type;
+
+                using train_type = typename train_line_fragment::train_type;
+
+
+                // constructors and destructor
+
+                impl(
+                    const train_type& train,
+                    const size_type   departure_stop_index,
+                    selection_type&,
+                    position_type               departure,
+                    position_type               arrival,
+                    const bool                  draw_train_name,
+                    const message_catalog_type& message_catalog)
+                : m_p_train{ &train }, m_departure_stop_index{ departure_stop_index },
+                  m_departure{ std::move(departure) }, m_arrival{ std::move(arrival) },
+                  m_draw_train_name{ draw_train_name }, m_p_message_catalog{ &message_catalog }
+                {}
+
+                impl(impl&& another)
+                : m_p_train{ another.m_p_train }, m_departure_stop_index{ another.m_departure_stop_index },
+                  m_departure{ std::move(another.m_departure) }, m_arrival{ std::move(another.m_arrival) },
+                  m_draw_train_name{ another.m_draw_train_name }, m_p_message_catalog{ another.m_p_message_catalog }
+                {}
+
+
+                // functions
+
+                impl& operator=(impl&& another)
+                {
+                    if (&another == this)
+                        return *this;
+
+                    m_p_train = another.m_p_train;
+                    m_departure_stop_index = another.m_departure_stop_index;
+                    m_departure = std::move(another.m_departure);
+                    m_arrival = std::move(another.m_arrival);
+                    m_draw_train_name = another.m_draw_train_name;
+                    m_p_message_catalog = another.m_p_message_catalog;
+
+                    return *this;
+                }
+
+                void draw_on_impl(const train_line_fragment& self, canvas_type& canvas) const
+                {
+                    draw_selectable_line(canvas, m_departure, m_arrival, self.selected());
+                    if (m_draw_train_name)
+                        draw_train_name(canvas);
+                }
+
+                base_type* p_item_by_position_impl(train_line_fragment& self, const position_type& position)
+                {
+                    return calculate_distance(position, m_departure, m_arrival) <=
+                                   selected_line_margin<dimension_unit_type>() ?
+                               &self :
+                               nullptr;
+                }
+
+                bool selected_impl(const train_line_fragment& self) const
+                {
+                    return self.get_selection().selected(*m_p_train, boost::none) ||
+                           self.get_selection().selected(*m_p_train, boost::make_optional(m_departure_stop_index));
+                }
+
+                void select_impl(train_line_fragment& self, const bool switch_selection_style)
+                {
+                    const auto whole_selected = self.get_selection().selected(*m_p_train, boost::none);
+                    const auto this_fragment_selected =
+                        self.get_selection().selected(*m_p_train, boost::make_optional(m_departure_stop_index));
+                    const auto any_fragment_selected = self.get_selection().selected(
+                        *m_p_train, boost::make_optional(std::numeric_limits<size_type>::max()));
+
+                    auto select_fragment = false;
+                    if (switch_selection_style)
+                        select_fragment = whole_selected || (!this_fragment_selected && any_fragment_selected);
+                    else
+                        select_fragment = this_fragment_selected;
+                    self.get_selection().select(
+                        *m_p_train, boost::make_optional(select_fragment, m_departure_stop_index));
+                }
+
+
+            private:
+                // types
+
+                using string_type = typename traits_type::string_type;
+
+                using direction_type = typename train_type::direction_type;
+
+                using position_unit_type = typename position_type::unit_type;
+
+                using dimension_type = typename canvas_type::dimension_type;
+
+                using dimension_unit_type = typename dimension_type::unit_type;
+
+                using geo_vector_type = std::pair<double, double>;
+
+
+                // static functions
+
+                static string_type make_train_name(const train_type& train, const message_catalog_type& message_catalog)
+                {
+                    std::basic_ostringstream<typename string_type::value_type> name;
+
+                    name << train.number();
+                    name << string_type{ TETENGO2_TEXT(" ") };
+                    if (train.name_number().empty())
+                    {
+                        name << train.name();
+                    }
+                    else
+                    {
+                        name << boost::basic_format<typename string_type::value_type>(
+                                    message_catalog.get(TETENGO2_TEXT("Diagram:%1% No. %2%"))) %
+                                    train.name() % train.name_number();
+                    }
+
+                    return name.str();
+                }
+
+                static double calculate_train_name_angle(const position_type& departure, const position_type& arrival)
+                {
+                    const auto height = arrival.top() - departure.top();
+                    const auto width = arrival.left() - departure.left();
+
+                    return std::atan2(
+                        boost::rational_cast<double>(height.value()), boost::rational_cast<double>(width.value()));
+                }
+
+                static position_type calculate_train_name_position(
+                    const position_type& departure,
+                    const string_type&   train_name,
+                    const double         angle,
+                    const direction_type direction,
+                    const canvas_type&   canvas)
+                {
+                    const auto  text_dimension = canvas.calc_text_dimension(train_name);
+                    const auto& text_height = text_dimension.height();
+
+                    if (direction == direction_type::down)
+                    {
+                        if (-boost::math::constants::pi<double>() / 8 < angle &&
+                            angle < boost::math::constants::pi<double>() / 8)
+                        {
+                            return { departure.left(), departure.top() - text_height };
+                        }
+                        else
+                        {
+                            const auto left_diff = boost::rational_cast<double>(text_height.value()) / std::sin(angle);
+                            const auto left = departure.left() + typename position_unit_type::value_type{
+                                static_cast<typename position_unit_type::value_type::int_type>(left_diff * 0x10000),
+                                0x10000
+                            };
+
+                            return { left, departure.top() };
+                        }
+                    }
+                    else
+                    {
+                        const auto left_diff = boost::rational_cast<double>(text_height.value()) * std::sin(angle);
+                        const auto left = departure.left() + typename position_unit_type::value_type{
+                            static_cast<typename position_unit_type::value_type::int_type>(left_diff * 0x10000), 0x10000
+                        };
+
+                        const auto top_diff = boost::rational_cast<double>(text_height.value()) * std::cos(angle);
+                        const auto top = departure.top() - typename position_unit_type::value_type{
+                            static_cast<typename position_unit_type::value_type::int_type>(top_diff * 0x10000), 0x10000
+                        };
+
+                        return { left, top };
+                    }
+                }
+
+                static dimension_unit_type calculate_distance(
+                    const position_type& point,
+                    const position_type& line_segment_begin,
+                    const position_type& line_segment_end)
+                {
+                    const auto p = to_geo_vector(point);
+                    const auto lsb = to_geo_vector(line_segment_begin);
+                    const auto lse = to_geo_vector(line_segment_end);
+
+                    auto d = 0.0;
+                    if (geo_dot(geo_minus(lse, lsb), geo_minus(p, lsb)) < 0.0)
+                        d = geo_abs(geo_minus(p, lsb));
+                    else if (geo_dot(geo_minus(lsb, lse), geo_minus(p, lse)) < 0.0)
+                        d = geo_abs(geo_minus(p, lse));
+                    else
+                        d = std::abs(geo_cross(geo_minus(lse, lsb), geo_minus(p, lsb))) / geo_abs(geo_minus(lse, lsb));
+
+                    return to_size(d);
+                }
+
+                static geo_vector_type to_geo_vector(const position_type& position)
+                {
+                    return { boost::rational_cast<double>(position.left().value()),
+                             boost::rational_cast<double>(position.top().value()) };
+                }
+
+                static dimension_unit_type to_size(const double value)
+                {
+                    return dimension_unit_type{ typename dimension_unit_type::value_type{
+                        static_cast<typename dimension_unit_type::value_type::int_type>(value * 256.0), 256 } };
+                }
+
+                static geo_vector_type geo_minus(const geo_vector_type& v1, const geo_vector_type& v2)
+                {
+                    return { v1.first - v2.first, v1.second - v2.second };
+                }
+
+                static double geo_abs(const geo_vector_type& v)
+                {
+                    return std::sqrt(v.first * v.first + v.second * v.second);
+                }
+
+                static double geo_dot(const geo_vector_type& v1, const geo_vector_type& v2)
+                {
+                    return v1.first * v2.first + v1.second * v2.second;
+                }
+
+                static double geo_cross(const geo_vector_type& v1, const geo_vector_type& v2)
+                {
+                    return v1.first * v2.second - v1.second * v2.first;
+                }
+
+
+                // variables
+
+                const train_type* m_p_train;
+
+                size_type m_departure_stop_index;
+
+                position_type m_departure;
+
+                position_type m_arrival;
+
+                bool m_draw_train_name;
+
+                const message_catalog_type* m_p_message_catalog;
+
+
+                // functions
+
+                void draw_train_name(canvas_type& canvas) const
+                {
+                    const auto train_name = make_train_name(*m_p_train, *m_p_message_catalog);
+                    const auto train_name_angle = calculate_train_name_angle(m_departure, m_arrival);
+                    canvas.draw_text(
+                        train_name,
+                        calculate_train_name_position(
+                            m_departure, train_name, train_name_angle, m_p_train->direction(), canvas),
+                        train_name_angle);
+                }
+            };
+
+
+            template <typename Traits>
+            train_line_fragment<Traits>::train_line_fragment(
+                const train_type&           train,
+                const size_type             departure_stop_index,
+                selection_type&             selection,
+                position_type               departure,
+                position_type               arrival,
+                const bool                  draw_train_name,
+                const message_catalog_type& message_catalog)
+            : base_type{ selection }, m_p_impl
+        }
+        tetengo2::stdalt::make_unique<impl>(
+            train,
+            departure_stop_index,
+            selection,
+            std::move(departure),
+            std::move(arrival),
+            draw_train_name,
+            message_catalog)
+    }
     {
-    public:
-        // types
-
-        using traits_type = Traits;
-
-        using size_type = typename traits_type::size_type;
-
-        using canvas_type = typename traits_type::canvas_type;
-
-        using position_type = typename train_line_fragment::position_type;
-
-        using message_catalog_type = typename traits_type::message_catalog_type;
-
-        using base_type = typename train_line_fragment::base_type;
-
-        using selection_type = typename train_line_fragment::selection_type;
-
-        using train_type = typename train_line_fragment::train_type;
-
-
-        // constructors and destructor
-
-        impl(
-            const train_type& train,
-            const size_type   departure_stop_index,
-            selection_type&,
-            position_type               departure,
-            position_type               arrival,
-            const bool                  draw_train_name,
-            const message_catalog_type& message_catalog)
-        : m_p_train(&train), m_departure_stop_index(departure_stop_index), m_departure(std::move(departure)),
-          m_arrival(std::move(arrival)), m_draw_train_name(draw_train_name), m_p_message_catalog(&message_catalog)
-        {}
-
-        impl(impl&& another)
-        : m_p_train(another.m_p_train), m_departure_stop_index(another.m_departure_stop_index),
-          m_departure(std::move(another.m_departure)), m_arrival(std::move(another.m_arrival)),
-          m_draw_train_name(another.m_draw_train_name), m_p_message_catalog(another.m_p_message_catalog)
-        {}
-
-
-        // functions
-
-        impl& operator=(impl&& another)
-        {
-            if (&another == this)
-                return *this;
-
-            m_p_train = another.m_p_train;
-            m_departure_stop_index = another.m_departure_stop_index;
-            m_departure = std::move(another.m_departure);
-            m_arrival = std::move(another.m_arrival);
-            m_draw_train_name = another.m_draw_train_name;
-            m_p_message_catalog = another.m_p_message_catalog;
-
-            return *this;
-        }
-
-        void draw_on_impl(const train_line_fragment& self, canvas_type& canvas) const
-        {
-            draw_selectable_line(canvas, m_departure, m_arrival, self.selected());
-            if (m_draw_train_name)
-                draw_train_name(canvas);
-        }
-
-        base_type* p_item_by_position_impl(train_line_fragment& self, const position_type& position)
-        {
-            return calculate_distance(position, m_departure, m_arrival) <= selected_line_margin<dimension_unit_type>() ?
-                       &self :
-                       nullptr;
-        }
-
-        bool selected_impl(const train_line_fragment& self) const
-        {
-            return self.get_selection().selected(*m_p_train, boost::none) ||
-                   self.get_selection().selected(*m_p_train, boost::make_optional(m_departure_stop_index));
-        }
-
-        void select_impl(train_line_fragment& self, const bool switch_selection_style)
-        {
-            const auto whole_selected = self.get_selection().selected(*m_p_train, boost::none);
-            const auto this_fragment_selected =
-                self.get_selection().selected(*m_p_train, boost::make_optional(m_departure_stop_index));
-            const auto any_fragment_selected =
-                self.get_selection().selected(*m_p_train, boost::make_optional(std::numeric_limits<size_type>::max()));
-
-            auto select_fragment = false;
-            if (switch_selection_style)
-                select_fragment = whole_selected || (!this_fragment_selected && any_fragment_selected);
-            else
-                select_fragment = this_fragment_selected;
-            self.get_selection().select(*m_p_train, boost::make_optional(select_fragment, m_departure_stop_index));
-        }
-
-
-    private:
-        // types
-
-        using string_type = typename traits_type::string_type;
-
-        using direction_type = typename train_type::direction_type;
-
-        using position_unit_type = typename position_type::unit_type;
-
-        using dimension_type = typename canvas_type::dimension_type;
-
-        using dimension_unit_type = typename dimension_type::unit_type;
-
-        using geo_vector_type = std::pair<double, double>;
-
-
-        // static functions
-
-        static string_type make_train_name(const train_type& train, const message_catalog_type& message_catalog)
-        {
-            std::basic_ostringstream<typename string_type::value_type> name;
-
-            name << train.number();
-            name << string_type{ TETENGO2_TEXT(" ") };
-            if (train.name_number().empty())
-            {
-                name << train.name();
-            }
-            else
-            {
-                name << boost::basic_format<typename string_type::value_type>(
-                            message_catalog.get(TETENGO2_TEXT("Diagram:%1% No. %2%"))) %
-                            train.name() % train.name_number();
-            }
-
-            return name.str();
-        }
-
-        static double calculate_train_name_angle(const position_type& departure, const position_type& arrival)
-        {
-            const auto height = arrival.top() - departure.top();
-            const auto width = arrival.left() - departure.left();
-
-            return std::atan2(
-                boost::rational_cast<double>(height.value()), boost::rational_cast<double>(width.value()));
-        }
-
-        static position_type calculate_train_name_position(
-            const position_type& departure,
-            const string_type&   train_name,
-            const double         angle,
-            const direction_type direction,
-            const canvas_type&   canvas)
-        {
-            const auto  text_dimension = canvas.calc_text_dimension(train_name);
-            const auto& text_height = text_dimension.height();
-
-            if (direction == direction_type::down)
-            {
-                if (-boost::math::constants::pi<double>() / 8 < angle &&
-                    angle < boost::math::constants::pi<double>() / 8)
-                {
-                    return { departure.left(), departure.top() - text_height };
-                }
-                else
-                {
-                    const auto left_diff = boost::rational_cast<double>(text_height.value()) / std::sin(angle);
-                    const auto left = departure.left() + typename position_unit_type::value_type{
-                        static_cast<typename position_unit_type::value_type::int_type>(left_diff * 0x10000), 0x10000
-                    };
-
-                    return { left, departure.top() };
-                }
-            }
-            else
-            {
-                const auto left_diff = boost::rational_cast<double>(text_height.value()) * std::sin(angle);
-                const auto left = departure.left() + typename position_unit_type::value_type{
-                    static_cast<typename position_unit_type::value_type::int_type>(left_diff * 0x10000), 0x10000
-                };
-
-                const auto top_diff = boost::rational_cast<double>(text_height.value()) * std::cos(angle);
-                const auto top = departure.top() - typename position_unit_type::value_type{
-                    static_cast<typename position_unit_type::value_type::int_type>(top_diff * 0x10000), 0x10000
-                };
-
-                return { left, top };
-            }
-        }
-
-        static dimension_unit_type calculate_distance(
-            const position_type& point,
-            const position_type& line_segment_begin,
-            const position_type& line_segment_end)
-        {
-            const auto p = to_geo_vector(point);
-            const auto lsb = to_geo_vector(line_segment_begin);
-            const auto lse = to_geo_vector(line_segment_end);
-
-            auto d = 0.0;
-            if (geo_dot(geo_minus(lse, lsb), geo_minus(p, lsb)) < 0.0)
-                d = geo_abs(geo_minus(p, lsb));
-            else if (geo_dot(geo_minus(lsb, lse), geo_minus(p, lse)) < 0.0)
-                d = geo_abs(geo_minus(p, lse));
-            else
-                d = std::abs(geo_cross(geo_minus(lse, lsb), geo_minus(p, lsb))) / geo_abs(geo_minus(lse, lsb));
-
-            return to_size(d);
-        }
-
-        static geo_vector_type to_geo_vector(const position_type& position)
-        {
-            return { boost::rational_cast<double>(position.left().value()),
-                     boost::rational_cast<double>(position.top().value()) };
-        }
-
-        static dimension_unit_type to_size(const double value)
-        {
-            return dimension_unit_type{ typename dimension_unit_type::value_type{
-                static_cast<typename dimension_unit_type::value_type::int_type>(value * 256.0), 256 } };
-        }
-
-        static geo_vector_type geo_minus(const geo_vector_type& v1, const geo_vector_type& v2)
-        {
-            return { v1.first - v2.first, v1.second - v2.second };
-        }
-
-        static double geo_abs(const geo_vector_type& v)
-        {
-            return std::sqrt(v.first * v.first + v.second * v.second);
-        }
-
-        static double geo_dot(const geo_vector_type& v1, const geo_vector_type& v2)
-        {
-            return v1.first * v2.first + v1.second * v2.second;
-        }
-
-        static double geo_cross(const geo_vector_type& v1, const geo_vector_type& v2)
-        {
-            return v1.first * v2.second - v1.second * v2.first;
-        }
-
-
-        // variables
-
-        const train_type* m_p_train;
-
-        size_type m_departure_stop_index;
-
-        position_type m_departure;
-
-        position_type m_arrival;
-
-        bool m_draw_train_name;
-
-        const message_catalog_type* m_p_message_catalog;
-
-
-        // functions
-
-        void draw_train_name(canvas_type& canvas) const
-        {
-            const auto train_name = make_train_name(*m_p_train, *m_p_message_catalog);
-            const auto train_name_angle = calculate_train_name_angle(m_departure, m_arrival);
-            canvas.draw_text(
-                train_name,
-                calculate_train_name_position(
-                    m_departure, train_name, train_name_angle, m_p_train->direction(), canvas),
-                train_name_angle);
-        }
-    };
-
-
-    template <typename Traits>
-    train_line_fragment<Traits>::train_line_fragment(
-        const train_type&           train,
-        const size_type             departure_stop_index,
-        selection_type&             selection,
-        position_type               departure,
-        position_type               arrival,
-        const bool                  draw_train_name,
-        const message_catalog_type& message_catalog)
-    : base_type(selection), m_p_impl(tetengo2::stdalt::make_unique<impl>(
-                                train,
-                                departure_stop_index,
-                                selection,
-                                std::move(departure),
-                                std::move(arrival),
-                                draw_train_name,
-                                message_catalog))
-    {}
+    }
 
     template <typename Traits>
     train_line_fragment<Traits>::train_line_fragment(train_line_fragment&& another)
-    : base_type(another.get_selection()), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                                std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>
@@ -425,22 +436,23 @@ namespace bobura { namespace view { namespace diagram {
             const station_intervals_type&          station_intervals,
             const std::vector<position_unit_type>& station_positions,
             const message_catalog_type&            message_catalog)
-        : m_p_train_kind(&train_kind), m_fragments(make_fragments(
-                                           train,
-                                           time_offset,
-                                           selection,
-                                           canvas_dimension,
-                                           scroll_bar_position,
-                                           station_header_right,
-                                           header_bottom,
-                                           time_header_height,
-                                           horizontal_scale,
-                                           station_intervals,
-                                           station_positions,
-                                           message_catalog))
+        : m_p_train_kind{ &train_kind }, m_fragments{ make_fragments(
+                                             train,
+                                             time_offset,
+                                             selection,
+                                             canvas_dimension,
+                                             scroll_bar_position,
+                                             station_header_right,
+                                             header_bottom,
+                                             time_header_height,
+                                             horizontal_scale,
+                                             station_intervals,
+                                             station_positions,
+                                             message_catalog) }
         {}
 
-        impl(impl&& another) : m_p_train_kind(another.m_p_train_kind), m_fragments(std::move(another.m_fragments)) {}
+        impl(impl&& another) : m_p_train_kind{ another.m_p_train_kind }, m_fragments{ std::move(another.m_fragments) }
+        {}
 
 
         // functions
@@ -863,25 +875,26 @@ namespace bobura { namespace view { namespace diagram {
         const station_intervals_type&          station_intervals,
         const std::vector<position_unit_type>& station_positions,
         const message_catalog_type&            message_catalog)
-    : base_type(selection), m_p_impl(tetengo2::stdalt::make_unique<impl>(
-                                train,
-                                train_kind,
-                                time_offset,
-                                selection,
-                                canvas_dimension,
-                                scroll_bar_position,
-                                station_header_right,
-                                header_bottom,
-                                time_header_height,
-                                horizontal_scale,
-                                station_intervals,
-                                station_positions,
-                                message_catalog))
+    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                  train,
+                                  train_kind,
+                                  time_offset,
+                                  selection,
+                                  canvas_dimension,
+                                  scroll_bar_position,
+                                  station_header_right,
+                                  header_bottom,
+                                  time_header_height,
+                                  horizontal_scale,
+                                  station_intervals,
+                                  station_positions,
+                                  message_catalog) }
     {}
 
     template <typename Traits>
     train_line<Traits>::train_line(train_line&& another)
-    : base_type(another.get_selection()), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                                std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>
@@ -961,7 +974,7 @@ namespace bobura { namespace view { namespace diagram {
             const station_intervals_type&          station_intervals,
             const std::vector<position_unit_type>& station_positions,
             const message_catalog_type&            message_catalog)
-        : m_train_lines(make_train_lines(
+        : m_train_lines{ make_train_lines(
               model,
               time_offset,
               selection,
@@ -973,10 +986,10 @@ namespace bobura { namespace view { namespace diagram {
               horizontal_scale,
               station_intervals,
               station_positions,
-              message_catalog))
+              message_catalog) }
         {}
 
-        impl(impl&& another) : m_train_lines(std::move(another.m_train_lines)) {}
+        impl(impl&& another) : m_train_lines{ std::move(another.m_train_lines) } {}
 
 
         // functions
@@ -1138,24 +1151,25 @@ namespace bobura { namespace view { namespace diagram {
         const station_intervals_type&          station_intervals,
         const std::vector<position_unit_type>& station_positions,
         const message_catalog_type&            message_catalog)
-    : base_type(selection), m_p_impl(tetengo2::stdalt::make_unique<impl>(
-                                model,
-                                time_offset,
-                                selection,
-                                canvas_dimension,
-                                scroll_bar_position,
-                                station_header_right,
-                                header_bottom,
-                                time_header_height,
-                                horizontal_scale,
-                                station_intervals,
-                                station_positions,
-                                message_catalog))
+    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                  model,
+                                  time_offset,
+                                  selection,
+                                  canvas_dimension,
+                                  scroll_bar_position,
+                                  station_header_right,
+                                  header_bottom,
+                                  time_header_height,
+                                  horizontal_scale,
+                                  station_intervals,
+                                  station_positions,
+                                  message_catalog) }
     {}
 
     template <typename Traits>
     train_line_list<Traits>::train_line_list(train_line_list&& another)
-    : base_type(another.get_selection()), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                                std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>
@@ -1217,6 +1231,6 @@ namespace bobura { namespace view { namespace diagram {
     template class train_line<typename test::traits_type_list_type::diagram_view_type>;
 
     template class train_line_list<typename test::traits_type_list_type::diagram_view_type>;
-
-
-}}}
+}
+}
+}

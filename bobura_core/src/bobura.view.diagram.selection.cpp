@@ -44,14 +44,15 @@ namespace bobura { namespace view { namespace diagram {
         // constructors and destructor
 
         impl()
-        : m_p_selected_station_location(nullptr), m_p_selected_train(nullptr),
-          m_p_selection_observer_set(tetengo2::stdalt::make_unique<selection_observer_set_type>())
+        : m_p_selected_station_location{ nullptr }, m_p_selected_train{ nullptr }, m_p_selection_observer_set{
+              tetengo2::stdalt::make_unique<selection_observer_set_type>()
+          }
         {}
 
         impl(impl&& another)
-        : m_p_selected_station_location(another.m_p_selected_station_location),
-          m_p_selected_train(another.m_p_selected_train),
-          m_p_selection_observer_set(std::move(another.m_p_selection_observer_set))
+        : m_p_selected_station_location{ another.m_p_selected_station_location },
+          m_p_selected_train{ another.m_p_selected_train }, m_p_selection_observer_set{ std::move(
+                                                                another.m_p_selection_observer_set) }
         {}
 
 
@@ -133,12 +134,12 @@ namespace bobura { namespace view { namespace diagram {
 
 
     template <typename Traits>
-    selection<Traits>::selection() : m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    selection<Traits>::selection() : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
     {}
 
     template <typename Traits>
     selection<Traits>::selection(selection&& another)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>
