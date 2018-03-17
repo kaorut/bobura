@@ -45,10 +45,4 @@
 #endif
 
 
-// Tetengo2 headers
-
-#include <tetengo2.h>
-#include <tetengo2.gui.h>
-
-
 #endif
