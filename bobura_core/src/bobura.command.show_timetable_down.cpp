@@ -57,7 +57,7 @@ namespace bobura { namespace command {
 
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits>
     show_timetable_down<Traits, CommandSetTraits, MainWindowTraits>::show_timetable_down()
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
     {}
 
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits>

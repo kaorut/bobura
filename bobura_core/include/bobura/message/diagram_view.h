@@ -168,7 +168,7 @@ namespace bobura { namespace message {
                 property_bar_type&          property_bar,
                 const model_type&           model,
                 const message_catalog_type& message_catalog)
-            : m_property_bar(property_bar), m_model(model), m_message_catalog(message_catalog)
+            : m_property_bar{ property_bar }, m_model{ model }, m_message_catalog{ message_catalog }
             {}
 
 
@@ -355,7 +355,7 @@ namespace bobura { namespace message {
                 property_bar_type&          property_bar,
                 const model_type&           model,
                 const message_catalog_type& message_catalog)
-            : m_property_bar(property_bar), m_model(model), m_message_catalog(message_catalog)
+            : m_property_bar{ property_bar }, m_model{ model }, m_message_catalog{ message_catalog }
             {}
 
 
@@ -684,7 +684,7 @@ namespace bobura { namespace message {
 
                 \param property_bar A property bar.
             */
-            explicit all_unselected(property_bar_type& property_bar) : m_property_bar(property_bar) {}
+            explicit all_unselected(property_bar_type& property_bar) : m_property_bar{ property_bar } {}
 
 
             // functions

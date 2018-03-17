@@ -41,7 +41,7 @@ namespace bobura { namespace command {
 
 
     template <typename Traits>
-    exit<Traits>::exit() : m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    exit<Traits>::exit() : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
     {}
 
     template <typename Traits>

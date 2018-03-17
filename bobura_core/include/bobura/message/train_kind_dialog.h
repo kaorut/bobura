@@ -61,7 +61,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
             boost::optional<size_type>& current_train_kind_index,
             const list_box_type&        list_box,
             const update_type           update)
-        : m_current_train_kind_index(current_train_kind_index), m_list_box(list_box), m_update(update)
+        : m_current_train_kind_index{ current_train_kind_index }, m_list_box{ list_box }, m_update{ update }
         {}
 
 
@@ -129,8 +129,8 @@ namespace bobura { namespace message { namespace train_kind_dialog {
             const boost::optional<size_type>& current_train_kind_index,
             const sync_type                   sync,
             const message_catalog_type&       message_catalog)
-        : m_info_sets(info_sets), m_current_train_kind_index(current_train_kind_index), m_sync(sync),
-          m_message_catalog(message_catalog)
+        : m_info_sets{ info_sets }, m_current_train_kind_index{ current_train_kind_index }, m_sync{ sync },
+          m_message_catalog{ message_catalog }
         {}
 
 
@@ -218,7 +218,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
             std::vector<info_set_type>& info_sets,
             boost::optional<size_type>& current_train_kind_index,
             const sync_type             sync)
-        : m_info_sets(info_sets), m_current_train_kind_index(current_train_kind_index), m_sync(sync)
+        : m_info_sets{ info_sets }, m_current_train_kind_index{ current_train_kind_index }, m_sync{ sync }
         {}
 
 
@@ -292,7 +292,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
             std::vector<info_set_type>& info_sets,
             boost::optional<size_type>& current_train_kind_index,
             const sync_type             sync)
-        : m_info_sets(info_sets), m_current_train_kind_index(current_train_kind_index), m_sync(sync)
+        : m_info_sets{ info_sets }, m_current_train_kind_index{ current_train_kind_index }, m_sync{ sync }
         {}
 
 
@@ -359,7 +359,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
             std::vector<info_set_type>& info_sets,
             boost::optional<size_type>& current_train_kind_index,
             const sync_type             sync)
-        : m_info_sets(info_sets), m_current_train_kind_index(current_train_kind_index), m_sync(sync)
+        : m_info_sets{ info_sets }, m_current_train_kind_index{ current_train_kind_index }, m_sync{ sync }
         {}
 
 
@@ -410,7 +410,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
 
             \param apply An apply function
         */
-        explicit name_text_box_changed(const apply_type apply) : m_apply(apply) {}
+        explicit name_text_box_changed(const apply_type apply) : m_apply{ apply } {}
 
 
         // functions
@@ -450,7 +450,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
 
             \param apply An apply function
         */
-        explicit abbreviation_text_box_changed(const apply_type apply) : m_apply(apply) {}
+        explicit abbreviation_text_box_changed(const apply_type apply) : m_apply{ apply } {}
 
 
         // functions
@@ -506,7 +506,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
             \param apply  An apply function.
         */
         diagram_font_button_mouse_clicked(dialog_type& dialog, font_type& font, const apply_type apply)
-        : m_dialog(dialog), m_font(font), m_apply(apply)
+        : m_dialog{ dialog }, m_font{ font }, m_apply{ apply }
         {}
 
 
@@ -575,7 +575,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
             \param apply  An apply function.
         */
         diagram_color_button_mouse_clicked(dialog_type& dialog, color_type& color, const apply_type apply)
-        : m_dialog(dialog), m_color(color), m_apply(apply)
+        : m_dialog{ dialog }, m_color{ color }, m_apply{ apply }
         {}
 
 
@@ -628,7 +628,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
 
             \param apply An apply function
         */
-        explicit diagram_weight_dropdown_box_selection_changed(const apply_type apply) : m_apply(apply) {}
+        explicit diagram_weight_dropdown_box_selection_changed(const apply_type apply) : m_apply{ apply } {}
 
 
         // functions
@@ -668,7 +668,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
 
             \param apply An apply function
         */
-        explicit diagram_line_style_dropdown_box_selection_changed(const apply_type apply) : m_apply(apply) {}
+        explicit diagram_line_style_dropdown_box_selection_changed(const apply_type apply) : m_apply{ apply } {}
 
 
         // functions
@@ -724,7 +724,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
             \param apply  An apply function.
         */
         timetable_font_button_mouse_clicked(dialog_type& dialog, font_type& font, const apply_type apply)
-        : m_dialog(dialog), m_font(font), m_apply(apply)
+        : m_dialog{ dialog }, m_font{ font }, m_apply{ apply }
         {}
 
 
@@ -793,7 +793,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
             \param apply  An apply function.
         */
         timetable_color_button_mouse_clicked(dialog_type& dialog, color_type& color, const apply_type apply)
-        : m_dialog(dialog), m_color(color), m_apply(apply)
+        : m_dialog{ dialog }, m_color{ color }, m_apply{ apply }
         {}
 
 
@@ -876,8 +876,10 @@ namespace bobura { namespace message { namespace train_kind_dialog {
             const color_type&                     background_color,
             const color_type&                     timetable_color,
             const dimension_type&                 canvas_dimension)
-        : m_info_sets(info_sets), m_current_train_kind_index(current_train_kind_index),
-          m_background_color(background_color), m_timetable_color(timetable_color), m_canvas_dimension(canvas_dimension)
+        : m_info_sets{ info_sets }, m_current_train_kind_index{ current_train_kind_index },
+          m_background_color{ background_color }, m_timetable_color{ timetable_color }, m_canvas_dimension{
+              canvas_dimension
+          }
         {}
 
 
@@ -1140,7 +1142,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
 
             \param dialog A dialog.
         */
-        explicit ok_button_mouse_clicked(dialog_type& dialog) : m_dialog(dialog) {}
+        explicit ok_button_mouse_clicked(dialog_type& dialog) : m_dialog{ dialog } {}
 
 
         // functions
@@ -1184,7 +1186,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
 
             \param dialog A dialog.
         */
-        explicit cancel_button_mouse_clicked(dialog_type& dialog) : m_dialog(dialog) {}
+        explicit cancel_button_mouse_clicked(dialog_type& dialog) : m_dialog{ dialog } {}
 
 
         // functions

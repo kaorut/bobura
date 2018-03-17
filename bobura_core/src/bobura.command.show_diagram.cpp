@@ -57,7 +57,7 @@ namespace bobura { namespace command {
 
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits>
     show_diagram<Traits, CommandSetTraits, MainWindowTraits>::show_diagram()
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
     {}
 
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits>

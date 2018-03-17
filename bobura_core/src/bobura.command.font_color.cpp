@@ -69,7 +69,7 @@ namespace bobura { namespace command {
 
         // constructors and destructor
 
-        explicit impl(const message_catalog_type& message_catalog) : m_message_catalog(message_catalog) {}
+        explicit impl(const message_catalog_type& message_catalog) : m_message_catalog{ message_catalog } {}
 
 
         // functions
@@ -175,7 +175,7 @@ namespace bobura { namespace command {
         ColorDialog,
         MessageCatalog,
         DialogTraits>::font_color(const message_catalog_type& message_catalog)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(message_catalog) }
     {}
 
     template <

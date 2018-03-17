@@ -64,7 +64,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
             \param view              A view.
         */
         mouse_pressed(picture_box_type& picture_box, const set_mouse_capture_type& set_mouse_capture, view_type& view)
-        : m_picture_box(picture_box), m_set_mouse_capture(set_mouse_capture), m_view(view)
+        : m_picture_box{ picture_box }, m_set_mouse_capture{ set_mouse_capture }, m_view{ view }
         {}
 
 
@@ -153,7 +153,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
             \param view                  A view.
         */
         mouse_released(const release_mouse_capture_type& release_mouse_capture, view_type& view)
-        : m_release_mouse_capture(release_mouse_capture), m_view(view)
+        : m_release_mouse_capture{ release_mouse_capture }, m_view{ view }
         {}
 
 
@@ -231,7 +231,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
             \param detail_impl_set A detail implementation set.
         */
         mouse_moved(picture_box_type& picture_box, const view_type& view, const detail_impl_set_type& detail_impl_set)
-        : m_picture_box(picture_box), m_view(view), m_detail_impl_set(detail_impl_set)
+        : m_picture_box{ picture_box }, m_view{ view }, m_detail_impl_set{ detail_impl_set }
         {}
 
 
@@ -334,7 +334,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
             \param picture_box A picture box.
             \param view        A view.
         */
-        mouse_wheeled(picture_box_type& picture_box, view_type& view) : m_picture_box(picture_box), m_view(view) {}
+        mouse_wheeled(picture_box_type& picture_box, view_type& view) : m_picture_box{ picture_box }, m_view{ view } {}
 
 
         // functions
@@ -480,7 +480,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
 
             \param picture_box A picture box.
         */
-        explicit keyboard_key_down(picture_box_type& picture_box) : m_picture_box(picture_box) {}
+        explicit keyboard_key_down(picture_box_type& picture_box) : m_picture_box{ picture_box } {}
 
 
         // functions
@@ -640,7 +640,8 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
             \param picture_box A picture box.
             \param view        A view.
         */
-        paint_paint(const picture_box_type& picture_box, view_type& view) : m_picture_box(picture_box), m_view(view) {}
+        paint_paint(const picture_box_type& picture_box, view_type& view) : m_picture_box{ picture_box }, m_view{ view }
+        {}
 
 
         // functions
@@ -730,7 +731,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
             \param view        A view.
         */
         scroll_bar_scrolled(const picture_box_type& picture_box, view_type& view)
-        : m_picture_box(picture_box), m_view(view)
+        : m_picture_box{ picture_box }, m_view{ view }
         {}
 
 

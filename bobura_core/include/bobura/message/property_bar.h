@@ -41,7 +41,7 @@ namespace bobura { namespace message { namespace property_bar {
             \param map_box      A map box.
         */
         resized(const side_bar_type& property_bar, map_box_type& map_box)
-        : m_property_bar(property_bar), m_map_box(map_box)
+        : m_property_bar{ property_bar }, m_map_box{ map_box }
         {}
 
 
@@ -103,7 +103,7 @@ namespace bobura { namespace message { namespace property_bar {
 
             \param map_box A map box.
         */
-        explicit mouse_pressed(map_box_type& map_box) : m_map_box(map_box) {}
+        explicit mouse_pressed(map_box_type& map_box) : m_map_box{ map_box } {}
 
 
         // functions

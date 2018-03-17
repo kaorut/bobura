@@ -83,7 +83,7 @@ namespace bobura {
             /*!
                 \brief Creates a font and color.
             */
-            font_color_type() : m_diagram_font(), m_diagram_color(), m_timetable_font(), m_timetable_color() {}
+            font_color_type() : m_diagram_font{}, m_diagram_color{}, m_timetable_font{}, m_timetable_color{} {}
 
             /*!
                 \brief Creates a font and color.
@@ -98,8 +98,8 @@ namespace bobura {
                 boost::optional<color_type> diagram_color,
                 boost::optional<font_type>  timetable_font,
                 boost::optional<color_type> timetable_color)
-            : m_diagram_font(std::move(diagram_font)), m_diagram_color(std::move(diagram_color)),
-              m_timetable_font(std::move(timetable_font)), m_timetable_color(std::move(timetable_color))
+            : m_diagram_font{ std::move(diagram_font) }, m_diagram_color{ std::move(diagram_color) },
+              m_timetable_font{ std::move(timetable_font) }, m_timetable_color{ std::move(timetable_color) }
             {}
 
 

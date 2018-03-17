@@ -115,21 +115,21 @@ namespace bobura { namespace command {
             const settings_type&        settings,
             const message_catalog_type& message_catalog,
             const detail_impl_set_type& detail_impl_set)
-        : m_p_about(create_about(message_catalog, settings, detail_impl_set)),
-          m_p_ask_file_path_and_save_to_file(create_save_to_file(ask_file_path_and_save_to_file)),
-          m_p_exit(create_exit()), m_p_file_property(create_file_property(message_catalog)),
-          m_p_font_color(create_font_color(message_catalog)),
-          m_p_horizontally_zoom_in(create_horizontally_zoom_in(diagram_view)),
-          m_p_horizontally_zoom_out(create_horizontally_zoom_out(diagram_view)),
-          m_p_load_from_file(create_load_from_file(load_from_file)), m_p_new_file(create_new_file(new_file)),
-          m_p_nop(create_nop()), m_p_open_www_tetengo_org(create_open_www_tetengo_org()),
-          m_p_reload(create_load_from_file(reload)), m_p_save_to_file(create_save_to_file(save_to_file)),
-          m_p_set_horizontal_scale(create_set_horizontal_scale(diagram_view)),
-          m_p_set_vertical_scale(create_set_vertical_scale(diagram_view)), m_p_show_diagram(create_show_diagram()),
-          m_p_show_timetable_down(create_show_timetable_down()), m_p_show_timetable_up(create_show_timetable_up()),
-          m_p_train_kind(create_train_kind(message_catalog)),
-          m_p_vertically_zoom_in(create_vertically_zoom_in(diagram_view)),
-          m_p_vertically_zoom_out(create_vertically_zoom_out(diagram_view))
+        : m_p_about{ create_about(message_catalog, settings, detail_impl_set) },
+          m_p_ask_file_path_and_save_to_file{ create_save_to_file(ask_file_path_and_save_to_file) },
+          m_p_exit{ create_exit() }, m_p_file_property{ create_file_property(message_catalog) },
+          m_p_font_color{ create_font_color(message_catalog) }, m_p_horizontally_zoom_in{ create_horizontally_zoom_in(
+                                                                    diagram_view) },
+          m_p_horizontally_zoom_out{ create_horizontally_zoom_out(diagram_view) },
+          m_p_load_from_file{ create_load_from_file(load_from_file) }, m_p_new_file{ create_new_file(new_file) },
+          m_p_nop{ create_nop() }, m_p_open_www_tetengo_org{ create_open_www_tetengo_org() },
+          m_p_reload{ create_load_from_file(reload) }, m_p_save_to_file{ create_save_to_file(save_to_file) },
+          m_p_set_horizontal_scale{ create_set_horizontal_scale(diagram_view) },
+          m_p_set_vertical_scale{ create_set_vertical_scale(diagram_view) }, m_p_show_diagram{ create_show_diagram() },
+          m_p_show_timetable_down{ create_show_timetable_down() }, m_p_show_timetable_up{ create_show_timetable_up() },
+          m_p_train_kind{ create_train_kind(message_catalog) }, m_p_vertically_zoom_in{ create_vertically_zoom_in(
+                                                                    diagram_view) },
+          m_p_vertically_zoom_out{ create_vertically_zoom_out(diagram_view) }
         {}
 
 
@@ -490,7 +490,7 @@ namespace bobura { namespace command {
         const settings_type&        settings,
         const message_catalog_type& message_catalog,
         const detail_impl_set_type& detail_impl_set)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(
           new_file,
           load_from_file,
           reload,
@@ -499,7 +499,7 @@ namespace bobura { namespace command {
           diagram_view,
           settings,
           message_catalog,
-          detail_impl_set))
+          detail_impl_set) }
     {}
 
     template <typename Traits>
