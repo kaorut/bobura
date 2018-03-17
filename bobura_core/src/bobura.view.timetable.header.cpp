@@ -48,11 +48,13 @@ namespace bobura { namespace view { namespace timetable {
         // constructors and destructor
 
         impl(string_type company_name, const font_type& font, const color_type& color)
-        : m_company_name(std::move(company_name)), m_p_font(&font), m_p_color(&color)
+        : m_company_name{ std::move(company_name) }, m_p_font{ &font }, m_p_color{ &color }
         {}
 
         impl(impl&& another)
-        : m_company_name(std::move(another.m_company_name)), m_p_font(another.m_p_font), m_p_color(another.m_p_color)
+        : m_company_name{ std::move(another.m_company_name) }, m_p_font{ another.m_p_font }, m_p_color{
+              another.m_p_color
+          }
         {}
 
 
@@ -96,7 +98,7 @@ namespace bobura { namespace view { namespace timetable {
         const color_type& color,
         position_type     position,
         dimension_type    dimension)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(company_name), font, color))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(company_name), font, color) }
     {
         this->set_position(std::move(position));
         this->set_dimension(std::move(dimension));
@@ -104,7 +106,7 @@ namespace bobura { namespace view { namespace timetable {
 
     template <typename Traits>
     company_name_header<Traits>::company_name_header(company_name_header&& another)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)) }
     {
         this->set_position(std::move(another.position()));
         this->set_dimension(std::move(another.dimension()));
@@ -157,11 +159,11 @@ namespace bobura { namespace view { namespace timetable {
         // constructors and destructor
 
         impl(string_type line_name, const font_type& font, const color_type& color)
-        : m_line_name(std::move(line_name)), m_p_font(&font), m_p_color(&color)
+        : m_line_name{ std::move(line_name) }, m_p_font{ &font }, m_p_color{ &color }
         {}
 
         impl(impl&& another)
-        : m_line_name(std::move(another.m_line_name)), m_p_font(another.m_p_font), m_p_color(another.m_p_color)
+        : m_line_name{ std::move(another.m_line_name) }, m_p_font{ another.m_p_font }, m_p_color{ another.m_p_color }
         {}
 
 
@@ -205,7 +207,7 @@ namespace bobura { namespace view { namespace timetable {
         const color_type& color,
         position_type     position,
         dimension_type    dimension)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(line_name), font, color))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(line_name), font, color) }
     {
         this->set_position(std::move(position));
         this->set_dimension(std::move(dimension));
@@ -213,7 +215,7 @@ namespace bobura { namespace view { namespace timetable {
 
     template <typename Traits>
     line_name_header<Traits>::line_name_header(line_name_header&& another)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)) }
     {
         this->set_position(std::move(another.position()));
         this->set_dimension(std::move(another.dimension()));
@@ -266,11 +268,11 @@ namespace bobura { namespace view { namespace timetable {
         // constructors and destructor
 
         impl(string_type note, const font_type& font, const color_type& color)
-        : m_note(std::move(note)), m_p_font(&font), m_p_color(&color)
+        : m_note{ std::move(note) }, m_p_font{ &font }, m_p_color{ &color }
         {}
 
         impl(impl&& another)
-        : m_note(std::move(another.m_note)), m_p_font(another.m_p_font), m_p_color(another.m_p_color)
+        : m_note{ std::move(another.m_note) }, m_p_font{ another.m_p_font }, m_p_color{ another.m_p_color }
         {}
 
 
@@ -314,7 +316,7 @@ namespace bobura { namespace view { namespace timetable {
         const color_type& color,
         position_type     position,
         dimension_type    dimension)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(note), font, color))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(note), font, color) }
     {
         this->set_position(std::move(position));
         this->set_dimension(std::move(dimension));
@@ -322,7 +324,7 @@ namespace bobura { namespace view { namespace timetable {
 
     template <typename Traits>
     note_header<Traits>::note_header(note_header&& another)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)) }
     {
         this->set_position(std::move(another.position()));
         this->set_dimension(std::move(another.dimension()));
@@ -378,8 +380,9 @@ namespace bobura { namespace view { namespace timetable {
             const dimension_type&       canvas_dimension,
             const dimension_type&       margin,
             header&                     base)
-        : m_p_company_name_header(), m_p_line_name_header(), m_p_note_header(),
-          m_p_general_color(&*model.timetable().font_color_set().general().timetable_color())
+        : m_p_company_name_header{}, m_p_line_name_header{}, m_p_note_header{}, m_p_general_color{
+              &*model.timetable().font_color_set().general().timetable_color()
+          }
         {
             const auto&    company_name = model.timetable().company_name();
             const auto&    company_name_font = *model.timetable().font_color_set().company_name().diagram_font();
@@ -436,9 +439,9 @@ namespace bobura { namespace view { namespace timetable {
         }
 
         impl(impl&& another)
-        : m_p_company_name_header(std::move(another.m_p_company_name_header)),
-          m_p_line_name_header(std::move(another.m_p_line_name_header)),
-          m_p_note_header(std::move(another.m_p_note_header)), m_p_general_color(another.m_p_general_color)
+        : m_p_company_name_header{ std::move(another.m_p_company_name_header) }, m_p_line_name_header{ std::move(
+                                                                                     another.m_p_line_name_header) },
+          m_p_note_header{ std::move(another.m_p_note_header) }, m_p_general_color{ another.m_p_general_color }
         {}
 
 
@@ -633,13 +636,13 @@ namespace bobura { namespace view { namespace timetable {
         canvas_type&                canvas,
         const dimension_type&       canvas_dimension,
         const dimension_type&       margin)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<
-                            impl>(direction, model, message_catalog, canvas, canvas_dimension, margin, *this))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<
+                       impl>(direction, model, message_catalog, canvas, canvas_dimension, margin, *this) }
     {}
 
     template <typename Traits>
     header<Traits>::header(header&& another)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>

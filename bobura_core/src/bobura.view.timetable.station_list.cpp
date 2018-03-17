@@ -44,10 +44,10 @@ namespace bobura { namespace view { namespace timetable {
             canvas_type& /*canvas*/,
             const dimension_type& /*canvas_dimension*/
             )
-        : m_p_general_color(&*model.timetable().font_color_set().general().timetable_color())
+        : m_p_general_color{ &*model.timetable().font_color_set().general().timetable_color() }
         {}
 
-        impl(impl&& another) : m_p_general_color(another.m_p_general_color) {}
+        impl(impl&& another) : m_p_general_color{ another.m_p_general_color } {}
 
 
         // functions
@@ -84,13 +84,14 @@ namespace bobura { namespace view { namespace timetable {
         const message_catalog_type& message_catalog,
         canvas_type&                canvas,
         const dimension_type&       canvas_dimension)
-    : base_type(),
-      m_p_impl(tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog, canvas, canvas_dimension))
+    : base_type{}, m_p_impl{
+          tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog, canvas, canvas_dimension)
+      }
     {}
 
     template <typename Traits>
     station_list<Traits>::station_list(station_list&& another)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>

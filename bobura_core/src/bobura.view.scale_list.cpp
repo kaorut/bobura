@@ -129,7 +129,7 @@ namespace bobura { namespace view {
 
 
     template <typename Size, typename String, typename Scale>
-    scale_list<Size, String, Scale>::scale_list() : m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    scale_list<Size, String, Scale>::scale_list() : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
     {}
 
     template <typename Size, typename String, typename Scale>

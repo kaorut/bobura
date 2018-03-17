@@ -37,7 +37,7 @@ namespace bobura { namespace view { namespace timetable {
 
         // constructors and destructor
 
-        impl() : m_position(), m_dimension() {}
+        impl() : m_position{}, m_dimension{} {}
 
 
         // functions
@@ -103,7 +103,7 @@ namespace bobura { namespace view { namespace timetable {
 
 
     template <typename Traits>
-    item<Traits>::item() : m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    item<Traits>::item() : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
     {}
 
     template <typename Traits>
