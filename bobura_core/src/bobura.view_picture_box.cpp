@@ -37,7 +37,7 @@ namespace bobura {
 
         // constructors and destructor
 
-        explicit impl(widget_type&) : m_p_mouse_capture() {}
+        explicit impl(widget_type&) : m_p_mouse_capture{} {}
 
 
         // functions
@@ -174,7 +174,8 @@ namespace bobura {
 
     template <typename PictureBox, typename MouseCapture>
     view_picture_box<PictureBox, MouseCapture>::view_picture_box(widget_type& parent)
-    : base_type(parent, base_type::scroll_bar_style_type::both), m_p_impl(tetengo2::stdalt::make_unique<impl>(parent))
+    : base_type{ parent, base_type::scroll_bar_style_type::both }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                                                       parent) }
     {}
 
     template <typename PictureBox, typename MouseCapture>

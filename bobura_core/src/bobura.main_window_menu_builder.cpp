@@ -55,7 +55,9 @@ namespace bobura {
             model_type&                 model,
             main_window_type&           main_window,
             const message_catalog_type& message_catalog)
-        : m_command_set(command_set), m_model(model), m_main_window(main_window), m_message_catalog(message_catalog)
+        : m_command_set{ command_set }, m_model{ model }, m_main_window{ main_window }, m_message_catalog{
+              message_catalog
+          }
         {}
 
 
@@ -415,7 +417,7 @@ namespace bobura {
         model_type&                 model,
         main_window_type&           main_window,
         const message_catalog_type& message_catalog)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(command_set, model, main_window, message_catalog))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(command_set, model, main_window, message_catalog) }
     {}
 
     template <typename Traits>

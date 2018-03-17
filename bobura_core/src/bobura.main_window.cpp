@@ -70,9 +70,9 @@ namespace bobura {
             settings_type&                settings,
             const confirm_file_save_type& confirm_file_save,
             const detail_impl_set_type&   detail_impl_set)
-        : m_base(base), m_message_catalog(message_catalog), m_p_tab_frame(), m_p_diagram_view_picture_box(),
-          m_p_timetable_down_view_picture_box(), m_p_timetable_up_view_picture_box(), m_p_property_bar(),
-          m_settings(settings), m_confirm_file_save(confirm_file_save)
+        : m_base{ base }, m_message_catalog{ message_catalog }, m_p_tab_frame{}, m_p_diagram_view_picture_box{},
+          m_p_timetable_down_view_picture_box{}, m_p_timetable_up_view_picture_box{}, m_p_property_bar{},
+          m_settings{ settings }, m_confirm_file_save{ confirm_file_save }
         {
             initialize_window(detail_impl_set);
         }
@@ -279,9 +279,9 @@ namespace bobura {
         settings_type&                settings,
         const confirm_file_save_type& confirm_file_save,
         const detail_impl_set_type&   detail_impl_set)
-    : base_type(base_type::scroll_bar_style_type::none, true),
-      m_p_impl(
-          tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, confirm_file_save, detail_impl_set))
+    : base_type{ base_type::scroll_bar_style_type::none, true }, m_p_impl{
+          tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, confirm_file_save, detail_impl_set)
+      }
     {}
 
     template <typename Traits, typename CommandSetTraits>

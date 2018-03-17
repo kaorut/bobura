@@ -42,10 +42,10 @@ namespace bobura {
         // constructors and destructor
 
         impl(base_type& base, const message_catalog_type& message_catalog)
-        : m_base(base), m_message_catalog(message_catalog), m_company_name(), m_line_name(), m_note(), m_file_name(),
-          m_p_company_name_label(), m_p_company_name_text_box(), m_p_line_name_label(), m_p_line_name_text_box(),
-          m_p_note_label(), m_p_note_text_box(), m_p_file_name_label(), m_p_file_name_text_box(), m_p_ok_button(),
-          m_p_cancel_button()
+        : m_base{ base }, m_message_catalog{ message_catalog }, m_company_name{}, m_line_name{}, m_note{},
+          m_file_name{}, m_p_company_name_label{}, m_p_company_name_text_box{}, m_p_line_name_label{},
+          m_p_line_name_text_box{}, m_p_note_label{}, m_p_note_text_box{}, m_p_file_name_label{},
+          m_p_file_name_text_box{}, m_p_ok_button{}, m_p_cancel_button{}
         {
             initialize_dialog();
         }
@@ -344,7 +344,7 @@ namespace bobura {
     file_property_dialog<Traits>::file_property_dialog(
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog)
-    : base_type(parent), m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog))
+    : base_type{ parent }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(*this, message_catalog) }
     {}
 
     template <typename Traits>

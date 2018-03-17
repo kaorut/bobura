@@ -59,8 +59,8 @@ namespace bobura {
         // constructors and destructor
 
         impl(settings_type& settings, const detail_impl_set_type& detail_impl_set)
-        : m_gui_fixture(detail_impl_set.create_gui_fixture()), m_settings(settings), m_model(),
-          m_p_input_file_load_timer(), m_detail_impl_set(detail_impl_set)
+        : m_gui_fixture{ detail_impl_set.create_gui_fixture() }, m_settings{ settings }, m_model{},
+          m_p_input_file_load_timer{}, m_detail_impl_set{ detail_impl_set }
         {}
 
 
@@ -274,19 +274,13 @@ namespace bobura {
                 diagram_view_type&          diagram_view,
                 const message_catalog_type& message_catalog,
                 const detail_impl_set_type& detail_impl_set)
-            : m_save_to_file(false, message_catalog), m_ask_file_path_and_save_to_file(true, message_catalog),
-              m_confirm_file_save(model, m_save_to_file, message_catalog), m_new_file(m_confirm_file_save),
-              m_reload(false, m_confirm_file_save, message_catalog),
-              m_load_from_file(true, m_confirm_file_save, message_catalog), m_command_set(
-                                                                                m_new_file,
-                                                                                m_load_from_file,
-                                                                                m_reload,
-                                                                                m_save_to_file,
-                                                                                m_ask_file_path_and_save_to_file,
-                                                                                diagram_view,
-                                                                                settings,
-                                                                                message_catalog,
-                                                                                detail_impl_set)
+            : m_save_to_file{ false, message_catalog }, m_ask_file_path_and_save_to_file{ true, message_catalog },
+              m_confirm_file_save{ model, m_save_to_file, message_catalog },
+              m_new_file{ m_confirm_file_save }, m_reload{ false, m_confirm_file_save, message_catalog },
+              m_load_from_file{ true, m_confirm_file_save, message_catalog }, m_command_set{
+                  m_new_file,   m_load_from_file, m_reload,        m_save_to_file, m_ask_file_path_and_save_to_file,
+                  diagram_view, settings,         message_catalog, detail_impl_set
+              }
             {}
 
             const confirm_file_save_type& confirm_file_save() const
@@ -460,7 +454,7 @@ namespace bobura {
 
     template <typename Traits>
     application<Traits>::application(settings_type& settings, const detail_impl_set_type& detail_impl_set)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(settings, detail_impl_set))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(settings, detail_impl_set) }
     {}
 
     template <typename Traits>
