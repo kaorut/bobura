@@ -94,7 +94,7 @@ namespace bobura { namespace model { namespace serializer {
         // constructors and destructor
 
         explicit impl(std::unique_ptr<select_diagram_type> p_select_diagram)
-        : m_p_select_diagram(std::move(p_select_diagram))
+        : m_p_select_diagram{ std::move(p_select_diagram) }
         {
             if (!m_p_select_diagram)
                 BOOST_THROW_EXCEPTION(std::invalid_argument("Diagram selector is nullptr."));
@@ -166,7 +166,7 @@ namespace bobura { namespace model { namespace serializer {
             int         m_minor_version;
 
             file_type(string_type name, int major_version, int minor_version)
-            : m_name(std::move(name)), m_major_version(major_version), m_minor_version(minor_version)
+            : m_name{ std::move(name) }, m_major_version{ major_version }, m_minor_version{ minor_version }
             {}
         };
 
@@ -222,7 +222,7 @@ namespace bobura { namespace model { namespace serializer {
         class initial_state : public state
         {
         public:
-            explicit initial_state(timetable_type& timetable) : m_timetable(timetable) {}
+            explicit initial_state(timetable_type& timetable) : m_timetable{ timetable } {}
 
             virtual ~initial_state() = default;
 
@@ -241,7 +241,7 @@ namespace bobura { namespace model { namespace serializer {
         class rosen_state : public state
         {
         public:
-            explicit rosen_state(timetable_type& timetable) : m_timetable(timetable) {}
+            explicit rosen_state(timetable_type& timetable) : m_timetable{ timetable } {}
 
             virtual ~rosen_state() = default;
 
@@ -261,7 +261,7 @@ namespace bobura { namespace model { namespace serializer {
         {
         public:
             explicit eki_state(timetable_type& timetable)
-            : m_timetable(timetable), m_ekimei(), m_ekijikokukeisiki(), m_ekikibo()
+            : m_timetable{ timetable }, m_ekimei{}, m_ekijikokukeisiki{}, m_ekikibo{}
             {}
 
             virtual ~eki_state() = default;
@@ -341,8 +341,8 @@ namespace bobura { namespace model { namespace serializer {
         {
         public:
             explicit ressyasyubetsu_state(timetable_type& timetable)
-            : m_timetable(timetable), m_syubetsumei(), m_ryakusyou(), m_diagram_sen_color(), m_diagram_sen_style(),
-              m_diagram_sen_is_bold()
+            : m_timetable{ timetable }, m_syubetsumei{}, m_ryakusyou{}, m_diagram_sen_color{}, m_diagram_sen_style{},
+              m_diagram_sen_is_bold{}
             {}
 
             virtual ~ressyasyubetsu_state() = default;
@@ -424,7 +424,7 @@ namespace bobura { namespace model { namespace serializer {
         class dia_state : public state
         {
         public:
-            explicit dia_state(string_type& current_diagram_name) : m_current_diagram_name(current_diagram_name) {}
+            explicit dia_state(string_type& current_diagram_name) : m_current_diagram_name{ current_diagram_name } {}
 
             virtual ~dia_state() = default;
 
@@ -443,7 +443,7 @@ namespace bobura { namespace model { namespace serializer {
         class kudari_state : public state
         {
         public:
-            explicit kudari_state(direction_type& direction) : m_direction(direction) {}
+            explicit kudari_state(direction_type& direction) : m_direction{ direction } {}
 
             virtual ~kudari_state() = default;
 
@@ -460,7 +460,7 @@ namespace bobura { namespace model { namespace serializer {
         class nobori_state : public state
         {
         public:
-            explicit nobori_state(direction_type& direction) : m_direction(direction) {}
+            explicit nobori_state(direction_type& direction) : m_direction{ direction } {}
 
             virtual ~nobori_state() = default;
 
@@ -478,8 +478,8 @@ namespace bobura { namespace model { namespace serializer {
         {
         public:
             explicit ressya_state(timetable_type& timetable, const direction_type direction)
-            : m_timetable(timetable), m_direction(direction), m_syubetsu(), m_ressyabangou(), m_ressyamei(), m_gousuu(),
-              m_eki_jikoku()
+            : m_timetable{ timetable }, m_direction{ direction }, m_syubetsu{}, m_ressyabangou{},
+              m_ressyamei{}, m_gousuu{}, m_eki_jikoku{}
             {}
 
             virtual ~ressya_state() = default;
@@ -493,7 +493,7 @@ namespace bobura { namespace model { namespace serializer {
             {
                 train_type& m_train;
 
-                explicit insert_stop(train_type& train) : m_train(train) {}
+                explicit insert_stop(train_type& train) : m_train{ train } {}
 
                 void operator()(stop_type& stop)
                 {
@@ -921,7 +921,7 @@ namespace bobura { namespace model { namespace serializer {
         typename Encoder>
     oudia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, SelectDiagram, Font, Encoder>::
         oudia_reader(std::unique_ptr<select_diagram_type> p_select_diagram)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(p_select_diagram)))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(p_select_diagram)) }
     {}
 
     template <

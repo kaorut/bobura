@@ -100,7 +100,7 @@ namespace bobura { namespace model { namespace timetable_info {
             const station_locations_type& station_locations,
             const trains_type&            down_trains,
             const trains_type&            up_trains)
-        : m_station_locations(station_locations), m_down_trains(down_trains), m_up_trains(up_trains)
+        : m_station_locations{ station_locations }, m_down_trains{ down_trains }, m_up_trains{ up_trains }
         {}
 
 

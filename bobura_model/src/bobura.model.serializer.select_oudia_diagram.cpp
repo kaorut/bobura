@@ -43,7 +43,7 @@ namespace bobura { namespace model { namespace serializer {
         // constructors and destructor
 
         impl(abstract_window_type& parent, string_type file_name, const message_catalog_type& message_catalog)
-        : m_parent(parent), m_file_name(std::move(file_name)), m_message_catalog(message_catalog)
+        : m_parent{ parent }, m_file_name{ std::move(file_name) }, m_message_catalog{ message_catalog }
         {}
 
 
@@ -98,7 +98,7 @@ namespace bobura { namespace model { namespace serializer {
         abstract_window_type&       parent,
         string_type                 file_name,
         const message_catalog_type& message_catalog)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(parent, std::move(file_name), message_catalog))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(parent, std::move(file_name), message_catalog) }
     {}
 
     template <typename OuDiaDiagramDialog>
@@ -126,7 +126,7 @@ namespace bobura { namespace model { namespace serializer {
 
         // constructors and destructor
 
-        explicit impl(string_type name) : m_name(std::move(name)) {}
+        explicit impl(string_type name) : m_name{ std::move(name) } {}
 
 
         // functions
@@ -146,7 +146,7 @@ namespace bobura { namespace model { namespace serializer {
 
     template <typename String>
     select_oudia_diagram_for_test<String>::select_oudia_diagram_for_test(string_type name)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(name)))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(name)) }
     {}
 
     template <typename String>

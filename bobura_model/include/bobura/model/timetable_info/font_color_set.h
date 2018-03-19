@@ -52,8 +52,8 @@ namespace bobura { namespace model { namespace timetable_info {
             boost::optional<color_type> diagram_color,
             boost::optional<font_type>  timetable_font,
             boost::optional<color_type> timetable_color)
-        : m_diagram_font(std::move(diagram_font)), m_diagram_color(std::move(diagram_color)),
-          m_timetable_font(std::move(timetable_font)), m_timetable_color(std::move(timetable_color))
+        : m_diagram_font{ std::move(diagram_font) }, m_diagram_color{ std::move(diagram_color) },
+          m_timetable_font{ std::move(timetable_font) }, m_timetable_color{ std::move(timetable_color) }
         {}
 
 
@@ -189,11 +189,11 @@ namespace bobura { namespace model { namespace timetable_info {
             font_color_type principal_station,
             font_color_type local_terminal_station,
             font_color_type principal_terminal_station)
-        : m_background(std::move(background)), m_general(std::move(general)), m_company_name(std::move(company_name)),
-          m_line_name(std::move(line_name)), m_note(std::move(note)), m_local_station(std::move(local_station)),
-          m_principal_station(std::move(principal_station)),
-          m_local_terminal_station(std::move(local_terminal_station)),
-          m_principal_terminal_station(std::move(principal_terminal_station))
+        : m_background{ std::move(background) }, m_general{ std::move(general) },
+          m_company_name{ std::move(company_name) }, m_line_name{ std::move(line_name) }, m_note{ std::move(note) },
+          m_local_station{ std::move(local_station) }, m_principal_station{ std::move(principal_station) },
+          m_local_terminal_station{ std::move(local_terminal_station) }, m_principal_terminal_station{ std::move(
+                                                                             principal_terminal_station) }
         {}
 
 

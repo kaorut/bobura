@@ -55,7 +55,7 @@ namespace bobura { namespace model { namespace train_info {
                 \param seconds Seconds.
             */
             hours_minutes_seconds_type(const size_type hours, const size_type minutes, const size_type seconds)
-            : m_hours(hours), m_minutes(minutes), m_seconds(seconds)
+            : m_hours{ hours }, m_minutes{ minutes }, m_seconds{ seconds }
             {}
 
             /*!
@@ -143,7 +143,7 @@ namespace bobura { namespace model { namespace train_info {
             \param seconds_from_midnight Seconds from the midnight.
         */
         explicit time(const size_type seconds_from_midnight)
-        : m_seconds_from_midnight(seconds_from_midnight % time_span_type::seconds_of_whole_day())
+        : m_seconds_from_midnight{ seconds_from_midnight % time_span_type::seconds_of_whole_day() }
         {}
 
         /*!
@@ -156,7 +156,7 @@ namespace bobura { namespace model { namespace train_info {
             \throw std::out_of_range When hours, minutes and/or seconds are invalid.
         */
         time(const size_type hours, const size_type minutes, const size_type seconds)
-        : m_seconds_from_midnight(calculate_seconds_from_midnight(hours, minutes, seconds))
+        : m_seconds_from_midnight{ calculate_seconds_from_midnight(hours, minutes, seconds) }
         {}
 
 
@@ -343,7 +343,7 @@ namespace bobura { namespace model { namespace train_info {
 
         // constructors and destructor
 
-        time() : m_seconds_from_midnight(std::numeric_limits<size_type>::max()) {}
+        time() : m_seconds_from_midnight{ std::numeric_limits<size_type>::max() } {}
 
 
         // variables

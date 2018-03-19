@@ -81,7 +81,7 @@ namespace bobura { namespace model { namespace serializer {
         // constructors and destructor
 
         explicit impl(std::unique_ptr<exec_json_reading_task_type> p_exec_json_reading_task)
-        : m_p_exec_json_reading_task(std::move(p_exec_json_reading_task))
+        : m_p_exec_json_reading_task{ std::move(p_exec_json_reading_task) }
         {
             if (!m_p_exec_json_reading_task)
                 BOOST_THROW_EXCEPTION(std::invalid_argument("JSON reading task execution is nullptr."));
@@ -1386,7 +1386,7 @@ namespace bobura { namespace model { namespace serializer {
         ExecJsonReadingTask,
         Font,
         Encoder>::json_reader(std::unique_ptr<exec_json_reading_task_type> p_exec_json_reading_task)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(p_exec_json_reading_task)))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(p_exec_json_reading_task)) }
     {}
 
     template <

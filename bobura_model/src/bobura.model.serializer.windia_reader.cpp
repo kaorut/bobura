@@ -170,7 +170,7 @@ namespace bobura { namespace model { namespace serializer {
         class windia_state : public state
         {
         public:
-            explicit windia_state(timetable_type& timetable) : m_timetable(timetable) {}
+            explicit windia_state(timetable_type& timetable) : m_timetable{ timetable } {}
 
             virtual ~windia_state() = default;
 
@@ -187,7 +187,7 @@ namespace bobura { namespace model { namespace serializer {
         class station_state : public state
         {
         public:
-            explicit station_state(timetable_type& timetable) : m_timetable(timetable), m_operating_distance() {}
+            explicit station_state(timetable_type& timetable) : m_timetable{ timetable }, m_operating_distance() {}
 
             virtual ~station_state() = default;
 
@@ -248,7 +248,7 @@ namespace bobura { namespace model { namespace serializer {
         class line_kind_state : public state
         {
         public:
-            explicit line_kind_state(timetable_type& timetable) : m_timetable(timetable) {}
+            explicit line_kind_state(timetable_type& timetable) : m_timetable{ timetable } {}
 
             virtual ~line_kind_state() = default;
 
@@ -274,7 +274,7 @@ namespace bobura { namespace model { namespace serializer {
                 std::vector<string_view_type> values{};
 
                 split_type(string_view_type key, const std::size_t index, std::vector<string_view_type> values)
-                : key(std::move(key)), index(index), values(std::move(values))
+                : key{ std::move(key) }, index{ index }, values{ std::move(values) }
                 {}
             };
 
@@ -379,7 +379,7 @@ namespace bobura { namespace model { namespace serializer {
         class train_state : public state
         {
         public:
-            explicit train_state(timetable_type& timetable) : m_timetable(timetable) {}
+            explicit train_state(timetable_type& timetable) : m_timetable{ timetable } {}
 
             virtual ~train_state() = default;
 
@@ -577,7 +577,7 @@ namespace bobura { namespace model { namespace serializer {
         class down_train_state : public train_state
         {
         public:
-            explicit down_train_state(timetable_type& timetable) : train_state(timetable) {}
+            explicit down_train_state(timetable_type& timetable) : train_state{ timetable } {}
 
             virtual ~down_train_state() = default;
 
@@ -597,7 +597,7 @@ namespace bobura { namespace model { namespace serializer {
         class up_train_state : public train_state
         {
         public:
-            explicit up_train_state(timetable_type& timetable) : train_state(timetable) {}
+            explicit up_train_state(timetable_type& timetable) : train_state{ timetable } {}
 
             virtual ~up_train_state() = default;
 
@@ -625,7 +625,9 @@ namespace bobura { namespace model { namespace serializer {
                 input_string_type     abbreviation,
                 const weight_type     weight,
                 const line_style_type line_style)
-            : name(std::move(name)), abbreviation(std::move(abbreviation)), weight(weight), line_style(line_style)
+            : name{ std::move(name) }, abbreviation{ std::move(abbreviation) }, weight{ weight }, line_style{
+                  line_style
+              }
             {}
         };
 
@@ -934,7 +936,7 @@ namespace bobura { namespace model { namespace serializer {
         typename Font,
         typename Encoder>
     windia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font, Encoder>::windia_reader()
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
     {}
 
     template <

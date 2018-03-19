@@ -52,8 +52,8 @@ namespace bobura { namespace model { namespace train_info {
             \param platform    A platform.
         */
         stop(time_type arrival, time_type departure, const bool operational, string_type platform)
-        : m_arrival(std::move(arrival)), m_departure(std::move(departure)), m_operational(operational),
-          m_platform(std::move(platform))
+        : m_arrival{ std::move(arrival) }, m_departure{ std::move(departure) }, m_operational{ operational },
+          m_platform{ std::move(platform) }
         {}
 
 

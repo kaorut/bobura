@@ -62,7 +62,7 @@ namespace bobura { namespace model { namespace serializer {
         // constructors and destructor
 
         impl(abstract_window_type& parent, const message_catalog_type& message_catalog)
-        : m_parent(parent), m_message_catalog(message_catalog)
+        : m_parent{ parent }, m_message_catalog{ message_catalog }
         {}
 
 
@@ -137,7 +137,7 @@ namespace bobura { namespace model { namespace serializer {
         SystemColorSet,
         MessageCatalog>::
         exec_json_reading_task(abstract_window_type& parent, const message_catalog_type& message_catalog)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(parent, message_catalog))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(parent, message_catalog) }
     {}
 
     template <

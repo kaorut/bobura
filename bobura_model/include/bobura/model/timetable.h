@@ -107,8 +107,8 @@ namespace bobura { namespace model {
             \brief Creates a timetalble.
         */
         timetable()
-        : m_company_name(), m_line_name(), m_note(), m_station_locations(), m_train_kinds(), m_down_trains(),
-          m_up_trains(), m_font_color_set(font_color_set_type::default_()), m_observer_set()
+        : m_company_name{}, m_line_name{}, m_note{}, m_station_locations{}, m_train_kinds{}, m_down_trains{},
+          m_up_trains{}, m_font_color_set{ font_color_set_type::default_() }, m_observer_set{}
         {}
 
 
@@ -622,7 +622,7 @@ namespace bobura { namespace model {
             replace_train_kind_index(
                 const train_kinds_type&       train_kinds,
                 const std::vector<size_type>& train_kind_index_map)
-            : m_train_kinds(train_kinds), m_train_kind_index_map(train_kind_index_map)
+            : m_train_kinds{ train_kinds }, m_train_kind_index_map{ train_kind_index_map }
             {}
 
             void operator()(train_type& train) const

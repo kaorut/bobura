@@ -73,8 +73,8 @@ namespace bobura { namespace model {
             string_type          name,
             string_type          name_number,
             string_type          note)
-        : m_direction(direction), m_number(std::move(number)), m_kind_index(kind_index), m_name(std::move(name)),
-          m_name_number(std::move(name_number)), m_note(std::move(note)), m_stops()
+        : m_direction{ direction }, m_number{ std::move(number) }, m_kind_index{ kind_index },
+          m_name{ std::move(name) }, m_name_number{ std::move(name_number) }, m_note{ std::move(note) }, m_stops{}
         {}
 
         /*!
@@ -98,8 +98,9 @@ namespace bobura { namespace model {
             string_type          name_number,
             string_type          note,
             stops_type           stops)
-        : m_direction(direction), m_number(std::move(number)), m_kind_index(kind_index), m_name(std::move(name)),
-          m_name_number(std::move(name_number)), m_note(std::move(note)), m_stops(std::move(stops))
+        : m_direction{ direction }, m_number{ std::move(number) }, m_kind_index{ kind_index }, m_name{ std::move(
+                                                                                                   name) },
+          m_name_number{ std::move(name_number) }, m_note{ std::move(note) }, m_stops{ std::move(stops) }
         {}
 
         /*!
@@ -126,8 +127,9 @@ namespace bobura { namespace model {
             string_type          note,
             const InputIterator  stop_first,
             const InputIterator  stop_last)
-        : m_direction(direction), m_number(std::move(number)), m_kind_index(kind_index), m_name(std::move(name)),
-          m_name_number(std::move(name_number)), m_note(std::move(note)), m_stops(stop_first, stop_last)
+        : m_direction{ direction }, m_number{ std::move(number) }, m_kind_index{ kind_index }, m_name{ std::move(
+                                                                                                   name) },
+          m_name_number{ std::move(name_number) }, m_note{ std::move(note) }, m_stops{ stop_first, stop_last }
         {}
 
 
