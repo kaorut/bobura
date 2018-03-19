@@ -51,7 +51,7 @@ namespace {
     class concrete_item : public item_type
     {
     public:
-        concrete_item() : item_type() {}
+        concrete_item() : item_type{} {}
 
         concrete_item& operator=(concrete_item&& item)
         {
