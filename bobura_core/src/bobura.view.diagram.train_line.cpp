@@ -70,14 +70,14 @@ namespace bobura { namespace view { namespace diagram {
             position_type               arrival,
             const bool                  draw_train_name,
             const message_catalog_type& message_catalog)
-        : m_p_train(&train), m_departure_stop_index(departure_stop_index), m_departure(std::move(departure)),
-          m_arrival(std::move(arrival)), m_draw_train_name(draw_train_name), m_p_message_catalog(&message_catalog)
+        : m_p_train{ &train }, m_departure_stop_index{ departure_stop_index }, m_departure{ std::move(departure) },
+          m_arrival{ std::move(arrival) }, m_draw_train_name{ draw_train_name }, m_p_message_catalog{ &message_catalog }
         {}
 
         impl(impl&& another)
-        : m_p_train(another.m_p_train), m_departure_stop_index(another.m_departure_stop_index),
-          m_departure(std::move(another.m_departure)), m_arrival(std::move(another.m_arrival)),
-          m_draw_train_name(another.m_draw_train_name), m_p_message_catalog(another.m_p_message_catalog)
+        : m_p_train{ another.m_p_train }, m_departure_stop_index{ another.m_departure_stop_index },
+          m_departure{ std::move(another.m_departure) }, m_arrival{ std::move(another.m_arrival) },
+          m_draw_train_name{ another.m_draw_train_name }, m_p_message_catalog{ another.m_p_message_catalog }
         {}
 
 
@@ -317,19 +317,20 @@ namespace bobura { namespace view { namespace diagram {
         position_type               arrival,
         const bool                  draw_train_name,
         const message_catalog_type& message_catalog)
-    : base_type(selection), m_p_impl(tetengo2::stdalt::make_unique<impl>(
-                                train,
-                                departure_stop_index,
-                                selection,
-                                std::move(departure),
-                                std::move(arrival),
-                                draw_train_name,
-                                message_catalog))
+    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                  train,
+                                  departure_stop_index,
+                                  selection,
+                                  std::move(departure),
+                                  std::move(arrival),
+                                  draw_train_name,
+                                  message_catalog) }
     {}
 
     template <typename Traits>
     train_line_fragment<Traits>::train_line_fragment(train_line_fragment&& another)
-    : base_type(another.get_selection()), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                                std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>
@@ -425,22 +426,23 @@ namespace bobura { namespace view { namespace diagram {
             const station_intervals_type&          station_intervals,
             const std::vector<position_unit_type>& station_positions,
             const message_catalog_type&            message_catalog)
-        : m_p_train_kind(&train_kind), m_fragments(make_fragments(
-                                           train,
-                                           time_offset,
-                                           selection,
-                                           canvas_dimension,
-                                           scroll_bar_position,
-                                           station_header_right,
-                                           header_bottom,
-                                           time_header_height,
-                                           horizontal_scale,
-                                           station_intervals,
-                                           station_positions,
-                                           message_catalog))
+        : m_p_train_kind{ &train_kind }, m_fragments{ make_fragments(
+                                             train,
+                                             time_offset,
+                                             selection,
+                                             canvas_dimension,
+                                             scroll_bar_position,
+                                             station_header_right,
+                                             header_bottom,
+                                             time_header_height,
+                                             horizontal_scale,
+                                             station_intervals,
+                                             station_positions,
+                                             message_catalog) }
         {}
 
-        impl(impl&& another) : m_p_train_kind(another.m_p_train_kind), m_fragments(std::move(another.m_fragments)) {}
+        impl(impl&& another) : m_p_train_kind{ another.m_p_train_kind }, m_fragments{ std::move(another.m_fragments) }
+        {}
 
 
         // functions
@@ -863,25 +865,26 @@ namespace bobura { namespace view { namespace diagram {
         const station_intervals_type&          station_intervals,
         const std::vector<position_unit_type>& station_positions,
         const message_catalog_type&            message_catalog)
-    : base_type(selection), m_p_impl(tetengo2::stdalt::make_unique<impl>(
-                                train,
-                                train_kind,
-                                time_offset,
-                                selection,
-                                canvas_dimension,
-                                scroll_bar_position,
-                                station_header_right,
-                                header_bottom,
-                                time_header_height,
-                                horizontal_scale,
-                                station_intervals,
-                                station_positions,
-                                message_catalog))
+    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                  train,
+                                  train_kind,
+                                  time_offset,
+                                  selection,
+                                  canvas_dimension,
+                                  scroll_bar_position,
+                                  station_header_right,
+                                  header_bottom,
+                                  time_header_height,
+                                  horizontal_scale,
+                                  station_intervals,
+                                  station_positions,
+                                  message_catalog) }
     {}
 
     template <typename Traits>
     train_line<Traits>::train_line(train_line&& another)
-    : base_type(another.get_selection()), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                                std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>
@@ -961,7 +964,7 @@ namespace bobura { namespace view { namespace diagram {
             const station_intervals_type&          station_intervals,
             const std::vector<position_unit_type>& station_positions,
             const message_catalog_type&            message_catalog)
-        : m_train_lines(make_train_lines(
+        : m_train_lines{ make_train_lines(
               model,
               time_offset,
               selection,
@@ -973,10 +976,10 @@ namespace bobura { namespace view { namespace diagram {
               horizontal_scale,
               station_intervals,
               station_positions,
-              message_catalog))
+              message_catalog) }
         {}
 
-        impl(impl&& another) : m_train_lines(std::move(another.m_train_lines)) {}
+        impl(impl&& another) : m_train_lines{ std::move(another.m_train_lines) } {}
 
 
         // functions
@@ -1138,24 +1141,25 @@ namespace bobura { namespace view { namespace diagram {
         const station_intervals_type&          station_intervals,
         const std::vector<position_unit_type>& station_positions,
         const message_catalog_type&            message_catalog)
-    : base_type(selection), m_p_impl(tetengo2::stdalt::make_unique<impl>(
-                                model,
-                                time_offset,
-                                selection,
-                                canvas_dimension,
-                                scroll_bar_position,
-                                station_header_right,
-                                header_bottom,
-                                time_header_height,
-                                horizontal_scale,
-                                station_intervals,
-                                station_positions,
-                                message_catalog))
+    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                  model,
+                                  time_offset,
+                                  selection,
+                                  canvas_dimension,
+                                  scroll_bar_position,
+                                  station_header_right,
+                                  header_bottom,
+                                  time_header_height,
+                                  horizontal_scale,
+                                  station_intervals,
+                                  station_positions,
+                                  message_catalog) }
     {}
 
     template <typename Traits>
     train_line_list<Traits>::train_line_list(train_line_list&& another)
-    : base_type(another.get_selection()), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                                std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>
@@ -1217,6 +1221,4 @@ namespace bobura { namespace view { namespace diagram {
     template class train_line<typename test::traits_type_list_type::diagram_view_type>;
 
     template class train_line_list<typename test::traits_type_list_type::diagram_view_type>;
-
-
 }}}

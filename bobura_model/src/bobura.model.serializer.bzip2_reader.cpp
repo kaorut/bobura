@@ -56,7 +56,7 @@ namespace bobura { namespace model { namespace serializer {
 
         // constructors and destructor
 
-        explicit impl(std::unique_ptr<base_type> p_reader) : m_p_reader(std::move(p_reader)) {}
+        explicit impl(std::unique_ptr<base_type> p_reader) : m_p_reader{ std::move(p_reader) } {}
 
 
         // functions
@@ -71,7 +71,7 @@ namespace bobura { namespace model { namespace serializer {
             const input_string_type             input_string{ first, last };
             boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(input_string) };
             boost::iostreams::filtering_istream filtering_input_stream{};
-            filtering_input_stream.push(boost::iostreams::bzip2_decompressor());
+            filtering_input_stream.push(boost::iostreams::bzip2_decompressor{});
             filtering_input_stream.push(input_stream);
 
             try
@@ -144,7 +144,7 @@ namespace bobura { namespace model { namespace serializer {
         typename Font>
     bzip2_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::bzip2_reader(
         std::unique_ptr<base_type> p_reader)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(p_reader)))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(p_reader)) }
     {}
 
     template <

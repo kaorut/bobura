@@ -55,10 +55,10 @@ namespace bobura {
         // constructors and destructor
 
         impl(const model_type& model, const message_catalog_type& message_catalog)
-        : m_model(model), m_message_catalog(message_catalog), m_selection(), m_horizontal_scale(1), m_vertical_scale(1),
-          m_dimension(), m_header_height(0), m_time_header_height(3), m_station_header_width(8),
-          m_time_offset(time_span_type{ 3, 0, 0 }), m_station_intervals(), m_station_positions(), m_p_header(),
-          m_p_time_line_list(), m_p_station_line_list(), m_p_train_line_list()
+        : m_model{ model }, m_message_catalog{ message_catalog }, m_selection{}, m_horizontal_scale{ 1 },
+          m_vertical_scale{ 1 }, m_dimension{}, m_header_height{ 0 }, m_time_header_height{ 3 },
+          m_station_header_width{ 8 }, m_time_offset{ time_span_type{ 3, 0, 0 } }, m_station_intervals{},
+          m_station_positions{}, m_p_header{}, m_p_time_line_list{}, m_p_station_line_list{}, m_p_train_line_list{}
         {}
 
 
@@ -232,7 +232,8 @@ namespace bobura {
         class to_station_position
         {
         public:
-            explicit to_station_position(const scale_type& vertical_scale) : m_vertical_scale(vertical_scale), m_sum(0)
+            explicit to_station_position(const scale_type& vertical_scale)
+            : m_vertical_scale{ vertical_scale }, m_sum{ 0 }
             {}
 
             position_unit_type operator()(const time_span_type& interval)
@@ -348,7 +349,7 @@ namespace bobura {
 
     template <typename Traits>
     diagram_view<Traits>::diagram_view(const model_type& model, const message_catalog_type& message_catalog)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(model, message_catalog))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(model, message_catalog) }
     {}
 
     template <typename Traits>

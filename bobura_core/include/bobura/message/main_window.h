@@ -63,7 +63,7 @@ namespace bobura { namespace message { namespace main_window {
             popup_menu_type&                   popup_menu,
             std::vector<const command_type*>&& commands,
             const model_type&                  model)
-        : m_popup_menu(popup_menu), m_commands(commands), m_model(model)
+        : m_popup_menu{ popup_menu }, m_commands{ commands }, m_model{ model }
         {
             assert(
                 static_cast<std::size_t>(std::distance(m_popup_menu.begin(), m_popup_menu.end())) == m_commands.size());
@@ -164,7 +164,7 @@ namespace bobura { namespace message { namespace main_window {
             \param parent  A parent window.
         */
         menu_command_selected(const command_type& command, model_type& model, abstract_window_type& parent)
-        : m_command(command), m_model(model), m_parent(parent)
+        : m_command{ command }, m_model{ model }, m_parent{ parent }
         {}
 
 
@@ -223,7 +223,7 @@ namespace bobura { namespace message { namespace main_window {
             \param parent      A parent window.
         */
         file_dropped(const command_set_type& command_set, model_type& model, abstract_window_type& parent)
-        : m_command_set(command_set), m_model(model), m_parent(parent)
+        : m_command_set{ command_set }, m_model{ model }, m_parent{ parent }
         {}
 
 
@@ -321,11 +321,11 @@ namespace bobura { namespace message { namespace main_window {
             view_picture_box_type& timetable_down_view_picture_box,
             view_picture_box_type& timetable_up_view_picture_box,
             property_bar_type&     property_bar)
-        : m_diagram_view(diagram_view), m_timetable_down_view(timetable_down_view),
-          m_timetable_up_view(timetable_up_view), m_window(window), m_tab_frame(tab_frame),
-          m_diagram_view_picture_box(diagram_view_picture_box),
-          m_timetable_down_view_picture_box(timetable_down_view_picture_box),
-          m_timetable_up_view_picture_box(timetable_up_view_picture_box), m_property_bar(property_bar)
+        : m_diagram_view{ diagram_view }, m_timetable_down_view{ timetable_down_view },
+          m_timetable_up_view{ timetable_up_view }, m_window{ window }, m_tab_frame{ tab_frame },
+          m_diagram_view_picture_box{ diagram_view_picture_box },
+          m_timetable_down_view_picture_box{ timetable_down_view_picture_box },
+          m_timetable_up_view_picture_box{ timetable_up_view_picture_box }, m_property_bar{ property_bar }
         {}
 
 
@@ -454,7 +454,7 @@ namespace bobura { namespace message { namespace main_window {
             abstract_window_type&         window,
             const confirm_file_save_type& confirm_file_save,
             save_settings_type            save_settings)
-        : m_window(window), m_confirm_file_save(confirm_file_save), m_save_settings(std::move(save_settings))
+        : m_window{ window }, m_confirm_file_save{ confirm_file_save }, m_save_settings{ std::move(save_settings) }
         {}
 
 

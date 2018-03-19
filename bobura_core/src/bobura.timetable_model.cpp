@@ -46,7 +46,8 @@ namespace bobura {
         // constructors and destructor
 
         impl()
-        : m_p_timetable(tetengo2::stdalt::make_unique<timetable_type>()), m_path(), m_changed(false), m_observer_set()
+        : m_p_timetable{ tetengo2::stdalt::make_unique<timetable_type>() }, m_path{}, m_changed{ false },
+          m_observer_set{}
         {
             set_timetable_observer_set();
         }
@@ -170,7 +171,7 @@ namespace bobura {
         typename Speed,
         typename Font>
     timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::timetable_model()
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
     {}
 
     template <

@@ -40,7 +40,7 @@ namespace bobura { namespace load_save {
         // constructors and destructor
 
         impl(model_type& model, const save_to_file_type& save_to_file, const message_catalog_type& message_catalog)
-        : m_model(model), m_save_to_file(save_to_file), m_message_catalog(message_catalog)
+        : m_model{ model }, m_save_to_file{ save_to_file }, m_message_catalog{ message_catalog }
         {}
 
 
@@ -108,7 +108,7 @@ namespace bobura { namespace load_save {
         model_type&                 model,
         const save_to_file_type&    save_to_file,
         const message_catalog_type& message_catalog)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(model, save_to_file, message_catalog))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(model, save_to_file, message_catalog) }
     {}
 
     template <typename Traits>

@@ -744,7 +744,7 @@ namespace bobura { namespace model { namespace serializer {
         typename Font,
         typename Encoder>
     json_writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font, Encoder>::json_writer()
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
     {}
 
     template <

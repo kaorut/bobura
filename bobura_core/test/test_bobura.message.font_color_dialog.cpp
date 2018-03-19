@@ -53,7 +53,7 @@ namespace {
     class concrete_dialog : public dialog_type
     {
     public:
-        explicit concrete_dialog(window_type::base_type& parent) : dialog_type(parent) {}
+        explicit concrete_dialog(window_type::base_type& parent) : dialog_type{ parent } {}
     };
 
     using list_box_type = ui_type_list_type::list_box_type;
@@ -77,15 +77,15 @@ namespace {
     public:
         // constructors and destructors
 
-        font_color_type() : m_diagram_font(), m_diagram_color(), m_timetable_font(), m_timetable_color() {}
+        font_color_type() : m_diagram_font{}, m_diagram_color{}, m_timetable_font{}, m_timetable_color{} {}
 
         font_color_type(
             boost::optional<font_type>  diagram_font,
             boost::optional<color_type> diagram_color,
             boost::optional<font_type>  timetable_font,
             boost::optional<color_type> timetable_color)
-        : m_diagram_font(diagram_font), m_diagram_color(diagram_color), m_timetable_font(timetable_font),
-          m_timetable_color(timetable_color)
+        : m_diagram_font{ diagram_font }, m_diagram_color{ diagram_color }, m_timetable_font{ timetable_font },
+          m_timetable_color{ timetable_color }
         {}
 
 
@@ -256,6 +256,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
 #if !( \
     BOOST_OS_LINUX && \
+        (BOOST_COMP_CLANG >= BOOST_VERSION_NUMBER(5, 0, 0) && BOOST_COMP_CLANG < BOOST_VERSION_NUMBER(5, 1, 0)) || \
     (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(6, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(6, 4, 0))\
 )
                 BOOST_AUTO_TEST_CASE(operator_paren)

@@ -39,7 +39,7 @@ namespace bobura { namespace command {
 
 
     template <typename Traits>
-    nop<Traits>::nop() : m_p_impl(tetengo2::stdalt::make_unique<impl>())
+    nop<Traits>::nop() : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
     {}
 
     template <typename Traits>

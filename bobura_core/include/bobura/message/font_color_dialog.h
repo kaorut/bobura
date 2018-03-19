@@ -55,7 +55,7 @@ namespace bobura { namespace message { namespace font_color_dialog {
             boost::optional<size_type>& current_category_index,
             const list_box_type&        list_box,
             const update_type           update)
-        : m_current_category_index(current_category_index), m_list_box(list_box), m_update(update)
+        : m_current_category_index{ current_category_index }, m_list_box{ list_box }, m_update{ update }
         {}
 
 
@@ -133,8 +133,8 @@ namespace bobura { namespace message { namespace font_color_dialog {
             const boost::optional<int_size_type>& current_category_index,
             const dimension_type&                 canvas_dimension,
             const message_catalog_type&           message_catalog)
-        : m_font_color_list(font_color_list), m_current_category_index(current_category_index),
-          m_canvas_dimension(canvas_dimension), m_message_catalog(message_catalog)
+        : m_font_color_list{ font_color_list }, m_current_category_index{ current_category_index },
+          m_canvas_dimension{ canvas_dimension }, m_message_catalog{ message_catalog }
         {}
 
 
@@ -342,8 +342,8 @@ namespace bobura { namespace message { namespace font_color_dialog {
             const boost::optional<size_type>& current_category_index,
             const update_type                 update,
             const message_catalog_type&       message_catalog)
-        : m_dialog(dialog), m_font_color_list(font_color_list), m_current_category_index(current_category_index),
-          m_update(update), m_message_catalog(message_catalog)
+        : m_dialog{ dialog }, m_font_color_list{ font_color_list },
+          m_current_category_index{ current_category_index }, m_update{ update }, m_message_catalog{ message_catalog }
         {}
 
 
@@ -451,8 +451,8 @@ namespace bobura { namespace message { namespace font_color_dialog {
             const boost::optional<size_type>& current_category_index,
             const update_type                 update,
             const message_catalog_type&       message_catalog)
-        : m_dialog(dialog), m_font_color_list(font_color_list), m_current_category_index(current_category_index),
-          m_update(update), m_message_catalog(message_catalog)
+        : m_dialog{ dialog }, m_font_color_list{ font_color_list },
+          m_current_category_index{ current_category_index }, m_update{ update }, m_message_catalog{ message_catalog }
         {}
 
 
@@ -560,8 +560,8 @@ namespace bobura { namespace message { namespace font_color_dialog {
             const boost::optional<size_type>& current_category_index,
             const update_type                 update,
             const message_catalog_type&       message_catalog)
-        : m_dialog(dialog), m_font_color_list(font_color_list), m_current_category_index(current_category_index),
-          m_update(update), m_message_catalog(message_catalog)
+        : m_dialog{ dialog }, m_font_color_list{ font_color_list },
+          m_current_category_index{ current_category_index }, m_update{ update }, m_message_catalog{ message_catalog }
         {}
 
 
@@ -669,8 +669,8 @@ namespace bobura { namespace message { namespace font_color_dialog {
             const boost::optional<size_type>& current_category_index,
             const update_type                 update,
             const message_catalog_type&       message_catalog)
-        : m_dialog(dialog), m_font_color_list(font_color_list), m_current_category_index(current_category_index),
-          m_update(update), m_message_catalog(message_catalog)
+        : m_dialog{ dialog }, m_font_color_list{ font_color_list },
+          m_current_category_index{ current_category_index }, m_update{ update }, m_message_catalog{ message_catalog }
         {}
 
 
@@ -734,7 +734,7 @@ namespace bobura { namespace message { namespace font_color_dialog {
 
             \param dialog A dialog.
         */
-        explicit ok_button_mouse_clicked(dialog_type& dialog) : m_dialog(dialog) {}
+        explicit ok_button_mouse_clicked(dialog_type& dialog) : m_dialog{ dialog } {}
 
 
         // functions
@@ -778,7 +778,7 @@ namespace bobura { namespace message { namespace font_color_dialog {
 
             \param dialog A dialog.
         */
-        explicit cancel_button_mouse_clicked(dialog_type& dialog) : m_dialog(dialog) {}
+        explicit cancel_button_mouse_clicked(dialog_type& dialog) : m_dialog{ dialog } {}
 
 
         // functions

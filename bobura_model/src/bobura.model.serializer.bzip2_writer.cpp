@@ -50,7 +50,7 @@ namespace bobura { namespace model { namespace serializer {
 
         // constructors and destructor
 
-        explicit impl(std::unique_ptr<base_type> p_writer) : m_p_writer(std::move(p_writer)) {}
+        explicit impl(std::unique_ptr<base_type> p_writer) : m_p_writer{ std::move(p_writer) } {}
 
 
         // functions
@@ -65,7 +65,7 @@ namespace bobura { namespace model { namespace serializer {
         void write_impl(const timetable_type& timetable, output_stream_type& output_stream)
         {
             boost::iostreams::filtering_ostream filtering_output_stream{};
-            filtering_output_stream.push(boost::iostreams::bzip2_compressor());
+            filtering_output_stream.push(boost::iostreams::bzip2_compressor{});
             filtering_output_stream.push(output_stream);
 
             m_p_writer->write(timetable, filtering_output_stream);
@@ -89,7 +89,7 @@ namespace bobura { namespace model { namespace serializer {
         typename Font>
     bzip2_writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::bzip2_writer(
         std::unique_ptr<base_type> p_writer)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(p_writer)))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(p_writer)) }
     {}
 
     template <

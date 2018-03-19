@@ -54,8 +54,8 @@ namespace bobura {
             const message_catalog_type& message_catalog,
             const settings_type&        settings,
             const detail_impl_set_type& detail_impl_set)
-        : m_base(base), m_message_catalog(message_catalog), m_settings(settings), m_p_application_image(),
-          m_p_title_label(), m_p_copyright_label(), m_p_link_label(), m_p_ok_button()
+        : m_base{ base }, m_message_catalog{ message_catalog }, m_settings{ settings }, m_p_application_image{},
+          m_p_title_label{}, m_p_copyright_label{}, m_p_link_label{}, m_p_ok_button{}
         {
             initialize_dialog(detail_impl_set);
         }
@@ -211,8 +211,9 @@ namespace bobura {
         const message_catalog_type& message_catalog,
         const settings_type&        settings,
         const detail_impl_set_type& detail_impl_set)
-    : base_type(parent),
-      m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, detail_impl_set))
+    : base_type{ parent }, m_p_impl{
+          tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, detail_impl_set)
+      }
     {}
 
     template <typename Traits>

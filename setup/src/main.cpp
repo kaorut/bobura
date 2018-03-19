@@ -177,11 +177,8 @@ namespace {
 
     \return The exit status code.
 */
-int WINAPI wWinMain(
-    const ::HINSTANCE hInstance,
-    const ::HINSTANCE hPrevInstance,
-    const ::LPWSTR    lpCmdLine,
-    const int         nCmdShow) noexcept
+int WINAPI
+    wWinMain(const ::HINSTANCE hInstance, const ::HINSTANCE hPrevInstance, const ::LPWSTR lpCmdLine, const int nCmdShow)
 {
     boost::ignore_unused(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
     try

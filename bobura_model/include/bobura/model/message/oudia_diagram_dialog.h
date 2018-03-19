@@ -33,7 +33,7 @@ namespace bobura { namespace model { namespace message { namespace oudia_diagram
 
             \param dialog A dialog.
         */
-        explicit ok_button_mouse_clicked(dialog_type& dialog) : m_dialog(dialog) {}
+        explicit ok_button_mouse_clicked(dialog_type& dialog) : m_dialog{ dialog } {}
 
 
         // functions
@@ -77,7 +77,7 @@ namespace bobura { namespace model { namespace message { namespace oudia_diagram
 
             \param dialog A dialog.
         */
-        explicit cancel_button_mouse_clicked(dialog_type& dialog) : m_dialog(dialog) {}
+        explicit cancel_button_mouse_clicked(dialog_type& dialog) : m_dialog{ dialog } {}
 
 
         // functions

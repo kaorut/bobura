@@ -80,9 +80,10 @@ namespace bobura { namespace message {
                 timetable_view_type&        timetable_down_view,
                 timetable_view_type&        timetable_up_view,
                 main_window_type&           main_window)
-            : m_timetable_model(timetable_model), m_diagram_view(diagram_view),
-              m_timetable_down_view(timetable_down_view), m_timetable_up_view(timetable_up_view),
-              m_main_window(main_window)
+            : m_timetable_model{ timetable_model }, m_diagram_view{ diagram_view },
+              m_timetable_down_view{ timetable_down_view }, m_timetable_up_view{ timetable_up_view }, m_main_window{
+                  main_window
+              }
             {}
 
 
@@ -225,9 +226,10 @@ namespace bobura { namespace message {
                 timetable_view_type&        timetable_down_view,
                 timetable_view_type&        timetable_up_view,
                 main_window_type&           main_window)
-            : m_timetable_model(timetable_model), m_diagram_view(diagram_view),
-              m_timetable_down_view(timetable_down_view), m_timetable_up_view(timetable_up_view),
-              m_main_window(main_window)
+            : m_timetable_model{ timetable_model }, m_diagram_view{ diagram_view },
+              m_timetable_down_view{ timetable_down_view }, m_timetable_up_view{ timetable_up_view }, m_main_window{
+                  main_window
+              }
             {}
 
 

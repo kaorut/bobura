@@ -52,8 +52,8 @@ namespace bobura {
             const view::timetable::direction_type direction,
             const model_type&                     model,
             const message_catalog_type&           message_catalog)
-        : m_direction(direction), m_model(model), m_message_catalog(message_catalog), m_dimension(), m_p_header(),
-          m_p_train_number_header()
+        : m_direction{ direction }, m_model{ model }, m_message_catalog{ message_catalog }, m_dimension{}, m_p_header{},
+          m_p_train_number_header{}
         {}
 
 
@@ -230,7 +230,7 @@ namespace bobura {
         const view::timetable::direction_type direction,
         const model_type&                     model,
         const message_catalog_type&           message_catalog)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog) }
     {}
 
     template <typename Traits>

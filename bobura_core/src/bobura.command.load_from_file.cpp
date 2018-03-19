@@ -42,7 +42,7 @@ namespace bobura { namespace command {
 
         // constructors and destructor
 
-        explicit impl(const load_from_file_type& load_from_file) : m_load_from_file(load_from_file) {}
+        explicit impl(const load_from_file_type& load_from_file) : m_load_from_file{ load_from_file } {}
 
 
         // functions
@@ -72,7 +72,7 @@ namespace bobura { namespace command {
 
     template <typename Traits, typename LoadSaveTraits>
     load_from_file<Traits, LoadSaveTraits>::parameter_type::parameter_type(boost::filesystem::path path)
-    : m_path(std::move(path))
+    : m_path{ std::move(path) }
     {}
 
     template <typename Traits, typename LoadSaveTraits>
@@ -87,7 +87,7 @@ namespace bobura { namespace command {
 
     template <typename Traits, typename LoadSaveTraits>
     load_from_file<Traits, LoadSaveTraits>::load_from_file(const load_from_file_type& load_from_file)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(load_from_file))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(load_from_file) }
     {}
 
     template <typename Traits, typename LoadSaveTraits>

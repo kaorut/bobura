@@ -128,7 +128,7 @@ namespace {
     class concrete_dialog : public dialog_type
     {
     public:
-        explicit concrete_dialog(window_type::base_type& parent) : dialog_type(parent) {}
+        explicit concrete_dialog(window_type::base_type& parent) : dialog_type{ parent } {}
     };
 
 

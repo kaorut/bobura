@@ -69,11 +69,11 @@ namespace bobura {
         // constructors and destructor
 
         impl(base_type& base, const message_catalog_type& message_catalog)
-        : m_base(base), m_font_color_list(9, font_color_type{}), m_message_catalog(message_catalog),
-          m_current_category_index(), m_p_category_label(), m_p_category_list_box(), m_p_diagram_label(),
-          m_p_diagram_font_button(), m_p_diagram_font_text_box(), m_p_diagram_color_button(), m_p_timetable_label(),
-          m_p_timetable_font_button(), m_p_timetable_font_text_box(), m_p_timetable_color_button(), m_p_sample_label(),
-          m_p_sample_picture_box(), m_p_ok_button(), m_p_cancel_button()
+        : m_base{ base }, m_font_color_list{ 9, font_color_type{} }, m_message_catalog{ message_catalog },
+          m_current_category_index{}, m_p_category_label{}, m_p_category_list_box{}, m_p_diagram_label{},
+          m_p_diagram_font_button{}, m_p_diagram_font_text_box{}, m_p_diagram_color_button{}, m_p_timetable_label{},
+          m_p_timetable_font_button{}, m_p_timetable_font_text_box{}, m_p_timetable_color_button{}, m_p_sample_label{},
+          m_p_sample_picture_box{}, m_p_ok_button{}, m_p_cancel_button{}
         {
             initialize_dialog();
         }
@@ -700,7 +700,7 @@ namespace bobura {
         typename ColorDialog>
     font_color_dialog<Traits, Size, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
         font_color_dialog(abstract_window_type& parent, const message_catalog_type& message_catalog)
-    : base_type(parent), m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog))
+    : base_type{ parent }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(*this, message_catalog) }
     {}
 
     template <

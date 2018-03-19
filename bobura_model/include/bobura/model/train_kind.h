@@ -92,10 +92,10 @@ namespace bobura { namespace model {
             const line_style_type diagram_line_style,
             font_type             timetable_font,
             color_type            timetable_color)
-        : m_name(std::move(name)), m_abbreviation(std::move(abbreviation)), m_diagram_font(std::move(diagram_font)),
-          m_diagram_color(std::move(diagram_color)), m_diagram_line_weight(diagram_line_weight),
-          m_diagram_line_style(diagram_line_style), m_timetable_font(std::move(timetable_font)),
-          m_timetable_color(std::move(timetable_color))
+        : m_name{ std::move(name) }, m_abbreviation{ std::move(abbreviation) },
+          m_diagram_font{ std::move(diagram_font) }, m_diagram_color{ std::move(diagram_color) },
+          m_diagram_line_weight{ diagram_line_weight }, m_diagram_line_style{ diagram_line_style },
+          m_timetable_font{ std::move(timetable_font) }, m_timetable_color{ std::move(timetable_color) }
         {}
 
 

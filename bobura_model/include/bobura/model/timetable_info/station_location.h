@@ -46,7 +46,7 @@ namespace bobura { namespace model { namespace timetable_info {
             \param operating_distance An operating distance.
         */
         station_location(station_type station, operating_distance_type operating_distance)
-        : m_station(std::move(station)), m_operating_distance(std::move(operating_distance))
+        : m_station{ std::move(station) }, m_operating_distance{ std::move(operating_distance) }
         {}
 
 

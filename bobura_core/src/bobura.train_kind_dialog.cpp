@@ -76,16 +76,16 @@ namespace bobura {
             const color_type&           background_color,
             const color_type&           timetable_color,
             const message_catalog_type& message_catalog)
-        : m_base(base), m_message_catalog(message_catalog), m_info_sets(), m_current_train_kind_index(),
-          m_current_diagram_font(font_type::dialog_font()), m_current_diagram_color(0, 0, 0),
-          m_current_timetable_font(font_type::dialog_font()), m_current_timetable_color(0, 0, 0),
-          m_p_train_kind_label(), m_p_train_kind_list_box(), m_p_add_button(), m_p_delete_button(), m_p_up_button(),
-          m_p_down_button(), m_p_name_label(), m_p_name_text_box(), m_p_abbreviation_label(),
-          m_p_abbreviation_text_box(), m_p_diagram_label(), m_p_diagram_font_button(), m_p_diagram_font_text_box(),
-          m_p_diagram_color_button(), m_p_diagram_weight_label(), m_p_diagram_weight_dropdown_box(),
-          m_p_diagram_line_style_label(), m_p_diagram_line_style_dropdown_box(), m_p_timetable_label(),
-          m_p_timetable_font_button(), m_p_timetable_font_text_box(), m_p_timetable_color_button(),
-          m_p_sample_picture_box(), m_p_ok_button(), m_p_cancel_button()
+        : m_base{ base }, m_message_catalog{ message_catalog }, m_info_sets{}, m_current_train_kind_index{},
+          m_current_diagram_font{ font_type::dialog_font() }, m_current_diagram_color{ 0, 0, 0 },
+          m_current_timetable_font{ font_type::dialog_font() }, m_current_timetable_color{ 0, 0, 0 },
+          m_p_train_kind_label{}, m_p_train_kind_list_box{}, m_p_add_button{}, m_p_delete_button{}, m_p_up_button{},
+          m_p_down_button{}, m_p_name_label{}, m_p_name_text_box{}, m_p_abbreviation_label{},
+          m_p_abbreviation_text_box{}, m_p_diagram_label{}, m_p_diagram_font_button{}, m_p_diagram_font_text_box{},
+          m_p_diagram_color_button{}, m_p_diagram_weight_label{}, m_p_diagram_weight_dropdown_box{},
+          m_p_diagram_line_style_label{}, m_p_diagram_line_style_dropdown_box{}, m_p_timetable_label{},
+          m_p_timetable_font_button{}, m_p_timetable_font_text_box{}, m_p_timetable_color_button{},
+          m_p_sample_picture_box{}, m_p_ok_button{}, m_p_cancel_button{}
         {
             initialize_dialog(background_color, timetable_color);
         }
@@ -948,7 +948,7 @@ namespace bobura {
             boost::optional<size_type> original_index,
             const bool                 referred,
             train_kind_type            train_kind)
-    : m_original_index(std::move(original_index)), m_referred(referred), m_train_kind(std::move(train_kind))
+    : m_original_index{ std::move(original_index) }, m_referred{ referred }, m_train_kind{ std::move(train_kind) }
     {}
 
 
@@ -1054,8 +1054,9 @@ namespace bobura {
             const color_type&           background_color,
             const color_type&           timetable_color,
             const message_catalog_type& message_catalog)
-    : base_type(parent),
-      m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, background_color, timetable_color, message_catalog))
+    : base_type{ parent }, m_p_impl{
+          tetengo2::stdalt::make_unique<impl>(*this, background_color, timetable_color, message_catalog)
+      }
     {}
 
     template <

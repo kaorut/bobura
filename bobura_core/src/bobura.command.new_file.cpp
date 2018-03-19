@@ -31,7 +31,7 @@ namespace bobura { namespace command {
 
         // constructors and destructor
 
-        explicit impl(const new_file_type& new_file) : m_new_file(new_file) {}
+        explicit impl(const new_file_type& new_file) : m_new_file{ new_file } {}
 
 
         // functions
@@ -51,7 +51,7 @@ namespace bobura { namespace command {
 
     template <typename Traits, typename LoadSaveTraits>
     new_file<Traits, LoadSaveTraits>::new_file(const new_file_type& new_file)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(new_file))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(new_file) }
     {}
 
     template <typename Traits, typename LoadSaveTraits>

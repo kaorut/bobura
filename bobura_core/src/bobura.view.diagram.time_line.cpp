@@ -55,13 +55,14 @@ namespace bobura { namespace view { namespace diagram {
             position_unit_type         bottom,
             color_type                 color,
             boost::optional<size_type> hours)
-        : m_left(std::move(left)), m_top(std::move(top)), m_bottom(std::move(bottom)), m_color(std::move(color)),
-          m_hours(std::move(hours))
+        : m_left{ std::move(left) }, m_top{ std::move(top) }, m_bottom{ std::move(bottom) },
+          m_color{ std::move(color) }, m_hours{ std::move(hours) }
         {}
 
         impl(impl&& another)
-        : m_left(std::move(another.m_left)), m_top(std::move(another.m_top)), m_bottom(std::move(another.m_bottom)),
-          m_color(std::move(another.m_color)), m_hours(std::move(another.m_hours))
+        : m_left{ std::move(another.m_left) }, m_top{ std::move(another.m_top) },
+          m_bottom{ std::move(another.m_bottom) }, m_color{ std::move(another.m_color) }, m_hours{ std::move(
+                                                                                              another.m_hours) }
         {}
 
 
@@ -121,18 +122,19 @@ namespace bobura { namespace view { namespace diagram {
         position_unit_type         bottom,
         color_type                 color,
         boost::optional<size_type> hours)
-    : base_type(selection), m_p_impl(tetengo2::stdalt::make_unique<impl>(
-                                selection,
-                                std::move(left),
-                                std::move(top),
-                                std::move(bottom),
-                                std::move(color),
-                                std::move(hours)))
+    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                  selection,
+                                  std::move(left),
+                                  std::move(top),
+                                  std::move(bottom),
+                                  std::move(color),
+                                  std::move(hours)) }
     {}
 
     template <typename Traits>
     time_line<Traits>::time_line(time_line&& another)
-    : base_type(another.get_selection()), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                                std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>
@@ -198,24 +200,25 @@ namespace bobura { namespace view { namespace diagram {
             const position_unit_type&  header_bottom,
             const dimension_unit_type& time_header_height,
             const scale_type&          horizontal_scale)
-        : m_p_font(&*model.timetable().font_color_set().general().diagram_font()),
-          m_p_color(&*model.timetable().font_color_set().general().diagram_color()),
-          m_p_background_color(&*model.timetable().font_color_set().background().diagram_color()),
-          m_time_lines(make_time_lines(
-              time_offset,
-              selection,
-              canvas_dimension,
-              timetable_dimension,
-              scroll_bar_position,
-              station_header_right,
-              header_bottom,
-              time_header_height,
-              horizontal_scale))
+        : m_p_font{ &*model.timetable().font_color_set().general().diagram_font() },
+          m_p_color{ &*model.timetable().font_color_set().general().diagram_color() },
+          m_p_background_color{ &*model.timetable().font_color_set().background().diagram_color() }, m_time_lines{
+              make_time_lines(
+                  time_offset,
+                  selection,
+                  canvas_dimension,
+                  timetable_dimension,
+                  scroll_bar_position,
+                  station_header_right,
+                  header_bottom,
+                  time_header_height,
+                  horizontal_scale)
+          }
         {}
 
         impl(impl&& another)
-        : m_p_font(another.m_p_font), m_p_color(another.m_p_color), m_p_background_color(another.m_p_background_color),
-          m_time_lines(std::move(another.m_time_lines))
+        : m_p_font{ another.m_p_font }, m_p_color{ another.m_p_color },
+          m_p_background_color{ another.m_p_background_color }, m_time_lines{ std::move(another.m_time_lines) }
         {}
 
 
@@ -394,22 +397,23 @@ namespace bobura { namespace view { namespace diagram {
         const position_unit_type&  header_bottom,
         const dimension_unit_type& time_header_height,
         const scale_type&          horizontal_scale)
-    : base_type(selection), m_p_impl(tetengo2::stdalt::make_unique<impl>(
-                                model,
-                                time_offset,
-                                selection,
-                                canvas_dimension,
-                                timetable_dimension,
-                                scroll_bar_position,
-                                station_header_right,
-                                header_bottom,
-                                time_header_height,
-                                horizontal_scale))
+    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                  model,
+                                  time_offset,
+                                  selection,
+                                  canvas_dimension,
+                                  timetable_dimension,
+                                  scroll_bar_position,
+                                  station_header_right,
+                                  header_bottom,
+                                  time_header_height,
+                                  horizontal_scale) }
     {}
 
     template <typename Traits>
     time_line_list<Traits>::time_line_list(time_line_list&& another)
-    : base_type(another.get_selection()), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                                std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>

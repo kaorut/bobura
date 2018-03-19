@@ -48,7 +48,7 @@ namespace bobura { namespace model { namespace serializer {
         // constructors and destructor
 
         impl(std::vector<std::unique_ptr<base_type>> p_writers, boost::filesystem::path path)
-        : m_p_writers(std::move(p_writers)), m_path(std::move(path))
+        : m_p_writers{ std::move(p_writers) }, m_path{ std::move(path) }
         {
             if (m_p_writers.empty())
                 BOOST_THROW_EXCEPTION(std::invalid_argument("No writer is specified."));
@@ -109,7 +109,7 @@ namespace bobura { namespace model { namespace serializer {
     writer_selector<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::writer_selector(
         std::vector<std::unique_ptr<base_type>> p_writers,
         boost::filesystem::path                 path)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(p_writers), std::move(path)))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(p_writers), std::move(path)) }
     {}
 
     template <

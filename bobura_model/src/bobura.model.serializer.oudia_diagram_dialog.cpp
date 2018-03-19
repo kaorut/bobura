@@ -46,8 +46,8 @@ namespace bobura { namespace model { namespace serializer {
         // constructors and destructor
 
         impl(base_type& base, const message_catalog_type& message_catalog)
-        : m_base(base), m_message_catalog(message_catalog), m_file_name(), m_names(), m_selected_index(),
-          m_p_file_name_label(), m_p_prompt_label(), m_p_diagram_list_box(), m_p_ok_button(), m_p_cancel_button()
+        : m_base{ base }, m_message_catalog{ message_catalog }, m_file_name{}, m_names{}, m_selected_index{},
+          m_p_file_name_label{}, m_p_prompt_label{}, m_p_diagram_list_box{}, m_p_ok_button{}, m_p_cancel_button{}
         {
             initialize_dialog();
         }
@@ -254,7 +254,7 @@ namespace bobura { namespace model { namespace serializer {
     oudia_diagram_dialog<Traits, Size>::oudia_diagram_dialog(
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog)
-    : base_type(parent), m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, message_catalog))
+    : base_type{ parent }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(*this, message_catalog) }
     {}
 
     template <typename Traits, typename Size>

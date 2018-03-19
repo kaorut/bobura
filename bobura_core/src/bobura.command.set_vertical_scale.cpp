@@ -53,7 +53,9 @@ namespace bobura { namespace command {
 
         // constructors and destructor
 
-        impl(diagram_view_type& diagram_view, const scale_type& scale) : m_diagram_view(diagram_view), m_scale(scale) {}
+        impl(diagram_view_type& diagram_view, const scale_type& scale)
+        : m_diagram_view{ diagram_view }, m_scale{ scale }
+        {}
 
 
         // functions
@@ -101,7 +103,7 @@ namespace bobura { namespace command {
     set_vertical_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::set_vertical_scale(
         diagram_view_type& diagram_view,
         const scale_type&  scale)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(diagram_view, scale))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(diagram_view, scale) }
     {}
 
     template <

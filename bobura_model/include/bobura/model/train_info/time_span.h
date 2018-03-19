@@ -47,7 +47,7 @@ namespace bobura { namespace model { namespace train_info {
                 const difference_type hours,
                 const difference_type minutes,
                 const difference_type seconds)
-            : m_hours(hours), m_minutes(minutes), m_seconds(seconds)
+            : m_hours{ hours }, m_minutes{ minutes }, m_seconds{ seconds }
             {}
 
             /*!
@@ -127,7 +127,7 @@ namespace bobura { namespace model { namespace train_info {
 
             \param seconds A second span.
         */
-        explicit time_span(const difference_type seconds) : m_seconds(seconds) {}
+        explicit time_span(const difference_type seconds) : m_seconds{ seconds } {}
 
         /*!
             \brief Creates a time span.
@@ -143,7 +143,7 @@ namespace bobura { namespace model { namespace train_info {
             \throw std::invalid_argument When the signs of the hours and the minutes and the seconds are different.
         */
         time_span(const difference_type hours, const difference_type minutes, const difference_type seconds)
-        : m_seconds(calculate_seconds(hours, minutes, seconds))
+        : m_seconds{ calculate_seconds(hours, minutes, seconds) }
         {}
 
 

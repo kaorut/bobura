@@ -49,7 +49,7 @@ namespace bobura { namespace model { namespace serializer {
 
         // constructors and destructor
 
-        explicit impl(std::vector<std::unique_ptr<base_type>> p_readers) : m_p_readers(std::move(p_readers))
+        explicit impl(std::vector<std::unique_ptr<base_type>> p_readers) : m_p_readers{ std::move(p_readers) }
         {
             if (m_p_readers.empty())
                 BOOST_THROW_EXCEPTION(std::invalid_argument("No reader is specified."));
@@ -104,7 +104,7 @@ namespace bobura { namespace model { namespace serializer {
         typename Font>
     reader_selector<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::reader_selector(
         std::vector<std::unique_ptr<base_type>> p_readers)
-    : base_type(), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(p_readers)))
+    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(p_readers)) }
     {}
 
     template <

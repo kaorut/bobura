@@ -47,7 +47,7 @@ namespace {
     class concrete_item : public item_type
     {
     public:
-        explicit concrete_item(selection_type& selection) : item_type(selection), m_selected(false) {}
+        explicit concrete_item(selection_type& selection) : item_type{ selection }, m_selected{ false } {}
 
         concrete_item& operator=(concrete_item&& item)
         {

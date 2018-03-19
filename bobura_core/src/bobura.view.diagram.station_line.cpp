@@ -57,14 +57,15 @@ namespace bobura { namespace view { namespace diagram {
             const position_unit_type& station_header_right,
             position_unit_type        top,
             const font_color_type&    font_color)
-        : m_p_station_location(&station_location), m_right(right), m_station_header_right(station_header_right),
-          m_top(std::move(top)), m_p_font_color(&font_color)
+        : m_p_station_location{ &station_location }, m_right{ right },
+          m_station_header_right{ station_header_right }, m_top{ std::move(top) }, m_p_font_color{ &font_color }
         {}
 
         impl(impl&& another)
-        : m_p_station_location(another.m_p_station_location), m_right(std::move(another.m_right)),
-          m_station_header_right(another.m_station_header_right), m_top(std::move(another.m_top)),
-          m_p_font_color(another.m_p_font_color)
+        : m_p_station_location{ another.m_p_station_location }, m_right{ std::move(another.m_right) },
+          m_station_header_right{ another.m_station_header_right }, m_top{ std::move(another.m_top) }, m_p_font_color{
+              another.m_p_font_color
+          }
         {}
 
 
@@ -157,18 +158,19 @@ namespace bobura { namespace view { namespace diagram {
         const position_unit_type&    station_header_right,
         position_unit_type           top,
         const font_color_type&       font_color)
-    : base_type(selection), m_p_impl(tetengo2::stdalt::make_unique<impl>(
-                                station_location,
-                                selection,
-                                right,
-                                station_header_right,
-                                std::move(top),
-                                font_color))
+    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                  station_location,
+                                  selection,
+                                  right,
+                                  station_header_right,
+                                  std::move(top),
+                                  font_color) }
     {}
 
     template <typename Traits>
     station_line<Traits>::station_line(station_line&& another)
-    : base_type(another.get_selection()), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                                std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>
@@ -255,7 +257,7 @@ namespace bobura { namespace view { namespace diagram {
             const dimension_unit_type&             time_header_height,
             const scale_type&                      horizontal_scale,
             const std::vector<position_unit_type>& station_positions)
-        : m_station_lines(make_station_lines(
+        : m_station_lines{ make_station_lines(
               model,
               time_offset,
               selection,
@@ -265,10 +267,10 @@ namespace bobura { namespace view { namespace diagram {
               header_bottom,
               time_header_height,
               horizontal_scale,
-              station_positions))
+              station_positions) }
         {}
 
-        impl(impl&& another) : m_station_lines(std::move(another.m_station_lines)) {}
+        impl(impl&& another) : m_station_lines{ std::move(another.m_station_lines) } {}
 
 
         // functions
@@ -402,22 +404,23 @@ namespace bobura { namespace view { namespace diagram {
         const dimension_unit_type&             time_header_height,
         const scale_type&                      horizontal_scale,
         const std::vector<position_unit_type>& station_positions)
-    : base_type(selection), m_p_impl(tetengo2::stdalt::make_unique<impl>(
-                                model,
-                                time_offset,
-                                selection,
-                                canvas_dimension,
-                                scroll_bar_position,
-                                station_header_right,
-                                header_bottom,
-                                time_header_height,
-                                horizontal_scale,
-                                station_positions))
+    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                  model,
+                                  time_offset,
+                                  selection,
+                                  canvas_dimension,
+                                  scroll_bar_position,
+                                  station_header_right,
+                                  header_bottom,
+                                  time_header_height,
+                                  horizontal_scale,
+                                  station_positions) }
     {}
 
     template <typename Traits>
     station_line_list<Traits>::station_line_list(station_line_list&& another)
-    : base_type(another.get_selection()), m_p_impl(tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)))
+    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+                                                std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>

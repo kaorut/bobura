@@ -33,7 +33,7 @@ namespace bobura { namespace message { namespace file_property_dialog {
 
             \param dialog A dialog.
         */
-        explicit ok_button_mouse_clicked(dialog_type& dialog) : m_dialog(dialog) {}
+        explicit ok_button_mouse_clicked(dialog_type& dialog) : m_dialog{ dialog } {}
 
 
         // functions
@@ -76,7 +76,7 @@ namespace bobura { namespace message { namespace file_property_dialog {
 
             \param dialog A dialog.
         */
-        explicit cancel_button_mouse_clicked(dialog_type& dialog) : m_dialog(dialog) {}
+        explicit cancel_button_mouse_clicked(dialog_type& dialog) : m_dialog{ dialog } {}
 
 
         // functions

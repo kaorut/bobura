@@ -56,7 +56,9 @@ namespace bobura { namespace load_save {
             const bool                    ask_file_path,
             const confirm_file_save_type& confirm_file_save,
             const message_catalog_type&   message_catalog)
-        : m_ask_file_path(ask_file_path), m_confirm_file_save(confirm_file_save), m_message_catalog(message_catalog)
+        : m_ask_file_path{ ask_file_path }, m_confirm_file_save{ confirm_file_save }, m_message_catalog{
+              message_catalog
+          }
         {}
 
 
@@ -287,7 +289,7 @@ namespace bobura { namespace load_save {
         const bool                    ask_file_path,
         const confirm_file_save_type& confirm_file_save,
         const message_catalog_type&   message_catalog)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(ask_file_path, confirm_file_save, message_catalog))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(ask_file_path, confirm_file_save, message_catalog) }
     {}
 
     template <typename Traits>

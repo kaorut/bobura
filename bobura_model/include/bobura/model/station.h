@@ -50,8 +50,8 @@ namespace bobura { namespace model {
             const bool        shows_down_arrival_times,
             const bool        shows_up_arrival_times,
             string_type       note)
-        : m_name(std::move(name)), m_p_grade(&grade), m_shows_down_arrival_times(shows_down_arrival_times),
-          m_shows_up_arrival_times(shows_up_arrival_times), m_note(std::move(note))
+        : m_name{ std::move(name) }, m_p_grade{ &grade }, m_shows_down_arrival_times{ shows_down_arrival_times },
+          m_shows_up_arrival_times{ shows_up_arrival_times }, m_note{ std::move(note) }
         {}
 
 

@@ -34,7 +34,7 @@ namespace bobura { namespace load_save {
 
         // constructors and destructor
 
-        explicit impl(const confirm_file_save_type& confirm_file_save) : m_confirm_file_save(confirm_file_save) {}
+        explicit impl(const confirm_file_save_type& confirm_file_save) : m_confirm_file_save{ confirm_file_save } {}
 
 
         // functions
@@ -62,7 +62,7 @@ namespace bobura { namespace load_save {
 
     template <typename Traits>
     new_file<Traits>::new_file(const confirm_file_save_type& confirm_file_save)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(confirm_file_save))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(confirm_file_save) }
     {}
 
     template <typename Traits>

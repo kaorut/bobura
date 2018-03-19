@@ -61,7 +61,7 @@ namespace bobura {
             settings_type&              settings,
             const message_catalog_type& message_catalog,
             const detail_impl_set_type& detail_impl_set)
-        : m_settings(settings), m_message_catalog(message_catalog), m_p_map_box()
+        : m_settings{ settings }, m_message_catalog{ message_catalog }, m_p_map_box{}
         {
             initialize_property_bar(self, detail_impl_set);
         }
@@ -165,8 +165,9 @@ namespace bobura {
         settings_type&              settings,
         const message_catalog_type& message_catalog,
         const detail_impl_set_type& detail_impl_set)
-    : base_type(parent, detail_impl_set.cursor_()),
-      m_p_impl(tetengo2::stdalt::make_unique<impl>(*this, parent, settings, message_catalog, detail_impl_set))
+    : base_type{ parent, detail_impl_set.cursor_() }, m_p_impl{
+          tetengo2::stdalt::make_unique<impl>(*this, parent, settings, message_catalog, detail_impl_set)
+      }
     {}
 
     template <

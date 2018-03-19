@@ -59,7 +59,7 @@ namespace bobura {
         // constructors and destructor
 
         impl(const std::vector<string_type>& command_line_arguments, string_type config_group_name)
-        : m_base_path(), m_input(), m_p_config()
+        : m_base_path{}, m_input{}, m_p_config{}
         {
             initialize(command_line_arguments, std::move(config_group_name));
         }
@@ -378,7 +378,7 @@ namespace bobura {
     settings<String, Position, Dimension>::settings(
         const std::vector<string_type>& command_line_arguments,
         string_type                     config_group_name)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(command_line_arguments, std::move(config_group_name)))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(command_line_arguments, std::move(config_group_name)) }
     {}
 
     template <typename String, typename Position, typename Dimension>

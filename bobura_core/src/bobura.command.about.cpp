@@ -43,7 +43,7 @@ namespace bobura { namespace command {
             const message_catalog_type& message_catalog,
             const settings_type&        settings,
             const detail_impl_set_type& detail_impl_set)
-        : m_message_catalog(message_catalog), m_settings(settings), m_detail_impl_set(detail_impl_set)
+        : m_message_catalog{ message_catalog }, m_settings{ settings }, m_detail_impl_set{ detail_impl_set }
         {}
 
 
@@ -78,7 +78,7 @@ namespace bobura { namespace command {
         const message_catalog_type& message_catalog,
         const settings_type&        settings,
         const detail_impl_set_type& detail_impl_set)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(message_catalog, settings, detail_impl_set))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(message_catalog, settings, detail_impl_set) }
     {}
 
     template <typename Traits, typename Position, typename Dimension, typename MessageCatalog, typename DialogTraits>

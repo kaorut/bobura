@@ -44,7 +44,7 @@ namespace bobura { namespace command {
 
         // constructors and destructor
 
-        explicit impl(diagram_view_type& diagram_view) : m_diagram_view(diagram_view) {}
+        explicit impl(diagram_view_type& diagram_view) : m_diagram_view{ diagram_view } {}
 
 
         // functions
@@ -79,7 +79,7 @@ namespace bobura { namespace command {
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename DiagramViewTraits>
     horizontally_zoom_in<Traits, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::horizontally_zoom_in(
         diagram_view_type& diagram_view)
-    : m_p_impl(tetengo2::stdalt::make_unique<impl>(diagram_view))
+    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(diagram_view) }
     {}
 
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename DiagramViewTraits>
