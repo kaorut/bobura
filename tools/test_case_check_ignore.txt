@@ -1,3 +1,4 @@
+::wWinMain
 bobura::command::load_from_file::parameter_type::
 bobura::command::[a-zA-Z0-9_]+::enabled_impl
 bobura::command::[a-zA-Z0-9_]+::execute_impl
@@ -25,7 +26,6 @@ bobura::view::diagram::[a-zA-Z0-9_]+::selected_impl
 bobura::view::diagram::[a-zA-Z0-9_]+::select_impl
 bobura::view::timetable::[a-zA-Z0-9_]+::draw_on_impl
 setup::encode
-
 test_bobura::model::serializer::reader_selector::selects
 test_bobura::model::serializer::reader_selector::read
 test_bobura::model::serializer::writer_selector::extension

@@ -72,7 +72,7 @@ namespace {
     class concrete_reader : public reader_type
     {
     public:
-        concrete_reader(string_type line_name) : reader_type(), m_line_name(std::move(line_name)) {}
+        concrete_reader(string_type line_name) : reader_type{}, m_line_name{ std::move(line_name) } {}
 
         virtual ~concrete_reader() = default;
 
