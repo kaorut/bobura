@@ -187,7 +187,7 @@ namespace bobura { namespace model { namespace serializer {
         class station_state : public state
         {
         public:
-            explicit station_state(timetable_type& timetable) : m_timetable{ timetable }, m_operating_distance() {}
+            explicit station_state(timetable_type& timetable) : m_timetable{ timetable }, m_operating_distance{} {}
 
             virtual ~station_state() = default;
 

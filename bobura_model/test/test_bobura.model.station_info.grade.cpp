@@ -41,7 +41,7 @@ namespace {
     class concrete_grade : public grade_type
     {
     public:
-        concrete_grade() : grade_type(), m_name(TETENGO2_TEXT("hoge")) {}
+        concrete_grade() : grade_type{}, m_name{ TETENGO2_TEXT("hoge") } {}
 
         virtual ~concrete_grade() = default;
 

@@ -70,7 +70,7 @@ namespace {
     public:
         using output_string_type = std::basic_string<output_stream_type::char_type>;
 
-        explicit concrete_writer(boost::filesystem::path extension) : writer_type(), m_extension(std::move(extension))
+        explicit concrete_writer(boost::filesystem::path extension) : writer_type{}, m_extension{ std::move(extension) }
         {}
 
         virtual ~concrete_writer() = default;
