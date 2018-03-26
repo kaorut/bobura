@@ -15,7 +15,7 @@
 #include <bobura/load_save/new_file.h>
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     /*!
         \brief The class template for a new-file command.
 
@@ -77,9 +77,7 @@ namespace bobura { namespace command {
 
         virtual void execute_impl(model_type& model, abstract_window_type& parent) const override;
     };
-
-
-}}
+}
 
 
 #endif

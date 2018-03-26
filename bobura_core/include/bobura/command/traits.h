@@ -10,7 +10,7 @@
 #define BOBURA_COMMAND_TRAITS_H
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     /*!
         \brief The class template for the command traits.
 
@@ -61,9 +61,7 @@ namespace bobura { namespace command {
         //! The mouse capture type.
         using mouse_capture_type = MouseCapture;
     };
-
-
-}}
+}
 
 
 #endif

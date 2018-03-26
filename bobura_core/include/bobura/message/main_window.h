@@ -21,12 +21,12 @@
 
 #include <bobura/command/command_base.h> // IWYU pragma: keep
 
-namespace boost { namespace filesystem {
+namespace boost::filesystem {
     class path;
-}}
+}
 
 
-namespace bobura { namespace message { namespace main_window {
+namespace bobura::message::main_window {
     /*!
         \brief The class template for a popup menu selection observer of the main window.
 
@@ -484,9 +484,7 @@ namespace bobura { namespace message { namespace main_window {
 
         const save_settings_type m_save_settings;
     };
-
-
-}}}
+}
 
 
 #endif

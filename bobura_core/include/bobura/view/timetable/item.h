@@ -14,7 +14,7 @@
 #include <boost/core/noncopyable.hpp>
 
 
-namespace bobura { namespace view { namespace timetable {
+namespace bobura::view::timetable {
     /*!
        \brief The class template for the timetable view item.
 
@@ -132,9 +132,7 @@ namespace bobura { namespace view { namespace timetable {
 
         virtual void draw_on_impl(canvas_type& canvas) const;
     };
-
-
-}}}
+}
 
 
 #endif

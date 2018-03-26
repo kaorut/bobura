@@ -19,12 +19,12 @@
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 
-namespace bobura { namespace command {
+namespace bobura::command {
     class parameter_base;
-}}
+}
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     template <typename Traits, typename LoadSaveTraits>
     class load_from_file<Traits, LoadSaveTraits>::impl
     {
@@ -141,6 +141,4 @@ namespace bobura { namespace command {
     template class load_from_file<
         typename test::traits_type_list_type::command_type,
         typename test::traits_type_list_type::load_save_type>;
-
-
-}}
+}

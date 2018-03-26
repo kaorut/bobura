@@ -10,7 +10,7 @@
 #define BOBURA_COMMAND_SETTRAITS_H
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     /*!
         \brief The class template for the command set traits.
 
@@ -111,9 +111,7 @@ namespace bobura { namespace command {
         //! The dialog traits type.
         using dialog_traits_type = DialogTraits;
     };
-
-
-}}
+}
 
 
 #endif

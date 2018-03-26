@@ -10,7 +10,7 @@
 #define BOBURA_VIEW_DIAGRAM_TRAITS_H
 
 
-namespace bobura { namespace view { namespace diagram {
+namespace bobura::view::diagram {
     /*!
        \brief The class template for the diagram view traits.
 
@@ -66,9 +66,7 @@ namespace bobura { namespace view { namespace diagram {
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
     };
-
-
-}}}
+}
 
 
 #endif

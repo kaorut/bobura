@@ -16,7 +16,7 @@
 #include <bobura/model/serializer/writer.h>
 
 
-namespace bobura { namespace model { namespace serializer {
+namespace bobura::model::serializer {
     /*!
         \brief The class template for a JSON writer.
 
@@ -111,9 +111,7 @@ namespace bobura { namespace model { namespace serializer {
 
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream) override;
     };
-
-
-}}}
+}
 
 
 #endif

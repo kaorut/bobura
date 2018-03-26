@@ -17,7 +17,7 @@
 #include <bobura/view/diagram/selection.h>
 
 
-namespace bobura { namespace view { namespace diagram {
+namespace bobura::view::diagram {
     /*!
        \brief The class template for a train line fragment in the diagram view.
 
@@ -444,9 +444,7 @@ namespace bobura { namespace view { namespace diagram {
 
         virtual base_type* p_item_by_position_impl(const position_type& position) override;
     };
-
-
-}}}
+}
 
 
 #endif

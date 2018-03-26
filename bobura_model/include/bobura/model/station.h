@@ -14,7 +14,7 @@
 #include <bobura/model/station_info/grade.h>
 
 
-namespace bobura { namespace model {
+namespace bobura::model {
     /*!
         \brief The class template for a station.
 
@@ -139,9 +139,7 @@ namespace bobura { namespace model {
 
         string_type m_note;
     };
-
-
-}}
+}
 
 
 #endif

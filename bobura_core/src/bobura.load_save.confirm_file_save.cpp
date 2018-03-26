@@ -19,7 +19,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace load_save {
+namespace bobura::load_save {
     template <typename Traits>
     class confirm_file_save<Traits>::impl : private boost::noncopyable
     {
@@ -143,6 +143,4 @@ namespace bobura { namespace load_save {
 #endif
 
     template class confirm_file_save<test::traits_type_list_type::load_save_type>;
-
-
-}}
+}

@@ -21,7 +21,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace model { namespace serializer {
+namespace bobura::model::serializer {
     template <
         typename Size,
         typename Difference,
@@ -251,6 +251,4 @@ namespace bobura { namespace model { namespace serializer {
         typename test::ui_type_list_type::timer_type,
         typename test::ui_type_list_type::system_color_set_type,
         typename test::locale_type_list_type::message_catalog_type>;
-
-
-}}}
+}

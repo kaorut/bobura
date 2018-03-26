@@ -22,7 +22,7 @@
 #include <bobura/diagram_view.h>
 
 
-namespace bobura { namespace message { namespace view_picture_box { namespace diagram {
+namespace bobura::message::view_picture_box::diagram {
     /*!
         \brief The class template for a mouse pressed observer of the picture box.
 
@@ -758,9 +758,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace di
 
         view_type& m_view;
     };
-
-
-}}}}
+}
 
 
 #endif

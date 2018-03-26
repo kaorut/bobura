@@ -23,7 +23,7 @@
 #include <bobura/view/timetable/utility.h>
 
 
-namespace bobura { namespace view { namespace timetable {
+namespace bobura::view::timetable {
     template <typename Traits>
     class company_name_header<Traits>::impl : private boost::noncopyable
     {
@@ -701,6 +701,4 @@ namespace bobura { namespace view { namespace timetable {
     template class note_header<typename test::traits_type_list_type::timetable_view_type>;
 
     template class header<typename test::traits_type_list_type::timetable_view_type>;
-
-
-}}}
+}

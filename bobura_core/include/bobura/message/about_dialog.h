@@ -10,7 +10,7 @@
 #define BOBURA_MESSAGE_ABOUTDIALOG_H
 
 
-namespace bobura { namespace message { namespace about_dialog {
+namespace bobura::message::about_dialog {
     /*!
        \brief The class template for a mouse click observer of the OK button.
 
@@ -53,9 +53,7 @@ namespace bobura { namespace message { namespace about_dialog {
 
         dialog_type& m_dialog;
     };
-
-
-}}}
+}
 
 
 #endif

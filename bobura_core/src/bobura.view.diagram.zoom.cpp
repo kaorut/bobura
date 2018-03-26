@@ -20,7 +20,7 @@
 #include <bobura/view_picture_box.h>
 
 
-namespace bobura { namespace view { namespace diagram {
+namespace bobura::view::diagram {
     template <typename Traits, typename PictureBox, typename MouseCapture>
     class zoom<Traits, PictureBox, MouseCapture>::impl : private boost::noncopyable
     {
@@ -226,6 +226,4 @@ namespace bobura { namespace view { namespace diagram {
         typename test::traits_type_list_type::diagram_view_type,
         typename test::ui_type_list_type::picture_box_type,
         typename test::ui_type_list_type::mouse_capture_type>;
-
-
-}}}
+}

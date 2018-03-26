@@ -26,7 +26,7 @@
 #include <bobura/view/utility.h>
 
 
-namespace bobura { namespace view { namespace diagram {
+namespace bobura::view::diagram {
     template <typename Traits>
     class station_line<Traits>::impl : private boost::noncopyable
     {
@@ -478,6 +478,4 @@ namespace bobura { namespace view { namespace diagram {
     template class station_line<typename test::traits_type_list_type::diagram_view_type>;
 
     template class station_line_list<typename test::traits_type_list_type::diagram_view_type>;
-
-
-}}}
+}

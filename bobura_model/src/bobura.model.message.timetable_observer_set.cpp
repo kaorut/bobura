@@ -15,7 +15,7 @@
 #include <bobura/model/message/timetable_observer_set.h>
 
 
-namespace bobura { namespace model { namespace message {
+namespace bobura::model::message {
     class timetable_observer_set::impl : private boost::noncopyable
     {
     public:
@@ -59,6 +59,4 @@ namespace bobura { namespace model { namespace message {
     {
         return m_p_impl->changed();
     }
-
-
-}}}
+}

@@ -24,7 +24,7 @@
 #include <bobura/view/scale_list.h>
 
 
-namespace bobura { namespace view {
+namespace bobura::view {
     template <typename Size, typename String, typename Scale>
     class scale_list<Size, String, Scale>::impl : private boost::noncopyable
     {
@@ -186,6 +186,4 @@ namespace bobura { namespace view {
         typename common_type_list_type::size_type,
         typename common_type_list_type::string_type,
         typename common_type_list_type::scale_type>;
-
-
-}}
+}

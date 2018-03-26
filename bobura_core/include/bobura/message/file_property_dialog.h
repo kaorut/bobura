@@ -10,7 +10,7 @@
 #define BOBURA_MESSAGE_FILEPROPERTYDIALOG_H
 
 
-namespace bobura { namespace message { namespace file_property_dialog {
+namespace bobura::message::file_property_dialog {
     /*!
        \brief The class template for a mouse click observer of the OK button.
 
@@ -96,9 +96,7 @@ namespace bobura { namespace message { namespace file_property_dialog {
 
         dialog_type& m_dialog;
     };
-
-
-}}}
+}
 
 
 #endif

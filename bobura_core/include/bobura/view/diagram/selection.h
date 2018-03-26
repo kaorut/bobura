@@ -23,7 +23,7 @@ namespace boost {
 }
 
 
-namespace bobura { namespace view { namespace diagram {
+namespace bobura::view::diagram {
     /*!
        \brief The class template for the diagram view selection.
 
@@ -151,9 +151,7 @@ namespace bobura { namespace view { namespace diagram {
 
         const std::unique_ptr<impl> m_p_impl;
     };
-
-
-}}}
+}
 
 
 #endif

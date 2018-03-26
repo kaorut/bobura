@@ -12,7 +12,7 @@
 #include <boost/core/ignore_unused.hpp>
 
 
-namespace bobura { namespace message { namespace property_bar {
+namespace bobura::message::property_bar {
     /*!
         \brief The class template for a resized observer of the property bar.
 
@@ -135,9 +135,7 @@ namespace bobura { namespace message { namespace property_bar {
 
         map_box_type& m_map_box;
     };
-
-
-}}}
+}
 
 
 #endif

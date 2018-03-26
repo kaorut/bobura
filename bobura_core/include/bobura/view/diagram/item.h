@@ -16,7 +16,7 @@
 #include <bobura/view/diagram/selection.h>
 
 
-namespace bobura { namespace view { namespace diagram {
+namespace bobura::view::diagram {
     /*!
        \brief The class template for the diagram view item.
 
@@ -148,9 +148,7 @@ namespace bobura { namespace view { namespace diagram {
 
         virtual void select_impl(bool switch_selection_style);
     };
-
-
-}}}
+}
 
 
 #endif

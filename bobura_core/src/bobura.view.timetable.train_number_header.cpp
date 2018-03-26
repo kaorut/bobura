@@ -22,7 +22,7 @@
 #include <bobura/view/timetable/utility.h>
 
 
-namespace bobura { namespace view { namespace timetable {
+namespace bobura::view::timetable {
     template <typename Traits>
     class operating_distance_header<Traits>::impl : private boost::noncopyable
     {
@@ -760,6 +760,4 @@ namespace bobura { namespace view { namespace timetable {
     template class train_name_description_header<typename test::traits_type_list_type::timetable_view_type>;
 
     template class train_number_header<typename test::traits_type_list_type::timetable_view_type>;
-
-
-}}}
+}

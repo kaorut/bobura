@@ -10,7 +10,7 @@
 #define BOBURA_LOADSAVE_TRAITS_H
 
 
-namespace bobura { namespace load_save {
+namespace bobura::load_save {
     /*!
         \brief The class template for the loading and saving processing traits.
 
@@ -116,9 +116,7 @@ namespace bobura { namespace load_save {
         //! The WinDIA file encoder type.
         using windia_file_encoder_type = WinDiaFileEncoder;
     };
-
-
-}}
+}
 
 
 #endif

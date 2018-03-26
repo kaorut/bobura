@@ -23,7 +23,7 @@ namespace boost {
 }
 
 
-namespace bobura { namespace message {
+namespace bobura::message {
     /*!
         \brief The class template for a diagram selection observer set.
 
@@ -155,9 +155,7 @@ namespace bobura { namespace message {
 
         const std::unique_ptr<impl> m_p_impl;
     };
-
-
-}}
+}
 
 
 #endif

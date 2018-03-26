@@ -15,7 +15,7 @@
 #include <boost/core/noncopyable.hpp>
 
 
-namespace bobura { namespace model { namespace serializer {
+namespace bobura::model::serializer {
     /*!
         \brief The class template for an OuDia diagram selecting.
 
@@ -144,9 +144,7 @@ namespace bobura { namespace model { namespace serializer {
 
         const std::unique_ptr<impl> m_p_impl;
     };
-
-
-}}}
+}
 
 
 #endif

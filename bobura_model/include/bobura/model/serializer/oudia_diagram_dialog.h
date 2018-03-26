@@ -18,7 +18,7 @@ namespace boost {
 }
 
 
-namespace bobura { namespace model { namespace serializer {
+namespace bobura::model::serializer {
     /*!
         \brief The class template for the OuDia diagram dialog.
 
@@ -128,9 +128,7 @@ namespace bobura { namespace model { namespace serializer {
 
         virtual void set_result_impl() override;
     };
-
-
-}}}
+}
 
 
 #endif

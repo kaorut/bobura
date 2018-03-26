@@ -25,7 +25,7 @@
 #include <tetengo2/text.h>
 
 
-namespace bobura { namespace message { namespace train_kind_dialog {
+namespace bobura::message::train_kind_dialog {
     /*!
         \brief The class template for a selection change observer of the train kind list box.
 
@@ -1206,9 +1206,7 @@ namespace bobura { namespace message { namespace train_kind_dialog {
 
         dialog_type& m_dialog;
     };
-
-
-}}}
+}
 
 
 #endif

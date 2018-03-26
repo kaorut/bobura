@@ -14,7 +14,7 @@
 #include <bobura/model/station.h>
 
 
-namespace bobura { namespace model { namespace timetable_info {
+namespace bobura::model::timetable_info {
     /*!
         \brief The class template for a station location.
 
@@ -107,9 +107,7 @@ namespace bobura { namespace model { namespace timetable_info {
 
         operating_distance_type m_operating_distance;
     };
-
-
-}}}
+}
 
 
 #endif

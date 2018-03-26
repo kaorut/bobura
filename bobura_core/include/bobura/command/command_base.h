@@ -14,7 +14,7 @@
 #include <bobura/timetable_model.h>
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     /*!
         \brief The command parameter base type.
     */
@@ -176,9 +176,7 @@ namespace bobura { namespace command {
         virtual void
         execute_impl(model_type& model, abstract_window_type& parent, const parameter_base& parameter) const;
     };
-
-
-}}
+}
 
 
 #endif

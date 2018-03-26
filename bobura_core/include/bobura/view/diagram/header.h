@@ -16,7 +16,7 @@
 #include <bobura/view/diagram/selection.h>
 
 
-namespace bobura { namespace view { namespace diagram {
+namespace bobura::view::diagram {
     /*!
         \brief The class template for a header of the company name in the diagram view.
 
@@ -428,9 +428,7 @@ namespace bobura { namespace view { namespace diagram {
 
         virtual void draw_on_impl(canvas_type& canvas) const override;
     };
-
-
-}}}
+}
 
 
 #endif

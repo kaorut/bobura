@@ -14,7 +14,7 @@
 #include <tetengo2/text.h>
 
 
-namespace bobura { namespace model { namespace station_info {
+namespace bobura::model::station_info {
     /*!
         \brief The class template for a station grade.
 
@@ -272,8 +272,6 @@ namespace bobura { namespace model { namespace station_info {
 
         grade_type_set() = delete;
     };
-
-
-}}}
+}
 
 #endif

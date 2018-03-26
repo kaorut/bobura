@@ -22,7 +22,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace model { namespace serializer {
+namespace bobura::model::serializer {
     template <typename OuDiaDiagramDialog>
     class select_oudia_diagram<OuDiaDiagramDialog>::impl : private boost::noncopyable
     {
@@ -194,6 +194,4 @@ namespace bobura { namespace model { namespace serializer {
     template class select_oudia_diagram<test::oudia_diagram_dialog_type>;
 
     template class select_oudia_diagram_for_test<typename test::common_type_list_type::string_type>;
-
-
-}}}
+}

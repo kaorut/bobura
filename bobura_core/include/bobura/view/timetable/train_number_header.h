@@ -16,7 +16,7 @@
 #include <bobura/view/timetable/utility.h>
 
 
-namespace bobura { namespace view { namespace timetable {
+namespace bobura::view::timetable {
     /*!
         \brief The class template for a header of the operating distance in the timetable view.
 
@@ -429,9 +429,7 @@ namespace bobura { namespace view { namespace timetable {
 
         virtual void draw_on_impl(canvas_type& canvas) const override;
     };
-
-
-}}}
+}
 
 
 #endif

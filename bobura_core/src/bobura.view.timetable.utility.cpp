@@ -12,7 +12,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace view { namespace timetable {
+namespace bobura::view::timetable {
     template <typename Size>
     Size normal_line_width()
     {
@@ -51,6 +51,4 @@ namespace bobura { namespace view { namespace timetable {
 #if !defined(DOCUMENTATION)
     template test::dimension_unit_type normal_line_width();
 #endif
-
-
-}}}
+}

@@ -20,7 +20,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits>
     class show_timetable_down<Traits, CommandSetTraits, MainWindowTraits>::impl : private boost::noncopyable
     {
@@ -100,6 +100,4 @@ namespace bobura { namespace command {
         typename test::traits_type_list_type::command_type,
         typename test::traits_type_list_type::command_set_type,
         typename test::traits_type_list_type::main_window_type>;
-
-
-}}
+}

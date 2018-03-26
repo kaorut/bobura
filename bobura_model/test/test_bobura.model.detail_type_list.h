@@ -12,27 +12,24 @@
 #include <tetengo2/detail/stub/drawing.h>
 
 
-namespace test_bobura { namespace model {
-    namespace type_list {
-    /**** Detail Implementation **************************************************************************************/
+namespace test_bobura::model::type_list {
+/**** Detail Implementation **************************************************************************************/
 
 #if !defined(DOCUMENTATION)
-        namespace detail { namespace detail { namespace test {
-            using drawing_details_type = tetengo2::detail::stub::drawing;
-
-        }}}
+    namespace detail::detail::test {
+        using drawing_details_type = tetengo2::detail::stub::drawing;
+    }
 #endif
 
-        /*!
-            \brief The detail type list for the testing.
-        */
-        struct detail_for_test
-        {
-            //! The drawing type.
-            using drawing_type = detail::detail::test::drawing_details_type;
-        };
-    }
-}}
+    /*!
+        \brief The detail type list for the testing.
+    */
+    struct detail_for_test
+    {
+        //! The drawing type.
+        using drawing_type = detail::detail::test::drawing_details_type;
+    };
+}
 
 
 #endif

@@ -15,7 +15,7 @@
 #include <boost/signals2.hpp>
 
 
-namespace bobura { namespace model { namespace message {
+namespace bobura::model::message {
     /*!
         \brief The class for a timetable observer set.
     */
@@ -73,9 +73,7 @@ namespace bobura { namespace model { namespace message {
 
         const std::unique_ptr<impl> m_p_impl;
     };
-
-
-}}}
+}
 
 
 #endif

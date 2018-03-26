@@ -10,7 +10,7 @@
 #define BOBURA_VIEW_TIMETABLE_UTILITY_H
 
 
-namespace bobura { namespace view { namespace timetable {
+namespace bobura::view::timetable {
     // types
 
     /*!
@@ -34,9 +34,7 @@ namespace bobura { namespace view { namespace timetable {
     */
     template <typename Size>
     Size normal_line_width();
-
-
-}}}
+}
 
 
 #endif

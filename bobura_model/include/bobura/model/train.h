@@ -17,7 +17,7 @@
 #include <bobura/model/train_info/stop.h>
 
 
-namespace bobura { namespace model {
+namespace bobura::model {
     /*!
         \brief The class template for a train.
 
@@ -369,9 +369,7 @@ namespace bobura { namespace model {
             return m_stops.end();
         }
     };
-
-
-}}
+}
 
 
 #endif

@@ -19,7 +19,7 @@
 #include <bobura/model/timetable.h>
 
 
-namespace bobura { namespace model { namespace serializer {
+namespace bobura::model::serializer {
     /*!
         \brief The class template for a JSON reading task execution.
 
@@ -143,9 +143,7 @@ namespace bobura { namespace model { namespace serializer {
 
         const std::unique_ptr<impl> m_p_impl;
     };
-
-
-}}}
+}
 
 
 #endif

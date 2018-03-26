@@ -10,7 +10,7 @@
 #define BOBURA_MESSAGE_OUDIADIAGRAMDIALOG_H
 
 
-namespace bobura { namespace model { namespace message { namespace oudia_diagram_dialog {
+namespace bobura::model::message::oudia_diagram_dialog {
     /*!
        \brief The class template for a mouse click observer of the OK button.
 
@@ -97,9 +97,7 @@ namespace bobura { namespace model { namespace message { namespace oudia_diagram
 
         dialog_type& m_dialog;
     };
-
-
-}}}}
+}
 
 
 #endif

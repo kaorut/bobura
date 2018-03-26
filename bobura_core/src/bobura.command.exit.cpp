@@ -17,7 +17,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     template <typename Traits>
     class exit<Traits>::impl : private boost::noncopyable
     {
@@ -76,6 +76,4 @@ namespace bobura { namespace command {
 #endif
 
     template class exit<typename test::traits_type_list_type::command_type>;
-
-
-}}
+}

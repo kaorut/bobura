@@ -15,7 +15,7 @@
 #include <boost/optional.hpp>
 
 
-namespace bobura { namespace view {
+namespace bobura::view {
     /*!
         \brief The class template for a view scale list.
 
@@ -121,9 +121,7 @@ namespace bobura { namespace view {
 
         const std::unique_ptr<impl> m_p_impl;
     };
-
-
-}}
+}
 
 
 #endif

@@ -41,7 +41,7 @@
 #include <bobura/view/scale_list.h>
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     template <typename Traits>
     class set<Traits>::impl : private boost::noncopyable
     {
@@ -661,6 +661,4 @@ namespace bobura { namespace command {
 #endif
 
     template class set<typename test::traits_type_list_type::command_set_type>;
-
-
-}}
+}
