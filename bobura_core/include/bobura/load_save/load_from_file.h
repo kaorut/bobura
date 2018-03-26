@@ -16,16 +16,16 @@
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/timetable_model.h>
 
-namespace boost { namespace filesystem {
+namespace boost::filesystem {
     class path;
-}}
+}
 namespace boost {
     template <typename T>
     class optional;
 }
 
 
-namespace bobura { namespace load_save {
+namespace bobura::load_save {
     /*!
         \brief The class template for a file loading.
 
@@ -128,9 +128,7 @@ namespace bobura { namespace load_save {
 
         const std::unique_ptr<impl> m_p_impl;
     };
-
-
-}}
+}
 
 
 #endif

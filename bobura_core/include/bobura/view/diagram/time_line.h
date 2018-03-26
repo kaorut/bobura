@@ -21,7 +21,7 @@ namespace boost {
 }
 
 
-namespace bobura { namespace view { namespace diagram {
+namespace bobura::view::diagram {
     /*!
        \brief The class template for a time line in the diagram view.
 
@@ -253,9 +253,7 @@ namespace bobura { namespace view { namespace diagram {
 
         virtual void draw_on_impl(canvas_type& canvas) const override;
     };
-
-
-}}}
+}
 
 
 #endif

@@ -15,7 +15,7 @@
 #include <bobura/model/station_info/grade.h>
 
 
-namespace bobura { namespace model { namespace serializer {
+namespace bobura::model::serializer {
     /*!
         \brief The class template for an OuDia reader.
 
@@ -119,9 +119,7 @@ namespace bobura { namespace model { namespace serializer {
 
         virtual std::unique_ptr<timetable_type> read_impl(iterator first, iterator last, error_type& error) override;
     };
-
-
-}}}
+}
 
 
 #endif

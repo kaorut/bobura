@@ -17,7 +17,7 @@
 #include <bobura/model/serializer/writer.h>
 
 
-namespace bobura { namespace model { namespace serializer {
+namespace bobura::model::serializer {
     /*!
         \brief The class template for a writer set.
 
@@ -99,9 +99,7 @@ namespace bobura { namespace model { namespace serializer {
 
         writer_set() = delete;
     };
-
-
-}}}
+}
 
 
 #endif

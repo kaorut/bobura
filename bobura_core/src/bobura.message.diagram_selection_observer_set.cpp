@@ -14,7 +14,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace message {
+namespace bobura::message {
     template <typename Size, typename Difference, typename String, typename OperatingDistance>
     class diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::impl : private boost::noncopyable
     {
@@ -143,6 +143,4 @@ namespace bobura { namespace message {
         typename common_type_list_type::difference_type,
         typename common_type_list_type::string_type,
         typename common_type_list_type::operating_distance_type>;
-
-
-}}
+}

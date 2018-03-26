@@ -25,7 +25,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace model { namespace serializer {
+namespace bobura::model::serializer {
     template <typename Traits, typename Size>
     class oudia_diagram_dialog<Traits, Size>::impl : private boost::noncopyable
     {
@@ -336,6 +336,4 @@ namespace bobura { namespace model { namespace serializer {
     template class oudia_diagram_dialog<
         typename test::traits_type_list_type::dialog_type,
         typename test::common_type_list_type::size_type>;
-
-
-}}}
+}

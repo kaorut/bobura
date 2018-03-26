@@ -17,7 +17,7 @@
 #include <bobura/model/serializer/reader.h>
 
 
-namespace bobura { namespace model { namespace serializer {
+namespace bobura::model::serializer {
     /*!
         \brief The class template for a reader set.
 
@@ -121,9 +121,7 @@ namespace bobura { namespace model { namespace serializer {
 
         reader_set() = delete;
     };
-
-
-}}}
+}
 
 
 #endif

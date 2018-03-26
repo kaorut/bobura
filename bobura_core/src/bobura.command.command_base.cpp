@@ -14,7 +14,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     parameter_base::~parameter_base() noexcept {}
 
     parameter_base::parameter_base() {}
@@ -94,6 +94,4 @@ namespace bobura { namespace command {
 #endif
 
     template class command_base<typename test::traits_type_list_type::command_type>;
-
-
-}}
+}

@@ -38,7 +38,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace model { namespace serializer {
+namespace bobura::model::serializer {
     template <
         typename Size,
         typename Difference,
@@ -1055,6 +1055,4 @@ namespace bobura { namespace model { namespace serializer {
         test::select_oudia_diagram_for_test_type,
         typename test::ui_type_list_type::font_type,
         typename test::locale_type_list_type::windia_file_encoder_type>;
-
-
-}}}
+}

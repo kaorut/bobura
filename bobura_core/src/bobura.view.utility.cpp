@@ -18,7 +18,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace view {
+namespace bobura::view {
     template <typename FontColorSet, typename StationGradeTypeSet>
     const typename FontColorSet::font_color_type&
     select_station_font_color(const FontColorSet& font_color_set, const typename StationGradeTypeSet::grade_type& grade)
@@ -109,6 +109,4 @@ namespace bobura { namespace view {
         const test_font_color_set_type& font_color_set,
         const test_grade_type&          grade);
 #endif
-
-
-}}
+}

@@ -11,16 +11,16 @@
 
 #include <vector>
 
-namespace bobura { namespace model { namespace train_info {
+namespace bobura::model::train_info {
     template <typename Difference>
     class time_span;
 
     template <typename Size, typename Difference>
     class time;
-}}}
+}
 
 
-namespace bobura { namespace view { namespace diagram {
+namespace bobura::view::diagram {
     /*!
         \brief Calculates a horizontal position by a time.
 
@@ -111,9 +111,7 @@ namespace bobura { namespace view { namespace diagram {
     */
     template <typename Canvas, typename Position>
     void draw_selectable_line(Canvas& canvas, const Position& from, const Position& to, bool selected);
-
-
-}}}
+}
 
 
 #endif

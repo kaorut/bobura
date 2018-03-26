@@ -15,7 +15,7 @@
 #include <bobura/model/timetable.h>
 
 
-namespace bobura { namespace model { namespace serializer {
+namespace bobura::model::serializer {
     /*!
         \brief The class template for a writer.
 
@@ -122,9 +122,7 @@ namespace bobura { namespace model { namespace serializer {
 
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream) = 0;
     };
-
-
-}}}
+}
 
 
 #endif

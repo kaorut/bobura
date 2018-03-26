@@ -17,7 +17,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace view { namespace diagram {
+namespace bobura::view::diagram {
     template <typename Size, typename Difference, typename Left>
     Left time_to_left(
         const model::train_info::time<Size, Difference>& time,
@@ -198,6 +198,4 @@ namespace bobura { namespace view { namespace diagram {
     template void
     draw_selectable_line(test::canvas_type&, const test::position_type&, const test::position_type&, bool);
 #endif
-
-
-}}}
+}

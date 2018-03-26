@@ -16,7 +16,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     template <typename Traits, typename Dialog, typename MessageCatalog, typename DialogTraits>
     class file_property<Traits, Dialog, MessageCatalog, DialogTraits>::impl
     {
@@ -131,6 +131,4 @@ namespace bobura { namespace command {
         typename test::ui_type_list_type::dialog_type,
         typename test::locale_type_list_type::message_catalog_type,
         typename test::traits_type_list_type::dialog_type>;
-
-
-}}
+}

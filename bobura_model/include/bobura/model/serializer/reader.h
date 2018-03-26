@@ -16,7 +16,7 @@
 #include <bobura/model/timetable.h>
 
 
-namespace bobura { namespace model { namespace serializer {
+namespace bobura::model::serializer {
     /*!
         \brief The class template for a reader.
 
@@ -127,9 +127,7 @@ namespace bobura { namespace model { namespace serializer {
 
         virtual std::unique_ptr<timetable_type> read_impl(iterator first, iterator last, error_type& error) = 0;
     };
-
-
-}}}
+}
 
 
 #endif

@@ -16,7 +16,7 @@
 #include <boost/throw_exception.hpp>
 
 
-namespace bobura { namespace model { namespace train_info {
+namespace bobura::model::train_info {
     /*!
         \brief The class template for a time span.
 
@@ -272,9 +272,7 @@ namespace bobura { namespace model { namespace train_info {
 
         difference_type m_seconds;
     };
-
-
-}}}
+}
 
 
 #endif

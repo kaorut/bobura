@@ -19,7 +19,7 @@
 #include <tetengo2/text.h>
 
 
-namespace bobura { namespace message { namespace font_color_dialog {
+namespace bobura::message::font_color_dialog {
     /*!
         \brief The class template for a selection change observer of the category list box.
 
@@ -798,9 +798,7 @@ namespace bobura { namespace message { namespace font_color_dialog {
 
         dialog_type& m_dialog;
     };
-
-
-}}}
+}
 
 
 #endif

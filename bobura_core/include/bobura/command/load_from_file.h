@@ -17,7 +17,7 @@
 #include <bobura/load_save/load_from_file.h>
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     /*!
         \brief The class template for a load-from-file command.
 
@@ -111,9 +111,7 @@ namespace bobura { namespace command {
         virtual void
         execute_impl(model_type& model, abstract_window_type& parent, const parameter_base& parameter) const override;
     };
-
-
-}}
+}
 
 
 #endif

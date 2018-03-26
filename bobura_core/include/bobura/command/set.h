@@ -24,7 +24,7 @@
 #include <bobura/settings.h>
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     /*!
         \brief The class template for a command set.
 
@@ -323,9 +323,7 @@ namespace bobura { namespace command {
 
         const std::unique_ptr<impl> m_p_impl;
     };
-
-
-}}
+}
 
 
 #endif

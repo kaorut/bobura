@@ -14,7 +14,7 @@
 #include <bobura/model/train_info/time.h>
 
 
-namespace bobura { namespace model { namespace train_info {
+namespace bobura::model::train_info {
     /*!
         \brief The class template for a train stop.
 
@@ -138,9 +138,7 @@ namespace bobura { namespace model { namespace train_info {
 
         string_type m_platform;
     };
-
-
-}}}
+}
 
 
 #endif

@@ -10,7 +10,7 @@
 #define BOBURA_VIEW_TIMETABLE_TRAITS_H
 
 
-namespace bobura { namespace view { namespace timetable {
+namespace bobura::view::timetable {
     /*!
        \brief The class template for the timetable view traits.
 
@@ -61,9 +61,7 @@ namespace bobura { namespace view { namespace timetable {
         //! The message catalog type.
         using message_catalog_type = MessageCatalog;
     };
-
-
-}}}
+}
 
 
 #endif

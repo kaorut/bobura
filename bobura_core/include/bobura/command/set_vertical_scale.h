@@ -15,7 +15,7 @@
 #include <bobura/diagram_view.h>
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     /*!
         \brief The class template for a set-vertical-scale command.
 
@@ -100,9 +100,7 @@ namespace bobura { namespace command {
 
         virtual void execute_impl(model_type& model, abstract_window_type& parent) const override;
     };
-
-
-}}
+}
 
 
 #endif

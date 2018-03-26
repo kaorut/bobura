@@ -21,7 +21,7 @@
 #include <bobura/model/train.h>
 
 
-namespace bobura { namespace model { namespace timetable_info {
+namespace bobura::model::timetable_info {
     /*!
         \brief The class template for a station interval calculator.
 
@@ -238,9 +238,7 @@ namespace bobura { namespace model { namespace timetable_info {
             return boost::make_optional(to_time - from_time);
         }
     };
-
-
-}}}
+}
 
 
 #endif

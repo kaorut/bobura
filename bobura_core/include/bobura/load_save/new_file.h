@@ -17,7 +17,7 @@
 #include <bobura/timetable_model.h>
 
 
-namespace bobura { namespace load_save {
+namespace bobura::load_save {
     /*!
         \brief The class template for a file initialization.
 
@@ -97,9 +97,7 @@ namespace bobura { namespace load_save {
 
         const std::unique_ptr<impl> m_p_impl;
     };
-
-
-}}
+}
 
 
 #endif

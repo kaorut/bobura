@@ -20,7 +20,7 @@
 #include <bobura/model/train_info/time_span.h>
 
 
-namespace bobura { namespace model { namespace train_info {
+namespace bobura::model::train_info {
     /*!
         \brief The class template for a time.
 
@@ -350,9 +350,7 @@ namespace bobura { namespace model { namespace train_info {
 
         size_type m_seconds_from_midnight;
     };
-
-
-}}}
+}
 
 
 #endif

@@ -20,7 +20,7 @@
 #include <bobura/view/diagram/zoom.h>
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename DiagramViewTraits>
     class horizontally_zoom_in<Traits, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::impl
     {
@@ -125,6 +125,4 @@ namespace bobura { namespace command {
         typename test::traits_type_list_type::command_set_type,
         typename test::traits_type_list_type::main_window_type,
         typename test::traits_type_list_type::diagram_view_type>;
-
-
-}}
+}

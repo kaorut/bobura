@@ -17,7 +17,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     template <typename Traits, typename Shell>
     class open_www_tetengo_org<Traits, Shell>::impl
     {
@@ -92,6 +92,4 @@ namespace bobura { namespace command {
     template class open_www_tetengo_org<
         typename test::traits_type_list_type::command_type,
         typename test::ui_type_list_type::shell_type>;
-
-
-}}
+}

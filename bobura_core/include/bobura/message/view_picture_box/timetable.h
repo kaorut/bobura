@@ -17,7 +17,7 @@
 #include <bobura/timetable_view.h>
 
 
-namespace bobura { namespace message { namespace view_picture_box { namespace timetable {
+namespace bobura::message::view_picture_box::timetable {
     /*!
         \brief The class template for a mouse pressed observer of the picture box.
 
@@ -764,9 +764,7 @@ namespace bobura { namespace message { namespace view_picture_box { namespace ti
 
         view_type& m_view;
     };
-
-
-}}}}
+}
 
 
 #endif

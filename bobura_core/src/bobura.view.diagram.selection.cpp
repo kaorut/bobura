@@ -23,7 +23,7 @@
 #include <bobura/view/diagram/selection.h>
 
 
-namespace bobura { namespace view { namespace diagram {
+namespace bobura::view::diagram {
     template <typename Traits>
     class selection<Traits>::impl : private boost::noncopyable
     {
@@ -211,6 +211,4 @@ namespace bobura { namespace view { namespace diagram {
 #endif
 
     template class selection<typename test::traits_type_list_type::diagram_view_type>;
-
-
-}}}
+}

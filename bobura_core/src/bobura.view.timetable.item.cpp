@@ -19,7 +19,7 @@
 #include <bobura/view/timetable/item.h>
 
 
-namespace bobura { namespace view { namespace timetable {
+namespace bobura::view::timetable {
     template <typename Traits>
     class item<Traits>::impl : private boost::noncopyable
     {
@@ -191,6 +191,4 @@ namespace bobura { namespace view { namespace timetable {
 #endif
 
     template class item<typename test::traits_type_list_type::timetable_view_type>;
-
-
-}}}
+}

@@ -16,7 +16,7 @@
 #include <tetengo2/gui/drawing/color.h>
 
 
-namespace bobura { namespace model {
+namespace bobura::model {
     /*!
         \brief The class template for a train kind.
 
@@ -232,9 +232,7 @@ namespace bobura { namespace model {
 
         color_type m_timetable_color;
     };
-
-
-}}
+}
 
 
 #endif

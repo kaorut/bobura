@@ -18,7 +18,7 @@
 #include <tetengo2/gui/drawing/color.h>
 
 
-namespace bobura { namespace model { namespace timetable_info {
+namespace bobura::model::timetable_info {
     /*!
         \brief The class template for a font and color.
 
@@ -398,9 +398,7 @@ namespace bobura { namespace model { namespace timetable_info {
 
         font_color_type m_principal_terminal_station;
     };
-
-
-}}}
+}
 
 
 #endif

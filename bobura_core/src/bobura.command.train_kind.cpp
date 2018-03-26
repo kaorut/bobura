@@ -22,7 +22,7 @@
 #include <bobura/type_list.h>
 
 
-namespace bobura { namespace command {
+namespace bobura::command {
     template <
         typename Traits,
         typename Dialog,
@@ -304,6 +304,4 @@ namespace bobura { namespace command {
         typename test::common_dialog_type_list_type::color_type,
         typename test::locale_type_list_type::message_catalog_type,
         typename test::traits_type_list_type::dialog_type>;
-
-
-}}
+}

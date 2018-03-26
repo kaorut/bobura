@@ -33,7 +33,7 @@ namespace boost {
 }
 
 
-namespace bobura { namespace model { namespace serializer {
+namespace bobura::model::serializer {
     template <
         typename Size,
         typename Difference,
@@ -837,6 +837,4 @@ namespace bobura { namespace model { namespace serializer {
         typename test::common_type_list_type::speed_type,
         typename test::ui_type_list_type::font_type,
         typename test::locale_type_list_type::timetable_file_encoder_type>;
-
-
-}}}
+}

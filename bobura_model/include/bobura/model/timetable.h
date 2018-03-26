@@ -27,7 +27,7 @@
 #include <bobura/model/train_kind.h>
 
 
-namespace bobura { namespace model {
+namespace bobura::model {
     /*!
         \brief The class template for a timetable.
 
@@ -768,9 +768,7 @@ namespace bobura { namespace model {
             m_observer_set.changed()();
         }
     };
-
-
-}}
+}
 
 
 #endif
