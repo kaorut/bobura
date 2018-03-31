@@ -21,7 +21,6 @@
 #include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 

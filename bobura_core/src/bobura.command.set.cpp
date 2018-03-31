@@ -13,8 +13,6 @@
 #include <boost/filesystem.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
-
 #include <bobura/command/about.h> // IWYU pragma: keep
 #include <bobura/command/command_base.h> // IWYU pragma: keep
 #include <bobura/command/exit.h> // IWYU pragma: keep

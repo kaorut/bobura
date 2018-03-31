@@ -14,8 +14,6 @@
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
-
 #include <bobura/command/train_kind.h>
 #include <bobura/detail_type_list.h>
 #include <bobura/train_kind_dialog.h>

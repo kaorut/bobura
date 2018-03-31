@@ -8,8 +8,6 @@
 
 #include <boost/core/noncopyable.hpp>
 
-#include <tetengo2/stdalt.h>
-
 #include <bobura/message/diagram_selection_observer_set.h>
 #include <bobura/type_list.h>
 

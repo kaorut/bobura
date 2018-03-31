@@ -10,8 +10,6 @@
 
 #include <boost/core/noncopyable.hpp>
 
-#include <tetengo2/stdalt.h>
-
 #include <bobura/message/timetable_model_observer_set.h>
 
 

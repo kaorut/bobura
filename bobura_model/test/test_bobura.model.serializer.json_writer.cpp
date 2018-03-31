@@ -20,7 +20,6 @@
 
 #include <tetengo2/gui/drawing/color.h>
 #include <tetengo2/gui/drawing/font.h>
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>

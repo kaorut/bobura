@@ -11,8 +11,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
-
 #include <bobura/command/font_color.h>
 #include <bobura/detail_type_list.h>
 #include <bobura/font_color_dialog.h>

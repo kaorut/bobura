@@ -22,7 +22,6 @@
 #include <boost/spirit/include/support_multi_pass.hpp>
 
 #include <tetengo2/iterator/observable_forward_iterator.h>
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>

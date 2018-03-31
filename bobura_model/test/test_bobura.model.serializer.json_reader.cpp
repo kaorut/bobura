@@ -28,7 +28,6 @@
 #include <tetengo2/gui/menu/menu_bar.h>
 #include <tetengo2/gui/widget/dialog.h>
 #include <tetengo2/iterator/observable_forward_iterator.h>
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>

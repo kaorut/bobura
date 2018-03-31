@@ -24,7 +24,6 @@
 #include <boost/variant.hpp>
 
 #include <tetengo2/gui/widget/dialog.h>
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 #include <tetengo2/text/grammar/json.h>
 #include <tetengo2/text/pull_parser.h>

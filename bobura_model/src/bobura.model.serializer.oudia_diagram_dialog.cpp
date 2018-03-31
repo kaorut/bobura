@@ -16,7 +16,6 @@
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>

@@ -8,8 +8,6 @@
 
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
-
 #include <bobura/command/file_property.h>
 #include <bobura/detail_type_list.h>
 #include <bobura/file_property_dialog.h>

@@ -10,8 +10,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
-
 #include <bobura/command/nop.h>
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>

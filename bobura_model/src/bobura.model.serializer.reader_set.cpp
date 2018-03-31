@@ -15,7 +15,6 @@
 #include <boost/shared_ptr.hpp>
 
 #include <tetengo2/gui/widget/dialog.h>
-#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/bzip2_reader.h>
