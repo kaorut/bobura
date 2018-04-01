@@ -14,7 +14,6 @@
 #include <boost/predef.h>
 #include <boost/rational.hpp>
 
-
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 #include <bobura/view_picture_box.h>

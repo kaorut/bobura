@@ -10,7 +10,6 @@
 
 #include <boost/core/noncopyable.hpp>
 
-
 #include <bobura/model/message/timetable_observer_set.h>
 
 
