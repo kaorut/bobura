@@ -16,7 +16,6 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -92,7 +91,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    auto                    p_writer = tetengo2::stdalt::make_unique<concrete_writer>();
+                    auto                    p_writer = std::make_unique<concrete_writer>();
                     const bzip2_writer_type bzip2_writer{ std::move(p_writer) };
                 }
 
@@ -100,7 +99,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    auto                    p_writer = tetengo2::stdalt::make_unique<concrete_writer>();
+                    auto                    p_writer = std::make_unique<concrete_writer>();
                     const bzip2_writer_type bzip2_writer{ std::move(p_writer) };
 
                     BOOST_CHECK(bzip2_writer.extension() == boost::filesystem::path{ TETENGO2_TEXT("hoge.ext_bz2") });
@@ -110,7 +109,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    auto                    p_writer = tetengo2::stdalt::make_unique<concrete_writer>();
+                    auto                    p_writer = std::make_unique<concrete_writer>();
                     const bzip2_writer_type bzip2_writer{ std::move(p_writer) };
 
                     BOOST_TEST(bzip2_writer.selects(boost::filesystem::path{ TETENGO2_TEXT("hoge.ext_bz2") }));
@@ -122,7 +121,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    auto                 p_writer = tetengo2::stdalt::make_unique<concrete_writer>();
+                    auto                 p_writer = std::make_unique<concrete_writer>();
                     bzip2_writer_type    bzip2_writer{ std::move(p_writer) };
                     const timetable_type timetable{};
                     std::ostringstream   stream{};

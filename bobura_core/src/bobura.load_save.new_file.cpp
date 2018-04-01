@@ -6,10 +6,10 @@
     $Id$
 */
 
+#include <memory>
+
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
-
-#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/load_save/new_file.h>
@@ -44,7 +44,7 @@ namespace bobura::load_save {
             if (!m_confirm_file_save(parent))
                 return;
 
-            model.reset_timetable(tetengo2::stdalt::make_unique<timetable_type>());
+            model.reset_timetable(std::make_unique<timetable_type>());
         }
 
 
@@ -62,7 +62,7 @@ namespace bobura::load_save {
 
     template <typename Traits>
     new_file<Traits>::new_file(const confirm_file_save_type& confirm_file_save)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(confirm_file_save) }
+    : m_p_impl{ std::make_unique<impl>(confirm_file_save) }
     {}
 
     template <typename Traits>

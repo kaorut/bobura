@@ -6,9 +6,9 @@
     $Id$
 */
 
-#include <boost/predef.h>
+#include <memory>
 
-#include <tetengo2/stdalt.h>
+#include <boost/predef.h>
 
 #include <bobura/command/new_file.h>
 #include <bobura/detail_type_list.h>
@@ -51,7 +51,7 @@ namespace bobura::command {
 
     template <typename Traits, typename LoadSaveTraits>
     new_file<Traits, LoadSaveTraits>::new_file(const new_file_type& new_file)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(new_file) }
+    : m_p_impl{ std::make_unique<impl>(new_file) }
     {}
 
     template <typename Traits, typename LoadSaveTraits>

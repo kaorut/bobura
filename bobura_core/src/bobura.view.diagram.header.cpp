@@ -13,8 +13,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
-
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/header.h>
@@ -111,7 +109,7 @@ namespace bobura::view::diagram {
         const color_type& color,
         position_type     position,
         dimension_type    dimension)
-    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+    : base_type{ selection }, m_p_impl{ std::make_unique<impl>(
                                   selection,
                                   std::move(company_name),
                                   font,
@@ -122,8 +120,7 @@ namespace bobura::view::diagram {
 
     template <typename Traits>
     company_name_header<Traits>::company_name_header(company_name_header&& another)
-    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
-                                                std::move(*another.m_p_impl)) }
+    : base_type{ another.get_selection() }, m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>
@@ -238,7 +235,7 @@ namespace bobura::view::diagram {
         const color_type& color,
         position_type     position,
         dimension_type    dimension)
-    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+    : base_type{ selection }, m_p_impl{ std::make_unique<impl>(
                                   selection,
                                   std::move(line_name),
                                   font,
@@ -249,8 +246,7 @@ namespace bobura::view::diagram {
 
     template <typename Traits>
     line_name_header<Traits>::line_name_header(line_name_header&& another)
-    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
-                                                std::move(*another.m_p_impl)) }
+    : base_type{ another.get_selection() }, m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>
@@ -365,19 +361,14 @@ namespace bobura::view::diagram {
         const color_type& color,
         position_type     position,
         dimension_type    dimension)
-    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
-                                  selection,
-                                  std::move(note),
-                                  font,
-                                  color,
-                                  std::move(position),
-                                  std::move(dimension)) }
+    : base_type{ selection }, m_p_impl{
+          std::make_unique<impl>(selection, std::move(note), font, color, std::move(position), std::move(dimension))
+      }
     {}
 
     template <typename Traits>
     note_header<Traits>::note_header(note_header&& another)
-    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
-                                                std::move(*another.m_p_impl)) }
+    : base_type{ another.get_selection() }, m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>
@@ -461,7 +452,7 @@ namespace bobura::view::diagram {
                 m_dimension);
 
             const auto& company_name_color = *model.timetable().font_color_set().company_name().diagram_color();
-            m_p_company_name_header = tetengo2::stdalt::make_unique<company_name_header_type>(
+            m_p_company_name_header = std::make_unique<company_name_header_type>(
                 selection,
                 std::move(company_name),
                 company_name_font,
@@ -469,7 +460,7 @@ namespace bobura::view::diagram {
                 std::move(company_name_position),
                 std::move(company_name_dimension));
             const auto& line_name_color = *model.timetable().font_color_set().line_name().diagram_color();
-            m_p_line_name_header = tetengo2::stdalt::make_unique<line_name_header_type>(
+            m_p_line_name_header = std::make_unique<line_name_header_type>(
                 selection,
                 std::move(line_name),
                 line_name_font,
@@ -477,7 +468,7 @@ namespace bobura::view::diagram {
                 std::move(line_name_position),
                 std::move(line_name_dimension));
             const auto& note_color = *model.timetable().font_color_set().note().diagram_color();
-            m_p_note_header = tetengo2::stdalt::make_unique<note_header_type>(
+            m_p_note_header = std::make_unique<note_header_type>(
                 selection, std::move(note), note_font, note_color, std::move(note_position), std::move(note_dimension));
         }
 
@@ -654,15 +645,12 @@ namespace bobura::view::diagram {
         selection_type&       selection,
         canvas_type&          canvas,
         const dimension_type& canvas_dimension)
-    : base_type{ selection }, m_p_impl{
-          tetengo2::stdalt::make_unique<impl>(model, selection, canvas, canvas_dimension)
-      }
+    : base_type{ selection }, m_p_impl{ std::make_unique<impl>(model, selection, canvas, canvas_dimension) }
     {}
 
     template <typename Traits>
     header<Traits>::header(header&& another)
-    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
-                                                std::move(*another.m_p_impl)) }
+    : base_type{ another.get_selection() }, m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>

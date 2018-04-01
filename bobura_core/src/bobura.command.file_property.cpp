@@ -6,9 +6,9 @@
     $Id$
 */
 
-#include <boost/predef.h>
+#include <memory>
 
-#include <tetengo2/stdalt.h>
+#include <boost/predef.h>
 
 #include <bobura/command/file_property.h>
 #include <bobura/detail_type_list.h>
@@ -78,7 +78,7 @@ namespace bobura::command {
     template <typename Traits, typename Dialog, typename MessageCatalog, typename DialogTraits>
     file_property<Traits, Dialog, MessageCatalog, DialogTraits>::file_property(
         const message_catalog_type& message_catalog)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(message_catalog) }
+    : m_p_impl{ std::make_unique<impl>(message_catalog) }
     {}
 
     template <typename Traits, typename Dialog, typename MessageCatalog, typename DialogTraits>

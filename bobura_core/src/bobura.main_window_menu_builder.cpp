@@ -14,7 +14,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -65,7 +64,7 @@ namespace bobura {
 
         std::unique_ptr<menu_bar_type> build() const
         {
-            auto p_menu_bar = tetengo2::stdalt::make_unique<menu_bar_type>();
+            auto p_menu_bar = std::make_unique<menu_bar_type>();
 
             p_menu_bar->insert(p_menu_bar->end(), build_file_menu());
             p_menu_bar->insert(p_menu_bar->end(), build_view_menu());
@@ -124,8 +123,7 @@ namespace bobura {
 
         std::unique_ptr<popup_menu_type> build_file_menu() const
         {
-            auto p_popup_menu =
-                tetengo2::stdalt::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:&File")));
+            auto p_popup_menu = std::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:&File")));
             commands_type commands{};
 
             append_menu_command(
@@ -175,8 +173,7 @@ namespace bobura {
 
         std::unique_ptr<popup_menu_type> build_format_menu() const
         {
-            auto p_popup_menu =
-                tetengo2::stdalt::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:F&ormat")));
+            auto p_popup_menu = std::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:F&ormat")));
             commands_type commands{};
 
             append_menu_command(
@@ -191,8 +188,7 @@ namespace bobura {
 
         std::unique_ptr<popup_menu_type> build_train_menu() const
         {
-            auto p_popup_menu =
-                tetengo2::stdalt::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:&Train")));
+            auto p_popup_menu = std::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:&Train")));
             commands_type commands{};
 
             append_menu_command(
@@ -207,8 +203,7 @@ namespace bobura {
 
         std::unique_ptr<popup_menu_type> build_view_menu() const
         {
-            auto p_popup_menu =
-                tetengo2::stdalt::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:&View")));
+            auto p_popup_menu = std::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:&View")));
             commands_type commands{};
 
             append_menu_command(
@@ -241,8 +236,8 @@ namespace bobura {
 
         std::unique_ptr<popup_menu_type> build_horizontal_zoom_menu() const
         {
-            auto p_popup_menu = tetengo2::stdalt::make_unique<popup_menu_type>(
-                m_message_catalog.get(TETENGO2_TEXT("Menu:View:&Horizontal Zoom")));
+            auto p_popup_menu =
+                std::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:View:&Horizontal Zoom")));
             commands_type commands{};
 
             append_menu_command(
@@ -282,8 +277,8 @@ namespace bobura {
 
         std::unique_ptr<popup_menu_type> build_vertical_zoom_menu() const
         {
-            auto p_popup_menu = tetengo2::stdalt::make_unique<popup_menu_type>(
-                m_message_catalog.get(TETENGO2_TEXT("Menu:View:&Vertical Zoom")));
+            auto p_popup_menu =
+                std::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:View:&Vertical Zoom")));
             commands_type commands{};
 
             append_menu_command(
@@ -328,8 +323,7 @@ namespace bobura {
 
         std::unique_ptr<popup_menu_type> build_help_menu() const
         {
-            auto p_popup_menu =
-                tetengo2::stdalt::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:&Help")));
+            auto p_popup_menu = std::make_unique<popup_menu_type>(m_message_catalog.get(TETENGO2_TEXT("Menu:&Help")));
             commands_type commands{};
 
             append_menu_command(
@@ -365,7 +359,7 @@ namespace bobura {
             const command_type& command,
             commands_type&      commands) const
         {
-            auto p_menu_command = tetengo2::stdalt::make_unique<menu_command_type>(std::move(text));
+            auto p_menu_command = std::make_unique<menu_command_type>(std::move(text));
 
             append_menu_command_impl(popup_menu, std::move(p_menu_command), command, commands);
         }
@@ -377,8 +371,7 @@ namespace bobura {
             commands_type&      commands,
             shortcut_key_type   shortcut_key) const
         {
-            auto p_menu_command =
-                tetengo2::stdalt::make_unique<menu_command_type>(std::move(text), std::move(shortcut_key));
+            auto p_menu_command = std::make_unique<menu_command_type>(std::move(text), std::move(shortcut_key));
 
             append_menu_command_impl(popup_menu, std::move(p_menu_command), command, commands);
         }
@@ -398,7 +391,7 @@ namespace bobura {
 
         void append_menu_separator(popup_menu_type& popup_menu, commands_type& commands) const
         {
-            auto p_menu_separator = tetengo2::stdalt::make_unique<menu_separator_type>();
+            auto p_menu_separator = std::make_unique<menu_separator_type>();
             popup_menu.insert(popup_menu.end(), std::move(p_menu_separator));
             commands.push_back(nullptr);
         }
@@ -417,7 +410,7 @@ namespace bobura {
         model_type&                 model,
         main_window_type&           main_window,
         const message_catalog_type& message_catalog)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(command_set, model, main_window, message_catalog) }
+    : m_p_impl{ std::make_unique<impl>(command_set, model, main_window, message_catalog) }
     {}
 
     template <typename Traits>

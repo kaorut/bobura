@@ -9,12 +9,12 @@
 #include <algorithm>
 #include <cassert>
 #include <iterator>
+#include <memory>
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/oudia_diagram_dialog.h>
@@ -98,7 +98,7 @@ namespace bobura::model::serializer {
         abstract_window_type&       parent,
         string_type                 file_name,
         const message_catalog_type& message_catalog)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(parent, std::move(file_name), message_catalog) }
+    : m_p_impl{ std::make_unique<impl>(parent, std::move(file_name), message_catalog) }
     {}
 
     template <typename OuDiaDiagramDialog>
@@ -146,7 +146,7 @@ namespace bobura::model::serializer {
 
     template <typename String>
     select_oudia_diagram_for_test<String>::select_oudia_diagram_for_test(string_type name)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(name)) }
+    : m_p_impl{ std::make_unique<impl>(std::move(name)) }
     {}
 
     template <typename String>

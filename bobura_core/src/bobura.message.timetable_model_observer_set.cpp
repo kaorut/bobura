@@ -10,8 +10,6 @@
 
 #include <boost/core/noncopyable.hpp>
 
-#include <tetengo2/stdalt.h>
-
 #include <bobura/message/timetable_model_observer_set.h>
 
 
@@ -62,7 +60,7 @@ namespace bobura::message {
     };
 
 
-    timetable_model_observer_set::timetable_model_observer_set() : m_p_impl{ tetengo2::stdalt::make_unique<impl>() } {}
+    timetable_model_observer_set::timetable_model_observer_set() : m_p_impl{ std::make_unique<impl>() } {}
 
     timetable_model_observer_set::~timetable_model_observer_set() noexcept {}
 

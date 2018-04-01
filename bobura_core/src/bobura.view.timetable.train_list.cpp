@@ -6,10 +6,10 @@
     $Id$
 */
 
+#include <memory>
+
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
-
-#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
@@ -84,14 +84,12 @@ namespace bobura::view::timetable {
         const message_catalog_type& message_catalog,
         canvas_type&                canvas,
         const dimension_type&       canvas_dimension)
-    : base_type{}, m_p_impl{
-          tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog, canvas, canvas_dimension)
-      }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(direction, model, message_catalog, canvas, canvas_dimension) }
     {}
 
     template <typename Traits>
     train_list<Traits>::train_list(train_list&& another)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)) }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>

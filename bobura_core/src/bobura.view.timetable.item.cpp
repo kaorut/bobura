@@ -6,13 +6,12 @@
     $Id$
 */
 
+#include <memory>
 #include <utility>
 
 #include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
-
-#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
@@ -103,7 +102,7 @@ namespace bobura::view::timetable {
 
 
     template <typename Traits>
-    item<Traits>::item() : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
+    item<Traits>::item() : m_p_impl{ std::make_unique<impl>() }
     {}
 
     template <typename Traits>

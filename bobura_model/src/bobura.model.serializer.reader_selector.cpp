@@ -16,7 +16,6 @@
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/reader_selector.h>
@@ -104,7 +103,7 @@ namespace bobura::model::serializer {
         typename Font>
     reader_selector<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::reader_selector(
         std::vector<std::unique_ptr<base_type>> p_readers)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(p_readers)) }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(p_readers)) }
     {}
 
     template <

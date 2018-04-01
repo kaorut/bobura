@@ -7,11 +7,10 @@
 */
 
 #include <cassert>
+#include <memory>
 
 #include <boost/core/ignore_unused.hpp>
 #include <boost/predef.h>
-
-#include <tetengo2/stdalt.h>
 
 #include <bobura/command/vertically_zoom_out.h>
 #include <bobura/detail_type_list.h>
@@ -79,7 +78,7 @@ namespace bobura::command {
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename DiagramViewTraits>
     vertically_zoom_out<Traits, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::vertically_zoom_out(
         diagram_view_type& diagram_view)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(diagram_view) }
+    : m_p_impl{ std::make_unique<impl>(diagram_view) }
     {}
 
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits, typename DiagramViewTraits>

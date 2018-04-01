@@ -15,8 +15,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
-
 #include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
 #include <bobura/type_list.h>
@@ -290,7 +288,7 @@ namespace bobura {
 
         void clear_background(canvas_type& canvas, const dimension_type& canvas_dimension) const
         {
-            canvas.set_background(tetengo2::stdalt::make_unique<const solid_background_type>(
+            canvas.set_background(std::make_unique<const solid_background_type>(
                 *m_model.timetable().font_color_set().background().diagram_color()));
             canvas.fill_rectangle(position_type{}, canvas_dimension);
         }
@@ -306,9 +304,9 @@ namespace bobura {
                 return;
             }
 
-            m_p_header = tetengo2::stdalt::make_unique<header_type>(m_model, m_selection, canvas, canvas_dimension);
+            m_p_header = std::make_unique<header_type>(m_model, m_selection, canvas, canvas_dimension);
             m_header_height = m_p_header->dimension().height();
-            m_p_time_line_list = tetengo2::stdalt::make_unique<time_line_list_type>(
+            m_p_time_line_list = std::make_unique<time_line_list_type>(
                 m_model,
                 m_time_offset,
                 m_selection,
@@ -319,7 +317,7 @@ namespace bobura {
                 position_unit_type::from(m_header_height),
                 m_time_header_height,
                 m_horizontal_scale);
-            m_p_station_line_list = tetengo2::stdalt::make_unique<station_line_list_type>(
+            m_p_station_line_list = std::make_unique<station_line_list_type>(
                 m_model,
                 m_time_offset,
                 m_selection,
@@ -330,7 +328,7 @@ namespace bobura {
                 m_time_header_height,
                 m_horizontal_scale,
                 m_station_positions);
-            m_p_train_line_list = tetengo2::stdalt::make_unique<train_line_list_type>(
+            m_p_train_line_list = std::make_unique<train_line_list_type>(
                 m_model,
                 m_time_offset,
                 m_selection,
@@ -349,7 +347,7 @@ namespace bobura {
 
     template <typename Traits>
     diagram_view<Traits>::diagram_view(const model_type& model, const message_catalog_type& message_catalog)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(model, message_catalog) }
+    : m_p_impl{ std::make_unique<impl>(model, message_catalog) }
     {}
 
     template <typename Traits>

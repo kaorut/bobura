@@ -17,7 +17,6 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2/iterator/observable_forward_iterator.h>
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -82,7 +81,7 @@ namespace {
         {
             boost::ignore_unused(first, last, error);
 
-            return tetengo2::stdalt::make_unique<timetable_type>();
+            return std::make_unique<timetable_type>();
         }
     };
 }

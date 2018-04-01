@@ -11,7 +11,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -88,7 +87,7 @@ namespace bobura::load_save {
             const auto file_path = m_model.has_path() ? m_model.path().template string<string_type>() :
                                                         m_message_catalog.get(TETENGO2_TEXT("Common:Untitled"));
 
-            return tetengo2::stdalt::make_unique<message_box_type>(
+            return std::make_unique<message_box_type>(
                 parent,
                 m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
                 m_message_catalog.get(
@@ -108,7 +107,7 @@ namespace bobura::load_save {
         model_type&                 model,
         const save_to_file_type&    save_to_file,
         const message_catalog_type& message_catalog)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(model, save_to_file, message_catalog) }
+    : m_p_impl{ std::make_unique<impl>(model, save_to_file, message_catalog) }
     {}
 
     template <typename Traits>

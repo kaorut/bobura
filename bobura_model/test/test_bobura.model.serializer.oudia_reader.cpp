@@ -22,7 +22,6 @@
 
 #include <tetengo2/gui/drawing/color.h>
 #include <tetengo2/iterator/observable_forward_iterator.h>
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -379,8 +378,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     BOOST_TEST_PASSPOINT();
 
                     {
-                        auto p_select_diagram = tetengo2::stdalt::make_unique<select_oudia_diagram_type>(
-                            string_type{ TETENGO2_TEXT("Dia1") });
+                        auto p_select_diagram =
+                            std::make_unique<select_oudia_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
                         const reader_type reader(std::move(p_select_diagram));
                     }
                     {
@@ -394,8 +393,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     BOOST_TEST_PASSPOINT();
 
                     {
-                        auto p_select_diagram = tetengo2::stdalt::make_unique<select_oudia_diagram_type>(
-                            string_type{ TETENGO2_TEXT("Dia1") });
+                        auto p_select_diagram =
+                            std::make_unique<select_oudia_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
                         reader_type reader(std::move(p_select_diagram));
 
                         boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_empty) };
@@ -406,8 +405,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         BOOST_TEST(!reader.selects(first, last));
                     }
                     {
-                        auto p_select_diagram = tetengo2::stdalt::make_unique<select_oudia_diagram_type>(
-                            string_type{ TETENGO2_TEXT("Dia1") });
+                        auto p_select_diagram =
+                            std::make_unique<select_oudia_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
                         reader_type reader(std::move(p_select_diagram));
 
                         boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_no_train) };
@@ -418,8 +417,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         BOOST_TEST(reader.selects(first, last));
                     }
                     {
-                        auto p_select_diagram = tetengo2::stdalt::make_unique<select_oudia_diagram_type>(
-                            string_type{ TETENGO2_TEXT("Dia1") });
+                        auto p_select_diagram =
+                            std::make_unique<select_oudia_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
                         reader_type reader(std::move(p_select_diagram));
 
                         boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(
@@ -431,8 +430,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         BOOST_TEST(!reader.selects(first, last));
                     }
                     {
-                        auto p_select_diagram = tetengo2::stdalt::make_unique<select_oudia_diagram_type>(
-                            string_type{ TETENGO2_TEXT("Dia1") });
+                        auto p_select_diagram =
+                            std::make_unique<select_oudia_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
                         reader_type reader(std::move(p_select_diagram));
 
                         boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(
@@ -450,8 +449,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     BOOST_TEST_PASSPOINT();
 
                     {
-                        auto p_select_diagram = tetengo2::stdalt::make_unique<select_oudia_diagram_type>(
-                            string_type{ TETENGO2_TEXT("Dia1") });
+                        auto p_select_diagram =
+                            std::make_unique<select_oudia_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
                         reader_type reader(std::move(p_select_diagram));
 
                         boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_empty) };
@@ -466,8 +465,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         BOOST_CHECK(error == error_type::corrupted);
                     }
                     {
-                        auto p_select_diagram = tetengo2::stdalt::make_unique<select_oudia_diagram_type>(
-                            string_type{ TETENGO2_TEXT("Dia1") });
+                        auto p_select_diagram =
+                            std::make_unique<select_oudia_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
                         reader_type reader(std::move(p_select_diagram));
 
                         boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_no_train) };
@@ -497,8 +496,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         BOOST_TEST(p_timetable->up_trains().empty());
                     }
                     {
-                        auto p_select_diagram = tetengo2::stdalt::make_unique<select_oudia_diagram_type>(
-                            string_type{ TETENGO2_TEXT("Dia1") });
+                        auto p_select_diagram =
+                            std::make_unique<select_oudia_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
                         reader_type reader(std::move(p_select_diagram));
 
                         boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_full) };
@@ -657,8 +656,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         }
                     }
                     {
-                        auto p_select_diagram = tetengo2::stdalt::make_unique<select_oudia_diagram_type>(
-                            string_type{ TETENGO2_TEXT("Dia2") });
+                        auto p_select_diagram =
+                            std::make_unique<select_oudia_diagram_type>(string_type{ TETENGO2_TEXT("Dia2") });
                         reader_type reader(std::move(p_select_diagram));
 
                         boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_full) };
@@ -675,8 +674,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         BOOST_TEST(p_timetable->up_trains().size() == 1U);
                     }
                     {
-                        auto p_select_diagram = tetengo2::stdalt::make_unique<select_oudia_diagram_type>(
-                            string_type{ TETENGO2_TEXT("Dia3") });
+                        auto p_select_diagram =
+                            std::make_unique<select_oudia_diagram_type>(string_type{ TETENGO2_TEXT("Dia3") });
                         reader_type reader(std::move(p_select_diagram));
 
                         boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(data_full) };
@@ -691,8 +690,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         BOOST_CHECK(error == error_type::canceled);
                     }
                     {
-                        auto p_select_diagram = tetengo2::stdalt::make_unique<select_oudia_diagram_type>(
-                            string_type{ TETENGO2_TEXT("Dia1") });
+                        auto p_select_diagram =
+                            std::make_unique<select_oudia_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
                         reader_type reader(std::move(p_select_diagram));
 
                         boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(
@@ -708,8 +707,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         BOOST_CHECK(error == error_type::corrupted);
                     }
                     {
-                        auto p_select_diagram = tetengo2::stdalt::make_unique<select_oudia_diagram_type>(
-                            string_type{ TETENGO2_TEXT("Dia1") });
+                        auto p_select_diagram =
+                            std::make_unique<select_oudia_diagram_type>(string_type{ TETENGO2_TEXT("Dia1") });
                         reader_type reader(std::move(p_select_diagram));
 
                         boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(

@@ -7,14 +7,13 @@
 */
 
 #include <algorithm>
+#include <memory>
 #include <vector>
 
 #include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 #include <boost/range/adaptors.hpp>
-
-#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/model/station_info/grade.h>
@@ -158,19 +157,14 @@ namespace bobura::view::diagram {
         const position_unit_type&    station_header_right,
         position_unit_type           top,
         const font_color_type&       font_color)
-    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
-                                  station_location,
-                                  selection,
-                                  right,
-                                  station_header_right,
-                                  std::move(top),
-                                  font_color) }
+    : base_type{ selection }, m_p_impl{
+          std::make_unique<impl>(station_location, selection, right, station_header_right, std::move(top), font_color)
+      }
     {}
 
     template <typename Traits>
     station_line<Traits>::station_line(station_line&& another)
-    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
-                                                std::move(*another.m_p_impl)) }
+    : base_type{ another.get_selection() }, m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>
@@ -404,7 +398,7 @@ namespace bobura::view::diagram {
         const dimension_unit_type&             time_header_height,
         const scale_type&                      horizontal_scale,
         const std::vector<position_unit_type>& station_positions)
-    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+    : base_type{ selection }, m_p_impl{ std::make_unique<impl>(
                                   model,
                                   time_offset,
                                   selection,
@@ -419,8 +413,7 @@ namespace bobura::view::diagram {
 
     template <typename Traits>
     station_line_list<Traits>::station_line_list(station_line_list&& another)
-    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
-                                                std::move(*another.m_p_impl)) }
+    : base_type{ another.get_selection() }, m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>

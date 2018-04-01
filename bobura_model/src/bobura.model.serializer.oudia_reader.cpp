@@ -26,7 +26,6 @@
 #include <boost/throw_exception.hpp>
 #include <boost/utility/string_view.hpp>
 
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -762,38 +761,38 @@ namespace bobura::model::serializer {
             const auto name = string_view_type{ line }.substr(0, line.length() - 1);
             if (name.empty())
             {
-                return tetengo2::stdalt::make_unique<initial_state>(timetable);
+                return std::make_unique<initial_state>(timetable);
             }
             else if (name == string_view_type(TETENGO2_TEXT("Rosen")))
             {
-                return tetengo2::stdalt::make_unique<rosen_state>(timetable);
+                return std::make_unique<rosen_state>(timetable);
             }
             else if (name == string_view_type(TETENGO2_TEXT("Eki")))
             {
-                return tetengo2::stdalt::make_unique<eki_state>(timetable);
+                return std::make_unique<eki_state>(timetable);
             }
             else if (name == string_view_type(TETENGO2_TEXT("Ressyasyubetsu")))
             {
-                return tetengo2::stdalt::make_unique<ressyasyubetsu_state>(timetable);
+                return std::make_unique<ressyasyubetsu_state>(timetable);
             }
             else if (name == string_view_type(TETENGO2_TEXT("Dia")))
             {
-                return tetengo2::stdalt::make_unique<dia_state>(current_diagram_name);
+                return std::make_unique<dia_state>(current_diagram_name);
             }
             else if (!current_diagram_name.empty() && current_diagram_name == selected_diagram_name)
             {
                 if (name == string_view_type(TETENGO2_TEXT("Kudari")))
-                    return tetengo2::stdalt::make_unique<kudari_state>(direction);
+                    return std::make_unique<kudari_state>(direction);
                 else if (name == string_view_type(TETENGO2_TEXT("Nobori")))
-                    return tetengo2::stdalt::make_unique<nobori_state>(direction);
+                    return std::make_unique<nobori_state>(direction);
                 else if (name == string_view_type(TETENGO2_TEXT("Ressya")))
-                    return tetengo2::stdalt::make_unique<ressya_state>(timetable, direction);
+                    return std::make_unique<ressya_state>(timetable, direction);
                 else
-                    return tetengo2::stdalt::make_unique<unknown_state>();
+                    return std::make_unique<unknown_state>();
             }
             else
             {
-                return tetengo2::stdalt::make_unique<unknown_state>();
+                return std::make_unique<unknown_state>();
             }
         }
 
@@ -860,11 +859,11 @@ namespace bobura::model::serializer {
             error_type&        error,
             const string_type& selected_diagram_name)
         {
-            auto        p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
+            auto        p_timetable = std::make_unique<timetable_type>();
             string_type current_diagram_name{};
             auto        direction = direction_type::down;
 
-            std::unique_ptr<state> p_state = tetengo2::stdalt::make_unique<initial_state>(*p_timetable);
+            std::unique_ptr<state> p_state = std::make_unique<initial_state>(*p_timetable);
             auto                   next_line_first = first;
             for (;;)
             {
@@ -921,7 +920,7 @@ namespace bobura::model::serializer {
         typename Encoder>
     oudia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, SelectDiagram, Font, Encoder>::
         oudia_reader(std::unique_ptr<select_diagram_type> p_select_diagram)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(p_select_diagram)) }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(p_select_diagram)) }
     {}
 
     template <

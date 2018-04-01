@@ -17,7 +17,6 @@
 #include <boost/rational.hpp>
 
 #include <tetengo2/detail/base/impl_set.h>
-#include <tetengo2/stdalt.h>
 
 #include <bobura/diagram_view.h>
 
@@ -256,7 +255,7 @@ namespace bobura::message::view_picture_box::diagram {
             {
                 if (!p_system_cursor || p_system_cursor->style() != system_cursor_type::style_type::hand)
                 {
-                    m_picture_box.set_cursor(tetengo2::stdalt::make_unique<system_cursor_type>(
+                    m_picture_box.set_cursor(std::make_unique<system_cursor_type>(
                         system_cursor_type::style_type::hand, m_detail_impl_set.cursor_()));
                 }
             }

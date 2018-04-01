@@ -15,7 +15,6 @@
 #include <boost/shared_ptr.hpp>
 
 #include <tetengo2/gui/widget/dialog.h>
-#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/bzip2_reader.h>
@@ -147,10 +146,9 @@ namespace bobura::model::serializer {
             std::vector<std::unique_ptr<reader_type>> readers{};
 
             readers.push_back(create_json_reader(parent, message_catalog));
-            readers.push_back(
-                tetengo2::stdalt::make_unique<bzip2_reader_type>(create_json_reader(parent, message_catalog)));
+            readers.push_back(std::make_unique<bzip2_reader_type>(create_json_reader(parent, message_catalog)));
             readers.push_back(create_oudia_reader(parent, std::move(file_name), message_catalog));
-            readers.push_back(tetengo2::stdalt::make_unique<windia_reader_type>());
+            readers.push_back(std::make_unique<windia_reader_type>());
 
             return std::move(readers);
         }
@@ -162,9 +160,8 @@ namespace bobura::model::serializer {
         static std::unique_ptr<reader_type>
         create_json_reader(abstract_window_type& parent, const message_catalog_type& message_catalog)
         {
-            auto p_exec_json_reading_task =
-                tetengo2::stdalt::make_unique<exec_json_reading_task_type>(parent, message_catalog);
-            return tetengo2::stdalt::make_unique<json_reader_type>(std::move(p_exec_json_reading_task));
+            auto p_exec_json_reading_task = std::make_unique<exec_json_reading_task_type>(parent, message_catalog);
+            return std::make_unique<json_reader_type>(std::move(p_exec_json_reading_task));
         }
 
         static std::unique_ptr<reader_type> create_oudia_reader(
@@ -173,8 +170,8 @@ namespace bobura::model::serializer {
             const message_catalog_type& message_catalog)
         {
             auto p_select_oudia_diagram =
-                tetengo2::stdalt::make_unique<select_oudia_diagram_type>(parent, std::move(file_name), message_catalog);
-            return tetengo2::stdalt::make_unique<oudia_reader_type>(std::move(p_select_oudia_diagram));
+                std::make_unique<select_oudia_diagram_type>(parent, std::move(file_name), message_catalog);
+            return std::make_unique<oudia_reader_type>(std::move(p_select_oudia_diagram));
         }
 
 

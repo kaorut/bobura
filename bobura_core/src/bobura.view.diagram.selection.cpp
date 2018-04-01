@@ -16,8 +16,6 @@
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
-
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/selection.h>
@@ -45,7 +43,7 @@ namespace bobura::view::diagram {
 
         impl()
         : m_p_selected_station_location{ nullptr }, m_p_selected_train{ nullptr }, m_p_selection_observer_set{
-              tetengo2::stdalt::make_unique<selection_observer_set_type>()
+              std::make_unique<selection_observer_set_type>()
           }
         {}
 
@@ -134,12 +132,11 @@ namespace bobura::view::diagram {
 
 
     template <typename Traits>
-    selection<Traits>::selection() : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
+    selection<Traits>::selection() : m_p_impl{ std::make_unique<impl>() }
     {}
 
     template <typename Traits>
-    selection<Traits>::selection(selection&& another)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)) }
+    selection<Traits>::selection(selection&& another) : m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>

@@ -13,7 +13,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/bzip2_writer.h>
@@ -82,9 +81,8 @@ namespace bobura::model::serializer {
         {
             std::vector<std::unique_ptr<writer_type>> writers{};
 
-            writers.push_back(tetengo2::stdalt::make_unique<json_writer_type>());
-            writers.push_back(
-                tetengo2::stdalt::make_unique<bzip2_writer_type>(tetengo2::stdalt::make_unique<json_writer_type>()));
+            writers.push_back(std::make_unique<json_writer_type>());
+            writers.push_back(std::make_unique<bzip2_writer_type>(std::make_unique<json_writer_type>()));
 
             return std::move(writers);
         }

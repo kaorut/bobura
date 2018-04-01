@@ -15,7 +15,6 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -81,13 +80,13 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             {
                 model_type model{};
 
-                model.reset_timetable(tetengo2::stdalt::make_unique<timetable_type>());
+                model.reset_timetable(std::make_unique<timetable_type>());
             }
             {
                 model_type model{};
 
                 model.reset_timetable(
-                    tetengo2::stdalt::make_unique<timetable_type>(),
+                    std::make_unique<timetable_type>(),
                     boost::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } });
             }
             {
@@ -112,7 +111,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             }
             {
                 model_type model{};
-                auto       p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
+                auto       p_timetable = std::make_unique<timetable_type>();
                 model.reset_timetable(std::move(p_timetable), string_type{ TETENGO2_TEXT("hoge") });
 
                 BOOST_TEST(model.has_path());
@@ -130,7 +129,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             }
             {
                 model_type model{};
-                auto       p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
+                auto       p_timetable = std::make_unique<timetable_type>();
                 model.reset_timetable(std::move(p_timetable), string_type{ TETENGO2_TEXT("hoge") });
 
                 BOOST_CHECK(model.path() == boost::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } });

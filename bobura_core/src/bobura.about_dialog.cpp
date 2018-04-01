@@ -14,7 +14,6 @@
 #include <boost/format.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/about_dialog.h>
@@ -121,9 +120,9 @@ namespace bobura {
 
         std::unique_ptr<image_type> create_application_image()
         {
-            auto p_image = tetengo2::stdalt::make_unique<image_type>(m_base);
+            auto p_image = std::make_unique<image_type>(m_base);
 
-            auto p_icon = tetengo2::stdalt::make_unique<icon_type>(
+            auto p_icon = std::make_unique<icon_type>(
                 m_settings.image_directory_path() / string_type{ TETENGO2_TEXT("bobura_app.ico") },
                 dimension_type{ dimension_unit_type{ 4 }, dimension_unit_type{ 4 } });
             p_image->set_icon(std::move(p_icon));
@@ -140,10 +139,10 @@ namespace bobura {
                          m_message_catalog.get(TETENGO2_TEXT("Dialog:About:version")) %
                          string_type{ TETENGO2_TEXT("0.0.0") };
 
-            auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
+            auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(title.str());
-            auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
+            auto p_background = std::make_unique<transparent_background_type>();
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -151,10 +150,10 @@ namespace bobura {
 
         std::unique_ptr<label_type> create_copyright_label()
         {
-            auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
+            auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(string_type{ TETENGO2_TEXT("Copyright (C) 2007-2018 kaoru") });
-            auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
+            auto p_background = std::make_unique<transparent_background_type>();
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -162,7 +161,7 @@ namespace bobura {
 
         std::unique_ptr<link_label_type> create_link_label(const detail_impl_set_type& detail_impl_set)
         {
-            auto p_label = tetengo2::stdalt::make_unique<link_label_type>(m_base, detail_impl_set.cursor_());
+            auto p_label = std::make_unique<link_label_type>(m_base, detail_impl_set.cursor_());
 
             p_label->set_text(string_type{ TETENGO2_TEXT("http://www.tetengo.org/") });
             p_label->set_target(p_label->text());
@@ -172,7 +171,7 @@ namespace bobura {
 
         std::unique_ptr<button_type> create_ok_button()
         {
-            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::default_);
+            auto p_button = std::make_unique<button_type>(m_base, button_type::style_type::default_);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Common:OK")));
             p_button->mouse_observer_set().clicked().connect(ok_button_mouse_clicked_observer_type{ m_base });
@@ -211,9 +210,7 @@ namespace bobura {
         const message_catalog_type& message_catalog,
         const settings_type&        settings,
         const detail_impl_set_type& detail_impl_set)
-    : base_type{ parent }, m_p_impl{
-          tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, detail_impl_set)
-      }
+    : base_type{ parent }, m_p_impl{ std::make_unique<impl>(*this, message_catalog, settings, detail_impl_set) }
     {}
 
     template <typename Traits>

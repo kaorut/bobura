@@ -29,7 +29,6 @@
 #include <tetengo2/config/config_list.h>
 #include <tetengo2/config/persistent_config.h>
 #include <tetengo2/config/temporary_config.h>
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 #include <tetengo2/type_list.h>
 
@@ -274,7 +273,7 @@ namespace bobura {
             p_configs.push_back(create_temporary_config(options));
             p_configs.push_back(create_persistent_config(std::move(group_name)));
 
-            return tetengo2::stdalt::make_unique<config_list_type>(std::move(p_configs));
+            return std::make_unique<config_list_type>(std::move(p_configs));
         }
 
         static std::unique_ptr<config_base_type>
@@ -294,7 +293,7 @@ namespace bobura {
                 }
             }
 
-            auto p_config = tetengo2::stdalt::make_unique<temporary_config_type>();
+            auto p_config = std::make_unique<temporary_config_type>();
             for (auto&& value : values)
             {
                 p_config->set(value.first, std::move(value.second));
@@ -339,8 +338,8 @@ namespace bobura {
 
         static std::unique_ptr<config_base_type> create_persistent_config(string_type group_name)
         {
-            return tetengo2::stdalt::make_unique<cached_config_type>(
-                tetengo2::stdalt::make_unique<persistent_config_type>(std::move(group_name)));
+            return std::make_unique<cached_config_type>(
+                std::make_unique<persistent_config_type>(std::move(group_name)));
         }
 
 
@@ -378,7 +377,7 @@ namespace bobura {
     settings<String, Position, Dimension>::settings(
         const std::vector<string_type>& command_line_arguments,
         string_type                     config_group_name)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(command_line_arguments, std::move(config_group_name)) }
+    : m_p_impl{ std::make_unique<impl>(command_line_arguments, std::move(config_group_name)) }
     {}
 
     template <typename String, typename Position, typename Dimension>

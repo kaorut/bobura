@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <cassert>
 #include <functional>
+#include <memory>
 #include <stdexcept>
 #include <vector>
 
@@ -17,7 +18,6 @@
 #include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/type_list.h>
@@ -129,7 +129,7 @@ namespace bobura::view {
 
 
     template <typename Size, typename String, typename Scale>
-    scale_list<Size, String, Scale>::scale_list() : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
+    scale_list<Size, String, Scale>::scale_list() : m_p_impl{ std::make_unique<impl>() }
     {}
 
     template <typename Size, typename String, typename Scale>

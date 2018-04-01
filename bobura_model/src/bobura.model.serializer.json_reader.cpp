@@ -24,7 +24,6 @@
 #include <boost/variant.hpp>
 
 #include <tetengo2/gui/widget/dialog.h>
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 #include <tetengo2/text/grammar/json.h>
 #include <tetengo2/text/pull_parser.h>
@@ -92,8 +91,7 @@ namespace bobura::model::serializer {
 
         bool selects_impl(const iterator first, const iterator last)
         {
-            auto p_push_parser = tetengo2::stdalt::make_unique<push_parser_type>(
-                first, last, tetengo2::stdalt::make_unique<grammar_type>());
+            auto p_push_parser = std::make_unique<push_parser_type>(first, last, std::make_unique<grammar_type>());
             pull_parser_type pull_parser{ std::move(p_push_parser), 5 };
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
@@ -190,7 +188,7 @@ namespace bobura::model::serializer {
         static std::unique_ptr<timetable_type>
         read_timetable(pull_parser_type& pull_parser, error_type& error, promise_type& promise)
         {
-            auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
+            auto p_timetable = std::make_unique<timetable_type>();
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
@@ -1353,8 +1351,8 @@ namespace bobura::model::serializer {
                     }
                 });
 
-            auto p_push_parser = tetengo2::stdalt::make_unique<push_parser_type>(
-                observing_first, last, tetengo2::stdalt::make_unique<grammar_type>());
+            auto p_push_parser =
+                std::make_unique<push_parser_type>(observing_first, last, std::make_unique<grammar_type>());
             pull_parser_type pull_parser{ std::move(p_push_parser), 5 };
 
             return read_timetable(pull_parser, error, promise);
@@ -1386,7 +1384,7 @@ namespace bobura::model::serializer {
         ExecJsonReadingTask,
         Font,
         Encoder>::json_reader(std::unique_ptr<exec_json_reading_task_type> p_exec_json_reading_task)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(p_exec_json_reading_task)) }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(p_exec_json_reading_task)) }
     {}
 
     template <

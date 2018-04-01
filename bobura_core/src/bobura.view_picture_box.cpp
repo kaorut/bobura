@@ -14,7 +14,6 @@
 #include <boost/predef.h>
 #include <boost/rational.hpp>
 
-#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
@@ -45,7 +44,7 @@ namespace bobura {
         void set_mouse_capture(view_picture_box& self, const mouse_button_type mouse_button)
         {
             assert(!m_p_mouse_capture);
-            m_p_mouse_capture = tetengo2::stdalt::make_unique<mouse_capture_type>(self, mouse_button);
+            m_p_mouse_capture = std::make_unique<mouse_capture_type>(self, mouse_button);
         }
 
         bool release_mouse_capture(const mouse_button_type mouse_button)
@@ -174,8 +173,7 @@ namespace bobura {
 
     template <typename PictureBox, typename MouseCapture>
     view_picture_box<PictureBox, MouseCapture>::view_picture_box(widget_type& parent)
-    : base_type{ parent, base_type::scroll_bar_style_type::both }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
-                                                                       parent) }
+    : base_type{ parent, base_type::scroll_bar_style_type::both }, m_p_impl{ std::make_unique<impl>(parent) }
     {}
 
     template <typename PictureBox, typename MouseCapture>

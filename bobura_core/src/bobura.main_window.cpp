@@ -14,7 +14,6 @@
 #include <boost/none.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -213,19 +212,19 @@ namespace bobura {
 
         void initialize_window(const detail_impl_set_type& detail_impl_set)
         {
-            m_p_tab_frame = tetengo2::stdalt::make_unique<tab_frame_type>(m_base);
+            m_p_tab_frame = std::make_unique<tab_frame_type>(m_base);
 
-            m_p_diagram_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
+            m_p_diagram_view_picture_box = std::make_unique<view_picture_box_type>(*m_p_tab_frame);
             m_p_tab_frame->tab_at(0).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Diagram")));
 
-            m_p_timetable_down_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
+            m_p_timetable_down_view_picture_box = std::make_unique<view_picture_box_type>(*m_p_tab_frame);
             m_p_tab_frame->tab_at(1).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Timetable (Down)")));
 
-            m_p_timetable_up_view_picture_box = tetengo2::stdalt::make_unique<view_picture_box_type>(*m_p_tab_frame);
+            m_p_timetable_up_view_picture_box = std::make_unique<view_picture_box_type>(*m_p_tab_frame);
             m_p_tab_frame->tab_at(2).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Timetable (Up)")));
 
-            m_p_property_bar = tetengo2::stdalt::make_unique<property_bar_type>(
-                m_base, m_settings, m_message_catalog, detail_impl_set);
+            m_p_property_bar =
+                std::make_unique<property_bar_type>(m_base, m_settings, m_message_catalog, detail_impl_set);
 
             set_message_observers();
 
@@ -258,7 +257,7 @@ namespace bobura {
 
         void set_window_icon()
         {
-            auto p_icon = tetengo2::stdalt::make_unique<icon_type>(
+            auto p_icon = std::make_unique<icon_type>(
                 m_settings.image_directory_path() / string_type{ TETENGO2_TEXT("bobura_app.ico") });
             m_base.set_icon(std::move(p_icon));
         }
@@ -280,7 +279,7 @@ namespace bobura {
         const confirm_file_save_type& confirm_file_save,
         const detail_impl_set_type&   detail_impl_set)
     : base_type{ base_type::scroll_bar_style_type::none, true }, m_p_impl{
-          tetengo2::stdalt::make_unique<impl>(*this, message_catalog, settings, confirm_file_save, detail_impl_set)
+          std::make_unique<impl>(*this, message_catalog, settings, confirm_file_save, detail_impl_set)
       }
     {}
 

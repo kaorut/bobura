@@ -12,7 +12,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -118,7 +117,7 @@ namespace bobura {
         {
             self.set_text(m_message_catalog.get(TETENGO2_TEXT("PropertyBar:Properties")));
 
-            m_p_map_box = tetengo2::stdalt::make_unique<map_box_type>(self, detail_impl_set.cursor_());
+            m_p_map_box = std::make_unique<map_box_type>(self, detail_impl_set.cursor_());
 
             self.size_observer_set().resized().connect(resized_observer_type{ self, *m_p_map_box });
 
@@ -166,7 +165,7 @@ namespace bobura {
         const message_catalog_type& message_catalog,
         const detail_impl_set_type& detail_impl_set)
     : base_type{ parent, detail_impl_set.cursor_() }, m_p_impl{
-          tetengo2::stdalt::make_unique<impl>(*this, parent, settings, message_catalog, detail_impl_set)
+          std::make_unique<impl>(*this, parent, settings, message_catalog, detail_impl_set)
       }
     {}
 

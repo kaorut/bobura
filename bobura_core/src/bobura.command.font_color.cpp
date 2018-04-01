@@ -6,12 +6,11 @@
     $Id$
 */
 
+#include <memory>
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
-
-#include <tetengo2/stdalt.h>
 
 #include <bobura/command/font_color.h>
 #include <bobura/detail_type_list.h>
@@ -175,7 +174,7 @@ namespace bobura::command {
         ColorDialog,
         MessageCatalog,
         DialogTraits>::font_color(const message_catalog_type& message_catalog)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(message_catalog) }
+    : m_p_impl{ std::make_unique<impl>(message_catalog) }
     {}
 
     template <

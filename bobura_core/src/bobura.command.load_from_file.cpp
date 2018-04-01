@@ -6,14 +6,13 @@
     $Id$
 */
 
+#include <memory>
 #include <utility>
 
 #include <boost/filesystem.hpp>
 #include <boost/none.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
-
-#include <tetengo2/stdalt.h>
 
 #include <bobura/command/load_from_file.h>
 #include <bobura/detail_type_list.h>
@@ -87,7 +86,7 @@ namespace bobura::command {
 
     template <typename Traits, typename LoadSaveTraits>
     load_from_file<Traits, LoadSaveTraits>::load_from_file(const load_from_file_type& load_from_file)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(load_from_file) }
+    : m_p_impl{ std::make_unique<impl>(load_from_file) }
     {}
 
     template <typename Traits, typename LoadSaveTraits>

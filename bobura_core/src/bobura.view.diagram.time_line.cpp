@@ -8,6 +8,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <memory>
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
@@ -15,8 +16,6 @@
 #include <boost/none.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
-
-#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
@@ -122,7 +121,7 @@ namespace bobura::view::diagram {
         position_unit_type         bottom,
         color_type                 color,
         boost::optional<size_type> hours)
-    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+    : base_type{ selection }, m_p_impl{ std::make_unique<impl>(
                                   selection,
                                   std::move(left),
                                   std::move(top),
@@ -133,8 +132,7 @@ namespace bobura::view::diagram {
 
     template <typename Traits>
     time_line<Traits>::time_line(time_line&& another)
-    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
-                                                std::move(*another.m_p_impl)) }
+    : base_type{ another.get_selection() }, m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>
@@ -397,7 +395,7 @@ namespace bobura::view::diagram {
         const position_unit_type&  header_bottom,
         const dimension_unit_type& time_header_height,
         const scale_type&          horizontal_scale)
-    : base_type{ selection }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+    : base_type{ selection }, m_p_impl{ std::make_unique<impl>(
                                   model,
                                   time_offset,
                                   selection,
@@ -412,8 +410,7 @@ namespace bobura::view::diagram {
 
     template <typename Traits>
     time_line_list<Traits>::time_line_list(time_line_list&& another)
-    : base_type{ another.get_selection() }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
-                                                std::move(*another.m_p_impl)) }
+    : base_type{ another.get_selection() }, m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>

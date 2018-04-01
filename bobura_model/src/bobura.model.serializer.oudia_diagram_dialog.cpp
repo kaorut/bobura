@@ -16,7 +16,6 @@
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -172,10 +171,10 @@ namespace bobura::model::serializer {
 
         std::unique_ptr<label_type> create_file_name_label()
         {
-            auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
+            auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_file_name);
-            auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
+            auto p_background = std::make_unique<transparent_background_type>();
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -183,10 +182,10 @@ namespace bobura::model::serializer {
 
         std::unique_ptr<label_type> create_prompt_label()
         {
-            auto p_label = tetengo2::stdalt::make_unique<label_type>(m_base);
+            auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:OuDiaDiagram:&Select a diagram to load:")));
-            auto p_background = tetengo2::stdalt::make_unique<transparent_background_type>();
+            auto p_background = std::make_unique<transparent_background_type>();
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -194,8 +193,7 @@ namespace bobura::model::serializer {
 
         std::unique_ptr<list_box_type> create_diagram_list_box()
         {
-            auto p_list_box =
-                tetengo2::stdalt::make_unique<list_box_type>(m_base, list_box_type::scroll_bar_style_type::vertical);
+            auto p_list_box = std::make_unique<list_box_type>(m_base, list_box_type::scroll_bar_style_type::vertical);
 
             p_list_box->mouse_observer_set().doubleclicked().connect(ok_button_mouse_clicked_type{ m_base });
 
@@ -204,7 +202,7 @@ namespace bobura::model::serializer {
 
         std::unique_ptr<button_type> create_ok_button()
         {
-            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::default_);
+            auto p_button = std::make_unique<button_type>(m_base, button_type::style_type::default_);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Common:OK")));
             p_button->mouse_observer_set().clicked().connect(ok_button_mouse_clicked_type{ m_base });
@@ -214,7 +212,7 @@ namespace bobura::model::serializer {
 
         std::unique_ptr<button_type> create_cancel_button()
         {
-            auto p_button = tetengo2::stdalt::make_unique<button_type>(m_base, button_type::style_type::cancel);
+            auto p_button = std::make_unique<button_type>(m_base, button_type::style_type::cancel);
 
             p_button->set_text(m_message_catalog.get(TETENGO2_TEXT("Common:Cancel")));
             p_button->mouse_observer_set().clicked().connect(cancel_button_mouse_clicked_type{ m_base });
@@ -254,7 +252,7 @@ namespace bobura::model::serializer {
     oudia_diagram_dialog<Traits, Size>::oudia_diagram_dialog(
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog)
-    : base_type{ parent }, m_p_impl{ tetengo2::stdalt::make_unique<impl>(*this, message_catalog) }
+    : base_type{ parent }, m_p_impl{ std::make_unique<impl>(*this, message_catalog) }
     {}
 
     template <typename Traits, typename Size>

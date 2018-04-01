@@ -6,11 +6,11 @@
     $Id$
 */
 
+#include <memory>
+
 #include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
-
-#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
@@ -91,7 +91,7 @@ namespace bobura::view::diagram {
 
 
     template <typename Traits>
-    item<Traits>::item(selection_type& selection) : m_p_impl{ tetengo2::stdalt::make_unique<impl>(selection) }
+    item<Traits>::item(selection_type& selection) : m_p_impl{ std::make_unique<impl>(selection) }
     {}
 
     template <typename Traits>

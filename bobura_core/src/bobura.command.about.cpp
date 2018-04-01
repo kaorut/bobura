@@ -6,10 +6,10 @@
     $Id$
 */
 
+#include <memory>
+
 #include <boost/core/ignore_unused.hpp>
 #include <boost/predef.h>
-
-#include <tetengo2/stdalt.h>
 
 #include <bobura/about_dialog.h>
 #include <bobura/command/about.h>
@@ -78,7 +78,7 @@ namespace bobura::command {
         const message_catalog_type& message_catalog,
         const settings_type&        settings,
         const detail_impl_set_type& detail_impl_set)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(message_catalog, settings, detail_impl_set) }
+    : m_p_impl{ std::make_unique<impl>(message_catalog, settings, detail_impl_set) }
     {}
 
     template <typename Traits, typename Position, typename Dimension, typename MessageCatalog, typename DialogTraits>

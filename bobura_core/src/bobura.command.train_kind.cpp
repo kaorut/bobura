@@ -9,12 +9,11 @@
 #include <algorithm>
 #include <cassert>
 #include <iterator>
+#include <memory>
 #include <vector>
 
 #include <boost/optional.hpp>
 #include <boost/predef.h>
-
-#include <tetengo2/stdalt.h>
 
 #include <bobura/command/train_kind.h>
 #include <bobura/detail_type_list.h>
@@ -203,7 +202,7 @@ namespace bobura::command {
         ColorDialog,
         MessageCatalog,
         DialogTraits>::train_kind(const message_catalog_type& message_catalog)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(message_catalog) }
+    : m_p_impl{ std::make_unique<impl>(message_catalog) }
     {}
 
     template <

@@ -8,6 +8,7 @@
 
 #include <algorithm>
 #include <iterator>
+#include <memory>
 #include <sstream>
 #include <string>
 #include <type_traits>
@@ -19,7 +20,6 @@
 #include <boost/predef.h>
 #include <boost/rational.hpp>
 
-#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -744,7 +744,7 @@ namespace bobura::model::serializer {
         typename Font,
         typename Encoder>
     json_writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font, Encoder>::json_writer()
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
+    : base_type{}, m_p_impl{ std::make_unique<impl>() }
     {}
 
     template <
