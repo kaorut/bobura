@@ -43,9 +43,7 @@ namespace bobura {
 
         // constructors and destructor
 
-        impl()
-        : m_p_timetable{ tetengo2::stdalt::make_unique<timetable_type>() }, m_path{}, m_changed{ false },
-          m_observer_set{}
+        impl() : m_p_timetable{ std::make_unique<timetable_type>() }, m_path{}, m_changed{ false }, m_observer_set{}
         {
             set_timetable_observer_set();
         }
@@ -67,7 +65,7 @@ namespace bobura {
 
         void reset_timetable()
         {
-            reset_timetable_impl(tetengo2::stdalt::make_unique<timetable_type>(), boost::none);
+            reset_timetable_impl(std::make_unique<timetable_type>(), boost::none);
         }
 
         void reset_timetable(std::unique_ptr<timetable_type> p_timetable)
@@ -169,7 +167,7 @@ namespace bobura {
         typename Speed,
         typename Font>
     timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::timetable_model()
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
+    : m_p_impl{ std::make_unique<impl>() }
     {}
 
     template <

@@ -7,6 +7,7 @@
 */
 
 #include <cassert>
+#include <memory>
 
 #include <boost/core/ignore_unused.hpp>
 #include <boost/predef.h>
@@ -101,7 +102,7 @@ namespace bobura::command {
     set_horizontal_scale<Traits, Scale, CommandSetTraits, MainWindowTraits, DiagramViewTraits>::set_horizontal_scale(
         diagram_view_type& diagram_view,
         const scale_type&  scale)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(diagram_view, scale) }
+    : m_p_impl{ std::make_unique<impl>(diagram_view, scale) }
     {}
 
     template <

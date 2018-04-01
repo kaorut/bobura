@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <memory>
 #include <utility>
 
 #include <boost/filesystem.hpp>
@@ -85,7 +86,7 @@ namespace bobura::command {
 
     template <typename Traits, typename LoadSaveTraits>
     load_from_file<Traits, LoadSaveTraits>::load_from_file(const load_from_file_type& load_from_file)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(load_from_file) }
+    : m_p_impl{ std::make_unique<impl>(load_from_file) }
     {}
 
     template <typename Traits, typename LoadSaveTraits>

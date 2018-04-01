@@ -178,7 +178,7 @@ namespace bobura {
 
         void clear_background(canvas_type& canvas, const dimension_type& canvas_dimension) const
         {
-            canvas.set_background(tetengo2::stdalt::make_unique<const solid_background_type>(
+            canvas.set_background(std::make_unique<const solid_background_type>(
                 *m_model.timetable().font_color_set().background().diagram_color()));
             canvas.fill_rectangle(position_type{}, canvas_dimension);
         }
@@ -202,13 +202,13 @@ namespace bobura {
             const auto train_number_height_ = train_number_height(canvas, m_model.timetable().font_color_set());
             const auto train_name_height_ = dimension_unit_type{ 5 };
 
-            m_p_header = tetengo2::stdalt::make_unique<header_type>(
+            m_p_header = std::make_unique<header_type>(
                 m_direction, m_model, m_message_catalog, canvas, canvas_dimension, margin);
 
             const auto header_bottom =
                 m_p_header->position().top() + position_unit_type::from(m_p_header->dimension().height());
 
-            m_p_train_number_header = tetengo2::stdalt::make_unique<train_number_header_type>(
+            m_p_train_number_header = std::make_unique<train_number_header_type>(
                 m_direction,
                 m_model,
                 m_message_catalog,
@@ -229,7 +229,7 @@ namespace bobura {
         const view::timetable::direction_type direction,
         const model_type&                     model,
         const message_catalog_type&           message_catalog)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog) }
+    : m_p_impl{ std::make_unique<impl>(direction, model, message_catalog) }
     {}
 
     template <typename Traits>

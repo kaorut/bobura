@@ -110,7 +110,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         const exec_json_reading_task_type task{ parent, message_catalog };
 
                         auto p_result = task([](promise_type&) {
-                            auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
+                            auto p_timetable = std::make_unique<timetable_type>();
                             p_timetable->set_line_name(string_type{ TETENGO2_TEXT("hoge") });
                             return p_timetable;
                         });

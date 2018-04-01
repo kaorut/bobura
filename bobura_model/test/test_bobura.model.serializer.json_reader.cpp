@@ -621,7 +621,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         window_type                window;
                         const message_catalog_type message_catalog;
                         auto                       p_exec_json_reading_task =
-                            tetengo2::stdalt::make_unique<exec_json_reading_task_type>(window, message_catalog);
+                            std::make_unique<exec_json_reading_task_type>(window, message_catalog);
                         reader_type json_reader{ std::move(p_exec_json_reading_task) };
                     }
                     {
@@ -638,7 +638,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     window_type                window;
                     const message_catalog_type message_catalog;
                     auto                       p_exec_json_reading_task =
-                        tetengo2::stdalt::make_unique<exec_json_reading_task_type>(window, message_catalog);
+                        std::make_unique<exec_json_reading_task_type>(window, message_catalog);
                     reader_type json_reader{ std::move(p_exec_json_reading_task) };
                     {
                         boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_empty0) };
@@ -690,7 +690,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     window_type                window;
                     const message_catalog_type message_catalog;
                     auto                       p_exec_json_reading_task =
-                        tetengo2::stdalt::make_unique<exec_json_reading_task_type>(window, message_catalog);
+                        std::make_unique<exec_json_reading_task_type>(window, message_catalog);
                     reader_type json_reader{ std::move(p_exec_json_reading_task) };
                     {
                         boost::iostreams::filtering_istream input_stream{ boost::make_iterator_range(json_not_json) };

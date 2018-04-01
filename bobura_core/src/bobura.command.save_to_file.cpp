@@ -6,6 +6,8 @@
     $Id$
 */
 
+#include <memory>
+
 #include <boost/predef.h>
 
 #include <bobura/command/save_to_file.h>
@@ -49,7 +51,7 @@ namespace bobura::command {
 
     template <typename Traits, typename LoadSaveTraits>
     save_to_file<Traits, LoadSaveTraits>::save_to_file(const save_to_file_type& save_to_file)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(save_to_file) }
+    : m_p_impl{ std::make_unique<impl>(save_to_file) }
     {}
 
     template <typename Traits, typename LoadSaveTraits>

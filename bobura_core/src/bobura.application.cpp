@@ -436,7 +436,7 @@ namespace bobura {
             if (!m_settings.input())
                 return;
 
-            m_p_input_file_load_timer = tetengo2::stdalt::make_unique<timer_type>(
+            m_p_input_file_load_timer = std::make_unique<timer_type>(
                 main_window,
                 [this, &main_window, &command_set](bool& stop) {
                     const auto p_parameter = command_set.create_load_from_file_parameter(*this->m_settings.input());
@@ -452,7 +452,7 @@ namespace bobura {
 
     template <typename Traits>
     application<Traits>::application(settings_type& settings, const detail_impl_set_type& detail_impl_set)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(settings, detail_impl_set) }
+    : m_p_impl{ std::make_unique<impl>(settings, detail_impl_set) }
     {}
 
     template <typename Traits>

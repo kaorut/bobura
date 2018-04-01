@@ -136,7 +136,7 @@ namespace bobura::model::serializer {
         SystemColorSet,
         MessageCatalog>::
         exec_json_reading_task(abstract_window_type& parent, const message_catalog_type& message_catalog)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(parent, message_catalog) }
+    : m_p_impl{ std::make_unique<impl>(parent, message_catalog) }
     {}
 
     template <

@@ -7,6 +7,7 @@
 */
 
 #include <cassert>
+#include <memory>
 
 #include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
@@ -54,8 +55,7 @@ namespace bobura::command {
 
 
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits>
-    show_diagram<Traits, CommandSetTraits, MainWindowTraits>::show_diagram()
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
+    show_diagram<Traits, CommandSetTraits, MainWindowTraits>::show_diagram() : m_p_impl{ std::make_unique<impl>() }
     {}
 
     template <typename Traits, typename CommandSetTraits, typename MainWindowTraits>

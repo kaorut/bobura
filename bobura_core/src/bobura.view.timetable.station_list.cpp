@@ -6,6 +6,8 @@
     $Id$
 */
 
+#include <memory>
+
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
@@ -82,14 +84,12 @@ namespace bobura::view::timetable {
         const message_catalog_type& message_catalog,
         canvas_type&                canvas,
         const dimension_type&       canvas_dimension)
-    : base_type{}, m_p_impl{
-          tetengo2::stdalt::make_unique<impl>(direction, model, message_catalog, canvas, canvas_dimension)
-      }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(direction, model, message_catalog, canvas, canvas_dimension) }
     {}
 
     template <typename Traits>
     station_list<Traits>::station_list(station_list&& another)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)) }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>

@@ -123,7 +123,7 @@ namespace bobura::view::timetable {
         const color_type& color,
         position_type     position,
         dimension_type    dimension)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(description), font, color) }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(description), font, color) }
     {
         this->set_position(std::move(position));
         this->set_dimension(std::move(dimension));
@@ -131,7 +131,7 @@ namespace bobura::view::timetable {
 
     template <typename Traits>
     operating_distance_header<Traits>::operating_distance_header(operating_distance_header&& another)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)) }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {
         this->set_position(std::move(another.position()));
         this->set_dimension(std::move(another.dimension()));
@@ -261,7 +261,7 @@ namespace bobura::view::timetable {
         const color_type& color,
         position_type     position,
         dimension_type    dimension)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(description), font, color) }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(description), font, color) }
     {
         this->set_position(std::move(position));
         this->set_dimension(std::move(dimension));
@@ -269,7 +269,7 @@ namespace bobura::view::timetable {
 
     template <typename Traits>
     train_number_description_header<Traits>::train_number_description_header(train_number_description_header&& another)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)) }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {
         this->set_position(std::move(another.position()));
         this->set_dimension(std::move(another.dimension()));
@@ -394,7 +394,7 @@ namespace bobura::view::timetable {
         const color_type& color,
         position_type     position,
         dimension_type    dimension)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(description), font, color) }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(description), font, color) }
     {
         this->set_position(std::move(position));
         this->set_dimension(std::move(dimension));
@@ -402,7 +402,7 @@ namespace bobura::view::timetable {
 
     template <typename Traits>
     train_name_description_header<Traits>::train_name_description_header(train_name_description_header&& another)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)) }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {
         this->set_position(std::move(another.position()));
         this->set_dimension(std::move(another.dimension()));
@@ -683,7 +683,7 @@ namespace bobura::view::timetable {
         const dimension_unit_type&  station_name_width,
         const dimension_unit_type&  train_number_height,
         const dimension_unit_type&  train_name_height)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+    : base_type{}, m_p_impl{ std::make_unique<impl>(
                        direction,
                        model,
                        message_catalog,
@@ -700,7 +700,7 @@ namespace bobura::view::timetable {
 
     template <typename Traits>
     train_number_header<Traits>::train_number_header(train_number_header&& another)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(*another.m_p_impl)) }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(*another.m_p_impl)) }
     {}
 
     template <typename Traits>

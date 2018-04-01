@@ -6,6 +6,8 @@
     $Id$
 */
 
+#include <memory>
+
 #include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
@@ -37,7 +39,7 @@ namespace bobura::command {
 
 
     template <typename Traits>
-    nop<Traits>::nop() : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
+    nop<Traits>::nop() : m_p_impl{ std::make_unique<impl>() }
     {}
 
     template <typename Traits>

@@ -143,7 +143,7 @@ namespace bobura::model::serializer {
         typename Font>
     bzip2_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font>::bzip2_reader(
         std::unique_ptr<base_type> p_reader)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(p_reader)) }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(p_reader)) }
     {}
 
     template <

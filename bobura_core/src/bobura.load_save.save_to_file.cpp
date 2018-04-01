@@ -166,7 +166,7 @@ namespace bobura::load_save {
             const boost::filesystem::path& path,
             abstract_window_type&          parent) const
         {
-            return tetengo2::stdalt::make_unique<message_box_type>(
+            return std::make_unique<message_box_type>(
                 parent,
                 m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
                 m_message_catalog.get(TETENGO2_TEXT("Message:File:Can't create a temporary file.")),
@@ -178,7 +178,7 @@ namespace bobura::load_save {
         std::unique_ptr<message_box_type>
         create_cant_write_to_file_message_box(const boost::filesystem::path& path, abstract_window_type& parent) const
         {
-            return tetengo2::stdalt::make_unique<message_box_type>(
+            return std::make_unique<message_box_type>(
                 parent,
                 m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
                 m_message_catalog.get(TETENGO2_TEXT("Message:File:Can't write to the file.")),
@@ -201,7 +201,7 @@ namespace bobura::load_save {
 
     template <typename Traits>
     save_to_file<Traits>::save_to_file(const bool ask_file_path, const message_catalog_type& message_catalog)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(ask_file_path, message_catalog) }
+    : m_p_impl{ std::make_unique<impl>(ask_file_path, message_catalog) }
     {}
 
     /*!

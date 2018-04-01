@@ -6,6 +6,8 @@
     $Id$
 */
 
+#include <memory>
+
 #include <boost/core/noncopyable.hpp>
 
 #include <bobura/message/diagram_selection_observer_set.h>
@@ -78,7 +80,7 @@ namespace bobura::message {
 
     template <typename Size, typename Difference, typename String, typename OperatingDistance>
     diagram_selection_observer_set<Size, Difference, String, OperatingDistance>::diagram_selection_observer_set()
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
+    : m_p_impl{ std::make_unique<impl>() }
     {}
 
     template <typename Size, typename Difference, typename String, typename OperatingDistance>

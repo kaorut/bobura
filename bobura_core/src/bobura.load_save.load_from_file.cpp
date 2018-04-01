@@ -229,7 +229,7 @@ namespace bobura::load_save {
         std::unique_ptr<message_box_type>
         create_cant_open_file_message_box(const boost::filesystem::path& path, abstract_window_type& parent) const
         {
-            return tetengo2::stdalt::make_unique<message_box_type>(
+            return std::make_unique<message_box_type>(
                 parent,
                 m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
                 m_message_catalog.get(TETENGO2_TEXT("Message:File:Can't open the file.")),
@@ -241,7 +241,7 @@ namespace bobura::load_save {
         std::unique_ptr<message_box_type>
         create_file_broken_message_box(const boost::filesystem::path& path, abstract_window_type& parent) const
         {
-            return tetengo2::stdalt::make_unique<message_box_type>(
+            return std::make_unique<message_box_type>(
                 parent,
                 m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
                 m_message_catalog.get(TETENGO2_TEXT("Message:File:The timetable file is corrupted.")),
@@ -254,7 +254,7 @@ namespace bobura::load_save {
             const boost::filesystem::path& path,
             abstract_window_type&          parent) const
         {
-            return tetengo2::stdalt::make_unique<message_box_type>(
+            return std::make_unique<message_box_type>(
                 parent,
                 m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
                 m_message_catalog.get(TETENGO2_TEXT("Message:File:Unsupported format file.")),
@@ -288,7 +288,7 @@ namespace bobura::load_save {
         const bool                    ask_file_path,
         const confirm_file_save_type& confirm_file_save,
         const message_catalog_type&   message_catalog)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(ask_file_path, confirm_file_save, message_catalog) }
+    : m_p_impl{ std::make_unique<impl>(ask_file_path, confirm_file_save, message_catalog) }
     {}
 
     template <typename Traits>

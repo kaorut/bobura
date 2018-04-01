@@ -6,6 +6,8 @@
     $Id$
 */
 
+#include <memory>
+
 #include <boost/core/ignore_unused.hpp>
 #include <boost/predef.h>
 
@@ -48,7 +50,7 @@ namespace bobura::command {
 
 
     template <typename Traits, typename Shell>
-    open_www_tetengo_org<Traits, Shell>::open_www_tetengo_org() : m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
+    open_www_tetengo_org<Traits, Shell>::open_www_tetengo_org() : m_p_impl{ std::make_unique<impl>() }
     {}
 
     template <typename Traits, typename Shell>

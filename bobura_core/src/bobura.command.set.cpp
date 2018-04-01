@@ -175,7 +175,7 @@ namespace bobura::command {
 
         std::unique_ptr<parameter_type> create_load_from_file_parameter(const boost::filesystem::path& path) const
         {
-            return tetengo2::stdalt::make_unique<
+            return std::make_unique<
                 typename command::load_from_file<command_traits_type, load_save_traits_type>::parameter_type>(path);
         }
 
@@ -260,7 +260,7 @@ namespace bobura::command {
             const settings_type&        settings,
             const detail_impl_set_type& detail_impl_set)
         {
-            return tetengo2::stdalt::make_unique<command::about<
+            return std::make_unique<command::about<
                 command_traits_type,
                 position_type,
                 dimension_type,
@@ -270,19 +270,19 @@ namespace bobura::command {
 
         static command_ptr_type create_exit()
         {
-            return tetengo2::stdalt::make_unique<command::exit<command_traits_type>>();
+            return std::make_unique<command::exit<command_traits_type>>();
         }
 
         static command_ptr_type create_file_property(const message_catalog_type& message_catalog)
         {
-            return tetengo2::stdalt::make_unique<
+            return std::make_unique<
                 command::file_property<command_traits_type, dialog_type, message_catalog_type, dialog_traits_type>>(
                 message_catalog);
         }
 
         static command_ptr_type create_font_color(const message_catalog_type& message_catalog)
         {
-            return tetengo2::stdalt::make_unique<command::font_color<
+            return std::make_unique<command::font_color<
                 command_traits_type,
                 dialog_type,
                 point_dimension_unit_type,
@@ -296,7 +296,7 @@ namespace bobura::command {
 
         static command_ptr_type create_horizontally_zoom_in(diagram_view_type& diagram_view)
         {
-            return tetengo2::stdalt::make_unique<command::horizontally_zoom_in<
+            return std::make_unique<command::horizontally_zoom_in<
                 command_traits_type,
                 traits_type,
                 main_window_traits_type,
@@ -305,7 +305,7 @@ namespace bobura::command {
 
         static command_ptr_type create_horizontally_zoom_out(diagram_view_type& diagram_view)
         {
-            return tetengo2::stdalt::make_unique<command::horizontally_zoom_out<
+            return std::make_unique<command::horizontally_zoom_out<
                 command_traits_type,
                 traits_type,
                 main_window_traits_type,
@@ -314,30 +314,28 @@ namespace bobura::command {
 
         static command_ptr_type create_load_from_file(const load_from_file_type& load_from_file)
         {
-            return tetengo2::stdalt::make_unique<command::load_from_file<command_traits_type, load_save_traits_type>>(
+            return std::make_unique<command::load_from_file<command_traits_type, load_save_traits_type>>(
                 load_from_file);
         }
 
         static command_ptr_type create_new_file(const new_file_type& new_file)
         {
-            return tetengo2::stdalt::make_unique<command::new_file<command_traits_type, load_save_traits_type>>(
-                new_file);
+            return std::make_unique<command::new_file<command_traits_type, load_save_traits_type>>(new_file);
         }
 
         static command_ptr_type create_nop()
         {
-            return tetengo2::stdalt::make_unique<command::nop<command_traits_type>>();
+            return std::make_unique<command::nop<command_traits_type>>();
         }
 
         static command_ptr_type create_open_www_tetengo_org()
         {
-            return tetengo2::stdalt::make_unique<command::open_www_tetengo_org<command_traits_type, shell_type>>();
+            return std::make_unique<command::open_www_tetengo_org<command_traits_type, shell_type>>();
         }
 
         static command_ptr_type create_save_to_file(const save_to_file_type& save_to_file)
         {
-            return tetengo2::stdalt::make_unique<command::save_to_file<command_traits_type, load_save_traits_type>>(
-                save_to_file);
+            return std::make_unique<command::save_to_file<command_traits_type, load_save_traits_type>>(save_to_file);
         }
 
         static std::vector<command_ptr_type> create_set_horizontal_scale(diagram_view_type& diagram_view)
@@ -349,7 +347,7 @@ namespace bobura::command {
 
             for (size_type i = 0; i < scale_list.size(); ++i)
             {
-                commands.push_back(tetengo2::stdalt::make_unique<command::set_horizontal_scale<
+                commands.push_back(std::make_unique<command::set_horizontal_scale<
                                        command_traits_type,
                                        scale_type,
                                        traits_type,
@@ -369,7 +367,7 @@ namespace bobura::command {
 
             for (size_type i = 0; i < scale_list.size(); ++i)
             {
-                commands.push_back(tetengo2::stdalt::make_unique<command::set_vertical_scale<
+                commands.push_back(std::make_unique<command::set_vertical_scale<
                                        command_traits_type,
                                        scale_type,
                                        traits_type,
@@ -382,25 +380,24 @@ namespace bobura::command {
 
         static command_ptr_type create_show_diagram()
         {
-            return tetengo2::stdalt::make_unique<
-                command::show_diagram<command_traits_type, traits_type, main_window_traits_type>>();
+            return std::make_unique<command::show_diagram<command_traits_type, traits_type, main_window_traits_type>>();
         }
 
         static command_ptr_type create_show_timetable_down()
         {
-            return tetengo2::stdalt::make_unique<
+            return std::make_unique<
                 command::show_timetable_down<command_traits_type, traits_type, main_window_traits_type>>();
         }
 
         static command_ptr_type create_show_timetable_up()
         {
-            return tetengo2::stdalt::make_unique<
+            return std::make_unique<
                 command::show_timetable_up<command_traits_type, traits_type, main_window_traits_type>>();
         }
 
         static command_ptr_type create_train_kind(const message_catalog_type& message_catalog)
         {
-            return tetengo2::stdalt::make_unique<command::train_kind<
+            return std::make_unique<command::train_kind<
                 command_traits_type,
                 dialog_type,
                 point_dimension_unit_type,
@@ -414,7 +411,7 @@ namespace bobura::command {
 
         static command_ptr_type create_vertically_zoom_in(diagram_view_type& diagram_view)
         {
-            return tetengo2::stdalt::make_unique<command::vertically_zoom_in<
+            return std::make_unique<command::vertically_zoom_in<
                 command_traits_type,
                 traits_type,
                 main_window_traits_type,
@@ -423,7 +420,7 @@ namespace bobura::command {
 
         static command_ptr_type create_vertically_zoom_out(diagram_view_type& diagram_view)
         {
-            return tetengo2::stdalt::make_unique<command::vertically_zoom_out<
+            return std::make_unique<command::vertically_zoom_out<
                 command_traits_type,
                 traits_type,
                 main_window_traits_type,
@@ -488,7 +485,7 @@ namespace bobura::command {
         const settings_type&        settings,
         const message_catalog_type& message_catalog,
         const detail_impl_set_type& detail_impl_set)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(
+    : m_p_impl{ std::make_unique<impl>(
           new_file,
           load_from_file,
           reload,

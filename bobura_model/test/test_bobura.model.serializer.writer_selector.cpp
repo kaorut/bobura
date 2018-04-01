@@ -98,10 +98,8 @@ namespace {
     {
         std::vector<std::unique_ptr<writer_type>> writers{};
 
-        writers.push_back(
-            tetengo2::stdalt::make_unique<concrete_writer>(boost::filesystem::path{ TETENGO2_TEXT(".hoge") }));
-        writers.push_back(
-            tetengo2::stdalt::make_unique<concrete_writer>(boost::filesystem::path{ TETENGO2_TEXT(".fuga") }));
+        writers.push_back(std::make_unique<concrete_writer>(boost::filesystem::path{ TETENGO2_TEXT(".hoge") }));
+        writers.push_back(std::make_unique<concrete_writer>(boost::filesystem::path{ TETENGO2_TEXT(".fuga") }));
 
         return writers;
     }

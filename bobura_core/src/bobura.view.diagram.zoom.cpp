@@ -7,6 +7,7 @@
 */
 
 #include <cassert>
+#include <memory>
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
@@ -149,7 +150,7 @@ namespace bobura::view::diagram {
 
     template <typename Traits, typename PictureBox, typename MouseCapture>
     zoom<Traits, PictureBox, MouseCapture>::zoom(picture_box_type& picture_box, diagram_view_type& diagram_view)
-    : m_p_impl{ tetengo2::stdalt::make_unique<impl>(picture_box, diagram_view) }
+    : m_p_impl{ std::make_unique<impl>(picture_box, diagram_view) }
     {}
 
     template <typename Traits, typename PictureBox, typename MouseCapture>

@@ -12,6 +12,7 @@
 #include <cassert>
 #include <functional>
 #include <iterator>
+#include <memory>
 #include <stdexcept>
 #include <tuple>
 #include <utility>
@@ -973,7 +974,7 @@ namespace bobura::message::train_kind_dialog {
 
         void paint_background(canvas_type& canvas) const
         {
-            auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(m_background_color);
+            auto p_background = std::make_unique<solid_background_type>(m_background_color);
             canvas.set_background(std::move(p_background));
             canvas.fill_rectangle(position_type{}, m_canvas_dimension);
         }
@@ -1033,7 +1034,7 @@ namespace bobura::message::train_kind_dialog {
             const position_type&   position,
             const dimension_type&  dimension) const
         {
-            auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(m_background_color);
+            auto p_background = std::make_unique<solid_background_type>(m_background_color);
             canvas.set_background(std::move(p_background));
             canvas.fill_rectangle(position, dimension);
 

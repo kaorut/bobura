@@ -78,11 +78,11 @@ namespace bobura::model::serializer {
 
         std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
         {
-            auto p_timetable = tetengo2::stdalt::make_unique<timetable_type>();
+            auto p_timetable = std::make_unique<timetable_type>();
 
             insert_preset_train_kinds(*p_timetable);
 
-            std::unique_ptr<state> p_state = tetengo2::stdalt::make_unique<initial_state>();
+            std::unique_ptr<state> p_state = std::make_unique<initial_state>();
             auto                   next_line_first = first;
             for (;;)
             {
@@ -91,15 +91,15 @@ namespace bobura::model::serializer {
                     break;
 
                 if (input_line == windia_section_label())
-                    p_state = tetengo2::stdalt::make_unique<windia_state>(*p_timetable);
+                    p_state = std::make_unique<windia_state>(*p_timetable);
                 else if (input_line == station_section_label())
-                    p_state = tetengo2::stdalt::make_unique<station_state>(*p_timetable);
+                    p_state = std::make_unique<station_state>(*p_timetable);
                 else if (input_line == line_kind_section_label())
-                    p_state = tetengo2::stdalt::make_unique<line_kind_state>(*p_timetable);
+                    p_state = std::make_unique<line_kind_state>(*p_timetable);
                 else if (input_line == down_train_section_label())
-                    p_state = tetengo2::stdalt::make_unique<down_train_state>(*p_timetable);
+                    p_state = std::make_unique<down_train_state>(*p_timetable);
                 else if (input_line == up_train_section_label())
-                    p_state = tetengo2::stdalt::make_unique<up_train_state>(*p_timetable);
+                    p_state = std::make_unique<up_train_state>(*p_timetable);
                 else
                 {
                     if (!p_state->parse(input_line))
@@ -935,7 +935,7 @@ namespace bobura::model::serializer {
         typename Font,
         typename Encoder>
     windia_reader<Size, Difference, String, ForwardIterator, OperatingDistance, Speed, Font, Encoder>::windia_reader()
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>() }
+    : base_type{}, m_p_impl{ std::make_unique<impl>() }
     {}
 
     template <

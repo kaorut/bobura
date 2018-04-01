@@ -11,6 +11,7 @@
 
 #include <cassert>
 #include <functional>
+#include <memory>
 #include <vector>
 
 #include <boost/optional.hpp>
@@ -222,7 +223,7 @@ namespace bobura::message::font_color_dialog {
             const string_type&                                                               text) const
         {
             assert(get_color(m_font_color_list[0]));
-            auto p_background = tetengo2::stdalt::make_unique<solid_background_type>(*get_color(m_font_color_list[0]));
+            auto p_background = std::make_unique<solid_background_type>(*get_color(m_font_color_list[0]));
             canvas.set_background(std::move(p_background));
             canvas.fill_rectangle(position, dimension);
 

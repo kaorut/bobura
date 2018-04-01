@@ -11,6 +11,7 @@
 
 #include <cassert>
 #include <functional>
+#include <memory>
 
 #include <boost/core/ignore_unused.hpp>
 
@@ -249,7 +250,7 @@ namespace bobura::message::view_picture_box::timetable {
             //    if (!p_system_cursor || p_system_cursor->style() != system_cursor_type::style_type::hand)
             //    {
             //        m_picture_box.set_cursor(
-            //            tetengo2::stdalt::make_unique<system_cursor_type>(system_cursor_type::style_type::hand)
+            //            std::make_unique<system_cursor_type>(system_cursor_type::style_type::hand)
             //        );
             //    }
             //}

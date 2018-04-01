@@ -108,7 +108,7 @@ namespace bobura::model::serializer {
     writer_selector<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::writer_selector(
         std::vector<std::unique_ptr<base_type>> p_writers,
         boost::filesystem::path                 path)
-    : base_type{}, m_p_impl{ tetengo2::stdalt::make_unique<impl>(std::move(p_writers), std::move(path)) }
+    : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(p_writers), std::move(path)) }
     {}
 
     template <

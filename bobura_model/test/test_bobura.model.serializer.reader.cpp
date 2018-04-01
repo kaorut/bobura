@@ -81,7 +81,7 @@ namespace {
         {
             boost::ignore_unused(first, last, error);
 
-            return tetengo2::stdalt::make_unique<timetable_type>();
+            return std::make_unique<timetable_type>();
         }
     };
 }

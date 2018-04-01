@@ -8,6 +8,7 @@
 
 #include <exception> // IWYU pragma: keep
 #include <locale>
+#include <memory>
 #include <stdexcept> // IWYU pragma: keep
 #include <string>
 #include <vector> // IWYU pragma: keep
@@ -77,7 +78,7 @@ namespace {
 
     void set_locale(const boost::filesystem::path& message_directory_path)
     {
-        auto p_messages_facet = tetengo2::stdalt::make_unique<tetengo2::message::messages>(
+        auto p_messages_facet = std::make_unique<tetengo2::message::messages>(
             message_directory_path, std::locale(ui_locale_name().c_str()));
         const std::locale global_locale{ std::locale(""), p_messages_facet.release() };
 
