@@ -8,7 +8,6 @@
 
 #include <memory>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/predef.h>
 
 #include <bobura/about_dialog.h>
@@ -49,10 +48,8 @@ namespace bobura::command {
 
         // functions
 
-        void execute(model_type& model, abstract_window_type& parent) const
+        void execute([[maybe_unused]] model_type& model, abstract_window_type& parent) const
         {
-            boost::ignore_unused(model);
-
             about_dialog_type{ parent, m_message_catalog, m_settings, m_detail_impl_set }.do_modal();
         }
 

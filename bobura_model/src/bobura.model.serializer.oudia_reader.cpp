@@ -16,7 +16,6 @@
 #include <vector>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/lexical_cast.hpp>
@@ -194,10 +193,8 @@ namespace bobura::model::serializer {
             }
 
         private:
-            virtual bool parse_impl(const string_type& key, string_type value)
+            virtual bool parse_impl([[maybe_unused]] const string_type& key, [[maybe_unused]] string_type value)
             {
-                boost::ignore_unused(key, value);
-
                 return true;
             }
 

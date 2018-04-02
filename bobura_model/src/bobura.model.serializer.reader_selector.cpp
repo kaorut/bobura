@@ -11,7 +11,6 @@
 #include <stdexcept>
 #include <vector>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
@@ -59,10 +58,8 @@ namespace bobura::model::serializer {
 #if BOOST_COMP_GNUC
 #pragma GCC diagnostic ignored "-Wreturn-type"
 #endif
-        bool selects_impl(const iterator first, const iterator last)
+        bool selects_impl([[maybe_unused]] const iterator first, [[maybe_unused]] const iterator last)
         {
-            boost::ignore_unused(first, last);
-
             BOOST_THROW_EXCEPTION(std::logic_error("This function cannot be called."));
         }
 #if BOOST_COMP_GNUC

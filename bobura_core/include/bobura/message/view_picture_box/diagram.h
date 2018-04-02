@@ -13,7 +13,6 @@
 #include <functional>
 #include <memory>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/rational.hpp>
 
 #include <tetengo2/detail/base/impl_set.h>
@@ -79,14 +78,12 @@ namespace bobura::message::view_picture_box::diagram {
             \param meta     True when meta key is pressed.
         */
         void operator()(
-            const mouse_button_type button,
-            const position_type&    position,
-            const bool              shift,
-            const bool              control,
-            const bool              meta) const
+            const mouse_button_type     button,
+            const position_type&        position,
+            [[maybe_unused]] const bool shift,
+            [[maybe_unused]] const bool control,
+            [[maybe_unused]] const bool meta) const
         {
-            boost::ignore_unused(shift, control, meta);
-
             m_picture_box.set_focus();
 
             m_set_mouse_capture(button);
@@ -168,14 +165,12 @@ namespace bobura::message::view_picture_box::diagram {
             \param meta     True when meta key is pressed.
         */
         void operator()(
-            const mouse_button_type button,
-            const position_type&    position,
-            const bool              shift,
-            const bool              control,
-            const bool              meta) const
+            const mouse_button_type               button,
+            [[maybe_unused]] const position_type& position,
+            [[maybe_unused]] const bool           shift,
+            [[maybe_unused]] const bool           control,
+            [[maybe_unused]] const bool           meta) const
         {
-            boost::ignore_unused(button, position, shift, control, meta);
-
             m_release_mouse_capture(button);
         }
 
@@ -244,10 +239,12 @@ namespace bobura::message::view_picture_box::diagram {
             \param control  True when control key is pressed.
             \param meta     True when meta key is pressed.
         */
-        void operator()(const position_type& position, const bool shift, const bool control, const bool meta) const
+        void operator()(
+            const position_type&        position,
+            [[maybe_unused]] const bool shift,
+            [[maybe_unused]] const bool control,
+            [[maybe_unused]] const bool meta) const
         {
-            boost::ignore_unused(shift, control, meta);
-
             const auto* const p_item = m_view.p_item_by_position(position);
             const auto        p_cursor = m_picture_box.p_cursor();
             const auto* const p_system_cursor = p_cursor ? dynamic_cast<const system_cursor_type*>(p_cursor) : nullptr;
@@ -741,10 +738,8 @@ namespace bobura::message::view_picture_box::diagram {
 
             \param new_position A new position.
         */
-        void operator()(const size_type new_position) const
+        void operator()([[maybe_unused]] const size_type new_position) const
         {
-            boost::ignore_unused(new_position);
-
             m_view.update_dimension();
             m_picture_box.repaint();
         }

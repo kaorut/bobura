@@ -9,7 +9,6 @@
 #include <cassert>
 #include <memory>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
@@ -184,11 +183,10 @@ namespace bobura {
         }
 
         void ensure_items_created(
-            canvas_type&          canvas,
-            const dimension_type& canvas_dimension,
-            const position_type&  scroll_bar_position)
+            canvas_type&                          canvas,
+            const dimension_type&                 canvas_dimension,
+            [[maybe_unused]] const position_type& scroll_bar_position)
         {
-            boost::ignore_unused(scroll_bar_position);
             if (m_p_header)
             {
                 assert(m_p_train_number_header);

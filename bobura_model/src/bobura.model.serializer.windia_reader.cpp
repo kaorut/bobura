@@ -16,7 +16,6 @@
 #include <utility>
 #include <vector>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/lexical_cast.hpp>
@@ -158,10 +157,8 @@ namespace bobura::model::serializer {
         public:
             virtual ~initial_state() = default;
 
-            virtual bool parse(const string_type& line) override
+            virtual bool parse([[maybe_unused]] const string_type& line) override
             {
-                boost::ignore_unused(line);
-
                 return false;
             }
         };

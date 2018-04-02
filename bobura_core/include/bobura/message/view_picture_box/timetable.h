@@ -13,8 +13,6 @@
 #include <functional>
 #include <memory>
 
-#include <boost/core/ignore_unused.hpp>
-
 #include <bobura/timetable_view.h>
 
 
@@ -76,14 +74,12 @@ namespace bobura::message::view_picture_box::timetable {
             \param meta     True when meta key is pressed.
         */
         void operator()(
-            const mouse_button_type button,
-            const position_type&    position,
-            const bool              shift,
-            const bool              control,
-            const bool              meta) const
+            [[maybe_unused]] const mouse_button_type button,
+            [[maybe_unused]] const position_type&    position,
+            [[maybe_unused]] const bool              shift,
+            [[maybe_unused]] const bool              control,
+            [[maybe_unused]] const bool              meta) const
         {
-            boost::ignore_unused(button, position, shift, control, meta);
-
             // m_picture_box.set_focus();
 
             // m_set_mouse_capture(button);
@@ -165,14 +161,12 @@ namespace bobura::message::view_picture_box::timetable {
             \param meta     True when meta key is pressed.
         */
         void operator()(
-            const mouse_button_type button,
-            const position_type&    position,
-            const bool              shift,
-            const bool              control,
-            const bool              meta) const
+            [[maybe_unused]] const mouse_button_type button,
+            [[maybe_unused]] const position_type&    position,
+            [[maybe_unused]] const bool              shift,
+            [[maybe_unused]] const bool              control,
+            [[maybe_unused]] const bool              meta) const
         {
-            boost::ignore_unused(button, position, shift, control, meta);
-
             // m_release_mouse_capture(button);
         }
 
@@ -237,10 +231,12 @@ namespace bobura::message::view_picture_box::timetable {
             \param control  True when control key is pressed.
             \param meta     True when meta key is pressed.
         */
-        void operator()(const position_type& position, const bool shift, const bool control, const bool meta) const
+        void operator()(
+            [[maybe_unused]] const position_type& position,
+            [[maybe_unused]] const bool           shift,
+            [[maybe_unused]] const bool           control,
+            [[maybe_unused]] const bool           meta) const
         {
-            boost::ignore_unused(position, shift, control, meta);
-
             // const auto* const p_item = m_view.p_item_by_position(position);
             // const auto cursor = m_picture_box.cursor();
             // const auto* const p_system_cursor =
@@ -338,14 +334,12 @@ namespace bobura::message::view_picture_box::timetable {
             \param meta      True when meta key is pressed.
         */
         void operator()(
-            const delta_type&    delta,
-            const direction_type direction,
-            const bool           shift,
-            const bool           control,
-            const bool           meta) const
+            [[maybe_unused]] const delta_type&    delta,
+            [[maybe_unused]] const direction_type direction,
+            [[maybe_unused]] const bool           shift,
+            [[maybe_unused]] const bool           control,
+            [[maybe_unused]] const bool           meta) const
         {
-            boost::ignore_unused(delta, direction, shift, control, meta);
-
             // const auto adjusted_delta =
             //    direction == picture_box_type::mouse_observer_set_type::direction_type::horizontal ? delta : -delta;
 
@@ -490,11 +484,12 @@ namespace bobura::message::view_picture_box::timetable {
             \param control     True when control key is pressed.
             \param meta        True when meta key is pressed.
         */
-        void
-        operator()(const virtual_key_type& virtual_key, const bool shift, const bool control, const bool meta) const
+        void operator()(
+            [[maybe_unused]] const virtual_key_type& virtual_key,
+            [[maybe_unused]] const bool              shift,
+            [[maybe_unused]] const bool              control,
+            [[maybe_unused]] const bool              meta) const
         {
-            boost::ignore_unused(virtual_key, shift, control, meta);
-
             // if (
             //    virtual_key == virtual_key_type::left() ||
             //    virtual_key == virtual_key_type::right() ||
@@ -658,8 +653,6 @@ namespace bobura::message::view_picture_box::timetable {
         */
         void operator()(canvas_type& canvas) const
         {
-            boost::ignore_unused(canvas);
-
             assert(m_picture_box.has_vertical_scroll_bar());
             assert(m_picture_box.has_horizontal_scroll_bar());
 
@@ -749,10 +742,8 @@ namespace bobura::message::view_picture_box::timetable {
 
             \param new_position A new position.
         */
-        void operator()(const size_type new_position) const
+        void operator()([[maybe_unused]] const size_type new_position) const
         {
-            boost::ignore_unused(new_position);
-
             // m_view.update_dimension();
             // m_picture_box.repaint();
         }

@@ -10,7 +10,6 @@
 #include <sstream>
 #include <utility>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/test/unit_test.hpp>
@@ -70,18 +69,16 @@ namespace {
 
 
     private:
-        virtual bool selects_impl(const iterator first, const iterator last) override
+        virtual bool selects_impl([[maybe_unused]] const iterator first, [[maybe_unused]] const iterator last) override
         {
-            boost::ignore_unused(first, last);
-
             return true;
         }
 
-        virtual std::unique_ptr<timetable_type>
-        read_impl(const iterator first, const iterator last, error_type& error) override
+        virtual std::unique_ptr<timetable_type> read_impl(
+            [[maybe_unused]] const iterator first,
+            [[maybe_unused]] const iterator last,
+            [[maybe_unused]] error_type&    error) override
         {
-            boost::ignore_unused(first, last, error);
-
             return std::make_unique<timetable_type>();
         }
     };

@@ -8,7 +8,6 @@
 
 #include <memory>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
@@ -31,10 +30,8 @@ namespace bobura::command {
 
         // functions
 
-        void execute(model_type& model, abstract_window_type& parent) const
+        void execute([[maybe_unused]] model_type& model, abstract_window_type& parent) const
         {
-            boost::ignore_unused(model);
-
             parent.close();
         }
     };
