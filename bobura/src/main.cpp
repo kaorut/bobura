@@ -13,7 +13,6 @@
 #include <string>
 #include <vector> // IWYU pragma: keep
 
-#include <boost/core/ignore_unused.hpp> // IWYU pragma: keep
 #include <boost/exception/all.hpp> // IWYU pragma: keep
 #include <boost/filesystem.hpp>
 #include <boost/program_options.hpp> // IWYU pragma: keep
@@ -102,11 +101,12 @@ namespace {
 
     \return The exit status code.
 */
-int WINAPI
-    wWinMain(const ::HINSTANCE hInstance, const ::HINSTANCE hPrevInstance, const ::LPWSTR lpCmdLine, const int nCmdShow)
+int WINAPI wWinMain(
+    [[maybe_unused]] const ::HINSTANCE hInstance,
+    [[maybe_unused]] const ::HINSTANCE hPrevInstance,
+    [[maybe_unused]] const ::LPWSTR    lpCmdLine,
+    [[maybe_unused]] const int         nCmdShow)
 {
-    boost::ignore_unused(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
-
     using alert_type = ui_type_list_type::alert_type;
 
     try

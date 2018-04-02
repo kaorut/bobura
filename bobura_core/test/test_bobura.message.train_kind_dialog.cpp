@@ -9,7 +9,6 @@
 #include <memory>
 #include <vector>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/none.hpp>
 #include <boost/operators.hpp>
 #include <boost/optional.hpp>
@@ -75,10 +74,11 @@ namespace {
 
         info_set_type() {}
 
-        info_set_type(boost::optional<size_type> original_index, const bool referred, train_kind_type train_kind)
-        {
-            boost::ignore_unused(original_index, referred, train_kind);
-        }
+        info_set_type(
+            [[maybe_unused]] boost::optional<size_type> original_index,
+            [[maybe_unused]] const bool                 referred,
+            [[maybe_unused]] train_kind_type            train_kind)
+        {}
 
         const boost::optional<size_type>& original_index() const
         {

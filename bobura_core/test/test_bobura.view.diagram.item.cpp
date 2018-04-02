@@ -9,7 +9,6 @@
 #include <memory>
 #include <utility>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -64,10 +63,8 @@ namespace {
             return m_selected;
         }
 
-        virtual void select_impl(const bool switch_selection_style) override
+        virtual void select_impl([[maybe_unused]] const bool switch_selection_style) override
         {
-            boost::ignore_unused(switch_selection_style);
-
             m_selected = true;
         }
     };

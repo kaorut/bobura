@@ -9,7 +9,6 @@
 #include <memory>
 #include <utility>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
@@ -69,10 +68,7 @@ namespace bobura::view::timetable {
             return m_dimension;
         }
 
-        void draw_on_impl(canvas_type& canvas) const
-        {
-            boost::ignore_unused(canvas);
-        }
+        void draw_on_impl([[maybe_unused]] canvas_type& canvas) const {}
 
         void set_position(position_type position)
         {

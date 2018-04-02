@@ -13,7 +13,6 @@
 #include <utility>
 #include <vector>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
@@ -84,11 +83,11 @@ namespace {
             return string_type{ first, last } == m_line_name;
         }
 
-        virtual std::unique_ptr<timetable_type>
-        read_impl(const iterator first, const iterator last, error_type& error) override
+        virtual std::unique_ptr<timetable_type> read_impl(
+            [[maybe_unused]] const iterator first,
+            [[maybe_unused]] const iterator last,
+            [[maybe_unused]] error_type&    error) override
         {
-            boost::ignore_unused(first, last, error);
-
             auto p_timetable = std::make_unique<timetable_type>();
 
             p_timetable->set_line_name(m_line_name);

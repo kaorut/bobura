@@ -9,7 +9,6 @@
 #include <sstream>
 #include <stdexcept>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/operators.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
@@ -105,7 +104,6 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     BOOST_TEST_PASSPOINT();
 
                     const auto time = time_type::uninitialized();
-                    boost::ignore_unused(time);
                 }
 
                 BOOST_AUTO_TEST_CASE(construction)

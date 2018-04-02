@@ -8,7 +8,6 @@
 
 #include <memory>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2/text.h>
@@ -34,10 +33,8 @@ namespace bobura::command {
 
         // functions
 
-        void execute(model_type& model, abstract_window_type& parent) const
+        void execute([[maybe_unused]] model_type& model, [[maybe_unused]] abstract_window_type& parent) const
         {
-            boost::ignore_unused(model, parent);
-
             shell_type::instance().execute(string_type{ TETENGO2_TEXT("http://www.tetengo.org/") });
         }
 

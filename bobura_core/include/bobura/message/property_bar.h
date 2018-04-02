@@ -9,8 +9,6 @@
 #if !defined(BOBURA_MESSAGE_PROPERTYBAR_H)
 #define BOBURA_MESSAGE_PROPERTYBAR_H
 
-#include <boost/core/ignore_unused.hpp>
-
 
 namespace bobura::message::property_bar {
     /*!
@@ -118,14 +116,12 @@ namespace bobura::message::property_bar {
             \param meta     True when meta key is pressed.
         */
         void operator()(
-            const mouse_button_type button,
-            const position_type&    position,
-            const bool              shift,
-            const bool              control,
-            const bool              meta) const
+            [[maybe_unused]] const mouse_button_type button,
+            [[maybe_unused]] const position_type&    position,
+            [[maybe_unused]] const bool              shift,
+            [[maybe_unused]] const bool              control,
+            [[maybe_unused]] const bool              meta) const
         {
-            boost::ignore_unused(button, position, shift, control, meta);
-
             m_map_box.set_focus();
         }
 

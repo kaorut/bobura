@@ -6,7 +6,6 @@
     $Id$
 */
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/predef.h>
 
 #include <bobura/command/command_base.h>
@@ -49,10 +48,8 @@ namespace bobura::command {
     }
 
     template <typename Traits>
-    bool command_base<Traits>::enabled_impl(const model_type& model) const
+    bool command_base<Traits>::enabled_impl([[maybe_unused]] const model_type& model) const
     {
-        boost::ignore_unused(model);
-
         return true;
     }
 
@@ -63,12 +60,11 @@ namespace bobura::command {
     }
 
     template <typename Traits>
-    void
-    command_base<Traits>::execute_impl(model_type& model, abstract_window_type& parent, const parameter_base& parameter)
-        const
+    void command_base<Traits>::execute_impl(
+        model_type&                            model,
+        abstract_window_type&                  parent,
+        [[maybe_unused]] const parameter_base& parameter) const
     {
-        boost::ignore_unused(parameter);
-
         execute_impl(model, parent);
     }
 

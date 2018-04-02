@@ -10,7 +10,6 @@
 #include <memory>
 #include <vector>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 #include <boost/range/adaptors.hpp>
@@ -119,10 +118,8 @@ namespace bobura::view::diagram {
             return self.get_selection().selected(*m_p_station_location);
         }
 
-        void select_impl(station_line& self, const bool switch_selection_style)
+        void select_impl(station_line& self, [[maybe_unused]] const bool switch_selection_style)
         {
-            boost::ignore_unused(switch_selection_style);
-
             self.get_selection().select(*m_p_station_location);
         }
 

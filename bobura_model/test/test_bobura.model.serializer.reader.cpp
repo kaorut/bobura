@@ -10,7 +10,6 @@
 #include <sstream>
 #include <string>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
@@ -71,16 +70,14 @@ namespace {
     private:
         virtual bool selects_impl(const iterator first, const iterator last) override
         {
-            boost::ignore_unused(first, last);
-
             return string_type{ first, last } == string_type{ TETENGO2_TEXT("hoge") };
         }
 
-        virtual std::unique_ptr<timetable_type>
-        read_impl(const iterator first, const iterator last, error_type& error) override
+        virtual std::unique_ptr<timetable_type> read_impl(
+            [[maybe_unused]] const iterator first,
+            [[maybe_unused]] const iterator last,
+            [[maybe_unused]] error_type&    error) override
         {
-            boost::ignore_unused(first, last, error);
-
             return std::make_unique<timetable_type>();
         }
     };

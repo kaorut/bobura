@@ -13,7 +13,6 @@
 #include <string>
 #include <vector> // IWYU pragma: keep
 
-#include <boost/core/ignore_unused.hpp> // IWYU pragma: keep
 #include <boost/filesystem.hpp>
 
 #define NOMINMAX
@@ -170,17 +169,19 @@ namespace {
 /*!
     \brief The entry point of the application.
 
-    \param hInstance     Not used.
+    \param hInstance     A handle to the instance.
     \param hPrevInstance Not used.
     \param lpCmdLine     Not used.
-    \param nCmdShow      Not used.
+    \param nCmdShow      A window state.
 
     \return The exit status code.
 */
-int WINAPI
-    wWinMain(const ::HINSTANCE hInstance, const ::HINSTANCE hPrevInstance, const ::LPWSTR lpCmdLine, const int nCmdShow)
+int WINAPI wWinMain(
+    const ::HINSTANCE                  hInstance,
+    [[maybe_unused]] const ::HINSTANCE hPrevInstance,
+    [[maybe_unused]] const ::LPWSTR    lpCmdLine,
+    const int                          nCmdShow)
 {
-    boost::ignore_unused(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
     try
     {
         std::locale::global(std::locale(""));

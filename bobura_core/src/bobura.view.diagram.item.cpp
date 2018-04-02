@@ -8,7 +8,6 @@
 
 #include <memory>
 
-#include <boost/core/ignore_unused.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
@@ -60,15 +59,10 @@ namespace bobura::view::diagram {
             return *m_p_selection;
         }
 
-        void draw_on_impl(canvas_type& canvas) const
-        {
-            boost::ignore_unused(canvas);
-        }
+        void draw_on_impl([[maybe_unused]] canvas_type& canvas) const {}
 
-        item* p_item_by_position_impl(const position_type& position)
+        item* p_item_by_position_impl([[maybe_unused]] const position_type& position)
         {
-            boost::ignore_unused(position);
-
             return nullptr;
         }
 
@@ -77,10 +71,7 @@ namespace bobura::view::diagram {
             return false;
         }
 
-        void select_impl(const bool switch_selection_style)
-        {
-            boost::ignore_unused(switch_selection_style);
-        }
+        void select_impl([[maybe_unused]] const bool switch_selection_style) {}
 
 
     private:
