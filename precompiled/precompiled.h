@@ -10,19 +10,21 @@
 #define PRECOMPILED_H
 
 // The standard library headers
+
 #include <algorithm>
 #include <cassert>
 #include <chrono>
 #include <cmath>
 #include <cstddef>
 #include <cstdint>
+#include <cstdlib>
 #include <exception>
 #include <functional>
-#include <iomanip>
 #include <ios>
 #include <iterator>
 #include <limits>
 #include <locale>
+#include <map>
 #include <memory>
 #include <numeric>
 #include <ostream>
@@ -35,28 +37,35 @@
 #include <utility>
 #include <vector>
 
+
 // The Boost library headers
+
 #include <boost/algorithm/string.hpp>
+#include <boost/container/container_fwd.hpp>
 #include <boost/core/noncopyable.hpp>
+#include <boost/core/swap.hpp>
 #include <boost/exception/all.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/filesystem/fstream.hpp>
 #include <boost/format.hpp>
 #include <boost/iostreams/filter/bzip2.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
+#include <boost/iostreams/traits.hpp>
+#include <boost/iterator/iterator_facade.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/math/constants/constants.hpp>
+#include <boost/none.hpp>
 #include <boost/operators.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
+#include <boost/preprocessor.hpp>
 #include <boost/program_options.hpp>
 #include <boost/range/adaptors.hpp>
 #include <boost/range/iterator_range.hpp>
 #include <boost/rational.hpp>
+#include <boost/shared_ptr.hpp>
 #include <boost/signals2.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
-#include <boost/swap.hpp>
-#include <boost/system/system_error.hpp>
+#include <boost/system/error_code.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/utility/string_view.hpp>
 #include <boost/variant.hpp>
