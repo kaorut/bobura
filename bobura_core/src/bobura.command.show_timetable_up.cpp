@@ -12,6 +12,8 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/command/show_timetable_up.h>
 #include <bobura/detail_type_list.h>
 #include <bobura/main_window.h>
@@ -36,7 +38,7 @@ namespace bobura::command {
 
         // functions
 
-        void execute([[maybe_unused]] model_type& model, abstract_window_type& parent) const
+        void execute(TETENGO2_STDALT_MAYBE_UNUSED model_type& model, abstract_window_type& parent) const
         {
             auto* const p_main_window = dynamic_cast<main_window_type*>(&parent);
             assert(p_main_window);

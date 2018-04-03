@@ -23,6 +23,7 @@
 #include <Windows.h>
 
 #include <tetengo2/detail/windows/impl_set.h>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/application.h>
 #include <bobura/settings.h>
@@ -102,10 +103,10 @@ namespace {
     \return The exit status code.
 */
 int WINAPI wWinMain(
-    [[maybe_unused]] const ::HINSTANCE hInstance,
-    [[maybe_unused]] const ::HINSTANCE hPrevInstance,
-    [[maybe_unused]] const ::LPWSTR    lpCmdLine,
-    [[maybe_unused]] const int         nCmdShow)
+    TETENGO2_STDALT_MAYBE_UNUSED const ::HINSTANCE hInstance,
+    TETENGO2_STDALT_MAYBE_UNUSED const ::HINSTANCE hPrevInstance,
+    TETENGO2_STDALT_MAYBE_UNUSED const ::LPWSTR    lpCmdLine,
+    TETENGO2_STDALT_MAYBE_UNUSED const int         nCmdShow)
 {
     using alert_type = ui_type_list_type::alert_type;
 

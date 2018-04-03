@@ -16,6 +16,7 @@
 #include <boost/rational.hpp>
 
 #include <tetengo2/detail/base/impl_set.h>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/diagram_view.h>
 
@@ -80,9 +81,9 @@ namespace bobura::message::view_picture_box::diagram {
         void operator()(
             const mouse_button_type     button,
             const position_type&        position,
-            [[maybe_unused]] const bool shift,
-            [[maybe_unused]] const bool control,
-            [[maybe_unused]] const bool meta) const
+            TETENGO2_STDALT_MAYBE_UNUSED const bool shift,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool control,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool meta) const
         {
             m_picture_box.set_focus();
 
@@ -166,10 +167,10 @@ namespace bobura::message::view_picture_box::diagram {
         */
         void operator()(
             const mouse_button_type               button,
-            [[maybe_unused]] const position_type& position,
-            [[maybe_unused]] const bool           shift,
-            [[maybe_unused]] const bool           control,
-            [[maybe_unused]] const bool           meta) const
+            TETENGO2_STDALT_MAYBE_UNUSED const position_type& position,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           shift,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           control,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           meta) const
         {
             m_release_mouse_capture(button);
         }
@@ -241,9 +242,9 @@ namespace bobura::message::view_picture_box::diagram {
         */
         void operator()(
             const position_type&        position,
-            [[maybe_unused]] const bool shift,
-            [[maybe_unused]] const bool control,
-            [[maybe_unused]] const bool meta) const
+            TETENGO2_STDALT_MAYBE_UNUSED const bool shift,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool control,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool meta) const
         {
             const auto* const p_item = m_view.p_item_by_position(position);
             const auto        p_cursor = m_picture_box.p_cursor();
@@ -738,7 +739,7 @@ namespace bobura::message::view_picture_box::diagram {
 
             \param new_position A new position.
         */
-        void operator()([[maybe_unused]] const size_type new_position) const
+        void operator()(TETENGO2_STDALT_MAYBE_UNUSED const size_type new_position) const
         {
             m_view.update_dimension();
             m_picture_box.repaint();

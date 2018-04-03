@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    const auto time = time_type::uninitialized();
+                    time_type::uninitialized();
                 }
 
                 BOOST_AUTO_TEST_CASE(construction)

@@ -15,6 +15,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2/iterator/observable_forward_iterator.h>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/bzip2_reader.h>
@@ -69,15 +70,15 @@ namespace {
 
 
     private:
-        virtual bool selects_impl([[maybe_unused]] const iterator first, [[maybe_unused]] const iterator last) override
+        virtual bool selects_impl(TETENGO2_STDALT_MAYBE_UNUSED const iterator first, TETENGO2_STDALT_MAYBE_UNUSED const iterator last) override
         {
             return true;
         }
 
         virtual std::unique_ptr<timetable_type> read_impl(
-            [[maybe_unused]] const iterator first,
-            [[maybe_unused]] const iterator last,
-            [[maybe_unused]] error_type&    error) override
+            TETENGO2_STDALT_MAYBE_UNUSED const iterator first,
+            TETENGO2_STDALT_MAYBE_UNUSED const iterator last,
+            TETENGO2_STDALT_MAYBE_UNUSED error_type&    error) override
         {
             return std::make_unique<timetable_type>();
         }

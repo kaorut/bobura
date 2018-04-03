@@ -12,6 +12,8 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 #include <bobura/view/timetable/item.h>
@@ -68,7 +70,7 @@ namespace bobura::view::timetable {
             return m_dimension;
         }
 
-        void draw_on_impl([[maybe_unused]] canvas_type& canvas) const {}
+        void draw_on_impl(TETENGO2_STDALT_MAYBE_UNUSED canvas_type& canvas) const {}
 
         void set_position(position_type position)
         {

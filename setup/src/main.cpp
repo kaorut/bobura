@@ -21,6 +21,8 @@
 #// prevent sort by ClangFormat
 #include <CommCtrl.h>
 
+#include <tetengo2/stdalt.h>
+
 #include <setup/encode.h>
 
 
@@ -178,8 +180,8 @@ namespace {
 */
 int WINAPI wWinMain(
     const ::HINSTANCE                  hInstance,
-    [[maybe_unused]] const ::HINSTANCE hPrevInstance,
-    [[maybe_unused]] const ::LPWSTR    lpCmdLine,
+    TETENGO2_STDALT_MAYBE_UNUSED const ::HINSTANCE hPrevInstance,
+    TETENGO2_STDALT_MAYBE_UNUSED const ::LPWSTR    lpCmdLine,
     const int                          nCmdShow)
 {
     try

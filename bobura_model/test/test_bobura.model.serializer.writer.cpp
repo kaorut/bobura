@@ -12,6 +12,7 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -68,8 +69,8 @@ namespace {
         }
 
         virtual void write_impl(
-            [[maybe_unused]] const timetable_type& timetable,
-            [[maybe_unused]] output_stream_type&   output_stream) override
+            TETENGO2_STDALT_MAYBE_UNUSED const timetable_type& timetable,
+            TETENGO2_STDALT_MAYBE_UNUSED output_stream_type&   output_stream) override
         {}
     };
 }
