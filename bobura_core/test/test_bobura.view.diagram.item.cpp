@@ -12,6 +12,8 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/item.h>
@@ -63,7 +65,7 @@ namespace {
             return m_selected;
         }
 
-        virtual void select_impl([[maybe_unused]] const bool switch_selection_style) override
+        virtual void select_impl(TETENGO2_STDALT_MAYBE_UNUSED const bool switch_selection_style) override
         {
             m_selected = true;
         }

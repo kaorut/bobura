@@ -10,6 +10,8 @@
 
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/about_dialog.h>
 #include <bobura/command/about.h>
 #include <bobura/detail_type_list.h>
@@ -48,7 +50,7 @@ namespace bobura::command {
 
         // functions
 
-        void execute([[maybe_unused]] model_type& model, abstract_window_type& parent) const
+        void execute(TETENGO2_STDALT_MAYBE_UNUSED model_type& model, abstract_window_type& parent) const
         {
             about_dialog_type{ parent, m_message_catalog, m_settings, m_detail_impl_set }.do_modal();
         }

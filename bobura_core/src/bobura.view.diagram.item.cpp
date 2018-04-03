@@ -11,6 +11,8 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 #include <bobura/view/diagram/item.h>
@@ -59,9 +61,9 @@ namespace bobura::view::diagram {
             return *m_p_selection;
         }
 
-        void draw_on_impl([[maybe_unused]] canvas_type& canvas) const {}
+        void draw_on_impl(TETENGO2_STDALT_MAYBE_UNUSED canvas_type& canvas) const {}
 
-        item* p_item_by_position_impl([[maybe_unused]] const position_type& position)
+        item* p_item_by_position_impl(TETENGO2_STDALT_MAYBE_UNUSED const position_type& position)
         {
             return nullptr;
         }
@@ -71,7 +73,7 @@ namespace bobura::view::diagram {
             return false;
         }
 
-        void select_impl([[maybe_unused]] const bool switch_selection_style) {}
+        void select_impl(TETENGO2_STDALT_MAYBE_UNUSED const bool switch_selection_style) {}
 
 
     private:

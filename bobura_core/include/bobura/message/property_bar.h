@@ -9,6 +9,8 @@
 #if !defined(BOBURA_MESSAGE_PROPERTYBAR_H)
 #define BOBURA_MESSAGE_PROPERTYBAR_H
 
+#include <tetengo2/stdalt.h>
+
 
 namespace bobura::message::property_bar {
     /*!
@@ -116,11 +118,11 @@ namespace bobura::message::property_bar {
             \param meta     True when meta key is pressed.
         */
         void operator()(
-            [[maybe_unused]] const mouse_button_type button,
-            [[maybe_unused]] const position_type&    position,
-            [[maybe_unused]] const bool              shift,
-            [[maybe_unused]] const bool              control,
-            [[maybe_unused]] const bool              meta) const
+            TETENGO2_STDALT_MAYBE_UNUSED const mouse_button_type button,
+            TETENGO2_STDALT_MAYBE_UNUSED const position_type&    position,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool              shift,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool              control,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool              meta) const
         {
             m_map_box.set_focus();
         }

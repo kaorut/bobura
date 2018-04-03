@@ -14,6 +14,8 @@
 #include <boost/predef.h>
 #include <boost/range/adaptors.hpp>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/detail_type_list.h>
 #include <bobura/model/station_info/grade.h>
 #include <bobura/type_list.h>
@@ -118,7 +120,7 @@ namespace bobura::view::diagram {
             return self.get_selection().selected(*m_p_station_location);
         }
 
-        void select_impl(station_line& self, [[maybe_unused]] const bool switch_selection_style)
+        void select_impl(station_line& self, TETENGO2_STDALT_MAYBE_UNUSED const bool switch_selection_style)
         {
             self.get_selection().select(*m_p_station_location);
         }

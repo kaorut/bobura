@@ -15,6 +15,8 @@
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/reader_selector.h>
 #include <bobura/type_list.h>
@@ -58,7 +60,7 @@ namespace bobura::model::serializer {
 #if BOOST_COMP_GNUC
 #pragma GCC diagnostic ignored "-Wreturn-type"
 #endif
-        bool selects_impl([[maybe_unused]] const iterator first, [[maybe_unused]] const iterator last)
+        bool selects_impl(TETENGO2_STDALT_MAYBE_UNUSED const iterator first, TETENGO2_STDALT_MAYBE_UNUSED const iterator last)
         {
             BOOST_THROW_EXCEPTION(std::logic_error("This function cannot be called."));
         }

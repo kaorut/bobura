@@ -17,6 +17,7 @@
 
 #include <tetengo2/gui/unit/em.h>
 #include <tetengo2/gui/unit/unit.h>
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -75,9 +76,9 @@ namespace {
         info_set_type() {}
 
         info_set_type(
-            [[maybe_unused]] boost::optional<size_type> original_index,
-            [[maybe_unused]] const bool                 referred,
-            [[maybe_unused]] train_kind_type            train_kind)
+            TETENGO2_STDALT_MAYBE_UNUSED boost::optional<size_type> original_index,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool                 referred,
+            TETENGO2_STDALT_MAYBE_UNUSED train_kind_type            train_kind)
         {}
 
         const boost::optional<size_type>& original_index() const

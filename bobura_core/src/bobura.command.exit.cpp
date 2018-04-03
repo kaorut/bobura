@@ -11,6 +11,8 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/command/exit.h>
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
@@ -30,7 +32,7 @@ namespace bobura::command {
 
         // functions
 
-        void execute([[maybe_unused]] model_type& model, abstract_window_type& parent) const
+        void execute(TETENGO2_STDALT_MAYBE_UNUSED model_type& model, abstract_window_type& parent) const
         {
             parent.close();
         }

@@ -12,6 +12,7 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -185,7 +186,7 @@ namespace bobura {
         void ensure_items_created(
             canvas_type&                          canvas,
             const dimension_type&                 canvas_dimension,
-            [[maybe_unused]] const position_type& scroll_bar_position)
+            TETENGO2_STDALT_MAYBE_UNUSED const position_type& scroll_bar_position)
         {
             if (m_p_header)
             {

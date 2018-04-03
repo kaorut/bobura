@@ -25,6 +25,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/utility/string_view.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -157,7 +158,7 @@ namespace bobura::model::serializer {
         public:
             virtual ~initial_state() = default;
 
-            virtual bool parse([[maybe_unused]] const string_type& line) override
+            virtual bool parse(TETENGO2_STDALT_MAYBE_UNUSED const string_type& line) override
             {
                 return false;
             }

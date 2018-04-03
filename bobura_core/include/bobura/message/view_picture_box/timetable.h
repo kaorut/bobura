@@ -13,6 +13,8 @@
 #include <functional>
 #include <memory>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/timetable_view.h>
 
 
@@ -74,11 +76,11 @@ namespace bobura::message::view_picture_box::timetable {
             \param meta     True when meta key is pressed.
         */
         void operator()(
-            [[maybe_unused]] const mouse_button_type button,
-            [[maybe_unused]] const position_type&    position,
-            [[maybe_unused]] const bool              shift,
-            [[maybe_unused]] const bool              control,
-            [[maybe_unused]] const bool              meta) const
+            TETENGO2_STDALT_MAYBE_UNUSED const mouse_button_type button,
+            TETENGO2_STDALT_MAYBE_UNUSED const position_type&    position,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool              shift,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool              control,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool              meta) const
         {
             // m_picture_box.set_focus();
 
@@ -161,11 +163,11 @@ namespace bobura::message::view_picture_box::timetable {
             \param meta     True when meta key is pressed.
         */
         void operator()(
-            [[maybe_unused]] const mouse_button_type button,
-            [[maybe_unused]] const position_type&    position,
-            [[maybe_unused]] const bool              shift,
-            [[maybe_unused]] const bool              control,
-            [[maybe_unused]] const bool              meta) const
+            TETENGO2_STDALT_MAYBE_UNUSED const mouse_button_type button,
+            TETENGO2_STDALT_MAYBE_UNUSED const position_type&    position,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool              shift,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool              control,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool              meta) const
         {
             // m_release_mouse_capture(button);
         }
@@ -232,10 +234,10 @@ namespace bobura::message::view_picture_box::timetable {
             \param meta     True when meta key is pressed.
         */
         void operator()(
-            [[maybe_unused]] const position_type& position,
-            [[maybe_unused]] const bool           shift,
-            [[maybe_unused]] const bool           control,
-            [[maybe_unused]] const bool           meta) const
+            TETENGO2_STDALT_MAYBE_UNUSED const position_type& position,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           shift,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           control,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           meta) const
         {
             // const auto* const p_item = m_view.p_item_by_position(position);
             // const auto cursor = m_picture_box.cursor();
@@ -334,11 +336,11 @@ namespace bobura::message::view_picture_box::timetable {
             \param meta      True when meta key is pressed.
         */
         void operator()(
-            [[maybe_unused]] const delta_type&    delta,
-            [[maybe_unused]] const direction_type direction,
-            [[maybe_unused]] const bool           shift,
-            [[maybe_unused]] const bool           control,
-            [[maybe_unused]] const bool           meta) const
+            TETENGO2_STDALT_MAYBE_UNUSED const delta_type&    delta,
+            TETENGO2_STDALT_MAYBE_UNUSED const direction_type direction,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           shift,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           control,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           meta) const
         {
             // const auto adjusted_delta =
             //    direction == picture_box_type::mouse_observer_set_type::direction_type::horizontal ? delta : -delta;
@@ -485,10 +487,10 @@ namespace bobura::message::view_picture_box::timetable {
             \param meta        True when meta key is pressed.
         */
         void operator()(
-            [[maybe_unused]] const virtual_key_type& virtual_key,
-            [[maybe_unused]] const bool              shift,
-            [[maybe_unused]] const bool              control,
-            [[maybe_unused]] const bool              meta) const
+            TETENGO2_STDALT_MAYBE_UNUSED const virtual_key_type& virtual_key,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool              shift,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool              control,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool              meta) const
         {
             // if (
             //    virtual_key == virtual_key_type::left() ||
@@ -742,7 +744,7 @@ namespace bobura::message::view_picture_box::timetable {
 
             \param new_position A new position.
         */
-        void operator()([[maybe_unused]] const size_type new_position) const
+        void operator()(TETENGO2_STDALT_MAYBE_UNUSED const size_type new_position) const
         {
             // m_view.update_dimension();
             // m_picture_box.repaint();

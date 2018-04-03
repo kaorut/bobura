@@ -8,6 +8,8 @@
 
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/command/command_base.h>
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
@@ -48,7 +50,7 @@ namespace bobura::command {
     }
 
     template <typename Traits>
-    bool command_base<Traits>::enabled_impl([[maybe_unused]] const model_type& model) const
+    bool command_base<Traits>::enabled_impl(TETENGO2_STDALT_MAYBE_UNUSED const model_type& model) const
     {
         return true;
     }
@@ -63,7 +65,7 @@ namespace bobura::command {
     void command_base<Traits>::execute_impl(
         model_type&                            model,
         abstract_window_type&                  parent,
-        [[maybe_unused]] const parameter_base& parameter) const
+        TETENGO2_STDALT_MAYBE_UNUSED const parameter_base& parameter) const
     {
         execute_impl(model, parent);
     }
