@@ -22,6 +22,15 @@
 
 
 namespace bobura::model::serializer {
+    namespace {
+        template <typename E>
+        [[noreturn]] void call_throw_exception(const E& e)
+        {
+            BOOST_THROW_EXCEPTION(e);
+        }
+    }
+
+
     template <
         typename Size,
         typename Difference,
@@ -63,16 +72,10 @@ namespace bobura::model::serializer {
                        }) != m_p_writers.end();
         }
 
-#if BOOST_COMP_GNUC
-#pragma GCC diagnostic ignored "-Wreturn-type"
-#endif
         boost::filesystem::path extension_impl() const
         {
-            BOOST_THROW_EXCEPTION(std::logic_error("No extension."));
+            call_throw_exception(std::logic_error("No extension."));
         }
-#if BOOST_COMP_GNUC
-#pragma GCC diagnostic warning "-Wreturn-type"
-#endif
 
         void write_impl(const timetable_type& timetable, output_stream_type& output_stream)
         {
