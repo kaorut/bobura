@@ -65,7 +65,11 @@ namespace bobura::command {
     void command_base<Traits>::execute_impl(
         model_type&                            model,
         abstract_window_type&                  parent,
+#if !defined(DOCUMENTATION) // to avoid Doxygen warning
         TETENGO2_STDALT_MAYBE_UNUSED const parameter_base& parameter) const
+#else
+        /*TETENGO2_STDALT_MAYBE_UNUSED*/ const parameter_base& parameter) const
+#endif
     {
         execute_impl(model, parent);
     }
