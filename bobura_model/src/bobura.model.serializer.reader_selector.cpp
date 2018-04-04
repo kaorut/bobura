@@ -60,7 +60,9 @@ namespace bobura::model::serializer {
 #if BOOST_COMP_GNUC
 #pragma GCC diagnostic ignored "-Wreturn-type"
 #endif
-        bool selects_impl(TETENGO2_STDALT_MAYBE_UNUSED const iterator first, TETENGO2_STDALT_MAYBE_UNUSED const iterator last)
+        bool selects_impl(
+            TETENGO2_STDALT_MAYBE_UNUSED const iterator first,
+            TETENGO2_STDALT_MAYBE_UNUSED const iterator last)
         {
             BOOST_THROW_EXCEPTION(std::logic_error("This function cannot be called."));
         }

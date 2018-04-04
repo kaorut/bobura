@@ -32,7 +32,10 @@ namespace bobura::command {
 
         // functions
 
-        void execute(TETENGO2_STDALT_MAYBE_UNUSED model_type& model, TETENGO2_STDALT_MAYBE_UNUSED abstract_window_type& parent) const {}
+        void execute(
+            TETENGO2_STDALT_MAYBE_UNUSED model_type& model,
+            TETENGO2_STDALT_MAYBE_UNUSED abstract_window_type& parent) const
+        {}
     };
 
 

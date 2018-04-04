@@ -184,8 +184,8 @@ namespace bobura {
         }
 
         void ensure_items_created(
-            canvas_type&                          canvas,
-            const dimension_type&                 canvas_dimension,
+            canvas_type&                       canvas,
+            const dimension_type&              canvas_dimension,
             TETENGO2_STDALT_MAYBE_UNUSED const position_type& scroll_bar_position)
         {
             if (m_p_header)

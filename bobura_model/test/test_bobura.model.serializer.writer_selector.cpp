@@ -83,8 +83,9 @@ namespace {
             return m_extension;
         }
 
-        virtual void
-            write_impl(TETENGO2_STDALT_MAYBE_UNUSED const timetable_type& timetable, output_stream_type& output_stream) override
+        virtual void write_impl(
+            TETENGO2_STDALT_MAYBE_UNUSED const timetable_type& timetable,
+            output_stream_type&                                output_stream) override
         {
             output_stream << m_extension.string();
         }

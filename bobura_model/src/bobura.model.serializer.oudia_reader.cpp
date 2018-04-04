@@ -194,7 +194,9 @@ namespace bobura::model::serializer {
             }
 
         private:
-            virtual bool parse_impl(TETENGO2_STDALT_MAYBE_UNUSED const string_type& key, TETENGO2_STDALT_MAYBE_UNUSED string_type value)
+            virtual bool parse_impl(
+                TETENGO2_STDALT_MAYBE_UNUSED const string_type& key,
+                TETENGO2_STDALT_MAYBE_UNUSED string_type value)
             {
                 return true;
             }

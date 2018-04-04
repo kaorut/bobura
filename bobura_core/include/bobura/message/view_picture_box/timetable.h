@@ -77,10 +77,10 @@ namespace bobura::message::view_picture_box::timetable {
         */
         void operator()(
             TETENGO2_STDALT_MAYBE_UNUSED const mouse_button_type button,
-            TETENGO2_STDALT_MAYBE_UNUSED const position_type&    position,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool              shift,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool              control,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool              meta) const
+            TETENGO2_STDALT_MAYBE_UNUSED const position_type& position,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           shift,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           control,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           meta) const
         {
             // m_picture_box.set_focus();
 
@@ -164,10 +164,10 @@ namespace bobura::message::view_picture_box::timetable {
         */
         void operator()(
             TETENGO2_STDALT_MAYBE_UNUSED const mouse_button_type button,
-            TETENGO2_STDALT_MAYBE_UNUSED const position_type&    position,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool              shift,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool              control,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool              meta) const
+            TETENGO2_STDALT_MAYBE_UNUSED const position_type& position,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           shift,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           control,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           meta) const
         {
             // m_release_mouse_capture(button);
         }
@@ -336,7 +336,7 @@ namespace bobura::message::view_picture_box::timetable {
             \param meta      True when meta key is pressed.
         */
         void operator()(
-            TETENGO2_STDALT_MAYBE_UNUSED const delta_type&    delta,
+            TETENGO2_STDALT_MAYBE_UNUSED const delta_type& delta,
             TETENGO2_STDALT_MAYBE_UNUSED const direction_type direction,
             TETENGO2_STDALT_MAYBE_UNUSED const bool           shift,
             TETENGO2_STDALT_MAYBE_UNUSED const bool           control,

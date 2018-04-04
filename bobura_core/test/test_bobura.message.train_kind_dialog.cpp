@@ -78,7 +78,7 @@ namespace {
         info_set_type(
             TETENGO2_STDALT_MAYBE_UNUSED boost::optional<size_type> original_index,
             TETENGO2_STDALT_MAYBE_UNUSED const bool                 referred,
-            TETENGO2_STDALT_MAYBE_UNUSED train_kind_type            train_kind)
+            TETENGO2_STDALT_MAYBE_UNUSED train_kind_type train_kind)
         {}
 
         const boost::optional<size_type>& original_index() const
