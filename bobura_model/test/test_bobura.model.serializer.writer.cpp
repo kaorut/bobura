@@ -70,7 +70,7 @@ namespace {
 
         virtual void write_impl(
             TETENGO2_STDALT_MAYBE_UNUSED const timetable_type& timetable,
-            TETENGO2_STDALT_MAYBE_UNUSED output_stream_type&   output_stream) override
+            TETENGO2_STDALT_MAYBE_UNUSED output_stream_type& output_stream) override
         {}
     };
 }

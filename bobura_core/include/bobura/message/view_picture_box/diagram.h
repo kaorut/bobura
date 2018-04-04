@@ -79,8 +79,8 @@ namespace bobura::message::view_picture_box::diagram {
             \param meta     True when meta key is pressed.
         */
         void operator()(
-            const mouse_button_type     button,
-            const position_type&        position,
+            const mouse_button_type                 button,
+            const position_type&                    position,
             TETENGO2_STDALT_MAYBE_UNUSED const bool shift,
             TETENGO2_STDALT_MAYBE_UNUSED const bool control,
             TETENGO2_STDALT_MAYBE_UNUSED const bool meta) const
@@ -166,7 +166,7 @@ namespace bobura::message::view_picture_box::diagram {
             \param meta     True when meta key is pressed.
         */
         void operator()(
-            const mouse_button_type               button,
+            const mouse_button_type            button,
             TETENGO2_STDALT_MAYBE_UNUSED const position_type& position,
             TETENGO2_STDALT_MAYBE_UNUSED const bool           shift,
             TETENGO2_STDALT_MAYBE_UNUSED const bool           control,
@@ -241,7 +241,7 @@ namespace bobura::message::view_picture_box::diagram {
             \param meta     True when meta key is pressed.
         */
         void operator()(
-            const position_type&        position,
+            const position_type&                    position,
             TETENGO2_STDALT_MAYBE_UNUSED const bool shift,
             TETENGO2_STDALT_MAYBE_UNUSED const bool control,
             TETENGO2_STDALT_MAYBE_UNUSED const bool meta) const

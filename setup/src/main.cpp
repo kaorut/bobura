@@ -179,10 +179,10 @@ namespace {
     \return The exit status code.
 */
 int WINAPI wWinMain(
-    const ::HINSTANCE                  hInstance,
+    const ::HINSTANCE                              hInstance,
     TETENGO2_STDALT_MAYBE_UNUSED const ::HINSTANCE hPrevInstance,
     TETENGO2_STDALT_MAYBE_UNUSED const ::LPWSTR    lpCmdLine,
-    const int                          nCmdShow)
+    const int                                      nCmdShow)
 {
     try
     {

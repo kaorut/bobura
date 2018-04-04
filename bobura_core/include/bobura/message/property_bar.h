@@ -119,10 +119,10 @@ namespace bobura::message::property_bar {
         */
         void operator()(
             TETENGO2_STDALT_MAYBE_UNUSED const mouse_button_type button,
-            TETENGO2_STDALT_MAYBE_UNUSED const position_type&    position,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool              shift,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool              control,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool              meta) const
+            TETENGO2_STDALT_MAYBE_UNUSED const position_type& position,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           shift,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           control,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool           meta) const
         {
             m_map_box.set_focus();
         }

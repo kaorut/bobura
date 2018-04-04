@@ -23,6 +23,15 @@
 
 
 namespace bobura::model::serializer {
+    namespace {
+        template <typename E>
+        [[noreturn]] void call_throw_exception(const E& e)
+        {
+            BOOST_THROW_EXCEPTION(e);
+        }
+    }
+
+
     template <
         typename Size,
         typename Difference,
@@ -55,18 +64,14 @@ namespace bobura::model::serializer {
         }
 
 
-            // functions
+        // functions
 
-#if BOOST_COMP_GNUC
-#pragma GCC diagnostic ignored "-Wreturn-type"
-#endif
-        bool selects_impl(TETENGO2_STDALT_MAYBE_UNUSED const iterator first, TETENGO2_STDALT_MAYBE_UNUSED const iterator last)
+        bool selects_impl(
+            TETENGO2_STDALT_MAYBE_UNUSED const iterator first,
+            TETENGO2_STDALT_MAYBE_UNUSED const iterator last)
         {
-            BOOST_THROW_EXCEPTION(std::logic_error("This function cannot be called."));
+            call_throw_exception(std::logic_error("This function cannot be called."));
         }
-#if BOOST_COMP_GNUC
-#pragma GCC diagnostic warning "-Wreturn-type"
-#endif
 
         std::unique_ptr<timetable_type> read_impl(const iterator first, const iterator last, error_type& error)
         {

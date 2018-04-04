@@ -70,7 +70,9 @@ namespace {
 
 
     private:
-        virtual bool selects_impl(TETENGO2_STDALT_MAYBE_UNUSED const iterator first, TETENGO2_STDALT_MAYBE_UNUSED const iterator last) override
+        virtual bool selects_impl(
+            TETENGO2_STDALT_MAYBE_UNUSED const iterator first,
+            TETENGO2_STDALT_MAYBE_UNUSED const iterator last) override
         {
             return true;
         }
@@ -78,7 +80,7 @@ namespace {
         virtual std::unique_ptr<timetable_type> read_impl(
             TETENGO2_STDALT_MAYBE_UNUSED const iterator first,
             TETENGO2_STDALT_MAYBE_UNUSED const iterator last,
-            TETENGO2_STDALT_MAYBE_UNUSED error_type&    error) override
+            TETENGO2_STDALT_MAYBE_UNUSED error_type& error) override
         {
             return std::make_unique<timetable_type>();
         }
