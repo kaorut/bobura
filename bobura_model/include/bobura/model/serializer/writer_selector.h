@@ -12,7 +12,7 @@
 #include <memory>
 #include <vector>
 
-#include <boost/filesystem.hpp>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/model/serializer/writer.h>
 
@@ -91,7 +91,7 @@ namespace bobura::model::serializer {
             \throw std::invalid_argument When the count of the writers is
                                          empty.
         */
-        writer_selector(std::vector<std::unique_ptr<base_type>> p_writers, boost::filesystem::path path);
+        writer_selector(std::vector<std::unique_ptr<base_type>> p_writers, tetengo2::stdalt::filesystem::path path);
 
         /*!
             \brief Destroys the writer_selector.
@@ -112,9 +112,9 @@ namespace bobura::model::serializer {
 
         // virtual functions
 
-        virtual bool selects_impl(const boost::filesystem::path& path) const override;
+        virtual bool selects_impl(const tetengo2::stdalt::filesystem::path& path) const override;
 
-        virtual boost::filesystem::path extension_impl() const override;
+        virtual tetengo2::stdalt::filesystem::path extension_impl() const override;
 
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream) override;
     };

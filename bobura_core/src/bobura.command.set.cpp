@@ -10,8 +10,9 @@
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/predef.h>
+
+#include <tetengo2/stdalt.h>
 
 #include <bobura/command/about.h> // IWYU pragma: keep
 #include <bobura/command/command_base.h> // IWYU pragma: keep
@@ -173,7 +174,8 @@ namespace bobura::command {
             return *m_p_load_from_file;
         }
 
-        std::unique_ptr<parameter_type> create_load_from_file_parameter(const boost::filesystem::path& path) const
+        std::unique_ptr<parameter_type>
+        create_load_from_file_parameter(const tetengo2::stdalt::filesystem::path& path) const
         {
             return std::make_unique<
                 typename command::load_from_file<command_traits_type, load_save_traits_type>::parameter_type>(path);
@@ -551,7 +553,7 @@ namespace bobura::command {
 
     template <typename Traits>
     std::unique_ptr<typename set<Traits>::parameter_type>
-    set<Traits>::create_load_from_file_parameter(const boost::filesystem::path& path) const
+    set<Traits>::create_load_from_file_parameter(const tetengo2::stdalt::filesystem::path& path) const
     {
         return m_p_impl->create_load_from_file_parameter(path);
     }

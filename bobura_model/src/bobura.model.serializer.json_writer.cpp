@@ -15,11 +15,11 @@
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/format.hpp>
 #include <boost/predef.h>
 #include <boost/rational.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -79,9 +79,10 @@ namespace bobura::model::serializer {
 
         // virtual functions
 
-        boost::filesystem::path extension_impl() const
+        tetengo2::stdalt::filesystem::path extension_impl() const
         {
-            return boost::filesystem::path{ TETENGO2_TEXT(".btt") };
+            return tetengo2::stdalt::filesystem::path{ tetengo2::stdalt::filesystem::path::string_type{
+                TETENGO2_TEXT(".btt") } };
         }
 
         void write_impl(const timetable_type& timetable, output_stream_type& output_stream)
@@ -769,7 +770,7 @@ namespace bobura::model::serializer {
         typename Speed,
         typename Font,
         typename Encoder>
-    boost::filesystem::path
+    tetengo2::stdalt::filesystem::path
     json_writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font, Encoder>::extension_impl() const
     {
         return m_p_impl->extension_impl();

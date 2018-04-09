@@ -6,16 +6,17 @@
     $Id$
 */
 
+#include <fstream>
 #include <ios>
 #include <memory>
+#include <system_error>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/none.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
-#include <boost/system/error_code.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -52,7 +53,7 @@ namespace bobura::load_save {
 
         bool operator()(model_type& model, abstract_window_type& parent) const
         {
-            boost::filesystem::path path{};
+            tetengo2::stdalt::filesystem::path path{};
             if (!model.has_path() || m_ask_file_path)
             {
                 file_save_dialog_type dialog{ m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:SaveAs")),
@@ -73,7 +74,8 @@ namespace bobura::load_save {
                 path = model.path();
             }
 
-            const auto temporary_path = path.parent_path() / boost::filesystem::unique_path();
+            auto temporary_path = path;
+            temporary_path += tetengo2::stdalt::filesystem::path::string_type{ TETENGO2_TEXT(".tmp") };
             {
                 writer_selector_type writer{ writer_set_type::create_writers(), path };
                 if (!writer.selects(path))
@@ -84,7 +86,7 @@ namespace bobura::load_save {
                         return save_to_file(true, m_message_catalog)(model, parent);
                 }
 
-                boost::filesystem::ofstream output_stream{ temporary_path, std::ios_base::binary };
+                std::ofstream output_stream{ temporary_path, std::ios_base::binary };
                 if (!output_stream)
                 {
                     create_cant_create_temporary_file_message_box(temporary_path, parent)->do_modal();
@@ -95,8 +97,8 @@ namespace bobura::load_save {
             }
 
             {
-                boost::system::error_code error_code{};
-                boost::filesystem::rename(temporary_path, path, error_code);
+                std::error_code error_code{};
+                tetengo2::stdalt::filesystem::rename(temporary_path, path, error_code);
                 if (error_code)
                 {
                     create_cant_write_to_file_message_box(path, parent)->do_modal();
@@ -163,26 +165,27 @@ namespace bobura::load_save {
         // functions
 
         std::unique_ptr<message_box_type> create_cant_create_temporary_file_message_box(
-            const boost::filesystem::path& path,
-            abstract_window_type&          parent) const
+            const tetengo2::stdalt::filesystem::path& path,
+            abstract_window_type&                     parent) const
         {
             return std::make_unique<message_box_type>(
                 parent,
                 m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
                 m_message_catalog.get(TETENGO2_TEXT("Message:File:Can't create a temporary file.")),
-                path.template string<string_type>(),
+                path.template string<typename string_type::value_type>(),
                 message_box_type::button_style_type::ok(false),
                 message_box_type::icon_style_type::error);
         }
 
-        std::unique_ptr<message_box_type>
-        create_cant_write_to_file_message_box(const boost::filesystem::path& path, abstract_window_type& parent) const
+        std::unique_ptr<message_box_type> create_cant_write_to_file_message_box(
+            const tetengo2::stdalt::filesystem::path& path,
+            abstract_window_type&                     parent) const
         {
             return std::make_unique<message_box_type>(
                 parent,
                 m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
                 m_message_catalog.get(TETENGO2_TEXT("Message:File:Can't write to the file.")),
-                path.template string<string_type>(),
+                path.template string<typename string_type::value_type>(),
                 message_box_type::button_style_type::ok(false),
                 message_box_type::icon_style_type::error);
         }

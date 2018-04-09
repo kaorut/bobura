@@ -45,7 +45,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/core/swap.hpp>
 #include <boost/exception/all.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/format.hpp>
 #include <boost/iostreams/filter/bzip2.hpp>
 #include <boost/iostreams/filtering_stream.hpp>

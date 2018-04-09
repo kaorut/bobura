@@ -11,7 +11,7 @@
 
 #include <memory>
 
-#include <boost/filesystem.hpp>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/command/command_base.h>
 #include <bobura/load_save/load_from_file.h>
@@ -57,7 +57,7 @@ namespace bobura::command {
 
                 \param path A path.
             */
-            explicit parameter_type(boost::filesystem::path path);
+            explicit parameter_type(tetengo2::stdalt::filesystem::path path);
 
             /*!
                 \brief Destroys the parameter.
@@ -69,10 +69,10 @@ namespace bobura::command {
 
                 \return The path.
             */
-            const boost::filesystem::path& path() const;
+            const tetengo2::stdalt::filesystem::path& path() const;
 
         private:
-            boost::filesystem::path m_path;
+            tetengo2::stdalt::filesystem::path m_path;
         };
 
 

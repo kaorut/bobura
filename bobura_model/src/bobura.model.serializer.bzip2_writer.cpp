@@ -12,12 +12,12 @@
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/iostreams/filter/bzip2.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/iostreams/traits.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -54,11 +54,11 @@ namespace bobura::model::serializer {
 
         // functions
 
-        boost::filesystem::path extension_impl() const
+        tetengo2::stdalt::filesystem::path extension_impl() const
         {
-            return boost::filesystem::path(
+            return tetengo2::stdalt::filesystem::path(
                 m_p_writer->extension().native() +
-                typename boost::filesystem::path::string_type{ TETENGO2_TEXT("_bz2") });
+                typename tetengo2::stdalt::filesystem::path::string_type{ TETENGO2_TEXT("_bz2") });
         }
 
         void write_impl(const timetable_type& timetable, output_stream_type& output_stream)
@@ -110,7 +110,7 @@ namespace bobura::model::serializer {
         typename OperatingDistance,
         typename Speed,
         typename Font>
-    boost::filesystem::path
+    tetengo2::stdalt::filesystem::path
     bzip2_writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::extension_impl() const
     {
         return m_p_impl->extension_impl();

@@ -12,9 +12,10 @@
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
+
+#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/writer_selector.h>
@@ -54,7 +55,7 @@ namespace bobura::model::serializer {
 
         // constructors and destructor
 
-        impl(std::vector<std::unique_ptr<base_type>> p_writers, boost::filesystem::path path)
+        impl(std::vector<std::unique_ptr<base_type>> p_writers, tetengo2::stdalt::filesystem::path path)
         : m_p_writers{ std::move(p_writers) }, m_path{ std::move(path) }
         {
             if (m_p_writers.empty())
@@ -64,7 +65,7 @@ namespace bobura::model::serializer {
 
         // functions
 
-        bool selects_impl(const boost::filesystem::path& path) const
+        bool selects_impl(const tetengo2::stdalt::filesystem::path& path) const
         {
             return std::find_if(
                        m_p_writers.begin(), m_p_writers.end(), [&path](const std::unique_ptr<base_type>& p_writer) {
@@ -72,7 +73,7 @@ namespace bobura::model::serializer {
                        }) != m_p_writers.end();
         }
 
-        boost::filesystem::path extension_impl() const
+        tetengo2::stdalt::filesystem::path extension_impl() const
         {
             call_throw_exception(std::logic_error("No extension."));
         }
@@ -95,7 +96,7 @@ namespace bobura::model::serializer {
 
         const std::vector<std::unique_ptr<base_type>> m_p_writers;
 
-        const boost::filesystem::path m_path;
+        const tetengo2::stdalt::filesystem::path m_path;
     };
 
 
@@ -109,7 +110,7 @@ namespace bobura::model::serializer {
         typename Font>
     writer_selector<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::writer_selector(
         std::vector<std::unique_ptr<base_type>> p_writers,
-        boost::filesystem::path                 path)
+        tetengo2::stdalt::filesystem::path      path)
     : base_type{}, m_p_impl{ std::make_unique<impl>(std::move(p_writers), std::move(path)) }
     {}
 
@@ -133,7 +134,7 @@ namespace bobura::model::serializer {
         typename Speed,
         typename Font>
     bool writer_selector<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::selects_impl(
-        const boost::filesystem::path& path) const
+        const tetengo2::stdalt::filesystem::path& path) const
     {
         return m_p_impl->selects_impl(path);
     }
@@ -146,7 +147,7 @@ namespace bobura::model::serializer {
         typename OperatingDistance,
         typename Speed,
         typename Font>
-    boost::filesystem::path
+    tetengo2::stdalt::filesystem::path
     writer_selector<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::extension_impl() const
     {
         return m_p_impl->extension_impl();

@@ -6,9 +6,10 @@
     $Id$
 */
 
-#include <boost/filesystem.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
+
+#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/load_save/save_to_file.h>
@@ -77,7 +78,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const save_to_file_type    save_to_file{ false, message_catalog };
 
                     model_type model{};
-                    model.set_path(boost::filesystem::path("test"));
+                    model.set_path(tetengo2::stdalt::filesystem::path("test"));
                     window_type parent{};
                     const auto  result = save_to_file(model, parent);
 

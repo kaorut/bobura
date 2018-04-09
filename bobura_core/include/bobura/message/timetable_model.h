@@ -27,7 +27,8 @@ namespace bobura::message::timetable_model {
 
             const auto title =
                 timetable_model.has_path() ?
-                    boost::make_optional(timetable_model.path().filename().template string<string_type>()) :
+                    boost::make_optional(
+                        timetable_model.path().filename().template string<typename string_type::value_type>()) :
                     boost::none;
             main_window.set_title(title, timetable_model.changed());
         }

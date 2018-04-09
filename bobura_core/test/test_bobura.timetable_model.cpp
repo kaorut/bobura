@@ -11,10 +11,10 @@
 #include <string>
 #include <utility>
 
-#include <boost/filesystem.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -87,7 +87,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                 model.reset_timetable(
                     std::make_unique<timetable_type>(),
-                    boost::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } });
+                    tetengo2::stdalt::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } });
             }
             {
                 model_type model{};
@@ -95,7 +95,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 BOOST_CHECK_THROW(
                     model.reset_timetable(
                         std::unique_ptr<timetable_type>{},
-                        boost::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } }),
+                        tetengo2::stdalt::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } }),
                     std::invalid_argument);
             }
         }
@@ -132,7 +132,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 auto       p_timetable = std::make_unique<timetable_type>();
                 model.reset_timetable(std::move(p_timetable), string_type{ TETENGO2_TEXT("hoge") });
 
-                BOOST_CHECK(model.path() == boost::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } });
+                BOOST_CHECK(model.path() == tetengo2::stdalt::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } });
             }
         }
 
@@ -141,9 +141,9 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             BOOST_TEST_PASSPOINT();
 
             model_type model{};
-            model.set_path(boost::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } });
+            model.set_path(tetengo2::stdalt::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } });
 
-            BOOST_CHECK(model.path() == boost::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } });
+            BOOST_CHECK(model.path() == tetengo2::stdalt::filesystem::path{ string_type{ TETENGO2_TEXT("hoge") } });
         }
 
         BOOST_AUTO_TEST_CASE(changed)

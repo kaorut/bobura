@@ -14,7 +14,6 @@
 #include <vector> // IWYU pragma: keep
 
 #include <boost/exception/all.hpp> // IWYU pragma: keep
-#include <boost/filesystem.hpp>
 #include <boost/program_options.hpp> // IWYU pragma: keep
 #include <boost/throw_exception.hpp>
 
@@ -76,7 +75,7 @@ namespace {
         return locale_info(locale_id, LOCALE_SENGLANGUAGE) + "_" + locale_info(locale_id, LOCALE_SENGCOUNTRY);
     }
 
-    void set_locale(const boost::filesystem::path& message_directory_path)
+    void set_locale(const tetengo2::stdalt::filesystem::path& message_directory_path)
     {
         auto p_messages_facet = std::make_unique<tetengo2::message::messages>(
             message_directory_path, std::locale(ui_locale_name().c_str()));

@@ -84,9 +84,9 @@ namespace bobura::load_save {
 
         std::unique_ptr<message_box_type> create_message_box(abstract_window_type& parent) const
         {
-            const auto file_path = m_model.has_path() ? m_model.path().template string<string_type>() :
-                                                        m_message_catalog.get(TETENGO2_TEXT("Common:Untitled"));
-
+            const auto file_path = m_model.has_path() ?
+                                       m_model.path().template string<typename string_type::value_type>() :
+                                       m_message_catalog.get(TETENGO2_TEXT("Common:Untitled"));
             return std::make_unique<message_box_type>(
                 parent,
                 m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),

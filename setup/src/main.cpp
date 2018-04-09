@@ -13,8 +13,6 @@
 #include <string>
 #include <vector> // IWYU pragma: keep
 
-#include <boost/filesystem.hpp>
-
 #define NOMINMAX
 #define OEMRESOURCE
 #include <Windows.h>
@@ -97,15 +95,16 @@ namespace {
             return {};
     }
 
-    boost::filesystem::path msi_path(const boost::filesystem::path& base_path_, const std::wstring& platform)
+    tetengo2::stdalt::filesystem::path
+    msi_path(const tetengo2::stdalt::filesystem::path& base_path_, const std::wstring& platform)
     {
-        return base_path_ / boost::filesystem::path(msi_prefix() + platform + msi_suffix());
+        return base_path_ / tetengo2::stdalt::filesystem::path(msi_prefix() + platform + msi_suffix());
     }
 
     std::wstring build_parameters(
-        const std::wstring&            language,
-        const std::wstring&            platform,
-        const boost::filesystem::path& base_path_)
+        const std::wstring&                       language,
+        const std::wstring&                       platform,
+        const tetengo2::stdalt::filesystem::path& base_path_)
     {
         std::wstring parameters{};
 
@@ -117,14 +116,14 @@ namespace {
         return parameters;
     }
 
-    boost::filesystem::path base_path()
+    tetengo2::stdalt::filesystem::path base_path()
     {
         std::vector<wchar_t> path_buffer(MAX_PATH, 0);
         const ::DWORD        path_length = ::GetModuleFileNameW(nullptr, path_buffer.data(), path_buffer.size());
         if (path_length == 0)
             throw std::runtime_error("Cannot get the path where the installer exists.");
 
-        boost::filesystem::path path(path_buffer.begin(), path_buffer.begin() + path_length);
+        tetengo2::stdalt::filesystem::path path(path_buffer.begin(), path_buffer.begin() + path_length);
 
         return path.parent_path();
     }
@@ -137,7 +136,7 @@ namespace {
                 std::string{ "Cannot install " } + application_name_narrow() + " to this platform.");
         }
 
-        const boost::filesystem::path base_path_ = base_path();
+        const tetengo2::stdalt::filesystem::path base_path_ = base_path();
 
         const std::wstring parameters = build_parameters(language, platform, base_path_);
 

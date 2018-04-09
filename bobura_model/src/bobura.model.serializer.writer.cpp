@@ -9,8 +9,9 @@
 #include <iterator>
 #include <string>
 
-#include <boost/filesystem.hpp>
 #include <boost/predef.h>
+
+#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/model/serializer/writer.h>
@@ -37,7 +38,7 @@ namespace bobura::model::serializer {
         typename OperatingDistance,
         typename Speed,
         typename Font>
-    boost::filesystem::path
+    tetengo2::stdalt::filesystem::path
     writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::extension() const
     {
         return extension_impl();
@@ -52,7 +53,7 @@ namespace bobura::model::serializer {
         typename Speed,
         typename Font>
     bool writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::selects(
-        const boost::filesystem::path& path) const
+        const tetengo2::stdalt::filesystem::path& path) const
     {
         return selects_impl(path);
     }
@@ -92,9 +93,9 @@ namespace bobura::model::serializer {
         typename Speed,
         typename Font>
     bool writer<Size, Difference, String, OutputStream, OperatingDistance, Speed, Font>::selects_impl(
-        const boost::filesystem::path& path) const
+        const tetengo2::stdalt::filesystem::path& path) const
     {
-        using path_string_type = typename boost::filesystem::path::string_type;
+        using path_string_type = typename tetengo2::stdalt::filesystem::path::string_type;
 
         const auto path_string = path.native();
         const auto extension_string = extension_impl().native();

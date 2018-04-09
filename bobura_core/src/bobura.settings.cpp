@@ -16,7 +16,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/container/container_fwd.hpp>
 #include <boost/core/noncopyable.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/none.hpp>
 #include <boost/optional.hpp>
@@ -29,6 +28,7 @@
 #include <tetengo2/config/config_list.h>
 #include <tetengo2/config/persistent_config.h>
 #include <tetengo2/config/temporary_config.h>
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 #include <tetengo2/type_list.h>
 
@@ -66,22 +66,22 @@ namespace bobura {
 
         // functions
 
-        const boost::filesystem::path& base_path() const
+        const tetengo2::stdalt::filesystem::path& base_path() const
         {
             return m_base_path;
         }
 
-        const boost::optional<boost::filesystem::path>& input() const
+        const boost::optional<tetengo2::stdalt::filesystem::path>& input() const
         {
             return m_input;
         }
 
-        boost::filesystem::path message_directory_path() const
+        tetengo2::stdalt::filesystem::path message_directory_path() const
         {
             return m_base_path / path_string_type{ TETENGO2_TEXT("messages") };
         }
 
-        boost::filesystem::path image_directory_path() const
+        tetengo2::stdalt::filesystem::path image_directory_path() const
         {
             return m_base_path / path_string_type{ TETENGO2_TEXT("images") };
         }
@@ -184,7 +184,7 @@ namespace bobura {
     private:
         // types
 
-        using path_string_type = typename boost::filesystem::path::string_type;
+        using path_string_type = typename tetengo2::stdalt::filesystem::path::string_type;
 
         using uint_type = tetengo2::type_list::size_type;
 
@@ -345,9 +345,9 @@ namespace bobura {
 
         // variables
 
-        boost::filesystem::path m_base_path;
+        tetengo2::stdalt::filesystem::path m_base_path;
 
-        boost::optional<boost::filesystem::path> m_input;
+        boost::optional<tetengo2::stdalt::filesystem::path> m_input;
 
         std::unique_ptr<config_base_type> m_p_config;
 
@@ -359,7 +359,7 @@ namespace bobura {
             const auto options = parse_command_line_arguments(command_line_arguments);
 
             assert(options.find("exe") != options.end());
-            m_base_path = boost::filesystem::path(options["exe"].template as<string_type>()).parent_path();
+            m_base_path = tetengo2::stdalt::filesystem::path(options["exe"].template as<string_type>()).parent_path();
 
             if (options.find("input") != options.end())
             {
@@ -385,25 +385,25 @@ namespace bobura {
     {}
 
     template <typename String, typename Position, typename Dimension>
-    const boost::filesystem::path& settings<String, Position, Dimension>::base_path() const
+    const tetengo2::stdalt::filesystem::path& settings<String, Position, Dimension>::base_path() const
     {
         return m_p_impl->base_path();
     }
 
     template <typename String, typename Position, typename Dimension>
-    const boost::optional<boost::filesystem::path>& settings<String, Position, Dimension>::input() const
+    const boost::optional<tetengo2::stdalt::filesystem::path>& settings<String, Position, Dimension>::input() const
     {
         return m_p_impl->input();
     }
 
     template <typename String, typename Position, typename Dimension>
-    boost::filesystem::path settings<String, Position, Dimension>::message_directory_path() const
+    tetengo2::stdalt::filesystem::path settings<String, Position, Dimension>::message_directory_path() const
     {
         return m_p_impl->message_directory_path();
     }
 
     template <typename String, typename Position, typename Dimension>
-    boost::filesystem::path settings<String, Position, Dimension>::image_directory_path() const
+    tetengo2::stdalt::filesystem::path settings<String, Position, Dimension>::image_directory_path() const
     {
         return m_p_impl->image_directory_path();
     }

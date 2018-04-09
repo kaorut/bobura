@@ -12,7 +12,6 @@
 #include <utility>
 #include <vector>
 
-#include <boost/filesystem.hpp>
 #include <boost/none.hpp>
 #include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
@@ -20,6 +19,7 @@
 
 #include <tetengo2/gui/drawing/color.h>
 #include <tetengo2/gui/drawing/font.h>
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -85,6 +85,10 @@ namespace {
     using font_color_type = font_color_set_type::font_color_type;
 
     using color_type = ui_type_list_type::color_type;
+
+    using path_type = tetengo2::stdalt::filesystem::path;
+
+    using path_string_type = path_type::string_type;
 
     using output_stream_type = common_type_list_type::output_stream_type;
 
@@ -355,7 +359,9 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     const writer_type json_writer{};
 
-                    BOOST_CHECK(json_writer.extension() == boost::filesystem::path{ TETENGO2_TEXT(".btt") });
+                    BOOST_CHECK(
+                        json_writer.extension() ==
+                        tetengo2::stdalt::filesystem::path{ path_string_type{ TETENGO2_TEXT(".btt") } });
                 }
 
                 BOOST_AUTO_TEST_CASE(selects)
@@ -364,9 +370,11 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     const writer_type json_writer{};
 
-                    BOOST_TEST(json_writer.selects(boost::filesystem::path{ TETENGO2_TEXT(".btt") }));
-                    BOOST_TEST(!json_writer.selects(boost::filesystem::path{ TETENGO2_TEXT(".hoge") }));
-                    BOOST_TEST(!json_writer.selects(boost::filesystem::path{}));
+                    BOOST_TEST(json_writer.selects(
+                        tetengo2::stdalt::filesystem::path{ path_string_type{ TETENGO2_TEXT(".btt") } }));
+                    BOOST_TEST(!json_writer.selects(
+                        tetengo2::stdalt::filesystem::path{ path_string_type{ TETENGO2_TEXT(".hoge") } }));
+                    BOOST_TEST(!json_writer.selects(tetengo2::stdalt::filesystem::path{}));
                 }
 
                 BOOST_AUTO_TEST_CASE(write)
