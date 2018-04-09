@@ -11,7 +11,7 @@
 
 #include <memory>
 
-#include <boost/filesystem.hpp>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/model/serializer/writer.h>
 
@@ -107,7 +107,7 @@ namespace bobura::model::serializer {
 
         // virtual functions
 
-        virtual boost::filesystem::path extension_impl() const override;
+        virtual tetengo2::stdalt::filesystem::path extension_impl() const override;
 
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream) override;
     };

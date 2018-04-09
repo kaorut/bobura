@@ -12,9 +12,9 @@
 #include <memory>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/filesystem.hpp>
 
 #include <tetengo2/detail/base/impl_set.h>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/command/command_base.h> // IWYU pragma: keep
 #include <bobura/diagram_view.h>
@@ -215,7 +215,8 @@ namespace bobura::command {
 
             \return A unique pointer to a parameter for the command load-from-file.
         */
-        std::unique_ptr<parameter_type> create_load_from_file_parameter(const boost::filesystem::path& path) const;
+        std::unique_ptr<parameter_type>
+        create_load_from_file_parameter(const tetengo2::stdalt::filesystem::path& path) const;
 
         /*!
             \brief Returns the command new-file.

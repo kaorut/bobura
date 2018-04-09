@@ -12,11 +12,12 @@
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/none.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
+
+#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/timetable_model.h>
@@ -73,7 +74,7 @@ namespace bobura {
             reset_timetable_impl(std::move(p_timetable), boost::none);
         }
 
-        void reset_timetable(std::unique_ptr<timetable_type> p_timetable, boost::filesystem::path path)
+        void reset_timetable(std::unique_ptr<timetable_type> p_timetable, tetengo2::stdalt::filesystem::path path)
         {
             reset_timetable_impl(std::move(p_timetable), boost::make_optional(std::move(path)));
         }
@@ -83,7 +84,7 @@ namespace bobura {
             return static_cast<bool>(m_path);
         }
 
-        const boost::filesystem::path& path() const
+        const tetengo2::stdalt::filesystem::path& path() const
         {
             if (!has_path())
                 BOOST_THROW_EXCEPTION(std::logic_error("This model does not have a path."));
@@ -91,7 +92,7 @@ namespace bobura {
             return *m_path;
         }
 
-        void set_path(boost::filesystem::path path)
+        void set_path(tetengo2::stdalt::filesystem::path path)
         {
             m_path = boost::make_optional(std::move(path));
             m_changed = false;
@@ -127,7 +128,7 @@ namespace bobura {
 
         std::unique_ptr<timetable_type> m_p_timetable;
 
-        boost::optional<boost::filesystem::path> m_path;
+        boost::optional<tetengo2::stdalt::filesystem::path> m_path;
 
         bool m_changed;
 
@@ -137,14 +138,14 @@ namespace bobura {
         // functions
 
         void reset_timetable_impl(
-            std::unique_ptr<timetable_type>            p_timetable,
-            boost::optional<boost::filesystem::path>&& path)
+            std::unique_ptr<timetable_type>                       p_timetable,
+            boost::optional<tetengo2::stdalt::filesystem::path>&& path)
         {
             if (!p_timetable)
                 BOOST_THROW_EXCEPTION(std::invalid_argument("Timetable is nullptr."));
 
             m_p_timetable = std::move(p_timetable);
-            m_path = std::forward<boost::optional<boost::filesystem::path>>(path);
+            m_path = std::forward<boost::optional<tetengo2::stdalt::filesystem::path>>(path);
             m_changed = false;
 
             set_timetable_observer_set();
@@ -239,8 +240,8 @@ namespace bobura {
         typename Speed,
         typename Font>
     void timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::reset_timetable(
-        std::unique_ptr<timetable_type> p_timetable,
-        boost::filesystem::path         path)
+        std::unique_ptr<timetable_type>    p_timetable,
+        tetengo2::stdalt::filesystem::path path)
     {
         m_p_impl->reset_timetable(std::move(p_timetable), std::move(path));
     }
@@ -264,7 +265,7 @@ namespace bobura {
         typename OperatingDistance,
         typename Speed,
         typename Font>
-    const boost::filesystem::path&
+    const tetengo2::stdalt::filesystem::path&
     timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::path() const
     {
         return m_p_impl->path();
@@ -277,8 +278,8 @@ namespace bobura {
         typename OperatingDistance,
         typename Speed,
         typename Font>
-    void
-    timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::set_path(boost::filesystem::path path)
+    void timetable_model<Size, Difference, String, OperatingDistance, Speed, Font>::set_path(
+        tetengo2::stdalt::filesystem::path path)
     {
         m_p_impl->set_path(std::move(path));
     }

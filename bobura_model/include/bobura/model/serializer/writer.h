@@ -10,7 +10,8 @@
 #define BOBURA_MODEL_SERIALIZER_WRITER_H
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/filesystem.hpp>
+
+#include <tetengo2/stdalt.h>
 
 #include <bobura/model/timetable.h>
 
@@ -83,7 +84,7 @@ namespace bobura::model::serializer {
 
             \return The extension.
         */
-        boost::filesystem::path extension() const;
+        tetengo2::stdalt::filesystem::path extension() const;
 
         /*!
             \brief Checks whether this writer selects a file type.
@@ -93,7 +94,7 @@ namespace bobura::model::serializer {
             \retval true  When this writer selects the file type.
             \retval false Otherwise.
         */
-        bool selects(const boost::filesystem::path& path) const;
+        bool selects(const tetengo2::stdalt::filesystem::path& path) const;
 
         /*!
             \brief Writes a timetable.
@@ -116,9 +117,9 @@ namespace bobura::model::serializer {
     private:
         // virtual functions
 
-        virtual bool selects_impl(const boost::filesystem::path& path) const;
+        virtual bool selects_impl(const tetengo2::stdalt::filesystem::path& path) const;
 
-        virtual boost::filesystem::path extension_impl() const = 0;
+        virtual tetengo2::stdalt::filesystem::path extension_impl() const = 0;
 
         virtual void write_impl(const timetable_type& timetable, output_stream_type& output_stream) = 0;
     };

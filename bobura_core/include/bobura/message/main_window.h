@@ -19,11 +19,9 @@
 
 #include <boost/throw_exception.hpp>
 
-#include <bobura/command/command_base.h> // IWYU pragma: keep
+#include <tetengo2/stdalt.h>
 
-namespace boost::filesystem {
-    class path;
-}
+#include <bobura/command/command_base.h> // IWYU pragma: keep
 
 
 namespace bobura::message::main_window {
@@ -234,7 +232,7 @@ namespace bobura::message::main_window {
 
             \param paths Paths.
         */
-        void operator()(const std::vector<boost::filesystem::path>& paths) const
+        void operator()(const std::vector<tetengo2::stdalt::filesystem::path>& paths) const
         {
             if (paths.empty())
                 return;

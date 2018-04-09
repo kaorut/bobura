@@ -7,19 +7,20 @@
 */
 
 #include <cassert>
+#include <fstream>
 #include <ios>
 #include <memory>
 #include <stdexcept>
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/throw_exception.hpp>
 
 #include <tetengo2/iterator/observable_forward_iterator.h>
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -63,15 +64,16 @@ namespace bobura::load_save {
 
         // functions
 
-        bool reloadable(const model_type& model, const boost::optional<boost::filesystem::path>& given_path) const
+        bool
+        reloadable(const model_type& model, const boost::optional<tetengo2::stdalt::filesystem::path>& given_path) const
         {
             return m_ask_file_path || model.has_path() || given_path;
         }
 
         void operator()(
-            model_type&                                     model,
-            const boost::optional<boost::filesystem::path>& given_path,
-            abstract_window_type&                           parent) const
+            model_type&                                                model,
+            const boost::optional<tetengo2::stdalt::filesystem::path>& given_path,
+            abstract_window_type&                                      parent) const
         {
             if (!m_ask_file_path && !model.has_path() && !given_path)
                 return;
@@ -79,7 +81,7 @@ namespace bobura::load_save {
             if (!m_confirm_file_save(parent))
                 return;
 
-            boost::filesystem::path path{};
+            tetengo2::stdalt::filesystem::path path{};
             if (given_path)
             {
                 path = *given_path;
@@ -101,7 +103,7 @@ namespace bobura::load_save {
                 path = model.path();
             }
 
-            boost::filesystem::ifstream input_stream{ path, std::ios_base::binary };
+            std::ifstream input_stream{ path, std::ios_base::binary };
             if (!input_stream)
             {
                 create_cant_open_file_message_box(path, parent)->do_modal();
@@ -109,7 +111,7 @@ namespace bobura::load_save {
             }
 
             reader_selector_type reader_selector{ reader_set_type::create_readers(
-                parent, path.template string<string_type>(), m_message_catalog) };
+                parent, path.template string<typename string_type::value_type>(), m_message_catalog) };
             const auto           first = tetengo2::iterator::make_observable_forward_iterator(
                 boost::spirit::make_default_multi_pass(std::istreambuf_iterator<char>{ input_stream }));
             const auto last = tetengo2::iterator::make_observable_forward_iterator(
@@ -226,39 +228,41 @@ namespace bobura::load_save {
 
         // functions
 
-        std::unique_ptr<message_box_type>
-        create_cant_open_file_message_box(const boost::filesystem::path& path, abstract_window_type& parent) const
+        std::unique_ptr<message_box_type> create_cant_open_file_message_box(
+            const tetengo2::stdalt::filesystem::path& path,
+            abstract_window_type&                     parent) const
         {
             return std::make_unique<message_box_type>(
                 parent,
                 m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
                 m_message_catalog.get(TETENGO2_TEXT("Message:File:Can't open the file.")),
-                path.template string<string_type>(),
+                path.template string<typename string_type::value_type>(),
                 message_box_type::button_style_type::ok(false),
                 message_box_type::icon_style_type::error);
         }
 
-        std::unique_ptr<message_box_type>
-        create_file_broken_message_box(const boost::filesystem::path& path, abstract_window_type& parent) const
+        std::unique_ptr<message_box_type> create_file_broken_message_box(
+            const tetengo2::stdalt::filesystem::path& path,
+            abstract_window_type&                     parent) const
         {
             return std::make_unique<message_box_type>(
                 parent,
                 m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
                 m_message_catalog.get(TETENGO2_TEXT("Message:File:The timetable file is corrupted.")),
-                path.template string<string_type>(),
+                path.template string<typename string_type::value_type>(),
                 message_box_type::button_style_type::ok(false),
                 message_box_type::icon_style_type::error);
         }
 
         std::unique_ptr<message_box_type> create_unsupported_format_file_message_box(
-            const boost::filesystem::path& path,
-            abstract_window_type&          parent) const
+            const tetengo2::stdalt::filesystem::path& path,
+            abstract_window_type&                     parent) const
         {
             return std::make_unique<message_box_type>(
                 parent,
                 m_message_catalog.get(TETENGO2_TEXT("App:Bobura")),
                 m_message_catalog.get(TETENGO2_TEXT("Message:File:Unsupported format file.")),
-                path.template string<string_type>(),
+                path.template string<typename string_type::value_type>(),
                 message_box_type::button_style_type::ok(false),
                 message_box_type::icon_style_type::error);
         }
@@ -297,17 +301,17 @@ namespace bobura::load_save {
 
     template <typename Traits>
     bool load_from_file<Traits>::reloadable(
-        const model_type&                               model,
-        const boost::optional<boost::filesystem::path>& given_path) const
+        const model_type&                                          model,
+        const boost::optional<tetengo2::stdalt::filesystem::path>& given_path) const
     {
         return m_p_impl->reloadable(model, given_path);
     }
 
     template <typename Traits>
     void load_from_file<Traits>::operator()(
-        model_type&                                     model,
-        const boost::optional<boost::filesystem::path>& given_path,
-        abstract_window_type&                           parent) const
+        model_type&                                                model,
+        const boost::optional<tetengo2::stdalt::filesystem::path>& given_path,
+        abstract_window_type&                                      parent) const
     {
         (*m_p_impl)(model, given_path, parent);
     }

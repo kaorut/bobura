@@ -13,8 +13,9 @@
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/optional.hpp>
+
+#include <tetengo2/stdalt.h>
 
 
 namespace bobura {
@@ -70,28 +71,28 @@ namespace bobura {
 
             \return The base path.
         */
-        const boost::filesystem::path& base_path() const;
+        const tetengo2::stdalt::filesystem::path& base_path() const;
 
         /*!
             \brief Returns the input.
 
             \return The input.
         */
-        const boost::optional<boost::filesystem::path>& input() const;
+        const boost::optional<tetengo2::stdalt::filesystem::path>& input() const;
 
         /*!
             \brief Returns the message directory path.
 
             \return The message directory path.
         */
-        boost::filesystem::path message_directory_path() const;
+        tetengo2::stdalt::filesystem::path message_directory_path() const;
 
         /*!
             \brief Returns the image directory path.
 
             \return The image directory path.
         */
-        boost::filesystem::path image_directory_path() const;
+        tetengo2::stdalt::filesystem::path image_directory_path() const;
 
         /*!
             \brief Returns the main window dimension.

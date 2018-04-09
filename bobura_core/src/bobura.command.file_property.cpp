@@ -51,7 +51,7 @@ namespace bobura::command {
             dialog.set_line_name(model.timetable().line_name());
             dialog.set_note(model.timetable().note());
             if (model.has_path())
-                dialog.set_file_name(model.path().template string<string_type>());
+                dialog.set_file_name(model.path().template string<typename string_type::value_type>());
 
             dialog.do_modal();
             if (dialog.result() != dialog_type::result_type::accepted)

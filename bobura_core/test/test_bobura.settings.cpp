@@ -9,7 +9,6 @@
 #include <cstddef>
 #include <vector>
 
-#include <boost/filesystem.hpp>
 #include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
@@ -17,6 +16,7 @@
 #include <tetengo2/gui/dimension.h>
 #include <tetengo2/gui/unit/em.h>
 #include <tetengo2/gui/unit/unit.h>
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -68,7 +68,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
             settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
-            BOOST_CHECK(settings.base_path() == boost::filesystem::path{ string_type{ TETENGO2_TEXT("path/to") } });
+            BOOST_CHECK(
+                settings.base_path() == tetengo2::stdalt::filesystem::path{ string_type{ TETENGO2_TEXT("path/to") } });
 
             settings.clear_config();
         }
@@ -91,7 +92,9 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
                 BOOST_TEST_REQUIRE(settings.input().is_initialized());
-                BOOST_CHECK(*settings.input() == boost::filesystem::path{ string_type{ TETENGO2_TEXT("input_file") } });
+                BOOST_CHECK(
+                    *settings.input() ==
+                    tetengo2::stdalt::filesystem::path{ string_type{ TETENGO2_TEXT("input_file") } });
 
                 settings.clear_config();
             }
@@ -106,7 +109,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
             BOOST_CHECK(
                 settings.message_directory_path() ==
-                boost::filesystem::path{ string_type{ TETENGO2_TEXT("path/to/messages") } });
+                tetengo2::stdalt::filesystem::path{ string_type{ TETENGO2_TEXT("path/to/messages") } });
 
             settings.clear_config();
         }
@@ -120,7 +123,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
             BOOST_CHECK(
                 settings.image_directory_path() ==
-                boost::filesystem::path{ string_type{ TETENGO2_TEXT("path/to/images") } });
+                tetengo2::stdalt::filesystem::path{ string_type{ TETENGO2_TEXT("path/to/images") } });
 
             settings.clear_config();
         }

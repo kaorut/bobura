@@ -12,7 +12,8 @@
 #include <memory>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/filesystem.hpp>
+
+#include <tetengo2/stdalt.h>
 
 #include <bobura/message/timetable_model_observer_set.h>
 #include <bobura/model/timetable.h>
@@ -118,7 +119,7 @@ namespace bobura {
 
             \throw std::invalid_argument When p_timetable is nullptr.
         */
-        void reset_timetable(std::unique_ptr<timetable_type> p_timetable, boost::filesystem::path path);
+        void reset_timetable(std::unique_ptr<timetable_type> p_timetable, tetengo2::stdalt::filesystem::path path);
 
         /*!
             \brief Checks whether the model has a path.
@@ -135,14 +136,14 @@ namespace bobura {
 
             \throw std::logic_error When the model does not have a path.
         */
-        const boost::filesystem::path& path() const;
+        const tetengo2::stdalt::filesystem::path& path() const;
 
         /*!
             \brief Sets a path.
 
             \param path A path.
         */
-        void set_path(boost::filesystem::path path);
+        void set_path(tetengo2::stdalt::filesystem::path path);
 
         /*!
             \brief Checks whether the model is changed.

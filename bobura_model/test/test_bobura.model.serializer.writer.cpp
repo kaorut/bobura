@@ -8,7 +8,6 @@
 
 #include <sstream>
 
-#include <boost/filesystem.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -45,6 +44,10 @@ namespace {
     using timetable_type = bobura::model::
         timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
 
+    using path_type = tetengo2::stdalt::filesystem::path;
+
+    using path_string_type = path_type::string_type;
+
     using output_stream_type = common_type_list_type::output_stream_type;
 
     using writer_type = bobura::model::serializer::writer<
@@ -63,9 +66,9 @@ namespace {
 
 
     private:
-        virtual boost::filesystem::path extension_impl() const override
+        virtual path_type extension_impl() const override
         {
-            return boost::filesystem::path{ TETENGO2_TEXT("hoge") };
+            return path_type{ path_string_type{ TETENGO2_TEXT("hoge") } };
         }
 
         virtual void write_impl(
@@ -95,7 +98,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     const concrete_writer writer{};
 
-                    BOOST_CHECK(writer.extension() == boost::filesystem::path{ TETENGO2_TEXT("hoge") });
+                    BOOST_CHECK(writer.extension() == path_type{ path_string_type{ TETENGO2_TEXT("hoge") } });
                 }
 
                 BOOST_AUTO_TEST_CASE(selects)
@@ -104,9 +107,9 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     const concrete_writer writer{};
 
-                    BOOST_TEST(writer.selects(boost::filesystem::path{ TETENGO2_TEXT("hoge") }));
-                    BOOST_TEST(!writer.selects(boost::filesystem::path{ TETENGO2_TEXT("fuga") }));
-                    BOOST_TEST(!writer.selects(boost::filesystem::path{}));
+                    BOOST_TEST(writer.selects(path_type{ path_string_type{ TETENGO2_TEXT("hoge") } }));
+                    BOOST_TEST(!writer.selects(path_type{ path_string_type{ TETENGO2_TEXT("fuga") } }));
+                    BOOST_TEST(!writer.selects(path_type{}));
                 }
 
                 BOOST_AUTO_TEST_CASE(write)

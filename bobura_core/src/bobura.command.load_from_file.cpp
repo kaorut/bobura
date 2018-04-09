@@ -9,10 +9,11 @@
 #include <memory>
 #include <utility>
 
-#include <boost/filesystem.hpp>
 #include <boost/none.hpp>
 #include <boost/optional.hpp>
 #include <boost/predef.h>
+
+#include <tetengo2/stdalt.h>
 
 #include <bobura/command/load_from_file.h>
 #include <bobura/detail_type_list.h>
@@ -70,7 +71,7 @@ namespace bobura::command {
 
 
     template <typename Traits, typename LoadSaveTraits>
-    load_from_file<Traits, LoadSaveTraits>::parameter_type::parameter_type(boost::filesystem::path path)
+    load_from_file<Traits, LoadSaveTraits>::parameter_type::parameter_type(tetengo2::stdalt::filesystem::path path)
     : m_path{ std::move(path) }
     {}
 
@@ -79,7 +80,7 @@ namespace bobura::command {
     {}
 
     template <typename Traits, typename LoadSaveTraits>
-    const boost::filesystem::path& load_from_file<Traits, LoadSaveTraits>::parameter_type::path() const
+    const tetengo2::stdalt::filesystem::path& load_from_file<Traits, LoadSaveTraits>::parameter_type::path() const
     {
         return m_path;
     }

@@ -9,11 +9,11 @@
 #include <sstream>
 #include <vector>
 
-#include <boost/filesystem.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2/detail/stub/impl_set.h>
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/command/set.h>
@@ -369,7 +369,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                                     message_catalog,
                                                     detail_impl_set_type::instance() };
 
-                const boost::filesystem::path path{ string_type{ TETENGO2_TEXT("hoge.txt") } };
+                const tetengo2::stdalt::filesystem::path path{ string_type{ TETENGO2_TEXT("hoge.txt") } };
                 command_set.create_load_from_file_parameter(path);
             }
 

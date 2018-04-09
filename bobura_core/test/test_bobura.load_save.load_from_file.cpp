@@ -6,11 +6,11 @@
     $Id$
 */
 
-#include <boost/filesystem.hpp>
 #include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -60,6 +60,10 @@ namespace {
     using confirm_file_save_type = bobura::load_save::confirm_file_save<load_save_traits_type>;
 
     using load_from_file_type = bobura::load_save::load_from_file<load_save_traits_type>;
+
+    using path_type = tetengo2::stdalt::filesystem::path;
+
+    using path_string_type = path_type::string_type;
 }
 
 
@@ -99,7 +103,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
                     const load_from_file_type    load_from_file{ false, confirm_file_save, message_catalog };
 
-                    const boost::optional<boost::filesystem::path> path{};
+                    const boost::optional<path_type> path{};
 
                     BOOST_TEST(!load_from_file.reloadable(model, path));
                 }
@@ -110,19 +114,19 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
                     const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
 
-                    const boost::optional<boost::filesystem::path> path{};
+                    const boost::optional<path_type> path{};
 
                     BOOST_TEST(load_from_file.reloadable(model, path));
                 }
                 {
                     model_type model{};
-                    model.set_path(boost::filesystem::path{ TETENGO2_TEXT("file_path") });
+                    model.set_path(path_type{ path_string_type{ TETENGO2_TEXT("file_path") } });
                     const message_catalog_type_  message_catalog{};
                     const save_to_file_type      save_to_file{ false, message_catalog };
                     const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
                     const load_from_file_type    load_from_file{ false, confirm_file_save, message_catalog };
 
-                    const boost::optional<boost::filesystem::path> path{};
+                    const boost::optional<path_type> path{};
                     BOOST_TEST(load_from_file.reloadable(model, path));
                 }
                 {
@@ -132,8 +136,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
                     const load_from_file_type    load_from_file{ false, confirm_file_save, message_catalog };
 
-                    const boost::optional<boost::filesystem::path> path{ boost::filesystem::path{
-                        TETENGO2_TEXT("file_path") } };
+                    const boost::optional<path_type> path{ path_type{
+                        path_string_type{ TETENGO2_TEXT("file_path") } } };
                     BOOST_TEST(load_from_file.reloadable(model, path));
                 }
             }
@@ -149,8 +153,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
                     const load_from_file_type    load_from_file{ false, confirm_file_save, message_catalog };
 
-                    const boost::optional<boost::filesystem::path> path{};
-                    window_type                                    parent{};
+                    const boost::optional<path_type> path{};
+                    window_type                      parent{};
                     load_from_file(model, path, parent);
                 }
                 {
@@ -160,8 +164,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
                     const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
 
-                    const boost::optional<boost::filesystem::path> path{};
-                    window_type                                    parent{};
+                    const boost::optional<path_type> path{};
+                    window_type                      parent{};
                     load_from_file(model, path, parent);
                 }
             }
