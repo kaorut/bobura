@@ -19,6 +19,7 @@
 #include <cstdint>
 #include <cstdlib>
 #include <exception>
+#include <fstream>
 #include <functional>
 #include <ios>
 #include <iterator>
@@ -31,6 +32,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <system_error>
 #include <tuple>
 #include <type_traits>
 #include <unordered_map>
@@ -64,7 +66,6 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/signals2.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
-#include <boost/system/error_code.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/utility/string_view.hpp>
 #include <boost/variant.hpp>
