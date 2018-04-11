@@ -39,14 +39,24 @@ $(TETENGO2_TOOLS)/check_type_list_type_duplication.sh:
 
 lint-iwyu: $(top_srcdir)/$(IWYU_IMP_PATH)
 	for d in $(SOURCE_SUBDIRS); do (cd $$d && $(MAKE) lint-iwyu); done
+	test `find -name '*.iwyuout' | xargs grep -l " should " | wc -l` -eq 0
 
 .PHONY: lint-iwyu-extra
 lint-iwyu-extra: $(top_srcdir)/$(IWYU_IMP_PATH)
 	for d in $(SOURCE_SUBDIRS); do (cd $$d && $(MAKE) lint-iwyu-extra); done
+	test `find -name '*.iwyuout' | xargs grep -l " should " | wc -l` -eq 0
 
 $(top_srcdir)/$(IWYU_IMP_PATH):
 	git submodule update --init
 	git submodule foreach 'git checkout -f master && git pull -p'
+
+.PHONY: iwyu-result
+iwyu-result:
+	find -name '*.iwyuout' | xargs cat | less
+
+.PHONY: clean-iwyu
+clean-iwyu:
+	find -name '*.iwyuout' | xargs rm
 
 .PHONY: format
 format: $(top_srcdir)/.clang-format

@@ -17,7 +17,7 @@ lint-iwyu-extra:
 	for d in $(SUBDIRS); do (cd $$d && $(MAKE) lint-iwyu-extra); done
 
 %.iwyuout: %
-	$(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(CXXFLAGS) $< 2> $(addsuffix .tmp, $@) || test $$? -eq 2
+	$(IWYU) $(IWYU_OPTS) $(CPPFLAGS) $(CXXFLAGS) $< 2> $(addsuffix .tmp, $@) || true
 	mv $(addsuffix .tmp, $@) $@
 
 format:
