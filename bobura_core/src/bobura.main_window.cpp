@@ -11,9 +11,9 @@
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/none.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -79,7 +79,7 @@ namespace bobura {
 
         // functions
 
-        void set_title(const boost::optional<string_type>& document_name, const bool changed)
+        void set_title(const tetengo2::stdalt::optional<string_type>& document_name, const bool changed)
         {
             auto title = document_name ? *document_name : m_message_catalog.get(TETENGO2_TEXT("Common:Untitled"));
             if (changed)
@@ -229,7 +229,7 @@ namespace bobura {
             set_message_observers();
 
             set_window_icon();
-            set_title(boost::none, false);
+            set_title(TETENGO2_STDALT_NULLOPT, false);
 
             auto dimension = m_settings.main_window_dimension();
             if (dimension)
@@ -289,8 +289,8 @@ namespace bobura {
 
     template <typename Traits, typename CommandSetTraits>
     void main_window<Traits, CommandSetTraits>::set_title(
-        const boost::optional<string_type>& document_name,
-        const bool                          changed)
+        const tetengo2::stdalt::optional<string_type>& document_name,
+        const bool                                     changed)
     {
         m_p_impl->set_title(document_name, changed);
     }

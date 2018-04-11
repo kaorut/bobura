@@ -14,10 +14,10 @@
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/format.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/rational.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -173,7 +173,7 @@ namespace bobura {
         void do_modal_impl()
         {
             m_p_category_list_box->select_value(0);
-            m_current_category_index = boost::make_optional<size_type>(0);
+            m_current_category_index = tetengo2::stdalt::make_optional<size_type>(0);
             update();
         }
 
@@ -259,7 +259,7 @@ namespace bobura {
 
         const message_catalog_type& m_message_catalog;
 
-        boost::optional<size_type> m_current_category_index;
+        tetengo2::stdalt::optional<size_type> m_current_category_index;
 
         std::unique_ptr<label_type> m_p_category_label;
 
@@ -626,7 +626,7 @@ namespace bobura {
             return font_name_and_size(m_font_color_list[*m_current_category_index].timetable_font());
         }
 
-        string_type font_name_and_size(const boost::optional<font_type>& font) const
+        string_type font_name_and_size(const tetengo2::stdalt::optional<font_type>& font) const
         {
             if (!font)
                 return {};

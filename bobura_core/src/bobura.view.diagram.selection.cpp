@@ -12,9 +12,9 @@
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
+
+#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
@@ -64,7 +64,7 @@ namespace bobura::view::diagram {
             return &station_location == m_p_selected_station_location;
         }
 
-        bool selected(const train_type& train, const boost::optional<size_type>& departure_stop_index) const
+        bool selected(const train_type& train, const tetengo2::stdalt::optional<size_type>& departure_stop_index) const
         {
             if (!m_p_selected_train)
                 return false;
@@ -88,7 +88,7 @@ namespace bobura::view::diagram {
             m_p_selection_observer_set->station_selected()(station_location);
         }
 
-        void select(const train_type& train, const boost::optional<size_type>& departure_stop_index)
+        void select(const train_type& train, const tetengo2::stdalt::optional<size_type>& departure_stop_index)
         {
             unselect_all();
 
@@ -102,7 +102,7 @@ namespace bobura::view::diagram {
         {
             m_p_selected_station_location = nullptr;
             m_p_selected_train = nullptr;
-            m_departure_stop_index = boost::none;
+            m_departure_stop_index = TETENGO2_STDALT_NULLOPT;
 
             m_p_selection_observer_set->all_unselected()();
         }
@@ -125,7 +125,7 @@ namespace bobura::view::diagram {
 
         const train_type* m_p_selected_train;
 
-        boost::optional<size_type> m_departure_stop_index;
+        tetengo2::stdalt::optional<size_type> m_departure_stop_index;
 
         std::unique_ptr<selection_observer_set_type> m_p_selection_observer_set;
     };
@@ -150,8 +150,9 @@ namespace bobura::view::diagram {
     }
 
     template <typename Traits>
-    bool
-    selection<Traits>::selected(const train_type& train, const boost::optional<size_type>& departure_stop_index) const
+    bool selection<Traits>::selected(
+        const train_type&                            train,
+        const tetengo2::stdalt::optional<size_type>& departure_stop_index) const
     {
         return m_p_impl->selected(train, departure_stop_index);
     }
@@ -163,7 +164,9 @@ namespace bobura::view::diagram {
     }
 
     template <typename Traits>
-    void selection<Traits>::select(const train_type& train, const boost::optional<size_type>& departure_stop_index)
+    void selection<Traits>::select(
+        const train_type&                            train,
+        const tetengo2::stdalt::optional<size_type>& departure_stop_index)
     {
         m_p_impl->select(train, departure_stop_index);
     }

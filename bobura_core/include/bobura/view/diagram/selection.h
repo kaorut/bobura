@@ -13,14 +13,11 @@
 
 #include <boost/core/noncopyable.hpp>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/message/diagram_selection_observer_set.h>
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
-
-namespace boost {
-    template <class T>
-    class optional;
-}
 
 
 namespace bobura::view::diagram {
@@ -99,12 +96,13 @@ namespace bobura::view::diagram {
             \param train                A train.
             \param departure_stop_index A departure stop index.
                                         Specity std::numeric_limits<size_type>::max() to test whether any fragment is
-                                        selected. Or specify boost::none to test whether a whole train is selected.
+                                        selected. Or specify TETENGO2_STDALT_NULLOPT to test whether a whole train is
+           selected.
 
             \retval true  When the train is selected.
             \retval false Otherwise.
         */
-        bool selected(const train_type& train, const boost::optional<size_type>& departure_stop_index) const;
+        bool selected(const train_type& train, const tetengo2::stdalt::optional<size_type>& departure_stop_index) const;
 
         /*!
             \brief Selects a station location.
@@ -117,9 +115,10 @@ namespace bobura::view::diagram {
             \brief Selects a train.
 
             \param train                A train.
-            \param departure_stop_index A departure stop index. Or specify boost::none when a whole train is selected.
+            \param departure_stop_index A departure stop index. Or specify TETENGO2_STDALT_NULLOPT when a whole train is
+           selected.
         */
-        void select(const train_type& train, const boost::optional<size_type>& departure_stop_index);
+        void select(const train_type& train, const tetengo2::stdalt::optional<size_type>& departure_stop_index);
 
         /*!
             \brief Unselects all the items.

@@ -13,9 +13,9 @@
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
+
+#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
@@ -49,11 +49,11 @@ namespace bobura::view::diagram {
 
         impl(
             selection_type&,
-            position_unit_type         left,
-            position_unit_type         top,
-            position_unit_type         bottom,
-            color_type                 color,
-            boost::optional<size_type> hours)
+            position_unit_type                    left,
+            position_unit_type                    top,
+            position_unit_type                    bottom,
+            color_type                            color,
+            tetengo2::stdalt::optional<size_type> hours)
         : m_left{ std::move(left) }, m_top{ std::move(top) }, m_bottom{ std::move(bottom) },
           m_color{ std::move(color) }, m_hours{ std::move(hours) }
         {}
@@ -109,18 +109,18 @@ namespace bobura::view::diagram {
 
         color_type m_color;
 
-        boost::optional<size_type> m_hours;
+        tetengo2::stdalt::optional<size_type> m_hours;
     };
 
 
     template <typename Traits>
     time_line<Traits>::time_line(
-        selection_type&            selection,
-        position_unit_type         left,
-        position_unit_type         top,
-        position_unit_type         bottom,
-        color_type                 color,
-        boost::optional<size_type> hours)
+        selection_type&                       selection,
+        position_unit_type                    left,
+        position_unit_type                    top,
+        position_unit_type                    bottom,
+        color_type                            color,
+        tetengo2::stdalt::optional<size_type> hours)
     : base_type{ selection }, m_p_impl{ std::make_unique<impl>(
                                   selection,
                                   std::move(left),
@@ -299,7 +299,7 @@ namespace bobura::view::diagram {
             {
                 const time_type time{ i * 60 + time_offset.seconds() };
                 const auto      hours_minutes_seconds = time.hours_minutes_seconds();
-                const auto      hours = hours_minutes_seconds.hours();
+                auto            hours = hours_minutes_seconds.hours();
                 const auto      minutes = hours_minutes_seconds.minutes();
                 assert(hours_minutes_seconds.seconds() == 0);
 
@@ -323,7 +323,7 @@ namespace bobura::view::diagram {
                         header_bottom,
                         line_bottom,
                         *m_p_color,
-                        boost::make_optional(hours));
+                        tetengo2::stdalt::make_optional(std::move(hours)));
                 }
                 else if (minutes % 10 == 0)
                 {
@@ -335,7 +335,7 @@ namespace bobura::view::diagram {
                             canvas_top,
                             line_bottom,
                             m_p_color->mix(*m_p_background_color, 0.5),
-                            boost::none);
+                            TETENGO2_STDALT_NULLOPT);
                     }
                 }
                 else if (minutes % 2 == 0)
@@ -348,7 +348,7 @@ namespace bobura::view::diagram {
                             canvas_top,
                             line_bottom,
                             m_p_color->mix(*m_p_background_color, 0.75),
-                            boost::none);
+                            TETENGO2_STDALT_NULLOPT);
                     }
                 }
                 else
@@ -361,7 +361,7 @@ namespace bobura::view::diagram {
                             canvas_top,
                             line_bottom,
                             m_p_color->mix(*m_p_background_color, 0.75),
-                            boost::none);
+                            TETENGO2_STDALT_NULLOPT);
                     }
                 }
             }

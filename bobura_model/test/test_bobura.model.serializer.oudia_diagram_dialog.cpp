@@ -11,10 +11,10 @@
 #include <utility>
 #include <vector>
 
-#include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -145,12 +145,12 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     oudia_diagram_dialog.set_selected_index(1);
 
-                    BOOST_TEST(oudia_diagram_dialog.selected_index().is_initialized());
+                    BOOST_TEST(tetengo2::stdalt::has_value(oudia_diagram_dialog.selected_index()));
                     BOOST_CHECK(*oudia_diagram_dialog.selected_index() == 1);
 
                     oudia_diagram_dialog.set_names(std::vector<string_type>{});
 
-                    BOOST_TEST(!oudia_diagram_dialog.selected_index().is_initialized());
+                    BOOST_TEST(!tetengo2::stdalt::has_value(oudia_diagram_dialog.selected_index()));
                 }
 
 

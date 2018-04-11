@@ -21,13 +21,12 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/format.hpp>
 #include <boost/math/constants/constants.hpp>
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/range/adaptors.hpp>
 #include <boost/rational.hpp>
 #include <boost/throw_exception.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -114,24 +113,28 @@ namespace bobura::view::diagram {
 
         bool selected_impl(const train_line_fragment& self) const
         {
-            return self.get_selection().selected(*m_p_train, boost::none) ||
-                   self.get_selection().selected(*m_p_train, boost::make_optional(m_departure_stop_index));
+            return self.get_selection().selected(*m_p_train, TETENGO2_STDALT_NULLOPT) ||
+                   self.get_selection().selected(
+                       *m_p_train, tetengo2::stdalt::make_optional(size_type{ m_departure_stop_index }));
         }
 
         void select_impl(train_line_fragment& self, const bool switch_selection_style)
         {
-            const auto whole_selected = self.get_selection().selected(*m_p_train, boost::none);
-            const auto this_fragment_selected =
-                self.get_selection().selected(*m_p_train, boost::make_optional(m_departure_stop_index));
-            const auto any_fragment_selected =
-                self.get_selection().selected(*m_p_train, boost::make_optional(std::numeric_limits<size_type>::max()));
+            const auto whole_selected = self.get_selection().selected(*m_p_train, TETENGO2_STDALT_NULLOPT);
+            const auto this_fragment_selected = self.get_selection().selected(
+                *m_p_train, tetengo2::stdalt::make_optional(size_type{ m_departure_stop_index }));
+            const auto any_fragment_selected = self.get_selection().selected(
+                *m_p_train, tetengo2::stdalt::make_optional(std::numeric_limits<size_type>::max()));
 
             auto select_fragment = false;
             if (switch_selection_style)
                 select_fragment = whole_selected || (!this_fragment_selected && any_fragment_selected);
             else
                 select_fragment = this_fragment_selected;
-            self.get_selection().select(*m_p_train, boost::make_optional(select_fragment, m_departure_stop_index));
+            self.get_selection().select(
+                *m_p_train,
+                select_fragment ? tetengo2::stdalt::make_optional(size_type{ m_departure_stop_index }) :
+                                  TETENGO2_STDALT_NULLOPT);
         }
 
 

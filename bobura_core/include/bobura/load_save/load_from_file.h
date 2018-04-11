@@ -102,8 +102,9 @@ namespace bobura::load_save {
             \retval true  When the model is reloadable.
             \retval false Otherwise.
         */
-        bool reloadable(const model_type& model, const boost::optional<tetengo2::stdalt::filesystem::path>& given_path)
-            const;
+        bool reloadable(
+            const model_type&                                                     model,
+            const tetengo2::stdalt::optional<tetengo2::stdalt::filesystem::path>& given_path) const;
 
         /*!
             \brief Executes the load_save.
@@ -113,9 +114,9 @@ namespace bobura::load_save {
             \param parent     A parent window.
         */
         void operator()(
-            model_type&                                                model,
-            const boost::optional<tetengo2::stdalt::filesystem::path>& given_path,
-            abstract_window_type&                                      parent) const;
+            model_type&                                                           model,
+            const tetengo2::stdalt::optional<tetengo2::stdalt::filesystem::path>& given_path,
+            abstract_window_type&                                                 parent) const;
 
 
     private:

@@ -14,8 +14,7 @@
 #include <memory>
 #include <vector>
 
-#include <boost/optional.hpp>
-
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 
@@ -52,9 +51,9 @@ namespace bobura::message::font_color_dialog {
             \param update                 An update function.
         */
         category_list_box_selection_changed(
-            boost::optional<size_type>& current_category_index,
-            const list_box_type&        list_box,
-            const update_type           update)
+            tetengo2::stdalt::optional<size_type>& current_category_index,
+            const list_box_type&                   list_box,
+            const update_type                      update)
         : m_current_category_index{ current_category_index }, m_list_box{ list_box }, m_update{ update }
         {}
 
@@ -74,7 +73,7 @@ namespace bobura::message::font_color_dialog {
     private:
         // variables
 
-        boost::optional<size_type>& m_current_category_index;
+        tetengo2::stdalt::optional<size_type>& m_current_category_index;
 
         const list_box_type& m_list_box;
 
@@ -129,10 +128,10 @@ namespace bobura::message::font_color_dialog {
             \param message_catalog        A message catalog.
         */
         sample_picture_box_paint(
-            const std::vector<font_color_type>&   font_color_list,
-            const boost::optional<int_size_type>& current_category_index,
-            const dimension_type&                 canvas_dimension,
-            const message_catalog_type&           message_catalog)
+            const std::vector<font_color_type>&              font_color_list,
+            const tetengo2::stdalt::optional<int_size_type>& current_category_index,
+            const dimension_type&                            canvas_dimension,
+            const message_catalog_type&                      message_catalog)
         : m_font_color_list{ font_color_list }, m_current_category_index{ current_category_index },
           m_canvas_dimension{ canvas_dimension }, m_message_catalog{ message_catalog }
         {}
@@ -181,7 +180,7 @@ namespace bobura::message::font_color_dialog {
 
         const std::vector<font_color_type>& m_font_color_list;
 
-        const boost::optional<int_size_type>& m_current_category_index;
+        const tetengo2::stdalt::optional<int_size_type>& m_current_category_index;
 
         const dimension_type m_canvas_dimension;
 
@@ -197,8 +196,12 @@ namespace bobura::message::font_color_dialog {
                 canvas,
                 position,
                 dimension,
-                [](const font_color_type& fc) -> const boost::optional<font_type>& { return fc.diagram_font(); },
-                [](const font_color_type& fc) -> const boost::optional<color_type>& { return fc.diagram_color(); },
+                [](const font_color_type& fc) -> const tetengo2::stdalt::optional<font_type>& {
+                    return fc.diagram_font();
+                },
+                [](const font_color_type& fc) -> const tetengo2::stdalt::optional<color_type>& {
+                    return fc.diagram_color();
+                },
                 m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Diagram")));
         }
 
@@ -209,18 +212,22 @@ namespace bobura::message::font_color_dialog {
                 canvas,
                 position,
                 dimension,
-                [](const font_color_type& fc) -> const boost::optional<font_type>& { return fc.timetable_font(); },
-                [](const font_color_type& fc) -> const boost::optional<color_type>& { return fc.timetable_color(); },
+                [](const font_color_type& fc) -> const tetengo2::stdalt::optional<font_type>& {
+                    return fc.timetable_font();
+                },
+                [](const font_color_type& fc) -> const tetengo2::stdalt::optional<color_type>& {
+                    return fc.timetable_color();
+                },
                 m_message_catalog.get(TETENGO2_TEXT("Dialog:FontAndColor:Timetable")));
         }
 
         void draw_sample(
-            canvas_type&                                                                     canvas,
-            const position_type&                                                             position,
-            const dimension_type&                                                            dimension,
-            const std::function<const boost::optional<font_type>&(const font_color_type&)>&  get_font,
-            const std::function<const boost::optional<color_type>&(const font_color_type&)>& get_color,
-            const string_type&                                                               text) const
+            canvas_type&                                                                                canvas,
+            const position_type&                                                                        position,
+            const dimension_type&                                                                       dimension,
+            const std::function<const tetengo2::stdalt::optional<font_type>&(const font_color_type&)>&  get_font,
+            const std::function<const tetengo2::stdalt::optional<color_type>&(const font_color_type&)>& get_color,
+            const string_type&                                                                          text) const
         {
             assert(get_color(m_font_color_list[0]));
             auto p_background = std::make_unique<solid_background_type>(*get_color(m_font_color_list[0]));
@@ -337,11 +344,11 @@ namespace bobura::message::font_color_dialog {
             \param message_catalog        A message catalog.
         */
         diagram_font_button_mouse_clicked(
-            dialog_type&                      dialog,
-            std::vector<font_color_type>&     font_color_list,
-            const boost::optional<size_type>& current_category_index,
-            const update_type                 update,
-            const message_catalog_type&       message_catalog)
+            dialog_type&                                 dialog,
+            std::vector<font_color_type>&                font_color_list,
+            const tetengo2::stdalt::optional<size_type>& current_category_index,
+            const update_type                            update,
+            const message_catalog_type&                  message_catalog)
         : m_dialog{ dialog }, m_font_color_list{ font_color_list },
           m_current_category_index{ current_category_index }, m_update{ update }, m_message_catalog{ message_catalog }
         {}
@@ -363,7 +370,8 @@ namespace bobura::message::font_color_dialog {
             if (!ok)
                 return;
 
-            m_font_color_list[*m_current_category_index].set_diagram_font(boost::make_optional(font_dialog.result()));
+            m_font_color_list[*m_current_category_index].set_diagram_font(
+                tetengo2::stdalt::make_optional(font_type{ font_dialog.result() }));
 
             m_update();
         }
@@ -376,7 +384,7 @@ namespace bobura::message::font_color_dialog {
 
         std::vector<font_color_type>& m_font_color_list;
 
-        const boost::optional<size_type>& m_current_category_index;
+        const tetengo2::stdalt::optional<size_type>& m_current_category_index;
 
         update_type m_update;
 
@@ -446,11 +454,11 @@ namespace bobura::message::font_color_dialog {
             \param message_catalog        A message catalog.
         */
         explicit diagram_color_button_mouse_clicked(
-            dialog_type&                      dialog,
-            std::vector<font_color_type>&     font_color_list,
-            const boost::optional<size_type>& current_category_index,
-            const update_type                 update,
-            const message_catalog_type&       message_catalog)
+            dialog_type&                                 dialog,
+            std::vector<font_color_type>&                font_color_list,
+            const tetengo2::stdalt::optional<size_type>& current_category_index,
+            const update_type                            update,
+            const message_catalog_type&                  message_catalog)
         : m_dialog{ dialog }, m_font_color_list{ font_color_list },
           m_current_category_index{ current_category_index }, m_update{ update }, m_message_catalog{ message_catalog }
         {}
@@ -472,7 +480,8 @@ namespace bobura::message::font_color_dialog {
             if (!ok)
                 return;
 
-            m_font_color_list[*m_current_category_index].set_diagram_color(boost::make_optional(color_dialog.result()));
+            m_font_color_list[*m_current_category_index].set_diagram_color(
+                tetengo2::stdalt::make_optional(color_type{ color_dialog.result() }));
 
             m_update();
         }
@@ -485,7 +494,7 @@ namespace bobura::message::font_color_dialog {
 
         std::vector<font_color_type>& m_font_color_list;
 
-        const boost::optional<size_type>& m_current_category_index;
+        const tetengo2::stdalt::optional<size_type>& m_current_category_index;
 
         update_type m_update;
 
@@ -555,11 +564,11 @@ namespace bobura::message::font_color_dialog {
             \param message_catalog        A message catalog.
         */
         timetable_font_button_mouse_clicked(
-            dialog_type&                      dialog,
-            std::vector<font_color_type>&     font_color_list,
-            const boost::optional<size_type>& current_category_index,
-            const update_type                 update,
-            const message_catalog_type&       message_catalog)
+            dialog_type&                                 dialog,
+            std::vector<font_color_type>&                font_color_list,
+            const tetengo2::stdalt::optional<size_type>& current_category_index,
+            const update_type                            update,
+            const message_catalog_type&                  message_catalog)
         : m_dialog{ dialog }, m_font_color_list{ font_color_list },
           m_current_category_index{ current_category_index }, m_update{ update }, m_message_catalog{ message_catalog }
         {}
@@ -581,7 +590,8 @@ namespace bobura::message::font_color_dialog {
             if (!ok)
                 return;
 
-            m_font_color_list[*m_current_category_index].set_timetable_font(boost::make_optional(font_dialog.result()));
+            m_font_color_list[*m_current_category_index].set_timetable_font(
+                tetengo2::stdalt::make_optional(font_type{ font_dialog.result() }));
 
             m_update();
         }
@@ -594,7 +604,7 @@ namespace bobura::message::font_color_dialog {
 
         std::vector<font_color_type>& m_font_color_list;
 
-        const boost::optional<size_type>& m_current_category_index;
+        const tetengo2::stdalt::optional<size_type>& m_current_category_index;
 
         update_type m_update;
 
@@ -664,11 +674,11 @@ namespace bobura::message::font_color_dialog {
             \param message_catalog        A message catalog.
         */
         explicit timetable_color_button_mouse_clicked(
-            dialog_type&                      dialog,
-            std::vector<font_color_type>&     font_color_list,
-            const boost::optional<size_type>& current_category_index,
-            const update_type                 update,
-            const message_catalog_type&       message_catalog)
+            dialog_type&                                 dialog,
+            std::vector<font_color_type>&                font_color_list,
+            const tetengo2::stdalt::optional<size_type>& current_category_index,
+            const update_type                            update,
+            const message_catalog_type&                  message_catalog)
         : m_dialog{ dialog }, m_font_color_list{ font_color_list },
           m_current_category_index{ current_category_index }, m_update{ update }, m_message_catalog{ message_catalog }
         {}
@@ -691,7 +701,7 @@ namespace bobura::message::font_color_dialog {
                 return;
 
             m_font_color_list[*m_current_category_index].set_timetable_color(
-                boost::make_optional(color_dialog.result()));
+                tetengo2::stdalt::make_optional(color_type{ color_dialog.result() }));
 
             m_update();
         }
@@ -704,7 +714,7 @@ namespace bobura::message::font_color_dialog {
 
         std::vector<font_color_type>& m_font_color_list;
 
-        const boost::optional<size_type>& m_current_category_index;
+        const tetengo2::stdalt::optional<size_type>& m_current_category_index;
 
         update_type m_update;
 

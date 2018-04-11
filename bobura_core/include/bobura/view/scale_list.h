@@ -12,7 +12,8 @@
 #include <memory>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/optional.hpp>
+
+#include <tetengo2/stdalt.h>
 
 
 namespace bobura::view {
@@ -90,7 +91,7 @@ namespace bobura::view {
 
             \return The same scale index.
         */
-        boost::optional<size_type> index_of(const scale_type& scale) const;
+        tetengo2::stdalt::optional<size_type> index_of(const scale_type& scale) const;
 
         /*!
             \brief Returns the nearest larger scale.

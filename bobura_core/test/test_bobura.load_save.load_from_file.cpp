@@ -6,7 +6,6 @@
     $Id$
 */
 
-#include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -103,7 +102,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
                     const load_from_file_type    load_from_file{ false, confirm_file_save, message_catalog };
 
-                    const boost::optional<path_type> path{};
+                    const tetengo2::stdalt::optional<path_type> path{};
 
                     BOOST_TEST(!load_from_file.reloadable(model, path));
                 }
@@ -114,7 +113,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
                     const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
 
-                    const boost::optional<path_type> path{};
+                    const tetengo2::stdalt::optional<path_type> path{};
 
                     BOOST_TEST(load_from_file.reloadable(model, path));
                 }
@@ -126,7 +125,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
                     const load_from_file_type    load_from_file{ false, confirm_file_save, message_catalog };
 
-                    const boost::optional<path_type> path{};
+                    const tetengo2::stdalt::optional<path_type> path{};
                     BOOST_TEST(load_from_file.reloadable(model, path));
                 }
                 {
@@ -136,7 +135,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
                     const load_from_file_type    load_from_file{ false, confirm_file_save, message_catalog };
 
-                    const boost::optional<path_type> path{ path_type{
+                    const tetengo2::stdalt::optional<path_type> path{ path_type{
                         path_string_type{ TETENGO2_TEXT("file_path") } } };
                     BOOST_TEST(load_from_file.reloadable(model, path));
                 }
@@ -153,8 +152,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
                     const load_from_file_type    load_from_file{ false, confirm_file_save, message_catalog };
 
-                    const boost::optional<path_type> path{};
-                    window_type                      parent{};
+                    const tetengo2::stdalt::optional<path_type> path{};
+                    window_type                                 parent{};
                     load_from_file(model, path, parent);
                 }
                 {
@@ -164,8 +163,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
                     const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
 
-                    const boost::optional<path_type> path{};
-                    window_type                      parent{};
+                    const tetengo2::stdalt::optional<path_type> path{};
+                    window_type                                 parent{};
                     load_from_file(model, path, parent);
                 }
             }

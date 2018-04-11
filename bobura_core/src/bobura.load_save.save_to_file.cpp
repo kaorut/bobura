@@ -12,8 +12,6 @@
 #include <system_error>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2/stdalt.h>
@@ -57,7 +55,10 @@ namespace bobura::load_save {
             if (!model.has_path() || m_ask_file_path)
             {
                 file_save_dialog_type dialog{ m_message_catalog.get(TETENGO2_TEXT("Dialog:FileOpenSave:SaveAs")),
-                                              model.has_path() ? boost::make_optional(model.path()) : boost::none,
+                                              model.has_path() ?
+                                                  tetengo2::stdalt::make_optional(
+                                                      tetengo2::stdalt::filesystem::path{ model.path() }) :
+                                                  TETENGO2_STDALT_NULLOPT,
                                               make_file_filters(),
                                               parent };
                 const auto            ok = dialog.do_modal();

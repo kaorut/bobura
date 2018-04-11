@@ -18,10 +18,9 @@
 #include <utility>
 #include <vector>
 
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 
@@ -58,9 +57,9 @@ namespace bobura::message::train_kind_dialog {
             \param update                   A update function.
         */
         train_kind_list_box_selection_changed(
-            boost::optional<size_type>& current_train_kind_index,
-            const list_box_type&        list_box,
-            const update_type           update)
+            tetengo2::stdalt::optional<size_type>& current_train_kind_index,
+            const list_box_type&                   list_box,
+            const update_type                      update)
         : m_current_train_kind_index{ current_train_kind_index }, m_list_box{ list_box }, m_update{ update }
         {}
 
@@ -80,7 +79,7 @@ namespace bobura::message::train_kind_dialog {
     private:
         // variables
 
-        boost::optional<size_type>& m_current_train_kind_index;
+        tetengo2::stdalt::optional<size_type>& m_current_train_kind_index;
 
         const list_box_type& m_list_box;
 
@@ -125,10 +124,10 @@ namespace bobura::message::train_kind_dialog {
             \param message_catalog          A message catalog.
         */
         add_button_mouse_clicked(
-            std::vector<info_set_type>&       info_sets,
-            const boost::optional<size_type>& current_train_kind_index,
-            const sync_type                   sync,
-            const message_catalog_type&       message_catalog)
+            std::vector<info_set_type>&                  info_sets,
+            const tetengo2::stdalt::optional<size_type>& current_train_kind_index,
+            const sync_type                              sync,
+            const message_catalog_type&                  message_catalog)
         : m_info_sets{ info_sets }, m_current_train_kind_index{ current_train_kind_index }, m_sync{ sync },
           m_message_catalog{ message_catalog }
         {}
@@ -153,7 +152,7 @@ namespace bobura::message::train_kind_dialog {
                                       train_kind_type::default_().diagram_line_style(),
                                       train_kind_type::default_().timetable_font(),
                                       train_kind_type::default_().timetable_color() };
-            m_info_sets.emplace(insertion_position, boost::none, false, std::move(new_kind));
+            m_info_sets.emplace(insertion_position, TETENGO2_STDALT_NULLOPT, false, std::move(new_kind));
 
             m_sync();
         }
@@ -175,7 +174,7 @@ namespace bobura::message::train_kind_dialog {
 
         std::vector<info_set_type>& m_info_sets;
 
-        const boost::optional<size_type>& m_current_train_kind_index;
+        const tetengo2::stdalt::optional<size_type>& m_current_train_kind_index;
 
         sync_type m_sync;
 
@@ -215,9 +214,9 @@ namespace bobura::message::train_kind_dialog {
             \param sync                     A sync function type.
         */
         delete_button_mouse_clicked(
-            std::vector<info_set_type>& info_sets,
-            boost::optional<size_type>& current_train_kind_index,
-            const sync_type             sync)
+            std::vector<info_set_type>&            info_sets,
+            tetengo2::stdalt::optional<size_type>& current_train_kind_index,
+            const sync_type                        sync)
         : m_info_sets{ info_sets }, m_current_train_kind_index{ current_train_kind_index }, m_sync{ sync }
         {}
 
@@ -237,9 +236,9 @@ namespace bobura::message::train_kind_dialog {
             if (*m_current_train_kind_index >= m_info_sets.size())
             {
                 if (m_info_sets.empty())
-                    m_current_train_kind_index = boost::none;
+                    m_current_train_kind_index = TETENGO2_STDALT_NULLOPT;
                 else
-                    m_current_train_kind_index = boost::make_optional(m_info_sets.size() - 1);
+                    m_current_train_kind_index = tetengo2::stdalt::make_optional(m_info_sets.size() - 1);
             }
 
             m_sync();
@@ -251,7 +250,7 @@ namespace bobura::message::train_kind_dialog {
 
         std::vector<info_set_type>& m_info_sets;
 
-        boost::optional<size_type>& m_current_train_kind_index;
+        tetengo2::stdalt::optional<size_type>& m_current_train_kind_index;
 
         sync_type m_sync;
     };
@@ -289,9 +288,9 @@ namespace bobura::message::train_kind_dialog {
             \param sync                     A sync function type.
         */
         up_button_mouse_clicked(
-            std::vector<info_set_type>& info_sets,
-            boost::optional<size_type>& current_train_kind_index,
-            const sync_type             sync)
+            std::vector<info_set_type>&            info_sets,
+            tetengo2::stdalt::optional<size_type>& current_train_kind_index,
+            const sync_type                        sync)
         : m_info_sets{ info_sets }, m_current_train_kind_index{ current_train_kind_index }, m_sync{ sync }
         {}
 
@@ -318,7 +317,7 @@ namespace bobura::message::train_kind_dialog {
 
         std::vector<info_set_type>& m_info_sets;
 
-        boost::optional<size_type>& m_current_train_kind_index;
+        tetengo2::stdalt::optional<size_type>& m_current_train_kind_index;
 
         sync_type m_sync;
     };
@@ -356,9 +355,9 @@ namespace bobura::message::train_kind_dialog {
             \param sync                     A sync function type.
         */
         down_button_mouse_clicked(
-            std::vector<info_set_type>& info_sets,
-            boost::optional<size_type>& current_train_kind_index,
-            const sync_type             sync)
+            std::vector<info_set_type>&            info_sets,
+            tetengo2::stdalt::optional<size_type>& current_train_kind_index,
+            const sync_type                        sync)
         : m_info_sets{ info_sets }, m_current_train_kind_index{ current_train_kind_index }, m_sync{ sync }
         {}
 
@@ -385,7 +384,7 @@ namespace bobura::message::train_kind_dialog {
 
         std::vector<info_set_type>& m_info_sets;
 
-        boost::optional<size_type>& m_current_train_kind_index;
+        tetengo2::stdalt::optional<size_type>& m_current_train_kind_index;
 
         sync_type m_sync;
     };
@@ -871,11 +870,11 @@ namespace bobura::message::train_kind_dialog {
             \param canvas_dimension         A canvas dimension.
         */
         sample_picture_box_paint(
-            const std::vector<info_set_type>&     info_sets,
-            const boost::optional<int_size_type>& current_train_kind_index,
-            const color_type&                     background_color,
-            const color_type&                     timetable_color,
-            const dimension_type&                 canvas_dimension)
+            const std::vector<info_set_type>&                info_sets,
+            const tetengo2::stdalt::optional<int_size_type>& current_train_kind_index,
+            const color_type&                                background_color,
+            const color_type&                                timetable_color,
+            const dimension_type&                            canvas_dimension)
         : m_info_sets{ info_sets }, m_current_train_kind_index{ current_train_kind_index },
           m_background_color{ background_color }, m_timetable_color{ timetable_color }, m_canvas_dimension{
               canvas_dimension
@@ -961,7 +960,7 @@ namespace bobura::message::train_kind_dialog {
 
         const std::vector<info_set_type>& m_info_sets;
 
-        const boost::optional<int_size_type>& m_current_train_kind_index;
+        const tetengo2::stdalt::optional<int_size_type>& m_current_train_kind_index;
 
         const color_type& m_background_color;
 

@@ -10,12 +10,11 @@
 #include <string>
 #include <vector>
 
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2/detail/stub/impl_set.h>
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -102,7 +101,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             };
 
             {
-                main_window.set_title(boost::none, false);
+                main_window.set_title(TETENGO2_STDALT_NULLOPT, false);
 
                 const auto expected = message_catalog.get(TETENGO2_TEXT("Common:Untitled")) +
                                       string_type{ TETENGO2_TEXT(" - ") } +
@@ -110,7 +109,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 BOOST_CHECK(main_window.text() == expected);
             }
             {
-                main_window.set_title(boost::none, true);
+                main_window.set_title(TETENGO2_STDALT_NULLOPT, true);
 
                 const auto expected = message_catalog.get(TETENGO2_TEXT("Common:Untitled")) +
                                       string_type{ TETENGO2_TEXT(" *") } + string_type{ TETENGO2_TEXT(" - ") } +
@@ -118,14 +117,14 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 BOOST_CHECK(main_window.text() == expected);
             }
             {
-                main_window.set_title(boost::make_optional(string_type{ TETENGO2_TEXT("hoge") }), false);
+                main_window.set_title(tetengo2::stdalt::make_optional(string_type{ TETENGO2_TEXT("hoge") }), false);
 
                 const auto expected = string_type{ TETENGO2_TEXT("hoge") } + string_type{ TETENGO2_TEXT(" - ") } +
                                       message_catalog.get(TETENGO2_TEXT("App:Bobura"));
                 BOOST_CHECK(main_window.text() == expected);
             }
             {
-                main_window.set_title(boost::make_optional(string_type{ TETENGO2_TEXT("hoge") }), true);
+                main_window.set_title(tetengo2::stdalt::make_optional(string_type{ TETENGO2_TEXT("hoge") }), true);
 
                 const auto expected = string_type{ TETENGO2_TEXT("hoge") } + string_type{ TETENGO2_TEXT(" *") } +
                                       string_type{ TETENGO2_TEXT(" - ") } +

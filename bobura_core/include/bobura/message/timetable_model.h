@@ -12,9 +12,9 @@
 #include <cassert>
 #include <utility>
 
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/rational.hpp>
+
+#include <tetengo2/stdalt.h>
 
 
 namespace bobura::message::timetable_model {
@@ -27,9 +27,9 @@ namespace bobura::message::timetable_model {
 
             const auto title =
                 timetable_model.has_path() ?
-                    boost::make_optional(
+                    tetengo2::stdalt::make_optional(
                         timetable_model.path().filename().template string<typename string_type::value_type>()) :
-                    boost::none;
+                    TETENGO2_STDALT_NULLOPT;
             main_window.set_title(title, timetable_model.changed());
         }
     }

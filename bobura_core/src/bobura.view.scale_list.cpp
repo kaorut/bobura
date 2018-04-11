@@ -14,10 +14,9 @@
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/type_list.h>
@@ -62,14 +61,14 @@ namespace bobura::view {
             return labels()[index];
         }
 
-        boost::optional<size_type> index_of(const scale_type& scale) const
+        tetengo2::stdalt::optional<size_type> index_of(const scale_type& scale) const
         {
             for (size_type i = 0; i < scales().size(); ++i)
             {
                 if (scales()[i] == scale)
-                    return boost::make_optional(i);
+                    return tetengo2::stdalt::make_optional(std::move(i));
             }
-            return boost::none;
+            return TETENGO2_STDALT_NULLOPT;
         }
 
         const scale_type& larger(const scale_type& scale) const
@@ -157,7 +156,7 @@ namespace bobura::view {
     }
 
     template <typename Size, typename String, typename Scale>
-    boost::optional<typename scale_list<Size, String, Scale>::size_type>
+    tetengo2::stdalt::optional<typename scale_list<Size, String, Scale>::size_type>
     scale_list<Size, String, Scale>::index_of(const scale_type& scale) const
     {
         return m_p_impl->index_of(scale);

@@ -10,13 +10,13 @@
 #include <utility>
 #include <vector>
 
-#include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2/gui/drawing/color.h>
 #include <tetengo2/gui/drawing/font.h>
 #include <tetengo2/gui/unit/em.h>
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -97,9 +97,12 @@ namespace {
 
     font_color_type make_font_color(const bool has_font, const bool has_color)
     {
-        const auto font = boost::make_optional(
-            has_font, font_type{ string_type{ TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false });
-        const auto color = boost::make_optional(has_color, color_type{ 12, 34, 56 });
+        const auto font =
+            has_font ? tetengo2::stdalt::make_optional(
+                           font_type{ string_type{ TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false }) :
+                       TETENGO2_STDALT_NULLOPT;
+        const auto color =
+            has_color ? tetengo2::stdalt::make_optional(color_type{ 12, 34, 56 }) : TETENGO2_STDALT_NULLOPT;
         return font_color_type{ font, color, font, color };
     }
 }

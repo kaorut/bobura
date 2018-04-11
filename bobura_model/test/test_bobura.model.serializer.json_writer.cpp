@@ -12,8 +12,6 @@
 #include <utility>
 #include <vector>
 
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -224,10 +222,12 @@ namespace {
         {
             color_type            diagram_background_color{ 0xAB, 0xCD, 0xEF };
             color_type            timetable_background_color{ 0xFE, 0xDC, 0xBA };
-            const font_color_type background_font_color{ boost::none,
-                                                         boost::make_optional(diagram_background_color),
-                                                         boost::none,
-                                                         boost::make_optional(timetable_background_color) };
+            const font_color_type background_font_color{
+                TETENGO2_STDALT_NULLOPT,
+                tetengo2::stdalt::make_optional(std::move(diagram_background_color)),
+                TETENGO2_STDALT_NULLOPT,
+                tetengo2::stdalt::make_optional(std::move(timetable_background_color))
+            };
 
             font_type diagram_company_name_font{
                 string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true
@@ -237,10 +237,12 @@ namespace {
                 string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true
             };
             color_type            timetable_company_name_color{ 0xFE, 0xDC, 0xBA };
-            const font_color_type company_name_font_color{ boost::make_optional(diagram_company_name_font),
-                                                           boost::make_optional(diagram_company_name_color),
-                                                           boost::make_optional(timetable_company_name_font),
-                                                           boost::make_optional(timetable_company_name_color) };
+            const font_color_type company_name_font_color{
+                tetengo2::stdalt::make_optional(std::move(diagram_company_name_font)),
+                tetengo2::stdalt::make_optional(std::move(diagram_company_name_color)),
+                tetengo2::stdalt::make_optional(std::move(timetable_company_name_font)),
+                tetengo2::stdalt::make_optional(std::move(timetable_company_name_color))
+            };
 
             const font_color_set_type font_color_set{ background_font_color,
                                                       font_color_set_type::default_().general(),

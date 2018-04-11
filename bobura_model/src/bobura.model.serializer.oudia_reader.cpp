@@ -19,8 +19,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 #include <boost/utility/string_view.hpp>
@@ -500,7 +498,7 @@ namespace bobura::model::serializer {
                 }
             };
 
-            static boost::optional<std::vector<stop_type>> parse_stops(
+            static tetengo2::stdalt::optional<std::vector<stop_type>> parse_stops(
                 const string_type&                               stops_string,
                 const typename std::vector<stop_type>::size_type station_location_count,
                 const bool                                       direction_down)
@@ -513,11 +511,11 @@ namespace bobura::model::serializer {
                 {
                     auto stop = parse_stop(stop_string);
                     if (!stop)
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                     stops.push_back(std::move(*stop));
                 }
                 if (stops.size() > station_location_count)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 std::fill_n(
                     std::back_inserter(stops),
@@ -530,11 +528,11 @@ namespace bobura::model::serializer {
                 return stops;
             }
 
-            static boost::optional<stop_type> parse_stop(const string_type& stop_string)
+            static tetengo2::stdalt::optional<stop_type> parse_stop(const string_type& stop_string)
             {
                 const auto kind_time = split(stop_string, char_type(TETENGO2_TEXT(';')));
                 if (kind_time.empty())
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 const auto stopping = kind_time[0] == string_type{ TETENGO2_TEXT("1") } && kind_time.size() >= 2;
                 const auto operational = !stopping && kind_time.size() >= 2;
@@ -543,49 +541,51 @@ namespace bobura::model::serializer {
 
                 const auto arrival_departure = split(kind_time[1], char_type(TETENGO2_TEXT('/')));
                 if (arrival_departure.empty())
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
-                auto arrival = boost::make_optional(time_type::uninitialized());
-                auto departure = boost::make_optional(time_type::uninitialized());
+                auto uninitialized_arrival = time_type::uninitialized();
+                auto arrival = tetengo2::stdalt::make_optional<time_type>(std::move(uninitialized_arrival));
+                auto uninitialized_departure = time_type::uninitialized();
+                auto departure = tetengo2::stdalt::make_optional<time_type>(std::move(uninitialized_departure));
                 if (arrival_departure.size() < 2)
                 {
                     departure = parse_time(arrival_departure[0]);
                     if (!departure)
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                 }
                 else
                 {
                     arrival = parse_time(arrival_departure[0]);
                     if (!arrival)
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                     departure = parse_time(arrival_departure[1]);
                     if (!departure)
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                 }
 
-                return boost::make_optional(
+                return tetengo2::stdalt::make_optional(
                     stop_type(std::move(*arrival), std::move(*departure), operational, string_type{}));
             }
 
-            static boost::optional<time_type> parse_time(const string_type& time_string)
+            static tetengo2::stdalt::optional<time_type> parse_time(const string_type& time_string)
             {
                 if (time_string.empty())
-                    return boost::make_optional(time_type::uninitialized());
+                    return tetengo2::stdalt::make_optional(time_type{ time_type::uninitialized() });
                 if (time_string.size() > 4)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 const auto hours = time_string.length() > 2 ?
                                        to_number<unsigned int>(time_string.substr(0, time_string.length() - 2)) :
-                                       boost::make_optional<unsigned int>(0);
+                                       tetengo2::stdalt::make_optional<unsigned int>(0);
                 if (!hours || *hours >= 24)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 const auto minutes = time_string.length() > 2 ?
                                          to_number<unsigned int>(time_string.substr(time_string.length() - 2)) :
                                          to_number<unsigned int>(time_string);
                 if (!minutes || *minutes >= 60)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
-                return boost::make_optional(time_type{ *hours, *minutes, 0 });
+                return tetengo2::stdalt::make_optional(time_type{ *hours, *minutes, 0 });
             }
 
             timetable_type& m_timetable;
@@ -708,44 +708,45 @@ namespace bobura::model::serializer {
         }
 
         template <typename T>
-        static boost::optional<T> to_number(const string_type& number_string)
+        static tetengo2::stdalt::optional<T> to_number(const string_type& number_string)
         {
             try
             {
-                return boost::make_optional(boost::lexical_cast<T>(number_string));
+                return tetengo2::stdalt::make_optional(boost::lexical_cast<T>(number_string));
             }
             catch (const boost::bad_lexical_cast&)
             {
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
         }
 
-        static boost::optional<color_type> to_color(const string_type& color_string)
+        static tetengo2::stdalt::optional<color_type> to_color(const string_type& color_string)
         {
             if (color_string.length() != 8)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             const auto red = from_hex_string<unsigned int>(color_string.substr(2, 2));
             if (!red)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto green = from_hex_string<unsigned int>(color_string.substr(4, 2));
             if (!green)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto blue = from_hex_string<unsigned int>(color_string.substr(6, 2));
             if (!blue)
-                return boost::none;
-            return boost::make_optional(color_type{ static_cast<unsigned char>(*red),
-                                                    static_cast<unsigned char>(*green),
-                                                    static_cast<unsigned char>(*blue) });
+                return TETENGO2_STDALT_NULLOPT;
+            return tetengo2::stdalt::make_optional(color_type{ static_cast<unsigned char>(*red),
+                                                               static_cast<unsigned char>(*green),
+                                                               static_cast<unsigned char>(*blue) });
         }
 
         template <typename T>
-        static boost::optional<T> from_hex_string(const string_type& hex_string)
+        static tetengo2::stdalt::optional<T> from_hex_string(const string_type& hex_string)
         {
             std::basic_istringstream<char_type> stream{ hex_string };
             T                                   result = 0;
             stream >> std::hex >> result;
-            return boost::make_optional(stream.eof() || stream.good(), std::move(result));
+            return stream.eof() || stream.good() ? tetengo2::stdalt::make_optional(std::move(result)) :
+                                                   TETENGO2_STDALT_NULLOPT;
         }
 
         static std::unique_ptr<state> dispatch(
@@ -827,8 +828,8 @@ namespace bobura::model::serializer {
         {
             auto       splitted = split(file_type_string, char_type(TETENGO2_TEXT('.')));
             auto       name = splitted.size() >= 1 ? std::move(splitted[0]) : string_type{};
-            const auto major_version = splitted.size() >= 2 ? to_number<int>(splitted[1]) : boost::none;
-            const auto minor_version = splitted.size() >= 3 ? to_number<int>(splitted[2]) : boost::none;
+            const auto major_version = splitted.size() >= 2 ? to_number<int>(splitted[1]) : TETENGO2_STDALT_NULLOPT;
+            const auto minor_version = splitted.size() >= 3 ? to_number<int>(splitted[2]) : TETENGO2_STDALT_NULLOPT;
             return file_type(std::move(name), major_version ? *major_version : 0, minor_version ? *minor_version : 0);
         }
 
@@ -840,7 +841,7 @@ namespace bobura::model::serializer {
 
         // functions
 
-        boost::optional<string_type> select_diagram(const iterator first, const iterator last)
+        tetengo2::stdalt::optional<string_type> select_diagram(const iterator first, const iterator last)
         {
             auto diagram_names = collect_diagram_names(first, last);
             if (diagram_names.empty())
@@ -848,7 +849,7 @@ namespace bobura::model::serializer {
 
             const auto found = (*m_p_select_diagram)(diagram_names.begin(), diagram_names.end());
             if (found == diagram_names.end())
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             return std::move(*found);
         }

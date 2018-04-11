@@ -12,6 +12,7 @@
 #include <memory>
 
 #include <tetengo2/detail/base/impl_set.h>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/property_bar.h>
@@ -141,7 +142,7 @@ namespace bobura {
             \param document_name A document name.
             \param changed       A changed status.
         */
-        void set_title(const boost::optional<string_type>& document_name, bool changed);
+        void set_title(const tetengo2::stdalt::optional<string_type>& document_name, bool changed);
 
         /*!
             \brief Returns the tab frame.

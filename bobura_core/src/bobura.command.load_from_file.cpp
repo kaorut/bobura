@@ -9,8 +9,6 @@
 #include <memory>
 #include <utility>
 
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
 
 #include <tetengo2/stdalt.h>
@@ -49,17 +47,21 @@ namespace bobura::command {
 
         bool enabled(const model_type& model) const
         {
-            return m_load_from_file.reloadable(model, boost::none);
+            return m_load_from_file.reloadable(model, TETENGO2_STDALT_NULLOPT);
         }
 
         void execute(model_type& model, abstract_window_type& parent) const
         {
-            m_load_from_file(model, boost::none, parent);
+            m_load_from_file(model, TETENGO2_STDALT_NULLOPT, parent);
         }
 
         void execute(model_type& model, abstract_window_type& parent, const parameter_base& parameter) const
         {
-            m_load_from_file(model, boost::make_optional(parameter.as<parameter_type>().path()), parent);
+            m_load_from_file(
+                model,
+                tetengo2::stdalt::make_optional(
+                    tetengo2::stdalt::filesystem::path{ parameter.as<parameter_type>().path() }),
+                parent);
         }
 
 

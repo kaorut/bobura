@@ -9,13 +9,12 @@
 #include <sstream>
 #include <utility>
 
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/signals2.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -112,7 +111,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("name_number") },
                                             string_type{ TETENGO2_TEXT("note") } };
 
-                    BOOST_TEST(!selection.selected(train, boost::none));
+                    BOOST_TEST(!selection.selected(train, TETENGO2_STDALT_NULLOPT));
                 }
 
                 BOOST_AUTO_TEST_CASE(select_O_station)
@@ -134,7 +133,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("name_number") },
                                             string_type{ TETENGO2_TEXT("note") } };
 
-                    selection.select(train, boost::none);
+                    selection.select(train, TETENGO2_STDALT_NULLOPT);
 
                     station_type                station{ string_type{ TETENGO2_TEXT("name") },
                                           station_grade_type_set_type::local_type::instance(),
@@ -146,8 +145,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     selection.select(station_location);
 
                     BOOST_TEST(selection.selected(station_location));
-                    BOOST_TEST(!selection.selected(train, boost::none));
-                    BOOST_TEST(!selection.selected(train, boost::make_optional<size_type>(42)));
+                    BOOST_TEST(!selection.selected(train, TETENGO2_STDALT_NULLOPT));
+                    BOOST_TEST(!selection.selected(train, tetengo2::stdalt::make_optional<size_type>(42)));
                     BOOST_TEST(p_selected_station_location == &station_location);
                 }
 
@@ -158,11 +157,12 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     {
                         selection_type selection{};
 
-                        const train_type*          p_selected_train = nullptr;
-                        boost::optional<size_type> selected_departure_stop_index{};
+                        const train_type*                     p_selected_train = nullptr;
+                        tetengo2::stdalt::optional<size_type> selected_departure_stop_index{};
                         selection.selection_observer_set().train_selected().connect(
                             [&p_selected_train, &selected_departure_stop_index](
-                                const train_type& train, const boost::optional<size_type>& departure_stop_index) {
+                                const train_type&                            train,
+                                const tetengo2::stdalt::optional<size_type>& departure_stop_index) {
                                 p_selected_train = &train;
                                 selected_departure_stop_index = departure_stop_index;
                             });
@@ -182,22 +182,23 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                                 string_type{ TETENGO2_TEXT("name_number") },
                                                 string_type{ TETENGO2_TEXT("note") } };
 
-                        selection.select(train, boost::none);
+                        selection.select(train, TETENGO2_STDALT_NULLOPT);
 
                         BOOST_TEST(!selection.selected(station_location));
-                        BOOST_TEST(selection.selected(train, boost::none));
-                        BOOST_TEST(!selection.selected(train, boost::make_optional<size_type>(42)));
+                        BOOST_TEST(selection.selected(train, TETENGO2_STDALT_NULLOPT));
+                        BOOST_TEST(!selection.selected(train, tetengo2::stdalt::make_optional<size_type>(42)));
                         BOOST_TEST(p_selected_train == &train);
-                        BOOST_CHECK(selected_departure_stop_index == boost::none);
+                        BOOST_CHECK(selected_departure_stop_index == TETENGO2_STDALT_NULLOPT);
                     }
                     {
                         selection_type selection{};
 
-                        const train_type*          p_selected_train = nullptr;
-                        boost::optional<size_type> selected_departure_stop_index{};
+                        const train_type*                     p_selected_train = nullptr;
+                        tetengo2::stdalt::optional<size_type> selected_departure_stop_index{};
                         selection.selection_observer_set().train_selected().connect(
                             [&p_selected_train, &selected_departure_stop_index](
-                                const train_type& train, const boost::optional<size_type>& departure_stop_index) {
+                                const train_type&                            train,
+                                const tetengo2::stdalt::optional<size_type>& departure_stop_index) {
                                 p_selected_train = &train;
                                 selected_departure_stop_index = departure_stop_index;
                             });
@@ -217,22 +218,23 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                                 string_type{ TETENGO2_TEXT("name_number") },
                                                 string_type{ TETENGO2_TEXT("note") } };
 
-                        selection.select(train, boost::make_optional<size_type>(42));
+                        selection.select(train, tetengo2::stdalt::make_optional<size_type>(42));
 
                         BOOST_TEST(!selection.selected(station_location));
-                        BOOST_TEST(!selection.selected(train, boost::none));
-                        BOOST_TEST(selection.selected(train, boost::make_optional<size_type>(42)));
+                        BOOST_TEST(!selection.selected(train, TETENGO2_STDALT_NULLOPT));
+                        BOOST_TEST(selection.selected(train, tetengo2::stdalt::make_optional<size_type>(42)));
                         BOOST_TEST(p_selected_train == &train);
-                        BOOST_CHECK(selected_departure_stop_index == boost::make_optional<size_type>(42));
+                        BOOST_CHECK(selected_departure_stop_index == tetengo2::stdalt::make_optional<size_type>(42));
                     }
                     {
                         selection_type selection{};
 
-                        const train_type*          p_selected_train = nullptr;
-                        boost::optional<size_type> selected_departure_stop_index{};
+                        const train_type*                     p_selected_train = nullptr;
+                        tetengo2::stdalt::optional<size_type> selected_departure_stop_index{};
                         selection.selection_observer_set().train_selected().connect(
                             [&p_selected_train, &selected_departure_stop_index](
-                                const train_type& train, const boost::optional<size_type>& departure_stop_index) {
+                                const train_type&                            train,
+                                const tetengo2::stdalt::optional<size_type>& departure_stop_index) {
                                 p_selected_train = &train;
                                 selected_departure_stop_index = departure_stop_index;
                             });
@@ -252,13 +254,13 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                                 string_type{ TETENGO2_TEXT("name_number") },
                                                 string_type{ TETENGO2_TEXT("note") } };
 
-                        selection.select(train, boost::make_optional<size_type>(42));
+                        selection.select(train, tetengo2::stdalt::make_optional<size_type>(42));
 
                         BOOST_TEST(!selection.selected(station_location));
-                        BOOST_TEST(!selection.selected(train, boost::none));
-                        BOOST_TEST(selection.selected(train, boost::make_optional<size_type>(42)));
+                        BOOST_TEST(!selection.selected(train, TETENGO2_STDALT_NULLOPT));
+                        BOOST_TEST(selection.selected(train, tetengo2::stdalt::make_optional<size_type>(42)));
                         BOOST_TEST(p_selected_train == &train);
-                        BOOST_CHECK(selected_departure_stop_index == boost::make_optional<size_type>(42));
+                        BOOST_CHECK(selected_departure_stop_index == tetengo2::stdalt::make_optional<size_type>(42));
                     }
                 }
 
@@ -299,11 +301,11 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                                 string_type{ TETENGO2_TEXT("name") },
                                                 string_type{ TETENGO2_TEXT("name_number") },
                                                 string_type{ TETENGO2_TEXT("note") } };
-                        selection.select(train, boost::none);
+                        selection.select(train, TETENGO2_STDALT_NULLOPT);
 
                         selection.unselect_all();
 
-                        BOOST_TEST(!selection.selected(train, boost::none));
+                        BOOST_TEST(!selection.selected(train, TETENGO2_STDALT_NULLOPT));
                         BOOST_TEST(all_unselected_called);
                     }
                 }

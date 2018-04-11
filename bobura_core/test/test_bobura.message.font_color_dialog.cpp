@@ -11,7 +11,6 @@
 #include <vector>
 
 #include <boost/operators.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
@@ -20,6 +19,7 @@
 #include <tetengo2/gui/drawing/font.h>
 #include <tetengo2/gui/unit/em.h>
 #include <tetengo2/gui/unit/unit.h>
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -80,10 +80,10 @@ namespace {
         font_color_type() : m_diagram_font{}, m_diagram_color{}, m_timetable_font{}, m_timetable_color{} {}
 
         font_color_type(
-            boost::optional<font_type>  diagram_font,
-            boost::optional<color_type> diagram_color,
-            boost::optional<font_type>  timetable_font,
-            boost::optional<color_type> timetable_color)
+            tetengo2::stdalt::optional<font_type>  diagram_font,
+            tetengo2::stdalt::optional<color_type> diagram_color,
+            tetengo2::stdalt::optional<font_type>  timetable_font,
+            tetengo2::stdalt::optional<color_type> timetable_color)
         : m_diagram_font{ diagram_font }, m_diagram_color{ diagram_color }, m_timetable_font{ timetable_font },
           m_timetable_color{ timetable_color }
         {}
@@ -91,42 +91,42 @@ namespace {
 
         // functions
 
-        const boost::optional<font_type>& diagram_font() const
+        const tetengo2::stdalt::optional<font_type>& diagram_font() const
         {
             return m_diagram_font;
         }
 
-        void set_diagram_font(boost::optional<font_type> diagram_font)
+        void set_diagram_font(tetengo2::stdalt::optional<font_type> diagram_font)
         {
             m_diagram_font = std::move(diagram_font);
         }
 
-        const boost::optional<color_type>& diagram_color() const
+        const tetengo2::stdalt::optional<color_type>& diagram_color() const
         {
             return m_diagram_color;
         }
 
-        void set_diagram_color(boost::optional<color_type> diagram_color)
+        void set_diagram_color(tetengo2::stdalt::optional<color_type> diagram_color)
         {
             m_diagram_color = std::move(diagram_color);
         }
 
-        const boost::optional<font_type>& timetable_font() const
+        const tetengo2::stdalt::optional<font_type>& timetable_font() const
         {
             return m_timetable_font;
         }
 
-        void set_timetable_font(boost::optional<font_type> timetable_font)
+        void set_timetable_font(tetengo2::stdalt::optional<font_type> timetable_font)
         {
             m_timetable_font = std::move(timetable_font);
         }
 
-        const boost::optional<color_type>& timetable_color() const
+        const tetengo2::stdalt::optional<color_type>& timetable_color() const
         {
             return m_timetable_color;
         }
 
-        void set_timetable_color(boost::optional<color_type> timetable_color)
+        void set_timetable_color(tetengo2::stdalt::optional<color_type> timetable_color)
         {
             m_timetable_color = std::move(timetable_color);
         }
@@ -135,13 +135,13 @@ namespace {
     private:
         // variables
 
-        boost::optional<font_type> m_diagram_font;
+        tetengo2::stdalt::optional<font_type> m_diagram_font;
 
-        boost::optional<color_type> m_diagram_color;
+        tetengo2::stdalt::optional<color_type> m_diagram_color;
 
-        boost::optional<font_type> m_timetable_font;
+        tetengo2::stdalt::optional<font_type> m_timetable_font;
 
-        boost::optional<color_type> m_timetable_color;
+        tetengo2::stdalt::optional<color_type> m_timetable_color;
     };
 
 
@@ -149,9 +149,12 @@ namespace {
 
     font_color_type make_font_color(const bool has_font, const bool has_color)
     {
-        const auto font = boost::make_optional(
-            has_font, font_type{ string_type{ TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false });
-        const auto color = boost::make_optional(has_color, color_type{ 12, 34, 56 });
+        const auto font =
+            has_font ? tetengo2::stdalt::make_optional(
+                           font_type{ string_type{ TETENGO2_TEXT("Tetengo2 Font") }, 42, false, false, false, false }) :
+                       TETENGO2_STDALT_NULLOPT;
+        const auto color =
+            has_color ? tetengo2::stdalt::make_optional(color_type{ 12, 34, 56 }) : TETENGO2_STDALT_NULLOPT;
         return font_color_type{ font, color, font, color };
     }
 
@@ -170,9 +173,9 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    boost::optional<size_type> current_category_index{};
-                    window_type                parent{};
-                    list_box_type              list_box{ parent, list_box_type::scroll_bar_style_type::none };
+                    tetengo2::stdalt::optional<size_type> current_category_index{};
+                    window_type                           parent{};
+                    list_box_type list_box{ parent, list_box_type::scroll_bar_style_type::none };
                     const bobura::message::font_color_dialog::
                         category_list_box_selection_changed<size_type, list_box_type>
                             observer(current_category_index, list_box, update);
@@ -182,9 +185,9 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    boost::optional<size_type> current_category_index{};
-                    window_type                parent{};
-                    list_box_type              list_box{ parent, list_box_type::scroll_bar_style_type::none };
+                    tetengo2::stdalt::optional<size_type> current_category_index{};
+                    window_type                           parent{};
+                    list_box_type list_box{ parent, list_box_type::scroll_bar_style_type::none };
                     const bobura::message::font_color_dialog::
                         category_list_box_selection_changed<size_type, list_box_type>
                             observer(current_category_index, list_box, update);
@@ -206,7 +209,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const bobura::message::font_color_dialog::
                         sample_picture_box_paint<size_type, canvas_type, font_color_type, message_catalog_type>
                             observer{ font_color_list,
-                                      boost::make_optional<size_type>(1),
+                                      tetengo2::stdalt::make_optional<size_type>(1),
                                       dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
                                       message_catalog };
                 }
@@ -220,7 +223,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const bobura::message::font_color_dialog::
                         sample_picture_box_paint<size_type, canvas_type, font_color_type, message_catalog_type>
                             observer{ font_color_list,
-                                      boost::make_optional<size_type>(1),
+                                      tetengo2::stdalt::make_optional<size_type>(1),
                                       dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } },
                                       message_catalog };
 
@@ -249,9 +252,11 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         canvas_type,
                         font_color_type,
                         message_catalog_type>
-                        observer{
-                            dialog, font_color_list, boost::make_optional<size_type>(1), update, message_catalog
-                        };
+                        observer{ dialog,
+                                  font_color_list,
+                                  tetengo2::stdalt::make_optional<size_type>(1),
+                                  update,
+                                  message_catalog };
                 }
 
 #if !( \
@@ -274,9 +279,11 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         canvas_type,
                         font_color_type,
                         message_catalog_type>
-                        observer{
-                            dialog, font_color_list, boost::make_optional<size_type>(1), update, message_catalog
-                        };
+                        observer{ dialog,
+                                  font_color_list,
+                                  tetengo2::stdalt::make_optional<size_type>(1),
+                                  update,
+                                  message_catalog };
 
                     observer();
                 }
@@ -302,9 +309,11 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         canvas_type,
                         font_color_type,
                         message_catalog_type>
-                        observer{
-                            dialog, font_color_list, boost::make_optional<size_type>(1), update, message_catalog
-                        };
+                        observer{ dialog,
+                                  font_color_list,
+                                  tetengo2::stdalt::make_optional<size_type>(1),
+                                  update,
+                                  message_catalog };
                 }
 
                 BOOST_AUTO_TEST_CASE(operator_paren)
@@ -322,9 +331,11 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         canvas_type,
                         font_color_type,
                         message_catalog_type>
-                        observer{
-                            dialog, font_color_list, boost::make_optional<size_type>(1), update, message_catalog
-                        };
+                        observer{ dialog,
+                                  font_color_list,
+                                  tetengo2::stdalt::make_optional<size_type>(1),
+                                  update,
+                                  message_catalog };
 
                     observer();
                 }
@@ -349,9 +360,11 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         canvas_type,
                         font_color_type,
                         message_catalog_type>
-                        observer{
-                            dialog, font_color_list, boost::make_optional<size_type>(1), update, message_catalog
-                        };
+                        observer{ dialog,
+                                  font_color_list,
+                                  tetengo2::stdalt::make_optional<size_type>(1),
+                                  update,
+                                  message_catalog };
                 }
 
 #if !( \
@@ -374,9 +387,11 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         canvas_type,
                         font_color_type,
                         message_catalog_type>
-                        observer{
-                            dialog, font_color_list, boost::make_optional<size_type>(1), update, message_catalog
-                        };
+                        observer{ dialog,
+                                  font_color_list,
+                                  tetengo2::stdalt::make_optional<size_type>(1),
+                                  update,
+                                  message_catalog };
 
                     observer();
                 }
@@ -402,9 +417,11 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         canvas_type,
                         font_color_type,
                         message_catalog_type>
-                        observer{
-                            dialog, font_color_list, boost::make_optional<size_type>(1), update, message_catalog
-                        };
+                        observer{ dialog,
+                                  font_color_list,
+                                  tetengo2::stdalt::make_optional<size_type>(1),
+                                  update,
+                                  message_catalog };
                 }
 
                 BOOST_AUTO_TEST_CASE(operator_paren)
@@ -422,9 +439,11 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         canvas_type,
                         font_color_type,
                         message_catalog_type>
-                        observer{
-                            dialog, font_color_list, boost::make_optional<size_type>(1), update, message_catalog
-                        };
+                        observer{ dialog,
+                                  font_color_list,
+                                  tetengo2::stdalt::make_optional<size_type>(1),
+                                  update,
+                                  message_catalog };
 
                     observer();
                 }

@@ -15,11 +15,11 @@
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/format.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/rational.hpp>
 #include <boost/throw_exception.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -262,7 +262,7 @@ namespace bobura {
 
         std::vector<info_set_type> m_info_sets;
 
-        boost::optional<size_type> m_current_train_kind_index;
+        tetengo2::stdalt::optional<size_type> m_current_train_kind_index;
 
         font_type m_current_diagram_font;
 
@@ -823,7 +823,7 @@ namespace bobura {
             if (m_p_train_kind_list_box->value_count() > 0)
             {
                 if (!m_current_train_kind_index)
-                    m_current_train_kind_index = boost::make_optional<size_type>(0);
+                    m_current_train_kind_index = tetengo2::stdalt::make_optional<size_type>(0);
                 m_p_train_kind_list_box->select_value(*m_current_train_kind_index);
             }
             update();
@@ -938,9 +938,9 @@ namespace bobura {
         typename ColorDialog>
     train_kind_dialog<Traits, Size, String, Font, PointDimensionUnit, Color, Canvas, FontDialog, ColorDialog>::
         info_set_type::info_set_type(
-            boost::optional<size_type> original_index,
-            const bool                 referred,
-            train_kind_type            train_kind)
+            tetengo2::stdalt::optional<size_type> original_index,
+            const bool                            referred,
+            train_kind_type                       train_kind)
     : m_original_index{ std::move(original_index) }, m_referred{ referred }, m_train_kind{ std::move(train_kind) }
     {}
 
@@ -955,7 +955,7 @@ namespace bobura {
         typename Canvas,
         typename FontDialog,
         typename ColorDialog>
-    const boost::optional<typename train_kind_dialog<
+    const tetengo2::stdalt::optional<typename train_kind_dialog<
         Traits,
         Size,
         String,

@@ -14,8 +14,8 @@
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
+
+#include <tetengo2/stdalt.h>
 
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
@@ -222,20 +222,20 @@ namespace bobura::model::timetable_info {
             return intervals;
         }
 
-        boost::optional<time_span_type>
+        tetengo2::stdalt::optional<time_span_type>
         calculate_travel_time(const train_type& train, const stop_index_type from, const stop_index_type to) const
         {
             const auto& from_stop = train.stops()[from];
             const auto  from_time = from_stop.departure().initialized() ? from_stop.departure() : from_stop.arrival();
             if (!from_time.initialized())
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             const auto& to_stop = train.stops()[to];
             const auto  to_time = to_stop.arrival().initialized() ? to_stop.arrival() : to_stop.departure();
             if (!to_time.initialized())
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
-            return boost::make_optional(to_time - from_time);
+            return tetengo2::stdalt::make_optional(to_time - from_time);
         }
     };
 }

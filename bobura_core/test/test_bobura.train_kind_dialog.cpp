@@ -11,11 +11,11 @@
 #include <utility>
 #include <vector>
 
-#include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2/gui/drawing/font.h>
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -113,7 +113,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             train_kind_dialog_type     train_kind_dialog{ parent, background_color, timetable_color, message_catalog };
 
             std::vector<info_set_type> info_sets{
-                info_set_type{ boost::make_optional<size_type>(0),
+                info_set_type{ tetengo2::stdalt::make_optional<size_type>(0),
                                false,
                                train_kind_type{
                                    string_type{ TETENGO2_TEXT("name0") },
@@ -125,7 +125,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                    font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
                                    color_type{ 30, 40, 50 } } },
                 info_set_type{
-                    boost::make_optional<size_type>(1),
+                    tetengo2::stdalt::make_optional<size_type>(1),
                     true,
                     train_kind_type{ string_type{ TETENGO2_TEXT("name1") },
                                      string_type{ TETENGO2_TEXT("abbreviation1") },
@@ -139,7 +139,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             train_kind_dialog.set_info_sets(std::move(info_sets));
 
             const std::vector<info_set_type> expected{
-                info_set_type{ boost::make_optional<size_type>(0),
+                info_set_type{ tetengo2::stdalt::make_optional<size_type>(0),
                                false,
                                train_kind_type{
                                    string_type{ TETENGO2_TEXT("name0") },
@@ -151,7 +151,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                    font_type{ string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true },
                                    color_type{ 30, 40, 50 } } },
                 info_set_type{
-                    boost::make_optional<size_type>(1),
+                    tetengo2::stdalt::make_optional<size_type>(1),
                     true,
                     train_kind_type{ string_type{ TETENGO2_TEXT("name1") },
                                      string_type{ TETENGO2_TEXT("abbreviation1") },

@@ -12,7 +12,7 @@
 #include <memory>
 #include <vector>
 
-#include <boost/optional.hpp>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/model/train_kind.h>
 
@@ -96,7 +96,10 @@ namespace bobura {
                 \param referred       A referred status.
                 \param train_kind     A train kind.
             */
-            info_set_type(boost::optional<size_type> original_index, bool referred, train_kind_type train_kind);
+            info_set_type(
+                tetengo2::stdalt::optional<size_type> original_index,
+                bool                                  referred,
+                train_kind_type                       train_kind);
 
 
             /*!
@@ -104,7 +107,7 @@ namespace bobura {
 
                 \return The original index.
             */
-            const boost::optional<size_type>& original_index() const;
+            const tetengo2::stdalt::optional<size_type>& original_index() const;
 
             /*!
                 \brief Returns the referred status.
@@ -128,7 +131,7 @@ namespace bobura {
             train_kind_type& train_kind();
 
         private:
-            boost::optional<size_type> m_original_index;
+            tetengo2::stdalt::optional<size_type> m_original_index;
 
             bool m_referred;
 
