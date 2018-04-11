@@ -14,7 +14,6 @@
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/throw_exception.hpp>
@@ -64,16 +63,17 @@ namespace bobura::load_save {
 
         // functions
 
-        bool
-        reloadable(const model_type& model, const boost::optional<tetengo2::stdalt::filesystem::path>& given_path) const
+        bool reloadable(
+            const model_type&                                                     model,
+            const tetengo2::stdalt::optional<tetengo2::stdalt::filesystem::path>& given_path) const
         {
             return m_ask_file_path || model.has_path() || given_path;
         }
 
         void operator()(
-            model_type&                                                model,
-            const boost::optional<tetengo2::stdalt::filesystem::path>& given_path,
-            abstract_window_type&                                      parent) const
+            model_type&                                                           model,
+            const tetengo2::stdalt::optional<tetengo2::stdalt::filesystem::path>& given_path,
+            abstract_window_type&                                                 parent) const
         {
             if (!m_ask_file_path && !model.has_path() && !given_path)
                 return;
@@ -301,17 +301,17 @@ namespace bobura::load_save {
 
     template <typename Traits>
     bool load_from_file<Traits>::reloadable(
-        const model_type&                                          model,
-        const boost::optional<tetengo2::stdalt::filesystem::path>& given_path) const
+        const model_type&                                                     model,
+        const tetengo2::stdalt::optional<tetengo2::stdalt::filesystem::path>& given_path) const
     {
         return m_p_impl->reloadable(model, given_path);
     }
 
     template <typename Traits>
     void load_from_file<Traits>::operator()(
-        model_type&                                                model,
-        const boost::optional<tetengo2::stdalt::filesystem::path>& given_path,
-        abstract_window_type&                                      parent) const
+        model_type&                                                           model,
+        const tetengo2::stdalt::optional<tetengo2::stdalt::filesystem::path>& given_path,
+        abstract_window_type&                                                 parent) const
     {
         (*m_p_impl)(model, given_path, parent);
     }

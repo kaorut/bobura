@@ -10,12 +10,12 @@
 #include <utility>
 
 #include <boost/operators.hpp>
-#include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2/gui/drawing/color.h>
 #include <tetengo2/gui/drawing/font.h>
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/model/timetable_info/font_color_set.h>
@@ -48,9 +48,11 @@ namespace {
 
     font_color_type make_font_color(const string_type& font_name, const bool has_color)
     {
-        const auto font =
-            boost::make_optional(!font_name.empty(), font_type{ font_name, 42, false, true, false, true });
-        const auto color = boost::make_optional(has_color, color_type{ 12, 34, 56 });
+        const auto font = !font_name.empty() ?
+                              tetengo2::stdalt::make_optional(font_type{ font_name, 42, false, true, false, true }) :
+                              TETENGO2_STDALT_NULLOPT;
+        const auto color =
+            has_color ? tetengo2::stdalt::make_optional(color_type{ 12, 34, 56 }) : TETENGO2_STDALT_NULLOPT;
         return font_color_type{ font, color, font, color };
     }
 
@@ -164,7 +166,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     const auto font_color = make_font_color(string_type{ TETENGO2_TEXT("company_name") }, true);
 
-                    const auto expected = boost::make_optional(
+                    const auto expected = tetengo2::stdalt::make_optional(
                         font_type{ string_type{ TETENGO2_TEXT("company_name") }, 42, false, true, false, true });
                     BOOST_CHECK(font_color.diagram_font() == expected);
                 }
@@ -175,7 +177,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     const auto font_color = make_font_color(string_type{ TETENGO2_TEXT("company_name") }, true);
 
-                    BOOST_CHECK((font_color.diagram_color() == boost::make_optional(color_type{ 12, 34, 56 })));
+                    BOOST_CHECK(
+                        (font_color.diagram_color() == tetengo2::stdalt::make_optional(color_type{ 12, 34, 56 })));
                 }
 
                 BOOST_AUTO_TEST_CASE(timetable_font)
@@ -184,7 +187,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     const auto font_color = make_font_color(string_type{ TETENGO2_TEXT("company_name") }, true);
 
-                    const auto expected = boost::make_optional(
+                    const auto expected = tetengo2::stdalt::make_optional(
                         font_type{ string_type{ TETENGO2_TEXT("company_name") }, 42, false, true, false, true });
                     BOOST_CHECK(font_color.timetable_font() == expected);
                 }
@@ -195,7 +198,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     const auto font_color = make_font_color(string_type{ TETENGO2_TEXT("company_name") }, true);
 
-                    BOOST_CHECK((font_color.timetable_color() == boost::make_optional(color_type{ 12, 34, 56 })));
+                    BOOST_CHECK(
+                        (font_color.timetable_color() == tetengo2::stdalt::make_optional(color_type{ 12, 34, 56 })));
                 }
 
 

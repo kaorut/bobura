@@ -12,8 +12,6 @@
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
@@ -66,17 +64,17 @@ namespace bobura {
 
         void reset_timetable()
         {
-            reset_timetable_impl(std::make_unique<timetable_type>(), boost::none);
+            reset_timetable_impl(std::make_unique<timetable_type>(), TETENGO2_STDALT_NULLOPT);
         }
 
         void reset_timetable(std::unique_ptr<timetable_type> p_timetable)
         {
-            reset_timetable_impl(std::move(p_timetable), boost::none);
+            reset_timetable_impl(std::move(p_timetable), TETENGO2_STDALT_NULLOPT);
         }
 
         void reset_timetable(std::unique_ptr<timetable_type> p_timetable, tetengo2::stdalt::filesystem::path path)
         {
-            reset_timetable_impl(std::move(p_timetable), boost::make_optional(std::move(path)));
+            reset_timetable_impl(std::move(p_timetable), tetengo2::stdalt::make_optional(std::move(path)));
         }
 
         bool has_path() const
@@ -94,7 +92,7 @@ namespace bobura {
 
         void set_path(tetengo2::stdalt::filesystem::path path)
         {
-            m_path = boost::make_optional(std::move(path));
+            m_path = tetengo2::stdalt::make_optional(std::move(path));
             m_changed = false;
 
             m_observer_set.reset()();
@@ -128,7 +126,7 @@ namespace bobura {
 
         std::unique_ptr<timetable_type> m_p_timetable;
 
-        boost::optional<tetengo2::stdalt::filesystem::path> m_path;
+        tetengo2::stdalt::optional<tetengo2::stdalt::filesystem::path> m_path;
 
         bool m_changed;
 
@@ -138,14 +136,14 @@ namespace bobura {
         // functions
 
         void reset_timetable_impl(
-            std::unique_ptr<timetable_type>                       p_timetable,
-            boost::optional<tetengo2::stdalt::filesystem::path>&& path)
+            std::unique_ptr<timetable_type>                                  p_timetable,
+            tetengo2::stdalt::optional<tetengo2::stdalt::filesystem::path>&& path)
         {
             if (!p_timetable)
                 BOOST_THROW_EXCEPTION(std::invalid_argument("Timetable is nullptr."));
 
             m_p_timetable = std::move(p_timetable);
-            m_path = std::forward<boost::optional<tetengo2::stdalt::filesystem::path>>(path);
+            m_path = std::forward<tetengo2::stdalt::optional<tetengo2::stdalt::filesystem::path>>(path);
             m_changed = false;
 
             set_timetable_observer_set();

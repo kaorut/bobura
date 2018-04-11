@@ -9,11 +9,11 @@
 #include <memory>
 #include <utility>
 
-#include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <tetengo2/gui/unit/em.h>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/model/train_info/time.h>
@@ -94,7 +94,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                                position_unit_type{ 24 },
                                                position_unit_type{ 42 },
                                                color_type{ 0x12, 0x34, 0x56, 0x78 },
-                                               boost::make_optional<time_type::size_type>(12) };
+                                               tetengo2::stdalt::make_optional<time_type::size_type>(12) };
                     const time_line_type time_line2{ std::move(time_line1) };
                 }
 
@@ -108,13 +108,13 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                                position_unit_type{ 24 },
                                                position_unit_type{ 42 },
                                                color_type{ 0x12, 0x34, 0x56, 0x78 },
-                                               boost::make_optional<time_type::size_type>(12) };
+                                               tetengo2::stdalt::make_optional<time_type::size_type>(12) };
                     time_line_type time_line2{ selection,
                                                position_unit_type{ 42 },
                                                position_unit_type{ 24 },
                                                position_unit_type{ 42 },
                                                color_type{ 0x12, 0x34, 0x56, 0x78 },
-                                               boost::make_optional<time_type::size_type>(12) };
+                                               tetengo2::stdalt::make_optional<time_type::size_type>(12) };
 
                     time_line1 = std::move(time_line2);
                 }
@@ -129,7 +129,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                                     position_unit_type{ 24 },
                                                     position_unit_type{ 42 },
                                                     color_type{ 0x12, 0x34, 0x56, 0x78 },
-                                                    boost::make_optional<time_type::size_type>(12) };
+                                                    tetengo2::stdalt::make_optional<time_type::size_type>(12) };
 
                     window_type window{};
                     const auto  p_canvas = window.create_canvas();

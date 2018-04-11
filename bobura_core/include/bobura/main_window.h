@@ -12,16 +12,12 @@
 #include <memory>
 
 #include <tetengo2/detail/base/impl_set.h>
+#include <tetengo2/stdalt.h>
 
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/property_bar.h>
 #include <bobura/settings.h>
 #include <bobura/view_picture_box.h>
-
-namespace boost {
-    template <typename T>
-    class optional;
-}
 
 
 namespace bobura {
@@ -141,7 +137,7 @@ namespace bobura {
             \param document_name A document name.
             \param changed       A changed status.
         */
-        void set_title(const boost::optional<string_type>& document_name, bool changed);
+        void set_title(const tetengo2::stdalt::optional<string_type>& document_name, bool changed);
 
         /*!
             \brief Returns the tab frame.

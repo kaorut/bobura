@@ -376,7 +376,7 @@ namespace bobura::model::serializer {
             return true;
         }
 
-        static void write_font(const boost::optional<font_type>& font, output_stream_type& output_stream)
+        static void write_font(const tetengo2::stdalt::optional<font_type>& font, output_stream_type& output_stream)
         {
             if (!font)
             {
@@ -406,7 +406,7 @@ namespace bobura::model::serializer {
             output_stream << array_end();
         }
 
-        static void write_color(const boost::optional<color_type>& color, output_stream_type& output_stream)
+        static void write_color(const tetengo2::stdalt::optional<color_type>& color, output_stream_type& output_stream)
         {
             if (!color)
             {

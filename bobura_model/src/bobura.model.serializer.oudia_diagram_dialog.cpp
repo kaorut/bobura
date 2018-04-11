@@ -12,10 +12,10 @@
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -86,7 +86,7 @@ namespace bobura::model::serializer {
             m_selected_index = m_p_diagram_list_box->selected_value_index();
         }
 
-        const boost::optional<size_type>& selected_index() const
+        const tetengo2::stdalt::optional<size_type>& selected_index() const
         {
             return m_selected_index;
         }
@@ -96,7 +96,7 @@ namespace bobura::model::serializer {
             if (index >= m_p_diagram_list_box->value_count())
                 BOOST_THROW_EXCEPTION(std::out_of_range("index is greater than the diagram count."));
 
-            m_selected_index = boost::make_optional(index);
+            m_selected_index = tetengo2::stdalt::make_optional(size_type{ index });
             if (!m_p_diagram_list_box->destroyed())
                 m_p_diagram_list_box->select_value(*m_selected_index);
         }
@@ -141,7 +141,7 @@ namespace bobura::model::serializer {
 
         std::vector<string_type> m_names;
 
-        boost::optional<size_type> m_selected_index;
+        tetengo2::stdalt::optional<size_type> m_selected_index;
 
         std::unique_ptr<label_type> m_p_file_name_label;
 
@@ -286,7 +286,7 @@ namespace bobura::model::serializer {
     }
 
     template <typename Traits, typename Size>
-    const boost::optional<typename oudia_diagram_dialog<Traits, Size>::size_type>&
+    const tetengo2::stdalt::optional<typename oudia_diagram_dialog<Traits, Size>::size_type>&
     oudia_diagram_dialog<Traits, Size>::selected_index() const
     {
         return m_p_impl->selected_index();

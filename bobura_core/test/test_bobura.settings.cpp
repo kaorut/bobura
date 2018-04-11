@@ -9,7 +9,6 @@
 #include <cstddef>
 #include <vector>
 
-#include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -82,7 +81,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const std::vector<string_type> arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
                 settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
-                BOOST_TEST(!settings.input().is_initialized());
+                BOOST_TEST(!tetengo2::stdalt::has_value(settings.input()));
 
                 settings.clear_config();
             }
@@ -91,7 +90,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                                           string_type{ TETENGO2_TEXT("input_file") } };
                 settings_type                  settings{ arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
 
-                BOOST_TEST_REQUIRE(settings.input().is_initialized());
+                BOOST_TEST_REQUIRE(tetengo2::stdalt::has_value(settings.input()));
                 BOOST_CHECK(
                     *settings.input() ==
                     tetengo2::stdalt::filesystem::path{ string_type{ TETENGO2_TEXT("input_file") } });
@@ -147,7 +146,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                 const auto dimension = settings.main_window_dimension();
 
-                BOOST_TEST_REQUIRE(dimension.is_initialized());
+                BOOST_TEST_REQUIRE(tetengo2::stdalt::has_value(dimension));
                 BOOST_TEST(dimension->width().to_pixels<std::size_t>() == 240U);
                 BOOST_TEST(dimension->height().to_pixels<std::size_t>() == 120U);
 
@@ -161,7 +160,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                 const auto dimension = settings.main_window_dimension();
 
-                BOOST_TEST_REQUIRE(dimension.is_initialized());
+                BOOST_TEST_REQUIRE(tetengo2::stdalt::has_value(dimension));
                 BOOST_TEST(dimension->width().to_pixels<std::size_t>() == 240U);
                 BOOST_TEST(dimension->height().to_pixels<std::size_t>() == 120U);
 
@@ -180,7 +179,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
             const auto dimension = settings.main_window_dimension();
 
-            BOOST_TEST_REQUIRE(dimension.is_initialized());
+            BOOST_TEST_REQUIRE(tetengo2::stdalt::has_value(dimension));
             BOOST_CHECK(dimension->width() == dimension_unit_type{ 42 });
             BOOST_CHECK(dimension->height() == dimension_unit_type{ 24 });
 
@@ -211,7 +210,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                 const auto maximized = settings.main_window_maximized();
 
-                BOOST_TEST_REQUIRE(maximized.is_initialized());
+                BOOST_TEST_REQUIRE(tetengo2::stdalt::has_value(maximized));
                 BOOST_TEST(!*maximized);
 
                 settings.clear_config();
@@ -224,7 +223,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                 const auto maximized = settings.main_window_maximized();
 
-                BOOST_TEST_REQUIRE(maximized.is_initialized());
+                BOOST_TEST_REQUIRE(tetengo2::stdalt::has_value(maximized));
                 BOOST_TEST(*maximized);
 
                 settings.clear_config();
@@ -254,7 +253,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
             const auto width = settings.property_bar_width();
 
-            BOOST_TEST_REQUIRE(width.is_initialized());
+            BOOST_TEST_REQUIRE(tetengo2::stdalt::has_value(width));
             BOOST_CHECK(*width == dimension_unit_type{ 42 });
 
             settings.clear_config();
@@ -284,7 +283,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                 const auto minimized = settings.property_bar_minimized();
 
-                BOOST_TEST_REQUIRE(minimized.is_initialized());
+                BOOST_TEST_REQUIRE(tetengo2::stdalt::has_value(minimized));
                 BOOST_TEST(!*minimized);
 
                 settings.clear_config();
@@ -297,7 +296,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                 const auto minimized = settings.property_bar_minimized();
 
-                BOOST_TEST_REQUIRE(minimized.is_initialized());
+                BOOST_TEST_REQUIRE(tetengo2::stdalt::has_value(minimized));
                 BOOST_TEST(*minimized);
 
                 settings.clear_config();
@@ -327,7 +326,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
             const auto position = settings.property_bar_splitter_position();
 
-            BOOST_TEST_REQUIRE(position.is_initialized());
+            BOOST_TEST_REQUIRE(tetengo2::stdalt::has_value(position));
             BOOST_CHECK(*position == position_unit_type{ 42 });
 
             settings.clear_config();

@@ -11,7 +11,7 @@
 
 #include <memory>
 
-#include <boost/optional.hpp>
+#include <tetengo2/stdalt.h>
 
 
 namespace bobura {
@@ -94,10 +94,10 @@ namespace bobura {
                 \param timetable_color A color for the timetable.
             */
             font_color_type(
-                boost::optional<font_type>  diagram_font,
-                boost::optional<color_type> diagram_color,
-                boost::optional<font_type>  timetable_font,
-                boost::optional<color_type> timetable_color)
+                tetengo2::stdalt::optional<font_type>  diagram_font,
+                tetengo2::stdalt::optional<color_type> diagram_color,
+                tetengo2::stdalt::optional<font_type>  timetable_font,
+                tetengo2::stdalt::optional<color_type> timetable_color)
             : m_diagram_font{ std::move(diagram_font) }, m_diagram_color{ std::move(diagram_color) },
               m_timetable_font{ std::move(timetable_font) }, m_timetable_color{ std::move(timetable_color) }
             {}
@@ -126,7 +126,7 @@ namespace bobura {
 
                 \return The font for the diagram.
             */
-            const boost::optional<font_type>& diagram_font() const
+            const tetengo2::stdalt::optional<font_type>& diagram_font() const
             {
                 return m_diagram_font;
             }
@@ -136,7 +136,7 @@ namespace bobura {
 
                 \param diagram_font A font for the diagram.
             */
-            void set_diagram_font(boost::optional<font_type> diagram_font)
+            void set_diagram_font(tetengo2::stdalt::optional<font_type> diagram_font)
             {
                 m_diagram_font = std::move(diagram_font);
             }
@@ -146,7 +146,7 @@ namespace bobura {
 
                 \return The color for the diagram.
             */
-            const boost::optional<color_type>& diagram_color() const
+            const tetengo2::stdalt::optional<color_type>& diagram_color() const
             {
                 return m_diagram_color;
             }
@@ -156,7 +156,7 @@ namespace bobura {
 
                 \param diagram_color A color for the diagram.
             */
-            void set_diagram_color(boost::optional<color_type> diagram_color)
+            void set_diagram_color(tetengo2::stdalt::optional<color_type> diagram_color)
             {
                 m_diagram_color = std::move(diagram_color);
             }
@@ -166,7 +166,7 @@ namespace bobura {
 
                 \return The font for the timetable.
             */
-            const boost::optional<font_type>& timetable_font() const
+            const tetengo2::stdalt::optional<font_type>& timetable_font() const
             {
                 return m_timetable_font;
             }
@@ -176,7 +176,7 @@ namespace bobura {
 
                 \param timetable_font A font for the timetable.
             */
-            void set_timetable_font(boost::optional<font_type> timetable_font)
+            void set_timetable_font(tetengo2::stdalt::optional<font_type> timetable_font)
             {
                 m_timetable_font = std::move(timetable_font);
             }
@@ -186,7 +186,7 @@ namespace bobura {
 
                 \return The color for the timetable.
             */
-            const boost::optional<color_type>& timetable_color() const
+            const tetengo2::stdalt::optional<color_type>& timetable_color() const
             {
                 return m_timetable_color;
             }
@@ -196,7 +196,7 @@ namespace bobura {
 
                 \param timetable_color A color for the timetable.
             */
-            void set_timetable_color(boost::optional<color_type> timetable_color)
+            void set_timetable_color(tetengo2::stdalt::optional<color_type> timetable_color)
             {
                 m_timetable_color = std::move(timetable_color);
             }
@@ -205,13 +205,13 @@ namespace bobura {
         private:
             // variables
 
-            boost::optional<font_type> m_diagram_font;
+            tetengo2::stdalt::optional<font_type> m_diagram_font;
 
-            boost::optional<color_type> m_diagram_color;
+            tetengo2::stdalt::optional<color_type> m_diagram_color;
 
-            boost::optional<font_type> m_timetable_font;
+            tetengo2::stdalt::optional<font_type> m_timetable_font;
 
-            boost::optional<color_type> m_timetable_color;
+            tetengo2::stdalt::optional<color_type> m_timetable_color;
         };
 
 

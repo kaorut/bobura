@@ -11,14 +11,11 @@
 
 #include <memory>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/timetable_model.h>
 #include <bobura/view/diagram/item.h>
 #include <bobura/view/diagram/selection.h>
-
-namespace boost {
-    template <class T>
-    class optional;
-}
 
 
 namespace bobura::view::diagram {
@@ -68,12 +65,12 @@ namespace bobura::view::diagram {
             \param hours     Hours.
         */
         time_line(
-            selection_type&            selection,
-            position_unit_type         left,
-            position_unit_type         top,
-            position_unit_type         bottom,
-            color_type                 color,
-            boost::optional<size_type> hours);
+            selection_type&                       selection,
+            position_unit_type                    left,
+            position_unit_type                    top,
+            position_unit_type                    bottom,
+            color_type                            color,
+            tetengo2::stdalt::optional<size_type> hours);
 
         /*!
             \brief Moves a time line.

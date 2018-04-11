@@ -12,10 +12,7 @@
 #include <memory>
 #include <vector>
 
-namespace boost {
-    template <typename T>
-    class optional;
-}
+#include <tetengo2/stdalt.h>
 
 
 namespace bobura::model::serializer {
@@ -101,7 +98,7 @@ namespace bobura::model::serializer {
 
             \return The selected index.
         */
-        const boost::optional<size_type>& selected_index() const;
+        const tetengo2::stdalt::optional<size_type>& selected_index() const;
 
         /*!
             \brief Sets a selected index.

@@ -11,11 +11,10 @@
 
 #include <utility>
 
-#include <boost/none.hpp>
 #include <boost/operators.hpp>
-#include <boost/optional.hpp>
 
 #include <tetengo2/gui/drawing/color.h>
+#include <tetengo2/stdalt.h>
 
 
 namespace bobura::model::timetable_info {
@@ -48,10 +47,10 @@ namespace bobura::model::timetable_info {
             \param timetable_color A color for the timetable.
         */
         font_color(
-            boost::optional<font_type>  diagram_font,
-            boost::optional<color_type> diagram_color,
-            boost::optional<font_type>  timetable_font,
-            boost::optional<color_type> timetable_color)
+            tetengo2::stdalt::optional<font_type>  diagram_font,
+            tetengo2::stdalt::optional<color_type> diagram_color,
+            tetengo2::stdalt::optional<font_type>  timetable_font,
+            tetengo2::stdalt::optional<color_type> timetable_color)
         : m_diagram_font{ std::move(diagram_font) }, m_diagram_color{ std::move(diagram_color) },
           m_timetable_font{ std::move(timetable_font) }, m_timetable_color{ std::move(timetable_color) }
         {}
@@ -80,7 +79,7 @@ namespace bobura::model::timetable_info {
 
             \return The font for the diagram.
         */
-        const boost::optional<font_type>& diagram_font() const
+        const tetengo2::stdalt::optional<font_type>& diagram_font() const
         {
             return m_diagram_font;
         }
@@ -90,7 +89,7 @@ namespace bobura::model::timetable_info {
 
             \return The color for the diagram.
         */
-        const boost::optional<color_type>& diagram_color() const
+        const tetengo2::stdalt::optional<color_type>& diagram_color() const
         {
             return m_diagram_color;
         }
@@ -100,7 +99,7 @@ namespace bobura::model::timetable_info {
 
             \return The font for the timetable.
         */
-        const boost::optional<font_type>& timetable_font() const
+        const tetengo2::stdalt::optional<font_type>& timetable_font() const
         {
             return m_timetable_font;
         }
@@ -110,7 +109,7 @@ namespace bobura::model::timetable_info {
 
             \return The color for the timetable.
         */
-        const boost::optional<color_type>& timetable_color() const
+        const tetengo2::stdalt::optional<color_type>& timetable_color() const
         {
             return m_timetable_color;
         }
@@ -119,13 +118,13 @@ namespace bobura::model::timetable_info {
     private:
         // variables
 
-        boost::optional<font_type> m_diagram_font;
+        tetengo2::stdalt::optional<font_type> m_diagram_font;
 
-        boost::optional<color_type> m_diagram_color;
+        tetengo2::stdalt::optional<color_type> m_diagram_color;
 
-        boost::optional<font_type> m_timetable_font;
+        tetengo2::stdalt::optional<font_type> m_timetable_font;
 
-        boost::optional<color_type> m_timetable_color;
+        tetengo2::stdalt::optional<color_type> m_timetable_color;
     };
 
 
@@ -319,52 +318,57 @@ namespace bobura::model::timetable_info {
                                                       default_font.bold(),      default_font.italic(),
                                                       default_font.underline(), default_font.strikeout() };
 
-            font_color_type default_background_font_color{ boost::none,
-                                                           boost::make_optional(color_type{ 0xF8, 0xFF, 0xF0 }),
-                                                           boost::none,
-                                                           boost::make_optional(color_type{ 0xF8, 0xFF, 0xF0 })
+            font_color_type default_background_font_color{
+                TETENGO2_STDALT_NULLOPT,
+                tetengo2::stdalt::make_optional(color_type{ 0xF8, 0xFF, 0xF0 }),
+                TETENGO2_STDALT_NULLOPT,
+                tetengo2::stdalt::make_optional(color_type{ 0xF8, 0xFF, 0xF0 })
 
             };
-            font_color_type default_general_font_color{ boost::make_optional(default_font),
-                                                        boost::make_optional(color_type{ 0x80, 0x80, 0x80 }),
-                                                        boost::make_optional(default_font),
-                                                        boost::make_optional(color_type{ 0x40, 0x40, 0x40 }) };
+            font_color_type default_general_font_color{ tetengo2::stdalt::make_optional(font_type{ default_font }),
+                                                        tetengo2::stdalt::make_optional(color_type{ 0x80, 0x80, 0x80 }),
+                                                        tetengo2::stdalt::make_optional(font_type{ default_font }),
+                                                        tetengo2::stdalt::make_optional(
+                                                            color_type{ 0x40, 0x40, 0x40 }) };
             font_color_type default_company_name_font_color{
-                boost::make_optional(std::move(default_company_line_name_font)),
-                boost::make_optional(color_type{ 0x40, 0x40, 0x40 }),
-                boost::make_optional(std::move(default_company_line_name_font)),
-                boost::make_optional(color_type{ 0x40, 0x40, 0x40 })
+                tetengo2::stdalt::make_optional(std::move(default_company_line_name_font)),
+                tetengo2::stdalt::make_optional(color_type{ 0x40, 0x40, 0x40 }),
+                tetengo2::stdalt::make_optional(std::move(default_company_line_name_font)),
+                tetengo2::stdalt::make_optional(color_type{ 0x40, 0x40, 0x40 })
             };
             font_color_type default_line_name_font_color{
-                boost::make_optional(std::move(default_company_line_name_font)),
-                boost::make_optional(color_type{ 0x40, 0x40, 0x40 }),
-                boost::make_optional(std::move(default_company_line_name_font)),
-                boost::make_optional(color_type{ 0x40, 0x40, 0x40 })
+                tetengo2::stdalt::make_optional(std::move(default_company_line_name_font)),
+                tetengo2::stdalt::make_optional(color_type{ 0x40, 0x40, 0x40 }),
+                tetengo2::stdalt::make_optional(std::move(default_company_line_name_font)),
+                tetengo2::stdalt::make_optional(color_type{ 0x40, 0x40, 0x40 })
             };
-            font_color_type default_note_font_color{ boost::make_optional(default_font),
-                                                     boost::make_optional(color_type{ 0x40, 0x40, 0x40 }),
-                                                     boost::make_optional(default_font),
-                                                     boost::make_optional(color_type{ 0x40, 0x40, 0x40 }) };
-            font_color_type default_local_station_font_color{ boost::make_optional(default_font),
-                                                              boost::make_optional(color_type{ 0xA0, 0xA0, 0xA0 }),
-                                                              boost::make_optional(default_font),
-                                                              boost::make_optional(color_type{ 0xA0, 0xA0, 0xA0 }) };
-            font_color_type default_principal_station_font_color{ boost::make_optional(default_font),
-                                                                  boost::make_optional(color_type{ 0x40, 0x40, 0xA0 }),
-                                                                  boost::make_optional(default_font),
-                                                                  boost::make_optional(
-                                                                      color_type{ 0x40, 0x40, 0xA0 }) };
+            font_color_type default_note_font_color{ tetengo2::stdalt::make_optional(font_type{ default_font }),
+                                                     tetengo2::stdalt::make_optional(color_type{ 0x40, 0x40, 0x40 }),
+                                                     tetengo2::stdalt::make_optional(font_type{ default_font }),
+                                                     tetengo2::stdalt::make_optional(color_type{ 0x40, 0x40, 0x40 }) };
+            font_color_type default_local_station_font_color{
+                tetengo2::stdalt::make_optional(font_type{ default_font }),
+                tetengo2::stdalt::make_optional(color_type{ 0xA0, 0xA0, 0xA0 }),
+                tetengo2::stdalt::make_optional(font_type{ default_font }),
+                tetengo2::stdalt::make_optional(color_type{ 0xA0, 0xA0, 0xA0 })
+            };
+            font_color_type default_principal_station_font_color{
+                tetengo2::stdalt::make_optional(font_type{ default_font }),
+                tetengo2::stdalt::make_optional(color_type{ 0x40, 0x40, 0xA0 }),
+                tetengo2::stdalt::make_optional(font_type{ default_font }),
+                tetengo2::stdalt::make_optional(color_type{ 0x40, 0x40, 0xA0 })
+            };
             font_color_type default_local_terminal_station_font_color{
-                boost::make_optional(default_font),
-                boost::make_optional(color_type{ 0xA0, 0x40, 0x40 }),
-                boost::make_optional(default_font),
-                boost::make_optional(color_type{ 0xA0, 0x40, 0x40 })
+                tetengo2::stdalt::make_optional(font_type{ default_font }),
+                tetengo2::stdalt::make_optional(color_type{ 0xA0, 0x40, 0x40 }),
+                tetengo2::stdalt::make_optional(font_type{ default_font }),
+                tetengo2::stdalt::make_optional(color_type{ 0xA0, 0x40, 0x40 })
             };
             font_color_type default_principal_terminal_station_font_color(
-                boost::make_optional(default_font),
-                boost::make_optional(color_type{ 0x00, 0x00, 0x00 }),
-                boost::make_optional(default_font),
-                boost::make_optional(color_type{ 0x00, 0x00, 0x00 }));
+                tetengo2::stdalt::make_optional(font_type{ default_font }),
+                tetengo2::stdalt::make_optional(color_type{ 0x00, 0x00, 0x00 }),
+                tetengo2::stdalt::make_optional(font_type{ default_font }),
+                tetengo2::stdalt::make_optional(color_type{ 0x00, 0x00, 0x00 }));
 
             return font_color_set{ std::move(default_background_font_color),
                                    std::move(default_general_font_color),

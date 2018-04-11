@@ -21,16 +21,12 @@
 #include <boost/rational.hpp>
 #include <boost/throw_exception.hpp>
 
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/model/station_info/grade.h>
 #include <bobura/property_bar.h>
 #include <bobura/timetable_model.h>
-
-namespace boost {
-    template <typename T>
-    class optional;
-}
 
 
 namespace bobura::message::diagram_view {
@@ -354,9 +350,10 @@ namespace bobura::message::diagram_view {
             \brief Called when a train is selected.
 
             \param train                A train.
-            \param departure_stop_index A departure stop index. Or boost::none when a whole train is selected.
+            \param departure_stop_index A departure stop index. Or TETENGO2_STDALT_NULLOPT when a whole train is
+           selected.
         */
-        void operator()(const train_type& train, const boost::optional<size_type>& departure_stop_index)
+        void operator()(const train_type& train, const tetengo2::stdalt::optional<size_type>& departure_stop_index)
         {
             insert_value(m_message_catalog.get(TETENGO2_TEXT("PropertyBar:Train Number")), train.number());
             insert_value(m_message_catalog.get(TETENGO2_TEXT("PropertyBar:Kind")), kind_name_text(train));
@@ -573,8 +570,9 @@ namespace bobura::message::diagram_view {
             return stream.str();
         }
 
-        string_type
-        scheduled_speed_text(const train_type& train, const boost::optional<size_type>& departure_stop_index) const
+        string_type scheduled_speed_text(
+            const train_type&                            train,
+            const tetengo2::stdalt::optional<size_type>& departure_stop_index) const
         {
             if (train.stops().empty())
             {
@@ -593,8 +591,8 @@ namespace bobura::message::diagram_view {
         }
 
         std::pair<stop_iterator, stop_iterator> schedule_speed_departure_and_arrival(
-            const train_type&                 train,
-            const boost::optional<size_type>& departure_stop_index) const
+            const train_type&                            train,
+            const tetengo2::stdalt::optional<size_type>& departure_stop_index) const
         {
             if (departure_stop_index)
             {

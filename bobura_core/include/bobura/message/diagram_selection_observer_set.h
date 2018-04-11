@@ -14,13 +14,10 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/signals2.hpp>
 
+#include <tetengo2/stdalt.h>
+
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
-
-namespace boost {
-    template <typename T>
-    class optional;
-}
 
 
 namespace bobura::message {
@@ -70,10 +67,11 @@ namespace bobura::message {
             \brief The observer type of train selection.
 
             \param train                A train.
-            \param departure_stop_index A departure stop index. Or boost::none when a whole train is selected.
+            \param departure_stop_index A departure stop index. Or TETENGO2_STDALT_NULLOPT when a whole train is
+           selected.
         */
         using train_selected_type =
-            void(const train_type& train, const boost::optional<size_type>& departure_stop_index);
+            void(const train_type& train, const tetengo2::stdalt::optional<size_type>& departure_stop_index);
 
         //! The signal type of train selection.
         using train_selected_signal_type = boost::signals2::signal<train_selected_type>;

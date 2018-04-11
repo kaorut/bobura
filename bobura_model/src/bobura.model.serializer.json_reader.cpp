@@ -16,14 +16,13 @@
 
 #include <boost/container/container_fwd.hpp>
 #include <boost/core/noncopyable.hpp>
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/shared_ptr.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/variant.hpp>
 
 #include <tetengo2/gui/widget/dialog.h>
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 #include <tetengo2/text/grammar/json.h>
 #include <tetengo2/text/pull_parser.h>
@@ -257,7 +256,7 @@ namespace bobura::model::serializer {
             return std::move(p_timetable);
         }
 
-        static boost::optional<header_type>
+        static tetengo2::stdalt::optional<header_type>
         read_header(pull_parser_type& pull_parser, error_type& error, promise_type& promise)
         {
             header_type header{};
@@ -265,7 +264,7 @@ namespace bobura::model::serializer {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
             {
                 error = error_type::corrupted;
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
             pull_parser.next();
 
@@ -274,7 +273,7 @@ namespace bobura::model::serializer {
                 if (promise.abort_requested())
                 {
                     error = error_type::canceled;
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 }
 
                 auto member = read_string_member(pull_parser);
@@ -287,20 +286,20 @@ namespace bobura::model::serializer {
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
             {
                 error = error_type::corrupted;
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
             pull_parser.next();
 
-            return boost::make_optional(std::move(header));
+            return tetengo2::stdalt::make_optional(std::move(header));
         }
 
-        static boost::optional<font_color_set_type>
+        static tetengo2::stdalt::optional<font_color_set_type>
         read_font_color_set(pull_parser_type& pull_parser, error_type& error, promise_type& promise)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
             {
                 error = error_type::corrupted;
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
             pull_parser.next();
 
@@ -318,7 +317,7 @@ namespace bobura::model::serializer {
                 if (promise.abort_requested())
                 {
                     error = error_type::canceled;
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 }
 
                 auto element = read_font_color_element(pull_parser);
@@ -331,7 +330,7 @@ namespace bobura::model::serializer {
                           !element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                     }
                     background_font_color = std::move(element->second);
                 }
@@ -341,7 +340,7 @@ namespace bobura::model::serializer {
                           element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                     }
                     general_font_color = std::move(element->second);
                 }
@@ -351,7 +350,7 @@ namespace bobura::model::serializer {
                           element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                     }
                     company_name_font_color = std::move(element->second);
                 }
@@ -361,7 +360,7 @@ namespace bobura::model::serializer {
                           element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                     }
                     line_name_font_color = std::move(element->second);
                 }
@@ -371,7 +370,7 @@ namespace bobura::model::serializer {
                           element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                     }
                     note_font_color = std::move(element->second);
                 }
@@ -381,7 +380,7 @@ namespace bobura::model::serializer {
                           element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                     }
                     local_station_font_color = std::move(element->second);
                 }
@@ -391,7 +390,7 @@ namespace bobura::model::serializer {
                           element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                     }
                     principal_station_font_color = std::move(element->second);
                 }
@@ -401,7 +400,7 @@ namespace bobura::model::serializer {
                           element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                     }
                     local_terminal_station_font_color = std::move(element->second);
                 }
@@ -411,60 +410,61 @@ namespace bobura::model::serializer {
                           element->second.timetable_font() && element->second.timetable_color()))
                     {
                         error = error_type::corrupted;
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                     }
                     principal_terminal_station_font_color = std::move(element->second);
                 }
                 else
                 {
                     error = error_type::corrupted;
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 }
             }
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
             {
                 error = error_type::corrupted;
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
             pull_parser.next();
 
-            return boost::make_optional(font_color_set_type{ std::move(background_font_color),
-                                                             std::move(general_font_color),
-                                                             std::move(company_name_font_color),
-                                                             std::move(line_name_font_color),
-                                                             std::move(note_font_color),
-                                                             std::move(local_station_font_color),
-                                                             std::move(principal_station_font_color),
-                                                             std::move(local_terminal_station_font_color),
-                                                             std::move(principal_terminal_station_font_color) });
+            return tetengo2::stdalt::make_optional(
+                font_color_set_type{ std::move(background_font_color),
+                                     std::move(general_font_color),
+                                     std::move(company_name_font_color),
+                                     std::move(line_name_font_color),
+                                     std::move(note_font_color),
+                                     std::move(local_station_font_color),
+                                     std::move(principal_station_font_color),
+                                     std::move(local_terminal_station_font_color),
+                                     std::move(principal_terminal_station_font_color) });
         }
 
-        static boost::optional<std::pair<string_type, font_color_type>>
+        static tetengo2::stdalt::optional<std::pair<string_type, font_color_type>>
         read_font_color_element(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
             auto value = read_font_color_element_value(pull_parser);
             if (!value)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
-            return boost::make_optional(std::make_pair(encoder().decode(std::move(key)), std::move(*value)));
+            return tetengo2::stdalt::make_optional(std::make_pair(encoder().decode(std::move(key)), std::move(*value)));
         }
 
-        static boost::optional<font_color_type> read_font_color_element_value(pull_parser_type& pull_parser)
+        static tetengo2::stdalt::optional<font_color_type> read_font_color_element_value(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
             auto diagram_font = read_font(pull_parser);
@@ -472,123 +472,126 @@ namespace bobura::model::serializer {
             auto timetable_font = read_font(pull_parser);
             auto timetable_color = read_color(pull_parser);
             if (!diagram_font && !diagram_color && !timetable_font && !timetable_color)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
-            return boost::make_optional<font_color_type>(
+            return tetengo2::stdalt::make_optional<font_color_type>(
                 font_color_type{ diagram_font, diagram_color, timetable_font, timetable_color });
         }
 
-        static boost::optional<std::pair<string_type, font_type>> read_font_element(pull_parser_type& pull_parser)
+        static tetengo2::stdalt::optional<std::pair<string_type, font_type>>
+        read_font_element(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
             auto value = read_font(pull_parser);
             if (!value)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
-            return boost::make_optional(std::make_pair(encoder().decode(std::move(key)), std::move(*value)));
+            return tetengo2::stdalt::make_optional(std::make_pair(encoder().decode(std::move(key)), std::move(*value)));
         }
 
-        static boost::optional<font_type> read_font(pull_parser_type& pull_parser)
+        static tetengo2::stdalt::optional<font_type> read_font(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
                 if (next_is_null(pull_parser))
                     pull_parser.next();
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
             pull_parser.next();
 
             auto font_name = read_string(pull_parser);
             if (!font_name)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             auto font_size = read_integer<typename font_type::size_type>(pull_parser);
             if (!font_size)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             auto font_bold = read_boolean(pull_parser);
             if (!font_bold)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             auto font_italic = read_boolean(pull_parser);
             if (!font_italic)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             auto font_underline = read_boolean(pull_parser);
             if (!font_underline)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             auto font_strikeout = read_boolean(pull_parser);
             if (!font_strikeout)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
-            return boost::make_optional<font_type>(font_type{ encoder().decode(std::move(*font_name)),
-                                                              std::move(*font_size),
-                                                              std::move(*font_bold),
-                                                              std::move(*font_italic),
-                                                              std::move(*font_underline),
-                                                              std::move(*font_strikeout) });
+            return tetengo2::stdalt::make_optional<font_type>(font_type{ encoder().decode(std::move(*font_name)),
+                                                                         std::move(*font_size),
+                                                                         std::move(*font_bold),
+                                                                         std::move(*font_italic),
+                                                                         std::move(*font_underline),
+                                                                         std::move(*font_strikeout) });
         }
 
-        static boost::optional<std::pair<string_type, color_type>> read_color_element(pull_parser_type& pull_parser)
+        static tetengo2::stdalt::optional<std::pair<string_type, color_type>>
+        read_color_element(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
             auto value = read_color(pull_parser);
             if (!value)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
-            return boost::make_optional(std::make_pair(encoder().decode(std::move(key)), std::move(*value)));
+            return tetengo2::stdalt::make_optional(std::make_pair(encoder().decode(std::move(key)), std::move(*value)));
         }
 
-        static boost::optional<color_type> read_color(pull_parser_type& pull_parser)
+        static tetengo2::stdalt::optional<color_type> read_color(pull_parser_type& pull_parser)
         {
             if (next_is_null(pull_parser))
             {
                 pull_parser.next();
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
             auto color_string = read_string(pull_parser);
             if (!color_string)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             return to_color(encoder().decode(std::move(*color_string)));
         }
 
-        static boost::optional<color_type> to_color(string_type color_string)
+        static tetengo2::stdalt::optional<color_type> to_color(string_type color_string)
         {
             if (color_string.length() != 6)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             const auto color_value = to_color_value(std::move(color_string));
 
-            return boost::make_optional(color_type{ static_cast<unsigned char>((color_value / 0x010000) & 0x0000FF),
-                                                    static_cast<unsigned char>((color_value / 0x000100) & 0x0000FF),
-                                                    static_cast<unsigned char>(color_value & 0x0000FF) });
+            return tetengo2::stdalt::make_optional(
+                color_type{ static_cast<unsigned char>((color_value / 0x010000) & 0x0000FF),
+                            static_cast<unsigned char>((color_value / 0x000100) & 0x0000FF),
+                            static_cast<unsigned char>(color_value & 0x0000FF) });
         }
 
-        static boost::optional<std::vector<station_location_type>>
+        static tetengo2::stdalt::optional<std::vector<station_location_type>>
         read_stations(pull_parser_type& pull_parser, error_type& error, promise_type& promise)
         {
             std::vector<station_location_type> stations{};
@@ -596,7 +599,7 @@ namespace bobura::model::serializer {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
                 error = error_type::corrupted;
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
             pull_parser.next();
 
@@ -605,7 +608,7 @@ namespace bobura::model::serializer {
                 if (promise.abort_requested())
                 {
                     error = error_type::canceled;
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 }
 
                 auto station = read_station(pull_parser);
@@ -618,26 +621,26 @@ namespace bobura::model::serializer {
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
                 error = error_type::corrupted;
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
             pull_parser.next();
 
-            return boost::make_optional(std::move(stations));
+            return tetengo2::stdalt::make_optional(std::move(stations));
         }
 
-        static boost::optional<station_location_type> read_station(pull_parser_type& pull_parser)
+        static tetengo2::stdalt::optional<station_location_type> read_station(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
             string_type name{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("name") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 name = std::move(member->second);
             }
@@ -646,22 +649,22 @@ namespace bobura::model::serializer {
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("grade") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 p_grade = to_station_grade(std::move(member->second));
                 if (!p_grade)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
             }
 
             auto show_down_arrival_times = false;
             {
                 auto member = read_boolean_member(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("show_down_arrival_times") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 show_down_arrival_times = std::move(member->second);
             }
@@ -670,9 +673,9 @@ namespace bobura::model::serializer {
             {
                 auto member = read_boolean_member(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("show_up_arrival_times") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 show_up_arrival_times = std::move(member->second);
             }
@@ -681,9 +684,9 @@ namespace bobura::model::serializer {
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("note") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 note = std::move(member->second);
             }
@@ -692,18 +695,18 @@ namespace bobura::model::serializer {
             {
                 auto member = read_integer_member<operating_distance_type>(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("operating_distance") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 operating_distance = operating_distance_type{ member->second } / 10U;
             }
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
-            return boost::make_optional(station_location_type{
+            return tetengo2::stdalt::make_optional(station_location_type{
                 station_type{
                     std::move(name), *p_grade, show_down_arrival_times, show_up_arrival_times, std::move(note) },
                 std::move(operating_distance) });
@@ -723,7 +726,7 @@ namespace bobura::model::serializer {
                 return nullptr;
         }
 
-        static boost::optional<std::vector<train_kind_type>>
+        static tetengo2::stdalt::optional<std::vector<train_kind_type>>
         read_train_kinds(pull_parser_type& pull_parser, error_type& error, promise_type& promise)
         {
             std::vector<train_kind_type> train_kinds{};
@@ -731,7 +734,7 @@ namespace bobura::model::serializer {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
                 error = error_type::corrupted;
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
             pull_parser.next();
 
@@ -740,7 +743,7 @@ namespace bobura::model::serializer {
                 if (promise.abort_requested())
                 {
                     error = error_type::canceled;
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 }
 
                 auto train_kind = read_train_kind(pull_parser);
@@ -753,26 +756,26 @@ namespace bobura::model::serializer {
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
                 error = error_type::corrupted;
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
             pull_parser.next();
 
-            return boost::make_optional(std::move(train_kinds));
+            return tetengo2::stdalt::make_optional(std::move(train_kinds));
         }
 
-        static boost::optional<train_kind_type> read_train_kind(pull_parser_type& pull_parser)
+        static tetengo2::stdalt::optional<train_kind_type> read_train_kind(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
             auto name = train_kind_type::default_().name();
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("name") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 name = std::move(member->second);
             }
@@ -781,9 +784,9 @@ namespace bobura::model::serializer {
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("abbreviation") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 abbreviation = std::move(member->second);
             }
@@ -792,9 +795,9 @@ namespace bobura::model::serializer {
             {
                 auto element = read_font_element(pull_parser);
                 if (!element)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (element->first != string_type{ TETENGO2_TEXT("diagram_font") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 diagram_font = std::move(element->second);
             }
@@ -803,9 +806,9 @@ namespace bobura::model::serializer {
             {
                 auto element = read_color_element(pull_parser);
                 if (!element)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (element->first != string_type{ TETENGO2_TEXT("diagram_color") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 diagram_color = std::move(element->second);
             }
@@ -814,13 +817,13 @@ namespace bobura::model::serializer {
             {
                 const auto member = read_integer_member<int>(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("diagram_line_weight") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 const auto weight_ = to_weight(member->second);
                 if (!weight_)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 diagram_line_weight = *weight_;
             }
 
@@ -828,13 +831,13 @@ namespace bobura::model::serializer {
             {
                 const auto member = read_integer_member<int>(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("diagram_line_style") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 const auto line_style_ = to_line_style(member->second);
                 if (!line_style_)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 diagram_line_style = *line_style_;
             }
 
@@ -842,9 +845,9 @@ namespace bobura::model::serializer {
             {
                 auto element = read_font_element(pull_parser);
                 if (!element)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (element->first != string_type{ TETENGO2_TEXT("timetable_font") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 diagram_font = std::move(element->second);
             }
@@ -853,25 +856,25 @@ namespace bobura::model::serializer {
             {
                 auto element = read_color_element(pull_parser);
                 if (!element)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (element->first != string_type{ TETENGO2_TEXT("timetable_color") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 diagram_color = std::move(element->second);
             }
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
-            return boost::make_optional(train_kind_type{ std::move(name),
-                                                         std::move(abbreviation),
-                                                         std::move(diagram_font),
-                                                         std::move(diagram_color),
-                                                         diagram_line_weight,
-                                                         diagram_line_style,
-                                                         std::move(timetable_font),
-                                                         std::move(timetable_color) });
+            return tetengo2::stdalt::make_optional(train_kind_type{ std::move(name),
+                                                                    std::move(abbreviation),
+                                                                    std::move(diagram_font),
+                                                                    std::move(diagram_color),
+                                                                    diagram_line_weight,
+                                                                    diagram_line_style,
+                                                                    std::move(timetable_font),
+                                                                    std::move(timetable_color) });
         }
 
         static unsigned int to_color_value(string_type color_string)
@@ -884,37 +887,37 @@ namespace bobura::model::serializer {
             return value;
         }
 
-        static boost::optional<weight_type> to_weight(const int weight_integer)
+        static tetengo2::stdalt::optional<weight_type> to_weight(const int weight_integer)
         {
             switch (weight_integer)
             {
             case 0:
-                return boost::make_optional(train_kind_type::weight_type::normal);
+                return tetengo2::stdalt::make_optional(train_kind_type::weight_type::normal);
             case 1:
-                return boost::make_optional(train_kind_type::weight_type::bold);
+                return tetengo2::stdalt::make_optional(train_kind_type::weight_type::bold);
             default:
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
         }
 
-        static boost::optional<line_style_type> to_line_style(const int line_style_integer)
+        static tetengo2::stdalt::optional<line_style_type> to_line_style(const int line_style_integer)
         {
             switch (line_style_integer)
             {
             case 0:
-                return boost::make_optional(train_kind_type::line_style_type::solid);
+                return tetengo2::stdalt::make_optional(train_kind_type::line_style_type::solid);
             case 1:
-                return boost::make_optional(train_kind_type::line_style_type::dashed);
+                return tetengo2::stdalt::make_optional(train_kind_type::line_style_type::dashed);
             case 2:
-                return boost::make_optional(train_kind_type::line_style_type::dotted);
+                return tetengo2::stdalt::make_optional(train_kind_type::line_style_type::dotted);
             case 3:
-                return boost::make_optional(train_kind_type::line_style_type::dot_dashed);
+                return tetengo2::stdalt::make_optional(train_kind_type::line_style_type::dot_dashed);
             default:
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
         }
 
-        static boost::optional<std::vector<train_type>> read_trains(
+        static tetengo2::stdalt::optional<std::vector<train_type>> read_trains(
             pull_parser_type&    pull_parser,
             error_type&          error,
             promise_type&        promise,
@@ -927,7 +930,7 @@ namespace bobura::model::serializer {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
                 error = error_type::corrupted;
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
             pull_parser.next();
 
@@ -936,14 +939,14 @@ namespace bobura::model::serializer {
                 if (promise.abort_requested())
                 {
                     error = error_type::canceled;
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 }
 
                 auto train = read_train(pull_parser, error, promise, direction, station_count, kind_count);
                 if (!train)
                 {
                     if (error == error_type::canceled)
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                     else
                         break;
                 }
@@ -954,14 +957,14 @@ namespace bobura::model::serializer {
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
             {
                 error = error_type::corrupted;
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
             pull_parser.next();
 
-            return boost::make_optional(std::move(trains));
+            return tetengo2::stdalt::make_optional(std::move(trains));
         }
 
-        static boost::optional<train_type> read_train(
+        static tetengo2::stdalt::optional<train_type> read_train(
             pull_parser_type&    pull_parser,
             error_type&          error,
             promise_type&        promise,
@@ -970,16 +973,16 @@ namespace bobura::model::serializer {
             const std::size_t    kind_count)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
             string_type number{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("number") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 number = std::move(member->second);
             }
@@ -988,22 +991,22 @@ namespace bobura::model::serializer {
             {
                 auto member = read_integer_member<train_kind_index_type>(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("kind_index") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 kind_index = std::move(member->second);
                 if (kind_index >= kind_count)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
             }
 
             string_type name{};
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("name") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 name = std::move(member->second);
             }
@@ -1012,9 +1015,9 @@ namespace bobura::model::serializer {
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("name_number") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 name_number = std::move(member->second);
             }
@@ -1023,9 +1026,9 @@ namespace bobura::model::serializer {
             {
                 auto member = read_string_member(pull_parser);
                 if (!member)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 if (member->first != string_type{ TETENGO2_TEXT("note") })
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 note = std::move(member->second);
             }
@@ -1035,19 +1038,19 @@ namespace bobura::model::serializer {
 
             auto stops = read_stops(pull_parser, error, promise);
             if (!stops)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             if (stops->size() > station_count)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             for (auto& stop : *stops)
                 train.insert_stop(train.stops().end(), std::move(stop));
             for (std::size_t i = stops->size(); i < station_count; ++i)
                 train.insert_stop(train.stops().end(), empty_stop());
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("object") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
-            return boost::make_optional(std::move(train));
+            return tetengo2::stdalt::make_optional(std::move(train));
         }
 
         static stop_type empty_stop()
@@ -1055,22 +1058,22 @@ namespace bobura::model::serializer {
             return stop_type{ time_type::uninitialized(), time_type::uninitialized(), false, string_type{} };
         }
 
-        static boost::optional<std::vector<stop_type>>
+        static tetengo2::stdalt::optional<std::vector<stop_type>>
         read_stops(pull_parser_type& pull_parser, error_type& error, promise_type& promise)
         {
             std::vector<stop_type> stops{};
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             if (key != "stops")
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
             for (;;)
@@ -1078,7 +1081,7 @@ namespace bobura::model::serializer {
                 if (promise.abort_requested())
                 {
                     error = error_type::canceled;
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 }
 
                 auto stop = read_stop(pull_parser);
@@ -1089,180 +1092,183 @@ namespace bobura::model::serializer {
             }
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
-            return boost::make_optional(std::move(stops));
+            return tetengo2::stdalt::make_optional(std::move(stops));
         }
 
-        static boost::optional<stop_type> read_stop(pull_parser_type& pull_parser)
+        static tetengo2::stdalt::optional<stop_type> read_stop(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
             auto arrival_input = read_integer<std::ptrdiff_t>(pull_parser);
             if (!arrival_input)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto arrival_time = to_time(*arrival_input);
             if (!arrival_time)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             const auto departure_input = read_integer<std::ptrdiff_t>(pull_parser);
             if (!departure_input)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto departure_time = to_time(*departure_input);
             if (!departure_time)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             const auto operational = read_boolean(pull_parser);
             if (!operational)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             auto platform = read_string(pull_parser);
             if (!platform)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("array") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
-            return boost::make_optional(stop_type{ std::move(*arrival_time),
-                                                   std::move(*departure_time),
-                                                   *operational,
-                                                   encoder().decode(std::move(*platform)) });
+            return tetengo2::stdalt::make_optional(stop_type{ std::move(*arrival_time),
+                                                              std::move(*departure_time),
+                                                              *operational,
+                                                              encoder().decode(std::move(*platform)) });
         }
 
-        static boost::optional<time_type> to_time(const std::ptrdiff_t input)
+        static tetengo2::stdalt::optional<time_type> to_time(const std::ptrdiff_t input)
         {
             if (input < 0)
-                return boost::make_optional(time_type::uninitialized());
+                return tetengo2::stdalt::make_optional(time_type{ time_type::uninitialized() });
 
             const std::size_t hours = (input / 10000) % 100;
             if (hours > 23)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             const std::size_t minutes = (input / 100) % 100;
             if (minutes > 59)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             const std::size_t seconds = input % 100;
             if (seconds > 59)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
-            return boost::make_optional(time_type{ hours, minutes, seconds });
+            return tetengo2::stdalt::make_optional(time_type{ hours, minutes, seconds });
         }
 
-        static boost::optional<std::pair<string_type, string_type>> read_string_member(pull_parser_type& pull_parser)
+        static tetengo2::stdalt::optional<std::pair<string_type, string_type>>
+        read_string_member(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
             auto value = read_string(pull_parser);
             if (!value)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
-            return boost::make_optional(
+            return tetengo2::stdalt::make_optional(
                 std::make_pair(encoder().decode(std::move(key)), encoder().decode(std::move(*value))));
         }
 
-        static boost::optional<input_string_type> read_string(pull_parser_type& pull_parser)
+        static tetengo2::stdalt::optional<input_string_type> read_string(pull_parser_type& pull_parser)
         {
             if (!pull_parser.has_next())
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto& element = pull_parser.peek();
             if (element.which() != 2)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto& value = boost::get<value_type>(element);
             if (value.which() != 4)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             auto string = boost::get<input_string_type>(value);
             pull_parser.next();
-            return boost::make_optional(std::move(string));
+            return tetengo2::stdalt::make_optional(std::move(string));
         }
 
         template <typename Int>
-        static boost::optional<std::pair<string_type, Int>> read_integer_member(pull_parser_type& pull_parser)
+        static tetengo2::stdalt::optional<std::pair<string_type, Int>>
+        read_integer_member(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
             const auto value = read_integer<Int>(pull_parser);
             if (!value)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
-            return boost::make_optional(std::make_pair(encoder().decode(std::move(key)), *value));
+            return tetengo2::stdalt::make_optional(std::make_pair(encoder().decode(std::move(key)), *value));
         }
 
         template <typename Int>
-        static boost::optional<Int> read_integer(pull_parser_type& pull_parser)
+        static tetengo2::stdalt::optional<Int> read_integer(pull_parser_type& pull_parser)
         {
             if (!pull_parser.has_next())
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto& element = pull_parser.peek();
             if (element.which() != 2)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto& value = boost::get<value_type>(element);
             if (value.which() != 2)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             auto integer = boost::get<integer_type>(value);
             pull_parser.next();
-            return boost::make_optional<Int>(std::move(integer));
+            return tetengo2::stdalt::make_optional<Int>(std::move(integer));
         }
 
-        static boost::optional<std::pair<string_type, bool>> read_boolean_member(pull_parser_type& pull_parser)
+        static tetengo2::stdalt::optional<std::pair<string_type, bool>>
+        read_boolean_member(pull_parser_type& pull_parser)
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
             const auto value = read_boolean(pull_parser);
             if (!value)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             if (!next_is_structure_end(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
 
-            return boost::make_optional(std::make_pair(encoder().decode(std::move(key)), *value));
+            return tetengo2::stdalt::make_optional(std::make_pair(encoder().decode(std::move(key)), *value));
         }
 
-        static boost::optional<bool> read_boolean(pull_parser_type& pull_parser)
+        static tetengo2::stdalt::optional<bool> read_boolean(pull_parser_type& pull_parser)
         {
             if (!pull_parser.has_next())
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto& element = pull_parser.peek();
             if (element.which() != 2)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto& value = boost::get<value_type>(element);
             if (value.which() != 0)
-                return boost::none;
-            const auto boolean = boost::get<bool>(value);
+                return TETENGO2_STDALT_NULLOPT;
+            auto boolean = boost::get<bool>(value);
             pull_parser.next();
-            return boost::make_optional(boolean);
+            return tetengo2::stdalt::make_optional(std::move(boolean));
         }
 
         static bool next_is_structure_begin(const pull_parser_type& pull_parser, const input_string_type& name)

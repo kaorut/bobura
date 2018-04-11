@@ -19,8 +19,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 #include <boost/utility/string_view.hpp>
@@ -275,11 +273,11 @@ namespace bobura::model::serializer {
                 {}
             };
 
-            static boost::optional<split_type> split_line(const string_type& line)
+            static tetengo2::stdalt::optional<split_type> split_line(const string_type& line)
             {
                 const auto equal_position = line.find(TETENGO2_TEXT('='));
                 if (equal_position == string_type::npos)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 const auto  key_and_index = string_view_type{ line }.substr(0, equal_position);
                 const auto  index_position = key_and_index.find_first_of(string_view_type(TETENGO2_TEXT("0123456789")));
@@ -293,13 +291,13 @@ namespace bobura::model::serializer {
                     }
                     catch (const boost::bad_lexical_cast&)
                     {
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                     }
                 }
 
                 auto values = split_by_comma(string_view_type{ line }.substr(equal_position + 1));
 
-                return boost::make_optional(split_type(std::move(key), index, std::move(values)));
+                return tetengo2::stdalt::make_optional(split_type(std::move(key), index, std::move(values)));
             }
 
             timetable_type& m_timetable;
@@ -448,7 +446,7 @@ namespace bobura::model::serializer {
 
             virtual void insert_train_impl(train_type train) = 0;
 
-            boost::optional<size_type> to_train_kind_index(const string_view_type& train_kind_string)
+            tetengo2::stdalt::optional<size_type> to_train_kind_index(const string_view_type& train_kind_string)
             {
                 const auto opening_paren_position = train_kind_string.find(TETENGO2_TEXT('('));
                 if (opening_paren_position == string_type::npos)
@@ -456,18 +454,18 @@ namespace bobura::model::serializer {
                     try
                     {
                         return train_kind_string.empty() ?
-                                   boost::make_optional(static_cast<size_type>(0)) :
-                                   boost::make_optional(boost::lexical_cast<size_type>(train_kind_string));
+                                   tetengo2::stdalt::make_optional(static_cast<size_type>(0)) :
+                                   tetengo2::stdalt::make_optional(boost::lexical_cast<size_type>(train_kind_string));
                     }
                     catch (const boost::bad_lexical_cast&)
                     {
-                        return boost::none;
+                        return TETENGO2_STDALT_NULLOPT;
                     }
                 }
 
                 const auto closing_paren_position = train_kind_string.find(TETENGO2_TEXT(')'));
                 if (closing_paren_position == string_type::npos || closing_paren_position <= opening_paren_position)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 size_type base_index = 0;
                 try
@@ -477,10 +475,10 @@ namespace bobura::model::serializer {
                 }
                 catch (const boost::bad_lexical_cast&)
                 {
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 }
                 if (base_index >= m_timetable.train_kinds().size())
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 unsigned int prop = 0;
                 try
@@ -490,27 +488,27 @@ namespace bobura::model::serializer {
                 }
                 catch (const boost::bad_lexical_cast&)
                 {
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 }
 
                 auto new_train_kind = make_train_kind(&m_timetable.train_kinds()[base_index], prop);
                 if (!new_train_kind)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 m_timetable.insert_train_kind(m_timetable.train_kinds().end(), std::move(*new_train_kind));
 
-                return boost::make_optional<size_type>(m_timetable.train_kinds().size() - 1);
+                return tetengo2::stdalt::make_optional<size_type>(m_timetable.train_kinds().size() - 1);
             }
 
-            boost::optional<stop_type> to_stop(string_view_type time_string)
+            tetengo2::stdalt::optional<stop_type> to_stop(string_view_type time_string)
             {
                 const auto arrival_and_departure_string = split_time_string(std::move(time_string));
 
                 auto arrival = to_time(arrival_and_departure_string.first);
                 if (!arrival)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 auto departure = to_time(arrival_and_departure_string.second);
                 if (!departure)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
                 const auto operational = is_operational(arrival_and_departure_string.first) ||
                                          is_operational(arrival_and_departure_string.second);
@@ -527,16 +525,16 @@ namespace bobura::model::serializer {
                 return std::make_pair(time_string.substr(0, slash_position), time_string.substr(slash_position + 1));
             }
 
-            boost::optional<time_type> to_time(const string_view_type& time_string)
+            tetengo2::stdalt::optional<time_type> to_time(const string_view_type& time_string)
             {
                 if (time_string.empty() || time_string == string_view_type(TETENGO2_TEXT("-")))
-                    return boost::make_optional(time_type::uninitialized());
+                    return tetengo2::stdalt::make_optional(time_type{ time_type::uninitialized() });
 
                 const auto time_string_length = time_string[time_string.length() - 1] == char_type(TETENGO2_TEXT('?')) ?
                                                     time_string.length() - 1 :
                                                     time_string.length();
                 if (time_string_length < 3 && 4 < time_string_length)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 const std::size_t minute_position = time_string_length == 3 ? 1 : 2;
 
                 size_type hours = 0;
@@ -546,7 +544,7 @@ namespace bobura::model::serializer {
                 }
                 catch (const boost::bad_lexical_cast&)
                 {
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 }
                 hours %= 24;
 
@@ -557,12 +555,12 @@ namespace bobura::model::serializer {
                 }
                 catch (const boost::bad_lexical_cast&)
                 {
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
                 }
                 if (minutes > 59)
-                    return boost::none;
+                    return TETENGO2_STDALT_NULLOPT;
 
-                return boost::make_optional(time_type{ hours, minutes, 0 });
+                return tetengo2::stdalt::make_optional(time_type{ hours, minutes, 0 });
             }
 
             bool is_operational(const string_view_type& time_string)
@@ -833,24 +831,27 @@ namespace bobura::model::serializer {
             return values;
         }
 
-        static boost::optional<train_kind_type> make_train_kind(const train_kind_type* p_base, const unsigned int prop)
+        static tetengo2::stdalt::optional<train_kind_type>
+        make_train_kind(const train_kind_type* p_base, const unsigned int prop)
         {
             const auto  diagram_line_style = to_line_style(prop & 0x03);
             const auto  custom_color = (prop & 0x40) != 0;
             const auto& diagram_font = p_base ? p_base->diagram_font() : train_kind_type::default_().diagram_font();
-            const auto  diagram_color = custom_color ?
-                                           to_color((prop & 0x3C) / 0x04) :
-                                           (p_base ? boost::make_optional(p_base->diagram_color()) :
-                                                     boost::make_optional(train_kind_type::default_().diagram_color()));
+            const auto  diagram_color =
+                custom_color ?
+                    to_color((prop & 0x3C) / 0x04) :
+                    (p_base ?
+                         tetengo2::stdalt::make_optional(color_type{ p_base->diagram_color() }) :
+                         tetengo2::stdalt::make_optional(color_type{ train_kind_type::default_().diagram_color() }));
             if (!diagram_color)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto  diagram_line_weight = to_weight((prop & 0x80) != 0);
             const auto& timetable_font =
                 p_base ? p_base->timetable_font() : train_kind_type::default_().timetable_font();
             const auto& timetable_color =
                 p_base ? p_base->timetable_color() : train_kind_type::default_().timetable_color();
 
-            return p_base ? boost::make_optional(train_kind_type(
+            return p_base ? tetengo2::stdalt::make_optional(train_kind_type(
                                 p_base->name(),
                                 p_base->abbreviation(),
                                 diagram_font,
@@ -859,7 +860,7 @@ namespace bobura::model::serializer {
                                 diagram_line_style,
                                 timetable_font,
                                 timetable_color)) :
-                            boost::make_optional(train_kind_type(
+                            tetengo2::stdalt::make_optional(train_kind_type(
                                 string_type{},
                                 string_type{},
                                 diagram_font,
@@ -870,11 +871,11 @@ namespace bobura::model::serializer {
                                 timetable_color));
         }
 
-        static boost::optional<color_type> to_color(const std::size_t index)
+        static tetengo2::stdalt::optional<color_type> to_color(const std::size_t index)
         {
             if (index >= preset_palette().size())
-                return boost::none;
-            return boost::make_optional(preset_palette()[index]);
+                return TETENGO2_STDALT_NULLOPT;
+            return tetengo2::stdalt::make_optional(color_type{ preset_palette()[index] });
         }
 
         static weight_type to_weight(const bool bold)

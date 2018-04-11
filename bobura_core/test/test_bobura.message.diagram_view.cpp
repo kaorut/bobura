@@ -9,7 +9,6 @@
 #include <utility>
 #include <vector>
 
-#include <boost/none.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -237,7 +236,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("name") },
                                             string_type{ TETENGO2_TEXT("name_number") },
                                             string_type{ TETENGO2_TEXT("note") } };
-                    train_selected(train, boost::none);
+                    train_selected(train, TETENGO2_STDALT_NULLOPT);
 
                     settings.clear_config();
                 }

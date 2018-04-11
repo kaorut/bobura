@@ -13,7 +13,6 @@
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
-#include <boost/optional.hpp>
 
 #include <tetengo2/stdalt.h>
 
@@ -78,7 +77,7 @@ namespace bobura {
 
             \return The input.
         */
-        const boost::optional<tetengo2::stdalt::filesystem::path>& input() const;
+        const tetengo2::stdalt::optional<tetengo2::stdalt::filesystem::path>& input() const;
 
         /*!
             \brief Returns the message directory path.
@@ -99,7 +98,7 @@ namespace bobura {
 
             \return The main window dimension.
         */
-        boost::optional<dimension_type> main_window_dimension() const;
+        tetengo2::stdalt::optional<dimension_type> main_window_dimension() const;
 
         /*!
             \brief Sets a main window dimension.
@@ -113,7 +112,7 @@ namespace bobura {
 
             \return The maximized status.
         */
-        boost::optional<bool> main_window_maximized() const;
+        tetengo2::stdalt::optional<bool> main_window_maximized() const;
 
         /*!
             \brief Sets a maximized status of the main window.
@@ -127,7 +126,7 @@ namespace bobura {
 
             \return The property bar width.
         */
-        boost::optional<dimension_unit_type> property_bar_width() const;
+        tetengo2::stdalt::optional<dimension_unit_type> property_bar_width() const;
 
         /*!
             \brief Sets a property bar width.
@@ -141,7 +140,7 @@ namespace bobura {
 
             \return The minimized status.
         */
-        boost::optional<bool> property_bar_minimized() const;
+        tetengo2::stdalt::optional<bool> property_bar_minimized() const;
 
         /*!
             \brief Sets a minimized status of the property bar.
@@ -155,7 +154,7 @@ namespace bobura {
 
             \return The splitter bar position.
         */
-        boost::optional<position_unit_type> property_bar_splitter_position() const;
+        tetengo2::stdalt::optional<position_unit_type> property_bar_splitter_position() const;
 
         /*!
             \brief Sets a splitter bar position in the property bar.

@@ -9,9 +9,7 @@
 #include <memory>
 #include <vector>
 
-#include <boost/none.hpp>
 #include <boost/operators.hpp>
-#include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -76,14 +74,14 @@ namespace {
         info_set_type() {}
 
         info_set_type(
-            TETENGO2_STDALT_MAYBE_UNUSED boost::optional<size_type> original_index,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool                 referred,
+            TETENGO2_STDALT_MAYBE_UNUSED tetengo2::stdalt::optional<size_type> original_index,
+            TETENGO2_STDALT_MAYBE_UNUSED const bool                            referred,
             TETENGO2_STDALT_MAYBE_UNUSED train_kind_type train_kind)
         {}
 
-        const boost::optional<size_type>& original_index() const
+        const tetengo2::stdalt::optional<size_type>& original_index() const
         {
-            static const boost::optional<size_type> singleton{};
+            static const tetengo2::stdalt::optional<size_type> singleton{};
             return singleton;
         }
 
@@ -153,9 +151,9 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    boost::optional<size_type> current_train_kind_index{};
-                    window_type                window{};
-                    list_box_type              list_box{ window, list_box_type::scroll_bar_style_type::none };
+                    tetengo2::stdalt::optional<size_type> current_train_kind_index{};
+                    window_type                           window{};
+                    list_box_type list_box{ window, list_box_type::scroll_bar_style_type::none };
                     const bobura::message::train_kind_dialog::
                         train_kind_list_box_selection_changed<size_type, list_box_type>
                             observer(current_train_kind_index, list_box, update_function);
@@ -165,9 +163,9 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    boost::optional<size_type> current_train_kind_index{};
-                    window_type                window{};
-                    list_box_type              list_box{ window, list_box_type::scroll_bar_style_type::none };
+                    tetengo2::stdalt::optional<size_type> current_train_kind_index{};
+                    window_type                           window{};
+                    list_box_type list_box{ window, list_box_type::scroll_bar_style_type::none };
                     const bobura::message::train_kind_dialog::
                         train_kind_list_box_selection_changed<size_type, list_box_type>
                             observer(current_train_kind_index, list_box, update_function);
@@ -184,9 +182,9 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    std::vector<info_set_type>       info_sets{ 3, info_set_type{} };
-                    const boost::optional<size_type> current_train_kind_index{ 1 };
-                    const message_catalog_type       message_catalog{};
+                    std::vector<info_set_type>                  info_sets{ 3, info_set_type{} };
+                    const tetengo2::stdalt::optional<size_type> current_train_kind_index{ 1 };
+                    const message_catalog_type                  message_catalog{};
                     const bobura::message::train_kind_dialog::
                         add_button_mouse_clicked<info_set_type, size_type, message_catalog_type>
                             observer(info_sets, current_train_kind_index, sync_function, message_catalog);
@@ -196,9 +194,9 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    std::vector<info_set_type>       info_sets{ 3, info_set_type{} };
-                    const boost::optional<size_type> current_train_kind_index{ 1 };
-                    const message_catalog_type       message_catalog{};
+                    std::vector<info_set_type>                  info_sets{ 3, info_set_type{} };
+                    const tetengo2::stdalt::optional<size_type> current_train_kind_index{ 1 };
+                    const message_catalog_type                  message_catalog{};
                     const bobura::message::train_kind_dialog::
                         add_button_mouse_clicked<info_set_type, size_type, message_catalog_type>
                             observer(info_sets, current_train_kind_index, sync_function, message_catalog);
@@ -215,8 +213,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    std::vector<info_set_type> info_sets{ 3, info_set_type{} };
-                    boost::optional<size_type> current_train_kind_index{ 1 };
+                    std::vector<info_set_type>            info_sets{ 3, info_set_type{} };
+                    tetengo2::stdalt::optional<size_type> current_train_kind_index{ 1 };
                     const bobura::message::train_kind_dialog::delete_button_mouse_clicked<info_set_type, size_type>
                         observer(info_sets, current_train_kind_index, sync_function);
                 }
@@ -225,8 +223,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    std::vector<info_set_type> info_sets{ 3, info_set_type{} };
-                    boost::optional<size_type> current_train_kind_index{ 1 };
+                    std::vector<info_set_type>            info_sets{ 3, info_set_type{} };
+                    tetengo2::stdalt::optional<size_type> current_train_kind_index{ 1 };
                     const bobura::message::train_kind_dialog::delete_button_mouse_clicked<info_set_type, size_type>
                         observer(info_sets, current_train_kind_index, sync_function);
 
@@ -242,8 +240,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    std::vector<info_set_type> info_sets{ 3, info_set_type{} };
-                    boost::optional<size_type> current_train_kind_index{ 1 };
+                    std::vector<info_set_type>            info_sets{ 3, info_set_type{} };
+                    tetengo2::stdalt::optional<size_type> current_train_kind_index{ 1 };
                     const bobura::message::train_kind_dialog::up_button_mouse_clicked<info_set_type, size_type>
                         observer(info_sets, current_train_kind_index, sync_function);
                 }
@@ -252,8 +250,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    std::vector<info_set_type> info_sets{ 3, info_set_type{} };
-                    boost::optional<size_type> current_train_kind_index{ 1 };
+                    std::vector<info_set_type>            info_sets{ 3, info_set_type{} };
+                    tetengo2::stdalt::optional<size_type> current_train_kind_index{ 1 };
                     const bobura::message::train_kind_dialog::up_button_mouse_clicked<info_set_type, size_type>
                         observer(info_sets, current_train_kind_index, sync_function);
 
@@ -269,8 +267,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    std::vector<info_set_type> info_sets{ 3, info_set_type{} };
-                    boost::optional<size_type> current_train_kind_index{ 1 };
+                    std::vector<info_set_type>            info_sets{ 3, info_set_type{} };
+                    tetengo2::stdalt::optional<size_type> current_train_kind_index{ 1 };
                     const bobura::message::train_kind_dialog::down_button_mouse_clicked<info_set_type, size_type>
                         observer(info_sets, current_train_kind_index, sync_function);
                 }
@@ -279,8 +277,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    std::vector<info_set_type> info_sets{ 3, info_set_type{} };
-                    boost::optional<size_type> current_train_kind_index{ 1 };
+                    std::vector<info_set_type>            info_sets{ 3, info_set_type{} };
+                    tetengo2::stdalt::optional<size_type> current_train_kind_index{ 1 };
                     const bobura::message::train_kind_dialog::down_button_mouse_clicked<info_set_type, size_type>
                         observer(info_sets, current_train_kind_index, sync_function);
 
@@ -512,7 +510,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         sample_picture_box_paint<info_set_type, size_type, canvas_type>
                             observer(
                                 std::vector<info_set_type>(),
-                                boost::none,
+                                TETENGO2_STDALT_NULLOPT,
                                 color_type{ 0x12, 0x34, 0x56 },
                                 color_type{ 0x78, 0x9A, 0xBC },
                                 dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } });
@@ -526,7 +524,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         sample_picture_box_paint<info_set_type, size_type, canvas_type>
                             observer(
                                 std::vector<info_set_type>(),
-                                boost::none,
+                                TETENGO2_STDALT_NULLOPT,
                                 color_type{ 0x12, 0x34, 0x56 },
                                 color_type{ 0x78, 0x9A, 0xBC },
                                 dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } });

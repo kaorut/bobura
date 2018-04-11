@@ -15,7 +15,6 @@
 
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/iostreams/traits.hpp>
-#include <boost/optional.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/range/iterator_range.hpp>
 #include <boost/shared_ptr.hpp>
@@ -28,6 +27,7 @@
 #include <tetengo2/gui/menu/menu_bar.h>
 #include <tetengo2/gui/widget/dialog.h>
 #include <tetengo2/iterator/observable_forward_iterator.h>
+#include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -817,12 +817,12 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                             BOOST_CHECK(
                                 (font_color_set.company_name() ==
                                  font_color_type{
-                                     boost::make_optional(font_type{
+                                     tetengo2::stdalt::make_optional(font_type{
                                          string_type{ TETENGO2_TEXT("hogefont") }, 42, false, true, false, true }),
-                                     boost::make_optional(color_type{ 0xAB, 0xCD, 0xEF }),
-                                     boost::make_optional(font_type{
+                                     tetengo2::stdalt::make_optional(color_type{ 0xAB, 0xCD, 0xEF }),
+                                     tetengo2::stdalt::make_optional(font_type{
                                          string_type{ TETENGO2_TEXT("fugafont") }, 42, false, true, false, true }),
-                                     boost::make_optional(color_type{ 0xFE, 0xDC, 0xBA }) }));
+                                     tetengo2::stdalt::make_optional(color_type{ 0xFE, 0xDC, 0xBA }) }));
                         }
 
                         BOOST_TEST_REQUIRE(p_timetable->down_trains().size() == 2U);

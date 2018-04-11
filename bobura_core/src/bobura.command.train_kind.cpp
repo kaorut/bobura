@@ -12,8 +12,9 @@
 #include <memory>
 #include <vector>
 
-#include <boost/optional.hpp>
 #include <boost/predef.h>
+
+#include <tetengo2/stdalt.h>
 
 #include <bobura/command/train_kind.h>
 #include <bobura/detail_type_list.h>
@@ -137,8 +138,9 @@ namespace bobura::command {
 
             for (auto i = timetable.train_kinds().begin(); i != timetable.train_kinds().end(); ++i)
             {
-                const size_type index = std::distance(timetable.train_kinds().begin(), i);
-                info_sets.emplace_back(boost::make_optional(index), timetable.train_kind_referred(i), *i);
+                size_type index = std::distance(timetable.train_kinds().begin(), i);
+                info_sets.emplace_back(
+                    tetengo2::stdalt::make_optional(std::move(index)), timetable.train_kind_referred(i), *i);
             }
 
             return info_sets;

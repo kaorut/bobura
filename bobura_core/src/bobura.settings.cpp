@@ -17,8 +17,6 @@
 #include <boost/container/container_fwd.hpp>
 #include <boost/core/noncopyable.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/none.hpp>
-#include <boost/optional.hpp>
 #include <boost/predef.h>
 #include <boost/program_options.hpp>
 #include <boost/variant.hpp>
@@ -71,7 +69,7 @@ namespace bobura {
             return m_base_path;
         }
 
-        const boost::optional<tetengo2::stdalt::filesystem::path>& input() const
+        const tetengo2::stdalt::optional<tetengo2::stdalt::filesystem::path>& input() const
         {
             return m_input;
         }
@@ -86,16 +84,16 @@ namespace bobura {
             return m_base_path / path_string_type{ TETENGO2_TEXT("images") };
         }
 
-        boost::optional<dimension_type> main_window_dimension() const
+        tetengo2::stdalt::optional<dimension_type> main_window_dimension() const
         {
             const auto width = m_p_config->get(string_type{ TETENGO2_TEXT("MainWindow/Width") });
             if (!width || width->which() != 1)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             const auto height = m_p_config->get(string_type{ TETENGO2_TEXT("MainWindow/Height") });
             if (!height || height->which() != 1)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
-            return boost::make_optional(
+            return tetengo2::stdalt::make_optional(
                 dimension_type{ dimension_unit_type::from_pixels(boost::get<uint_type>(*width)),
                                 dimension_unit_type::from_pixels(boost::get<uint_type>(*height)) });
         }
@@ -113,13 +111,13 @@ namespace bobura {
                 config_value_type(height.template to_pixels<uint_type>()));
         }
 
-        boost::optional<bool> main_window_maximized() const
+        tetengo2::stdalt::optional<bool> main_window_maximized() const
         {
             const auto status = m_p_config->get(string_type{ TETENGO2_TEXT("MainWindow/Maximized") });
             if (!status || status->which() != 1)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
-            return boost::make_optional(boost::get<uint_type>(*status) != 0);
+            return tetengo2::stdalt::make_optional(boost::get<uint_type>(*status) != 0);
         }
 
         void set_main_window_maximized(const bool status)
@@ -127,13 +125,13 @@ namespace bobura {
             m_p_config->set(string_type{ TETENGO2_TEXT("MainWindow/Maximized") }, config_value_type{ status ? 1 : 0 });
         }
 
-        boost::optional<dimension_unit_type> property_bar_width() const
+        tetengo2::stdalt::optional<dimension_unit_type> property_bar_width() const
         {
             const auto width = m_p_config->get(string_type{ TETENGO2_TEXT("MainWindow/PropertyBarWidth") });
             if (!width || width->which() != 1)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
-            return boost::make_optional(dimension_unit_type::from_pixels(boost::get<uint_type>(*width)));
+            return tetengo2::stdalt::make_optional(dimension_unit_type::from_pixels(boost::get<uint_type>(*width)));
         }
 
         void set_property_bar_width(const dimension_unit_type& width)
@@ -143,13 +141,13 @@ namespace bobura {
                 config_value_type(width.template to_pixels<uint_type>()));
         }
 
-        boost::optional<bool> property_bar_minimized() const
+        tetengo2::stdalt::optional<bool> property_bar_minimized() const
         {
             const auto status = m_p_config->get(string_type{ TETENGO2_TEXT("MainWindow/PropertyBarMinimized") });
             if (!status || status->which() != 1)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
-            return boost::make_optional(boost::get<uint_type>(*status) != 0);
+            return tetengo2::stdalt::make_optional(boost::get<uint_type>(*status) != 0);
         }
 
         void set_property_bar_minimized(const bool status)
@@ -158,14 +156,14 @@ namespace bobura {
                 string_type{ TETENGO2_TEXT("MainWindow/PropertyBarMinimized") }, config_value_type{ status ? 1 : 0 });
         }
 
-        boost::optional<position_unit_type> property_bar_splitter_position() const
+        tetengo2::stdalt::optional<position_unit_type> property_bar_splitter_position() const
         {
             const auto position =
                 m_p_config->get(string_type{ TETENGO2_TEXT("MainWindow/PropertyBarSplitterPosition") });
             if (!position || position->which() != 1)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
-            return boost::make_optional(position_unit_type::from_pixels(boost::get<uint_type>(*position)));
+            return tetengo2::stdalt::make_optional(position_unit_type::from_pixels(boost::get<uint_type>(*position)));
         }
 
         void set_property_bar_splitter_position(const position_unit_type& position)
@@ -301,21 +299,22 @@ namespace bobura {
             return std::move(p_config);
         }
 
-        static boost::optional<std::pair<uint_type, uint_type>>
+        static tetengo2::stdalt::optional<std::pair<uint_type, uint_type>>
         main_window_dimension_in_command_line(const boost::program_options::variables_map& options)
         {
             const auto found = options.find("dimension");
             if (found == options.end())
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             const auto width_and_height = parse_dimension(found->second.as<string_type>());
             if (!width_and_height)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             return width_and_height;
         }
 
-        static boost::optional<std::pair<uint_type, uint_type>> parse_dimension(const string_type& dimension_string)
+        static tetengo2::stdalt::optional<std::pair<uint_type, uint_type>>
+        parse_dimension(const string_type& dimension_string)
         {
             std::vector<string_type> result{};
             using char_type = typename string_type::value_type;
@@ -323,7 +322,7 @@ namespace bobura {
                 return character == char_type{ TETENGO2_TEXT('x') };
             });
             if (result.size() < 2)
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
 
             try
             {
@@ -332,7 +331,7 @@ namespace bobura {
             }
             catch (const boost::bad_lexical_cast&)
             {
-                return boost::none;
+                return TETENGO2_STDALT_NULLOPT;
             }
         }
 
@@ -347,7 +346,7 @@ namespace bobura {
 
         tetengo2::stdalt::filesystem::path m_base_path;
 
-        boost::optional<tetengo2::stdalt::filesystem::path> m_input;
+        tetengo2::stdalt::optional<tetengo2::stdalt::filesystem::path> m_input;
 
         std::unique_ptr<config_base_type> m_p_config;
 
@@ -365,7 +364,7 @@ namespace bobura {
             {
                 const auto& input_values = options["input"].template as<std::vector<string_type>>();
                 if (!input_values.empty())
-                    m_input = boost::optional<string_type>{ input_values[0] };
+                    m_input = tetengo2::stdalt::optional<string_type>{ input_values[0] };
             }
 
             m_p_config = create_config(options, std::move(config_group_name));
@@ -391,7 +390,8 @@ namespace bobura {
     }
 
     template <typename String, typename Position, typename Dimension>
-    const boost::optional<tetengo2::stdalt::filesystem::path>& settings<String, Position, Dimension>::input() const
+    const tetengo2::stdalt::optional<tetengo2::stdalt::filesystem::path>&
+    settings<String, Position, Dimension>::input() const
     {
         return m_p_impl->input();
     }
@@ -409,7 +409,7 @@ namespace bobura {
     }
 
     template <typename String, typename Position, typename Dimension>
-    boost::optional<typename settings<String, Position, Dimension>::dimension_type>
+    tetengo2::stdalt::optional<typename settings<String, Position, Dimension>::dimension_type>
     settings<String, Position, Dimension>::main_window_dimension() const
     {
         return m_p_impl->main_window_dimension();
@@ -422,7 +422,7 @@ namespace bobura {
     }
 
     template <typename String, typename Position, typename Dimension>
-    boost::optional<bool> settings<String, Position, Dimension>::main_window_maximized() const
+    tetengo2::stdalt::optional<bool> settings<String, Position, Dimension>::main_window_maximized() const
     {
         return m_p_impl->main_window_maximized();
     }
@@ -434,7 +434,7 @@ namespace bobura {
     }
 
     template <typename String, typename Position, typename Dimension>
-    boost::optional<typename settings<String, Position, Dimension>::dimension_unit_type>
+    tetengo2::stdalt::optional<typename settings<String, Position, Dimension>::dimension_unit_type>
     settings<String, Position, Dimension>::property_bar_width() const
     {
         return m_p_impl->property_bar_width();
@@ -447,7 +447,7 @@ namespace bobura {
     }
 
     template <typename String, typename Position, typename Dimension>
-    boost::optional<bool> settings<String, Position, Dimension>::property_bar_minimized() const
+    tetengo2::stdalt::optional<bool> settings<String, Position, Dimension>::property_bar_minimized() const
     {
         return m_p_impl->property_bar_minimized();
     }
@@ -459,7 +459,7 @@ namespace bobura {
     }
 
     template <typename String, typename Position, typename Dimension>
-    boost::optional<typename settings<String, Position, Dimension>::position_unit_type>
+    tetengo2::stdalt::optional<typename settings<String, Position, Dimension>::position_unit_type>
     settings<String, Position, Dimension>::property_bar_splitter_position() const
     {
         return m_p_impl->property_bar_splitter_position();
