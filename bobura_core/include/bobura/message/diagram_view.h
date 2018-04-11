@@ -28,11 +28,6 @@
 #include <bobura/property_bar.h>
 #include <bobura/timetable_model.h>
 
-namespace boost {
-    template <typename T>
-    class optional;
-}
-
 
 namespace bobura::message::diagram_view {
 #if !defined(DOCUMENTATION)

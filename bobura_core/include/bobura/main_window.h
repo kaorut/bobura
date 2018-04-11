@@ -19,11 +19,6 @@
 #include <bobura/settings.h>
 #include <bobura/view_picture_box.h>
 
-namespace boost {
-    template <typename T>
-    class optional;
-}
-
 
 namespace bobura {
     /*!

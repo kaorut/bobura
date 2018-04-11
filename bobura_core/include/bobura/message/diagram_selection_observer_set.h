@@ -19,11 +19,6 @@
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
 
-namespace boost {
-    template <typename T>
-    class optional;
-}
-
 
 namespace bobura::message {
     /*!

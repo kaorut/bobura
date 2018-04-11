@@ -11,7 +11,6 @@
 
 #include <cassert>
 #include <functional>
-#include <memory>
 
 #include <tetengo2/stdalt.h>
 

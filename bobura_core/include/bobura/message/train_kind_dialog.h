@@ -9,6 +9,7 @@
 #if !defined(BOBURA_MESSAGE_TRAINKINDDIALOG_H)
 #define BOBURA_MESSAGE_TRAINKINDDIALOG_H
 
+#include <algorithm> // IWYU pragma: keep
 #include <cassert>
 #include <functional>
 #include <iterator>

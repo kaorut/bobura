@@ -18,11 +18,6 @@
 #include <bobura/load_save/confirm_file_save.h>
 #include <bobura/timetable_model.h>
 
-namespace boost {
-    template <typename T>
-    class optional;
-}
-
 
 namespace bobura::load_save {
     /*!
