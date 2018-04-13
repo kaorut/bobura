@@ -445,7 +445,7 @@ namespace bobura::model::serializer {
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return TETENGO2_STDALT_NULLOPT;
-            const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
+            const auto key = get_attribute(tetengo2::stdalt::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
                 return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
@@ -487,7 +487,7 @@ namespace bobura::model::serializer {
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return TETENGO2_STDALT_NULLOPT;
-            const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
+            const auto key = get_attribute(tetengo2::stdalt::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
                 return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
@@ -549,7 +549,7 @@ namespace bobura::model::serializer {
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return TETENGO2_STDALT_NULLOPT;
-            const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
+            const auto key = get_attribute(tetengo2::stdalt::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
                 return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
@@ -1065,7 +1065,7 @@ namespace bobura::model::serializer {
 
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return TETENGO2_STDALT_NULLOPT;
-            const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
+            const auto key = get_attribute(tetengo2::stdalt::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
                 return TETENGO2_STDALT_NULLOPT;
             if (key != "stops")
@@ -1165,7 +1165,7 @@ namespace bobura::model::serializer {
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return TETENGO2_STDALT_NULLOPT;
-            auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
+            auto key = get_attribute(tetengo2::stdalt::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
                 return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
@@ -1187,12 +1187,12 @@ namespace bobura::model::serializer {
             if (!pull_parser.has_next())
                 return TETENGO2_STDALT_NULLOPT;
             const auto& element = pull_parser.peek();
-            if (element.which() != 2)
+            if (tetengo2::stdalt::index(element) != 2)
                 return TETENGO2_STDALT_NULLOPT;
-            const auto& value = boost::get<value_type>(element);
-            if (value.which() != 4)
+            const auto& value = tetengo2::stdalt::get<value_type>(element);
+            if (tetengo2::stdalt::index(value) != 4)
                 return TETENGO2_STDALT_NULLOPT;
-            auto string = boost::get<input_string_type>(value);
+            auto string = tetengo2::stdalt::get<input_string_type>(value);
             pull_parser.next();
             return tetengo2::stdalt::make_optional(std::move(string));
         }
@@ -1203,7 +1203,7 @@ namespace bobura::model::serializer {
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return TETENGO2_STDALT_NULLOPT;
-            const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
+            const auto key = get_attribute(tetengo2::stdalt::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
                 return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
@@ -1225,12 +1225,12 @@ namespace bobura::model::serializer {
             if (!pull_parser.has_next())
                 return TETENGO2_STDALT_NULLOPT;
             const auto& element = pull_parser.peek();
-            if (element.which() != 2)
+            if (tetengo2::stdalt::index(element) != 2)
                 return TETENGO2_STDALT_NULLOPT;
-            const auto& value = boost::get<value_type>(element);
-            if (value.which() != 2)
+            const auto& value = tetengo2::stdalt::get<value_type>(element);
+            if (tetengo2::stdalt::index(value) != 2)
                 return TETENGO2_STDALT_NULLOPT;
-            auto integer = boost::get<integer_type>(value);
+            auto integer = tetengo2::stdalt::get<integer_type>(value);
             pull_parser.next();
             return tetengo2::stdalt::make_optional<Int>(std::move(integer));
         }
@@ -1240,7 +1240,7 @@ namespace bobura::model::serializer {
         {
             if (!next_is_structure_begin(pull_parser, input_string_type{ TETENGO2_TEXT("member") }))
                 return TETENGO2_STDALT_NULLOPT;
-            const auto key = get_attribute(boost::get<structure_begin_type>(pull_parser.peek()));
+            const auto key = get_attribute(tetengo2::stdalt::get<structure_begin_type>(pull_parser.peek()));
             if (key.empty())
                 return TETENGO2_STDALT_NULLOPT;
             pull_parser.next();
@@ -1261,12 +1261,12 @@ namespace bobura::model::serializer {
             if (!pull_parser.has_next())
                 return TETENGO2_STDALT_NULLOPT;
             const auto& element = pull_parser.peek();
-            if (element.which() != 2)
+            if (tetengo2::stdalt::index(element) != 2)
                 return TETENGO2_STDALT_NULLOPT;
-            const auto& value = boost::get<value_type>(element);
-            if (value.which() != 0)
+            const auto& value = tetengo2::stdalt::get<value_type>(element);
+            if (tetengo2::stdalt::index(value) != 0)
                 return TETENGO2_STDALT_NULLOPT;
-            auto boolean = boost::get<bool>(value);
+            auto boolean = tetengo2::stdalt::get<bool>(value);
             pull_parser.next();
             return tetengo2::stdalt::make_optional(std::move(boolean));
         }
@@ -1276,9 +1276,9 @@ namespace bobura::model::serializer {
             if (!pull_parser.has_next())
                 return false;
             const auto& element = pull_parser.peek();
-            if (element.which() != 0)
+            if (tetengo2::stdalt::index(element) != 0)
                 return false;
-            if (boost::get<structure_begin_type>(element).name() != name)
+            if (tetengo2::stdalt::get<structure_begin_type>(element).name() != name)
                 return false;
 
             return true;
@@ -1289,9 +1289,9 @@ namespace bobura::model::serializer {
             if (!pull_parser.has_next())
                 return false;
             const auto& element = pull_parser.peek();
-            if (element.which() != 1)
+            if (tetengo2::stdalt::index(element) != 1)
                 return false;
-            if (boost::get<structure_end_type>(element).name() != name)
+            if (tetengo2::stdalt::get<structure_end_type>(element).name() != name)
                 return false;
 
             return true;
@@ -1307,15 +1307,15 @@ namespace bobura::model::serializer {
             return next_is_value(pull_parser, 1);
         }
 
-        static bool next_is_value(const pull_parser_type& pull_parser, const int which)
+        static bool next_is_value(const pull_parser_type& pull_parser, const std::size_t which)
         {
             if (!pull_parser.has_next())
                 return false;
             const auto& element = pull_parser.peek();
-            if (element.which() != 2)
+            if (tetengo2::stdalt::index(element) != 2)
                 return false;
-            const auto& value = boost::get<value_type>(element);
-            if (value.which() != which)
+            const auto& value = tetengo2::stdalt::get<value_type>(element);
+            if (tetengo2::stdalt::index(value) != which)
                 return false;
 
             return true;
@@ -1327,10 +1327,10 @@ namespace bobura::model::serializer {
                 structure.attribute_map().find(input_string_type{ TETENGO2_TEXT("name") });
             if (found == structure.attribute_map().end())
                 return input_string_type{};
-            if (found->second.which() != 4)
+            if (tetengo2::stdalt::index(found->second) != 4)
                 return input_string_type{};
 
-            return boost::get<input_string_type>(found->second);
+            return tetengo2::stdalt::get<input_string_type>(found->second);
         }
 
 
