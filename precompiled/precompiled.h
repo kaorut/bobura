@@ -38,6 +38,21 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
+#if __has_include(<filesystem>)
+#   include <filesystem>
+#elif __has_include(<experimental/filesystem>)
+#   include <experimental/filesystem>
+#endif
+#if __has_include(<optional>)
+#   include <optional>
+#elif __has_include(<experimental/optional>)
+#   include <experimental/optional>
+#endif
+#if __has_include(<variant>)
+#   include <variant>
+#elif __has_include(<boost/variant.hpp>)
+#   include <boost/variant.hpp>
+#endif
 
 
 // The Boost library headers
@@ -66,7 +81,6 @@
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/utility/string_view.hpp>
-#include <boost/variant.hpp>
 
 
 #if BOOST_COMP_MSVC
