@@ -131,7 +131,8 @@ namespace bobura {
             if (!width || tetengo2::stdalt::index(*width) != 1)
                 return TETENGO2_STDALT_NULLOPT;
 
-            return tetengo2::stdalt::make_optional(dimension_unit_type::from_pixels(tetengo2::stdalt::get<uint_type>(*width)));
+            return tetengo2::stdalt::make_optional(
+                dimension_unit_type::from_pixels(tetengo2::stdalt::get<uint_type>(*width)));
         }
 
         void set_property_bar_width(const dimension_unit_type& width)
@@ -163,7 +164,8 @@ namespace bobura {
             if (!position || tetengo2::stdalt::index(*position) != 1)
                 return TETENGO2_STDALT_NULLOPT;
 
-            return tetengo2::stdalt::make_optional(position_unit_type::from_pixels(tetengo2::stdalt::get<uint_type>(*position)));
+            return tetengo2::stdalt::make_optional(
+                position_unit_type::from_pixels(tetengo2::stdalt::get<uint_type>(*position)));
         }
 
         void set_property_bar_splitter_position(const position_unit_type& position)
