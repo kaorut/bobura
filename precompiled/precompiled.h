@@ -48,6 +48,11 @@
 #elif __has_include(<experimental/optional>)
 #   include <experimental/optional>
 #endif
+#if __has_include(<string_view>)
+#   include <string_view>
+#elif __has_include(<boost/utility/string_view.hpp>)
+#   include <boost/utility/string_view.hpp>
+#endif
 #if __has_include(<variant>)
 #   include <variant>
 #elif __has_include(<boost/variant.hpp>)
@@ -80,7 +85,6 @@
 #include <boost/signals2.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/utility/string_view.hpp>
 
 
 #if BOOST_COMP_MSVC
