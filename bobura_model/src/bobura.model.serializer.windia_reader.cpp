@@ -21,7 +21,6 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
-#include <boost/utility/string_view.hpp>
 
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
@@ -129,7 +128,7 @@ namespace bobura::model::serializer {
 
         using char_type = typename string_type::value_type;
 
-        using string_view_type = boost::basic_string_view<char_type, std::char_traits<char_type>>;
+        using string_view_type = tetengo2::stdalt::basic_string_view<char_type, std::char_traits<char_type>>;
 
         using train_kind_type = typename timetable_type::train_kind_type;
 
