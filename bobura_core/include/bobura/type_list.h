@@ -247,13 +247,9 @@ namespace bobura::type_list {
         template <typename DetailTypeList>
         using mouse_capture_details_type = typename DetailTypeList::mouse_capture_type;
 
-        using position_unit_type = tetengo2::gui::unit::em;
+        using position_type = tetengo2::gui::em_position;
 
-        using position_type = tetengo2::gui::position<position_unit_type>;
-
-        using dimension_unit_type = tetengo2::gui::unit::uem;
-
-        using dimension_type = tetengo2::gui::dimension<dimension_unit_type>;
+        using dimension_type = tetengo2::gui::em_dimension;
 
         template <typename DetailTypeList>
         using fast_solid_background_type =
