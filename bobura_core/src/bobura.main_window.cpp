@@ -71,9 +71,9 @@ namespace bobura {
             const detail_impl_set_type&   detail_impl_set)
         : m_base{ base }, m_message_catalog{ message_catalog }, m_p_tab_frame{}, m_p_diagram_view_picture_box{},
           m_p_timetable_down_view_picture_box{}, m_p_timetable_up_view_picture_box{}, m_p_property_bar{},
-          m_settings{ settings }, m_confirm_file_save{ confirm_file_save }
+          m_settings{ settings }, m_confirm_file_save{ confirm_file_save }, m_detail_impl_set{ detail_impl_set }
         {
-            initialize_window(detail_impl_set);
+            initialize_window();
         }
 
 
@@ -207,10 +207,12 @@ namespace bobura {
 
         const confirm_file_save_type& m_confirm_file_save;
 
+        const detail_impl_set_type& m_detail_impl_set;
+
 
         // functions
 
-        void initialize_window(const detail_impl_set_type& detail_impl_set)
+        void initialize_window()
         {
             m_p_tab_frame = std::make_unique<tab_frame_type>(m_base);
 
@@ -224,7 +226,7 @@ namespace bobura {
             m_p_tab_frame->tab_at(2).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Timetable (Up)")));
 
             m_p_property_bar =
-                std::make_unique<property_bar_type>(m_base, m_settings, m_message_catalog, detail_impl_set);
+                std::make_unique<property_bar_type>(m_base, m_settings, m_message_catalog, m_detail_impl_set);
 
             set_message_observers();
 
@@ -258,7 +260,8 @@ namespace bobura {
         void set_window_icon()
         {
             auto p_icon = std::make_unique<icon_type>(
-                m_settings.image_directory_path() / string_type{ TETENGO2_TEXT("bobura_app.ico") });
+                m_settings.image_directory_path() / string_type{ TETENGO2_TEXT("bobura_app.ico") },
+                m_detail_impl_set.icon_());
             m_base.set_icon(std::move(p_icon));
         }
 

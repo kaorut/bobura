@@ -247,13 +247,9 @@ namespace bobura::type_list {
         template <typename DetailTypeList>
         using mouse_capture_details_type = typename DetailTypeList::mouse_capture_type;
 
-        using position_unit_type = tetengo2::gui::unit::em;
+        using position_type = tetengo2::gui::em_position;
 
-        using position_type = tetengo2::gui::position<position_unit_type>;
-
-        using dimension_unit_type = tetengo2::gui::unit::uem;
-
-        using dimension_type = tetengo2::gui::dimension<dimension_unit_type>;
+        using dimension_type = tetengo2::gui::em_dimension;
 
         template <typename DetailTypeList>
         using fast_solid_background_type =
@@ -275,16 +271,12 @@ namespace bobura::type_list {
             canvas_traits<size_type, string_type, position_type, dimension_type, ui_encoder_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using canvas_type = tetengo2::gui::drawing::canvas<
-            canvas_traits_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            icon_details_type<DetailTypeList>>;
+        using canvas_type =
+            tetengo2::gui::drawing::canvas<canvas_traits_type<DetailTypeList>, drawing_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using fast_canvas_type = tetengo2::gui::drawing::canvas<
-            canvas_traits_type<DetailTypeList>,
-            fast_drawing_details_type<DetailTypeList>,
-            icon_details_type<DetailTypeList>>;
+        using fast_canvas_type = tetengo2::gui::drawing::
+            canvas<canvas_traits_type<DetailTypeList>, fast_drawing_details_type<DetailTypeList>>;
 
         using mouse_observer_set_type = tetengo2::gui::message::mouse_observer_set<position_type, difference_type>;
 
