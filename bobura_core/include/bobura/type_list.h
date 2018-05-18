@@ -271,14 +271,12 @@ namespace bobura::type_list {
             canvas_traits<size_type, string_type, position_type, dimension_type, ui_encoder_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using canvas_type = tetengo2::gui::drawing::canvas<
-            canvas_traits_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>>;
+        using canvas_type =
+            tetengo2::gui::drawing::canvas<canvas_traits_type<DetailTypeList>, drawing_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using fast_canvas_type = tetengo2::gui::drawing::canvas<
-            canvas_traits_type<DetailTypeList>,
-            fast_drawing_details_type<DetailTypeList>>;
+        using fast_canvas_type = tetengo2::gui::drawing::
+            canvas<canvas_traits_type<DetailTypeList>, fast_drawing_details_type<DetailTypeList>>;
 
         using mouse_observer_set_type = tetengo2::gui::message::mouse_observer_set<position_type, difference_type>;
 
