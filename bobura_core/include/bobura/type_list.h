@@ -43,7 +43,6 @@
 #include <tetengo2/gui/position.h>
 #include <tetengo2/gui/shell.h>
 #include <tetengo2/gui/timer.h>
-#include <tetengo2/gui/unit/em.h>
 #include <tetengo2/gui/unit/point.h>
 #include <tetengo2/gui/widget/abstract_window.h>
 #include <tetengo2/gui/widget/button.h>
