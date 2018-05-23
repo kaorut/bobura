@@ -147,8 +147,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const auto dimension = settings.main_window_dimension();
 
                 BOOST_TEST_REQUIRE(tetengo2::stdalt::has_value(dimension));
-                BOOST_TEST(dimension->width().to_pixels<std::size_t>() == 240U);
-                BOOST_TEST(dimension->height().to_pixels<std::size_t>() == 120U);
+                BOOST_TEST(dimension->width().to_pixels() == 240U);
+                BOOST_TEST(dimension->height().to_pixels() == 120U);
 
                 settings.clear_config();
             }
@@ -161,8 +161,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const auto dimension = settings.main_window_dimension();
 
                 BOOST_TEST_REQUIRE(tetengo2::stdalt::has_value(dimension));
-                BOOST_TEST(dimension->width().to_pixels<std::size_t>() == 240U);
-                BOOST_TEST(dimension->height().to_pixels<std::size_t>() == 120U);
+                BOOST_TEST(dimension->width().to_pixels() == 240U);
+                BOOST_TEST(dimension->height().to_pixels() == 120U);
 
                 settings.clear_config();
             }
