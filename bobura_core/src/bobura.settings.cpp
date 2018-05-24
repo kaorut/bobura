@@ -101,14 +101,10 @@ namespace bobura {
         void set_main_window_dimension(const dimension_type& dimension)
         {
             const auto& width = dimension.width();
-            m_p_config->set(
-                string_type{ TETENGO2_TEXT("MainWindow/Width") },
-                config_value_type(width.template to_pixels<uint_type>()));
+            m_p_config->set(string_type{ TETENGO2_TEXT("MainWindow/Width") }, config_value_type{ width.to_pixels() });
 
             const auto& height = dimension.height();
-            m_p_config->set(
-                string_type{ TETENGO2_TEXT("MainWindow/Height") },
-                config_value_type(height.template to_pixels<uint_type>()));
+            m_p_config->set(string_type{ TETENGO2_TEXT("MainWindow/Height") }, config_value_type{ height.to_pixels() });
         }
 
         tetengo2::stdalt::optional<bool> main_window_maximized() const
@@ -138,8 +134,7 @@ namespace bobura {
         void set_property_bar_width(const dimension_unit_type& width)
         {
             m_p_config->set(
-                string_type{ TETENGO2_TEXT("MainWindow/PropertyBarWidth") },
-                config_value_type(width.template to_pixels<uint_type>()));
+                string_type{ TETENGO2_TEXT("MainWindow/PropertyBarWidth") }, config_value_type{ width.to_pixels() });
         }
 
         tetengo2::stdalt::optional<bool> property_bar_minimized() const
@@ -172,7 +167,7 @@ namespace bobura {
         {
             m_p_config->set(
                 string_type{ TETENGO2_TEXT("MainWindow/PropertyBarSplitterPosition") },
-                config_value_type(position.template to_pixels<uint_type>()));
+                config_value_type{ position.to_pixels() });
         }
 
         void clear_config()
