@@ -403,9 +403,7 @@ namespace bobura::type_list {
             menu_details_type<DetailTypeList>,
             virtual_key_details_type<DetailTypeList>>;
 
-        template <typename DetailTypeList>
-        using shell_type =
-            tetengo2::gui::shell<string_type, ui_encoder_type<DetailTypeList>, shell_details_type<DetailTypeList>>;
+        using shell_type = tetengo2::gui::shell;
 
         template <typename DetailTypeList>
         using timer_details_type = typename DetailTypeList::timer_type;
@@ -523,7 +521,7 @@ namespace bobura::type_list {
         using position_type = detail::ui::position_type;
 
         //! The shell type.
-        using shell_type = detail::ui::shell_type<DetailTypeList>;
+        using shell_type = detail::ui::shell_type;
 
         //! The timer type.
         using timer_type = detail::ui::timer_type<DetailTypeList>;
@@ -805,7 +803,7 @@ namespace bobura::type_list {
             type_list::detail::ui::point_dimension_unit_type,
             fast_canvas_type<DetailTypeList>,
             scale_type,
-            type_list::detail::ui::shell_type<DetailTypeList>,
+            type_list::detail::ui::shell_type,
             type_list::detail::common_dialog::font_type<DetailTypeList>,
             type_list::detail::common_dialog::color_type<DetailTypeList>,
             message_catalog_type,
