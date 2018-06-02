@@ -24,7 +24,6 @@
 #include <tetengo2/detail/stub/shell.h>
 #include <tetengo2/detail/stub/system_color.h>
 #include <tetengo2/detail/stub/timer.h>
-#include <tetengo2/detail/stub/virtual_key.h>
 #include <tetengo2/detail/stub/widget.h>
 #if BOOST_COMP_MSVC
 #include <tetengo2/detail/windows/alert.h>
@@ -44,7 +43,6 @@
 #include <tetengo2/detail/windows/shell.h>
 #include <tetengo2/detail/windows/system_color.h>
 #include <tetengo2/detail/windows/timer.h>
-#include <tetengo2/detail/windows/virtual_key.h>
 #include <tetengo2/detail/windows/widget.h>
 #else
 #include <tetengo2/detail/unixos/config.h>
@@ -95,8 +93,6 @@ namespace bobura::type_list {
 
             using timer_type = tetengo2::detail::windows::timer;
 
-            using virtual_key_type = tetengo2::detail::windows::virtual_key;
-
             using widget_type = tetengo2::detail::windows::widget;
 #endif
         }
@@ -144,8 +140,6 @@ namespace bobura::type_list {
             using system_color_type = tetengo2::detail::stub::system_color;
 
             using timer_type = tetengo2::detail::stub::timer;
-
-            using virtual_key_type = tetengo2::detail::stub::virtual_key;
 
             using widget_type = tetengo2::detail::stub::widget;
         }
@@ -206,9 +200,6 @@ namespace bobura::type_list {
         //! The detail implementation type of the timer.
         using timer_type = detail::detail::application::timer_type;
 
-        //! The detail implementation type of the virtual key.
-        using virtual_key_type = detail::detail::application::virtual_key_type;
-
         //! The detail implementation type of the widget.
         using widget_type = detail::detail::application::widget_type;
 #endif
@@ -266,9 +257,6 @@ namespace bobura::type_list {
 
         //! The detail implementation type of the timer.
         using timer_type = detail::detail::test::timer_type;
-
-        //! The detail implementation type of the virtual key.
-        using virtual_key_type = detail::detail::test::virtual_key_type;
 
         //! The detail implementation type of the widget.
         using widget_type = detail::detail::test::widget_type;
