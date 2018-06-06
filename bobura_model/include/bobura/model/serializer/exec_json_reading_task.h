@@ -95,8 +95,7 @@ namespace bobura::model::serializer {
             typename dialog_type::details_traits_type,
             typename dialog_type::menu_details_type,
             typename dialog_type::message_loop_details_type,
-            typename timer_type::timer_details_type,
-            typename system_color_set_type::system_color_details_type>;
+            typename timer_type::timer_details_type>;
 
         //! The promise type.
         using promise_type = typename progress_dialog_type::promise_type;
