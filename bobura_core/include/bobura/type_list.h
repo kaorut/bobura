@@ -238,9 +238,6 @@ namespace bobura::type_list {
         using shell_details_type = typename DetailTypeList::shell_type;
 
         template <typename DetailTypeList>
-        using system_color_details_type = typename DetailTypeList::system_color_type;
-
-        template <typename DetailTypeList>
         using mouse_capture_details_type = typename DetailTypeList::mouse_capture_type;
 
         using position_type = tetengo2::gui::em_position;
@@ -338,7 +335,6 @@ namespace bobura::type_list {
         using link_label_type = tetengo2::gui::widget::link_label<
             widget_traits_type<DetailTypeList>,
             widget_details_traits_type<DetailTypeList>,
-            system_color_details_type<DetailTypeList>,
             shell_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
@@ -355,8 +351,7 @@ namespace bobura::type_list {
         using map_box_type = tetengo2::gui::widget::map_box<
             widget_traits_type<DetailTypeList>,
             widget_details_traits_type<DetailTypeList>,
-            mouse_capture_details_type<DetailTypeList>,
-            system_color_details_type<DetailTypeList>>;
+            mouse_capture_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using menu_bar_type = tetengo2::gui::menu::menu_bar<
@@ -396,19 +391,16 @@ namespace bobura::type_list {
             widget_traits_type<DetailTypeList>,
             widget_details_traits_type<DetailTypeList>,
             mouse_capture_details_type<DetailTypeList>,
-            system_color_details_type<DetailTypeList>,
             timer_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using system_color_set_type =
-            tetengo2::gui::drawing::system_color_set<system_color_details_type<DetailTypeList>>;
+        using system_color_set_type = tetengo2::gui::drawing::system_color_set;
 
         template <typename DetailTypeList>
         using tab_frame_type = tetengo2::gui::widget::tab_frame<
             widget_traits_type<DetailTypeList>,
             widget_details_traits_type<DetailTypeList>,
-            mouse_capture_details_type<DetailTypeList>,
-            system_color_details_type<DetailTypeList>>;
+            mouse_capture_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using text_box_type = tetengo2::gui::widget::
