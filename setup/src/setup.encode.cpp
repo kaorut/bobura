@@ -17,6 +17,7 @@
 
 #include <tetengo2.detail.base.encoding.cpp>
 #include <tetengo2.detail.windows.encoding.cpp>
+#include <tetengo2.detail.windows.windows_version.cpp>
 #include <tetengo2.text.encoding.ascii.cpp>
 #include <tetengo2.text.encoding.encoding.cpp>
 #include <tetengo2.text.encoding.locale.cpp>
