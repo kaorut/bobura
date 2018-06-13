@@ -11,7 +11,7 @@
 
 #include <memory>
 
-#include <tetengo2/detail/base/impl_set.h>
+#include <tetengo2/detail/base/gui_impl_set.h>
 
 #include <bobura/settings.h>
 
@@ -66,7 +66,7 @@ namespace bobura {
         using settings_type = settings<string_type, position_type, dimension_type>;
 
         //! The detail implementation set type.
-        using detail_impl_set_type = tetengo2::detail::base::impl_set;
+        using detail_impl_set_type = tetengo2::detail::base::gui_impl_set;
 
 
         // constructors and destructor

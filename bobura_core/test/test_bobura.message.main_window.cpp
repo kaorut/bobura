@@ -13,7 +13,7 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/impl_set.h>
+#include <tetengo2/detail/stub/gui_impl_set.h>
 #include <tetengo2/text.h>
 
 #include <bobura/command/nop.h>
@@ -103,7 +103,7 @@ namespace {
         ui_type_list_type::map_box_type,
         message_catalog_type>;
 
-    using detail_impl_set_type = tetengo2::detail::stub::impl_set;
+    using detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 
     using popup_menu_selected_type =
         bobura::message::main_window::popup_menu_selected<popup_menu_type, command_type, model_type>;

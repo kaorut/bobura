@@ -15,7 +15,7 @@
 
 #include <boost/rational.hpp>
 
-#include <tetengo2/detail/base/impl_set.h>
+#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/stdalt.h>
 
 #include <bobura/diagram_view.h>
@@ -213,7 +213,7 @@ namespace bobura::message::view_picture_box::diagram {
         using view_type = bobura::diagram_view<view_traits_type>;
 
         //! The detail implementation set type.
-        using detail_impl_set_type = tetengo2::detail::base::impl_set;
+        using detail_impl_set_type = tetengo2::detail::base::gui_impl_set;
 
 
         // constructors and destructor

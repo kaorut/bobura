@@ -12,7 +12,7 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/impl_set.h>
+#include <tetengo2/detail/stub/gui_impl_set.h>
 #include <tetengo2/text.h>
 
 #include <bobura/about_dialog.h>
@@ -45,7 +45,7 @@ namespace {
 
     using about_dialog_type = bobura::about_dialog<traits_type_list_type::dialog_type>;
 
-    using detail_detail_impl_set_type = tetengo2::detail::stub::impl_set;
+    using detail_detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 }
 
 

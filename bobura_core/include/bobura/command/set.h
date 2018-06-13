@@ -13,7 +13,7 @@
 
 #include <boost/core/noncopyable.hpp>
 
-#include <tetengo2/detail/base/impl_set.h>
+#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/stdalt.h>
 
 #include <bobura/command/command_base.h> // IWYU pragma: keep
@@ -115,7 +115,7 @@ namespace bobura::command {
         using parameter_type = parameter_base;
 
         //! The detail implementation set type.
-        using detail_impl_set_type = tetengo2::detail::base::impl_set;
+        using detail_impl_set_type = tetengo2::detail::base::gui_impl_set;
 
 
         // constructors

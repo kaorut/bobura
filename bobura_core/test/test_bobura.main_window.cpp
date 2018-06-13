@@ -13,7 +13,7 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/impl_set.h>
+#include <tetengo2/detail/stub/gui_impl_set.h>
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
@@ -63,7 +63,7 @@ namespace {
     using main_window_type =
         bobura::main_window<traits_type_list_type::main_window_type, traits_type_list_type::command_set_type>;
 
-    using detail_impl_set_type = tetengo2::detail::stub::impl_set;
+    using detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 }
 
 

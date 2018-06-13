@@ -12,7 +12,7 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/impl_set.h>
+#include <tetengo2/detail/stub/gui_impl_set.h>
 #include <tetengo2/text.h>
 
 #include <bobura/application.h>
@@ -39,7 +39,7 @@ namespace {
 
     using application_type = bobura::application<traits_type_list_type::application_type>;
 
-    using detail_impl_set_type = tetengo2::detail::stub::impl_set;
+    using detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 }
 
 
