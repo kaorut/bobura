@@ -15,8 +15,12 @@
 #include <tetengo2/text/encoding/encoding.h>
 #include <tetengo2/text/encoding/locale.h>
 
+#include <tetengo2.detail.base.config.cpp>
 #include <tetengo2.detail.base.encoding.cpp>
+#include <tetengo2.detail.base.impl_set.cpp>
+#include <tetengo2.detail.windows.config.cpp>
 #include <tetengo2.detail.windows.encoding.cpp>
+#include <tetengo2.detail.windows.impl_set.cpp>
 #include <tetengo2.detail.windows.windows_version.cpp>
 #include <tetengo2.text.encoding.ascii.cpp>
 #include <tetengo2.text.encoding.encoding.cpp>
