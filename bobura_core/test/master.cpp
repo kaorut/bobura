@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <boost/predef.h>
 #define BOOST_TEST_MODULE test_bobura
 #include <boost/test/unit_test.hpp> // IWYU pragma: keep
 
