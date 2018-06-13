@@ -21,7 +21,10 @@
 #define OEMRESOURCE
 #include <Windows.h>
 
+#include <tetengo2/detail/base/gui_impl_set.h>
+#include <tetengo2/detail/base/impl_set.h>
 #include <tetengo2/detail/windows/gui_impl_set.h>
+#include <tetengo2/detail/windows/impl_set.h>
 #include <tetengo2/stdalt.h>
 
 #include <bobura/application.h>
@@ -111,6 +114,9 @@ int WINAPI wWinMain(
 
     try
     {
+        tetengo2::detail::set_detail_impl_set(tetengo2::detail::windows::impl_set::instance());
+        tetengo2::detail::set_gui_detail_impl_set(tetengo2::detail::windows::gui_impl_set::instance());
+
         settings_type settings{ boost::program_options::split_winmain(::GetCommandLineW()),
                                 string_type{ TETENGO2_TEXT("bobura") } };
 
