@@ -12,7 +12,7 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/impl_set.h>
+#include <tetengo2/detail/stub/gui_impl_set.h>
 
 #include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
@@ -76,7 +76,7 @@ namespace {
     using mouse_wheeled_type = bobura::message::view_picture_box::diagram::
         mouse_wheeled<picture_box_type, view_zoom_type, diagram_view_traits_type>;
 
-    using detail_impl_set_type = tetengo2::detail::stub::impl_set;
+    using detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 
     using virtual_key_type = picture_box_type::keyboard_observer_set_type::virtual_key_type;
 

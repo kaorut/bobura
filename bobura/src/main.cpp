@@ -21,7 +21,7 @@
 #define OEMRESOURCE
 #include <Windows.h>
 
-#include <tetengo2/detail/windows/impl_set.h>
+#include <tetengo2/detail/windows/gui_impl_set.h>
 #include <tetengo2/stdalt.h>
 
 #include <bobura/application.h>
@@ -50,7 +50,7 @@ namespace {
 
     using application_type = bobura::application<traits_type_list_type::application_type>;
 
-    using detail_impl_set_type = tetengo2::detail::windows::impl_set;
+    using detail_impl_set_type = tetengo2::detail::windows::gui_impl_set;
 
 
     // functions

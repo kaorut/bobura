@@ -11,7 +11,7 @@
 
 #include <memory>
 
-#include <tetengo2/detail/base/impl_set.h>
+#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/stdalt.h>
 
 #include <bobura/load_save/confirm_file_save.h>
@@ -104,7 +104,7 @@ namespace bobura {
         using confirm_file_save_type = load_save::confirm_file_save<load_save_traits_type>;
 
         //! The detail implementation set type.
-        using detail_impl_set_type = tetengo2::detail::base::impl_set;
+        using detail_impl_set_type = tetengo2::detail::base::gui_impl_set;
 
 
         // constructors and destructor

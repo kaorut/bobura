@@ -12,7 +12,7 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/impl_set.h>
+#include <tetengo2/detail/stub/gui_impl_set.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -76,7 +76,7 @@ namespace {
         map_box_type,
         message_catalog_type>;
 
-    using detail_impl_set_type = tetengo2::detail::stub::impl_set;
+    using detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 
     using model_type = bobura::
         timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, fast_font_type>;
