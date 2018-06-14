@@ -10,7 +10,9 @@
 #define BOOST_TEST_MODULE test_bobura
 #include <boost/test/unit_test.hpp> // IWYU pragma: keep
 
+#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/detail/base/impl_set.h>
+#include <tetengo2/detail/stub/gui_impl_set.h>
 #if BOOST_OS_WINDOWS
 #include <tetengo2/detail/windows/impl_set.h>
 #elif BOOST_OS_LINUX
@@ -32,6 +34,7 @@ namespace {
 #else
 #error Unsupported platform.
 #endif
+            tetengo2::detail::set_gui_detail_impl_set(tetengo2::detail::stub::gui_impl_set::instance());
         }
     };
 }
