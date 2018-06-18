@@ -114,7 +114,7 @@ namespace bobura::command {
             const settings_type&        settings,
             const message_catalog_type& message_catalog,
             const detail_impl_set_type& detail_impl_set)
-        : m_p_about{ create_about(message_catalog, settings, detail_impl_set) },
+        : m_p_about{ create_about(message_catalog, settings) },
           m_p_ask_file_path_and_save_to_file{ create_save_to_file(ask_file_path_and_save_to_file) },
           m_p_exit{ create_exit() }, m_p_file_property{ create_file_property(message_catalog) },
           m_p_font_color{ create_font_color(message_catalog) }, m_p_horizontally_zoom_in{ create_horizontally_zoom_in(
@@ -257,17 +257,14 @@ namespace bobura::command {
 
         // static functions
 
-        static command_ptr_type create_about(
-            const message_catalog_type& message_catalog,
-            const settings_type&        settings,
-            const detail_impl_set_type& detail_impl_set)
+        static command_ptr_type create_about(const message_catalog_type& message_catalog, const settings_type& settings)
         {
             return std::make_unique<command::about<
                 command_traits_type,
                 position_type,
                 dimension_type,
                 message_catalog_type,
-                dialog_traits_type>>(message_catalog, settings, detail_impl_set);
+                dialog_traits_type>>(message_catalog, settings);
         }
 
         static command_ptr_type create_exit()

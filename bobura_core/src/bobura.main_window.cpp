@@ -58,8 +58,6 @@ namespace bobura {
 
         using confirm_file_save_type = typename main_window::confirm_file_save_type;
 
-        using detail_impl_set_type = typename main_window::detail_impl_set_type;
-
 
         // constructors and destructor
 
@@ -67,11 +65,10 @@ namespace bobura {
             base_type&                    base,
             const message_catalog_type&   message_catalog,
             settings_type&                settings,
-            const confirm_file_save_type& confirm_file_save,
-            const detail_impl_set_type&   detail_impl_set)
+            const confirm_file_save_type& confirm_file_save)
         : m_base{ base }, m_message_catalog{ message_catalog }, m_p_tab_frame{}, m_p_diagram_view_picture_box{},
           m_p_timetable_down_view_picture_box{}, m_p_timetable_up_view_picture_box{}, m_p_property_bar{},
-          m_settings{ settings }, m_confirm_file_save{ confirm_file_save }, m_detail_impl_set{ detail_impl_set }
+          m_settings{ settings }, m_confirm_file_save{ confirm_file_save }
         {
             initialize_window();
         }
@@ -207,8 +204,6 @@ namespace bobura {
 
         const confirm_file_save_type& m_confirm_file_save;
 
-        const detail_impl_set_type& m_detail_impl_set;
-
 
         // functions
 
@@ -259,8 +254,7 @@ namespace bobura {
         void set_window_icon()
         {
             auto p_icon = std::make_unique<icon_type>(
-                m_settings.image_directory_path() / string_type{ TETENGO2_TEXT("bobura_app.ico") },
-                m_detail_impl_set.icon_());
+                m_settings.image_directory_path() / string_type{ TETENGO2_TEXT("bobura_app.ico") });
             m_base.set_icon(std::move(p_icon));
         }
 
@@ -278,10 +272,9 @@ namespace bobura {
     main_window<Traits, CommandSetTraits>::main_window(
         const message_catalog_type&   message_catalog,
         settings_type&                settings,
-        const confirm_file_save_type& confirm_file_save,
-        const detail_impl_set_type&   detail_impl_set)
+        const confirm_file_save_type& confirm_file_save)
     : base_type{ base_type::scroll_bar_style_type::none, true }, m_p_impl{
-          std::make_unique<impl>(*this, message_catalog, settings, confirm_file_save, detail_impl_set)
+          std::make_unique<impl>(*this, message_catalog, settings, confirm_file_save)
       }
     {}
 

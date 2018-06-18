@@ -11,7 +11,6 @@
 
 #include <memory>
 
-#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/stdalt.h>
 
 #include <bobura/load_save/confirm_file_save.h>
@@ -103,9 +102,6 @@ namespace bobura {
         //! The file save confirmation type.
         using confirm_file_save_type = load_save::confirm_file_save<load_save_traits_type>;
 
-        //! The detail implementation set type.
-        using detail_impl_set_type = tetengo2::detail::base::gui_impl_set;
-
 
         // constructors and destructor
 
@@ -115,13 +111,11 @@ namespace bobura {
             \param message_catalog   A message catalog.
             \param settings          Settings.
             \param confirm_file_save A file save confirmation.
-            \param detail_impl_set   A detail implementation set.
         */
         main_window(
             const message_catalog_type&   message_catalog,
             settings_type&                settings,
-            const confirm_file_save_type& confirm_file_save,
-            const detail_impl_set_type&   detail_impl_set);
+            const confirm_file_save_type& confirm_file_save);
 
         /*!
             \brief Destroys the main window.

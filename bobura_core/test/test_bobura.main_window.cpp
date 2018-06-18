@@ -13,7 +13,6 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/gui_impl_set.h>
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
@@ -62,8 +61,6 @@ namespace {
 
     using main_window_type =
         bobura::main_window<traits_type_list_type::main_window_type, traits_type_list_type::command_set_type>;
-
-    using detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 }
 
 
@@ -81,9 +78,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             model_type    model{};
             const save_to_file_type      save_to_file{ false, message_catalog };
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-            const main_window_type       main_window{
-                message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-            };
+            const main_window_type       main_window{ message_catalog, settings, confirm_file_save };
         }
 
         BOOST_AUTO_TEST_CASE(set_title)
@@ -96,9 +91,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             model_type    model{};
             const save_to_file_type      save_to_file{ false, message_catalog };
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-            main_window_type             main_window{
-                message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-            };
+            main_window_type             main_window{ message_catalog, settings, confirm_file_save };
 
             {
                 main_window.set_title(TETENGO2_STDALT_NULLOPT, false);
@@ -145,9 +138,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 model_type                   model{};
                 const save_to_file_type      save_to_file{ false, message_catalog };
                 const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-                const main_window_type       main_window{
-                    message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-                };
+                const main_window_type       main_window{ message_catalog, settings, confirm_file_save };
 
                 main_window.get_tab_frame();
             }
@@ -159,9 +150,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 model_type                   model{};
                 const save_to_file_type      save_to_file{ false, message_catalog };
                 const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-                main_window_type             main_window{
-                    message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-                };
+                main_window_type             main_window{ message_catalog, settings, confirm_file_save };
 
                 main_window.get_tab_frame();
             }
@@ -177,9 +166,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             model_type    model{};
             const save_to_file_type      save_to_file{ false, message_catalog };
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-            main_window_type             main_window{
-                message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-            };
+            main_window_type             main_window{ message_catalog, settings, confirm_file_save };
 
             main_window.show_diagram_tab();
         }
@@ -194,9 +181,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             model_type    model{};
             const save_to_file_type      save_to_file{ false, message_catalog };
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-            main_window_type             main_window{
-                message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-            };
+            main_window_type             main_window{ message_catalog, settings, confirm_file_save };
 
             main_window.show_timetable_down_tab();
         }
@@ -211,9 +196,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             model_type    model{};
             const save_to_file_type      save_to_file{ false, message_catalog };
             const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-            main_window_type             main_window{
-                message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-            };
+            main_window_type             main_window{ message_catalog, settings, confirm_file_save };
 
             main_window.show_timetable_up_tab();
         }
@@ -230,9 +213,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 model_type                   model{};
                 const save_to_file_type      save_to_file{ false, message_catalog };
                 const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-                const main_window_type       main_window{
-                    message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-                };
+                const main_window_type       main_window{ message_catalog, settings, confirm_file_save };
 
                 main_window.get_diagram_view_picture_box();
             }
@@ -244,9 +225,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 model_type                   model{};
                 const save_to_file_type      save_to_file{ false, message_catalog };
                 const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-                main_window_type             main_window{
-                    message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-                };
+                main_window_type             main_window{ message_catalog, settings, confirm_file_save };
 
                 main_window.get_diagram_view_picture_box();
             }
@@ -264,9 +243,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 model_type                   model{};
                 const save_to_file_type      save_to_file{ false, message_catalog };
                 const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-                const main_window_type       main_window{
-                    message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-                };
+                const main_window_type       main_window{ message_catalog, settings, confirm_file_save };
 
                 main_window.get_timetable_down_view_picture_box();
             }
@@ -278,9 +255,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 model_type                   model{};
                 const save_to_file_type      save_to_file{ false, message_catalog };
                 const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-                main_window_type             main_window{
-                    message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-                };
+                main_window_type             main_window{ message_catalog, settings, confirm_file_save };
 
                 main_window.get_timetable_down_view_picture_box();
             }
@@ -298,9 +273,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 model_type                   model{};
                 const save_to_file_type      save_to_file{ false, message_catalog };
                 const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-                const main_window_type       main_window{
-                    message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-                };
+                const main_window_type       main_window{ message_catalog, settings, confirm_file_save };
 
                 main_window.get_timetable_up_view_picture_box();
             }
@@ -312,9 +285,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 model_type                   model{};
                 const save_to_file_type      save_to_file{ false, message_catalog };
                 const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-                main_window_type             main_window{
-                    message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-                };
+                main_window_type             main_window{ message_catalog, settings, confirm_file_save };
 
                 main_window.get_timetable_up_view_picture_box();
             }
@@ -332,9 +303,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 model_type                   model{};
                 const save_to_file_type      save_to_file{ false, message_catalog };
                 const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-                const main_window_type       main_window{
-                    message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-                };
+                const main_window_type       main_window{ message_catalog, settings, confirm_file_save };
 
                 main_window.get_property_bar();
             }
@@ -346,9 +315,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 model_type                   model{};
                 const save_to_file_type      save_to_file{ false, message_catalog };
                 const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
-                main_window_type             main_window{
-                    message_catalog, settings, confirm_file_save, detail_impl_set_type::instance()
-                };
+                main_window_type             main_window{ message_catalog, settings, confirm_file_save };
 
                 main_window.get_property_bar();
             }

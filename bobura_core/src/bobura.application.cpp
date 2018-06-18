@@ -74,8 +74,7 @@ namespace bobura {
                 m_settings, m_model, diagram_view, message_catalog, m_detail_impl_set
             };
 
-            main_window_type main_window(
-                message_catalog, m_settings, command_set_holder.confirm_file_save(), m_detail_impl_set);
+            main_window_type main_window(message_catalog, m_settings, command_set_holder.confirm_file_save());
             set_message_observers(
                 command_set_holder.command_set(),
                 diagram_view,
