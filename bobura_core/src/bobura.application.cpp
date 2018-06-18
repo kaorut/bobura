@@ -379,7 +379,7 @@ namespace bobura {
                 },
                 view });
             picture_box.mouse_observer_set().moved().connect(
-                diagram_view_picture_box_mouse_moved_observer_type{ picture_box, view, m_detail_impl_set });
+                diagram_view_picture_box_mouse_moved_observer_type{ picture_box, view });
             picture_box.mouse_observer_set().wheeled().connect(
                 diagram_view_picture_box_mouse_wheeled_observer_type{ picture_box, view });
             picture_box.keyboard_observer_set().key_down().connect(

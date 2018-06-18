@@ -77,13 +77,11 @@ namespace bobura {
             \param parent          A parent.
             \param settings        Settings.
             \param message_catalog A message catalog.
-            \param detail_impl_set A detail implementation set.
         */
         property_bar(
             abstract_window_type&       parent,
             settings_type&              settings,
-            const message_catalog_type& message_catalog,
-            const detail_impl_set_type& detail_impl_set);
+            const message_catalog_type& message_catalog);
 
         /*!
             \brief Destroys the property bar.

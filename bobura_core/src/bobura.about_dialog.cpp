@@ -115,7 +115,7 @@ namespace bobura {
             m_p_application_image = create_application_image();
             m_p_title_label = create_title_label();
             m_p_copyright_label = create_copyright_label();
-            m_p_link_label = create_link_label(m_detail_impl_set);
+            m_p_link_label = create_link_label();
             m_p_ok_button = create_ok_button();
 
             locate_controls();
@@ -163,9 +163,9 @@ namespace bobura {
             return std::move(p_label);
         }
 
-        std::unique_ptr<link_label_type> create_link_label(const detail_impl_set_type& detail_impl_set)
+        std::unique_ptr<link_label_type> create_link_label()
         {
-            auto p_label = std::make_unique<link_label_type>(m_base, detail_impl_set.cursor_());
+            auto p_label = std::make_unique<link_label_type>(m_base);
 
             p_label->set_text(string_type{ TETENGO2_TEXT("http://www.tetengo.org/") });
             p_label->set_target(p_label->text());

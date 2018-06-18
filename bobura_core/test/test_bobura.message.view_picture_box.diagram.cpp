@@ -12,8 +12,6 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/gui_impl_set.h>
-
 #include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
 #include <bobura/message/view_picture_box/diagram.h>
@@ -75,8 +73,6 @@ namespace {
 
     using mouse_wheeled_type = bobura::message::view_picture_box::diagram::
         mouse_wheeled<picture_box_type, view_zoom_type, diagram_view_traits_type>;
-
-    using detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 
     using virtual_key_type = picture_box_type::keyboard_observer_set_type::virtual_key_type;
 
@@ -184,9 +180,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         const model_type model{};
                         const message_catalog_type message_catalog{};
                         const diagram_view_type    diagram_view{ model, message_catalog };
-                        const mouse_moved_type     mouse_moved{ picture_box,
-                                                            diagram_view,
-                                                            detail_impl_set_type::instance() };
+                        const mouse_moved_type     mouse_moved{ picture_box, diagram_view };
                     }
 
                     BOOST_AUTO_TEST_CASE(operator_paren)
@@ -198,9 +192,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         const model_type model{};
                         const message_catalog_type message_catalog{};
                         const diagram_view_type    diagram_view{ model, message_catalog };
-                        const mouse_moved_type     mouse_moved{ picture_box,
-                                                            diagram_view,
-                                                            detail_impl_set_type::instance() };
+                        const mouse_moved_type     mouse_moved{ picture_box, diagram_view };
 
                         mouse_moved(
                             position_type{ position_unit_type{ 24 }, position_unit_type{ 42 } }, false, false, false);

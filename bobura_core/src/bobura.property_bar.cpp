@@ -49,8 +49,6 @@ namespace bobura {
 
         using settings_type = typename property_bar::settings_type;
 
-        using detail_impl_set_type = typename property_bar::detail_impl_set_type;
-
 
         // constructors and destructor
 
@@ -58,11 +56,10 @@ namespace bobura {
             property_bar& self,
             abstract_window_type&,
             settings_type&              settings,
-            const message_catalog_type& message_catalog,
-            const detail_impl_set_type& detail_impl_set)
+            const message_catalog_type& message_catalog)
         : m_settings{ settings }, m_message_catalog{ message_catalog }, m_p_map_box{}
         {
-            initialize_property_bar(self, detail_impl_set);
+            initialize_property_bar(self);
         }
 
 
@@ -113,11 +110,11 @@ namespace bobura {
 
         // functions
 
-        void initialize_property_bar(property_bar& self, const detail_impl_set_type& detail_impl_set)
+        void initialize_property_bar(property_bar& self)
         {
             self.set_text(m_message_catalog.get(TETENGO2_TEXT("PropertyBar:Properties")));
 
-            m_p_map_box = std::make_unique<map_box_type>(self, detail_impl_set.cursor_());
+            m_p_map_box = std::make_unique<map_box_type>(self);
 
             self.size_observer_set().resized().connect(resized_observer_type{ self, *m_p_map_box });
 
@@ -162,11 +159,8 @@ namespace bobura {
     property_bar<String, Position, Dimension, AbstractWindow, SideBar, MapBox, MessageCatalog>::property_bar(
         abstract_window_type&       parent,
         settings_type&              settings,
-        const message_catalog_type& message_catalog,
-        const detail_impl_set_type& detail_impl_set)
-    : base_type{ parent, detail_impl_set.cursor_() }, m_p_impl{
-          std::make_unique<impl>(*this, parent, settings, message_catalog, detail_impl_set)
-      }
+        const message_catalog_type& message_catalog)
+    : base_type{ parent }, m_p_impl{ std::make_unique<impl>(*this, parent, settings, message_catalog) }
     {}
 
     template <

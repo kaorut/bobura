@@ -225,8 +225,7 @@ namespace bobura {
             m_p_timetable_up_view_picture_box = std::make_unique<view_picture_box_type>(*m_p_tab_frame);
             m_p_tab_frame->tab_at(2).label().set_title(m_message_catalog.get(TETENGO2_TEXT("Tab:Timetable (Up)")));
 
-            m_p_property_bar =
-                std::make_unique<property_bar_type>(m_base, m_settings, m_message_catalog, m_detail_impl_set);
+            m_p_property_bar = std::make_unique<property_bar_type>(m_base, m_settings, m_message_catalog);
 
             set_message_observers();
 
