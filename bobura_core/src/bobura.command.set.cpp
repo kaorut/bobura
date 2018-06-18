@@ -114,8 +114,8 @@ namespace bobura::command {
             const settings_type&        settings,
             const message_catalog_type& message_catalog,
             const detail_impl_set_type& detail_impl_set)
-        : m_p_about{ create_about(message_catalog, settings) },
-          m_p_ask_file_path_and_save_to_file{ create_save_to_file(ask_file_path_and_save_to_file) },
+        : m_p_about{ create_about(message_catalog, settings) }, m_p_ask_file_path_and_save_to_file{ create_save_to_file(
+                                                                    ask_file_path_and_save_to_file) },
           m_p_exit{ create_exit() }, m_p_file_property{ create_file_property(message_catalog) },
           m_p_font_color{ create_font_color(message_catalog) }, m_p_horizontally_zoom_in{ create_horizontally_zoom_in(
                                                                     diagram_view) },
