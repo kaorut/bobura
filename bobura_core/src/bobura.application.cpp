@@ -74,8 +74,7 @@ namespace bobura {
                 m_settings, m_model, diagram_view, message_catalog, m_detail_impl_set
             };
 
-            main_window_type main_window(
-                message_catalog, m_settings, command_set_holder.confirm_file_save(), m_detail_impl_set);
+            main_window_type main_window(message_catalog, m_settings, command_set_holder.confirm_file_save());
             set_message_observers(
                 command_set_holder.command_set(),
                 diagram_view,
@@ -379,7 +378,7 @@ namespace bobura {
                 },
                 view });
             picture_box.mouse_observer_set().moved().connect(
-                diagram_view_picture_box_mouse_moved_observer_type{ picture_box, view, m_detail_impl_set });
+                diagram_view_picture_box_mouse_moved_observer_type{ picture_box, view });
             picture_box.mouse_observer_set().wheeled().connect(
                 diagram_view_picture_box_mouse_wheeled_observer_type{ picture_box, view });
             picture_box.keyboard_observer_set().key_down().connect(

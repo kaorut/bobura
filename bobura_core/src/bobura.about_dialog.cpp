@@ -43,19 +43,12 @@ namespace bobura {
 
         using settings_type = typename about_dialog::settings_type;
 
-        using detail_impl_set_type = typename about_dialog::detail_impl_set_type;
-
 
         // constructors and destructor
 
-        impl(
-            base_type&                  base,
-            const message_catalog_type& message_catalog,
-            const settings_type&        settings,
-            const detail_impl_set_type& detail_impl_set)
-        : m_base{ base }, m_message_catalog{ message_catalog }, m_settings{ settings },
-          m_detail_impl_set{ detail_impl_set }, m_p_application_image{}, m_p_title_label{}, m_p_copyright_label{},
-          m_p_link_label{}, m_p_ok_button{}
+        impl(base_type& base, const message_catalog_type& message_catalog, const settings_type& settings)
+        : m_base{ base }, m_message_catalog{ message_catalog }, m_settings{ settings }, m_p_application_image{},
+          m_p_title_label{}, m_p_copyright_label{}, m_p_link_label{}, m_p_ok_button{}
         {
             initialize_dialog();
         }
@@ -93,8 +86,6 @@ namespace bobura {
 
         const settings_type& m_settings;
 
-        const detail_impl_set_type& m_detail_impl_set;
-
         std::unique_ptr<image_type> m_p_application_image;
 
         std::unique_ptr<label_type> m_p_title_label;
@@ -115,7 +106,7 @@ namespace bobura {
             m_p_application_image = create_application_image();
             m_p_title_label = create_title_label();
             m_p_copyright_label = create_copyright_label();
-            m_p_link_label = create_link_label(m_detail_impl_set);
+            m_p_link_label = create_link_label();
             m_p_ok_button = create_ok_button();
 
             locate_controls();
@@ -127,8 +118,7 @@ namespace bobura {
 
             auto p_icon = std::make_unique<icon_type>(
                 m_settings.image_directory_path() / string_type{ TETENGO2_TEXT("bobura_app.ico") },
-                dimension_type{ dimension_unit_type{ 4 }, dimension_unit_type{ 4 } },
-                m_detail_impl_set.icon_());
+                dimension_type{ dimension_unit_type{ 4 }, dimension_unit_type{ 4 } });
             p_image->set_icon(std::move(p_icon));
 
             return std::move(p_image);
@@ -163,9 +153,9 @@ namespace bobura {
             return std::move(p_label);
         }
 
-        std::unique_ptr<link_label_type> create_link_label(const detail_impl_set_type& detail_impl_set)
+        std::unique_ptr<link_label_type> create_link_label()
         {
-            auto p_label = std::make_unique<link_label_type>(m_base, detail_impl_set.cursor_());
+            auto p_label = std::make_unique<link_label_type>(m_base);
 
             p_label->set_text(string_type{ TETENGO2_TEXT("http://www.tetengo.org/") });
             p_label->set_target(p_label->text());
@@ -212,9 +202,8 @@ namespace bobura {
     about_dialog<Traits>::about_dialog(
         abstract_window_type&       parent,
         const message_catalog_type& message_catalog,
-        const settings_type&        settings,
-        const detail_impl_set_type& detail_impl_set)
-    : base_type{ parent }, m_p_impl{ std::make_unique<impl>(*this, message_catalog, settings, detail_impl_set) }
+        const settings_type&        settings)
+    : base_type{ parent }, m_p_impl{ std::make_unique<impl>(*this, message_catalog, settings) }
     {}
 
     template <typename Traits>

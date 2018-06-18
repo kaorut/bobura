@@ -13,7 +13,6 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/gui_impl_set.h>
 #include <tetengo2/text.h>
 
 #include <bobura/command/nop.h>
@@ -102,8 +101,6 @@ namespace {
         ui_type_list_type::side_bar_type,
         ui_type_list_type::map_box_type,
         message_catalog_type>;
-
-    using detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 
     using popup_menu_selected_type =
         bobura::message::main_window::popup_menu_selected<popup_menu_type, command_type, model_type>;
@@ -224,9 +221,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     view_picture_box_type          timetable_up_view_picture_box{ tab_frame };
                     const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
                     settings_type     settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-                    property_bar_type property_bar{
-                        window, settings, message_catalog, detail_impl_set_type::instance()
-                    };
+                    property_bar_type property_bar{ window, settings, message_catalog };
                     const window_resized_type observer{ diagram_view,
                                                         timetable_down_view,
                                                         timetable_up_view,
@@ -256,9 +251,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     view_picture_box_type          timetable_up_view_picture_box{ tab_frame };
                     const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
                     settings_type     settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-                    property_bar_type property_bar{
-                        window, settings, message_catalog, detail_impl_set_type::instance()
-                    };
+                    property_bar_type property_bar{ window, settings, message_catalog };
                     const window_resized_type observer{ diagram_view,
                                                         timetable_down_view,
                                                         timetable_up_view,

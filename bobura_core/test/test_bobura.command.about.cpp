@@ -12,7 +12,6 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/gui_impl_set.h>
 #include <tetengo2/text.h>
 
 #include <bobura/command/about.h>
@@ -50,8 +49,6 @@ namespace {
         dimension_type,
         message_catalog_type,
         traits_type_list_type::dialog_type>;
-
-    using detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 }
 
 
@@ -68,7 +65,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const settings_type        settings{ std::vector<string_type>{
                                                   1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
                                               string_type{ TETENGO2_TEXT("test_bobura") } };
-                const about_command_type   command{ message_catalog, settings, detail_impl_set_type::instance() };
+                const about_command_type   command{ message_catalog, settings };
             }
 
 

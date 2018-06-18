@@ -221,12 +221,10 @@ namespace bobura::message::view_picture_box::diagram {
         /*!
             \brief Creates a mouse moved observer of the picture box.
 
-            \param picture_box     A picture box.
-            \param view            A view.
-            \param detail_impl_set A detail implementation set.
+            \param picture_box A picture box.
+            \param view        A view.
         */
-        mouse_moved(picture_box_type& picture_box, const view_type& view, const detail_impl_set_type& detail_impl_set)
-        : m_picture_box{ picture_box }, m_view{ view }, m_detail_impl_set{ detail_impl_set }
+        mouse_moved(picture_box_type& picture_box, const view_type& view) : m_picture_box{ picture_box }, m_view{ view }
         {}
 
 
@@ -253,8 +251,8 @@ namespace bobura::message::view_picture_box::diagram {
             {
                 if (!p_system_cursor || p_system_cursor->style() != system_cursor_type::style_type::hand)
                 {
-                    m_picture_box.set_cursor(std::make_unique<system_cursor_type>(
-                        system_cursor_type::style_type::hand, m_detail_impl_set.cursor_()));
+                    m_picture_box.set_cursor(
+                        std::make_unique<system_cursor_type>(system_cursor_type::style_type::hand));
                 }
             }
             else
@@ -280,8 +278,6 @@ namespace bobura::message::view_picture_box::diagram {
         picture_box_type& m_picture_box;
 
         const view_type& m_view;
-
-        const detail_impl_set_type& m_detail_impl_set;
     };
 
 

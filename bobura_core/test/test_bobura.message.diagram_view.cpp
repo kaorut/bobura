@@ -12,7 +12,6 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/gui_impl_set.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -75,8 +74,6 @@ namespace {
         side_bar_type,
         map_box_type,
         message_catalog_type>;
-
-    using detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 
     using model_type = bobura::
         timetable_model<size_type, difference_type, string_type, operating_distance_type, speed_type, fast_font_type>;
@@ -148,10 +145,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const message_catalog_type     message_catalog{};
                     const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
                     settings_type     settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
-                    property_bar_type property_bar{
-                        window, settings, message_catalog, detail_impl_set_type::instance()
-                    };
-                    const model_type            model{};
+                    property_bar_type property_bar{ window, settings, message_catalog };
+                    const model_type  model{};
                     const station_selected_type station_selected{ property_bar, model, message_catalog };
 
                     settings.clear_config();
@@ -165,11 +160,9 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
                     settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
                     const message_catalog_type message_catalog{};
-                    property_bar_type          property_bar{
-                        window, settings, message_catalog, detail_impl_set_type::instance()
-                    };
-                    const model_type      model{};
-                    station_selected_type station_selected{ property_bar, model, message_catalog };
+                    property_bar_type          property_bar{ window, settings, message_catalog };
+                    const model_type           model{};
+                    station_selected_type      station_selected{ property_bar, model, message_catalog };
 
                     station_type          station{ string_type{ TETENGO2_TEXT("name") },
                                           station_grade_type_set_type::local_type::instance(),
@@ -195,11 +188,9 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
                     settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
                     const message_catalog_type message_catalog{};
-                    property_bar_type          property_bar{
-                        window, settings, message_catalog, detail_impl_set_type::instance()
-                    };
-                    const model_type          model{};
-                    const train_selected_type train_selected{ property_bar, model, message_catalog };
+                    property_bar_type          property_bar{ window, settings, message_catalog };
+                    const model_type           model{};
+                    const train_selected_type  train_selected{ property_bar, model, message_catalog };
 
                     settings.clear_config();
                 }
@@ -212,10 +203,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
                     settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
                     const message_catalog_type message_catalog{};
-                    property_bar_type          property_bar{
-                        window, settings, message_catalog, detail_impl_set_type::instance()
-                    };
-                    model_type model{};
+                    property_bar_type          property_bar{ window, settings, message_catalog };
+                    model_type                 model{};
                     model.timetable().insert_train_kind(
                         model.timetable().train_kinds().end(),
                         train_kind_type{
@@ -254,10 +243,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
                     settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
                     const message_catalog_type message_catalog{};
-                    property_bar_type          property_bar{
-                        window, settings, message_catalog, detail_impl_set_type::instance()
-                    };
-                    const all_unselected_type all_unselected{ property_bar };
+                    property_bar_type          property_bar{ window, settings, message_catalog };
+                    const all_unselected_type  all_unselected{ property_bar };
 
                     settings.clear_config();
                 }
@@ -270,10 +257,8 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const std::vector<string_type> settings_arguments{ string_type{ TETENGO2_TEXT("path/to/exe") } };
                     settings_type settings{ settings_arguments, string_type{ TETENGO2_TEXT("test_bobura") } };
                     const message_catalog_type message_catalog{};
-                    property_bar_type          property_bar{
-                        window, settings, message_catalog, detail_impl_set_type::instance()
-                    };
-                    all_unselected_type all_unselected{ property_bar };
+                    property_bar_type          property_bar{ window, settings, message_catalog };
+                    all_unselected_type        all_unselected{ property_bar };
 
                     all_unselected();
 

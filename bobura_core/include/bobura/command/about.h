@@ -14,8 +14,6 @@
 #include <bobura/command/command_base.h>
 #include <bobura/settings.h>
 
-#include <tetengo2/detail/base/gui_impl_set.h>
-
 
 namespace bobura::command {
     /*!
@@ -63,9 +61,6 @@ namespace bobura::command {
         //! The settings type.
         using settings_type = settings<string_type, position_type, dimension_type>;
 
-        //! The detail implementation set type.
-        using detail_impl_set_type = tetengo2::detail::base::gui_impl_set;
-
 
         // constructors and destructor
 
@@ -74,12 +69,8 @@ namespace bobura::command {
 
             \param message_catalog A message catalog.
             \param settings        Settings type.
-            \param detail_impl_set A detail implementation set.
         */
-        about(
-            const message_catalog_type& message_catalog,
-            const settings_type&        settings,
-            const detail_impl_set_type& detail_impl_set);
+        about(const message_catalog_type& message_catalog, const settings_type& settings);
 
         /*!
             \brief Destroys the about command.

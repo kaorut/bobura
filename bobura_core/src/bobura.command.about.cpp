@@ -35,16 +35,11 @@ namespace bobura::command {
 
         using settings_type = typename about::settings_type;
 
-        using detail_impl_set_type = typename about::detail_impl_set_type;
-
 
         // constructors and destructor
 
-        impl(
-            const message_catalog_type& message_catalog,
-            const settings_type&        settings,
-            const detail_impl_set_type& detail_impl_set)
-        : m_message_catalog{ message_catalog }, m_settings{ settings }, m_detail_impl_set{ detail_impl_set }
+        impl(const message_catalog_type& message_catalog, const settings_type& settings)
+        : m_message_catalog{ message_catalog }, m_settings{ settings }
         {}
 
 
@@ -52,7 +47,7 @@ namespace bobura::command {
 
         void execute(TETENGO2_STDALT_MAYBE_UNUSED model_type& model, abstract_window_type& parent) const
         {
-            about_dialog_type{ parent, m_message_catalog, m_settings, m_detail_impl_set }.do_modal();
+            about_dialog_type{ parent, m_message_catalog, m_settings }.do_modal();
         }
 
 
@@ -67,17 +62,14 @@ namespace bobura::command {
         const message_catalog_type& m_message_catalog;
 
         const settings_type& m_settings;
-
-        const detail_impl_set_type& m_detail_impl_set;
     };
 
 
     template <typename Traits, typename Position, typename Dimension, typename MessageCatalog, typename DialogTraits>
     about<Traits, Position, Dimension, MessageCatalog, DialogTraits>::about(
         const message_catalog_type& message_catalog,
-        const settings_type&        settings,
-        const detail_impl_set_type& detail_impl_set)
-    : m_p_impl{ std::make_unique<impl>(message_catalog, settings, detail_impl_set) }
+        const settings_type&        settings)
+    : m_p_impl{ std::make_unique<impl>(message_catalog, settings) }
     {}
 
     template <typename Traits, typename Position, typename Dimension, typename MessageCatalog, typename DialogTraits>
