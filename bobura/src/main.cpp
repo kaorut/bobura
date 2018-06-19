@@ -124,17 +124,17 @@ int WINAPI wWinMain(
     }
     catch (const boost::exception& e)
     {
-        alert_type{ tetengo2::detail::gui_detail_impl_set().alert_() }(e);
+        alert_type{}(e);
         return 1;
     }
     catch (const std::exception& e)
     {
-        alert_type{ tetengo2::detail::gui_detail_impl_set().alert_() }(e);
+        alert_type{}(e);
         return 1;
     }
     catch (...)
     {
-        alert_type{ tetengo2::detail::gui_detail_impl_set().alert_() }();
+        alert_type{}();
         return 2;
     }
 }
