@@ -58,7 +58,7 @@ namespace bobura {
 
         impl(settings_type& settings, const detail_impl_set_type& detail_impl_set)
         : m_gui_fixture{ detail_impl_set.create_gui_fixture() }, m_settings{ settings }, m_model{},
-          m_p_input_file_load_timer{}, m_detail_impl_set{ detail_impl_set }
+          m_p_input_file_load_timer{}
         {}
 
 
@@ -70,9 +70,7 @@ namespace bobura {
             diagram_view_type          diagram_view{ m_model, message_catalog };
             timetable_view_type timetable_down_view{ view::timetable::direction_type::down, m_model, message_catalog };
             timetable_view_type timetable_up_view{ view::timetable::direction_type::up, m_model, message_catalog };
-            const command_set_holder_type command_set_holder{
-                m_settings, m_model, diagram_view, message_catalog, m_detail_impl_set
-            };
+            const command_set_holder_type command_set_holder{ m_settings, m_model, diagram_view, message_catalog };
 
             main_window_type main_window(message_catalog, m_settings, command_set_holder.confirm_file_save());
             set_message_observers(
@@ -269,14 +267,13 @@ namespace bobura {
                 settings_type&              settings,
                 model_type&                 model,
                 diagram_view_type&          diagram_view,
-                const message_catalog_type& message_catalog,
-                const detail_impl_set_type& detail_impl_set)
+                const message_catalog_type& message_catalog)
             : m_save_to_file{ false, message_catalog }, m_ask_file_path_and_save_to_file{ true, message_catalog },
               m_confirm_file_save{ model, m_save_to_file, message_catalog },
               m_new_file{ m_confirm_file_save }, m_reload{ false, m_confirm_file_save, message_catalog },
               m_load_from_file{ true, m_confirm_file_save, message_catalog }, m_command_set{
-                  m_new_file,   m_load_from_file, m_reload,        m_save_to_file, m_ask_file_path_and_save_to_file,
-                  diagram_view, settings,         message_catalog, detail_impl_set
+                  m_new_file,   m_load_from_file, m_reload,       m_save_to_file, m_ask_file_path_and_save_to_file,
+                  diagram_view, settings,         message_catalog
               }
             {}
 
@@ -316,8 +313,6 @@ namespace bobura {
         model_type m_model;
 
         std::unique_ptr<timer_type> m_p_input_file_load_timer;
-
-        const detail_impl_set_type& m_detail_impl_set;
 
 
         // functions

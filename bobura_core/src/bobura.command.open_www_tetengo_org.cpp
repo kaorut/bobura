@@ -27,16 +27,9 @@ namespace bobura::command {
 
         using shell_type = typename open_www_tetengo_org::shell_type;
 
-        using shell_details_type = typename open_www_tetengo_org::shell_details_type;
-
         using abstract_window_type = typename open_www_tetengo_org::abstract_window_type;
 
         using model_type = typename open_www_tetengo_org::model_type;
-
-
-        // constructors
-
-        explicit impl(const shell_details_type& shell_details) : m_shell_details{ shell_details } {}
 
 
         // functions
@@ -45,7 +38,7 @@ namespace bobura::command {
             TETENGO2_STDALT_MAYBE_UNUSED model_type& model,
             TETENGO2_STDALT_MAYBE_UNUSED abstract_window_type& parent) const
         {
-            const shell_type shell{ m_shell_details };
+            static const shell_type shell{};
             shell.execute(string_type{ TETENGO2_TEXT("http://www.tetengo.org/") });
         }
 
@@ -54,17 +47,11 @@ namespace bobura::command {
         // types
 
         using string_type = typename shell_type::string_type;
-
-
-        // variables
-
-        const shell_details_type& m_shell_details;
     };
 
 
     template <typename Traits, typename Shell>
-    open_www_tetengo_org<Traits, Shell>::open_www_tetengo_org(const shell_details_type& shell_details)
-    : m_p_impl{ std::make_unique<impl>(shell_details) }
+    open_www_tetengo_org<Traits, Shell>::open_www_tetengo_org() : m_p_impl{ std::make_unique<impl>() }
     {}
 
     template <typename Traits, typename Shell>

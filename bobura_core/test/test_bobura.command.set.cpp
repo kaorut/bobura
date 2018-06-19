@@ -13,7 +13,6 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/gui_impl_set.h>
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
@@ -75,8 +74,6 @@ namespace {
     using scale_list_type = bobura::view::scale_list<size_type, string_type, common_type_list_type::scale_type>;
 
     using command_set_type = bobura::command::set<traits_type_list_type::command_set_type>;
-
-    using detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 }
 
 
@@ -101,15 +98,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
             }
 
             BOOST_AUTO_TEST_CASE(about)
@@ -128,15 +120,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.about();
             }
@@ -157,15 +144,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.ask_file_path_and_save_to_file();
             }
@@ -186,15 +168,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.exit();
             }
@@ -215,15 +192,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.file_property();
             }
@@ -244,15 +216,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.font_color();
             }
@@ -273,15 +240,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.horizontally_zoom_in();
             }
@@ -302,15 +264,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.horizontally_zoom_out();
             }
@@ -331,15 +288,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.load_from_file();
             }
@@ -360,15 +312,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 const tetengo2::stdalt::filesystem::path path{ string_type{ TETENGO2_TEXT("hoge.txt") } };
                 command_set.create_load_from_file_parameter(path);
@@ -390,15 +337,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.new_file();
             }
@@ -419,15 +361,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.nop();
             }
@@ -448,15 +385,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.open_www_tetengo_org();
             }
@@ -477,15 +409,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.reload();
             }
@@ -506,15 +433,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.save_to_file();
             }
@@ -535,15 +457,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 const scale_list_type scale_list{};
                 command_set.set_horizontal_scale(0);
@@ -566,15 +483,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 const scale_list_type scale_list{};
                 command_set.set_vertical_scale(0);
@@ -597,15 +509,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.show_diagram();
             }
@@ -626,15 +533,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.show_timetable_down();
             }
@@ -655,15 +557,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.show_timetable_up();
             }
@@ -684,15 +581,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.train_kind();
             }
@@ -713,15 +605,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.vertically_zoom_in();
             }
@@ -742,15 +629,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
                 const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
                 diagram_view_type            diagram_view{ model, message_catalog };
-                const command_set_type       command_set{ new_file,
-                                                    load_from_file,
-                                                    reload,
-                                                    save_to_file,
-                                                    ask_file_path_and_save_to_file,
-                                                    diagram_view,
-                                                    settings,
-                                                    message_catalog,
-                                                    detail_impl_set_type::instance() };
+                const command_set_type       command_set{
+                    new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                    diagram_view, settings,       message_catalog
+                };
 
                 command_set.vertically_zoom_out();
             }
