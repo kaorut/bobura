@@ -33,9 +33,6 @@ namespace bobura::command {
         //! The shell type.
         using shell_type = Shell;
 
-        //! The shell details type.
-        using shell_details_type = typename Shell::shell_details_type;
-
         //! The base type.
         using base_type = command_base<traits_type>;
 
@@ -50,10 +47,8 @@ namespace bobura::command {
 
         /*!
             \brief Create an open-www.tetengo.org command.
-
-            \param shell_details A detail implementation of a shell.
         */
-        explicit open_www_tetengo_org(const shell_details_type& shell_details);
+        open_www_tetengo_org();
 
         /*!
             \brief Destroys the open-www.tetengo.org command.

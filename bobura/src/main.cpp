@@ -53,8 +53,6 @@ namespace {
 
     using application_type = bobura::application<traits_type_list_type::application_type>;
 
-    using detail_impl_set_type = tetengo2::detail::windows::gui_impl_set;
-
 
     // functions
 
@@ -89,7 +87,7 @@ namespace {
 
     int run_application(settings_type& settings)
     {
-        return application_type(settings, detail_impl_set_type::instance()).run();
+        return application_type{ settings }.run();
     }
 }
 
@@ -112,11 +110,11 @@ int WINAPI wWinMain(
 {
     using alert_type = ui_type_list_type::alert_type;
 
+    tetengo2::detail::set_detail_impl_set(tetengo2::detail::windows::impl_set::instance());
+    tetengo2::detail::set_gui_detail_impl_set(tetengo2::detail::windows::gui_impl_set::instance());
+
     try
     {
-        tetengo2::detail::set_detail_impl_set(tetengo2::detail::windows::impl_set::instance());
-        tetengo2::detail::set_gui_detail_impl_set(tetengo2::detail::windows::gui_impl_set::instance());
-
         settings_type settings{ boost::program_options::split_winmain(::GetCommandLineW()),
                                 string_type{ TETENGO2_TEXT("bobura") } };
 
@@ -126,17 +124,17 @@ int WINAPI wWinMain(
     }
     catch (const boost::exception& e)
     {
-        alert_type{ detail_impl_set_type::instance().alert_() }(e);
+        alert_type{}(e);
         return 1;
     }
     catch (const std::exception& e)
     {
-        alert_type{ detail_impl_set_type::instance().alert_() }(e);
+        alert_type{}(e);
         return 1;
     }
     catch (...)
     {
-        alert_type{ detail_impl_set_type::instance().alert_() }();
+        alert_type{}();
         return 2;
     }
 }

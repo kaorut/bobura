@@ -99,8 +99,6 @@ namespace bobura::command {
 
         using parameter_type = typename set::parameter_type;
 
-        using detail_impl_set_type = typename set::detail_impl_set_type;
-
 
         // constructors and destructor
 
@@ -112,8 +110,7 @@ namespace bobura::command {
             const save_to_file_type&    ask_file_path_and_save_to_file,
             diagram_view_type&          diagram_view,
             const settings_type&        settings,
-            const message_catalog_type& message_catalog,
-            const detail_impl_set_type& detail_impl_set)
+            const message_catalog_type& message_catalog)
         : m_p_about{ create_about(message_catalog, settings) }, m_p_ask_file_path_and_save_to_file{ create_save_to_file(
                                                                     ask_file_path_and_save_to_file) },
           m_p_exit{ create_exit() }, m_p_file_property{ create_file_property(message_catalog) },
@@ -121,7 +118,7 @@ namespace bobura::command {
                                                                     diagram_view) },
           m_p_horizontally_zoom_out{ create_horizontally_zoom_out(diagram_view) },
           m_p_load_from_file{ create_load_from_file(load_from_file) }, m_p_new_file{ create_new_file(new_file) },
-          m_p_nop{ create_nop() }, m_p_open_www_tetengo_org{ create_open_www_tetengo_org(detail_impl_set) },
+          m_p_nop{ create_nop() }, m_p_open_www_tetengo_org{ create_open_www_tetengo_org() },
           m_p_reload{ create_load_from_file(reload) }, m_p_save_to_file{ create_save_to_file(save_to_file) },
           m_p_set_horizontal_scale{ create_set_horizontal_scale(diagram_view) },
           m_p_set_vertical_scale{ create_set_vertical_scale(diagram_view) }, m_p_show_diagram{ create_show_diagram() },
@@ -327,10 +324,9 @@ namespace bobura::command {
             return std::make_unique<command::nop<command_traits_type>>();
         }
 
-        static command_ptr_type create_open_www_tetengo_org(const detail_impl_set_type& detail_impl_set)
+        static command_ptr_type create_open_www_tetengo_org()
         {
-            return std::make_unique<command::open_www_tetengo_org<command_traits_type, shell_type>>(
-                detail_impl_set.shell_());
+            return std::make_unique<command::open_www_tetengo_org<command_traits_type, shell_type>>();
         }
 
         static command_ptr_type create_save_to_file(const save_to_file_type& save_to_file)
@@ -483,8 +479,7 @@ namespace bobura::command {
         const save_to_file_type&    ask_file_path_and_save_to_file,
         diagram_view_type&          diagram_view,
         const settings_type&        settings,
-        const message_catalog_type& message_catalog,
-        const detail_impl_set_type& detail_impl_set)
+        const message_catalog_type& message_catalog)
     : m_p_impl{ std::make_unique<impl>(
           new_file,
           load_from_file,
@@ -493,8 +488,7 @@ namespace bobura::command {
           ask_file_path_and_save_to_file,
           diagram_view,
           settings,
-          message_catalog,
-          detail_impl_set) }
+          message_catalog) }
     {}
 
     template <typename Traits>

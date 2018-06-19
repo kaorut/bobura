@@ -11,8 +11,6 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/gui_impl_set.h>
-
 #include <bobura/command/open_www_tetengo_org.h>
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
@@ -29,8 +27,6 @@ namespace {
 
     using open_www_tetengo_org_command_type =
         bobura::command::open_www_tetengo_org<traits_type_list_type::command_type, ui_type_list_type::shell_type>;
-
-    using detail_detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 }
 
 
@@ -43,7 +39,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             {
                 BOOST_TEST_PASSPOINT();
 
-                const open_www_tetengo_org_command_type command{ detail_detail_impl_set_type::instance().shell_() };
+                const open_www_tetengo_org_command_type command{};
             }
 
 

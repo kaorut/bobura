@@ -235,9 +235,6 @@ namespace bobura::type_list {
         using menu_details_type = typename DetailTypeList::menu_type;
 
         template <typename DetailTypeList>
-        using shell_details_type = typename DetailTypeList::shell_type;
-
-        template <typename DetailTypeList>
         using mouse_capture_details_type = typename DetailTypeList::mouse_capture_type;
 
         using position_type = tetengo2::gui::em_position;
@@ -332,10 +329,8 @@ namespace bobura::type_list {
             label<widget_traits_type<DetailTypeList>, widget_details_traits_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using link_label_type = tetengo2::gui::widget::link_label<
-            widget_traits_type<DetailTypeList>,
-            widget_details_traits_type<DetailTypeList>,
-            shell_details_type<DetailTypeList>>;
+        using link_label_type = tetengo2::gui::widget::
+            link_label<widget_traits_type<DetailTypeList>, widget_details_traits_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using list_box_type = tetengo2::gui::widget::

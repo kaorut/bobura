@@ -13,7 +13,6 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/gui_impl_set.h>
 #include <tetengo2/text.h>
 
 #include <bobura/command/set.h>
@@ -77,8 +76,6 @@ namespace {
 
     using main_window_menu_builder_type =
         bobura::main_window_menu_builder<traits_type_list_type::main_window_menu_builder_type>;
-
-    using detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 }
 
 
@@ -94,22 +91,17 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             settings_type settings{ std::vector<string_type>{ 1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
                                     string_type{ TETENGO2_TEXT("test_bobura") } };
             model_type    model{};
-            const save_to_file_type             save_to_file{ false, message_catalog };
-            const save_to_file_type             ask_file_path_and_save_to_file{ true, message_catalog };
-            const confirm_file_save_type        confirm_file_save{ model, save_to_file, message_catalog };
-            const new_file_type                 new_file{ confirm_file_save };
-            const load_from_file_type           load_from_file{ true, confirm_file_save, message_catalog };
-            const load_from_file_type           reload{ false, confirm_file_save, message_catalog };
-            diagram_view_type                   diagram_view{ model, message_catalog };
-            const command_set_type              command_set{ new_file,
-                                                load_from_file,
-                                                reload,
-                                                save_to_file,
-                                                ask_file_path_and_save_to_file,
-                                                diagram_view,
-                                                settings,
-                                                message_catalog,
-                                                detail_impl_set_type::instance() };
+            const save_to_file_type      save_to_file{ false, message_catalog };
+            const save_to_file_type      ask_file_path_and_save_to_file{ true, message_catalog };
+            const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
+            const new_file_type          new_file{ confirm_file_save };
+            const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
+            const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
+            diagram_view_type            diagram_view{ model, message_catalog };
+            const command_set_type       command_set{
+                new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                diagram_view, settings,       message_catalog
+            };
             main_window_type                    main_window{ message_catalog, settings, confirm_file_save };
             const main_window_menu_builder_type main_window_menu_builder{
                 command_set, model, main_window, message_catalog
@@ -124,22 +116,17 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
             settings_type settings{ std::vector<string_type>{ 1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
                                     string_type{ TETENGO2_TEXT("test_bobura") } };
             model_type    model{};
-            const save_to_file_type             save_to_file{ false, message_catalog };
-            const save_to_file_type             ask_file_path_and_save_to_file{ true, message_catalog };
-            const confirm_file_save_type        confirm_file_save{ model, save_to_file, message_catalog };
-            const new_file_type                 new_file{ confirm_file_save };
-            const load_from_file_type           load_from_file{ true, confirm_file_save, message_catalog };
-            const load_from_file_type           reload{ false, confirm_file_save, message_catalog };
-            diagram_view_type                   diagram_view{ model, message_catalog };
-            const command_set_type              command_set{ new_file,
-                                                load_from_file,
-                                                reload,
-                                                save_to_file,
-                                                ask_file_path_and_save_to_file,
-                                                diagram_view,
-                                                settings,
-                                                message_catalog,
-                                                detail_impl_set_type::instance() };
+            const save_to_file_type      save_to_file{ false, message_catalog };
+            const save_to_file_type      ask_file_path_and_save_to_file{ true, message_catalog };
+            const confirm_file_save_type confirm_file_save{ model, save_to_file, message_catalog };
+            const new_file_type          new_file{ confirm_file_save };
+            const load_from_file_type    load_from_file{ true, confirm_file_save, message_catalog };
+            const load_from_file_type    reload{ false, confirm_file_save, message_catalog };
+            diagram_view_type            diagram_view{ model, message_catalog };
+            const command_set_type       command_set{
+                new_file,     load_from_file, reload,         save_to_file, ask_file_path_and_save_to_file,
+                diagram_view, settings,       message_catalog
+            };
             main_window_type                    main_window{ message_catalog, settings, confirm_file_save };
             const main_window_menu_builder_type main_window_menu_builder{
                 command_set, model, main_window, message_catalog

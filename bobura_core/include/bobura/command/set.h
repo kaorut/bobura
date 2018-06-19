@@ -13,7 +13,6 @@
 
 #include <boost/core/noncopyable.hpp>
 
-#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/stdalt.h>
 
 #include <bobura/command/command_base.h> // IWYU pragma: keep
@@ -114,9 +113,6 @@ namespace bobura::command {
         //! The parameter type.
         using parameter_type = parameter_base;
 
-        //! The detail implementation set type.
-        using detail_impl_set_type = tetengo2::detail::base::gui_impl_set;
-
 
         // constructors
 
@@ -131,7 +127,6 @@ namespace bobura::command {
             \param diagram_view                   A diagram view.
             \param settings                       Settings.
             \param message_catalog                A message catalog.
-            \param detail_impl_set                A detail implementation set.
         */
         set(const new_file_type&        new_file,
             const load_from_file_type&  load_from_file,
@@ -140,8 +135,7 @@ namespace bobura::command {
             const save_to_file_type&    ask_file_path_and_save_to_file,
             diagram_view_type&          diagram_view,
             const settings_type&        settings,
-            const message_catalog_type& message_catalog,
-            const detail_impl_set_type& detail_impl_set);
+            const message_catalog_type& message_catalog);
 
         /*!
             \brief Destroys the command set.
