@@ -51,14 +51,11 @@ namespace bobura {
 
         using settings_type = typename application::settings_type;
 
-        using detail_impl_set_type = typename application::detail_impl_set_type;
-
 
         // constructors and destructor
 
-        impl(settings_type& settings, const detail_impl_set_type& detail_impl_set)
-        : m_gui_fixture{ detail_impl_set.create_gui_fixture() }, m_settings{ settings }, m_model{},
-          m_p_input_file_load_timer{}
+        explicit impl(settings_type& settings)
+        : m_gui_fixture{}, m_settings{ settings }, m_model{}, m_p_input_file_load_timer{}
         {}
 
 
@@ -445,8 +442,7 @@ namespace bobura {
 
 
     template <typename Traits>
-    application<Traits>::application(settings_type& settings, const detail_impl_set_type& detail_impl_set)
-    : m_p_impl{ std::make_unique<impl>(settings, detail_impl_set) }
+    application<Traits>::application(settings_type& settings) : m_p_impl{ std::make_unique<impl>(settings) }
     {}
 
     template <typename Traits>

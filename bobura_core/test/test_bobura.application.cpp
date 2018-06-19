@@ -12,7 +12,6 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/stub/gui_impl_set.h>
 #include <tetengo2/text.h>
 
 #include <bobura/application.h>
@@ -38,8 +37,6 @@ namespace {
         bobura::settings<string_type, ui_type_list_type::position_type, ui_type_list_type::dimension_type>;
 
     using application_type = bobura::application<traits_type_list_type::application_type>;
-
-    using detail_impl_set_type = tetengo2::detail::stub::gui_impl_set;
 }
 
 
@@ -53,7 +50,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
             settings_type settings{ std::vector<string_type>{ 1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
                                     string_type{ TETENGO2_TEXT("test_bobura") } };
-            const application_type application{ settings, detail_impl_set_type::instance() };
+            const application_type application{ settings };
         }
 
         BOOST_AUTO_TEST_CASE(run)
@@ -62,7 +59,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
             settings_type settings{ std::vector<string_type>{ 1, string_type{ TETENGO2_TEXT("bobura_core.test.exe") } },
                                     string_type{ TETENGO2_TEXT("test_bobura") } };
-            application_type application{ settings, detail_impl_set_type::instance() };
+            application_type application{ settings };
 
             application.run();
         }
