@@ -25,7 +25,7 @@ namespace test_bobura::model::type_list {
 
         using difference_type = std::ptrdiff_t;
 
-        using string_type = std::string;
+        using string_type = std::wstring;
 
         using operating_distance_type = size_type;
 
@@ -59,15 +59,11 @@ namespace test_bobura::model::type_list {
 
 #if !defined(DOCUMENTATION)
     namespace detail::ui {
-        using size_type = type_list::detail::common::size_type;
-
-        using string_type = type_list::detail::common::string_type;
-
         template <typename DetailTypeList>
         using drawing_details_type = typename DetailTypeList::drawing_type;
 
         template <typename DetailTypeList>
-        using font_type = tetengo2::gui::drawing::font<string_type, size_type, drawing_details_type<DetailTypeList>>;
+        using font_type = tetengo2::gui::drawing::font<drawing_details_type<DetailTypeList>>;
 
         using color_type = tetengo2::gui::drawing::color;
     }
