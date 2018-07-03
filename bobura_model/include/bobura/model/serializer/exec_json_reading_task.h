@@ -89,7 +89,6 @@ namespace bobura::model::serializer {
 
         //! The progress dialog type.
         using progress_dialog_type = tetengo2::gui::widget::progress_dialog<
-            typename dialog_type::traits_type,
             std::unique_ptr<timetable_type>,
             message_catalog_type,
             typename dialog_type::details_traits_type,
