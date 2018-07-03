@@ -81,7 +81,7 @@
 
 namespace tetengo2::gui {
     namespace menu {
-        template <typename Encoder, typename MenuDetails>
+        template <typename MenuDetails>
         class shortcut_key_table;
     }
     namespace message {
@@ -341,17 +341,14 @@ namespace bobura::type_list {
 
         template <typename DetailTypeList>
         using menu_bar_type = tetengo2::gui::menu::menu_bar<
-            tetengo2::gui::menu::shortcut_key_table<ui_encoder_type<DetailTypeList>, menu_details_type<DetailTypeList>>,
-            ui_encoder_type<DetailTypeList>,
+            tetengo2::gui::menu::shortcut_key_table<menu_details_type<DetailTypeList>>,
             menu_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using menu_command_type =
-            tetengo2::gui::menu::command<ui_encoder_type<DetailTypeList>, menu_details_type<DetailTypeList>>;
+        using menu_command_type = tetengo2::gui::menu::command<menu_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using menu_separator_type =
-            tetengo2::gui::menu::separator<ui_encoder_type<DetailTypeList>, menu_details_type<DetailTypeList>>;
+        using menu_separator_type = tetengo2::gui::menu::separator<menu_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using picture_box_type = tetengo2::gui::widget::picture_box<
@@ -362,8 +359,7 @@ namespace bobura::type_list {
         using point_dimension_unit_type = tetengo2::gui::unit::upoint;
 
         template <typename DetailTypeList>
-        using popup_menu_type =
-            tetengo2::gui::menu::popup<ui_encoder_type<DetailTypeList>, menu_details_type<DetailTypeList>>;
+        using popup_menu_type = tetengo2::gui::menu::popup<menu_details_type<DetailTypeList>>;
 
         using shell_type = tetengo2::gui::shell;
 
