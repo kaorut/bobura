@@ -56,7 +56,6 @@
 #include <tetengo2/gui/widget/tab_frame.h>
 #include <tetengo2/gui/widget/text_box.h>
 #include <tetengo2/gui/widget/widget.h>
-#include <tetengo2/gui/widget/widget_details_traits.h>
 #include <tetengo2/gui/widget/window.h>
 #include <tetengo2/iterator/observable_forward_iterator.h>
 #include <tetengo2/message/message_catalog.h>
@@ -208,13 +207,19 @@ namespace bobura::type_list {
         using alert_type = tetengo2::gui::alert;
 
         template <typename DetailTypeList>
+        using widget_details_type = typename DetailTypeList::widget_type;
+
+        template <typename DetailTypeList>
         using drawing_details_type = typename DetailTypeList::drawing_type;
 
         template <typename DetailTypeList>
         using fast_drawing_details_type = typename DetailTypeList::fast_drawing_type;
 
         template <typename DetailTypeList>
-        using icon_details_type = typename DetailTypeList::icon_type;
+        using scroll_details_type = typename DetailTypeList::scroll_type;
+
+        template <typename DetailTypeList>
+        using message_handler_details_type = typename DetailTypeList::message_handler_type;
 
         template <typename DetailTypeList>
         using menu_details_type = typename DetailTypeList::menu_type;
@@ -249,49 +254,80 @@ namespace bobura::type_list {
         using mouse_observer_set_type = tetengo2::gui::message::mouse_observer_set;
 
         template <typename DetailTypeList>
-        using widget_details_traits_type = tetengo2::gui::widget::widget_details_traits<
-            typename DetailTypeList::widget_type,
+        using widget_type = tetengo2::gui::widget::widget<
+            widget_details_type<DetailTypeList>,
             drawing_details_type<DetailTypeList>,
-            icon_details_type<DetailTypeList>,
-            typename DetailTypeList::scroll_type,
-            typename DetailTypeList::message_handler_type>;
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using widget_type = tetengo2::gui::widget::widget<widget_details_traits_type<DetailTypeList>>;
+        using abstract_window_type = tetengo2::gui::widget::abstract_window<
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>,
+            menu_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using abstract_window_type = tetengo2::gui::widget::
-            abstract_window<widget_details_traits_type<DetailTypeList>, menu_details_type<DetailTypeList>>;
-
-        template <typename DetailTypeList>
-        using window_type = tetengo2::gui::widget::
-            window<widget_details_traits_type<DetailTypeList>, menu_details_type<DetailTypeList>>;
+        using window_type = tetengo2::gui::widget::window<
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>,
+            menu_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using dialog_type = tetengo2::gui::widget::dialog<
-            widget_details_traits_type<DetailTypeList>,
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>,
             menu_details_type<DetailTypeList>,
             typename DetailTypeList::message_loop_type>;
 
         using color_type = tetengo2::gui::drawing::color;
 
         template <typename DetailTypeList>
-        using button_type = tetengo2::gui::widget::button<widget_details_traits_type<DetailTypeList>>;
+        using button_type = tetengo2::gui::widget::button<
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using dropdown_box_type = tetengo2::gui::widget::dropdown_box<widget_details_traits_type<DetailTypeList>>;
+        using dropdown_box_type = tetengo2::gui::widget::dropdown_box<
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using image_type = tetengo2::gui::widget::image<widget_details_traits_type<DetailTypeList>>;
+        using image_type = tetengo2::gui::widget::image<
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using label_type = tetengo2::gui::widget::label<widget_details_traits_type<DetailTypeList>>;
+        using label_type = tetengo2::gui::widget::label<
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using link_label_type = tetengo2::gui::widget::link_label<widget_details_traits_type<DetailTypeList>>;
+        using link_label_type = tetengo2::gui::widget::link_label<
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using list_box_type = tetengo2::gui::widget::list_box<widget_details_traits_type<DetailTypeList>>;
+        using list_box_type = tetengo2::gui::widget::list_box<
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using mouse_capture_type = tetengo2::gui::mouse_capture<
@@ -300,8 +336,12 @@ namespace bobura::type_list {
             mouse_capture_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using map_box_type = tetengo2::gui::widget::
-            map_box<widget_details_traits_type<DetailTypeList>, mouse_capture_details_type<DetailTypeList>>;
+        using map_box_type = tetengo2::gui::widget::map_box<
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>,
+            mouse_capture_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using menu_bar_type = tetengo2::gui::menu::menu_bar<
@@ -315,8 +355,12 @@ namespace bobura::type_list {
         using menu_separator_type = tetengo2::gui::menu::separator<menu_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using picture_box_type = tetengo2::gui::widget::
-            picture_box<widget_details_traits_type<DetailTypeList>, fast_drawing_details_type<DetailTypeList>>;
+        using picture_box_type = tetengo2::gui::widget::picture_box<
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>,
+            fast_drawing_details_type<DetailTypeList>>;
 
         using point_dimension_unit_type = tetengo2::gui::unit::upoint;
 
@@ -330,7 +374,10 @@ namespace bobura::type_list {
 
         template <typename DetailTypeList>
         using side_bar_type = tetengo2::gui::widget::side_bar<
-            widget_details_traits_type<DetailTypeList>,
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>,
             mouse_capture_details_type<DetailTypeList>,
             timer_details_type<DetailTypeList>>;
 
@@ -338,11 +385,19 @@ namespace bobura::type_list {
         using system_color_set_type = tetengo2::gui::drawing::system_color_set;
 
         template <typename DetailTypeList>
-        using tab_frame_type = tetengo2::gui::widget::
-            tab_frame<widget_details_traits_type<DetailTypeList>, mouse_capture_details_type<DetailTypeList>>;
+        using tab_frame_type = tetengo2::gui::widget::tab_frame<
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>,
+            mouse_capture_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using text_box_type = tetengo2::gui::widget::text_box<widget_details_traits_type<DetailTypeList>>;
+        using text_box_type = tetengo2::gui::widget::text_box<
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using timer_type = tetengo2::gui::
@@ -457,9 +512,6 @@ namespace bobura::type_list {
         //! The widget type.
         using widget_type = detail::ui::widget_type<DetailTypeList>;
 
-        //! The widget details traits type.
-        using widget_details_traits_type = detail::ui::widget_details_traits_type<DetailTypeList>;
-
         //! The window type.
         using window_type = detail::ui::window_type<DetailTypeList>;
     };
@@ -475,41 +527,53 @@ namespace bobura::type_list {
         using common_dialog_details_type = typename DetailTypeList::common_dialog_type;
 
         template <typename DetailTypeList>
-        using widget_details_traits_type = type_list::detail::ui::widget_details_traits_type<DetailTypeList>;
-
-        template <typename DetailTypeList>
         using menu_details_type = typename DetailTypeList::menu_type;
 
         template <typename DetailTypeList>
         using color_type = tetengo2::gui::common_dialog::color<
             type_list::detail::ui::color_type,
             common_dialog_details_type<DetailTypeList>,
-            widget_details_traits_type<DetailTypeList>,
+            type_list::detail::ui::widget_details_type<DetailTypeList>,
+            type_list::detail::ui::drawing_details_type<DetailTypeList>,
+            type_list::detail::ui::scroll_details_type<DetailTypeList>,
+            type_list::detail::ui::message_handler_details_type<DetailTypeList>,
             menu_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using file_open_type = tetengo2::gui::common_dialog::file_open<
             common_dialog_details_type<DetailTypeList>,
-            widget_details_traits_type<DetailTypeList>,
+            type_list::detail::ui::widget_details_type<DetailTypeList>,
+            type_list::detail::ui::drawing_details_type<DetailTypeList>,
+            type_list::detail::ui::scroll_details_type<DetailTypeList>,
+            type_list::detail::ui::message_handler_details_type<DetailTypeList>,
             menu_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using file_save_type = tetengo2::gui::common_dialog::file_save<
             common_dialog_details_type<DetailTypeList>,
-            widget_details_traits_type<DetailTypeList>,
+            type_list::detail::ui::widget_details_type<DetailTypeList>,
+            type_list::detail::ui::drawing_details_type<DetailTypeList>,
+            type_list::detail::ui::scroll_details_type<DetailTypeList>,
+            type_list::detail::ui::message_handler_details_type<DetailTypeList>,
             menu_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using font_type = tetengo2::gui::common_dialog::font<
             type_list::detail::ui::fast_font_type<DetailTypeList>,
             common_dialog_details_type<DetailTypeList>,
-            widget_details_traits_type<DetailTypeList>,
+            type_list::detail::ui::widget_details_type<DetailTypeList>,
+            type_list::detail::ui::drawing_details_type<DetailTypeList>,
+            type_list::detail::ui::scroll_details_type<DetailTypeList>,
+            type_list::detail::ui::message_handler_details_type<DetailTypeList>,
             menu_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using message_box_type = tetengo2::gui::common_dialog::message_box<
             common_dialog_details_type<DetailTypeList>,
-            widget_details_traits_type<DetailTypeList>,
+            type_list::detail::ui::widget_details_type<DetailTypeList>,
+            type_list::detail::ui::drawing_details_type<DetailTypeList>,
+            type_list::detail::ui::scroll_details_type<DetailTypeList>,
+            type_list::detail::ui::message_handler_details_type<DetailTypeList>,
             menu_details_type<DetailTypeList>>;
     }
 #endif
