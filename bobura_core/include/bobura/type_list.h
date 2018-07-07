@@ -76,15 +76,9 @@
 #include <bobura/view/diagram/traits.h>
 #include <bobura/view/timetable/traits.h>
 
-namespace tetengo2::gui {
-    namespace menu {
-        template <typename MenuDetails>
-        class shortcut_key_table;
-    }
-    namespace message {
-        template <typename MessageLoopDetails>
-        class message_loop_break;
-    }
+namespace tetengo2::gui::message {
+    template <typename MessageLoopDetails>
+    class message_loop_break;
 }
 
 
@@ -331,8 +325,10 @@ namespace bobura::type_list {
 
         template <typename DetailTypeList>
         using mouse_capture_type = tetengo2::gui::mouse_capture<
-            widget_type<DetailTypeList>,
-            mouse_observer_set_type::mouse_button_type,
+            widget_details_type<DetailTypeList>,
+            drawing_details_type<DetailTypeList>,
+            scroll_details_type<DetailTypeList>,
+            message_handler_details_type<DetailTypeList>,
             mouse_capture_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
@@ -344,9 +340,7 @@ namespace bobura::type_list {
             mouse_capture_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using menu_bar_type = tetengo2::gui::menu::menu_bar<
-            tetengo2::gui::menu::shortcut_key_table<menu_details_type<DetailTypeList>>,
-            menu_details_type<DetailTypeList>>;
+        using menu_bar_type = tetengo2::gui::menu::menu_bar<menu_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using menu_command_type = tetengo2::gui::menu::command<menu_details_type<DetailTypeList>>;
@@ -531,7 +525,6 @@ namespace bobura::type_list {
 
         template <typename DetailTypeList>
         using color_type = tetengo2::gui::common_dialog::color<
-            type_list::detail::ui::color_type,
             common_dialog_details_type<DetailTypeList>,
             type_list::detail::ui::widget_details_type<DetailTypeList>,
             type_list::detail::ui::drawing_details_type<DetailTypeList>,
