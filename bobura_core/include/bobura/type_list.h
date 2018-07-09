@@ -247,81 +247,27 @@ namespace bobura::type_list {
 
         using mouse_observer_set_type = tetengo2::gui::message::mouse_observer_set;
 
-        template <typename DetailTypeList>
-        using widget_type = tetengo2::gui::widget::widget<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>>;
+        using widget_type = tetengo2::gui::widget::widget;
 
-        template <typename DetailTypeList>
-        using abstract_window_type = tetengo2::gui::widget::abstract_window<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>,
-            menu_details_type<DetailTypeList>>;
+        using abstract_window_type = tetengo2::gui::widget::abstract_window;
 
-        template <typename DetailTypeList>
-        using window_type = tetengo2::gui::widget::window<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>,
-            menu_details_type<DetailTypeList>>;
+        using window_type = tetengo2::gui::widget::window;
 
-        template <typename DetailTypeList>
-        using dialog_type = tetengo2::gui::widget::dialog<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>,
-            menu_details_type<DetailTypeList>,
-            typename DetailTypeList::message_loop_type>;
+        using dialog_type = tetengo2::gui::widget::dialog;
 
         using color_type = tetengo2::gui::drawing::color;
 
-        template <typename DetailTypeList>
-        using button_type = tetengo2::gui::widget::button<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>>;
+        using button_type = tetengo2::gui::widget::button;
 
-        template <typename DetailTypeList>
-        using dropdown_box_type = tetengo2::gui::widget::dropdown_box<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>>;
+        using dropdown_box_type = tetengo2::gui::widget::dropdown_box;
 
-        template <typename DetailTypeList>
-        using image_type = tetengo2::gui::widget::image<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>>;
+        using image_type = tetengo2::gui::widget::image;
 
-        template <typename DetailTypeList>
-        using label_type = tetengo2::gui::widget::label<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>>;
+        using label_type = tetengo2::gui::widget::label;
 
-        template <typename DetailTypeList>
-        using link_label_type = tetengo2::gui::widget::link_label<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>>;
+        using link_label_type = tetengo2::gui::widget::link_label;
 
-        template <typename DetailTypeList>
-        using list_box_type = tetengo2::gui::widget::list_box<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>>;
+        using list_box_type = tetengo2::gui::widget::list_box;
 
         template <typename DetailTypeList>
         using mouse_capture_type = tetengo2::gui::mouse_capture<
@@ -331,13 +277,7 @@ namespace bobura::type_list {
             message_handler_details_type<DetailTypeList>,
             mouse_capture_details_type<DetailTypeList>>;
 
-        template <typename DetailTypeList>
-        using map_box_type = tetengo2::gui::widget::map_box<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>,
-            mouse_capture_details_type<DetailTypeList>>;
+        using map_box_type = tetengo2::gui::widget::map_box;
 
         template <typename DetailTypeList>
         using menu_bar_type = tetengo2::gui::menu::menu_bar<menu_details_type<DetailTypeList>>;
@@ -349,12 +289,7 @@ namespace bobura::type_list {
         using menu_separator_type = tetengo2::gui::menu::separator<menu_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
-        using picture_box_type = tetengo2::gui::widget::picture_box<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>,
-            fast_drawing_details_type<DetailTypeList>>;
+        using picture_box_type = tetengo2::gui::widget::picture_box<fast_drawing_details_type<DetailTypeList>>;
 
         using point_dimension_unit_type = tetengo2::gui::unit::upoint;
 
@@ -367,35 +302,17 @@ namespace bobura::type_list {
         using timer_details_type = typename DetailTypeList::timer_type;
 
         template <typename DetailTypeList>
-        using side_bar_type = tetengo2::gui::widget::side_bar<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>,
-            mouse_capture_details_type<DetailTypeList>,
-            timer_details_type<DetailTypeList>>;
+        using side_bar_type = tetengo2::gui::widget::side_bar<timer_details_type<DetailTypeList>>;
 
         template <typename DetailTypeList>
         using system_color_set_type = tetengo2::gui::drawing::system_color_set;
 
-        template <typename DetailTypeList>
-        using tab_frame_type = tetengo2::gui::widget::tab_frame<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>,
-            mouse_capture_details_type<DetailTypeList>>;
+        using tab_frame_type = tetengo2::gui::widget::tab_frame;
+
+        using text_box_type = tetengo2::gui::widget::text_box;
 
         template <typename DetailTypeList>
-        using text_box_type = tetengo2::gui::widget::text_box<
-            widget_details_type<DetailTypeList>,
-            drawing_details_type<DetailTypeList>,
-            scroll_details_type<DetailTypeList>,
-            message_handler_details_type<DetailTypeList>>;
-
-        template <typename DetailTypeList>
-        using timer_type = tetengo2::gui::
-            timer<type_list::detail::ui::widget_type<DetailTypeList>, timer_details_type<DetailTypeList>>;
+        using timer_type = tetengo2::gui::timer<tetengo2::gui::widget::widget, timer_details_type<DetailTypeList>>;
     }
 #endif
 
@@ -408,13 +325,13 @@ namespace bobura::type_list {
     struct ui
     {
         //! The abstract window type.
-        using abstract_window_type = detail::ui::abstract_window_type<DetailTypeList>;
+        using abstract_window_type = detail::ui::abstract_window_type;
 
         //! The alert type.
         using alert_type = detail::ui::alert_type;
 
         //! The button type.
-        using button_type = detail::ui::button_type<DetailTypeList>;
+        using button_type = detail::ui::button_type;
 
         //! The canvas type.
         using canvas_type = detail::ui::canvas_type<DetailTypeList>;
@@ -423,13 +340,13 @@ namespace bobura::type_list {
         using color_type = detail::ui::color_type;
 
         //! The dialog type.
-        using dialog_type = detail::ui::dialog_type<DetailTypeList>;
+        using dialog_type = detail::ui::dialog_type;
 
         //! The dimension type.
         using dimension_type = detail::ui::dimension_type;
 
         //! The dropdown box type.
-        using dropdown_box_type = detail::ui::dropdown_box_type<DetailTypeList>;
+        using dropdown_box_type = detail::ui::dropdown_box_type;
 
         //! The fast canvas type.
         using fast_canvas_type = detail::ui::fast_canvas_type<DetailTypeList>;
@@ -444,19 +361,19 @@ namespace bobura::type_list {
         using fast_solid_background_type = detail::ui::fast_solid_background_type<DetailTypeList>;
 
         //! The image type.
-        using image_type = detail::ui::image_type<DetailTypeList>;
+        using image_type = detail::ui::image_type;
 
         //! The label type.
-        using label_type = detail::ui::label_type<DetailTypeList>;
+        using label_type = detail::ui::label_type;
 
         //! The link label type.
-        using link_label_type = detail::ui::link_label_type<DetailTypeList>;
+        using link_label_type = detail::ui::link_label_type;
 
         //! The list box type.
-        using list_box_type = detail::ui::list_box_type<DetailTypeList>;
+        using list_box_type = detail::ui::list_box_type;
 
         //! The map box type.
-        using map_box_type = detail::ui::map_box_type<DetailTypeList>;
+        using map_box_type = detail::ui::map_box_type;
 
         //! The menu bar type.
         using menu_bar_type = detail::ui::menu_bar_type<DetailTypeList>;
@@ -495,19 +412,19 @@ namespace bobura::type_list {
         using system_color_set_type = detail::ui::system_color_set_type<DetailTypeList>;
 
         //! The tab frame type.
-        using tab_frame_type = detail::ui::tab_frame_type<DetailTypeList>;
+        using tab_frame_type = detail::ui::tab_frame_type;
 
         //! The text box type.
-        using text_box_type = detail::ui::text_box_type<DetailTypeList>;
+        using text_box_type = detail::ui::text_box_type;
 
         //! The transparent background type.
         using transparent_background_type = detail::ui::transparent_background_type<DetailTypeList>;
 
         //! The widget type.
-        using widget_type = detail::ui::widget_type<DetailTypeList>;
+        using widget_type = detail::ui::widget_type;
 
         //! The window type.
-        using window_type = detail::ui::window_type<DetailTypeList>;
+        using window_type = detail::ui::window_type;
     };
 
 
@@ -622,11 +539,9 @@ namespace bobura::type_list {
         template <typename DetailTypeList>
         using fast_font_type = type_list::detail::ui::fast_font_type<DetailTypeList>;
 
-        template <typename DetailTypeList>
-        using dialog_type = type_list::detail::ui::dialog_type<DetailTypeList>;
+        using dialog_type = type_list::detail::ui::dialog_type;
 
-        template <typename DetailTypeList>
-        using abstract_window_type = type_list::detail::ui::abstract_window_type<DetailTypeList>;
+        using abstract_window_type = type_list::detail::ui::abstract_window_type;
 
         template <typename DetailTypeList>
         using picture_box_type = type_list::detail::ui::picture_box_type<DetailTypeList>;
@@ -641,15 +556,15 @@ namespace bobura::type_list {
             string_type,
             position_type,
             dimension_type,
-            dialog_type<DetailTypeList>,
-            abstract_window_type<DetailTypeList>,
-            type_list::detail::ui::label_type<DetailTypeList>,
-            type_list::detail::ui::link_label_type<DetailTypeList>,
-            type_list::detail::ui::image_type<DetailTypeList>,
-            type_list::detail::ui::button_type<DetailTypeList>,
-            type_list::detail::ui::text_box_type<DetailTypeList>,
-            type_list::detail::ui::list_box_type<DetailTypeList>,
-            type_list::detail::ui::dropdown_box_type<DetailTypeList>,
+            dialog_type,
+            abstract_window_type,
+            type_list::detail::ui::label_type,
+            type_list::detail::ui::link_label_type,
+            type_list::detail::ui::image_type,
+            type_list::detail::ui::button_type,
+            type_list::detail::ui::text_box_type,
+            type_list::detail::ui::list_box_type,
+            type_list::detail::ui::dropdown_box_type,
             picture_box_type<DetailTypeList>,
             type_list::detail::ui::transparent_background_type<DetailTypeList>,
             message_catalog_type>;
@@ -664,11 +579,11 @@ namespace bobura::type_list {
             operating_distance_type,
             speed_type,
             fast_font_type<DetailTypeList>,
-            abstract_window_type<DetailTypeList>,
+            abstract_window_type,
             type_list::detail::common_dialog::message_box_type<DetailTypeList>,
             type_list::detail::common_dialog::file_open_type<DetailTypeList>,
             type_list::detail::common_dialog::file_save_type<DetailTypeList>,
-            dialog_type<DetailTypeList>,
+            dialog_type,
             type_list::detail::ui::timer_type<DetailTypeList>,
             type_list::detail::ui::system_color_set_type<DetailTypeList>,
             model::serializer::oudia_diagram_dialog<dialog_traits_type<DetailTypeList>, size_type>,
