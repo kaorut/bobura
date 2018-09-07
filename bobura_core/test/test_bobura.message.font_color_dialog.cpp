@@ -19,6 +19,7 @@
 #include <tetengo2/gui/drawing/font.h>
 #include <tetengo2/gui/unit/em.h>
 #include <tetengo2/gui/unit/unit.h>
+#include <tetengo2/gui/widget/abstract_window.h>
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
@@ -53,7 +54,7 @@ namespace {
     class concrete_dialog : public dialog_type
     {
     public:
-        explicit concrete_dialog(window_type::base_type& parent) : dialog_type{ parent } {}
+        explicit concrete_dialog(tetengo2::gui::widget::abstract_window& parent) : dialog_type{ parent } {}
     };
 
     using list_box_type = ui_type_list_type::list_box_type;

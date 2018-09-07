@@ -13,8 +13,10 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/gui/unit/em.h>
 #include <tetengo2/gui/unit/unit.h>
+#include <tetengo2/gui/widget/abstract_window.h>
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
@@ -127,7 +129,7 @@ namespace {
     class concrete_dialog : public dialog_type
     {
     public:
-        explicit concrete_dialog(window_type::base_type& parent) : dialog_type{ parent } {}
+        explicit concrete_dialog(tetengo2::gui::widget::abstract_window& parent) : dialog_type{ parent } {}
     };
 
 
@@ -338,7 +340,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     window_type     window{};
                     concrete_dialog dialog{ window };
-                    auto            font = font_type::dialog_font();
+                    auto            font = font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_());
                     const bobura::message::train_kind_dialog::
                         diagram_font_button_mouse_clicked<dialog_type, font_dialog_type>
                             observer(dialog, font, apply_function);
@@ -350,7 +352,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     window_type     window{};
                     concrete_dialog dialog{ window };
-                    auto            font = font_type::dialog_font();
+                    auto            font = font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_());
                     const bobura::message::train_kind_dialog::
                         diagram_font_button_mouse_clicked<dialog_type, font_dialog_type>
                             observer(dialog, font, apply_function);
@@ -446,7 +448,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     window_type     window{};
                     concrete_dialog dialog{ window };
-                    auto            font = font_type::dialog_font();
+                    auto            font = font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_());
                     const bobura::message::train_kind_dialog::
                         timetable_font_button_mouse_clicked<dialog_type, font_dialog_type>
                             observer(dialog, font, apply_function);
@@ -458,7 +460,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     window_type     window{};
                     concrete_dialog dialog{ window };
-                    auto            font = font_type::dialog_font();
+                    auto            font = font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_());
                     const bobura::message::train_kind_dialog::
                         timetable_font_button_mouse_clicked<dialog_type, font_dialog_type>
                             observer(dialog, font, apply_function);
