@@ -13,6 +13,8 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/gui/widget/abstract_window.h>
+#include <tetengo2/gui/widget/progress_dialog.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -51,7 +53,7 @@ namespace bobura::model::serializer {
 
         using dialog_type = Dialog;
 
-        using abstract_window_type = typename dialog_type::base_type;
+        using abstract_window_type = tetengo2::gui::widget::abstract_window;
 
         using message_catalog_type = MessageCatalog;
 
@@ -78,7 +80,7 @@ namespace bobura::model::serializer {
                 try
                 {
                     auto p_timetable = read_timetable(promise);
-                    promise.set_value(std::move(p_timetable));
+                    promise.set_value(std::make_unique<task_result_type>( std::move(p_timetable) ));
                 }
                 catch (std::exception& e)
                 {
@@ -91,7 +93,7 @@ namespace bobura::model::serializer {
             };
             dialog.do_modal();
 
-            return dialog.task_future().get();
+            return std::move(task_result_type::get(*dialog.task_future().get()));
         }
 
 
@@ -103,6 +105,8 @@ namespace bobura::model::serializer {
         using progress_dialog_type = typename exec_json_reading_task::progress_dialog_type;
 
         using promise_type = typename exec_json_reading_task::promise_type;
+
+        using task_result_type = tetengo2::gui::widget::task_result<std::unique_ptr<timetable_type>>;
 
 
         // variables

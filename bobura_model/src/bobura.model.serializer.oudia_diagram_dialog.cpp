@@ -15,6 +15,7 @@
 #include <boost/predef.h>
 #include <boost/throw_exception.hpp>
 
+#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
@@ -174,7 +175,7 @@ namespace bobura::model::serializer {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_file_name);
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background = std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -185,7 +186,7 @@ namespace bobura::model::serializer {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:OuDiaDiagram:&Select a diagram to load:")));
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background = std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);

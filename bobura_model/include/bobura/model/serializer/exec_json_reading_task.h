@@ -14,6 +14,7 @@
 
 #include <boost/core/noncopyable.hpp>
 
+#include <tetengo2/gui/widget/abstract_window.h>
 #include <tetengo2/gui/widget/progress_dialog.h>
 
 #include <bobura/model/timetable.h>
@@ -76,7 +77,7 @@ namespace bobura::model::serializer {
         using dialog_type = Dialog;
 
         //! The abstract window type.
-        using abstract_window_type = typename dialog_type::base_type;
+        using abstract_window_type = tetengo2::gui::widget::abstract_window;
 
         //! The timer type.
         using timer_type = Timer;
