@@ -13,6 +13,7 @@
 
 #include <boost/operators.hpp>
 
+#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/gui/drawing/color.h>
 
 
@@ -206,7 +207,7 @@ namespace bobura::model {
 
         static train_kind make_default()
         {
-            auto default_font = font_type::dialog_font();
+            auto default_font = font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_());
             return train_kind{ string_type{},       string_type{},
                                default_font,        color_type{ 0x00, 0x00, 0x00 },
                                weight_type::normal, line_style_type::solid,

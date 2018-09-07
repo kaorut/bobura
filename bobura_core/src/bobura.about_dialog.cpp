@@ -14,6 +14,7 @@
 #include <boost/format.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/text.h>
 
 #include <bobura/about_dialog.h>
@@ -136,7 +137,8 @@ namespace bobura {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(title.str());
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -147,7 +149,8 @@ namespace bobura {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(string_type{ TETENGO2_TEXT("Copyright (C) 2007-2018 kaoru") });
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);

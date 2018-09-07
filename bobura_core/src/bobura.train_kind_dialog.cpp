@@ -19,6 +19,7 @@
 #include <boost/rational.hpp>
 #include <boost/throw_exception.hpp>
 
+#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
@@ -76,15 +77,16 @@ namespace bobura {
             const color_type&           timetable_color,
             const message_catalog_type& message_catalog)
         : m_base{ base }, m_message_catalog{ message_catalog }, m_info_sets{}, m_current_train_kind_index{},
-          m_current_diagram_font{ font_type::dialog_font() }, m_current_diagram_color{ 0, 0, 0 },
-          m_current_timetable_font{ font_type::dialog_font() }, m_current_timetable_color{ 0, 0, 0 },
-          m_p_train_kind_label{}, m_p_train_kind_list_box{}, m_p_add_button{}, m_p_delete_button{}, m_p_up_button{},
-          m_p_down_button{}, m_p_name_label{}, m_p_name_text_box{}, m_p_abbreviation_label{},
-          m_p_abbreviation_text_box{}, m_p_diagram_label{}, m_p_diagram_font_button{}, m_p_diagram_font_text_box{},
-          m_p_diagram_color_button{}, m_p_diagram_weight_label{}, m_p_diagram_weight_dropdown_box{},
-          m_p_diagram_line_style_label{}, m_p_diagram_line_style_dropdown_box{}, m_p_timetable_label{},
-          m_p_timetable_font_button{}, m_p_timetable_font_text_box{}, m_p_timetable_color_button{},
-          m_p_sample_picture_box{}, m_p_ok_button{}, m_p_cancel_button{}
+          m_current_diagram_font{ font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_()) },
+          m_current_diagram_color{ 0, 0, 0 }, m_current_timetable_font{ font_type::dialog_font(
+                                                  tetengo2::detail::gui_detail_impl_set().drawing_()) },
+          m_current_timetable_color{ 0, 0, 0 }, m_p_train_kind_label{}, m_p_train_kind_list_box{}, m_p_add_button{},
+          m_p_delete_button{}, m_p_up_button{}, m_p_down_button{}, m_p_name_label{}, m_p_name_text_box{},
+          m_p_abbreviation_label{}, m_p_abbreviation_text_box{}, m_p_diagram_label{}, m_p_diagram_font_button{},
+          m_p_diagram_font_text_box{}, m_p_diagram_color_button{}, m_p_diagram_weight_label{},
+          m_p_diagram_weight_dropdown_box{}, m_p_diagram_line_style_label{}, m_p_diagram_line_style_dropdown_box{},
+          m_p_timetable_label{}, m_p_timetable_font_button{}, m_p_timetable_font_text_box{},
+          m_p_timetable_color_button{}, m_p_sample_picture_box{}, m_p_ok_button{}, m_p_cancel_button{}
         {
             initialize_dialog(background_color, timetable_color);
         }
@@ -366,7 +368,8 @@ namespace bobura {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Train &Kinds:")));
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -432,7 +435,8 @@ namespace bobura {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:&Name:")));
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -453,7 +457,8 @@ namespace bobura {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:A&bbreviation:")));
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -474,7 +479,8 @@ namespace bobura {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Diagram:")));
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -516,7 +522,8 @@ namespace bobura {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Line &Weight:")));
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -543,7 +550,8 @@ namespace bobura {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Line &Style:")));
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -574,7 +582,8 @@ namespace bobura {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Timetable:")));
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -616,7 +625,8 @@ namespace bobura {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:TrainKind:Sample:")));
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -874,9 +884,9 @@ namespace bobura {
             }
             else
             {
-                m_current_diagram_font = font_type::dialog_font();
+                m_current_diagram_font = font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_());
                 m_current_diagram_color = color_type{ 0, 0, 0 };
-                m_current_timetable_font = font_type::dialog_font();
+                m_current_timetable_font = font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_());
                 m_current_timetable_color = color_type{ 0, 0, 0 };
                 m_p_name_text_box->set_text(string_type{});
                 m_p_abbreviation_text_box->set_text(string_type{});

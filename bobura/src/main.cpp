@@ -26,6 +26,7 @@
 #include <tetengo2/detail/windows/gui_impl_set.h>
 #include <tetengo2/detail/windows/impl_set.h>
 #include <tetengo2/stdalt.h>
+#include <tetengo2/text.h>
 
 #include <bobura/application.h>
 #include <bobura/settings.h>

@@ -19,6 +19,7 @@
 
 #include <boost/throw_exception.hpp>
 
+#include <tetengo2/gui/widget/control.h>
 #include <tetengo2/stdalt.h>
 
 #include <bobura/command/command_base.h> // IWYU pragma: keep
@@ -384,7 +385,7 @@ namespace bobura::message::main_window {
 
         using window_state_type = typename abstract_window_type::window_state_type;
 
-        using control_type = typename view_picture_box_type::base_type::base_type;
+        using control_type = tetengo2::gui::widget::control;
 
         using position_type = typename control_type::position_type;
 

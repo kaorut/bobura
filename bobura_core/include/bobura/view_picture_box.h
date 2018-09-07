@@ -11,6 +11,8 @@
 
 #include <memory>
 
+#include <tetengo2/gui/widget/widget.h>
+
 
 namespace bobura {
     /*!
@@ -29,7 +31,7 @@ namespace bobura {
         using base_type = PictureBox;
 
         //! The widget type.
-        using widget_type = typename base_type::base_type::base_type;
+        using widget_type = tetengo2::gui::widget::widget;
 
         //! The dimension type.
         using dimension_type = typename base_type::dimension_type;

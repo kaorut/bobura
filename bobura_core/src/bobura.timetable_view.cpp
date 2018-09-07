@@ -12,6 +12,7 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
@@ -179,6 +180,7 @@ namespace bobura {
         void clear_background(canvas_type& canvas, const dimension_type& canvas_dimension) const
         {
             canvas.set_background(std::make_unique<const solid_background_type>(
+                tetengo2::detail::gui_detail_impl_set().drawing_(),
                 *m_model.timetable().font_color_set().background().diagram_color()));
             canvas.fill_rectangle(position_type{}, canvas_dimension);
         }

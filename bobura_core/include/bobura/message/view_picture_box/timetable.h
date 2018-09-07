@@ -12,6 +12,7 @@
 #include <cassert>
 #include <functional>
 
+#include <tetengo2/gui/cursor/system.h>
 #include <tetengo2/stdalt.h>
 
 #include <bobura/timetable_view.h>
@@ -266,7 +267,7 @@ namespace bobura::message::view_picture_box::timetable {
 
         using cursor_type = typename picture_box_type::cursor_type;
 
-        using system_cursor_type = typename picture_box_type::system_cursor_type;
+        using system_cursor_type = tetengo2::gui::cursor::system;
 
 
         // variables

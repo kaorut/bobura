@@ -12,6 +12,7 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -193,7 +194,8 @@ namespace bobura {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FileProperty:&Company Name:")));
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -211,7 +213,8 @@ namespace bobura {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FileProperty:&Line Name:")));
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -229,7 +232,8 @@ namespace bobura {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FileProperty:&Note:")));
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -247,7 +251,8 @@ namespace bobura {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:FileProperty:&File Name:")));
-            auto p_background = std::make_unique<transparent_background_type>();
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);

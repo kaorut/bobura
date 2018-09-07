@@ -88,16 +88,7 @@ namespace bobura::model::serializer {
         using message_catalog_type = MessageCatalog;
 
         //! The progress dialog type.
-        using progress_dialog_type = tetengo2::gui::widget::progress_dialog<
-            std::unique_ptr<timetable_type>,
-            message_catalog_type,
-            typename dialog_type::widget_details_type,
-            typename dialog_type::drawing_details_type,
-            typename dialog_type::scroll_details_type,
-            typename dialog_type::message_handler_details_type,
-            typename dialog_type::menu_details_type,
-            typename dialog_type::message_loop_details_type,
-            typename timer_type::timer_details_type>;
+        using progress_dialog_type = tetengo2::gui::widget::progress_dialog;
 
         //! The promise type.
         using promise_type = typename progress_dialog_type::promise_type;

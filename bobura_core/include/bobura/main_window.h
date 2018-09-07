@@ -11,6 +11,7 @@
 
 #include <memory>
 
+#include <tetengo2/gui/widget/abstract_window.h>
 #include <tetengo2/stdalt.h>
 
 #include <bobura/load_save/confirm_file_save.h>
@@ -48,7 +49,7 @@ namespace bobura {
         using base_type = typename traits_type::window_type;
 
         //! The abstract window type.
-        using abstract_window_type = typename base_type::base_type;
+        using abstract_window_type = tetengo2::gui::widget::abstract_window;
 
         //! The icon type.
         using icon_type = typename base_type::icon_type;

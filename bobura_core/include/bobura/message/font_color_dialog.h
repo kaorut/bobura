@@ -14,6 +14,7 @@
 #include <memory>
 #include <vector>
 
+#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
@@ -230,7 +231,8 @@ namespace bobura::message::font_color_dialog {
             const string_type&                                                                          text) const
         {
             assert(get_color(m_font_color_list[0]));
-            auto p_background = std::make_unique<solid_background_type>(*get_color(m_font_color_list[0]));
+            auto p_background = std::make_unique<solid_background_type>(
+                tetengo2::detail::gui_detail_impl_set().drawing_(), *get_color(m_font_color_list[0]));
             canvas.set_background(std::move(p_background));
             canvas.fill_rectangle(position, dimension);
 
