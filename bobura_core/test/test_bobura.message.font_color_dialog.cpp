@@ -317,6 +317,11 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                   message_catalog };
                 }
 
+#if !( \
+    BOOST_OS_LINUX && \
+        (BOOST_COMP_CLANG >= BOOST_VERSION_NUMBER(5, 0, 0) && BOOST_COMP_CLANG < BOOST_VERSION_NUMBER(5, 1, 0)) || \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(6, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(6, 4, 0))\
+)
                 BOOST_AUTO_TEST_CASE(operator_paren)
                 {
                     BOOST_TEST_PASSPOINT();
@@ -340,6 +345,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     observer();
                 }
+#endif
 
 
             BOOST_AUTO_TEST_SUITE_END()
@@ -425,6 +431,11 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                   message_catalog };
                 }
 
+#if !( \
+    BOOST_OS_LINUX && \
+        (BOOST_COMP_CLANG >= BOOST_VERSION_NUMBER(5, 0, 0) && BOOST_COMP_CLANG < BOOST_VERSION_NUMBER(5, 1, 0)) || \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(6, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(6, 4, 0))\
+)
                 BOOST_AUTO_TEST_CASE(operator_paren)
                 {
                     BOOST_TEST_PASSPOINT();
@@ -448,6 +459,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     observer();
                 }
+#endif
 
 
             BOOST_AUTO_TEST_SUITE_END()
