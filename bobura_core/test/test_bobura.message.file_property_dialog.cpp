@@ -11,11 +11,13 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/gui/widget/abstract_window.h>
-
 #include <bobura/detail_type_list.h>
 #include <bobura/message/file_property_dialog.h>
 #include <bobura/type_list.h>
+
+namespace tetengo2 { namespace gui { namespace widget {
+    class abstract_window;
+}}}
 
 
 namespace {

@@ -6,12 +6,11 @@
     $Id$
 */
 
+#include <algorithm>
 #include <cassert>
-#include <fstream>
-#include <ios>
+#include <fstream> // IWYU pragma: keep
 #include <memory>
 #include <stdexcept>
-#include <utility>
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
