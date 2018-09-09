@@ -80,7 +80,7 @@ namespace bobura::model::serializer {
                 try
                 {
                     auto p_timetable = read_timetable(promise);
-                    promise.set_value(std::make_unique<task_result_type>( std::move(p_timetable) ));
+                    promise.set_value(std::make_unique<task_result_type>(std::move(p_timetable)));
                 }
                 catch (std::exception& e)
                 {

@@ -175,7 +175,8 @@ namespace bobura::model::serializer {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_file_name);
-            auto p_background = std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
@@ -186,7 +187,8 @@ namespace bobura::model::serializer {
             auto p_label = std::make_unique<label_type>(m_base);
 
             p_label->set_text(m_message_catalog.get(TETENGO2_TEXT("Dialog:OuDiaDiagram:&Select a diagram to load:")));
-            auto p_background = std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
+            auto p_background =
+                std::make_unique<transparent_background_type>(tetengo2::detail::gui_detail_impl_set().drawing_());
             p_label->set_background(std::move(p_background));
 
             return std::move(p_label);
