@@ -59,11 +59,7 @@ namespace test_bobura::model::type_list {
 
 #if !defined(DOCUMENTATION)
     namespace detail::ui {
-        template <typename DetailTypeList>
-        using drawing_details_type = typename DetailTypeList::drawing_type;
-
-        template <typename DetailTypeList>
-        using font_type = tetengo2::gui::drawing::font<drawing_details_type<DetailTypeList>>;
+        using font_type = tetengo2::gui::drawing::font;
 
         using color_type = tetengo2::gui::drawing::color;
     }
@@ -78,7 +74,7 @@ namespace test_bobura::model::type_list {
     struct ui
     {
         //! The font type.
-        using font_type = detail::ui::font_type<DetailTypeList>;
+        using font_type = detail::ui::font_type;
 
         //! The color type.
         using color_type = detail::ui::color_type;

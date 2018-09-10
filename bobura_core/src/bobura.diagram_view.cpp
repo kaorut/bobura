@@ -15,6 +15,8 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/detail/base/gui_impl_set.h>
+
 #include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
 #include <bobura/type_list.h>
@@ -289,7 +291,7 @@ namespace bobura {
         void clear_background(canvas_type& canvas, const dimension_type& canvas_dimension) const
         {
             canvas.set_background(std::make_unique<const solid_background_type>(
-                *m_model.timetable().font_color_set().background().diagram_color()));
+                canvas.drawing_details(), *m_model.timetable().font_color_set().background().diagram_color()));
             canvas.fill_rectangle(position_type{}, canvas_dimension);
         }
 

@@ -15,6 +15,10 @@
 #include <bobura/model/message/oudia_diagram_dialog.h>
 #include <bobura/type_list.h>
 
+namespace tetengo2 { namespace gui { namespace widget {
+    class abstract_window;
+}}}
+
 
 namespace {
     // types
@@ -30,7 +34,7 @@ namespace {
     class concrete_dialog : public dialog_type
     {
     public:
-        explicit concrete_dialog(window_type::base_type& parent) : dialog_type{ parent } {}
+        explicit concrete_dialog(tetengo2::gui::widget::abstract_window& parent) : dialog_type{ parent } {}
     };
 }
 

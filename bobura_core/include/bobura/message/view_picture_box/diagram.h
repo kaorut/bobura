@@ -16,6 +16,7 @@
 #include <boost/rational.hpp>
 
 #include <tetengo2/detail/base/gui_impl_set.h>
+#include <tetengo2/gui/cursor/system.h>
 #include <tetengo2/stdalt.h>
 
 #include <bobura/diagram_view.h>
@@ -270,7 +271,7 @@ namespace bobura::message::view_picture_box::diagram {
 
         using cursor_type = typename picture_box_type::cursor_type;
 
-        using system_cursor_type = typename picture_box_type::system_cursor_type;
+        using system_cursor_type = tetengo2::gui::cursor::system;
 
 
         // variables

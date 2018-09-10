@@ -313,10 +313,10 @@ namespace bobura::model::timetable_info {
 
         static font_color_set make_default()
         {
-            auto      default_font = font_type::dialog_font();
-            font_type default_company_line_name_font{ default_font.family(),    default_font.size() * 2,
-                                                      default_font.bold(),      default_font.italic(),
-                                                      default_font.underline(), default_font.strikeout() };
+            auto            default_font = font_type::dialog_font();
+            const font_type default_company_line_name_font{ default_font.family(),    default_font.size() * 2,
+                                                            default_font.bold(),      default_font.italic(),
+                                                            default_font.underline(), default_font.strikeout() };
 
             font_color_type default_background_font_color{
                 TETENGO2_STDALT_NULLOPT,
@@ -331,15 +331,15 @@ namespace bobura::model::timetable_info {
                                                         tetengo2::stdalt::make_optional(
                                                             color_type{ 0x40, 0x40, 0x40 }) };
             font_color_type default_company_name_font_color{
-                tetengo2::stdalt::make_optional(std::move(default_company_line_name_font)),
+                tetengo2::stdalt::make_optional(font_type{ default_company_line_name_font }),
                 tetengo2::stdalt::make_optional(color_type{ 0x40, 0x40, 0x40 }),
-                tetengo2::stdalt::make_optional(std::move(default_company_line_name_font)),
+                tetengo2::stdalt::make_optional(font_type{ default_company_line_name_font }),
                 tetengo2::stdalt::make_optional(color_type{ 0x40, 0x40, 0x40 })
             };
             font_color_type default_line_name_font_color{
-                tetengo2::stdalt::make_optional(std::move(default_company_line_name_font)),
+                tetengo2::stdalt::make_optional(font_type{ default_company_line_name_font }),
                 tetengo2::stdalt::make_optional(color_type{ 0x40, 0x40, 0x40 }),
-                tetengo2::stdalt::make_optional(std::move(default_company_line_name_font)),
+                tetengo2::stdalt::make_optional(font_type{ default_company_line_name_font }),
                 tetengo2::stdalt::make_optional(color_type{ 0x40, 0x40, 0x40 })
             };
             font_color_type default_note_font_color{ tetengo2::stdalt::make_optional(font_type{ default_font }),

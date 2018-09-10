@@ -13,8 +13,10 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/gui/unit/em.h>
 #include <tetengo2/gui/unit/unit.h>
+#include <tetengo2/gui/widget/abstract_window.h>
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
@@ -127,7 +129,7 @@ namespace {
     class concrete_dialog : public dialog_type
     {
     public:
-        explicit concrete_dialog(window_type::base_type& parent) : dialog_type{ parent } {}
+        explicit concrete_dialog(tetengo2::gui::widget::abstract_window& parent) : dialog_type{ parent } {}
     };
 
 

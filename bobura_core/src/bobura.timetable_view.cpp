@@ -179,7 +179,7 @@ namespace bobura {
         void clear_background(canvas_type& canvas, const dimension_type& canvas_dimension) const
         {
             canvas.set_background(std::make_unique<const solid_background_type>(
-                *m_model.timetable().font_color_set().background().diagram_color()));
+                canvas.drawing_details(), *m_model.timetable().font_color_set().background().diagram_color()));
             canvas.fill_rectangle(position_type{}, canvas_dimension);
         }
 
