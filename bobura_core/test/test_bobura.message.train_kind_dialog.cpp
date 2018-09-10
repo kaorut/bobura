@@ -340,7 +340,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     window_type     window{};
                     concrete_dialog dialog{ window };
-                    auto            font = font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_());
+                    auto            font = font_type::dialog_font();
                     const bobura::message::train_kind_dialog::
                         diagram_font_button_mouse_clicked<dialog_type, font_dialog_type>
                             observer(dialog, font, apply_function);
@@ -352,7 +352,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     window_type     window{};
                     concrete_dialog dialog{ window };
-                    auto            font = font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_());
+                    auto            font = font_type::dialog_font();
                     const bobura::message::train_kind_dialog::
                         diagram_font_button_mouse_clicked<dialog_type, font_dialog_type>
                             observer(dialog, font, apply_function);
@@ -448,7 +448,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     window_type     window{};
                     concrete_dialog dialog{ window };
-                    auto            font = font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_());
+                    auto            font = font_type::dialog_font();
                     const bobura::message::train_kind_dialog::
                         timetable_font_button_mouse_clicked<dialog_type, font_dialog_type>
                             observer(dialog, font, apply_function);
@@ -460,7 +460,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     window_type     window{};
                     concrete_dialog dialog{ window };
-                    auto            font = font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_());
+                    auto            font = font_type::dialog_font();
                     const bobura::message::train_kind_dialog::
                         timetable_font_button_mouse_clicked<dialog_type, font_dialog_type>
                             observer(dialog, font, apply_function);

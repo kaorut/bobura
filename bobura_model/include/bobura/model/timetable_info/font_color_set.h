@@ -13,7 +13,6 @@
 
 #include <boost/operators.hpp>
 
-#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/gui/drawing/color.h>
 #include <tetengo2/stdalt.h>
 
@@ -314,7 +313,7 @@ namespace bobura::model::timetable_info {
 
         static font_color_set make_default()
         {
-            auto            default_font = font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_());
+            auto            default_font = font_type::dialog_font();
             const font_type default_company_line_name_font{ default_font.family(),    default_font.size() * 2,
                                                             default_font.bold(),      default_font.italic(),
                                                             default_font.underline(), default_font.strikeout() };

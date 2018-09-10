@@ -21,7 +21,6 @@
 
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
@@ -933,11 +932,9 @@ namespace bobura::message::train_kind_dialog {
 
         static font_type fixed_size_font(const font_type& base)
         {
-            return font_type{
-                base.family(),    font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_()).size(),
-                base.bold(),      base.italic(),
-                base.underline(), base.strikeout()
-            };
+            return font_type{ base.family(),    font_type::dialog_font().size(),
+                              base.bold(),      base.italic(),
+                              base.underline(), base.strikeout() };
         }
 
         static typename canvas_type::line_style_type
@@ -977,8 +974,7 @@ namespace bobura::message::train_kind_dialog {
 
         void paint_background(canvas_type& canvas) const
         {
-            auto p_background = std::make_unique<solid_background_type>(
-                tetengo2::detail::gui_detail_impl_set().drawing_(), m_background_color);
+            auto p_background = std::make_unique<solid_background_type>(canvas.drawing_details(), m_background_color);
             canvas.set_background(std::move(p_background));
             canvas.fill_rectangle(position_type{}, m_canvas_dimension);
         }
@@ -1038,8 +1034,7 @@ namespace bobura::message::train_kind_dialog {
             const position_type&   position,
             const dimension_type&  dimension) const
         {
-            auto p_background = std::make_unique<solid_background_type>(
-                tetengo2::detail::gui_detail_impl_set().drawing_(), m_background_color);
+            auto p_background = std::make_unique<solid_background_type>(canvas.drawing_details(), m_background_color);
             canvas.set_background(std::move(p_background));
             canvas.fill_rectangle(position, dimension);
 

@@ -13,7 +13,6 @@
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/gui/unit/em.h>
 #include <tetengo2/text.h>
 
@@ -93,7 +92,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     operating_distance_header_type header1{
                         string_type{ TETENGO2_TEXT("hoge") },
-                        font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_()),
+                        font_type::dialog_font(),
                         color_type{ 0x12, 0x34, 0x56 },
                         position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
                         dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
@@ -108,7 +107,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     operating_distance_header_type header1{
                         string_type{ TETENGO2_TEXT("hoge") },
-                        font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_()),
+                        font_type::dialog_font(),
                         color_type{ 0x12, 0x34, 0x56 },
                         position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
                         dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
@@ -116,7 +115,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     };
                     operating_distance_header_type header2{
                         string_type{ TETENGO2_TEXT("hoge") },
-                        font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_()),
+                        font_type::dialog_font(),
                         color_type{ 0x12, 0x34, 0x56 },
                         position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
                         dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
@@ -135,7 +134,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const auto                     p_canvas = picture_box.create_canvas();
                     operating_distance_header_type header{
                         string_type{ TETENGO2_TEXT("hoge") },
-                        font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_()),
+                        font_type::dialog_font(),
                         color_type{ 0x12, 0x34, 0x56 },
                         position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
                         dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
@@ -156,7 +155,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     train_number_description_header_type header1{
                         string_type{ TETENGO2_TEXT("hoge") },
-                        font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_()),
+                        font_type::dialog_font(),
                         color_type{ 0x12, 0x34, 0x56 },
                         position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
                         dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
@@ -171,7 +170,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     train_number_description_header_type header1{
                         string_type{ TETENGO2_TEXT("hoge") },
-                        font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_()),
+                        font_type::dialog_font(),
                         color_type{ 0x12, 0x34, 0x56 },
                         position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
                         dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
@@ -179,7 +178,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     };
                     train_number_description_header_type header2{
                         string_type{ TETENGO2_TEXT("hoge") },
-                        font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_()),
+                        font_type::dialog_font(),
                         color_type{ 0x12, 0x34, 0x56 },
                         position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
                         dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
@@ -198,7 +197,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const auto             p_canvas = picture_box.create_canvas();
                     train_number_description_header_type header{
                         string_type{ TETENGO2_TEXT("hoge") },
-                        font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_()),
+                        font_type::dialog_font(),
                         color_type{ 0x12, 0x34, 0x56 },
                         position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
                         dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
@@ -219,7 +218,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     train_name_description_header_type header1{
                         string_type{ TETENGO2_TEXT("hoge") },
-                        font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_()),
+                        font_type::dialog_font(),
                         color_type{ 0x12, 0x34, 0x56 },
                         position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
                         dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
@@ -234,7 +233,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     train_name_description_header_type header1{
                         string_type{ TETENGO2_TEXT("hoge") },
-                        font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_()),
+                        font_type::dialog_font(),
                         color_type{ 0x12, 0x34, 0x56 },
                         position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
                         dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
@@ -242,7 +241,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     };
                     train_name_description_header_type header2{
                         string_type{ TETENGO2_TEXT("hoge") },
-                        font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_()),
+                        font_type::dialog_font(),
                         color_type{ 0x12, 0x34, 0x56 },
                         position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
                         dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
@@ -261,7 +260,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const auto             p_canvas = picture_box.create_canvas();
                     train_name_description_header_type header{
                         string_type{ TETENGO2_TEXT("hoge") },
-                        font_type::dialog_font(tetengo2::detail::gui_detail_impl_set().drawing_()),
+                        font_type::dialog_font(),
                         color_type{ 0x12, 0x34, 0x56 },
                         position_type{ position_unit_type{ 42 }, position_unit_type{ 24 } },
                         dimension_type{ dimension_unit_type{ 24 }, dimension_unit_type{ 42 } }
