@@ -10,6 +10,7 @@
 #include <vector>
 
 #include <boost/operators.hpp>
+#include <boost/predef.h>
 #include <boost/preprocessor.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -518,6 +519,10 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                 dimension_type{ dimension_unit_type{ 42 }, dimension_unit_type{ 24 } });
                 }
 
+#if !( \
+    BOOST_OS_LINUX && \
+        (BOOST_COMP_CLANG >= BOOST_VERSION_NUMBER(5, 0, 0) && BOOST_COMP_CLANG < BOOST_VERSION_NUMBER(5, 1, 0)) || \
+    (BOOST_COMP_GNUC >= BOOST_VERSION_NUMBER(6, 3, 0) && BOOST_COMP_GNUC < BOOST_VERSION_NUMBER(6, 4, 0)))
                 BOOST_AUTO_TEST_CASE(operator_paren)
                 {
                     BOOST_TEST_PASSPOINT();
@@ -535,6 +540,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     const auto  p_canvas = window.create_canvas();
                     observer(*p_canvas);
                 }
+#endif
 
 
             BOOST_AUTO_TEST_SUITE_END()
