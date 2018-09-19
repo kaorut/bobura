@@ -21,6 +21,7 @@
 
 #include <boost/throw_exception.hpp>
 
+#include <tetengo2/gui/drawing/solid_background.h>
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
@@ -923,7 +924,7 @@ namespace bobura::message::train_kind_dialog {
 
         using background_type = typename canvas_type::background_type;
 
-        using solid_background_type = typename canvas_type::solid_background_type;
+        using solid_background_type = tetengo2::gui::drawing::solid_background;
 
         using train_kind_type = typename info_set_type::train_kind_type;
 
