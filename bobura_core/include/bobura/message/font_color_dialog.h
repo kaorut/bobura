@@ -14,6 +14,7 @@
 #include <memory>
 #include <vector>
 
+#include <tetengo2/gui/drawing/solid_background.h>
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
@@ -173,7 +174,7 @@ namespace bobura::message::font_color_dialog {
 
         using background_type = typename canvas_type::background_type;
 
-        using solid_background_type = typename canvas_type::solid_background_type;
+        using solid_background_type = tetengo2::gui::drawing::solid_background;
 
 
         // variables
