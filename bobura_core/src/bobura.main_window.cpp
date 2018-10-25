@@ -13,6 +13,7 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
+#include <tetengo2/gui/message/message_loop_break.h>
 #include <tetengo2/stdalt.h>
 #include <tetengo2/text.h>
 
