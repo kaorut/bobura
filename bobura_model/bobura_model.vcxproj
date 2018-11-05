@@ -76,6 +76,17 @@
     <ClCompile Include="src\bobura.model.serializer.writer.cpp" />
     <ClCompile Include="src\bobura.model.serializer.writer_selector.cpp" />
     <ClCompile Include="src\bobura.model.serializer.writer_set.cpp" />
+    <ClCompile Include="src\bobura.model.station.cpp" />
+    <ClCompile Include="src\bobura.model.station_info.grade.cpp" />
+    <ClCompile Include="src\bobura.model.timetable.cpp" />
+    <ClCompile Include="src\bobura.model.timetable_info.font_color_set.cpp" />
+    <ClCompile Include="src\bobura.model.timetable_info.station_interval_calculator.cpp" />
+    <ClCompile Include="src\bobura.model.timetable_info.station_location.cpp" />
+    <ClCompile Include="src\bobura.model.train.cpp" />
+    <ClCompile Include="src\bobura.model.train_info.stop.cpp" />
+    <ClCompile Include="src\bobura.model.train_info.time.cpp" />
+    <ClCompile Include="src\bobura.model.train_info.time_span.cpp" />
+    <ClCompile Include="src\bobura.model.train_kind.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E3D6C3EA-1A16-45EB-80A6-69B4AFAD366C}</ProjectGuid>

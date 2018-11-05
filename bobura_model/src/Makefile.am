@@ -22,7 +22,18 @@ sources = \
     bobura.model.serializer.windia_reader.cpp \
     bobura.model.serializer.writer.cpp \
     bobura.model.serializer.writer_selector.cpp \
-    bobura.model.serializer.writer_set.cpp
+    bobura.model.serializer.writer_set.cpp \
+    bobura.model.station.cpp \
+    bobura.model.station_info.grade.cpp \
+    bobura.model.timetable.cpp \
+    bobura.model.timetable_info.font_color_set.cpp \
+    bobura.model.timetable_info.station_interval_calculator.cpp \
+    bobura.model.timetable_info.station_location.cpp \
+    bobura.model.train.cpp \
+    bobura.model.train_info.stop.cpp \
+    bobura.model.train_info.time.cpp \
+    bobura.model.train_info.time_span.cpp \
+    bobura.model.train_kind.cpp
 
 extra_sources =
 
