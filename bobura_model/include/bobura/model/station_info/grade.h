@@ -13,21 +13,20 @@
 
 #include <tetengo2/text.h>
 
+#include <bobura/type_list.h>
+
 
 namespace bobura::model::station_info {
     /*!
-        \brief The class template for a station grade.
-
-        \tparam String A string type.
+        \brief The class for a station grade.
     */
-    template <typename String>
     class grade : private boost::noncopyable
     {
     public:
         // types
 
         //! The string type.
-        using string_type = String;
+        using string_type = type_list::common::string_type;
 
 
         // functions
@@ -60,18 +59,15 @@ namespace bobura::model::station_info {
 
 
     /*!
-        \brief The class template for a local station grade.
-
-        \tparam String A string type.
+        \brief The class for a local station grade.
     */
-    template <typename String>
-    class local : public grade<String>
+    class local : public grade
     {
     public:
         // types
 
         //! The base type.
-        using base_type = grade<String>;
+        using base_type = grade;
 
 
         // static functions
@@ -105,18 +101,15 @@ namespace bobura::model::station_info {
     };
 
     /*!
-        \brief The class template for a principal station grade.
-
-        \tparam String A string type.
+        \brief The class for a principal station grade.
    */
-    template <typename String>
-    class principal : public grade<String>
+    class principal : public grade
     {
     public:
         // types
 
         //! The base type.
-        using base_type = grade<String>;
+        using base_type = grade;
 
 
         // static functions
@@ -150,18 +143,15 @@ namespace bobura::model::station_info {
     };
 
     /*!
-        \brief The class template for a local terminal station grade.
-
-        \tparam String A string type.
+        \brief The class for a local terminal station grade.
     */
-    template <typename String>
-    class local_terminal : public grade<String>
+    class local_terminal : public grade
     {
     public:
         // types
 
         //! The base type.
-        using base_type = grade<String>;
+        using base_type = grade;
 
 
         // static functions
@@ -195,18 +185,15 @@ namespace bobura::model::station_info {
     };
 
     /*!
-        \brief The class template for a principal terminal station grade.
-
-        \tparam String A string type.
+        \brief The class for a principal terminal station grade.
     */
-    template <typename String>
-    class principal_terminal : public grade<String>
+    class principal_terminal : public grade
     {
     public:
         // types
 
         //! The base type.
-        using base_type = grade<String>;
+        using base_type = grade;
 
 
         // static functions
@@ -241,30 +228,27 @@ namespace bobura::model::station_info {
 
 
     /*!
-        \brief The class template for a grade type set.
-
-        \tparam String A string type.
+        \brief The class for a grade type set.
     */
-    template <typename String>
     class grade_type_set : private boost::noncopyable
     {
     public:
         // types
 
         //! The grade type.
-        using grade_type = grade<String>;
+        using grade_type = grade;
 
         //! The local type.
-        using local_type = local<String>;
+        using local_type = local;
 
         //! The principal type.
-        using principal_type = principal<String>;
+        using principal_type = principal;
 
         //! The local terminal type.
-        using local_terminal_type = local_terminal<String>;
+        using local_terminal_type = local_terminal;
 
         //! The principal terminal type.
-        using principal_terminal_type = principal_terminal<String>;
+        using principal_terminal_type = principal_terminal;
 
 
     private:

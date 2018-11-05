@@ -63,7 +63,7 @@ namespace bobura::view {
 
         using application_font_color_type = application_font_color_set_type::font_color_type;
 
-        using application_grade_type_set_type = model::station_info::grade_type_set<application_string_type>;
+        using application_grade_type_set_type = model::station_info::grade_type_set;
 
         using application_grade_type = application_grade_type_set_type::grade_type;
 #endif
@@ -92,7 +92,7 @@ namespace bobura::view {
 
         using test_font_color_type = test_font_color_set_type::font_color_type;
 
-        using test_grade_type_set_type = model::station_info::grade_type_set<test_string_type>;
+        using test_grade_type_set_type = model::station_info::grade_type_set;
 
         using test_grade_type = test_grade_type_set_type::grade_type;
     }

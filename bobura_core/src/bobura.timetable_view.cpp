@@ -108,7 +108,7 @@ namespace bobura {
 
         using font_color_set_type = typename model_type::timetable_type::font_color_set_type;
 
-        using station_grade_type_set_type = model::station_info::grade_type_set<string_type>;
+        using station_grade_type_set_type = model::station_info::grade_type_set;
 
         using station_grade_type = typename station_grade_type_set_type::grade_type;
 

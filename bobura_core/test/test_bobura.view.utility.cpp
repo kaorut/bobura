@@ -51,7 +51,7 @@ namespace {
 
     using font_color_type = font_color_set_type::font_color_type;
 
-    using station_grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
+    using station_grade_type_set_type = bobura::model::station_info::grade_type_set;
 
     using grade_type = station_grade_type_set_type::grade_type;
 }

@@ -129,7 +129,7 @@ namespace bobura::model::serializer {
 
         using push_parser_type = typename pull_parser_type::push_parser_type;
 
-        using station_grade_type_set_type = station_info::grade_type_set<string_type>;
+        using station_grade_type_set_type = station_info::grade_type_set;
 
         using promise_type = typename exec_json_reading_task_type::promise_type;
 

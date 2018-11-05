@@ -56,7 +56,7 @@ namespace {
 
     using station_type = bobura::model::station<string_type>;
 
-    using grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
+    using grade_type_set_type = bobura::model::station_info::grade_type_set;
 
 
     // functions

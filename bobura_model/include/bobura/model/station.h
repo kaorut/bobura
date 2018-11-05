@@ -30,7 +30,7 @@ namespace bobura::model {
         using string_type = String;
 
         //! The grade type.
-        using grade_type = station_info::grade<string_type>;
+        using grade_type = station_info::grade;
 
 
         // constructors and destructor

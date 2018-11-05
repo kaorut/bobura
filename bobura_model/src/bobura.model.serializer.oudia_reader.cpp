@@ -84,7 +84,7 @@ namespace bobura::model::serializer {
 
         using error_type = typename base_type::error_type;
 
-        using station_grade_type_set_type = station_info::grade_type_set<string_type>;
+        using station_grade_type_set_type = station_info::grade_type_set;
 
 
         // constructors and destructor
