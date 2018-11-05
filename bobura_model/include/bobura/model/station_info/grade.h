@@ -11,8 +11,6 @@
 
 #include <boost/core/noncopyable.hpp>
 
-#include <tetengo2/text.h>
-
 #include <bobura/type_list.h>
 
 
@@ -36,19 +34,21 @@ namespace bobura::model::station_info {
 
             \return The name.
         */
-        const string_type& name() const
-        {
-            return name_impl();
-        }
+        const string_type& name() const;
 
 
     protected:
         // constructors and destructor
 
         /*!
-            \brief Destroys the grade.
+            \brief Creates a station grade.
         */
-        virtual ~grade() = default;
+        grade();
+
+        /*!
+            \brief Destroys the station grade.
+        */
+        virtual ~grade();
 
 
     private:
@@ -77,27 +77,26 @@ namespace bobura::model::station_info {
 
             \return The instance of the local.
         */
-        static const local& instance()
-        {
-            static const local singleton{};
+        static const local& instance();
 
-            return singleton;
-        }
+
+        // constructors and destructor
+
+        /*!
+            \brief Destroys the local station grade.
+        */
+        virtual ~local();
 
 
     private:
-        // constructors and destructor
+        // constructors
 
-        virtual ~local() = default;
+        local();
 
 
         // virtual functions
 
-        virtual const typename local::string_type& name_impl() const override
-        {
-            static const typename local::string_type singleton{ TETENGO2_TEXT("local") };
-            return singleton;
-        }
+        virtual const typename local::string_type& name_impl() const override;
     };
 
     /*!
@@ -119,27 +118,26 @@ namespace bobura::model::station_info {
 
             \return The instance of the principal.
         */
-        static const principal& instance()
-        {
-            static const principal singleton{};
+        static const principal& instance();
 
-            return singleton;
-        }
+
+        // constructors and destructor
+
+        /*!
+            \brief Destroys the principal station grade.
+        */
+        virtual ~principal();
 
 
     private:
-        // constructors and destructor
+        // constructors
 
-        virtual ~principal() = default;
+        principal();
 
 
         // virtual functions
 
-        virtual const typename principal::string_type& name_impl() const override
-        {
-            static const typename principal::string_type singleton{ TETENGO2_TEXT("principal") };
-            return singleton;
-        }
+        virtual const typename principal::string_type& name_impl() const override;
     };
 
     /*!
@@ -161,27 +159,26 @@ namespace bobura::model::station_info {
 
             \return The instance of the local terminal.
         */
-        static const local_terminal& instance()
-        {
-            static const local_terminal singleton{};
+        static const local_terminal& instance();
 
-            return singleton;
-        }
+
+        // constructors and destructor
+
+        /*!
+            \brief Destroys the local terminal station grade.
+        */
+        virtual ~local_terminal();
 
 
     private:
-        // constructors and destructor
+        // constructors
 
-        virtual ~local_terminal() = default;
+        local_terminal();
 
 
         // virtual functions
 
-        virtual const typename local_terminal::string_type& name_impl() const override
-        {
-            static const typename local_terminal::string_type singleton{ TETENGO2_TEXT("local terminal") };
-            return singleton;
-        }
+        virtual const typename local_terminal::string_type& name_impl() const override;
     };
 
     /*!
@@ -203,27 +200,26 @@ namespace bobura::model::station_info {
 
             \return The instance of the principal terminal.
         */
-        static const principal_terminal& instance()
-        {
-            static const principal_terminal singleton{};
+        static const principal_terminal& instance();
 
-            return singleton;
-        }
+
+        // constructors and destructor
+
+        /*!
+            \brief Destroys the principal terminal station grade.
+        */
+        virtual ~principal_terminal();
 
 
     private:
-        // constructors and destructor
+        // constructors
 
-        virtual ~principal_terminal() = default;
+        principal_terminal();
 
 
         // virtual functions
 
-        virtual const typename principal_terminal::string_type& name_impl() const override
-        {
-            static const typename principal_terminal::string_type singleton{ TETENGO2_TEXT("principal terminal") };
-            return singleton;
-        }
+        virtual const typename principal_terminal::string_type& name_impl() const override;
     };
 
 

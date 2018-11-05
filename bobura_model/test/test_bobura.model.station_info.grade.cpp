@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     local_type::instance();
                 }
 
-                BOOST_AUTO_TEST_CASE(name)
+                BOOST_AUTO_TEST_CASE(name_impl)
                 {
                     BOOST_TEST_PASSPOINT();
 
@@ -102,7 +102,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     principal_type::instance();
                 }
 
-                BOOST_AUTO_TEST_CASE(name)
+                BOOST_AUTO_TEST_CASE(name_impl)
                 {
                     BOOST_TEST_PASSPOINT();
 
@@ -121,7 +121,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     local_terminal_type::instance();
                 }
 
-                BOOST_AUTO_TEST_CASE(name)
+                BOOST_AUTO_TEST_CASE(name_impl)
                 {
                     BOOST_TEST_PASSPOINT();
 
@@ -141,7 +141,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     principal_terminal_type::instance();
                 }
 
-                BOOST_AUTO_TEST_CASE(name)
+                BOOST_AUTO_TEST_CASE(name_impl)
                 {
                     BOOST_TEST_PASSPOINT();
 
