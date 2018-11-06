@@ -95,7 +95,7 @@ namespace bobura::model {
         using trains_type = std::vector<train_type>;
 
         //! The font color set type.
-        using font_color_set_type = timetable_info::font_color_set<font_type>;
+        using font_color_set_type = timetable_info::font_color_set;
 
         //! The observer set type.
         using observer_set_type = message::timetable_observer_set;

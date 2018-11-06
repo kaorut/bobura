@@ -11,12 +11,8 @@
 #include <string>
 
 #include <boost/preprocessor.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/gui/menu/abstract_popup.h>
-#include <tetengo2/gui/menu/menu_bar.h>
-#include <tetengo2/gui/widget/dialog.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>

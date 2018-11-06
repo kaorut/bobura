@@ -18,6 +18,7 @@ bobura::model::serializer::writer_selector::extension_impl
 bobura::model::serializer::writer_selector::write_impl
 bobura::model::serializer::oudia_diagram_dialog::set_result_impl
 bobura::model::timetable::replace_train_kind_index::
+bobura::model::timetable_info::operator ==
 bobura::train_kind_dialog::do_modal_impl
 bobura::train_kind_dialog::info_set_type::
 bobura::view::diagram::[a-zA-Z0-9_]+::draw_on_impl
@@ -37,6 +38,8 @@ test_bobura::model::serializer::[a-zA-Z0-9_]+_writer::extension
 test_bobura::model::serializer::[a-zA-Z0-9_]+_writer::selects
 test_bobura::model::serializer::[a-zA-Z0-9_]+_writer::write
 test_bobura::model::station_info::[a-zA-Z0-9_]+::name
+test_bobura::model::timetable_info::font_color::operator_equal
+test_bobura::model::timetable_info::font_color_set::operator_equal
 test_bobura::view::diagram::[a-zA-Z0-9_]+::draw_on
 test_bobura::view::diagram::[a-zA-Z0-9_]+::p_item_by_position
 test_bobura::view::diagram::[a-zA-Z0-9_]+::select
