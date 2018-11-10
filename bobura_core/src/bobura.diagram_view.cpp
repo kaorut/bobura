@@ -15,8 +15,6 @@
 #include <boost/core/noncopyable.hpp>
 #include <boost/predef.h>
 
-#include <tetengo2/detail/base/gui_impl_set.h>
-
 #include <bobura/detail_type_list.h>
 #include <bobura/diagram_view.h>
 #include <bobura/type_list.h>
