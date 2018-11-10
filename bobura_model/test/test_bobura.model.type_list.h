@@ -12,12 +12,14 @@
 #include <cstddef>
 #include <string>
 
+#include <boost/rational.hpp>
+
 #include <tetengo2/gui/drawing/color.h>
 #include <tetengo2/gui/drawing/font.h>
 
 
 namespace test_bobura::model::type_list {
-/**** Common *****************************************************************************************************/
+    /**** Common *****************************************************************************************************/
 
 #if !defined(DOCUMENTATION)
     namespace detail::common {
@@ -27,9 +29,9 @@ namespace test_bobura::model::type_list {
 
         using string_type = std::wstring;
 
-        using operating_distance_type = size_type;
+        using operating_distance_type = boost::rational<size_type>;
 
-        using speed_type = size_type;
+        using speed_type = boost::rational<size_type>;
     }
 #endif
 

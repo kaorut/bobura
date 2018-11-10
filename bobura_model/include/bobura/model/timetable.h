@@ -76,8 +76,7 @@ namespace bobura::model {
         using station_locations_type = std::vector<station_location_type>;
 
         //! The station interval calculator type.
-        using station_interval_calculator_type = timetable_info::
-            station_interval_calculator<size_type, difference_type, string_type, operating_distance_type>;
+        using station_interval_calculator_type = timetable_info::station_interval_calculator;
 
         //! The station intervals type.
         using station_intervals_type = typename station_interval_calculator_type::station_intervals_type;

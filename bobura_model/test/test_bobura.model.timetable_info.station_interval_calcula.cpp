@@ -39,8 +39,7 @@ namespace {
 
     using operating_distance_type = common_type_list_type::operating_distance_type;
 
-    using station_interval_calculator_type = bobura::model::timetable_info::
-        station_interval_calculator<size_type, difference_type, string_type, operating_distance_type>;
+    using station_interval_calculator_type = bobura::model::timetable_info::station_interval_calculator;
 
     using station_location_type = bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
 

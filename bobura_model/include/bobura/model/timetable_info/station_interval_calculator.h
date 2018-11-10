@@ -19,34 +19,29 @@
 
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura::model::timetable_info {
     /*!
-        \brief The class template for a station interval calculator.
-
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
+        \brief The class for a station interval calculator.
     */
-    template <typename Size, typename Difference, typename String, typename OperatingDistance>
     class station_interval_calculator : private boost::noncopyable
     {
     public:
         // types
 
         //! The size type.
-        using size_type = Size;
+        using size_type = bobura::type_list::common::size_type;
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = bobura::type_list::common::difference_type;
 
         //! The string type.
-        using string_type = String;
+        using string_type = bobura::type_list::common::string_type;
 
         //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
+        using operating_distance_type = bobura::type_list::common::operating_distance_type;
 
         //! The station location type.
         using station_location_type = station_location<string_type, operating_distance_type>;
