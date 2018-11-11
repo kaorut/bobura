@@ -12,29 +12,23 @@
 #include <boost/operators.hpp>
 
 #include <bobura/model/station.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura::model::timetable_info {
     /*!
-        \brief The class template for a station location.
-
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
+        \brief The class for a station location.
     */
-    template <typename String, typename OperatingDistance>
-    class station_location : private boost::equality_comparable<station_location<String, OperatingDistance>>
+    class station_location : private boost::equality_comparable<station_location>
     {
     public:
         // types
 
-        //! The string type.
-        using string_type = String;
-
         //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
+        using operating_distance_type = type_list::common::operating_distance_type;
 
         //! The station type.
-        using station_type = station<string_type>;
+        using station_type = station<type_list::common::string_type>;
 
 
         // constructors and destructor

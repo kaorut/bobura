@@ -40,7 +40,7 @@ namespace {
 
     using station_interval_calculator_type = bobura::model::timetable_info::station_interval_calculator;
 
-    using station_location_type = bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
+    using station_location_type = bobura::model::timetable_info::station_location;
 
     using train_type = bobura::model::train<size_type, difference_type, string_type>;
 

@@ -62,7 +62,7 @@ namespace {
 
     using local_type = grade_type_set_type::local_type;
 
-    using station_location_type = bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
+    using station_location_type = bobura::model::timetable_info::station_location;
 
     using time_type = bobura::model::train_info::time<size_type, difference_type>;
 

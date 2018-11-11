@@ -29,15 +29,13 @@ namespace {
 
     using string_type = common_type_list_type::string_type;
 
-    using operating_distance_type = common_type_list_type::operating_distance_type;
-
     using station_type = bobura::model::station<string_type>;
 
     using grade_type_set_type = bobura::model::station_info::grade_type_set;
 
     using local_type = grade_type_set_type::local_type;
 
-    using station_location_type = bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
+    using station_location_type = bobura::model::timetable_info::station_location;
 }
 
 

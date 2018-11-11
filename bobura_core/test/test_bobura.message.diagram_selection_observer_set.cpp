@@ -43,11 +43,7 @@ namespace {
 
     using station_location_type = model_type::timetable_type::station_location_type;
 
-    using observer_set_type = bobura::message::diagram_selection_observer_set<
-        size_type,
-        difference_type,
-        string_type,
-        station_location_type::operating_distance_type>;
+    using observer_set_type = bobura::message::diagram_selection_observer_set<size_type, difference_type, string_type>;
 }
 
 

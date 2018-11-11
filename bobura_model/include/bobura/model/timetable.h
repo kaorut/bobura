@@ -70,7 +70,7 @@ namespace bobura::model {
         using font_type = Font;
 
         //! The station location type.
-        using station_location_type = timetable_info::station_location<string_type, operating_distance_type>;
+        using station_location_type = timetable_info::station_location;
 
         //! The station locations type.
         using station_locations_type = std::vector<station_location_type>;
