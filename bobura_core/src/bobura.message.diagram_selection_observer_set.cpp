@@ -84,14 +84,12 @@ namespace bobura::message {
     {}
 
     template <typename Size, typename Difference, typename String>
-    diagram_selection_observer_set<Size, Difference, String>::
-        ~diagram_selection_observer_set() noexcept
+    diagram_selection_observer_set<Size, Difference, String>::~diagram_selection_observer_set() noexcept
     {}
 
     template <typename Size, typename Difference, typename String>
-    const typename diagram_selection_observer_set<Size, Difference, String>::
-        station_selected_signal_type&
-        diagram_selection_observer_set<Size, Difference, String>::station_selected() const
+    const typename diagram_selection_observer_set<Size, Difference, String>::station_selected_signal_type&
+    diagram_selection_observer_set<Size, Difference, String>::station_selected() const
     {
         return m_p_impl->station_selected();
     }
@@ -104,9 +102,8 @@ namespace bobura::message {
     }
 
     template <typename Size, typename Difference, typename String>
-    const typename diagram_selection_observer_set<Size, Difference, String>::
-        train_selected_signal_type&
-        diagram_selection_observer_set<Size, Difference, String>::train_selected() const
+    const typename diagram_selection_observer_set<Size, Difference, String>::train_selected_signal_type&
+    diagram_selection_observer_set<Size, Difference, String>::train_selected() const
     {
         return m_p_impl->train_selected();
     }
@@ -119,9 +116,8 @@ namespace bobura::message {
     }
 
     template <typename Size, typename Difference, typename String>
-    const typename diagram_selection_observer_set<Size, Difference, String>::
-        all_unselected_signal_type&
-        diagram_selection_observer_set<Size, Difference, String>::all_unselected() const
+    const typename diagram_selection_observer_set<Size, Difference, String>::all_unselected_signal_type&
+    diagram_selection_observer_set<Size, Difference, String>::all_unselected() const
     {
         return m_p_impl->all_unselected();
     }
