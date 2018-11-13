@@ -12,33 +12,29 @@
 #include <boost/operators.hpp>
 
 #include <bobura/model/train_info/time.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura::model::train_info {
     /*!
-        \brief The class template for a train stop.
-
-        \tparam Size       A size type.
-        \tparam Difference A difference type.
-        \tparam String     A string type.
+        \brief The class for a train stop.
     */
-    template <typename Size, typename Difference, typename String>
-    class stop : private boost::equality_comparable<stop<Size, Difference, String>>
+    class stop : private boost::equality_comparable<stop>
     {
     public:
         // types
 
         //! The size type.
-        using size_type = Size;
+        using size_type = type_list::common::size_type;
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = type_list::common::difference_type;
 
         //! The time type.
         using time_type = time<size_type, difference_type>;
 
         //! The string type.
-        using string_type = String;
+        using string_type = type_list::common::string_type;
 
 
         // constructors and destructor

@@ -39,7 +39,7 @@ namespace {
 
     using time_type = bobura::model::train_info::time<size_type, difference_type>;
 
-    using stop_type = bobura::model::train_info::stop<size_type, difference_type, string_type>;
+    using stop_type = bobura::model::train_info::stop;
 
     using train_type = bobura::model::train<size_type, difference_type, string_type>;
 }

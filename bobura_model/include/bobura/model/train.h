@@ -41,7 +41,7 @@ namespace bobura::model {
         using string_type = String;
 
         //! The stop type.
-        using stop_type = train_info::stop<size_type, difference_type, string_type>;
+        using stop_type = train_info::stop;
 
         //! The stops type.
         using stops_type = std::vector<stop_type>;
