@@ -67,7 +67,7 @@ namespace {
 
     using station_location_type = bobura::model::timetable_info::station_location;
 
-    using time_type = bobura::model::train_info::time<size_type, difference_type>;
+    using time_type = bobura::model::train_info::time;
 
     using stop_type = bobura::model::train_info::stop;
 

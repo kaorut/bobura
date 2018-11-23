@@ -67,7 +67,7 @@ namespace {
 
     using font_type = ui_type_list_type::font_type;
 
-    using time_type = bobura::model::train_info::time<size_type, difference_type>;
+    using time_type = bobura::model::train_info::time;
 
     using timetable_type = bobura::model::
         timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;

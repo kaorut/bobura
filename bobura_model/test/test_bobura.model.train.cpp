@@ -37,7 +37,7 @@ namespace {
 
     using string_type = common_type_list_type::string_type;
 
-    using time_type = bobura::model::train_info::time<size_type, difference_type>;
+    using time_type = bobura::model::train_info::time;
 
     using stop_type = bobura::model::train_info::stop;
 

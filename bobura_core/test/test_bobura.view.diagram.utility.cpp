@@ -48,7 +48,7 @@ namespace {
 
     using time_span_type = bobura::model::train_info::time_span<difference_type>;
 
-    using time_type = bobura::model::train_info::time<size_type, difference_type>;
+    using time_type = bobura::model::train_info::time;
 
     using dimension_unit_type = canvas_type::dimension_unit_type;
 }

@@ -15,7 +15,6 @@ namespace bobura::model::train_info {
     template <typename Difference>
     class time_span;
 
-    template <typename Size, typename Difference>
     class time;
 }
 
@@ -24,7 +23,6 @@ namespace bobura::view::diagram {
     /*!
         \brief Calculates a horizontal position by a time.
 
-        \tparam Size       A size type.
         \tparam Difference A difference type.
         \tparam Left       A left type.
 
@@ -37,14 +35,14 @@ namespace bobura::view::diagram {
 
         \return The horizontal position.
     */
-    template <typename Size, typename Difference, typename Left>
+    template <typename Difference, typename Left>
     Left time_to_left(
-        const model::train_info::time<Size, Difference>& time,
-        const model::train_info::time_span<Difference>&  time_offset,
-        int                                              previous_or_next_day,
-        const Left&                                      horizontal_scroll_bar_position,
-        const Left&                                      station_header_right,
-        const Left&                                      horizontal_scale);
+        const model::train_info::time&                  time,
+        const model::train_info::time_span<Difference>& time_offset,
+        int                                             previous_or_next_day,
+        const Left&                                     horizontal_scroll_bar_position,
+        const Left&                                     station_header_right,
+        const Left&                                     horizontal_scale);
 
     /*!
         \brief Calculates a vertical position by a station index.

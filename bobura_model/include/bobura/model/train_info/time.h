@@ -18,30 +18,23 @@
 #include <boost/throw_exception.hpp>
 
 #include <bobura/model/train_info/time_span.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura::model::train_info {
     /*!
-        \brief The class template for a time.
-
-        \tparam Size       A size type.
-        \tparam Difference A difference type.
+        \brief The class for a time.
     */
-    template <typename Size, typename Difference>
-    class time : private boost::totally_ordered<time<Size, Difference>>,
-                 private boost::additive<time<Size, Difference>, time_span<Difference>>
+    class time : private boost::totally_ordered<time>, private boost::additive<time, time_span<type_list ::common::difference_type>>
     {
     public:
         // types
 
         //! The size type.
-        using size_type = Size;
-
-        //! The difference type.
-        using difference_type = Difference;
+        using size_type = type_list::common::size_type;
 
         //! The time span type.
-        using time_span_type = time_span<difference_type>;
+        using time_span_type = time_span<type_list ::common::difference_type>;
 
         //! The hours-minutes-seconds type.
         class hours_minutes_seconds_type : private boost::equality_comparable<hours_minutes_seconds_type>

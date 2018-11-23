@@ -24,13 +24,11 @@ namespace {
 
     using common_type_list_type = test_bobura::model::type_list::common;
 
-    using size_type = common_type_list_type::size_type;
-
     using difference_type = common_type_list_type::difference_type;
 
     using time_span_type = bobura::model::train_info::time_span<difference_type>;
 
-    using time_type = bobura::model::train_info::time<size_type, difference_type>;
+    using time_type = bobura::model::train_info::time;
 
     using hours_minutes_seconds_type_ = time_type::hours_minutes_seconds_type;
 }

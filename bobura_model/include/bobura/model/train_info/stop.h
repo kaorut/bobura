@@ -26,14 +26,8 @@ namespace bobura::model::train_info {
     public:
         // types
 
-        //! The size type.
-        using size_type = type_list::common::size_type;
-
-        //! The difference type.
-        using difference_type = type_list::common::difference_type;
-
         //! The time type.
-        using time_type = time<size_type, difference_type>;
+        using time_type = time;
 
         //! The string type.
         using string_type = type_list::common::string_type;
