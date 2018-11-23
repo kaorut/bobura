@@ -42,7 +42,7 @@ namespace bobura::model::train_info {
                 \param minutes Minutes.
                 \param seconds Seconds.
             */
-            hours_minutes_seconds_type(const size_type hours, const size_type minutes, const size_type seconds);
+            hours_minutes_seconds_type(size_type hours, size_type minutes, size_type seconds);
 
             /*!
                 \brief Checks whether one hours-minutes-seconds is equal to another.
@@ -110,7 +110,7 @@ namespace bobura::model::train_info {
 
             \param seconds_from_midnight Seconds from the midnight.
         */
-        explicit time(const size_type seconds_from_midnight);
+        explicit time(size_type seconds_from_midnight);
 
         /*!
             \brief Creates a time.
@@ -121,7 +121,7 @@ namespace bobura::model::train_info {
 
             \throw std::out_of_range When hours, minutes and/or seconds are invalid.
         */
-        time(const size_type hours, const size_type minutes, const size_type seconds);
+        time(size_type hours, size_type minutes, size_type seconds);
 
 
         // functions
