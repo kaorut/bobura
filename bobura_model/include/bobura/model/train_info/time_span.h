@@ -9,11 +9,7 @@
 #if !defined(BOBURA_MODEL_TRAININFO_TIMESPAN_H)
 #define BOBURA_MODEL_TRAININFO_TIMESPAN_H
 
-#include <stdexcept>
-
-#include <boost/core/swap.hpp>
 #include <boost/operators.hpp>
-#include <boost/throw_exception.hpp>
 
 #include <bobura/type_list.h>
 
@@ -41,12 +37,7 @@ namespace bobura::model::train_info {
                 \param minutes Minutes.
                 \param seconds Seconds.
             */
-            hours_minutes_seconds_type(
-                const difference_type hours,
-                const difference_type minutes,
-                const difference_type seconds)
-            : m_hours{ hours }, m_minutes{ minutes }, m_seconds{ seconds }
-            {}
+            hours_minutes_seconds_type(difference_type hours, difference_type minutes, difference_type seconds);
 
             /*!
                 \brief Checks whether one hours-minutes-seconds is equal to another.
@@ -57,41 +48,28 @@ namespace bobura::model::train_info {
                 \retval true  When the one is equal to the other.
                 \retval false Otherwise.
             */
-            friend bool operator==(const hours_minutes_seconds_type& one, const hours_minutes_seconds_type& another)
-            {
-                return one.m_hours == another.m_hours && one.m_minutes == another.m_minutes &&
-                       one.m_seconds == another.m_seconds;
-            }
+            friend bool operator==(const hours_minutes_seconds_type& one, const hours_minutes_seconds_type& another);
 
             /*!
                 \brief Returns hours.
 
                 \return Hours.
             */
-            difference_type hours() const
-            {
-                return m_hours;
-            }
+            difference_type hours() const;
 
             /*!
                 \brief Returns minutes.
 
                 \return Minutes.
             */
-            difference_type minutes() const
-            {
-                return m_minutes;
-            }
+            difference_type minutes() const;
 
             /*!
                 \brief Returns seconds.
 
                 \return Seconds.
             */
-            difference_type seconds() const
-            {
-                return m_seconds;
-            }
+            difference_type seconds() const;
 
 
         private:
@@ -112,10 +90,7 @@ namespace bobura::model::train_info {
 
             \return The seconds of a whole way.
         */
-        static difference_type seconds_of_whole_day()
-        {
-            return 24 * 60 * 60;
-        }
+        static difference_type seconds_of_whole_day();
 
 
         // constructors and destructor
@@ -125,7 +100,7 @@ namespace bobura::model::train_info {
 
             \param seconds A second span.
         */
-        explicit time_span(const difference_type seconds) : m_seconds{ seconds } {}
+        explicit time_span(difference_type seconds);
 
         /*!
             \brief Creates a time span.
@@ -140,9 +115,7 @@ namespace bobura::model::train_info {
             \throw std::out_of_range     When the minutes and/or seconds are invalid.
             \throw std::invalid_argument When the signs of the hours and the minutes and the seconds are different.
         */
-        time_span(const difference_type hours, const difference_type minutes, const difference_type seconds)
-        : m_seconds{ calculate_seconds(hours, minutes, seconds) }
-        {}
+        time_span(difference_type hours, difference_type minutes, difference_type seconds);
 
 
         // functions
@@ -154,15 +127,7 @@ namespace bobura::model::train_info {
 
             \return This object.
         */
-        time_span& operator+=(const time_span& another)
-        {
-            time_span temp{ *this };
-
-            temp.m_seconds += another.m_seconds;
-
-            boost::swap(temp, *this);
-            return *this;
-        }
+        time_span& operator+=(const time_span& another);
 
         /*!
             \brief Subtracts another time span.
@@ -171,15 +136,7 @@ namespace bobura::model::train_info {
 
             \return This object.
         */
-        time_span& operator-=(const time_span& another)
-        {
-            time_span temp{ *this };
-
-            temp.m_seconds -= another.m_seconds;
-
-            boost::swap(temp, *this);
-            return *this;
-        }
+        time_span& operator-=(const time_span& another);
 
         /*!
             \brief Checks whether one time span is equal to another.
@@ -190,10 +147,7 @@ namespace bobura::model::train_info {
             \retval true  When the one is equal to the other.
             \retval false Otherwise.
         */
-        friend bool operator==(const time_span& one, const time_span& another)
-        {
-            return one.m_seconds == another.m_seconds;
-        }
+        friend bool operator==(const time_span& one, const time_span& another);
 
         /*!
             \brief Checks whether one time span is less than another.
@@ -204,68 +158,24 @@ namespace bobura::model::train_info {
             \retval true  When the one is less than the other.
             \retval false Otherwise.
         */
-        friend bool operator<(const time_span& one, const time_span& another)
-        {
-            return one.m_seconds < another.m_seconds;
-        }
+        friend bool operator<(const time_span& one, const time_span& another);
 
         /*!
             \brief Returns the seconds.
 
             \return The seconds.
         */
-        difference_type seconds() const
-        {
-            return m_seconds;
-        }
+        difference_type seconds() const;
 
         /*!
             \brief Returns the hours, minutes and seconds.
 
             \return The hours, minutes and seconds.
         */
-        const hours_minutes_seconds_type hours_minutes_seconds() const
-        {
-            const difference_type hours = m_seconds / (60 * 60);
-            const difference_type minutes = m_seconds / 60 - hours * 60;
-            const difference_type seconds = m_seconds - hours * 60 * 60 - minutes * 60;
-
-            return hours_minutes_seconds_type{ hours, minutes, seconds };
-        }
+        hours_minutes_seconds_type hours_minutes_seconds() const;
 
 
     private:
-        // static functions
-
-        static difference_type
-        calculate_seconds(const difference_type hours, const difference_type minutes, const difference_type seconds)
-        {
-            if (!(hours >= 0 && minutes >= 0 && seconds >= 0) && !(hours <= 0 && minutes <= 0 && seconds <= 0))
-            {
-                BOOST_THROW_EXCEPTION(
-                    std::invalid_argument("The signs of the hours, the minutes and the seconds are different."));
-            }
-            else if (minutes > 59)
-            {
-                BOOST_THROW_EXCEPTION(std::out_of_range("60 or larger is specified for the minutes."));
-            }
-            else if (minutes < -59)
-            {
-                BOOST_THROW_EXCEPTION(std::out_of_range("-60 or smaller is specified for the minutes."));
-            }
-            else if (seconds > 59)
-            {
-                BOOST_THROW_EXCEPTION(std::out_of_range("60 or larger is specified for the seconds."));
-            }
-            else if (seconds < -59)
-            {
-                BOOST_THROW_EXCEPTION(std::out_of_range("-60 or smaller is specified for the seconds."));
-            }
-
-            return hours * 60 * 60 + minutes * 60 + seconds;
-        }
-
-
         // variables
 
         difference_type m_seconds;
