@@ -19,8 +19,7 @@ namespace bobura::model::train_info {
     /*!
         \brief The class for a time.
     */
-    class time : private boost::totally_ordered<time>,
-                 private boost::additive<time, time_span<type_list ::common::difference_type>>
+    class time : private boost::totally_ordered<time>, private boost::additive<time, time_span>
     {
     public:
         // types
@@ -29,7 +28,7 @@ namespace bobura::model::train_info {
         using size_type = type_list::common::size_type;
 
         //! The time span type.
-        using time_span_type = time_span<type_list ::common::difference_type>;
+        using time_span_type = time_span;
 
         //! The hours-minutes-seconds type.
         class hours_minutes_seconds_type : private boost::equality_comparable<hours_minutes_seconds_type>

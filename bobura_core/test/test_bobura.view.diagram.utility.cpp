@@ -34,8 +34,6 @@ namespace {
 
     using size_type = common_type_list_type::size_type;
 
-    using difference_type = common_type_list_type::difference_type;
-
     using window_type = ui_type_list_type::window_type;
 
     using picture_box_type = ui_type_list_type::picture_box_type;
@@ -46,7 +44,7 @@ namespace {
 
     using canvas_type = ui_type_list_type::canvas_type;
 
-    using time_span_type = bobura::model::train_info::time_span<difference_type>;
+    using time_span_type = bobura::model::train_info::time_span;
 
     using time_type = bobura::model::train_info::time;
 

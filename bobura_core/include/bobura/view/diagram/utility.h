@@ -12,10 +12,9 @@
 #include <vector>
 
 namespace bobura::model::train_info {
-    template <typename Difference>
-    class time_span;
-
     class time;
+
+    class time_span;
 }
 
 
@@ -23,8 +22,7 @@ namespace bobura::view::diagram {
     /*!
         \brief Calculates a horizontal position by a time.
 
-        \tparam Difference A difference type.
-        \tparam Left       A left type.
+        \tparam Left A left type.
 
         \param time                           A time.
         \param time_offset                    A time offset
@@ -35,14 +33,14 @@ namespace bobura::view::diagram {
 
         \return The horizontal position.
     */
-    template <typename Difference, typename Left>
+    template <typename Left>
     Left time_to_left(
-        const model::train_info::time&                  time,
-        const model::train_info::time_span<Difference>& time_offset,
-        int                                             previous_or_next_day,
-        const Left&                                     horizontal_scroll_bar_position,
-        const Left&                                     station_header_right,
-        const Left&                                     horizontal_scale);
+        const model::train_info::time&      time,
+        const model::train_info::time_span& time_offset,
+        int                                 previous_or_next_day,
+        const Left&                         horizontal_scroll_bar_position,
+        const Left&                         station_header_right,
+        const Left&                         horizontal_scale);
 
     /*!
         \brief Calculates a vertical position by a station index.

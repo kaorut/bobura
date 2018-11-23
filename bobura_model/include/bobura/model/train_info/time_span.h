@@ -15,22 +15,20 @@
 #include <boost/operators.hpp>
 #include <boost/throw_exception.hpp>
 
+#include <bobura/type_list.h>
+
 
 namespace bobura::model::train_info {
     /*!
-        \brief The class template for a time span.
-
-        \tparam Difference A difference type.
+        \brief The class for a time span.
     */
-    template <typename Difference>
-    class time_span : private boost::totally_ordered<time_span<Difference>>,
-                      private boost::additive<time_span<Difference>>
+    class time_span : private boost::totally_ordered<time_span>, private boost::additive<time_span>
     {
     public:
         // types
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = type_list::common::difference_type;
 
         //! The hours-minutes-seconds type.
         class hours_minutes_seconds_type : private boost::equality_comparable<hours_minutes_seconds_type>
