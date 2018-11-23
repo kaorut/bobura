@@ -9,13 +9,7 @@
 #if !defined(BOBURA_MODEL_TRAININFO_TIME_H)
 #define BOBURA_MODEL_TRAININFO_TIME_H
 
-#include <cassert>
-#include <limits>
-#include <stdexcept>
-
-#include <boost/core/swap.hpp>
 #include <boost/operators.hpp>
-#include <boost/throw_exception.hpp>
 
 #include <bobura/model/train_info/time_span.h>
 #include <bobura/type_list.h>
@@ -25,7 +19,8 @@ namespace bobura::model::train_info {
     /*!
         \brief The class for a time.
     */
-    class time : private boost::totally_ordered<time>, private boost::additive<time, time_span<type_list ::common::difference_type>>
+    class time : private boost::totally_ordered<time>,
+                 private boost::additive<time, time_span<type_list ::common::difference_type>>
     {
     public:
         // types
@@ -47,9 +42,7 @@ namespace bobura::model::train_info {
                 \param minutes Minutes.
                 \param seconds Seconds.
             */
-            hours_minutes_seconds_type(const size_type hours, const size_type minutes, const size_type seconds)
-            : m_hours{ hours }, m_minutes{ minutes }, m_seconds{ seconds }
-            {}
+            hours_minutes_seconds_type(const size_type hours, const size_type minutes, const size_type seconds);
 
             /*!
                 \brief Checks whether one hours-minutes-seconds is equal to another.
@@ -60,41 +53,28 @@ namespace bobura::model::train_info {
                 \retval true  When the one is equal to the other.
                 \retval false Otherwise.
             */
-            friend bool operator==(const hours_minutes_seconds_type& one, const hours_minutes_seconds_type& another)
-            {
-                return one.m_hours == another.m_hours && one.m_minutes == another.m_minutes &&
-                       one.m_seconds == another.m_seconds;
-            }
+            friend bool operator==(const hours_minutes_seconds_type& one, const hours_minutes_seconds_type& another);
 
             /*!
                 \brief Returns hours.
 
                 \return Hours.
             */
-            size_type hours() const
-            {
-                return m_hours;
-            }
+            size_type hours() const;
 
             /*!
                 \brief Returns minutes.
 
                 \return Minutes.
             */
-            size_type minutes() const
-            {
-                return m_minutes;
-            }
+            size_type minutes() const;
 
             /*!
                 \brief Returns seconds.
 
                 \return Seconds.
             */
-            size_type seconds() const
-            {
-                return m_seconds;
-            }
+            size_type seconds() const;
 
 
         private:
@@ -117,12 +97,7 @@ namespace bobura::model::train_info {
 
             \return The uninitialized time.
         */
-        static const time& uninitialized()
-        {
-            static const time singleton{};
-
-            return singleton;
-        }
+        static const time& uninitialized();
 
 
         // constructors and destructor
@@ -135,9 +110,7 @@ namespace bobura::model::train_info {
 
             \param seconds_from_midnight Seconds from the midnight.
         */
-        explicit time(const size_type seconds_from_midnight)
-        : m_seconds_from_midnight{ seconds_from_midnight % time_span_type::seconds_of_whole_day() }
-        {}
+        explicit time(const size_type seconds_from_midnight);
 
         /*!
             \brief Creates a time.
@@ -148,9 +121,7 @@ namespace bobura::model::train_info {
 
             \throw std::out_of_range When hours, minutes and/or seconds are invalid.
         */
-        time(const size_type hours, const size_type minutes, const size_type seconds)
-        : m_seconds_from_midnight{ calculate_seconds_from_midnight(hours, minutes, seconds) }
-        {}
+        time(const size_type hours, const size_type minutes, const size_type seconds);
 
 
         // functions
@@ -168,22 +139,7 @@ namespace bobura::model::train_info {
 
             \return This object.
         */
-        time& operator+=(const time_span_type& time_span)
-        {
-            if (*this == uninitialized())
-                return *this;
-
-            typename time_span_type::difference_type seconds = m_seconds_from_midnight;
-            while (seconds < -time_span.seconds())
-                seconds += time_span_type::seconds_of_whole_day();
-            seconds += time_span.seconds();
-            seconds %= time_span_type::seconds_of_whole_day();
-            assert(0 <= seconds && seconds < time_span_type::seconds_of_whole_day());
-
-            time temp{ static_cast<size_type>(seconds) };
-            boost::swap(temp, *this);
-            return *this;
-        }
+        time& operator+=(const time_span_type& time_span);
 
         /*!
             \brief Subtracts a time span.
@@ -198,22 +154,7 @@ namespace bobura::model::train_info {
 
             \return This object.
         */
-        time& operator-=(const time_span_type& time_span)
-        {
-            if (*this == uninitialized())
-                return *this;
-
-            typename time_span_type::difference_type seconds = m_seconds_from_midnight;
-            while (seconds < time_span.seconds())
-                seconds += time_span_type::seconds_of_whole_day();
-            seconds -= time_span.seconds();
-            seconds %= time_span_type::seconds_of_whole_day();
-            assert(0 <= seconds && seconds < time_span_type::seconds_of_whole_day());
-
-            time temp{ static_cast<size_type>(seconds) };
-            boost::swap(temp, *this);
-            return *this;
-        }
+        time& operator-=(const time_span_type& time_span);
 
         /*!
             \brief Subtracts times.
@@ -227,18 +168,7 @@ namespace bobura::model::train_info {
 
             \throw std::logic_error When one and/or another are uninitialized.
         */
-        friend time_span_type operator-(const time& one, const time& another)
-        {
-            if (one == uninitialized() || another == uninitialized())
-                BOOST_THROW_EXCEPTION(std::logic_error("The time object is uninitialized."));
-
-            typename time_span_type::difference_type seconds = one.m_seconds_from_midnight;
-            seconds -= another.m_seconds_from_midnight;
-            while (seconds < 0)
-                seconds += time_span_type::seconds_of_whole_day();
-
-            return time_span_type{ seconds };
-        }
+        friend time_span_type operator-(const time& one, const time& another);
 
         /*!
             \brief Checks whether one time is equal to another.
@@ -249,10 +179,7 @@ namespace bobura::model::train_info {
             \retval true  When the one is equal to the other.
             \retval false Otherwise.
         */
-        friend bool operator==(const time& one, const time& another)
-        {
-            return one.m_seconds_from_midnight == another.m_seconds_from_midnight;
-        }
+        friend bool operator==(const time& one, const time& another);
 
         /*!
             \brief Checks whether one time is less than another.
@@ -263,10 +190,7 @@ namespace bobura::model::train_info {
             \retval true  When the one is less than the other.
             \retval false Otherwise.
         */
-        friend bool operator<(const time& one, const time& another)
-        {
-            return one.m_seconds_from_midnight < another.m_seconds_from_midnight;
-        }
+        friend bool operator<(const time& one, const time& another);
 
         /*!
             \brief Returns the seconds from the midnight.
@@ -275,13 +199,7 @@ namespace bobura::model::train_info {
 
             \throw std::logic_error When this is uninitialized.
         */
-        size_type seconds_from_midnight() const
-        {
-            if (*this == uninitialized())
-                BOOST_THROW_EXCEPTION(std::logic_error("The time object is uninitialized."));
-
-            return m_seconds_from_midnight;
-        }
+        size_type seconds_from_midnight() const;
 
         /*!
             \brief Returns the hours, minutes and seconds.
@@ -290,17 +208,7 @@ namespace bobura::model::train_info {
 
             \throw std::logic_error When this is uninitialized.
         */
-        const hours_minutes_seconds_type hours_minutes_seconds() const
-        {
-            if (*this == uninitialized())
-                BOOST_THROW_EXCEPTION(std::logic_error("The time object is uninitialized."));
-
-            const size_type hours = m_seconds_from_midnight / (60 * 60);
-            const size_type minutes = m_seconds_from_midnight / 60 - hours * 60;
-            const size_type seconds = m_seconds_from_midnight - hours * 60 * 60 - minutes * 60;
-
-            return hours_minutes_seconds_type{ hours, minutes, seconds };
-        }
+        hours_minutes_seconds_type hours_minutes_seconds() const;
 
         /*!
             \brief Checks whether this time is initialized.
@@ -308,35 +216,13 @@ namespace bobura::model::train_info {
             \retval true  When this time is initialized.
             \retval false Otherwise.
         */
-        bool initialized() const
-        {
-            return *this != uninitialized();
-        }
+        bool initialized() const;
 
 
     private:
-        // static functions
-
-        static size_type
-        calculate_seconds_from_midnight(const size_type hours, const size_type minutes, const size_type seconds)
-        {
-            if (hours > 23)
-                BOOST_THROW_EXCEPTION(std::out_of_range("24 or greater is specified for the hours."));
-            else if (minutes > 59)
-                BOOST_THROW_EXCEPTION(std::out_of_range("60 or greater is specified for the minutes."));
-            else if (seconds > 59)
-                BOOST_THROW_EXCEPTION(std::out_of_range("60 or greater is specified for the seconds."));
-
-            const size_type seconds_from_midnight = hours * 60 * 60 + minutes * 60 + seconds;
-            assert(seconds_from_midnight < static_cast<size_type>(time_span_type::seconds_of_whole_day()));
-
-            return seconds_from_midnight;
-        }
-
-
         // constructors and destructor
 
-        time() : m_seconds_from_midnight{ std::numeric_limits<size_type>::max() } {}
+        time();
 
 
         // variables
