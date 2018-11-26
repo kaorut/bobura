@@ -6,6 +6,7 @@ bobura::command::[a-zA-Z0-9_]+::state_impl
 bobura::file_property_dialog::set_result_impl
 bobura::font_color_dialog::do_modal_impl
 bobura::font_color_dialog::font_color_type::
+bobura::model::operator ==
 bobura::model::serializer::[a-zA-Z0-9_]+_reader::selects_impl
 bobura::model::serializer::[a-zA-Z0-9_]+_reader::read_impl
 bobura::model::serializer::reader_selector::selects_impl
@@ -40,6 +41,7 @@ test_bobura::model::serializer::[a-zA-Z0-9_]+_reader::read
 test_bobura::model::serializer::[a-zA-Z0-9_]+_writer::extension
 test_bobura::model::serializer::[a-zA-Z0-9_]+_writer::selects
 test_bobura::model::serializer::[a-zA-Z0-9_]+_writer::write
+test_bobura::model::station::operator_equal
 test_bobura::model::station_info::[a-zA-Z0-9_]+::name
 test_bobura::model::timetable_info::font_color::operator_equal
 test_bobura::model::timetable_info::font_color_set::operator_equal

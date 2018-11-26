@@ -8,7 +8,6 @@
 
 #include <algorithm>
 #include <sstream>
-#include <string>
 
 #include <boost/operators.hpp>
 #include <boost/preprocessor.hpp>
