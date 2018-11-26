@@ -52,7 +52,7 @@ namespace {
 
     using station_interval_type = station_intervals_type::value_type;
 
-    using station_type = bobura::model::station<string_type>;
+    using station_type = bobura::model::station;
 
     using grade_type_set_type = bobura::model::station_info::grade_type_set;
 

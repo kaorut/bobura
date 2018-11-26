@@ -56,7 +56,7 @@ namespace {
 
     using font_type = ui_type_list_type::font_type;
 
-    using station_type = bobura::model::station<string_type>;
+    using station_type = bobura::model::station;
 
     using grade_type_set_type = bobura::model::station_info::grade_type_set;
 

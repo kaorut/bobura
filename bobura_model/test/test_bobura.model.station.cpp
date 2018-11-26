@@ -38,7 +38,7 @@ namespace {
 
     using principal_terminal_type = grade_type_set_type::principal_terminal_type;
 
-    using station_type = bobura::model::station<string_type>;
+    using station_type = bobura::model::station;
 }
 
 

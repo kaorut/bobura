@@ -27,7 +27,7 @@ namespace bobura::model::timetable_info {
         // types
 
         //! The station type.
-        using station_type = station<type_list::common::string_type>;
+        using station_type = station;
 
         //! The operating distance type.
         using operating_distance_type = type_list::common::operating_distance_type;

@@ -12,22 +12,20 @@
 #include <boost/operators.hpp>
 
 #include <bobura/model/station_info/grade.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura::model {
     /*!
-        \brief The class template for a station.
-
-        \tparam String A string type.
+        \brief The class for a station.
     */
-    template <typename String>
-    class station : private boost::equality_comparable<station<String>>
+    class station : private boost::equality_comparable<station>
     {
     public:
         // types
 
         //! The string type.
-        using string_type = String;
+        using string_type = type_list::common::string_type;
 
         //! The grade type.
         using grade_type = station_info::grade;

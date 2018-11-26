@@ -30,7 +30,7 @@ namespace {
 
     using string_type = common_type_list_type::string_type;
 
-    using station_type = bobura::model::station<string_type>;
+    using station_type = bobura::model::station;
 
     using grade_type_set_type = bobura::model::station_info::grade_type_set;
 
