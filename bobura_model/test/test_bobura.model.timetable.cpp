@@ -72,8 +72,7 @@ namespace {
 
     using train_type = bobura::model::train<size_type, difference_type, string_type>;
 
-    using timetable_type = bobura::model::
-        timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+    using timetable_type = bobura::model::timetable;
 
     using train_kinds_type = timetable_type::train_kinds_type;
 

@@ -45,8 +45,7 @@ namespace {
 
     using font_type = ui_type_list_type::font_type;
 
-    using timetable_type = bobura::model::
-        timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+    using timetable_type = bobura::model::timetable;
 
     using input_stream_iterator_type = common_type_list_type::input_stream_iterator_type;
 
