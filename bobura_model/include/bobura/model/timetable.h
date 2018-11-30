@@ -70,7 +70,7 @@ namespace bobura::model {
         using train_kinds_type = std::vector<train_kind_type>;
 
         //! The train type.
-        using train_type = train<size_type, difference_type, string_type>;
+        using train_type = train;
 
         //! The trains type.
         using trains_type = std::vector<train_type>;

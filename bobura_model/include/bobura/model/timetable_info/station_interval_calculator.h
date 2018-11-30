@@ -44,7 +44,7 @@ namespace bobura::model::timetable_info {
         using station_locations_type = std::vector<station_location_type>;
 
         //! The train type.
-        using train_type = train<size_type, difference_type, string_type>;
+        using train_type = train;
 
         //! The trains type.
         using trains_type = std::vector<train_type>;

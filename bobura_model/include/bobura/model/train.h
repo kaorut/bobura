@@ -16,30 +16,26 @@
 #include <boost/operators.hpp>
 
 #include <bobura/model/train_info/stop.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura::model {
     /*!
-        \brief The class template for a train.
-
-        \tparam Size       A size type.
-        \tparam Difference A difference type.
-        \tparam String     A string type.
+        \brief The class for a train.
     */
-    template <typename Size, typename Difference, typename String>
-    class train : private boost::equality_comparable<train<Size, Difference, String>>
+    class train : private boost::equality_comparable<train>
     {
     public:
         // types
 
         //! The size type.
-        using size_type = Size;
+        using size_type = type_list::common::size_type;
 
         //! The difference type.
-        using difference_type = Difference;
+        using difference_type = type_list::common::difference_type;
 
         //! The string type.
-        using string_type = String;
+        using string_type = type_list::common::string_type;
 
         //! The stop type.
         using stop_type = train_info::stop;

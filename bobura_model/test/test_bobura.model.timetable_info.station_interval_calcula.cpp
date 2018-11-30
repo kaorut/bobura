@@ -42,7 +42,7 @@ namespace {
 
     using station_location_type = bobura::model::timetable_info::station_location;
 
-    using train_type = bobura::model::train<size_type, difference_type, string_type>;
+    using train_type = bobura::model::train;
 
     using stop_type = train_type::stop_type;
 

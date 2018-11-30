@@ -47,7 +47,7 @@ namespace bobura::message {
         using station_location_type = model::timetable_info::station_location;
 
         //! The train type.
-        using train_type = model::train<size_type, difference_type, string_type>;
+        using train_type = model::train;
 
         /*!
             \brief The observer type of station selection.
