@@ -64,7 +64,7 @@ namespace bobura::model {
         using station_intervals_type = typename station_interval_calculator_type::station_intervals_type;
 
         //! The train kind type.
-        using train_kind_type = train_kind<string_type, font_type>;
+        using train_kind_type = train_kind;
 
         //! The train kinds type.
         using train_kinds_type = std::vector<train_kind_type>;

@@ -38,7 +38,7 @@ namespace {
 
     using color_type = ui_type_list_type::color_type;
 
-    using train_kind_type = bobura::model::train_kind<string_type, font_type>;
+    using train_kind_type = bobura::model::train_kind;
 }
 
 

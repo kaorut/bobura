@@ -53,7 +53,7 @@ namespace {
 
     using message_catalog_type = locale_type_list_type::message_catalog_type;
 
-    using train_kind_type = bobura::model::train_kind<string_type, font_type>;
+    using train_kind_type = bobura::model::train_kind;
 
     using train_kind_dialog_type = bobura::train_kind_dialog<
         traits_type_list_type::dialog_type,

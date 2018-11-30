@@ -14,26 +14,25 @@
 #include <boost/operators.hpp>
 
 #include <tetengo2/gui/drawing/color.h>
+#include <tetengo2/gui/drawing/font.h>
+
+#include <bobura/type_list.h>
 
 
 namespace bobura::model {
     /*!
-        \brief The class template for a train kind.
-
-        \tparam String A string type.
-        \tparam Font   A font type.
+        \brief The class for a train kind.
     */
-    template <typename String, typename Font>
-    class train_kind : private boost::equality_comparable<train_kind<String, Font>>
+    class train_kind : private boost::equality_comparable<train_kind>
     {
     public:
         // types
 
         //! The string type.
-        using string_type = String;
+        using string_type = type_list::common::string_type;
 
         //! The font type.
-        using font_type = Font;
+        using font_type = tetengo2::gui::drawing::font;
 
         //! The color type.
         using color_type = tetengo2::gui::drawing::color;

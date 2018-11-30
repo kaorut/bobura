@@ -71,7 +71,7 @@ namespace {
 
     using stop_type = bobura::model::train_info::stop;
 
-    using train_kind_type = bobura::model::train_kind<string_type, font_type>;
+    using train_kind_type = bobura::model::train_kind;
 
     using train_type = bobura::model::train;
 

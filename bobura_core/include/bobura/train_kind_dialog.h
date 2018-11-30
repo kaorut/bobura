@@ -87,7 +87,7 @@ namespace bobura {
         {
         public:
             //! The train kind type.
-            using train_kind_type = bobura::model::train_kind<string_type, font_type>;
+            using train_kind_type = bobura::model::train_kind;
 
             /*!
                 \brief Creates an information set.
