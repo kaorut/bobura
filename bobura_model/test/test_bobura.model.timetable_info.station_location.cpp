@@ -6,8 +6,8 @@
     $Id$
 */
 
+#include <algorithm>
 #include <sstream>
-#include <string>
 
 #include <boost/operators.hpp>
 #include <boost/preprocessor.hpp>
@@ -29,15 +29,15 @@ namespace {
 
     using string_type = common_type_list_type::string_type;
 
-    using operating_distance_type = common_type_list_type::operating_distance_type;
+    using station_type = bobura::model::station;
 
-    using station_type = bobura::model::station<string_type>;
-
-    using grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
+    using grade_type_set_type = bobura::model::station_info::grade_type_set;
 
     using local_type = grade_type_set_type::local_type;
 
-    using station_location_type = bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
+    using principal_type = grade_type_set_type::principal_type;
+
+    using station_location_type = bobura::model::timetable_info::station_location;
 }
 
 
@@ -51,9 +51,19 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    const station_location_type station_location{
+                    const station_location_type station_location1{
                         station_type(string_type{}, local_type::instance(), false, false, string_type{}), 0
                     };
+
+                    station_location_type station_location2{ station_location1 };
+                    BOOST_CHECK(
+                        station_location2.get_station() ==
+                        station_type(string_type{}, local_type::instance(), false, false, string_type{}));
+
+                    const station_location_type station_location3{ std::move(station_location2) };
+                    BOOST_CHECK(
+                        station_location3.get_station() ==
+                        station_type(string_type{}, local_type::instance(), false, false, string_type{}));
                 }
 
                 BOOST_AUTO_TEST_CASE(operator_equal)
@@ -95,6 +105,40 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                                                        2 };
 
                         BOOST_CHECK(station_location1 != station_location2);
+                    }
+                }
+
+                BOOST_AUTO_TEST_CASE(operator_assign)
+                {
+                    BOOST_TEST_PASSPOINT();
+
+                    {
+                        const station_location_type station_location1{
+                            station_type(string_type{}, local_type::instance(), false, false, string_type{}), 0
+                        };
+                        station_location_type station_location2{
+                            station_type(string_type{}, principal_type::instance(), false, false, string_type{}), 0
+                        };
+
+                        station_location2 = station_location1;
+
+                        BOOST_CHECK(
+                            station_location2.get_station() ==
+                            station_type(string_type{}, local_type::instance(), false, false, string_type{}));
+                    }
+                    {
+                        station_location_type station_location1{
+                            station_type(string_type{}, local_type::instance(), false, false, string_type{}), 0
+                        };
+                        station_location_type station_location2{
+                            station_type(string_type{}, principal_type::instance(), false, false, string_type{}), 0
+                        };
+
+                        station_location2 = std::move(station_location1);
+
+                        BOOST_CHECK(
+                            station_location2.get_station() ==
+                            station_type(string_type{}, local_type::instance(), false, false, string_type{}));
                     }
                 }
 

@@ -90,7 +90,7 @@ namespace {
 
     using station_line_list_type = bobura::view::diagram::station_line_list<traits_type>;
 
-    using station_grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
+    using station_grade_type_set_type = bobura::model::station_info::grade_type_set;
 
 
     // functions

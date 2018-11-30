@@ -18,16 +18,16 @@
 
 
 namespace bobura::view::diagram {
-    template <typename Size, typename Difference, typename Left>
+    template <typename Left>
     Left time_to_left(
-        const model::train_info::time<Size, Difference>& time,
-        const model::train_info::time_span<Difference>&  time_offset,
-        const int                                        previous_or_next_day,
-        const Left&                                      horizontal_scroll_bar_position,
-        const Left&                                      station_header_right,
-        const Left&                                      horizontal_scale)
+        const model::train_info::time&      time,
+        const model::train_info::time_span& time_offset,
+        const int                           previous_or_next_day,
+        const Left&                         horizontal_scroll_bar_position,
+        const Left&                         station_header_right,
+        const Left&                         horizontal_scale)
     {
-        using time_span_type = model::train_info::time_span<Difference>;
+        using time_span_type = model::train_info::time_span;
 
         typename Left::value_type left_value(time.seconds_from_midnight());
         left_value -= time_offset.seconds();
@@ -113,8 +113,6 @@ namespace bobura::view::diagram {
 
             using size_type = application::traits_type_list_type::diagram_view_type::size_type;
 
-            using difference_type = application::traits_type_list_type::diagram_view_type::difference_type;
-
             using canvas_type = application::traits_type_list_type::diagram_view_type::canvas_type;
 
             using dimension_unit_type = canvas_type::dimension_unit_type;
@@ -132,8 +130,6 @@ namespace bobura::view::diagram {
 
             using size_type = test::traits_type_list_type::diagram_view_type::size_type;
 
-            using difference_type = test::traits_type_list_type::diagram_view_type::difference_type;
-
             using canvas_type = test::traits_type_list_type::diagram_view_type::canvas_type;
 
             using dimension_unit_type = canvas_type::dimension_unit_type;
@@ -142,8 +138,8 @@ namespace bobura::view::diagram {
 
 #if BOOST_COMP_MSVC
     template application::position_unit_type time_to_left(
-        const model::train_info::time<application::size_type, application::difference_type>&,
-        const model::train_info::time_span<application::difference_type>&,
+        const model::train_info::time&,
+        const model::train_info::time_span&,
         int,
         const application::position_unit_type&,
         const application::position_unit_type&,
@@ -173,8 +169,8 @@ namespace bobura::view::diagram {
 
 #if !defined(DOCUMENTATION)
     template test::position_unit_type time_to_left(
-        const model::train_info::time<test::size_type, test::difference_type>&,
-        const model::train_info::time_span<test::difference_type>&,
+        const model::train_info::time&,
+        const model::train_info::time_span&,
         int,
         const test::position_unit_type&,
         const test::position_unit_type&,

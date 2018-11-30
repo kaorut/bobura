@@ -142,7 +142,7 @@ namespace bobura::message::diagram_view {
         using station_location_type = typename timetable_type::station_location_type;
 
         //! The station grade type set type.
-        using station_grade_type_set_type = model::station_info::grade_type_set<string_type>;
+        using station_grade_type_set_type = model::station_info::grade_type_set;
 
 
         // constructors and destructor
@@ -324,7 +324,7 @@ namespace bobura::message::diagram_view {
         using train_type = typename timetable_type::train_type;
 
         //! The station grade type set type.
-        using station_grade_type_set_type = model::station_info::grade_type_set<string_type>;
+        using station_grade_type_set_type = model::station_info::grade_type_set;
 
 
         // constructors and destructor

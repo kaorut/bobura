@@ -70,8 +70,7 @@ namespace bobura::model::serializer {
         using font_type = Font;
 
         //! The timetable type.
-        using timetable_type =
-            timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+        using timetable_type = timetable;
 
         //! The dialog type.
         using dialog_type = Dialog;

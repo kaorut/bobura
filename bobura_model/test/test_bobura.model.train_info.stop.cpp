@@ -6,6 +6,7 @@
     $Id$
 */
 
+#include <algorithm>
 #include <sstream>
 #include <string>
 
@@ -26,15 +27,11 @@ namespace {
 
     using common_type_list_type = test_bobura::model::type_list::common;
 
-    using size_type = common_type_list_type::size_type;
-
-    using difference_type = common_type_list_type::difference_type;
-
     using string_type = common_type_list_type::string_type;
 
-    using time_type = bobura::model::train_info::time<size_type, difference_type>;
+    using time_type = bobura::model::train_info::time;
 
-    using stop_type = bobura::model::train_info::stop<size_type, difference_type, string_type>;
+    using stop_type = bobura::model::train_info::stop;
 }
 
 
@@ -73,6 +70,15 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         BOOST_CHECK(stop.departure() == time_type{ 2 });
                         BOOST_TEST(stop.operational());
                         BOOST_CHECK(stop.platform() == string_type{ TETENGO2_TEXT("ZZZ") });
+                    }
+                    {
+                        const stop_type stop1{ time_type{ 0 }, time_type{ 0 }, false, string_type{} };
+
+                        stop_type stop2{ stop1 };
+                        BOOST_CHECK(stop2 == stop1);
+
+                        stop_type stop3{ std::move(stop2) };
+                        BOOST_CHECK(stop2 == stop1);
                     }
                 }
 
@@ -139,6 +145,34 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         };
 
                         BOOST_CHECK(stop1 != stop2);
+                    }
+                }
+
+                BOOST_AUTO_TEST_CASE(operator_assign)
+                {
+                    BOOST_TEST_PASSPOINT();
+
+                    {
+                        stop_type       stop1{ time_type{ 0 }, time_type{ 0 }, false, string_type{} };
+                        const stop_type stop2{
+                            time_type{ 0 }, time_type{ 1 }, true, string_type{ TETENGO2_TEXT("1") }
+                        };
+
+                        stop1 = stop2;
+                        BOOST_CHECK(stop1.arrival() == time_type{ 0 });
+                        BOOST_CHECK(stop1.departure() == time_type{ 1 });
+                        BOOST_TEST(stop1.operational());
+                        BOOST_CHECK(stop1.platform() == string_type{ TETENGO2_TEXT("1") });
+                    }
+                    {
+                        stop_type stop1{ time_type{ 0 }, time_type{ 0 }, false, string_type{} };
+                        stop_type stop2{ time_type{ 0 }, time_type{ 1 }, true, string_type{ TETENGO2_TEXT("1") } };
+
+                        stop1 = std::move(stop2);
+                        BOOST_CHECK(stop1.arrival() == time_type{ 0 });
+                        BOOST_CHECK(stop1.departure() == time_type{ 1 });
+                        BOOST_TEST(stop1.operational());
+                        BOOST_CHECK(stop1.platform() == string_type{ TETENGO2_TEXT("1") });
                     }
                 }
 

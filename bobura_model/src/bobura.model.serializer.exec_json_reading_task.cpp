@@ -7,6 +7,7 @@
 */
 
 #include <exception>
+#include <functional>
 #include <memory>
 #include <utility>
 

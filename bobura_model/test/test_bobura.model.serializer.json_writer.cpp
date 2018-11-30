@@ -57,26 +57,25 @@ namespace {
 
     using font_type = ui_type_list_type::font_type;
 
-    using station_type = bobura::model::station<string_type>;
+    using station_type = bobura::model::station;
 
-    using grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
+    using grade_type_set_type = bobura::model::station_info::grade_type_set;
 
     using local_type = grade_type_set_type::local_type;
 
     using principal_type = grade_type_set_type::principal_type;
 
-    using station_location_type = bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
+    using station_location_type = bobura::model::timetable_info::station_location;
 
-    using time_type = bobura::model::train_info::time<size_type, difference_type>;
+    using time_type = bobura::model::train_info::time;
 
-    using stop_type = bobura::model::train_info::stop<size_type, difference_type, string_type>;
+    using stop_type = bobura::model::train_info::stop;
 
-    using train_kind_type = bobura::model::train_kind<string_type, font_type>;
+    using train_kind_type = bobura::model::train_kind;
 
-    using train_type = bobura::model::train<size_type, difference_type, string_type>;
+    using train_type = bobura::model::train;
 
-    using timetable_type = bobura::model::
-        timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+    using timetable_type = bobura::model::timetable;
 
     using font_color_set_type = timetable_type::font_color_set_type;
 

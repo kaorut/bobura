@@ -61,8 +61,7 @@ namespace bobura {
         using font_type = Font;
 
         //! The timetable type.
-        using timetable_type =
-            model::timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+        using timetable_type = model::timetable;
 
         //! The observer set type.
         using observer_set_type = message::timetable_model_observer_set;
