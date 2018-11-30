@@ -55,6 +55,7 @@ test_bobura::model::train_info::time::operator_minus
 test_bobura::model::train_info::time_span::hours_minutes_seconds_type::operator_equal
 test_bobura::model::train_info::time_span::operator_equal
 test_bobura::model::train_info::time_span::operator_less_than
+test_bobura::model::train_kind::operator_equal
 test_bobura::view::diagram::[a-zA-Z0-9_]+::draw_on
 test_bobura::view::diagram::[a-zA-Z0-9_]+::p_item_by_position
 test_bobura::view::diagram::[a-zA-Z0-9_]+::select

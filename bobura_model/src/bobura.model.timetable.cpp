@@ -19,8 +19,6 @@
 #include <boost/rational.hpp>
 #include <boost/throw_exception.hpp>
 
-#include <tetengo2/gui/drawing/font.h>
-
 #include <bobura/model/message/timetable_observer_set.h>
 #include <bobura/model/timetable.h>
 #include <bobura/model/timetable_info/station_location.h>
