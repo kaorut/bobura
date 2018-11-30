@@ -6,9 +6,9 @@
     $Id$
 */
 
-#include <iterator>
-#include <memory>
-#include <sstream>
+#include <iterator> // IWYU pragma: keep
+#include <memory> // IWYU pragma: keep
+#include <sstream> // IWYU pragma: keep
 #include <string>
 #include <utility>
 #include <vector>
@@ -106,39 +106,6 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
 
                     BOOST_CHECK(train.stops() == stops);
                 }
-                {
-                    const train_type::stops_type stops{
-                        stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
-                    };
-
-                    const train_type train{ train_type::direction_type::down,
-                                            string_type{ TETENGO2_TEXT("1") },
-                                            0,
-                                            string_type{ TETENGO2_TEXT("a") },
-                                            string_type{ TETENGO2_TEXT("42") },
-                                            string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
-
-                    BOOST_CHECK(train.stops() == stops);
-                }
-                {
-                    const train_type::stops_type stops{
-                        stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
-                        stop_type{ time_type{ 1 }, time_type{ 2 }, true, string_type{ TETENGO2_TEXT("a") } },
-                    };
-
-                    const train_type train{ train_type::direction_type::down,
-                                            string_type{ TETENGO2_TEXT("1") },
-                                            0,
-                                            string_type{ TETENGO2_TEXT("a") },
-                                            string_type{ TETENGO2_TEXT("42") },
-                                            string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
-
-                    BOOST_CHECK(train.stops() == stops);
-                }
             }
 
             BOOST_AUTO_TEST_CASE(operator_equal)
@@ -172,8 +139,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                              string_type{ TETENGO2_TEXT("a") },
                                              string_type{ TETENGO2_TEXT("42") },
                                              string_type{ TETENGO2_TEXT("x") },
-                                             stops1.begin(),
-                                             stops1.end() };
+                                             train_type::stops_type{ stops1.begin(), stops1.end() } };
 
                     const train_type::stops_type stops2{
                         stop_type{ time_type{ 0 }, time_type{ 0 }, false, string_type{} },
@@ -184,8 +150,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                              string_type{ TETENGO2_TEXT("a") },
                                              string_type{ TETENGO2_TEXT("42") },
                                              string_type{ TETENGO2_TEXT("x") },
-                                             stops2.begin(),
-                                             stops2.end() };
+                                             train_type::stops_type{ stops2.begin(), stops2.end() } };
 
                     BOOST_CHECK(train1 == train2);
                 }
@@ -200,8 +165,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                              string_type{ TETENGO2_TEXT("a") },
                                              string_type{ TETENGO2_TEXT("42") },
                                              string_type{ TETENGO2_TEXT("x") },
-                                             stops1.begin(),
-                                             stops1.end() };
+                                             train_type::stops_type{ stops1.begin(), stops1.end() } };
 
                     const train_type::stops_type stops2{
                         stop_type{ time_type{ 1 }, time_type{ 2 }, false, string_type{ TETENGO2_TEXT("a") } },
@@ -213,8 +177,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                              string_type{ TETENGO2_TEXT("a") },
                                              string_type{ TETENGO2_TEXT("42") },
                                              string_type{ TETENGO2_TEXT("x") },
-                                             stops2.begin(),
-                                             stops2.end() };
+                                             train_type::stops_type{ stops2.begin(), stops2.end() } };
 
                     BOOST_CHECK(train1 == train2);
                 }
@@ -253,8 +216,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                              string_type{ TETENGO2_TEXT("a") },
                                              string_type{ TETENGO2_TEXT("42") },
                                              string_type{ TETENGO2_TEXT("y") },
-                                             stops2.begin(),
-                                             stops2.end() };
+                                             train_type::stops_type{ stops2.begin(), stops2.end() } };
 
                     BOOST_CHECK(train1 != train2);
                 }
@@ -268,8 +230,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                              string_type{ TETENGO2_TEXT("a") },
                                              string_type{ TETENGO2_TEXT("42") },
                                              string_type{ TETENGO2_TEXT("x") },
-                                             stops1.begin(),
-                                             stops1.end() };
+                                             train_type::stops_type{ stops1.begin(), stops1.end() } };
 
                     const train_type train2{ train_type::direction_type::down,
                                              string_type{ TETENGO2_TEXT("2") },
@@ -290,8 +251,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                              string_type{ TETENGO2_TEXT("a") },
                                              string_type{ TETENGO2_TEXT("42") },
                                              string_type{ TETENGO2_TEXT("x") },
-                                             stops1.begin(),
-                                             stops1.end() };
+                                             train_type::stops_type{ stops1.begin(), stops1.end() } };
 
                     const train_type::stops_type stops2{
                         stop_type{ time_type{ 1 }, time_type{ 2 }, false, string_type{ TETENGO2_TEXT("a") } },
@@ -303,8 +263,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                              string_type{ TETENGO2_TEXT("a") },
                                              string_type{ TETENGO2_TEXT("42") },
                                              string_type{ TETENGO2_TEXT("y") },
-                                             stops2.begin(),
-                                             stops2.end() };
+                                             train_type::stops_type{ stops2.begin(), stops2.end() } };
 
                     BOOST_CHECK(train1 != train2);
                 }
@@ -437,8 +396,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                         string_type{ TETENGO2_TEXT("a") },
                                         string_type{ TETENGO2_TEXT("42") },
                                         string_type{ TETENGO2_TEXT("x") },
-                                        stops.begin(),
-                                        stops.end() };
+                                        train_type::stops_type{ stops.begin(), stops.end() } };
 
                 BOOST_CHECK(train.stops() == stops);
             }
@@ -491,8 +449,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                       string_type{ TETENGO2_TEXT("a") },
                                       string_type{ TETENGO2_TEXT("42") },
                                       string_type{ TETENGO2_TEXT("x") },
-                                      stops.begin(),
-                                      stops.begin() + 1 };
+                                      train_type::stops_type{ stops.begin(), stops.begin() + 1 } };
                     train.insert_stop(train.stops().end(), stops[1]);
 
                     BOOST_CHECK(train.stops() == stops);
@@ -509,8 +466,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                       string_type{ TETENGO2_TEXT("a") },
                                       string_type{ TETENGO2_TEXT("42") },
                                       string_type{ TETENGO2_TEXT("x") },
-                                      stops.begin() + 1,
-                                      stops.end() };
+                                      train_type::stops_type{ stops.begin() + 1, stops.end() } };
                     train.insert_stop(train.stops().begin(), stops[0]);
 
                     BOOST_CHECK(train.stops() == stops);
@@ -533,8 +489,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                       string_type{ TETENGO2_TEXT("a") },
                                       string_type{ TETENGO2_TEXT("42") },
                                       string_type{ TETENGO2_TEXT("x") },
-                                      stops.begin(),
-                                      stops.end() };
+                                      train_type::stops_type{ stops.begin(), stops.end() } };
 
                     train.erase_stops(train.stops().begin(), train.stops().end());
 
@@ -571,8 +526,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                       string_type{ TETENGO2_TEXT("a") },
                                       string_type{ TETENGO2_TEXT("42") },
                                       string_type{ TETENGO2_TEXT("x") },
-                                      stops.begin(),
-                                      stops.begin() + 1 };
+                                      train_type::stops_type{ stops.begin(), stops.begin() + 1 } };
                     train.insert_stop(train.stops().end(), stops[1]);
 
                     train.erase_stops(train.stops().begin(), train.stops().end());
@@ -591,8 +545,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                       string_type{ TETENGO2_TEXT("a") },
                                       string_type{ TETENGO2_TEXT("42") },
                                       string_type{ TETENGO2_TEXT("x") },
-                                      stops.begin(),
-                                      stops.end() };
+                                      train_type::stops_type{ stops.begin(), stops.end() } };
 
                     train.erase_stops(train.stops().begin(), train.stops().begin());
 
@@ -619,8 +572,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                       string_type{ TETENGO2_TEXT("a") },
                                       string_type{ TETENGO2_TEXT("42") },
                                       string_type{ TETENGO2_TEXT("x") },
-                                      stops.begin(),
-                                      stops.end() };
+                                      train_type::stops_type{ stops.begin(), stops.end() } };
 
                     train.erase_stops(train.stops().begin() + 1, train.stops().begin() + 2);
 
@@ -663,8 +615,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("a") },
                                             string_type{ TETENGO2_TEXT("42") },
                                             string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
+                                            train_type::stops_type{ stops.begin(), stops.end() } };
 
                     BOOST_CHECK(train.previous_stop(std::next(train.stops().begin(), 0)) == train.stops().end());
                     BOOST_CHECK(train.previous_stop(std::next(train.stops().begin(), 1)) == train.stops().end());
@@ -697,8 +648,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("a") },
                                             string_type{ TETENGO2_TEXT("42") },
                                             string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
+                                            train_type::stops_type{ stops.begin(), stops.end() } };
 
                     BOOST_CHECK(
                         train.previous_stop(std::next(train.stops().begin(), 0)) ==
@@ -738,8 +688,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("a") },
                                             string_type{ TETENGO2_TEXT("42") },
                                             string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
+                                            train_type::stops_type{ stops.begin(), stops.end() } };
 
                     BOOST_CHECK(
                         train.next_stop(std::next(train.stops().begin(), 0)) == std::next(train.stops().begin(), 1));
@@ -770,8 +719,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("a") },
                                             string_type{ TETENGO2_TEXT("42") },
                                             string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
+                                            train_type::stops_type{ stops.begin(), stops.end() } };
 
                     BOOST_CHECK(train.next_stop(std::next(train.stops().begin(), 0)) == train.stops().end());
                     BOOST_CHECK(train.next_stop(std::next(train.stops().begin(), 1)) == train.stops().end());
@@ -803,8 +751,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("a") },
                                             string_type{ TETENGO2_TEXT("42") },
                                             string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
+                                            train_type::stops_type{ stops.begin(), stops.end() } };
 
                     BOOST_CHECK(train.origin_stop() == std::next(train.stops().begin(), 0));
                 }
@@ -830,8 +777,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("a") },
                                             string_type{ TETENGO2_TEXT("42") },
                                             string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
+                                            train_type::stops_type{ stops.begin(), stops.end() } };
 
                     BOOST_CHECK(train.origin_stop() == std::next(train.stops().begin(), 1));
                 }
@@ -851,8 +797,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("a") },
                                             string_type{ TETENGO2_TEXT("42") },
                                             string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
+                                            train_type::stops_type{ stops.begin(), stops.end() } };
 
                     BOOST_CHECK(train.origin_stop() == std::next(train.stops().begin(), 3));
                 }
@@ -878,8 +823,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("a") },
                                             string_type{ TETENGO2_TEXT("42") },
                                             string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
+                                            train_type::stops_type{ stops.begin(), stops.end() } };
 
                     BOOST_CHECK(train.origin_stop() == std::next(train.stops().begin(), 2));
                 }
@@ -901,8 +845,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("a") },
                                             string_type{ TETENGO2_TEXT("42") },
                                             string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
+                                            train_type::stops_type{ stops.begin(), stops.end() } };
 
                     BOOST_CHECK(train.origin_stop() == train.stops().end());
                 }
@@ -929,8 +872,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("a") },
                                             string_type{ TETENGO2_TEXT("42") },
                                             string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
+                                            train_type::stops_type{ stops.begin(), stops.end() } };
 
                     BOOST_CHECK(train.destination_stop() == std::next(train.stops().begin(), 3));
                 }
@@ -956,8 +898,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("a") },
                                             string_type{ TETENGO2_TEXT("42") },
                                             string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
+                                            train_type::stops_type{ stops.begin(), stops.end() } };
 
                     BOOST_CHECK(train.destination_stop() == std::next(train.stops().begin(), 2));
                 }
@@ -977,8 +918,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("a") },
                                             string_type{ TETENGO2_TEXT("42") },
                                             string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
+                                            train_type::stops_type{ stops.begin(), stops.end() } };
 
                     BOOST_CHECK(train.destination_stop() == std::next(train.stops().begin(), 0));
                 }
@@ -1004,8 +944,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("a") },
                                             string_type{ TETENGO2_TEXT("42") },
                                             string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
+                                            train_type::stops_type{ stops.begin(), stops.end() } };
 
                     BOOST_CHECK(train.destination_stop() == std::next(train.stops().begin(), 1));
                 }
@@ -1027,8 +966,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                             string_type{ TETENGO2_TEXT("a") },
                                             string_type{ TETENGO2_TEXT("42") },
                                             string_type{ TETENGO2_TEXT("x") },
-                                            stops.begin(),
-                                            stops.end() };
+                                            train_type::stops_type{ stops.begin(), stops.end() } };
 
                     BOOST_CHECK(train.destination_stop() == train.stops().end());
                 }

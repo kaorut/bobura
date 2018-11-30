@@ -46,6 +46,7 @@ test_bobura::model::timetable::operator_equal
 test_bobura::model::timetable_info::font_color::operator_equal
 test_bobura::model::timetable_info::font_color_set::operator_equal
 test_bobura::model::timetable_info::station_location::operator_equal
+test_bobura::model::train::operator_equal
 test_bobura::model::train_info::stop::operator_equal
 test_bobura::model::train_info::time::hours_minutes_seconds_type::operator_equal
 test_bobura::model::train_info::time::operator_equal

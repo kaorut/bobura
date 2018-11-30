@@ -80,10 +80,13 @@ namespace {
     template <typename InputIterator>
     train_type make_train(const InputIterator stop_first, const InputIterator stop_last)
     {
-        return train_type{
-            train_type::direction_type::down, train_type::string_type{}, 0,          train_type::string_type{},
-            train_type::string_type{},        train_type::string_type{}, stop_first, stop_last
-        };
+        return train_type{ train_type::direction_type::down,
+                           train_type::string_type{},
+                           0,
+                           train_type::string_type{},
+                           train_type::string_type{},
+                           train_type::string_type{},
+                           train_type::stops_type{ stop_first, stop_last } };
     }
 
     stop_type make_stop(const bool arrival, const size_type hours, const size_type minutes)

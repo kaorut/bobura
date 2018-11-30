@@ -9,8 +9,6 @@
 #if !defined(BOBURA_MODEL_TRAIN_H)
 #define BOBURA_MODEL_TRAIN_H
 
-#include <algorithm>
-#include <iterator>
 #include <vector>
 
 #include <boost/operators.hpp>
@@ -64,15 +62,12 @@ namespace bobura::model {
             \param note        A note.
         */
         train(
-            const direction_type direction,
-            string_type          number,
-            const size_type      kind_index,
-            string_type          name,
-            string_type          name_number,
-            string_type          note)
-        : m_direction{ direction }, m_number{ std::move(number) }, m_kind_index{ kind_index },
-          m_name{ std::move(name) }, m_name_number{ std::move(name_number) }, m_note{ std::move(note) }, m_stops{}
-        {}
+            direction_type direction,
+            string_type    number,
+            size_type      kind_index,
+            string_type    name,
+            string_type    name_number,
+            string_type    note);
 
         /*!
             \brief Creates a train.
@@ -88,46 +83,13 @@ namespace bobura::model {
             \param stops       Stops.
         */
         train(
-            const direction_type direction,
-            string_type          number,
-            const size_type      kind_index,
-            string_type          name,
-            string_type          name_number,
-            string_type          note,
-            stops_type           stops)
-        : m_direction{ direction }, m_number{ std::move(number) }, m_kind_index{ kind_index }, m_name{ std::move(
-                                                                                                   name) },
-          m_name_number{ std::move(name_number) }, m_note{ std::move(note) }, m_stops{ std::move(stops) }
-        {}
-
-        /*!
-            \brief Creates a train.
-
-            \tparam InputIterator An input iterator type.
-
-            \param direction   A direction.
-            \param number      A number.
-            \param kind_index  A kind index.
-            \param name        A name.
-            \param name_number A name number.
-            \param note        A note.
-            \param stop_first  The first iterator among stops.
-            \param stop_last   The last iterator among stops.
-        */
-        template <typename InputIterator>
-        train(
-            const direction_type direction,
-            string_type          number,
-            const size_type      kind_index,
-            string_type          name,
-            string_type          name_number,
-            string_type          note,
-            const InputIterator  stop_first,
-            const InputIterator  stop_last)
-        : m_direction{ direction }, m_number{ std::move(number) }, m_kind_index{ kind_index }, m_name{ std::move(
-                                                                                                   name) },
-          m_name_number{ std::move(name_number) }, m_note{ std::move(note) }, m_stops{ stop_first, stop_last }
-        {}
+            direction_type direction,
+            string_type    number,
+            size_type      kind_index,
+            string_type    name,
+            string_type    name_number,
+            string_type    note,
+            stops_type     stops);
 
 
         // functions
@@ -141,93 +103,63 @@ namespace bobura::model {
             \retval true  When the one is equal to the other.
             \retval false Otherwise.
         */
-        friend bool operator==(const train& one, const train& another)
-        {
-            return one.m_direction == another.m_direction && one.m_number == another.m_number &&
-                   one.m_kind_index == another.m_kind_index && one.m_name == another.m_name &&
-                   one.m_name_number == another.m_name_number && one.m_note == another.m_note &&
-                   one.m_stops == another.m_stops;
-        }
+        friend bool operator==(const train& one, const train& another);
 
         /*!
             \brief Returns the direction.
 
             \return The direction.
         */
-        direction_type direction() const
-        {
-            return m_direction;
-        }
+        direction_type direction() const;
 
         /*!
             \brief Returns the number.
 
             \return The number.
         */
-        const string_type& number() const
-        {
-            return m_number;
-        }
+        const string_type& number() const;
 
         /*!
             \brief Returns the kind index.
 
             \return The kind index.
         */
-        size_type kind_index() const
-        {
-            return m_kind_index;
-        }
+        size_type kind_index() const;
 
         /*!
             \brief Sets a kind index.
 
             \param kind_index A kind index.
         */
-        void set_kind_index(const size_type kind_index)
-        {
-            m_kind_index = kind_index;
-        }
+        void set_kind_index(size_type kind_index);
 
         /*!
             \brief Returns the name.
 
             \return The name.
         */
-        const string_type& name() const
-        {
-            return m_name;
-        }
+        const string_type& name() const;
 
         /*!
             \brief Returns the name number.
 
             \return The name number.
         */
-        const string_type& name_number() const
-        {
-            return m_name_number;
-        }
+        const string_type& name_number() const;
 
         /*!
             \brief Returns the note.
 
             \return The note.
         */
-        const string_type& note() const
-        {
-            return m_note;
-        }
+        const string_type& note() const;
 
         /*!
             \brief Returns the stops.
 
             \return The stops.
         */
-        const stops_type& stops() const
-        {
-            return m_stops;
-        }
+        const stops_type& stops() const;
 
         /*!
             \brief Inserts a stop.
@@ -235,10 +167,7 @@ namespace bobura::model {
             \param position A position where a stop is inserted.
             \param stop     A stop.
         */
-        void insert_stop(const typename stops_type::const_iterator position, stop_type stop)
-        {
-            m_stops.insert(position, std::move(stop));
-        }
+        void insert_stop(typename stops_type::const_iterator position, stop_type stop);
 
         /*!
             \brief Erases the stops.
@@ -246,11 +175,7 @@ namespace bobura::model {
             \param first A first iterator among the erased stops.
             \param last  A last iterator among the erased stops.
         */
-        void
-        erase_stops(const typename stops_type::const_iterator first, const typename stops_type::const_iterator last)
-        {
-            m_stops.erase(first, last);
-        }
+        void erase_stops(typename stops_type::const_iterator first, typename stops_type::const_iterator last);
 
         /*!
             \brief Returns the stop previous to the specified stop.
@@ -261,10 +186,7 @@ namespace bobura::model {
 
             \return The iterator to the stop previous to the specified stop.
         */
-        typename stops_type::const_iterator previous_stop(const typename stops_type::const_iterator i_stop) const
-        {
-            return m_direction == direction_type::down ? rfind_real_stop(i_stop, true) : find_real_stop(i_stop, true);
-        }
+        typename stops_type::const_iterator previous_stop(typename stops_type::const_iterator i_stop) const;
 
         /*!
             \brief Returns the stop next to the specified stop.
@@ -275,10 +197,7 @@ namespace bobura::model {
 
             \return The iterator to the stop next to the specified stop.
         */
-        typename stops_type::const_iterator next_stop(const typename stops_type::const_iterator i_stop) const
-        {
-            return m_direction == direction_type::down ? find_real_stop(i_stop, true) : rfind_real_stop(i_stop, true);
-        }
+        typename stops_type::const_iterator next_stop(typename stops_type::const_iterator i_stop) const;
 
         /*!
             \brief Returns the origin stop.
@@ -287,11 +206,7 @@ namespace bobura::model {
 
             \return The iterator to the origin stop.
         */
-        typename stops_type::const_iterator origin_stop() const
-        {
-            return m_direction == direction_type::down ? find_real_stop(m_stops.begin(), false) :
-                                                         rfind_real_stop(m_stops.end(), false);
-        }
+        typename stops_type::const_iterator origin_stop() const;
 
         /*!
             \brief Returns the destination stop.
@@ -300,11 +215,7 @@ namespace bobura::model {
 
             \return The iterator to the destination stop.
         */
-        typename stops_type::const_iterator destination_stop() const
-        {
-            return m_direction == direction_type::down ? rfind_real_stop(m_stops.end(), false) :
-                                                         find_real_stop(m_stops.begin(), false);
-        }
+        typename stops_type::const_iterator destination_stop() const;
 
 
     private:
@@ -323,48 +234,6 @@ namespace bobura::model {
         string_type m_note;
 
         stops_type m_stops;
-
-
-        // functions
-
-        typename stops_type::const_iterator
-        find_real_stop(typename stops_type::const_iterator i_stop, const bool skip_start) const
-        {
-            if (skip_start && i_stop != m_stops.end())
-                std::advance(i_stop, 1);
-
-            for (auto i = i_stop; i != m_stops.end(); ++i)
-            {
-                if (!i->passing())
-                    return i;
-            }
-
-            return m_stops.end();
-        }
-
-        typename stops_type::const_iterator
-        rfind_real_stop(typename stops_type::const_iterator i_stop, const bool skip_start) const
-        {
-            if (skip_start && i_stop != m_stops.begin())
-                std::advance(i_stop, -1);
-
-            for (auto i = i_stop;; --i)
-            {
-                if (i == m_stops.end())
-                {
-                    if (i == m_stops.begin())
-                        break;
-                    else
-                        continue;
-                }
-                if (!i->passing())
-                    return i;
-                if (i == m_stops.begin())
-                    break;
-            }
-
-            return m_stops.end();
-        }
     };
 }
 
