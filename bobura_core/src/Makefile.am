@@ -39,8 +39,18 @@ sources = \
     bobura.load_save.save_to_file.cpp \
     bobura.main_window.cpp \
     bobura.main_window_menu_builder.cpp \
+    bobura.message.about_dialog.cpp \
     bobura.message.diagram_selection_observer_set.cpp \
+    bobura.message.diagram_view.cpp \
+    bobura.message.file_property_dialog.cpp \
+    bobura.message.font_color_dialog.cpp \
+    bobura.message.main_window.cpp \
+    bobura.message.property_bar.cpp \
+    bobura.message.timetable_model.cpp \
     bobura.message.timetable_model_observer_set.cpp \
+    bobura.message.train_kind_dialog.cpp \
+    bobura.message.view_picture_box.diagram.cpp \
+    bobura.message.view_picture_box.timetable.cpp \
     bobura.property_bar.cpp \
     bobura.settings.cpp \
     bobura.timetable_model.cpp \

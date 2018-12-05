@@ -52,6 +52,9 @@
     <Filter Include="sources\bobura\view\timetable">
       <UniqueIdentifier>{6574bfe3-565e-4048-ab51-1e002ddedcbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sources\bobura\message\view_picture_box">
+      <UniqueIdentifier>{88344bbf-79c0-4c18-b996-19a4deb71db5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\precompiled\precompiled.h">
@@ -478,6 +481,36 @@
     </ClCompile>
     <ClCompile Include="src\bobura.view.utility.cpp">
       <Filter>sources\bobura\view</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.message.diagram_view.cpp">
+      <Filter>sources\bobura\message</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.message.font_color_dialog.cpp">
+      <Filter>sources\bobura\message</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.message.main_window.cpp">
+      <Filter>sources\bobura\message</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.message.train_kind_dialog.cpp">
+      <Filter>sources\bobura\message</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.message.view_picture_box.diagram.cpp">
+      <Filter>sources\bobura\message\view_picture_box</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.message.view_picture_box.timetable.cpp">
+      <Filter>sources\bobura\message\view_picture_box</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.message.about_dialog.cpp">
+      <Filter>sources\bobura\message</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.message.file_property_dialog.cpp">
+      <Filter>sources\bobura\message</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.message.property_bar.cpp">
+      <Filter>sources\bobura\message</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.message.timetable_model.cpp">
+      <Filter>sources\bobura\message</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
