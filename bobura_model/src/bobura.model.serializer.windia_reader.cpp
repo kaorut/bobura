@@ -17,6 +17,7 @@
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
+#include <boost/core/typeinfo.hpp>
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/predef.h>
