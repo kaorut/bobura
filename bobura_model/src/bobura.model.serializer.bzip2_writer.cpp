@@ -12,6 +12,7 @@
 #include <utility>
 
 #include <boost/core/noncopyable.hpp>
+#include <boost/core/typeinfo.hpp>
 #include <boost/iostreams/filter/bzip2.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/iostreams/traits.hpp>
