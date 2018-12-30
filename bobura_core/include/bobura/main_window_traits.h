@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::main_window_traits.
 
-    Copyright (C) 2007-2018 kaoru
+    Copyright (C) 2007-2019 kaoru
 
     $Id$
 */
