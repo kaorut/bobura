@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::message::train_kind_dialog.
 
-    Copyright (C) 2007-2018 kaoru
+    Copyright (C) 2007-2019 kaoru
 
     $Id$
 */

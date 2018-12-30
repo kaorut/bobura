@@ -1,7 +1,7 @@
 /*! \file
     \brief Test of class bobura::font_color_dialog.
 
-    Copyright (C) 2007-2018 kaoru
+    Copyright (C) 2007-2019 kaoru
 
     $Id$
 */

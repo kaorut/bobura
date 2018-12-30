@@ -1,7 +1,7 @@
 /*! \file
     \brief Test of class bobura::message::train_kind_dialog.
 
-    Copyright (C) 2007-2018 kaoru
+    Copyright (C) 2007-2019 kaoru
 
     $Id$
 */

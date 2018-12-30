@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::command::show_diagram.
 
-    Copyright (C) 2007-2018 kaoru
+    Copyright (C) 2007-2019 kaoru
 
     $Id$
 */

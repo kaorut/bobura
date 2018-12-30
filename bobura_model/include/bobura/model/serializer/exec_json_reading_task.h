@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::model::serializer::exec_json_reading_task.
 
-    Copyright (C) 2007-2018 kaoru
+    Copyright (C) 2007-2019 kaoru
 
     $Id$
 */
