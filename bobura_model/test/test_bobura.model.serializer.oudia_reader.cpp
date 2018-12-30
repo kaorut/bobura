@@ -12,6 +12,7 @@
 #include <string>
 #include <utility>
 
+#include <boost/core/typeinfo.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/iostreams/traits.hpp>
 #include <boost/preprocessor.hpp>
