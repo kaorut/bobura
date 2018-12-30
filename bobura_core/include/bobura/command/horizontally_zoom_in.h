@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::command::horizontally_zoom_in.
 
-    Copyright (C) 2007-2018 kaoru
+    Copyright (C) 2007-2019 kaoru
 
     $Id$
 */

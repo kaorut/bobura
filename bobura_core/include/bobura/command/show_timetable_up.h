@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of bobura::command::show_timetable_up.
 
-    Copyright (C) 2007-2018 kaoru
+    Copyright (C) 2007-2019 kaoru
 
     $Id$
 */
