@@ -24,12 +24,11 @@ namespace bobura::message {
     /*!
         \brief The class template for a diagram selection observer set.
 
-        \tparam Size              A size type.
-        \tparam Difference        A difference type.
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
+        \tparam Size       A size type.
+        \tparam Difference A difference type.
+        \tparam String     A string type.
     */
-    template <typename Size, typename Difference, typename String, typename OperatingDistance>
+    template <typename Size, typename Difference, typename String>
     class diagram_selection_observer_set : private boost::noncopyable
     {
     public:
@@ -44,14 +43,11 @@ namespace bobura::message {
         //! The string type.
         using string_type = String;
 
-        //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
-
         //! The station location type.
-        using station_location_type = model::timetable_info::station_location<string_type, operating_distance_type>;
+        using station_location_type = model::timetable_info::station_location;
 
         //! The train type.
-        using train_type = model::train<size_type, difference_type, string_type>;
+        using train_type = model::train;
 
         /*!
             \brief The observer type of station selection.

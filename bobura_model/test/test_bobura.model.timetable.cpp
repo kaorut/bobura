@@ -56,24 +56,23 @@ namespace {
 
     using font_type = ui_type_list_type::font_type;
 
-    using station_type = bobura::model::station<string_type>;
+    using station_type = bobura::model::station;
 
-    using grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
+    using grade_type_set_type = bobura::model::station_info::grade_type_set;
 
     using local_type = grade_type_set_type::local_type;
 
-    using station_location_type = bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
+    using station_location_type = bobura::model::timetable_info::station_location;
 
-    using time_type = bobura::model::train_info::time<size_type, difference_type>;
+    using time_type = bobura::model::train_info::time;
 
-    using stop_type = bobura::model::train_info::stop<size_type, difference_type, string_type>;
+    using stop_type = bobura::model::train_info::stop;
 
-    using train_kind_type = bobura::model::train_kind<string_type, font_type>;
+    using train_kind_type = bobura::model::train_kind;
 
-    using train_type = bobura::model::train<size_type, difference_type, string_type>;
+    using train_type = bobura::model::train;
 
-    using timetable_type = bobura::model::
-        timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+    using timetable_type = bobura::model::timetable;
 
     using train_kinds_type = timetable_type::train_kinds_type;
 
@@ -592,8 +591,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                     string_type{ TETENGO2_TEXT("a") },
                                     string_type{ TETENGO2_TEXT("42") },
                                     string_type{ TETENGO2_TEXT("y") },
-                                    stops.begin(),
-                                    stops.begin() + 1 });
+                                    train_type::stops_type{ stops.begin(), stops.begin() + 1 } });
 
                     timetable.insert_station_location(
                         timetable.station_locations().end(),
@@ -618,8 +616,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                     string_type{ TETENGO2_TEXT("a") },
                                     string_type{ TETENGO2_TEXT("42") },
                                     string_type{ TETENGO2_TEXT("z") },
-                                    stops.begin(),
-                                    stops.end() });
+                                    train_type::stops_type{ stops.begin(), stops.end() } });
 
                     timetable.insert_station_location(
                         timetable.station_locations().begin() + 1,
@@ -676,8 +673,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                     string_type{ TETENGO2_TEXT("a") },
                                     string_type{ TETENGO2_TEXT("42") },
                                     string_type{ TETENGO2_TEXT("y") },
-                                    stops.begin(),
-                                    stops.begin() + 1 });
+                                    train_type::stops_type{ stops.begin(), stops.begin() + 1 } });
 
                     timetable.insert_station_location(
                         timetable.station_locations().end(),
@@ -701,8 +697,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                     string_type{ TETENGO2_TEXT("a") },
                                     string_type{ TETENGO2_TEXT("42") },
                                     string_type{ TETENGO2_TEXT("z") },
-                                    stops.begin(),
-                                    stops.end() });
+                                    train_type::stops_type{ stops.begin(), stops.end() } });
 
                     timetable.insert_station_location(
                         timetable.station_locations().begin() + 1,
@@ -896,8 +891,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                     string_type{ TETENGO2_TEXT("a") },
                                     string_type{ TETENGO2_TEXT("42") },
                                     string_type{ TETENGO2_TEXT("x") },
-                                    stops.begin(),
-                                    stops.end() });
+                                    train_type::stops_type{ stops.begin(), stops.end() } });
 
                     timetable.erase_station_locations(
                         timetable.station_locations().begin(), timetable.station_locations().end());
@@ -937,8 +931,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                     string_type{ TETENGO2_TEXT("a") },
                                     string_type{ TETENGO2_TEXT("42") },
                                     string_type{ TETENGO2_TEXT("x") },
-                                    stops.begin(),
-                                    stops.end() });
+                                    train_type::stops_type{ stops.begin(), stops.end() } });
 
                     timetable.erase_station_locations(
                         timetable.station_locations().begin(), timetable.station_locations().end());
@@ -978,8 +971,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                     string_type{ TETENGO2_TEXT("a") },
                                     string_type{ TETENGO2_TEXT("42") },
                                     string_type{ TETENGO2_TEXT("x") },
-                                    stops.begin(),
-                                    stops.end() });
+                                    train_type::stops_type{ stops.begin(), stops.end() } });
 
                     timetable.erase_station_locations(
                         timetable.station_locations().begin(), timetable.station_locations().begin() + 1);
@@ -1019,8 +1011,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                     string_type{ TETENGO2_TEXT("a") },
                                     string_type{ TETENGO2_TEXT("42") },
                                     string_type{ TETENGO2_TEXT("x") },
-                                    stops.begin(),
-                                    stops.end() });
+                                    train_type::stops_type{ stops.begin(), stops.end() } });
 
                     timetable.erase_station_locations(
                         timetable.station_locations().begin(), timetable.station_locations().begin() + 1);
@@ -1605,8 +1596,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                         string_type{ TETENGO2_TEXT("a") },
                                         string_type{ TETENGO2_TEXT("42") },
                                         string_type{ TETENGO2_TEXT("x") },
-                                        stops.begin(),
-                                        stops.end() }),
+                                        train_type::stops_type{ stops.begin(), stops.end() } }),
                         std::invalid_argument);
                 }
                 {
@@ -1649,8 +1639,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                         string_type{ TETENGO2_TEXT("a") },
                                         string_type{ TETENGO2_TEXT("42") },
                                         string_type{ TETENGO2_TEXT("x") },
-                                        stops.begin(),
-                                        stops.end() }),
+                                        train_type::stops_type{ stops.begin(), stops.end() } }),
                         std::invalid_argument);
                 }
             }
@@ -1795,8 +1784,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                         string_type{ TETENGO2_TEXT("a") },
                                         string_type{ TETENGO2_TEXT("42") },
                                         string_type{ TETENGO2_TEXT("x") },
-                                        stops.begin(),
-                                        stops.end() }),
+                                        train_type::stops_type{ stops.begin(), stops.end() } }),
                         std::invalid_argument);
                 }
                 {
@@ -1839,8 +1827,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                                         string_type{ TETENGO2_TEXT("a") },
                                         string_type{ TETENGO2_TEXT("42") },
                                         string_type{ TETENGO2_TEXT("x") },
-                                        stops.begin(),
-                                        stops.end() }),
+                                        train_type::stops_type{ stops.begin(), stops.end() } }),
                         std::invalid_argument);
                 }
             }

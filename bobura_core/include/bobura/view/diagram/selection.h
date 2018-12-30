@@ -44,18 +44,15 @@ namespace bobura::view::diagram {
         //! The string type.
         using string_type = typename traits_type::string_type;
 
-        //! The operating distance type.
-        using operating_distance_type = typename traits_type::operating_distance_type;
-
         //! The station location type.
-        using station_location_type = model::timetable_info::station_location<string_type, operating_distance_type>;
+        using station_location_type = model::timetable_info::station_location;
 
         //! The train type.
-        using train_type = model::train<size_type, difference_type, string_type>;
+        using train_type = model::train;
 
         //! The selection observer set type.
         using selection_observer_set_type =
-            message::diagram_selection_observer_set<size_type, difference_type, string_type, operating_distance_type>;
+            message::diagram_selection_observer_set<size_type, difference_type, string_type>;
 
 
         // constructors and destructor

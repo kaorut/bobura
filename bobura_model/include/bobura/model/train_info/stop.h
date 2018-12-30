@@ -9,36 +9,28 @@
 #if !defined(BOBURA_MODEL_TRAININFO_STOP_H)
 #define BOBURA_MODEL_TRAININFO_STOP_H
 
+#include <memory>
+
 #include <boost/operators.hpp>
 
 #include <bobura/model/train_info/time.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura::model::train_info {
     /*!
-        \brief The class template for a train stop.
-
-        \tparam Size       A size type.
-        \tparam Difference A difference type.
-        \tparam String     A string type.
+        \brief The class for a train stop.
     */
-    template <typename Size, typename Difference, typename String>
-    class stop : private boost::equality_comparable<stop<Size, Difference, String>>
+    class stop : private boost::equality_comparable<stop>
     {
     public:
         // types
 
-        //! The size type.
-        using size_type = Size;
-
-        //! The difference type.
-        using difference_type = Difference;
-
         //! The time type.
-        using time_type = time<size_type, difference_type>;
+        using time_type = time;
 
         //! The string type.
-        using string_type = String;
+        using string_type = type_list::common::string_type;
 
 
         // constructors and destructor
@@ -51,10 +43,26 @@ namespace bobura::model::train_info {
             \param operational Set true for an operational stop.
             \param platform    A platform.
         */
-        stop(time_type arrival, time_type departure, const bool operational, string_type platform)
-        : m_arrival{ std::move(arrival) }, m_departure{ std::move(departure) }, m_operational{ operational },
-          m_platform{ std::move(platform) }
-        {}
+        stop(time_type arrival, time_type departure, const bool operational, string_type platform);
+
+        /*!
+            \brief Copies a stop.
+
+            \param another Another stop.
+        */
+        stop(const stop& another);
+
+        /*!
+            \brief Moves a stop.
+
+            \param another Another stop.
+        */
+        stop(stop&& another);
+
+        /*!
+            \brief Destorys the stop.
+        */
+        ~stop();
 
 
         // functions
@@ -68,31 +76,39 @@ namespace bobura::model::train_info {
             \retval true  When the one is equal to the other.
             \retval false Otherwise.
         */
-        friend bool operator==(const stop& one, const stop& another)
-        {
-            return one.m_arrival == another.m_arrival && one.m_departure == another.m_departure &&
-                   one.m_operational == another.m_operational && one.m_platform == another.m_platform;
-        }
+        friend bool operator==(const stop& one, const stop& another);
+
+        /*!
+            \brief Assigns a stop.
+
+            \param another Another stop.
+
+            \return This object.
+        */
+        stop& operator=(const stop& another);
+
+        /*!
+            \brief Assigns a stop.
+
+            \param another Another stop.
+
+            \return This object.
+        */
+        stop& operator=(stop&& another);
 
         /*!
             \brief Returns the arrival time.
 
             \return The arrival time.
         */
-        const time_type& arrival() const
-        {
-            return m_arrival;
-        }
+        const time_type& arrival() const;
 
         /*!
             \brief Returns the departure time.
 
             \return The departure time.
         */
-        const time_type& departure() const
-        {
-            return m_departure;
-        }
+        const time_type& departure() const;
 
         /*!
             \brief Checks whether the stop is passing.
@@ -100,10 +116,7 @@ namespace bobura::model::train_info {
             \retval true  When the stop is passing.
             \retval false Otherwise.
         */
-        bool passing() const
-        {
-            return !m_arrival.initialized() && !m_departure.initialized();
-        }
+        bool passing() const;
 
         /*!
             \brief Checks whether the stop is operational.
@@ -111,32 +124,25 @@ namespace bobura::model::train_info {
             \retval true  When the stop is operational.
             \retval false Otherwise.
         */
-        bool operational() const
-        {
-            return m_operational;
-        }
+        bool operational() const;
 
         /*!
             \brief Returns the platform.
 
             \return The platform.
         */
-        const string_type& platform() const
-        {
-            return m_platform;
-        }
+        const string_type& platform() const;
 
 
     private:
+        // types
+
+        class impl;
+
+
         // variables
 
-        time_type m_arrival;
-
-        time_type m_departure;
-
-        bool m_operational;
-
-        string_type m_platform;
+        std::unique_ptr<impl> m_p_impl;
     };
 }
 

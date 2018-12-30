@@ -84,7 +84,7 @@ namespace {
 
     using station_type = station_location_type::station_type;
 
-    using station_grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
+    using station_grade_type_set_type = bobura::model::station_info::grade_type_set;
 
     using station_selected_type = bobura::message::diagram_view::station_selected<
         size_type,

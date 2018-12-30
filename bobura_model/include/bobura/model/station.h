@@ -12,25 +12,23 @@
 #include <boost/operators.hpp>
 
 #include <bobura/model/station_info/grade.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura::model {
     /*!
-        \brief The class template for a station.
-
-        \tparam String A string type.
+        \brief The class for a station.
     */
-    template <typename String>
-    class station : private boost::equality_comparable<station<String>>
+    class station : private boost::equality_comparable<station>
     {
     public:
         // types
 
         //! The string type.
-        using string_type = String;
+        using string_type = type_list::common::string_type;
 
         //! The grade type.
-        using grade_type = station_info::grade<string_type>;
+        using grade_type = station_info::grade;
 
 
         // constructors and destructor
@@ -47,12 +45,9 @@ namespace bobura::model {
         station(
             string_type       name,
             const grade_type& grade,
-            const bool        shows_down_arrival_times,
-            const bool        shows_up_arrival_times,
-            string_type       note)
-        : m_name{ std::move(name) }, m_p_grade{ &grade }, m_shows_down_arrival_times{ shows_down_arrival_times },
-          m_shows_up_arrival_times{ shows_up_arrival_times }, m_note{ std::move(note) }
-        {}
+            bool              shows_down_arrival_times,
+            bool              shows_up_arrival_times,
+            string_type       note);
 
 
         // functions
@@ -66,32 +61,21 @@ namespace bobura::model {
             \retval true  When the one is equal to the other.
             \retval false Otherwise.
         */
-        friend bool operator==(const station& one, const station& another)
-        {
-            return one.m_name == another.m_name && one.m_p_grade == another.m_p_grade &&
-                   one.m_shows_down_arrival_times == another.m_shows_down_arrival_times &&
-                   one.m_shows_up_arrival_times == another.m_shows_up_arrival_times && one.m_note == another.m_note;
-        }
+        friend bool operator==(const station& one, const station& another);
 
         /*!
             \brief Returns the name.
 
             \return The name.
         */
-        const string_type& name() const
-        {
-            return m_name;
-        }
+        const string_type& name() const;
 
         /*!
             \brief Returns the grade.
 
             \return The grade.
         */
-        const grade_type& grade() const
-        {
-            return *m_p_grade;
-        }
+        const grade_type& grade() const;
 
         /*!
             \brief Returns whether the arrival times of down trains are shown.
@@ -99,10 +83,7 @@ namespace bobura::model {
             \retval true  When the arrival times of down trains are shown.
             \retval false Otherwise.
         */
-        bool shows_down_arrival_times() const
-        {
-            return m_shows_down_arrival_times;
-        }
+        bool shows_down_arrival_times() const;
 
         /*!
             \brief Returns whether the arrival times of up trains are shown.
@@ -110,20 +91,14 @@ namespace bobura::model {
             \retval true  When the arrival times of up trains are shown.
             \retval false Otherwise.
         */
-        bool shows_up_arrival_times() const
-        {
-            return m_shows_up_arrival_times;
-        }
+        bool shows_up_arrival_times() const;
 
         /*!
             \brief Returns the note.
 
             \return The note.
         */
-        const string_type& note() const
-        {
-            return m_note;
-        }
+        const string_type& note() const;
 
 
     private:

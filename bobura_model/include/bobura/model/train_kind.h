@@ -9,31 +9,28 @@
 #if !defined(BOBURA_MODEL_TRAINKIND_H)
 #define BOBURA_MODEL_TRAINKIND_H
 
-#include <utility>
-
 #include <boost/operators.hpp>
 
 #include <tetengo2/gui/drawing/color.h>
+#include <tetengo2/gui/drawing/font.h>
+
+#include <bobura/type_list.h>
 
 
 namespace bobura::model {
     /*!
-        \brief The class template for a train kind.
-
-        \tparam String A string type.
-        \tparam Font   A font type.
+        \brief The class for a train kind.
     */
-    template <typename String, typename Font>
-    class train_kind : private boost::equality_comparable<train_kind<String, Font>>
+    class train_kind : private boost::equality_comparable<train_kind>
     {
     public:
         // types
 
         //! The string type.
-        using string_type = String;
+        using string_type = type_list::common::string_type;
 
         //! The font type.
-        using font_type = Font;
+        using font_type = tetengo2::gui::drawing::font;
 
         //! The color type.
         using color_type = tetengo2::gui::drawing::color;
@@ -62,11 +59,7 @@ namespace bobura::model {
 
             \return The default train kind.
         */
-        static const train_kind& default_()
-        {
-            static auto singleton = make_default();
-            return singleton;
-        }
+        static const train_kind& default_();
 
 
         // constructors and destructor
@@ -91,12 +84,7 @@ namespace bobura::model {
             const weight_type     diagram_line_weight,
             const line_style_type diagram_line_style,
             font_type             timetable_font,
-            color_type            timetable_color)
-        : m_name{ std::move(name) }, m_abbreviation{ std::move(abbreviation) },
-          m_diagram_font{ std::move(diagram_font) }, m_diagram_color{ std::move(diagram_color) },
-          m_diagram_line_weight{ diagram_line_weight }, m_diagram_line_style{ diagram_line_style },
-          m_timetable_font{ std::move(timetable_font) }, m_timetable_color{ std::move(timetable_color) }
-        {}
+            color_type            timetable_color);
 
 
         // functions
@@ -110,110 +98,66 @@ namespace bobura::model {
             \retval true  When the one is equal to the other.
             \retval false Otherwise.
         */
-        friend bool operator==(const train_kind& one, const train_kind& another)
-        {
-            return one.m_name == another.m_name && one.m_abbreviation == another.m_abbreviation &&
-                   one.m_diagram_font == another.m_diagram_font && one.m_diagram_color == another.m_diagram_color &&
-                   one.m_diagram_line_weight == another.m_diagram_line_weight &&
-                   one.m_diagram_line_style == another.m_diagram_line_style &&
-                   one.m_timetable_font == another.m_timetable_font &&
-                   one.m_timetable_color == another.m_timetable_color;
-        }
+        friend bool operator==(const train_kind& one, const train_kind& another);
 
         /*!
             \brief Returns the name.
 
             \return The name.
         */
-        const string_type& name() const
-        {
-            return m_name;
-        }
+        const string_type& name() const;
 
         /*!
             \brief Returns the abbreviated name.
 
             \return The abbreviated name.
         */
-        const string_type& abbreviation() const
-        {
-            return m_abbreviation;
-        }
+        const string_type& abbreviation() const;
 
         /*!
             \brief Returns the font for the diagram.
 
             \return The font for the diagram.
         */
-        const font_type& diagram_font() const
-        {
-            return m_diagram_font;
-        }
+        const font_type& diagram_font() const;
 
         /*!
             \brief Returns the color for the diagram.
 
             \return The color for the diagram.
         */
-        const color_type& diagram_color() const
-        {
-            return m_diagram_color;
-        }
+        const color_type& diagram_color() const;
 
         /*!
             \brief Returns the line weight for the diagram.
 
             \return The line weight for the diagram.
         */
-        weight_type diagram_line_weight() const
-        {
-            return m_diagram_line_weight;
-        }
+        weight_type diagram_line_weight() const;
 
         /*!
             \brief Returns the line style for the diagram.
 
             \return The line style for the diagram.
         */
-        line_style_type diagram_line_style() const
-        {
-            return m_diagram_line_style;
-        }
+        line_style_type diagram_line_style() const;
 
         /*!
             \brief Returns the timetable font for the timetable.
 
             \return The timetable font for the timetable.
         */
-        const font_type& timetable_font() const
-        {
-            return m_timetable_font;
-        }
+        const font_type& timetable_font() const;
 
         /*!
             \brief Returns the timetable color for the timetable.
 
             \return Thetimetable color for the timetable.
         */
-        const color_type& timetable_color() const
-        {
-            return m_timetable_color;
-        }
+        const color_type& timetable_color() const;
 
 
     private:
-        // static functions
-
-        static train_kind make_default()
-        {
-            auto default_font = font_type::dialog_font();
-            return train_kind{ string_type{},       string_type{},
-                               default_font,        color_type{ 0x00, 0x00, 0x00 },
-                               weight_type::normal, line_style_type::solid,
-                               default_font,        color_type{ 0x00, 0x00, 0x00 } };
-        }
-
-
         // variables
 
         string_type m_name;

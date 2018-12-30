@@ -53,7 +53,7 @@ namespace {
 
     using station_type = station_location_type::station_type;
 
-    using station_grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
+    using station_grade_type_set_type = bobura::model::station_info::grade_type_set;
 
     using train_type = model_type::timetable_type::train_type;
 

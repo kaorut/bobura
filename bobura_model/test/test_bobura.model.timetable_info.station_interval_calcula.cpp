@@ -20,7 +20,6 @@
 #include <bobura/model/timetable_info/station_interval_calculator.h>
 #include <bobura/model/timetable_info/station_location.h>
 #include <bobura/model/train.h>
-#include <bobura/model/train_info/time.h>
 #include <bobura/model/train_info/time_span.h>
 
 #include "test_bobura.model.type_list.h"
@@ -39,12 +38,11 @@ namespace {
 
     using operating_distance_type = common_type_list_type::operating_distance_type;
 
-    using station_interval_calculator_type = bobura::model::timetable_info::
-        station_interval_calculator<size_type, difference_type, string_type, operating_distance_type>;
+    using station_interval_calculator_type = bobura::model::timetable_info::station_interval_calculator;
 
-    using station_location_type = bobura::model::timetable_info::station_location<string_type, operating_distance_type>;
+    using station_location_type = bobura::model::timetable_info::station_location;
 
-    using train_type = bobura::model::train<size_type, difference_type, string_type>;
+    using train_type = bobura::model::train;
 
     using stop_type = train_type::stop_type;
 
@@ -54,9 +52,9 @@ namespace {
 
     using station_interval_type = station_intervals_type::value_type;
 
-    using station_type = bobura::model::station<string_type>;
+    using station_type = bobura::model::station;
 
-    using grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
+    using grade_type_set_type = bobura::model::station_info::grade_type_set;
 
 
     // functions
@@ -82,10 +80,13 @@ namespace {
     template <typename InputIterator>
     train_type make_train(const InputIterator stop_first, const InputIterator stop_last)
     {
-        return train_type{
-            train_type::direction_type::down, train_type::string_type{}, 0,          train_type::string_type{},
-            train_type::string_type{},        train_type::string_type{}, stop_first, stop_last
-        };
+        return train_type{ train_type::direction_type::down,
+                           train_type::string_type{},
+                           0,
+                           train_type::string_type{},
+                           train_type::string_type{},
+                           train_type::string_type{},
+                           train_type::stops_type{ stop_first, stop_last } };
     }
 
     stop_type make_stop(const bool arrival, const size_type hours, const size_type minutes)

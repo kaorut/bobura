@@ -9,32 +9,28 @@
 #if !defined(BOBURA_MODEL_TIMETABLEINFO_STATIONLOCATION_H)
 #define BOBURA_MODEL_TIMETABLEINFO_STATIONLOCATION_H
 
+#include <memory>
+
 #include <boost/operators.hpp>
 
 #include <bobura/model/station.h>
+#include <bobura/type_list.h>
 
 
 namespace bobura::model::timetable_info {
     /*!
-        \brief The class template for a station location.
-
-        \tparam String            A string type.
-        \tparam OperatingDistance An operating distance type.
+        \brief The class for a station location.
     */
-    template <typename String, typename OperatingDistance>
-    class station_location : private boost::equality_comparable<station_location<String, OperatingDistance>>
+    class station_location : private boost::equality_comparable<station_location>
     {
     public:
         // types
 
-        //! The string type.
-        using string_type = String;
+        //! The station type.
+        using station_type = station;
 
         //! The operating distance type.
-        using operating_distance_type = OperatingDistance;
-
-        //! The station type.
-        using station_type = station<string_type>;
+        using operating_distance_type = type_list::common::operating_distance_type;
 
 
         // constructors and destructor
@@ -45,9 +41,26 @@ namespace bobura::model::timetable_info {
             \param station            A station.
             \param operating_distance An operating distance.
         */
-        station_location(station_type station, operating_distance_type operating_distance)
-        : m_station{ std::move(station) }, m_operating_distance{ std::move(operating_distance) }
-        {}
+        station_location(station_type station, operating_distance_type operating_distance);
+
+        /*!
+            \brief Copies a station location.
+
+            \param another Another station location.
+        */
+        station_location(const station_location& another);
+
+        /*!
+            \brief Moves a station location.
+
+            \param another Another station location.
+        */
+        station_location(station_location&& another);
+
+        /*!
+            \brief Destroys the station location.
+        */
+        ~station_location();
 
 
         // functions
@@ -61,30 +74,39 @@ namespace bobura::model::timetable_info {
             \retval true  When the one is equal to the other.
             \retval false Otherwise.
         */
-        friend bool operator==(const station_location& one, const station_location& another)
-        {
-            return one.m_station == another.m_station && one.m_operating_distance == another.m_operating_distance;
-        }
+        friend bool operator==(const station_location& one, const station_location& another);
+
+        /*!
+            \brief Assigns a station location.
+
+            \param another Another station location.
+
+            \return This object.
+        */
+        station_location& operator=(const station_location& another);
+
+        /*!
+            \brief Assigns a station location.
+
+            \param another Another station location.
+
+            \return This object.
+        */
+        station_location& operator=(station_location&& another);
 
         /*!
             \brief Returns the station.
 
             \return The station.
         */
-        const station_type& get_station() const
-        {
-            return m_station;
-        }
+        const station_type& get_station() const;
 
         /*!
             \brief Returns the operating distance.
 
             \return The operating distance.
         */
-        const operating_distance_type& operating_distance() const
-        {
-            return m_operating_distance;
-        }
+        const operating_distance_type& operating_distance() const;
 
         /*!
             \brief Checks this station is located before another.
@@ -94,18 +116,18 @@ namespace bobura::model::timetable_info {
             \retval true  When operating_distance() < another.operating_distance().
             \retval false Otherwise.
         */
-        bool before(const station_location& another) const
-        {
-            return m_operating_distance < another.m_operating_distance;
-        }
+        bool before(const station_location& another) const;
 
 
     private:
+        // types
+
+        class impl;
+
+
         // variables
 
-        station_type m_station;
-
-        operating_distance_type m_operating_distance;
+        std::unique_ptr<impl> m_p_impl;
     };
 }
 

@@ -17,6 +17,7 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/core/noncopyable.hpp>
+#include <boost/core/typeinfo.hpp>
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/predef.h>
@@ -84,7 +85,7 @@ namespace bobura::model::serializer {
 
         using error_type = typename base_type::error_type;
 
-        using station_grade_type_set_type = station_info::grade_type_set<string_type>;
+        using station_grade_type_set_type = station_info::grade_type_set;
 
 
         // constructors and destructor

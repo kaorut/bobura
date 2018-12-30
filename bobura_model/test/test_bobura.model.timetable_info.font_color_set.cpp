@@ -39,7 +39,7 @@ namespace {
 
     using color_type = ui_type_list_type::color_type;
 
-    using font_color_set_type = bobura::model::timetable_info::font_color_set<font_type>;
+    using font_color_set_type = bobura::model::timetable_info::font_color_set;
 
     using font_color_type = font_color_set_type::font_color_type;
 
@@ -139,7 +139,13 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    const auto font_color = make_font_color(string_type{ TETENGO2_TEXT("company_name") }, true);
+                    const auto font_color1 = make_font_color(string_type{ TETENGO2_TEXT("company_name") }, true);
+
+                    font_color_type font_color2{ font_color1 };
+                    BOOST_CHECK(font_color2 == font_color1);
+
+                    const font_color_type font_color3{ std::move(font_color2) };
+                    BOOST_CHECK(font_color3 == font_color1);
                 }
 
                 BOOST_AUTO_TEST_CASE(operator_equal)
@@ -157,6 +163,28 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                         const auto font_color2 = make_font_color(string_type{ TETENGO2_TEXT("ABC") }, true);
 
                         BOOST_CHECK(font_color1 != font_color2);
+                    }
+                }
+
+                BOOST_AUTO_TEST_CASE(operator_assign)
+                {
+                    BOOST_TEST_PASSPOINT();
+
+                    {
+                        auto       font_color1 = make_font_color(string_type{ TETENGO2_TEXT("company_name") }, true);
+                        const auto font_color2 = make_font_color(string_type{ TETENGO2_TEXT("ABC") }, true);
+
+                        font_color1 = font_color2;
+
+                        BOOST_CHECK(font_color1 == font_color2);
+                    }
+                    {
+                        auto font_color1 = make_font_color(string_type{ TETENGO2_TEXT("company_name") }, true);
+                        auto font_color2 = make_font_color(string_type{ TETENGO2_TEXT("ABC") }, true);
+
+                        font_color1 = std::move(font_color2);
+
+                        BOOST_CHECK(font_color1 == make_font_color(string_type{ TETENGO2_TEXT("ABC") }, true));
                     }
                 }
 
@@ -218,7 +246,13 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    make_font_color_set1();
+                    const auto font_color_set1 = make_font_color_set1();
+
+                    font_color_set_type font_color_set2{ font_color_set1 };
+                    BOOST_CHECK(font_color_set2 == font_color_set1);
+
+                    const font_color_set_type font_color_set3{ std::move(font_color_set2) };
+                    BOOST_CHECK(font_color_set3 == font_color_set1);
                 }
 
                 BOOST_AUTO_TEST_CASE(operator_equal)
@@ -226,17 +260,38 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     BOOST_TEST_PASSPOINT();
 
                     {
-                        const font_color_set_type font_color_set1 = make_font_color_set1();
-                        const font_color_set_type font_color_set2 = make_font_color_set2();
-
+                        const auto font_color_set1 = make_font_color_set1();
+                        const auto font_color_set2 = make_font_color_set2();
 
                         BOOST_CHECK(font_color_set1 == font_color_set2);
                     }
                     {
-                        const font_color_set_type font_color_set1 = make_font_color_set1();
-                        const font_color_set_type font_color_set3 = make_font_color_set3();
+                        const auto font_color_set1 = make_font_color_set1();
+                        const auto font_color_set3 = make_font_color_set3();
 
                         BOOST_CHECK(font_color_set1 != font_color_set3);
+                    }
+                }
+
+                BOOST_AUTO_TEST_CASE(operator_assign)
+                {
+                    BOOST_TEST_PASSPOINT();
+
+                    {
+                        auto       font_color_set1 = make_font_color_set1();
+                        const auto font_color_set2 = make_font_color_set2();
+
+                        font_color_set1 = font_color_set2;
+
+                        BOOST_CHECK(font_color_set1 == font_color_set2);
+                    }
+                    {
+                        auto font_color_set1 = make_font_color_set1();
+                        auto font_color_set2 = make_font_color_set2();
+
+                        font_color_set1 = std::move(font_color_set2);
+
+                        BOOST_CHECK(font_color_set1 == make_font_color_set2());
                     }
                 }
 
@@ -244,7 +299,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    const font_color_set_type font_color_set = make_font_color_set1();
+                    const auto font_color_set = make_font_color_set1();
 
                     BOOST_CHECK(font_color_set.background() == make_font_color(string_type{}, true));
                 }
@@ -253,7 +308,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    const font_color_set_type font_color_set = make_font_color_set1();
+                    const auto font_color_set = make_font_color_set1();
 
                     BOOST_CHECK(
                         font_color_set.general() == make_font_color(string_type{ TETENGO2_TEXT("general") }, true));
@@ -263,7 +318,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    const font_color_set_type font_color_set = make_font_color_set1();
+                    const auto font_color_set = make_font_color_set1();
 
                     BOOST_CHECK(
                         font_color_set.company_name() ==
@@ -274,7 +329,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    const font_color_set_type font_color_set = make_font_color_set1();
+                    const auto font_color_set = make_font_color_set1();
 
                     BOOST_CHECK(
                         font_color_set.line_name() == make_font_color(string_type{ TETENGO2_TEXT("line_name") }, true));
@@ -284,7 +339,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    const font_color_set_type font_color_set = make_font_color_set1();
+                    const auto font_color_set = make_font_color_set1();
 
                     BOOST_CHECK(font_color_set.note() == make_font_color(string_type{ TETENGO2_TEXT("note") }, true));
                 }
@@ -293,7 +348,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    const font_color_set_type font_color_set = make_font_color_set1();
+                    const auto font_color_set = make_font_color_set1();
 
                     BOOST_CHECK(
                         font_color_set.local_station() ==
@@ -304,7 +359,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    const font_color_set_type font_color_set = make_font_color_set1();
+                    const auto font_color_set = make_font_color_set1();
 
                     BOOST_CHECK(
                         font_color_set.principal_station() ==
@@ -315,7 +370,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    const font_color_set_type font_color_set = make_font_color_set1();
+                    const auto font_color_set = make_font_color_set1();
 
                     BOOST_CHECK(
                         font_color_set.local_terminal_station() ==
@@ -326,7 +381,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                 {
                     BOOST_TEST_PASSPOINT();
 
-                    const font_color_set_type font_color_set = make_font_color_set1();
+                    const auto font_color_set = make_font_color_set1();
 
                     BOOST_CHECK(
                         font_color_set.principal_terminal_station() ==

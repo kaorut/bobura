@@ -34,6 +34,15 @@
     <Filter Include="sources\bobura::model\message">
       <UniqueIdentifier>{212a1d57-4d08-4319-be4f-8fa0f0b4c979}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sources\bobura::model\station_info">
+      <UniqueIdentifier>{61abb54a-d4cc-4889-9eb7-900c78ecd300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\bobura::model\timetable_info">
+      <UniqueIdentifier>{e162f760-42af-40e9-bf1d-1a6974138936}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\bobura::model\train_info">
+      <UniqueIdentifier>{afb79184-5657-46cb-9595-84dbc45eef6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\bobura\model\message\timetable_observer_set.h">
@@ -193,6 +202,39 @@
     </ClCompile>
     <ClCompile Include="src\bobura.model.message.timetable_observer_set.cpp">
       <Filter>sources\bobura::model\message</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.station.cpp">
+      <Filter>sources\bobura::model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.timetable.cpp">
+      <Filter>sources\bobura::model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.train.cpp">
+      <Filter>sources\bobura::model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.train_kind.cpp">
+      <Filter>sources\bobura::model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.station_info.grade.cpp">
+      <Filter>sources\bobura::model\station_info</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.timetable_info.font_color_set.cpp">
+      <Filter>sources\bobura::model\timetable_info</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.timetable_info.station_interval_calculator.cpp">
+      <Filter>sources\bobura::model\timetable_info</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.timetable_info.station_location.cpp">
+      <Filter>sources\bobura::model\timetable_info</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.train_info.stop.cpp">
+      <Filter>sources\bobura::model\train_info</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.train_info.time.cpp">
+      <Filter>sources\bobura::model\train_info</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bobura.model.train_info.time_span.cpp">
+      <Filter>sources\bobura::model\train_info</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

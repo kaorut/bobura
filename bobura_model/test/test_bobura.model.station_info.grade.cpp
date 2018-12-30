@@ -26,7 +26,7 @@ namespace {
 
     using string_type = common_type_list_type::string_type;
 
-    using grade_type_set_type = bobura::model::station_info::grade_type_set<string_type>;
+    using grade_type_set_type = bobura::model::station_info::grade_type_set;
 
     using grade_type = grade_type_set_type::grade_type;
 
@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     local_type::instance();
                 }
 
-                BOOST_AUTO_TEST_CASE(name)
+                BOOST_AUTO_TEST_CASE(name_impl)
                 {
                     BOOST_TEST_PASSPOINT();
 
@@ -102,7 +102,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     principal_type::instance();
                 }
 
-                BOOST_AUTO_TEST_CASE(name)
+                BOOST_AUTO_TEST_CASE(name_impl)
                 {
                     BOOST_TEST_PASSPOINT();
 
@@ -121,7 +121,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     local_terminal_type::instance();
                 }
 
-                BOOST_AUTO_TEST_CASE(name)
+                BOOST_AUTO_TEST_CASE(name_impl)
                 {
                     BOOST_TEST_PASSPOINT();
 
@@ -141,7 +141,7 @@ BOOST_AUTO_TEST_SUITE(test_bobura)
                     principal_terminal_type::instance();
                 }
 
-                BOOST_AUTO_TEST_CASE(name)
+                BOOST_AUTO_TEST_CASE(name_impl)
                 {
                     BOOST_TEST_PASSPOINT();
 

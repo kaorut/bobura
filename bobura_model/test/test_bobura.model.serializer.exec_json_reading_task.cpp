@@ -11,12 +11,8 @@
 #include <string>
 
 #include <boost/preprocessor.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <tetengo2/gui/menu/abstract_popup.h>
-#include <tetengo2/gui/menu/menu_bar.h>
-#include <tetengo2/gui/widget/dialog.h>
 #include <tetengo2/text.h>
 
 #include <bobura/detail_type_list.h>
@@ -48,8 +44,7 @@ namespace {
 
     using font_type = ui_type_list_type::font_type;
 
-    using timetable_type = bobura::model::
-        timetable<size_type, difference_type, string_type, operating_distance_type, speed_type, font_type>;
+    using timetable_type = bobura::model::timetable;
 
     using window_type = ui_type_list_type::window_type;
 

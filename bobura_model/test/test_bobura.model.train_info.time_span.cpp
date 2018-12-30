@@ -15,17 +15,11 @@
 
 #include <bobura/model/train_info/time_span.h>
 
-#include "test_bobura.model.type_list.h"
-
 
 namespace {
     // types
 
-    using common_type_list_type = test_bobura::model::type_list::common;
-
-    using difference_type = common_type_list_type::difference_type;
-
-    using time_span_type = bobura::model::train_info::time_span<difference_type>;
+    using time_span_type = bobura::model::train_info::time_span;
 
     using hours_minutes_seconds_type_ = time_span_type::hours_minutes_seconds_type;
 }

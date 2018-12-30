@@ -17,6 +17,7 @@
 #include <vector>
 
 #include <boost/core/noncopyable.hpp>
+#include <boost/core/typeinfo.hpp>
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/predef.h>
@@ -220,7 +221,7 @@ namespace bobura::model::serializer {
 
             using operating_distance_type = typename station_location_type::operating_distance_type;
 
-            using station_grade_type_set_type = station_info::grade_type_set<string_type>;
+            using station_grade_type_set_type = station_info::grade_type_set;
 
             static const grade_type& to_grade(const bool principal, const bool show_arrival_and_departure_time)
             {
