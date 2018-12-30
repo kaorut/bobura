@@ -1,7 +1,7 @@
 /*! \file
     \brief The definition of test_bobura::model::type_list.
 
-    Copyright (C) 2007-2018 kaoru
+    Copyright (C) 2007-2019 kaoru
 
     $Id$
 */
