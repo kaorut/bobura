@@ -17,9 +17,9 @@
 #include <bobura/detail_type_list.h>
 #include <bobura/type_list.h>
 
-namespace bobura::command {
+namespace bobura { namespace command {
     class parameter_base;
-}
+}}
 
 
 namespace bobura::command {
