@@ -8,13 +8,13 @@
 
 /*! \mainpage
 
-What is Bobura? {#what_is_bobura}
+What is Bobura?
 ===============
 
 Bobura is some software about railways.
 
 
-Requirements {#requirements}
+Requirements
 ============
 
 Bobura application
@@ -33,7 +33,7 @@ It's tested on the following systems:
 - [Debian GNU/Linux 9](https://www.debian.org/)
 
 
-How to Build {#how_to_build}
+How to Build
 ============
 
 Building on Windows
