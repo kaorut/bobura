@@ -214,9 +214,8 @@ namespace bobura {
         using diagram_view_picture_box_mouse_moved_observer_type =
             message::view_picture_box::diagram::mouse_moved<diagram_view_traits_type>;
 
-        using diagram_view_picture_box_mouse_wheeled_observer_type = message::view_picture_box::diagram::mouse_wheeled<
-            view::diagram::zoom<diagram_view_traits_type, picture_box_type, mouse_capture_type>,
-            diagram_view_traits_type>;
+        using diagram_view_picture_box_mouse_wheeled_observer_type = message::view_picture_box::diagram::
+            mouse_wheeled<view::diagram::zoom<diagram_view_traits_type>, diagram_view_traits_type>;
 
         using diagram_view_picture_box_key_down_observer_type = message::view_picture_box::diagram::keyboard_key_down;
 

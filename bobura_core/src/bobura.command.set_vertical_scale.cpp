@@ -32,8 +32,6 @@ namespace bobura::command {
     public:
         // types
 
-        using mouse_capture_type = typename set_vertical_scale::mouse_capture_type;
-
         using scale_type = typename set_vertical_scale::scale_type;
 
         using command_set_traits_type = typename set_vertical_scale::command_set_traits_type;
@@ -80,8 +78,7 @@ namespace bobura::command {
 
         using main_window_type = main_window<main_window_traits_type, command_set_traits_type>;
 
-        using zoom_type = view::diagram::
-            zoom<diagram_view_traits_type, typename main_window_traits_type::picture_box_type, mouse_capture_type>;
+        using zoom_type = view::diagram::zoom<diagram_view_traits_type>;
 
 
         // variables

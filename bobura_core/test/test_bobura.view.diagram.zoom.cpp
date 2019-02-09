@@ -63,7 +63,7 @@ namespace {
 
     using diagram_view_type = bobura::diagram_view<diagram_view_traits_type>;
 
-    using zoom_type = bobura::view::diagram::zoom<diagram_view_traits_type, picture_box_type, mouse_capture_type>;
+    using zoom_type = bobura::view::diagram::zoom<diagram_view_traits_type>;
 
     using scale_type = zoom_type::scale_type;
 }

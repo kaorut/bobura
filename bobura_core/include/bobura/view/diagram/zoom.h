@@ -13,6 +13,9 @@
 
 #include <boost/core/noncopyable.hpp>
 
+#include <tetengo2/gui/mouse_capture.h>
+#include <tetengo2/gui/widget/picture_box.h>
+
 #include <bobura/diagram_view.h>
 #include <bobura/view/scale_list.h>
 
@@ -21,11 +24,9 @@ namespace bobura::view::diagram {
     /*!
         \brief The class template for a zoom of a view.
 
-        \tparam Traits       A traits type.
-        \tparam PictureBox   A picture box type.
-        \tparam MouseCapture A mouse capture type.
+        \tparam Traits A traits type.
     */
-    template <typename Traits, typename PictureBox, typename MouseCapture>
+    template <typename Traits>
     class zoom : private boost::noncopyable
     {
     public:
@@ -62,10 +63,10 @@ namespace bobura::view::diagram {
         using message_catalog_type = typename traits_type::message_catalog_type;
 
         //! The picture box type.
-        using picture_box_type = PictureBox;
+        using picture_box_type = tetengo2::gui::widget::picture_box;
 
         //! The mouse capture type.
-        using mouse_capture_type = MouseCapture;
+        using mouse_capture_type = tetengo2::gui::mouse_capture;
 
         //! The view type.
         using diagram_view_type = bobura::diagram_view<traits_type>;
