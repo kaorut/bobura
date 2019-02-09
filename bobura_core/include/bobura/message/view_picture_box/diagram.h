@@ -26,6 +26,7 @@
 #include <tetengo2/stdalt.h>
 
 #include <bobura/diagram_view.h>
+#include <bobura/view/diagram/zoom.h>
 
 
 namespace bobura::message::view_picture_box::diagram {
@@ -291,7 +292,7 @@ namespace bobura::message::view_picture_box::diagram {
         \tparam Zoom       A zoom type.
         \tparam ViewTraits A view traits type.
     */
-    template <typename Zoom, typename ViewTraits>
+    template <typename ViewTraits>
     class mouse_wheeled
     {
     public:
@@ -312,14 +313,14 @@ namespace bobura::message::view_picture_box::diagram {
         //! The direction type.
         using direction_type = typename picture_box_type::mouse_observer_set_type::direction_type;
 
-        //! The view zoom type.
-        using view_zoom_type = Zoom;
-
         //! The view traits type.
         using view_traits_type = ViewTraits;
 
         //! The view type.
         using view_type = bobura::diagram_view<view_traits_type>;
+
+        //! The view zoom type.
+        using view_zoom_type = view::diagram::zoom<view_traits_type>;
 
 
         // constructors and destructor

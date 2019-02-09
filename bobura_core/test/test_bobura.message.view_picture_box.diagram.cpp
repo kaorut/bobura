@@ -17,7 +17,6 @@
 #include <bobura/message/view_picture_box/diagram.h>
 #include <bobura/timetable_model.h>
 #include <bobura/type_list.h>
-#include <bobura/view/diagram/zoom.h>
 
 
 namespace {
@@ -65,10 +64,7 @@ namespace {
 
     using mouse_moved_type = bobura::message::view_picture_box::diagram::mouse_moved<diagram_view_traits_type>;
 
-    using view_zoom_type = bobura::view::diagram::zoom<diagram_view_traits_type>;
-
-    using mouse_wheeled_type =
-        bobura::message::view_picture_box::diagram::mouse_wheeled<view_zoom_type, diagram_view_traits_type>;
+    using mouse_wheeled_type = bobura::message::view_picture_box::diagram::mouse_wheeled<diagram_view_traits_type>;
 
     using virtual_key_type = picture_box_type::keyboard_observer_set_type::virtual_key_type;
 
