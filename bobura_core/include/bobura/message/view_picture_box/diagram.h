@@ -17,6 +17,12 @@
 
 #include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/gui/cursor/system.h>
+#include <tetengo2/gui/message/scroll_bar_observer_set.h>
+#include <tetengo2/gui/scroll_bar.h>
+#include <tetengo2/gui/unit/em.h>
+#include <tetengo2/gui/virtual_key.h>
+#include <tetengo2/gui/widget/picture_box.h>
+#include <tetengo2/gui/widget/widget.h>
 #include <tetengo2/stdalt.h>
 
 #include <bobura/diagram_view.h>
@@ -26,17 +32,16 @@ namespace bobura::message::view_picture_box::diagram {
     /*!
         \brief The class template for a mouse pressed observer of the picture box.
 
-        \tparam PictureBox A picture box type.
         \tparam ViewTraits A view traits type.
     */
-    template <typename PictureBox, typename ViewTraits>
+    template <typename ViewTraits>
     class mouse_pressed
     {
     public:
         // types
 
         //! The picture box type.
-        using picture_box_type = PictureBox;
+        using picture_box_type = tetengo2::gui::widget::picture_box;
 
         //! The position type.
         using position_type = typename picture_box_type::position_type;
@@ -114,17 +119,16 @@ namespace bobura::message::view_picture_box::diagram {
     /*!
         \brief The class template for a mouse released observer of the picture box.
 
-        \tparam PictureBox A picture box type.
         \tparam ViewTraits A view traits type.
     */
-    template <typename PictureBox, typename ViewTraits>
+    template <typename ViewTraits>
     class mouse_released
     {
     public:
         // types
 
         //! The picture box type.
-        using picture_box_type = PictureBox;
+        using picture_box_type = tetengo2::gui::widget::picture_box;
 
         //! The position type.
         using position_type = typename picture_box_type::position_type;
@@ -189,17 +193,16 @@ namespace bobura::message::view_picture_box::diagram {
     /*!
         \brief The class template for a mouse moved observer of the picture box.
 
-        \tparam PictureBox A picture box type.
         \tparam ViewTraits A view traits type.
     */
-    template <typename PictureBox, typename ViewTraits>
+    template <typename ViewTraits>
     class mouse_moved
     {
     public:
         // types
 
         //! The picture box type.
-        using picture_box_type = PictureBox;
+        using picture_box_type = tetengo2::gui::widget::picture_box;
 
         //! The position type.
         using position_type = typename picture_box_type::position_type;
@@ -285,18 +288,17 @@ namespace bobura::message::view_picture_box::diagram {
     /*!
         \brief The class template for a mouse wheel observer of the picture box.
 
-        \tparam PictureBox A picture box type.
         \tparam Zoom       A zoom type.
         \tparam ViewTraits A view traits type.
     */
-    template <typename PictureBox, typename Zoom, typename ViewTraits>
+    template <typename Zoom, typename ViewTraits>
     class mouse_wheeled
     {
     public:
         // types
 
         //! The picture box type.
-        using picture_box_type = PictureBox;
+        using picture_box_type = tetengo2::gui::widget::picture_box;
 
         //! The position type.
         using position_type = typename picture_box_type::position_type;
@@ -450,18 +452,15 @@ namespace bobura::message::view_picture_box::diagram {
 
 
     /*!
-        \brief The class template for a key down observer of the picture box.
-
-        \tparam PictureBox A picture box type.
+        \brief The class for a key down observer of the picture box.
     */
-    template <typename PictureBox>
     class keyboard_key_down
     {
     public:
         // types
 
         //! The picture box type.
-        using picture_box_type = PictureBox;
+        using picture_box_type = tetengo2::gui::widget::picture_box;
 
         //! The virtual key type.
         using virtual_key_type = typename picture_box_type::keyboard_observer_set_type::virtual_key_type;
@@ -604,17 +603,16 @@ namespace bobura::message::view_picture_box::diagram {
     /*!
         \brief The class template for a paint observer of the picture box.
 
-        \tparam PictureBox A picture box type.
         \tparam ViewTraits A view traits type.
     */
-    template <typename PictureBox, typename ViewTraits>
+    template <typename ViewTraits>
     class paint_paint
     {
     public:
         // types
 
         //! The picture box type.
-        using picture_box_type = PictureBox;
+        using picture_box_type = tetengo2::gui::widget::picture_box;
 
         //! The view traits type.
         using view_traits_type = ViewTraits;
@@ -694,17 +692,16 @@ namespace bobura::message::view_picture_box::diagram {
     /*!
         \brief The class template for a scroll bar observer of the picture box.
 
-        \tparam PictureBox A picture box type.
         \tparam ViewTraits A view traits type.
     */
-    template <typename PictureBox, typename ViewTraits>
+    template <typename ViewTraits>
     class scroll_bar_scrolled
     {
     public:
         // types
 
         //! The picture box type.
-        using picture_box_type = PictureBox;
+        using picture_box_type = tetengo2::gui::widget::picture_box;
 
         //! The view traits type.
         using view_traits_type = ViewTraits;
