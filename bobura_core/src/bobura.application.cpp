@@ -227,25 +227,25 @@ namespace bobura {
             message::view_picture_box::diagram::scroll_bar_scrolled<diagram_view_traits_type>;
 
         using timetable_view_picture_box_mouse_pressed_observer_type =
-            message::view_picture_box::timetable::mouse_pressed<picture_box_type, timetable_view_traits_type>;
+            message::view_picture_box::timetable::mouse_pressed<timetable_view_traits_type>;
 
         using timetable_view_picture_box_mouse_released_observer_type =
-            message::view_picture_box::timetable::mouse_released<picture_box_type, timetable_view_traits_type>;
+            message::view_picture_box::timetable::mouse_released<timetable_view_traits_type>;
 
         using timetable_view_picture_box_mouse_moved_observer_type =
-            message::view_picture_box::timetable::mouse_moved<picture_box_type, timetable_view_traits_type>;
+            message::view_picture_box::timetable::mouse_moved<timetable_view_traits_type>;
 
         using timetable_view_picture_box_mouse_wheeled_observer_type =
-            message::view_picture_box::timetable::mouse_wheeled<picture_box_type, timetable_view_traits_type>;
+            message::view_picture_box::timetable::mouse_wheeled<timetable_view_traits_type>;
 
         using timetable_view_picture_box_key_down_observer_type =
-            message::view_picture_box::timetable::keyboard_key_down<picture_box_type>;
+            message::view_picture_box::timetable::keyboard_key_down;
 
         using timetable_view_picture_box_paint_paint_observer_type =
-            message::view_picture_box::timetable::paint_paint<picture_box_type, timetable_view_traits_type>;
+            message::view_picture_box::timetable::paint_paint<timetable_view_traits_type>;
 
         using timetable_view_picture_box_scroll_bar_scrolled_observer_type =
-            message::view_picture_box::timetable::scroll_bar_scrolled<picture_box_type, timetable_view_traits_type>;
+            message::view_picture_box::timetable::scroll_bar_scrolled<timetable_view_traits_type>;
 
         using message_loop_type = typename traits_type::message_loop_type;
 

@@ -61,24 +61,21 @@ namespace {
 
     using window_type = ui_type_list_type::window_type;
 
-    using mouse_pressed_type =
-        bobura::message::view_picture_box::timetable::mouse_pressed<picture_box_type, timetable_view_traits_type>;
+    using mouse_pressed_type = bobura::message::view_picture_box::timetable::mouse_pressed<timetable_view_traits_type>;
 
     using mouse_released_type =
-        bobura::message::view_picture_box::timetable::mouse_released<picture_box_type, timetable_view_traits_type>;
+        bobura::message::view_picture_box::timetable::mouse_released<timetable_view_traits_type>;
 
-    using mouse_moved_type =
-        bobura::message::view_picture_box::timetable::mouse_moved<picture_box_type, timetable_view_traits_type>;
+    using mouse_moved_type = bobura::message::view_picture_box::timetable::mouse_moved<timetable_view_traits_type>;
 
     using virtual_key_type = picture_box_type::keyboard_observer_set_type::virtual_key_type;
 
-    using keyboard_key_down_type = bobura::message::view_picture_box::timetable::keyboard_key_down<picture_box_type>;
+    using keyboard_key_down_type = bobura::message::view_picture_box::timetable::keyboard_key_down;
 
-    using paint_paint_type =
-        bobura::message::view_picture_box::timetable::paint_paint<picture_box_type, timetable_view_traits_type>;
+    using paint_paint_type = bobura::message::view_picture_box::timetable::paint_paint<timetable_view_traits_type>;
 
     using scroll_bar_scrolled_type =
-        bobura::message::view_picture_box::timetable::scroll_bar_scrolled<picture_box_type, timetable_view_traits_type>;
+        bobura::message::view_picture_box::timetable::scroll_bar_scrolled<timetable_view_traits_type>;
 
 
     // functions
