@@ -9,21 +9,11 @@
 #if !defined(BOBURA_MESSAGE_VIEWPICTUREBOX_DIAGRAM_H)
 #define BOBURA_MESSAGE_VIEWPICTUREBOX_DIAGRAM_H
 
-#include <cassert>
 #include <functional>
-#include <memory>
-
-#include <boost/rational.hpp>
 
 #include <tetengo2/detail/base/gui_impl_set.h>
 #include <tetengo2/gui/cursor/system.h>
-#include <tetengo2/gui/message/scroll_bar_observer_set.h>
-#include <tetengo2/gui/scroll_bar.h>
-#include <tetengo2/gui/unit/em.h>
-#include <tetengo2/gui/virtual_key.h>
 #include <tetengo2/gui/widget/picture_box.h>
-#include <tetengo2/gui/widget/widget.h>
-#include <tetengo2/stdalt.h>
 
 #include <bobura/diagram_view.h>
 #include <bobura/view/diagram/zoom.h>
@@ -69,9 +59,7 @@ namespace bobura::message::view_picture_box::diagram {
             \param set_mouse_capture A set-mouse-capture function.
             \param view              A view.
         */
-        mouse_pressed(picture_box_type& picture_box, const set_mouse_capture_type& set_mouse_capture, view_type& view)
-        : m_picture_box{ picture_box }, m_set_mouse_capture{ set_mouse_capture }, m_view{ view }
-        {}
+        mouse_pressed(picture_box_type& picture_box, const set_mouse_capture_type& set_mouse_capture, view_type& view);
 
 
         // functions
@@ -85,25 +73,8 @@ namespace bobura::message::view_picture_box::diagram {
             \param control  True when control key is pressed.
             \param meta     True when meta key is pressed.
         */
-        void operator()(
-            const mouse_button_type                 button,
-            const position_type&                    position,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool shift,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool control,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool meta) const
-        {
-            m_picture_box.set_focus();
-
-            m_set_mouse_capture(button);
-
-            auto* const p_item = m_view.p_item_by_position(position);
-            if (p_item)
-                p_item->select(button != mouse_button_type::right);
-            else
-                m_view.unselect_all_items();
-
-            m_picture_box.repaint();
-        }
+        void
+        operator()(mouse_button_type button, const position_type& position, bool shift, bool control, bool meta) const;
 
 
     private:
@@ -155,9 +126,7 @@ namespace bobura::message::view_picture_box::diagram {
             \param release_mouse_capture A set-mouse-capture function.
             \param view                  A view.
         */
-        mouse_released(const release_mouse_capture_type& release_mouse_capture, view_type& view)
-        : m_release_mouse_capture{ release_mouse_capture }, m_view{ view }
-        {}
+        mouse_released(const release_mouse_capture_type& release_mouse_capture, view_type& view);
 
 
         // functions
@@ -171,15 +140,8 @@ namespace bobura::message::view_picture_box::diagram {
             \param control  True when control key is pressed.
             \param meta     True when meta key is pressed.
         */
-        void operator()(
-            const mouse_button_type            button,
-            TETENGO2_STDALT_MAYBE_UNUSED const position_type& position,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool           shift,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool           control,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool           meta) const
-        {
-            m_release_mouse_capture(button);
-        }
+        void
+        operator()(mouse_button_type button, const position_type& position, bool shift, bool control, bool meta) const;
 
 
     private:
@@ -229,8 +191,7 @@ namespace bobura::message::view_picture_box::diagram {
             \param picture_box A picture box.
             \param view        A view.
         */
-        mouse_moved(picture_box_type& picture_box, const view_type& view) : m_picture_box{ picture_box }, m_view{ view }
-        {}
+        mouse_moved(picture_box_type& picture_box, const view_type& view);
 
 
         // functions
@@ -243,31 +204,7 @@ namespace bobura::message::view_picture_box::diagram {
             \param control  True when control key is pressed.
             \param meta     True when meta key is pressed.
         */
-        void operator()(
-            const position_type&                    position,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool shift,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool control,
-            TETENGO2_STDALT_MAYBE_UNUSED const bool meta) const
-        {
-            const auto* const p_item = m_view.p_item_by_position(position);
-            const auto        p_cursor = m_picture_box.p_cursor();
-            const auto* const p_system_cursor = p_cursor ? dynamic_cast<const system_cursor_type*>(p_cursor) : nullptr;
-            if (p_item)
-            {
-                if (!p_system_cursor || p_system_cursor->style() != system_cursor_type::style_type::hand)
-                {
-                    m_picture_box.set_cursor(
-                        std::make_unique<system_cursor_type>(system_cursor_type::style_type::hand));
-                }
-            }
-            else
-            {
-                if (p_system_cursor)
-                {
-                    m_picture_box.set_cursor(std::unique_ptr<cursor_type>{});
-                }
-            }
-        }
+        void operator()(const position_type& position, bool shift, bool control, bool meta) const;
 
 
     private:
@@ -331,7 +268,7 @@ namespace bobura::message::view_picture_box::diagram {
             \param picture_box A picture box.
             \param view        A view.
         */
-        mouse_wheeled(picture_box_type& picture_box, view_type& view) : m_picture_box{ picture_box }, m_view{ view } {}
+        mouse_wheeled(picture_box_type& picture_box, view_type& view);
 
 
         // functions
@@ -345,21 +282,7 @@ namespace bobura::message::view_picture_box::diagram {
             \param control   True when control key is pressed.
             \param meta      True when meta key is pressed.
         */
-        void operator()(
-            const delta_type&    delta,
-            const direction_type direction,
-            const bool           shift,
-            const bool           control,
-            const bool           meta) const
-        {
-            const auto adjusted_delta =
-                direction == picture_box_type::mouse_observer_set_type::direction_type::horizontal ? delta : -delta;
-
-            if (!control && !meta)
-                scroll(adjusted_delta, is_vertical(direction, shift));
-            else if (control && !meta)
-                zoom(adjusted_delta, is_vertical(direction, shift));
-        }
+        void operator()(const delta_type& delta, direction_type direction, bool shift, bool control, bool meta) const;
 
 
     private:
@@ -377,78 +300,15 @@ namespace bobura::message::view_picture_box::diagram {
 
         // functions
 
-        bool is_vertical(const direction_type direction, const bool shift) const
-        {
-            return (!shift && direction == picture_box_type::mouse_observer_set_type::direction_type::vertical) ||
-                   (shift && direction == picture_box_type::mouse_observer_set_type::direction_type::horizontal);
-        }
+        bool is_vertical(direction_type direction, bool shift) const;
 
-        void scroll(const delta_type& delta, const bool vertical) const
-        {
-            if (vertical)
-            {
-                assert(m_picture_box.has_vertical_scroll_bar());
-                if (!m_picture_box.vertical_scroll_bar().enabled())
-                    return;
-
-                const auto new_position = calculate_new_position(m_picture_box.vertical_scroll_bar(), delta);
-                m_picture_box.vertical_scroll_bar().set_position(new_position);
-                m_picture_box.vertical_scroll_bar().scroll_bar_observer_set().scrolled()(new_position);
-            }
-            else
-            {
-                assert(m_picture_box.has_horizontal_scroll_bar());
-                if (!m_picture_box.horizontal_scroll_bar().enabled())
-                    return;
-
-                const auto new_position = calculate_new_position(m_picture_box.horizontal_scroll_bar(), delta);
-                m_picture_box.horizontal_scroll_bar().set_position(new_position);
-                m_picture_box.horizontal_scroll_bar().scroll_bar_observer_set().scrolled()(new_position);
-            }
-        }
+        void scroll(const delta_type& delta, bool vertical) const;
 
         scroll_bar_size_type calculate_new_position(
             const typename picture_box_type::scroll_bar_type& scroll_bar,
-            const delta_type&                                 delta) const
-        {
-            using delta_int_type = typename delta_type::int_type;
-            auto int_delta = boost::rational_cast<delta_int_type>(delta * 3);
-            if (int_delta == 0)
-            {
-                if (delta > 0)
-                    ++int_delta;
-                else
-                    --int_delta;
-            }
-            const delta_int_type new_position = scroll_bar.position() + int_delta;
+            const delta_type&                                 delta) const;
 
-            if (new_position < static_cast<delta_int_type>(scroll_bar.range().first))
-                return scroll_bar.range().first;
-            if (new_position > static_cast<delta_int_type>(scroll_bar.range().second - scroll_bar.page_size() + 1))
-                return scroll_bar.range().second - scroll_bar.page_size() + 1;
-
-            return new_position;
-        }
-
-        void zoom(const delta_type delta, const bool vertical) const
-        {
-            view_zoom_type zoom{ m_picture_box, m_view };
-
-            if (vertical)
-            {
-                if (delta > 0)
-                    zoom.vertically_zoom_in(false);
-                else
-                    zoom.vertically_zoom_out(false);
-            }
-            else
-            {
-                if (delta > 0)
-                    zoom.horizontally_zoom_in(false);
-                else
-                    zoom.horizontally_zoom_out(false);
-            }
-        }
+        void zoom(const delta_type& delta, bool vertical) const;
     };
 
 
@@ -474,7 +334,7 @@ namespace bobura::message::view_picture_box::diagram {
 
             \param picture_box A picture box.
         */
-        explicit keyboard_key_down(picture_box_type& picture_box) : m_picture_box{ picture_box } {}
+        explicit keyboard_key_down(picture_box_type& picture_box);
 
 
         // functions
@@ -487,18 +347,7 @@ namespace bobura::message::view_picture_box::diagram {
             \param control     True when control key is pressed.
             \param meta        True when meta key is pressed.
         */
-        void
-        operator()(const virtual_key_type& virtual_key, const bool shift, const bool control, const bool meta) const
-        {
-            if (virtual_key == virtual_key_type::left() || virtual_key == virtual_key_type::right() ||
-                virtual_key == virtual_key_type::up() || virtual_key == virtual_key_type::down() ||
-                virtual_key == virtual_key_type::page_up() || virtual_key == virtual_key_type::page_down() ||
-                virtual_key == virtual_key_type::home() || virtual_key == virtual_key_type::end())
-            {
-                if (!control && !meta)
-                    scroll(virtual_key, shift);
-            }
-        }
+        void operator()(const virtual_key_type& virtual_key, bool shift, bool control, bool meta) const;
 
 
     private:
@@ -514,90 +363,13 @@ namespace bobura::message::view_picture_box::diagram {
 
         // functions
 
-        void scroll(const virtual_key_type& virtual_key, const bool shift) const
-        {
-            const auto vertical = is_vertical(virtual_key, shift);
-            if (vertical)
-            {
-                assert(m_picture_box.has_vertical_scroll_bar());
-                if (!m_picture_box.vertical_scroll_bar().enabled())
-                    return;
+        void scroll(const virtual_key_type& virtual_key, bool shift) const;
 
-                const auto new_position = calculate_new_position(m_picture_box.vertical_scroll_bar(), virtual_key);
-                m_picture_box.vertical_scroll_bar().set_position(new_position);
-                m_picture_box.vertical_scroll_bar().scroll_bar_observer_set().scrolled()(new_position);
-            }
-            else
-            {
-                assert(m_picture_box.has_horizontal_scroll_bar());
-                if (!m_picture_box.horizontal_scroll_bar().enabled())
-                    return;
-
-                const auto new_position = calculate_new_position(m_picture_box.horizontal_scroll_bar(), virtual_key);
-                m_picture_box.horizontal_scroll_bar().set_position(new_position);
-                m_picture_box.horizontal_scroll_bar().scroll_bar_observer_set().scrolled()(new_position);
-            }
-        }
-
-        bool is_vertical(const virtual_key_type& virtual_key, const bool shift) const
-        {
-            if (virtual_key == virtual_key_type::up() || virtual_key == virtual_key_type::down())
-            {
-                return true;
-            }
-            else if (
-                !shift && (virtual_key == virtual_key_type::page_up() || virtual_key == virtual_key_type::page_down()))
-            {
-                return true;
-            }
-            else if (!shift && (virtual_key == virtual_key_type::home() || virtual_key == virtual_key_type::end()))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        bool is_vertical(const virtual_key_type& virtual_key, bool shift) const;
 
         scroll_bar_size_type calculate_new_position(
             const typename picture_box_type::scroll_bar_type& scroll_bar,
-            const virtual_key_type&                           virtual_key) const
-        {
-            const auto min_position = scroll_bar.range().first;
-            const auto max_position = scroll_bar.range().second - scroll_bar.page_size() + 1;
-
-            if (virtual_key == virtual_key_type::home())
-            {
-                return min_position;
-            }
-            else if (virtual_key == virtual_key_type::end())
-            {
-                return max_position;
-            }
-            else if (virtual_key == virtual_key_type::page_up())
-            {
-                return scroll_bar.position() > min_position + scroll_bar.page_size() ?
-                           scroll_bar.position() - scroll_bar.page_size() :
-                           min_position;
-            }
-            else if (virtual_key == virtual_key_type::page_down())
-            {
-                return scroll_bar.position() + scroll_bar.page_size() < max_position ?
-                           scroll_bar.position() + scroll_bar.page_size() :
-                           max_position;
-            }
-            else if (virtual_key == virtual_key_type::up() || virtual_key == virtual_key_type::left())
-            {
-                return scroll_bar.position() > min_position + 1 ? scroll_bar.position() - 1 : min_position;
-            }
-            else
-            {
-                assert(virtual_key == virtual_key_type::down() || virtual_key == virtual_key_type::right());
-
-                return scroll_bar.position() + 1 < max_position ? scroll_bar.position() + 1 : max_position;
-            }
-        }
+            const virtual_key_type&                           virtual_key) const;
     };
 
 
@@ -633,8 +405,7 @@ namespace bobura::message::view_picture_box::diagram {
             \param picture_box A picture box.
             \param view        A view.
         */
-        paint_paint(const picture_box_type& picture_box, view_type& view) : m_picture_box{ picture_box }, m_view{ view }
-        {}
+        paint_paint(const picture_box_type& picture_box, view_type& view);
 
 
         // functions
@@ -644,24 +415,7 @@ namespace bobura::message::view_picture_box::diagram {
 
             \param canvas A canvas.
         */
-        void operator()(canvas_type& canvas) const
-        {
-            assert(m_picture_box.has_vertical_scroll_bar());
-            assert(m_picture_box.has_horizontal_scroll_bar());
-
-            const auto client_dimension = m_picture_box.client_dimension();
-
-            canvas.begin_transaction(client_dimension);
-
-            m_view.draw_on(
-                canvas,
-                client_dimension,
-                to_position(
-                    m_picture_box.horizontal_scroll_bar().tracking_position(),
-                    m_picture_box.vertical_scroll_bar().tracking_position()));
-
-            canvas.end_transaction();
-        }
+        void operator()(canvas_type& canvas) const;
 
 
     private:
@@ -676,10 +430,7 @@ namespace bobura::message::view_picture_box::diagram {
 
         // static functions
 
-        static position_type to_position(const scroll_bar_size_type left, const scroll_bar_size_type top)
-        {
-            return { static_cast<position_unit_type>(left), static_cast<position_unit_type>(top) };
-        }
+        static position_type to_position(scroll_bar_size_type left, scroll_bar_size_type top);
 
 
         // variables
@@ -722,9 +473,7 @@ namespace bobura::message::view_picture_box::diagram {
             \param picture_box A picture box.
             \param view        A view.
         */
-        scroll_bar_scrolled(const picture_box_type& picture_box, view_type& view)
-        : m_picture_box{ picture_box }, m_view{ view }
-        {}
+        scroll_bar_scrolled(const picture_box_type& picture_box, view_type& view);
 
 
         // functions
@@ -734,11 +483,7 @@ namespace bobura::message::view_picture_box::diagram {
 
             \param new_position A new position.
         */
-        void operator()(TETENGO2_STDALT_MAYBE_UNUSED const size_type new_position) const
-        {
-            m_view.update_dimension();
-            m_picture_box.repaint();
-        }
+        void operator()(size_type new_position) const;
 
 
     private:

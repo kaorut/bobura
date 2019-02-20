@@ -6,6 +6,14 @@ bobura::command::[a-zA-Z0-9_]+::state_impl
 bobura::file_property_dialog::set_result_impl
 bobura::font_color_dialog::do_modal_impl
 bobura::font_color_dialog::font_color_type::
+bobura::message::view_picture_box::diagram::keyboard_key_down::scroll
+bobura::message::view_picture_box::diagram::keyboard_key_down::is_vertical
+bobura::message::view_picture_box::diagram::keyboard_key_down::calculate_new_position
+bobura::message::view_picture_box::diagram::mouse_wheeled::calculate_new_position
+bobura::message::view_picture_box::diagram::mouse_wheeled::is_vertical
+bobura::message::view_picture_box::diagram::mouse_wheeled::scroll
+bobura::message::view_picture_box::diagram::mouse_wheeled::zoom
+bobura::message::view_picture_box::diagram::paint_paint::to_position
 bobura::model::operator ==
 bobura::model::serializer::[a-zA-Z0-9_]+_reader::selects_impl
 bobura::model::serializer::[a-zA-Z0-9_]+_reader::read_impl
